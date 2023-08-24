@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, this.title = "Eye Care For All"});
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({
+    super.key,
+    this.title = "Eye Care For All",
+    this.actions,
+    this.showBackButton = true,
+  });
 
   final String title;
+  final List<Widget>? actions;
+  final bool showBackButton;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: showBackButton
+          ? IconButton(
+              icon: const Icon(
+                Icons.chevron_left,
+                size: 32,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          : null,
       title: Text(title),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {},
-        ),
-      ],
+      actions: actions,
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56.0);
 }

@@ -1,16 +1,45 @@
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_test.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:ui';
 
-class PatientVisionAcuityTestPage extends StatelessWidget {
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/landolt_test/landolt_test.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_test.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+enum TestType { TumblingE, LandoltC }
+
+class PatientVisionAcuityTestPage extends HookWidget {
   static const String routeName = '/patient-acuity-test';
-  const PatientVisionAcuityTestPage({super.key});
+
+  const PatientVisionAcuityTestPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      final timer = Timer(const Duration(milliseconds: 1), () {
+        _showTermsOfUseDialog(context);
+      });
+
+      return timer.cancel;
+    }, []);
+
+    var isTumblingE = useState<TestType>(TestType.TumblingE);
+    var isLandoltC = useState<TestType>(TestType.LandoltC);
+    var isSelected = useState<TestType>(TestType.TumblingE);
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Vision Acuity Test'),
+      appBar: CustomAppBar(
+        title: "Vision Acuity Test",
+        showBackButton: false,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
@@ -18,9 +47,19 @@ class PatientVisionAcuityTestPage extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return const TumblingTest();
-            }));
+            if (isSelected.value == TestType.TumblingE) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const TumblingTest(),
+                ),
+              );
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const LandoltTestPage(),
+                ),
+              );
+            }
           },
           child: const Text("Next"),
         ),
@@ -33,37 +72,43 @@ class PatientVisionAcuityTestPage extends StatelessWidget {
             Text(
               "Visual acuity is a measure of the human eye’s ability to discern spatial details. It is the ability to distinguish letters or symbols on an eye chart at a certain distance",
               softWrap: true,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: applyRobotoFont(
+                fontSize: 14,
+              ),
             ),
             const SizedBox(height: AppSize.kmheight),
             Text(
               "Select the test to be performed",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: applyFiraSansFont(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(height: AppSize.kmheight),
             RadioListTile.adaptive(
-              value: true,
-              groupValue: true,
+              value: isTumblingE.value,
+              groupValue: isSelected.value,
               dense: true,
               controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (value) {},
+              onChanged: (value) {
+                isSelected.value = value!;
+              },
               title: Text(
                 "Tumbling E",
-                style: Theme.of(context).textTheme.titleSmall,
+                style: applyRobotoFont(),
               ),
             ),
             RadioListTile.adaptive(
-              value: true,
-              groupValue: true,
+              value: isLandoltC.value,
+              groupValue: isSelected.value,
               dense: true,
               controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (value) {},
+              onChanged: (value) {
+                isSelected.value = value!;
+              },
               title: Text(
                 "Landolt C",
-                style: Theme.of(context).textTheme.titleSmall,
+                style: applyRobotoFont(),
               ),
             ),
             const SizedBox(height: AppSize.kmheight),
@@ -74,12 +119,72 @@ class PatientVisionAcuityTestPage extends StatelessWidget {
               onChanged: (value) {},
               title: Text(
                 "Skip the steps to do",
-                style: Theme.of(context).textTheme.titleSmall,
+                style: applyRobotoFont(),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showTermsOfUseDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog(
+            title: Text(
+              'Terms of Use',
+              style: applyFiraSansFont(
+                fontSize: 18,
+              ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Legal disclaimer: The content on this application is presented for informational purposes only.\n\nNever disregard professional medical advice from your healthcare provider, or delay in seeking it, because of using this application.\n\nThe developer of this app, cannot be held liable for any damages of any kind related to the usage of this software.\n\nREMEMBER: It’s people who resolve vision problems. Our technology is designed to help them do that. Full terms of use",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Full terms of use",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Accept'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Decline'),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

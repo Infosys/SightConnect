@@ -16,23 +16,23 @@ class PatientBottomNavBar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var initialScale = useState<List<double>>(List.filled(5, 1.0));
+    final initialScale = useState<List<double>>([1.2, 1.0, 1.0, 1.0, 1.0]);
 
     void updateScale(int index) {
       initialScale.value = List.generate(5, (i) => i == index ? 1.2 : 1.0);
     }
 
-    List<Widget> generateIcons() {
-      final icons = [
-        AppIcon.navHome,
-        AppIcon.navService,
-        AppIcon.navAcuity,
-        AppIcon.navNotification,
-        AppIcon.navProfile,
-      ];
+    final icons = [
+      AppIcon.navHome,
+      AppIcon.navService,
+      AppIcon.navAcuity,
+      AppIcon.navNotification,
+      AppIcon.navProfile,
+    ];
 
-      final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Theme.of(context).primaryColor;
 
+    List<IconButton> generateIcons() {
       return List.generate(
         5,
         (index) {

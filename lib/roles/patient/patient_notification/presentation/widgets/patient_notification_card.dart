@@ -1,4 +1,7 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class PatientNotificationCard extends StatelessWidget {
@@ -17,20 +20,26 @@ class PatientNotificationCard extends StatelessWidget {
       onTap: onTap,
       leading: const CircleAvatar(),
       title: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: AppSize.width * 0.5,
+            ),
             child: Text(
               data["title"],
               maxLines: 2,
               softWrap: true,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: applyFiraSansFont(fontWeight: FontWeight.w500),
             ),
           ),
           Text(
             data["time"],
-            style: Theme.of(context).textTheme.bodySmall,
+            style: applyRobotoFont(
+              fontSize: 11,
+              color: AppColor.kGrey,
+            ),
           )
         ],
       ),
@@ -42,11 +51,13 @@ class PatientNotificationCard extends StatelessWidget {
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             softWrap: true,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: applyRobotoFont(
+              fontSize: 14,
+            ),
           ),
           const SizedBox(height: AppSize.kmheight),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextButton(
                 onPressed: () {},
