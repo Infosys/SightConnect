@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/widgets/patient_notification_card.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class PatientNotificationPage extends StatelessWidget {
@@ -31,13 +32,14 @@ class PatientNotificationPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Notifications"),
+      appBar: CustomAppBar(
+        title: "Notifications",
+        showBackButton: false,
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.more_vert),
-          )
+          ),
         ],
       ),
       body: ListView.builder(
