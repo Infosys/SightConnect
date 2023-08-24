@@ -1,13 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/profile_app_bar.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../data/local/fake_data_source.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../widgets/patient_profile_familyinfocards.dart';
-import '../widgets/patient_profile_patientinfo.dart';
-import '../widgets/profile_header.dart';
+import '../widgets/patient_profile_family_info_cards.dart';
+import '../widgets/patient_profile_patient_info.dart';
+import '../widgets/patient_profile_header.dart';
 
 class PatientProfilePage extends StatelessWidget {
   const PatientProfilePage({super.key});
@@ -19,7 +19,7 @@ class PatientProfilePage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       backgroundColor: AppColor.kScaffold,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.h),
+        preferredSize: Size.fromHeight(100.h),
         child: const ProfileAppBar(),
       ),
       body: SingleChildScrollView(
@@ -28,7 +28,8 @@ class PatientProfilePage extends StatelessWidget {
           children: [
             const ProfileHeader(), //Appbar/header image and texts
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,14 +38,13 @@ class PatientProfilePage extends StatelessWidget {
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Address",
-                          style: AppTheme.lightTheme.textTheme.titleMedium,
-                        ),
+                        Text("Address",
+                            style: applyFiraSansFont(
+                                fontSize: 18.sp, fontWeight: FontWeight.w800)),
                         AppSize.ksheight.verticalSpace,
                         Text(
                           profile["address"] ?? "",
-                          style: AppTheme.lightTheme.textTheme.bodySmall,
+                          style: applyRobotoFont(fontSize: 14.sp),
                         ),
                       ],
                     ),
@@ -56,7 +56,8 @@ class PatientProfilePage extends StatelessWidget {
                       children: [
                         Text(
                           "General Information",
-                          style: AppTheme.lightTheme.textTheme.titleMedium,
+                          style: applyFiraSansFont(
+                              fontSize: 18.sp, fontWeight: FontWeight.w800),
                         ),
                         AppSize.ksheight.verticalSpace,
                         PatientInfoCard(

@@ -6,4 +6,8 @@ class AppIcon {
   static const String navAcuity = 'assets/icons/visual-acuity-test.svg';
   static const String navNotification = 'assets/icons/notification.svg';
   static const String navProfile = 'assets/icons/reminders.svg';
+
+  //Patient Appointment Booking
+  static const String patientAppointmentBookingCalander =
+      'assets/icons/calendar booking.svg';
 }

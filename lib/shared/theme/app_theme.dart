@@ -68,6 +68,10 @@ class AppTheme extends StateNotifier<ThemeMode> {
         foregroundColor: AppColor.kWhite,
         backgroundColor: AppColor.kPrimary,
         shape: const StadiumBorder(),
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 32,
+        ),
         textStyle: applyRobotoFont(
           fontSize: 14,
         ),

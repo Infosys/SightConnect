@@ -1,5 +1,6 @@
-import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PatientInfoCard extends StatelessWidget {
   const PatientInfoCard({super.key, this.keyText, this.valueText});
@@ -14,14 +15,14 @@ class PatientInfoCard extends StatelessWidget {
         children: [
           Text(
             keyText ?? "",
-            style: AppTheme.lightTheme.textTheme.bodySmall,
+            style: applyRobotoFont(fontSize: 14.sp, color: Color(0xFF888888)),
           ),
           Text(
             valueText ?? "",
-            style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+            style: applyRobotoFont(fontSize: 14.sp).copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.w800,
+            ),
           ),
         ],
       ),

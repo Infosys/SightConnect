@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/local/fake_data_source.dart';
@@ -11,16 +12,17 @@ class PatientFamilyDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Family Details",
-            style: AppTheme.lightTheme.textTheme.titleMedium,
+            style: applyFiraSansFont(fontSize: 18.sp, fontWeight: FontWeight.w800),
           ),
           AppSize.ksheight.verticalSpace,
           ...hospital
               .map(
                 (hospital) => ListTile(
+                  contentPadding: const EdgeInsets.all(0),
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     child: Text(
