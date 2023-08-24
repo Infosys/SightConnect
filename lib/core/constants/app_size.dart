@@ -19,6 +19,10 @@ class AppSize {
   static const double kmheight = 16.0;
   static const double klheight = 24.0;
 
+  static const double kselevation = 8.0;
+  static const double kmelevation = 16.0;
+  static const double klelevation = 24.0;
+
   static double get width => ScreenUtil().screenWidth;
   static double get height => ScreenUtil().screenHeight;
 }

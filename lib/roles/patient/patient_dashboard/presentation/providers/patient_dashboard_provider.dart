@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/patient_vision_acuity_test_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
@@ -21,9 +22,7 @@ class PatientDashboardProvider extends ChangeNotifier {
 
   final List<Widget> _pages = [
     const PatientHomePage(),
-    const Center(
-      child: Text('Search'),
-    ),
+    const PatientAppointmentSchedulePage(),
     const PatientVisionAcuityTestPage(),
     const PatientNotificationPage(),
     const Center(
