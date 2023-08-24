@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="calendar_booking" data-name="calendar booking" transform="translate(-62 -644)">
+    <rect id="Rectangle_6711" data-name="Rectangle 6711" width="24" height="24" transform="translate(62 644)" fill="#296df6" opacity="0"/>
+    <path id="Path_37970" data-name="Path 37970" d="M21,6.25A3.25,3.25,0,0,0,17.75,3H6.25A3.25,3.25,0,0,0,3,6.25v11.5A3.25,3.25,0,0,0,6.25,21h6.922A3.738,3.738,0,0,1,13,19.875v-.1q0-.138.013-.272H6.25A1.75,1.75,0,0,1,4.5,17.75V8.5h15v2.645a3.5,3.5,0,0,1,1.5.906ZM6.25,4.5h11.5A1.75,1.75,0,0,1,19.5,6.25V7H4.5V6.25A1.75,1.75,0,0,1,6.25,4.5ZM21,14.5A2.5,2.5,0,1,1,18.5,12,2.5,2.5,0,0,1,21,14.5Zm2,5.375C23,21.431,21.714,23,18.5,23S14,21.437,14,19.875v-.1A1.772,1.772,0,0,1,15.773,18h5.455A1.772,1.772,0,0,1,23,19.772Z" transform="translate(61 643)" fill="#296df6"/>
+  </g>
+</svg>

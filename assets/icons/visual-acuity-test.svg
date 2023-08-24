@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="30" viewBox="0 0 28 30">
+  <g id="visual_acuity_test" data-name="visual acuity test" transform="translate(-674 -930)">
+    <g id="tumbling_E" data-name="tumbling E" transform="translate(680 945) rotate(-90)">
+      <path id="tumbling_E-2" data-name="tumbling E" d="M0,0V3H12V6H0V9H12v3H0v3H15V0Z" transform="translate(0 0)" fill="#296df6"/>
+    </g>
+    <g id="tumbling_E-3" data-name="tumbling E" transform="translate(684 960) rotate(180)">
+      <path id="tumbling_E-4" data-name="tumbling E" d="M0,0V2H8V4H0V6H8V8H0v2H10V0Z" transform="translate(0 0)" fill="#296df6"/>
+    </g>
+    <g id="tumbling_E-5" data-name="tumbling E" transform="translate(692 950)">
+      <path id="tumbling_E-6" data-name="tumbling E" d="M0,0V2H8V4H0V6H8V8H0v2H10V0Z" transform="translate(0 0)" fill="#296df6"/>
+    </g>
+  </g>
+</svg>
