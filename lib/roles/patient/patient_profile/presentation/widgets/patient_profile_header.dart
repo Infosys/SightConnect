@@ -63,7 +63,7 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          AppSize.ksheight.verticalSpace,
+          AppSize.klheight.verticalSpace,
           Container(
             width: AppSize.width * 0.8,
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
