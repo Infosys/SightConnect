@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/profile_app_bar.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_color.dart';
@@ -30,33 +32,33 @@ class PatientProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  8.verticalSpace,
+                  AppSize.ksheight.verticalSpace,
                   ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Address",
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: AppTheme.lightTheme.textTheme.titleMedium,
                         ),
-                        8.verticalSpace,
+                        AppSize.ksheight.verticalSpace,
                         Text(
                           profile["address"] ?? "",
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: AppTheme.lightTheme.textTheme.bodySmall,
                         ),
                       ],
                     ),
                   ),
-                  8.verticalSpace,
+                  AppSize.ksheight.verticalSpace,
                   ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "General Information",
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: AppTheme.lightTheme.textTheme.titleMedium,
                         ),
-                        8.verticalSpace,
+                        AppSize.ksheight.verticalSpace,
                         PatientInfoCard(
                           keyText: "Date of Birth",
                           valueText: profile["dob"]!,

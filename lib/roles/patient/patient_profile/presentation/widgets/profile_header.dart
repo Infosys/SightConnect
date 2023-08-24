@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -9,15 +11,15 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(AppSize.klpadding),
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fitWidth,
           image: AssetImage(AppImages.profileBg),
         ),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
+          bottomLeft: Radius.circular(AppSize.klradius),
+          bottomRight: Radius.circular(AppSize.klradius),
         ),
       ),
       child: Column(
@@ -34,20 +36,20 @@ class ProfileHeader extends StatelessWidget {
             ),
             title: Text(
               profile["name"] ?? "",
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.normal,
                   ),
             ),
             subtitle: Text(
               profile["id"] ?? "",
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              style: AppTheme.lightTheme.textTheme.titleSmall?.copyWith(
                     color: Colors.white54,
                     fontWeight: FontWeight.normal,
                   ),
             ),
           ),
-          8.verticalSpace,
+          AppSize.ksheight.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -55,7 +57,7 @@ class ProfileHeader extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(AppSize.kspadding),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white12,
@@ -66,10 +68,10 @@ class ProfileHeader extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  8.horizontalSpace,
+                  AppSize.ksheight.horizontalSpace,
                   Text(
                     profile["mobile"] ?? "",
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
                         ),
@@ -80,7 +82,7 @@ class ProfileHeader extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(AppSize.kspadding),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white12,
@@ -91,10 +93,10 @@ class ProfileHeader extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  8.horizontalSpace,
+                  AppSize.ksheight.horizontalSpace,
                   Text(
                     profile["email"] ?? "",
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
                         ),

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class PatientInfoCard extends StatelessWidget {
@@ -13,11 +14,11 @@ class PatientInfoCard extends StatelessWidget {
         children: [
           Text(
             keyText ?? "",
-            style: Theme.of(context).textTheme.bodySmall,
+            style: AppTheme.lightTheme.textTheme.bodySmall,
           ),
           Text(
             valueText ?? "",
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -27,25 +28,3 @@ class PatientInfoCard extends StatelessWidget {
     );
   }
 }
-// }
-// Widget PatientInfoCard(BuildContext context, String key, String value) {
-//   return Padding(
-//     padding: const EdgeInsets.all(4.0),
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Text(
-//           key,
-//           style: Theme.of(context).textTheme.bodySmall,
-//         ),
-//         Text(
-//           value,
-//           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-//                 color: Colors.black,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
