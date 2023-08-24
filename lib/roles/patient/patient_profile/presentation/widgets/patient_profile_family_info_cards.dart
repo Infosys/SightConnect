@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,12 +34,13 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                   title: Text(
                     hospital["name"] ?? "",
+                    style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
                     hospital["address"] ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: AppTheme.lightTheme.textTheme.bodySmall,
+                    style: applyRobotoFont(fontSize: 12, color: const Color(0xFF888888)),
                   ),
                   trailing: IconButton(
                     onPressed: () {},
