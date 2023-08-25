@@ -85,7 +85,7 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    AppSize.ksheight.horizontalSpace,
+                    3.horizontalSpace ,
                     Text(
                       profile["mobile"] ?? "",
                       style: applyRobotoFont(
