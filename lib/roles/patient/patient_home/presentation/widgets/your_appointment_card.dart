@@ -8,79 +8,40 @@ class YourAppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(
-        right: 10,
-      ),
-      color: AppColor.kPrimary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(AppSize.kspadding),
-        width: AppSize.width * 0.8,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: ListTile(
+        tileColor: AppColor.kWhite,
+        leading: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [
-                const CircleAvatar(
-                  maxRadius: 20,
-                  minRadius: 18,
-                  backgroundImage: AssetImage(
-                    "assets/images/doctor.png",
-                  ),
-                ),
-                const SizedBox(width: AppSize.kmwidth),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Dr. Jagadish Rana",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.kWhite,
-                        ),
-                      ),
-                      Text(
-                        "Eye Surgeon",
-                        style: applyRobotoFont(
-                          fontSize: 10,
-                          color: AppColor.kWhite.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  "1 min ago",
-                  style: applyRobotoFont(
-                    fontSize: 11,
-                    color: AppColor.kWhite.withOpacity(0.5),
-                  ),
-                )
-              ],
+            Text(
+              "Today",
+              style: applyRobotoFont(
+                fontSize: 12,
+              ),
             ),
-            const SizedBox(height: AppSize.ksheight),
-            Container(
-              padding: const EdgeInsets.all(AppSize.kspadding / 2),
-              decoration: BoxDecoration(
-                color: AppColor.kWhite.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(
-                  AppSize.ksradius / 2,
-                ),
+            Text(
+              "8:00 - 8:45PM",
+              style: applyRobotoFont(
+                fontSize: 10,
+                color: AppColor.kGrey,
               ),
-              child: Text(
-                "Raghvan Kumar is recommended for Cataract surgery…",
-                maxLines: 1,
-                style: applyRobotoFont(fontSize: 11, color: AppColor.kWhite),
-              ),
-            )
+            ),
           ],
+        ),
+        title: Text(
+          "Avinash has an appointment with Dr. Rajkumar Williams",
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
+            fontSize: 14,
+          ),
+        ),
+        trailing: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.more_vert),
         ),
       ),
     );
