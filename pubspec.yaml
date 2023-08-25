@@ -46,7 +46,9 @@ dependencies:
   connectivity_plus: ^4.0.2
   flutter_archive: ^5.0.0
   shelf: ^1.4.1
-  
+  camera: ^0.10.5+3
+  percent_indicator: ^4.2.3
+  avatars: ^3.0.2
  
   
 
