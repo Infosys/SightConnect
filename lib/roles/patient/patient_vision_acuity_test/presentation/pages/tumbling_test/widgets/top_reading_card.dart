@@ -1,14 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/data/local/fake_data_source.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_e_test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class TopReadingCard extends StatelessWidget {
+class TopReadingCard extends ConsumerWidget {
   const TopReadingCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(tumblingTestProvider);
     return Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -27,11 +31,19 @@ class TopReadingCard extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [1, 2, 3, 4, 5]
+                  children: model.tumblingTestList[model.currentTestIndex].eList
                       .map((e) => RotatedBox(
-                            quarterTurns: e,
+                            quarterTurns: e.quater,
                             child: SvgPicture.asset(
                               "assets/images/tumbling_e.svg",
+                              height: model
+                                  .tumblingTestList[model.currentTestIndex]
+                                  .eSize,
+                              color: e.status == eStatus.correct
+                                  ? AppColor.kGreen
+                                  : e.status == eStatus.incorrect
+                                      ? AppColor.kRed
+                                      : AppColor.kGrey,
                             ),
                           ))
                       .toList(),
@@ -40,12 +52,12 @@ class TopReadingCard extends StatelessWidget {
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                children: model.tumblingTestList
                     .map((e) => Flexible(
                           child: LinearPercentIndicator(
                             padding: const EdgeInsets.all(2),
                             lineHeight: 8,
-                            percent: e == 1 ? 0.4 : 0,
+                            percent: 0.01 * e.progress,
                             progressColor: AppColor.kGreen,
                           ),
                         ))
