@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_e_test_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,12 @@ class TumblingTest extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.kmheight),
             ListTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TumblingETestPage()));
+              },
               tileColor: AppColor.kWhite,
               title: Text(
                 "View Steps to perform Tumbling E Test",
