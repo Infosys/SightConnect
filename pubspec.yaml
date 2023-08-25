@@ -46,6 +46,8 @@ dependencies:
   connectivity_plus: ^4.0.2
   flutter_archive: ^5.0.0
   shelf: ^1.4.1
+  carousel_slider: ^4.2.1
+  gauge_indicator: ^0.4.3
   
  
   
