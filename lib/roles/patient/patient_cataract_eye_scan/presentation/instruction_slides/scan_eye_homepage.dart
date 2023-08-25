@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -77,8 +78,9 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
@@ -91,12 +93,12 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
                     image: AssetImage(slideShowData[counterForSlideShow].image),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Colors.black38,
                     ),
@@ -106,9 +108,10 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
                       child: Text(
                         slideShowData[counterForSlideShow].title,
                         style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontStyle: GoogleFonts.roboto().fontStyle),
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontStyle: GoogleFonts.roboto().fontStyle,
+                        ),
                       ),
                     ),
                   ),
@@ -124,12 +127,12 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.pause),
+                    const Icon(Icons.pause),
                     LinearPercentIndicator(
                       width: 180.0,
                       lineHeight: 6.0,
                       percent: (counterForSlideShow + 1) / 7,
-                      barRadius: Radius.circular(12),
+                      barRadius: const Radius.circular(12),
                       backgroundColor: Colors.grey[300],
                       progressColor: Colors.blue,
                     )
@@ -143,15 +146,17 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
                       onDecrement();
                     },
                     child: Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                              width: 2,
-                              color: counterForSlideShow == 0
-                                  ? Colors.grey
-                                  : Colors.blue)),
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          width: 2,
+                          color: counterForSlideShow == 0
+                              ? Colors.grey
+                              : Colors.blue,
+                        ),
+                      ),
                       child: Icon(
                         Icons.arrow_back_ios,
                         color: counterForSlideShow == 0
@@ -165,15 +170,17 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
                       onIncrement();
                     },
                     child: Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                              width: 2,
-                              color: counterForSlideShow == 6
-                                  ? Colors.grey
-                                  : Colors.blue)),
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          width: 2,
+                          color: counterForSlideShow == 6
+                              ? Colors.grey
+                              : Colors.blue,
+                        ),
+                      ),
                       child: Icon(
                         Icons.arrow_forward_ios,
                         color: counterForSlideShow == 6
@@ -186,39 +193,46 @@ class _InstructionSlidesState extends ConsumerState<InstructionSlides> {
               )
             ],
           ),
+          10.verticalSpace,
           TextButton(
-              style: TextButton.styleFrom(
-                  side: BorderSide(
-                    color: Color(0xff296DF6),
+            style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                ),
+                side: const BorderSide(
+                  color: Color(0xff296DF6),
+                ),
+                backgroundColor: counterForSlideShow == 6
+                    ? const Color(0xff296DF6)
+                    : Colors.white),
+            onPressed: () {
+              log(ref.watch(patientEyeScanProvider).userDetails.toString());
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) {
+                    return DetectCamera(
+                      eye: Eye.RIGHT_EYE,
+                      userDetails:
+                          ref.watch(patientEyeScanProvider).userDetails!,
+                    );
+                  },
+                ),
+              );
+            },
+            child: Text(
+              counterForSlideShow == 6
+                  ? "Proceed to Scan"
+                  : "Skip & Proceed to Scan",
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: counterForSlideShow == 6
+                        ? Colors.white
+                        : const Color(0xff296DF6),
                   ),
-                  backgroundColor: counterForSlideShow == 6
-                      ? Color(0xff296DF6)
-                      : Colors.white),
-              onPressed: () {
-                log(ref.watch(patientEyeScanProvider).userDetails.toString());
-                // log("test triggered");
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return DetectCamera(
-                    eye: Eye.RIGHT_EYE,
-                    userDetails: ref.watch(patientEyeScanProvider).userDetails!,
-                  );
-                }));
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      counterForSlideShow == 6
-                          ? "Proceed to Scan"
-                          : "Skip & Proceed to Scan",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: counterForSlideShow == 6
-                                ? Colors.white
-                                : Color(0xff296DF6),
-                          )),
-                ],
-              ))
+            ),
+          )
         ],
       ),
     );

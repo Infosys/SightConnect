@@ -50,10 +50,8 @@ dependencies:
   percent_indicator: ^4.2.3
   carousel_slider: ^4.2.1
   gauge_indicator: ^0.4.3
-  
-  camera: ^0.10.5+3
-  percent_indicator: ^4.2.3
   avatars: ^3.0.2
+  camera: any
  
   
 
