@@ -26,7 +26,7 @@ class PatientProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ProfileHeader(), //Appbar/header image and texts
+            const ProfileHeader(),
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
@@ -38,9 +38,13 @@ class PatientProfilePage extends StatelessWidget {
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Address",
-                            style: applyFiraSansFont(
-                                fontSize: 18.sp, fontWeight: FontWeight.w800)),
+                        Text(
+                          "Address",
+                          style: applyFiraSansFont(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
                         AppSize.ksheight.verticalSpace,
                         Text(
                           profile["address"] ?? "",
