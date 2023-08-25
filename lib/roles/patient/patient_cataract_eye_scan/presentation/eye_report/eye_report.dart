@@ -12,13 +12,12 @@ import 'widgets/previous_reports.dart';
 import 'widgets/report_eye_section.dart';
 
 class EyeScanReport extends ConsumerWidget {
-  EyeScanReport({Key? key}) : super(key: key);
+  const EyeScanReport({Key? key}) : super(key: key);
   static const String routeName = "/reportEyeSection";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     var model = ref.watch(patientEyeScanProvider);
-    var _generalAdvice = [
+    var generalAdvice = [
       "1. Make sure your eyeglasses or contact lenses are the most accurate prescription possible",
       "2. Use a magnifying glass to read if you need additional help reading",
       "3. Improve the lightning in your home with more or brighter lamps",
@@ -26,7 +25,7 @@ class EyeScanReport extends ConsumerWidget {
       "5. Limit your night driving",
       "6. Consider sugery when vision deteriorates and starts affecting your daily activities"
     ];
-    var _watchWhatYouEat = [
+    var watchWhatYouEat = [
       "Nutrients that must be a part of your daily diet to support a good eye function :",
       "Vitamin A",
       "Vitamin C",
@@ -40,16 +39,16 @@ class EyeScanReport extends ConsumerWidget {
           title: Text(
             "Eye Scan - Reports",
             style: TextStyle(
-                fontStyle: GoogleFonts.firaSans().fontStyle,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
+              fontStyle: GoogleFonts.firaSans().fontStyle,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_outlined),
+            icon: const Icon(Icons.arrow_back_ios_new_outlined),
             onPressed: () {
-              
-              Navigator.popUntil(context, (route) => route.isFirst);
+              Navigator.of(context).popUntil((route) => route.isFirst);
               model.resetImages();
             },
           ),
@@ -93,18 +92,18 @@ class EyeScanReport extends ConsumerWidget {
               child: CircularProgressIndicator(),
             )
           : Container(
-              color: Color(0xffF7FAFF),
+              color: const Color(0xffF7FAFF),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Container(
                         //rounded container border
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color(0xffC9DAFD),
+                          color: const Color(0xffC9DAFD),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -114,17 +113,15 @@ class EyeScanReport extends ConsumerWidget {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Avatar(
                                   shape: AvatarShape.circle(25),
-                                  name: model
-                                      .userDetails!
-                                      .patientName
-                                      .toString(),
+                                  name:
+                                      model.userDetails!.patientName.toString(),
                                   // backgroundImage:
                                   //     AssetImage('assets/images/user.png'),
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Expanded(
@@ -134,7 +131,7 @@ class EyeScanReport extends ConsumerWidget {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(
-                                      "${model.userDetails!.patientName.toString()}",
+                                      model.userDetails!.patientName.toString(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium
@@ -178,8 +175,7 @@ class EyeScanReport extends ConsumerWidget {
                                       "Scan Date : ${model.formatedDate}",
                                       style: GoogleFonts.roboto(),
                                     ),
-                                    Text(
-                                        "${model.formatedTime}",
+                                    Text("${model.formatedTime}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium
@@ -193,26 +189,20 @@ class EyeScanReport extends ConsumerWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                model.scanType ==
-                                        ScanType.Cataract
+                                model.scanType == ScanType.Cataract
                                     ? ReportEyeSection(
                                         eye: Eye.RIGHT_EYE,
-                                        status: model
-                                            .rightEyeStatus,
-                                        percentage: model
-                                            .rightEyeScore,
+                                        status: model.rightEyeStatus,
+                                        percentage: model.rightEyeScore,
                                       )
                                     : KeratoconusEyeSection(
                                         eye: Eye.RIGHT_EYE,
                                       ),
-                                model.scanType ==
-                                        ScanType.Cataract
+                                model.scanType == ScanType.Cataract
                                     ? ReportEyeSection(
                                         eye: Eye.LEFT_EYE,
-                                        status: model
-                                            .leftEyeStatus,
-                                        percentage: model
-                                            .leftEyeScore,
+                                        status: model.leftEyeStatus,
+                                        percentage: model.leftEyeScore,
                                       )
                                     : KeratoconusEyeSection(
                                         eye: Eye.LEFT_EYE,
@@ -240,7 +230,7 @@ class EyeScanReport extends ConsumerWidget {
                                           fontStyle:
                                               GoogleFonts.firaSans().fontStyle),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text(
@@ -250,7 +240,7 @@ class EyeScanReport extends ConsumerWidget {
                                           fontStyle:
                                               GoogleFonts.roboto().fontStyle),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Row(
@@ -276,7 +266,7 @@ class EyeScanReport extends ConsumerWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(20),
-                                                color: Color(0xff296DF6),
+                                                color: const Color(0xff296DF6),
                                               ),
                                               child: Padding(
                                                 padding:
@@ -284,7 +274,7 @@ class EyeScanReport extends ConsumerWidget {
                                                 child: Center(
                                                     child: Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 8.0),
                                                   child: Text(
                                                     // context
@@ -292,8 +282,8 @@ class EyeScanReport extends ConsumerWidget {
                                                     //             PatientsReportsProvider>()
                                                     //         .isKeretoconusReportSent
                                                     //     ? "Reshare with Doctor"
-                                                    //     : 
-                                                        "Share with Doctor",
+                                                    //     :
+                                                    "Share with Doctor",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontStyle:
@@ -311,10 +301,10 @@ class EyeScanReport extends ConsumerWidget {
                                               "assets/images/trend.png",
                                               scale: 1.5,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
-                                            Text(
+                                            const Text(
                                               "1k+ got helped so far",
                                               style: TextStyle(
                                                   color: Color(0xff22BF85),
@@ -332,8 +322,7 @@ class EyeScanReport extends ConsumerWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          model.scanType ==
-                                  ScanType.Keratoconus
+                          model.scanType == ScanType.Keratoconus
                               ? Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10.0),
@@ -349,7 +338,7 @@ class EyeScanReport extends ConsumerWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
-                                              color: Color(0xff296DF6)),
+                                              color: const Color(0xff296DF6)),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(10.0),
@@ -368,7 +357,8 @@ class EyeScanReport extends ConsumerWidget {
                                                 Text(
                                                   "View Report",
                                                   style: TextStyle(
-                                                      color: Color(0xff296DF6),
+                                                      color: const Color(
+                                                          0xff296DF6),
                                                       fontStyle:
                                                           GoogleFonts.roboto()
                                                               .fontStyle,
@@ -383,15 +373,14 @@ class EyeScanReport extends ConsumerWidget {
                               //outlined rounded button
                               : InkWell(
                                   onTap: () {
-                                    model
-                                        .resetImages();
+                                    model.resetImages();
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 EyeScanHomePage(
-                                                    userDetails: model
-                                                        .userDetails)));
+                                                    userDetails:
+                                                        model.userDetails)));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -401,7 +390,7 @@ class EyeScanReport extends ConsumerWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
-                                              color: Color(0xff296DF6)),
+                                              color: const Color(0xff296DF6)),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(10.0),
@@ -415,13 +404,14 @@ class EyeScanReport extends ConsumerWidget {
                                                   "assets/images/iView_scan.png",
                                                   scale: 1.5,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 5,
                                                 ),
                                                 Text(
                                                   "Scan Again",
                                                   style: TextStyle(
-                                                      color: Color(0xff296DF6),
+                                                      color: const Color(
+                                                          0xff296DF6),
                                                       fontStyle:
                                                           GoogleFonts.roboto()
                                                               .fontStyle,
@@ -446,8 +436,8 @@ class EyeScanReport extends ConsumerWidget {
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    border:
-                                        Border.all(color: Color(0xff296DF6)),
+                                    border: Border.all(
+                                        color: const Color(0xff296DF6)),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
@@ -458,7 +448,7 @@ class EyeScanReport extends ConsumerWidget {
                                       child: Text(
                                         "View Previous Reports",
                                         style: TextStyle(
-                                            color: Color(0xff296DF6),
+                                            color: const Color(0xff296DF6),
                                             fontStyle:
                                                 GoogleFonts.roboto().fontStyle,
                                             fontSize: 14),
@@ -493,10 +483,10 @@ class EyeScanReport extends ConsumerWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
-                                ..._generalAdvice
+                                ...generalAdvice
                                     .map(
                                       (e) => Text(
                                         e,
@@ -534,10 +524,10 @@ class EyeScanReport extends ConsumerWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
-                                ..._watchWhatYouEat
+                                ...watchWhatYouEat
                                     .map(
                                       (e) => Text(
                                         e,
