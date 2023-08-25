@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/widgets/tumbling_direction_card.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/widgets/tumbling_firection_rows.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/widgets/tumbling_direction_rows.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,12 @@ class TumblingOverlay extends ConsumerStatefulWidget {
 
 class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
   final CarouselController _carouselController = CarouselController();
+  List<String> handImagePaths = [
+    AppImages.swipeUp,
+    AppImages.swipeDown,
+    AppImages.swipeLeft,
+    AppImages.swipeRight,
+  ];
   @override
   Widget build(BuildContext context) {
     final tumblingState = ref.watch(tumblingTestProvider);
@@ -33,7 +40,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
         widget.child,
         if (widget.isLoading && tumblingState.overlay == true)
 
-        //  Filter 
+          //  Filter
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Align(
@@ -87,7 +94,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                           ),
 
                           //changing direction of image
-                          
+
                           itemBuilder: (context, index, _) {
                             const imagePath = "assets/images/tumbling_E.svg";
                             double rotationAngle = 0.0;
@@ -102,7 +109,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
 
                             return TumblingDirectionCard(
                               symbolImage: imagePath,
-                              handImage: TumblingDirectionCard.handImagePaths[index],
+                              handImage: handImagePaths[index],
                               rotationAngle: rotationAngle,
                             );
                           },
@@ -111,7 +118,8 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
 
                         // Direction Row that shows written direction
 
-                        TumblingDirectionRow(currentIndex: tumblingState.currentIndex),
+                        TumblingDirectionRow(
+                            currentIndex: tumblingState.currentIndex),
                         // SizedBox(height : 5),
 
                         // Row of back and forth button and dots
@@ -182,7 +190,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                           ),
                         ),
 
-                       // Row of checkbox and start/skip button
+                        // Row of checkbox and start/skip button
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +216,6 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                               TextButton(
                                 onPressed: () {
                                   if (tumblingState.currentIndex == 2) {
-                                   
                                     ref
                                         .read(tumblingTestProvider.notifier)
                                         .updateButtonText("Start");
