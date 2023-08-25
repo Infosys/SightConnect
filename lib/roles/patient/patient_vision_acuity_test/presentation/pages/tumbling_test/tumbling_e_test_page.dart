@@ -2,16 +2,23 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/widgets/bottom_input_tab.dart';
 import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/widgets/top_reading_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/provider/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TumblingETestPage extends StatelessWidget {
+final tumblingTestProvider =
+    ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
+  return TumblingTestProvider();
+});
+
+class TumblingETestPage extends ConsumerWidget {
   static const String routeName = '/tumbling-e-test';
   const TumblingETestPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppBar(
         title: "Tumbling E Test",
