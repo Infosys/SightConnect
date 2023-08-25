@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/widgets/swipe_gesture_card.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/widgets/voice_assist_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/swipe_gesture_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/voice_assist_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -71,7 +71,7 @@ class ButtomNavigationBar extends HookWidget {
               child: Container(
                 color:
                     index == currentIndex ? AppColor.kPrimary : AppColor.kWhite,
-                padding: const EdgeInsets.all(AppSize.kmpadding),
+                padding: const EdgeInsets.all(AppSize.kspadding),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/widgets/tumbling_direction_card.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/widgets/tumbling_direction_rows.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_direction_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_direction_rows.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_size.dart';
-import '../providers/tumbling_test_provider.dart';
+import '../providers/tumbling_test_instruction_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TumblingOverlay extends ConsumerStatefulWidget {
@@ -34,7 +34,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
   ];
   @override
   Widget build(BuildContext context) {
-    final tumblingState = ref.watch(tumblingTestProvider);
+    final tumblingState = ref.watch(tumblingTestInstructionProvider);
     return Stack(
       children: [
         widget.child,
@@ -88,7 +88,8 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                             enableInfiniteScroll: false,
                             onPageChanged: (index, _) {
                               ref
-                                  .read(tumblingTestProvider.notifier)
+                                  .read(
+                                      tumblingTestInstructionProvider.notifier)
                                   .setCurrentIndex(index);
                             },
                           ),
@@ -201,7 +202,8 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                                   value: tumblingState.isCheckboxChecked,
                                   onChanged: (value) {
                                     ref
-                                        .read(tumblingTestProvider.notifier)
+                                        .read(tumblingTestInstructionProvider
+                                            .notifier)
                                         .updateCheckbox(value ?? false);
                                   },
                                 ),
@@ -217,7 +219,8 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                                 onPressed: () {
                                   if (tumblingState.currentIndex == 2) {
                                     ref
-                                        .read(tumblingTestProvider.notifier)
+                                        .read(tumblingTestInstructionProvider
+                                            .notifier)
                                         .updateButtonText("Start");
                                   }
                                   _carouselController.animateToPage(
@@ -237,7 +240,8 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                               TextButton(
                                 onPressed: () {
                                   ref
-                                      .read(tumblingTestProvider.notifier)
+                                      .read(tumblingTestInstructionProvider
+                                          .notifier)
                                       .updateLoading(false);
                                 },
                                 style: TextButton.styleFrom(

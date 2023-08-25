@@ -3,7 +3,8 @@ import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/present
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_services/presentation/pages/patient_services_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/patient_vision_acuity_test_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_result_report_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_test_options.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,7 +29,7 @@ class PatientDashboardProvider extends ChangeNotifier {
     // const PatientAppointmentSchedulePage(),
     // const EyeScanHomePage(),
     const PatientServicesPage(),
-    const PatientVisionAcuityTestPage(),
+    const PatientTestOptions(),
     const PatientNotificationPage(),
     const PatientProfilePage(),
   ];

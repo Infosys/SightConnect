@@ -61,6 +61,10 @@ class AppTheme extends StateNotifier<ThemeMode> {
         textStyle: applyRobotoFont(
           fontSize: 14,
         ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 32,
+        ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -69,7 +73,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         backgroundColor: AppColor.kPrimary,
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(
-          vertical: 16,
+          vertical: 14,
           horizontal: 32,
         ),
         textStyle: applyRobotoFont(

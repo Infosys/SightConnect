@@ -1,8 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/data/local/fake_data_source.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_e_test_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/fake_data_source.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_result_report_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_tumbling_start_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +22,12 @@ class SwipeGestureCard extends ConsumerWidget {
         model.evaluteResponse(dragDirection ?? TumblistTestEDirection.up);
 
         if (model.gameOver) {
-          Navigator.pop(context);
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const PatientResultReportPage(),
+            ),
+            (route) => route.isFirst,
+          );
         }
       },
       onHorizontalDragEnd: (dragEndDetails) {

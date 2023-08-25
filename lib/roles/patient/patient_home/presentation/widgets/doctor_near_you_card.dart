@@ -4,7 +4,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DoctorNearYouCard extends StatelessWidget {
-  const DoctorNearYouCard({Key? key}) : super(key: key);
+  const DoctorNearYouCard({Key? key, required this.data}) : super(key: key);
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class DoctorNearYouCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 Text(
-                  "Dr. Jagadish Rana",
+                  data["name"],
                   style: applyRobotoFont(
                     fontSize: 12,
                   ),

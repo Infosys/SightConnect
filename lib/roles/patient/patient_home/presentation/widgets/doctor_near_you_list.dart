@@ -8,7 +8,14 @@ class DoctorNearYouList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var names = ["adas", "Adsas", "Adasda"];
+    var doctor = [
+      {
+        "name": "Dr. Jagadish Rana",
+      },
+      {
+        "name": "Dr. Jagadish Rana",
+      }
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,9 +28,11 @@ class DoctorNearYouList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...names
+              ...doctor
                   .map(
-                    (e) => const DoctorNearYouCard(),
+                    (e) => DoctorNearYouCard(
+                      data: e,
+                    ),
                   )
                   .toList()
             ],

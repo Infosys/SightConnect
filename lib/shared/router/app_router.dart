@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/present
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/eye_scan_home_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/presentation/pages/tumbling_test/tumbling_e_test_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_tumbling_start_page.dart';
 import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,8 @@ class AppRouter {
     AuthPage.routeName: (context) => const AuthPage(),
     SplashPage.routeName: (context) => const SplashPage(),
     PatientDashboardPage.routeName: (context) => const PatientDashboardPage(),
-    TumblingETestPage.routeName: (context) => const TumblingETestPage(),
     EyeScanHomePage.routeName: (context) => const EyeScanHomePage(),
-    EyeScanReport.routeName: (context) => EyeScanReport(),
+    EyeScanReport.routeName: (context) => const EyeScanReport(),
   };
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {

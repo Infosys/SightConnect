@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/roles/patient/patient_vision_acuity_test/data/local/fake_data_source.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/fake_data_source.dart';
 import 'package:flutter/material.dart';
 
 class TumblingTestProvider extends ChangeNotifier {
@@ -60,6 +60,8 @@ class TumblingTestProvider extends ChangeNotifier {
 
     if (currentQuestionIndex == 4) {
       _curretTestIndex = _curretTestIndex + 1;
+      correctCount = 0;
+      wrongCount = 0;
       currentQuestionIndex = 0;
     } else {
       _currentQuestionIndex = _currentQuestionIndex + 1;
@@ -78,7 +80,7 @@ class TumblingTestProvider extends ChangeNotifier {
   get isGameOver => gameOver;
 
   void checkGameOver() {
-    if (correctCount == 3 || wrongCount == 3) {
+    if (correctCount == 5 || wrongCount == 5 || _curretTestIndex == 6) {
       gameOver = true;
     }
     notifyListeners();

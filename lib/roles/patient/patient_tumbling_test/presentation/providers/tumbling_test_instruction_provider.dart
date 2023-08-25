@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final tumblingTestProvider =
-    StateNotifierProvider<TumblingTestProvider, TumblingTestState>(
-  (ref) => TumblingTestProvider(),
+final tumblingTestInstructionProvider =
+    StateNotifierProvider<TumblingTestInstructionProvider, TumblingTestState>(
+  (ref) => TumblingTestInstructionProvider(),
 );
 
 class TumblingTestState {
@@ -33,8 +33,9 @@ class TumblingTestState {
   }
 }
 
-class TumblingTestProvider extends StateNotifier<TumblingTestState> {
-  TumblingTestProvider() : super(TumblingTestState(true, 0, false, "Skip"));
+class TumblingTestInstructionProvider extends StateNotifier<TumblingTestState> {
+  TumblingTestInstructionProvider()
+      : super(TumblingTestState(true, 0, false, "Skip"));
 
   void toggleOverlay() {
     state = state.copyWith(overlay: !state.overlay);
@@ -56,6 +57,3 @@ class TumblingTestProvider extends StateNotifier<TumblingTestState> {
     state = state.copyWith(overlay: isLoading);
   }
 }
-
-
-

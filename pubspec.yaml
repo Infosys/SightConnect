@@ -49,9 +49,9 @@ dependencies:
   dotted_border: ^2.0.0+3
   percent_indicator: ^4.2.3
   carousel_slider: ^4.2.1
-  gauge_indicator: ^0.4.3
   avatars: ^3.0.2
   camera: any
+  syncfusion_flutter_gauges: ^22.2.10
  
   
 
