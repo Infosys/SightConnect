@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/discover_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,7 +9,18 @@ class DiscoverCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var names = ["adas", "Adsas", "Adasda"];
+    var data = [
+      {
+        "image": AppImages.discover2,
+        "name":
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque",
+      },
+      {
+        "image": AppImages.discover,
+        "name":
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque",
+      },
+    ];
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,9 +34,11 @@ class DiscoverCardList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...names
+              ...data
                   .map(
-                    (e) => const DiscoverCard(),
+                    (e) => DiscoverCard(
+                      data: e,
+                    ),
                   )
                   .toList()
             ],

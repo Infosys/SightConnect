@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class PatientResultReportPage extends StatelessWidget {
-  const PatientResultReportPage({super.key});
+class TumblingResultReportPage extends StatelessWidget {
+  static const String routeName = "/tumbling-result-report";
+  const TumblingResultReportPage({super.key});
 
   @override
   Widget build(BuildContext context) {

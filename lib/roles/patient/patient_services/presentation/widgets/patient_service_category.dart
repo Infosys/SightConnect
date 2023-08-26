@@ -1,7 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/eye_scan_home_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class PatientServiceCategory extends StatelessWidget {
   const PatientServiceCategory({
@@ -14,26 +16,26 @@ class PatientServiceCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: applyFiraSansFont(),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: AppSize.kmheight,
-        ),
-        Wrap(
-          runSpacing: 4,
-          alignment: WrapAlignment.start,
-          children: services
-              .map((miniapp) => InkWell(
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppSize.kmpadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: applyFiraSansFont(),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSize.kmheight),
+          Wrap(
+            spacing: 10,
+            children: services
+                .map(
+                  (miniapp) => InkWell(
                     onTap: () {
                       if (miniapp == "Eye Scan") {
                         Navigator.of(context).push(
@@ -43,20 +45,18 @@ class PatientServiceCategory extends StatelessWidget {
                         );
                       }
                     },
-                    child: Container(
-                      constraints: const BoxConstraints(
-                        maxWidth: 80,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                      width: 80,
                       child: Column(
                         children: [
-                          // SvgPicture.asset(
-                          //   AssetMapper.getAssetIcon(miniapp)!,
-                          //   height: 24,
-                          //   width: 24,
-                          //   fit: BoxFit.contain,
-                          // ),
-                          const CircleAvatar(),
+                          mappers[miniapp] != null
+                              ? SvgPicture.asset(
+                                  mappers[miniapp]!,
+                                  height: 24,
+                                  width: 24,
+                                  fit: BoxFit.contain,
+                                )
+                              : const CircleAvatar(),
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
@@ -72,10 +72,12 @@ class PatientServiceCategory extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ))
-              .toList(),
-        ),
-      ],
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,7 +5,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverCard extends StatelessWidget {
-  const DiscoverCard({super.key});
+  const DiscoverCard({super.key, required this.data});
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +15,15 @@ class DiscoverCard extends StatelessWidget {
       width: AppSize.width * 0.9,
       child: Stack(
         children: [
-          ClipRRect(
-            child: Image.asset(
-              AppImages.discover,
-              fit: BoxFit.cover,
-              height: 180,
-            ),
-          ),
+          data["image"] != null
+              ? ClipRRect(
+                  child: Image.asset(
+                    data["image"]!,
+                    fit: BoxFit.cover,
+                    height: 180,
+                  ),
+                )
+              : const SizedBox(),
           Container(
             height: 180,
             margin: const EdgeInsets.only(right: 10),
@@ -37,7 +40,7 @@ class DiscoverCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque",
+                  data["name"] ?? "",
                   softWrap: true,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w500,

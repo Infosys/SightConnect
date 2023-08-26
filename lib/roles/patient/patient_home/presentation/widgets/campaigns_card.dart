@@ -5,7 +5,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class CampaginsCard extends StatelessWidget {
-  const CampaginsCard({super.key});
+  const CampaginsCard({super.key, required this.data});
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,14 @@ class CampaginsCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            AppImages.campaign,
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
+          data["image"] != null
+              ? Image.asset(
+                  data["image"]!,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                )
+              : const SizedBox(),
           const SizedBox(
             width: AppSize.kswidth,
           ),
@@ -34,7 +37,7 @@ class CampaginsCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Rural Eye Camps",
+                  data["title"] ?? "",
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -44,7 +47,7 @@ class CampaginsCard extends StatelessWidget {
                   height: AppSize.ksheight,
                 ),
                 Text(
-                  "Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer",
+                  data["description"] ?? "",
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(

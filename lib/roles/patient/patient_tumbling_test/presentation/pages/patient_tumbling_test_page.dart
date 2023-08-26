@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_introduction_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_instructional_video_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +10,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 enum TestType { TumblingE, LandoltC }
 
-class PatientTestOptions extends HookWidget {
-  static const String routeName = '/patient-test-options';
+class PatientTumblingTestPage extends HookWidget {
+  static const String routeName = "/patient-tumbling-test";
 
-  const PatientTestOptions({Key? key}) : super(key: key);
+  const PatientTumblingTestPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,13 @@ class PatientTestOptions extends HookWidget {
             if (isSelected.value == TestType.TumblingE) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (context) => const TumblingTestIntroductionPage()),
+                  builder: (context) =>
+                      const TumblingTestInstructionalVideoPage(),
+                ),
               );
-            } else {}
+            } else {
+              //
+            }
           },
           child: const Text("Next"),
         ),

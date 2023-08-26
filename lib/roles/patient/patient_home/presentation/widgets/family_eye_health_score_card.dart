@@ -2,9 +2,11 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FamilyEyeHealthScoreCard extends StatelessWidget {
-  const FamilyEyeHealthScoreCard({super.key});
+  const FamilyEyeHealthScoreCard({super.key, required this.data});
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +26,20 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 maxRadius: 20,
                 minRadius: 15,
-                backgroundImage: AssetImage(
-                  "assets/images/doctor.png",
-                ),
+                child: data["image"] != null
+                    ? Image.asset(
+                        data["image"]!,
+                      )
+                    : const SizedBox(),
               ),
               const SizedBox(
                 width: AppSize.kswidth,
               ),
               Text(
-                "Ragavan Kumar",
+                data["name"] ?? "",
                 style: applyRobotoFont(
                   fontSize: 14,
                 ),
@@ -59,15 +63,25 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                   fit: StackFit.expand,
                   children: [
                     CircularProgressIndicator(
-                      value: 0.3,
+                      value: data["percentage"],
                       backgroundColor: AppColor.kGrey.withOpacity(0.7),
-                      valueColor:
-                          const AlwaysStoppedAnimation<Color>(AppColor.kRed),
+                      valueColor: data["percentage"] > 0.7
+                          ? const AlwaysStoppedAnimation<Color>(AppColor.kGreen)
+                          : const AlwaysStoppedAnimation<Color>(AppColor.kRed),
                       strokeCap: StrokeCap.round,
                     ),
-                    const Align(
+                    Align(
                       alignment: Alignment.center,
-                      child: Text("30%"),
+                      child: Text(
+                        "${data["percentage"] * 100}%",
+                        style: applyRobotoFont(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: data["percentage"] > 0.7
+                              ? AppColor.kGreen
+                              : AppColor.kRed,
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -81,15 +95,17 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "6/20",
+                      data["score"] ?? "",
                       style: applyFiraSansFont(
                         fontSize: 18,
-                        color: AppColor.kRed,
+                        color: data["percentage"] > 0.7
+                            ? AppColor.kGreen
+                            : AppColor.kRed,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
-                      "Left eye - Consider surgery, your vision deteriorating",
+                      data["description"] ?? "",
                       textAlign: TextAlign.right,
                       style: applyRobotoFont(fontSize: 10),
                     )

@@ -1,14 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/patient_tumbling_start_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class TumblingTestIntroductionPage extends StatelessWidget {
-  static const String routeName = '/tumbling-test-introduction';
-  const TumblingTestIntroductionPage({super.key});
+class TumblingTestInstructionalVideoPage extends StatelessWidget {
+  static const String routeName = "/tumbling-test-instructional-video";
+  const TumblingTestInstructionalVideoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TumblingTestIntroductionPage extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const PatientTumblingStartTestPage(),
+                builder: (context) => const TumblingTestInitiatePage(),
               ),
             );
           },
