@@ -97,7 +97,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                           //changing direction of image
 
                           itemBuilder: (context, index, _) {
-                            const imagePath = "assets/images/tumbling_E.svg";
+                            const imagePath = "assets/images/tumbling_e.svg";
                             double rotationAngle = 0.0;
 
                             if (index == 0) {

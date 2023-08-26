@@ -35,7 +35,7 @@ class TopReadingCard extends ConsumerWidget {
                     .map((e) => RotatedBox(
                           quarterTurns: e.quater,
                           child: SvgPicture.asset(
-                            "assets/images/tumbling_E.svg",
+                            "assets/images/tumbling_e.svg",
                             height: model
                                 .tumblingTestList[model.currentTestIndex].eSize,
                             colorFilter: ColorFilter.mode(

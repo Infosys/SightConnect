@@ -27,13 +27,19 @@ class DoctorNearYouCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CircleAvatar(
-                  maxRadius: 40,
-                  minRadius: 35,
-                  backgroundImage: AssetImage(
-                    "assets/images/doctor.png",
+                if (data["image"] != null)
+                  CircleAvatar(
+                    maxRadius: 40,
+                    minRadius: 35,
+                    backgroundImage: AssetImage(data["image"]),
+                  )
+                else
+                  CircleAvatar(
+                    maxRadius: 40,
+                    minRadius: 35,
+                    backgroundColor: Colors.grey,
+                    child: Icon(Icons.person, color: Colors.white),
                   ),
-                ),
                 const SizedBox(height: AppSize.kmheight),
                 Text(
                   data["name"],
@@ -42,7 +48,7 @@ class DoctorNearYouCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Eye Surgeon",
+                  data["profession"],
                   style: applyRobotoFont(
                     fontSize: 10,
                     color: AppColor.kGrey,

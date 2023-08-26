@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/priority_notification_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,7 +9,26 @@ class PriorityNotificationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var names = ["adas", "Adsas", "Adasda"];
+    var doctor = [
+  {
+    "name": "Dr. Jagadish Rana",
+    "profession": "Eye Surgeon",
+    "recommendation": "Dr. Jagadish Rana is recommended for Cataract surgery...",
+    "image" : AppImages.doctor_2,
+  },
+  {
+    "name": "Dr. Kamlesh Singh",
+    "profession": "Ophthalmologist",
+    "recommendation": "Dr. Kamlesh Singh is recommended for Retina treatment...",
+    "image" : AppImages.doctor,
+  },
+  // {
+  //   "name": "Dr. Manish Jain",
+  //   "profession": "Optometrist",
+  //   "recommendation": "Dr. Manish Jain is recommended for Contact lens fitting...",
+  // }
+];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,9 +41,11 @@ class PriorityNotificationList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...names
+             ...doctor
                   .map(
-                    (e) => const PriorityNotificationCard(),
+                    (e) => PriorityNotificationCard(
+                      data: e,
+                    ),
                   )
                   .toList()
             ],

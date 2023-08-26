@@ -10,7 +10,21 @@ class FamilyEyeHealthScoreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var names = ["adas", "Adsas", "Adasda"];
+    var doctor = [
+      {
+        "name": "Dr. Jagadish Rana",
+         "score": "6/20",
+         "remark" : ""
+      },
+      {
+        "name": "Dr. Jagadish Rana",
+         "score": "8/20",
+      },
+      {
+        "name" : "Dr. Jagadish Rana",
+        "score": "18/20",
+      }
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,7 +45,7 @@ class FamilyEyeHealthScoreList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...names
+              ...doctor
                   .map(
                     (e) => const FamilyEyeHealthScoreCard(),
                   )

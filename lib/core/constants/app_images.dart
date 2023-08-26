@@ -15,4 +15,5 @@ class AppImages {
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
   static const String tumblingE = 'assets/images/tumbling_E.svg';
+  static const String doctor_2 = 'assets/images/doctor_2.png';
 }

@@ -8,7 +8,23 @@ class YourAppointmentCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var names = ["adas", "Adsas", "Adasda"];
+    var data = [
+  {
+    "day": "Today",
+    "Time": "8:00 PM - 8:45 PM",
+    "appointment": "Avinash has an appointment with Dr. Rajkumar Williams",
+  },
+  {
+     "day": "July 1, 2023",
+    "Time": "8:00 PM - 8:45 PM",
+    "appointment": "Karthik has an appointment with Dr. Isha Deol",
+  },
+  {
+    "day": "July 1, 2023",
+    "Time": "8:00 PM - 8:45 PM",
+    "appointment": "Ganesh has an appointment with Dr. Rajkumar Balan",
+  },
+];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,9 +37,20 @@ class YourAppointmentCardList extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 4,
+          itemCount: 1,
           itemBuilder: (context, index) {
-            return const YourAppointmentCard();
+            return Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ...data
+                  .map(
+                    (e) => YourAppointmentCard(
+                      data: e,
+                    ),
+                  )
+                  .toList()
+              ],
+            );
           },
         )
       ],
