@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class TumblingResultReportPage extends StatelessWidget {
@@ -110,17 +112,25 @@ class TumblingResultReportPage extends StatelessWidget {
               const Text(
                 "For more details and insights, visit nearest LVPEI vision centre, or call our toll free number to connect with our vision technician.",
               ),
-              const ListTile(
-                leading: Icon(Icons.abc),
-                trailing: Icon(Icons.beach_access),
-                title: Text("LVPEI Vision Center"),
-                subtitle: Text("LVPEI Vision Center"),
+              ListTile(
+                leading: SvgPicture.asset(
+                  AppIcon.visionCenter,
+                ),
+                trailing: SvgPicture.asset(
+                  AppIcon.location,
+                ),
+                title: const Text("LVPEI Vision Center"),
+                subtitle: const Text("LVPEI Vision Center"),
               ),
-              const ListTile(
-                leading: Icon(Icons.abc),
-                trailing: Icon(Icons.beach_access),
-                title: Text("Vision Technician"),
-                subtitle: Text("Toll Free Number"),
+              ListTile(
+                leading: SvgPicture.asset(
+                  AppIcon.tollFree,
+                ),
+                trailing: SvgPicture.asset(
+                  AppIcon.call,
+                ),
+                title: const Text("Vision Technician"),
+                subtitle: const Text("Toll Free Number"),
               ),
               16.verticalSpace,
               Padding(

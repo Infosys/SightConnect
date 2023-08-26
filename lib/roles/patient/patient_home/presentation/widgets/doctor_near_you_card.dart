@@ -37,8 +37,7 @@ class DoctorNearYouCard extends StatelessWidget {
                   CircleAvatar(
                     maxRadius: 40,
                     minRadius: 35,
-                    backgroundColor: Colors.grey,
-                    child: Icon(Icons.person, color: Colors.white),
+                    backgroundColor: AppColor.kGrey.withOpacity(0.3),
                   ),
                 const SizedBox(height: AppSize.kmheight),
                 Text(

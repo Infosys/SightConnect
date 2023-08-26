@@ -9,41 +9,53 @@ class YourAppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        tileColor: AppColor.kWhite,
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              data["day"],
-              style: applyRobotoFont(
-                fontSize: 12,
+      child: Row(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data["day"],
+                style: applyRobotoFont(
+                  fontSize: 12,
+                ),
               ),
-            ),
-            Text(
-              data["Time"],
-              style: applyRobotoFont(
-                fontSize: 10,
-                color: AppColor.kGrey,
+              Text(
+                data["Time"],
+                style: applyRobotoFont(
+                  fontSize: 10,
+                  color: AppColor.kGrey,
+                ),
               ),
-            ),
-          ],
-        ),
-        title: Text(
-          data["appointment"],
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 14,
+            ],
           ),
-        ),
-        trailing: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.more_vert),
-        ),
+          const SizedBox(
+            width: AppSize.kmwidth,
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    data["appointment"],
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

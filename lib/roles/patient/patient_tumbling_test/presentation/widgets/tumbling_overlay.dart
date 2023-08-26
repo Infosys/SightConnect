@@ -69,11 +69,13 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                           height: 5,
                         ),
                         Text(
-                            'Here is how you interpret the directions for each symbol',
-                            style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF888888))),
+                          'Here is how you interpret the directions for each symbol',
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xFF888888),
+                          ),
+                        ),
                         const SizedBox(height: 20),
 
                         // Carousel
@@ -97,7 +99,7 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                           //changing direction of image
 
                           itemBuilder: (context, index, _) {
-                            const imagePath = "assets/images/tumbling_e.svg";
+                            const imagePath = AppImages.tumblingE;
                             double rotationAngle = 0.0;
 
                             if (index == 0) {

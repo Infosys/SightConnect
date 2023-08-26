@@ -10,4 +10,10 @@ class AppIcon {
   //Patient Appointment Booking
   static const String patientAppointmentBookingCalander =
       'assets/icons/calendar booking.svg';
+
+  //Tumbling Result
+  static const String call = 'assets/icons/call.svg';
+  static const String location = 'assets/icons/location.svg';
+  static const String tollFree = 'assets/icons/toll_free.svg';
+  static const String visionCenter = 'assets/icons/vision_center.svg';
 }

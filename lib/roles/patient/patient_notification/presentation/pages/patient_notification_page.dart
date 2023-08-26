@@ -10,24 +10,22 @@ class PatientNotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = [
       {
-        "title": "Dolor voluptate irure",
+        "title": "Patient Report Alert",
         "description":
-            "Dolore consectetur mollit officia est nisi nulla minim. Occaecat eiusmod eu id proident duis dolore. Culpa ullamco id velit anim labore id reprehenderit. Ullamco amet anim pariatur voluptate consectetur qui voluptate. Incididunt ex do eiusmod eiusmod cillum non eiusmod Lorem nulla aliquip sunt est in.",
-        "time": "1:33 PM",
+            "Your recent test results are available. Please review them.",
+        "time": "9:00 AM"
       },
       {
-        "title":
-            "Dolor voluptate irure nostrud minim dolore ad consectetur fugiat eu occaecat.",
+        "title": "Appointment Alert",
         "description":
-            "Dolore consectetur mollit officia est nisi nulla minim. Occaecat eiusmod eu id proident duis dolore. Culpa ullamco id velit anim labore id reprehenderit. Ullamco amet anim pariatur voluptate consectetur qui voluptate. Incididunt ex do eiusmod eiusmod cillum non eiusmod Lorem nulla aliquip sunt est in.",
-        "time": "1:33 PM",
+            "You have an upcoming appointment with Dr. Smith tomorrow.",
+        "time": "2:30 PM"
       },
       {
-        "title":
-            "Dolor voluptate irure nostrud minim dolore ad consectetur fugiat eu occaecat.",
+        "title": "Insurance Alert",
         "description":
-            "Dolore consectetur mollit officia est nisi nulla minim. Occaecat eiusmod eu id proident duis dolore. Culpa ullamco id velit anim labore id reprehenderit. Ullamco amet anim pariatur voluptate consectetur qui voluptate. Incididunt ex do eiusmod eiusmod cillum non eiusmod Lorem nulla aliquip sunt est in.",
-        "time": "1:33 PM",
+            "Your insurance claim has been processed. Please check the details.",
+        "time": "4:45 PM"
       }
     ];
 

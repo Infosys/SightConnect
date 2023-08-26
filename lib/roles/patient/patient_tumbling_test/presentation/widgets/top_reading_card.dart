@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/fake_data_source.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
@@ -35,7 +36,7 @@ class TopReadingCard extends ConsumerWidget {
                     .map((e) => RotatedBox(
                           quarterTurns: e.quater,
                           child: SvgPicture.asset(
-                            "assets/images/tumbling_e.svg",
+                            AppImages.tumblingE,
                             height: model
                                 .tumblingTestList[model.currentTestIndex].eSize,
                             colorFilter: ColorFilter.mode(

@@ -58,6 +58,9 @@ class AppTheme extends StateNotifier<ThemeMode> {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         shape: const StadiumBorder(),
+        side: const BorderSide(
+          color: AppColor.kPrimary,
+        ),
         textStyle: applyRobotoFont(
           fontSize: 14,
         ),
