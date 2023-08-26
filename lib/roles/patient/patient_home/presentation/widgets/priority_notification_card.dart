@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class PriorityNotificationCard extends StatelessWidget {
-  const PriorityNotificationCard({super.key});
-
+  const PriorityNotificationCard({Key? key, required this.data}) : super(key: key);
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,11 +25,11 @@ class PriorityNotificationCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   maxRadius: 20,
                   minRadius: 18,
                   backgroundImage: AssetImage(
-                    "assets/images/doctor.png",
+                    data["image"],
                   ),
                 ),
                 const SizedBox(width: AppSize.kmwidth),
@@ -39,7 +39,7 @@ class PriorityNotificationCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dr. Jagadish Rana",
+                        data["name"],
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class PriorityNotificationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Eye Surgeon",
+                        data["profession"],
                         style: applyRobotoFont(
                           fontSize: 10,
                           color: AppColor.kWhite.withOpacity(0.5),
@@ -75,7 +75,7 @@ class PriorityNotificationCard extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Raghvan Kumar is recommended for Cataract surgery…",
+                data["recommendation"],
                 maxLines: 1,
                 style: applyRobotoFont(fontSize: 11, color: AppColor.kWhite),
               ),

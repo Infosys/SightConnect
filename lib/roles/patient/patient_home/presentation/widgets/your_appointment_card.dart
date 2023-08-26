@@ -4,7 +4,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class YourAppointmentCard extends StatelessWidget {
-  const YourAppointmentCard({super.key});
+  const YourAppointmentCard({Key? key, required this.data}) : super(key: key);
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +18,13 @@ class YourAppointmentCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Today",
+              data["day"],
               style: applyRobotoFont(
                 fontSize: 12,
               ),
             ),
             Text(
-              "8:00 - 8:45PM",
+              data["Time"],
               style: applyRobotoFont(
                 fontSize: 10,
                 color: AppColor.kGrey,
@@ -32,7 +33,7 @@ class YourAppointmentCard extends StatelessWidget {
           ],
         ),
         title: Text(
-          "Avinash has an appointment with Dr. Rajkumar Williams",
+          data["appointment"],
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(

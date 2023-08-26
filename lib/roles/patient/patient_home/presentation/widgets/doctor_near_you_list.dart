@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/doctor_near_you_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,12 +9,21 @@ class DoctorNearYouList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var doctor = [
+      var doctor = [
       {
-        "name": "Dr. Jagadish Rana",
+        "name": "Dr. Rajkumar Williams",
+         "profession": "Eye Surgeon",
+         "image": AppImages.doctor_2,
       },
       {
-        "name": "Dr. Jagadish Rana",
+        "name": "Dr. Priya Shankar",
+         "profession": "Ophthalmologist",
+         "image": null,
+      },
+      {
+        "name" : "Dr. Manish Jain",
+        "profession": "Optometrist",
+        "image": null,
       }
     ];
     return Column(
