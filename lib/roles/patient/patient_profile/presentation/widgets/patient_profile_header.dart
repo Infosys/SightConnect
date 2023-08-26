@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,12 +14,13 @@ class ProfileHeader extends StatelessWidget {
     return Container(
       height: AppSize.height * 0.3,
       padding: const EdgeInsets.all(AppSize.kspadding),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
+      decoration: BoxDecoration(
+        boxShadow: appShadow(),
+        image: const DecorationImage(
           fit: BoxFit.fitWidth,
           image: AssetImage(AppImages.profileBg),
         ),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(AppSize.klradius),
           bottomRight: Radius.circular(AppSize.klradius),
         ),
@@ -65,7 +67,6 @@ class ProfileHeader extends StatelessWidget {
           ),
           AppSize.klheight.verticalSpace,
           Container(
-            width: AppSize.width * 0.8,
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,7 +86,7 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    3.horizontalSpace ,
+                    3.horizontalSpace,
                     Text(
                       profile["mobile"] ?? "",
                       style: applyRobotoFont(
@@ -113,13 +114,16 @@ class ProfileHeader extends StatelessWidget {
                       ),
                     ),
                     AppSize.ksheight.horizontalSpace,
-                    Text(
-                      profile["email"] ?? "",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                      ).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.normal,
+                    Flexible(
+                      child: Text(
+                        profile["email"] ?? "",
+                        softWrap: true,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                        ).copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ),
                   ],

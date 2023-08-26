@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/profile_app_bar.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_color.dart';
-import '../../../patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
 import '../../data/local/fake_data_source.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
@@ -14,16 +13,6 @@ class PatientProfilePage extends StatelessWidget {
   const PatientProfilePage({super.key});
 
   static const String routeName = '/patient-profile';
-
-  //   void _showTumblingOverlay(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false, // Prevent closing by tapping outside
-  //     builder: (BuildContext context) {
-  //       return TumblingOverlay(isLoading: true, child: Text(''),);
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +25,11 @@ class PatientProfilePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const ProfileHeader(),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              padding: const EdgeInsets.all(AppSize.kmpadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -54,13 +42,12 @@ class PatientProfilePage extends StatelessWidget {
                           "Address",
                           style: applyFiraSansFont(
                             fontSize: 18.sp,
-                            fontWeight: FontWeight.w800,
                           ),
                         ),
                         AppSize.ksheight.verticalSpace,
                         Text(
                           profile["address"] ?? "",
-                          style: applyRobotoFont(fontSize: 14.sp),
+                          style: applyRobotoFont(fontSize: 14),
                         ),
                       ],
                     ),
@@ -73,7 +60,8 @@ class PatientProfilePage extends StatelessWidget {
                         Text(
                           "General Information",
                           style: applyFiraSansFont(
-                              fontSize: 18.sp, fontWeight: FontWeight.w800),
+                            fontSize: 18.sp,
+                          ),
                         ),
                         AppSize.ksheight.verticalSpace,
                         PatientInfoCard(

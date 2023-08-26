@@ -17,7 +17,7 @@ class PatientNotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: const CircleAvatar(),
+      leading: const Icon(Icons.notifications),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

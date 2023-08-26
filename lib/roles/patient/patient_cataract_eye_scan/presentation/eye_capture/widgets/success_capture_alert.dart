@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/eye_report/eye_report.dart';
 import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +8,6 @@ import '../../../data/models/enums/eye.dart';
 import '../../../data/models/enums/scan_type.dart';
 import '../../provider/eye_scan_provider.dart';
 import '../detect_camera.dart';
-
 
 void successCaptureAlert(BuildContext context, Eye eye) {
   showGeneralDialog(
@@ -22,7 +20,7 @@ void successCaptureAlert(BuildContext context, Eye eye) {
         'assets/images/check.png',
         height: 40,
         width: 40,
-        color: Color(0xff22BF85),
+        color: const Color(0xff22BF85),
       ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +32,7 @@ void successCaptureAlert(BuildContext context, Eye eye) {
             style: TextStyle(
                 fontStyle: GoogleFonts.firaSans().fontStyle, fontSize: 20),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           eye == Eye.RIGHT_EYE
               ? Text(
                   'Proceed with Left eye scan',
@@ -52,13 +50,12 @@ void successCaptureAlert(BuildContext context, Eye eye) {
       actionsAlignment: MainAxisAlignment.end,
       actions: [
         Consumer(
-          builder: (context, ref, child) => 
-          TextButton(
+          builder: (context, ref, child) => TextButton(
             child: Text('Rescan',
                 style: TextStyle(
                     fontStyle: GoogleFonts.roboto().fontStyle,
                     fontSize: 14,
-                    color: Color(0xff296DF6))),
+                    color: const Color(0xff296DF6))),
             onPressed: () {
               ref.watch(patientEyeScanProvider).resetEyeImage(eye);
               Navigator.push(
@@ -71,15 +68,7 @@ void successCaptureAlert(BuildContext context, Eye eye) {
           ),
         ),
         Consumer(
-          builder: (context, ref, child) => 
-          TextButton(
-              child: Text(
-                'Ok',
-                style: TextStyle(
-                    fontStyle: GoogleFonts.roboto().fontStyle,
-                    fontSize: 14,
-                    color: Color(0xff296DF6)),
-              ),
+          builder: (context, ref, child) => TextButton(
               onPressed: eye == Eye.RIGHT_EYE
                   ? () {
                       Navigator.push(
@@ -96,12 +85,21 @@ void successCaptureAlert(BuildContext context, Eye eye) {
                       ref.watch(patientEyeScanProvider).scanType ==
                               ScanType.Cataract
                           ? ref.watch(patientEyeScanProvider).processModel()
-                          : ref.watch(patientEyeScanProvider).processKeratoconus();
+                          : ref
+                              .watch(patientEyeScanProvider)
+                              .processKeratoconus();
                       // context.read<EyeScanProvider>().fakeProcessModel();
                       Navigator.pushNamed(context, '/reportEyeSection');
                       // Navigator.push(context, MaterialPageRoute(builder: (_) => EyeScanReport()));
                       // Navigator.pop(context);
-                    }),
+                    },
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                    fontStyle: GoogleFonts.roboto().fontStyle,
+                    fontSize: 14,
+                    color: const Color(0xff296DF6)),
+              )),
         ),
       ],
     ),

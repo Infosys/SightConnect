@@ -17,21 +17,16 @@ class DiscoverCard extends StatelessWidget {
         children: [
           data["image"] != null
               ? ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSize.kmradius),
                   child: Image.asset(
                     data["image"]!,
                     fit: BoxFit.cover,
                     height: 180,
+                    colorBlendMode: BlendMode.darken,
+                    color: Colors.black.withOpacity(0.1),
                   ),
                 )
               : const SizedBox(),
-          Container(
-            height: 180,
-            margin: const EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              color: AppColor.kBlack.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(AppSize.klpadding),
             child: Column(

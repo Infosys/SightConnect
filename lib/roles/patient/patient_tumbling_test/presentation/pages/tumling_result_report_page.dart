@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TumblingResultReportPage extends StatelessWidget {
   static const String routeName = "/tumbling-result-report";
@@ -120,9 +121,17 @@ class TumblingResultReportPage extends StatelessWidget {
                   AppIcon.location,
                 ),
                 title: const Text("LVPEI Vision Center"),
-                subtitle: const Text("LVPEI Vision Center"),
+                subtitle: const Text("Addanki"),
               ),
               ListTile(
+                onTap: () async {
+                  await launchOut(
+                    Uri(
+                      scheme: "tel",
+                      path: "08069490400",
+                    ),
+                  );
+                },
                 leading: SvgPicture.asset(
                   AppIcon.tollFree,
                 ),
@@ -162,6 +171,12 @@ class TumblingResultReportPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> launchOut(Uri uri) async {
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
   }
 
   buildCol(String title, String value) {

@@ -3,7 +3,7 @@ var profile = {
   "id": "DRID: 110050C701",
   "image": "assets/images/profile_image.png",
   "mobile": "776-654-2345",
-  "email": 'abc@gmail.com',
+  "email": 'anandi@gmail.com',
   "address":
       "15 / 128, Sector 51, Dada Sahib Street, Ammerpet, Guntur - 508021",
   "dob": "5 May 2009 (14 years)",

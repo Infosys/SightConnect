@@ -10,7 +10,12 @@ class YourAppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        color: AppColor.kWhite.withOpacity(0.35),
+      ),
+      padding: const EdgeInsets.all(AppSize.kspadding),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
           Column(
@@ -50,7 +55,11 @@ class YourAppointmentCard extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.more_vert),
+                  icon: const Icon(
+                    Icons.more_vert_sharp,
+                    color: AppColor.kGrey,
+                    size: 18,
+                  ),
                 ),
               ],
             ),

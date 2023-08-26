@@ -65,7 +65,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
           fontSize: 14,
         ),
         padding: const EdgeInsets.symmetric(
-          vertical: 14,
+          vertical: 12,
           horizontal: 32,
         ),
       ),
@@ -76,7 +76,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         backgroundColor: AppColor.kPrimary,
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(
-          vertical: 14,
+          vertical: 12,
           horizontal: 32,
         ),
         textStyle: applyRobotoFont(

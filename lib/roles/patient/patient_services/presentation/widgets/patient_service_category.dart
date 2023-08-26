@@ -32,7 +32,8 @@ class PatientServiceCategory extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           Wrap(
-            spacing: 10,
+            spacing: 4,
+            runSpacing: 4,
             children: services
                 .map(
                   (miniapp) => InkWell(

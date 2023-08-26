@@ -80,7 +80,7 @@ class TumblingTestProvider extends ChangeNotifier {
   get isGameOver => gameOver;
 
   void checkGameOver() {
-    if (correctCount == 5 || wrongCount == 5 || _curretTestIndex == 6) {
+    if (correctCount == 5 || wrongCount == 3 || _curretTestIndex == 6) {
       gameOver = true;
     }
     notifyListeners();

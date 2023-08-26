@@ -16,9 +16,14 @@ class PatientHeader extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            AppImages.patientCover,
-            fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              bottomRight: Radius.circular(AppSize.klradius),
+            ),
+            child: Image.asset(
+              AppImages.patientCover,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(AppSize.kmpadding),

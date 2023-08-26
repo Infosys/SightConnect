@@ -1,5 +1,4 @@
-import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
+import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.lightTheme
               : AppTheme.darkTheme,
           routes: AppRouter.routes,
-          initialRoute: PatientDashboardPage.routeName,
+          initialRoute: AuthPage.routeName,
         );
       },
     );

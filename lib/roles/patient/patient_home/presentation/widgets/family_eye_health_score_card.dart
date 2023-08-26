@@ -12,11 +12,10 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.kWhite,
         borderRadius: BorderRadius.circular(AppSize.ksradius),
-        boxShadow: const [],
       ),
       width: AppSize.width * 0.5,
       child: Column(
@@ -46,9 +45,7 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: AppSize.ksheight,
-          ),
+          const SizedBox(height: AppSize.ksheight),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -64,7 +61,8 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                   children: [
                     CircularProgressIndicator(
                       value: data["percentage"],
-                      backgroundColor: AppColor.kGrey.withOpacity(0.7),
+                      strokeWidth: 6,
+                      backgroundColor: AppColor.kGrey.withOpacity(0.3),
                       valueColor: data["percentage"] > 0.7
                           ? const AlwaysStoppedAnimation<Color>(AppColor.kGreen)
                           : const AlwaysStoppedAnimation<Color>(AppColor.kRed),
@@ -79,7 +77,7 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: data["percentage"] > 0.7
                               ? AppColor.kGreen
-                              : AppColor.kRed,
+                              : AppColor.kGrey.withOpacity(0.7),
                         ),
                       ),
                     )
@@ -107,7 +105,10 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                     Text(
                       data["description"] ?? "",
                       textAlign: TextAlign.right,
-                      style: applyRobotoFont(fontSize: 10),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          applyRobotoFont(fontSize: 10, color: AppColor.kGrey),
                     )
                   ],
                 ),

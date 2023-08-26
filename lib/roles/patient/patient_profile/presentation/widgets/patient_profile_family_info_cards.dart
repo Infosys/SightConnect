@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ class PatientFamilyDetails extends StatelessWidget {
         children: [
           Text(
             "Family Details",
-            style: applyFiraSansFont(fontSize: 18.sp, fontWeight: FontWeight.w800),
+            style: applyFiraSansFont(
+              fontSize: 18.sp,
+            ),
           ),
           AppSize.ksheight.verticalSpace,
           ...hospital
@@ -23,9 +26,9 @@ class PatientFamilyDetails extends StatelessWidget {
                 (hospital) => ListTile(
                   contentPadding: const EdgeInsets.all(0),
                   leading: CircleAvatar(
-                    backgroundColor: Colors.black,
+                    backgroundColor: AppColor.kBlack,
                     child: Text(
-                      hospital["name"]![0],
+                      hospital["name"]?[0] ?? "",
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -34,13 +37,19 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                   title: Text(
                     hospital["name"] ?? "",
-                    style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   subtitle: Text(
                     hospital["address"] ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(fontSize: 12, color: const Color(0xFF888888)),
+                    style: applyRobotoFont(
+                      fontSize: 12,
+                      color: AppColor.kGrey,
+                    ),
                   ),
                   trailing: IconButton(
                     onPressed: () {},
