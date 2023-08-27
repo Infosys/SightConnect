@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -41,42 +42,67 @@ class PatientHeader extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.search),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacementNamed(
+                              AuthPage.routeName,
+                            );
+                          },
+                          icon: const Icon(Icons.logout_outlined),
+                        ),
+                      ],
                     )
                   ],
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.klheight),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     maxWidth: 300,
                   ),
                   child: Text(
-                    "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
+                    "Welcome Back",
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.klheight),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     maxWidth: 300,
                   ),
                   child: Text(
-                    "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+                    "Anandi Murthy",
+                    style: applyFiraSansFont(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSize.klheight),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 300,
+                  ),
+                  child: Text(
+                    "Have a nice day",
                     style: applyRobotoFont(
                       fontSize: 14,
                     ),
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: const Text("know more"),
-                ),
+                // OutlinedButton(
+                //   onPressed: () {},
+                //   child: const Text("View Profile"),
+                // ),
               ],
             ),
           )
