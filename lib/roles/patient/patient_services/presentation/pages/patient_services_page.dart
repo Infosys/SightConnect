@@ -16,6 +16,7 @@ class _PatientServicesPageState extends State<PatientServicesPage> {
     "Patient Care": [
       "Buy Spectacles",
       "Reminders",
+      "Appointment Booking",
     ],
     "Remote Care": [
       "Eye Scan",

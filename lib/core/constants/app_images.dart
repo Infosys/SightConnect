@@ -47,4 +47,8 @@ class AppImages {
   static const String campaign = 'assets/images/campaign_1.png';
   static const String campaign2 = 'assets/images/campaign_2.png';
   static const String doctor_2 = 'assets/images/doctor_2.png';
+
+  //tumbling test
+
+  static const String tumblingTestPlay = 'assets/images/play.svg';
 }

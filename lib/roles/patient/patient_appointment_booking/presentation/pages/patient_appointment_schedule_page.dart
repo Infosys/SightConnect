@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class PatientAppointmentSchedulePage extends ConsumerWidget {
                   AppointmentBookingDoctorCard(
                     doctorName: "Dr. John Doe",
                     doctorSpeciality: "Eye Specialist",
-                    doctorImage: "assets/images/doctor.png",
+                    doctorImage: AppImages.doctor,
                     hospialName: "LVP Eye Hospital, Guntur, Hyderabad",
                   ),
                   SizedBox(

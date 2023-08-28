@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/widgets/appointment_booking_doctor_card.dart';
 import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/widgets/appointment_booking_input_tile.dart';
@@ -27,7 +28,7 @@ class PatientAppointmentBookingPage extends ConsumerWidget {
             const AppointmentBookingDoctorCard(
               doctorName: "Dr. John Doe",
               doctorSpeciality: "Eye Specialist",
-              doctorImage: "assets/images/doctor.png",
+              doctorImage: AppImages.doctor,
               hospialName: "LVP Eye Hospital, Guntur, Hyderabad",
             ),
             const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentBookingDoctorCard extends StatelessWidget {
@@ -47,18 +48,21 @@ class AppointmentBookingDoctorCard extends StatelessWidget {
                       children: [
                         Text(
                           doctorName ?? "",
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: applyFiraSansFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         Text(
                           doctorSpeciality ?? "",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: AppColor.kGrey),
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.kGrey,
+                          ),
                         ),
                         Text(
                           hospialName ?? "",
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: applyRobotoFont(fontSize: 12),
                         ),
                       ],
                     ),

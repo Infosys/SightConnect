@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -22,8 +23,10 @@ class AppointmentBookingPopUp extends StatelessWidget {
           const Text('Confirm Booking'),
         ],
       ),
-      content: const Text(
-          'Voluptate duis incididunt ad Lorem cillum ut exercitation occaecat fugiat officia esse.'),
+      content: Text(
+        'Voluptate duis incididunt ad Lorem cillum ut exercitation occaecat fugiat officia esse.',
+        style: applyRobotoFont(fontSize: 14),
+      ),
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
@@ -54,10 +57,9 @@ class AppointmentBookingPopUp extends StatelessWidget {
                 content: SizedBox(
                   child: Text(
                     "Done! Appointment with  is scheduled for Sreeram Murthy on ${DateFormat("MMMM d, yyyy").format(DateTime.now())} ",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
+                    style: applyRobotoFont(
                       fontSize: 12,
+                      color: Colors.white,
                     ),
                   ),
                 ),

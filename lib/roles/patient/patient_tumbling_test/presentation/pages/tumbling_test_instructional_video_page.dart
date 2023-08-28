@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -61,7 +62,7 @@ class TumblingTestInstructionalVideoPage extends StatelessWidget {
               ),
               child: Center(
                 child: SvgPicture.asset(
-                  "assets/images/play.svg",
+                  AppImages.tumblingTestPlay,
                   height: 40,
                   width: 40,
                 ),

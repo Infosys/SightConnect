@@ -16,4 +16,5 @@ var mappers = {
   "Calendar Check": AppImages.calendarCheck,
   "Doctors Nearby": AppImages.doctorNearBy,
   "Hospitals Nearby": AppImages.hospitalNearBy,
+  "Appointment Booking": AppImages.calendarCheck,
 };

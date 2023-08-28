@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/eye_scan_home_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -42,6 +43,14 @@ class PatientServiceCategory extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const EyeScanHomePage(),
+                          ),
+                        );
+                      }
+                      if (miniapp == "Appointment Booking") {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientAppointmentSchedulePage(),
                           ),
                         );
                       }

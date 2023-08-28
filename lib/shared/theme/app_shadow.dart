@@ -16,7 +16,7 @@ appShadow() {
     //   offset: const Offset(-10, -10),
     // ),
     BoxShadow(
-      color: AppColor.kshadowColor.withOpacity(0.02),
+      color: AppColor.kshadowColor.withOpacity(0.04),
       blurRadius: 64,
       offset: const Offset(0, 24),
     ),
