@@ -17,6 +17,7 @@ class AppColor {
   static const Color kGrey = Color(0xFF888888);
   static const Color kBlack = Color(0xFF000000);
   static const Color kshadowColor = Color(0xFF296DF6);
+  static const Color kLightGrey = Color(0xFFDDDDDD);
 
   static const Map<int, Color> colorShades = {
     50: Color(0xFFE3F2FD),

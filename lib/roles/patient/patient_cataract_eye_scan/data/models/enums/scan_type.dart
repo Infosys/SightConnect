@@ -1,1 +1,0 @@
-enum ScanType { Cataract, Keratoconus }

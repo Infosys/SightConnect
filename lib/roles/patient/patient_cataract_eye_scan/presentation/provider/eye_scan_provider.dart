@@ -8,10 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../data/contract/patient_eye_scan_repository.dart';
-import '../../data/models/User_details_model.dart';
-import '../../data/models/enums/eye.dart';
-import '../../data/models/enums/scan_type.dart';
-import '../../data/models/previous_report_model.dart';
+import '../../data/local/User_details_model.dart';
+import './../../data/local/fake_data_source_cataract.dart';
 import '../../data/remote/patient_eye_scan_repository_impl.dart';
 
 var patientEyeScanProvider = ChangeNotifierProvider((ref) => EyeScanProvider(ref.watch(patientEyeScanRepository)));

@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/models/enums/eye.dart';
-import '../../../data/models/enums/scan_type.dart';
-import '../../provider/eye_scan_provider.dart';
-import '../detect_camera.dart';
+import '../../../../data/local/fake_data_source_cataract.dart';
+import '../../../provider/eye_scan_provider.dart';
+import '../../../pages/patient_eyes_capture_page.dart';
 
 void successCaptureAlert(BuildContext context, Eye eye) {
   showGeneralDialog(
@@ -61,7 +60,7 @@ void successCaptureAlert(BuildContext context, Eye eye) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DetectCamera(
+                      builder: (context) => PatientEyeCapturePage(
                             eye: eye,
                           )));
             },
@@ -74,7 +73,7 @@ void successCaptureAlert(BuildContext context, Eye eye) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DetectCamera(
+                          builder: (context) => const PatientEyeCapturePage(
                             eye: Eye.LEFT_EYE,
                           ),
                         ),

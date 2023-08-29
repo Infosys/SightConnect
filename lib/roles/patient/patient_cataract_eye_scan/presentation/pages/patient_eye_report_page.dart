@@ -1,19 +1,19 @@
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:avatars/avatars.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/enums/eye.dart';
-import '../../data/models/enums/scan_type.dart';
-import '../pages/eye_scan_home_page.dart';
+import '../../data/local/fake_data_source_cataract.dart';
 import '../provider/eye_scan_provider.dart';
-import 'widgets/keratoconus_eye_section.dart';
-import 'widgets/previous_reports.dart';
-import 'widgets/report_eye_section.dart';
+import '../widgets/eye_report/widgets/keratoconus_eye_section.dart';
+import '../widgets/eye_report/widgets/previous_reports.dart';
+import '../widgets/eye_report/widgets/report_eye_section.dart';
 
-class EyeScanReport extends ConsumerWidget {
-  const EyeScanReport({Key? key}) : super(key: key);
-  static const String routeName = "/reportEyeSection";
+class PatientEyesReportPage extends ConsumerWidget {
+   static const String routeName = "/patientEyesReportPage";
+  const PatientEyesReportPage({Key? key}) : super(key: key);
+ 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientEyeScanProvider);
@@ -378,7 +378,7 @@ class EyeScanReport extends ConsumerWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                EyeScanHomePage(
+                                                PatientEyeCapturePage(
                                                     userDetails:
                                                         model.userDetails)));
                                   },

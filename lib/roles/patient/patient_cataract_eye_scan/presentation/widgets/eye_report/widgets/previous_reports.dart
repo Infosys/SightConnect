@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../pages/eye_scan_home_page.dart';
-import '../../provider/eye_scan_provider.dart';
+import '../../../pages/patient_cataract_eyes_scan_page.dart';
+import '../../../provider/eye_scan_provider.dart';
 
 class PreviousReports extends ConsumerWidget {
   const PreviousReports({super.key});

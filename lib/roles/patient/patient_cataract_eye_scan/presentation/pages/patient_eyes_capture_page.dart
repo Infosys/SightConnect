@@ -4,25 +4,27 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/User_details_model.dart';
-import '../../data/models/enums/eye.dart';
-import 'widgets/camera_not_found.dart';
-import 'widgets/success_capture_alert.dart';
+import '../../data/local/User_details_model.dart';
+import '../../data/local/fake_data_source_cataract.dart';
+import '../widgets/eye_capture/widgets/camera_not_found.dart';
+import '../widgets/eye_capture/widgets/success_capture_alert.dart';
 
-class DetectCamera extends StatefulWidget {
-  const DetectCamera({Key? key, this.eye, this.userDetails}) : super(key: key);
+class PatientEyeCapturePage extends StatefulWidget {
+  static const String routeName = "/patientEyeCapturePage";
+  const PatientEyeCapturePage({Key? key, this.eye, this.userDetails}) : super(key: key);
   final Eye? eye;
-  static const String routeName = "/captureImage";
+  
   final UserDetails? userDetails;
 
   @override
-  State<DetectCamera> createState() => _DetectCameraState();
+  State<PatientEyeCapturePage> createState() => _PatientEyeCapturePageState();
 }
 
-class _DetectCameraState extends State<DetectCamera> {
+class _PatientEyeCapturePageState extends State<PatientEyeCapturePage> {
   bool _isLoading = false;
   late CameraController _cameraController;
 

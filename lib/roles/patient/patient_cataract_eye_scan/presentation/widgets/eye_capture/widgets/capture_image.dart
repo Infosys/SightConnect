@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/models/enums/eye.dart';
-import '../../provider/eye_scan_provider.dart';
+import '../../../../data/local/fake_data_source_cataract.dart';
+import '../../../provider/eye_scan_provider.dart';
 import 'success_capture_alert.dart';
 
 class CaptureImage extends StatefulWidget {
