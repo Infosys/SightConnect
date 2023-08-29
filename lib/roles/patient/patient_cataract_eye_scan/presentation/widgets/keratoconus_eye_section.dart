@@ -1,11 +1,8 @@
-import 'dart:io';
-
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/data/local/fake_data_source_cataract.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../data/local/fake_data_source_cataract.dart';
-import '../../../provider/eye_scan_provider.dart';
 
 class KeratoconusEyeSection extends ConsumerWidget {
   const KeratoconusEyeSection({Key? key, this.eye}) : super(key: key);
@@ -23,14 +20,14 @@ class KeratoconusEyeSection extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: Image.file(
-              eye == Eye.RIGHT_EYE
-                  ? File(model.rightEye!.path)
-                  : File(model.leftEye!.path),
-            ).image,
-          ),
+          // CircleAvatar(
+          //   radius: 40,
+          //   backgroundImage: Image.file(
+          //     eye == Eye.RIGHT_EYE
+          //         ? File(model.rightEye!.path)
+          //         : File(model.leftEye!.path),
+          //   ).image,
+          // ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(

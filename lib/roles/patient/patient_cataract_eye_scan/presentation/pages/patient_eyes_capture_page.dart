@@ -1,193 +1,139 @@
-import 'dart:developer';
-import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/local/User_details_model.dart';
 import '../../data/local/fake_data_source_cataract.dart';
-import '../widgets/eye_capture/widgets/camera_not_found.dart';
-import '../widgets/eye_capture/widgets/success_capture_alert.dart';
+import '../../modals/camera_not_found.dart';
 
-class PatientEyeCapturePage extends StatefulWidget {
+class PatientEyeCapturePage extends StatefulHookConsumerWidget {
   static const String routeName = "/patientEyeCapturePage";
-  const PatientEyeCapturePage({Key? key, this.eye, this.userDetails}) : super(key: key);
-  final Eye? eye;
-  
-  final UserDetails? userDetails;
+  const PatientEyeCapturePage({
+    super.key,
+  });
 
   @override
-  State<PatientEyeCapturePage> createState() => _PatientEyeCapturePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PatientEyeCapturePageState();
 }
 
-class _PatientEyeCapturePageState extends State<PatientEyeCapturePage> {
-  bool _isLoading = false;
-  late CameraController _cameraController;
+class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
+  late CameraDescription? cameraDescription;
+  bool isLoading = false;
+  late CameraController? cameraController;
 
   @override
   void initState() {
-    log("test triggered 2");
-    log(widget.userDetails.toString());
-
-    // _initCamera();
-    helperFunction();
     super.initState();
+    _init();
   }
 
-  helperFunction() async {
-    await _initCamera();
-
-    if (!_cameraController.value.isInitialized) {
+  _init() async {
+    await _intializeCamera();
+    if (!cameraController!.value.isInitialized && context.mounted) {
       showCameraNotFound(context);
     }
   }
 
+  _intializeCamera() async {
+    setState(() {
+      isLoading = true;
+    });
+    final cameras = await availableCameras();
+    cameraDescription = cameras.firstWhere(
+        (element) => element.lensDirection == CameraLensDirection.back);
+
+    cameraController = CameraController(
+      cameraDescription!,
+      ResolutionPreset.max,
+    );
+    await cameraController!.initialize();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
-  void dispose() async {
-    await _cameraController.dispose();
+  void dispose() {
+    cameraController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var eye = ref.watch(patientEyeScanProvider).currentEye == Eye.RIGHT_EYE
+        ? "Right Eye"
+        : "Left Eye";
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Eye Scanner (${widget.eye.toString().split('.')[1].split('_')[0].capitalize()})",
-            style: TextStyle(
-              fontStyle: GoogleFonts.firaSans().fontStyle,
-              fontSize: 16,
-            ),
-          ),
-          // flexibleSpace: ClipRect(
-          //   child: BackdropFilter(
-          //     filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-          //     child: Container(
-          //       color: Colors.transparent,
-
-          //     ),
-          //   ),
-          // ),
-        ),
-        body: _isLoading
-            ? Container(
-                color: Colors.white,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : Consumer(
+      appBar: CustomAppBar(
+        title: "Eye Scanner - $eye",
+      ),
+      body: isLoading
+          ? Container(
+              color: Colors.white,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Consumer(
               builder: (context, ref, child) => Center(
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      widget.eye == Eye.RIGHT_EYE
-                          ? ref.watch(patientEyeScanProvider).rightEye == null
-                              ? CameraPreview(
-                                  _cameraController,
-                                )
-                              : Image.file(File(ref.watch(patientEyeScanProvider)
-                                  .rightEye!
-                                  .path))
-                          : ref.watch(patientEyeScanProvider).leftEye == null
-                              ? CameraPreview(
-                                  _cameraController,
-                                )
-                              : Image.file(File(ref.watch(patientEyeScanProvider)
-                                  .leftEye!
-                                  .path)),
-            
-                      // : Image.file(
-                      //     File(context.read<EyeScanProvider>().leftEye!.path)),
-                      // Tooltip(
-                      //   message: "${widget.eye.toString().split('.')[1].split('_')[0]} Eye",
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: FloatingActionButton(
-                          backgroundColor: Colors.grey,
-                          child: const Icon(Icons.camera),
-                          onPressed: () => _takePicture(ref),
-                        ),
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    if (ref.watch(patientEyeScanProvider).rightEyeImage ==
+                            null ||
+                        ref.watch(patientEyeScanProvider).leftEyeImage == null)
+                      CameraPreview(cameraController!),
+                    if (ref.watch(patientEyeScanProvider).rightEyeImage != null)
+                      Image.file(
+                        ref.watch(patientEyeScanProvider).rightEyeImage!,
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
+                    if (ref.watch(patientEyeScanProvider).leftEyeImage != null)
+                      Image.file(
+                        ref.watch(patientEyeScanProvider).leftEyeImage!,
+                        fit: BoxFit.cover,
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(25),
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.grey,
+                        onPressed: _takePicture,
+                        child: const Icon(Icons.camera),
+                      ),
+                    ),
+                  ],
                 ),
-            ));
+              ),
+            ),
+    );
   }
 
-  _initCamera() async {
-    setState(() => _isLoading = true);
-    final cameras = await availableCameras();
-    for (var camera in cameras) {
-      log(camera.toString());
-    }
-    final cam;
-    if (cameras.length > 1) {
-      cam = cameras.firstWhere(
-          (element) => element.lensDirection == CameraLensDirection.back);
-    } else {
-      cam = cameras.first;
-    }
-
-    _cameraController = CameraController(cam, ResolutionPreset.max);
-    await _cameraController.initialize();
-
-    setState(() => _isLoading = false);
-  }
-
-  _takePicture(WidgetRef ref) async {
-    if (!_cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
+  _takePicture() {
+    if (!cameraController!.value.isInitialized) {
+      showCameraSnackBar(context, "Error: select a camera first.");
       return null;
     }
-
-    if (_cameraController.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
+    if (cameraController!.value.isTakingPicture) {
       return null;
     }
-
     try {
-      log("capture started");
-      XFile image = await _cameraController.takePicture();
-      ref.watch(patientEyeScanProvider).setEye(image, widget.eye!);
-      log("capture ended");
-      if (widget.eye == Eye.RIGHT_EYE) {
-        ref.watch(patientEyeScanProvider).setUserDetails();
-      }
-      if (widget.eye == Eye.LEFT_EYE) {
-        Future.delayed(Duration(seconds: 1), dispose);
-      }
-
-      successCaptureAlert(context, widget.eye!);
-
-      // if (widget.eye == Eye.LEFT_EYE) {}
+      cameraController!.takePicture().then((image) {
+        var eye = ref.watch(patientEyeScanProvider).currentEye;
+        if (eye == Eye.RIGHT_EYE) {
+          ref.read(patientEyeScanProvider).setRightEyeImage(image);
+        } else {
+          ref.read(patientEyeScanProvider).setLeftEyeImage(image);
+        }
+        cameraCaptureAlert(context, eye);
+      });
     } on CameraException catch (e) {
-      _showCameraException(e);
-      // Navigator.pop(context);
+      showCameraSnackBar(context, "Error: ${e.code}\n${e.description}");
+
       return null;
-    }
-  }
-
-  void _showCameraException(CameraException e) {
-    _logError(e.code, e.description);
-    showInSnackBar('Error: ${e.code}\n${e.description}');
-  }
-
-  void showInSnackBar(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  void _logError(String code, String? message) {
-    if (message != null) {
-      print('Error: $code\nError Message: $message');
-    } else {
-      print('Error: $code');
     }
   }
 }

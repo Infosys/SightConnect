@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/data/local/fake_data_source_cataract.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../data/local/fake_data_source_cataract.dart';
 
 class ReportEyeSection extends ConsumerWidget {
   const ReportEyeSection({Key? key, this.eye, this.status, this.percentage})
@@ -24,14 +23,14 @@ class ReportEyeSection extends ConsumerWidget {
         Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: Image.file(
-            eye == Eye.RIGHT_EYE
-                ? File(model.rightEye?.path ?? "assets/images/right_eye.png")
-                : File(model.leftEye?.path ?? "assets/images/left_eye.png"),
-          ).image,
-        ),
+        // CircleAvatar(
+        //   radius: 40,
+        //   backgroundImage: Image.file(
+        //     eye == Eye.RIGHT_EYE
+        //         ? File(model.rightEye?.path ?? "assets/images/right_eye.png")
+        //         : File(model.leftEye?.path ?? "assets/images/left_eye.png"),
+        //   ).image,
+        // ),
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(

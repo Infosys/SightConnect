@@ -1,10 +1,10 @@
 import 'package:avatars/avatars.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/data/local/fake_data_source_cataract.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../pages/patient_cataract_eyes_scan_page.dart';
-import '../../../provider/eye_scan_provider.dart';
 
 class PreviousReports extends ConsumerWidget {
   const PreviousReports({super.key});
@@ -129,10 +129,11 @@ class PreviousReports extends ConsumerWidget {
             onPressed: () {
               model.resetImages();
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          EyeScanHomePage(userDetails: model.userDetails)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PatientEyeCapturePage(),
+                ),
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
