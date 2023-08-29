@@ -1,4 +1,5 @@
-import 'package:eye_care_for_all/core/constants/app_images.dart';
+// import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,22 +22,22 @@ class TumblingDirectionCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            const SizedBox(width: 5),
+            const SizedBox(width: 15),
             Transform.rotate(
               angle: rotationAngle,
               child: SvgPicture.asset(
                 symbolImage,
-                height: 140,
-                width: 80,
+                height: AppSize.height*0.179,//140
+                // width: 70,
               ),
             ),
             const SizedBox(
-              width: 20,
+              width: 40,
             ),
             SvgPicture.asset(
               handImage,
-              height: 140,
-              width: 60,
+              height: AppSize.height*0.128, //100
+              // width: 60,
             ),
           ],
         ),
