@@ -195,7 +195,7 @@ class EyeScanReport extends ConsumerWidget {
                                         status: model.rightEyeStatus,
                                         percentage: model.rightEyeScore,
                                       )
-                                    : KeratoconusEyeSection(
+                                    : const KeratoconusEyeSection(
                                         eye: Eye.RIGHT_EYE,
                                       ),
                                 model.scanType == ScanType.Cataract
@@ -204,7 +204,7 @@ class EyeScanReport extends ConsumerWidget {
                                         status: model.leftEyeStatus,
                                         percentage: model.leftEyeScore,
                                       )
-                                    : KeratoconusEyeSection(
+                                    : const KeratoconusEyeSection(
                                         eye: Eye.LEFT_EYE,
                                       ),
                               ]),
@@ -426,9 +426,11 @@ class EyeScanReport extends ConsumerWidget {
                           InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => PreviousReports()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const PreviousReports(),
+                                ),
+                              );
                             },
                             child: Padding(
                               padding:

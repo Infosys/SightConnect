@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/models/enums/eye.dart';
 
 class ReportEyeSection extends ConsumerWidget {
-  ReportEyeSection({Key? key, this.eye, this.status, this.percentage})
+  const ReportEyeSection({Key? key, this.eye, this.status, this.percentage})
       : super(key: key);
   final Eye? eye;
   final String? status;
@@ -62,8 +62,8 @@ class ReportEyeSection extends ConsumerWidget {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 18.0,
                                     color: status == "Cataract"
-                                        ? Color(0xffEF5757)
-                                        : Color(0xff22BF85),
+                                        ? const Color(0xffEF5757)
+                                        : const Color(0xff22BF85),
                                   ),
                         ),
                       ],
@@ -74,8 +74,8 @@ class ReportEyeSection extends ConsumerWidget {
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontStyle: GoogleFonts.firaSans().fontStyle,
                             color: status == "Cataract"
-                                ? Color(0xffEF5757)
-                                : Color(0xff22BF85),
+                                ? const Color(0xffEF5757)
+                                : const Color(0xff22BF85),
                             fontWeight: FontWeight.w500,
                           ),
                     ),
@@ -84,15 +84,12 @@ class ReportEyeSection extends ConsumerWidget {
               ),
               SizedBox(
                 width: 230,
-                child: Container(
-                  child: Text(
-                    status == "Cataract"
-                        ? "There is loss of transparency of the lens of the left eye. Fogging is detected."
-                        : "No loss of transparency of the lens of the eye. No fogging is detected",
-                    style: TextStyle(
-                        fontStyle: GoogleFonts.roboto().fontStyle,
-                        fontSize: 14),
-                  ),
+                child: Text(
+                  status == "Cataract"
+                      ? "There is loss of transparency of the lens of the left eye. Fogging is detected."
+                      : "No loss of transparency of the lens of the eye. No fogging is detected",
+                  style: TextStyle(
+                      fontStyle: GoogleFonts.roboto().fontStyle, fontSize: 14),
                 ),
               ),
             ],

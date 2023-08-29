@@ -60,14 +60,12 @@ class SwipeGestureCard extends ConsumerWidget {
           color: AppColor.kGrey,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(12)),
-            child: Container(
-              child: Center(
-                child: Text(
-                  "Swipe in the direction of the symbol",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.kGrey,
-                  ),
+            child: Center(
+              child: Text(
+                "Swipe in the direction of the symbol",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.kGrey,
                 ),
               ),
             ),

@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_services/presentation/widgets/patient_service_category.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class PatientServicesPage extends StatefulWidget {
   const PatientServicesPage({Key? key}) : super(key: key);

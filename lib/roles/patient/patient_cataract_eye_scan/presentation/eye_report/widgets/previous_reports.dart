@@ -7,6 +7,8 @@ import '../../pages/eye_scan_home_page.dart';
 import '../../provider/eye_scan_provider.dart';
 
 class PreviousReports extends ConsumerWidget {
+  const PreviousReports({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientEyeScanProvider);
@@ -20,18 +22,18 @@ class PreviousReports extends ConsumerWidget {
               fontWeight: FontWeight.w500),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
           onPressed: () {
             model.resetImages();
             // Navigator.pop(context);
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Color(0xffF7FAFF),
+        backgroundColor: const Color(0xffF7FAFF),
       ),
       body: SizedBox.expand(
         child: Container(
-          color: Color(0xffF7FAFF),
+          color: const Color(0xffF7FAFF),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,13 +41,12 @@ class PreviousReports extends ConsumerWidget {
                 const SizedBox(
                   height: 26,
                 ),
-                ...model
-                    .previousReports
+                ...model.previousReports
                     .map((e) => Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color(0xffFFFFFF),
+                              color: const Color(0xffFFFFFF),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
@@ -70,7 +71,7 @@ class PreviousReports extends ConsumerWidget {
                                                 fontStyle: GoogleFonts.roboto()
                                                     .fontStyle,
                                                 fontSize: 10,
-                                                color: Color(0xff888888),
+                                                color: const Color(0xff888888),
                                               ))
                                         ],
                                       ),
@@ -82,7 +83,7 @@ class PreviousReports extends ConsumerWidget {
                                         name: e.name,
                                         // backgroundImage:
                                         //     AssetImage('assets/images/user.png'),
-                                        textStyle: TextStyle(
+                                        textStyle: const TextStyle(
                                             fontSize: 18, color: Colors.white),
                                       ),
                                       const SizedBox(
@@ -100,7 +101,7 @@ class PreviousReports extends ConsumerWidget {
                                   ),
                                   InkWell(
                                     onTap: () {},
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.more_vert,
                                       color: Color(0xff888888),
                                     ),
@@ -120,19 +121,18 @@ class PreviousReports extends ConsumerWidget {
         padding: const EdgeInsets.all(32.0),
         child: TextButton(
             style: TextButton.styleFrom(
-              side: BorderSide(
+              side: const BorderSide(
                 color: Color(0xff296DF6),
               ),
-              backgroundColor: Color(0xff296DF6),
+              backgroundColor: const Color(0xff296DF6),
             ),
             onPressed: () {
               model.resetImages();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => EyeScanHomePage(
-                          userDetails:
-                              model.userDetails)));
+                      builder: (context) =>
+                          EyeScanHomePage(userDetails: model.userDetails)));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

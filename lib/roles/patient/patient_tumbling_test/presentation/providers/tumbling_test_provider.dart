@@ -35,7 +35,7 @@ class TumblingTestProvider extends ChangeNotifier {
   }
 
   evaluteResponse(TumblistTestEDirection userResponse) {
-    print("User Response: $userResponse");
+    debugPrint("User Response: $userResponse");
 
     //Logic to check user response
     if (userResponse ==

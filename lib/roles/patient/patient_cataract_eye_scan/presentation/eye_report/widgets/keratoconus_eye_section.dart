@@ -7,9 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/models/enums/eye.dart';
 import '../../provider/eye_scan_provider.dart';
 
-
 class KeratoconusEyeSection extends ConsumerWidget {
-  KeratoconusEyeSection({Key? key, this.eye}) : super(key: key);
+  const KeratoconusEyeSection({Key? key, this.eye}) : super(key: key);
   final Eye? eye;
 
   //route

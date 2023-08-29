@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PatientInfoCard extends StatelessWidget {
   const PatientInfoCard({super.key, this.keyText, this.valueText});
