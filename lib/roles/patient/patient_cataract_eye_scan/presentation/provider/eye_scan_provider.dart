@@ -30,7 +30,7 @@ class EyeScanProvider extends ChangeNotifier {
   ];
 
   var previousReports = [];
-
+  bool isLoaded = false;
   Eye currentEye = Eye.RIGHT_EYE;
   setCurrentEye(eye){
    currentEye = eye;
@@ -56,10 +56,21 @@ class EyeScanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetImages(eye) {
-    _leftEyeImage = null;
+  resetRightImage(eye){
     _rightEyeImage = null;
     currentEye = eye;
+    notifyListeners();
+  }
+
+    resetLeftImage(eye){
+    _leftEyeImage = null;
+    currentEye = eye;
+    notifyListeners();
+  }
+
+  resetImages() {
+    _leftEyeImage = null;
+    _rightEyeImage = null;
     notifyListeners();
   }
 }

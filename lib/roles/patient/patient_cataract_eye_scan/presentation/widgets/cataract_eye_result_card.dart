@@ -52,13 +52,13 @@ class EyeResultImageCard extends ConsumerWidget {
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: ref.read(patientEyeScanProvider).leftEyeImage == null
+                  leading: ref.read(patientEyeScanProvider).rightEyeImage == null
                       ? const CircleAvatar()
                       : CircleAvatar(
                           radius: 31,
                           child: ClipOval(
                             child: Image.file(
-                              ref.read(patientEyeScanProvider).leftEyeImage!,
+                              ref.read(patientEyeScanProvider).rightEyeImage!,
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
@@ -97,7 +97,8 @@ class EyeResultImageCard extends ConsumerWidget {
                 const SizedBox(height: AppSize.ksheight + 2),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: ref.read(patientEyeScanProvider).leftEyeImage == null
+                  leading: ref.read(patientEyeScanProvider).leftEyeImage ==
+                          null
                       ? const CircleAvatar()
                       : CircleAvatar(
                           radius: 31,

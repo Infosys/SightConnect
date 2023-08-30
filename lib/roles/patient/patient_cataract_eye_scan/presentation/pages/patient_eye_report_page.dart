@@ -60,9 +60,10 @@ class PatientEyesReportPage extends ConsumerWidget {
                     label: Text(
                       "Scan Again",
                       style: applyRobotoFont(
-                          color: AppColor.kPrimary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,),
+                        color: AppColor.kPrimary,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   OutlinedButton(
@@ -98,4 +99,3 @@ class PatientEyesReportPage extends ConsumerWidget {
     );
   }
 }
-

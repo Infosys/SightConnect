@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -21,6 +22,7 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(patientEyeScanProvider).resetImages();
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(

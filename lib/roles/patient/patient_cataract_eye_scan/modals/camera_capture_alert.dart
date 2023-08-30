@@ -56,23 +56,32 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
       actions: [
         Consumer(
           builder: (context, ref, child) => TextButton(
-            child: Text(
-              'Rescan',
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.kPrimary,
-              ),
-            ),
-            onPressed: () {
-              ref.read(patientEyeScanProvider).resetImages(eye);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PatientEyeCapturePage(),
+              onPressed: eye == Eye.RIGHT_EYE
+                  ? () {
+                      ref.read(patientEyeScanProvider).resetRightImage(eye);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PatientEyeCapturePage(),
+                        ),
+                      );
+                    }
+                  : () {
+                      ref.read(patientEyeScanProvider).resetLeftImage(eye);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PatientEyeCapturePage(),
+                        ),
+                      );
+                    },
+              child: Text(
+                'Rescan',
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.kPrimary,
                 ),
-              );
-            },
-          ),
+              )),
         ),
         Consumer(
           builder: (context, ref, child) => TextButton(
@@ -86,7 +95,10 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
                     );
                   }
                 : () {
-                    ref.read(patientEyeScanProvider).setCurrentEye(Eye.RIGHT_EYE);
+                    // ref.read(patientEyeScanProvider).resetImages(eye);
+                    ref
+                        .read(patientEyeScanProvider)
+                        .setCurrentEye(Eye.RIGHT_EYE);
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                             builder: (context) =>
