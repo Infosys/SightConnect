@@ -53,9 +53,10 @@ class EyeScanProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetImages() {
+  resetImages(eye) {
     _leftEyeImage = null;
     _rightEyeImage = null;
+    currentEye = eye;
     notifyListeners();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 
 class ArrowButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class ArrowButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSize.kspadding),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(

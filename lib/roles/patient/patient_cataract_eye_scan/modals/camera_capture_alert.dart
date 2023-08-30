@@ -1,25 +1,27 @@
 import 'dart:ui';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/data/local/fake_data_source_cataract.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_report_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void cameraCaptureAlert(BuildContext context, Eye eye) {
   showGeneralDialog(
     barrierDismissible: false,
     barrierLabel: '',
-    barrierColor: Colors.black38,
+    barrierColor: AppColor.kBlackOpacity, //black38
     transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (ctx, anim1, anim2) => AlertDialog(
       title: Image.asset(
-        'assets/images/check.png',
+        AppImages.checkMark,
         height: 40,
         width: 40,
-        color: const Color(0xff22BF85),
+        color: AppColor.kGreen,
       ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,24 +30,22 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
         children: [
           Text(
             "${eye.toString().split('_')[0].split('.')[1].toLowerCase().capitalize()} Eye Scan complete",
-            style: TextStyle(
-              fontStyle: GoogleFonts.firaSans().fontStyle,
-              fontSize: 20,
+            style: applyRobotoFont(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 16),
           eye == Eye.RIGHT_EYE
               ? Text(
                   'Proceed with Left eye scan',
-                  style: TextStyle(
-                    fontStyle: GoogleFonts.roboto().fontStyle,
+                  style: applyRobotoFont(
                     fontSize: 14,
                   ),
                 )
               : Text(
                   "Proceed to report processing",
-                  style: TextStyle(
-                    fontStyle: GoogleFonts.roboto().fontStyle,
+                  style: applyRobotoFont(
                     fontSize: 14,
                   ),
                 )
@@ -58,14 +58,13 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
           builder: (context, ref, child) => TextButton(
             child: Text(
               'Rescan',
-              style: TextStyle(
-                fontStyle: GoogleFonts.roboto().fontStyle,
+              style: applyRobotoFont(
                 fontSize: 14,
-                color: const Color(0xff296DF6),
+                color: AppColor.kPrimary,
               ),
             ),
             onPressed: () {
-              ref.read(patientEyeScanProvider).resetImages();
+              ref.read(patientEyeScanProvider).resetImages(eye);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -75,30 +74,31 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
             },
           ),
         ),
-        TextButton(
-          onPressed: eye == Eye.RIGHT_EYE
-              ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PatientEyeCapturePage(),
-                    ),
-                  );
-                }
-              : () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PatientEyesReportPage(),
-                    ),
-                  );
-                },
-          child: Text(
-            'Ok',
-            style: TextStyle(
-              fontStyle: GoogleFonts.roboto().fontStyle,
-              fontSize: 14,
-              color: const Color(0xff296DF6),
+        Consumer(
+          builder: (context, ref, child) => TextButton(
+            onPressed: eye == Eye.RIGHT_EYE
+                ? () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PatientEyeCapturePage(),
+                      ),
+                    );
+                  }
+                : () {
+                    ref.read(patientEyeScanProvider).resetImages(Eye.RIGHT_EYE);
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientEyesReportPage()),
+                        (route) => route.isFirst);
+                  },
+            child: Text(
+              'Ok',
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.kPrimary,
+              ),
             ),
           ),
         ),

@@ -1,4 +1,6 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
@@ -73,7 +75,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
       ),
       body: isLoading
           ? Container(
-              color: Colors.white,
+              color: AppColor.kWhite,
               child: const Center(
                 child: CircularProgressIndicator(),
               ),
@@ -98,9 +100,9 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                         fit: BoxFit.cover,
                       ),
                     Padding(
-                      padding: const EdgeInsets.all(25),
+                      padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
-                        backgroundColor: Colors.grey,
+                        backgroundColor: AppColor.kGrey,
                         onPressed: _takePicture,
                         child: const Icon(Icons.camera),
                       ),

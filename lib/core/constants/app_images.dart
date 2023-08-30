@@ -51,4 +51,9 @@ class AppImages {
   //tumbling test
 
   static const String tumblingTestPlay = 'assets/images/play.svg';
+
+  //cataract eye scan
+
+  static const String checkMark = 'assets/images/check.png';
+  static const String warning= 'assets/images/warning.png';
 }
