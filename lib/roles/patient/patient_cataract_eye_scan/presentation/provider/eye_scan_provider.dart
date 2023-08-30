@@ -32,6 +32,9 @@ class EyeScanProvider extends ChangeNotifier {
   var previousReports = [];
 
   Eye currentEye = Eye.RIGHT_EYE;
+  setCurrentEye(eye){
+   currentEye = eye;
+  }
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
 

@@ -86,7 +86,7 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
                     );
                   }
                 : () {
-                    ref.read(patientEyeScanProvider).resetImages(Eye.RIGHT_EYE);
+                    ref.read(patientEyeScanProvider).setCurrentEye(Eye.RIGHT_EYE);
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                             builder: (context) =>
