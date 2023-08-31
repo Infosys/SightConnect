@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,7 +23,6 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(patientEyeScanProvider).resetImages();
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(
@@ -47,7 +47,8 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
                   child: AnimatedSmoothIndicator(
                     onDotClicked: (index) {},
                     activeIndex: activeIndex.value,
@@ -86,8 +87,8 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding+6,
-              vertical: AppSize.kspadding+2,
+              horizontal: AppSize.klpadding + 6,
+              vertical: AppSize.kspadding + 2,
             ),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -100,6 +101,7 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
                     : AppColor.kWhite,
               ),
               onPressed: () {
+                ref.read(patientEyeScanProvider).resetImages();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const PatientEyeCapturePage(),
@@ -110,12 +112,12 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
                 activeIndex.value == 6
                     ? "Proceed to Scan"
                     : "Skip & Proceed to Scan",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: activeIndex.value == 6
-                          ? AppColor.kWhite
-                          : AppColor.kPrimary,
-                    ),
+                style: applyRobotoFont(
+                  fontWeight: FontWeight.w500,
+                  color: activeIndex.value == 6
+                      ? AppColor.kWhite
+                      : AppColor.kPrimary,
+                ),
               ),
             ),
           ),
