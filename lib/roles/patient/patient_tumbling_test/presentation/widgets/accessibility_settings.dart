@@ -73,9 +73,11 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                         ),
                         Container(
                           decoration: const BoxDecoration(
-                              color: Color(0xffFAFAFA),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                            color: Color(0xffFAFAFA),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Row(
@@ -85,26 +87,25 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                                   "T",
                                   style: TextStyle(fontSize: model.smallText),
                                 ),
-                                SizedBox(
-                                  width: 300,
-                                  child: Slider(
-                                    value: startfontvalue,
-                                    onChanged: (double s) {
-                                      setState(() {
-                                        model.reSizeDemoText(s);
-                                        startfontvalue = s;
-                                      });
-                                    },
-                                    divisions: 4,
-                                    min: -2,
-                                    max: 2,
+                                Flexible(
+                                  child: SizedBox(
+                                    child: Slider(
+                                      value: startfontvalue,
+                                      onChanged: (double s) {
+                                        setState(() {
+                                          model.reSizeDemoText(s);
+                                          startfontvalue = s;
+                                        });
+                                      },
+                                      divisions: 4,
+                                      min: -2,
+                                      max: 2,
+                                    ),
                                   ),
                                 ),
-                                Flexible(
-                                  child: Text(
-                                    "T",
-                                    style: TextStyle(fontSize: model.largeText),
-                                  ),
+                                Text(
+                                  "T",
+                                  style: TextStyle(fontSize: model.largeText),
                                 ),
                               ],
                             ),
@@ -147,10 +148,11 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                                   BorderRadius.all(Radius.circular(20))),
                           child: Row(
                             children: [
-                              Image.asset("assets/images/brightnesslow.png",
-                                  width: 30),
-                              SizedBox(
-                                width: 270,
+                              Image.asset(
+                                "assets/images/brightnesslow.png",
+                                width: 30,
+                              ),
+                              Flexible(
                                 child: Slider(
                                   min: 0.0,
                                   max: 1.0,
@@ -171,8 +173,10 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                                   },
                                 ),
                               ),
-                              Image.asset("assets/images/autobrightness.png",
-                                  width: 30),
+                              Image.asset(
+                                "assets/images/autobrightness.png",
+                                width: 30,
+                              ),
                             ],
                           ),
                         ),
@@ -199,17 +203,18 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                         ),
                         Container(
                           decoration: const BoxDecoration(
-                              color: Color(0xffFAFAFA),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                            color: Color(0xffFAFAFA),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
                           child: Row(
                             children: [
                               Image.asset(
                                 "assets/images/autocontrastmin.png",
                                 width: 30,
                               ),
-                              SizedBox(
-                                width: 270,
+                              Flexible(
                                 child: Slider(
                                   value: startcontrastvalue,
                                   min: 0.0,
@@ -223,8 +228,10 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                                   },
                                 ),
                               ),
-                              Image.asset("assets/images/autocontrastmax.png",
-                                  width: 30),
+                              Image.asset(
+                                "assets/images/autocontrastmax.png",
+                                width: 30,
+                              ),
                             ],
                           ),
                         ),

@@ -9,10 +9,12 @@ import 'package:flutter_svg/svg.dart';
 class PatientBottomNavBar extends HookWidget {
   const PatientBottomNavBar({
     required this.onTap,
+    required this.currentIndex,
     Key? key,
   }) : super(key: key);
 
   final Function(int) onTap;
+  final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class PatientBottomNavBar extends HookWidget {
       return List.generate(
         5,
         (index) {
-          final isSelected = initialScale.value[index] == 1.2;
+          final isSelected = currentIndex == index;
           final colorFilter = isSelected
               ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
               : const ColorFilter.mode(AppColor.kGrey, BlendMode.srcIn);

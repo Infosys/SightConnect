@@ -50,11 +50,9 @@ class TumblingCarousel extends HookConsumerWidget {
             );
           },
         ),
-
         TumblingDirectionRow(
           currentIndex: currentIndex.value,
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -117,8 +115,6 @@ class TumblingCarousel extends HookConsumerWidget {
             ),
           ],
         ),
-
-        // Row of checkbox and start/skip button
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -148,15 +144,7 @@ class TumblingCarousel extends HookConsumerWidget {
               builder: (context, ref, child) {
                 return TextButton(
                   onPressed: () {
-                    if (currentIndex.value > 2) {
-                      ref.read(tumblingDialogProvider.notifier).state = false;
-                    } else {
-                      carouselController.value.animateToPage(
-                        currentIndex.value + 1,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    }
+                    ref.read(tumblingDialogProvider.notifier).state = false;
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.kPrimary,

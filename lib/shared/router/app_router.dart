@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/present
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/steps_tumbling_e_test_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_e_steps_instruction_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
@@ -18,7 +18,8 @@ class AppRouter {
     PatientEyeScanInstructionsPage.routeName: (context) =>
         const PatientEyeScanInstructionsPage(),
     PatientEyesReportPage.routeName: (context) => const PatientEyesReportPage(),
-    InstructionSlides.routeName: (context) => const InstructionSlides(),
+    TumblingEStepsInstructionsPage.routeName: (context) =>
+        const TumblingEStepsInstructionsPage(),
     TumblingTestInitiatePage.routeName: (context) =>
         const TumblingTestInitiatePage(),
   };

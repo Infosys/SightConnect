@@ -13,6 +13,7 @@ class PatientDashboardPage extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar: PatientBottomNavBar(
         onTap: (index) => model.changeIndex(index),
+        currentIndex: model.currentIndex,
       ),
       body: model.pages[model.currentIndex],
     );

@@ -31,7 +31,6 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
             child: Align(
               alignment: Alignment.center,
               child: SizedBox(
-                height: AppSize.height * 0.5,
                 width: AppSize.width * 0.9,
                 child: Card(
                   shape: RoundedRectangleBorder(

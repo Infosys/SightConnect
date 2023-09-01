@@ -114,6 +114,14 @@ class TumblingResultReportPage extends StatelessWidget {
                 "For more details and insights, visit nearest LVPEI vision centre, or call our toll free number to connect with our vision technician.",
               ),
               ListTile(
+                onTap: () async {
+                  await launchOut(
+                    Uri(
+                      scheme: "geo",
+                      path: "15.8145,79.9920",
+                    ),
+                  );
+                },
                 leading: SvgPicture.asset(
                   AppIcon.visionCenter,
                 ),

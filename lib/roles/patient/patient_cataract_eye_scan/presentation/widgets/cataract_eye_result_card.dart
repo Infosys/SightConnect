@@ -19,157 +19,131 @@ class EyeResultImageCard extends ConsumerWidget {
         ),
         elevation: 2,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.kmpadding, vertical: AppSize.kspadding),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(AppSize.kspadding),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Scan Date: 30 June, 2023",
-                        style: applyRobotoFont(
-                            fontSize: 14, fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "09:00 AM",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.kGrey,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: AppSize.kspadding,
-                ),
-                Row(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                title: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ref.read(patientEyeScanProvider).rightEyeImage == null
-                        ? const CircleAvatar()
-                        : CircleAvatar(
-                            radius: 40,
-                            child: ClipOval(
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: ref.read(patientEyeScanProvider).rightEyeImage ==
+                              null
+                          ? const CircleAvatar()
+                          : ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(AppSize.klradius * 10),
                               child: Image.file(
                                 ref.read(patientEyeScanProvider).rightEyeImage!,
-                                width: 100,
-                                height: 100,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                    const SizedBox(
-                      width: AppSize.kmpadding,
                     ),
+                    const SizedBox(width: AppSize.kmpadding),
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "Right Eye",
-                                style: applyFiraSansFont(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
+                              Expanded(
+                                child: Text(
+                                  "Right Eye",
+                                  style: applyFiraSansFont(
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
-                              const Spacer(),
                               Text(
                                 "20/20",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w500,
                                   color: AppColor.kGreen,
                                 ),
                               ),
                             ],
                           ),
-                         const Spacer(),
+                          const SizedBox(height: AppSize.kspadding / 2),
                           Text(
                             "No loss of transparency of the lens of the eye. No fogging is detected.",
                             style: applyRobotoFont(
-                                fontSize: 14, fontWeight: FontWeight.w400),
-                          )
+                              fontSize: 14,
+                              color: AppColor.kGrey,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.klheight),
-                Row(
+              ),
+              const SizedBox(height: AppSize.klheight),
+              ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                title: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ref.read(patientEyeScanProvider).leftEyeImage == null
-                        ? const CircleAvatar()
-                        : CircleAvatar(
-                            radius: 40,
-                            child: ClipOval(
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: ref.read(patientEyeScanProvider).leftEyeImage ==
+                              null
+                          ? const CircleAvatar()
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(320),
                               child: Image.file(
                                 ref.read(patientEyeScanProvider).leftEyeImage!,
-                                width: 100,
-                                height: 100,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                    const SizedBox(
-                      width: AppSize.kmpadding,
                     ),
+                    const SizedBox(width: AppSize.kmpadding),
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "Left Eye",
-                                style: applyFiraSansFont(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
+                              Expanded(
+                                child: Text(
+                                  "Left Eye",
+                                  style: applyFiraSansFont(
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
-                              const Spacer(),
                               Text(
                                 "6/20",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w500,
                                   color: AppColor.kRed,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: AppSize.height * 0.012,
-                          ),
+                          const SizedBox(height: AppSize.kspadding / 2),
                           Text(
                             "There is loss of transparency of the lens of the left eye. Fogging is detected.",
                             style: applyRobotoFont(
-                                fontSize: 14, fontWeight: FontWeight.w400),
-                          )
+                              fontSize: 14,
+                              color: AppColor.kGrey,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
