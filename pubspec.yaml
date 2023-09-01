@@ -53,6 +53,7 @@ dependencies:
   camera: any
   syncfusion_flutter_gauges: ^22.2.10
   url_launcher: ^6.1.12
+  screen_brightness: ^0.2.2+1
  
   
 

@@ -1,8 +1,6 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/accessibility_settings.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/bottom_input_tab.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
@@ -36,7 +34,9 @@ class TumblingTestInitiatePage extends HookConsumerWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showAccessibilitySettings(context, ref);
+              },
               icon: const Icon(
                 Icons.settings,
                 color: AppColor.kGrey,

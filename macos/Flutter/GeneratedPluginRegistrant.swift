@@ -9,6 +9,7 @@ import connectivity_plus
 import flutter_archive
 import flutter_secure_storage_macos
 import path_provider_foundation
+import screen_brightness_macos
 import sqflite
 import url_launcher_macos
 
@@ -17,6 +18,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FlutterArchivePlugin.register(with: registry.registrar(forPlugin: "FlutterArchivePlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
+  ScreenBrightnessMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenBrightnessMacosPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
 }

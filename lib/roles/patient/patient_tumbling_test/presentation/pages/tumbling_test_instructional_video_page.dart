@@ -77,7 +77,9 @@ class TumblingTestInstructionalVideoPage extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.kmheight),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/instructuions');
+              },
               tileColor: AppColor.kWhite,
               title: Text(
                 "View Steps to perform Tumbling E Test",
