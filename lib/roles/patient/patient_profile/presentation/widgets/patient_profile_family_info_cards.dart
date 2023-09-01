@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/local/fake_data_source.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
@@ -17,10 +16,12 @@ class PatientFamilyDetails extends StatelessWidget {
           Text(
             "Family Details",
             style: applyFiraSansFont(
-              fontSize: 18.sp,
+              fontSize: 18,
             ),
           ),
-          AppSize.ksheight.verticalSpace,
+          const SizedBox(
+            height: AppSize.ksheight,
+          ),
           ...hospital
               .map(
                 (hospital) => ListTile(

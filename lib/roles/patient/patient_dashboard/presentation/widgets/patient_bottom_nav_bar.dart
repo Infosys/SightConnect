@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PatientBottomNavBar extends HookWidget {
@@ -61,8 +60,8 @@ class PatientBottomNavBar extends HookWidget {
                   ),
                   child: SvgPicture.asset(
                     icons[index],
-                    width: 20.w,
-                    height: 20.h,
+                    width: 20,
+                    height: 20,
                   ),
                 ),
               ),
@@ -74,8 +73,8 @@ class PatientBottomNavBar extends HookWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: AppSize.width * 0.05,
-        vertical: AppSize.height * 0.02,
+        horizontal: AppSize.width(context) * 0.05,
+        vertical: AppSize.height(context) * 0.02,
       ),
       child: Card(
         elevation: 8,

@@ -11,7 +11,7 @@ class DiscoverCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
-      width: AppSize.width * 0.9,
+      width: AppSize.width(context) * 0.9,
       child: Stack(
         children: [
           data["image"] != null

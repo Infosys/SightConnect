@@ -27,7 +27,7 @@ class TumblingDirectionCard extends StatelessWidget {
               angle: rotationAngle,
               child: SvgPicture.asset(
                 symbolImage,
-                height: AppSize.height*0.179,//140
+                height: AppSize.height(context) * 0.179, //140
                 // width: 70,
               ),
             ),
@@ -36,7 +36,7 @@ class TumblingDirectionCard extends StatelessWidget {
             ),
             SvgPicture.asset(
               handImage,
-              height: AppSize.height*0.128, //100
+              height: AppSize.height(context) * 0.128, //100
               // width: 60,
             ),
           ],

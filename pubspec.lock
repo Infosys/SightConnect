@@ -342,14 +342,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_archive:
-    dependency: "direct main"
-    description:
-      name: flutter_archive
-      sha256: aec85d1da65e5b33a529db00a86df0b8e92bda78088a7cfaeeba5187701d0d85
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -374,14 +366,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.20.0"
-  flutter_inappwebview:
-    dependency: "direct main"
-    description:
-      name: flutter_inappwebview
-      sha256: f73505c792cf083d5566e1a94002311be497d984b5607f25be36d685cf6361cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.7.2+3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -406,14 +390,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
-  flutter_screenutil:
-    dependency: "direct main"
-    description:
-      name: flutter_screenutil
-      sha256: "8cf100b8e4973dc570b6415a2090b0bfaa8756ad333db46939efc3e774ee100d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.9.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:

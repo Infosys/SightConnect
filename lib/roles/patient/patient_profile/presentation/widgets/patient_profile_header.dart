@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../data/local/fake_data_source.dart';
 
@@ -12,7 +11,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSize.height * 0.3,
+      height: AppSize.height(context) * 0.3,
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
         boxShadow: appShadow(),
@@ -29,7 +28,7 @@ class ProfileHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: AppSize.height * 0.1),
+          SizedBox(height: AppSize.height(context) * 0.1),
           ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(130),
@@ -65,7 +64,9 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          AppSize.klheight.verticalSpace,
+          const SizedBox(
+            height: AppSize.klheight,
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
             child: Row(
@@ -86,7 +87,9 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    3.horizontalSpace,
+                    const SizedBox(
+                      height: AppSize.ksheight / 2,
+                    ),
                     Text(
                       profile["mobile"] ?? "",
                       style: applyRobotoFont(
@@ -113,7 +116,9 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    AppSize.ksheight.horizontalSpace,
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
                     Flexible(
                       child: Text(
                         profile["email"] ?? "",

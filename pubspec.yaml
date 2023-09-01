@@ -39,12 +39,12 @@ dependencies:
   flutter_spinkit: ^5.2.0
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.7
-  flutter_screenutil: ^5.9.0
-  flutter_inappwebview: ^5.7.2+3
+
+  
   formz: ^0.6.0
   intl: ^0.18.1
   connectivity_plus: ^4.0.2
-  flutter_archive: ^5.0.0
+ 
   shelf: ^1.4.1
   dotted_border: ^2.0.0+3
   percent_indicator: ^4.2.3

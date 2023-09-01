@@ -22,7 +22,7 @@ class PriorityNotificationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.ksradius),
         child: Container(
           padding: const EdgeInsets.all(AppSize.kspadding),
-          width: AppSize.width * 0.8,
+          width: AppSize.width(context) * 0.8,
           decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,

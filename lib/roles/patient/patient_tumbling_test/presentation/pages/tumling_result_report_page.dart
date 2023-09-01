@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -64,7 +63,9 @@ class TumblingResultReportPage extends StatelessWidget {
                                     color: const Color(0xff333333),
                                   ),
                                 ),
-                                8.verticalSpace,
+                                const SizedBox(
+                                  height: AppSize.ksheight,
+                                ),
                                 buildGuage()
                               ],
                             ),
@@ -109,7 +110,9 @@ class TumblingResultReportPage extends StatelessWidget {
                   ],
                 ),
               ),
-              16.verticalSpace,
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
               const Text(
                 "For more details and insights, visit nearest LVPEI vision centre, or call our toll free number to connect with our vision technician.",
               ),
@@ -149,7 +152,9 @@ class TumblingResultReportPage extends StatelessWidget {
                 title: const Text("Vision Technician"),
                 subtitle: const Text("Toll Free Number"),
               ),
-              16.verticalSpace,
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -162,7 +167,9 @@ class TumblingResultReportPage extends StatelessWidget {
                         child: const Text("Home"),
                       ),
                     ),
-                    8.horizontalSpace,
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () {
@@ -198,7 +205,9 @@ class TumblingResultReportPage extends StatelessWidget {
             title,
             style: applyFiraSansFont(fontSize: 18, color: AppColor.kWhite),
           ),
-          8.verticalSpace,
+          const SizedBox(
+            height: AppSize.ksheight,
+          ),
           Text(
             value,
             style: applyFiraSansFont(fontSize: 24, color: AppColor.kGreen),

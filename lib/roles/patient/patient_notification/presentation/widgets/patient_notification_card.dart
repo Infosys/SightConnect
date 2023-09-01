@@ -24,7 +24,7 @@ class PatientNotificationCard extends StatelessWidget {
         children: [
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: AppSize.width * 0.5,
+              maxWidth: AppSize.width(context) * 0.5,
             ),
             child: Text(
               data["title"],

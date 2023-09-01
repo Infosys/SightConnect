@@ -16,7 +16,7 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
         color: AppColor.kWhite,
         borderRadius: BorderRadius.circular(AppSize.ksradius),
       ),
-      width: AppSize.width * 0.5,
+      width: AppSize.width(context) * 0.5,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

@@ -42,7 +42,7 @@
 //       ),
 //       bottomNavigationBar: Padding(
 //         padding: EdgeInsets.symmetric(
-//           horizontal: AppSize.width * 0.1,
+//           horizontal: AppSize.width(context) * 0.1,
 //         ),
 //         child: ElevatedButton(
 //           onPressed: () {

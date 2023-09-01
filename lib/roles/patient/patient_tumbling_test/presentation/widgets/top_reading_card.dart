@@ -29,7 +29,7 @@ class TopReadingCard extends ConsumerWidget {
         child: Column(
           children: [
             SizedBox(
-              height: AppSize.height * 0.02,
+              height: AppSize.height(context) * 0.02,
             ),
             Container(
               padding: const EdgeInsets.all(AppSize.kmpadding),

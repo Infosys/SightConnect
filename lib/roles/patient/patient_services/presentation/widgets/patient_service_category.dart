@@ -36,7 +36,8 @@ class PatientServiceCategory extends StatelessWidget {
           const SizedBox(height: AppSize.kmheight),
           Wrap(
             runSpacing: 8,
-            alignment: WrapAlignment.spaceEvenly,
+            spacing: 10,
+            alignment: WrapAlignment.start,
             children: services
                 .map(
                   (miniapp) => InkWell(
@@ -60,6 +61,7 @@ class PatientServiceCategory extends StatelessWidget {
                     },
                     child: SizedBox(
                       width: 60,
+                      height: 60,
                       child: Column(
                         children: [
                           mappers[miniapp] != null

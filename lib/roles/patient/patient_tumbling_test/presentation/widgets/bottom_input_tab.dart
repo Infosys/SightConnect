@@ -103,8 +103,8 @@ class ButtomNavigationBar extends HookWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: AppSize.width * 0.05,
-        vertical: AppSize.height * 0.02,
+        horizontal: AppSize.width(context) * 0.05,
+        vertical: AppSize.height(context) * 0.02,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppSize.klradius * 8),

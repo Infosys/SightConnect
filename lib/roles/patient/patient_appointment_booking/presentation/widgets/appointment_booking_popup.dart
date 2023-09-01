@@ -15,10 +15,10 @@ class AppointmentBookingPopUp extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppIcon.patientAppointmentBookingCalander,
-            height: AppSize.height * 0.05,
+            height: AppSize.height(context) * 0.05,
           ),
           SizedBox(
-            height: AppSize.height * 0.02,
+            height: AppSize.height(context) * 0.02,
           ),
           const Text('Confirm Booking'),
         ],

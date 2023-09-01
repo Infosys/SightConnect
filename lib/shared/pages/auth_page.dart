@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthPage extends HookConsumerWidget {
@@ -13,6 +12,7 @@ class AuthPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isLoading = useState(false);
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -23,7 +23,7 @@ class AuthPage extends HookConsumerWidget {
             left: 0,
             right: 0,
             child: Container(
-              height: 0.32.sh,
+              height: size.height * 0.4,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -42,7 +42,7 @@ class AuthPage extends HookConsumerWidget {
             ),
           ),
           Positioned(
-            top: 0.3.sh,
+            top: size.height * 0.4,
             bottom: 0,
             left: 0,
             right: 0,
@@ -59,7 +59,9 @@ class AuthPage extends HookConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      16.verticalSpace,
+                      const SizedBox(
+                        height: 16,
+                      ),
                       Container(
                         width: 50,
                         height: 4,
@@ -68,7 +70,9 @@ class AuthPage extends HookConsumerWidget {
                           color: Colors.black54,
                         ),
                       ),
-                      10.verticalSpace,
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Form(
                         autovalidateMode: AutovalidateMode.always,
                         child: Builder(
@@ -95,7 +99,9 @@ class AuthPage extends HookConsumerWidget {
                                       contentPadding: EdgeInsets.all(18),
                                     ),
                                   ),
-                                  10.verticalSpace,
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
                                   TextFormField(
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -111,7 +117,9 @@ class AuthPage extends HookConsumerWidget {
                                       contentPadding: EdgeInsets.all(18),
                                     ),
                                   ),
-                                  14.verticalSpace,
+                                  const SizedBox(
+                                    height: 14,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -155,7 +163,9 @@ class AuthPage extends HookConsumerWidget {
                                             ),
                                     ],
                                   ),
-                                  30.verticalSpace,
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
                                   Directionality(
                                     textDirection: TextDirection.rtl,
                                     child: OutlinedButton.icon(
@@ -164,7 +174,9 @@ class AuthPage extends HookConsumerWidget {
                                       onPressed: () {},
                                     ),
                                   ),
-                                  80.verticalSpace,
+                                  const SizedBox(
+                                    height: 80,
+                                  ),
                                 ],
                               ),
                             );

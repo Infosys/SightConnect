@@ -22,7 +22,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: _generateDates(),
+                  children: _generateDates(context),
                 ),
               ),
               const SizedBox(
@@ -165,7 +165,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
     );
   }
 
-  _generateDates() {
+  _generateDates(context) {
     final currentDate = DateTime.now();
     final dayFormatter = DateFormat('d');
     final monthFormatter = DateFormat('EEE');
@@ -176,7 +176,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
       dates.add(GestureDetector(
         child: SizedBox(
           height: AppSize.klheight * 2,
-          width: AppSize.width * 0.15,
+          width: AppSize.width(context) * 0.15,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

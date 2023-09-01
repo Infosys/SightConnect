@@ -33,8 +33,8 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.width * 0.1,
-          vertical: AppSize.height * 0.02,
+          horizontal: AppSize.width(context) * 0.1,
+          vertical: AppSize.height(context) * 0.02,
         ),
         child: ElevatedButton(
           onPressed: () {
@@ -69,7 +69,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
             const SizedBox(height: AppSize.kmheight),
             Container(
               height: 200,
-              width: AppSize.width * 0.9,
+              width: AppSize.width(context) * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSize.klradius),
                 color: AppColor.kBlack,

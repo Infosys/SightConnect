@@ -1,4 +1,4 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
 
 class AppSize {
   AppSize._();
@@ -23,6 +23,11 @@ class AppSize {
   static const double kmelevation = 16.0;
   static const double klelevation = 24.0;
 
-  static double get width => ScreenUtil().screenWidth;
-  static double get height => ScreenUtil().screenHeight;
+  static double width(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
+
+  static double height(BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
 }
