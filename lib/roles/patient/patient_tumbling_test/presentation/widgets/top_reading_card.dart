@@ -13,6 +13,10 @@ class TopReadingCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Logic to Calculate E Size using DPI to centimeter formula
+
+    double dpi = MediaQuery.of(context).devicePixelRatio;
+
     var model = ref.watch(tumblingTestProvider);
     return Card(
       elevation: 4,
