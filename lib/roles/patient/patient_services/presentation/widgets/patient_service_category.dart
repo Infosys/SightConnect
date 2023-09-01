@@ -18,7 +18,7 @@ class PatientServiceCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: AppSize.kmpadding),
+      margin: const EdgeInsets.only(bottom: AppSize.klpadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -27,14 +27,16 @@ class PatientServiceCategory extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: applyFiraSansFont(),
+                style: applyFiraSansFont(
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
           const SizedBox(height: AppSize.kmheight),
           Wrap(
-            spacing: 4,
-            runSpacing: 4,
+            runSpacing: 8,
+            alignment: WrapAlignment.spaceEvenly,
             children: services
                 .map(
                   (miniapp) => InkWell(
@@ -56,7 +58,7 @@ class PatientServiceCategory extends StatelessWidget {
                       }
                     },
                     child: SizedBox(
-                      width: 80,
+                      width: 60,
                       child: Column(
                         children: [
                           mappers[miniapp] != null

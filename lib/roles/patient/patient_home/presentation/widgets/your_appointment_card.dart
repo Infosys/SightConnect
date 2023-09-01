@@ -28,6 +28,9 @@ class YourAppointmentCard extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
+              const SizedBox(
+                height: AppSize.ksheight / 2,
+              ),
               Text(
                 data["Time"],
                 style: applyRobotoFont(

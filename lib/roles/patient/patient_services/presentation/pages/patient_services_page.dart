@@ -52,6 +52,7 @@ class _PatientServicesPageState extends State<PatientServicesPage> {
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: services.keys
                 .map((e) => PatientServiceCategory(
                       title: e,

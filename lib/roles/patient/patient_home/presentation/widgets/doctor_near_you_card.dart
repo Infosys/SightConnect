@@ -17,9 +17,9 @@ class DoctorNearYouCard extends StatelessWidget {
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.fromLTRB(
         AppSize.kspadding,
-        AppSize.kmpadding,
         AppSize.kspadding,
-        AppSize.kmpadding,
+        AppSize.kspadding,
+        AppSize.kspadding,
       ),
       decoration: BoxDecoration(
         color: AppColor.kWhite,
@@ -31,13 +31,15 @@ class DoctorNearYouCard extends StatelessWidget {
         children: [
           if (data["image"] != null)
             CircleAvatar(
-              maxRadius: 30,
+              maxRadius: 35,
               minRadius: 25,
-              backgroundImage: AssetImage(data["image"]),
+              backgroundImage: AssetImage(
+                data["image"],
+              ),
             )
           else
             CircleAvatar(
-              maxRadius: 30,
+              maxRadius: 35,
               minRadius: 25,
               backgroundColor: AppColor.kGrey.withOpacity(0.3),
             ),
@@ -64,16 +66,19 @@ class DoctorNearYouCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
           Flexible(
             child: Material(
+              type: MaterialType.card,
               child: InkWell(
                 onTap: () {},
-                child: Text(
-                  "Book Appointment",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.kPrimary,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  child: Text(
+                    "Book Appointment",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.kPrimary,
+                    ),
                   ),
                 ),
               ),

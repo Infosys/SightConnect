@@ -53,6 +53,7 @@ dependencies:
   camera: any
   syncfusion_flutter_gauges: ^22.2.10
   url_launcher: ^6.1.12
+  jwt_decoder: ^2.0.1
  
   
 
