@@ -1,16 +1,21 @@
 import 'dart:ui';
-
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void showCameraNotFound(BuildContext context) {
   showGeneralDialog(
     barrierDismissible: true,
     barrierLabel: '',
-    barrierColor: Colors.black38,
+    barrierColor: AppColor.kBlackOpacity, //black 38
     transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (ctx, anim1, anim2) => AlertDialog(
-      title: Image.asset('assets/images/warning.png', height: 40, width: 40),
+      title: Image.asset(
+        AppImages.warning,
+        height: 40,
+        width: 40,
+      ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -18,14 +23,16 @@ void showCameraNotFound(BuildContext context) {
         children: [
           Text(
             "Camera Attachment not Detected",
-            style: TextStyle(
-                fontStyle: GoogleFonts.firaSans().fontStyle, fontSize: 20),
+            style: applyRobotoFont(
+              fontSize: 20,
+            ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             'Connect the device to the mobile using the instructions given in the device.',
-            style: TextStyle(
-                fontStyle: GoogleFonts.roboto().fontStyle, fontSize: 14),
+            style: applyRobotoFont(
+              fontSize: 14,
+            ),
           )
         ],
       ),
@@ -40,8 +47,10 @@ void showCameraNotFound(BuildContext context) {
       ],
     ),
     transitionBuilder: (ctx, anim1, anim2, child) => BackdropFilter(
-      filter:
-          ImageFilter.blur(sigmaX: 4 * anim1.value, sigmaY: 4 * anim1.value),
+      filter: ImageFilter.blur(
+        sigmaX: 4 * anim1.value,
+        sigmaY: 4 * anim1.value,
+      ),
       child: FadeTransition(
         opacity: anim1,
         child: child,
