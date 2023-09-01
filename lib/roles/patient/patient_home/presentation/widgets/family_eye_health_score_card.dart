@@ -36,10 +36,14 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
               const SizedBox(
                 width: AppSize.kswidth,
               ),
-              Text(
-                data["name"] ?? "",
-                style: applyRobotoFont(
-                  fontSize: 14,
+              Flexible(
+                child: Text(
+                  data["name"] ?? "",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],

@@ -183,9 +183,9 @@ class _AutoFontSizeWidget extends HookWidget {
                             ref.read(textScaleFactorProvider.notifier).state =
                                 s;
                           },
-                          divisions: 3,
+                          divisions: 4,
                           min: 1,
-                          max: 3,
+                          max: 1.8,
                         ),
                       ),
                     );

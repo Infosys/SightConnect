@@ -14,11 +14,8 @@ class CampaginsCard extends StatelessWidget {
       margin: const EdgeInsets.only(
         top: 10,
       ),
-      constraints: const BoxConstraints(
-        minHeight: 100,
-        maxHeight: 100,
-      ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           data["image"] != null
               ? Image.asset(
@@ -44,11 +41,11 @@ class CampaginsCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.ksheight,
+                  height: AppSize.ksheight / 2,
                 ),
                 Text(
                   data["description"] ?? "",
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
                     fontSize: 14,

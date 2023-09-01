@@ -18,7 +18,7 @@ class MyApp extends ConsumerWidget {
       DeviceOrientation.portraitDown,
     ]);
     final mediaQueryData = MediaQuery.of(context);
-    final scale = ref.watch(textScaleFactorProvider.notifier).state;
+    final scale = ref.watch(textScaleFactorProvider);
     return MediaQuery(
       data: mediaQueryData.copyWith(
         textScaleFactor: scale,

@@ -36,6 +36,7 @@ class DiscoverCard extends StatelessWidget {
                 Text(
                   data["name"] ?? "",
                   softWrap: true,
+                  maxLines: 3,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w500,
                     color: AppColor.kWhite,

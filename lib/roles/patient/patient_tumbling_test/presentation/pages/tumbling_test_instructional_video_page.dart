@@ -30,6 +30,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
     return Scaffold(
       appBar: const CustomAppBar(
         title: "Tumbling Test",
+        showBackButton: false,
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
@@ -47,65 +48,67 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
           child: const Text("Next"),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.kspadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              "Visual acuity is a measure of the human eye’s ability to discern spatial details. It is the ability to distinguish letters or symbols on an eye chart at a certain distance",
-              softWrap: true,
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: AppSize.kmheight),
-            Text(
-              "Demonstration",
-              style: applyRobotoFont(
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: AppSize.kmheight),
-            Container(
-              height: 200,
-              width: AppSize.width(context) * 0.9,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.klradius),
-                color: AppColor.kBlack,
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  AppImages.tumblingTestPlay,
-                  height: 40,
-                  width: 40,
-                ),
-              ),
-            ),
-            const SizedBox(height: AppSize.kmheight),
-            Text(
-              "View Demonstration video to perform Tumbling E Test",
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: AppSize.kmheight),
-            ListTile(
-              onTap: () {
-                Navigator.of(context)
-                    .pushNamed(TumblingEStepsInstructionsPage.routeName);
-              },
-              tileColor: AppColor.kWhite,
-              title: Text(
-                "View Steps to perform Tumbling E Test",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kspadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                "Visual acuity is a measure of the human eye’s ability to discern spatial details. It is the ability to distinguish letters or symbols on an eye chart at a certain distance",
+                softWrap: true,
                 style: applyRobotoFont(
                   fontSize: 14,
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
-            )
-          ],
+              const SizedBox(height: AppSize.kmheight),
+              Text(
+                "Demonstration",
+                style: applyRobotoFont(
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              Container(
+                height: 200,
+                width: AppSize.width(context) * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  color: AppColor.kBlack,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    AppImages.tumblingTestPlay,
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              Text(
+                "View Demonstration video to perform Tumbling E Test",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              ListTile(
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(TumblingEStepsInstructionsPage.routeName);
+                },
+                tileColor: AppColor.kWhite,
+                title: Text(
+                  "View Steps to perform Tumbling E Test",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -125,50 +128,52 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 fontSize: 18,
               ),
             ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Legal disclaimer: The content on this application is presented for informational purposes only.\n\nNever disregard professional medical advice from your healthcare provider, or delay in seeking it, because of using this application.\n\nThe developer of this app, cannot be held liable for any damages of any kind related to the usage of this software.\n\nREMEMBER: It’s people who resolve vision problems. Our technology is designed to help them do that. Full terms of use",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Full terms of use",
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Legal disclaimer: The content on this application is presented for informational purposes only.\n\nNever disregard professional medical advice from your healthcare provider, or delay in seeking it, because of using this application.\n\nThe developer of this app, cannot be held liable for any damages of any kind related to the usage of this software.\n\nREMEMBER: It’s people who resolve vision problems. Our technology is designed to help them do that. Full terms of use",
                     style: applyRobotoFont(
                       fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      color: Theme.of(context).primaryColor,
                     ),
                   ),
-                ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    return Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Accept'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            ref.read(patientDashboardProvider).changeIndex(0);
-                          },
-                          child: const Text('Decline'),
-                        ),
-                      ],
-                    );
-                  },
-                )
-              ],
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Full terms of use",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Accept'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              ref.read(patientDashboardProvider).changeIndex(0);
+                            },
+                            child: const Text('Decline'),
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         );

@@ -13,7 +13,7 @@ class DoctorNearYouCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
+      width: AppSize.width(context) * 0.4,
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.fromLTRB(
         AppSize.kspadding,
@@ -46,6 +46,9 @@ class DoctorNearYouCard extends StatelessWidget {
           const SizedBox(height: AppSize.ksheight),
           Text(
             data["name"],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
             style: applyRobotoFont(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -53,6 +56,8 @@ class DoctorNearYouCard extends StatelessWidget {
           ),
           Text(
             data["profession"],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 10,
               color: AppColor.kGrey,
@@ -61,6 +66,8 @@ class DoctorNearYouCard extends StatelessWidget {
           const SizedBox(height: AppSize.ksheight),
           Text(
             data["hospital"],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -75,6 +82,9 @@ class DoctorNearYouCard extends StatelessWidget {
                   padding: const EdgeInsets.all(AppSize.kspadding),
                   child: Text(
                     "Book Appointment",
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.kPrimary,
