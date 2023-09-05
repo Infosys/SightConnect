@@ -35,7 +35,7 @@ class DoctorNearYouCard extends StatelessWidget {
         children: [
           if (data["image"] != null)
             CircleAvatar(
-              maxRadius: 35,
+              maxRadius: 45,
               minRadius: 25,
               backgroundImage: AssetImage(
                 data["image"],

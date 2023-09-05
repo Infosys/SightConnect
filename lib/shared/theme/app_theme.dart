@@ -1,7 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,75 +19,123 @@ class AppTheme extends StateNotifier<ThemeMode> {
     state = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
   }
 
-  static ThemeData lightTheme = ThemeData(
-    primarySwatch: MaterialColor(
-      const Color(0xff296DF6).value,
-      const {
-        50: Color(0xff296DF6),
-        100: Color(0xff296DF6),
-        200: Color(0xff296DF6),
-        300: Color(0xff296DF6),
-        400: Color(0xff296DF6),
-        500: Color(0xff296DF6),
-        600: Color(0xff296DF6),
-        700: Color(0xff296DF6),
-        800: Color(0xff296DF6),
-        900: Color(0xff296DF6),
-      },
-    ),
-    brightness: Brightness.light,
-    scaffoldBackgroundColor: AppColor.kScaffold,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    iconTheme: const IconThemeData(
-      color: AppColor.kBlack,
-      size: 24,
-    ),
-    appBarTheme: AppBarTheme(
-      elevation: 0,
-      backgroundColor: AppColor.kScaffold,
-      foregroundColor: AppColor.kBlack,
-      iconTheme: const IconThemeData(
+  static ThemeData getLightTheme(BuildContext context) {
+    return ThemeData(
+      primarySwatch: MaterialColor(
+        const Color(0xff296DF6).value,
+        const {
+          50: Color(0xff296DF6),
+          100: Color(0xff296DF6),
+          200: Color(0xff296DF6),
+          300: Color(0xff296DF6),
+          400: Color(0xff296DF6),
+          500: Color(0xff296DF6),
+          600: Color(0xff296DF6),
+          700: Color(0xff296DF6),
+          800: Color(0xff296DF6),
+          900: Color(0xff296DF6),
+        },
+      ),
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: AppColor.kScaffold,
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      iconTheme: IconThemeData(
         color: AppColor.kBlack,
+        size: Responsive.isMobile(context) ? 24 : 32,
       ),
-      titleTextStyle: applyFiraSansFont(fontWeight: FontWeight.w500),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        shape: const StadiumBorder(),
-        textStyle: applyRobotoFont(
-          fontSize: 14,
+      appBarTheme: AppBarTheme(
+        elevation: 0,
+        backgroundColor: AppColor.kScaffold,
+        foregroundColor: AppColor.kBlack,
+        actionsIconTheme: IconThemeData(
+          color: AppColor.kBlack,
+          size: Responsive.isMobile(context) ? 24 : 32,
+        ),
+        iconTheme: IconThemeData(
+          color: AppColor.kBlack,
+          size: Responsive.isMobile(context) ? 24 : 32,
+        ),
+        titleTextStyle: applyFiraSansFont(fontWeight: FontWeight.w500),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          shape: const StadiumBorder(),
+          textStyle: applyRobotoFont(
+            fontSize: 14,
+          ),
         ),
       ),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        shape: const StadiumBorder(),
-        side: const BorderSide(
-          color: AppColor.kPrimary,
-        ),
-        textStyle: applyRobotoFont(
-          fontSize: 14,
-        ),
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: AppColor.kWhite,
-        backgroundColor: AppColor.kPrimary,
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        textStyle: applyRobotoFont(
-          fontSize: 14,
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: const StadiumBorder(),
+          side: const BorderSide(
+            color: AppColor.kPrimary,
+          ),
+          textStyle: applyRobotoFont(
+            fontSize: 14,
+          ),
+          padding: Responsive.isMobile(context)
+              ? const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
+                )
+              : const EdgeInsets.symmetric(
+                  horizontal: AppSize.klpadding,
+                  vertical: AppSize.kmpadding,
+                ),
         ),
       ),
-    ),
-    checkboxTheme: CheckboxThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: AppColor.kWhite,
+          backgroundColor: AppColor.kPrimary,
+          shape: const StadiumBorder(),
+          textStyle: applyRobotoFont(
+            fontSize: 14,
+          ),
+          padding: Responsive.isMobile(context)
+              ? const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
+                )
+              : const EdgeInsets.symmetric(
+                  horizontal: AppSize.klpadding,
+                  vertical: AppSize.kmpadding,
+                ),
+        ),
       ),
-    ),
-  );
+      checkboxTheme: CheckboxThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    );
+  }
 
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData getDarkTheme(BuildContext context) {
+    return ThemeData(
+      primarySwatch: MaterialColor(
+        const Color(0xff296DF6).value,
+        const {
+          50: Color(0xff296DF6),
+          100: Color(0xff296DF6),
+          200: Color(0xff296DF6),
+          300: Color(0xff296DF6),
+          400: Color(0xff296DF6),
+          500: Color(0xff296DF6),
+          600: Color(0xff296DF6),
+          700: Color(0xff296DF6),
+          800: Color(0xff296DF6),
+          900: Color(0xff296DF6),
+        },
+      ),
+      brightness: Brightness.dark,
+    );
+  }
 }

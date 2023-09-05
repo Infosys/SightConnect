@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentatio
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../../shared/theme/text_theme.dart';
+
 class BottomInputTab extends StatefulWidget {
   const BottomInputTab({super.key});
 
@@ -27,10 +29,47 @@ class BottomInputTabState extends State<BottomInputTab>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _controller,
-        children: <Widget>[SwipeGestureCard(), const VoiceAssistCard()],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Distance:",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.kGrey,
+                    ),
+                  ),
+                  const SizedBox(width: AppSize.kswidth),
+                  Text(
+                    "40 cm",
+                    style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.kGreen),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Text(
+                "Left Eye",
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _controller,
+              children: <Widget>[SwipeGestureCard(), const VoiceAssistCard()],
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: ButtomNavigationBar(
         onTap: (index) {
@@ -59,68 +98,34 @@ class ButtomNavigationBar extends HookWidget {
   Widget build(BuildContext context) {
     List<IconData> icons = [Icons.swipe, Icons.mic];
     List<String> buttonStrings = ["Swipe Gesture", "Voice Assist"];
-    List<Flexible> generateIcons() {
+    List<Widget> generateIcons() {
       return List.generate(
         2,
         (index) {
-          return Flexible(
-            fit: FlexFit.tight,
-            child: GestureDetector(
-              onTap: () {
-                onTap(index);
-              },
-              child: Container(
+          return OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(
+              foregroundColor:
+                  currentIndex == index ? AppColor.kPrimary : AppColor.kGrey,
+              side: BorderSide(
                 color:
-                    index == currentIndex ? AppColor.kPrimary : AppColor.kWhite,
-                padding: const EdgeInsets.all(AppSize.kspadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      icons[index],
-                      color: index == currentIndex
-                          ? AppColor.kWhite
-                          : AppColor.kPrimary,
-                    ),
-                    const SizedBox(
-                      width: AppSize.kswidth,
-                    ),
-                    Text(
-                      buttonStrings[index],
-                      style: TextStyle(
-                        color: index == currentIndex
-                            ? AppColor.kWhite
-                            : AppColor.kPrimary,
-                      ),
-                    )
-                  ],
-                ),
+                    currentIndex == index ? AppColor.kPrimary : AppColor.kGrey,
               ),
+            ),
+            onPressed: () {
+              onTap(index);
+            },
+            icon: Icon(icons[index]),
+            label: Text(
+              buttonStrings[index],
             ),
           );
         },
       );
     }
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSize.width(context) * 0.05,
-        vertical: AppSize.height(context) * 0.02,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppSize.klradius * 8),
-        child: Card(
-          margin: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(color: Colors.blue),
-            borderRadius: BorderRadius.circular(AppSize.klradius * 8),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: generateIcons(),
-          ),
-        ),
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: generateIcons(),
     );
   }
 }

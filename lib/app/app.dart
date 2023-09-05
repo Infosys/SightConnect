@@ -19,15 +19,15 @@ class MyApp extends ConsumerWidget {
 
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        textScaleFactor: Responsive.isMobile(context) ? null : 1.2,
+        textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.3,
       ),
       child: MaterialApp(
         title: 'Eye Care For All',
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeProvider),
         theme: ref.watch(themeProvider) == ThemeMode.light
-            ? AppTheme.lightTheme
-            : AppTheme.darkTheme,
+            ? AppTheme.getLightTheme(context)
+            : AppTheme.getDarkTheme(context),
         routes: AppRouter.routes,
         initialRoute: AuthPage.routeName,
       ),

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_e_steps_instruction_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,9 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kspadding),
+          padding: Responsive.isMobile(context)
+              ? const EdgeInsets.all(AppSize.kspadding)
+              : const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

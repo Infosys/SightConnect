@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentatio
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/bottom_input_tab.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -49,46 +50,18 @@ class TumblingTestInitiatePage extends HookConsumerWidget {
           ],
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const TopReadingCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kmpadding,
-                vertical: AppSize.kmpadding,
-              ),
-              child: Row(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Distance:",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.kGrey,
-                        ),
-                      ),
-                      const SizedBox(width: AppSize.kswidth),
-                      Text(
-                        "40 cm",
-                        style: applyFiraSansFont(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.kGreen),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Left Eye",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Expanded(
-              child: BottomInputTab(),
+            Container(
+              alignment: Alignment.bottomCenter,
+              width: Responsive.isMobile(context)
+                  ? AppSize.width(context) * 0.9
+                  : AppSize.width(context) * 0.8,
+              height: Responsive.isMobile(context)
+                  ? AppSize.height(context) * 0.4
+                  : AppSize.height(context) * 0.3,
+              child: const BottomInputTab(),
             )
           ],
         ),

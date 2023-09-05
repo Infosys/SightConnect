@@ -45,7 +45,7 @@ class PatientBottomNavBar extends HookWidget {
 
     final primaryColor = Theme.of(context).primaryColor;
 
-    List<IconButton> generateIcons() {
+    List<Widget> generateIcons() {
       return List.generate(
         5,
         (index) {
@@ -54,27 +54,28 @@ class PatientBottomNavBar extends HookWidget {
               ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
               : const ColorFilter.mode(AppColor.kGrey, BlendMode.srcIn);
 
-          return IconButton(
-            onPressed: () {
+          return InkWell(
+            onTap: () {
               onTap(index);
               updateScale(index);
             },
-            icon: ColorFiltered(
+            child: ColorFiltered(
               colorFilter: colorFilter,
               child: AnimatedScale(
                 scale: initialScale.value[index],
                 duration: const Duration(milliseconds: 200),
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: Responsive.isMobile(context)
+                      ? const EdgeInsets.all(AppSize.kspadding)
+                      : const EdgeInsets.all(AppSize.kmpadding - 4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isSelected ? primaryColor.withOpacity(0.1) : null,
                   ),
                   child: SvgPicture.asset(
                     icons[index],
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.cover,
+                    height: Responsive.isMobile(context) ? 14 : 20,
+                    width: Responsive.isMobile(context) ? 14 : 20,
                   ),
                 ),
               ),
@@ -87,7 +88,7 @@ class PatientBottomNavBar extends HookWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: Responsive.isMobile(context)
-            ? AppSize.width(context) * 0.05
+            ? AppSize.width(context) * 0.1
             : AppSize.width(context) * 0.15,
         vertical: AppSize.height(context) * 0.02,
       ),
@@ -99,7 +100,7 @@ class PatientBottomNavBar extends HookWidget {
         ),
         child: Padding(
           padding: Responsive.isMobile(context)
-              ? const EdgeInsets.all(AppSize.kspadding / 2)
+              ? const EdgeInsets.all(AppSize.kspadding)
               : const EdgeInsets.all(AppSize.kmpadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

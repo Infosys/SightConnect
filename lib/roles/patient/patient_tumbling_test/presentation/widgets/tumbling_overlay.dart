@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_carousel.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +38,9 @@ class _TumblingOverlayState extends ConsumerState<TumblingOverlay> {
                     borderRadius: BorderRadius.circular(AppSize.kmradius),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(AppSize.kmpadding),
+                    padding: Responsive.isMobile(context)
+                        ? const EdgeInsets.all(AppSize.kmpadding)
+                        : const EdgeInsets.all(AppSize.klpadding),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
