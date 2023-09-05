@@ -45,6 +45,7 @@ class YourAppointmentCard extends StatelessWidget {
           ),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   child: Text(
@@ -56,7 +57,6 @@ class YourAppointmentCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Spacer(),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(

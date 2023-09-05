@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
 
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.2,
+        textScaleFactor: Responsive.isMobile(context) ? null : 1.2,
       ),
       child: MaterialApp(
         title: 'Eye Care For All',

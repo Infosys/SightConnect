@@ -71,12 +71,9 @@ class AuthPage extends HookConsumerWidget {
                           color: Colors.black54,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       SizedBox(
                         width: Responsive.isMobile(context)
-                            ? size.width * 0.9
+                            ? size.width * 1
                             : size.width * 0.7,
                         child: Form(
                           autovalidateMode: AutovalidateMode.always,
@@ -85,7 +82,6 @@ class AuthPage extends HookConsumerWidget {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
-                                  vertical: 20,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -104,9 +100,6 @@ class AuthPage extends HookConsumerWidget {
                                             Icon(Icons.person_2_outlined),
                                         contentPadding: EdgeInsets.all(18),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
                                     ),
                                     TextFormField(
                                       validator: (value) {

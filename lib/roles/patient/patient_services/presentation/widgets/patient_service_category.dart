@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_services/data/data/local_source.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +19,9 @@ class PatientServiceCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: AppSize.klpadding),
+      margin: Responsive.isMobile(context)
+          ? const EdgeInsets.only(bottom: AppSize.klpadding)
+          : const EdgeInsets.only(bottom: AppSize.klpadding * 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -33,10 +36,12 @@ class PatientServiceCategory extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.kmheight),
+          Responsive.isMobile(context)
+              ? const SizedBox(height: AppSize.kmheight)
+              : const SizedBox(height: AppSize.klheight),
           Wrap(
-            runSpacing: 8,
-            spacing: 10,
+            runSpacing: Responsive.isMobile(context) ? 10 : 20,
+            spacing: Responsive.isMobile(context) ? 10 : 20,
             alignment: WrapAlignment.start,
             children: services
                 .map(
@@ -60,14 +65,15 @@ class PatientServiceCategory extends StatelessWidget {
                       }
                     },
                     child: SizedBox(
-                      width: 60,
+                      width: Responsive.isMobile(context) ? 60 : 80,
                       child: Column(
                         children: [
                           mappers[miniapp] != null
                               ? SvgPicture.asset(
                                   mappers[miniapp]!,
-                                  height: 24,
-                                  width: 24,
+                                  height:
+                                      Responsive.isMobile(context) ? 24 : 32,
+                                  width: Responsive.isMobile(context) ? 24 : 32,
                                   fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),

@@ -12,7 +12,7 @@ class PatientHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: Responsive.isMobile(context)
-          ? AppSize.height(context) * 0.3
+          ? AppSize.height(context) * 0.4
           : AppSize.height(context) * 0.3,
       child: Stack(
         fit: StackFit.expand,

@@ -24,7 +24,7 @@ class PriorityNotificationCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(AppSize.kspadding),
           width: Responsive.isMobile(context)
-              ? AppSize.width(context) * 0.9
+              ? AppSize.width(context) * 0.8
               : AppSize.width(context) * 0.4,
           decoration: const BoxDecoration(
             image: DecorationImage(
