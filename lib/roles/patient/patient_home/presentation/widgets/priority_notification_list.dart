@@ -26,11 +26,6 @@ class PriorityNotificationList extends StatelessWidget {
         'image': 'assets/images/dr_rajeev_r_pappuru.png',
         "prefix": "RP",
       },
-      // {
-      //   "name": "Dr. Manish Jain",
-      //   "profession": "Optometrist",
-      //   "recommendation": "Dr. Manish Jain is recommended for Contact lens fitting...",
-      // }
     ];
 
     return Container(
@@ -38,7 +33,7 @@ class PriorityNotificationList extends StatelessWidget {
         boxShadow: appShadow(),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             "Priority Notification",
@@ -48,6 +43,7 @@ class PriorityNotificationList extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 ...doctor
                     .map(

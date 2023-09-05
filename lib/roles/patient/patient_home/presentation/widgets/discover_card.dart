@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,9 @@ class DiscoverCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
-      width: AppSize.width(context) * 0.9,
+      width: Responsive.isMobile(context)
+          ? AppSize.width(context) * 0.8
+          : AppSize.width(context) * 0.4,
       child: Stack(
         children: [
           data["image"] != null

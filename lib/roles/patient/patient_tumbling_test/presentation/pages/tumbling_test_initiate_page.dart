@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/accessibility_settings.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/bottom_input_tab.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/top_reading_card.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -46,18 +50,11 @@ class TumblingTestInitiatePage extends HookConsumerWidget {
         ),
         body: Column(
           children: [
-            const Expanded(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.all(
-                  AppSize.kmpadding,
-                ),
-                child: TopReadingCard(),
-              ),
-            ),
+            const TopReadingCard(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSize.kmpadding,
+                vertical: AppSize.kmpadding,
               ),
               child: Row(
                 children: [
@@ -91,7 +88,6 @@ class TumblingTestInitiatePage extends HookConsumerWidget {
               ),
             ),
             const Expanded(
-              flex: 2,
               child: BottomInputTab(),
             )
           ],

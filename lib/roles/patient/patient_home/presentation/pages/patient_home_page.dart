@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/priority_notification_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/you_appointment_card_list.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 class PatientHomePage extends StatelessWidget {
@@ -14,15 +15,17 @@ class PatientHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            PatientHeader(),
+            const PatientHeader(),
             Padding(
-              padding: EdgeInsets.all(AppSize.kmpadding),
-              child: Column(
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(AppSize.kmpadding)
+                  : const EdgeInsets.all(AppSize.klpadding),
+              child: const Column(
                 children: [
                   PriorityNotificationList(),
                   SizedBox(height: AppSize.kmheight),

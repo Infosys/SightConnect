@@ -3,6 +3,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../shared/responsive/responsive.dart';
+
 class DoctorNearYouCard extends StatelessWidget {
   const DoctorNearYouCard({
     Key? key,
@@ -13,7 +15,9 @@ class DoctorNearYouCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppSize.width(context) * 0.4,
+      width: Responsive.isMobile(context)
+          ? AppSize.width(context) * 0.45
+          : AppSize.width(context) * 0.35,
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.fromLTRB(
         AppSize.kspadding,

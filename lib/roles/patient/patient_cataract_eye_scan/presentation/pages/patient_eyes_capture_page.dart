@@ -77,7 +77,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
           ? Container(
               color: AppColor.kWhite,
               child: const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               ),
             )
           : Consumer(

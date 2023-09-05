@@ -71,7 +71,7 @@ class TumblingTestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  //calculating total correct and wrong questions count and checking if game is over
+  // calculating total correct and wrong questions count and checking if game is over
 
   int correctCount = 0;
   int wrongCount = 0;

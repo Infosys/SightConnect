@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -64,10 +65,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         textStyle: applyRobotoFont(
           fontSize: 14,
         ),
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 32,
-        ),
+        padding: const EdgeInsets.all(AppSize.kmpadding),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -75,13 +73,15 @@ class AppTheme extends StateNotifier<ThemeMode> {
         foregroundColor: AppColor.kWhite,
         backgroundColor: AppColor.kPrimary,
         shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 32,
-        ),
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         textStyle: applyRobotoFont(
           fontSize: 14,
         ),
+      ),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
       ),
     ),
   );

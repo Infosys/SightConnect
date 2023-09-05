@@ -27,20 +27,21 @@ class BottomInputTabState extends State<BottomInputTab>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _controller,
-          children: <Widget>[SwipeGestureCard(), const VoiceAssistCard()],
-        ),
-        bottomNavigationBar: ButtomNavigationBar(
-          onTap: (index) {
-            setState(() {
-              _index = index;
-              _controller!.index = _index ?? 0;
-            });
-          },
-          currentIndex: _index ?? 0,
-        ));
+      body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _controller,
+        children: <Widget>[SwipeGestureCard(), const VoiceAssistCard()],
+      ),
+      bottomNavigationBar: ButtomNavigationBar(
+        onTap: (index) {
+          setState(() {
+            _index = index;
+            _controller!.index = _index ?? 0;
+          });
+        },
+        currentIndex: _index ?? 0,
+      ),
+    );
   }
 }
 

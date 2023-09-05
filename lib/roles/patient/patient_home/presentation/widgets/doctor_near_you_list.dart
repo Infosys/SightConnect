@@ -38,7 +38,7 @@ class DoctorNearYouList extends StatelessWidget {
         boxShadow: appShadow(),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             "Doctor near you",

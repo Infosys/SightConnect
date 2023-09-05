@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,9 @@ class PriorityNotificationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.ksradius),
         child: Container(
           padding: const EdgeInsets.all(AppSize.kspadding),
-          width: AppSize.width(context) * 0.8,
+          width: Responsive.isMobile(context)
+              ? AppSize.width(context) * 0.9
+              : AppSize.width(context) * 0.4,
           decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,

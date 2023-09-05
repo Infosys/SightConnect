@@ -61,7 +61,6 @@ class PatientServiceCategory extends StatelessWidget {
                     },
                     child: SizedBox(
                       width: 60,
-                      height: 60,
                       child: Column(
                         children: [
                           mappers[miniapp] != null

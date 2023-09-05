@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -73,114 +74,123 @@ class AuthPage extends HookConsumerWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Form(
-                        autovalidateMode: AutovalidateMode.always,
-                        child: Builder(
-                          builder: (context) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 20,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  TextFormField(
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Email is required";
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: const InputDecoration(
-                                      label: Text("Email"),
-                                      prefixIcon: Icon(Icons.person_2_outlined),
-                                      contentPadding: EdgeInsets.all(18),
+                      SizedBox(
+                        width: Responsive.isMobile(context)
+                            ? size.width * 0.9
+                            : size.width * 0.7,
+                        child: Form(
+                          autovalidateMode: AutovalidateMode.always,
+                          child: Builder(
+                            builder: (context) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 20,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Email is required";
+                                        }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      decoration: const InputDecoration(
+                                        label: Text("Email"),
+                                        prefixIcon:
+                                            Icon(Icons.person_2_outlined),
+                                        contentPadding: EdgeInsets.all(18),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  TextFormField(
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Password is required";
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    obscureText: true,
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.password_outlined),
-                                      label: Text("Password"),
-                                      contentPadding: EdgeInsets.all(18),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 14,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      isLoading.value
-                                          ? const CircularProgressIndicator()
-                                          : ElevatedButton.icon(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    const Color(0xff296DF6),
-                                              ),
-                                              onPressed: () async {
-                                                var navigator =
-                                                    Navigator.of(context);
-                                                if (Form.of(context)
-                                                    .validate()) {
-                                                  isLoading.value = true;
-                                                  await Future.delayed(
-                                                    const Duration(
-                                                      seconds: 2,
-                                                    ),
-                                                  );
-                                                  isLoading.value = false;
-                                                  navigator
-                                                      .pushReplacementNamed(
-                                                    SplashPage.routeName,
-                                                  );
-                                                }
-                                              },
-                                              icon: const Icon(
-                                                Icons.login,
-                                                color: Colors.white,
-                                              ),
-                                              label: Text(
-                                                "Sign In",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleMedium
-                                                    ?.copyWith(
-                                                        color: Colors.white),
-                                              ),
-                                            ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
-                                  Directionality(
-                                    textDirection: TextDirection.rtl,
-                                    child: OutlinedButton.icon(
-                                      label: const Text("Register New User "),
-                                      icon: const Icon(Icons.person_add_alt_1),
-                                      onPressed: () {},
+                                    TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Password is required";
+                                        }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      obscureText: true,
+                                      decoration: const InputDecoration(
+                                        prefixIcon:
+                                            Icon(Icons.password_outlined),
+                                        label: Text("Password"),
+                                        contentPadding: EdgeInsets.all(18),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 80,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        isLoading.value
+                                            ? const CircularProgressIndicator
+                                                .adaptive()
+                                            : ElevatedButton.icon(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      const Color(0xff296DF6),
+                                                ),
+                                                onPressed: () async {
+                                                  var navigator =
+                                                      Navigator.of(context);
+                                                  if (Form.of(context)
+                                                      .validate()) {
+                                                    isLoading.value = true;
+                                                    await Future.delayed(
+                                                      const Duration(
+                                                        seconds: 2,
+                                                      ),
+                                                    );
+                                                    isLoading.value = false;
+                                                    navigator
+                                                        .pushReplacementNamed(
+                                                      SplashPage.routeName,
+                                                    );
+                                                  }
+                                                },
+                                                icon: const Icon(
+                                                  Icons.login,
+                                                  color: Colors.white,
+                                                ),
+                                                label: Text(
+                                                  "Sign In",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleMedium
+                                                      ?.copyWith(
+                                                          color: Colors.white),
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: OutlinedButton.icon(
+                                        label: const Text("Register New User "),
+                                        icon:
+                                            const Icon(Icons.person_add_alt_1),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 80,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],

@@ -82,7 +82,7 @@ class TumblingInstructionCarousel extends HookWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.black54,
                 ),
                 padding: const EdgeInsets.all(AppSize.kspadding),
                 child: Text(

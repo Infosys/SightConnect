@@ -32,7 +32,7 @@ class FamilyEyeHealthScoreList extends StatelessWidget {
         boxShadow: appShadow(),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             "Family Eye Health Scores",

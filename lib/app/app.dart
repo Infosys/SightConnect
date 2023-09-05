@@ -1,7 +1,5 @@
-import 'dart:developer';
-
-import 'package:eye_care_for_all/core/providers/accessbility_provider.dart';
 import 'package:eye_care_for_all/shared/pages/auth_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +16,10 @@ class MyApp extends ConsumerWidget {
       DeviceOrientation.portraitDown,
     ]);
     final mediaQueryData = MediaQuery.of(context);
-    final scale = ref.watch(textScaleFactorProvider);
+
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        textScaleFactor: scale,
+        textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.2,
       ),
       child: MaterialApp(
         title: 'Eye Care For All',

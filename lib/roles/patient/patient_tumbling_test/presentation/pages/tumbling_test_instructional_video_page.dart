@@ -121,7 +121,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       builder: (BuildContext context) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: AlertDialog(
+          child: AlertDialog.adaptive(
             title: Text(
               'Terms of Use',
               style: applyFiraSansFont(
@@ -135,6 +135,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 children: [
                   Text(
                     "Legal disclaimer: The content on this application is presented for informational purposes only.\n\nNever disregard professional medical advice from your healthcare provider, or delay in seeking it, because of using this application.\n\nThe developer of this app, cannot be held liable for any damages of any kind related to the usage of this software.\n\nREMEMBER: It’s people who resolve vision problems. Our technology is designed to help them do that. Full terms of use",
+                    textAlign: TextAlign.justify,
                     style: applyRobotoFont(
                       fontSize: 14,
                     ),
@@ -143,6 +144,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                     onPressed: () {},
                     child: Text(
                       "Full terms of use",
+                      textAlign: TextAlign.justify,
                       style: applyRobotoFont(
                         fontSize: 14,
                         decoration: TextDecoration.underline,

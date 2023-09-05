@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/pages/auth_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +10,10 @@ class PatientHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxHeight: 300,
-        minHeight: 200,
-      ),
+    return SizedBox(
+      height: Responsive.isMobile(context)
+          ? AppSize.height(context) * 0.3
+          : AppSize.height(context) * 0.3,
       child: Stack(
         fit: StackFit.expand,
         children: [

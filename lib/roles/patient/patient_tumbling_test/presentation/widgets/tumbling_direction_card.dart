@@ -22,22 +22,25 @@ class TumblingDirectionCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            const SizedBox(width: 15),
-            Transform.rotate(
-              angle: rotationAngle,
-              child: SvgPicture.asset(
-                symbolImage,
-                height: AppSize.height(context) * 0.179, //140
-                // width: 70,
+            Flexible(
+              child: Transform.rotate(
+                angle: rotationAngle,
+                child: SvgPicture.asset(
+                  symbolImage,
+                  height: AppSize.height(context) * 0.179, //140
+                  // width: 70,
+                ),
               ),
             ),
-            const SizedBox(
-              width: 40,
+            SizedBox(
+              width: AppSize.width(context) * 0.05, //20
             ),
-            SvgPicture.asset(
-              handImage,
-              height: AppSize.height(context) * 0.128, //100
-              // width: 60,
+            Flexible(
+              child: SvgPicture.asset(
+                handImage,
+                height: AppSize.height(context) * 0.128, //100
+                // width: 60,
+              ),
             ),
           ],
         ),

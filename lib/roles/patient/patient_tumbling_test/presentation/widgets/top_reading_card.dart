@@ -13,11 +13,9 @@ class TopReadingCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Logic to Calculate E Size using DPI to centimeter formula
-
-    double dpi = MediaQuery.of(context).devicePixelRatio;
-
     var model = ref.watch(tumblingTestProvider);
+    var boxSizeInPixels = calculateLogicalPixelSize(context);
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -25,38 +23,36 @@ class TopReadingCard extends ConsumerWidget {
       ),
       shadowColor: AppColor.kPrimary.withOpacity(0.5),
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: AppSize.height(context) * 0.02,
+            Wrap(
+              runAlignment: WrapAlignment.center,
+              runSpacing: AppSize.kmheight,
+              spacing: AppSize.kmwidth,
+              children: model.tumblingTestList[model.currentTestIndex].eList
+                  .map(
+                    (e) => RotatedBox(
+                      quarterTurns: e.quater,
+                      child: SvgPicture.asset(
+                        AppImages.tumblingE,
+                        height: boxSizeInPixels,
+                        width: boxSizeInPixels,
+                        colorFilter: ColorFilter.mode(
+                          e.status == eStatus.correct
+                              ? AppColor.kGreen
+                              : e.status == eStatus.incorrect
+                                  ? AppColor.kRed
+                                  : AppColor.kBlack,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
-            Container(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: model.tumblingTestList[model.currentTestIndex].eList
-                    .map((e) => RotatedBox(
-                          quarterTurns: e.quater,
-                          child: SvgPicture.asset(
-                            AppImages.tumblingE,
-                            height: model
-                                .tumblingTestList[model.currentTestIndex].eSize,
-                            colorFilter: ColorFilter.mode(
-                              e.status == eStatus.correct
-                                  ? AppColor.kGreen
-                                  : e.status == eStatus.incorrect
-                                      ? AppColor.kRed
-                                      : AppColor.kBlack,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
-            const Spacer(),
+            const SizedBox(height: AppSize.klheight),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: model.tumblingTestList
@@ -72,9 +68,18 @@ class TopReadingCard extends ConsumerWidget {
                   )
                   .toList(),
             ),
+            const SizedBox(height: AppSize.ksheight),
           ],
         ),
       ),
     );
+  }
+
+  double calculateLogicalPixelSize(BuildContext context) {
+    final double dp = MediaQuery.of(context).devicePixelRatio;
+    var sizeInCm = 24.5 / 10;
+
+    final double boxSizeInPixels = (dp * sizeInCm * 38) / 2.54;
+    return boxSizeInPixels;
   }
 }

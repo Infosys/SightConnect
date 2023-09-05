@@ -31,11 +31,23 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-            child: TumblingInstructionCarousel(
-              onPageChanged: (index) {
-                activeIndex.value = index;
-              },
-              carouselController: carouselController.value,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColor.kPrimary.withOpacity(0.1),
+                    blurRadius: 10,
+                    spreadRadius: 0,
+                    offset: const Offset(20, 20),
+                  ),
+                ],
+              ),
+              child: TumblingInstructionCarousel(
+                onPageChanged: (index) {
+                  activeIndex.value = index;
+                },
+                carouselController: carouselController.value,
+              ),
             ),
           ),
           const SizedBox(

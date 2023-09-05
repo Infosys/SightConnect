@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,12 +12,14 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
         color: AppColor.kWhite,
         borderRadius: BorderRadius.circular(AppSize.ksradius),
       ),
-      width: AppSize.width(context) * 0.5,
+      width: Responsive.isMobile(context)
+          ? AppSize.width(context) * 0.5
+          : AppSize.width(context) * 0.35,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +28,7 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                maxRadius: 20,
+                maxRadius: 25,
                 minRadius: 15,
                 child: data["image"] != null
                     ? Image.asset(
@@ -64,7 +67,7 @@ class FamilyEyeHealthScoreCard extends StatelessWidget {
                   children: [
                     CircularProgressIndicator(
                       value: data["percentage"],
-                      strokeWidth: 6,
+                      strokeWidth: 4,
                       backgroundColor: AppColor.kGrey.withOpacity(0.3),
                       valueColor: data["percentage"] > 0.7
                           ? const AlwaysStoppedAnimation<Color>(AppColor.kGreen)
