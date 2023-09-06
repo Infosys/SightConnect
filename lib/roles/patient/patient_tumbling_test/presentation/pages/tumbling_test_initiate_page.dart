@@ -37,23 +37,15 @@ class TumblingTestInitiatePage extends StatelessWidget {
             ),
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const TopReadingCard(),
-            Flexible(
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.9
-                    : AppSize.width(context) * 0.8,
-                height: Responsive.isMobile(context)
-                    ? AppSize.height(context) * 0.4
-                    : AppSize.height(context) * 0.3,
-                child: const BottomInputTab(),
-              ),
-            )
-          ],
+        body: const Padding(
+          padding: EdgeInsets.all(AppSize.klpadding),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: TopReadingCard()),
+              Expanded(child: BottomInputTab())
+            ],
+          ),
         ),
       ),
     );

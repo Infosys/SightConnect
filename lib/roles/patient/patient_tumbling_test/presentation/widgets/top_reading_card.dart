@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -18,26 +16,24 @@ class TopReadingCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
-
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
 
-    log(mm(model.tumblingTestList[model.currentTestIndex].eSize).toString());
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.klradius),
-        ),
-        shadowColor: AppColor.kPrimary.withOpacity(0.5),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Wrap(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+          ),
+          shadowColor: AppColor.kPrimary.withOpacity(0.5),
+          child: Container(
+            height: 200,
+            padding: const EdgeInsets.all(AppSize.kmpadding),
+            child: Center(
+              child: Wrap(
                 runAlignment: WrapAlignment.center,
                 runSpacing: AppSize.kmheight,
                 spacing: AppSize.kmwidth,
@@ -64,31 +60,27 @@ class TopReadingCard extends ConsumerWidget {
                     )
                     .toList(),
               ),
-              const SizedBox(height: AppSize.klheight),
-              Padding(
-                padding: const EdgeInsets.all(AppSize.kmpadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: model.tumblingTestList
-                      .map(
-                        (e) => Flexible(
-                          child: LinearPercentIndicator(
-                            padding: const EdgeInsets.all(2),
-                            lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                            percent: e.progress,
-                            barRadius: const Radius.circular(AppSize.klradius),
-                            progressColor: AppColor.kGreen,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-            ],
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: AppSize.klheight),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: model.tumblingTestList
+              .map(
+                (e) => Flexible(
+                  child: LinearPercentIndicator(
+                    padding: const EdgeInsets.all(2),
+                    lineHeight: Responsive.isMobile(context) ? 8 : 14,
+                    percent: e.progress,
+                    barRadius: const Radius.circular(AppSize.klradius),
+                    progressColor: AppColor.kGreen,
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
     );
   }
 }

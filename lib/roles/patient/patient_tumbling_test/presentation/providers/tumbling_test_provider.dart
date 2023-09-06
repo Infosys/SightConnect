@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_test.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +11,22 @@ class TumblingTestProvider extends ChangeNotifier {
   TumblistTestEDirection _currentDirection = TumblistTestEDirection.up;
   int _curretTestIndex = 0;
   int _currentQuestionIndex = 0;
-  int totalCorrectCount = 0;
-  int totalWrongCount = 0;
-  int currentTestCorrectCount = 0;
-  int currentTestWrongCount = 0;
-  bool isGameOver = false;
+  int _totalCorrectCount = 0;
+  int _totalWrongCount = 0;
+  int _currentTestCorrectCount = 0;
+  int _currentTestWrongCount = 0;
+  bool _isGameOver = false;
 
   List<TumblingTest> get tumblingTestList => _tumblingTestList;
   TumblistTestEDirection get currentDirection => _currentDirection;
 
   int get currentTestIndex => _curretTestIndex;
   int get currentQuestionIndex => _currentQuestionIndex;
+  int get totalCorrectCount => _totalCorrectCount;
+  int get totalWrongCount => _totalWrongCount;
+  int get currentTestCorrectCount => _currentTestCorrectCount;
+  int get currentTestWrongCount => _currentTestWrongCount;
+  bool get isGameOver => _isGameOver;
 
   set currentTestIndex(int index) {
     _curretTestIndex = index;
@@ -40,65 +44,58 @@ class TumblingTestProvider extends ChangeNotifier {
   }
 
   void evaluteResponse(TumblistTestEDirection userResponse) {
-    debugPrint("userResponse: $userResponse");
+    var currentTest = _tumblingTestList[_curretTestIndex];
+    var currentQuestion = currentTest.eList[_currentQuestionIndex];
+    var currentDirection = currentQuestion.direction;
 
-    if (userResponse ==
-        _tumblingTestList[_curretTestIndex]
-            .eList[_currentQuestionIndex]
-            .direction) {
-      _tumblingTestList[_curretTestIndex].eList[_currentQuestionIndex].status =
-          EStatus.correct;
-      currentTestCorrectCount = currentTestCorrectCount + 1;
-      totalCorrectCount = totalCorrectCount + 1;
+    if (userResponse == currentDirection) {
+      currentQuestion.status = EStatus.correct;
+      _currentTestCorrectCount = _currentTestCorrectCount + 1;
+      _totalCorrectCount = _totalCorrectCount + 1;
     } else {
-      _tumblingTestList[_curretTestIndex].eList[_currentQuestionIndex].status =
-          EStatus.incorrect;
-      currentTestWrongCount = currentTestWrongCount + 1;
-      totalWrongCount = totalWrongCount + 1;
+      currentQuestion.status = EStatus.incorrect;
+      _currentTestWrongCount = _currentTestWrongCount + 1;
+      _totalWrongCount = _totalWrongCount + 1;
     }
 
-    _tumblingTestList[_curretTestIndex].progress =
-        _tumblingTestList[_curretTestIndex].progress +
-            (1 / _tumblingTestList[_curretTestIndex].eList.length);
+    currentTest.progress += (1 / currentTest.eList.length);
 
-    if (currentQuestionIndex ==
-        _tumblingTestList[currentTestIndex].eList.length - 1) {
+    if (_currentQuestionIndex == currentTest.eList.length - 1) {
+      _checkIsGameOver();
       _curretTestIndex = _curretTestIndex + 1;
-      currentTestCorrectCount = 0;
-      currentTestWrongCount = 0;
-      currentQuestionIndex = 0;
+      _currentTestCorrectCount = 0;
+      _currentTestWrongCount = 0;
+      _currentQuestionIndex = 0;
     } else {
       _currentQuestionIndex = _currentQuestionIndex + 1;
     }
 
-    _checkIsGameOver();
     notifyListeners();
-    printDetails();
+    _logGameScoreBoard();
   }
 
   void _checkIsGameOver() {
     if (_curretTestIndex == _tumblingTestList.length) {
-      isGameOver = true;
+      _isGameOver = true;
     }
     notifyListeners();
   }
 
-  printDetails() {
-    log("currentDirection: $currentDirection");
-    log("currentTestCorrectCount: $currentTestCorrectCount");
-    log("currentTestWrongCount: $currentTestWrongCount");
-    log("currentTestIndex: $currentTestIndex");
-    log("currentQuestionIndex: $currentQuestionIndex'");
-
-    log("totalCorrectCount: $totalCorrectCount");
-    log("totalWrongCount: $totalWrongCount");
-    log("isGameOver: $isGameOver");
+  _logGameScoreBoard() {
+    logger.d({
+      "currentTestIndex": _curretTestIndex,
+      "currentQuestionIndex": _currentQuestionIndex,
+      "totalCorrectCount": _totalCorrectCount,
+      "totalWrongCount": _totalWrongCount,
+      "currentTestCorrectCount": _currentTestCorrectCount,
+      "currentTestWrongCount": _currentTestWrongCount,
+      "isGameOver": _isGameOver,
+    });
   }
 }
 
 final tumblingTestProvider =
     ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
   var t = TumblingTestDataSource().tumblingTestList;
-
   return TumblingTestProvider(t);
 });

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/accessbility_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -124,7 +125,7 @@ class _AutoBrightnessWidget extends HookWidget {
     try {
       return await ScreenBrightness().current;
     } catch (e) {
-      debugPrint(e.toString());
+      logger.d(e.toString());
       throw 'Failed to get current brightness';
     }
   }
@@ -133,7 +134,7 @@ class _AutoBrightnessWidget extends HookWidget {
     try {
       await ScreenBrightness().setScreenBrightness(brightness);
     } catch (e) {
-      debugPrint(e.toString());
+      logger.d(e.toString());
       throw 'Failed to set brightness';
     }
   }

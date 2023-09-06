@@ -19,13 +19,13 @@ List<VisionAcuity> _getLogMarValues() {
     ),
     VisionAcuity(
       level: 3,
-      logMar: 0.3,
-      eSize: 1.165,
+      logMar: 0.25,
+      eSize: 0.23,
     ),
     VisionAcuity(
       level: 4,
-      logMar: 0.25,
-      eSize: 0.23,
+      logMar: 0.32,
+      eSize: 0.18,
     ),
     VisionAcuity(
       level: 5,

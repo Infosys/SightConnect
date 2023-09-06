@@ -1,8 +1,8 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_direction_card.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_direction_indicator.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
@@ -33,7 +33,7 @@ class TumblingCarousel extends HookConsumerWidget {
             initialPage: currentIndex.value,
             enableInfiniteScroll: false,
             onPageChanged: (index, _) {
-              log(index.toString());
+              logger.d(index.toString());
               currentIndex.value = index;
               if (currentIndex.value > 2) {
                 buttonName.value = "Start";

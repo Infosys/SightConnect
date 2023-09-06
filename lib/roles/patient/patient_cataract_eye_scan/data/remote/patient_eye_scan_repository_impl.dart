@@ -1,22 +1,19 @@
-import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/services/dio_service.dart';
+import '../../../../../main.dart';
 import '../contract/patient_eye_scan_repository.dart';
-
 
 var patientEyeScanRepository = Provider<PatientEyeScanRepository>((ref) {
   return PatientEyeScanRepositoryImpl(ref.watch(dioProvider));
 });
 
 class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
-
-  Dio _dio;
+  final Dio _dio;
 
   PatientEyeScanRepositoryImpl(this._dio);
-
 
   @override
   getCataractPrediction({required XFile? eyeImage}) async {
@@ -34,27 +31,27 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
     });
     String url = "http://testbed.surveymaster.in:8088/predict/";
 
-    log("model post call initiated");
-    log(url);
+    logger.d("model post call initiated");
+    logger.d(url);
     try {
       var response = await _dio.post<Map<String, dynamic>>(
         url,
         data: formData,
         options: Options(
             contentType: "multipart/form-data",
-            receiveTimeout: Duration(seconds: 7),
-            sendTimeout: Duration(seconds: 5)),
+            receiveTimeout: const Duration(seconds: 7),
+            sendTimeout: const Duration(seconds: 5)),
       );
-      log("post called ended");
-      log(response.data.toString());
+      logger.d("post called ended");
+      logger.d(response.data.toString());
       return response.data;
     } on Exception catch (e) {
       if (e == DioExceptionType.sendTimeout ||
           e == DioExceptionType.receiveTimeout) {
-        log("Connection  Timeout Exception");
+        logger.d("Connection  Timeout Exception");
         return null;
       }
-      log(e.toString());
+      logger.d(e.toString());
     }
   }
 }

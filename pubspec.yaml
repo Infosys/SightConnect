@@ -56,6 +56,7 @@ dependencies:
   url_launcher: ^6.1.12
   jwt_decoder: ^2.0.1
   screen_brightness: ^0.2.2+1
+  logger: ^2.0.2
  
   
 
