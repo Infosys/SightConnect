@@ -1,12 +1,15 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/fake_data_source.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_test.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:millimeters/millimeters.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TopReadingCard extends ConsumerWidget {
@@ -15,7 +18,11 @@ class TopReadingCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
-    var boxSizeInPixels = calculateLogicalPixelSize(context);
+
+    final physicalities = Millimeters.of(context);
+    final mm = physicalities.mm;
+
+    log(mm(model.tumblingTestList[model.currentTestIndex].eSize).toString());
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -37,15 +44,17 @@ class TopReadingCard extends ConsumerWidget {
                 children: model.tumblingTestList[model.currentTestIndex].eList
                     .map(
                       (e) => RotatedBox(
-                        quarterTurns: e.quater,
+                        quarterTurns: e.quarter,
                         child: SvgPicture.asset(
                           AppImages.tumblingE,
-                          height: boxSizeInPixels,
-                          width: boxSizeInPixels,
+                          width: mm(model
+                              .tumblingTestList[model.currentTestIndex].eSize),
+                          height: mm(model
+                              .tumblingTestList[model.currentTestIndex].eSize),
                           colorFilter: ColorFilter.mode(
-                            e.status == eStatus.correct
+                            e.status == EStatus.correct
                                 ? AppColor.kGreen
-                                : e.status == eStatus.incorrect
+                                : e.status == EStatus.incorrect
                                     ? AppColor.kRed
                                     : AppColor.kBlack,
                             BlendMode.srcIn,
@@ -66,7 +75,7 @@ class TopReadingCard extends ConsumerWidget {
                           child: LinearPercentIndicator(
                             padding: const EdgeInsets.all(2),
                             lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                            percent: 0.01 * e.progress,
+                            percent: e.progress,
                             barRadius: const Radius.circular(AppSize.klradius),
                             progressColor: AppColor.kGreen,
                           ),
@@ -81,13 +90,5 @@ class TopReadingCard extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  double calculateLogicalPixelSize(BuildContext context) {
-    final double dp = MediaQuery.of(context).devicePixelRatio;
-    var sizeInCm = 2;
-
-    final double boxSizeInPixels = (dp * sizeInCm * 38) / 2.54;
-    return boxSizeInPixels;
   }
 }

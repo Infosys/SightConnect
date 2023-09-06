@@ -1,25 +1,25 @@
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/fake_data_source.dart';
+import 'dart:developer';
+
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/tumbling_data_source.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_test.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TumblingTestProvider extends ChangeNotifier {
-  final List<TumblingTest> _tumblingTestList =
-      FakeDataSource().tumblingTestList;
+  TumblingTestProvider(this._tumblingTestList);
 
-  List<TumblingTest> get tumblingTestList => _tumblingTestList;
-
-  TumblistTestEDirection _direction = TumblistTestEDirection.up;
-
-  TumblistTestEDirection get direction => _direction;
-
-  void setDirection(TumblistTestEDirection direction) {
-    _direction = direction;
-    notifyListeners();
-  }
-
-  //Evaluate the User Response
-
+  final List<TumblingTest> _tumblingTestList;
+  TumblistTestEDirection _currentDirection = TumblistTestEDirection.up;
   int _curretTestIndex = 0;
   int _currentQuestionIndex = 0;
+  int totalCorrectCount = 0;
+  int totalWrongCount = 0;
+  int currentTestCorrectCount = 0;
+  int currentTestWrongCount = 0;
+  bool isGameOver = false;
+
+  List<TumblingTest> get tumblingTestList => _tumblingTestList;
+  TumblistTestEDirection get currentDirection => _currentDirection;
 
   int get currentTestIndex => _curretTestIndex;
   int get currentQuestionIndex => _currentQuestionIndex;
@@ -34,57 +34,71 @@ class TumblingTestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  evaluteResponse(TumblistTestEDirection userResponse) {
-    debugPrint("User Response: $userResponse");
+  void setDirection(TumblistTestEDirection direction) {
+    _currentDirection = direction;
+    notifyListeners();
+  }
 
-    //Logic to check user response
+  void evaluteResponse(TumblistTestEDirection userResponse) {
+    debugPrint("userResponse: $userResponse");
+
     if (userResponse ==
         _tumblingTestList[_curretTestIndex]
             .eList[_currentQuestionIndex]
             .direction) {
       _tumblingTestList[_curretTestIndex].eList[_currentQuestionIndex].status =
-          eStatus.correct;
-      correctCount = correctCount + 1;
+          EStatus.correct;
+      currentTestCorrectCount = currentTestCorrectCount + 1;
+      totalCorrectCount = totalCorrectCount + 1;
     } else {
       _tumblingTestList[_curretTestIndex].eList[_currentQuestionIndex].status =
-          eStatus.incorrect;
-      wrongCount = wrongCount + 1;
+          EStatus.incorrect;
+      currentTestWrongCount = currentTestWrongCount + 1;
+      totalWrongCount = totalWrongCount + 1;
     }
 
-    //logic for progress bar
-
     _tumblingTestList[_curretTestIndex].progress =
-        _tumblingTestList[_curretTestIndex].progress + 20;
+        _tumblingTestList[_curretTestIndex].progress +
+            (1 / _tumblingTestList[_curretTestIndex].eList.length);
 
-    //logic to check if one test is over and update question count
-
-    if (currentQuestionIndex == 4) {
+    if (currentQuestionIndex ==
+        _tumblingTestList[currentTestIndex].eList.length - 1) {
       _curretTestIndex = _curretTestIndex + 1;
-      correctCount = 0;
-      wrongCount = 0;
+      currentTestCorrectCount = 0;
+      currentTestWrongCount = 0;
       currentQuestionIndex = 0;
     } else {
       _currentQuestionIndex = _currentQuestionIndex + 1;
     }
 
-    checkGameOver();
+    _checkIsGameOver();
     notifyListeners();
+    printDetails();
   }
 
-  // calculating total correct and wrong questions count and checking if game is over
-
-  int correctCount = 0;
-  int wrongCount = 0;
-  bool gameOver = false;
-
-  get isGameOver => gameOver;
-
-  void checkGameOver() {
-    if (correctCount == 5 || wrongCount == 3 || _curretTestIndex == 6) {
-      gameOver = true;
+  void _checkIsGameOver() {
+    if (_curretTestIndex == _tumblingTestList.length) {
+      isGameOver = true;
     }
     notifyListeners();
   }
 
-  // Logic to Calculate E Size using DPI to centimeter formula
+  printDetails() {
+    log("currentDirection: $currentDirection");
+    log("currentTestCorrectCount: $currentTestCorrectCount");
+    log("currentTestWrongCount: $currentTestWrongCount");
+    log("currentTestIndex: $currentTestIndex");
+    log("currentQuestionIndex: $currentQuestionIndex'");
+
+    log("totalCorrectCount: $totalCorrectCount");
+    log("totalWrongCount: $totalWrongCount");
+    log("isGameOver: $isGameOver");
+  }
 }
+
+final tumblingTestProvider =
+    ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
+  var t = TumblingTestDataSource().tumblingTestList;
+
+  return TumblingTestProvider(t);
+});
