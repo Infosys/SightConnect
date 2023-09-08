@@ -43,42 +43,45 @@ class TumblingTestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void evaluteResponse(TumblistTestEDirection userResponse) {
+  void evaluteResponse(TumblistTestEDirection userResponse) async {
     var currentTest = _tumblingTestList[_curretTestIndex];
     var currentQuestion = currentTest.eList[_currentQuestionIndex];
     var currentDirection = currentQuestion.direction;
-
-    if (userResponse == currentDirection) {
-      currentQuestion.status = EStatus.correct;
-      _currentTestCorrectCount = _currentTestCorrectCount + 1;
-      _totalCorrectCount = _totalCorrectCount + 1;
+    if (_checkIsGameOver()) {
     } else {
-      currentQuestion.status = EStatus.incorrect;
-      _currentTestWrongCount = _currentTestWrongCount + 1;
-      _totalWrongCount = _totalWrongCount + 1;
+      if (userResponse == currentDirection) {
+        currentQuestion.status = EStatus.correct;
+        _currentTestCorrectCount = _currentTestCorrectCount + 1;
+        _totalCorrectCount = _totalCorrectCount + 1;
+      } else {
+        currentQuestion.status = EStatus.incorrect;
+        _currentTestWrongCount = _currentTestWrongCount + 1;
+        _totalWrongCount = _totalWrongCount + 1;
+      }
+
+      currentTest.progress += (1 / currentTest.eList.length);
+
+      if (_currentQuestionIndex == currentTest.eList.length - 1) {
+        _curretTestIndex = _curretTestIndex + 1;
+        _currentTestCorrectCount = 0;
+        _currentTestWrongCount = 0;
+        _currentQuestionIndex = 0;
+      } else {
+        _currentQuestionIndex = _currentQuestionIndex + 1;
+      }
     }
-
-    currentTest.progress += (1 / currentTest.eList.length);
-
-    if (_currentQuestionIndex == currentTest.eList.length - 1) {
-      _checkIsGameOver();
-      _curretTestIndex = _curretTestIndex + 1;
-      _currentTestCorrectCount = 0;
-      _currentTestWrongCount = 0;
-      _currentQuestionIndex = 0;
-    } else {
-      _currentQuestionIndex = _currentQuestionIndex + 1;
-    }
-
     notifyListeners();
     _logGameScoreBoard();
   }
 
-  void _checkIsGameOver() {
-    if (_curretTestIndex == _tumblingTestList.length) {
+  bool _checkIsGameOver() {
+    if (_curretTestIndex == _tumblingTestList.length - 1 &&
+        _currentQuestionIndex ==
+            _tumblingTestList[_curretTestIndex].eList.length - 1) {
       _isGameOver = true;
     }
-    notifyListeners();
+
+    return _isGameOver;
   }
 
   _logGameScoreBoard() {
