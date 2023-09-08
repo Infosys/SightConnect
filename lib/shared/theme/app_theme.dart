@@ -57,11 +57,13 @@ class AppTheme extends StateNotifier<ThemeMode> {
           color: AppColor.kBlack,
           size: Responsive.isMobile(context) ? 24 : 32,
         ),
-        iconTheme: IconThemeData(
-          color: AppColor.kBlack,
-          size: Responsive.isMobile(context) ? 24 : 32,
-        ),
+        iconTheme: const IconThemeData(color: AppColor.kBlack, size: 32),
         titleTextStyle: applyFiraSansFont(fontWeight: FontWeight.w500),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          iconSize: Responsive.isMobile(context) ? 24 : 32,
+        ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -82,8 +84,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
           ),
           padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
+                  vertical: 14,
+                  horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.klpadding,
@@ -101,8 +103,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
           ),
           padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
+                  vertical: 14,
+                  horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.klpadding,

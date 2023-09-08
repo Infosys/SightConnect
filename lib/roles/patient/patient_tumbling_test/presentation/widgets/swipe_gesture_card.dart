@@ -54,7 +54,9 @@ class SwipeGestureCard extends HookConsumerWidget {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.symmetric(
+          vertical: AppSize.kmpadding,
+        ),
         child: DottedBorder(
           borderType: BorderType.RRect,
           radius: const Radius.circular(AppSize.klradius),

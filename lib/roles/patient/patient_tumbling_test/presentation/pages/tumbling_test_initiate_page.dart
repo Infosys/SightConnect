@@ -42,8 +42,10 @@ class TumblingTestInitiatePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: TopReadingCard()),
-              Expanded(child: BottomInputTab())
+              TopReadingCard(),
+              Expanded(
+                child: BottomInputTab(),
+              ),
             ],
           ),
         ),

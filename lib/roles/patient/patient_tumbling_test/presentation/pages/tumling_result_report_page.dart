@@ -168,7 +168,7 @@ class TumblingResultReportPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      width: AppSize.kmheight,
                     ),
                     Expanded(
                       child: OutlinedButton(

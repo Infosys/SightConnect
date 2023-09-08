@@ -12,9 +12,9 @@ List<Tstatus> _generateTumblingEList(int level) {
       return [
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        )
+          direction: TumblistTestEDirection.right,
+          quarter: 4,
+        ),
       ];
 
     case 2:

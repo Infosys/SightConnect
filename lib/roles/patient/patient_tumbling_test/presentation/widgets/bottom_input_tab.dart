@@ -32,6 +32,7 @@ class BottomInputTabState extends State<BottomInputTab>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          const SizedBox(height: AppSize.kmheight),
           Row(
             children: [
               Row(
@@ -96,36 +97,27 @@ class ButtomNavigationBar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<IconData> icons = [Icons.swipe, Icons.mic];
-    List<String> buttonStrings = ["Swipe Gesture", "Voice Assist"];
-    List<Widget> generateIcons() {
-      return List.generate(
-        2,
-        (index) {
-          return OutlinedButton.icon(
-            style: OutlinedButton.styleFrom(
-              foregroundColor:
-                  currentIndex == index ? AppColor.kPrimary : AppColor.kGrey,
-              side: BorderSide(
-                color:
-                    currentIndex == index ? AppColor.kPrimary : AppColor.kGrey,
-              ),
-            ),
-            onPressed: () {
-              onTap(index);
-            },
-            icon: Icon(icons[index]),
-            label: Text(
-              buttonStrings[index],
-            ),
-          );
-        },
-      );
-    }
+    var isSelected = useState<Set<int>>({currentIndex});
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: generateIcons(),
+    return SegmentedButton(
+      showSelectedIcon: false,
+      segments: const [
+        ButtonSegment(
+          value: 0,
+          icon: Icon(Icons.touch_app),
+          label: Text("Swipe Gesture"),
+        ),
+        ButtonSegment(
+          value: 1,
+          icon: Icon(Icons.mic),
+          label: Text("Voice Assist"),
+        ),
+      ],
+      onSelectionChanged: (value) {
+        isSelected.value = value;
+        onTap(value.first);
+      },
+      selected: isSelected.value,
     );
   }
 }

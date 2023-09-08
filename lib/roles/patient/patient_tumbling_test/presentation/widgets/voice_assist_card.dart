@@ -10,7 +10,9 @@ class VoiceAssistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSize.kmpadding,
+      ),
       child: DottedBorder(
         borderType: BorderType.RRect,
         radius: const Radius.circular(AppSize.klradius),

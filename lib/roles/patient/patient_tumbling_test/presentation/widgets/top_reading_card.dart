@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -18,69 +20,87 @@ class TopReadingCard extends ConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
+    var size = mm(model.tumblingTestList[model.currentTestIndex].eSize);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.klradius),
-          ),
-          shadowColor: AppColor.kPrimary.withOpacity(0.5),
-          child: Container(
-            height: 200,
-            padding: const EdgeInsets.all(AppSize.kmpadding),
-            child: Center(
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSize.klradius),
+      ),
+      shadowColor: AppColor.kPrimary.withOpacity(0.5),
+      child: Container(
+        height: 200,
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Expanded(
+              flex: 9,
               child: Wrap(
-                runAlignment: WrapAlignment.center,
-                runSpacing: AppSize.kmheight,
-                spacing: AppSize.kmwidth,
-                children: model.tumblingTestList[model.currentTestIndex].eList
-                    .map(
-                      (e) => RotatedBox(
-                        quarterTurns: e.quarter,
-                        child: SvgPicture.asset(
-                          AppImages.tumblingE,
-                          width: mm(model
-                              .tumblingTestList[model.currentTestIndex].eSize),
-                          height: mm(model
-                              .tumblingTestList[model.currentTestIndex].eSize),
-                          colorFilter: ColorFilter.mode(
-                            e.status == EStatus.correct
-                                ? AppColor.kGreen
-                                : e.status == EStatus.incorrect
-                                    ? AppColor.kRed
-                                    : AppColor.kBlack,
-                            BlendMode.srcIn,
+                  runAlignment: WrapAlignment.center,
+                  runSpacing: size,
+                  spacing: size,
+                  children: model.tumblingTestList[model.currentTestIndex].eList
+                      .asMap()
+                      .entries
+                      .map((e) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        RotatedBox(
+                          quarterTurns: e.value.quarter,
+                          child: SvgPicture.asset(
+                            AppImages.tumblingE,
+                            width: size,
+                            height: size,
+                            colorFilter: ColorFilter.mode(
+                              e.value.status == EStatus.correct
+                                  ? AppColor.kGreen
+                                  : e.value.status == EStatus.incorrect
+                                      ? AppColor.kRed
+                                      : AppColor.kBlack,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList(),
-              ),
+                        SizedBox(
+                          height: size / 2,
+                        ),
+                        Visibility(
+                          visible: e.key == model.currentQuestionIndex,
+                          child: Container(
+                            height: 4,
+                            width: size,
+                            decoration: BoxDecoration(
+                              color: AppColor.kPrimary,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  }).toList()),
             ),
-          ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: model.tumblingTestList
+                  .map(
+                    (e) => Flexible(
+                      child: LinearPercentIndicator(
+                        padding: const EdgeInsets.all(2),
+                        lineHeight: Responsive.isMobile(context) ? 8 : 14,
+                        percent: e.progress,
+                        barRadius: const Radius.circular(AppSize.klradius),
+                        progressColor: AppColor.kGreen,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
         ),
-        const SizedBox(height: AppSize.klheight),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: model.tumblingTestList
-              .map(
-                (e) => Flexible(
-                  child: LinearPercentIndicator(
-                    padding: const EdgeInsets.all(2),
-                    lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                    percent: e.progress,
-                    barRadius: const Radius.circular(AppSize.klradius),
-                    progressColor: AppColor.kGreen,
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-      ],
+      ),
     );
   }
 }
