@@ -1,6 +1,6 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +12,13 @@ class PatientHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: Responsive.isMobile(context)
-          ? AppSize.height(context) * 0.4
+          ? AppSize.height(context) * 0.3
           : AppSize.height(context) * 0.3,
       child: Stack(
         fit: StackFit.expand,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(AppSize.klradius),
-            ),
+            borderRadius: BorderRadius.circular(AppSize.klradius),
             child: Image.asset(
               AppImages.patientCover,
               fit: BoxFit.cover,
@@ -31,78 +29,26 @@ class PatientHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.klheight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Eye Care for All",
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.search),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacementNamed(
-                              AuthPage.routeName,
-                            );
-                          },
-                          icon: const Icon(Icons.logout_outlined),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(height: AppSize.klheight),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 300,
-                  ),
-                  child: Text(
-                    "Welcome Back",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: AppSize.klheight),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 300,
-                  ),
-                  child: Text(
-                    "Anandi Murthy",
-                    style: applyFiraSansFont(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: AppSize.klheight),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 300,
-                  ),
-                  child: Text(
-                    "Have a nice day",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                    ),
+                Text(
+                  "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),
-                // OutlinedButton(
-                //   onPressed: () {},
-                //   child: const Text("View Profile"),
-                // ),
+                Text(
+                  "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.kGrey,
+                  ),
+                ),
+                const SizedBox(height: AppSize.ksheight),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: const Text("Know More"),
+                ),
               ],
             ),
           )

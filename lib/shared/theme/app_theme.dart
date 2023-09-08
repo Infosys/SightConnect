@@ -83,7 +83,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
           padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
                   horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.klpadding,
@@ -102,7 +102,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
           padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
                   horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.klpadding,

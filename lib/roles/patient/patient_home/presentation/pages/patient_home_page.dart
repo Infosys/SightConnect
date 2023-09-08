@@ -16,32 +16,47 @@ class PatientHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Eye Care for All",
+        ),
+        actions: [
+          CircleAvatar(
+            radius: 20,
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const CircleAvatar(
+              radius: 18,
+              backgroundImage: AssetImage('assets/images/doctor_2.png'),
+            ),
+          ),
+          const SizedBox(
+            width: AppSize.kswidth,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const PatientHeader(),
-            Padding(
-              padding: Responsive.isMobile(context)
-                  ? const EdgeInsets.all(AppSize.kmpadding)
-                  : const EdgeInsets.all(AppSize.klpadding),
-              child: const Column(
-                children: [
-                  PriorityNotificationList(),
-                  SizedBox(height: AppSize.kmheight),
-                  DoctorNearYouList(),
-                  SizedBox(height: AppSize.kmheight),
-                  YourAppointmentCardList(),
-                  SizedBox(height: AppSize.kmheight),
-                  FamilyEyeHealthScoreList(),
-                  SizedBox(height: AppSize.kmheight),
-                  DiscoverCardList(),
-                  SizedBox(height: AppSize.kmheight),
-                  CampaginsList(),
-                ],
-              ),
-            )
-          ],
+        child: Padding(
+          padding: Responsive.isMobile(context)
+              ? const EdgeInsets.all(AppSize.kmpadding)
+              : const EdgeInsets.all(AppSize.klpadding),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              PatientHeader(),
+              SizedBox(height: AppSize.kmheight),
+              PriorityNotificationList(),
+              SizedBox(height: AppSize.kmheight),
+              DoctorNearYouList(),
+              SizedBox(height: AppSize.kmheight),
+              YourAppointmentCardList(),
+              SizedBox(height: AppSize.kmheight),
+              FamilyEyeHealthScoreList(),
+              SizedBox(height: AppSize.kmheight),
+              DiscoverCardList(),
+              SizedBox(height: AppSize.kmheight),
+              CampaginsList()
+            ],
+          ),
         ),
       ),
     );
