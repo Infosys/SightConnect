@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EyeCampCard extends StatelessWidget {
   const EyeCampCard({super.key, required this.data});
@@ -18,6 +19,11 @@ class EyeCampCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.loose,
           children: [
+            SvgPicture.asset(
+              AppImages.eyeCampBg,
+              fit: BoxFit.fill,
+              height: AppSize.width(context) * 0.491,
+            ),
             Align(
                 alignment: Alignment.topLeft,
                 child: SizedBox(

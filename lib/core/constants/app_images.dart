@@ -69,6 +69,7 @@ class AppImages {
   //eye camp images
 
   static const String eyeCampImage = "assets/images/eye_camps_image.png";
+  static const String eyeCampBg = "assets/images/eye_camp_card_bg.svg";
 
   //good to know
 
