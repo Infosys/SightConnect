@@ -35,8 +35,8 @@ List<Tstatus> _generateTumblingEList(int level) {
       return [
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
+          direction: TumblistTestEDirection.up,
+          quarter: 3,
         ),
         Tstatus(
           status: EStatus.notAttempted,
@@ -45,8 +45,8 @@ List<Tstatus> _generateTumblingEList(int level) {
         ),
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
+          direction: TumblistTestEDirection.up,
+          quarter: 3,
         ),
       ];
 
@@ -54,11 +54,6 @@ List<Tstatus> _generateTumblingEList(int level) {
       return [
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
           direction: TumblistTestEDirection.right,
           quarter: 4,
         ),
@@ -66,6 +61,11 @@ List<Tstatus> _generateTumblingEList(int level) {
           status: EStatus.notAttempted,
           direction: TumblistTestEDirection.left,
           quarter: 2,
+        ),
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.down,
+          quarter: 1,
         ),
         Tstatus(
           status: EStatus.notAttempted,
@@ -78,54 +78,11 @@ List<Tstatus> _generateTumblingEList(int level) {
       return [
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
           direction: TumblistTestEDirection.right,
           quarter: 4,
         ),
         Tstatus(
           status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-      ];
-    case 6:
-      return [
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
           direction: TumblistTestEDirection.down,
           quarter: 1,
         ),
@@ -133,127 +90,6 @@ List<Tstatus> _generateTumblingEList(int level) {
           status: EStatus.notAttempted,
           direction: TumblistTestEDirection.left,
           quarter: 2,
-        ),
-      ];
-
-    case 7:
-      return [
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-      ];
-    case 8:
-      return [
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-      ];
-
-    case 9:
-      return [
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.up,
-          quarter: 3,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.down,
-          quarter: 1,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.left,
-          quarter: 2,
-        ),
-        Tstatus(
-          status: EStatus.notAttempted,
-          direction: TumblistTestEDirection.right,
-          quarter: 4,
         ),
         Tstatus(
           status: EStatus.notAttempted,
@@ -268,6 +104,32 @@ List<Tstatus> _generateTumblingEList(int level) {
       ];
 
     default:
-      return [];
+      return [
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.right,
+          quarter: 4,
+        ),
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.down,
+          quarter: 1,
+        ),
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.left,
+          quarter: 2,
+        ),
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.up,
+          quarter: 3,
+        ),
+        Tstatus(
+          status: EStatus.notAttempted,
+          direction: TumblistTestEDirection.down,
+          quarter: 1,
+        ),
+      ];
   }
 }

@@ -5,25 +5,30 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class MyConnectionsCard extends HookWidget {
   const MyConnectionsCard({
     Key? key,
-    required this.data,
+    required this.doctor,
+    required this.index,
   }) : super(key: key);
-  final Map<String, dynamic> data;
+  final Map<String, dynamic> doctor;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     var isSelected = useState<bool>(false);
-    return InkWell(
-      onTap: () {
-        isSelected.value = !isSelected.value;
-      },
-      child: Container(
-        width: AppSize.width(context) * 0.189,
-        margin: EdgeInsets.only(right: AppSize.width(context) * 0.01),
-        padding: const EdgeInsets.all(2),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
+    isSelected.value = index == 0 ? true : false;
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      margin: EdgeInsets.only(right: AppSize.width(context) * 0.01),
+      padding: const EdgeInsets.all(2),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            onTap: () {
+              isSelected.value = !isSelected.value;
+            },
+            child: Container(
               width: 60.0,
               height: 60.0,
               decoration: BoxDecoration(
@@ -32,18 +37,18 @@ class MyConnectionsCard extends HookWidget {
                   color: isSelected.value ? Colors.blue : Colors.transparent,
                   width: 3.0,
                 ),
-              ),
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage(
-                  data["image"],
+                image: DecorationImage(
+                  opacity: isSelected.value ? 1 : 0.9,
+                  image: AssetImage(
+                    doctor["image"],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 5),
-            Text(data["name"]),
-          ],
-        ),
+          ),
+          const SizedBox(height: AppSize.ksheight),
+          Text(doctor["name"]),
+        ],
       ),
     );
   }

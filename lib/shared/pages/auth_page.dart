@@ -144,9 +144,10 @@ class AuthPage extends HookConsumerWidget {
                                                     );
                                                     isLoading.value = false;
                                                     navigator
-                                                        .pushReplacementNamed(
-                                                      SplashPage.routeName,
-                                                    );
+                                                        .pushNamedAndRemoveUntil(
+                                                            SplashPage
+                                                                .routeName,
+                                                            (route) => false);
                                                   }
                                                 },
                                                 icon: const Icon(

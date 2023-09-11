@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -40,55 +41,79 @@ class MyConnectionsList extends StatelessWidget {
               Text(
                 "My Connections",
                 style: applyFiraSansFont(
-                    fontSize: 18, fontWeight: FontWeight.w600),
+                  fontSize: 18,
+                ),
               ),
               const Spacer(),
               TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "See All",
-                    style: applyFiraSansFont(
-                        fontSize: 14,
-                        color: AppColor.kBlue,
-                        fontWeight: FontWeight.w700),
-                  ))
+                onPressed: () {},
+                child: Text(
+                  "See All",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.kBlue,
+                  ),
+                ),
+              )
             ],
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...doctors
-                    .map(
-                      (e) => MyConnectionsCard(
-                        data: e,
-                      ),
-                    )
-                    .toList(),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Container(
-                          width: 41.0,
-                          height: 41.0,
-                          decoration: BoxDecoration(
-                            color: AppColor.kWhite,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColor.kLightBlue,
-                              width: 2.0,
-                            ),
+          Row(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: [
+                    ...doctors
+                        .asMap()
+                        .entries
+                        .map(
+                          (e) => MyConnectionsCard(
+                            doctor: e.value,
+                            index: e.key,
                           ),
-                          child: const Center(
-                              child: Icon(Icons.add,
-                                  color: AppColor.kBlue, size: 30))),
-                    ),
-                  ],
+                        )
+                        .toList(),
+                  ]),
                 ),
-              ],
-            ),
-          )
+              ),
+              const SizedBox(width: AppSize.kmwidth),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: 50,
+                      width: 60,
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColor.kLightBlue,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        color: AppColor.kBlue,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    "Add",
+                    style: applyFiraSansFont(
+                      fontSize: 12,
+                      color: AppColor.kBlue,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );

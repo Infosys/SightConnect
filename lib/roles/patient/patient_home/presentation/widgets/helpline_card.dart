@@ -55,16 +55,20 @@ class HelplineCard extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
+        InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: EdgeInsets.only(
               left: AppSize.width(context) * 0.02,
-              right: AppSize.width(context) * 0.02),
-          child: const CircleAvatar(
-            radius: 20,
-            backgroundColor: AppColor.kWhite,
-            child: Icon(
-              Icons.phone_outlined,
-              color: AppColor.kBlue,
+              right: AppSize.width(context) * 0.02,
+            ),
+            child: const CircleAvatar(
+              radius: 20,
+              backgroundColor: AppColor.kWhite,
+              child: Icon(
+                Icons.phone_outlined,
+                color: AppColor.kBlue,
+              ),
             ),
           ),
         ),

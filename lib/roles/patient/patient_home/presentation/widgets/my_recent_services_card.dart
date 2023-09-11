@@ -10,13 +10,11 @@ class RecentServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: AppSize.width(context) * 0.02,
-        top: AppSize.width(context) * 0.01,
-      ),
-      child: SizedBox(
-        width: AppSize.klpadding*4.5,
+    return SizedBox(
+      width: 120,
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(AppSize.kmradius),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.kmradius),

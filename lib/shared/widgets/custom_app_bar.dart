@@ -25,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ? IconButton(
                 icon: const Icon(
                   Icons.chevron_left,
+                  size: 34,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();

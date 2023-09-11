@@ -46,7 +46,6 @@ class _PatientServicesPageState extends State<PatientServicesPage> {
     return Scaffold(
       appBar: const CustomAppBar(
         title: "Services",
-        showBackButton: false,
       ),
       body: SingleChildScrollView(
         child: Padding(

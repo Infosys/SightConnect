@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TumblingTestProvider extends ChangeNotifier {
-  TumblingTestProvider(this._tumblingTestList);
+  TumblingTestProvider(this._dataSource) {
+    _tumblingTestList = _dataSource.tumblingTestList;
+  }
 
-  final List<TumblingTest> _tumblingTestList;
+  List<TumblingTest> _tumblingTestList = [];
+  late final TumblingTestDataSource _dataSource;
   TumblistTestEDirection _currentDirection = TumblistTestEDirection.up;
   int _curretTestIndex = 0;
   int _currentQuestionIndex = 0;
@@ -99,6 +102,5 @@ class TumblingTestProvider extends ChangeNotifier {
 
 final tumblingTestProvider =
     ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
-  var t = TumblingTestDataSource().tumblingTestList;
-  return TumblingTestProvider(t);
+  return TumblingTestProvider(TumblingTestDataSource());
 });

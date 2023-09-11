@@ -34,7 +34,9 @@ class EyeCampsCardList extends StatelessWidget {
         children: [
           Text(
             "Eye Camps Near Me",
-            style: applyFiraSansFont(fontSize: 18, fontWeight: FontWeight.w600),
+            style: applyFiraSansFont(
+              fontSize: 18,
+            ),
           ),
           const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(

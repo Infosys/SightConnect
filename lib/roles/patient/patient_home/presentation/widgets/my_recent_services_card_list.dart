@@ -41,17 +41,19 @@ class RecentServicesCardList extends StatelessWidget {
               Text(
                 "My Recent Services",
                 style: applyFiraSansFont(
-                    fontSize: 18, fontWeight: FontWeight.w600),
+                  fontSize: 18,
+                ),
               ),
               const Spacer(),
               TextButton(
                 onPressed: () {},
                 child: Text(
                   "See All",
-                  style: applyFiraSansFont(
-                      fontSize: 14,
-                      color: AppColor.kBlue,
-                      fontWeight: FontWeight.w700),
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.kBlue,
+                  ),
                 ),
               ),
             ],

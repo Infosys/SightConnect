@@ -32,7 +32,6 @@ class PatientNotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: "Notifications",
-        showBackButton: false,
         actions: [
           IconButton(
             onPressed: () {},

@@ -55,6 +55,7 @@ class PatientBottomNavBar extends HookWidget {
               : const ColorFilter.mode(AppColor.kGrey, BlendMode.srcIn);
 
           return InkWell(
+            customBorder: const CircleBorder(),
             onTap: () {
               onTap(index);
               updateScale(index);
@@ -74,8 +75,8 @@ class PatientBottomNavBar extends HookWidget {
                   ),
                   child: SvgPicture.asset(
                     icons[index],
-                    height: Responsive.isMobile(context) ? 14 : 20,
-                    width: Responsive.isMobile(context) ? 14 : 20,
+                    height: Responsive.isMobile(context) ? 16 : 20,
+                    width: Responsive.isMobile(context) ? 16 : 20,
                   ),
                 ),
               ),

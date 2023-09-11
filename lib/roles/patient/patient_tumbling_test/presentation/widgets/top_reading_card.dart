@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_test.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -21,6 +20,7 @@ class TopReadingCard extends ConsumerWidget {
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
     var size = mm(model.tumblingTestList[model.currentTestIndex].eSize);
+    logger.f("size: $size");
 
     return Card(
       elevation: 4,
@@ -37,14 +37,18 @@ class TopReadingCard extends ConsumerWidget {
             Expanded(
               flex: 9,
               child: Wrap(
-                  runAlignment: WrapAlignment.center,
-                  runSpacing: size,
-                  spacing: size,
-                  children: model.tumblingTestList[model.currentTestIndex].eList
-                      .asMap()
-                      .entries
-                      .map((e) {
-                    return Column(
+                runAlignment: WrapAlignment.center,
+                runSpacing: 8,
+                spacing: 8,
+                children: model.tumblingTestList[model.currentTestIndex].eList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      right: size,
+                    ),
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -79,8 +83,10 @@ class TopReadingCard extends ConsumerWidget {
                           ),
                         )
                       ],
-                    );
-                  }).toList()),
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

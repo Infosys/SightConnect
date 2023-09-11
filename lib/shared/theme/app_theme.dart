@@ -57,7 +57,6 @@ class AppTheme extends StateNotifier<ThemeMode> {
           color: AppColor.kBlack,
           size: Responsive.isMobile(context) ? 24 : 32,
         ),
-        iconTheme: const IconThemeData(color: AppColor.kBlack, size: 32),
         titleTextStyle: applyFiraSansFont(fontWeight: FontWeight.w500),
       ),
       iconButtonTheme: IconButtonThemeData(

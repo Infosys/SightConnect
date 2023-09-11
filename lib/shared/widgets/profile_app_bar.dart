@@ -13,6 +13,10 @@ class ProfileAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: const SizedBox(
+        width: 0,
+        height: 0,
+      ),
       backgroundColor: Colors.white.withOpacity(0),
       elevation: 0,
       title: Text(
