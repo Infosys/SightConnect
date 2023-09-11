@@ -48,6 +48,9 @@ class AppImages {
   static const String campaign2 = 'assets/images/campaign_2.png';
   static const String doctor_2 = 'assets/images/doctor_2.png';
 
+  static const String campaignBgOne = 'assets/images/campaign_bg_one.png';
+  static const String campaignBgTwo = 'assets/images/campaign_bg_two.png';
+
   //tumbling test
 
   static const String tumblingTestPlay = 'assets/images/play.svg';
@@ -56,4 +59,22 @@ class AppImages {
 
   static const String checkMark = 'assets/images/check.png';
   static const String warning = 'assets/images/warning.png';
+
+  //connections
+
+  static const String raghavi = 'assets/images/connection_dp_one';
+  static const String chunky = 'assets/images/connection_dp_two';
+  static const String mangal = 'assets/images/connection_dp_three';
+
+  //eye camp images
+
+  static const String eyeCampImage = "assets/images/eye_camps_image.png";
+
+  //good to know
+
+  static const String goodToKnowOne = "assets/images/good_to_know_bg_one.png";
+
+  //invite others to join
+
+  static const String inviteBg = "assets/images/invite_bg.png";
 }

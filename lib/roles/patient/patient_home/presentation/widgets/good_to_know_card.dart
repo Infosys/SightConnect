@@ -1,20 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-class DiscoverCard extends StatelessWidget {
-  const DiscoverCard({super.key, required this.data});
+class GoodToKnowCards extends StatelessWidget {
+  const GoodToKnowCards({super.key, required this.data});
   final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10),
-      width: Responsive.isMobile(context)
-          ? AppSize.width(context) * 0.8
-          : AppSize.width(context) * 0.4,
+      margin: const EdgeInsets.only(right: AppSize.kmwidth),
+      width: AppSize.width(context) * 0.8,
       child: Stack(
         children: [
           data["image"] != null
@@ -40,6 +37,7 @@ class DiscoverCard extends StatelessWidget {
                   data["name"] ?? "",
                   softWrap: true,
                   maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w500,
                     color: AppColor.kWhite,
