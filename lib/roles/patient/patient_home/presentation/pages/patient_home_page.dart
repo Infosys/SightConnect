@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/widgets/patient_bottom_nav_bar.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/campaigns_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/good_to_know_list.dart';
