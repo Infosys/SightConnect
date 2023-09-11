@@ -20,6 +20,10 @@ class AppColor {
   static const Color kLightGrey = Color(0xFFDDDDDD);
   static const Color kDarkCharcoal = Color(0xFF333333);
   static const Color kBlackOpacity = Colors.black38;
+  static const Color kPaleYellow = Color(0xFFF3FFC1);
+  static const Color kLavanderBlue = Color(0xFFD4C1FF);
+  static const Color kTeaGreen = Color(0xFFCFFFC1); 
+  static const Color kBisque = Color(0xFFFEEAC1);
 
   static const Map<int, Color> colorShades = {
     50: Color(0xFFE3F2FD),

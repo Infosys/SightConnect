@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22.4" height="24" viewBox="0 0 22.4 24">
+  <g id="visual_acuity_test" data-name="visual acuity test" transform="translate(-674 -930)">
+    <path id="tumbling_E" data-name="tumbling E" d="M0,0V2.4H9.6V4.8H0V7.2H9.6V9.6H0V12H12V0Z" transform="translate(678.8 942) rotate(-90)" fill="#333"/>
+    <path id="tumbling_E-2" data-name="tumbling E" d="M0,0V1.6H6.4V3.2H0V4.8H6.4V6.4H0V8H8V0Z" transform="translate(682 954) rotate(180)" fill="#333"/>
+    <path id="tumbling_E-3" data-name="tumbling E" d="M0,0V1.6H6.4V3.2H0V4.8H6.4V6.4H0V8H8V0Z" transform="translate(688.4 945.999)" fill="#333"/>
+  </g>
+</svg>

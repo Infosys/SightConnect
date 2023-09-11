@@ -11,16 +11,16 @@ class CampaginsList extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = [
       {
-        "image": AppImages.campaign,
-        "title": "Rural Eye Camps",
+        "image": AppImages.campaignBgOne,
+        "title": "Impact of LVPEI Eye Health Pyramid",
         "description":
-            "Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer",
+            "It is heart-warming to share the story of Varun, a 7-month-old born with Gl..",
       },
       {
-        "image": AppImages.campaign2,
-        "title": "Eye Care Awareness",
+        "image": AppImages.campaignBgTwo,
+        "title": "In pursuit of healthy and happy ageing",
         "description":
-            "Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer",
+            "This lovely picture of 72 year old Mrs Premalata Mohapatra is simply heart-…",
       },
     ];
     return Row(

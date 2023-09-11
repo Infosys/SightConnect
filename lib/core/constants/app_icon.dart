@@ -16,4 +16,10 @@ class AppIcon {
   static const String location = 'assets/icons/location.svg';
   static const String tollFree = 'assets/icons/toll_free.svg';
   static const String visionCenter = 'assets/icons/vision_center.svg';
+
+  //My recent services
+  static const String triage = 'assets/icons/triage.svg';
+  static const String acuityTest = 'assets/icons/visual_acuity_test.svg';
+  static const String pledge = 'assets/icons/pledge.svg';
+  static const String eyeScanner = 'assets/icons/eye_scan.svg';
 }

@@ -1,11 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/campaigns_list.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/discover_list.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/doctor_near_you_list.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/family_eye_health_score_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/good_to_know_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/eye_camps_card_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/helpline_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/invite_others_card.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_connections_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/priority_notification_list.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/you_appointment_card_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
@@ -46,13 +49,18 @@ class PatientHomePage extends StatelessWidget {
               SizedBox(height: AppSize.kmheight),
               PriorityNotificationList(),
               SizedBox(height: AppSize.kmheight),
-              DoctorNearYouList(),
+              MyConnectionsList(),
               SizedBox(height: AppSize.kmheight),
-              YourAppointmentCardList(),
+              RecentServicesCardList(),
               SizedBox(height: AppSize.kmheight),
-              FamilyEyeHealthScoreList(),
+              NearbyVisionCentersList(),
               SizedBox(height: AppSize.kmheight),
-              DiscoverCardList(),
+              HelplineCard(),
+              SizedBox(height: AppSize.kmheight),
+              InviteCard(),
+              EyeCampsCardList(),
+              SizedBox(height: AppSize.kmheight),
+              GoodToKnowCardList(),
               SizedBox(height: AppSize.kmheight),
               CampaginsList()
             ],
