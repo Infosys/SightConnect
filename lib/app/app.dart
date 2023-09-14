@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -31,7 +32,6 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          // initialRoute: AuthPage.routeName,
           initialRoute: SplashPage.routeName,
         ),
       ),

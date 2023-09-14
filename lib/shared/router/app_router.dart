@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/present
 
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_e_steps_instruction_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
-import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +10,8 @@ class AppRouter {
   AppRouter._();
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    AuthPage.routeName: (context) => const AuthPage(),
     SplashPage.routeName: (context) => const SplashPage(),
+    // AuthPage.routeName: (context) => const AuthPage(),
     PatientEyeScanInstructionsPage.routeName: (context) =>
         const PatientEyeScanInstructionsPage(),
     PatientEyesReportPage.routeName: (context) => const PatientEyesReportPage(),

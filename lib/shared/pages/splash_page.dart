@@ -1,20 +1,42 @@
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/core/providers/auth_page_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
-import 'package:eye_care_for_all/shared/pages/auth_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends ConsumerWidget {
   static const String routeName = '/splash';
   const SplashPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // get user profile
-    // role based navigation
-    if (role == ROLE.PATIENT) {
-      return const PatientHomePage();
-    } else {
-      return const AuthPage();
-    }
+  Widget build(BuildContext context, WidgetRef ref) {
+    //  return const PatientHomePage();
+
+    ref.listen(authPageProvider, (previous, next) {
+      if (next.userInfo != null) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const PatientHomePage(),
+          ),
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Authentication failed'),
+          ),
+        );
+      }
+    });
+
+    return RefreshIndicator(
+      onRefresh: () async {
+        ref.invalidate(authPageProvider);
+      },
+      child: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }
