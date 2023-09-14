@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,8 +17,11 @@ class TumblingResultReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: "Tumbling E Test - Completed",
+        onBackButtonPressed: () {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        },
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -89,23 +94,27 @@ class TumblingResultReportPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        buildCol(
-                          "Left Eye",
-                          "1.0",
-                        ),
-                        buildCol(
-                          "Both Eyes",
-                          "0.8",
-                        ),
-                        buildCol(
-                          "Right Eye",
-                          "1.0",
-                        ),
-                      ],
+                    Consumer(
+                      builder: (context, ref, child) {
+                        var model = ref.watch(tumblingTestProvider);
+                        var leftEye = model.calculateLeftEyeSigth();
+
+                        var rightEye = model.calculateRightEyeSigth();
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            buildCol(
+                              "Left Eye",
+                              leftEye.toString(),
+                            ),
+                            buildCol(
+                              "Right Eye",
+                              rightEye.toString(),
+                            ),
+                          ],
+                        );
+                      },
                     )
                   ],
                 ),
@@ -162,7 +171,8 @@ class TumblingResultReportPage extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
                         },
                         child: const Text("Home"),
                       ),
@@ -173,7 +183,8 @@ class TumblingResultReportPage extends StatelessWidget {
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
                         },
                         child: const Text("Test Again"),
                       ),

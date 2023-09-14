@@ -1,106 +1,143 @@
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/local/tumbling_data_source.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_test.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_models.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TumblingTestProvider extends ChangeNotifier {
+class TumblingTestProvider with ChangeNotifier {
+  final TumblingDataSource _dataSource;
   TumblingTestProvider(this._dataSource) {
-    _tumblingTestList = _dataSource.tumblingTestList;
+    startGame(Eye.left);
   }
 
-  List<TumblingTest> _tumblingTestList = [];
-  late final TumblingTestDataSource _dataSource;
-  TumblistTestEDirection _currentDirection = TumblistTestEDirection.up;
-  int _curretTestIndex = 0;
-  int _currentQuestionIndex = 0;
-  int _totalCorrectCount = 0;
-  int _totalWrongCount = 0;
-  int _currentTestCorrectCount = 0;
-  int _currentTestWrongCount = 0;
-  bool _isGameOver = false;
+  late Level? level;
+  late GameMode? gameMode;
+  late Eye? currentEye;
+  late int? currentLevel;
+  late int? currentIndex;
+  late bool? isGameOver;
+  late bool? isRetry;
+  late int? totalWrongLevelResponse;
+  late List<UserResponse>? currentLevelUserResponses;
+  late Map<int, List<UserResponse>>? singleEyeReport;
+  Map<Eye, Map> eyesFinalReport = {};
+  TumblingDataSource get dataSource => _dataSource;
 
-  List<TumblingTest> get tumblingTestList => _tumblingTestList;
-  TumblistTestEDirection get currentDirection => _currentDirection;
-
-  int get currentTestIndex => _curretTestIndex;
-  int get currentQuestionIndex => _currentQuestionIndex;
-  int get totalCorrectCount => _totalCorrectCount;
-  int get totalWrongCount => _totalWrongCount;
-  int get currentTestCorrectCount => _currentTestCorrectCount;
-  int get currentTestWrongCount => _currentTestWrongCount;
-  bool get isGameOver => _isGameOver;
-
-  set currentTestIndex(int index) {
-    _curretTestIndex = index;
-    notifyListeners();
+  void startGame(Eye eye) {
+    eyesFinalReport[eye] = {};
+    gameMode = GameMode.regular;
+    currentEye = eye;
+    currentLevel = 0;
+    currentIndex = 0;
+    isGameOver = false;
+    isRetry = false;
+    totalWrongLevelResponse = 0;
+    currentLevelUserResponses = [];
+    level = _dataSource.getLevel(0, GameMode.regular);
+    singleEyeReport = {};
   }
 
-  set currentQuestionIndex(int index) {
-    _currentQuestionIndex = index;
-    notifyListeners();
-  }
-
-  void setDirection(TumblistTestEDirection direction) {
-    _currentDirection = direction;
-    notifyListeners();
-  }
-
-  void evaluteResponse(TumblistTestEDirection userResponse) async {
-    var currentTest = _tumblingTestList[_curretTestIndex];
-    var currentQuestion = currentTest.eList[_currentQuestionIndex];
-    var currentDirection = currentQuestion.direction;
-    if (_checkIsGameOver()) {
+  void handUserResponse(UserResponse userResponse) {
+    var response = _isUserSwipDirectionCorrect(
+      userResponse.swipeDirection,
+      level!.questions[currentIndex!].direction,
+    );
+    if (response) {
+      userResponse.isUserResponseCorrect = true;
     } else {
-      if (userResponse == currentDirection) {
-        currentQuestion.status = EStatus.correct;
-        _currentTestCorrectCount = _currentTestCorrectCount + 1;
-        _totalCorrectCount = _totalCorrectCount + 1;
+      userResponse.isUserResponseCorrect = false;
+    }
+    currentLevelUserResponses!.add(userResponse);
+    if (response) {
+      singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+
+      if (currentIndex! + 1 == level!.totalQuestions) {
+        currentLevel = currentLevel! + 1;
+        if (currentLevel! > maxLevel) {
+          isGameOver = true;
+          eyesFinalReport[currentEye!] = singleEyeReport!;
+          currentLevel = maxLevel;
+        }
+
+        currentIndex = 0;
+        isRetry = false;
+
+        totalWrongLevelResponse = 0;
+
+        currentLevelUserResponses = [];
+        level = _dataSource.getLevel(currentLevel!, gameMode!);
       } else {
-        currentQuestion.status = EStatus.incorrect;
-        _currentTestWrongCount = _currentTestWrongCount + 1;
-        _totalWrongCount = _totalWrongCount + 1;
+        currentIndex = currentIndex! + 1;
+      }
+    } else {
+      // here you exit from regular mode
+      totalWrongLevelResponse = totalWrongLevelResponse! + 1;
+      if (currentLevel == 0) {
+        isGameOver = true;
+        eyesFinalReport[currentEye!] = singleEyeReport!;
       }
 
-      currentTest.progress += (1 / currentTest.eList.length);
-
-      if (_currentQuestionIndex == currentTest.eList.length - 1) {
-        _curretTestIndex = _curretTestIndex + 1;
-        _currentTestCorrectCount = 0;
-        _currentTestWrongCount = 0;
-        _currentQuestionIndex = 0;
-      } else {
-        _currentQuestionIndex = _currentQuestionIndex + 1;
+      if (userResponse.mode == GameMode.regular) {
+        isRetry = true;
+        gameMode = GameMode.isFive;
+        if (currentLevel! > 0) {
+          currentLevel = currentLevel! - 1;
+        }
+        currentIndex = 0;
+        singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+        currentLevelUserResponses = [];
+        level = _dataSource.getLevel(currentLevel!, gameMode!);
+      } else if (userResponse.mode == GameMode.isFive) {
+        if (isRetry!) {
+          isGameOver = true;
+          eyesFinalReport[currentEye!] = singleEyeReport!;
+        } else {
+          if (totalWrongLevelResponse == 2) {
+            isRetry = true;
+            currentLevel = currentLevel! - 1;
+            currentIndex = 0;
+            singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+            currentLevelUserResponses = [];
+            level = _dataSource.getLevel(currentLevel!, gameMode!);
+          } else {
+            currentIndex = currentIndex! + 1;
+          }
+        }
       }
     }
-    notifyListeners();
-    _logGameScoreBoard();
-  }
-
-  bool _checkIsGameOver() {
-    if (_curretTestIndex == _tumblingTestList.length - 1 &&
-        _currentQuestionIndex ==
-            _tumblingTestList[_curretTestIndex].eList.length - 1) {
-      _isGameOver = true;
-    }
-
-    return _isGameOver;
-  }
-
-  _logGameScoreBoard() {
     logger.d({
-      "currentTestIndex": _curretTestIndex,
-      "currentQuestionIndex": _currentQuestionIndex,
-      "totalCorrectCount": _totalCorrectCount,
-      "totalWrongCount": _totalWrongCount,
-      "currentTestCorrectCount": _currentTestCorrectCount,
-      "currentTestWrongCount": _currentTestWrongCount,
-      "isGameOver": _isGameOver,
+      'currentIndex': currentIndex,
+      'currentLevel': currentLevel,
+      'isGameOver': isGameOver,
+      'gameMode': gameMode,
+      "questionLength": level!.totalQuestions,
     });
+
+    notifyListeners();
+  }
+
+  bool _isUserSwipDirectionCorrect(
+    QuestionDirection userSwipDirection,
+    QuestionDirection questionDirection,
+  ) {
+    return userSwipDirection == questionDirection;
+  }
+
+  double calculateLeftEyeSigth() {
+    var value = eyesFinalReport[Eye.left]!.keys.last;
+
+    return _dataSource.getLogMarFromLevel(value);
+  }
+
+  double calculateRightEyeSigth() {
+    var value = eyesFinalReport[Eye.right]!.keys.last;
+
+    return _dataSource.getLogMarFromLevel(value);
   }
 }
 
 final tumblingTestProvider =
     ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
-  return TumblingTestProvider(TumblingTestDataSource());
+  return TumblingTestProvider(TumblingDataSource());
 });

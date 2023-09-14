@@ -7,11 +7,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title = "Eye Care For All",
     this.actions,
     this.showBackButton = true,
+    this.onBackButtonPressed,
   });
 
   final String title;
   final List<Widget>? actions;
   final bool showBackButton;
+  final VoidCallback? onBackButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Icons.chevron_left,
                   size: 34,
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed:
+                    onBackButtonPressed ?? () => Navigator.of(context).pop(),
               )
             : null,
         title: Text(title),

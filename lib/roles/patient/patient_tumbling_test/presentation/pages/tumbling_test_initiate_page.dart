@@ -6,13 +6,14 @@ import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentatio
 
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TumblingTestInitiatePage extends StatelessWidget {
+class TumblingTestInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
   const TumblingTestInitiatePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppBar(
         title: "Tumbling E Test",

@@ -8,6 +8,7 @@ enum ROLE { DOCTOR, PATIENT, VISION_GUARDIAN }
 var role = ROLE.PATIENT;
 var logger = Logger();
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     const ProviderScope(
       child: MyApp(),
