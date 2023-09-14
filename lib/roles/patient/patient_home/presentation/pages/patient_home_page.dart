@@ -28,19 +28,6 @@ class PatientHomePage extends HookWidget {
   static const String routeName = '/patient-home';
   const PatientHomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    var currentItem = useState(MenuItems.home);
-
-    return PatientDrawerPage(
-      mainScreen: getView(currentItem.value),
-      selectedItem: currentItem.value,
-      onSelected: (item) {
-        currentItem.value = item;
-      },
-    );
-  }
-
   getView(MenuItem item) {
     switch (item) {
       case MenuItems.home:
@@ -65,6 +52,19 @@ class PatientHomePage extends HookWidget {
         return const _MainView();
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    var currentItem = useState(MenuItems.home);
+
+    return PatientDrawerPage(
+      mainScreen: getView(currentItem.value),
+      selectedItem: currentItem.value,
+      onSelected: (item) {
+        currentItem.value = item;
+      },
+    );
+  }
 }
 
 class _MainView extends ConsumerWidget {
@@ -72,15 +72,8 @@ class _MainView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(patientHomeProvider);
     return Scaffold(
-      bottomNavigationBar: PatientBottomNavBar(
-        onTap: (index) {
-          model.changeIndex(index);
-          _navigateToPage(index, context);
-        },
-        currentIndex: model.currentIndex,
-      ),
+      bottomNavigationBar: const PatientBottomNavBar(),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
