@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentatio
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
 
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,8 +14,8 @@ class TumblingTestInitiatePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Tumbling E Test",
+      appBar: AppBar(
+        title: const Text("Tumbling E Test"),
         actions: [
           IconButton(
             onPressed: () {},

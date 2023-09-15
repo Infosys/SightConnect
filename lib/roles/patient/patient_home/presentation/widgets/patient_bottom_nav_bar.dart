@@ -1,20 +1,19 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_services/presentation/pages/patient_services_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 
 class PatientBottomNavBar extends HookWidget {
   const PatientBottomNavBar({
+    required this.onSelected,
+    required this.selectedIndex,
     Key? key,
   }) : super(key: key);
+  final int selectedIndex;
+  final Function(int) onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +44,6 @@ class PatientBottomNavBar extends HookWidget {
 
     final primaryColor = Theme.of(context).primaryColor;
 
-    var currentIndex = useState(0);
-
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: Responsive.isMobile(context)
@@ -55,21 +52,21 @@ class PatientBottomNavBar extends HookWidget {
         vertical: AppSize.height(context) * 0.02,
       ),
       child: Card(
-        elevation: 8,
+        elevation: 10,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.klradius * 8),
         ),
         child: Padding(
           padding: Responsive.isMobile(context)
-              ? const EdgeInsets.all(AppSize.kspadding)
+              ? const EdgeInsets.all(AppSize.kspadding + 4)
               : const EdgeInsets.all(AppSize.kmpadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
               5,
               (index) {
-                final isSelected = currentIndex.value == index;
+                final isSelected = selectedIndex == index;
                 final colorFilter = isSelected
                     ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
                     : const ColorFilter.mode(AppColor.kGrey, BlendMode.srcIn);
@@ -77,10 +74,8 @@ class PatientBottomNavBar extends HookWidget {
                 return InkWell(
                   customBorder: const CircleBorder(),
                   onTap: () {
-                    currentIndex.value = index;
-
                     updateScale(index);
-                    _navigateToPage(index, context);
+                    onSelected(index);
                   },
                   child: ColorFiltered(
                     colorFilter: colorFilter,
@@ -111,48 +106,5 @@ class PatientBottomNavBar extends HookWidget {
         ),
       ),
     );
-  }
-
-  _navigateToPage(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientServicesPage(),
-          ),
-        );
-        break;
-      case 2:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const TumblingTestInitiatePage(),
-          ),
-        );
-        break;
-
-      case 3:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientNotificationPage(),
-          ),
-        );
-        break;
-      case 4:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientProfilePage(),
-          ),
-        );
-        break;
-
-      default:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientHomePage(),
-          ),
-        );
-    }
   }
 }

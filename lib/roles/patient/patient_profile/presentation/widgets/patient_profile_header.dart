@@ -42,9 +42,10 @@ class ProfileHeader extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
                 profile["name"] ?? "",
-                style:
-                    applyFiraSansFont(fontSize: 24, fontWeight: FontWeight.w300)
-                        .copyWith(
+                style: applyFiraSansFont(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300,
+                ).copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.normal,
                 ),
@@ -55,18 +56,17 @@ class ProfileHeader extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
                 profile["id"] ?? "",
-                style:
-                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w300)
-                        .copyWith(
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                ).copyWith(
                   color: Colors.white54,
                   fontWeight: FontWeight.normal,
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
+          const SizedBox(height: AppSize.klheight),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
             child: Row(
@@ -116,18 +116,14 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    const SizedBox(
-                      height: AppSize.ksheight,
-                    ),
+                    const SizedBox(height: AppSize.ksheight),
                     Flexible(
                       child: Text(
                         profile["email"] ?? "",
                         softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 14,
-                        ).copyWith(
                           color: Colors.white,
-                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),

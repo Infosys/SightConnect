@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -70,8 +70,8 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
         ? "Right Eye"
         : "Left Eye";
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Eye Scanner - $eye",
+      appBar: AppBar(
+        title: Text("Eye Scanner - $eye"),
       ),
       body: isLoading
           ? Container(

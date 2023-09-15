@@ -1,6 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_drawer/data/model/menu_item.dart';
-import 'package:eye_care_for_all/roles/patient/patient_drawer/presentation/pages/patient_drawer_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/campaigns_list.dart';
@@ -13,72 +11,36 @@ import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/priority_notification_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
-import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_services/presentation/pages/patient_services_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
-import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PatientHomePage extends HookWidget {
-  static const String routeName = '/patient-home';
-  const PatientHomePage({super.key});
-
-  getView(MenuItem item) {
-    switch (item) {
-      case MenuItems.home:
-        return const _MainView();
-      case MenuItems.profile:
-        return const PatientProfilePage();
-      case MenuItems.appointments:
-        return const InternetLostPage();
-      case MenuItems.prescriptions:
-        return const InternetLostPage();
-      case MenuItems.accessibilities:
-        return const InternetLostPage();
-      case MenuItems.about:
-        return const InternetLostPage();
-      case MenuItems.termOfUse:
-        return const InternetLostPage();
-      case MenuItems.privacyPolicy:
-        return const InternetLostPage();
-      case MenuItems.help:
-        return const InternetLostPage();
-      default:
-        return const _MainView();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var currentItem = useState(MenuItems.home);
-
-    if (!kIsWeb) {
-      return PatientDrawerPage(
-        mainScreen: getView(currentItem.value),
-        selectedItem: currentItem.value,
-        onSelected: (item) {
-          currentItem.value = item;
-        },
-      );
-    } else {
-      return const _MainView();
-    }
-  }
-}
-
-class _MainView extends ConsumerWidget {
-  const _MainView();
+class MainView extends ConsumerWidget {
+  const MainView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      bottomNavigationBar: const PatientBottomNavBar(),
+      bottomNavigationBar: PatientBottomNavBar(
+        onSelected: (index) {
+          ref.read(patientHomeProvider).changeIndex(index);
+        },
+        selectedIndex: ref.watch(patientHomeProvider).currentIndex,
+      ),
+      body: ref
+          .read(patientHomeProvider)
+          .pages[ref.watch(patientHomeProvider).currentIndex],
+    );
+  }
+}
+
+class PatientHomePage extends ConsumerWidget {
+  const PatientHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -140,47 +102,5 @@ class _MainView extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  _navigateToPage(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientServicesPage(),
-          ),
-        );
-        break;
-      case 2:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const TumblingTestInitiatePage(),
-          ),
-        );
-        break;
-
-      case 3:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => const PatientNotificationPage()),
-        );
-        break;
-      case 4:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientProfilePage(),
-          ),
-        );
-        break;
-
-      default:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const PatientHomePage(),
-          ),
-        );
-    }
   }
 }

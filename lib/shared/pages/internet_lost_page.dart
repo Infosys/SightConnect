@@ -5,9 +5,29 @@ class InternetLostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: Text("Internet Lost"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.wifi_off,
+              size: 100,
+            ),
+            const Center(
+              child: Text("No Internet Connection"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FilledButton(
+              onPressed: () {},
+              child: const Text("Retry"),
+            ),
+          ],
+        ),
       ),
     );
   }

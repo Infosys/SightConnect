@@ -1,13 +1,14 @@
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/widgets/patient_notification_card.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:flutter/material.dart';
 
-class PatientNotificationPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class PatientNotificationPage extends ConsumerWidget {
   static const String routeName = "/patient-notification-page";
   const PatientNotificationPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var data = [
       {
         "title": "Patient Report Alert",
@@ -30,8 +31,8 @@ class PatientNotificationPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Notifications",
+      appBar: AppBar(
+        title: const Text('Notifications'),
         actions: [
           IconButton(
             onPressed: () {},

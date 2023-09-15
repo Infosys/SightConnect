@@ -70,7 +70,7 @@ class TopReadingCard extends ConsumerWidget {
               child: LinearPercentIndicator(
                 padding: const EdgeInsets.all(2),
                 lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                percent: ((model.currentLevel! + 1) / maxLevel).clamp(0, 1),
+                percent: ((model.currentLevel!) / maxLevel).clamp(0, 1),
                 barRadius: const Radius.circular(AppSize.klradius),
                 progressColor: AppColor.kGreen,
               ),

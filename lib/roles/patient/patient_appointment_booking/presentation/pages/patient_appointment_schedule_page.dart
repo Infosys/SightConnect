@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/widgets/appointment_booking_calendar.dart';
@@ -13,15 +13,16 @@ class PatientAppointmentSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
-      appBar: CustomAppBar(
-        title: 'Appointment Booking',
-        showBackButton: false,
-        actions: [
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Appointment Booking',
+        ),
+        actions: const [
           Icon(Icons.more_vert),
         ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             Padding(

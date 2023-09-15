@@ -1,27 +1,24 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TumblingResultReportPage extends StatelessWidget {
+class TumblingResultReportPage extends ConsumerWidget {
   static const String routeName = "/tumbling-result-report";
   const TumblingResultReportPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Tumbling E Test - Completed",
-        onBackButtonPressed: () {
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        },
+      appBar: AppBar(
+        title: const Text("Tumbling E Test - Completed"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -171,6 +168,7 @@ class TumblingResultReportPage extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
+                          ref.read(patientHomeProvider).changeIndex(0);
                           Navigator.of(context)
                               .popUntil((route) => route.isFirst);
                         },

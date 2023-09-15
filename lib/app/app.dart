@@ -1,4 +1,6 @@
-import 'package:eye_care_for_all/shared/pages/auth_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:eye_care_for_all/core/providers/internet_provider.dart';
+import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -33,6 +35,21 @@ class MyApp extends ConsumerWidget {
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
+          builder: (context, child) {
+            return ref.watch(internetProvider).when(
+                  data: (value) {
+                    if (value == ConnectivityResult.none) {
+                      return const InternetLostPage();
+                    } else {
+                      return child!;
+                    }
+                  },
+                  loading: () => const InternetLostPage(),
+                  error: (error, stackTrace) {
+                    return const InternetLostPage();
+                  },
+                );
+          },
         ),
       ),
     );

@@ -51,13 +51,20 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: AppColor.kScaffold,
         foregroundColor: AppColor.kBlack,
+        iconTheme: IconThemeData(
+          color: AppColor.kBlack,
+          size: Responsive.isMobile(context) ? 24 : 32,
+        ),
         actionsIconTheme: IconThemeData(
           color: AppColor.kBlack,
           size: Responsive.isMobile(context) ? 24 : 32,
         ),
-        titleTextStyle: applyFiraSansFont(fontWeight: FontWeight.w500),
+        titleTextStyle: applyFiraSansFont(
+          fontWeight: FontWeight.w500,
+        ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
