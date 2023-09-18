@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/p
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_services/presentation/pages/patient_services_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/patient_triage_steps_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +22,7 @@ class PatientHomeProvider extends ChangeNotifier {
   List<Widget> pages = [
     const PatientHomePage(),
     const PatientServicesPage(),
-    const TumblingTestInitiatePage(),
+    const PatientTriageStepsPage(),
     const PatientNotificationPage(),
     const PatientProfilePage()
   ];
