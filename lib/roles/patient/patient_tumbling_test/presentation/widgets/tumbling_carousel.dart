@@ -28,7 +28,7 @@ class TumblingCarousel extends HookConsumerWidget {
           carouselController: carouselController.value,
           itemCount: 4,
           options: CarouselOptions(
-            aspectRatio: 1.8,
+            aspectRatio: 1.77,
             viewportFraction: 1.0,
             initialPage: currentIndex.value,
             enableInfiniteScroll: false,
