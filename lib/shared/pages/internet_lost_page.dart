@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
+// import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:flutter/material.dart';
 
 class InternetLostPage extends StatelessWidget {
