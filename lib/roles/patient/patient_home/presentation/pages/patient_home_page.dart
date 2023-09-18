@@ -22,15 +22,24 @@ class MainView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      bottomNavigationBar: PatientBottomNavBar(
-        onSelected: (index) {
-          ref.read(patientHomeProvider).changeIndex(index);
-        },
-        selectedIndex: ref.watch(patientHomeProvider).currentIndex,
+      body: Stack(
+        children: [
+          ref
+              .read(patientHomeProvider)
+              .pages[ref.watch(patientHomeProvider).currentIndex],
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: PatientBottomNavBar(
+              onSelected: (index) {
+                ref.read(patientHomeProvider).changeIndex(index);
+              },
+              selectedIndex: ref.watch(patientHomeProvider).currentIndex,
+            ),
+          ),
+        ],
       ),
-      body: ref
-          .read(patientHomeProvider)
-          .pages[ref.watch(patientHomeProvider).currentIndex],
     );
   }
 }

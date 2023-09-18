@@ -1,9 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:eye_care_for_all/core/providers/auth_page_provider.dart';
-import 'package:eye_care_for_all/core/providers/internet_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/pages/patient_home_page.dart';
-import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
