@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_add_member_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +39,6 @@ class TriageMemberSelectionPage extends HookWidget {
       backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: const Text('Select Member'),
-        leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       floatingActionButton: Theme(
         data: Theme.of(context).copyWith(
@@ -103,8 +98,7 @@ class TriageMemberSelectionPage extends HookWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const TriageMemberSelectionPage(),
-                // fullscreenDialog: true,
+                builder: (context) => const TriageEyeAssessmentPage(),
               ),
             );
           },
@@ -112,71 +106,69 @@ class TriageMemberSelectionPage extends HookWidget {
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-          child: ListView.builder(
-            itemCount: people.length,
-            itemBuilder: (context, index) {
-              final person = people[index];
-              return Padding(
-                padding:
-                    const EdgeInsets.all(8.0), // Add padding for separation
-                child: Container(
-                  decoration: BoxDecoration(
-                    //give circle border
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: appShadow(),
-                    color: AppColor.kWhite,
-                  ), // Add elevation for a card-like appearance
-                  child: RadioListTile<int>(
-                    contentPadding: EdgeInsets.zero,
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          person['image'],
-                          height: 40,
-                          width: 40,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              person['name'],
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              person['about'],
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.kGrey,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    // subtitle: Text(person['about']),
-                    value: index,
-                    groupValue: selectedValue.value,
-                    onChanged: (value) {
-                      selectedValue.value = value!;
-                    },
-                  ),
+        padding: const EdgeInsets.all(8),
+        child: ListView.builder(
+          itemCount: people.length,
+          itemBuilder: (context, index) {
+            final person = people[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: appShadow(),
+                  color: AppColor.kWhite,
                 ),
-              );
-            },
-          )),
+                child: RadioListTile<int>(
+                  contentPadding: EdgeInsets.zero,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        person['image'],
+                        height: 40,
+                        width: 40,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            person['name'],
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            person['about'],
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.kGrey,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  value: index,
+                  groupValue: selectedValue.value,
+                  onChanged: (value) {
+                    selectedValue.value = value!;
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -11,12 +11,6 @@ class TriageStepsIntroPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Report Eye Problems'),
-        leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
@@ -31,7 +25,6 @@ class TriageStepsIntroPage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const TriageMemberSelectionPage(),
-                // fullscreenDialog: true,
               ),
             );
           },

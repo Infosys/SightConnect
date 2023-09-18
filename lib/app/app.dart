@@ -35,21 +35,21 @@ class MyApp extends ConsumerWidget {
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
-          builder: (context, child) {
-            return ref.watch(internetProvider).when(
-                  data: (value) {
-                    if (value == ConnectivityResult.none) {
-                      return const InternetLostPage();
-                    } else {
-                      return child!;
-                    }
-                  },
-                  loading: () => const InternetLostPage(),
-                  error: (error, stackTrace) {
-                    return const InternetLostPage();
-                  },
-                );
-          },
+          // builder: (context, child) {
+          //   return ref.watch(internetProvider).when(
+          //         data: (value) {
+          //           if (value == ConnectivityResult.none) {
+          //             return const InternetLostPage();
+          //           } else {
+          //             return child!;
+          //           }
+          //         },
+          //         loading: () => const InternetLostPage(),
+          //         error: (error, stackTrace) {
+          //           return const InternetLostPage();
+          //         },
+          //       );
+          // },
         ),
       ),
     );
