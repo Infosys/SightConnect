@@ -15,21 +15,27 @@ class TumblingTestInitiatePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tumbling E Test"),
+        title: Row(
+          children: [
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
+                ),
+              ),
+              onPressed: () {},
+              child: const Text("Step 2 of 3"),
+            ),
+            const SizedBox(width: AppSize.kmwidth),
+            const Flexible(child: Text("Tumbling E Test")),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.question_mark,
-              color: AppColor.kGrey,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              // showAccessibilitySettings(context, ref);
-            },
-            icon: const Icon(
-              Icons.settings,
               color: AppColor.kGrey,
             ),
           ),

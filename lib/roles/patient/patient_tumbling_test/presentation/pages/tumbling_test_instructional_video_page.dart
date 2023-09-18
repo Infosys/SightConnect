@@ -28,8 +28,23 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
     }, []);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Tumbling Test",
+        title: Row(
+          children: [
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
+                ),
+              ),
+              onPressed: () {},
+              child: const Text("Step 2 of 3"),
+            ),
+            const SizedBox(width: AppSize.kmwidth),
+            const Text(
+              "Tumbling Test",
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: Padding(
@@ -42,6 +57,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const TumblingTestInitiatePage(),
+                fullscreenDialog: true,
               ),
             );
           },
