@@ -21,7 +21,7 @@ class PatientHomeProvider extends ChangeNotifier {
   }
 
   List<Widget> pages = [
-    const PatientTriageEyeScanIntroPage(),
+    const PatientHomePage(),
     const PatientServicesPage(),
     const PatientTriageStepsPage(),
     const PatientNotificationPage(),

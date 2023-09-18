@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import './../../data/local/fake_data_source_cataract.dart';
 
-var patientEyeScanProvider = ChangeNotifierProvider(
+var patientEyeScanProvider = ChangeNotifierProvider.autoDispose(
   (ref) => EyeScanProvider(),
 );
 

@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_intro_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_models.dart';
 
@@ -12,8 +13,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../pages/tumling_result_report_page.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
   const SwipeGestureCard({super.key});
@@ -134,6 +133,13 @@ class SwipeGestureCard extends HookConsumerWidget {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const PatientTriageEyeScanIntroPage(),
+                      fullscreenDialog: true,
+                    ),
+                  );
                 },
                 child: const Text("Proceed"),
               ),

@@ -99,6 +99,7 @@ class TriageMemberSelectionPage extends HookWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const TriageEyeAssessmentPage(),
+                fullscreenDialog: true,
               ),
             );
           },
