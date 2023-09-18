@@ -145,7 +145,8 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
             title: Text(
               'Tests to Perform',
               style: applyFiraSansFont(
-                fontSize: 18,
+                fontSize: 24,
+                fontWeight: FontWeight.w700
               ),
             ),
             content: Text(
@@ -160,7 +161,11 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text("Proceed"),
+                child: Text("Proceed",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.kPrimary
+                ),),
               ),
             ],
           ),

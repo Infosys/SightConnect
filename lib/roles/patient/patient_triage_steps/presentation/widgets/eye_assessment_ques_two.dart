@@ -8,11 +8,11 @@ List<Map<String, dynamic>> symptoms = [
   {'one': 'Coloured Haloes', 'two': '', "isSelected": false},
   {'one': 'Curtain like appearances', 'two': '', "isSelected": false},
   {'one': 'Decreased vision', 'two': '', "isSelected": false},
-  {'one': 'Double vision', 'two': 'Chronic condition', "isSelected": false},
+  {'one': 'Double vision\nChronic condition', 'two': '', "isSelected": false},
   {'one': 'Difficulty looking at light', 'two': '', "isSelected": false},
   {'one': 'Waviness of vision', 'two': '', "isSelected": false},
   {'one': 'Flashes of light', 'two': '', "isSelected": false},
-  {'one': 'Floaters', 'two': 'seeing dark spots', "isSelected": false},
+  {'one': 'Floaters\nseeing dark spots', 'two': '', "isSelected": false},
   {'one': 'Loss of field of vision', 'two': '', "isSelected": false},
 ];
 
@@ -27,6 +27,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,12 +39,18 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                 foregroundColor: AppColor.kBlue,
                 visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kmpadding,
+                  horizontal: AppSize.kspadding + 2,
                 ),
               ),
               onPressed: () {},
-              child: const Text("Step 1 of 3"),
+              child: Text(
+                "Step 1 of 3",
+                style: applyRobotoFont(
+                  color: AppColor.kPrimary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Padding(
@@ -61,7 +68,11 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("2. Are you facing sudden loss of vision?"),
+              Text(
+                "2. Is your vision not clear or disturbed? Choose the symptoms you are facing.",
+                style: applyFiraSansFont(
+                    fontSize: 16, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(height: 40),
               GridView.builder(
                 shrinkWrap: true,
@@ -70,7 +81,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                 itemCount: symptoms.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 2,
+                  childAspectRatio: 2.5,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -89,20 +100,20 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                           color: symptoms[index]['isSelected']
                               ? AppColor.kPrimary
                               : AppColor.kGrey,
-                          width: 2,
+                          width: 1.5,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: AppSize.width(context) * 0.4,
-                      height: AppSize.height(context) * 0.08,
                       child: Center(
                         child: Text(
-                          "${symptoms[index]['one']}\n${symptoms[index]['two']}",
+                          "${symptoms[index]['one']}",
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                             color: symptoms[index]['isSelected']
                                 ? AppColor.kPrimary
-                                : AppColor.kGrey,
+                                : AppColor.kBlack,
                           ),
                         ),
                       ),

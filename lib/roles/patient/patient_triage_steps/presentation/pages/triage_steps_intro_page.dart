@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -9,6 +10,7 @@ class TriageStepsIntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: const Text('Report Eye Problems'),
       ),

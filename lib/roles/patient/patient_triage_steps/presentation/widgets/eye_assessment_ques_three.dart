@@ -22,7 +22,7 @@ List<Map<String, dynamic>> symptoms = [
   },
   {
     'one': 'White spots in the black part of the eye',
-    'two': 'Chronic condition',
+    'two': '',
     "isSelected": false,
   },
   {
@@ -42,7 +42,7 @@ List<Map<String, dynamic>> symptoms = [
   },
   {
     'one': 'Foreign body sensation',
-    'two': 'seeing dark spots',
+    'two': '',
     "isSelected": false,
   },
   {
@@ -67,7 +67,7 @@ List<Map<String, dynamic>> symptoms = [
   },
   {
     'one': 'Drooping of eyes',
-    'two': 'Chronic condition',
+    'two': '',
     "isSelected": false,
   },
   {
@@ -94,6 +94,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -102,15 +103,22 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
           children: [
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColor.kBlue,
+                foregroundColor: AppColor.kPrimary,
                 visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kmpadding,
+                  horizontal: AppSize.kspadding + 2,
+                  vertical: 0,
                 ),
               ),
               onPressed: () {},
-              child: const Text("Step 1 of 3"),
+              child: Text(
+                "Step 1 of 3",
+                style: applyRobotoFont(
+                  color: AppColor.kPrimary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Padding(
@@ -128,8 +136,11 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                  "3. Are you experiencing any of the below changes in your eye?"),
+              Text(
+                "3. Are you experiencing any of the below changes in your eye?",
+                style: applyFiraSansFont(
+                    fontSize: 16, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(height: 40),
               GridView.builder(
                 shrinkWrap: true,
@@ -138,7 +149,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                 itemCount: symptoms.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 2,
+                  childAspectRatio: 2.5,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -157,20 +168,20 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                           color: symptoms[index]['isSelected']
                               ? AppColor.kPrimary
                               : AppColor.kGrey,
-                          width: 2,
+                          width: 1.5,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: AppSize.width(context) * 0.4,
-                      height: AppSize.height(context) * 0.08,
                       child: Center(
                         child: Text(
-                          "${symptoms[index]['one']}\n${symptoms[index]['two']}",
+                          "${symptoms[index]['one']}",
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                             color: symptoms[index]['isSelected']
                                 ? AppColor.kPrimary
-                                : AppColor.kGrey,
+                                : AppColor.kBlack,
                           ),
                         ),
                       ),

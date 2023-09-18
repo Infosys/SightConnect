@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_intro_page.dart';
@@ -116,18 +117,33 @@ class SwipeGestureCard extends HookConsumerWidget {
           child: AlertDialog.adaptive(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Text(
-              'Tumbling E Test is Done',
-              style: applyFiraSansFont(
-                fontSize: 18,
-              ),
+            title: Image.asset(
+              AppImages.checkMark,
+              height: 40,
+              width: 40,
+              color: AppColor.kGreen,
             ),
-            content: Text(
-              "You need to capture your eye photos next.",
-              textAlign: TextAlign.justify,
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Tumbling E Test is Done',
+                  style: applyFiraSansFont(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "You need to capture your eye photos next.",
+                  textAlign: TextAlign.justify,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
             actions: [
               TextButton(

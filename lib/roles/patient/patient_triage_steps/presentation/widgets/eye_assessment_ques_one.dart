@@ -12,6 +12,7 @@ class EyeAssessementQuesOne extends HookWidget {
   Widget build(BuildContext context) {
     final colorState = useState<int>(-1);
     return Scaffold(
+      backgroundColor: AppColor.kScaffold,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -23,12 +24,18 @@ class EyeAssessementQuesOne extends HookWidget {
                   foregroundColor: AppColor.kBlue,
                   visualDensity: VisualDensity.compact,
                   padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
-                    vertical: AppSize.kmpadding,
+                    horizontal: AppSize.kspadding + 2,
                   ),
                 ),
                 onPressed: () {},
-                child: const Text("Step 1 of 3"),
+                child: Text(
+                  "Step 1 of 3",
+                  style: applyRobotoFont(
+                    color: AppColor.kPrimary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               const SizedBox(width: AppSize.kmwidth),
               const Padding(
@@ -45,13 +52,24 @@ class EyeAssessementQuesOne extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("1. Are you facing sudden loss of vision?"),
+              Text(
+                "1. Are you facing sudden loss of vision?",
+                style: applyFiraSansFont(
+                    fontSize: 16, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(
                 height: 40,
               ),
-              Wrap(
-                spacing: 15,
-                runSpacing: 15,
+              GridView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -63,11 +81,19 @@ class EyeAssessementQuesOne extends HookWidget {
                               color: colorState.value == 0
                                   ? AppColor.kPrimary
                                   : AppColor.kGrey,
-                              width: 2),
+                              width: 1.5),
                           borderRadius: BorderRadius.circular(10)),
-                      width: AppSize.width(context) * 0.4,
-                      height: AppSize.height(context) * 0.08,
-                      child: const Center(child: Text("No")),
+                      child: Center(
+                          child: Text(
+                        "No",
+                        textAlign: TextAlign.center,
+                        style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: colorState.value == 0
+                                ? AppColor.kPrimary
+                                : AppColor.kBlack),
+                      )),
                     ),
                   ),
                   GestureDetector(
@@ -80,17 +106,25 @@ class EyeAssessementQuesOne extends HookWidget {
                               color: colorState.value == 1
                                   ? AppColor.kPrimary
                                   : AppColor.kGrey,
-                              width: 2),
+                              width: 1.5),
                           borderRadius: BorderRadius.circular(10)),
-                      width: AppSize.width(context) * 0.4,
-                      height: AppSize.height(context) * 0.08,
-                      child: const Center(child: Text("Yes")),
+                      child: Center(
+                          child: Text(
+                        "Yes",
+                        textAlign: TextAlign.center,
+                        style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: colorState.value == 1
+                                ? AppColor.kPrimary
+                                : AppColor.kBlack),
+                      )),
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 25,
+                height: 15,
               ),
               ElevatedButton(
                 style: ButtonStyle(

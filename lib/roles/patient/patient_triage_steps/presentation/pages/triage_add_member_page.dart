@@ -24,6 +24,7 @@ class TriageAddMemberPage extends HookWidget {
     });
 
     return Scaffold(
+      backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: const Text("Add Member"),
       ),
