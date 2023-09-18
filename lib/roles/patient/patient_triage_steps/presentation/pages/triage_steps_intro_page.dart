@@ -1,4 +1,6 @@
-import 'package:eye_care_for_all/roles/patient/patient_appointment_booking/presentation/pages/patient_appointment_booking_page.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class TriageStepsIntroPage extends StatelessWidget {
@@ -8,28 +10,58 @@ class TriageStepsIntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Triage Steps'),
-      ),
+          title: const Text('Report Eye Problems'),
+          leading: IconButton(
+            icon: const Icon(Icons.chevron_left),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.1,
-          vertical: 80,
+          horizontal: AppSize.width(context) * AppSize.knavbarwidth,
+          vertical: AppSize.height(context) * AppSize.knavbarheight,
         ),
         child: ElevatedButton(
+          style: const ButtonStyle(
+            visualDensity: VisualDensity.comfortable,
+          ),
           onPressed: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => const PatientAppointmentBookingPage(),
-            //     fullscreenDialog: true,
-            //   ),
-            // );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const TriageMemberSelectionPage(),
+                // fullscreenDialog: true,
+              ),
+            );
           },
-          child: const Text('Next'),
+          child: const Text('Proceed'),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "How to report eye problems?",
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\n\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

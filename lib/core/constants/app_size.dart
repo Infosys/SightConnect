@@ -23,6 +23,9 @@ class AppSize {
   static const double kmelevation = 16.0;
   static const double klelevation = 24.0;
 
+  static const double knavbarwidth = 0.1;
+  static const double knavbarheight = 0.1;
+  
   static double width(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
