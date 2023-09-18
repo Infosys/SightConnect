@@ -61,7 +61,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
               ),
             );
           },
-          child: const Text("Next"),
+          child: const Text("Start"),
         ),
       ),
       body: SingleChildScrollView(
@@ -140,60 +140,29 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: AlertDialog.adaptive(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             title: Text(
-              'Terms of Use',
+              'Tests to Perform',
               style: applyFiraSansFont(
                 fontSize: 18,
               ),
             ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Legal disclaimer: The content on this application is presented for informational purposes only.\n\nNever disregard professional medical advice from your healthcare provider, or delay in seeking it, because of using this application.\n\nThe developer of this app, cannot be held liable for any damages of any kind related to the usage of this software.\n\nREMEMBER: It’s people who resolve vision problems. Our technology is designed to help them do that. Full terms of use",
-                    textAlign: TextAlign.justify,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Full terms of use",
-                      textAlign: TextAlign.justify,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
-                  Consumer(
-                    builder: (context, ref, child) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Accept'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Decline'),
-                          ),
-                        ],
-                      );
-                    },
-                  )
-                ],
+            content: Text(
+              "Thanks for answering the questions. Based on the initial assessment you need to perform the below tests.\n\n1. Tumbling E\n2. Eye Photos\n\nYou will be guided step-by-step to perform each test. Follow instructions and perform the steps as instructed.",
+              textAlign: TextAlign.justify,
+              style: applyRobotoFont(
+                fontSize: 14,
               ),
             ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Proceed"),
+              ),
+            ],
           ),
         );
       },

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -31,11 +33,12 @@ class SwipeGestureCard extends HookConsumerWidget {
 
         logger.d(next.eyesFinalReport);
 
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const TumblingResultReportPage(),
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => const TumblingResultReportPage(),
+        //   ),
+        // );
+        _showSuccessTemp(context);
       }
     });
 
@@ -101,6 +104,43 @@ class SwipeGestureCard extends HookConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSuccessTemp(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog.adaptive(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Text(
+              'Tumbling E Test is Done',
+              style: applyFiraSansFont(
+                fontSize: 18,
+              ),
+            ),
+            content: Text(
+              "You need to capture your eye photos next.",
+              textAlign: TextAlign.justify,
+              style: applyRobotoFont(
+                fontSize: 14,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Proceed"),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
