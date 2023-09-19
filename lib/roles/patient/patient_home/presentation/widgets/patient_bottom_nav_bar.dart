@@ -39,7 +39,7 @@ class PatientBottomNavBar extends HookWidget {
       AppIcon.navService,
       AppIcon.navAcuity,
       AppIcon.navNotification,
-      AppIcon.navProfile,
+      AppIcon.navDrawer
     ];
 
     final primaryColor = Theme.of(context).primaryColor;

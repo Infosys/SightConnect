@@ -12,7 +12,7 @@ class EyeAssessementQuesOne extends HookWidget {
   Widget build(BuildContext context) {
     final colorState = useState<int>(-1);
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
+        backgroundColor: AppColor.kScaffold,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -77,23 +77,26 @@ class EyeAssessementQuesOne extends HookWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(
-                              color: colorState.value == 0
-                                  ? AppColor.kPrimary
-                                  : AppColor.kGrey,
-                              width: 1.5),
-                          borderRadius: BorderRadius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(
+                          color: colorState.value == 0
+                              ? AppColor.kPrimary
+                              : AppColor.kGrey.withOpacity(0.5),
+                          width: 1.2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Center(
-                          child: Text(
-                        "No",
-                        textAlign: TextAlign.center,
-                        style: applyRobotoFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                        child: Text(
+                          "No",
+                          textAlign: TextAlign.center,
+                          style: applyRobotoFont(
                             color: colorState.value == 0
                                 ? AppColor.kPrimary
-                                : AppColor.kBlack),
-                      )),
+                                : AppColor.kBlack,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -102,23 +105,24 @@ class EyeAssessementQuesOne extends HookWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
+                          color: Colors.white,
                           border: Border.all(
-                              color: colorState.value == 1
-                                  ? AppColor.kPrimary
-                                  : AppColor.kGrey,
-                              width: 1.5),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                          child: Text(
-                        "Yes",
-                        textAlign: TextAlign.center,
-                        style: applyRobotoFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
                             color: colorState.value == 1
                                 ? AppColor.kPrimary
-                                : AppColor.kBlack),
-                      )),
+                                : AppColor.kGrey.withOpacity(0.5),
+                            width: 1.2,
+                          ),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                        child: Text(
+                          "Yes",
+                          textAlign: TextAlign.center,
+                          style: applyRobotoFont(
+                              color: colorState.value == 1
+                                  ? AppColor.kPrimary
+                                  : AppColor.kBlack),
+                        ),
+                      ),
                     ),
                   ),
                 ],

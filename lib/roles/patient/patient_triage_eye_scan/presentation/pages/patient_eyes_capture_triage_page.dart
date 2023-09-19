@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_not_found.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
@@ -145,7 +146,15 @@ class _PatientEyeCaptureTriagePageState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Success"),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Image.asset(
+          AppImages.checkMark,
+          height: 40,
+          width: 40,
+          color: AppColor.kGreen,
+        ),
         content: const Text("Your eye scan is completed for Right eye."),
         actions: [
           TextButton(

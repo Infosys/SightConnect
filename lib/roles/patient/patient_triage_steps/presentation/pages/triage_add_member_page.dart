@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_eye_assessment_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_triage_steps/presentation/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -64,13 +63,14 @@ class TriageAddMemberPage extends HookWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                            child: Text(
-                          "Necessary Details",
-                          style: applyFiraSansFont(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
+                          child: Text(
+                            "Necessary Details",
+                            style: applyFiraSansFont(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        )),
+                        ),
                       ],
                     ),
                     Padding(
@@ -87,7 +87,9 @@ class TriageAddMemberPage extends HookWidget {
                                     horizontal: 10, vertical: 10),
                                 focusedBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 1.0, color: AppColor.kPrimary),
+                                    width: 1.0,
+                                    color: AppColor.kPrimary,
+                                  ),
                                 ),
                                 labelText: "Name",
                                 labelStyle: applyRobotoFont(
@@ -167,7 +169,9 @@ class TriageAddMemberPage extends HookWidget {
                                     horizontal: 10, vertical: 10),
                                 focusedBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 1.0, color: AppColor.kPrimary),
+                                    width: 1.0,
+                                    color: AppColor.kPrimary,
+                                  ),
                                 ),
                                 labelText: "Contact Number",
                                 labelStyle: applyRobotoFont(
@@ -201,21 +205,24 @@ class TriageAddMemberPage extends HookWidget {
                 color: AppColor.kWhite,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Row(children: [
-                Text(
-                  'Additional Details',
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+              child: Row(
+                children: [
+                  Text(
+                    'Additional Details',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                IconButton(
+                  const Spacer(),
+                  IconButton(
                     onPressed: () {},
                     icon: const Icon(
                       Icons.keyboard_arrow_down_sharp,
-                    ))
-              ]),
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],

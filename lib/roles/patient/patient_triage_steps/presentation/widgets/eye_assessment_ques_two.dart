@@ -96,11 +96,12 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
+                        color: Colors.white,
                         border: Border.all(
                           color: symptoms[index]['isSelected']
                               ? AppColor.kPrimary
-                              : AppColor.kGrey,
-                          width: 1.5,
+                              : AppColor.kGrey.withOpacity(0.5),
+                          width: 1.2,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -109,8 +110,6 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                           "${symptoms[index]['one']}",
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
                             color: symptoms[index]['isSelected']
                                 ? AppColor.kPrimary
                                 : AppColor.kBlack,

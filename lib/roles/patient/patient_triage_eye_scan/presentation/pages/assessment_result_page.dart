@@ -1,15 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentResultPage extends StatelessWidget {
+class AssessmentResultPage extends ConsumerWidget {
   const AssessmentResultPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List nearByVisionCenter = [
       {
         "name": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
@@ -143,9 +145,10 @@ class AssessmentResultPage extends StatelessWidget {
                 const Text(
                   "See All",
                   style: TextStyle(
-                      fontSize: 14,
-                      color: AppColor.kPrimary,
-                      fontWeight: FontWeight.w600),
+                    fontSize: 14,
+                    color: AppColor.kPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -156,80 +159,81 @@ class AssessmentResultPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: nearByVisionCenter
-                    .map((e) => Container(
-                          padding: const EdgeInsets.all(
-                            AppSize.kmpadding,
-                          ),
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: AppColor.kWhite,
-                            borderRadius:
-                                BorderRadius.circular(AppSize.ksradius),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColor.kPrimary.withOpacity(0.1),
-                                blurRadius: 10,
+                    .map(
+                      (e) => Container(
+                        padding: const EdgeInsets.all(
+                          AppSize.kmpadding,
+                        ),
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColor.kWhite,
+                          borderRadius: BorderRadius.circular(AppSize.ksradius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColor.kPrimary.withOpacity(0.1),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              e["name"],
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                e["name"],
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                            ),
+                            const SizedBox(
+                              height: AppSize.klheight,
+                            ),
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  AppIcon.location,
+                                  height: 16,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: AppSize.klheight,
-                              ),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    AppIcon.location,
-                                    height: 16,
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  e["location"],
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: const Color(0xff333333),
                                   ),
-                                  const SizedBox(
-                                    width: 8,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: AppSize.ksheight,
+                            ),
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  AppIcon.call,
+                                  height: 16,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  e["phone"],
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: const Color(0xff333333),
                                   ),
-                                  Text(
-                                    e["location"],
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      color: const Color(0xff333333),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: AppSize.ksheight,
-                              ),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    AppIcon.call,
-                                    height: 16,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    e["phone"],
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      color: const Color(0xff333333),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ))
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ),
@@ -264,7 +268,11 @@ class AssessmentResultPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        ref.read(patientHomeProvider).changeIndex(0);
+                      },
                       child: const Text("Home"),
                     ),
                   ),

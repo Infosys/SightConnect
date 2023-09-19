@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
@@ -11,8 +13,10 @@ import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/priority_notification_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
+import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,7 +37,11 @@ class MainView extends ConsumerWidget {
             right: 0,
             child: PatientBottomNavBar(
               onSelected: (index) {
-                ref.read(patientHomeProvider).changeIndex(index);
+                if (index == 4) {
+                  ZoomDrawer.of(context)!.toggle();
+                } else {
+                  ref.read(patientHomeProvider).changeIndex(index);
+                }
               },
               selectedIndex: ref.watch(patientHomeProvider).currentIndex,
             ),
@@ -51,22 +59,24 @@ class PatientHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            ZoomDrawer.of(context)!.toggle();
-          },
-          icon: const Icon(Icons.menu),
-        ),
         title: const Text(
           "Eye Care for All",
         ),
         actions: [
-          CircleAvatar(
-            radius: 20,
-            backgroundColor: Theme.of(context).primaryColor,
-            child: const CircleAvatar(
-              radius: 18,
-              backgroundImage: AssetImage('assets/images/profile_image.png'),
+          InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const PatientNotificationPage(),
+              ));
+            },
+            child: CircleAvatar(
+              radius: 20,
+              backgroundColor: Theme.of(context).primaryColor,
+              child: const CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage('assets/images/profile_image.png'),
+              ),
             ),
           ),
           const SizedBox(
