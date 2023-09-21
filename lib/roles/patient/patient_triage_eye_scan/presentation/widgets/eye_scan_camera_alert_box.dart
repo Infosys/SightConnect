@@ -31,7 +31,10 @@ class EyeScanCameraAlertBox extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () => onOkCallBack ?? Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            onOkCallBack?.call();
+          },
           child: const Text("OK"),
         ),
       ],

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
@@ -8,43 +9,65 @@ class EyeScanCameraControllers extends StatelessWidget {
     this.onCapture,
     this.onSwitchCamera,
     this.onFlash,
-    this.isFlashOn = false,
+    this.flashMode,
   });
   final VoidCallback? onCapture;
   final VoidCallback? onSwitchCamera;
   final VoidCallback? onFlash;
-  final bool isFlashOn;
+  final FlashMode? flashMode;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      decoration: BoxDecoration(
-        color: AppColor.black.withOpacity(0.7),
+      padding: const EdgeInsets.all(AppSize.klpadding),
+      decoration: const BoxDecoration(
+        color: AppColor.black,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          IconButton(
-            onPressed: onFlash,
-            icon: Icon(
-              isFlashOn ? Icons.flash_on : Icons.flash_off,
-              color: AppColor.white,
+          InkWell(
+            onTap: onFlash,
+            child: Container(
+              padding: const EdgeInsets.all(AppSize.kspadding),
+              decoration: const BoxDecoration(
+                color: AppColor.darkGrey,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                flashMode == FlashMode.off
+                    ? Icons.flash_off_outlined
+                    : Icons.flash_on_outlined,
+                color: AppColor.white,
+              ),
             ),
           ),
-          IconButton(
-            onPressed: onCapture,
-            icon: const Icon(
-              Icons.camera,
-              size: 40,
-              color: AppColor.white,
+          InkWell(
+            onTap: onCapture,
+            child: Container(
+              padding: const EdgeInsets.all(AppSize.kspadding),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.camera,
+                size: 50,
+                color: AppColor.white,
+              ),
             ),
           ),
-          IconButton(
-            onPressed: onSwitchCamera,
-            icon: const Icon(
-              Icons.camera_alt,
-              color: AppColor.white,
+          InkWell(
+            onTap: onSwitchCamera,
+            child: Container(
+              padding: const EdgeInsets.all(AppSize.kspadding),
+              decoration: const BoxDecoration(
+                color: AppColor.darkGrey,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.cameraswitch_outlined,
+                color: AppColor.white,
+              ),
             ),
           ),
         ],

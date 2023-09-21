@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -103,13 +104,21 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(AppSize.kmpadding),
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => const PatientEyeCaptureTriagePage(),
-                  ),
-                );
+              onPressed: () async {
+                var cameras = await availableCameras();
+                if (cameras.isEmpty) {
+                  return;
+                }
+                if (context.mounted) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) => PatientEyeCaptureTriagePage(
+                        cameras: cameras,
+                      ),
+                    ),
+                  );
+                }
               },
               child: const Text(
                 "Start",
