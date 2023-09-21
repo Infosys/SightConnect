@@ -23,6 +23,6 @@ class PatientHomeProvider extends ChangeNotifier {
     const PatientServicesPage(),
     const TumblingTestInitiatePage(),
     const PatientNotificationPage(),
-    const PatientProfilePage()
+    const SizedBox(),
   ];
 }

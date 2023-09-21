@@ -33,7 +33,11 @@ class MainView extends ConsumerWidget {
             right: 0,
             child: PatientBottomNavBar(
               onSelected: (index) {
-                ref.read(patientHomeProvider).changeIndex(index);
+                if (index == 4) {
+                  ZoomDrawer.of(context)!.toggle();
+                } else {
+                  ref.read(patientHomeProvider).changeIndex(index);
+                }
               },
               selectedIndex: ref.watch(patientHomeProvider).currentIndex,
             ),
@@ -51,12 +55,6 @@ class PatientHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            ZoomDrawer.of(context)!.toggle();
-          },
-          icon: const Icon(Icons.menu),
-        ),
         title: const Text(
           "Eye Care for All",
         ),

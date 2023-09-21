@@ -45,6 +45,9 @@ class TumblingTestInitiatePage extends ConsumerWidget {
               Expanded(
                 child: BottomInputTab(),
               ),
+              SizedBox(
+                height: 60,
+              ),
             ],
           ),
         ),
