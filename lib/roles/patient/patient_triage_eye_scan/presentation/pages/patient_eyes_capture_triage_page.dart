@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/widgets/camera_controllers.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/widgets/eye_scan_camera.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/widgets/eye_scan_camera_alert_box.dart';
@@ -202,7 +203,11 @@ class _PatientEyeCaptureTriagePageState
           title: "Success",
           message: "Left eye image captured successfully.",
           onOkCallBack: () {
-            // navigate to next page
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AssessmentResultPage(),
+              ),
+            );
           },
         ),
       );

@@ -149,7 +149,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                 itemCount: symptoms.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 2.5,
+                  childAspectRatio: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -192,17 +192,10 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                 height: 25,
               ),
               ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                  padding: const MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 10,
-                    ),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSize.klwidth * 3,
+                    vertical: AppSize.kmpadding,
                   ),
                 ),
                 onPressed: () {
