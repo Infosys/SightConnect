@@ -6,8 +6,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class PatientTriageEyeScanIntroPage extends StatelessWidget {
-  const PatientTriageEyeScanIntroPage({super.key});
+class PatientTriageEyeScanInstructions extends StatelessWidget {
+  const PatientTriageEyeScanInstructions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,17 @@ class PatientTriageEyeScanIntroPage extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: AppColor.blue,
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kspadding,
                 ),
               ),
-              child: const Text(
-                "Step 3 of 3",
-                style: TextStyle(
-                  fontSize: 13,
-                  color: AppColor.blue,
-                ),
-              ),
+              onPressed: () {},
+              child: const Text("Step 3 of 3"),
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: AppSize.kmwidth),
             const Text('Eye Photos'),
           ],
         ),
@@ -89,10 +81,7 @@ class PatientTriageEyeScanIntroPage extends StatelessWidget {
               ),
               const SizedBox(height: AppSize.kmheight),
               ListTile(
-                onTap: () {
-                  // Navigator.of(context)
-                  //     .pushNamed(TumblingEStepsInstructionsPage.routeName);
-                },
+                onTap: () {},
                 tileColor: AppColor.white,
                 title: Text(
                   "View Steps to know how to capture the photos of your eyes.",

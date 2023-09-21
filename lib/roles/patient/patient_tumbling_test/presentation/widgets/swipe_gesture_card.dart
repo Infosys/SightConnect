@@ -5,7 +5,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_intro_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_instructions_page.dart';
+import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/roles/patient/patient_tumbling_test/data/models/tumbling_models.dart';
 
@@ -151,8 +152,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const PatientTriageEyeScanIntroPage(),
+                      builder: (context) => const PatientTriageEyeScanPage(),
                       fullscreenDialog: true,
                     ),
                   );
