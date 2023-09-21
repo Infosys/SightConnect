@@ -64,7 +64,7 @@ class EyeResultImageCard extends ConsumerWidget {
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColor.kGreen,
+                                  color: AppColor.green,
                                 ),
                               ),
                             ],
@@ -74,7 +74,7 @@ class EyeResultImageCard extends ConsumerWidget {
                             "No loss of transparency of the lens of the eye. No fogging is detected.",
                             style: applyRobotoFont(
                               fontSize: 14,
-                              color: AppColor.kGrey,
+                              color: AppColor.grey,
                             ),
                           ),
                         ],
@@ -124,7 +124,7 @@ class EyeResultImageCard extends ConsumerWidget {
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColor.kRed,
+                                  color: AppColor.red,
                                 ),
                               ),
                             ],
@@ -134,7 +134,7 @@ class EyeResultImageCard extends ConsumerWidget {
                             "There is loss of transparency of the lens of the left eye. Fogging is detected.",
                             style: applyRobotoFont(
                               fontSize: 14,
-                              color: AppColor.kGrey,
+                              color: AppColor.grey,
                             ),
                           ),
                         ],

@@ -45,7 +45,7 @@ class NearbyVisionCentersList extends StatelessWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kBlue,
+                    color: AppColor.blue,
                   ),
                 ),
               ),

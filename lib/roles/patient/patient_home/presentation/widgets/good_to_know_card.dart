@@ -40,7 +40,7 @@ class GoodToKnowCards extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kWhite,
+                    color: AppColor.white,
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),
@@ -49,12 +49,12 @@ class GoodToKnowCards extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColor.kWhite,
+                      color: AppColor.white,
                     ),
                   ),
                   child: const Icon(
                     Icons.play_arrow,
-                    color: AppColor.kWhite,
+                    color: AppColor.white,
                   ),
                 )
               ],

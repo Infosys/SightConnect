@@ -11,7 +11,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TumblingTestInstructionalVideoPage extends HookWidget {
   static const String routeName = "/tumbling-test-instructional-video";
@@ -92,7 +91,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 width: AppSize.width(context) * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.klradius),
-                  color: AppColor.kBlack,
+                  color: AppColor.black,
                 ),
                 child: Center(
                   child: SvgPicture.asset(
@@ -115,7 +114,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                   Navigator.of(context)
                       .pushNamed(TumblingEStepsInstructionsPage.routeName);
                 },
-                tileColor: AppColor.kWhite,
+                tileColor: AppColor.white,
                 title: Text(
                   "View Steps to perform Tumbling E Test",
                   style: applyRobotoFont(
@@ -144,10 +143,8 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             title: Text(
               'Tests to Perform',
-              style: applyFiraSansFont(
-                fontSize: 24,
-                fontWeight: FontWeight.w700
-              ),
+              style:
+                  applyFiraSansFont(fontSize: 24, fontWeight: FontWeight.w700),
             ),
             content: Text(
               "Thanks for answering the questions. Based on the initial assessment you need to perform the below tests.\n\n1. Tumbling E\n2. Eye Photos\n\nYou will be guided step-by-step to perform each test. Follow instructions and perform the steps as instructed.",
@@ -161,11 +158,10 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("Proceed",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.kPrimary
-                ),),
+                child: Text(
+                  "Proceed",
+                  style: applyRobotoFont(fontSize: 14, color: AppColor.primary),
+                ),
               ),
             ],
           ),

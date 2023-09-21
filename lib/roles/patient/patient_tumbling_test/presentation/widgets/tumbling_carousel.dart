@@ -73,7 +73,7 @@ class TumblingCarousel extends HookConsumerWidget {
                 icon: Icon(
                   Icons.arrow_back,
                   color: currentIndex.value > 0
-                      ? AppColor.kPrimary
+                      ? AppColor.primary
                       : const Color(0xFFDDDDDD),
                 ),
               ),
@@ -83,7 +83,7 @@ class TumblingCarousel extends HookConsumerWidget {
               activeIndex: currentIndex.value,
               count: 4,
               effect: const WormEffect(
-                activeDotColor: AppColor.kPrimary,
+                activeDotColor: AppColor.primary,
                 dotColor: Color(0xFFDDDDDD),
                 dotHeight: 10,
                 dotWidth: 10,
@@ -108,7 +108,7 @@ class TumblingCarousel extends HookConsumerWidget {
                 icon: Icon(
                   Icons.arrow_forward,
                   color: currentIndex.value < 3
-                      ? AppColor.kPrimary
+                      ? AppColor.primary
                       : const Color(0xFFDDDDDD),
                 ),
               ),
@@ -133,7 +133,7 @@ class TumblingCarousel extends HookConsumerWidget {
                     "Don't show again",
                     style: applyRobotoFont(
                       fontSize: 14,
-                      color: AppColor.kGrey,
+                      color: AppColor.grey,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -147,7 +147,7 @@ class TumblingCarousel extends HookConsumerWidget {
                     ref.read(tumblingDialogProvider.notifier).state = false;
                   },
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColor.kPrimary,
+                    foregroundColor: AppColor.primary,
                   ),
                   child: Text(buttonName.value),
                 );

@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 appShadow() {
   return [
     // BoxShadow(
-    //   color: AppColor.kshadowColor.withOpacity(0.02),
+    //   color: AppColor.shadowColor.withOpacity(0.02),
     //   blurRadius: 10,
     //   spreadRadius: 5,
     //   offset: const Offset(10, 10),
     // ),
     // BoxShadow(
-    //   color: AppColor.kshadowColor.withOpacity(0.02),
+    //   color: AppColor.shadowColor.withOpacity(0.02),
     //   blurRadius: 10,
     //   spreadRadius: 5,
     //   offset: const Offset(-10, -10),
     // ),
     BoxShadow(
-      color: AppColor.kshadowColor.withOpacity(0.04),
+      color: AppColor.shadowColor.withOpacity(0.04),
       blurRadius: 64,
       offset: const Offset(0, 24),
     ),

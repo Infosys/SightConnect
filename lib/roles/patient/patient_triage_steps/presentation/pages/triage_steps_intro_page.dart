@@ -10,7 +10,7 @@ class TriageStepsIntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
+      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: const Text('Report Eye Problems'),
       ),
@@ -20,9 +20,6 @@ class TriageStepsIntroPage extends StatelessWidget {
           vertical: AppSize.height(context) * AppSize.knavbarheight,
         ),
         child: ElevatedButton(
-          style: const ButtonStyle(
-            visualDensity: VisualDensity.comfortable,
-          ),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(

@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23">
-  <path id="triage" d="M17,15a1,1,0,0,0-2,0v2H13a1,1,0,0,0,0,2h2v2a1,1,0,1,0,2,0V19h2a1,1,0,0,0,0-2H17ZM12,4h8a1,1,0,0,1,1,1V9h3a4,4,0,0,1,4,4V23a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V13A4,4,0,0,1,8,9h3V5A1,1,0,0,1,12,4Zm7,5V6H13V9ZM8,11a2,2,0,0,0-2,2V23a2,2,0,0,0,2,2H24a2,2,0,0,0,2-2V13a2,2,0,0,0-2-2Z" transform="translate(-4 -4)" fill="#333"/>
+<svg id="triage" xmlns="http://www.w3.org/2000/svg" width="28" height="24.5" viewBox="0 0 28 24.5">
+  <path id="Path_38048" data-name="Path 38048" d="M14,3.527,24.984,22.75H3.016ZM14,0,0,24.5H28Z" fill="#fff"/>
+  <rect id="Rectangle_7047" data-name="Rectangle 7047" width="1.75" height="15.164" transform="translate(13.36 14.532) rotate(-50)" fill="#fff"/>
+  <rect id="Rectangle_7048" data-name="Rectangle 7048" width="15.164" height="1.75" transform="matrix(0.766, -0.643, 0.643, 0.766, 1.984, 22.939)" fill="#fff"/>
+  <rect id="Rectangle_7049" data-name="Rectangle 7049" width="1.75" height="12.722" transform="translate(13.125 1.75)" fill="#fff"/>
 </svg>

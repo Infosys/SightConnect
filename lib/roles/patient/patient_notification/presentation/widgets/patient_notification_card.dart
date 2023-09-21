@@ -37,7 +37,7 @@ class PatientNotificationCard extends StatelessWidget {
             data["time"],
             style: applyRobotoFont(
               fontSize: 11,
-              color: AppColor.kGrey,
+              color: AppColor.grey,
             ),
           )
         ],

@@ -27,7 +27,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
+      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,7 +36,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
           children: [
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColor.kBlue,
+                foregroundColor: AppColor.blue,
                 visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSize.kspadding + 2,
@@ -46,7 +46,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
               child: Text(
                 "Step 1 of 3",
                 style: applyRobotoFont(
-                  color: AppColor.kPrimary,
+                  color: AppColor.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -99,8 +99,8 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                         color: Colors.white,
                         border: Border.all(
                           color: symptoms[index]['isSelected']
-                              ? AppColor.kPrimary
-                              : AppColor.kGrey.withOpacity(0.5),
+                              ? AppColor.primary
+                              : AppColor.grey.withOpacity(0.5),
                           width: 1.2,
                         ),
                         borderRadius: BorderRadius.circular(10),
@@ -111,8 +111,8 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
                             color: symptoms[index]['isSelected']
-                                ? AppColor.kPrimary
-                                : AppColor.kBlack,
+                                ? AppColor.primary
+                                : AppColor.black,
                           ),
                         ),
                       ),
@@ -147,7 +147,7 @@ class _EyeAssessementQuesTwoState extends State<EyeAssessementQuesTwo> {
                 },
                 child: Text(
                   "Next",
-                  style: applyRobotoFont(fontSize: 12, color: AppColor.kWhite),
+                  style: applyRobotoFont(fontSize: 12, color: AppColor.white),
                 ),
               ),
             ],

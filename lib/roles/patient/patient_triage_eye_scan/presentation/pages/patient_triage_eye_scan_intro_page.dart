@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
-import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/patient_eyes_capture_triage_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +20,14 @@ class PatientTriageEyeScanIntroPage extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: AppColor.kBlue,
+                  color: AppColor.blue,
                 ),
               ),
               child: const Text(
                 "Step 3 of 3",
                 style: TextStyle(
                   fontSize: 13,
-                  color: AppColor.kBlue,
+                  color: AppColor.blue,
                 ),
               ),
             ),
@@ -66,10 +64,10 @@ class PatientTriageEyeScanIntroPage extends StatelessWidget {
                 width: AppSize.width(context) * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.klradius),
-                  color: AppColor.kBlack,
+                  color: AppColor.black,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColor.kPrimary.withOpacity(0.4),
+                      color: AppColor.primary.withOpacity(0.4),
                       blurRadius: 50,
                     ),
                   ],
@@ -95,7 +93,7 @@ class PatientTriageEyeScanIntroPage extends StatelessWidget {
                   // Navigator.of(context)
                   //     .pushNamed(TumblingEStepsInstructionsPage.routeName);
                 },
-                tileColor: AppColor.kWhite,
+                tileColor: AppColor.white,
                 title: Text(
                   "View Steps to know how to capture the photos of your eyes.",
                   style: applyRobotoFont(

@@ -53,23 +53,24 @@ class CataractEyeScanCarousel extends HookWidget {
               height: 100,
               //  alignment: Alignment.bottomCenter,
               child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.black.withOpacity(0.5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                  child: Text(
-                    slideShowData[index].title,
-                    textAlign: TextAlign.center,
-                    style: applyFiraSansFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.kWhite,),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black.withOpacity(0.5),
                   ),
-                )
-              ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 30),
+                    child: Text(
+                      slideShowData[index].title,
+                      textAlign: TextAlign.center,
+                      style: applyFiraSansFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: AppColor.white,
+                      ),
+                    ),
+                  )),
             ),
           ],
         );

@@ -25,7 +25,7 @@ class AppointmentBookingDoctorCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSize.klradius),
-              color: AppColor.kPrimary.withOpacity(0.1),
+              color: AppColor.primary.withOpacity(0.1),
             ),
             child: Padding(
               padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -36,7 +36,7 @@ class AppointmentBookingDoctorCard extends StatelessWidget {
                   const CircleAvatar(
                     radius: AppSize.klradius * 1.4,
                     backgroundImage: AssetImage(AppImages.doctor),
-                    backgroundColor: AppColor.kBlue,
+                    backgroundColor: AppColor.blue,
                   ),
                   const SizedBox(
                     width: AppSize.kmpadding,
@@ -57,7 +57,7 @@ class AppointmentBookingDoctorCard extends StatelessWidget {
                           doctorSpeciality ?? "",
                           style: applyRobotoFont(
                             fontSize: 14,
-                            color: AppColor.kGrey,
+                            color: AppColor.grey,
                           ),
                         ),
                         Text(
@@ -71,14 +71,14 @@ class AppointmentBookingDoctorCard extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.call,
-                        color: AppColor.kGrey,
+                        color: AppColor.grey,
                       ),
                       SizedBox(
                         width: 12,
                       ),
                       Icon(
                         Icons.message,
-                        color: AppColor.kGrey,
+                        color: AppColor.grey,
                       )
                     ],
                   )

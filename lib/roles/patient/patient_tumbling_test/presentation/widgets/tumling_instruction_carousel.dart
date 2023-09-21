@@ -93,7 +93,7 @@ class TumblingInstructionCarousel extends HookWidget {
                   style: applyFiraSansFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: AppColor.kWhite,
+                    color: AppColor.white,
                   ),
                 ),
               ),

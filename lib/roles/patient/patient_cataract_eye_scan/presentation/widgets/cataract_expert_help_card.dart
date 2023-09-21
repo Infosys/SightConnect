@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-
 class ExperthelpCard extends StatelessWidget {
   const ExperthelpCard({super.key});
 
@@ -39,7 +38,7 @@ class ExperthelpCard extends StatelessWidget {
                   style: applyFiraSansFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: AppColor.kDarkCharcoal),
+                      color: AppColor.darkCharcoal),
                 ),
               ),
               Padding(
@@ -50,7 +49,7 @@ class ExperthelpCard extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(0),
-                        backgroundColor: AppColor.kPrimary,
+                        backgroundColor: AppColor.primary,
                         fixedSize: const Size(150, 40),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -60,7 +59,7 @@ class ExperthelpCard extends StatelessWidget {
                       child: Text(
                         "Consult a Doctor",
                         style: applyRobotoFont(
-                            color: AppColor.kWhite,
+                            color: AppColor.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w500),
                       ),
@@ -70,12 +69,12 @@ class ExperthelpCard extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.trending_up,
-                        color: AppColor.kGreen,
+                        color: AppColor.green,
                       ),
                       label: Text(
                         "1k+ got helped so far",
                         style: applyRobotoFont(
-                            color: AppColor.kGreen,
+                            color: AppColor.green,
                             fontSize: 14,
                             fontWeight: FontWeight.w500),
                       ),

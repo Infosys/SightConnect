@@ -1,6 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:eye_care_for_all/core/providers/internet_provider.dart';
-import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';

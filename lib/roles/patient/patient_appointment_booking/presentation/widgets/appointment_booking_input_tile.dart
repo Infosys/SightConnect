@@ -22,10 +22,10 @@ class AppointmentBookingInputTile extends StatelessWidget {
         label: Text(title!),
         suffixIcon: Icon(trailingIcon),
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.kGrey),
+          borderSide: BorderSide(color: AppColor.grey),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.kPrimary),
+          borderSide: BorderSide(color: AppColor.primary),
         ),
       ),
       maxLines: maxLine,

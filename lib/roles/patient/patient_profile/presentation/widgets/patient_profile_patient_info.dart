@@ -17,7 +17,7 @@ class PatientInfoCard extends StatelessWidget {
             keyText ?? "",
             style: applyRobotoFont(
               fontSize: 14,
-              color: AppColor.kGrey,
+              color: AppColor.grey,
             ),
           ),
           Text(

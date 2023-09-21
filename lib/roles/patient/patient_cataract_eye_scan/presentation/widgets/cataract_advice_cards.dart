@@ -30,7 +30,7 @@ class AdviceCards extends ConsumerWidget {
                   Text(
                     "General Advice:",
                     style: applyFiraSansFont(
-                        color: AppColor.kBlack,
+                        color: AppColor.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   ),
@@ -41,7 +41,7 @@ class AdviceCards extends ConsumerWidget {
                         (entry) => Text(
                           entry.value,
                           style: applyRobotoFont(
-                              color: AppColor.kDarkCharcoal,
+                              color: AppColor.darkCharcoal,
                               fontSize: 14,
                               fontWeight: FontWeight.w400),
                         ),
@@ -75,7 +75,7 @@ class AdviceCards extends ConsumerWidget {
                   Text(
                     "Watch what you eat",
                     style: applyFiraSansFont(
-                        color: AppColor.kBlack,
+                        color: AppColor.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   ),
@@ -86,7 +86,7 @@ class AdviceCards extends ConsumerWidget {
                     (e) => Text(
                       e,
                       style: applyRobotoFont(
-                          color: AppColor.kDarkCharcoal,
+                          color: AppColor.darkCharcoal,
                           fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),

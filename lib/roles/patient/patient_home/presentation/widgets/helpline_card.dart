@@ -14,14 +14,14 @@ class HelplineCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: BoxDecoration(
-              color: AppColor.kWhite,
+              color: AppColor.white,
               borderRadius: BorderRadius.circular(AppSize.kmwidth),
             ),
             child: Row(
               children: [
                 const Icon(
                   Icons.phone_outlined,
-                  color: AppColor.kBlue,
+                  color: AppColor.blue,
                 ),
                 const SizedBox(
                   width: AppSize.kswidth,
@@ -64,10 +64,10 @@ class HelplineCard extends StatelessWidget {
             ),
             child: const CircleAvatar(
               radius: 20,
-              backgroundColor: AppColor.kWhite,
+              backgroundColor: AppColor.white,
               child: Icon(
                 Icons.phone_outlined,
-                color: AppColor.kBlue,
+                color: AppColor.blue,
               ),
             ),
           ),

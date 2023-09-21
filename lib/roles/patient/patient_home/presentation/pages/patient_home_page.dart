@@ -1,7 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/patient_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/campaigns_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/good_to_know_list.dart';
@@ -15,8 +12,8 @@ import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets
 import 'package:eye_care_for_all/roles/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
 import 'package:eye_care_for_all/roles/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,7 +32,7 @@ class MainView extends ConsumerWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: PatientBottomNavBar(
+            child: AppBottomNavBar(
               onSelected: (index) {
                 if (index == 4) {
                   ZoomDrawer.of(context)!.toggle();
@@ -43,7 +40,6 @@ class MainView extends ConsumerWidget {
                   ref.read(patientHomeProvider).changeIndex(index);
                 }
               },
-              selectedIndex: ref.watch(patientHomeProvider).currentIndex,
             ),
           ),
         ],
@@ -66,9 +62,11 @@ class PatientHomePage extends ConsumerWidget {
           InkWell(
             customBorder: const CircleBorder(),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const PatientNotificationPage(),
-              ));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const PatientNotificationPage(),
+                ),
+              );
             },
             child: CircleAvatar(
               radius: 20,

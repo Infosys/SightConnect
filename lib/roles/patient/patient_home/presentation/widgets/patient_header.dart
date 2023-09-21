@@ -41,7 +41,7 @@ class PatientHeader extends StatelessWidget {
                   "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
                   style: applyRobotoFont(
                     fontSize: 14,
-                    color: AppColor.kGrey,
+                    color: AppColor.grey,
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),

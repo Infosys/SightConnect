@@ -23,7 +23,6 @@ class TriageAddMemberPage extends HookWidget {
     });
 
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
       appBar: AppBar(
         title: const Text("Add Member"),
       ),
@@ -33,9 +32,6 @@ class TriageAddMemberPage extends HookWidget {
           vertical: AppSize.height(context) * 0.05,
         ),
         child: ElevatedButton(
-          style: const ButtonStyle(
-            visualDensity: VisualDensity.comfortable,
-          ),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -47,185 +43,160 @@ class TriageAddMemberPage extends HookWidget {
           child: const Text('Save & Proceed to Questions'),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Card(
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Necessary Details",
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            children: [
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Necessary Details",
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: AppSize.width(context) * 0.8,
+                        child: TextField(
+                          focusNode: nameFocusNode,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1.0,
+                                color: AppColor.primary,
+                              ),
+                            ),
+                            labelText: "Name",
+                            labelStyle: applyRobotoFont(
+                              fontSize: 14,
+                              color: nameFocus.value
+                                  ? AppColor.primary
+                                  : AppColor.black,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20,
                       ),
-                      child: Row(
+                      const SizedBox(height: 20),
+                      const Text("Gender"),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: TextField(
-                              focusNode: nameFocusNode,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1.0,
-                                    color: AppColor.kPrimary,
+                          Flexible(
+                            child: SizedBox(
+                              width: 100,
+                              child: RadioListTile<int>(
+                                visualDensity: VisualDensity.compact,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  "Male",
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: AppColor.grey,
                                   ),
                                 ),
-                                labelText: "Name",
-                                labelStyle: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: nameFocus.value
-                                        ? AppColor.kPrimary
-                                        : AppColor.kBlack),
+                                value: 1,
+                                groupValue: selectedValue.value,
+                                onChanged: (value) {
+                                  selectedValue.value = value!;
+                                },
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text("Gender"),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: SizedBox(
-                            width: 100,
+                          ),
+                          Flexible(
                             child: RadioListTile<int>(
                               visualDensity: VisualDensity.compact,
                               contentPadding: EdgeInsets.zero,
                               title: Text(
-                                "Male",
+                                "Female",
                                 style: applyRobotoFont(
                                   fontSize: 14,
-                                  color: AppColor.kGrey,
+                                  color: AppColor.grey,
                                 ),
                               ),
-                              value: 1,
+                              value: 2,
                               groupValue: selectedValue.value,
                               onChanged: (value) {
                                 selectedValue.value = value!;
                               },
                             ),
                           ),
-                        ),
-                        Flexible(
-                          child: RadioListTile<int>(
-                            visualDensity: VisualDensity.compact,
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(
-                              "Female",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.kGrey,
-                              ),
-                            ),
-                            value: 2,
-                            groupValue: selectedValue.value,
-                            onChanged: (value) {
-                              selectedValue.value = value!;
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 25,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              focusNode: contactFocusNode,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1.0,
-                                    color: AppColor.kPrimary,
-                                  ),
-                                ),
-                                labelText: "Contact Number",
-                                labelStyle: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: contactFocus.value
-                                        ? AppColor.kPrimary
-                                        : AppColor.kBlack),
-                              ),
-                            ),
-                          )
                         ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: AppSize.width(context) * 0.8,
+                        child: TextField(
+                          focusNode: contactFocusNode,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1.0,
+                                color: AppColor.primary,
+                              ),
+                            ),
+                            labelText: "Contact Number",
+                            labelStyle: applyRobotoFont(
+                              fontSize: 14,
+                              color: contactFocus.value
+                                  ? AppColor.primary
+                                  : AppColor.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-              ),
-              decoration: BoxDecoration(
-                color: AppColor.kWhite,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    'Additional Details',
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      'Additional Details',
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down_sharp,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down_sharp,
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

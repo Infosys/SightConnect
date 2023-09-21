@@ -88,7 +88,7 @@ class _AutoBrightnessWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Container(
           decoration: BoxDecoration(
-            color: AppColor.kLightGrey.withOpacity(0.2),
+            color: AppColor.lightGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(AppSize.kmradius),
           ),
           child: Row(
@@ -158,7 +158,7 @@ class _AutoFontSizeWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Container(
           decoration: BoxDecoration(
-            color: AppColor.kLightGrey.withOpacity(0.2),
+            color: AppColor.lightGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(AppSize.kmradius),
           ),
           child: Padding(
@@ -228,7 +228,7 @@ class _AutoContrastWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Container(
           decoration: BoxDecoration(
-            color: AppColor.kLightGrey.withOpacity(0.2),
+            color: AppColor.lightGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(AppSize.kmradius),
           ),
           child: Row(

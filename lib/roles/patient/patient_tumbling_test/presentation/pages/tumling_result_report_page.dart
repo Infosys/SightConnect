@@ -48,7 +48,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                               0,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColor.kWhite,
+                              color: AppColor.white,
                               borderRadius:
                                   BorderRadius.circular(AppSize.klradius),
                             ),
@@ -82,7 +82,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                                 padding: EdgeInsets.all(14.0),
                                 child: Icon(
                                   Icons.check_circle_outline,
-                                  color: AppColor.kGreen,
+                                  color: AppColor.green,
                                   size: 40,
                                 ),
                               ),
@@ -212,14 +212,14 @@ class TumblingResultReportPage extends ConsumerWidget {
         children: [
           Text(
             title,
-            style: applyFiraSansFont(fontSize: 18, color: AppColor.kWhite),
+            style: applyFiraSansFont(fontSize: 18, color: AppColor.white),
           ),
           const SizedBox(
             height: AppSize.ksheight,
           ),
           Text(
             value,
-            style: applyFiraSansFont(fontSize: 24, color: AppColor.kGreen),
+            style: applyFiraSansFont(fontSize: 24, color: AppColor.green),
           ),
         ],
       ),

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 TextStyle applyRobotoFont({
   double fontSize = 16,
   FontWeight fontWeight = FontWeight.normal,
-  Color color = AppColor.kBlack,
+  Color color = AppColor.black,
   TextDecoration? decoration,
 }) {
   return GoogleFonts.roboto(
@@ -20,7 +20,7 @@ TextStyle applyRobotoFont({
 TextStyle applyFiraSansFont({
   double fontSize = 16,
   FontWeight fontWeight = FontWeight.normal,
-  Color color = AppColor.kBlack,
+  Color color = AppColor.black,
   TextDecoration? decoration,
 }) {
   return GoogleFonts.firaSans(

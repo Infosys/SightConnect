@@ -17,7 +17,7 @@ class VoiceAssistCard extends StatelessWidget {
         borderType: BorderType.RRect,
         radius: const Radius.circular(AppSize.klradius),
         padding: const EdgeInsets.all(AppSize.kspadding),
-        color: AppColor.kGrey,
+        color: AppColor.grey,
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           child: Center(
@@ -29,7 +29,7 @@ class VoiceAssistCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
-                        color: AppColor.kPrimary,
+                        color: AppColor.primary,
                         width: 1.5,
                       ),
                     ),
@@ -42,7 +42,7 @@ class VoiceAssistCard extends StatelessWidget {
                   "Press and hold the mic icon and speak loud",
                   style: applyRobotoFont(
                     fontSize: 14,
-                    color: AppColor.kGrey,
+                    color: AppColor.grey,
                   ),
                 ),
               ],

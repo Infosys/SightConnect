@@ -44,7 +44,7 @@ class BottomInputTabState extends State<BottomInputTab>
                     "Distance:",
                     style: applyRobotoFont(
                       fontSize: 14,
-                      color: AppColor.kGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                   const SizedBox(width: AppSize.kswidth),
@@ -53,7 +53,7 @@ class BottomInputTabState extends State<BottomInputTab>
                     style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.kGreen),
+                        color: AppColor.green),
                   ),
                 ],
               ),

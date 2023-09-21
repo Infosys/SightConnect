@@ -8,7 +8,7 @@ void showCameraNotFound(BuildContext context) {
   showGeneralDialog(
     barrierDismissible: true,
     barrierLabel: '',
-    barrierColor: AppColor.kBlackOpacity, //black 38
+    barrierColor: AppColor.blackOpacity, //black 38
     transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (ctx, anim1, anim2) => AlertDialog(
       title: Image.asset(

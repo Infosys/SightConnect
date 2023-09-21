@@ -37,7 +37,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         },
       ),
       brightness: Brightness.light,
-      scaffoldBackgroundColor: AppColor.kScaffold,
+      scaffoldBackgroundColor: AppColor.scaffold,
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -46,20 +46,20 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       iconTheme: IconThemeData(
-        color: AppColor.kBlack,
+        color: AppColor.black,
         size: Responsive.isMobile(context) ? 24 : 32,
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: AppColor.kScaffold,
-        foregroundColor: AppColor.kBlack,
+        backgroundColor: AppColor.scaffold,
+        foregroundColor: AppColor.black,
         iconTheme: IconThemeData(
-          color: AppColor.kBlack,
+          color: AppColor.black,
           size: Responsive.isMobile(context) ? 24 : 32,
         ),
         actionsIconTheme: IconThemeData(
-          color: AppColor.kBlack,
+          color: AppColor.black,
           size: Responsive.isMobile(context) ? 24 : 32,
         ),
         titleTextStyle: applyFiraSansFont(
@@ -83,7 +83,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         style: OutlinedButton.styleFrom(
           shape: const StadiumBorder(),
           side: const BorderSide(
-            color: AppColor.kPrimary,
+            color: AppColor.primary,
           ),
           textStyle: applyRobotoFont(
             fontSize: 14,
@@ -101,8 +101,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: AppColor.kWhite,
-          backgroundColor: AppColor.kPrimary,
+          foregroundColor: AppColor.white,
+          backgroundColor: AppColor.primary,
           shape: const StadiumBorder(),
           textStyle: applyRobotoFont(
             fontSize: 14,

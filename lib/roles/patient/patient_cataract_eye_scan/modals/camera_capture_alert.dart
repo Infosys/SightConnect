@@ -14,14 +14,14 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
   showGeneralDialog(
     barrierDismissible: false,
     barrierLabel: '',
-    barrierColor: AppColor.kBlackOpacity, //black38
+    barrierColor: AppColor.blackOpacity, //black38
     transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (ctx, anim1, anim2) => AlertDialog(
       title: Image.asset(
         AppImages.checkMark,
         height: 40,
         width: 40,
-        color: AppColor.kGreen,
+        color: AppColor.green,
       ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +79,7 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
                 'Rescan',
                 style: applyRobotoFont(
                   fontSize: 14,
-                  color: AppColor.kPrimary,
+                  color: AppColor.primary,
                 ),
               )),
         ),
@@ -109,7 +109,7 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
               'Ok',
               style: applyRobotoFont(
                 fontSize: 14,
-                color: AppColor.kPrimary,
+                color: AppColor.primary,
               ),
             ),
           ),

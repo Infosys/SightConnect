@@ -19,7 +19,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10),
         padding: const EdgeInsets.all(AppSize.kmpadding),
         decoration: BoxDecoration(
-          color: AppColor.kWhite,
+          color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.ksradius),
         ),
         child: Column(
@@ -39,7 +39,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.pin_drop_outlined,
-                  color: AppColor.kBlue,
+                  color: AppColor.blue,
                 ),
                 const SizedBox(width: AppSize.kswidth),
                 Flexible(
@@ -48,7 +48,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kGrey,
+                    color: AppColor.grey,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -60,7 +60,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.phone,
-                  color: AppColor.kBlue,
+                  color: AppColor.blue,
                 ),
                 const SizedBox(width: AppSize.kswidth),
                 Text(
@@ -68,7 +68,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kGrey,
+                    color: AppColor.grey,
                   ),
                 ),
               ],

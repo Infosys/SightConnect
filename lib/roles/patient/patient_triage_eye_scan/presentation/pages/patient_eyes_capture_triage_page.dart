@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_not_found.dart';
 import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
-import 'package:eye_care_for_all/roles/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_report_page.dart';
 import 'package:eye_care_for_all/roles/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 
 import 'package:flutter/material.dart';
@@ -80,7 +79,7 @@ class _PatientEyeCaptureTriagePageState
       ),
       body: isLoading
           ? Container(
-              color: AppColor.kWhite,
+              color: AppColor.white,
               child: const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
@@ -94,7 +93,7 @@ class _PatientEyeCaptureTriagePageState
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
-                        backgroundColor: AppColor.kGrey,
+                        backgroundColor: AppColor.grey,
                         onPressed: () async {
                           var navigator = Navigator.of(context);
                           var status = await _takePicture();
@@ -153,7 +152,7 @@ class _PatientEyeCaptureTriagePageState
           AppImages.checkMark,
           height: 40,
           width: 40,
-          color: AppColor.kGreen,
+          color: AppColor.green,
         ),
         content: const Text("Your eye scan is completed for Right eye."),
         actions: [

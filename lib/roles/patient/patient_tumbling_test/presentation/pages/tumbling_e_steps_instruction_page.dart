@@ -34,7 +34,7 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: AppColor.kPrimary.withOpacity(0.1),
+                    color: AppColor.primary.withOpacity(0.1),
                     blurRadius: 10,
                     spreadRadius: 0,
                     offset: const Offset(20, 20),
@@ -67,9 +67,9 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
                     activeIndex: activeIndex.value,
                     count: 5,
                     effect: const SlideEffect(
-                      activeDotColor: AppColor.kPrimary,
+                      activeDotColor: AppColor.primary,
                       radius: 2,
-                      dotColor: AppColor.kLightGrey,
+                      dotColor: AppColor.lightGrey,
                       dotHeight: 5,
                       dotWidth: 20,
                       spacing: 4,
@@ -107,11 +107,10 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
               style: TextButton.styleFrom(
                 fixedSize: const Size(0, 50),
                 side: const BorderSide(
-                  color: AppColor.kPrimary,
+                  color: AppColor.primary,
                 ),
-                backgroundColor: activeIndex.value == 4
-                    ? AppColor.kPrimary
-                    : AppColor.kWhite,
+                backgroundColor:
+                    activeIndex.value == 4 ? AppColor.primary : AppColor.white,
               ),
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(
@@ -123,8 +122,8 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
                 style: applyRobotoFont(
                   fontWeight: FontWeight.w500,
                   color: activeIndex.value == 4
-                      ? AppColor.kWhite
-                      : AppColor.kPrimary,
+                      ? AppColor.white
+                      : AppColor.primary,
                 ),
               ),
             ),

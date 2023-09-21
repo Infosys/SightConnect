@@ -94,7 +94,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
+      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -103,7 +103,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
           children: [
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColor.kPrimary,
+                foregroundColor: AppColor.primary,
                 visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSize.kspadding + 2,
@@ -114,7 +114,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
               child: Text(
                 "Step 1 of 3",
                 style: applyRobotoFont(
-                  color: AppColor.kPrimary,
+                  color: AppColor.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -167,8 +167,8 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                         color: Colors.white,
                         border: Border.all(
                           color: symptoms[index]['isSelected']
-                              ? AppColor.kPrimary
-                              : AppColor.kGrey.withOpacity(0.5),
+                              ? AppColor.primary
+                              : AppColor.grey.withOpacity(0.5),
                           width: 1.2,
                         ),
                         borderRadius: BorderRadius.circular(10),
@@ -179,8 +179,8 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
                             color: symptoms[index]['isSelected']
-                                ? AppColor.kPrimary
-                                : AppColor.kBlack,
+                                ? AppColor.primary
+                                : AppColor.black,
                           ),
                         ),
                       ),
@@ -215,7 +215,7 @@ class _EyeAssessementQuesThreeState extends State<EyeAssessementQuesThree> {
                 },
                 child: Text(
                   "Next",
-                  style: applyRobotoFont(fontSize: 12, color: AppColor.kWhite),
+                  style: applyRobotoFont(fontSize: 12, color: AppColor.white),
                 ),
               ),
             ],

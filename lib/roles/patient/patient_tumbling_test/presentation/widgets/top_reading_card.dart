@@ -27,7 +27,7 @@ class TopReadingCard extends ConsumerWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.klradius),
       ),
-      shadowColor: AppColor.kPrimary.withOpacity(0.5),
+      shadowColor: AppColor.primary.withOpacity(0.5),
       child: Container(
         height: 200,
         padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -61,7 +61,7 @@ class TopReadingCard extends ConsumerWidget {
               child: Text(
                 model.dataSource.getSnellerFraction(model.currentLevel!),
                 style: applyFiraSansFont(
-                  color: AppColor.kGrey,
+                  color: AppColor.grey,
                 ),
               ),
             ),
@@ -72,7 +72,7 @@ class TopReadingCard extends ConsumerWidget {
                 lineHeight: Responsive.isMobile(context) ? 8 : 14,
                 percent: ((model.currentLevel!) / maxLevel).clamp(0, 1),
                 barRadius: const Radius.circular(AppSize.klradius),
-                progressColor: AppColor.kGreen,
+                progressColor: AppColor.green,
               ),
             ),
           ],
@@ -112,7 +112,7 @@ class RotatedTumblingE extends StatelessWidget {
             //   index == selectedIndex
             //       ? AppColor.kBlack
             //       : index != selectedIndex
-            //           ? AppColor.kRed
+            //           ? AppColor.red
             //           : AppColor.kBlack,
             //   BlendMode.srcIn,
             // ),
@@ -127,7 +127,7 @@ class RotatedTumblingE extends StatelessWidget {
             height: 4,
             width: size,
             decoration: BoxDecoration(
-              color: AppColor.kPrimary,
+              color: AppColor.primary,
               borderRadius: BorderRadius.circular(4),
             ),
           ),

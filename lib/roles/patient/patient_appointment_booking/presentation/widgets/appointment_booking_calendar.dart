@@ -42,14 +42,14 @@ class AppointmentBookingCalendar extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: AppColor.kWhite,
+            color: AppColor.white,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(AppSize.klradius),
               topRight: Radius.circular(AppSize.klradius),
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColor.kPrimary.withOpacity(0.4),
+                color: AppColor.primary.withOpacity(0.4),
                 blurRadius: 60.0,
               ),
             ],
@@ -85,7 +85,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
                               flex: 7,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: AppColor.kGrey.withOpacity(
+                                  color: AppColor.grey.withOpacity(
                                     0.1,
                                   ),
                                 ),
@@ -101,7 +101,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
                                               e.isBreak! ? "Break" : "Booked",
                                               style: applyRobotoFont(
                                                 fontSize: 14,
-                                                color: AppColor.kGrey,
+                                                color: AppColor.grey,
                                               ),
                                             ),
                                           ),
@@ -109,7 +109,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
                                             "${e.startTime} - ${e.endTime}",
                                             style: applyRobotoFont(
                                               fontSize: 10,
-                                              color: AppColor.kGrey,
+                                              color: AppColor.grey,
                                             ),
                                           )
                                         ],
@@ -141,13 +141,13 @@ class AppointmentBookingCalendar extends StatelessWidget {
                                             child: Text("Schedule",
                                                 style: applyRobotoFont(
                                                   fontSize: 14,
-                                                  color: AppColor.kPrimary,
+                                                  color: AppColor.primary,
                                                 )),
                                           ),
                                           Text("${e.startTime} - ${e.endTime}",
                                               style: applyRobotoFont(
                                                   fontSize: 10,
-                                                  color: AppColor.kGrey))
+                                                  color: AppColor.grey))
                                         ],
                                       ),
                               ),
@@ -185,7 +185,7 @@ class AppointmentBookingCalendar extends StatelessWidget {
                 monthFormatter.format(date),
                 style: applyRobotoFont(
                   fontSize: 12,
-                  color: AppColor.kGrey,
+                  color: AppColor.grey,
                 ),
               ),
               const SizedBox(

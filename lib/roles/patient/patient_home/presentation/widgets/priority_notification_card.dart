@@ -15,7 +15,7 @@ class PriorityNotificationCard extends StatelessWidget {
       margin: const EdgeInsets.only(
         right: 10,
       ),
-      color: AppColor.kPrimary,
+      color: AppColor.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.ksradius),
       ),
@@ -41,13 +41,13 @@ class PriorityNotificationCard extends StatelessWidget {
                   CircleAvatar(
                     maxRadius: 20,
                     minRadius: 18,
-                    backgroundColor: AppColor.kGrey.withOpacity(0.8),
+                    backgroundColor: AppColor.grey.withOpacity(0.8),
                     child: Text(
                       data["prefix"] ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.kWhite,
+                        color: AppColor.white,
                       ),
                     ),
                   ),
@@ -62,7 +62,7 @@ class PriorityNotificationCard extends StatelessWidget {
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: AppColor.kWhite,
+                            color: AppColor.white,
                           ),
                         ),
                         const SizedBox(height: AppSize.ksheight / 2),
@@ -70,7 +70,7 @@ class PriorityNotificationCard extends StatelessWidget {
                           data["profession"],
                           style: applyRobotoFont(
                             fontSize: 12,
-                            color: AppColor.kWhite.withOpacity(0.5),
+                            color: AppColor.white.withOpacity(0.5),
                           ),
                         ),
                       ],
@@ -80,7 +80,7 @@ class PriorityNotificationCard extends StatelessWidget {
                     "1 min ago",
                     style: applyRobotoFont(
                       fontSize: 11,
-                      color: AppColor.kWhite.withOpacity(0.5),
+                      color: AppColor.white.withOpacity(0.5),
                     ),
                   )
                 ],
@@ -89,7 +89,7 @@ class PriorityNotificationCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(AppSize.kspadding),
                 decoration: BoxDecoration(
-                  color: AppColor.kWhite.withOpacity(0.2),
+                  color: AppColor.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(
                     AppSize.ksradius / 2,
                   ),
@@ -97,7 +97,7 @@ class PriorityNotificationCard extends StatelessWidget {
                 child: Text(
                   data["recommendation"],
                   maxLines: 1,
-                  style: applyRobotoFont(fontSize: 11, color: AppColor.kWhite),
+                  style: applyRobotoFont(fontSize: 11, color: AppColor.white),
                 ),
               )
             ],

@@ -32,14 +32,14 @@ class AssessmentResultPage extends ConsumerWidget {
             onPressed: () {},
             icon: const Icon(
               Icons.download_outlined,
-              color: AppColor.kGrey,
+              color: AppColor.grey,
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.share_outlined,
-              color: AppColor.kGrey,
+              color: AppColor.grey,
             ),
           ),
         ],
@@ -71,12 +71,12 @@ class AssessmentResultPage extends ConsumerWidget {
                             0,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColor.kWhite,
+                            color: AppColor.white,
                             borderRadius:
                                 BorderRadius.circular(AppSize.klradius),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColor.kPrimary.withOpacity(0.2),
+                                color: AppColor.primary.withOpacity(0.2),
                                 blurRadius: 50,
                               ),
                             ],
@@ -117,9 +117,7 @@ class AssessmentResultPage extends ConsumerWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(14.0),
-                              child: SvgPicture.asset(
-                                AppIcon.triageTopIcon,
-                              ),
+                              child: SvgPicture.asset(AppIcon.acuityTest),
                             ),
                           ),
                         )
@@ -146,7 +144,7 @@ class AssessmentResultPage extends ConsumerWidget {
                   "See All",
                   style: TextStyle(
                     fontSize: 14,
-                    color: AppColor.kPrimary,
+                    color: AppColor.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -166,11 +164,11 @@ class AssessmentResultPage extends ConsumerWidget {
                         ),
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: AppColor.kWhite,
+                          color: AppColor.white,
                           borderRadius: BorderRadius.circular(AppSize.ksradius),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColor.kPrimary.withOpacity(0.1),
+                              color: AppColor.primary.withOpacity(0.1),
                               blurRadius: 10,
                             ),
                           ],
@@ -241,7 +239,7 @@ class AssessmentResultPage extends ConsumerWidget {
               height: AppSize.kmheight,
             ),
             ListTile(
-              tileColor: AppColor.kWhite,
+              tileColor: AppColor.white,
               onTap: () async {},
               leading: SvgPicture.asset(
                 AppIcon.tollFree,
@@ -253,7 +251,7 @@ class AssessmentResultPage extends ConsumerWidget {
               subtitle: const Text(
                 "1800 1800 1800",
                 style: TextStyle(
-                  color: AppColor.kBlack,
+                  color: AppColor.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

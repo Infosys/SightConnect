@@ -75,7 +75,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
       ),
       body: isLoading
           ? Container(
-              color: AppColor.kWhite,
+              color: AppColor.white,
               child: const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
@@ -102,7 +102,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
-                        backgroundColor: AppColor.kGrey,
+                        backgroundColor: AppColor.grey,
                         onPressed: _takePicture,
                         child: const Icon(Icons.camera),
                       ),

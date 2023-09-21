@@ -52,7 +52,7 @@ class MyConnectionsList extends StatelessWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kBlue,
+                    color: AppColor.blue,
                   ),
                 ),
               )
@@ -92,13 +92,13 @@ class MyConnectionsList extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppColor.kLightBlue,
+                          color: AppColor.lightBlue,
                           width: 2.0,
                         ),
                       ),
                       child: const Icon(
                         Icons.add,
-                        color: AppColor.kBlue,
+                        color: AppColor.blue,
                       ),
                     ),
                   ),
@@ -107,7 +107,7 @@ class MyConnectionsList extends StatelessWidget {
                     "Add",
                     style: applyFiraSansFont(
                       fontSize: 12,
-                      color: AppColor.kBlue,
+                      color: AppColor.blue,
                     ),
                   ),
                 ],

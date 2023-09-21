@@ -16,7 +16,7 @@ class PatientDetailHeader extends StatelessWidget {
             horizontal: AppSize.kspadding + 2, vertical: AppSize.kspadding),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.kspadding),
-          color: AppColor.kLightBlue,
+          color: AppColor.lightBlue,
         ),
         child: Row(
           children: [
@@ -37,7 +37,7 @@ class PatientDetailHeader extends StatelessWidget {
               style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColor.kGrey),
+                  color: AppColor.grey),
             )
           ],
         ),

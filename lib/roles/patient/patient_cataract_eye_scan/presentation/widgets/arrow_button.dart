@@ -24,8 +24,8 @@ class ArrowButton extends StatelessWidget {
           border: Border.all(
             width: 2,
             color: (activeIndex == 0 && icon == Icons.arrow_back_ios)
-                ? AppColor.kGrey
-                : AppColor.kPrimary,
+                ? AppColor.grey
+                : AppColor.primary,
           ),
         ),
         child: Center(
@@ -33,8 +33,8 @@ class ArrowButton extends StatelessWidget {
             icon,
             size: 20,
             color: (activeIndex == 0 && icon == Icons.arrow_back_ios)
-                ? AppColor.kGrey
-                : AppColor.kPrimary,
+                ? AppColor.grey
+                : AppColor.primary,
           ),
         ),
       ),

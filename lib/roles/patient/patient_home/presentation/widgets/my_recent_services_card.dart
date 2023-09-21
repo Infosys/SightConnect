@@ -32,6 +32,7 @@ class RecentServicesCard extends StatelessWidget {
                   data["icon"],
                   height: AppSize.klpadding,
                   width: AppSize.klpadding,
+                  color: AppColor.black,
                 ),
                 const SizedBox(
                   height: AppSize.ksheight,
@@ -43,7 +44,7 @@ class RecentServicesCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: applyFiraSansFont(
                     fontSize: 12,
-                    color: AppColor.kBlack,
+                    color: AppColor.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

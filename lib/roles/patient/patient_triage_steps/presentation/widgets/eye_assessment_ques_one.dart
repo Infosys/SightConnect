@@ -12,7 +12,7 @@ class EyeAssessementQuesOne extends HookWidget {
   Widget build(BuildContext context) {
     final colorState = useState<int>(-1);
     return Scaffold(
-        backgroundColor: AppColor.kScaffold,
+        backgroundColor: AppColor.scaffold,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -21,7 +21,7 @@ class EyeAssessementQuesOne extends HookWidget {
             children: [
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColor.kBlue,
+                  foregroundColor: AppColor.blue,
                   visualDensity: VisualDensity.compact,
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSize.kspadding + 2,
@@ -31,7 +31,7 @@ class EyeAssessementQuesOne extends HookWidget {
                 child: Text(
                   "Step 1 of 3",
                   style: applyRobotoFont(
-                    color: AppColor.kPrimary,
+                    color: AppColor.primary,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -80,8 +80,8 @@ class EyeAssessementQuesOne extends HookWidget {
                         color: Colors.white,
                         border: Border.all(
                           color: colorState.value == 0
-                              ? AppColor.kPrimary
-                              : AppColor.kGrey.withOpacity(0.5),
+                              ? AppColor.primary
+                              : AppColor.grey.withOpacity(0.5),
                           width: 1.2,
                         ),
                         borderRadius: BorderRadius.circular(10),
@@ -92,8 +92,8 @@ class EyeAssessementQuesOne extends HookWidget {
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
                             color: colorState.value == 0
-                                ? AppColor.kPrimary
-                                : AppColor.kBlack,
+                                ? AppColor.primary
+                                : AppColor.black,
                           ),
                         ),
                       ),
@@ -108,8 +108,8 @@ class EyeAssessementQuesOne extends HookWidget {
                           color: Colors.white,
                           border: Border.all(
                             color: colorState.value == 1
-                                ? AppColor.kPrimary
-                                : AppColor.kGrey.withOpacity(0.5),
+                                ? AppColor.primary
+                                : AppColor.grey.withOpacity(0.5),
                             width: 1.2,
                           ),
                           borderRadius: BorderRadius.circular(10)),
@@ -119,8 +119,8 @@ class EyeAssessementQuesOne extends HookWidget {
                           textAlign: TextAlign.center,
                           style: applyRobotoFont(
                               color: colorState.value == 1
-                                  ? AppColor.kPrimary
-                                  : AppColor.kBlack),
+                                  ? AppColor.primary
+                                  : AppColor.black),
                         ),
                       ),
                     ),
@@ -137,7 +137,6 @@ class EyeAssessementQuesOne extends HookWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                    visualDensity: VisualDensity.comfortable,
                     padding:
                         const MaterialStatePropertyAll(EdgeInsets.symmetric(
                       horizontal: 5,
@@ -153,7 +152,7 @@ class EyeAssessementQuesOne extends HookWidget {
                 },
                 child: Text(
                   "Next",
-                  style: applyRobotoFont(fontSize: 12, color: AppColor.kWhite),
+                  style: applyRobotoFont(fontSize: 12, color: AppColor.white),
                 ),
               ),
             ],

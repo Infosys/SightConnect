@@ -16,7 +16,7 @@ class PatientEyesReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppColor.kScaffold,
+      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: const Text("Eye Report"),
       ),
@@ -49,7 +49,7 @@ class PatientEyesReportPage extends ConsumerWidget {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                       fixedSize: const Size(140, 40),
-                      side: const BorderSide(color: AppColor.kPrimary),
+                      side: const BorderSide(color: AppColor.primary),
                     ),
                     clipBehavior: Clip.hardEdge,
                     onPressed: () {},
@@ -60,7 +60,7 @@ class PatientEyesReportPage extends ConsumerWidget {
                     label: Text(
                       "Scan Again",
                       style: applyRobotoFont(
-                        color: AppColor.kPrimary,
+                        color: AppColor.primary,
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
@@ -70,14 +70,14 @@ class PatientEyesReportPage extends ConsumerWidget {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                       fixedSize: const Size(180, 40),
-                      side: const BorderSide(color: AppColor.kPrimary),
+                      side: const BorderSide(color: AppColor.primary),
                     ),
                     clipBehavior: Clip.hardEdge,
                     onPressed: () {},
                     child: Text(
                       "View Previous Reports",
                       style: applyRobotoFont(
-                          color: AppColor.kPrimary,
+                          color: AppColor.primary,
                           fontSize: 13,
                           fontWeight: FontWeight.w500),
                     ),

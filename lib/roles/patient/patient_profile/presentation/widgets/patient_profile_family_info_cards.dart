@@ -27,7 +27,7 @@ class PatientFamilyDetails extends StatelessWidget {
                 (hospital) => ListTile(
                   contentPadding: const EdgeInsets.all(0),
                   leading: CircleAvatar(
-                    backgroundColor: AppColor.kBlack,
+                    backgroundColor: AppColor.black,
                     child: Text(
                       hospital["name"]?[0] ?? "",
                       style: const TextStyle(
@@ -49,7 +49,7 @@ class PatientFamilyDetails extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 12,
-                      color: AppColor.kGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                   trailing: IconButton(

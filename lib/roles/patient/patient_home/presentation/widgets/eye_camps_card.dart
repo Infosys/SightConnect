@@ -59,7 +59,7 @@ class EyeCampCard extends StatelessWidget {
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: AppColor.kGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                   const SizedBox(height: AppSize.ksheight),
@@ -70,7 +70,7 @@ class EyeCampCard extends StatelessWidget {
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: AppColor.kBlue,
+                        color: AppColor.blue,
                       ),
                     ),
                   ),

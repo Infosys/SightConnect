@@ -46,7 +46,7 @@ class CampaginsCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
                     fontSize: 14,
-                    color: AppColor.kGrey,
+                    color: AppColor.grey,
                   ),
                 ),
                 Flexible(
@@ -58,7 +58,7 @@ class CampaginsCard extends StatelessWidget {
                       "Read More",
                       style: applyRobotoFont(
                         fontSize: 14,
-                        color: AppColor.kPrimary,
+                        color: AppColor.primary,
                       ),
                     ),
                     onPressed: () {},

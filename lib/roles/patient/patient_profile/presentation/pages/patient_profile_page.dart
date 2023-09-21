@@ -22,13 +22,13 @@ class PatientProfilePage extends ConsumerWidget {
         preferredSize: const Size.fromHeight(100),
         child: AppBar(
           iconTheme: const IconThemeData(
-            color: AppColor.kWhite,
+            color: AppColor.white,
           ),
           title: Text(
             "Profile",
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
-              color: AppColor.kWhite,
+              color: AppColor.white,
             ),
           ),
           backgroundColor: Colors.transparent,
@@ -37,7 +37,7 @@ class PatientProfilePage extends ConsumerWidget {
               onPressed: () {},
               icon: const Icon(
                 Icons.edit_outlined,
-                color: AppColor.kWhite,
+                color: AppColor.white,
               ),
             )
           ],

@@ -89,7 +89,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           borderType: BorderType.RRect,
           radius: const Radius.circular(AppSize.klradius),
           padding: const EdgeInsets.all(AppSize.kspadding),
-          color: AppColor.kGrey,
+          color: AppColor.grey,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             child: Center(
@@ -97,7 +97,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                 "Swipe in the direction of the symbol",
                 style: applyRobotoFont(
                   fontSize: 14,
-                  color: AppColor.kGrey,
+                  color: AppColor.grey,
                 ),
               ),
             ),
@@ -121,7 +121,7 @@ class SwipeGestureCard extends HookConsumerWidget {
               AppImages.checkMark,
               height: 40,
               width: 40,
-              color: AppColor.kGreen,
+              color: AppColor.green,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,

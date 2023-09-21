@@ -56,9 +56,9 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
                     activeIndex: activeIndex.value,
                     count: 7,
                     effect: const SlideEffect(
-                      activeDotColor: AppColor.kPrimary,
+                      activeDotColor: AppColor.primary,
                       radius: 2,
-                      dotColor: AppColor.kLightGrey,
+                      dotColor: AppColor.lightGrey,
                       dotHeight: 5,
                       dotWidth: 20,
                       spacing: 4,
@@ -96,11 +96,10 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
               style: TextButton.styleFrom(
                 fixedSize: const Size(0, 50),
                 side: const BorderSide(
-                  color: AppColor.kPrimary,
+                  color: AppColor.primary,
                 ),
-                backgroundColor: activeIndex.value == 6
-                    ? AppColor.kPrimary
-                    : AppColor.kWhite,
+                backgroundColor:
+                    activeIndex.value == 6 ? AppColor.primary : AppColor.white,
               ),
               onPressed: () {
                 ref.read(patientEyeScanProvider).resetImages();
@@ -117,8 +116,8 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
                 style: applyRobotoFont(
                   fontWeight: FontWeight.w500,
                   color: activeIndex.value == 6
-                      ? AppColor.kWhite
-                      : AppColor.kPrimary,
+                      ? AppColor.white
+                      : AppColor.primary,
                 ),
               ),
             ),

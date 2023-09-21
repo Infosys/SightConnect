@@ -13,17 +13,17 @@ class RecentServicesCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var data = [
-      {"icon": AppIcon.triage, "text": "Triage", "color": AppColor.kPaleYellow},
+      {"icon": AppIcon.triage, "text": "Triage", "color": AppColor.paleYellow},
       {
         "icon": AppIcon.acuityTest,
         "text": "Acuity test",
-        "color": AppColor.kLavanderBlue
+        "color": AppColor.lavanderBlue
       },
-      {"icon": AppIcon.pledge, "text": "Pledge", "color": AppColor.kTeaGreen},
+      {"icon": AppIcon.pledge, "text": "Pledge", "color": AppColor.teaGreen},
       {
         "icon": AppIcon.eyeScanner,
         "text": "Eye Scanner",
-        "color": AppColor.kBisque
+        "color": AppColor.bisque
       },
     ];
     return Container(
@@ -52,7 +52,7 @@ class RecentServicesCardList extends StatelessWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.kBlue,
+                    color: AppColor.blue,
                   ),
                 ),
               ),
