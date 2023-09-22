@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/camera_controllers.dart';
@@ -132,9 +133,11 @@ class _PatientEyeCaptureTriagePageState
         isLoading = false;
       });
       if (currentEye == TriageEye.RIGHT_EYE) {
+        ref.read(patientTriageEyeScanProvider).setRightEyeImage(image);
         ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
         _showSuccessDialog(TriageEye.RIGHT_EYE);
       } else {
+        ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
         _showSuccessDialog(TriageEye.LEFT_EYE);
       }
     } on CameraException catch (e) {

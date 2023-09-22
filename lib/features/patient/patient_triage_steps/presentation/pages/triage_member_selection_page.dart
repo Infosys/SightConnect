@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/pages/patient_triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/pages/triage_add_member_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/pages/triage_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -61,7 +61,7 @@ class TriageMemberSelectionPage extends HookWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const TriageEyeAssessmentPage(),
+                builder: (context) => const PatientTriageQuestionnairePage(),
                 fullscreenDialog: true,
               ),
             );
