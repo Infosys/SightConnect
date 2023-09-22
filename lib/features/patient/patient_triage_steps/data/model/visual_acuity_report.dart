@@ -18,8 +18,8 @@ class VisualAcuityReport with _$VisualAcuityReport {
     double? logMarLDC,
     String? leftEyeRemark,
     String? rightEyeRemark,
-    @Default(EyeCondition.NORMAL) EyeCondition leftEyeCondition,
-    @Default(EyeCondition.NORMAL) EyeCondition rightEyeCondition,
+    @Default(TriageEyeCondition.NORMAL) TriageEyeCondition leftEyeCondition,
+    @Default(TriageEyeCondition.NORMAL) TriageEyeCondition rightEyeCondition,
     String? remarks,
   }) = _VisualAcuityReport;
 

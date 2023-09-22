@@ -23,7 +23,7 @@ class ArtifactImage with _$ArtifactImage {
     @TimestampConverter() DateTime? timestamp,
     String? baseUrl,
     String? path,
-    EyeType? type,
+    TriageEyeType? type,
   }) = _ArtifactImage;
 
   factory ArtifactImage.fromJson(Map<String, Object?> json) =>

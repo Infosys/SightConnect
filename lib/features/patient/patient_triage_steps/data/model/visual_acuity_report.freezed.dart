@@ -31,8 +31,9 @@ mixin _$VisualAcuityReport {
   double? get logMarLDC => throw _privateConstructorUsedError;
   String? get leftEyeRemark => throw _privateConstructorUsedError;
   String? get rightEyeRemark => throw _privateConstructorUsedError;
-  EyeCondition get leftEyeCondition => throw _privateConstructorUsedError;
-  EyeCondition get rightEyeCondition => throw _privateConstructorUsedError;
+  TriageEyeCondition get leftEyeCondition => throw _privateConstructorUsedError;
+  TriageEyeCondition get rightEyeCondition =>
+      throw _privateConstructorUsedError;
   String? get remarks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,8 +60,8 @@ abstract class $VisualAcuityReportCopyWith<$Res> {
       double? logMarLDC,
       String? leftEyeRemark,
       String? rightEyeRemark,
-      EyeCondition leftEyeCondition,
-      EyeCondition rightEyeCondition,
+      TriageEyeCondition leftEyeCondition,
+      TriageEyeCondition rightEyeCondition,
       String? remarks});
 }
 
@@ -140,11 +141,11 @@ class _$VisualAcuityReportCopyWithImpl<$Res, $Val extends VisualAcuityReport>
       leftEyeCondition: null == leftEyeCondition
           ? _value.leftEyeCondition
           : leftEyeCondition // ignore: cast_nullable_to_non_nullable
-              as EyeCondition,
+              as TriageEyeCondition,
       rightEyeCondition: null == rightEyeCondition
           ? _value.rightEyeCondition
           : rightEyeCondition // ignore: cast_nullable_to_non_nullable
-              as EyeCondition,
+              as TriageEyeCondition,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -173,8 +174,8 @@ abstract class _$$_VisualAcuityReportCopyWith<$Res>
       double? logMarLDC,
       String? leftEyeRemark,
       String? rightEyeRemark,
-      EyeCondition leftEyeCondition,
-      EyeCondition rightEyeCondition,
+      TriageEyeCondition leftEyeCondition,
+      TriageEyeCondition rightEyeCondition,
       String? remarks});
 }
 
@@ -252,11 +253,11 @@ class __$$_VisualAcuityReportCopyWithImpl<$Res>
       leftEyeCondition: null == leftEyeCondition
           ? _value.leftEyeCondition
           : leftEyeCondition // ignore: cast_nullable_to_non_nullable
-              as EyeCondition,
+              as TriageEyeCondition,
       rightEyeCondition: null == rightEyeCondition
           ? _value.rightEyeCondition
           : rightEyeCondition // ignore: cast_nullable_to_non_nullable
-              as EyeCondition,
+              as TriageEyeCondition,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -280,8 +281,8 @@ class _$_VisualAcuityReport implements _VisualAcuityReport {
       this.logMarLDC,
       this.leftEyeRemark,
       this.rightEyeRemark,
-      this.leftEyeCondition = EyeCondition.NORMAL,
-      this.rightEyeCondition = EyeCondition.NORMAL,
+      this.leftEyeCondition = TriageEyeCondition.NORMAL,
+      this.rightEyeCondition = TriageEyeCondition.NORMAL,
       this.remarks});
 
   factory _$_VisualAcuityReport.fromJson(Map<String, dynamic> json) =>
@@ -311,10 +312,10 @@ class _$_VisualAcuityReport implements _VisualAcuityReport {
   final String? rightEyeRemark;
   @override
   @JsonKey()
-  final EyeCondition leftEyeCondition;
+  final TriageEyeCondition leftEyeCondition;
   @override
   @JsonKey()
-  final EyeCondition rightEyeCondition;
+  final TriageEyeCondition rightEyeCondition;
   @override
   final String? remarks;
 
@@ -403,8 +404,8 @@ abstract class _VisualAcuityReport implements VisualAcuityReport {
       final double? logMarLDC,
       final String? leftEyeRemark,
       final String? rightEyeRemark,
-      final EyeCondition leftEyeCondition,
-      final EyeCondition rightEyeCondition,
+      final TriageEyeCondition leftEyeCondition,
+      final TriageEyeCondition rightEyeCondition,
       final String? remarks}) = _$_VisualAcuityReport;
 
   factory _VisualAcuityReport.fromJson(Map<String, dynamic> json) =
@@ -433,9 +434,9 @@ abstract class _VisualAcuityReport implements VisualAcuityReport {
   @override
   String? get rightEyeRemark;
   @override
-  EyeCondition get leftEyeCondition;
+  TriageEyeCondition get leftEyeCondition;
   @override
-  EyeCondition get rightEyeCondition;
+  TriageEyeCondition get rightEyeCondition;
   @override
   String? get remarks;
   @override

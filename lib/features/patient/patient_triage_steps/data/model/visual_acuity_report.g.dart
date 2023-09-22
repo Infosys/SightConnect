@@ -21,11 +21,11 @@ _$_VisualAcuityReport _$$_VisualAcuityReportFromJson(
       leftEyeRemark: json['leftEyeRemark'] as String?,
       rightEyeRemark: json['rightEyeRemark'] as String?,
       leftEyeCondition: $enumDecodeNullable(
-              _$EyeConditionEnumMap, json['leftEyeCondition']) ??
-          EyeCondition.NORMAL,
+              _$TriageEyeConditionEnumMap, json['leftEyeCondition']) ??
+          TriageEyeCondition.NORMAL,
       rightEyeCondition: $enumDecodeNullable(
-              _$EyeConditionEnumMap, json['rightEyeCondition']) ??
-          EyeCondition.NORMAL,
+              _$TriageEyeConditionEnumMap, json['rightEyeCondition']) ??
+          TriageEyeCondition.NORMAL,
       remarks: json['remarks'] as String?,
     );
 
@@ -43,15 +43,17 @@ Map<String, dynamic> _$$_VisualAcuityReportToJson(
       'logMarLDC': instance.logMarLDC,
       'leftEyeRemark': instance.leftEyeRemark,
       'rightEyeRemark': instance.rightEyeRemark,
-      'leftEyeCondition': _$EyeConditionEnumMap[instance.leftEyeCondition]!,
-      'rightEyeCondition': _$EyeConditionEnumMap[instance.rightEyeCondition]!,
+      'leftEyeCondition':
+          _$TriageEyeConditionEnumMap[instance.leftEyeCondition]!,
+      'rightEyeCondition':
+          _$TriageEyeConditionEnumMap[instance.rightEyeCondition]!,
       'remarks': instance.remarks,
     };
 
-const _$EyeConditionEnumMap = {
-  EyeCondition.NORMAL: 'NORMAL',
-  EyeCondition.CATARACT: 'CATARACT',
-  EyeCondition.GLAUCOMA: 'GLAUCOMA',
-  EyeCondition.RETINA: 'RETINA',
-  EyeCondition.OTHERS: 'OTHERS',
+const _$TriageEyeConditionEnumMap = {
+  TriageEyeCondition.NORMAL: 'NORMAL',
+  TriageEyeCondition.CATARACT: 'CATARACT',
+  TriageEyeCondition.GLAUCOMA: 'GLAUCOMA',
+  TriageEyeCondition.RETINA: 'RETINA',
+  TriageEyeCondition.OTHERS: 'OTHERS',
 };

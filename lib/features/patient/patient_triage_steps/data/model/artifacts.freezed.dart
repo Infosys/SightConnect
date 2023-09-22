@@ -186,7 +186,7 @@ mixin _$ArtifactImage {
   DateTime? get timestamp => throw _privateConstructorUsedError;
   String? get baseUrl => throw _privateConstructorUsedError;
   String? get path => throw _privateConstructorUsedError;
-  EyeType? get type => throw _privateConstructorUsedError;
+  TriageEyeType? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -205,7 +205,7 @@ abstract class $ArtifactImageCopyWith<$Res> {
       @TimestampConverter() DateTime? timestamp,
       String? baseUrl,
       String? path,
-      EyeType? type});
+      TriageEyeType? type});
 }
 
 /// @nodoc
@@ -247,7 +247,7 @@ class _$ArtifactImageCopyWithImpl<$Res, $Val extends ArtifactImage>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as EyeType?,
+              as TriageEyeType?,
     ) as $Val);
   }
 }
@@ -265,7 +265,7 @@ abstract class _$$_ArtifactImageCopyWith<$Res>
       @TimestampConverter() DateTime? timestamp,
       String? baseUrl,
       String? path,
-      EyeType? type});
+      TriageEyeType? type});
 }
 
 /// @nodoc
@@ -305,7 +305,7 @@ class __$$_ArtifactImageCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as EyeType?,
+              as TriageEyeType?,
     ));
   }
 }
@@ -333,7 +333,7 @@ class _$_ArtifactImage implements _ArtifactImage {
   @override
   final String? path;
   @override
-  final EyeType? type;
+  final TriageEyeType? type;
 
   @override
   String toString() {
@@ -378,7 +378,7 @@ abstract class _ArtifactImage implements ArtifactImage {
       @TimestampConverter() final DateTime? timestamp,
       final String? baseUrl,
       final String? path,
-      final EyeType? type}) = _$_ArtifactImage;
+      final TriageEyeType? type}) = _$_ArtifactImage;
 
   factory _ArtifactImage.fromJson(Map<String, dynamic> json) =
       _$_ArtifactImage.fromJson;
@@ -393,7 +393,7 @@ abstract class _ArtifactImage implements ArtifactImage {
   @override
   String? get path;
   @override
-  EyeType? get type;
+  TriageEyeType? get type;
   @override
   @JsonKey(ignore: true)
   _$$_ArtifactImageCopyWith<_$_ArtifactImage> get copyWith =>

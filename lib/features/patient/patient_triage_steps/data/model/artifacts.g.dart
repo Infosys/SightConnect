@@ -26,7 +26,7 @@ _$_ArtifactImage _$$_ArtifactImageFromJson(Map<String, dynamic> json) =>
           const TimestampConverter().fromJson(json['timestamp'] as String?),
       baseUrl: json['baseUrl'] as String?,
       path: json['path'] as String?,
-      type: $enumDecodeNullable(_$EyeTypeEnumMap, json['type']),
+      type: $enumDecodeNullable(_$TriageEyeTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$$_ArtifactImageToJson(_$_ArtifactImage instance) =>
@@ -35,11 +35,11 @@ Map<String, dynamic> _$$_ArtifactImageToJson(_$_ArtifactImage instance) =>
       'timestamp': const TimestampConverter().toJson(instance.timestamp),
       'baseUrl': instance.baseUrl,
       'path': instance.path,
-      'type': _$EyeTypeEnumMap[instance.type],
+      'type': _$TriageEyeTypeEnumMap[instance.type],
     };
 
-const _$EyeTypeEnumMap = {
-  EyeType.LEFT: 'LEFT',
-  EyeType.RIGHT: 'RIGHT',
-  EyeType.BOTH: 'BOTH',
+const _$TriageEyeTypeEnumMap = {
+  TriageEyeType.LEFT: 'LEFT',
+  TriageEyeType.RIGHT: 'RIGHT',
+  TriageEyeType.BOTH: 'BOTH',
 };
