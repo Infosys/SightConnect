@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -267,6 +268,7 @@ class AssessmentResultPage extends ConsumerWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
+                        ref.read(patientTriageEyeScanProvider).printImage();
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                         ref.read(patientHomeProvider).changeIndex(0);
