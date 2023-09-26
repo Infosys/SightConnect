@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/pages/patient_triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/widget/member_details_form.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,18 +12,9 @@ class TriageAddMemberPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedValue = useState<int>(-1);
-    final nameFocusNode = useFocusNode();
-    final contactFocusNode = useFocusNode();
-    final nameFocus = useState(false);
-    final contactFocus = useState(false);
-    nameFocusNode.addListener(() {
-      nameFocus.value = nameFocusNode.hasFocus;
-    });
-    contactFocusNode.addListener(() {
-      contactFocus.value = contactFocusNode.hasFocus;
-    });
 
     return Scaffold(
+      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: const Text("Add Member"),
       ),
@@ -32,6 +24,9 @@ class TriageAddMemberPage extends HookWidget {
           vertical: AppSize.height(context) * 0.05,
         ),
         child: ElevatedButton(
+          style: const ButtonStyle(
+            visualDensity: VisualDensity.comfortable,
+          ),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -40,20 +35,19 @@ class TriageAddMemberPage extends HookWidget {
               ),
             );
           },
-          child: const Text('Save & Proceed to Questions'),
+          child: const Text('Save & Proceed'),
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: Column(
-            children: [
-              Card(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Card(
                 elevation: 2,
                 child: Padding(
-                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -64,35 +58,40 @@ class TriageAddMemberPage extends HookWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: AppSize.width(context) * 0.8,
-                        child: TextField(
-                          focusNode: nameFocusNode,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1.0,
-                                color: AppColor.primary,
-                              ),
-                            ),
-                            labelText: "Name",
-                            labelStyle: applyRobotoFont(
-                              fontSize: 14,
-                              color: nameFocus.value
-                                  ? AppColor.primary
-                                  : AppColor.black,
-                            ),
-                          ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: MemberDetailsForm(
+                              text: 'Name',
+                            ))
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: 5,
+                          bottom: 25,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: MemberDetailsForm(
+                              text: 'Date of Birth',
+                            ))
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       const Text("Gender"),
-                      const SizedBox(height: 10),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -137,40 +136,50 @@ class TriageAddMemberPage extends HookWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: AppSize.width(context) * 0.8,
-                        child: TextField(
-                          focusNode: contactFocusNode,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1.0,
-                                color: AppColor.primary,
-                              ),
-                            ),
-                            labelText: "Contact Number",
-                            labelStyle: applyRobotoFont(
-                              fontSize: 14,
-                              color: contactFocus.value
-                                  ? AppColor.primary
-                                  : AppColor.black,
-                            ),
-                          ),
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: 5,
+                          bottom: 25,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: MemberDetailsForm(
+                              text: 'Mobile Number',
+                            ))
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: 5,
+                          bottom: 25,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: MemberDetailsForm(
+                              text: 'Address (Pincode)',
+                            ))
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.all(8),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                ),
                 decoration: BoxDecoration(
                   color: AppColor.white,
                   borderRadius: BorderRadius.circular(5),
@@ -193,9 +202,9 @@ class TriageAddMemberPage extends HookWidget {
                     )
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

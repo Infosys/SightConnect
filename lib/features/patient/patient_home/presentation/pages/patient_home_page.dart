@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/campaigns_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/good_to_know_list.dart';
@@ -10,7 +12,6 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/priority_notification_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
-import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final iconProviderstate = ref.watch(iconProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -62,18 +64,25 @@ class PatientHomePage extends ConsumerWidget {
           InkWell(
             customBorder: const CircleBorder(),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const PatientNotificationPage(),
-                ),
+              showDialog(
+                context: context,
+                builder: (context) => const MemberSelectionPopUp(),
+                barrierDismissible: false,
+                barrierColor: AppColor.blackOpacity,
               );
             },
             child: CircleAvatar(
               radius: 20,
               backgroundColor: Theme.of(context).primaryColor,
-              child: const CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage('assets/images/profile_image.png'),
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  return CircleAvatar(
+                    radius: 18,
+                    backgroundImage: iconProviderstate.myString == ""
+                        ? const AssetImage('assets/images/profile_image.png')
+                        : AssetImage(iconProviderstate.myString),
+                  );
+                },
               ),
             ),
           ),

@@ -74,7 +74,7 @@ class BottomInputTabState extends State<BottomInputTab>
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
-              children: const <Widget>[SwipeGestureCard(), VoiceAssistCard()],
+              children: <Widget>[const SwipeGestureCard(), VoiceAssistCard()],
             ),
           ),
         ],
