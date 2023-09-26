@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/data/model/visual_acuity_report.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/models/enums/tumbling_enums.dart';
@@ -135,9 +137,26 @@ class TumblingTestProvider with ChangeNotifier {
 
     return _dataSource.getLogMarFromLevel(value);
   }
+
+  VisualAcuityReport getTriageTumblingEResponse() {
+    return VisualAcuityReport(
+      id: 0,
+      logMarLNE: calculateLeftEyeSigth(),
+      logMarRNE: calculateRightEyeSigth(),
+      logMarLDE: calculateLeftEyeSigth(),
+      logMarRDE: calculateRightEyeSigth(),
+      logMarLNC: calculateLeftEyeSigth(),
+      logMarRNC: calculateRightEyeSigth(),
+      logMarLDC: calculateLeftEyeSigth(),
+      logMarRDC: calculateRightEyeSigth(),
+      leftEyeCondition: TriageEyeCondition.NORMAL,
+      rightEyeCondition: TriageEyeCondition.NORMAL,
+    );
+  }
 }
 
-final tumblingTestProvider =
-    ChangeNotifierProvider.autoDispose<TumblingTestProvider>((ref) {
-  return TumblingTestProvider(TumblingDataSource());
-});
+var tumblingTestProvider = ChangeNotifierProvider(
+  (ref) => TumblingTestProvider(
+    TumblingDataSource(),
+  ),
+);

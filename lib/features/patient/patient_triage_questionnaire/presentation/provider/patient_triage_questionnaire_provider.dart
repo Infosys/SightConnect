@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/data/model/triage_question.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/data/model/triage_response.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -70,5 +71,48 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
     questions[questionIndex].answers[answerIndex].isAnswered =
         !questions[questionIndex].answers[answerIndex].isAnswered;
     notifyListeners();
+  }
+
+  TriageResponse getTriageQuestionnaireResponse() {
+    List<TraigeQuestion> triageResponse = [];
+    int counter = 1;
+
+    for (int i = 0; i < questions.length; i++) {
+      for (int j = 0; j < questions[i].answers.length; j++) {
+        triageResponse.add(
+          TraigeQuestion(
+            questionID: "q$counter",
+            symptoms: questions[i].answers[j].answer,
+            weightage: 1,
+            isSelected: questions[i].answers[j].isAnswered,
+          ),
+        );
+        counter++;
+      }
+    }
+
+    return TriageResponse(
+      id: 0,
+      json: triageResponse.toString(),
+    );
+  }
+}
+
+class TraigeQuestion {
+  String questionID; //q1,q2,q3
+  String symptoms; //color halos,curtain like appearance
+  int weightage; //1,2,3
+  bool isSelected; //true,false
+
+  TraigeQuestion({
+    required this.questionID,
+    required this.symptoms,
+    required this.weightage,
+    this.isSelected = false,
+  });
+
+  @override
+  String toString() {
+    return 'TraigeQuestion(questionID: $questionID, symptoms: $symptoms, weightage: $weightage, isSelected: $isSelected)';
   }
 }

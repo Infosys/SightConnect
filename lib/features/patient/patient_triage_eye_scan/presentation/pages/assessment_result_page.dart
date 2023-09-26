@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/providers/patient_triage_steps_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +31,9 @@ class AssessmentResultPage extends ConsumerWidget {
         title: const Text("Assessment Result"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ref.read(patientTriageStepsProvider).getTriageDetails();
+            },
             icon: const Icon(
               Icons.download_outlined,
               color: AppColor.grey,

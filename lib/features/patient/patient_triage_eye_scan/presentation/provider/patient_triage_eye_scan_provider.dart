@@ -26,6 +26,17 @@ class PatientTriageEyeScanProvider with ChangeNotifier {
       _rightEyeImage!.path,
     ]);
   }
+
+  Map<String, List<String>?> getTriageEyeScanResponse() {
+    return {
+      "leftEyeImage": [
+        _leftEyeImage!.path,
+      ],
+      "rightEyeImage": [
+        _rightEyeImage!.path,
+      ],
+    };
+  }
 }
 
 var patientTriageEyeScanProvider =
