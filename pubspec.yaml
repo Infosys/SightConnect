@@ -55,6 +55,23 @@ dependencies:
   logger: ^2.0.2
   openid_client: ^0.4.7
   change_app_package_name: ^1.1.0
+  flutter_native_splash: ^2.3.2
+
+
+# flutter_native_splash-production.yaml
+flutter_native_splash:
+  color: "#286DF6"
+  image: assets/logo/logo.png
+  branding: assets/logo/infosys logo.png
+  icon_background_color: "#ffffff"
+
+  android_12:
+    color: "#286DF6"
+    image: assets/logo/logo.png
+    branding: assets/logo/infosys logo.png
+    icon_background_color: "#ffffff"
+
+  web: false
 
  
   
