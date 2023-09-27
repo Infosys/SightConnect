@@ -127,7 +127,6 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   TriageResponse getTriageQuestionnaireResponse() {
     List<TraigeQuestion> triageResponse = [];
     int counter = 1;
-
     for (int i = 0; i < questions.length; i++) {
       for (int j = 0; j < questions[i].answers.length; j++) {
         triageResponse.add(
