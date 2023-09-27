@@ -46,37 +46,41 @@ class ExperthelpCard extends StatelessWidget {
                     vertical: AppSize.kspadding, horizontal: AppSize.kmpadding),
                 child: Row(
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(0),
-                        backgroundColor: AppColor.primary,
-                        fixedSize: const Size(150, 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
+                          backgroundColor: AppColor.primary,
+                          fixedSize: const Size(150, 40),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          "Consult a Doctor",
+                          style: applyRobotoFont(
+                              color: AppColor.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        "Consult a Doctor",
-                        style: applyRobotoFont(
-                            color: AppColor.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
                     ),
-                    const Spacer(),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.trending_up,
-                        color: AppColor.green,
-                      ),
-                      label: Text(
-                        "1k+ got helped so far",
-                        style: applyRobotoFont(
-                            color: AppColor.green,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: TextButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.trending_up,
+                          color: AppColor.green,
+                        ),
+                        label: Text(
+                          "1k+ got helped so far",
+                          softWrap: true,
+                          style: applyRobotoFont(
+                              color: AppColor.green,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ],

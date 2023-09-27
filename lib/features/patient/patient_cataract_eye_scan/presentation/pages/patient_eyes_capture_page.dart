@@ -25,6 +25,7 @@ class PatientEyeCapturePage extends StatefulHookConsumerWidget {
 class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
   late CameraDescription? cameraDescription;
   bool isLoading = false;
+  bool isProcessing = false;
   late CameraController? cameraController;
 
   @override
@@ -89,16 +90,16 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                             null ||
                         ref.watch(patientEyeScanProvider).leftEyeImage == null)
                       CameraPreview(cameraController!),
-                    if (ref.watch(patientEyeScanProvider).rightEyeImage != null)
-                      Image.file(
-                        ref.watch(patientEyeScanProvider).rightEyeImage!,
-                        fit: BoxFit.cover,
-                      ),
-                    if (ref.watch(patientEyeScanProvider).leftEyeImage != null)
-                      Image.file(
-                        ref.watch(patientEyeScanProvider).leftEyeImage!,
-                        fit: BoxFit.cover,
-                      ),
+                    // if (ref.watch(patientEyeScanProvider).rightEyeImage != null)
+                    //   Image.file(
+                    //     ref.watch(patientEyeScanProvider).rightEyeImage!,
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    // if (ref.watch(patientEyeScanProvider).leftEyeImage != null)
+                    //   Image.file(
+                    //     ref.watch(patientEyeScanProvider).leftEyeImage!,
+                    //     fit: BoxFit.cover,
+                    //   ),
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
@@ -107,6 +108,15 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                         child: const Icon(Icons.camera),
                       ),
                     ),
+                    if (isProcessing)
+                      Positioned.fill(
+                        child: Container(
+                          color: Colors.black.withOpacity(0.5),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -122,6 +132,10 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     if (cameraController!.value.isTakingPicture) {
       return null;
     }
+    setState(() {
+      isProcessing =
+          true; // Set the flag to indicate that the picture is being processed
+    });
     try {
       cameraController!.takePicture().then((image) {
         var eye = ref.watch(patientEyeScanProvider).currentEye;
