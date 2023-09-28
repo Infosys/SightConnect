@@ -13,7 +13,7 @@ class AppImages {
   static const String swipeUp = 'assets/images/swipe_up.svg';
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
-  static const String tumblingE = 'assets/images/tumbling_E.svg';
+  static const String tumblingE = 'assets/images/tumbling_e.svg';
 
   ///services
 
@@ -62,9 +62,9 @@ class AppImages {
 
   //connections
 
-  static const String raghavi = 'assets/images/connection_dp_one';
-  static const String chunky = 'assets/images/connection_dp_two';
-  static const String mangal = 'assets/images/connection_dp_three';
+  static const String raghavi = 'assets/images/connection_dp_one.png';
+  static const String chunky = 'assets/images/connection_dp_two.png';
+  static const String mangal = 'assets/images/connection_dp_three.png';
 
   //eye camp images
 

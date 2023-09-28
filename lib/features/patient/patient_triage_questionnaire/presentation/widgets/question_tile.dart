@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/data/model/triage_question.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/provider/patient_triage_questionnaire_provider.dart';
@@ -44,10 +45,33 @@ class QuestionTile extends ConsumerWidget {
           const SizedBox(
             height: AppSize.klheight,
           ),
-          ElevatedButton(
-            onPressed: onNext,
-            child: const Text('Next'),
-          ),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    shape: MaterialStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                    padding: const MaterialStatePropertyAll(
+                      EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 10,
+                      ),
+                    ),
+                  ),
+                  onPressed: onNext,
+                  child: Text(
+                    "Next",
+                    style:
+                        applyRobotoFont(fontSize: 14, color: AppColor.white),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
