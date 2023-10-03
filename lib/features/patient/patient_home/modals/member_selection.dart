@@ -157,9 +157,6 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: ElevatedButton(
-                          style: const ButtonStyle(
-                            visualDensity: VisualDensity.comfortable,
-                          ),
                           onPressed: () {
                             Navigator.pop(context);
                           },

@@ -3,7 +3,9 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/providers/patient_triage_steps_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +28,14 @@ class AssessmentResultPage extends ConsumerWidget {
         "phone": "99634 78760"
       },
     ];
+
+    resetTraige() {
+      ref.invalidate(patientTriageQuestionnaireProvider);
+      ref.invalidate(patientTriageEyeScanProvider);
+      ref.invalidate(tumblingTestProvider);
+      ref.invalidate(patientTriageStepsProvider);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Assessment Result"),
@@ -274,6 +284,7 @@ class AssessmentResultPage extends ConsumerWidget {
                         ref.read(patientTriageEyeScanProvider).printImage();
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
+                        resetTraige();
                         ref.read(patientHomeProvider).changeIndex(0);
                       },
                       child: const Text("Home"),
@@ -285,6 +296,7 @@ class AssessmentResultPage extends ConsumerWidget {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {
+                        resetTraige();
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                       },

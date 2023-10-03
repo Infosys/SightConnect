@@ -31,13 +31,21 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
           children: [
             OutlinedButton(
               style: OutlinedButton.styleFrom(
+                foregroundColor: AppColor.blue,
+                visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
+                  horizontal: AppSize.kspadding + 2,
                 ),
               ),
               onPressed: () {},
-              child: const Text("Step 2 of 3"),
+              child: Text(
+                "Step 2 of 3",
+                style: applyRobotoFont(
+                  color: AppColor.primary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Text(
