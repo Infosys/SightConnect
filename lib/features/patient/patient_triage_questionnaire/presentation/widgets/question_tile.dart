@@ -55,18 +55,11 @@ class QuestionTile extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                    padding: const MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(
-                        horizontal: 5,
-                        vertical: 10,
-                      ),
-                    ),
                   ),
                   onPressed: onNext,
                   child: Text(
                     "Next",
-                    style:
-                        applyRobotoFont(fontSize: 14, color: AppColor.white),
+                    style: applyRobotoFont(fontSize: 14, color: AppColor.white),
                   ),
                 ),
               ),

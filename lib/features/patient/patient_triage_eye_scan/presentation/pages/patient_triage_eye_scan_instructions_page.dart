@@ -16,15 +16,13 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
-                ),
+            Text(
+              "Step 3 of 3",
+              style: applyRobotoFont(
+                color: AppColor.primary,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
-              onPressed: () {},
-              child: const Text("Step 3 of 3"),
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Text('Eye Photos'),
@@ -38,7 +36,7 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Capturing the photos of your eyes will help in identifying the visible and noticeable eye issues. This will help us identify the severity of some eye problems.',
+                'You are close! Just one more test to go. Capture the photos of your eyes next.',
                 softWrap: true,
                 style: applyRobotoFont(
                   fontSize: 14,
@@ -46,10 +44,9 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
               ),
               const SizedBox(height: AppSize.kmheight),
               Text(
-                "Demonstration",
-                style: applyRobotoFont(
-                  fontSize: 18,
-                ),
+                "How to scan your eyes?",
+                style:
+                    applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: AppSize.kmheight),
               Container(
@@ -74,25 +71,42 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSize.kmheight),
-              Text(
-                "View Demonstration to know how to capture the photos of your eyes.",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                child: Divider(),
               ),
-              const SizedBox(height: AppSize.kmheight),
-              ListTile(
+              const SizedBox(height: AppSize.klheight),
+              InkWell(
                 onTap: () {},
-                tileColor: AppColor.white,
-                title: Text(
-                  "View Steps to know how to capture the photos of your eyes.",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w500,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColor.primary.withOpacity(0.1),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.vibration, color: AppColor.blue),
+                      const SizedBox(width: AppSize.kswidth),
+                      Text(
+                        "View Steps to perform Tumbling E Test",
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -5,10 +5,12 @@ class EyeScanCameraAlertBox extends StatelessWidget {
   const EyeScanCameraAlertBox({
     super.key,
     this.title,
+    this.buttonText,
     this.message,
     this.onOkCallBack,
   });
   final String? title;
+  final String? buttonText;
   final String? message;
   final VoidCallback? onOkCallBack;
 
@@ -18,7 +20,6 @@ class EyeScanCameraAlertBox extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.klradius),
       ),
-      title: Text(title ?? ""),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -35,7 +36,7 @@ class EyeScanCameraAlertBox extends StatelessWidget {
             Navigator.of(context).pop();
             onOkCallBack?.call();
           },
-          child: const Text("OK"),
+          child: Text(buttonText!),
         ),
       ],
     );

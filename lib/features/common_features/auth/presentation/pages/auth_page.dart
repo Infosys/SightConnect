@@ -12,6 +12,7 @@ class AuthPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const PatientDashboardPage();
+
     // ref.listen(authProvider, (previous, next) {
     //   if (next.userInfo != null) {
     //     Navigator.of(context).pushAndRemoveUntil(

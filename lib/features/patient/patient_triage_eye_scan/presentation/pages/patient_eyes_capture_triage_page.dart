@@ -195,16 +195,17 @@ class _PatientEyeCaptureTriagePageState
       showDialog(
         context: context,
         builder: (context) => const EyeScanCameraAlertBox(
-          title: "Success",
-          message: "Right eye image captured successfully.",
+          buttonText: "Ok",
+          message:
+              "Done! right eye image is captured.\n\nNow, let's capture your left eye.",
         ),
       );
     } else {
       showDialog(
         context: context,
         builder: (context) => EyeScanCameraAlertBox(
-          title: "Success",
-          message: "Left eye image captured successfully.",
+          buttonText: "Proceed",
+          message: "Done! Left eye image is captured.",
           onOkCallBack: () {
             Navigator.of(context).push(
               MaterialPageRoute(

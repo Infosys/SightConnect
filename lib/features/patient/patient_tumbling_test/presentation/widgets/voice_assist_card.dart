@@ -43,7 +43,7 @@ class VoiceAssistCard extends HookWidget {
                     ),
                   ),
                   child: AvatarGlow(
-                    endRadius: 75,
+                    endRadius: 30,
                     animate: isListening.value,
                     duration: const Duration(milliseconds: 2000),
                     glowColor: AppColor.primary,

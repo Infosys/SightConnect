@@ -29,15 +29,13 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
-                ),
+            Text(
+              "Step 2 of 3",
+              style: applyRobotoFont(
+                color: AppColor.primary,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
-              onPressed: () {},
-              child: const Text("Step 2 of 3"),
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Text(
@@ -66,13 +64,13 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: Responsive.isMobile(context)
-              ? const EdgeInsets.all(AppSize.kspadding)
+              ? const EdgeInsets.all(AppSize.kmpadding)
               : const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Visual acuity is a measure of the human eye’s ability to discern spatial details. It is the ability to distinguish letters or symbols on an eye chart at a certain distance",
+                "A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!",
                 softWrap: true,
                 style: applyRobotoFont(
                   fontSize: 14,
@@ -80,10 +78,9 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
               ),
               const SizedBox(height: AppSize.kmheight),
               Text(
-                "Demonstration",
-                style: applyRobotoFont(
-                  fontSize: 18,
-                ),
+                "How to perform the visual acuity test?",
+                style:
+                    applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: AppSize.kmheight),
               Container(
@@ -91,6 +88,13 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 width: AppSize.width(context) * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.klradius),
+                  boxShadow: [
+                    BoxShadow(
+                       
+                        color: AppColor.primary.withOpacity(0.4),
+                        blurRadius: 50,
+                        spreadRadius: 10),
+                  ],
                   color: AppColor.black,
                 ),
                 child: Center(
@@ -102,28 +106,45 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 ),
               ),
               const SizedBox(height: AppSize.kmheight),
-              Text(
-                "View Demonstration video to perform Tumbling E Test",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                child: Divider(),
               ),
               const SizedBox(height: AppSize.kmheight),
-              ListTile(
+              InkWell(
                 onTap: () {
                   Navigator.of(context)
                       .pushNamed(TumblingEStepsInstructionsPage.routeName);
                 },
-                tileColor: AppColor.white,
-                title: Text(
-                  "View Steps to perform Tumbling E Test",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w500,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColor.primary.withOpacity(0.1),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.vibration, color: AppColor.blue),
+                      const SizedBox(width: AppSize.kswidth),
+                      Text(
+                        "View Steps to perform Tumbling E Test",
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

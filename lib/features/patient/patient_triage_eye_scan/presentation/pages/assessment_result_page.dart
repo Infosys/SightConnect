@@ -5,7 +5,9 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_result_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/providers/patient_triage_steps_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,6 +57,14 @@ class AssessmentResultPage extends ConsumerWidget {
             "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
       },
     ];
+
+    resetTraige() {
+      ref.invalidate(patientTriageQuestionnaireProvider);
+      ref.invalidate(patientTriageEyeScanProvider);
+      ref.invalidate(tumblingTestProvider);
+      ref.invalidate(patientTriageStepsProvider);
+    }
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: AppBar(
@@ -215,83 +225,67 @@ class AssessmentResultPage extends ConsumerWidget {
               ),
               SizedBox(
                 height: AppSize.height(context) * 0.14,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        color: AppColor.yellow,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: resultData.resultState.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            resultData.setColors(index);
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: resultData.resultState.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    resultData.setColors(index);
 
-                            return Expanded(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    left: AppSize.width(context) * 0.03,
-                                    right: AppSize.width(context) * 0.078,
-                                    top: AppSize.height(context) * 0.01),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: resultData.backColor,
-                                ),
-                                margin: index == 2
-                                    ? const EdgeInsets.only(
-                                        right: 0,
-                                      )
-                                    : EdgeInsets.only(
-                                        right: AppSize.width(context) * 0.04),
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 20,
-                                        height: 20,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: resultData.checkColor,
-                                        ),
-                                        child: Center(
-                                          child: Icon(
-                                            resultData.icon,
-                                            color: Colors.white,
-                                            size: 15,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        resultData.resultState[index]['type']!,
-                                        style: applyRobotoFont(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        resultData.resultState[index]['state']!,
-                                        style: applyRobotoFont(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ]),
-                              ),
-                            );
-                          },
-                        ),
+                    return Container(
+                      padding: EdgeInsets.only(
+                          left: AppSize.width(context) * 0.03,
+                          right: MediaQuery.of(context).size.width * 0.048,
+                          top: AppSize.height(context) * 0.01),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: resultData.backColor,
                       ),
-                    ),
-                  ],
+                      margin: index == 2
+                          ? const EdgeInsets.only(
+                              right: 0,
+                            )
+                          : EdgeInsets.only(
+                              right: AppSize.width(context) * 0.04),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: resultData.checkColor,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  resultData.icon,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              resultData.resultState[index]['type']!,
+                              style: applyRobotoFont(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              resultData.resultState[index]['state']!,
+                              style: applyRobotoFont(
+                                  fontSize: 12, fontWeight: FontWeight.w400),
+                            )
+                          ]),
+                    );
+                  },
                 ),
               ),
               const SizedBox(

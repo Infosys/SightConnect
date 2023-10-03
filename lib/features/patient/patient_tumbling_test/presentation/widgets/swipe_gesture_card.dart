@@ -108,46 +108,38 @@ class SwipeGestureCard extends HookConsumerWidget {
   }
 
   void _showSuccessTemp(BuildContext context) {
-    showDialog(
+   showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (BuildContext context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: AlertDialog.adaptive(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Image.asset(
-              AppImages.checkMark,
-              height: 40,
-              width: 40,
-              color: AppColor.green,
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Tumbling E Test is Done',
-                  style: applyFiraSansFont(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.kmradius),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Done! Visual acuity test is completed for the right eye.",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: Colors.green,
+                  fontWeight: FontWeight.w500,
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(height: AppSize.kmpadding),
+              Text(
+                "You need to capture your eye photos next.",
+                style: applyFiraSansFont(
+                  fontSize: 14,
                 ),
-                Text(
-                  "You need to capture your eye photos next.",
-                  textAlign: TextAlign.justify,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+               onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -156,10 +148,9 @@ class SwipeGestureCard extends HookConsumerWidget {
                     ),
                   );
                 },
-                child: const Text("Proceed"),
-              ),
-            ],
-          ),
+              child: const Text("Proceed"),
+            )
+          ],
         );
       },
     );
@@ -179,7 +170,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Congratulations!! You have successfully completed the test for your left eye.",
+                "Done! Visual acuity test is completed for the left eye.",
                 style: applyRobotoFont(
                   fontSize: 14,
                   color: Colors.green,

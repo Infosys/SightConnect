@@ -89,15 +89,12 @@ class PatientServiceCategory extends StatelessWidget {
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
-                          SizedBox(
-                            width: Responsive.isMobile(context) ? 80 : 120,
-                            child: Text(
-                              miniapp,
-                              softWrap: true,
-                              textAlign: TextAlign.center,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                              ),
+                          Text(
+                            miniapp,
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                            style: applyRobotoFont(
+                              fontSize: 12,
                             ),
                           ),
                         ],
