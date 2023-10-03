@@ -21,7 +21,7 @@ class OptionGrid extends StatelessWidget {
       itemCount: symptoms.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 2,
+        childAspectRatio: 1.6,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),

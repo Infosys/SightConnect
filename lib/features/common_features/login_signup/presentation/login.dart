@@ -82,10 +82,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  const Expanded(
-                    child: Image(
-                      image: AssetImage('assets/images/login.png'),
-                    ),
+                  Expanded(
+                    child: Image.asset('assets/images/login.png'),
                   ),
                   const Row(
                     children: [
@@ -126,14 +124,16 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.ksheight,
                         ),
-                        Text("Please enter the OTP we have sent to ********90",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                            )),
+                        Text(
+                          "Please enter the OTP we have sent to ********90",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.klheight * 2,
                         ),
                         Center(
                           child: OTPTextField(
@@ -163,12 +163,14 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text("Resend OTP",
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: AppColor.primary,
-                                    decoration: TextDecoration.underline,
-                                  )),
+                              Text(
+                                "Resend OTP",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.primary,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -185,10 +187,15 @@ class _LoginPageState extends State<LoginPage> {
                               mobileNumber = value;
                             });
                           },
-                          keyboardType: TextInputType.number,
+                          keyboardType: const TextInputType.numberWithOptions(
+                            signed: true,
+                            decimal: true,
+                          ),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1.0,
@@ -207,79 +214,82 @@ class _LoginPageState extends State<LoginPage> {
             )
           ],
         )),
-        bottomNavigationBar: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                ),
-                onPressed: () {
-                  if (isMobileNumberEntered) {
-                    if (validateOTP()) {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AuthPage(),
-                        ),
-                        (route) => false,
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter valid OTP'),
-                        ),
-                      );
-                    }
-                  } else {
-                    if (validateMobileNumber()) {
-                      setState(() {
-                        isMobileNumberEntered = true;
-                      });
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter valid mobile number'),
-                        ),
-                      );
-                    }
-                  }
-                },
-                child: Text(
-                  isMobileNumberEntered ? 'Login' : 'Get OTP',
-                ),
-              ),
-            ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don’t have an account?",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                      )),
-                  const SizedBox(
-                    width: 5,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
                   ),
-                  Text("Sign Up?",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.primary,
-                        decoration: TextDecoration.underline,
-                      )),
-                ],
+                  onPressed: () {
+                    if (isMobileNumberEntered) {
+                      if (validateOTP()) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AuthPage(),
+                          ),
+                          (route) => false,
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please enter valid OTP'),
+                          ),
+                        );
+                      }
+                    } else {
+                      if (validateMobileNumber()) {
+                        setState(() {
+                          isMobileNumberEntered = true;
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please enter valid mobile number'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Text(
+                    isMobileNumberEntered ? 'Login' : 'Get OTP',
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const Center(child: BrandingWidget()),
-            const SizedBox(
-              height: 8,
-            ),
-          ],
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don’t have an account?",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                        )),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text("Sign Up?",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.primary,
+                          decoration: TextDecoration.underline,
+                        )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const Center(child: BrandingWidget()),
+              const SizedBox(
+                height: 8,
+              ),
+            ],
+          ),
         ));
   }
 }

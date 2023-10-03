@@ -65,7 +65,7 @@ class PatientServiceCategory extends StatelessWidget {
                       }
                     },
                     child: SizedBox(
-                      width: Responsive.isMobile(context) ? 60 : 80,
+                      width: Responsive.isMobile(context) ? 80 : 120,
                       child: Column(
                         children: [
                           mappers[miniapp] != null
@@ -82,9 +82,8 @@ class PatientServiceCategory extends StatelessWidget {
                           ),
                           Text(
                             miniapp,
-                            maxLines: 2,
+                            softWrap: true,
                             textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
                             style: applyRobotoFont(
                               fontSize: 12,
                             ),
