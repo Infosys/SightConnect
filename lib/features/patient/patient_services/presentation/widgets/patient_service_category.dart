@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
@@ -64,17 +65,16 @@ class PatientServiceCategory extends StatelessWidget {
                           ),
                         );
                       }
-                      if (miniapp == "Buy Spectacles"){
-                           Navigator.of(context).push(
+                      if (miniapp == "Buy Spectacles") {
+                        Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const AssessmentResultPage(),
+                            builder: (context) => const AssessmentResultPage(),
                           ),
                         );
                       }
                     },
                     child: SizedBox(
-                      width: Responsive.isMobile(context) ? 60 : 80,
+                      width: Responsive.isMobile(context) ? 80 : 120,
                       child: Column(
                         children: [
                           mappers[miniapp] != null
@@ -89,13 +89,15 @@ class PatientServiceCategory extends StatelessWidget {
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
-                          Text(
-                            miniapp,
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyRobotoFont(
-                              fontSize: 12,
+                          SizedBox(
+                            width: Responsive.isMobile(context) ? 80 : 120,
+                            child: Text(
+                              miniapp,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],

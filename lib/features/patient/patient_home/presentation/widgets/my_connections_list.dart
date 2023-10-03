@@ -39,7 +39,7 @@ class MyConnectionsList extends StatelessWidget {
           Row(
             children: [
               Text(
-                "My Connections",
+                "My Members",
                 style: applyFiraSansFont(
                   fontSize: 18,
                 ),
