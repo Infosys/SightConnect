@@ -24,4 +24,7 @@ class AppIcon {
   static const String acuityTest = 'assets/icons/visual_acuity_test.svg';
   static const String pledge = 'assets/icons/pledge.svg';
   static const String eyeScanner = 'assets/icons/eye_scan.svg';
+
+  //Patient Triage Eye Scan
+  static const String report = 'assets/icons/report.svg';
 }

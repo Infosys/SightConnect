@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/auth_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,6 +29,6 @@ class AuthPage extends ConsumerWidget {
     //   }
     // });
 
-    return const SplashPage();
+    // return const SplashPage();
   }
 }

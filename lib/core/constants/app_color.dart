@@ -12,9 +12,11 @@ class AppColor {
   static const Color yellow = Color(0xFFFFCD44);
   static const Color red = Color(0xFFEF5757);
   static const Color green = Color(0xFF22BF85);
+  static const Color altGreen = Color(0xFF21BF85);
   static const Color lightGreen = Color(0xFFB2E8D4);
   static const Color darkGrey = Color(0xFF333333);
   static const Color grey = Color(0xFF888888);
+  static const Color altGrey = Color(0xFFBBBBBB);
   static const Color black = Color(0xFF000000);
   static const Color shadowColor = Color(0xFF296DF6);
   static const Color lightGrey = Color(0xFFDDDDDD);
@@ -24,6 +26,8 @@ class AppColor {
   static const Color lavanderBlue = Color(0xFFD4C1FF);
   static const Color teaGreen = Color(0xFFCFFFC1);
   static const Color bisque = Color(0xFFFEEAC1);
+  static const Color lightOrange = Color(0xFFFECB92);
+  static const Color lightRed = Color(0xFFFBD5D5);
 
   static const Map<int, Color> colorShades = {
     50: Color(0xFFE3F2FD),

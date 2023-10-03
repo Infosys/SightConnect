@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,14 @@ class PatientServiceCategory extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) =>
                                 const PatientAppointmentSchedulePage(),
+                          ),
+                        );
+                      }
+                      if (miniapp == "Buy Spectacles"){
+                           Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const AssessmentResultPage(),
                           ),
                         );
                       }
