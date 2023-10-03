@@ -37,7 +37,6 @@ class TriageMemberSelectionPage extends HookWidget {
       },
     ];
     return Scaffold(
-      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: const Text('Eye Assessment'),
       ),
@@ -47,9 +46,6 @@ class TriageMemberSelectionPage extends HookWidget {
           vertical: AppSize.height(context) * 0.05,
         ),
         child: ElevatedButton(
-          style: const ButtonStyle(
-            visualDensity: VisualDensity.comfortable,
-          ),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
