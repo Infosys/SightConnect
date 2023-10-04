@@ -78,6 +78,8 @@ class TriageAddMemberPage extends HookWidget {
                             Expanded(
                                 child: MemberDetailsForm(
                               text: 'Date of Birth',
+                              isDate: true,
+                              numberKeyboard: true,
                             ))
                           ],
                         ),
@@ -143,6 +145,7 @@ class TriageAddMemberPage extends HookWidget {
                             Expanded(
                                 child: MemberDetailsForm(
                               text: 'Mobile Number',
+                              numberKeyboard: true,
                             ))
                           ],
                         ),
@@ -157,6 +160,7 @@ class TriageAddMemberPage extends HookWidget {
                             Expanded(
                                 child: MemberDetailsForm(
                               text: 'Address (Pincode)',
+                              numberKeyboard: true,
                             ))
                           ],
                         ),

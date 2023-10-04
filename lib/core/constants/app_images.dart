@@ -13,7 +13,7 @@ class AppImages {
   static const String swipeUp = 'assets/images/swipe_up.svg';
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
-  static const String tumblingE = 'assets/images/tumbling_E.svg';
+  static const String tumblingE = 'assets/images/tumbling_e.svg';
 
   ///services
 
@@ -78,4 +78,12 @@ class AppImages {
   //invite others to join
 
   static const String inviteBg = "assets/images/invite_bg.png";
+
+  //Drawer Page assets
+
+  static const String aboutUs = "assets/images/about_us.png";
+  static const String termsOfUse = "assets/images/terms_of_use.png";
+  static const String privacyPolicy = "assets/images/privacy_policy.svg";
+  static const String helpAndSupport = "assets/images/help_and_support.svg";
+
 }

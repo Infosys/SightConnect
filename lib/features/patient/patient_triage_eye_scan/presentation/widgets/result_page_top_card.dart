@@ -1,14 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_result_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ResultPageTopCard extends StatelessWidget {
+class ResultPageTopCard extends ConsumerWidget {
   const ResultPageTopCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var resultData = ref.watch(resultStateProvider);
+    resultData.setTopColors;
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -58,7 +62,7 @@ class ResultPageTopCard extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: AppColor.green.withOpacity(0.2),
+                  color: resultData.topCardColor.withOpacity(0.2),
                   offset: const Offset(0, 2),
                   blurRadius: 20,
                   spreadRadius: 20,
@@ -66,13 +70,13 @@ class ResultPageTopCard extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(10),
               color: AppColor.white,
-              border: const Border.symmetric(
+              border: Border.symmetric(
                 horizontal: BorderSide(
-                  color: AppColor.green,
+                  color: resultData.topCardColor,
                   width: 2,
                 ),
                 vertical: BorderSide(
-                  color: AppColor.green,
+                  color: resultData.topCardColor,
                   width: 1,
                 ),
               ),
@@ -89,8 +93,8 @@ class ResultPageTopCard extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: AppSize.width(context) * 0.01,
                         ),
-                        decoration: const BoxDecoration(
-                          color: AppColor.green,
+                        decoration: BoxDecoration(
+                          color: resultData.topCardColor,
                         ),
                         child: Text(
                           "Routine Consult",

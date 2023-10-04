@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final resultStateProvider = ChangeNotifierProvider((ref) => ResultState());
 
 class ResultState extends ChangeNotifier {
+  //state - Completed, Complete test, Not Applicable
+  //issueLevel - Normal, Minor, Major
   final List<Map<String, String>> _resultState = [
     {
       "type": "Assessment\nQuestions",
@@ -14,26 +16,52 @@ class ResultState extends ChangeNotifier {
     {
       "type": "Aquity\nTest",
       "state": "Complete test",
-      "issueLevel": "Minor",
+      "issueLevel": "",
     },
     {
       "type": "Eye\nScan",
       "state": "Not Applicable",
-      "issueLevel": "Major",
+      "issueLevel": "",
     },
   ];
 
   Color _backColor = AppColor.lightGrey.withOpacity(0.4);
   Color _checkColor = AppColor.red;
+  Color _topCardColor = AppColor.green;
+
+  String _highestPriority = 'Normal';
+
   IconData _icon = Icons.close;
 
   List<Map<String, String>> get resultState => _resultState;
+
+  Color get topCardColor => _topCardColor;
 
   Color get backColor => _backColor;
 
   Color get checkColor => _checkColor;
 
   IconData get icon => _icon;
+
+  setTopColors() {
+    for (var map in _resultState) {
+      final issueLevel = map['issueLevel'];
+
+      if (issueLevel == 'Major') {
+        _highestPriority = 'Major';
+      } else if (issueLevel == 'Minor' && _highestPriority != 'Major') {
+        _highestPriority = 'Minor';
+      } else if (issueLevel == 'Normal' && _highestPriority == '') {
+        _highestPriority = 'Normal';
+      }
+    }
+
+    _topCardColor = _highestPriority == 'Normal'
+        ? AppColor.green
+        : _highestPriority == 'Minor'
+            ? AppColor.orange
+            : AppColor.red;
+  }
 
   setColors(int index) {
     if (_resultState[index]["state"] == "Completed") {
@@ -57,13 +85,12 @@ class ResultState extends ChangeNotifier {
       _icon = Icons.remove;
       _backColor = AppColor.lightGrey.withOpacity(0.4);
     }
+    setTopColors();
   }
-
 
   setResultState(int index, String state, String issueLevel) {
     _resultState[index]["state"] = state;
     _resultState[index]["issueLevel"] = issueLevel;
     setColors(index);
   }
-
 }

@@ -19,8 +19,7 @@ class AssessmentResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-//state - Completed, Complete test, Not Applicable
-//issueLevel - Normal, Minor, Major
+ 
     resetTraige() {
       ref.invalidate(patientTriageQuestionnaireProvider);
       ref.invalidate(patientTriageEyeScanProvider);

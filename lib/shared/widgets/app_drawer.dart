@@ -1,8 +1,10 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/about.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/help.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/privacy_policy.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/terms_of_use.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,7 +57,33 @@ class AppDrawer extends StatelessWidget {
                     selectedColor: AppColor.white,
                     onTap: () {
                       switch (item.key) {
-                        case 0:
+                        case 5:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const AboutPage(),
+                            ),
+                          );
+                          break;
+                        case 6:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const TermsOfUsePage(),
+                            ),
+                          );
+                          break;
+                        case 7:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const PrivacyPolicyPage(),
+                            ),
+                          );
+                          break;
+                         case 8:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const HelpPage(),
+                            ),
+                          );
                           break;
                         default:
                       }
