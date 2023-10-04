@@ -477,4 +477,12 @@ class TumblingDataSource {
         return "20/20";
     }
   }
+
+  resetDataSource() {
+    for (var level in levels) {
+      for (var question in level.questions) {
+        question.questionStatus = QuestionStatus.unattempted;
+      }
+    }
+  }
 }
