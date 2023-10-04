@@ -7,11 +7,16 @@ final resultStateProvider = ChangeNotifierProvider((ref) => ResultState());
 class ResultState extends ChangeNotifier {
   //state - Completed, Complete test, Not Applicable
   //issueLevel - Normal, Minor, Major
+
+  // ResultState() {
+  //   setTopColors();
+  // }
+
   final List<Map<String, String>> _resultState = [
     {
       "type": "Assessment\nQuestions",
       "state": "Completed",
-      "issueLevel": "Normal",
+      "issueLevel": "",
     },
     {
       "type": "Aquity\nTest",
@@ -29,7 +34,7 @@ class ResultState extends ChangeNotifier {
   Color _checkColor = AppColor.red;
   Color _topCardColor = AppColor.green;
 
-  String _highestPriority = 'Normal';
+  String _highestPriority = '';
 
   IconData _icon = Icons.close;
 
@@ -43,10 +48,11 @@ class ResultState extends ChangeNotifier {
 
   IconData get icon => _icon;
 
+  String get highestPriority => _highestPriority;
+
   setTopColors() {
     for (var map in _resultState) {
       final issueLevel = map['issueLevel'];
-
       if (issueLevel == 'Major') {
         _highestPriority = 'Major';
       } else if (issueLevel == 'Minor' && _highestPriority != 'Major') {
@@ -54,6 +60,7 @@ class ResultState extends ChangeNotifier {
       } else if (issueLevel == 'Normal' && _highestPriority == '') {
         _highestPriority = 'Normal';
       }
+      print('$_highestPriority I have no clue');
     }
 
     _topCardColor = _highestPriority == 'Normal'

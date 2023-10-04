@@ -124,7 +124,7 @@ class SwipeGestureCard extends HookConsumerWidget {
               ),
               const SizedBox(height: AppSize.kmpadding),
               Text(
-                "Done! Visual acuity test is completed for the right eye..",
+                "Done! Visual acuity test is completed for the right eye.",
                 style: applyRobotoFont(
                   fontSize: 14,
                   color: Colors.green,

@@ -19,7 +19,7 @@ class AssessmentResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
- 
+
     resetTraige() {
       ref.invalidate(patientTriageQuestionnaireProvider);
       ref.invalidate(patientTriageEyeScanProvider);
