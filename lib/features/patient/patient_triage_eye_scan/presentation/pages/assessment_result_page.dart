@@ -29,7 +29,6 @@ class AssessmentResultPage extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         title: const Text("Assessment Result"),
         actions: [
@@ -61,26 +60,23 @@ class AssessmentResultPage extends ConsumerWidget {
             children: [
               const SizedBox(height: AppSize.kmheight),
               const ResultPageTopCard(),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
+              const SizedBox(height: AppSize.kmheight),
               const AssessmentResultCards(),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
+              const SizedBox(height: AppSize.kmheight),
               Container(
                 padding: const EdgeInsets.all(AppSize.kspadding),
                 decoration: BoxDecoration(
                   color: AppColor.white,
                   boxShadow: [
                     BoxShadow(
-                        offset: const Offset(
-                          2,
-                          10,
-                        ),
-                        color: AppColor.primary.withOpacity(0.1),
-                        blurRadius: 20,
-                        spreadRadius: 5),
+                      offset: const Offset(
+                        2,
+                        10,
+                      ),
+                      color: AppColor.primary.withOpacity(0.1),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    ),
                   ],
                   borderRadius: BorderRadius.circular(AppSize.ksradius),
                 ),
@@ -109,9 +105,7 @@ class AssessmentResultPage extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: AppSize.klheight),
               Text(
                 'Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.',
                 textAlign: TextAlign.left,
@@ -121,9 +115,7 @@ class AssessmentResultPage extends ConsumerWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: AppSize.klheight),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -144,13 +136,9 @@ class AssessmentResultPage extends ConsumerWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
+              const SizedBox(height: AppSize.kmheight),
               const EyeCentreDetailsCards(),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
+              const SizedBox(height: AppSize.kmheight),
               const ResultPageBottomCards(),
             ],
           ),

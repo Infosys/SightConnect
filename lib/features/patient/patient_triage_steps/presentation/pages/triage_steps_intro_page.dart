@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/provider/patient_triage_questionnaire_provider.dart';
@@ -48,7 +49,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
           ref.invalidate(tumblingTestProvider);
           ref.invalidate(patientTriageStepsProvider);
 
-          ref.read(patientHomeProvider).changeIndex(0);
+          ref.read(patientDashboardProvider).changeIndex(0);
         }
         return false;
       },

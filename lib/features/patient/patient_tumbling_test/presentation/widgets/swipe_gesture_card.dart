@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_page.dart';
@@ -11,6 +8,7 @@ import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/mod
 
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -108,7 +106,7 @@ class SwipeGestureCard extends HookConsumerWidget {
   }
 
   void _showSuccessTemp(BuildContext context) {
-   showDialog(
+    showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
@@ -139,15 +137,15 @@ class SwipeGestureCard extends HookConsumerWidget {
           ),
           actions: [
             TextButton(
-               onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const PatientTriageEyeScanPage(),
-                      fullscreenDialog: true,
-                    ),
-                  );
-                },
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PatientTriageEyeScanPage(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              },
               child: const Text("Proceed"),
             )
           ],
@@ -161,30 +159,20 @@ class SwipeGestureCard extends HookConsumerWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+        return BlurDialogBox(
+          title: Text(
+            "Done! Visual acuity test is completed for the left eye.",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: Colors.green,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Done! Visual acuity test is completed for the left eye.",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmpadding),
-              Text(
-                "Now, let's test your right eye.",
-                style: applyFiraSansFont(
-                  fontSize: 14,
-                ),
-              ),
-            ],
+          content: Text(
+            "Now, let's test your right eye.",
+            style: applyFiraSansFont(
+              fontSize: 14,
+            ),
           ),
           actions: [
             TextButton(

@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_size.dart';
+import '../../../patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 
 class ResultPageBottomCards extends ConsumerWidget {
   const ResultPageBottomCards({super.key});
@@ -46,7 +47,7 @@ class ResultPageBottomCards extends ConsumerWidget {
                   onPressed: () {
                     ref.read(patientTriageEyeScanProvider).printImage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
-                    ref.read(patientHomeProvider).changeIndex(0);
+                    ref.read(patientDashboardProvider).changeIndex(0);
                   },
                   child: const Text("Home"),
                 ),

@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presenta
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -90,7 +91,6 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                   borderRadius: BorderRadius.circular(AppSize.klradius),
                   boxShadow: [
                     BoxShadow(
-                       
                         color: AppColor.primary.withOpacity(0.4),
                         blurRadius: 50,
                         spreadRadius: 10),
@@ -157,35 +157,29 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: AlertDialog.adaptive(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Text(
-              'Tests to Perform',
-              style:
-                  applyFiraSansFont(fontSize: 24, fontWeight: FontWeight.w700),
-            ),
-            content: Text(
-              "Thanks for answering the questions. Based on the initial assessment you need to perform the below tests.\n\n1. Tumbling E\n2. Eye Photos\n\nYou will be guided step-by-step to perform each test. Follow instructions and perform the steps as instructed.",
-              textAlign: TextAlign.justify,
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  "Proceed",
-                  style: applyRobotoFont(fontSize: 14, color: AppColor.primary),
-                ),
-              ),
-            ],
+        return BlurDialogBox(
+          title: Text(
+            'Tests to Perform',
+            style: applyFiraSansFont(fontSize: 24, fontWeight: FontWeight.w700),
           ),
+          content: Text(
+            "Thanks for answering the questions. Based on the initial assessment you need to perform the below tests.\n\n1. Tumbling E\n2. Eye Photos\n\nYou will be guided step-by-step to perform each test. Follow instructions and perform the steps as instructed.",
+            textAlign: TextAlign.justify,
+            style: applyRobotoFont(
+              fontSize: 14,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Proceed",
+                style: applyRobotoFont(fontSize: 14, color: AppColor.primary),
+              ),
+            ),
+          ],
         );
       },
     );

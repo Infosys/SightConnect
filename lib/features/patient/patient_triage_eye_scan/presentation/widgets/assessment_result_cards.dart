@@ -12,63 +12,66 @@ class AssessmentResultCards extends ConsumerWidget {
     var resultData = ref.watch(resultStateProvider);
     resultData.setResultState(1, 'Complete test', 'Normal');
     return GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
-        itemCount: resultData.resultState.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemBuilder: (context, index) {
-          resultData.setColors(index);
-          return Container(
-            padding: EdgeInsets.only(
-                left: AppSize.width(context) * 0.03,
-                top: AppSize.height(context) * 0.01),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: resultData.backColor,
-            ),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: resultData.checkColor,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        resultData.icon,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
+      itemCount: resultData.resultState.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 1,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+      itemBuilder: (context, index) {
+        resultData.setColors(index);
+        return Container(
+          padding: EdgeInsets.only(
+            left: AppSize.width(context) * 0.03,
+            top: AppSize.height(context) * 0.01,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: resultData.backColor,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: resultData.checkColor,
+                ),
+                child: Center(
+                  child: Icon(
+                    resultData.icon,
+                    color: Colors.white,
+                    size: 15,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    resultData.resultState[index]['type']!,
-                    style: applyRobotoFont(
-                        fontSize: 14, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    resultData.resultState[index]['state']!,
-                    style: applyRobotoFont(
-                        fontSize: 12, fontWeight: FontWeight.w400),
-                  )
-                ]),
-          );
-        });
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                resultData.resultState[index]['type']!,
+                style:
+                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                resultData.resultState[index]['state']!,
+                style:
+                    applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }

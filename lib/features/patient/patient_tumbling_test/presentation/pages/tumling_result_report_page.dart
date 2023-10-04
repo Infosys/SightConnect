@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -168,7 +169,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          ref.read(patientHomeProvider).changeIndex(0);
+                          ref.read(patientDashboardProvider).changeIndex(0);
                           Navigator.of(context)
                               .popUntil((route) => route.isFirst);
                         },
