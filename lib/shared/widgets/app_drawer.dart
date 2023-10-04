@@ -47,27 +47,33 @@ class AppDrawer extends StatelessWidget {
                 );
               },
             ),
-            ...items.map(
-              (item) => ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                selectedColor: AppColor.white,
-                onTap: () {},
-                leading: Icon(
-                  item.icon,
-                  color: AppColor.white,
-                ),
-                title: Text(
-                  item.title,
-                  style: applyFiraSansFont(
-                    color: AppColor.white,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
+            ...items.asMap().entries.map(
+                  (item) => ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    selectedColor: AppColor.white,
+                    onTap: () {
+                      switch (item.key) {
+                        case 0:
+                          break;
+                        default:
+                      }
+                    },
+                    leading: Icon(
+                      item.value.icon,
+                      color: AppColor.white,
+                    ),
+                    title: Text(
+                      item.value.title,
+                      style: applyFiraSansFont(
+                        color: AppColor.white,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
             const Spacer(flex: 2),
             ListTile(
               leading: const Icon(
