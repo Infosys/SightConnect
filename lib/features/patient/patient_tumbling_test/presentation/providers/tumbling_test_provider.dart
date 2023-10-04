@@ -38,6 +38,7 @@ class TumblingTestProvider with ChangeNotifier {
     currentLevelUserResponses = [];
     level = _dataSource.getLevel(0, GameMode.regular);
     singleEyeReport = {};
+    _dataSource.resetDataSource();
   }
 
   void handUserResponse(UserResponse userResponse) {
@@ -47,8 +48,10 @@ class TumblingTestProvider with ChangeNotifier {
     );
     if (response) {
       userResponse.isUserResponseCorrect = true;
+      level!.questions[currentIndex!].questionStatus = QuestionStatus.right;
     } else {
       userResponse.isUserResponseCorrect = false;
+      level!.questions[currentIndex!].questionStatus = QuestionStatus.wrong;
     }
     currentLevelUserResponses!.add(userResponse);
     if (response) {
@@ -85,6 +88,7 @@ class TumblingTestProvider with ChangeNotifier {
         gameMode = GameMode.isFive;
         if (currentLevel! > 0) {
           currentLevel = currentLevel! - 1;
+          _dataSource.resetDataSource();
         }
         currentIndex = 0;
         singleEyeReport![currentLevel!] = currentLevelUserResponses!;
@@ -98,6 +102,7 @@ class TumblingTestProvider with ChangeNotifier {
           if (totalWrongLevelResponse == 2) {
             isRetry = true;
             currentLevel = currentLevel! - 1;
+            _dataSource.resetDataSource();
             currentIndex = 0;
             singleEyeReport![currentLevel!] = currentLevelUserResponses!;
             currentLevelUserResponses = [];

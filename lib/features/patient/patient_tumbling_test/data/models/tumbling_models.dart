@@ -7,6 +7,7 @@ class Level {
   double size;
   int totalQuestions;
   List<Question> questions;
+
   Level({
     required this.levelNumber,
     required this.mode,
@@ -26,10 +27,12 @@ class Question {
   QuestionDirection direction;
   int angle;
   String image;
+  QuestionStatus questionStatus;
   Question({
     required this.angle,
     this.image = "",
     required this.direction,
+    this.questionStatus = QuestionStatus.unattempted,
   });
 
   @override

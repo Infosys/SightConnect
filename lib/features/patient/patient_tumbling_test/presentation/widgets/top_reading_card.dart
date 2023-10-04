@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/local/tumbling_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/providers/tumbling_test_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -108,14 +109,14 @@ class RotatedTumblingE extends StatelessWidget {
             AppImages.tumblingE,
             width: size,
             height: size,
-            // colorFilter: ColorFilter.mode(
-            //   index == selectedIndex
-            //       ? AppColor.kBlack
-            //       : index != selectedIndex
-            //           ? AppColor.red
-            //           : AppColor.kBlack,
-            //   BlendMode.srcIn,
-            // ),
+            colorFilter: ColorFilter.mode(
+              question.questionStatus == QuestionStatus.unattempted
+                  ? AppColor.black
+                  : question.questionStatus == QuestionStatus.right
+                      ? AppColor.green
+                      : AppColor.red,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         const SizedBox(
