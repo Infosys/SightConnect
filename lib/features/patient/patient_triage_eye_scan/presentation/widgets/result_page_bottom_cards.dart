@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_result_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,6 +45,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    ref.invalidate(resultStateProvider);
                     ref.read(patientTriageEyeScanProvider).printImage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ref.read(patientDashboardProvider).changeIndex(0);
@@ -57,6 +59,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
+                    ref.invalidate(resultStateProvider);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Test Again"),

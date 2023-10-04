@@ -67,10 +67,18 @@ class PatientServiceCategory extends ConsumerWidget {
                         );
                       }
                       if (miniapp == "Buy Spectacles") {
-                        var resultData = ref.refresh(resultStateProvider);
+                        var resultData = ref.read(resultStateProvider);
                         resultData.setResultState(0, 'Completed', 'Normal');
                         resultData.setResultState(1, 'Complete test', '');
                         resultData.setResultState(2, 'Completed', 'Major');
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const AssessmentResultPage(),
+                          ),
+                        );
+                      }
+                      if (miniapp == "Reminders") {
+                        
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const AssessmentResultPage(),

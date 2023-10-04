@@ -67,7 +67,7 @@ class ResultState extends ChangeNotifier {
         ? AppColor.green
         : _highestPriority == 'Minor'
             ? AppColor.orange
-            : AppColor.red;
+            : _highestPriority == 'Major'? AppColor.red: AppColor.green;
   }
 
   setColors(int index) {
