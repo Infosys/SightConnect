@@ -36,6 +36,7 @@ class AssessmentResultPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
+              
               ref.read(patientTriageStepsProvider).getTriageDetails();
             },
             icon: const Icon(
