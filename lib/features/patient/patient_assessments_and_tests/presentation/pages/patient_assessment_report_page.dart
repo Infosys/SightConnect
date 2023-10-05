@@ -36,6 +36,64 @@ class PatientAssessmentReportPage extends StatelessWidget {
           ],
         ),
       ),
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(children: [
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      offset: const Offset(0, 2),
+                      blurRadius: 4,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(100),
+                  color: AppColor.white,
+                  border: Border.all(
+                    color: AppColor.white,
+                    width: 4,
+                  ),
+                ),
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage(
+                    currentData['image'],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Column(
+                children: [
+                  Text(
+                    currentData['name'],
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'PID: OP 4567890',
+                    style: applyFiraSansFont(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
+        ]),
+      )),
     );
   }
 }
