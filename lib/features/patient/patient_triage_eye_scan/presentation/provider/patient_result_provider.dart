@@ -51,6 +51,7 @@ class ResultState extends ChangeNotifier {
   String get highestPriority => _highestPriority;
 
   setTopColors() {
+    
     for (var map in _resultState) {
       final issueLevel = map['issueLevel'];
       if (issueLevel == 'Major') {
