@@ -1,6 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_recommendation.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/eye_scan_tab_view.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/fake_data_source.dart';
@@ -39,59 +45,18 @@ class PatientAssessmentReportPage extends StatelessWidget {
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(12),
-        child: Column(children: [
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      offset: const Offset(0, 2),
-                      blurRadius: 4,
-                      spreadRadius: 0,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(100),
-                  color: AppColor.white,
-                  border: Border.all(
-                    color: AppColor.white,
-                    width: 4,
-                  ),
-                ),
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage(
-                    currentData['image'],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Column(
-                children: [
-                  Text(
-                    currentData['name'],
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'PID: OP 4567890',
-                    style: applyFiraSansFont(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          )
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          ReportPageHeader(
+            index: index,
+          ),
+          const ReportAssessmentQuestions(),
+          const TumblingEReportCard(),
+          const EyeScanTabView(),
+          const AssessmentRecommendation(),
+          SizedBox(
+            height: AppSize.height(context) * 0.03,
+          ),
+          const BrandingWidget(),
         ]),
       )),
     );
