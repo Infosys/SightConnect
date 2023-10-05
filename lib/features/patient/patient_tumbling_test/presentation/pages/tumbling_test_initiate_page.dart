@@ -37,7 +37,10 @@ class TumblingTestInitiatePage extends ConsumerWidget {
               ),
             ),
             const SizedBox(width: AppSize.kmwidth),
-            const Flexible(child: Text("Tumbling E Test")),
+            const Flexible(
+                child: Text(
+              "Visual Acuity Test",
+            )),
           ],
         ),
         actions: [

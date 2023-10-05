@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/priority_notification_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,19 +38,45 @@ class PatientHomePage extends ConsumerWidget {
                 barrierColor: AppColor.blackOpacity,
               );
             },
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Theme.of(context).primaryColor,
-              child: Consumer(
-                builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                  return CircleAvatar(
-                    radius: 18,
-                    backgroundImage: iconProviderstate.myString == ""
-                        ? const AssetImage('assets/images/profile_image.png')
-                        : AssetImage(iconProviderstate.myString),
-                  );
-                },
-              ),
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 24,
+                  width: 65,
+                  padding: const EdgeInsets.all(4),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  child: const Icon(
+                    CupertinoIcons.chevron_down,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: Consumer(
+                      builder:
+                          (BuildContext context, WidgetRef ref, Widget? child) {
+                        return CircleAvatar(
+                          radius: 18,
+                          backgroundImage: iconProviderstate.myString == ""
+                              ? const AssetImage(
+                                  'assets/images/profile_image.png')
+                              : AssetImage(iconProviderstate.myString),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(

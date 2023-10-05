@@ -36,12 +36,12 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColor.scaffold,
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        },
-      ),
+      // pageTransitionsTheme: const PageTransitionsTheme(
+      //   builders: {
+      //     TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      //     TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      //   },
+      // ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       iconTheme: IconThemeData(
         color: AppColor.black,
