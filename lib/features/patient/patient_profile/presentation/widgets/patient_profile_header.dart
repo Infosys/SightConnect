@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -33,7 +34,7 @@ class ProfileHeader extends StatelessWidget {
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(130),
               child: Image.asset(
-                profile["image"] ?? "",
+                AppImages.raghavi,
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,14 +42,11 @@ class ProfileHeader extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
-                profile["name"] ?? "",
+                "Raghavi Pandey",
                 style: applyFiraSansFont(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w300,
-                ).copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.white),
               ),
             ),
             subtitle: Padding(
@@ -58,10 +56,8 @@ class ProfileHeader extends StatelessWidget {
                 profile["id"] ?? "",
                 style: applyRobotoFont(
                   fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                ).copyWith(
-                  color: Colors.white54,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.white.withOpacity(0.7),
                 ),
               ),
             ),
@@ -70,7 +66,7 @@ class ProfileHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -88,15 +84,14 @@ class ProfileHeader extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight / 2,
+                      width: AppSize.ksheight / 2,
                     ),
                     Text(
                       profile["mobile"] ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
-                      ).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.w400,
+                        color: AppColor.white.withOpacity(0.8),
                       ),
                     ),
                   ],
@@ -116,14 +111,15 @@ class ProfileHeader extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    const SizedBox(height: AppSize.ksheight),
+                    const SizedBox(width: AppSize.ksheight),
                     Flexible(
                       child: Text(
                         profile["email"] ?? "",
                         softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 14,
-                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.white.withOpacity(0.8),
                         ),
                       ),
                     ),

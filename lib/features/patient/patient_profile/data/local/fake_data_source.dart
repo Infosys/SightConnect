@@ -1,9 +1,9 @@
 var profile = {
   "name": "Anandi Murthy",
-  "id": "DRID: 110050C701",
+  "id": "PID: 110050C701",
   "image": "assets/images/profile_image.png",
-  "mobile": "776-654-2345",
-  "email": 'anandi@gmail.com',
+  "mobile": "9876543210",
+  "email": 'raghavi_pandey@abcde.com',
   "address":
       "15 / 128, Sector 51, Dada Sahib Street, Ammerpet, Guntur - 508021",
   "dob": "5 May 2009 (14 years)",

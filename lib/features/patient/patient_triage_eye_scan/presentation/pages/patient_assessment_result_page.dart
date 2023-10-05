@@ -15,13 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentResultPage extends ConsumerWidget {
-  const AssessmentResultPage({super.key});
+class PatientAssessmentResultPage extends ConsumerWidget {
+  const PatientAssessmentResultPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-     ref.watch(resultStateProvider);
+    ref.watch(resultStateProvider);
 
     resetTraige() {
       ref.invalidate(patientTriageQuestionnaireProvider);
@@ -36,7 +35,6 @@ class AssessmentResultPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              
               ref.read(patientTriageStepsProvider).getTriageDetails();
             },
             icon: const Icon(

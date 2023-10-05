@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/patient_assessment_result_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_result_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -73,15 +73,16 @@ class PatientServiceCategory extends ConsumerWidget {
                         resultData.setResultState(2, 'Completed', 'Major');
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const AssessmentResultPage(),
+                            builder: (context) =>
+                                const PatientAssessmentResultPage(),
                           ),
                         );
                       }
                       if (miniapp == "Reminders") {
-                        
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const AssessmentResultPage(),
+                            builder: (context) =>
+                                const PatientAssessmentResultPage(),
                           ),
                         );
                       }
