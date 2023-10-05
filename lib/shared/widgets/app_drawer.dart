@@ -73,6 +73,15 @@ class AppDrawer extends StatelessWidget {
                                 ),
                               );
                               break;
+
+                            case 3:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AssessmentsAndTestsPage(),
+                                ),
+                              );
+                              break;
                             case 5:
                               Navigator.of(context).push(
                                 MaterialPageRoute(

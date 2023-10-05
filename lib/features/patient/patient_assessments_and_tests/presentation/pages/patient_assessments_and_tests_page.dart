@@ -40,7 +40,9 @@ class AssessmentsAndTestsPage extends HookWidget {
                   InkWell(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 5),
+                        horizontal: 12,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColor.primary,
                         borderRadius: BorderRadius.circular(30),
