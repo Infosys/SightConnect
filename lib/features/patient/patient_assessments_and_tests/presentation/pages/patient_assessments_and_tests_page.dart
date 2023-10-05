@@ -121,7 +121,7 @@ class AssessmentsAndTestsPage extends HookWidget {
                   ),
                 ],
               ),
-              const AssessmentCards(),
+              const Flexible(child: AssessmentCards()),
             ],
           ),
         ));
