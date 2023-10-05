@@ -9,9 +9,11 @@ class AppBottomNavBar extends StatelessWidget {
   const AppBottomNavBar({
     required this.onSelected,
     Key? key,
+    required this.selectedIndex,
   }) : super(key: key);
 
   final Function(int) onSelected;
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AppBottomNavBar extends StatelessWidget {
     final width = AppSize.width(context);
     final height = AppSize.height(context);
     var isMobile = Responsive.isMobile(context);
-    var item = BottomNavItems.all;
+    var items = BottomNavItems.all;
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -39,9 +41,9 @@ class AppBottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
-              item.length,
+              items.length,
               (index) {
-                final isSelected = item[index].isSelected;
+                final isSelected = index == selectedIndex;
                 final colorFilter = isSelected
                     ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
                     : const ColorFilter.mode(AppColor.grey, BlendMode.srcIn);
@@ -50,16 +52,12 @@ class AppBottomNavBar extends StatelessWidget {
                   customBorder: const CircleBorder(),
                   onTap: () {
                     onSelected(index);
-                    updateScale(index, item);
-                    for (var element in item) {
-                      element.isSelected = false;
-                    }
-                    item[index].isSelected = true;
+                    updateScale(index, items[index]);
                   },
                   child: ColorFiltered(
                     colorFilter: colorFilter,
                     child: AnimatedScale(
-                      scale: item[index].initialScale.toDouble(),
+                      scale: items[index].initialScale.toDouble(),
                       duration: const Duration(milliseconds: 200),
                       child: Container(
                         padding: isMobile
@@ -71,7 +69,7 @@ class AppBottomNavBar extends StatelessWidget {
                               isSelected ? primaryColor.withOpacity(0.1) : null,
                         ),
                         child: SvgPicture.asset(
-                          item[index].svgImage,
+                          items[index].svgImage,
                           height: isMobile ? 16 : 20,
                           width: isMobile ? 16 : 20,
                         ),
@@ -87,14 +85,10 @@ class AppBottomNavBar extends StatelessWidget {
     );
   }
 
-  updateScale(int index, List<BottomNavItem> item) {
-    for (var element in item) {
-      if (item.indexOf(element) == 4) {
-        element.initialScale = 0.8;
-      } else {
-        element.initialScale = 1.0;
-      }
-    }
-    item[index].initialScale = 1.2;
+  updateScale(int index, BottomNavItem item) {
+    item.initialScale = 1.2;
+    Future.delayed(const Duration(milliseconds: 200), () {
+      item.initialScale = 1;
+    });
   }
 }

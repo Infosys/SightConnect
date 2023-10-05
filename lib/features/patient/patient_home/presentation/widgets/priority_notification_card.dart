@@ -39,13 +39,12 @@ class PriorityNotificationCard extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    maxRadius: 20,
-                    minRadius: 18,
+                    radius: 16,
                     backgroundColor: AppColor.grey.withOpacity(0.8),
                     child: Text(
                       data["prefix"] ?? "",
                       style: applyRobotoFont(
-                        fontSize: 14,
+                        fontSize: 10,
                         fontWeight: FontWeight.w500,
                         color: AppColor.white,
                       ),
@@ -60,16 +59,16 @@ class PriorityNotificationCard extends StatelessWidget {
                         Text(
                           data["name"],
                           style: applyRobotoFont(
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: AppColor.white,
                           ),
                         ),
-                        const SizedBox(height: AppSize.ksheight / 2),
+                        const SizedBox(height: AppSize.ksheight / 3),
                         Text(
                           data["profession"],
                           style: applyRobotoFont(
-                            fontSize: 12,
+                            fontSize: 10,
                             color: AppColor.white.withOpacity(0.5),
                           ),
                         ),
@@ -96,7 +95,7 @@ class PriorityNotificationCard extends StatelessWidget {
                 ),
                 child: Text(
                   data["recommendation"],
-                  maxLines: 1,
+                  maxLines: 2,
                   style: applyRobotoFont(fontSize: 11, color: AppColor.white),
                 ),
               )
