@@ -3,29 +3,19 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class TermsOfUsePage extends HookWidget {
-  const TermsOfUsePage({super.key});
+class PrivacyPolicyPage extends HookWidget {
+  const PrivacyPolicyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final selectedValue = useState<bool>(false);
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(CupertinoIcons.chevron_back),
-          ),
-          title: Text(
-            "Terms of Use",
-            style: applyFiraSansFont(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
-          ),
+          title: const Text("Privacy Policy"),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -35,10 +25,12 @@ class TermsOfUsePage extends HookWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 20),
-                  Image.asset(
-                    AppImages.termsOfUse,
-                    height: AppSize.height(context) * 0.25,
-                    width: AppSize.width(context),
+                  Center(
+                    child: SvgPicture.asset(
+                      AppImages.privacyPolicy,
+                      height: AppSize.height(context) * 0.25,
+                      width: AppSize.width(context),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(

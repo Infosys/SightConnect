@@ -11,62 +11,57 @@ class QuestionTile extends ConsumerWidget {
   const QuestionTile({
     this.onNext,
     required this.question,
+    this.isLast = false,
     super.key,
   });
   final TriageQuestion question;
   final VoidCallback? onNext;
+  final bool isLast;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            question.question,
-            style: applyFiraSansFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          question.question,
+          style: applyFiraSansFont(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
           ),
-          const SizedBox(height: 40),
-          OptionGrid(
-            symptoms: question.answers,
-            onTap: (optionIndex) {
-              ref
-                  .read(patientTriageQuestionnaireProvider.notifier)
-                  .updateAnswer(
-                    questionIndex: question.qNo - 1,
-                    answerIndex: optionIndex,
-                  );
-            },
-          ),
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                  ),
-                  onPressed: onNext,
-                  child: Text(
-                    "Next",
-                    style: applyRobotoFont(fontSize: 14, color: AppColor.white),
-                  ),
+        ),
+        const SizedBox(height: 20),
+        OptionGrid(
+          symptoms: question.answers,
+          onTap: (optionIndex) {
+            ref.read(patientTriageQuestionnaireProvider.notifier).updateAnswer(
+                  questionIndex: question.qNo - 1,
+                  answerIndex: optionIndex,
+                );
+          },
+        ),
+        const SizedBox(height: AppSize.klheight),
+        SizedBox(
+          width:
+              isLast ? AppSize.width(context) : AppSize.width(context) * 0.45,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
                 ),
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+            onPressed: onNext,
+            child: Text(
+              isLast ? "Proceed" : "Next",
+              style: applyRobotoFont(fontSize: 14, color: AppColor.white),
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSize.klheight),
+      ],
     );
   }
 }

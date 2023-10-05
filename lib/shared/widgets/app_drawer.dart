@@ -9,6 +9,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/models/drawer_menu_item.dart';
+import '../pages/about_us_page.dart';
+import '../pages/help_and_support_page.dart';
+import '../pages/privacy_policy_page.dart';
+import '../pages/terms_of_use_page.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -34,37 +38,31 @@ class AppDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: AppSize.klheight * 2),
-                Consumer(
-                  builder: (context, ref, child) {
-                    return ListTile(
-                      onTap: () {
-                        ref.read(patientDashboardProvider).changeIndex(0);
-                      },
-                      leading: Icon(
-                        Icons.adaptive.arrow_back,
-                        color: AppColor.white,
-                      ),
-                      title: Text(
-                        "Menu",
-                        style: applyFiraSansFont(
-                          color: AppColor.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 24,
-                        ),
-                      ),
-                    );
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
                   },
+                  leading: Icon(
+                    Icons.adaptive.arrow_back,
+                    color: AppColor.white,
+                  ),
+                  title: Text(
+                    "Menu",
+                    style: applyFiraSansFont(
+                      color: AppColor.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
                 ...items.asMap().entries.map(
                       (item) => ListTile(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        selectedColor: AppColor.white,
+                        splashColor: AppColor.blue,
                         onTap: () {
                           switch (item.key) {
-                            case 0:
-                              break;
                             case 1:
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -73,13 +71,58 @@ class AppDrawer extends StatelessWidget {
                                 ),
                               );
                               break;
+                            case 5:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const AboutUsPage(),
+                                ),
+                              );
+                              break;
+                            case 6:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const TermsOfUsePage(),
+                                ),
+                              );
+                              break;
+                            case 7:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PrivacyPolicyPage(),
+                                ),
+                              );
+                              break;
+                            case 8:
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HelpAndSupportPage(),
+                                ),
+                              );
+                              break;
                             default:
                           }
                         },
-                        leading: SvgPicture.asset(
-                          item.value.icon,
-                          color: AppColor.white,
-                        ),
+                        leading: item.value.icon.contains("svg")
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: SvgPicture.asset(
+                                  item.value.icon,
+                                  color: AppColor.white,
+                                ),
+                              )
+                            : Container(
+                                height: 40,
+                                width: 40,
+                                transform: Matrix4.translationValues(-10, 0, 0),
+                                child: Image.asset(
+                                  item.value.icon,
+                                  alignment: Alignment.centerLeft,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                         title: Text(
                           item.value.title,
                           style: applyFiraSansFont(

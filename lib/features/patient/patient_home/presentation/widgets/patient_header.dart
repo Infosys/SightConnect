@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,10 @@ class PatientHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: appShadow(),
+      ),
       height: Responsive.isMobile(context)
           ? AppSize.height(context) * 0.3
           : AppSize.height(context) * 0.3,
@@ -37,14 +41,22 @@ class PatientHeader extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.grey,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.6
+                        : AppSize.width(context) * 0.5,
+                  ),
+                  child: Text(
+                    "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.darkGrey,
+                      height: 1.4,
+                    ),
                   ),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.kmheight),
                 OutlinedButton(
                   onPressed: () {},
                   child: const Text("Know More"),

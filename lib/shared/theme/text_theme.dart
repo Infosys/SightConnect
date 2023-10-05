@@ -7,12 +7,13 @@ TextStyle applyRobotoFont({
   FontWeight fontWeight = FontWeight.normal,
   Color color = AppColor.black,
   TextDecoration? decoration,
+  double height = 1.4,
 }) {
   return GoogleFonts.roboto(
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
-    height: 1.2,
+    height: height,
     decoration: decoration,
   );
 }
@@ -22,12 +23,13 @@ TextStyle applyFiraSansFont({
   FontWeight fontWeight = FontWeight.normal,
   Color color = AppColor.black,
   TextDecoration? decoration,
+  double height = 1.4,
 }) {
   return GoogleFonts.firaSans(
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
-    height: 1.2,
+    height: height,
     decoration: decoration,
   );
 }

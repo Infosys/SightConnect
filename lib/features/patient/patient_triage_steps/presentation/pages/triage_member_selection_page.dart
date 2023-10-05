@@ -17,37 +17,37 @@ class TriageMemberSelectionPage extends HookWidget {
       appBar: AppBar(
         title: const Text('Eye Assessment'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              'assets/images/eye_assessment.svg',
-              height: AppSize.height(context) * 0.19,
-              width: AppSize.width(context),
-              fit: BoxFit.fill,
-            ),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            const Text(
-              'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
-              softWrap: true,
-            ),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            const Divider(
-              thickness: 2,
-            ),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            Row(
-              children: [
-                Text(
-                  'Change Member',
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                'assets/images/eye_assessment.svg',
+                width: AppSize.width(context) * 0.3,
+                height: AppSize.height(context) * 0.24,
+                fit: BoxFit.fill,
+              ),
+              SizedBox(height: AppSize.height(context) * 0.02),
+              Text(
+                'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
+                style: applyRobotoFont(fontSize: 14),
+                softWrap: true,
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              const Divider(thickness: 2),
+              const SizedBox(height: AppSize.kmheight),
+              Row(
+                children: [
+                  Text(
+                    'Change Member',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                InkWell(
+                  const Spacer(),
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -74,37 +74,30 @@ class TriageMemberSelectionPage extends HookWidget {
                           ),
                         ],
                       ),
-                    )),
-              ],
-            ),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            const ChangeMemberTiles(),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSize.width(context) * AppSize.knavbarwidth,
-                vertical: AppSize.height(context) * 0.01,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientTriageQuestionnairePage(),
-                            fullscreenDialog: true,
-                          ),
-                        );
-                      },
-                      child: const Text('Proceed'),
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: AppSize.kmheight),
+              const ChangeMemberTiles(),
+              const SizedBox(height: AppSize.kmheight),
+              SizedBox(
+                width: AppSize.width(context) * 0.8,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const PatientTriageQuestionnairePage(),
+                      ),
+                    );
+                  },
+                  child: const Text('Proceed'),
+                ),
+              ),
+              const SizedBox(height: AppSize.klheight * 3),
+            ],
+          ),
         ),
       ),
     );

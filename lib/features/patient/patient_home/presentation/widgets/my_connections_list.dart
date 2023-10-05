@@ -29,94 +29,89 @@ class MyConnectionsList extends StatelessWidget {
       },
     ];
 
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: appShadow(),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Text(
-                "My Members",
-                style: applyFiraSansFont(
-                  fontSize: 18,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Text(
+              "My Members",
+              style: applyFiraSansFont(
+                fontSize: 18,
+              ),
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "See All",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.blue,
                 ),
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "See All",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.blue,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    ...doctors
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => MyConnectionsCard(
-                            doctor: e.value,
-                            index: e.key,
-                          ),
-                        )
-                        .toList(),
-                  ]),
-                ),
-              ),
-              const SizedBox(width: AppSize.kswidth),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () {},
-                    child: Container(
-                      height: 50,
-                      width: 60,
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColor.lightBlue,
-                          width: 2.0,
+            )
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  ...doctors
+                      .asMap()
+                      .entries
+                      .map(
+                        (e) => MyConnectionsCard(
+                          doctor: e.value,
+                          index: e.key,
                         ),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: AppColor.blue,
+                      )
+                      .toList(),
+                ]),
+              ),
+            ),
+            const SizedBox(width: AppSize.kswidth),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () {},
+                  child: Container(
+                    width: 50.0,
+                    height: 50.0,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      border: Border.all(
+                        color: AppColor.lightBlue,
+                        width: 1.0,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    "Add",
-                    style: applyFiraSansFont(
-                      fontSize: 12,
+                    child: const Icon(
+                      Icons.add,
                       color: AppColor.blue,
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+                ),
+                const SizedBox(height: AppSize.ksheight + 10),
+                Text(
+                  "Add",
+                  style: applyFiraSansFont(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

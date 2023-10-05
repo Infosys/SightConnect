@@ -2,9 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,10 +20,10 @@ class AppTheme extends StateNotifier<ThemeMode> {
   static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
       primarySwatch: MaterialColor(
-        const Color(0xff296DF6).value,
+        const Color(0xff286DF6).value,
         const {
-          50: Color(0xff296DF6),
-          100: Color(0xff296DF6),
+          50: Color(0xff286DF6),
+          100: Color(0xff286DF6),
           200: Color(0xff296DF6),
           300: Color(0xff296DF6),
           400: Color(0xff296DF6),
@@ -51,7 +49,6 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
-        scrolledUnderElevation: 0,
         backgroundColor: AppColor.scaffold,
         foregroundColor: AppColor.black,
         iconTheme: IconThemeData(

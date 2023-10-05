@@ -188,21 +188,20 @@ class AppointmentBookingCalendar extends StatelessWidget {
                   color: AppColor.grey,
                 ),
               ),
-              const SizedBox(
-                height: 4,
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: dayFormatter.format(date) ==
-                        dayFormatter.format(DateTime.now())
-                    ? BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                      )
-                    : null,
-                child: Text(
-                  dayFormatter.format(date),
-                  style: applyFiraSansFont(
-                    fontSize: 18,
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: dayFormatter.format(date) ==
+                          dayFormatter.format(DateTime.now())
+                      ? BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                        )
+                      : null,
+                  child: Text(
+                    dayFormatter.format(date),
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),

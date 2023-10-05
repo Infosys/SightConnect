@@ -26,13 +26,10 @@ class RecentServicesCardList extends StatelessWidget {
         "color": AppColor.bisque
       },
     ];
-    return Container(
+    return SizedBox(
       width: Responsive.isMobile(context)
           ? AppSize.width(context) * 0.9
           : AppSize.width(context) * 0.7,
-      decoration: BoxDecoration(
-        boxShadow: appShadow(),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

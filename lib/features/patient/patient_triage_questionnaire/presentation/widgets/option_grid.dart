@@ -21,7 +21,7 @@ class OptionGrid extends StatelessWidget {
       itemCount: symptoms.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 1.6,
+        childAspectRatio: 1.3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
@@ -31,14 +31,14 @@ class OptionGrid extends StatelessWidget {
             onTap?.call(index);
           },
           child: Container(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
                 color: symptoms[index].isAnswered
                     ? AppColor.primary
                     : AppColor.grey.withOpacity(0.5),
-                width: 1.2,
+                width: 1,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
@@ -48,6 +48,7 @@ class OptionGrid extends StatelessWidget {
                 textAlign: TextAlign.left,
                 softWrap: true,
                 style: applyRobotoFont(
+                  fontSize: 16,
                   color: symptoms[index].isAnswered
                       ? AppColor.primary
                       : AppColor.black,

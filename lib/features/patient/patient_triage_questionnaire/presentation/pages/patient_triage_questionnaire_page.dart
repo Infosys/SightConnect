@@ -16,55 +16,51 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
     var currentIndex = ref.watch(patientTriageQuestionnaireProvider).index;
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColor.blue,
-                visualDensity: VisualDensity.compact,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kspadding + 2,
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
                 "Step 1 of 3",
                 style: applyRobotoFont(
                   color: AppColor.primary,
-                  fontSize: 12,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(width: AppSize.kmwidth),
+              Text(
+                "Eye Assessment",
+                style: applyFiraSansFont(
+                  fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-            ),
-            const SizedBox(width: AppSize.kmwidth),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Text("Eye Assessment"),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: QuestionTile(
-          question: questions[currentIndex],
-          onNext: () {
-            if (currentIndex == questions.length - 1) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const TumblingTestInstructionalVideoPage(),
-                ),
-              );
-              return;
-            }
-            ref
-                .read(patientTriageQuestionnaireProvider)
-                .setIndex(currentIndex + 1);
-          },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: QuestionTile(
+            question: questions[currentIndex],
+            isLast: currentIndex == questions.length - 1,
+            onNext: () {
+              if (currentIndex == questions.length - 1) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const TumblingTestInstructionalVideoPage(),
+                  ),
+                );
+                return;
+              }
+              ref
+                  .read(patientTriageQuestionnaireProvider)
+                  .setIndex(currentIndex + 1);
+            },
+          ),
         ),
       ),
     );

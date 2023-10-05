@@ -35,6 +35,7 @@ class ChangeMemberTiles extends HookWidget {
     ];
     return ListView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: people.length,
       itemBuilder: (context, index) {
         final person = people[index];

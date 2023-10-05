@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_e_steps_instruction_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
             ),
             const SizedBox(width: AppSize.kmwidth),
             const Text(
-              "Tumbling Test",
+              "Visual Acuity Test",
             ),
           ],
         ),
@@ -89,12 +90,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
                 width: AppSize.width(context) * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.klradius),
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColor.primary.withOpacity(0.4),
-                        blurRadius: 50,
-                        spreadRadius: 10),
-                  ],
+                  boxShadow: appShadow(),
                   color: AppColor.black,
                 ),
                 child: Center(

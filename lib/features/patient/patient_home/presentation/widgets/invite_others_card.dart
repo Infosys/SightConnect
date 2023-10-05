@@ -42,10 +42,13 @@ class InviteCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
+                Text(
                   "As a delighted user, you could invite your family and friends to join and explore the benefits of the Eye Care for All app.",
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {},

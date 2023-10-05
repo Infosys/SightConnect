@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 
 class DrawerMenuItem {
   final String title;
@@ -16,7 +17,7 @@ class DrawerMenuItems {
   );
   static const DrawerMenuItem profile = DrawerMenuItem(
     title: "My Profile",
-    icon: AppIcon.drawerProfile,
+    icon: AppImages.profieImage,
   );
   static const DrawerMenuItem appointments = DrawerMenuItem(
     title: "Appointments",

@@ -50,7 +50,6 @@ class EyeCampCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 14,
-                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: AppSize.ksheight),

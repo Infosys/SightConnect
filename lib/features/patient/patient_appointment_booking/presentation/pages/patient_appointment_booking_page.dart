@@ -14,6 +14,7 @@ class PatientAppointmentBookingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           'Appointment Booking',
@@ -22,53 +23,53 @@ class PatientAppointmentBookingPage extends ConsumerWidget {
           Icon(Icons.more_vert),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const AppointmentBookingDoctorCard(
-              doctorName: "Dr. John Doe",
-              doctorSpeciality: "Eye Specialist",
-              doctorImage: AppImages.doctor,
-              hospialName: "LVP Eye Hospital, Guntur, Hyderabad",
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            const AppointmentBookingRemoteTeleConsultationSwitch(
-              label: "Remote Tele Consultation",
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            const AppointmentBookingInputTile(
-              title: "Slot Duration",
-              defaultValue: "15 minutes",
-              trailingIcon: Icons.keyboard_arrow_down,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            const AppointmentBookingInputTile(
-              title: "Date",
-              defaultValue: "12 Jul 2023",
-              trailingIcon: Icons.calendar_month,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            const AppointmentBookingInputTile(
-              title: "Reason for Appointment",
-              defaultValue: "Tele Consultation for Eye Cateract Surgery",
-              trailingIcon: Icons.timer,
-              maxLine: 3,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            const Spacer(),
-            ElevatedButton(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const AppointmentBookingDoctorCard(
+                doctorName: "Dr. John Doe",
+                doctorSpeciality: "Eye Specialist",
+                doctorImage: AppImages.doctor,
+                hospialName: "LVP Eye Hospital, Guntur, Hyderabad",
+              ),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              const AppointmentBookingRemoteTeleConsultationSwitch(
+                label: "Remote Tele Consultation",
+              ),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              const AppointmentBookingInputTile(
+                title: "Slot Duration",
+                defaultValue: "15 minutes",
+                trailingIcon: Icons.keyboard_arrow_down,
+              ),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              const AppointmentBookingInputTile(
+                title: "Date",
+                defaultValue: "12 Jul 2023",
+                trailingIcon: Icons.calendar_month,
+              ),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              const AppointmentBookingInputTile(
+                title: "Reason for Appointment",
+                defaultValue: "Tele Consultation for Eye Cateract Surgery",
+                trailingIcon: Icons.timer,
+                maxLine: 3,
+              ),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              ElevatedButton(
                 onPressed: () {
                   showDialog<void>(
                     context: context,
@@ -77,8 +78,10 @@ class PatientAppointmentBookingPage extends ConsumerWidget {
                     },
                   );
                 },
-                child: const Text("Schedule Appointment")),
-          ],
+                child: const Text("Schedule Appointment"),
+              ),
+            ],
+          ),
         ),
       ),
     );

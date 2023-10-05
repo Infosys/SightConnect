@@ -43,31 +43,35 @@ class AppBottomNavBar extends StatelessWidget {
             children: List.generate(
               items.length,
               (index) {
-                final isSelected = index == selectedIndex;
-                final colorFilter = isSelected
-                    ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
-                    : const ColorFilter.mode(AppColor.grey, BlendMode.srcIn);
+                ColorFilter colorFilter;
+                if (index == 0) {
+                  colorFilter = ColorFilter.mode(primaryColor, BlendMode.srcIn);
+                } else if (index == 2) {
+                  colorFilter =
+                      const ColorFilter.mode(AppColor.white, BlendMode.srcIn);
+                } else {
+                  colorFilter =
+                      const ColorFilter.mode(AppColor.grey, BlendMode.srcIn);
+                }
 
                 return InkWell(
                   customBorder: const CircleBorder(),
                   onTap: () {
                     onSelected(index);
-                    updateScale(index, items[index]);
                   },
-                  child: ColorFiltered(
-                    colorFilter: colorFilter,
-                    child: AnimatedScale(
-                      scale: items[index].initialScale.toDouble(),
-                      duration: const Duration(milliseconds: 200),
-                      child: Container(
-                        padding: isMobile
-                            ? const EdgeInsets.all(AppSize.kspadding)
-                            : const EdgeInsets.all(AppSize.kmpadding - 4),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              isSelected ? primaryColor.withOpacity(0.1) : null,
-                        ),
+                  child: AnimatedScale(
+                    scale: items[index].initialScale.toDouble(),
+                    duration: const Duration(milliseconds: 200),
+                    child: Container(
+                      padding: isMobile
+                          ? const EdgeInsets.all(AppSize.kspadding)
+                          : const EdgeInsets.all(AppSize.kmpadding - 4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: index == 2 ? primaryColor : null,
+                      ),
+                      child: ColorFiltered(
+                        colorFilter: colorFilter,
                         child: SvgPicture.asset(
                           items[index].svgImage,
                           height: isMobile ? 16 : 20,

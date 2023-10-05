@@ -34,7 +34,7 @@ class GoodToKnowCardList extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Good To Know",
+                "Knowledge Center",
                 style: applyFiraSansFont(
                   fontSize: 18,
                 ),

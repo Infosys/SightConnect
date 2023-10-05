@@ -86,7 +86,8 @@ class PatientHomePage extends ConsumerWidget {
                 SizedBox(height: AppSize.kmheight),
                 GoodToKnowCardList(),
                 SizedBox(height: AppSize.kmheight),
-                CampaginsList()
+                CampaginsList(),
+                SizedBox(height: AppSize.klheight * 4),
               ],
             ),
           ),
