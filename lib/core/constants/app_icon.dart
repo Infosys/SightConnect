@@ -27,4 +27,21 @@ class AppIcon {
 
   //Patient Triage Eye Scan
   static const String report = 'assets/icons/report.svg';
+
+  static const String drawerBg = "assets/icons/drawer_bg.svg";
+  static const String drawerHome = "assets/icons/drawer_home.svg";
+  static const String drawerProfile = "assets/icons/drawer_home.svg";
+  static const String drawerAppoinments =
+      "assets/icons/drawer_appointments.svg";
+  static const String drawerAssessmentsAndTest =
+      "assets/icons/drawer_assessments.svg";
+  static const String drawerAssessibility =
+      "assets/icons/drawer_accessibility.svg";
+  static const String drawerAboutUs = "assets/icons/drawer_info.svg";
+  static const String drawerTermOfUse = "assets/icons/drawer_terms_of_use.svg";
+  static const String drawerPrivacyPolicy =
+      "assets/icons/drawer_privacy_policy.svg";
+  static const String drawerHelpAndSupport =
+      "assets/icons/drawer_help_and_support.svg";
+  static const String drawerSignOut = "assets/icons/drawer_sign_out.svg";
 }

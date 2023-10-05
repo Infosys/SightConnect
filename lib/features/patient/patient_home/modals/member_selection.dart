@@ -48,129 +48,117 @@ class MemberSelectionPopUp extends HookConsumerWidget {
         'about': 'Sister,18 years'
       },
     ];
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 4 * 1,
-            sigmaY: 4 * 1,
+    return BackdropFilter(
+      filter: ImageFilter.blur(
+        sigmaX: 4 * 1,
+        sigmaY: 4 * 1,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Change Member'),
+            automaticallyImplyLeading: false,
+            actions: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(Icons.close_outlined),
+              ),
+              const SizedBox(
+                width: AppSize.kswidth,
+              )
+            ],
           ),
-          child: SafeArea(
-            minimum: EdgeInsets.symmetric(
-              vertical: AppSize.height(context) * 0.26,
-              horizontal: AppSize.kmelevation,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Scaffold(
-                backgroundColor: AppColor.scaffold,
-                appBar: AppBar(
-                  title: const Text('Change Member'),
-                  automaticallyImplyLeading: false,
-                  actions: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.close_outlined),
-                    ),
-                    const SizedBox(
-                      width: AppSize.kswidth,
-                    )
-                  ],
-                ),
-                body: Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: people.length,
-                          itemBuilder: (context, index) {
-                            final person = people[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, bottom: 8),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  boxShadow: appShadow(),
-                                  color: AppColor.white,
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: people.length,
+                    itemBuilder: (context, index) {
+                      final person = people[index];
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: appShadow(),
+                            color: AppColor.white,
+                          ),
+                          child: RadioListTile<int>(
+                            contentPadding: EdgeInsets.zero,
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  person['image'],
+                                  height: 40,
+                                  width: 40,
                                 ),
-                                child: RadioListTile<int>(
-                                  contentPadding: EdgeInsets.zero,
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        person['image'],
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            person['name'],
-                                            style: applyRobotoFont(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            person['about'],
-                                            style: applyRobotoFont(
-                                              fontSize: 12,
-                                              color: AppColor.grey,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  value: index,
-                                  groupValue: selectedValue.value,
-                                  onChanged: (value) {
-                                    selectedValue.value = value!;
-                                    ref.read(iconProvider).setMyString =
-                                        person['image'];
-                                  },
+                                const SizedBox(
+                                  width: 20,
                                 ),
-                              ),
-                            );
-                          },
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      person['name'],
+                                      style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      person['about'],
+                                      style: applyRobotoFont(
+                                        fontSize: 12,
+                                        color: AppColor.grey,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            value: index,
+                            groupValue: selectedValue.value,
+                            onChanged: (value) {
+                              selectedValue.value = value!;
+                              ref.read(iconProvider).setMyString =
+                                  person['image'];
+                            },
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Apply'),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Apply'),
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

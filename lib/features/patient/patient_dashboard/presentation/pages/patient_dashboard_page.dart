@@ -24,6 +24,7 @@ class PatientDashboardPage extends ConsumerWidget {
                 onSelected: (index) {
                   ref.read(patientDashboardProvider).changeIndex(index);
                 },
+                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
               ),
             ),
           ),

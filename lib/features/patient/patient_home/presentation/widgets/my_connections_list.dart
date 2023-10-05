@@ -78,12 +78,13 @@ class MyConnectionsList extends StatelessWidget {
                   ]),
                 ),
               ),
-              const SizedBox(width: AppSize.kmwidth),
+              const SizedBox(width: AppSize.kswidth),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   InkWell(
+                    customBorder: const CircleBorder(),
                     onTap: () {},
                     child: Container(
                       height: 50,

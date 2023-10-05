@@ -15,12 +15,8 @@ class MyConnectionsCard extends HookWidget {
   Widget build(BuildContext context) {
     var isSelected = useState<bool>(false);
     isSelected.value = index == 0 ? true : false;
-    return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
-      margin: EdgeInsets.only(right: AppSize.width(context) * 0.01),
-      padding: const EdgeInsets.all(2),
+    return Padding(
+      padding: const EdgeInsets.only(right: AppSize.kmpadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -47,7 +43,11 @@ class MyConnectionsCard extends HookWidget {
             ),
           ),
           const SizedBox(height: AppSize.ksheight),
-          Text(doctor["name"]),
+          Text(
+            doctor["name"],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
