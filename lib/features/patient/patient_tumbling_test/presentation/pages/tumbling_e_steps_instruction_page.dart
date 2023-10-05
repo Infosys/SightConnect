@@ -113,8 +113,10 @@ class TumblingEStepsInstructionsPage extends HookConsumerWidget {
                     activeIndex.value == 4 ? AppColor.primary : AppColor.white,
               ),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(
-                  TumblingTestInitiatePage.routeName,
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TumblingTestInitiatePage(),
+                  ),
                 );
               },
               child: Text(

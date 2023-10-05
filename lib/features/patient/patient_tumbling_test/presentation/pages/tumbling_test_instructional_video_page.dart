@@ -113,8 +113,13 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
               const SizedBox(height: AppSize.kmheight),
               InkWell(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(TumblingEStepsInstructionsPage.routeName);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const TumblingEStepsInstructionsPage(),
+                      fullscreenDialog: true,
+                    ),
+                  );
                 },
                 child: Container(
                   padding:

@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/patient_triage_eye_scan_page.dart';
@@ -110,14 +111,18 @@ class SwipeGestureCard extends HookConsumerWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+        return BlurDialogBox(
+          title: Column(
             children: [
+              Center(
+                child: Image.asset(
+                  AppImages.checkMark,
+                  height: 40,
+                  width: 40,
+                  color: AppColor.green,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmpadding),
               Text(
                 "Done! Visual acuity test is completed for the right eye.",
                 style: applyRobotoFont(
@@ -126,14 +131,13 @@ class SwipeGestureCard extends HookConsumerWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSize.kmpadding),
-              Text(
-                "You need to capture your eye photos next.",
-                style: applyFiraSansFont(
-                  fontSize: 14,
-                ),
-              ),
             ],
+          ),
+          content: Text(
+            "You need to capture your eye photos next.",
+            style: applyFiraSansFont(
+              fontSize: 14,
+            ),
           ),
           actions: [
             TextButton(
@@ -160,13 +164,26 @@ class SwipeGestureCard extends HookConsumerWidget {
       context: context,
       builder: (context) {
         return BlurDialogBox(
-          title: Text(
-            "Done! Visual acuity test is completed for the left eye.",
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: Colors.green,
-              fontWeight: FontWeight.w500,
-            ),
+          title: Column(
+            children: [
+              Center(
+                child: Image.asset(
+                  AppImages.checkMark,
+                  height: 40,
+                  width: 40,
+                  color: AppColor.green,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmpadding),
+              Text(
+                "Done! Visual acuity test is completed for the left eye.",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: Colors.green,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
           content: Text(
             "Now, let's test your right eye.",

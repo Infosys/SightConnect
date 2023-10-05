@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_result_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/eye_centre_details_cards.dart';
@@ -19,8 +20,9 @@ class AssessmentResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-//state - Completed, Complete test, Not Applicable
-//issueLevel - Normal, Minor, Major
+
+     ref.watch(resultStateProvider);
+
     resetTraige() {
       ref.invalidate(patientTriageQuestionnaireProvider);
       ref.invalidate(patientTriageEyeScanProvider);

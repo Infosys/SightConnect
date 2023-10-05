@@ -10,7 +10,7 @@ class AssessmentResultCards extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var resultData = ref.watch(resultStateProvider);
-    resultData.setResultState(1, 'Complete test', 'Normal');
+
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

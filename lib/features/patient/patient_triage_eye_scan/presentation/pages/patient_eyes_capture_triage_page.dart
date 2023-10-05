@@ -1,11 +1,14 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/pages/assessment_result_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/camera_controllers.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/eye_scan_camera.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage_eye_scan/presentation/widgets/eye_scan_camera_alert_box.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 
 import 'package:flutter/material.dart';
@@ -183,9 +186,29 @@ class _PatientEyeCaptureTriagePageState
   _showCameraNotFoundDialog() {
     showDialog(
       context: context,
-      builder: (context) => const EyeScanCameraAlertBox(
-        title: "Camera not found",
-        message: "Please check your camera and try again.",
+      builder: (context) => BlurDialogBox(
+        title: Text(
+          "Camera not found",
+          style: applyRobotoFont(
+            fontSize: 14,
+            color: AppColor.red,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        content: Text(
+          "Please check your camera and try again.",
+          style: applyFiraSansFont(
+            fontSize: 14,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("Ok"),
+          )
+        ],
       ),
     );
   }
@@ -194,25 +217,81 @@ class _PatientEyeCaptureTriagePageState
     if (eye == TriageEye.RIGHT_EYE) {
       showDialog(
         context: context,
-        builder: (context) => const EyeScanCameraAlertBox(
-          buttonText: "Ok",
-          message:
-              "Done! right eye image is captured.\n\nNow, let's capture your left eye.",
+        builder: (context) => BlurDialogBox(
+          title: Column(
+            children: [
+              Center(
+                child: Image.asset(
+                  AppImages.checkMark,
+                  height: 40,
+                  width: 40,
+                  color: AppColor.green,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmpadding),
+              Text(
+                "Done! right eye image is captured.",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: Colors.green,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            "Now, let's test capture your left eye.",
+            style: applyFiraSansFont(
+              fontSize: 14,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Ok"),
+            )
+          ],
         ),
       );
     } else {
       showDialog(
         context: context,
-        builder: (context) => EyeScanCameraAlertBox(
-          buttonText: "Proceed",
-          message: "Done! Left eye image is captured.",
-          onOkCallBack: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AssessmentResultPage(),
+        builder: (context) => BlurDialogBox(
+          title: Column(
+            children: [
+              Center(
+                child: Image.asset(
+                  AppImages.checkMark,
+                  height: 40,
+                  width: 40,
+                  color: AppColor.green,
+                ),
               ),
-            );
-          },
+              const SizedBox(height: AppSize.kmpadding),
+            ],
+          ),
+          content: Text(
+            "Done! Left eye image is captured.",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: Colors.green,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AssessmentResultPage(),
+                  ),
+                );
+              },
+              child: const Text("Proceed"),
+            )
+          ],
         ),
       );
     }
