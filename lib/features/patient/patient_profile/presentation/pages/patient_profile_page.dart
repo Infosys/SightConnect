@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,7 +26,7 @@ class PatientProfilePage extends ConsumerWidget {
             color: AppColor.white,
           ),
           title: Text(
-            "Profile",
+            "My Profile",
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
               color: AppColor.white,
@@ -59,15 +60,15 @@ class PatientProfilePage extends ConsumerWidget {
                       Text(
                         "Address",
                         style: applyFiraSansFont(
-                          fontSize: 18,
-                        ),
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: AppSize.ksheight,
                       ),
                       Text(
                         profile["address"] ?? "",
-                        style: applyRobotoFont(fontSize: 14),
+                        style: applyRobotoFont(
+                            fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
@@ -80,8 +81,7 @@ class PatientProfilePage extends ConsumerWidget {
                       Text(
                         "General Information",
                         style: applyFiraSansFont(
-                          fontSize: 18,
-                        ),
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: AppSize.ksheight,
@@ -105,7 +105,18 @@ class PatientProfilePage extends ConsumerWidget {
                     ],
                   ),
                 ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Divider(
+                    thickness: 1,
+                    color: AppColor.black,
+                  ),
+                ),
                 const PatientFamilyDetails(),
+                const SizedBox(
+                  height: 15,
+                ),
+                const BrandingWidget(),
               ],
             ),
           ],

@@ -29,7 +29,7 @@ class ProfileHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: AppSize.height(context) * 0.1),
+          SizedBox(height: AppSize.height(context) * 0.11),
           ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(130),
@@ -62,11 +62,11 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kmheight),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,

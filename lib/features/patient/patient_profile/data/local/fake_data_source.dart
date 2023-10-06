@@ -6,10 +6,10 @@ var profile = {
   "email": 'raghavi_pandey@abcde.com',
   "address":
       "15 / 128, Sector 51, Dada Sahib Street, Ammerpet, Guntur - 508021",
-  "dob": "5 May 2009 (14 years)",
+  "dob": "15 May 1983 (39 years)",
   "blood_group": "B+",
-  "height": "5' 3",
-  "weight": "42 kg",
+  "height": "5” 11’",
+  "weight": "72 kg",
 };
 var hospital = [
   {
