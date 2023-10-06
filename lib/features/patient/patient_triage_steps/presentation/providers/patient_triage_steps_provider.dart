@@ -48,4 +48,17 @@ class TriageStepsProvider extends ChangeNotifier {
 
     logger.f(triage.toString());
   }
+
+  //Stepper State Logic
+
+  int _currentStep = 0;
+  int get currentStep => _currentStep;
+
+  void nextStep() {
+    if (_currentStep <= 3) {
+      _currentStep++;
+    }
+
+    notifyListeners();
+  }
 }

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage_questionnaire/presentation/widgets/question_tile.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_test_instructional_video_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
     var questions = ref.watch(patientTriageQuestionnaireProvider).questions;
     var currentIndex = ref.watch(patientTriageQuestionnaireProvider).index;
     return Scaffold(
+      drawer: const PatientTriageStepsDrawer(),
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),

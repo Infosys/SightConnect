@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_e_steps_instruction_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -28,6 +29,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
       return timer.cancel;
     }, []);
     return Scaffold(
+      drawer: const PatientTriageStepsDrawer(),
       appBar: AppBar(
         title: Row(
           children: [

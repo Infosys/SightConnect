@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/widgets/bottom_input_tab.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/presentation/widgets/tumbling_overlay.dart';
@@ -15,6 +16,7 @@ class TumblingTestInitiatePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      drawer: const PatientTriageStepsDrawer(),
       appBar: AppBar(
         title: Row(
           children: [
