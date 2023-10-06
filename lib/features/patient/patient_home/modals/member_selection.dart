@@ -74,6 +74,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                     color: AppColor.white,
                   ),
                   child: RadioListTile<int>(
+                    contentPadding: const EdgeInsets.all(0),
                     tileColor: AppColor.white,
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -86,29 +87,31 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                         const SizedBox(
                           width: 20,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              person.value['name'],
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                person.value['name'],
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              person.value['about'],
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                                fontWeight: FontWeight.w400,
+                              const SizedBox(
+                                height: 5,
                               ),
-                            ),
-                          ],
+                              Text(
+                                person.value['about'],
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -128,6 +131,9 @@ class MemberSelectionPopUp extends HookConsumerWidget {
         Align(
           alignment: Alignment.bottomLeft,
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              visualDensity: const VisualDensity(vertical: -1),
+            ),
             onPressed: () {
               Navigator.pop(context);
             },

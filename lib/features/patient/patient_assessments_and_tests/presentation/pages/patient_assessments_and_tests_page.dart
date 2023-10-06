@@ -19,7 +19,7 @@ class AssessmentsAndTestsPage extends HookWidget {
         title: const Text("Assessments and Tests"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

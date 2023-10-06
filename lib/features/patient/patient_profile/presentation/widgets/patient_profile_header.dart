@@ -12,7 +12,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSize.height(context) * 0.3,
+      height: AppSize.height(context) * 0.31,
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
         boxShadow: appShadow(),
@@ -64,57 +64,31 @@ class ProfileHeader extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.ksheight),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white12,
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white12,
+                        ),
+                        child: const Icon(
+                          Icons.call_outlined,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.call_outlined,
-                        color: Colors.white,
-                        size: 20,
+                      const SizedBox(
+                        width: AppSize.ksheight / 2,
                       ),
-                    ),
-                    const SizedBox(
-                      width: AppSize.ksheight / 2,
-                    ),
-                    Text(
-                      profile["mobile"] ?? "",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.white.withOpacity(0.8),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white12,
-                      ),
-                      child: const Icon(
-                        Icons.email_outlined,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(width: AppSize.ksheight),
-                    Flexible(
-                      child: Text(
-                        profile["email"] ?? "",
+                      Text(
+                        profile["mobile"] ?? "",
                         softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 14,
@@ -122,8 +96,39 @@ class ProfileHeader extends StatelessWidget {
                           color: AppColor.white.withOpacity(0.8),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white12,
+                        ),
+                        child: const Icon(
+                          Icons.email_outlined,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.ksheight / 2),
+                      Flexible(
+                        child: Text(
+                          profile["email"] ?? "",
+                          softWrap: true,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.white.withOpacity(0.8),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

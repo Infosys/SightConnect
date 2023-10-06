@@ -16,7 +16,7 @@ class PatientHeader extends StatelessWidget {
         boxShadow: appShadow(),
       ),
       height: Responsive.isMobile(context)
-          ? AppSize.height(context) * 0.3
+          ? AppSize.height(context) * 0.33
           : AppSize.height(context) * 0.3,
       child: Stack(
         fit: StackFit.expand,
@@ -54,12 +54,16 @@ class PatientHeader extends StatelessWidget {
                       color: AppColor.darkGrey,
                       height: 1.4,
                     ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(height: AppSize.kmheight),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: const Text("Know More"),
+                Flexible(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: const Text("Know More"),
+                  ),
                 ),
               ],
             ),
