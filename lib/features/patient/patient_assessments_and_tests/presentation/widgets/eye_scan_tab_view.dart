@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/left_cornea_tab_view.dart';
@@ -56,7 +58,8 @@ class EyeScanTabView extends StatelessWidget {
               height: 10,
             ),
             SizedBox(
-              height: AppSize.height(context) * 0.4,
+              height: lerpDouble(
+                  AppSize.height(context), AppSize.width(context), 1.05),
               child: const TabBarView(viewportFraction: 1, children: [
                 RightCorneaTabView(),
                 LeftCorneaTabView(),
