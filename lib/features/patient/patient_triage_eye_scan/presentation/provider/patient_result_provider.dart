@@ -16,17 +16,17 @@ class ResultState extends ChangeNotifier {
     {
       "type": "Assessment\nQuestions",
       "state": "Completed",
-      "issueLevel": "",
+      "issueLevel": "Normal",
     },
     {
       "type": "Aquity\nTest",
-      "state": "Complete test",
-      "issueLevel": "",
+      "state": "Completed",
+      "issueLevel": "Normal",
     },
     {
       "type": "Eye\nScan",
-      "state": "Not Applicable",
-      "issueLevel": "",
+      "state": "Completed",
+      "issueLevel": "Normal",
     },
   ];
 
@@ -51,7 +51,6 @@ class ResultState extends ChangeNotifier {
   String get highestPriority => _highestPriority;
 
   setTopColors() {
-    
     for (var map in _resultState) {
       final issueLevel = map['issueLevel'];
       if (issueLevel == 'Major') {
@@ -68,7 +67,9 @@ class ResultState extends ChangeNotifier {
         ? AppColor.green
         : _highestPriority == 'Minor'
             ? AppColor.orange
-            : _highestPriority == 'Major'? AppColor.red: AppColor.green;
+            : _highestPriority == 'Major'
+                ? AppColor.red
+                : AppColor.green;
   }
 
   setColors(int index) {
