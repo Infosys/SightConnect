@@ -68,7 +68,7 @@ class ReportAssessmentQuestions extends StatelessWidget {
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                               color: Colors.black.withOpacity(0.7),
-                              height: 0),
+                              height: 1.5),
                         ),
                         Text(
                           currentData['answer'],
