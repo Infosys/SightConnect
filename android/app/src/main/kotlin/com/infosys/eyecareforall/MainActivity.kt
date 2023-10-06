@@ -1,4 +1,4 @@
-package com.infy.eyecare
+package com.infosys.eyecareforall
 
 import io.flutter.embedding.android.FlutterActivity
 
