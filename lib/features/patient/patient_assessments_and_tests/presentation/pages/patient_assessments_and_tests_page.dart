@@ -1,19 +1,22 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentsAndTestsPage extends HookWidget {
+class AssessmentsAndTestsPage extends HookConsumerWidget {
   const AssessmentsAndTestsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var selectedOption = useState<String>(people[0]['name']);
-    var isDropDownOpen = useState<bool>(false);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var state = ref.watch(assessmentsAndTestProvider);
+    var selectedName = useState<String>(people[0]['name']);
+    // var isDropDownOpen = useState<bool>(false);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Assessments and Tests"),
@@ -44,12 +47,17 @@ class AssessmentsAndTestsPage extends HookWidget {
                       color: AppColor.primary,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Text(
-                      "All",
-                      style: applyRobotoFont(
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
+                    child: InkWell(
+                      onTap: () {
+                        state.setSelectedOption = 1;
+                      },
+                      child: Text(
+                        "All",
+                        style: applyRobotoFont(
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -68,21 +76,20 @@ class AssessmentsAndTestsPage extends HookWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
+                      horizontal: 5.0,
                       vertical: 0,
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        value: selectedOption.value,
+                        value: selectedName.value,
                         onChanged: (newValue) {
-                          selectedOption.value = newValue!;
-                          isDropDownOpen.value = true;
+                          selectedName.value = newValue!;
+                          state.setSelectedOption = 2;
+                          state.setSelectedName = newValue;
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           CupertinoIcons.chevron_down,
-                          color: isDropDownOpen.value
-                              ? AppColor.white
-                              : AppColor.black,
+                          color: AppColor.black,
                         ),
                         iconSize: 18,
                         elevation: 0,
