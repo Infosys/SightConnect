@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
@@ -67,7 +70,8 @@ class MemberSelectionPopUp extends HookConsumerWidget {
           ...people.asMap().entries.map(
                 (person) => Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
+                  width: lerpDouble(AppSize.width(context) * 0.5,
+                      AppSize.height(context) * 0.5, 0.66),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     boxShadow: appShadow(),

@@ -21,6 +21,10 @@ class BlurDialogBox extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        insetPadding: EdgeInsets.zero,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         title: title,
         content: content,
         actions: actions,
