@@ -70,8 +70,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
           ...people.asMap().entries.map(
                 (person) => Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  width: lerpDouble(AppSize.width(context) * 0.5,
-                      AppSize.height(context) * 0.5, 0.66),
+                  width: AppSize.width(context) * 0.88,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     boxShadow: appShadow(),
