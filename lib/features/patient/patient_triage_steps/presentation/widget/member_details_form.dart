@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage_steps/presentation/providers/patient_member_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MemberDetailsForm extends HookWidget {
+class MemberDetailsForm extends HookConsumerWidget {
   const MemberDetailsForm(
       {super.key,
       required this.text,
@@ -15,7 +17,11 @@ class MemberDetailsForm extends HookWidget {
   final bool numberKeyboard;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // String isdata = text;
+    var data = ref.watch(patientMemberDetailsProvider);
+    final controller = useTextEditingController();
+    final dateController = useTextEditingController();
     final nameFocusNode = useFocusNode();
     final nameFocus = useState(false);
     final selectedDate = useState<DateTime>(DateTime.now());
@@ -35,11 +41,18 @@ class MemberDetailsForm extends HookWidget {
 
       if (picked != null && picked != selectedDate.value) {
         selectedDate.value = picked;
+        dateController.text = "${picked.day}/${picked.month}/${picked.year}";
+        // data.setValues(dateController.text, text);
+        data.setInfo(text, dateController.text);
       }
     }
 
     if (isDate == false) {
-      return TextField(
+      return TextFormField(
+        controller: controller,
+        onChanged: (value) {
+          data.setInfo(text, value);
+        },
         focusNode: nameFocusNode,
         keyboardType:
             numberKeyboard ? TextInputType.number : TextInputType.text,
@@ -59,7 +72,11 @@ class MemberDetailsForm extends HookWidget {
         ),
       );
     } else {
-      return TextField(
+      return TextFormField(
+        onChanged: (value) {
+          dateController.value = TextEditingValue(text: value);
+          data.setInfo(text, value);
+        },
         focusNode: nameFocusNode,
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
@@ -82,11 +99,12 @@ class MemberDetailsForm extends HookWidget {
               },
               child: const Icon(CupertinoIcons.calendar)),
         ),
-        controller: TextEditingController(
-          text: datePicked.value
-              ? '${selectedDate.value.day}/${selectedDate.value.month}/${selectedDate.value.year}'
-              : '',
-        ),
+        controller: dateController,
+        //  useTextEditingController(
+        //   text: datePicked.value
+        //       ? "${selectedDate.value.day}/${selectedDate.value.month}/${selectedDate.value.year}"
+        //       : '',
+        // ),
       );
     }
   }
