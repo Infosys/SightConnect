@@ -114,6 +114,7 @@ class TriageAddMemberPage extends HookConsumerWidget {
                                 groupValue: selectedValue.value,
                                 onChanged: (value) {
                                   selectedValue.value = value!;
+                                  provider.gender = 'Male';
                                 },
                               ),
                             ),
@@ -133,6 +134,7 @@ class TriageAddMemberPage extends HookConsumerWidget {
                               groupValue: selectedValue.value,
                               onChanged: (value) {
                                 selectedValue.value = value!;
+                                provider.gender = 'Female';
                               },
                             ),
                           ),

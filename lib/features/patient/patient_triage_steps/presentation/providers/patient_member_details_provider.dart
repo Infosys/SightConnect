@@ -10,6 +10,7 @@ class PatientMemberDetailsProvider extends ChangeNotifier {
   late String _mobileNumber;
   late String _address;
   late String _dob;
+  late String _gender;
 
   List<Map<String, dynamic>> response = [];
 
@@ -65,10 +66,13 @@ class PatientMemberDetailsProvider extends ChangeNotifier {
       'mobileNumber': _mobileNumber,
       'address': _address,
       'dob': _dob,
+      'gender': _gender
     });
     print('\n\n$response\n\n');
     notifyListeners();
   }
+
+  set gender(String gender) => _gender = gender;
 
   String get name => _name;
   String get mobileNumber => _mobileNumber;
