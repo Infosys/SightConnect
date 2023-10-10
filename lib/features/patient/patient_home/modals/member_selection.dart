@@ -51,6 +51,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
       },
     ];
     return BlurDialogBox(
+      insetPadding: const EdgeInsets.all(8),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
