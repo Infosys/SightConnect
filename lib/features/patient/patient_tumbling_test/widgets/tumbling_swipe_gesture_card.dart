@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumling_result_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
@@ -11,11 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../patient_triage_eye_scan/pages/patient_triage_eye_scan_page.dart';
 import '../providers/tumbling_test_provider.dart';
 
-class SwipeGestureCard extends HookConsumerWidget {
-  const SwipeGestureCard({super.key});
+class TumblingSwipeGestureCard extends HookConsumerWidget {
+  const TumblingSwipeGestureCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -145,7 +145,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const PatientTriageEyeScanPage(),
+                    builder: (context) => const TumblingResultReportPage(),
                     fullscreenDialog: true,
                   ),
                 );

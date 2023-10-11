@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/triage_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
@@ -5,8 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tum
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/enums/triage_enums.dart';
-import '../../../data/models/visual_acuity_report.dart';
+import '../../patient_triage/data/models/visual_acuity_report.dart';
 
 class TumblingTestProvider with ChangeNotifier {
   final TumblingDataSource _dataSource;

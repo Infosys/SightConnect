@@ -1,20 +1,17 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../../patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import '../widgets/tumling_instruction_carousel.dart';
 import 'tumbling_test_initiate_page.dart';
 
-class TumblingEStepsInstructionsPage extends HookConsumerWidget {
-  static const String routeName = "/tumblingEStepsInstructionsPage";
-  const TumblingEStepsInstructionsPage({
-    Key? key,
-  }) : super(key: key);
+class TumblingTestInstructionPage extends HookConsumerWidget {
+  const TumblingTestInstructionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -14,8 +14,8 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../providers/tumbling_test_provider.dart';
 
-class TopReadingCard extends ConsumerWidget {
-  const TopReadingCard({super.key});
+class TumblingTopReadingCard extends ConsumerWidget {
+  const TumblingTopReadingCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

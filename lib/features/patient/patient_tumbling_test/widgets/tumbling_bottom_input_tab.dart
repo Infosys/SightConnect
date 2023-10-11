@@ -5,19 +5,19 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../shared/theme/text_theme.dart';
-import '../../../data/enums/tumbling_enums.dart';
+import '../../patient_triage/data/enums/tumbling_enums.dart';
 import '../providers/tumbling_test_provider.dart';
-import 'swipe_gesture_card.dart';
-import 'voice_assist_card.dart';
+import 'tumbling_swipe_gesture_card.dart';
+import 'tumbling_voice_assist_card.dart';
 
-class BottomInputTab extends StatefulWidget {
-  const BottomInputTab({super.key});
+class TumblingBottomInputTab extends StatefulWidget {
+  const TumblingBottomInputTab({super.key});
 
   @override
-  State createState() => BottomInputTabState();
+  State createState() => TumblingBottomInputTabState();
 }
 
-class BottomInputTabState extends State<BottomInputTab>
+class TumblingBottomInputTabState extends State<TumblingBottomInputTab>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
   int? _index;
@@ -74,7 +74,10 @@ class BottomInputTabState extends State<BottomInputTab>
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
-              children: <Widget>[const SwipeGestureCard(), VoiceAssistCard()],
+              children: <Widget>[
+                const TumblingSwipeGestureCard(),
+                TumblingVoiceAssistCard()
+              ],
             ),
           ),
         ],

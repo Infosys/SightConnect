@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class VoiceAssistCard extends HookWidget {
-  VoiceAssistCard({Key? key}) : super(key: key);
+class TumblingVoiceAssistCard extends HookWidget {
+  TumblingVoiceAssistCard({Key? key}) : super(key: key);
 
   final SpeechToText speechToText = SpeechToText();
 
