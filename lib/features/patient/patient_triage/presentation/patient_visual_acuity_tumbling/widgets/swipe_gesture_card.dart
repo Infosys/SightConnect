@@ -12,7 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../patient_triage_eye_scan/pages/patient_triage_eye_scan_page.dart';
-import '../providers/tumbling_test_provider.dart';
+import '../providers/patient_visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
   const SwipeGestureCard({super.key});

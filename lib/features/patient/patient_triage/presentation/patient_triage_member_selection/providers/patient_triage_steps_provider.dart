@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/models/visual_acuity_report.dart';
 import '../../patient_triage_eye_scan/provider/patient_triage_eye_scan_provider.dart';
 import '../../patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
-import '../../patient_visual_acuity_tumbling/providers/tumbling_test_provider.dart';
+import '../../patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 
 var patientTriageStepsProvider = ChangeNotifierProvider(
   (ref) => TriageStepsProvider(

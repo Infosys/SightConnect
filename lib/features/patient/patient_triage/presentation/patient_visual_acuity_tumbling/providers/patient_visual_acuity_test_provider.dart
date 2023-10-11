@@ -8,9 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/enums/triage_enums.dart';
 import '../../../data/models/visual_acuity_report.dart';
 
-class TumblingTestProvider with ChangeNotifier {
+class PatientVisualAcuityTestProvider with ChangeNotifier {
   final TumblingDataSource _dataSource;
-  TumblingTestProvider(this._dataSource) {
+  PatientVisualAcuityTestProvider(this._dataSource) {
     startGame(Eye.left);
   }
 
@@ -162,7 +162,7 @@ class TumblingTestProvider with ChangeNotifier {
 }
 
 var tumblingTestProvider = ChangeNotifierProvider(
-  (ref) => TumblingTestProvider(
+  (ref) => PatientVisualAcuityTestProvider(
     TumblingDataSource(),
   ),
 );
