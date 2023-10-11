@@ -41,8 +41,11 @@ class TriageExitAlertBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () {                   
+                    Navigator.popUntil(
+                      context,
+                      (route) => route.isFirst,
+                    );
                     onYesPressed?.call();
                   },
                   child: const Text('Yes'),

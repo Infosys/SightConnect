@@ -1,16 +1,13 @@
-import 'dart:async';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'patient_visual_acuity_initiate_page.dart';
 
 class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
@@ -19,13 +16,6 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    useEffect(() {
-      final timer = Timer(const Duration(milliseconds: 1), () {
-        _showTermsOfUseDialog(context);
-      });
-
-      return timer.cancel;
-    }, []);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Video Instructions"),
@@ -134,39 +124,6 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showTermsOfUseDialog(BuildContext context) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return BlurDialogBox(
-          title: Text(
-            'Tests to Perform',
-            style: applyFiraSansFont(fontSize: 24, fontWeight: FontWeight.w700),
-          ),
-          content: Text(
-            "Thanks for answering the questions. Based on the initial assessment you need to perform the below tests.\n\n1. Tumbling E\n2. Eye Photos\n\nYou will be guided step-by-step to perform each test. Follow instructions and perform the steps as instructed.",
-            textAlign: TextAlign.justify,
-            style: applyRobotoFont(
-              fontSize: 14,
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                "Proceed",
-                style: applyRobotoFont(fontSize: 14, color: AppColor.primary),
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 }
