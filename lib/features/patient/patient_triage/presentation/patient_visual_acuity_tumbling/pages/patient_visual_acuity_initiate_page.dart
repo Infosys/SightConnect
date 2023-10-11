@@ -6,11 +6,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import '../widgets/bottom_input_tab.dart';
 import '../widgets/top_reading_card.dart';
-import '../widgets/tumbling_overlay.dart';
 
-class TumblingTestInitiatePage extends ConsumerWidget {
+class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
-  const TumblingTestInitiatePage({super.key});
+  const PatinetVisualAcuityInitiatePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,18 +53,16 @@ class TumblingTestInitiatePage extends ConsumerWidget {
           ),
         ],
       ),
-      body: const TumblingOverlay(
-        child: Padding(
-          padding: EdgeInsets.all(AppSize.klpadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TopReadingCard(),
-              Expanded(
-                child: BottomInputTab(),
-              ),
-            ],
-          ),
+      body: const Padding(
+        padding: EdgeInsets.all(AppSize.klpadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TopReadingCard(),
+            Expanded(
+              child: BottomInputTab(),
+            ),
+          ],
         ),
       ),
     );

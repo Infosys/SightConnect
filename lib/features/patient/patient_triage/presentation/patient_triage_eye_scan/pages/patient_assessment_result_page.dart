@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pa
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/providers/patient_triage_steps_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/providers/tumbling_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

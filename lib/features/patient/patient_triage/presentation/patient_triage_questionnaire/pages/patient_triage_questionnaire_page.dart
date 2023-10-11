@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
-import '../../patient_visual_acuity_tumbling/pages/tumbling_test_instructional_video_page.dart';
+import '../../patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
 import '../provider/patient_triage_questionnaire_provider.dart';
 import '../widgets/question_tile.dart';
 
@@ -66,7 +66,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
-                          const TumblingTestInstructionalVideoPage(),
+                          const PatientVisualAcuityInstructionalVideoPage(),
                     ),
                   );
                   return;

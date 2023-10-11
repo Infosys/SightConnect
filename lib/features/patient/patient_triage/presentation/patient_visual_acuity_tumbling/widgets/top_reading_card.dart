@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import '../providers/tumbling_test_provider.dart';
+import '../providers/patient_visual_acuity_test_provider.dart';
 
 class TopReadingCard extends ConsumerWidget {
   const TopReadingCard({super.key});

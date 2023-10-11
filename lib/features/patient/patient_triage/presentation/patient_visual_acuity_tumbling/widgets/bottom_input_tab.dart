@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../data/enums/tumbling_enums.dart';
-import '../providers/tumbling_test_provider.dart';
+import '../providers/patient_visual_acuity_test_provider.dart';
 import 'swipe_gesture_card.dart';
 import 'voice_assist_card.dart';
 
