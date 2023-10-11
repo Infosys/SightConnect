@@ -17,12 +17,13 @@ class ArrowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      customBorder: const CircleBorder(),
       child: Container(
         padding: const EdgeInsets.all(AppSize.kspadding),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            width: 2,
+            width: 1,
             color: (activeIndex == 0 && icon == Icons.arrow_back_ios)
                 ? AppColor.grey
                 : AppColor.primary,

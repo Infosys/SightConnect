@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumbling_test_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +14,15 @@ class RecentServicesCard extends StatelessWidget {
     return SizedBox(
       width: 120,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          if (data["text"] == "Acuity test") {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const TumblingTestPage(),
+              ),
+            );
+          }
+        },
         borderRadius: BorderRadius.circular(AppSize.kmradius),
         child: Card(
           shape: RoundedRectangleBorder(

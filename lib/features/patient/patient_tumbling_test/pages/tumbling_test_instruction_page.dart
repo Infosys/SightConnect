@@ -107,7 +107,7 @@ class TumblingTestInstructionPage extends HookConsumerWidget {
                   color: AppColor.primary,
                 ),
                 backgroundColor:
-                    activeIndex.value == 4 ? AppColor.primary : AppColor.white,
+                    activeIndex.value == 4 ? AppColor.primary : null,
               ),
               onPressed: () {
                 Navigator.of(context).push(
