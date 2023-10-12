@@ -20,7 +20,7 @@ class TumblingResultReportPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: AppBar(
-        title: const Text("Eye Report"),
+        title: const Text("Visual Acuity Test Results"),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -27,7 +27,7 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
     }, []);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Video Instructions"),
+        title: const Text("Visual Acuity Test"),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
@@ -87,7 +87,9 @@ class TumblingTestInstructionalVideoPage extends HookWidget {
               const SizedBox(height: AppSize.kmheight),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: Divider(),
+                child: Divider(
+                  thickness: 0.8,
+                ),
               ),
               const SizedBox(height: AppSize.kmheight),
               InkWell(

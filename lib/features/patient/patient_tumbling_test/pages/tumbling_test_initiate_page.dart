@@ -11,19 +11,23 @@ class TumblingTestInitiatePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var pointerState = ref.watch(tumblingTestDialogProvider);
     return Scaffold(
-      appBar: AppBar(),
-      body: const TumblingOverlay(
-        child: Padding(
-          padding: EdgeInsets.all(AppSize.klpadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TumblingTopReadingCard(),
-              Expanded(
-                child: TumblingBottomInputTab(),
-              ),
-            ],
+      appBar: AppBar(title: const Text('Visual Acuity Test')),
+      body: TumblingOverlay(
+        child: IgnorePointer(
+          ignoring: pointerState,
+          child: const Padding(
+            padding: EdgeInsets.all(AppSize.klpadding),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TumblingTopReadingCard(),
+                Expanded(
+                  child: TumblingBottomInputTab(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
