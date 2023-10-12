@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_centre_details_cards.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/result_page_bottom_cards.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/result_page_top_card.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/widgets/result_page_bottom_cards.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 
 import 'package:flutter/material.dart';

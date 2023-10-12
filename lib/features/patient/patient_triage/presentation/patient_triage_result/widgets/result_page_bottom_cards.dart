@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../core/constants/app_size.dart';
 import '../../../../patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import '../provider/patient_result_provider.dart';
-import '../provider/patient_triage_eye_scan_provider.dart';
+import '../provider/patient_triage_result_provider.dart';
+import '../../patient_triage_eye_scan/provider/patient_triage_eye_scan_provider.dart';
 
 class ResultPageBottomCards extends ConsumerWidget {
   const ResultPageBottomCards({super.key});
@@ -45,7 +45,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.invalidate(resultStateProvider);
+                    ref.invalidate(patientTriageResultProvider);
                     ref.read(patientTriageEyeScanProvider).printImage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ref.read(patientDashboardProvider).changeIndex(0);
@@ -59,7 +59,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.invalidate(resultStateProvider);
+                    ref.invalidate(patientTriageResultProvider);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Test Again"),

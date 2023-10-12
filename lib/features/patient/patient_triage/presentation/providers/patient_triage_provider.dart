@@ -48,4 +48,11 @@ class PatientTriageProvider extends ChangeNotifier {
 
     logger.f(triage.toString());
   }
+
+  resetTraigeState() {
+    ref.invalidate(patientTriageQuestionnaireProvider);
+    ref.invalidate(patientTriageEyeScanProvider);
+    ref.invalidate(tumblingTestProvider);
+    ref.invalidate(patientTriageProvider);
+  }
 }

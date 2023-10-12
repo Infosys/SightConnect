@@ -5,14 +5,14 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/patient_result_provider.dart';
+import '../provider/patient_triage_result_provider.dart';
 
 class ResultPageTopCard extends ConsumerWidget {
   const ResultPageTopCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(resultStateProvider);
+    var resultData = ref.watch(patientTriageResultProvider);
     resultData.setTopColors();
     String issueInfo = resultData.highestPriority == 'Major'
         ? 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.'
