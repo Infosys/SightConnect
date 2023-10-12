@@ -1,17 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../providers/patient_triage_steps_provider.dart';
 
 class PatientTriageStepsDrawer extends ConsumerWidget {
   const PatientTriageStepsDrawer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(patientTriageStepsProvider);
+    var model = ref.watch(patientTriageStepperProvider);
     return Drawer(
       width: AppSize.width(context),
       child: Container(

@@ -3,14 +3,14 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/patient_result_provider.dart';
+import '../provider/patient_triage_result_provider.dart';
 
 class AssessmentResultCards extends ConsumerWidget {
   const AssessmentResultCards({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(resultStateProvider);
+    var resultData = ref.watch(patientTriageResultProvider);
 
     return GridView.builder(
       shrinkWrap: true,

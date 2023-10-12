@@ -187,6 +187,7 @@ class TumblingResultReportPage extends ConsumerWidget {
     );
   }
 
+
   buildGuage() {
     return SfRadialGauge(
       axes: [

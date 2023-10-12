@@ -2,7 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final resultStateProvider = ChangeNotifierProvider((ref) => ResultState());
+final patientTriageResultProvider =
+    ChangeNotifierProvider((ref) => ResultState());
 
 class ResultState extends ChangeNotifier {
   //state - Completed, Complete test, Not Applicable
