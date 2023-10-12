@@ -45,41 +45,45 @@ class PatientEyesReportPage extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlinedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(0),
-                      fixedSize: const Size(140, 40),
-                      side: const BorderSide(color: AppColor.primary),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.camera,
-                      size: 20,
-                    ),
-                    label: Text(
-                      "Scan Again",
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: OutlinedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                        fixedSize: const Size(140, 40),
+                        side: const BorderSide(color: AppColor.primary),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.camera,
+                        size: 20,
+                      ),
+                      label: Text(
+                        "Scan Again",
+                        style: applyRobotoFont(
+                          color: AppColor.primary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
-                  OutlinedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(0),
-                      fixedSize: const Size(180, 40),
-                      side: const BorderSide(color: AppColor.primary),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    onPressed: () {},
-                    child: Text(
-                      "View Previous Reports",
-                      style: applyRobotoFont(
-                          color: AppColor.primary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500),
+                  Flexible(
+                    child: OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                        fixedSize: const Size(180, 40),
+                        side: const BorderSide(color: AppColor.primary),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      onPressed: () {},
+                      child: Text(
+                        "View Previous Reports",
+                        style: applyRobotoFont(
+                            color: AppColor.primary,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ],
