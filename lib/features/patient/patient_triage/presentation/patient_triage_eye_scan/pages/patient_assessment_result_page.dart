@@ -6,8 +6,8 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pa
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/result_page_top_card.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/providers/patient_triage_steps_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,7 +27,7 @@ class PatientAssessmentResultPage extends ConsumerWidget {
       ref.invalidate(patientTriageQuestionnaireProvider);
       ref.invalidate(patientTriageEyeScanProvider);
       ref.invalidate(tumblingTestProvider);
-      ref.invalidate(patientTriageStepsProvider);
+      ref.invalidate(patientTriageProvider);
     }
 
     return Scaffold(
@@ -36,7 +36,7 @@ class PatientAssessmentResultPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              ref.read(patientTriageStepsProvider).getTriageDetails();
+              ref.read(patientTriageProvider).getTriageDetails();
             },
             icon: const Icon(
               Icons.download_outlined,
