@@ -72,7 +72,8 @@ class TumblingResultPageTopCard extends ConsumerWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 50),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            padding:
+                const EdgeInsets.only(right: 12, left: 12, top: 25, bottom: 14),
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(

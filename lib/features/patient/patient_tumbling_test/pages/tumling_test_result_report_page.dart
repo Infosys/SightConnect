@@ -37,6 +37,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                 ),
                 color: const Color(0xff333333),
                 child: Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     SizedBox(
                       child: Stack(
@@ -186,7 +187,6 @@ class TumblingResultReportPage extends ConsumerWidget {
       ),
     );
   }
-
 
   buildGuage() {
     return SfRadialGauge(

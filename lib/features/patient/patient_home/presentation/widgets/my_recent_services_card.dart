@@ -29,14 +29,7 @@ class RecentServicesCard extends StatelessWidget {
                 builder: (context) => const PatientTriagePage(),
               ),
             );
-          }
-          if (data["text"] == "Pledge") {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const TumblingLeftEyeInstruction(),
-              ),
-            );
-          }
+          }       
         },
         borderRadius: BorderRadius.circular(AppSize.kmradius),
         child: Card(

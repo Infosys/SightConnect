@@ -63,7 +63,7 @@ class TumblingTestInstructionPage extends HookConsumerWidget {
                   child: AnimatedSmoothIndicator(
                     onDotClicked: (index) {},
                     activeIndex: activeIndex.value,
-                    count: 5,
+                    count: 4,
                     effect: const SlideEffect(
                       activeDotColor: AppColor.primary,
                       radius: 2,

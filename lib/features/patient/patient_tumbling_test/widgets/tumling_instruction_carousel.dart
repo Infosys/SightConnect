@@ -38,11 +38,6 @@ class TumblingInstructionCarousel extends HookWidget {
         "text":
             "If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested."
       },
-      {
-        "image": "assets/images/Test1LeftEye.png",
-        "text":
-            "Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result."
-      },
     ];
     return CarouselSlider.builder(
       carouselController: carouselController,

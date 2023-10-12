@@ -21,10 +21,10 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
         title: Row(
           children: [
             Text(
-              "Step 3 of 3",
+              "3 of 3",
               style: applyRobotoFont(
                 color: AppColor.primary,
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
             ),

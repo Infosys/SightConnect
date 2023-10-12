@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,8 +18,29 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const PatientTriageStepsDrawer(),
       appBar: AppBar(
-        title: const Text("Video Instructions"),
+        title: Row(
+          children: [
+            Text(
+              "2 of 3",
+              style: applyRobotoFont(
+                color: AppColor.primary,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(width: AppSize.kmwidth),
+            Text(
+              'Visual Acuity Test',
+              style: applyFiraSansFont(
+                color: AppColor.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(
