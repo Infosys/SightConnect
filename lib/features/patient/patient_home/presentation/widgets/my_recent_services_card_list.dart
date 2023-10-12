@@ -12,13 +12,21 @@ class RecentServicesCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var data = [
-      {"icon": AppIcon.triage, "text": "Triage", "color": AppColor.paleYellow},
+      {
+        "icon": AppIcon.triage,
+        "text": "Triage",
+        "color": AppColor.paleYellow,
+      },
       {
         "icon": AppIcon.acuityTest,
         "text": "Acuity test",
         "color": AppColor.lavanderBlue
       },
-      {"icon": AppIcon.pledge, "text": "Pledge", "color": AppColor.teaGreen},
+      {
+        "icon": AppIcon.pledge,
+        "text": "Pledge",
+        "color": AppColor.teaGreen,
+      },
       {
         "icon": AppIcon.eyeScanner,
         "text": "Eye Scanner",
