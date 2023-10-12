@@ -2,7 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumling_result_report_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumling_test_result_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
