@@ -36,6 +36,19 @@ class PatientTriageProvider extends ChangeNotifier {
   TriageAssessment triageAssessment = const TriageAssessment(
     mediaListSections: [],
     observationsSections: [],
-    questionnaireSections: [],
+    questionnaireSections: [
+      QuestionnaireSection(
+        questionnaire: [
+          Questionnaire(
+            description: "This is a description",
+            questions: [
+              Question(
+                statement: "This is a statement",
+              )
+            ],
+          ),
+        ],
+      )
+    ],
   );
 }
