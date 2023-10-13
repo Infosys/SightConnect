@@ -1,0 +1,51 @@
+{
+  "patientId": 99000001,
+  "source": "App",
+  "organizationCode": 88000001,
+  "assessmentCode": 10000001,
+  "assessmentStartTime": "2023-10-12T13:26:15.000Z",
+  "assessmentEndTime": "2023-10-12T14:11:33.000Z",
+  "capturedBy": null,
+  "questionResponse": [
+    {
+      "questionCode": 30000001,
+      "response": "No"
+    },
+    {
+      "questionCode": 30000002,
+      "response": "No"
+    },
+    {
+      "questionCode": 30000003,
+      "response": "No"
+    },
+    {
+      "questionCode": 30000004,
+      "response": "Yes"
+    }
+  ],
+  "observations": [
+    {
+      "observationCode": 50000001,
+      "response": "0.2"
+    },
+    {
+      "observationCode": 50000002,
+      "response": "0.4"
+    }
+  ],
+  "mediaCapture": [
+    {
+      "mediaCode": 70000001,
+      "fileName": "99000001_IMG-20231012-WA000X13.JPG",
+      "fileType": "JPG",
+      "encoding-type": "GZip"
+    },
+    {
+      "mediaCode": 70000002,
+      "fileName": "99000001_IMG-20231012-WA000X21.JPG",
+      "fileType": "JPG",
+      "encoding-type": "GZip"
+    }
+  ]
+}

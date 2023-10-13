@@ -106,6 +106,7 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/services/
+    - assets/profile.json
   
   #   - images/a_dot_ham.jpeg
 

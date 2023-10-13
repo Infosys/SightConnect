@@ -1,0 +1,79 @@
+{
+    "requestId": "499a5a4a-7dda-4f20-9b67-e24589627061",
+    "timestamp": "2023-10-10T09:11:37.027Z",
+    "intent": {
+        "type": "string"
+    },
+    "location": {
+        "latitude": "string",
+        "longitude": "string"
+    },
+    "profile": {
+        "hipCode": "CounterId",
+        "patient": {
+            "healthId": "<username>@<suffix>",
+            "healthIdNumber": "1111-1111-1111-11",
+            "name": "Jane Doe",
+            "gender": "M",
+            "profilePhoto": "",
+            "address": [
+                {
+                    "line": "string",
+                    "district": "string",
+                    "state": "string",
+                    "pincode": "string",
+                    "label": "home",
+                    "isPrimary": true,
+                    "isDeleted": false,
+                    "status": "active"
+                },
+                {
+                    "line": "string",
+                    "district": "string",
+                    "state": "string",
+                    "pincode": "string",
+                    "label": "work",
+                    "isPrimary": false,
+                    "isDeleted": false,
+                    "status": "active"
+                }
+            ],
+            "yearOfBirth": 2000,
+            "dayOfBirth": 0,
+            "monthOfBirth": 0,
+            "parentPatientId": "361525217",
+            "relatedParty": [
+                {
+                    "patientId": "787878787",
+                    "name": "Chunkey Pandey",
+                    "profilePhoto": "",
+                    "relationship": "Father",
+                    "age": "67"
+                },
+                {
+                    "patientId": "543567",
+                    "name ": "Rati Pandey",
+                    "profilePhoto": "",
+                    "relationship": "Uncle",
+                    "age": "65"
+                }
+            ],
+            "identifiers": [
+                {
+                    "type": "Mobile",
+                    "value": "+919800083232"
+                }
+            ],
+            "medicalRecords": [
+                {
+                    "organisationId ": "LVP",
+                    "recordNumber": "7878"
+                },
+                {
+                    "organisationId": "APOLLO",
+                    "recordNumber": "56565"
+                }
+            ]
+        }
+    }
+}
