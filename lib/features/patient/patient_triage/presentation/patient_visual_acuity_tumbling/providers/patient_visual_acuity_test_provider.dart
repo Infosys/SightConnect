@@ -5,9 +5,6 @@ import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tum
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/enums/triage_enums.dart';
-import '../../../data/models/visual_acuity_report.dart';
-
 class PatientVisualAcuityTestProvider with ChangeNotifier {
   final TumblingDataSource _dataSource;
   PatientVisualAcuityTestProvider(this._dataSource) {
@@ -142,22 +139,6 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     var value = eyesFinalReport[Eye.right]!.keys.last;
 
     return _dataSource.getLogMarFromLevel(value);
-  }
-
-  VisualAcuityReport getTriageTumblingEResponse() {
-    return VisualAcuityReport(
-      id: 0,
-      logMarLNE: calculateLeftEyeSigth(),
-      logMarRNE: calculateRightEyeSigth(),
-      logMarLDE: calculateLeftEyeSigth(),
-      logMarRDE: calculateRightEyeSigth(),
-      logMarLNC: calculateLeftEyeSigth(),
-      logMarRNC: calculateRightEyeSigth(),
-      logMarLDC: calculateLeftEyeSigth(),
-      logMarRDC: calculateRightEyeSigth(),
-      leftEyeCondition: TriageEyeCondition.NORMAL,
-      rightEyeCondition: TriageEyeCondition.NORMAL,
-    );
   }
 }
 

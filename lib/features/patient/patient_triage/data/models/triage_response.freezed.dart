@@ -20,24 +20,19 @@ TriageResponse _$TriageResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TriageResponse {
-  int get id => throw _privateConstructorUsedError;
-  String? get getqVersion => throw _privateConstructorUsedError;
-  String? get q1 => throw _privateConstructorUsedError;
-  String? get q2 => throw _privateConstructorUsedError;
-  String? get q3 => throw _privateConstructorUsedError;
-  String? get q4 => throw _privateConstructorUsedError;
-  String? get q5 => throw _privateConstructorUsedError;
-  String? get q6 => throw _privateConstructorUsedError;
-  String? get q7 => throw _privateConstructorUsedError;
-  String? get q8 => throw _privateConstructorUsedError;
-  String? get q9 => throw _privateConstructorUsedError;
-  String? get q10 => throw _privateConstructorUsedError;
-  String? get q11 => throw _privateConstructorUsedError;
-  String? get q12 => throw _privateConstructorUsedError;
-  String? get q14 => throw _privateConstructorUsedError;
-  String? get q15 => throw _privateConstructorUsedError;
-  String? get q16 => throw _privateConstructorUsedError;
-  String? get json => throw _privateConstructorUsedError;
+  int? get patientId => throw _privateConstructorUsedError;
+  String? get source => throw _privateConstructorUsedError;
+  int? get organizationCode => throw _privateConstructorUsedError;
+  int? get assessmentCode => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get assessmentStartTime => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get assessmentEndTime => throw _privateConstructorUsedError;
+  String? get capturedBy => throw _privateConstructorUsedError;
+  List<QuestionResponse>? get questionResponse =>
+      throw _privateConstructorUsedError;
+  List<Observation>? get observations => throw _privateConstructorUsedError;
+  List<MediaCapture>? get mediaCapture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,24 +47,16 @@ abstract class $TriageResponseCopyWith<$Res> {
       _$TriageResponseCopyWithImpl<$Res, TriageResponse>;
   @useResult
   $Res call(
-      {int id,
-      String? getqVersion,
-      String? q1,
-      String? q2,
-      String? q3,
-      String? q4,
-      String? q5,
-      String? q6,
-      String? q7,
-      String? q8,
-      String? q9,
-      String? q10,
-      String? q11,
-      String? q12,
-      String? q14,
-      String? q15,
-      String? q16,
-      String? json});
+      {int? patientId,
+      String? source,
+      int? organizationCode,
+      int? assessmentCode,
+      @TimestampConverter() DateTime? assessmentStartTime,
+      @TimestampConverter() DateTime? assessmentEndTime,
+      String? capturedBy,
+      List<QuestionResponse>? questionResponse,
+      List<Observation>? observations,
+      List<MediaCapture>? mediaCapture});
 }
 
 /// @nodoc
@@ -85,98 +72,58 @@ class _$TriageResponseCopyWithImpl<$Res, $Val extends TriageResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? getqVersion = freezed,
-    Object? q1 = freezed,
-    Object? q2 = freezed,
-    Object? q3 = freezed,
-    Object? q4 = freezed,
-    Object? q5 = freezed,
-    Object? q6 = freezed,
-    Object? q7 = freezed,
-    Object? q8 = freezed,
-    Object? q9 = freezed,
-    Object? q10 = freezed,
-    Object? q11 = freezed,
-    Object? q12 = freezed,
-    Object? q14 = freezed,
-    Object? q15 = freezed,
-    Object? q16 = freezed,
-    Object? json = freezed,
+    Object? patientId = freezed,
+    Object? source = freezed,
+    Object? organizationCode = freezed,
+    Object? assessmentCode = freezed,
+    Object? assessmentStartTime = freezed,
+    Object? assessmentEndTime = freezed,
+    Object? capturedBy = freezed,
+    Object? questionResponse = freezed,
+    Object? observations = freezed,
+    Object? mediaCapture = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      getqVersion: freezed == getqVersion
-          ? _value.getqVersion
-          : getqVersion // ignore: cast_nullable_to_non_nullable
+      patientId: freezed == patientId
+          ? _value.patientId
+          : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String?,
-      q1: freezed == q1
-          ? _value.q1
-          : q1 // ignore: cast_nullable_to_non_nullable
+      organizationCode: freezed == organizationCode
+          ? _value.organizationCode
+          : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      assessmentCode: freezed == assessmentCode
+          ? _value.assessmentCode
+          : assessmentCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      assessmentStartTime: freezed == assessmentStartTime
+          ? _value.assessmentStartTime
+          : assessmentStartTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      assessmentEndTime: freezed == assessmentEndTime
+          ? _value.assessmentEndTime
+          : assessmentEndTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      capturedBy: freezed == capturedBy
+          ? _value.capturedBy
+          : capturedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      q2: freezed == q2
-          ? _value.q2
-          : q2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q3: freezed == q3
-          ? _value.q3
-          : q3 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q4: freezed == q4
-          ? _value.q4
-          : q4 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q5: freezed == q5
-          ? _value.q5
-          : q5 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q6: freezed == q6
-          ? _value.q6
-          : q6 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q7: freezed == q7
-          ? _value.q7
-          : q7 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q8: freezed == q8
-          ? _value.q8
-          : q8 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q9: freezed == q9
-          ? _value.q9
-          : q9 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q10: freezed == q10
-          ? _value.q10
-          : q10 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q11: freezed == q11
-          ? _value.q11
-          : q11 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q12: freezed == q12
-          ? _value.q12
-          : q12 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q14: freezed == q14
-          ? _value.q14
-          : q14 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q15: freezed == q15
-          ? _value.q15
-          : q15 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q16: freezed == q16
-          ? _value.q16
-          : q16 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      json: freezed == json
-          ? _value.json
-          : json // ignore: cast_nullable_to_non_nullable
-              as String?,
+      questionResponse: freezed == questionResponse
+          ? _value.questionResponse
+          : questionResponse // ignore: cast_nullable_to_non_nullable
+              as List<QuestionResponse>?,
+      observations: freezed == observations
+          ? _value.observations
+          : observations // ignore: cast_nullable_to_non_nullable
+              as List<Observation>?,
+      mediaCapture: freezed == mediaCapture
+          ? _value.mediaCapture
+          : mediaCapture // ignore: cast_nullable_to_non_nullable
+              as List<MediaCapture>?,
     ) as $Val);
   }
 }
@@ -190,24 +137,16 @@ abstract class _$$_TriageResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String? getqVersion,
-      String? q1,
-      String? q2,
-      String? q3,
-      String? q4,
-      String? q5,
-      String? q6,
-      String? q7,
-      String? q8,
-      String? q9,
-      String? q10,
-      String? q11,
-      String? q12,
-      String? q14,
-      String? q15,
-      String? q16,
-      String? json});
+      {int? patientId,
+      String? source,
+      int? organizationCode,
+      int? assessmentCode,
+      @TimestampConverter() DateTime? assessmentStartTime,
+      @TimestampConverter() DateTime? assessmentEndTime,
+      String? capturedBy,
+      List<QuestionResponse>? questionResponse,
+      List<Observation>? observations,
+      List<MediaCapture>? mediaCapture});
 }
 
 /// @nodoc
@@ -221,98 +160,58 @@ class __$$_TriageResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? getqVersion = freezed,
-    Object? q1 = freezed,
-    Object? q2 = freezed,
-    Object? q3 = freezed,
-    Object? q4 = freezed,
-    Object? q5 = freezed,
-    Object? q6 = freezed,
-    Object? q7 = freezed,
-    Object? q8 = freezed,
-    Object? q9 = freezed,
-    Object? q10 = freezed,
-    Object? q11 = freezed,
-    Object? q12 = freezed,
-    Object? q14 = freezed,
-    Object? q15 = freezed,
-    Object? q16 = freezed,
-    Object? json = freezed,
+    Object? patientId = freezed,
+    Object? source = freezed,
+    Object? organizationCode = freezed,
+    Object? assessmentCode = freezed,
+    Object? assessmentStartTime = freezed,
+    Object? assessmentEndTime = freezed,
+    Object? capturedBy = freezed,
+    Object? questionResponse = freezed,
+    Object? observations = freezed,
+    Object? mediaCapture = freezed,
   }) {
     return _then(_$_TriageResponse(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      getqVersion: freezed == getqVersion
-          ? _value.getqVersion
-          : getqVersion // ignore: cast_nullable_to_non_nullable
+      patientId: freezed == patientId
+          ? _value.patientId
+          : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String?,
-      q1: freezed == q1
-          ? _value.q1
-          : q1 // ignore: cast_nullable_to_non_nullable
+      organizationCode: freezed == organizationCode
+          ? _value.organizationCode
+          : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      assessmentCode: freezed == assessmentCode
+          ? _value.assessmentCode
+          : assessmentCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      assessmentStartTime: freezed == assessmentStartTime
+          ? _value.assessmentStartTime
+          : assessmentStartTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      assessmentEndTime: freezed == assessmentEndTime
+          ? _value.assessmentEndTime
+          : assessmentEndTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      capturedBy: freezed == capturedBy
+          ? _value.capturedBy
+          : capturedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      q2: freezed == q2
-          ? _value.q2
-          : q2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q3: freezed == q3
-          ? _value.q3
-          : q3 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q4: freezed == q4
-          ? _value.q4
-          : q4 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q5: freezed == q5
-          ? _value.q5
-          : q5 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q6: freezed == q6
-          ? _value.q6
-          : q6 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q7: freezed == q7
-          ? _value.q7
-          : q7 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q8: freezed == q8
-          ? _value.q8
-          : q8 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q9: freezed == q9
-          ? _value.q9
-          : q9 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q10: freezed == q10
-          ? _value.q10
-          : q10 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q11: freezed == q11
-          ? _value.q11
-          : q11 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q12: freezed == q12
-          ? _value.q12
-          : q12 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q14: freezed == q14
-          ? _value.q14
-          : q14 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q15: freezed == q15
-          ? _value.q15
-          : q15 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      q16: freezed == q16
-          ? _value.q16
-          : q16 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      json: freezed == json
-          ? _value.json
-          : json // ignore: cast_nullable_to_non_nullable
-              as String?,
+      questionResponse: freezed == questionResponse
+          ? _value._questionResponse
+          : questionResponse // ignore: cast_nullable_to_non_nullable
+              as List<QuestionResponse>?,
+      observations: freezed == observations
+          ? _value._observations
+          : observations // ignore: cast_nullable_to_non_nullable
+              as List<Observation>?,
+      mediaCapture: freezed == mediaCapture
+          ? _value._mediaCapture
+          : mediaCapture // ignore: cast_nullable_to_non_nullable
+              as List<MediaCapture>?,
     ));
   }
 }
@@ -321,68 +220,73 @@ class __$$_TriageResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TriageResponse implements _TriageResponse {
   const _$_TriageResponse(
-      {required this.id,
-      this.getqVersion,
-      this.q1,
-      this.q2,
-      this.q3,
-      this.q4,
-      this.q5,
-      this.q6,
-      this.q7,
-      this.q8,
-      this.q9,
-      this.q10,
-      this.q11,
-      this.q12,
-      this.q14,
-      this.q15,
-      this.q16,
-      this.json});
+      {this.patientId,
+      this.source,
+      this.organizationCode,
+      this.assessmentCode,
+      @TimestampConverter() this.assessmentStartTime,
+      @TimestampConverter() this.assessmentEndTime,
+      this.capturedBy,
+      final List<QuestionResponse>? questionResponse,
+      final List<Observation>? observations,
+      final List<MediaCapture>? mediaCapture})
+      : _questionResponse = questionResponse,
+        _observations = observations,
+        _mediaCapture = mediaCapture;
 
   factory _$_TriageResponse.fromJson(Map<String, dynamic> json) =>
       _$$_TriageResponseFromJson(json);
 
   @override
-  final int id;
+  final int? patientId;
   @override
-  final String? getqVersion;
+  final String? source;
   @override
-  final String? q1;
+  final int? organizationCode;
   @override
-  final String? q2;
+  final int? assessmentCode;
   @override
-  final String? q3;
+  @TimestampConverter()
+  final DateTime? assessmentStartTime;
   @override
-  final String? q4;
+  @TimestampConverter()
+  final DateTime? assessmentEndTime;
   @override
-  final String? q5;
+  final String? capturedBy;
+  final List<QuestionResponse>? _questionResponse;
   @override
-  final String? q6;
+  List<QuestionResponse>? get questionResponse {
+    final value = _questionResponse;
+    if (value == null) return null;
+    if (_questionResponse is EqualUnmodifiableListView)
+      return _questionResponse;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Observation>? _observations;
   @override
-  final String? q7;
+  List<Observation>? get observations {
+    final value = _observations;
+    if (value == null) return null;
+    if (_observations is EqualUnmodifiableListView) return _observations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<MediaCapture>? _mediaCapture;
   @override
-  final String? q8;
-  @override
-  final String? q9;
-  @override
-  final String? q10;
-  @override
-  final String? q11;
-  @override
-  final String? q12;
-  @override
-  final String? q14;
-  @override
-  final String? q15;
-  @override
-  final String? q16;
-  @override
-  final String? json;
+  List<MediaCapture>? get mediaCapture {
+    final value = _mediaCapture;
+    if (value == null) return null;
+    if (_mediaCapture is EqualUnmodifiableListView) return _mediaCapture;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TriageResponse(id: $id, getqVersion: $getqVersion, q1: $q1, q2: $q2, q3: $q3, q4: $q4, q5: $q5, q6: $q6, q7: $q7, q8: $q8, q9: $q9, q10: $q10, q11: $q11, q12: $q12, q14: $q14, q15: $q15, q16: $q16, json: $json)';
+    return 'TriageResponse(patientId: $patientId, source: $source, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, capturedBy: $capturedBy, questionResponse: $questionResponse, observations: $observations, mediaCapture: $mediaCapture)';
   }
 
   @override
@@ -390,31 +294,41 @@ class _$_TriageResponse implements _TriageResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TriageResponse &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.getqVersion, getqVersion) ||
-                other.getqVersion == getqVersion) &&
-            (identical(other.q1, q1) || other.q1 == q1) &&
-            (identical(other.q2, q2) || other.q2 == q2) &&
-            (identical(other.q3, q3) || other.q3 == q3) &&
-            (identical(other.q4, q4) || other.q4 == q4) &&
-            (identical(other.q5, q5) || other.q5 == q5) &&
-            (identical(other.q6, q6) || other.q6 == q6) &&
-            (identical(other.q7, q7) || other.q7 == q7) &&
-            (identical(other.q8, q8) || other.q8 == q8) &&
-            (identical(other.q9, q9) || other.q9 == q9) &&
-            (identical(other.q10, q10) || other.q10 == q10) &&
-            (identical(other.q11, q11) || other.q11 == q11) &&
-            (identical(other.q12, q12) || other.q12 == q12) &&
-            (identical(other.q14, q14) || other.q14 == q14) &&
-            (identical(other.q15, q15) || other.q15 == q15) &&
-            (identical(other.q16, q16) || other.q16 == q16) &&
-            (identical(other.json, json) || other.json == json));
+            (identical(other.patientId, patientId) ||
+                other.patientId == patientId) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.organizationCode, organizationCode) ||
+                other.organizationCode == organizationCode) &&
+            (identical(other.assessmentCode, assessmentCode) ||
+                other.assessmentCode == assessmentCode) &&
+            (identical(other.assessmentStartTime, assessmentStartTime) ||
+                other.assessmentStartTime == assessmentStartTime) &&
+            (identical(other.assessmentEndTime, assessmentEndTime) ||
+                other.assessmentEndTime == assessmentEndTime) &&
+            (identical(other.capturedBy, capturedBy) ||
+                other.capturedBy == capturedBy) &&
+            const DeepCollectionEquality()
+                .equals(other._questionResponse, _questionResponse) &&
+            const DeepCollectionEquality()
+                .equals(other._observations, _observations) &&
+            const DeepCollectionEquality()
+                .equals(other._mediaCapture, _mediaCapture));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, getqVersion, q1, q2, q3, q4,
-      q5, q6, q7, q8, q9, q10, q11, q12, q14, q15, q16, json);
+  int get hashCode => Object.hash(
+      runtimeType,
+      patientId,
+      source,
+      organizationCode,
+      assessmentCode,
+      assessmentStartTime,
+      assessmentEndTime,
+      capturedBy,
+      const DeepCollectionEquality().hash(_questionResponse),
+      const DeepCollectionEquality().hash(_observations),
+      const DeepCollectionEquality().hash(_mediaCapture));
 
   @JsonKey(ignore: true)
   @override
@@ -432,66 +346,556 @@ class _$_TriageResponse implements _TriageResponse {
 
 abstract class _TriageResponse implements TriageResponse {
   const factory _TriageResponse(
-      {required final int id,
-      final String? getqVersion,
-      final String? q1,
-      final String? q2,
-      final String? q3,
-      final String? q4,
-      final String? q5,
-      final String? q6,
-      final String? q7,
-      final String? q8,
-      final String? q9,
-      final String? q10,
-      final String? q11,
-      final String? q12,
-      final String? q14,
-      final String? q15,
-      final String? q16,
-      final String? json}) = _$_TriageResponse;
+      {final int? patientId,
+      final String? source,
+      final int? organizationCode,
+      final int? assessmentCode,
+      @TimestampConverter() final DateTime? assessmentStartTime,
+      @TimestampConverter() final DateTime? assessmentEndTime,
+      final String? capturedBy,
+      final List<QuestionResponse>? questionResponse,
+      final List<Observation>? observations,
+      final List<MediaCapture>? mediaCapture}) = _$_TriageResponse;
 
   factory _TriageResponse.fromJson(Map<String, dynamic> json) =
       _$_TriageResponse.fromJson;
 
   @override
-  int get id;
+  int? get patientId;
   @override
-  String? get getqVersion;
+  String? get source;
   @override
-  String? get q1;
+  int? get organizationCode;
   @override
-  String? get q2;
+  int? get assessmentCode;
   @override
-  String? get q3;
+  @TimestampConverter()
+  DateTime? get assessmentStartTime;
   @override
-  String? get q4;
+  @TimestampConverter()
+  DateTime? get assessmentEndTime;
   @override
-  String? get q5;
+  String? get capturedBy;
   @override
-  String? get q6;
+  List<QuestionResponse>? get questionResponse;
   @override
-  String? get q7;
+  List<Observation>? get observations;
   @override
-  String? get q8;
-  @override
-  String? get q9;
-  @override
-  String? get q10;
-  @override
-  String? get q11;
-  @override
-  String? get q12;
-  @override
-  String? get q14;
-  @override
-  String? get q15;
-  @override
-  String? get q16;
-  @override
-  String? get json;
+  List<MediaCapture>? get mediaCapture;
   @override
   @JsonKey(ignore: true)
   _$$_TriageResponseCopyWith<_$_TriageResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+QuestionResponse _$QuestionResponseFromJson(Map<String, dynamic> json) {
+  return _QuestionResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$QuestionResponse {
+  int? get questionCode => throw _privateConstructorUsedError;
+  String? get response => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $QuestionResponseCopyWith<QuestionResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $QuestionResponseCopyWith<$Res> {
+  factory $QuestionResponseCopyWith(
+          QuestionResponse value, $Res Function(QuestionResponse) then) =
+      _$QuestionResponseCopyWithImpl<$Res, QuestionResponse>;
+  @useResult
+  $Res call({int? questionCode, String? response});
+}
+
+/// @nodoc
+class _$QuestionResponseCopyWithImpl<$Res, $Val extends QuestionResponse>
+    implements $QuestionResponseCopyWith<$Res> {
+  _$QuestionResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? questionCode = freezed,
+    Object? response = freezed,
+  }) {
+    return _then(_value.copyWith(
+      questionCode: freezed == questionCode
+          ? _value.questionCode
+          : questionCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_QuestionResponseCopyWith<$Res>
+    implements $QuestionResponseCopyWith<$Res> {
+  factory _$$_QuestionResponseCopyWith(
+          _$_QuestionResponse value, $Res Function(_$_QuestionResponse) then) =
+      __$$_QuestionResponseCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? questionCode, String? response});
+}
+
+/// @nodoc
+class __$$_QuestionResponseCopyWithImpl<$Res>
+    extends _$QuestionResponseCopyWithImpl<$Res, _$_QuestionResponse>
+    implements _$$_QuestionResponseCopyWith<$Res> {
+  __$$_QuestionResponseCopyWithImpl(
+      _$_QuestionResponse _value, $Res Function(_$_QuestionResponse) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? questionCode = freezed,
+    Object? response = freezed,
+  }) {
+    return _then(_$_QuestionResponse(
+      questionCode: freezed == questionCode
+          ? _value.questionCode
+          : questionCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_QuestionResponse implements _QuestionResponse {
+  const _$_QuestionResponse({this.questionCode, this.response});
+
+  factory _$_QuestionResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionResponseFromJson(json);
+
+  @override
+  final int? questionCode;
+  @override
+  final String? response;
+
+  @override
+  String toString() {
+    return 'QuestionResponse(questionCode: $questionCode, response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_QuestionResponse &&
+            (identical(other.questionCode, questionCode) ||
+                other.questionCode == questionCode) &&
+            (identical(other.response, response) ||
+                other.response == response));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, questionCode, response);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_QuestionResponseCopyWith<_$_QuestionResponse> get copyWith =>
+      __$$_QuestionResponseCopyWithImpl<_$_QuestionResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QuestionResponseToJson(
+      this,
+    );
+  }
+}
+
+abstract class _QuestionResponse implements QuestionResponse {
+  const factory _QuestionResponse(
+      {final int? questionCode, final String? response}) = _$_QuestionResponse;
+
+  factory _QuestionResponse.fromJson(Map<String, dynamic> json) =
+      _$_QuestionResponse.fromJson;
+
+  @override
+  int? get questionCode;
+  @override
+  String? get response;
+  @override
+  @JsonKey(ignore: true)
+  _$$_QuestionResponseCopyWith<_$_QuestionResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Observation _$ObservationFromJson(Map<String, dynamic> json) {
+  return _Observation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Observation {
+  int? get observationCode => throw _privateConstructorUsedError;
+  String? get response => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ObservationCopyWith<Observation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ObservationCopyWith<$Res> {
+  factory $ObservationCopyWith(
+          Observation value, $Res Function(Observation) then) =
+      _$ObservationCopyWithImpl<$Res, Observation>;
+  @useResult
+  $Res call({int? observationCode, String? response});
+}
+
+/// @nodoc
+class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
+    implements $ObservationCopyWith<$Res> {
+  _$ObservationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? observationCode = freezed,
+    Object? response = freezed,
+  }) {
+    return _then(_value.copyWith(
+      observationCode: freezed == observationCode
+          ? _value.observationCode
+          : observationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ObservationCopyWith<$Res>
+    implements $ObservationCopyWith<$Res> {
+  factory _$$_ObservationCopyWith(
+          _$_Observation value, $Res Function(_$_Observation) then) =
+      __$$_ObservationCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? observationCode, String? response});
+}
+
+/// @nodoc
+class __$$_ObservationCopyWithImpl<$Res>
+    extends _$ObservationCopyWithImpl<$Res, _$_Observation>
+    implements _$$_ObservationCopyWith<$Res> {
+  __$$_ObservationCopyWithImpl(
+      _$_Observation _value, $Res Function(_$_Observation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? observationCode = freezed,
+    Object? response = freezed,
+  }) {
+    return _then(_$_Observation(
+      observationCode: freezed == observationCode
+          ? _value.observationCode
+          : observationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Observation implements _Observation {
+  const _$_Observation({this.observationCode, this.response});
+
+  factory _$_Observation.fromJson(Map<String, dynamic> json) =>
+      _$$_ObservationFromJson(json);
+
+  @override
+  final int? observationCode;
+  @override
+  final String? response;
+
+  @override
+  String toString() {
+    return 'Observation(observationCode: $observationCode, response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Observation &&
+            (identical(other.observationCode, observationCode) ||
+                other.observationCode == observationCode) &&
+            (identical(other.response, response) ||
+                other.response == response));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, observationCode, response);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
+      __$$_ObservationCopyWithImpl<_$_Observation>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ObservationToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Observation implements Observation {
+  const factory _Observation(
+      {final int? observationCode, final String? response}) = _$_Observation;
+
+  factory _Observation.fromJson(Map<String, dynamic> json) =
+      _$_Observation.fromJson;
+
+  @override
+  int? get observationCode;
+  @override
+  String? get response;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MediaCapture _$MediaCaptureFromJson(Map<String, dynamic> json) {
+  return _MediaCapture.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MediaCapture {
+  int? get mediaCode => throw _privateConstructorUsedError;
+  String? get fileName => throw _privateConstructorUsedError;
+  String? get fileType => throw _privateConstructorUsedError;
+  String? get encodingType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MediaCaptureCopyWith<MediaCapture> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MediaCaptureCopyWith<$Res> {
+  factory $MediaCaptureCopyWith(
+          MediaCapture value, $Res Function(MediaCapture) then) =
+      _$MediaCaptureCopyWithImpl<$Res, MediaCapture>;
+  @useResult
+  $Res call(
+      {int? mediaCode,
+      String? fileName,
+      String? fileType,
+      String? encodingType});
+}
+
+/// @nodoc
+class _$MediaCaptureCopyWithImpl<$Res, $Val extends MediaCapture>
+    implements $MediaCaptureCopyWith<$Res> {
+  _$MediaCaptureCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mediaCode = freezed,
+    Object? fileName = freezed,
+    Object? fileType = freezed,
+    Object? encodingType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      mediaCode: freezed == mediaCode
+          ? _value.mediaCode
+          : mediaCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileType: freezed == fileType
+          ? _value.fileType
+          : fileType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      encodingType: freezed == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MediaCaptureCopyWith<$Res>
+    implements $MediaCaptureCopyWith<$Res> {
+  factory _$$_MediaCaptureCopyWith(
+          _$_MediaCapture value, $Res Function(_$_MediaCapture) then) =
+      __$$_MediaCaptureCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? mediaCode,
+      String? fileName,
+      String? fileType,
+      String? encodingType});
+}
+
+/// @nodoc
+class __$$_MediaCaptureCopyWithImpl<$Res>
+    extends _$MediaCaptureCopyWithImpl<$Res, _$_MediaCapture>
+    implements _$$_MediaCaptureCopyWith<$Res> {
+  __$$_MediaCaptureCopyWithImpl(
+      _$_MediaCapture _value, $Res Function(_$_MediaCapture) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mediaCode = freezed,
+    Object? fileName = freezed,
+    Object? fileType = freezed,
+    Object? encodingType = freezed,
+  }) {
+    return _then(_$_MediaCapture(
+      mediaCode: freezed == mediaCode
+          ? _value.mediaCode
+          : mediaCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileType: freezed == fileType
+          ? _value.fileType
+          : fileType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      encodingType: freezed == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MediaCapture implements _MediaCapture {
+  const _$_MediaCapture(
+      {this.mediaCode, this.fileName, this.fileType, this.encodingType});
+
+  factory _$_MediaCapture.fromJson(Map<String, dynamic> json) =>
+      _$$_MediaCaptureFromJson(json);
+
+  @override
+  final int? mediaCode;
+  @override
+  final String? fileName;
+  @override
+  final String? fileType;
+  @override
+  final String? encodingType;
+
+  @override
+  String toString() {
+    return 'MediaCapture(mediaCode: $mediaCode, fileName: $fileName, fileType: $fileType, encodingType: $encodingType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MediaCapture &&
+            (identical(other.mediaCode, mediaCode) ||
+                other.mediaCode == mediaCode) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName) &&
+            (identical(other.fileType, fileType) ||
+                other.fileType == fileType) &&
+            (identical(other.encodingType, encodingType) ||
+                other.encodingType == encodingType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, mediaCode, fileName, fileType, encodingType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MediaCaptureCopyWith<_$_MediaCapture> get copyWith =>
+      __$$_MediaCaptureCopyWithImpl<_$_MediaCapture>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MediaCaptureToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MediaCapture implements MediaCapture {
+  const factory _MediaCapture(
+      {final int? mediaCode,
+      final String? fileName,
+      final String? fileType,
+      final String? encodingType}) = _$_MediaCapture;
+
+  factory _MediaCapture.fromJson(Map<String, dynamic> json) =
+      _$_MediaCapture.fromJson;
+
+  @override
+  int? get mediaCode;
+  @override
+  String? get fileName;
+  @override
+  String? get fileType;
+  @override
+  String? get encodingType;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MediaCaptureCopyWith<_$_MediaCapture> get copyWith =>
       throw _privateConstructorUsedError;
 }

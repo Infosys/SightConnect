@@ -8,44 +8,78 @@ part of 'triage_response.dart';
 
 _$_TriageResponse _$$_TriageResponseFromJson(Map<String, dynamic> json) =>
     _$_TriageResponse(
-      id: json['id'] as int,
-      getqVersion: json['getqVersion'] as String?,
-      q1: json['q1'] as String?,
-      q2: json['q2'] as String?,
-      q3: json['q3'] as String?,
-      q4: json['q4'] as String?,
-      q5: json['q5'] as String?,
-      q6: json['q6'] as String?,
-      q7: json['q7'] as String?,
-      q8: json['q8'] as String?,
-      q9: json['q9'] as String?,
-      q10: json['q10'] as String?,
-      q11: json['q11'] as String?,
-      q12: json['q12'] as String?,
-      q14: json['q14'] as String?,
-      q15: json['q15'] as String?,
-      q16: json['q16'] as String?,
-      json: json['json'] as String?,
+      patientId: json['patientId'] as int?,
+      source: json['source'] as String?,
+      organizationCode: json['organizationCode'] as int?,
+      assessmentCode: json['assessmentCode'] as int?,
+      assessmentStartTime: const TimestampConverter()
+          .fromJson(json['assessmentStartTime'] as String?),
+      assessmentEndTime: const TimestampConverter()
+          .fromJson(json['assessmentEndTime'] as String?),
+      capturedBy: json['capturedBy'] as String?,
+      questionResponse: (json['questionResponse'] as List<dynamic>?)
+          ?.map((e) => QuestionResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      observations: (json['observations'] as List<dynamic>?)
+          ?.map((e) => Observation.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      mediaCapture: (json['mediaCapture'] as List<dynamic>?)
+          ?.map((e) => MediaCapture.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_TriageResponseToJson(_$_TriageResponse instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'getqVersion': instance.getqVersion,
-      'q1': instance.q1,
-      'q2': instance.q2,
-      'q3': instance.q3,
-      'q4': instance.q4,
-      'q5': instance.q5,
-      'q6': instance.q6,
-      'q7': instance.q7,
-      'q8': instance.q8,
-      'q9': instance.q9,
-      'q10': instance.q10,
-      'q11': instance.q11,
-      'q12': instance.q12,
-      'q14': instance.q14,
-      'q15': instance.q15,
-      'q16': instance.q16,
-      'json': instance.json,
+      'patientId': instance.patientId,
+      'source': instance.source,
+      'organizationCode': instance.organizationCode,
+      'assessmentCode': instance.assessmentCode,
+      'assessmentStartTime':
+          const TimestampConverter().toJson(instance.assessmentStartTime),
+      'assessmentEndTime':
+          const TimestampConverter().toJson(instance.assessmentEndTime),
+      'capturedBy': instance.capturedBy,
+      'questionResponse': instance.questionResponse,
+      'observations': instance.observations,
+      'mediaCapture': instance.mediaCapture,
+    };
+
+_$_QuestionResponse _$$_QuestionResponseFromJson(Map<String, dynamic> json) =>
+    _$_QuestionResponse(
+      questionCode: json['questionCode'] as int?,
+      response: json['response'] as String?,
+    );
+
+Map<String, dynamic> _$$_QuestionResponseToJson(_$_QuestionResponse instance) =>
+    <String, dynamic>{
+      'questionCode': instance.questionCode,
+      'response': instance.response,
+    };
+
+_$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
+    _$_Observation(
+      observationCode: json['observationCode'] as int?,
+      response: json['response'] as String?,
+    );
+
+Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>
+    <String, dynamic>{
+      'observationCode': instance.observationCode,
+      'response': instance.response,
+    };
+
+_$_MediaCapture _$$_MediaCaptureFromJson(Map<String, dynamic> json) =>
+    _$_MediaCapture(
+      mediaCode: json['mediaCode'] as int?,
+      fileName: json['fileName'] as String?,
+      fileType: json['fileType'] as String?,
+      encodingType: json['encodingType'] as String?,
+    );
+
+Map<String, dynamic> _$$_MediaCaptureToJson(_$_MediaCapture instance) =>
+    <String, dynamic>{
+      'mediaCode': instance.mediaCode,
+      'fileName': instance.fileName,
+      'fileType': instance.fileType,
+      'encodingType': instance.encodingType,
     };
