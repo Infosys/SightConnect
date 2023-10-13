@@ -5,11 +5,4 @@ var patientTriageQuestionnaireProvider = ChangeNotifierProvider(
   (ref) => PatientTriageQuestionnaireProvider(),
 );
 
-class PatientTriageQuestionnaireProvider extends ChangeNotifier {
-  int index = 0;
-
-  setIndex(int newIndex) {
-    index = newIndex;
-    notifyListeners();
-  }
-}
+class PatientTriageQuestionnaireProvider extends ChangeNotifier {}
