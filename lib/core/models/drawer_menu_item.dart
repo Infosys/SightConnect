@@ -56,6 +56,6 @@ class DrawerMenuItems {
     about,
     termOfUse,
     privacyPolicy,
-    help
+    help,
   ];
 }

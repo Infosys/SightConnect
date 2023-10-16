@@ -21,7 +21,6 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconProviderstate = ref.watch(iconProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -63,14 +62,11 @@ class PatientHomePage extends ConsumerWidget {
                     radius: 20,
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Consumer(
-                      builder:
-                          (BuildContext context, WidgetRef ref, Widget? child) {
-                        return CircleAvatar(
+                      builder: (context, ref, child) {
+                        return const CircleAvatar(
                           radius: 18,
-                          backgroundImage: iconProviderstate.myString == ""
-                              ? const AssetImage(
-                                  'assets/images/profile_image.png')
-                              : AssetImage(iconProviderstate.myString),
+                          backgroundImage:
+                              AssetImage('assets/images/profile_image.png'),
                         );
                       },
                     ),
@@ -79,9 +75,7 @@ class PatientHomePage extends ConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(
-            width: AppSize.kmwidth,
-          ),
+          const SizedBox(width: AppSize.kmwidth),
         ],
       ),
       body: RefreshIndicator(
