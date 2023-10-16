@@ -52,20 +52,19 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            // Implement the logic for item selection based on pageIndex
+            
             if (widget.pageIndex == 0) {
-              // When pageIndex is 0, only one item can be selected
-              if (selectedStates[index]) {
-                // If the same item is tapped again, unselect it
+               if (selectedStates[index]) {
+               
                 selectedStates[index] = false;
               } else {
-                // Select a different item and unselect others
+             
                 for (int i = 0; i < selectedStates.length; i++) {
                   selectedStates[i] = (i == index);
                 }
               }
             } else {
-              // When pageIndex is greater than 0, items can be selected independently
+          
               selectedStates[index] = !selectedStates[index];
             }
             widget.onTap?.call(index);
