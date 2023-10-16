@@ -217,7 +217,8 @@ class __$$_TriageResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_TriageResponse implements _TriageResponse {
   const _$_TriageResponse(
       {this.patientId,
@@ -395,7 +396,7 @@ QuestionResponse _$QuestionResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$QuestionResponse {
   int? get questionCode => throw _privateConstructorUsedError;
-  String? get response => throw _privateConstructorUsedError;
+  bool? get response => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -409,7 +410,7 @@ abstract class $QuestionResponseCopyWith<$Res> {
           QuestionResponse value, $Res Function(QuestionResponse) then) =
       _$QuestionResponseCopyWithImpl<$Res, QuestionResponse>;
   @useResult
-  $Res call({int? questionCode, String? response});
+  $Res call({int? questionCode, bool? response});
 }
 
 /// @nodoc
@@ -436,7 +437,7 @@ class _$QuestionResponseCopyWithImpl<$Res, $Val extends QuestionResponse>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool?,
     ) as $Val);
   }
 }
@@ -449,7 +450,7 @@ abstract class _$$_QuestionResponseCopyWith<$Res>
       __$$_QuestionResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? questionCode, String? response});
+  $Res call({int? questionCode, bool? response});
 }
 
 /// @nodoc
@@ -474,7 +475,7 @@ class __$$_QuestionResponseCopyWithImpl<$Res>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool?,
     ));
   }
 }
@@ -490,7 +491,7 @@ class _$_QuestionResponse implements _QuestionResponse {
   @override
   final int? questionCode;
   @override
-  final String? response;
+  final bool? response;
 
   @override
   String toString() {
@@ -528,7 +529,7 @@ class _$_QuestionResponse implements _QuestionResponse {
 
 abstract class _QuestionResponse implements QuestionResponse {
   const factory _QuestionResponse(
-      {final int? questionCode, final String? response}) = _$_QuestionResponse;
+      {final int? questionCode, final bool? response}) = _$_QuestionResponse;
 
   factory _QuestionResponse.fromJson(Map<String, dynamic> json) =
       _$_QuestionResponse.fromJson;
@@ -536,7 +537,7 @@ abstract class _QuestionResponse implements QuestionResponse {
   @override
   int? get questionCode;
   @override
-  String? get response;
+  bool? get response;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionResponseCopyWith<_$_QuestionResponse> get copyWith =>
@@ -550,7 +551,7 @@ Observation _$ObservationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Observation {
   int? get observationCode => throw _privateConstructorUsedError;
-  String? get response => throw _privateConstructorUsedError;
+  double? get response => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -564,7 +565,7 @@ abstract class $ObservationCopyWith<$Res> {
           Observation value, $Res Function(Observation) then) =
       _$ObservationCopyWithImpl<$Res, Observation>;
   @useResult
-  $Res call({int? observationCode, String? response});
+  $Res call({int? observationCode, double? response});
 }
 
 /// @nodoc
@@ -591,7 +592,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
     ) as $Val);
   }
 }
@@ -604,7 +605,7 @@ abstract class _$$_ObservationCopyWith<$Res>
       __$$_ObservationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? observationCode, String? response});
+  $Res call({int? observationCode, double? response});
 }
 
 /// @nodoc
@@ -629,7 +630,7 @@ class __$$_ObservationCopyWithImpl<$Res>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
     ));
   }
 }
@@ -645,7 +646,7 @@ class _$_Observation implements _Observation {
   @override
   final int? observationCode;
   @override
-  final String? response;
+  final double? response;
 
   @override
   String toString() {
@@ -683,7 +684,7 @@ class _$_Observation implements _Observation {
 
 abstract class _Observation implements Observation {
   const factory _Observation(
-      {final int? observationCode, final String? response}) = _$_Observation;
+      {final int? observationCode, final double? response}) = _$_Observation;
 
   factory _Observation.fromJson(Map<String, dynamic> json) =
       _$_Observation.fromJson;
@@ -691,7 +692,7 @@ abstract class _Observation implements Observation {
   @override
   int? get observationCode;
   @override
-  String? get response;
+  double? get response;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationCopyWith<_$_Observation> get copyWith =>

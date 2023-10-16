@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var dioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: "https://eyecareforall.herokuapp.com/",
+      baseUrl: "http://10.89.240.91:8075/api",
     ),
   ),
 );

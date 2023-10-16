@@ -6,27 +6,27 @@ var patientTriageQuestionnaireProvider = ChangeNotifierProvider(
 );
 
 class PatientTriageQuestionnaireProvider extends ChangeNotifier {
-  final List<String> _selectedOptions = [];
+  final List<bool> _selectedOptions = [];
   List<Map<String, dynamic>> questionResponse = [];
 
   void setSelectedOptions(List<bool> options) {
-    var data = options.map((e) => e ? "Yes" : "No").toList();
-    _selectedOptions.addAll(data);
+    _selectedOptions.addAll(options);
     notifyListeners();
-    print(
-        '\n\n_selectedOptions: $_selectedOptions\n\n   ${_selectedOptions.length}');
   }
 
   void setQuestionaireResponse() {
     _selectedOptions.removeAt(1);
     for (int i = 0; i < _selectedOptions.length; i++) {
       questionResponse.add(
-          {"questionCode": '3000000${i + 1}', "response": _selectedOptions[i]});
+        {
+          "questionCode": '3000000${i + 1}',
+          "response": _selectedOptions[i],
+        },
+      );
     }
     notifyListeners();
     print('\n\nquestionResponse: $questionResponse\n\n');
   }
 
-  List<Map<String, dynamic>> get getQuestionaireResponse => questionResponse;
-  List<String> get selectedOptions => _selectedOptions;
+  List<bool> get selectedOptions => _selectedOptions;
 }
