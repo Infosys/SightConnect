@@ -18,6 +18,7 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   }
 
   void setQuestionaireResponse() {
+    _selectedOptions.removeAt(1);
     for (int i = 0; i < _selectedOptions.length; i++) {
       questionResponse.add(
           {"questionCode": '3000000${i + 1}', "response": _selectedOptions[i]});

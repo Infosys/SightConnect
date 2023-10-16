@@ -30,7 +30,11 @@ class TriageRepositoryImpl implements TriageRepository {
                 Question(
                   
                  code: 30000001, statement: "No",
-                )
+                ),
+                   Question(
+                  
+                 code: 30000034, statement: "Yes",
+                ),
               ],
             ),
           ],
