@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/patient/patient_triage/data/contracts/triage_repository.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_response.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/repositories/triage_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,6 +18,7 @@ class PatientTriageProvider extends ChangeNotifier {
 
   PatientTriageProvider(this._triageRepository) {
     getTriage();
+    saveTriage();
   }
 
   getTriage() async {
@@ -30,4 +32,20 @@ class PatientTriageProvider extends ChangeNotifier {
     );
     notifyListeners();
   }
+  
+  //set triage response based on the TriageResponse model
+
+  
+
+  saveTriage() async {
+    var response = await _triageRepository.saveTriage(
+      triage: const TriageResponse(
+      ),
+    );
+    response.fold(
+      (failure) => debugPrint(failure.message),
+      (triageResponse) => debugPrint(triageResponse.toString()),
+    );
+  }
+
 }

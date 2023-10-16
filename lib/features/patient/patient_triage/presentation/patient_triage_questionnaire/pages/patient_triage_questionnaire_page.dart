@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import '../widgets/option_grid.dart';
@@ -13,6 +15,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var pageController = usePageController();
     var questionnaireSections =
         ref.watch(patientTriageProvider).questionnaireSections;
 
@@ -57,7 +60,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
         body: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: PageView.builder(
-            physics: const NeverScrollableScrollPhysics(),
+            controller: pageController,
+            // physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: questionnaireSections.length,
             itemBuilder: (context, index) {
               var questionnaire =
@@ -78,6 +83,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                     OptionGrid(
                       question: questionnaire?.questions ?? [],
                       onTap: (optionIndex) {},
+                      pageIndex: index,
                     ),
                     const SizedBox(height: AppSize.klheight),
                     SizedBox(
@@ -92,7 +98,20 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          ref
+                              .read(patientTriageQuestionnaireProvider)
+                              .setSelectedOptions(ref.read(resProvider));
+                          if (index == 2) {
+                            ref
+                                .read(patientTriageQuestionnaireProvider)
+                                .setQuestionaireResponse();
+                          }
+                          pageController.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        },
                         child: Text(
                           "Next",
                           style: applyRobotoFont(
