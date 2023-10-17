@@ -8,6 +8,8 @@ class AppImages {
   static const String profieImage = 'assets/images/profile_image.png';
   static const String doctor = 'assets/images/doctor.png';
   static const String patientCover = 'assets/images/patient_cover.png';
+  static const String patientCover2 = 'assets/images/patient_cover_2.png';
+  static const String patientCover3 = 'assets/images/patient_cover_3.png';
 
   static const String swipeDown = 'assets/images/swipe_down.svg';
   static const String swipeUp = 'assets/images/swipe_up.svg';

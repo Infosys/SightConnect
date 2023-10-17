@@ -32,10 +32,13 @@ class EyeCampsCardList extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "Eye Camps Near Me",
-            style: applyFiraSansFont(
-              fontSize: 18,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+            child: Text(
+              "Eye Camps Near Me",
+              style: applyFiraSansFont(
+                fontSize: 18,
+              ),
             ),
           ),
           const SizedBox(height: AppSize.kmheight),

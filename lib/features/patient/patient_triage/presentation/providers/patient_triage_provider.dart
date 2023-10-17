@@ -29,7 +29,7 @@ class PatientTriageProvider extends ChangeNotifier {
   getTriage() async {
     var response = await ref.read(triageRepositoryProvider).getTriage();
     response.fold(
-      (failure) => debugPrint(failure.message),
+      (failure) => debugPrint("PatientTriageProvider:- $failure"),
       (triageAssessment) {
         _questionnaireSections = triageAssessment.questionnaireSections!;
         notifyListeners();
@@ -53,7 +53,7 @@ class PatientTriageProvider extends ChangeNotifier {
           triage: triageresponse,
         );
     response.fold(
-      (failure) => debugPrint(failure.message),
+      (failure) => debugPrint("PatientTriageProvider:- $failure"),
       (triageResponse) => debugPrint(triageResponse.toString()),
     );
   }

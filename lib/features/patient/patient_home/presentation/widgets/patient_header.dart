@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/data/local/fake_data_source.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -35,11 +35,16 @@ class PatientHeader extends HookWidget {
               },
             ),
             itemBuilder: (context, index, _) {
+              var data = carouselData[index];
+              var textColor = index == 0 ? AppColor.black : AppColor.white;
+              var buttonColor = index == 0 ? AppColor.primary : AppColor.white;
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
                   // margin: const EdgeInsets.only(right: 10),
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(
+                    boxShadow: appShadow(),
+                  ),
                   height: Responsive.isMobile(context)
                       ? AppSize.height(context) * 0.33
                       : AppSize.height(context) * 0.3,
@@ -49,21 +54,22 @@ class PatientHeader extends HookWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.klradius),
                         child: Image.asset(
-                          AppImages.patientCover,
-                          fit: BoxFit.cover,
+                          data["image"],
+                          fit: BoxFit.values[2],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(AppSize.kmpadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
+                              data["title"],
                               style: applyFiraSansFont(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor),
                             ),
                             const SizedBox(height: AppSize.ksheight),
                             Container(
@@ -73,21 +79,34 @@ class PatientHeader extends HookWidget {
                                     : AppSize.width(context) * 0.5,
                               ),
                               child: Text(
-                                "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+                                data["description"],
                                 style: applyRobotoFont(
                                   fontSize: 14,
-                                  color: AppColor.darkGrey,
+                                  color: textColor,
                                   height: 1.4,
                                 ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
                               ),
                             ),
                             const SizedBox(height: AppSize.kmheight),
-                            Flexible(
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
                               child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  visualDensity:
+                                      const VisualDensity(vertical: -1),
+                                  side: BorderSide(
+                                    color: buttonColor,
+                                  ),
+                                ),
                                 onPressed: () {},
-                                child: const Text("Know More"),
+                                child: Text(
+                                  "Know More",
+                                  style: applyRobotoFont(
+                                    color: buttonColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -99,7 +118,7 @@ class PatientHeader extends HookWidget {
               );
             }),
         Transform.translate(
-          offset: const Offset(0, -30),
+          offset: const Offset(0, -20),
           child: AnimatedSmoothIndicator(
             onDotClicked: (index) {},
             activeIndex: activeIndex.value,
@@ -110,7 +129,7 @@ class PatientHeader extends HookWidget {
               dotColor: AppColor.lightGrey,
               dotHeight: 10,
               dotWidth: 10,
-              spacing: 8,
+              spacing: 18,
             ),
           ),
         )

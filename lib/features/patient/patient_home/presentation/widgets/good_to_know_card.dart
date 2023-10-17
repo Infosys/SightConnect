@@ -10,8 +10,8 @@ class GoodToKnowCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: AppSize.kmwidth),
-      width: AppSize.width(context) * 0.8,
+      margin: const EdgeInsets.only(left: AppSize.kmwidth),
+      width: AppSize.width(context) * 0.85,
       child: Stack(
         children: [
           data["image"] != null
