@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/user_profile.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -169,23 +168,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                 visualDensity: const VisualDensity(vertical: -1),
               ),
               onPressed: () {
-                if (currentIndex.value > 0) {
-                  RelatedParty user = relatedParty[currentIndex.value - 1];
-                  ref
-                      .read(userDetailsProvider)
-                      .updateCurrentProfile(
-                        UserProfile(
-                          profile: Profile(
-                            patient: Patient(
-                              name: user.name,
-                            ),
-                          ),
-                        ),
-                      )
-                      .then((value) => Navigator.pop(context));
-                } else {
-                  Navigator.pop(context);
-                }
+                Navigator.pop(context);
               },
               child: const Text('Apply'),
             ),

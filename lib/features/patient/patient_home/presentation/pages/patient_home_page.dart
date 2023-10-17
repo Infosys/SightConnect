@@ -65,7 +65,7 @@ class PatientHomePage extends ConsumerWidget {
               children: [
                 Container(
                   height: 24,
-                  width: 65,
+                  width: 62,
                   padding: const EdgeInsets.all(4),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
@@ -107,35 +107,30 @@ class PatientHomePage extends ConsumerWidget {
           await Future.delayed(const Duration(seconds: 1));
         },
         child: SingleChildScrollView(
-          child: Padding(
-            padding: Responsive.isMobile(context)
-                ? const EdgeInsets.all(0)
-                : const EdgeInsets.all(0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: AppSize.height(context) * 0.16),
-                const PatientHeader(),
-                const SizedBox(height: AppSize.kmheight),
-                const PriorityNotificationList(),
-                const SizedBox(height: AppSize.kmheight),
-                const MyConnectionsList(),
-                const SizedBox(height: AppSize.kmheight),
-                const RecentServicesCardList(),
-                const SizedBox(height: AppSize.kmheight),
-                const NearbyVisionCentersList(),
-                const SizedBox(height: AppSize.kmheight),
-                const HelplineCard(),
-                const SizedBox(height: AppSize.kmheight),
-                const InviteCard(),
-                const EyeCampsCardList(),
-                const SizedBox(height: AppSize.kmheight),
-                const GoodToKnowCardList(),
-                const SizedBox(height: AppSize.kmheight),
-                const CampaginsList(),
-                const SizedBox(height: AppSize.klheight * 4),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: AppSize.height(context) * 0.16),
+              const PatientHeader(),
+              const SizedBox(height: AppSize.kmheight),
+              const PriorityNotificationList(),
+              const SizedBox(height: AppSize.kmheight),
+              const MyConnectionsList(),
+              const SizedBox(height: AppSize.kmheight),
+              const RecentServicesCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const NearbyVisionCentersList(),
+              const SizedBox(height: AppSize.kmheight),
+              const HelplineCard(),
+              const SizedBox(height: AppSize.kmheight),
+              const InviteCard(),
+              const EyeCampsCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const GoodToKnowCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const CampaginsList(),
+              const SizedBox(height: AppSize.klheight * 4),
+            ],
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
@@ -28,10 +29,16 @@ class PatientDashboardPage extends ConsumerWidget {
                   case 0:
                     break;
                   case 1:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const PatientServicesPage(),
-                      ),
+                    showModalBottomSheet(
+                      useSafeArea: true,
+                      enableDrag: true,
+                      context: context,
+                      builder: (context) {
+                        return SizedBox(
+                          height: AppSize.height(context) * 0.8,
+                          child: const PatientServicesPage(),
+                        );
+                      },
                     );
                     break;
                   case 2:
