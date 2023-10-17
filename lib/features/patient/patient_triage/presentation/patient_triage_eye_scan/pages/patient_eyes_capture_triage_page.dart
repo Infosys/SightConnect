@@ -287,13 +287,21 @@ class _PatientEyeCaptureTriagePageState
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                ref.read(patientTriageProvider).saveTriage();
-                Navigator.of(context).push(
+              onPressed: () async{
+                try {
+                  ref.read(patientTriageProvider).saveTriage().then((value) => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const PatientTriageResultPage(),
                   ),
-                );
+                ),);
+                } catch (e) {
+                  logger.d(e);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Something went wrong!"),
+                    ),
+                  );
+                }
               },
               child: const Text("Proceed"),
             )
