@@ -288,23 +288,25 @@ class _PatientEyeCaptureTriagePageState
           ),
           actions: [
             TextButton(
-              onPressed: () async{
+              onPressed: () async {
                 try {
-                  ref.read(patientTriageProvider).saveTriage().then((value) => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientTriageResultPage(),
-                  ),
-                ),);
+                  ref.read(patientTriageProvider).saveTriage().then(
+                    (value) {
+                      ref.read(patientTriageStepperProvider).nextStep(3);
+                      return Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PatientTriageResultPage(),
+                        ),
+                      );
+                    },
+                  );
                 } catch (e) {
-                  logger.d(e);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text("Something went wrong!"),
+                      content: Text("Server error!"),
                     ),
                   );
                 }
-                )
-                ref.read(patientTriageStepperProvider).nextStep(3);
               },
               child: const Text("Proceed"),
             )

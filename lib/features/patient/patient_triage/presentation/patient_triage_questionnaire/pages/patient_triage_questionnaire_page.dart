@@ -88,9 +88,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.klheight),
                     SizedBox(
-                      // width: questionnaire?.questions.ind
-                      //     ? AppSize.width(context)
-                      //     : AppSize.width(context) * 0.45,
+                      width: questionnaireSections.length - 1 == index
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.45,
                       child: ElevatedButton(
                         style: ButtonStyle(
                           shape: MaterialStatePropertyAll(
@@ -123,7 +123,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                           );
                         },
                         child: Text(
-                          "Next",
+                          questionnaireSections.length - 1 == index
+                              ? "Proceed"
+                              : "Next",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.white),
                         ),
