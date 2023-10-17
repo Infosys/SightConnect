@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
@@ -37,7 +38,7 @@ class SwipeGestureCard extends HookConsumerWidget {
         //     builder: (context) => const TumblingResultReportPage(),
         //   ),
         // );
-        _showSuccessTemp(context);
+        _showSuccessTemp(context, ref);
       }
     });
 
@@ -106,7 +107,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     );
   }
 
-  void _showSuccessTemp(BuildContext context) {
+  void _showSuccessTemp(BuildContext context, WidgetRef ref) {
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -149,6 +150,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                     fullscreenDialog: true,
                   ),
                 );
+                ref.read(patientTriageStepperProvider).nextStep(2);
               },
               child: const Text("Proceed"),
             )

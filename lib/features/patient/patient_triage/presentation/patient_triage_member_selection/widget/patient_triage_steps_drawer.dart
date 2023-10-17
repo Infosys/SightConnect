@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/provider/patient_triage_result_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +120,9 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    model.nextStep();
+                    model.reset();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    ref.read(patientDashboardProvider).changeIndex(0);
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
