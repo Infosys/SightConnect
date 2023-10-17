@@ -12,10 +12,13 @@ class InviteCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Invite Others to Join",
-          style: applyFiraSansFont(
-            fontSize: 18,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          child: Text(
+            "Invite Others to Join",
+            style: applyFiraSansFont(
+              fontSize: 18,
+            ),
           ),
         ),
         SizedBox(

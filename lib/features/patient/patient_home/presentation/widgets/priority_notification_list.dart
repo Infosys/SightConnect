@@ -35,9 +35,12 @@ class PriorityNotificationList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "My Action Items",
-            style: applyFiraSansFont(fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+            child: Text(
+              "My Action Items",
+              style: applyFiraSansFont(fontSize: 18),
+            ),
           ),
           const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(

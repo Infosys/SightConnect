@@ -16,7 +16,7 @@ class EyeCampCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
       margin: const EdgeInsets.only(
-        right: 10,
+        left: 16,
       ),
       child: Stack(
         children: [
@@ -61,8 +61,11 @@ class EyeCampCard extends StatelessWidget {
                       color: AppColor.grey,
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  SizedBox(height: AppSize.height(context) * 0.005),
                   TextButton(
+                    style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                        visualDensity: const VisualDensity(vertical: -4)),
                     onPressed: () {},
                     child: Text(
                       "Register Now",

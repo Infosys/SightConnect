@@ -12,14 +12,18 @@ class NearbyVisionCentersList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> data = [
       {
-        "hospitalName": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
+        "name": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
         "location": "Near Gudavalli Village, Cherukupalli, Guntur",
-        "mobileNumber": "99634 78759"
+        "phone": "99634 78759",
+        "speciality":
+            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
       },
       {
-        "hospitalName": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
-        "location": "Near Gudavalli Village, Cherukupalli, Guntur",
-        "mobileNumber": "99634 78759"
+        "name": "Edward and Soona Brown Eye Centre",
+        "location": "Pindugurala Road, Sattanapalli, Guntur",
+        "phone": "99634 78760",
+        "speciality":
+            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
       },
     ];
     return Container(
@@ -31,10 +35,14 @@ class NearbyVisionCentersList extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                "Nearby Vision Centers",
-                style: applyFiraSansFont(
-                  fontSize: 18,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+                child: Text(
+                  "Nearby Vision Centers",
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                  ),
                 ),
               ),
               const Spacer(),
