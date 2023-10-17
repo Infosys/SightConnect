@@ -62,8 +62,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: PageView.builder(
             controller: pageController,
-            // physics: const NeverScrollableScrollPhysics(),
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: questionnaireSections.length,
             itemBuilder: (context, index) {
               var questionnaire =
