@@ -9,7 +9,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../widgets/tumling_instruction_carousel.dart';
-import 'tumbling_test_initiate_page.dart';
 
 class TumblingTestInstructionPage extends HookConsumerWidget {
   const TumblingTestInstructionPage({Key? key}) : super(key: key);

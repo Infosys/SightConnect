@@ -39,15 +39,16 @@ Map<String, dynamic> _$$_TriageResponseToJson(_$_TriageResponse instance) =>
       'assessmentEndTime':
           const TimestampConverter().toJson(instance.assessmentEndTime),
       'capturedBy': instance.capturedBy,
-      'questionResponse': instance.questionResponse,
-      'observations': instance.observations,
-      'mediaCapture': instance.mediaCapture,
+      'questionResponse':
+          instance.questionResponse?.map((e) => e.toJson()).toList(),
+      'observations': instance.observations?.map((e) => e.toJson()).toList(),
+      'mediaCapture': instance.mediaCapture?.map((e) => e.toJson()).toList(),
     };
 
 _$_QuestionResponse _$$_QuestionResponseFromJson(Map<String, dynamic> json) =>
     _$_QuestionResponse(
       questionCode: json['questionCode'] as int?,
-      response: json['response'] as String?,
+      response: json['response'] as bool?,
     );
 
 Map<String, dynamic> _$$_QuestionResponseToJson(_$_QuestionResponse instance) =>
@@ -59,7 +60,7 @@ Map<String, dynamic> _$$_QuestionResponseToJson(_$_QuestionResponse instance) =>
 _$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
     _$_Observation(
       observationCode: json['observationCode'] as int?,
-      response: json['response'] as String?,
+      response: (json['response'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>

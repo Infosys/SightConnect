@@ -5,6 +5,7 @@ part 'triage_response.g.dart';
 
 @freezed
 class TriageResponse with _$TriageResponse {
+  @JsonSerializable(explicitToJson: true)
   const factory TriageResponse({
     int? patientId,
     String? source,
@@ -26,7 +27,7 @@ class TriageResponse with _$TriageResponse {
 class QuestionResponse with _$QuestionResponse {
   const factory QuestionResponse({
     int? questionCode,
-    String? response,
+    bool? response,
   }) = _QuestionResponse;
 
   factory QuestionResponse.fromJson(Map<String, Object?> json) =>
@@ -37,7 +38,7 @@ class QuestionResponse with _$QuestionResponse {
 class Observation with _$Observation {
   const factory Observation({
     int? observationCode,
-    String? response,
+    double? response,
   }) = _Observation;
 
   factory Observation.fromJson(Map<String, Object?> json) =>

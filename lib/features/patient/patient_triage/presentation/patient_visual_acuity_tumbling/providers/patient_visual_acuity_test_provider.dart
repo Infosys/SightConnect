@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
@@ -130,15 +132,20 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
 
   double calculateLeftEyeSigth() {
-    var value = eyesFinalReport[Eye.left]!.keys.last;
+    List<int> levels = eyesFinalReport[Eye.left]!.keys.toList() as List<int>;
 
-    return _dataSource.getLogMarFromLevel(value);
+    int secondLargeLevel =
+        levels.reduce((curr, next) => curr > next ? curr : next);
+
+    return _dataSource.getLogMarFromLevel(secondLargeLevel);
   }
 
   double calculateRightEyeSigth() {
-    var value = eyesFinalReport[Eye.right]!.keys.last;
+    List<int> levels = eyesFinalReport[Eye.right]!.keys.toList() as List<int>;
 
-    return _dataSource.getLogMarFromLevel(value);
+    int secondLargeLevel =
+        levels.reduce((curr, next) => curr > next ? curr : next);
+    return _dataSource.getLogMarFromLevel(secondLargeLevel);
   }
 }
 
