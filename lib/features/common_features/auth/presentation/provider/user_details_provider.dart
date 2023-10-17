@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/models/user_profile.dart';
 
-var userDetailsProvider = Provider((ref) => UserDetailsProvider());
+var userDetailsProvider =
+    ChangeNotifierProvider((ref) => UserDetailsProvider());
 
-class UserDetailsProvider {
+class UserDetailsProvider extends ChangeNotifier {
   UserProfile? userProfile;
   List<RelatedParty> familyMembers = [];
   UserDetailsProvider() {
@@ -15,7 +17,8 @@ class UserDetailsProvider {
       profile: Profile(
         patient: Patient(
           name: "Raghavi Pandey",
-          parentPatientId: "PID 123456",
+          parentPatientId: "123456",
+          dayOfBirth: 32,
           profilePhoto: 'assets/images/connection_dp_one.png',
           address: [
             PatientAddress(
@@ -30,19 +33,19 @@ class UserDetailsProvider {
             RelatedParty(
               name: "Chunkey Pandey",
               relationship: "Father",
-              age: "65 years",
+              age: "65",
               profilePhoto: 'assets/images/connection_dp_two.png',
             ),
             RelatedParty(
               name: "Mangal Pandey",
               relationship: "Brother",
-              age: "28 years",
+              age: "28",
               profilePhoto: 'assets/images/connections_dp_three.png',
             ),
             RelatedParty(
               name: "Rati Pandey",
               relationship: "Sister",
-              age: "18 years",
+              age: "18",
               profilePhoto: 'assets/images/profile_image.png',
             ),
           ],
@@ -51,5 +54,12 @@ class UserDetailsProvider {
     );
 
     familyMembers = userProfile!.profile!.patient!.relatedParty!;
+    notifyListeners();
+  }
+
+  Future<void> updateCurrentProfile(UserProfile profile) async {
+    userProfile = profile;
+    familyMembers = userProfile!.profile!.patient!.relatedParty!;
+    notifyListeners();
   }
 }

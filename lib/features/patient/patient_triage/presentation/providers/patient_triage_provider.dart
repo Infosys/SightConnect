@@ -53,7 +53,7 @@ class PatientTriageProvider extends ChangeNotifier {
           triage: triageresponse,
         );
     response.fold(
-      (failure) => debugPrint(failure.message),
+      (failure) => debugPrint("PatientTriageProvider:- $failure"),
       (triageResponse) => debugPrint(triageResponse.toString()),
     );
   }

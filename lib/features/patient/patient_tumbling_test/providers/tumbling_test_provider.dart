@@ -52,6 +52,7 @@ class TumblingTestProvider with ChangeNotifier {
       level!.questions[currentIndex!].questionStatus = QuestionStatus.wrong;
     }
     currentLevelUserResponses!.add(userResponse);
+
     if (response) {
       singleEyeReport![currentLevel!] = currentLevelUserResponses!;
 

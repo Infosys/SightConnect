@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/user_profile.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MemberSelectionPopUp extends ConsumerWidget {
+class MemberSelectionPopUp extends HookConsumerWidget {
   const MemberSelectionPopUp({super.key});
 
   @override
@@ -15,6 +19,9 @@ class MemberSelectionPopUp extends ConsumerWidget {
     var model = ref.watch(userDetailsProvider);
     var patient = model.userProfile!.profile!.patient!;
     var relatedParty = model.familyMembers;
+    var currentIndex = useState<int>(-1);
+    log(currentIndex.value.toString());
+
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
       insetPadding: const EdgeInsets.all(8),
@@ -74,7 +81,7 @@ class MemberSelectionPopUp extends ConsumerWidget {
                                 height: 5,
                               ),
                               Text(
-                                patient.parentPatientId ?? "",
+                                "Me, ${patient.dayOfBirth ?? ""} Years",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.grey,
@@ -87,8 +94,10 @@ class MemberSelectionPopUp extends ConsumerWidget {
                       ],
                     ),
                     value: 0,
-                    groupValue: 0,
-                    onChanged: (value) {},
+                    groupValue: currentIndex.value,
+                    onChanged: (value) {
+                      currentIndex.value = value!;
+                    },
                   ),
                 );
               } else {
@@ -131,7 +140,7 @@ class MemberSelectionPopUp extends ConsumerWidget {
                                 height: 5,
                               ),
                               Text(
-                                member.age ?? "",
+                                "${member.relationship ?? ""}, ${member.age ?? ""} Years",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.grey,
@@ -144,8 +153,10 @@ class MemberSelectionPopUp extends ConsumerWidget {
                       ],
                     ),
                     value: index,
-                    groupValue: 0,
-                    onChanged: (value) {},
+                    groupValue: currentIndex.value,
+                    onChanged: (value) {
+                      currentIndex.value = value!;
+                    },
                   ),
                 );
               }
@@ -158,7 +169,23 @@ class MemberSelectionPopUp extends ConsumerWidget {
                 visualDensity: const VisualDensity(vertical: -1),
               ),
               onPressed: () {
-                Navigator.pop(context);
+                if (currentIndex.value > 0) {
+                  RelatedParty user = relatedParty[currentIndex.value - 1];
+                  ref
+                      .read(userDetailsProvider)
+                      .updateCurrentProfile(
+                        UserProfile(
+                          profile: Profile(
+                            patient: Patient(
+                              name: user.name,
+                            ),
+                          ),
+                        ),
+                      )
+                      .then((value) => Navigator.pop(context));
+                } else {
+                  Navigator.pop(context);
+                }
               },
               child: const Text('Apply'),
             ),

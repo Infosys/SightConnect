@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/campaigns_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/good_to_know_list.dart';
@@ -39,7 +41,7 @@ class PatientHomePage extends ConsumerWidget {
         backgroundColor: Colors.white.withAlpha(350),
         title: Row(
           children: [
-            SvgPicture.asset('assets/icons/eye_care_app_icon.svg'),
+            SvgPicture.asset(AppIcon.logo),
             const SizedBox(width: AppSize.kmwidth),
             const Text(
               "Eye Care for All",
@@ -83,10 +85,12 @@ class PatientHomePage extends ConsumerWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Consumer(
                       builder: (context, ref, child) {
-                        return const CircleAvatar(
+                        var user = ref.watch(userDetailsProvider).userProfile;
+
+                        return CircleAvatar(
                           radius: 18,
                           backgroundImage:
-                              AssetImage('assets/images/profile_image.png'),
+                              AssetImage(user!.profile!.patient!.profilePhoto!),
                         );
                       },
                     ),

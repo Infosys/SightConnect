@@ -1,6 +1,8 @@
 class AppIcon {
   AppIcon._();
 
+  static const String logo = 'assets/logo/logo.svg';
+
   static const String navHome = 'assets/icons/home.svg';
   static const String navService = 'assets/icons/service.svg';
   static const String navAcuity = 'assets/icons/visual-acuity-test.svg';
