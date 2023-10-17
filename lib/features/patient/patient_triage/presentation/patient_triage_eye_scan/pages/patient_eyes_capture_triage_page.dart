@@ -37,7 +37,7 @@ class _PatientEyeCaptureTriagePageState
     extends ConsumerState<PatientEyeCaptureTriagePage> {
   late CameraDescription cameraDescription;
   late CameraController cameraController;
-  static const maxPhotosAllowedPerEye = 2;
+  // static const maxPhotosAllowedPerEye = 2;
   // popup to show  which eye image to be taken
   // fix flash icon and fucntionality
 

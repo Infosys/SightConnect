@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/user_profile.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
