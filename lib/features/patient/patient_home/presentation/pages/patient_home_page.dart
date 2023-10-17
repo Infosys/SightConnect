@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
@@ -14,6 +16,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientHomePage extends ConsumerWidget {
@@ -22,9 +25,26 @@ class PatientHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text(
-          "Eye Care for All",
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white.withAlpha(350),
+        title: Row(
+          children: [
+            SvgPicture.asset('assets/icons/eye_care_app_icon.svg'),
+            const SizedBox(width: AppSize.kmwidth),
+            const Text(
+              "Eye Care for All",
+            ),
+          ],
         ),
         actions: [
           InkWell(
@@ -85,30 +105,31 @@ class PatientHomePage extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: Responsive.isMobile(context)
-                ? const EdgeInsets.all(AppSize.kmpadding)
-                : const EdgeInsets.all(AppSize.klpadding),
-            child: const Column(
+                ? const EdgeInsets.all(0)
+                : const EdgeInsets.all(0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                PatientHeader(),
-                SizedBox(height: AppSize.kmheight),
-                PriorityNotificationList(),
-                SizedBox(height: AppSize.kmheight),
-                MyConnectionsList(),
-                SizedBox(height: AppSize.kmheight),
-                RecentServicesCardList(),
-                SizedBox(height: AppSize.kmheight),
-                NearbyVisionCentersList(),
-                SizedBox(height: AppSize.kmheight),
-                HelplineCard(),
-                SizedBox(height: AppSize.kmheight),
-                InviteCard(),
-                EyeCampsCardList(),
-                SizedBox(height: AppSize.kmheight),
-                GoodToKnowCardList(),
-                SizedBox(height: AppSize.kmheight),
-                CampaginsList(),
-                SizedBox(height: AppSize.klheight * 4),
+                SizedBox(height: AppSize.height(context) * 0.16),
+                const PatientHeader(),
+                const SizedBox(height: AppSize.kmheight),
+                const PriorityNotificationList(),
+                const SizedBox(height: AppSize.kmheight),
+                const MyConnectionsList(),
+                const SizedBox(height: AppSize.kmheight),
+                const RecentServicesCardList(),
+                const SizedBox(height: AppSize.kmheight),
+                const NearbyVisionCentersList(),
+                const SizedBox(height: AppSize.kmheight),
+                const HelplineCard(),
+                const SizedBox(height: AppSize.kmheight),
+                const InviteCard(),
+                const EyeCampsCardList(),
+                const SizedBox(height: AppSize.kmheight),
+                const GoodToKnowCardList(),
+                const SizedBox(height: AppSize.kmheight),
+                const CampaginsList(),
+                const SizedBox(height: AppSize.klheight * 4),
               ],
             ),
           ),
