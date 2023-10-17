@@ -1,60 +1,20 @@
-import 'dart:convert';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MemberSelectionPopUp extends ConsumerStatefulWidget {
+class MemberSelectionPopUp extends ConsumerWidget {
   const MemberSelectionPopUp({super.key});
 
   @override
-  ConsumerState<MemberSelectionPopUp> createState() =>
-      _MemberSelectionPopUpState();
-}
-
-class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
-  List<Map<String, dynamic>> people = [
-    {
-      'name': 'Raghavi Pandey',
-      'image': 'assets/images/connection_dp_one.png',
-      'about': 'Me,22 years'
-    },
-    {
-      'name': 'Chunkey Pandey',
-      'image': 'assets/images/connection_dp_two.png',
-      'about': 'Father,65 years'
-    },
-    {
-      'name': 'Mangal Pandey',
-      'image': 'assets/images/connections_dp_three.png',
-      'about': 'Brother,28 years'
-    },
-    {
-      'name': 'Rati Pandey',
-      'image': 'assets/images/profile_image.png',
-      'about': 'Sister,18 years'
-    },
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<void> loadProfiles() async {
-    final String jsonString =
-        await rootBundle.loadString('assets/profile.json');
-    final data = jsonDecode(jsonString);
-    debugPrint(data);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(userDetailsProvider);
+    var patient = model.userProfile!.profile!.patient!;
+    var relatedParty = model.familyMembers;
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
       insetPadding: const EdgeInsets.all(8),
@@ -74,14 +34,15 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ...people.asMap().entries.map(
-                (person) => Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: AppSize.width(context) * 0.88,
+          ...List.generate(
+            relatedParty.length + 1,
+            (index) {
+              if (index == 0) {
+                return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     boxShadow: appShadow(),
-                    color: AppColor.white,
+                    color: AppColor.white.withOpacity(0.5),
                   ),
                   child: RadioListTile<int>(
                     contentPadding: const EdgeInsets.all(0),
@@ -90,7 +51,7 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset(
-                          person.value['image'],
+                          patient.profilePhoto!,
                           height: 40,
                           width: 40,
                         ),
@@ -103,7 +64,7 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                person.value['name'],
+                                patient.name ?? "",
                                 style: applyRobotoFont(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -113,7 +74,7 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
                                 height: 5,
                               ),
                               Text(
-                                person.value['about'],
+                                patient.parentPatientId ?? "",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.grey,
@@ -125,12 +86,71 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
                         ),
                       ],
                     ),
-                    value: person.key,
+                    value: 0,
                     groupValue: 0,
                     onChanged: (value) {},
                   ),
-                ),
-              ),
+                );
+              } else {
+                var member = relatedParty[index - 1];
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: AppSize.width(context) * 0.88,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: appShadow(),
+                    color: AppColor.white.withOpacity(0.5),
+                  ),
+                  child: RadioListTile<int>(
+                    contentPadding: const EdgeInsets.all(0),
+                    tileColor: AppColor.white,
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          member.profilePhoto!,
+                          height: 40,
+                          width: 40,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                member.name ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                member.age ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    value: index,
+                    groupValue: 0,
+                    onChanged: (value) {},
+                  ),
+                );
+              }
+            },
+          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: ElevatedButton(
