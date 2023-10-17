@@ -2,14 +2,14 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/pages/patient_visual_acutiy_instruction_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'patient_visual_acuity_initiate_page.dart';
 
 class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
   static const String routeName = "/tumbling-test-instructional-video";
@@ -51,8 +51,8 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const PatinetVisualAcuityInitiatePage(),
-                fullscreenDialog: true,
+                builder: (context) =>
+                    const VisualAcuityTumblingLeftEyeInstruction(),
               ),
             );
           },
@@ -105,13 +105,13 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
               const SizedBox(height: AppSize.kmheight),
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) =>
-                  //         const TumblingEStepsInstructionsPage(),
-                  //     fullscreenDialog: true,
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const PatientVisualAcuityInstructionPage(),
+                      fullscreenDialog: true,
+                    ),
+                  );
                 },
                 child: Container(
                   padding:

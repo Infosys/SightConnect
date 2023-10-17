@@ -25,7 +25,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     ref.listen(tumblingTestProvider, (previous, next) {
       if (next.currentEye == Eye.left && next.isGameOver!) {
         logger.d("Game Over for left eye");
-        showTestCompleteDialog(context);
+        _showTestCompleteDialog(context);
         next.startGame(Eye.right);
       } else if (next.currentEye == Eye.right && next.isGameOver!) {
         logger.d("Game Over for both eyes");
@@ -158,47 +158,93 @@ class SwipeGestureCard extends HookConsumerWidget {
     );
   }
 
-  showTestCompleteDialog(BuildContext context) {
+   _showTestCompleteDialog(BuildContext context) {
     showDialog(
+      useSafeArea: false,
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return BlurDialogBox(
-          title: Column(
-            children: [
-              Center(
-                child: Image.asset(
-                  AppImages.checkMark,
-                  height: 40,
-                  width: 40,
-                  color: AppColor.green,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmpadding),
-              Text(
-                "Done! Visual acuity test is completed for the left eye.",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          content: Text(
-            "Now, let's test your right eye.",
-            style: applyFiraSansFont(
-              fontSize: 14,
+        return SizedBox(
+          width: AppSize.width(context) * 1,
+          height: AppSize.height(context) * 1,
+          child: Dialog(
+            insetPadding: EdgeInsets.zero,
+            child: SizedBox(
+              width: AppSize.width(context) * 1,
+              height: AppSize.height(context) * 1,
+              child: Scaffold(
+                  appBar: AppBar(
+                    title: const Text("Visual Acuity Test"),
+                  ),
+                  body: SizedBox(
+                    width: AppSize.width(context) * 1,
+                    height: AppSize.height(context) * 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Test 2 - Right Eye",
+                            style: applyFiraSansFont(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            softWrap: true,
+                          ),
+                          const SizedBox(
+                            height: AppSize.kmheight,
+                          ),
+                          Text(
+                            "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            softWrap: true,
+                          ),
+                          const SizedBox(
+                            height: AppSize.kmheight + 2,
+                          ),
+                          Center(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColor.primary.withOpacity(0.12),
+                                      offset: const Offset(0, 2),
+                                      blurRadius: 20,
+                                      spreadRadius: 20,
+                                    ),
+                                  ],
+                                ),
+                                height: AppSize.height(context) * 0.5,
+                                width: AppSize.width(context) * 0.7,
+                                child: Image.asset(
+                                    "assets/images/Test1RightEye.png")),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: const ButtonStyle(
+                                    visualDensity: VisualDensity(vertical: -1),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Start"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("I'm Ready"),
-            )
-          ],
         );
       },
     );

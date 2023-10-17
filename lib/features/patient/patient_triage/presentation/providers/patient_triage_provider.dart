@@ -40,7 +40,7 @@ class PatientTriageProvider extends ChangeNotifier {
 
   //set triage response based on the TriageResponse model
 
-  saveTriage() async {
+  Future<void>saveTriage() async {
     var triageresponse = TriageResponse(
       patientId: 99000001,
       assessmentStartTime: DateTime.now(),
@@ -53,7 +53,7 @@ class PatientTriageProvider extends ChangeNotifier {
           triage: triageresponse,
         );
     response.fold(
-      (failure) => debugPrint("PatientTriageProvider:- $failure"),
+      (failure) => throw failure,
       (triageResponse) => debugPrint(triageResponse.toString()),
     );
   }
