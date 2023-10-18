@@ -57,7 +57,7 @@ class GoodToKnowCardList extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

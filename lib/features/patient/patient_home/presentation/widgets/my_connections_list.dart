@@ -56,6 +56,7 @@ class MyConnectionsList extends StatelessWidget {
             )
           ],
         ),
+        const SizedBox(height: AppSize.kmheight),
         Row(
           children: [
             Expanded(

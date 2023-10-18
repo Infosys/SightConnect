@@ -18,60 +18,63 @@ class PatientDashboardPage extends ConsumerWidget {
       body: Stack(
         children: [
           const PatientHomePage(),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: AppBottomNavBar(
-              onSelected: (index) {
-                ref.read(patientDashboardProvider).currentIndex = index;
-                switch (index) {
-                  case 0:
-                    break;
-                  case 1:
-                    showModalBottomSheet(
-                      useSafeArea: true,
-                      enableDrag: true,
-                      context: context,
-                      builder: (context) {
-                        return SizedBox(
-                          height: AppSize.height(context) * 0.8,
-                          child: const PatientServicesPage(),
-                        );
-                      },
-                    );
-                    break;
-                  case 2:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const PatientTriagePage(),
-                      ),
-                    );
+          Visibility(
+            visible: ref.watch(patientDashboardProvider).isVisible,
+            child: Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: AppBottomNavBar(
+                onSelected: (index) {
+                  ref.read(patientDashboardProvider).currentIndex = index;
+                  switch (index) {
+                    case 0:
+                      break;
+                    case 1:
+                      showModalBottomSheet(
+                        useSafeArea: true,
+                        enableDrag: true,
+                        context: context,
+                        builder: (context) {
+                          return SizedBox(
+                            height: AppSize.height(context) * 0.8,
+                            child: const PatientServicesPage(),
+                          );
+                        },
+                      );
+                      break;
+                    case 2:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PatientTriagePage(),
+                        ),
+                      );
 
-                    break;
-                  case 3:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const PatientNotificationPage(),
-                      ),
-                    );
-                    break;
-                  case 4:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AppDrawer(),
-                      ),
-                    );
-                    break;
-                  default:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AppDrawer(),
-                      ),
-                    );
-                }
-              },
-              selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
+                      break;
+                    case 3:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PatientNotificationPage(),
+                        ),
+                      );
+                      break;
+                    case 4:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AppDrawer(),
+                        ),
+                      );
+                      break;
+                    default:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AppDrawer(),
+                        ),
+                      );
+                  }
+                },
+                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
+              ),
             ),
           ),
         ],
