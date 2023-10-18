@@ -18,10 +18,10 @@ class PatientHeader extends HookWidget {
     var activeIndex = useState<int>(0);
     var initialPage = useState<int>(0);
     return Container(
-      padding: const EdgeInsets.only(
+      margin: EdgeInsets.only(
+        top: AppSize.height(context) * 0.18,
         left: AppSize.kmpadding,
         right: AppSize.kmpadding,
-        top: AppSize.kmpadding + 70,
       ),
       decoration: BoxDecoration(
         boxShadow: appShadow(),
@@ -48,71 +48,76 @@ class PatientHeader extends HookWidget {
                 var textColor = index == 0 ? AppColor.black : AppColor.white;
                 var buttonColor =
                     index == 0 ? AppColor.primary : AppColor.white;
-                return Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                      child: Image.asset(
-                        data["image"],
-                        fit: BoxFit.values[2],
+                return Container(
+                  // padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppSize.klradius),
+                        child: Image.asset(
+                          data["image"],
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(AppSize.kmpadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            data["title"],
-                            style: applyFiraSansFont(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: textColor),
-                          ),
-                          const SizedBox(height: AppSize.ksheight),
-                          Container(
-                            constraints: BoxConstraints(
-                              maxWidth: Responsive.isMobile(context)
-                                  ? AppSize.width(context) * 0.6
-                                  : AppSize.width(context) * 0.5,
+                      Padding(
+                        padding: const EdgeInsets.all(AppSize.kmpadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              data["title"],
+                              style: applyFiraSansFont(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor),
                             ),
-                            child: Text(
-                              data["description"],
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: textColor,
-                                height: 1.4,
+                            const SizedBox(height: AppSize.ksheight),
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth: Responsive.isMobile(context)
+                                    ? AppSize.width(context) * 0.6
+                                    : AppSize.width(context) * 0.5,
                               ),
-                              softWrap: true,
-                            ),
-                          ),
-                          const SizedBox(height: AppSize.kmheight),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 20.0),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                visualDensity:
-                                    const VisualDensity(vertical: -1),
-                                side: BorderSide(
-                                  color: buttonColor,
-                                ),
-                              ),
-                              onPressed: () {},
                               child: Text(
-                                "Know More",
+                                data["description"],
                                 style: applyRobotoFont(
-                                  color: buttonColor,
+                                  fontSize: 14,
+                                  color: textColor,
+                                  height: 1.4,
+                                ),
+                                softWrap: true,
+                                // maxLines: 4,
+                                // overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            const SizedBox(height: AppSize.kmheight),
+                            // const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 0.0),
+                              child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  visualDensity:
+                                      const VisualDensity(vertical: -1),
+                                  side: BorderSide(
+                                    color: buttonColor,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  "Know More",
+                                  style: applyRobotoFont(
+                                    color: buttonColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }),
           Transform.translate(

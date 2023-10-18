@@ -20,23 +20,32 @@ class PatientTriageResultPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          child: const Icon(
+            Icons.close_outlined,
+            color: AppColor.black,
+          ),
+        ),
         title: const Text("Assessment Result"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.download_outlined,
-              color: AppColor.grey,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.share_outlined,
-              color: AppColor.grey,
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(
+        //       Icons.download_outlined,
+        //       color: AppColor.grey,
+        //     ),
+        //   ),
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(
+        //       Icons.share_outlined,
+        //       color: AppColor.grey,
+        //     ),
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(

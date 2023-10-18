@@ -25,7 +25,7 @@ class TriageRepositoryImpl implements TriageRepository {
         QuestionnaireSection(
           questionnaire: [
             Questionnaire(
-              description: "Are you facing sudden loss of vision?",
+              description: "1.Are you facing sudden loss of vision?",
               questions: [
                 Question(
                   code: 30000001,
@@ -43,7 +43,7 @@ class TriageRepositoryImpl implements TriageRepository {
           questionnaire: [
             Questionnaire(
               description:
-                  "Is your vision not clear or disturbed? Choose the symptoms you are facing.",
+                  "2. Is your vision not clear or disturbed? Choose the symptoms you are facing.",
               questions: [
                 Question(
                   code: 30000002,

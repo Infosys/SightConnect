@@ -66,7 +66,7 @@ class RecentServicesCard extends StatelessWidget {
                       style: applyFiraSansFont(
                         fontSize: 10,
                         color: AppColor.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),

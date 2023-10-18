@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/pages/patient_triage_eye_scan_carousel_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,140 +17,153 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const PatientTriageStepsDrawer(),
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text(
-              "3 of 3",
-              style: applyRobotoFont(
-                color: AppColor.primary,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(width: AppSize.kmwidth),
-            const Text('Eye Photos'),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return WillPopScope(
+      onWillPop: () async {
+        var result = await showDialog(
+          context: context,
+          builder: (context) => const TriageInstructionPageExitAlertBox(
+            content:
+                "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+          ),
+        );
+        return result ?? false;
+      },
+      child: Scaffold(
+        drawer: const PatientTriageStepsDrawer(),
+        appBar: AppBar(
+          titleSpacing: 0,
+          title: Row(
             children: [
               Text(
-                'You are close! Just one more test to go. Capture the photos of your eyes next.',
-                softWrap: true,
+                "3 of 3",
                 style: applyRobotoFont(
+                  color: AppColor.primary,
                   fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSize.kmheight),
-              Text(
-                "How to scan your eyes?",
-                style:
-                    applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              Container(
-                height: 200,
-                width: AppSize.width(context) * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
-                  color: AppColor.black,
-                  boxShadow: appShadow(),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    AppImages.tumblingTestPlay,
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: Divider(),
-              ),
-              const SizedBox(height: AppSize.klheight),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PatientTriageEyeScanCarouselPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColor.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.primary.withOpacity(0.1),
-                        blurRadius: 10,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.vibration, color: AppColor.blue),
-                      const SizedBox(width: AppSize.kswidth),
-                      Text(
-                        "View Steps to perform Tumbling E Test",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.blue,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              const SizedBox(width: AppSize.kswidth),
+              const Text('Eye Scan'),
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
+        body: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(AppSize.kmpadding),
-            child: ElevatedButton(
-              onPressed: () async {
-                var cameras = await availableCameras();
-                if (cameras.isEmpty) {
-                  return;
-                }
-                if (context.mounted) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (context) => PatientEyeCaptureTriagePage(
-                        cameras: cameras,
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'You are close! Just one more test to go. Capture the photos of your eyes next.',
+                  softWrap: true,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: AppSize.kmheight),
+                Text(
+                  "How to scan your eyes?",
+                  style: applyRobotoFont(
+                      fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: AppSize.kmheight),
+                Container(
+                  height: 200,
+                  width: AppSize.width(context) * 0.9,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
+                    color: AppColor.black,
+                    boxShadow: appShadow(),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      AppImages.tumblingTestPlay,
+                      height: 40,
+                      width: 40,
                     ),
-                  );
-                }
-              },
-              child: const Text(
-                "Start",
-                style: TextStyle(
-                  fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: AppSize.kmheight),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Divider(),
+                ),
+                const SizedBox(height: AppSize.klheight),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const PatientTriageEyeScanCarouselPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: AppColor.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColor.primary.withOpacity(0.1),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.vibration, color: AppColor.blue),
+                        const SizedBox(width: AppSize.kswidth),
+                        Text(
+                          "View Steps to perform Tumbling E Test",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.blue,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppSize.kmpadding),
+              child: ElevatedButton(
+                onPressed: () async {
+                  var cameras = await availableCameras();
+                  if (cameras.isEmpty) {
+                    return;
+                  }
+                  if (context.mounted) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) => PatientEyeCaptureTriagePage(
+                          cameras: cameras,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: const Text(
+                  "Start",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

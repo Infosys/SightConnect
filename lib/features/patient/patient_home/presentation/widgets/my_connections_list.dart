@@ -79,7 +79,7 @@ class MyConnectionsList extends StatelessWidget {
             ),
             const SizedBox(width: AppSize.kswidth),
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsets.only(right: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -108,7 +108,7 @@ class MyConnectionsList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight + 19.5),
+                  SizedBox(height: AppSize.height(context) * 0.037),
                   Text(
                     "Add",
                     style: applyFiraSansFont(
