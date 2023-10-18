@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
@@ -32,14 +31,11 @@ class PatientDashboardPage extends ConsumerWidget {
                       break;
                     case 1:
                       showModalBottomSheet(
-                        useSafeArea: true,
-                        enableDrag: true,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
                         context: context,
                         builder: (context) {
-                          return SizedBox(
-                            height: AppSize.height(context) * 0.8,
-                            child: const PatientServicesPage(),
-                          );
+                          return const PatientServicesPage();
                         },
                       );
                       break;

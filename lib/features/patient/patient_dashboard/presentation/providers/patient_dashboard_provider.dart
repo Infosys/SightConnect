@@ -10,7 +10,7 @@ var patientDashboardProvider = ChangeNotifierProvider(
 
 class PatientDashboardProvider extends ChangeNotifier {
   int currentIndex = 0;
-  bool isVisible = false;
+  bool isVisible = true;
 
   void changeIndex(int index) {
     currentIndex = index;
