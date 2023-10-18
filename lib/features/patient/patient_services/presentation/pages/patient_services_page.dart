@@ -44,105 +44,115 @@ class PatientServicesPage extends ConsumerWidget {
       ],
     };
 
-    return DefaultTabController(
-      length: 5,
-      initialIndex: 1,
-      child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: appShadow(),
-                color: AppColor.white.withOpacity(0.5),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: 8,
-                    width: 70,
-                    margin: const EdgeInsets.only(top: 10, bottom: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black45,
-                    ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(AppSize.klradius),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.9,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSize.klradius),
+        ),
+        child: DefaultTabController(
+          length: 5,
+          initialIndex: 1,
+          child: Scaffold(
+            body: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: appShadow(),
+                    color: AppColor.white.withOpacity(0.5),
                   ),
-                  TabBar(
-                    indicatorSize: TabBarIndicatorSize.label,
-                    enableFeedback: true,
-                    onTap: (index) {
-                      if (index != 1) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    isScrollable: false,
-                    tabs: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: SvgPicture.asset(BottomNavItems.home.svgImage),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: SvgPicture.asset(
-                          BottomNavItems.service.svgImage,
-                          color: AppColor.primary,
-                        ),
-                      ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                       Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primary,
-                        ),
-                        child: SvgPicture.asset(
-                          BottomNavItems.triage.svgImage,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: SvgPicture.asset(
-                          BottomNavItems.notification.svgImage,
-                          color: AppColor.grey,
+                        height: 8,
+                        width: 70,
+                        margin: const EdgeInsets.only(top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black45,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: SvgPicture.asset(
-                          BottomNavItems.drawer.svgImage,
-                          color: AppColor.grey,
-                        ),
+                      TabBar(
+                        indicatorSize: TabBarIndicatorSize.label,
+                        enableFeedback: true,
+                        onTap: (index) {
+                          if (index != 1) {
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        isScrollable: false,
+                        tabs: [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child:
+                                SvgPicture.asset(BottomNavItems.home.svgImage),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: SvgPicture.asset(
+                              BottomNavItems.service.svgImage,
+                              color: AppColor.primary,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColor.primary,
+                            ),
+                            child: SvgPicture.asset(
+                              BottomNavItems.triage.svgImage,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: SvgPicture.asset(
+                              BottomNavItems.notification.svgImage,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: SvgPicture.asset(
+                              BottomNavItems.drawer.svgImage,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const SizedBox(),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSize.kmpadding),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: services.keys
-                            .map((e) => PatientServiceCategory(
-                                  title: e,
-                                  services: services[e]!,
-                                ))
-                            .toList(),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      const SizedBox(),
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(AppSize.kmpadding),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: services.keys
+                                .map((e) => PatientServiceCategory(
+                                      title: e,
+                                      services: services[e]!,
+                                    ))
+                                .toList(),
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(),
+                      const SizedBox(),
+                      const SizedBox(),
+                    ],
                   ),
-                  const SizedBox(),
-                  const SizedBox(),
-                  const SizedBox(),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
