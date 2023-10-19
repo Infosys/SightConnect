@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pa
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,8 +20,8 @@ class PatientTriageResultPage extends ConsumerWidget {
     ref.watch(patientTriageResultProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
+      appBar: CustomAppbar(
+        leadingIcon: InkWell(
           onTap: () {
             Navigator.popUntil(context, (route) => route.isFirst);
           },

@@ -40,8 +40,8 @@ class AppDrawer extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  leading: Icon(
-                    Icons.adaptive.arrow_back,
+                  leading: const Icon(
+                    Icons.arrow_back_ios,
                     color: AppColor.white,
                   ),
                   title: Text(

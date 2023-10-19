@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_tumbling_test/widgets/
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/widgets/tumbling_test_result_page_bottom_cards.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/widgets/tumbling_test_result_page_top_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,8 +20,8 @@ class TumblingResultReportPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: AppBar(
-        title: const Text("Visual Acuity Test Results"),
+      appBar: const CustomAppbar(
+        title: Text("Visual Acuity Test Results"),
       ),
       body: SingleChildScrollView(
         child: Padding(

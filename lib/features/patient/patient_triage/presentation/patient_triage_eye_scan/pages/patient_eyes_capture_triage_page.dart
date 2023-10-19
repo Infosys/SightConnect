@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/wi
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 
 import 'package:flutter/material.dart';
@@ -95,8 +96,11 @@ class _PatientEyeCaptureTriagePageState
         return result ?? false;
       },
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppbar(
           iconTheme: const IconThemeData(
+            color: AppColor.white,
+          ),
+          actionsIconTheme: const IconThemeData(
             color: AppColor.white,
           ),
           backgroundColor: AppColor.black,

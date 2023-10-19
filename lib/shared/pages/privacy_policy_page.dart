@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,8 +15,8 @@ class PrivacyPolicyPage extends HookWidget {
   Widget build(BuildContext context) {
     final selectedValue = useState<bool>(false);
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Privacy Policy"),
+        appBar: const CustomAppbar(
+          title: Text("Privacy Policy"),
         ),
         body: SingleChildScrollView(
           child: Padding(

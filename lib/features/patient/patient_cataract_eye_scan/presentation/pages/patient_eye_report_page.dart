@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/pres
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_report_details_header.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,8 +18,8 @@ class PatientEyesReportPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: AppBar(
-        title: const Text("Eye Report"),
+      appBar: const CustomAppbar(
+        title: Text("Eye Report"),
       ),
       body: SingleChildScrollView(
         child: Column(

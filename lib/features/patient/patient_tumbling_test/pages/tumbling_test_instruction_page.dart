@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/widgets/tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,8 +20,8 @@ class TumblingTestInstructionPage extends HookConsumerWidget {
     var activeIndex = useState<int>(0);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Steps to do the retinal scanning"),
+      appBar: const CustomAppbar(
+        title: Text("Steps to do the retinal scanning"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

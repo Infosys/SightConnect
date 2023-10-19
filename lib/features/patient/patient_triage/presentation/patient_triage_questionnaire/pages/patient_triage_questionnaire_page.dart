@@ -37,51 +37,26 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       child: Scaffold(
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          titleSpacing: 0,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  width: AppSize.kmwidth,
-                ),
-                InkWell(
-                  child: ClipRRect(
-                    child: Image.asset(
-                      AppIcon.hamburgerIcon,
-                      height: 20,
-                      width: 20,
-                    ),
-                  ),
-                  onTap: () {
-                    scaffoldKey.currentState!.openDrawer();
-                  },
-                ),
-                const SizedBox(width: AppSize.kmwidth),
-                Text(
-                  "1 of 3",
-                  style: applyRobotoFont(
-                    color: AppColor.primary,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(width: AppSize.kswidth),
-                Text(
-                  "Eye Assessment Questions",
-                  style: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+        appBar: CustomAppbar(
+          leadingWidth: 60,
+          titleSpacing: 0.0,
+          centerTitle: false,
+          leadingIcon: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Image.asset(
+                AppIcon.hamburgerIcon,
+              ),
             ),
           ),
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const SizedBox(width: AppSize.kmwidth),
               Text(
                 "1 of 3",
                 style: applyRobotoFont(

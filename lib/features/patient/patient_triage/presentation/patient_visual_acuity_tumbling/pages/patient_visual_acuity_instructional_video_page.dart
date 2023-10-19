@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/wi
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -34,26 +35,26 @@ class PatientVisualAcuityInstructionalVideoPage extends HookWidget {
         child: Scaffold(
           key: scaffoldKey,
           drawer: const PatientTriageStepsDrawer(),
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            titleSpacing: 0,
+          appBar: CustomAppbar(
+            leadingWidth: 60,
+            titleSpacing: 0.0,
+            centerTitle: false,
+            leadingIcon: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Image.asset(
+                  AppIcon.hamburgerIcon,
+                ),
+              ),
+            ),
             title: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(
-                  width: AppSize.kmwidth,
-                ),
-                InkWell(
-                  child: ClipRRect(
-                    child: Image.asset(
-                      AppIcon.hamburgerIcon,
-                      height: 20,
-                      width: 20,
-                    ),
-                  ),
-                  onTap: () {
-                    scaffoldKey.currentState!.openDrawer();
-                  },
-                ),
                 const SizedBox(width: AppSize.kmwidth),
                 Text(
                   "2 of 3",

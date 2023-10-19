@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../widgets/tumbling_bottom_input_tab.dart';
@@ -13,7 +14,7 @@ class TumblingTestInitiatePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var pointerState = ref.watch(tumblingTestDialogProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Visual Acuity Test')),
+      appBar: const CustomAppbar(title: Text('Visual Acuity Test')),
       body: TumblingOverlay(
         child: IgnorePointer(
           ignoring: pointerState,

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pa
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -33,7 +34,7 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
       child: Scaffold(
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
-        appBar: AppBar(
+        appBar: CustomAppbar(
           automaticallyImplyLeading: false,
           titleSpacing: 0,
           title: Row(

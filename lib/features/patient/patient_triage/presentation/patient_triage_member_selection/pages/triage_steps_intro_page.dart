@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -56,9 +57,9 @@ class TriageStepsIntroPage extends ConsumerWidget {
       },
       child: Scaffold(
         backgroundColor: AppColor.scaffold,
-        appBar: AppBar(
-          leading: const SizedBox(),
-          title: const Text('Report Eye Problems'),
+        appBar: const CustomAppbar(
+          leadingIcon: SizedBox(),
+          title: Text('Report Eye Problems'),
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(

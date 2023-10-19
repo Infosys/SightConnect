@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pr
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -202,8 +203,8 @@ class VoiceAssistCard extends HookConsumerWidget {
               width: AppSize.width(context) * 1,
               height: AppSize.height(context) * 1,
               child: Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Visual Acuity Test"),
+                  appBar: const CustomAppbar(
+                    title: Text("Visual Acuity Test"),
                   ),
                   body: SizedBox(
                     width: AppSize.width(context) * 1,

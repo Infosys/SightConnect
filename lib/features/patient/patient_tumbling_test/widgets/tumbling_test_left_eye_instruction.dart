@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumbling_test_initiate_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class TumblingLeftEyeInstruction extends StatelessWidget {
@@ -10,8 +11,8 @@ class TumblingLeftEyeInstruction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Visual Acuity Test"),
+        appBar: const CustomAppbar(
+          title: Text("Visual Acuity Test"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
