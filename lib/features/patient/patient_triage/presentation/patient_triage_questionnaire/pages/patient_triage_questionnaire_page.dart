@@ -42,9 +42,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
               size: 30,
               weight: 10,
             ), // Custom icon for the drawer
-            onTap: () {
-              Scaffold.of(context).openDrawer();
-            },
+            onTap: () {},
           ),
           titleSpacing: 0,
           title: Padding(
