@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/accessibility_settings.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

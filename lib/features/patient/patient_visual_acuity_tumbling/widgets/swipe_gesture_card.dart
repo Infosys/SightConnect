@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
@@ -144,14 +145,19 @@ class SwipeGestureCard extends HookConsumerWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientTriageEyeScanPage(),
-                    fullscreenDialog: true,
-                  ),
-                );
-                ref.read(patientTriageStepperProvider).nextStep(2);
+                var isSkip = ref.watch(toggleTumblingResultPage);
+                if (!isSkip) {
+                  ///result page
+                } else {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const PatientTriageEyeScanPage(),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                  ref.read(patientTriageStepperProvider).nextStep(2);
+                }
               },
               child: const Text("Proceed"),
             )

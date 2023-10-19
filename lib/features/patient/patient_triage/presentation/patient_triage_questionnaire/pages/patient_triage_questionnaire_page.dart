@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
@@ -123,6 +124,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                             ref
                                 .read(patientTriageQuestionnaireProvider)
                                 .setQuestionaireResponse();
+
+                            ref.read(toggleTumblingResultPage.notifier).state =
+                                false;
 
                             Navigator.of(context).push(
                               MaterialPageRoute(
