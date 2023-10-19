@@ -1,15 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/widgets/accessibility_settings.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/accessibility_settings.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
+import '../../patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import '../widgets/bottom_input_tab.dart';
 import '../widgets/top_reading_card.dart';
 

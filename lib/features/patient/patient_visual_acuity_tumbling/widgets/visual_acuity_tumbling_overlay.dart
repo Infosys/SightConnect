@@ -10,9 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../../../../../core/constants/app_size.dart';
-
-
+import '../../../../../core/constants/app_size.dart';
 
 enum _TumblingDirection {
   Up,
@@ -31,7 +29,8 @@ class VisualAcuityTumblingOverlay extends ConsumerStatefulWidget {
   final Widget child;
 
   @override
-  ConsumerState<VisualAcuityTumblingOverlay> createState() => _TumblingOverlayState();
+  ConsumerState<VisualAcuityTumblingOverlay> createState() =>
+      _TumblingOverlayState();
 }
 
 class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
@@ -90,9 +89,6 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
     );
   }
 }
-
-
-
 
 class _TumblingCarousel extends HookConsumerWidget {
   const _TumblingCarousel();
@@ -226,7 +222,9 @@ class _TumblingCarousel extends HookConsumerWidget {
               builder: (context, ref, child) {
                 return TextButton(
                   onPressed: () {
-                    ref.read(visualAcuityTumblingTestDialogProvider.notifier).state = false;
+                    ref
+                        .read(visualAcuityTumblingTestDialogProvider.notifier)
+                        .state = false;
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.primary,
@@ -266,11 +264,8 @@ class _TumblingCarousel extends HookConsumerWidget {
   }
 }
 
-
-
 class _TumblingDirectionCard extends StatelessWidget {
   const _TumblingDirectionCard({
-    
     required this.symbolImage,
     required this.handImage,
     required this.rotationAngle,
@@ -313,10 +308,6 @@ class _TumblingDirectionCard extends StatelessWidget {
   }
 }
 
-
-
-
-
 class _TumblingDirectionRow extends StatelessWidget {
   final int currentIndex;
 
@@ -333,8 +324,7 @@ class _TumblingDirectionRow extends StatelessWidget {
       case 3:
         return _TumblingDirection.Right;
       default:
-        return _TumblingDirection
-            .Up;
+        return _TumblingDirection.Up;
     }
   }
 
@@ -355,7 +345,7 @@ class _TumblingDirectionRow extends StatelessWidget {
           Text(
             getDirection(currentIndex).toString().split('.').last,
             style: applyRobotoFont(
-              fontSize: 32,          
+              fontSize: 32,
               fontWeight: FontWeight.w700,
             ),
           ),

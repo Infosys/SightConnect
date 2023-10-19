@@ -1,12 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_tumbling_test/pages/tumbling_test_initiate_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class TumblingLeftEyeInstruction extends StatelessWidget {
-  const TumblingLeftEyeInstruction({super.key});
+class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
+  const VisualAcuityTumblingLeftEyeInstruction({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class TumblingLeftEyeInstruction extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                const TumblingTestInitiatePage(),
+                                const PatinetVisualAcuityInitiatePage(),
                           ),
                         );
                       },

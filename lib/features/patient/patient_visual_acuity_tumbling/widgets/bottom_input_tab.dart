@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../shared/theme/text_theme.dart';
+import '../../../../../shared/theme/text_theme.dart';
 import '../../patient_triage/data/enums/tumbling_enums.dart';
-import '../providers/tumbling_test_provider.dart';
-import 'tumbling_swipe_gesture_card.dart';
-import 'tumbling_voice_assist_card.dart';
+import '../providers/patient_visual_acuity_test_provider.dart';
+import 'swipe_gesture_card.dart';
+import 'voice_assist_card.dart';
 
-class TumblingBottomInputTab extends StatefulWidget {
-  const TumblingBottomInputTab({super.key});
+class BottomInputTab extends StatefulWidget {
+  const BottomInputTab({super.key});
 
   @override
-  State createState() => TumblingBottomInputTabState();
+  State createState() => BottomInputTabState();
 }
 
-class TumblingBottomInputTabState extends State<TumblingBottomInputTab>
+class BottomInputTabState extends State<BottomInputTab>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
   int? _index;
@@ -35,54 +35,45 @@ class TumblingBottomInputTabState extends State<TumblingBottomInputTab>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(height: AppSize.kmheight),
-          Container(
-            decoration: const BoxDecoration(
-              color: AppColor.black,
-            ),
-            child: Row(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Distance:",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.grey,
-                      ),
-                    ),
-                    const SizedBox(width: AppSize.kswidth),
-                    Text(
-                      "40 cm",
-                      style: applyFiraSansFont(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.green),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Consumer(
-                  builder: (context, ref, child) => Text(
-                    ref.watch(tumblingTestProvider).currentEye == Eye.left
-                        ? "Left Eye"
-                        : "Right Eye",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
+          Row(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Distance:",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.grey,
                     ),
                   ),
+                  const SizedBox(width: AppSize.kswidth),
+                  Text(
+                    "40 cms",
+                    style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.green),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Consumer(
+                builder: (context, ref, child) => Text(
+                  ref.watch(tumblingTestProvider).currentEye == Eye.left
+                      ? "Left Eye"
+                      : "Right Eye",
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Expanded(
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
-              children: <Widget>[
-                const TumblingSwipeGestureCard(),
-                TumblingVoiceAssistCard()
-              ],
+              children: <Widget>[const SwipeGestureCard(), VoiceAssistCard()],
             ),
           ),
         ],
