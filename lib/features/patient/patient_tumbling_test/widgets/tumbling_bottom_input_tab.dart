@@ -36,39 +36,44 @@ class TumblingBottomInputTabState extends State<TumblingBottomInputTab>
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           const SizedBox(height: AppSize.kmheight),
-          Row(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "Distance:",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
+          Container(
+            decoration: const BoxDecoration(
+              color: AppColor.black,
+            ),
+            child: Row(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Distance:",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.kswidth),
+                    Text(
+                      "40 cm",
+                      style: applyFiraSansFont(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.green),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Consumer(
+                  builder: (context, ref, child) => Text(
+                    ref.watch(tumblingTestProvider).currentEye == Eye.left
+                        ? "Left Eye"
+                        : "Right Eye",
+                    style: applyFiraSansFont(
+                      fontSize: 18,
                     ),
                   ),
-                  const SizedBox(width: AppSize.kswidth),
-                  Text(
-                    "40 cm",
-                    style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.green),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Consumer(
-                builder: (context, ref, child) => Text(
-                  ref.watch(tumblingTestProvider).currentEye == Eye.left
-                      ? "Left Eye"
-                      : "Right Eye",
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Expanded(
             child: TabBarView(

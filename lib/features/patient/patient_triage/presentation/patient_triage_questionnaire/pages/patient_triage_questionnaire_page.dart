@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
@@ -21,12 +21,12 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
     var pageController = usePageController();
     var questionnaireSections =
         ref.watch(patientTriageProvider).questionnaireSections;
-
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return WillPopScope(
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageQuestionnaireExitAlertBox(
+          builder: (context) => const TriageExitAlertBox(
             content:
                 "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
           ),
@@ -34,22 +34,32 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
         return result ?? false;
       },
       child: Scaffold(
+        key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
         appBar: AppBar(
-          leading: InkWell(
-            child: const Icon(
-              Icons.menu_outlined,
-              size: 30,
-              weight: 10,
-            ), // Custom icon for the drawer
-            onTap: () {},
-          ),
+          automaticallyImplyLeading: false,
           titleSpacing: 0,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(
+                  width: AppSize.kmwidth,
+                ),
+                InkWell(
+                  child: ClipRRect(
+                    child: Image.asset(
+                      AppIcon.hamburgerIcon,
+                      height: 20,
+                      width: 20,
+                    ),
+                  ),
+                  onTap: () {
+                    scaffoldKey.currentState!.openDrawer();
+                  },
+                ),
+                const SizedBox(width: AppSize.kmwidth),
                 Text(
                   "1 of 3",
                   style: applyRobotoFont(

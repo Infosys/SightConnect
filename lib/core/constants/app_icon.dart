@@ -10,6 +10,7 @@ class AppIcon {
   static const String navProfile = 'assets/icons/account.svg';
   static const String navDrawer = 'assets/icons/burger_menu.svg';
   static const String navTriage = 'assets/icons/triage.svg';
+  static const String hamburgerIcon = 'assets/icons/hamburger_icon.png';
 
   //Patient Appointment Booking
   static const String patientAppointmentBookingCalander =
