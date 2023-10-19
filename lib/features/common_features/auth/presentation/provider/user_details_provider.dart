@@ -18,7 +18,7 @@ class UserDetailsProvider extends ChangeNotifier {
       profile: Profile(
         patient: Patient(
           name: "Raghavi Pandey",
-          parentPatientId: "123456",
+          parentPatientId: "1",
           dayOfBirth: 32,
           profilePhoto: 'assets/images/connection_dp_one.png',
           address: [
@@ -32,18 +32,21 @@ class UserDetailsProvider extends ChangeNotifier {
           ],
           relatedParty: [
             RelatedParty(
+              patientId: "2",
               name: "Chunkey Pandey",
               relationship: "Father",
               age: "65",
               profilePhoto: 'assets/images/connection_dp_two.png',
             ),
             RelatedParty(
+              patientId: "3",
               name: "Mangal Pandey",
               relationship: "Brother",
               age: "28",
               profilePhoto: 'assets/images/connections_dp_three.png',
             ),
             RelatedParty(
+              patientId: "4",
               name: "Rati Pandey",
               relationship: "Sister",
               age: "18",
@@ -58,9 +61,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateCurrentProfile(UserProfile profile) async {
-    userProfile = profile;
-    familyMembers = userProfile!.profile!.patient!.relatedParty!;
+  Future<void> updateCurrentProfile(int selectedPatientId) async {
     notifyListeners();
   }
 }
