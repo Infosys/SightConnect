@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -32,15 +34,17 @@ class EyeCampCard extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.topLeft,
-            child: SizedBox(
-              child: Image.asset(AppImages.eyeCampImage),
+            alignment: Alignment.centerLeft,
+            child: Image.asset(
+              AppImages.eyeCampImage,
+              fit: BoxFit.contain,
             ),
           ),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.bottomRight,
             child: Container(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
+              padding: const EdgeInsets.only(
+                  left: AppSize.kmpadding, top: AppSize.kmpadding),
               width: AppSize.width(context) * 0.48,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
