@@ -2,6 +2,8 @@ class AppImages {
   AppImages._();
 
   static const String logo = 'assets/images/logo.png';
+  static const String drawerBg = "assets/images/drawer_bg.svg";
+  static const String splashBg = "assets/images/splash_bg.svg";
 
   //Patient Appointment Booking
   static const String profileBg = 'assets/images/profile_bg.png';

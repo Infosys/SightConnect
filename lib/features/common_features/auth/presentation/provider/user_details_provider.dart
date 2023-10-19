@@ -13,6 +13,7 @@ class UserDetailsProvider extends ChangeNotifier {
     _getProfile();
   }
   Future<void> _getProfile() async {
+    await Future.delayed(const Duration(seconds: 2));
     userProfile = const UserProfile(
       profile: Profile(
         patient: Patient(
