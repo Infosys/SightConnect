@@ -105,7 +105,7 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   state: model.currentStep > 3
                       ? StepState.complete
                       : StepState.editing,
-                  title: const Text("Step 4 - Assessment Results"),
+                  title: const Text("Assessment Results"),
                   subtitle: const Text("Complete all steps to view results"),
                   content: const Text(""),
                 ),
@@ -118,6 +118,11 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   width: AppSize.kmwidth,
                 ),
                 OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: AppColor.black,
+                    ),
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -129,7 +134,7 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.width(context) * 0.2,
+                      horizontal: AppSize.width(context) * 0.15,
                     ),
                     child: Text(
                       "Exit",

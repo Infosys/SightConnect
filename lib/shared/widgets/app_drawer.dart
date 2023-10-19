@@ -117,6 +117,8 @@ class AppDrawer extends StatelessWidget {
                                     default:
                                   }
                                 },
+                                visualDensity:
+                                    const VisualDensity(horizontal: -4),
                                 leading: item.value.icon.contains("svg")
                                     ? SizedBox(
                                         height: 20,

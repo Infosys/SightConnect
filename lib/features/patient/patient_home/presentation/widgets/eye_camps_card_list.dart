@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/eye_camps_card.dart';
@@ -24,25 +25,25 @@ class EyeCampsCardList extends StatelessWidget {
         "date": "24 Jul, 2022. 10:00 AM"
       },
     ];
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: appShadow(),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-            child: Text(
-              "Eye Camps Near Me",
-              style: applyFiraSansFont(
-                fontSize: 18,
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          child: Text(
+            "Eye Camps Near Me",
+            style: applyFiraSansFont(
+              fontSize: 18,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
-          SingleChildScrollView(
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: appShadow(),
+          ),
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -55,9 +56,9 @@ class EyeCampsCardList extends StatelessWidget {
                     .toList()
               ],
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
