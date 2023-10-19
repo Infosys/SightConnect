@@ -1,8 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageExitAlertBox(
+          builder: (context) => const TriageQuestionnaireExitAlertBox(
             content:
                 "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
           ),
@@ -34,21 +36,32 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       child: Scaffold(
         drawer: const PatientTriageStepsDrawer(),
         appBar: AppBar(
+          leading: InkWell(
+            child: const Icon(
+              Icons.menu_outlined,
+              size: 30,
+              weight: 10,
+            ), // Custom icon for the drawer
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+          titleSpacing: 0,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Step 1 of 3",
+                  "1 of 3",
                   style: applyRobotoFont(
                     color: AppColor.primary,
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(width: AppSize.kmwidth),
+                const SizedBox(width: AppSize.kswidth),
                 Text(
-                  "Eye Assessment",
+                  "Eye Assessment Questions",
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -62,8 +75,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: PageView.builder(
             controller: pageController,
-            // physics: const NeverScrollableScrollPhysics(),
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: questionnaireSections.length,
             itemBuilder: (context, index) {
               var questionnaire =
@@ -88,9 +100,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.klheight),
                     SizedBox(
-                      // width: questionnaire?.questions.ind
-                      //     ? AppSize.width(context)
-                      //     : AppSize.width(context) * 0.45,
+                      width: questionnaireSections.length - 1 == index
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.45,
                       child: ElevatedButton(
                         style: ButtonStyle(
                           shape: MaterialStatePropertyAll(
@@ -114,6 +126,8 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                                     const PatientVisualAcuityInstructionalVideoPage(),
                               ),
                             );
+
+                            ref.read(patientTriageStepperProvider).nextStep(1);
                           }
                           pageController.nextPage(
                             duration: const Duration(milliseconds: 500),
@@ -121,7 +135,9 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                           );
                         },
                         child: Text(
-                          "Next",
+                          questionnaireSections.length - 1 == index
+                              ? "Proceed"
+                              : "Next",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.white),
                         ),

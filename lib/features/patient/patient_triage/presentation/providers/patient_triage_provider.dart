@@ -29,7 +29,7 @@ class PatientTriageProvider extends ChangeNotifier {
   getTriage() async {
     var response = await ref.read(triageRepositoryProvider).getTriage();
     response.fold(
-      (failure) => debugPrint(failure.message),
+      (failure) => debugPrint("PatientTriageProvider:- $failure"),
       (triageAssessment) {
         _questionnaireSections = triageAssessment.questionnaireSections!;
         notifyListeners();
@@ -40,7 +40,7 @@ class PatientTriageProvider extends ChangeNotifier {
 
   //set triage response based on the TriageResponse model
 
-  saveTriage() async {
+  Future<void> saveTriage() async {
     var triageresponse = TriageResponse(
       patientId: 99000001,
       assessmentStartTime: DateTime.now(),
@@ -53,13 +53,15 @@ class PatientTriageProvider extends ChangeNotifier {
           triage: triageresponse,
         );
     response.fold(
-      (failure) => debugPrint(failure.message),
-      (triageResponse) => debugPrint(triageResponse.toString()),
+      (failure) {
+        logger.d("saveTriage $failure");
+        throw failure;
+      },
+      (triageResponse) => logger.d("Final Triage Response:  $triageResponse"),
     );
   }
 
   // set patient vision acuity tumbling based on the TriageAssessment model
-
   List<Observation> _getVisionAcuityTumblingResponse() {
     double leftEyeSight =
         ref.read(tumblingTestProvider).calculateLeftEyeSigth();
@@ -82,7 +84,6 @@ class PatientTriageProvider extends ChangeNotifier {
   }
 
   // set patient questionnaire based on the TriageAssessment model
-
   List<QuestionResponse> _getQuestionaireResponse() {
     List<bool> selectedOptions =
         ref.read(patientTriageQuestionnaireProvider).selectedOptions;
@@ -98,7 +99,6 @@ class PatientTriageProvider extends ChangeNotifier {
   }
 
   // set triage eye scan response based on the TriageAssessment model
-
   List<MediaCapture> _getTriageEyeScanResponse() {
     XFile? leftEyeImage = ref.read(patientTriageEyeScanProvider).leftEyeImage;
     XFile? rightEyeImage = ref.read(patientTriageEyeScanProvider).rightEyeImage;
@@ -131,6 +131,5 @@ String generateUniqueKey() {
 getUniqueFileName(String fileName) {
   String patientID = "99000001";
   String uniqueKey = generateUniqueKey();
-
   return "${patientID}_$fileName-$uniqueKey";
 }

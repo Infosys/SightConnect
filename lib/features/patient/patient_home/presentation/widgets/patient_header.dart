@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/data/local/fake_data_source.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,53 +17,61 @@ class PatientHeader extends HookWidget {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     var initialPage = useState<int>(0);
-    return Column(
-      children: [
-        CarouselSlider.builder(
-            carouselController: carouselController.value,
-            itemCount: 3,
-            options: CarouselOptions(
-              aspectRatio: 1.3,
-              viewportFraction: 1,
-              initialPage: 0,
-              enlargeCenterPage: false,
-              enlargeFactor: 0,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, _) {
-                activeIndex.value = index;
-                initialPage.value = index;
-              },
-            ),
-            itemBuilder: (context, index, _) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Container(
-                  // margin: const EdgeInsets.only(right: 10),
-                  decoration: const BoxDecoration(),
-                  height: Responsive.isMobile(context)
-                      ? AppSize.height(context) * 0.33
-                      : AppSize.height(context) * 0.3,
+    return Container(
+      margin: EdgeInsets.only(
+        top: AppSize.height(context) * 0.11,
+        left: AppSize.kmpadding,
+        right: AppSize.kmpadding,
+      ),
+      decoration: BoxDecoration(
+        boxShadow: appShadow(),
+      ),
+      child: Column(
+        children: [
+          CarouselSlider.builder(
+              carouselController: carouselController.value,
+              itemCount: 3,
+              options: CarouselOptions(
+                aspectRatio: 1.3,
+                viewportFraction: 1,
+                initialPage: 0,
+                enlargeCenterPage: false,
+                enlargeFactor: 0,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, _) {
+                  activeIndex.value = index;
+                  initialPage.value = index;
+                },
+              ),
+              itemBuilder: (context, index, _) {
+                var data = carouselData[index];
+                var textColor = index == 0 ? AppColor.black : AppColor.white;
+                var buttonColor =
+                    index == 0 ? AppColor.primary : AppColor.white;
+                return Container(
+                  // padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.klradius),
                         child: Image.asset(
-                          AppImages.patientCover,
-                          fit: BoxFit.cover,
+                          data["image"],
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(AppSize.kmpadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
+                              data["title"],
                               style: applyFiraSansFont(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor),
                             ),
                             const SizedBox(height: AppSize.ksheight),
                             Container(
@@ -73,21 +81,36 @@ class PatientHeader extends HookWidget {
                                     : AppSize.width(context) * 0.5,
                               ),
                               child: Text(
-                                "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+                                data["description"],
                                 style: applyRobotoFont(
                                   fontSize: 14,
-                                  color: AppColor.darkGrey,
+                                  color: textColor,
                                   height: 1.4,
                                 ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                // maxLines: 4,
+                                // overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             const SizedBox(height: AppSize.kmheight),
-                            Flexible(
+                            // const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 0.0),
                               child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  visualDensity:
+                                      const VisualDensity(vertical: -1),
+                                  side: BorderSide(
+                                    color: buttonColor,
+                                  ),
+                                ),
                                 onPressed: () {},
-                                child: const Text("Know More"),
+                                child: Text(
+                                  "Know More",
+                                  style: applyRobotoFont(
+                                    color: buttonColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -95,26 +118,28 @@ class PatientHeader extends HookWidget {
                       )
                     ],
                   ),
-                ),
-              );
-            }),
-        Transform.translate(
-          offset: const Offset(0, -30),
-          child: AnimatedSmoothIndicator(
-            onDotClicked: (index) {},
-            activeIndex: activeIndex.value,
-            count: 3,
-            effect: const WormEffect(
-              activeDotColor: AppColor.primary,
-              radius: 10,
-              dotColor: AppColor.lightGrey,
-              dotHeight: 10,
-              dotWidth: 10,
-              spacing: 8,
+                );
+              }),
+          Transform.translate(
+            offset: const Offset(0, -20),
+            child: AnimatedSmoothIndicator(
+              onDotClicked: (index) {},
+              activeIndex: activeIndex.value,
+              count: 3,
+              effect: WormEffect(
+                paintStyle: PaintingStyle.fill,
+                activeDotColor: AppColor.primary,
+                dotColor: AppColor.lightBlue.withOpacity(0.4),
+                strokeWidth: 2,
+                radius: 10,
+                dotHeight: 10,
+                dotWidth: 10,
+                spacing: 18,
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

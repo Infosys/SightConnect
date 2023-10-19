@@ -1,6 +1,8 @@
 class AppIcon {
   AppIcon._();
 
+  static const String logo = 'assets/logo/logo.svg';
+
   static const String navHome = 'assets/icons/home.svg';
   static const String navService = 'assets/icons/service.svg';
   static const String navAcuity = 'assets/icons/visual-acuity-test.svg';
@@ -28,7 +30,6 @@ class AppIcon {
   //Patient Triage Eye Scan
   static const String report = 'assets/icons/report.svg';
 
-  static const String drawerBg = "assets/icons/drawer_bg.svg";
   static const String drawerHome = "assets/icons/drawer_home.svg";
   static const String drawerProfile = "assets/icons/drawer_home.svg";
   static const String drawerAppoinments =

@@ -20,7 +20,7 @@ class GoodToKnowCardList extends StatelessWidget {
       {
         "image": AppImages.discover,
         "name":
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque",
+            "Myopia Education Program successfully organized at Kode Venkatadri Chowdary campus, Vijayawada",
       },
     ];
     return Container(
@@ -33,10 +33,14 @@ class GoodToKnowCardList extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                "Knowledge Center",
-                style: applyFiraSansFont(
-                  fontSize: 18,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                child: Text(
+                  "Knowledge Center",
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                  ),
                 ),
               ),
               const Spacer(),
@@ -53,7 +57,7 @@ class GoodToKnowCardList extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

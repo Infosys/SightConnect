@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/pages/patient_triage_result_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_scan_camera.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
@@ -81,49 +83,61 @@ class _PatientEyeCaptureTriagePageState
   @override
   Widget build(BuildContext context) {
     var current = ref.watch(currentEyeProvider);
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: AppColor.white,
-        ),
-        backgroundColor: AppColor.black,
-        title: Text(
-          current == TriageEye.RIGHT_EYE ? "Right Eye" : "Left Eye",
-          style: const TextStyle(
+    return WillPopScope(
+      onWillPop: () async {
+        var result = await showDialog(
+          context: context,
+          builder: (context) => const TriageInstructionPageExitAlertBox(
+            content:
+                "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+          ),
+        );
+        return result ?? false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
             color: AppColor.white,
           ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.info_outline_rounded,
+          backgroundColor: AppColor.black,
+          title: Text(
+            current == TriageEye.RIGHT_EYE ? "Right Eye" : "Left Eye",
+            style: const TextStyle(
               color: AppColor.white,
             ),
           ),
-        ],
-      ),
-      body: LoadingOverlay(
-        isLoading: isLoading,
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: Alignment.bottomCenter,
-          children: [
-            EyeScanCamera(
-              controller: cameraController,
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: EyeScanCameraControllers(
-                onCapture: () => _takePicture(current),
-                onFlash: _toggleFlash,
-                flashMode: cameraController.value.flashMode,
-                onSwitchCamera: _toggleCamera,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.info_outline_rounded,
+                color: AppColor.white,
               ),
-            )
+            ),
           ],
+        ),
+        body: LoadingOverlay(
+          isLoading: isLoading,
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.bottomCenter,
+            children: [
+              EyeScanCamera(
+                controller: cameraController,
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: EyeScanCameraControllers(
+                  onCapture: () => _takePicture(current),
+                  onFlash: _toggleFlash,
+                  flashMode: cameraController.value.flashMode,
+                  onSwitchCamera: _toggleCamera,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -288,12 +302,25 @@ class _PatientEyeCaptureTriagePageState
           actions: [
             TextButton(
               onPressed: () {
-                ref.read(patientTriageProvider).saveTriage();
+                ref.read(patientTriageStepperProvider).nextStep(3);
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const PatientTriageResultPage(),
                   ),
                 );
+                // try {
+                //   ref.read(patientTriageProvider).saveTriage().then(
+                //     (value) {
+
+                //     },
+                //   );
+                // } catch (e) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(
+                //       content: Text("Server error!"),
+                //     ),
+                //   );
+                // }
               },
               child: const Text("Proceed"),
             )

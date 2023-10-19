@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -104,7 +105,7 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   state: model.currentStep > 3
                       ? StepState.complete
                       : StepState.editing,
-                  title: const Text("Step 4 - Assessment Results"),
+                  title: const Text("Assessment Results"),
                   subtitle: const Text("Complete all steps to view results"),
                   content: const Text(""),
                 ),
@@ -117,12 +118,23 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   width: AppSize.kmwidth,
                 ),
                 OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: AppColor.black,
+                    ),
+                  ),
                   onPressed: () {
-                    model.nextStep();
+                    showDialog(
+                      context: context,
+                      builder: (context) => const TriageDrawerExitAlertBox(
+                        content:
+                            "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.width(context) * 0.2,
+                      horizontal: AppSize.width(context) * 0.15,
                     ),
                     child: Text(
                       "Exit",

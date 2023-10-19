@@ -13,7 +13,7 @@ class PriorityNotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(
-        right: 10,
+        left: 14,
       ),
       color: AppColor.primary,
       shape: RoundedRectangleBorder(

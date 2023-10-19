@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -47,6 +48,7 @@ class ResultPageBottomCards extends ConsumerWidget {
                   onPressed: () {
                     ref.invalidate(patientTriageResultProvider);
                     ref.read(patientTriageEyeScanProvider).printImage();
+                    ref.read(patientTriageStepperProvider).nextStep(4);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ref.read(patientDashboardProvider).changeIndex(0);
                   },

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
@@ -27,7 +28,7 @@ class AppDrawer extends StatelessWidget {
         child: Stack(
           children: [
             SvgPicture.asset(
-              AppIcon.drawerBg,
+              AppImages.drawerBg,
               fit: BoxFit.cover,
             ),
             Column(
@@ -116,6 +117,8 @@ class AppDrawer extends StatelessWidget {
                                     default:
                                   }
                                 },
+                                visualDensity:
+                                    const VisualDensity(horizontal: -4),
                                 leading: item.value.icon.contains("svg")
                                     ? SizedBox(
                                         height: 20,

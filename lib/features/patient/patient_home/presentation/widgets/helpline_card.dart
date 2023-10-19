@@ -1,78 +1,76 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HelplineCard extends StatelessWidget {
   const HelplineCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
             decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.kmwidth),
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.phone_outlined,
-                  color: AppColor.blue,
-                ),
-                const SizedBox(
-                  width: AppSize.kswidth,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "Toll Free Number",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                boxShadow: appShadow(), color: AppColor.white.withOpacity(0.3)),
+            child: SizedBox(
+              width: AppSize.width(context) * 0.75,
+              child: ListTile(
+                horizontalTitleGap: 10,
+                contentPadding: EdgeInsets.zero,
+                visualDensity: const VisualDensity(vertical: -3),
+                tileColor: AppColor.white,
+                onTap: () async {},
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: CircleAvatar(
+                    backgroundColor: AppColor.blue.withOpacity(0.1),
+                    child: SvgPicture.asset(
+                      AppIcon.tollFree,
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "1800 1800 1800",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () {},
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: AppSize.width(context) * 0.02,
-              right: AppSize.width(context) * 0.02,
-            ),
-            child: const CircleAvatar(
-              radius: 20,
-              backgroundColor: AppColor.white,
-              child: Icon(
-                Icons.phone_outlined,
-                color: AppColor.blue,
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 2, bottom: 4.0),
+                  child: Text(
+                    "Toll Free Number",
+                    style: applyRobotoFont(fontSize: 14),
+                  ),
+                ),
+                subtitle: const Padding(
+                  padding: EdgeInsets.only(bottom: 4.0),
+                  child: Text(
+                    "1800 1800 1800",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+          const Spacer(),
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: appShadow(),
+            ),
+            child: CircleAvatar(
+              backgroundColor: AppColor.white,
+              child: SvgPicture.asset(
+                AppIcon.call,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

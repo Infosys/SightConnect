@@ -24,12 +24,20 @@ class TopReadingCard extends ConsumerWidget {
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
     var dimension = mm(size) * 10;
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSize.klradius),
+        boxShadow: [
+          //give custom shadow on bottom and left right
+          BoxShadow(
+            color: AppColor.primary.withOpacity(0.4),
+            blurRadius: 20,
+            spreadRadius: 1,
+            offset: const Offset(0, 10),
+          ),
+        ],
+        color: AppColor.white,
       ),
-      shadowColor: AppColor.primary.withOpacity(0.5),
       child: Container(
         height: 200,
         padding: const EdgeInsets.all(AppSize.kmpadding),

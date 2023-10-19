@@ -14,12 +14,12 @@ class RecentServicesCardList extends StatelessWidget {
     var data = [
       {
         "icon": AppIcon.triage,
-        "text": "Triage",
+        "text": "Eye Assessment",
         "color": AppColor.paleYellow,
       },
       {
         "icon": AppIcon.acuityTest,
-        "text": "Acuity test",
+        "text": "Visual Acuity Test",
         "color": AppColor.lavanderBlue
       },
       {
@@ -42,10 +42,14 @@ class RecentServicesCardList extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                "My Recent Services",
-                style: applyFiraSansFont(
-                  fontSize: 18,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+                child: Text(
+                  "My Recent Services",
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                  ),
                 ),
               ),
               const Spacer(),

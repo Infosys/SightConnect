@@ -17,7 +17,7 @@ class TriageRepositoryImpl implements TriageRepository {
   TriageRepositoryImpl(this.dio);
 
   @override
-  Future<Either<Failure, TriageAssessment>> getTriage() {
+  Future<Either<Failure, TriageAssessment>> getTriage() async {
     TriageAssessment triageAssessment = const TriageAssessment(
       mediaListSections: [],
       observationsSections: [],
@@ -25,7 +25,7 @@ class TriageRepositoryImpl implements TriageRepository {
         QuestionnaireSection(
           questionnaire: [
             Questionnaire(
-              description: "Are you facing sudden loss of vision?",
+              description: "1.Are you facing sudden loss of vision?",
               questions: [
                 Question(
                   code: 30000001,
@@ -43,7 +43,7 @@ class TriageRepositoryImpl implements TriageRepository {
           questionnaire: [
             Questionnaire(
               description:
-                  "Is your vision not clear or disturbed? Choose the symptoms you are facing.",
+                  "2. Is your vision not clear or disturbed? Choose the symptoms you are facing.",
               questions: [
                 Question(
                   code: 30000002,
@@ -151,16 +151,16 @@ class TriageRepositoryImpl implements TriageRepository {
       ],
     );
 
-    return Future.value(Right(triageAssessment));
+    return Right(triageAssessment);
   }
 
   @override
   Future<Either<Failure, TriageResponse>> saveTriage(
       {required TriageResponse triage}) async {
     var endpoint = "/patient-responses";
-
-    logger.i(triage.toJson());
-    logger.i(endpoint);
+    logger.d({
+      "API saveTriage": triage.toJson(),
+    });
 
     try {
       var response = await dio.post(
@@ -168,16 +168,12 @@ class TriageRepositoryImpl implements TriageRepository {
         data: triage.toJson(),
       );
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        return Future.value(Right(triage));
+        return Right(triage);
       } else {
-        return Future.value(
-          Left(Failure(response.statusMessage!)),
-        );
+        return Left(Failure(response.statusMessage!));
       }
     } catch (e) {
-      return Future.value(
-        Left(Failure(e.toString())),
-      );
+      return Left(Failure(e.toString()));
     }
   }
 }

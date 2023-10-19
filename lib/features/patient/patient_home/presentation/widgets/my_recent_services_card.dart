@@ -12,59 +12,66 @@ class RecentServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 120,
-      child: InkWell(
-        onTap: () {
-          if (data["text"] == "Acuity test") {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const TumblingTestPage(),
-              ),
-            );
-          } else if (data["text"] == "Triage") {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const PatientTriagePage(),
-              ),
-            );
-          }
-        },
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
-          ),
-          color: data["color"],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSize.kmpadding,
+    return Padding(
+      padding: const EdgeInsets.only(left: AppSize.kmheight),
+      child: SizedBox(
+        width: 100,
+        child: InkWell(
+          onTap: () {
+            if (data["text"] == "Visual Acuity Test") {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const TumblingTestPage(),
+                ),
+              );
+            } else if (data["text"] == "Eye Assessment") {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const PatientTriagePage(),
+                ),
+              );
+            }
+          },
+          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          child: Card(
+            margin: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.ksradius),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  data["icon"],
-                  height: AppSize.klpadding,
-                  width: AppSize.klpadding,
-                  color: AppColor.black,
-                ),
-                const SizedBox(
-                  height: AppSize.ksheight,
-                ),
-                Text(
-                  data["text"],
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: applyFiraSansFont(
-                    fontSize: 12,
+            color: data["color"],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppSize.kmpadding,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    data["icon"],
+                    height: AppSize.klpadding,
+                    width: AppSize.klpadding,
                     color: AppColor.black,
-                    fontWeight: FontWeight.w500,
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: AppSize.ksheight,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(
+                      data["text"],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: applyFiraSansFont(
+                        fontSize: 10,
+                        color: AppColor.black,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

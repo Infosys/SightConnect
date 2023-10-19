@@ -33,10 +33,13 @@ class MyConnectionsList extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              "My Members",
-              style: applyFiraSansFont(
-                fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+              child: Text(
+                "My Members",
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                ),
               ),
             ),
             const Spacer(),
@@ -74,39 +77,45 @@ class MyConnectionsList extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSize.kswidth),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () {},
-                  child: Container(
-                    width: 50.0,
-                    height: 50.0,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      border: Border.all(
-                        color: AppColor.lightBlue,
-                        width: 1.0,
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Transform.translate(
+                    offset: const Offset(0, 10),
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: () {},
+                      child: Container(
+                        width: 40.0,
+                        height: 40.0,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          border: Border.all(
+                            color: AppColor.lightBlue,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColor.blue,
+                        ),
                       ),
                     ),
-                    child: const Icon(
-                      Icons.add,
-                      color: AppColor.blue,
+                  ),
+                  SizedBox(height: AppSize.height(context) * 0.037),
+                  Text(
+                    "Add",
+                    style: applyFiraSansFont(
+                      fontSize: 12,
                     ),
                   ),
-                ),
-                const SizedBox(height: AppSize.ksheight + 10),
-                Text(
-                  "Add",
-                  style: applyFiraSansFont(
-                    fontSize: 12,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

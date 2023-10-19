@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var patientDashboardProvider = ChangeNotifierProvider(
@@ -7,17 +10,31 @@ var patientDashboardProvider = ChangeNotifierProvider(
 
 class PatientDashboardProvider extends ChangeNotifier {
   int currentIndex = 0;
+  bool isVisible = true;
 
   void changeIndex(int index) {
     currentIndex = index;
     notifyListeners();
   }
 
-  // List<Widget> pages = [
-  //   const PatientHomePage(),
-  //   const PatientServicesPage(),
-  //   const PatientTriagePage(),
-  //   const PatientNotificationPage(),
-  //   const AppDrawer()
-  // ];
+  ScrollController? scrollController;
+  PatientDashboardProvider() : scrollController = ScrollController() {
+    scrollController?.addListener(listen);
+  }
+  void listen() {
+    final direction = scrollController?.position.userScrollDirection;
+    if (direction == ScrollDirection.forward) {
+      isVisible = true;
+    } else if (direction == ScrollDirection.reverse) {
+      isVisible = false;
+    }
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController?.removeListener(listen);
+    scrollController?.dispose();
+  }
 }
