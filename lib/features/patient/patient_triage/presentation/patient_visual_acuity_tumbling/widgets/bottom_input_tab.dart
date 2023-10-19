@@ -35,7 +35,6 @@ class BottomInputTabState extends State<BottomInputTab>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(height: AppSize.kmheight),
           Row(
             children: [
               Row(
@@ -49,7 +48,7 @@ class BottomInputTabState extends State<BottomInputTab>
                   ),
                   const SizedBox(width: AppSize.kswidth),
                   Text(
-                    "40 cm",
+                    "40 cms",
                     style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

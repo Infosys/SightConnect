@@ -126,7 +126,7 @@ class PatientTriageStepsDrawer extends ConsumerWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => const TriageDrawerExitAlertBox(
+                      builder: (context) => const TriageExitAlertBox(
                         content:
                             "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
                       ),

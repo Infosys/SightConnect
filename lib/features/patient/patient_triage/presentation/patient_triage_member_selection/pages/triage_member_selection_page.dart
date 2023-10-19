@@ -25,8 +25,8 @@ class TriageMemberSelectionPage extends HookWidget {
           children: [
             SvgPicture.asset(
               'assets/images/eye_assessment.svg',
-              width: AppSize.width(context) * 0.3,
-              height: AppSize.height(context) * 0.2,
+              width: AppSize.width(context) * 0.4,
+              height: AppSize.height(context) * 0.19,
               fit: BoxFit.fill,
             ),
             SizedBox(height: AppSize.height(context) * 0.02),
@@ -35,9 +35,8 @@ class TriageMemberSelectionPage extends HookWidget {
               style: applyRobotoFont(fontSize: 14),
               softWrap: true,
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.ksheight),
             const Divider(thickness: 2),
-            const SizedBox(height: AppSize.kmheight),
             Row(
               children: [
                 Text(
@@ -79,7 +78,7 @@ class TriageMemberSelectionPage extends HookWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.ksheight),
             const ChangeMemberTiles(),
             const Spacer(),
             SizedBox(
@@ -96,9 +95,6 @@ class TriageMemberSelectionPage extends HookWidget {
                 child: const Text('Proceed'),
               ),
             ),
-            const SizedBox(
-              height: AppSize.ksheight,
-            )
           ],
         ),
       ),

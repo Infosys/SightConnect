@@ -87,9 +87,9 @@ class _PatientEyeCaptureTriagePageState
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageInstructionPageExitAlertBox(
+          builder: (context) => const TriageExitAlertBox(
             content:
-                "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+                "Eye Scan helps to understand more about your eye problem. Do you really wish to exit?",
           ),
         );
         return result ?? false;

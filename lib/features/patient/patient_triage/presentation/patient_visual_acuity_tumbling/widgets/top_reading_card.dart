@@ -31,8 +31,8 @@ class TopReadingCard extends ConsumerWidget {
           //give custom shadow on bottom and left right
           BoxShadow(
             color: AppColor.primary.withOpacity(0.4),
-            blurRadius: 20,
-            spreadRadius: 1,
+            blurRadius: 12,
+            spreadRadius: 0.8,
             offset: const Offset(0, 10),
           ),
         ],
