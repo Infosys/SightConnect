@@ -19,7 +19,7 @@ class PatientHeader extends HookWidget {
     var initialPage = useState<int>(0);
     return Container(
       margin: EdgeInsets.only(
-        top: AppSize.height(context) * 0.18,
+        top: AppSize.height(context) * 0.11,
         left: AppSize.kmpadding,
         right: AppSize.kmpadding,
       ),
@@ -126,10 +126,12 @@ class PatientHeader extends HookWidget {
               onDotClicked: (index) {},
               activeIndex: activeIndex.value,
               count: 3,
-              effect: const WormEffect(
+              effect: WormEffect(
+                paintStyle: PaintingStyle.fill,
                 activeDotColor: AppColor.primary,
+                dotColor: AppColor.lightBlue.withOpacity(0.4),
+                strokeWidth: 2,
                 radius: 10,
-                dotColor: AppColor.lightGrey,
                 dotHeight: 10,
                 dotWidth: 10,
                 spacing: 18,

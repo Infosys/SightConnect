@@ -30,7 +30,6 @@ class AppIcon {
   //Patient Triage Eye Scan
   static const String report = 'assets/icons/report.svg';
 
-  static const String drawerBg = "assets/icons/drawer_bg.svg";
   static const String drawerHome = "assets/icons/drawer_home.svg";
   static const String drawerProfile = "assets/icons/drawer_home.svg";
   static const String drawerAppoinments =

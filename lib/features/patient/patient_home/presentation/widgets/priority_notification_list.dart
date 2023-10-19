@@ -42,7 +42,7 @@ class PriorityNotificationList extends StatelessWidget {
               style: applyFiraSansFont(fontSize: 18),
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.ksheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
