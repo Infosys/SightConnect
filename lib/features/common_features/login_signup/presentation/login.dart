@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -284,7 +284,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 8,
               ),
-              const Center(child: BrandingWidget()),
+              const Center(child: BrandingWidgetH()),
               const SizedBox(
                 height: 8,
               ),

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,8 +19,8 @@ class TriageAddMemberPage extends HookConsumerWidget {
     var provider = ref.watch(patientMemberDetailsProvider);
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: AppBar(
-        title: const Text("Add Member"),
+      appBar: const CustomAppbar(
+        title: Text("Add Member"),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(

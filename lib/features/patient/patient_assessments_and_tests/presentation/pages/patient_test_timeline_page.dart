@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 
 class PatientTestTimelinePage extends StatelessWidget {
@@ -135,7 +135,7 @@ class PatientTestTimelinePage extends StatelessWidget {
                 },
               ),
             ),
-            const BrandingWidget(),
+            const BrandingWidgetH(),
           ],
         ),
       ),

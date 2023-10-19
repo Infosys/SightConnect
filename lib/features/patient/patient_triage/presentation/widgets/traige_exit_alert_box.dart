@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -78,7 +78,7 @@ class TriageQuestionnaireExitAlertBox extends StatelessWidget {
             color: AppColor.white,
           ),
           padding: const EdgeInsets.all(12.0),
-          child: const BrandingWidget(),
+          child: const BrandingWidgetH(),
         ),
       ],
     );
@@ -155,7 +155,7 @@ class TriageInstructionPageExitAlertBox extends StatelessWidget {
             color: AppColor.white,
           ),
           padding: const EdgeInsets.all(12.0),
-          child: const BrandingWidget(),
+          child: const BrandingWidgetH(),
         ),
       ],
     );
@@ -165,7 +165,6 @@ class TriageInstructionPageExitAlertBox extends StatelessWidget {
 class TriageDrawerExitAlertBox extends ConsumerWidget {
   const TriageDrawerExitAlertBox({
     super.key,
-   
     required this.content,
     this.onYesPressed,
   });
@@ -237,7 +236,7 @@ class TriageDrawerExitAlertBox extends ConsumerWidget {
             color: AppColor.white,
           ),
           padding: const EdgeInsets.all(12.0),
-          child: const BrandingWidget(),
+          child: const BrandingWidgetH(),
         ),
       ],
     );

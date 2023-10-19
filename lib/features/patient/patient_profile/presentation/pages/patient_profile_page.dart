@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -116,7 +116,7 @@ class PatientProfilePage extends ConsumerWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const BrandingWidget(),
+                const BrandingWidgetH(),
               ],
             ),
           ],

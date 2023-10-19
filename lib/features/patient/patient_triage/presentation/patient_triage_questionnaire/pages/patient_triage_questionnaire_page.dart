@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
@@ -7,6 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pr
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -35,38 +35,33 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       },
       child: Scaffold(
         drawer: const PatientTriageStepsDrawer(),
-        appBar: AppBar(
-          leading: InkWell(
+        appBar: CustomAppbar(
+          leadingIcon: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {},
             child: const Icon(
               Icons.menu_outlined,
-              size: 30,
-              weight: 10,
-            ), // Custom icon for the drawer
-            onTap: () {},
-          ),
-          titleSpacing: 0,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "1 of 3",
-                  style: applyRobotoFont(
-                    color: AppColor.primary,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(width: AppSize.kswidth),
-                Text(
-                  "Eye Assessment Questions",
-                  style: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
             ),
+          ),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "1 of 3",
+                style: applyRobotoFont(
+                  color: AppColor.primary,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(width: AppSize.kswidth),
+              Text(
+                "Eye Assessment Questions",
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
         body: Padding(

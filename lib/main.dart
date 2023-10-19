@@ -8,8 +8,8 @@ import 'package:logger/logger.dart';
 var logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = MyHttpOverrides();
 
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     const ProviderScope(
       child: MyApp(),

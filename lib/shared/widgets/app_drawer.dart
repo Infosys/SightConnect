@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -167,50 +168,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Powered by",
-                        style: applyRobotoFont(
-                          fontSize: 10,
-                          color: AppColor.white,
-                        ),
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "Infosys",
-                              style: applyRobotoFont(
-                                fontSize: 38,
-                                color: AppColor.white,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "©",
-                              style: applyRobotoFont(
-                                fontSize: 10,
-                                color: AppColor.white,
-                              ),
-                            )
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        "Digital Public Stack",
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                          color: AppColor.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const BrandingWidgetV(),
               ],
             ),
           ],

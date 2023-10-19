@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -54,52 +55,9 @@ class _SplashPageState extends State<SplashPage> {
               ],
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.bottomLeft,
-            child: Container(
-              padding: const EdgeInsets.all(AppSize.klpadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Powered by",
-                    style: applyRobotoFont(
-                      fontSize: 10,
-                      color: AppColor.white,
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Infosys",
-                          style: applyRobotoFont(
-                            fontSize: 38,
-                            color: AppColor.white,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "©",
-                          style: applyRobotoFont(
-                            fontSize: 10,
-                            color: AppColor.white,
-                          ),
-                        )
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    "Digital Public Stack",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: BrandingWidgetV(),
           ),
         ],
       ),
