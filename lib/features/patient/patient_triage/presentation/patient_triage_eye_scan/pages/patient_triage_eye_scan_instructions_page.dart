@@ -35,25 +35,24 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
         appBar: CustomAppbar(
-          automaticallyImplyLeading: false,
-          titleSpacing: 0,
+          leadingWidth: 60,
+          titleSpacing: 0.0,
+          centerTitle: false,
+          leadingIcon: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Image.asset(
+                AppIcon.hamburgerIcon,
+              ),
+            ),
+          ),
           title: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(
-                width: AppSize.kmwidth,
-              ),
-              InkWell(
-                child: ClipRRect(
-                  child: Image.asset(
-                    AppIcon.hamburgerIcon,
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
-                onTap: () {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-              ),
               const SizedBox(width: AppSize.kmwidth),
               Text(
                 "3 of 3",
@@ -64,7 +63,14 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppSize.kswidth),
-              const Text('Eye Scan'),
+              Text(
+                'Eye Scan',
+                style: applyFiraSansFont(
+                  color: AppColor.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
           ),
         ),
