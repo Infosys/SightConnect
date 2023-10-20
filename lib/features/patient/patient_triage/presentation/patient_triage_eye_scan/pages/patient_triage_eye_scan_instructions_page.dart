@@ -10,15 +10,16 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'patient_eyes_capture_triage_page.dart';
 
-class PatientTriageEyeScanInstructions extends StatelessWidget {
+class PatientTriageEyeScanInstructions extends ConsumerWidget {
   const PatientTriageEyeScanInstructions({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return WillPopScope(
       onWillPop: () async {
@@ -34,7 +35,7 @@ class PatientTriageEyeScanInstructions extends StatelessWidget {
       child: Scaffold(
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
-        appBar: CustomAppbar(
+        appBar:CustomAppbar(
           leadingWidth: 60,
           titleSpacing: 0.0,
           centerTitle: false,

@@ -1,15 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/pages/patient_triage_result_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/triage_eye_scan_dialog.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/eye_scan_camera.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 
@@ -55,7 +53,14 @@ class _PatientEyeCaptureTriagePageState
   _init() async {
     await _intializeCamera();
     if (!cameraController.value.isInitialized) {
-      _showCameraNotFoundDialog();
+      if (mounted) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return TriageEyeScanDialog.showCameraNotFound(context);
+            });
+      }
     }
   }
 
@@ -83,6 +88,7 @@ class _PatientEyeCaptureTriagePageState
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     var current = ref.watch(currentEyeProvider);
     return WillPopScope(
       onWillPop: () async {
@@ -96,6 +102,8 @@ class _PatientEyeCaptureTriagePageState
         return result ?? false;
       },
       child: Scaffold(
+        key: scaffoldKey,
+        drawer: const PatientTriageStepsDrawer(),
         appBar: CustomAppbar(
           iconTheme: const IconThemeData(
             color: AppColor.white,
@@ -104,17 +112,55 @@ class _PatientEyeCaptureTriagePageState
             color: AppColor.white,
           ),
           backgroundColor: AppColor.black,
-          title: Text(
-            current == TriageEye.RIGHT_EYE ? "Right Eye" : "Left Eye",
-            style: const TextStyle(
-              color: AppColor.white,
+          leadingWidth: 60,
+          titleSpacing: 0.0,
+          centerTitle: false,
+          leadingIcon: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Image.asset(
+                AppIcon.hamburgerIcon,
+                color: AppColor.white,
+              ),
             ),
+          ),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(width: AppSize.kmwidth),
+              Text(
+                "3 of 3",
+                style: applyRobotoFont(
+                  color: AppColor.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(width: AppSize.kmwidth),
+              Flexible(
+                  child: Text(
+                "Eye Scan",
+                style: applyRobotoFont(
+                  color: AppColor.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+            ],
           ),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.info_outline_rounded,
+              onPressed: () {
+                _toggleFlash();
+              },
+              icon: Icon(
+                cameraController.value.flashMode == FlashMode.off
+                    ? Icons.flash_off_outlined
+                    : Icons.flash_on_outlined,
                 color: AppColor.white,
               ),
             ),
@@ -134,7 +180,7 @@ class _PatientEyeCaptureTriagePageState
                 right: 0,
                 left: 0,
                 child: EyeScanCameraControllers(
-                  onCapture: () => _takePicture(current),
+                  onCapture: () => _takePicture(current, context),
                   onFlash: _toggleFlash,
                   flashMode: cameraController.value.flashMode,
                   onSwitchCamera: _toggleCamera,
@@ -147,7 +193,7 @@ class _PatientEyeCaptureTriagePageState
     );
   }
 
-  Future<void> _takePicture(TriageEye currentEye) async {
+  Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
     try {
       setState(() {
         isLoading = true;
@@ -161,14 +207,40 @@ class _PatientEyeCaptureTriagePageState
       if (currentEye == TriageEye.RIGHT_EYE) {
         ref.read(patientTriageEyeScanProvider).setRightEyeImage(image);
         ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
-        _showSuccessDialog(TriageEye.RIGHT_EYE);
+        // _showSuccessDialog(TriageEye.RIGHT_EYE);
+        if (mounted) {
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return TriageEyeScanDialog.showSuccessDialog(
+                    context, TriageEye.RIGHT_EYE);
+              });
+        }
       } else {
         ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
-        _showSuccessDialog(TriageEye.LEFT_EYE);
+        // _showSuccessDialog(TriageEye.LEFT_EYE);
+        if (mounted) {
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return TriageEyeScanDialog.showSuccessDialog(
+                    context, TriageEye.LEFT_EYE);
+              });
+        }
       }
     } on CameraException catch (e) {
       logger.d(e);
-      _showCameraNotFoundDialog();
+      // _showCameraNotFoundDialog();
+      if (mounted) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return TriageEyeScanDialog.showCameraNotFound(context);
+            });
+      }
     }
   }
 
@@ -204,133 +276,5 @@ class _PatientEyeCaptureTriagePageState
       await cameraController.setFlashMode(FlashMode.off);
     }
     setState(() {});
-  }
-
-  _showCameraNotFoundDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => BlurDialogBox(
-        title: Text(
-          "Camera not found",
-          style: applyRobotoFont(
-            fontSize: 14,
-            color: AppColor.red,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        content: Text(
-          "Please check your camera and try again.",
-          style: applyFiraSansFont(
-            fontSize: 14,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text("Ok"),
-          )
-        ],
-      ),
-    );
-  }
-
-  _showSuccessDialog(TriageEye eye) {
-    if (eye == TriageEye.RIGHT_EYE) {
-      showDialog(
-        context: context,
-        builder: (context) => BlurDialogBox(
-          title: Column(
-            children: [
-              Center(
-                child: Image.asset(
-                  AppImages.checkMark,
-                  height: 40,
-                  width: 40,
-                  color: AppColor.green,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmpadding),
-              Text(
-                "Done! right eye image is captured.",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          content: Text(
-            "Now, let's test capture your left eye.",
-            style: applyFiraSansFont(
-              fontSize: 14,
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Ok"),
-            )
-          ],
-        ),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => BlurDialogBox(
-          title: Column(
-            children: [
-              Center(
-                child: Image.asset(
-                  AppImages.checkMark,
-                  height: 40,
-                  width: 40,
-                  color: AppColor.green,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmpadding),
-            ],
-          ),
-          content: Text(
-            "Done! Left eye image is captured.",
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: Colors.green,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                ref.read(patientTriageStepperProvider).nextStep(3);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientTriageResultPage(),
-                  ),
-                );
-                // try {
-                //   ref.read(patientTriageProvider).saveTriage().then(
-                //     (value) {
-
-                //     },
-                //   );
-                // } catch (e) {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(
-                //       content: Text("Server error!"),
-                //     ),
-                //   );
-                // }
-              },
-              child: const Text("Proceed"),
-            )
-          ],
-        ),
-      );
-    }
   }
 }

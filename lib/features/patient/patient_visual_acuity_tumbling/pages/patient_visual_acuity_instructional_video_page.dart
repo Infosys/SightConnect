@@ -37,8 +37,23 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
           key: scaffoldKey,
           drawer: const PatientTriageStepsDrawer(),
           appBar: ref.watch(toggleTumblingResultPage)
-              ? const CustomAppbar(
-                  title: Text("Visual Acuity Test"),
+              ? CustomAppbar(
+                  leadingIcon: IconButton(
+                    splashRadius: 20,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const TriageExitAlertBox(
+                          content:
+                              "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                  ),
+                  titleSpacing: 0,
+                  centerTitle: false,
+                  title: const Text("Visual Acuity Test"),
                 )
               : CustomAppbar(
                   leadingWidth: 60,

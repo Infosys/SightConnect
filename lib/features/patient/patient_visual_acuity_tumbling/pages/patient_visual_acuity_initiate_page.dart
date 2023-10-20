@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -33,42 +34,62 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
       child: Scaffold(
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
-        appBar: CustomAppbar(
-          leadingWidth: 60,
-          titleSpacing: 0.0,
-          centerTitle: false,
-          leadingIcon: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              scaffoldKey.currentState!.openDrawer();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Image.asset(
-                AppIcon.hamburgerIcon,
-              ),
-            ),
-          ),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(width: AppSize.kmwidth),
-              Text(
-                "2 of 3",
-                style: applyRobotoFont(
-                  color: AppColor.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+        appBar: ref.watch(toggleTumblingResultPage)
+            ? CustomAppbar(
+                  leadingIcon: IconButton(
+                    splashRadius: 20,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const TriageExitAlertBox(
+                          content:
+                              "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                  ),
+                  titleSpacing: 0,
+                  centerTitle: false,
+                  title: const Text("Visual Acuity Test"),
+                )
+              :  CustomAppbar(
+                leadingWidth: 60,
+                titleSpacing: 0.0,
+                centerTitle: false,
+                leadingIcon: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () {
+                    scaffoldKey.currentState!.openDrawer();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Image.asset(
+                      AppIcon.hamburgerIcon,
+                    ),
+                  ),
+                ),
+                title: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(width: AppSize.kmwidth),
+                    Text(
+                      "2 of 3",
+                      style: applyRobotoFont(
+                        color: AppColor.primary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.kmwidth),
+                    const Flexible(
+                        child: Text(
+                      "Visual Acuity Test",
+                    )),
+                  ],
                 ),
               ),
-              const SizedBox(width: AppSize.kmwidth),
-              const Flexible(
-                  child: Text(
-                "Visual Acuity Test",
-              )),
-            ],
-          ),
-        ),
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
             ignoring: pointerState,

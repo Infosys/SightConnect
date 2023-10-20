@@ -1,22 +1,15 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_result_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../patient_triage/presentation/patient_triage_eye_scan/pages/patient_triage_eye_scan_page.dart';
 import '../providers/patient_visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
@@ -30,7 +23,12 @@ class SwipeGestureCard extends HookConsumerWidget {
     ref.listen(tumblingTestProvider, (previous, next) {
       if (next.currentEye == Eye.left && next.isGameOver!) {
         logger.d("Game Over for left eye");
-        _showTestCompleteDialog(context);
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return VisualAcuityDialog.showTestCompleteDialog(context);
+            });
         next.startGame(Eye.right);
       } else if (next.currentEye == Eye.right && next.isGameOver!) {
         logger.d("Game Over for both eyes");
@@ -42,7 +40,12 @@ class SwipeGestureCard extends HookConsumerWidget {
         //     builder: (context) => const TumblingResultReportPage(),
         //   ),
         // );
-        _showSuccessTemp(context, ref);
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return VisualAcuityDialog.showSuccessTemp(context);
+            });
       }
     });
 
@@ -108,163 +111,6 @@ class SwipeGestureCard extends HookConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showSuccessTemp(BuildContext context, WidgetRef ref) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return BlurDialogBox(
-          title: Column(
-            children: [
-              Center(
-                child: Image.asset(
-                  AppImages.checkMark,
-                  height: 40,
-                  width: 40,
-                  color: AppColor.green,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmpadding),
-              Text(
-                "Done! Visual acuity test is completed for the right eye.",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          content: Text(
-            "You need to capture your eye photos next.",
-            style: applyFiraSansFont(
-              fontSize: 14,
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                ref
-                    .read(visualAcuityTumblingTestDialogProvider.notifier)
-                    .state = true;
-                var isSkip = ref.watch(toggleTumblingResultPage);
-                if (!isSkip) {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const PatientTriageEyeScanPage(),
-                      fullscreenDialog: true,
-                    ),
-                  );
-                  ref.read(patientTriageStepperProvider).nextStep(2);
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TumblingResultReportPage(),
-                    ),
-                  );
-                }
-              },
-              child: const Text("Proceed"),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  _showTestCompleteDialog(BuildContext context) {
-    showDialog(
-      useSafeArea: false,
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return SizedBox(
-          width: AppSize.width(context) * 1,
-          height: AppSize.height(context) * 1,
-          child: Dialog(
-            insetPadding: EdgeInsets.zero,
-            child: SizedBox(
-              width: AppSize.width(context) * 1,
-              height: AppSize.height(context) * 1,
-              child: Scaffold(
-                  appBar: const CustomAppbar(
-                    title: Text("Visual Acuity Test"),
-                  ),
-                  body: SizedBox(
-                    width: AppSize.width(context) * 1,
-                    height: AppSize.height(context) * 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Test 2 - Right Eye",
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            softWrap: true,
-                          ),
-                          const SizedBox(
-                            height: AppSize.kmheight,
-                          ),
-                          Text(
-                            "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            softWrap: true,
-                          ),
-                          const SizedBox(
-                            height: AppSize.kmheight + 2,
-                          ),
-                          Center(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColor.primary.withOpacity(0.12),
-                                      offset: const Offset(0, 2),
-                                      blurRadius: 20,
-                                      spreadRadius: 20,
-                                    ),
-                                  ],
-                                ),
-                                height: AppSize.height(context) * 0.5,
-                                width: AppSize.width(context) * 0.7,
-                                child: Image.asset(
-                                    "assets/images/Test1RightEye.png")),
-                          ),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  style: const ButtonStyle(
-                                    visualDensity: VisualDensity(vertical: -1),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("Start"),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )),
-            ),
-          ),
-        );
-      },
     );
   }
 }

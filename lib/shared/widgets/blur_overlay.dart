@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class BlurDialogBox extends StatelessWidget {
   const BlurDialogBox({
     super.key,
-    required this.title,
+    this.title,
     required this.content,
     required this.actions,
     this.contentPadding =
@@ -14,7 +14,7 @@ class BlurDialogBox extends StatelessWidget {
         const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
     this.actionsPadding = const EdgeInsets.symmetric(horizontal: 8.0),
   });
-  final Widget title;
+  final Widget? title;
   final Widget content;
   final List<Widget> actions;
   final EdgeInsetsGeometry contentPadding;
