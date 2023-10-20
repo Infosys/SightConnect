@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';

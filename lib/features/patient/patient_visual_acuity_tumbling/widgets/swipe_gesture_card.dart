@@ -4,6 +4,8 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_result_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
@@ -145,10 +147,11 @@ class SwipeGestureCard extends HookConsumerWidget {
           actions: [
             TextButton(
               onPressed: () {
+                ref
+                    .read(visualAcuityTumblingTestDialogProvider.notifier)
+                    .state = true;
                 var isSkip = ref.watch(toggleTumblingResultPage);
                 if (!isSkip) {
-                  ///result page
-                } else {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -157,6 +160,12 @@ class SwipeGestureCard extends HookConsumerWidget {
                     ),
                   );
                   ref.read(patientTriageStepperProvider).nextStep(2);
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TumblingResultReportPage(),
+                    ),
+                  );
                 }
               },
               child: const Text("Proceed"),
