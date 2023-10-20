@@ -1,15 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../core/constants/app_size.dart';
-import '../../patient_triage/data/enums/tumbling_enums.dart';
-// import '../../../../patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-// import '../provider/patient_result_provider.dart';
-// import '../provider/patient_triage_eye_scan_provider.dart';
 
 class TumblingResultPageBottomCards extends ConsumerWidget {
   const TumblingResultPageBottomCards({super.key});
@@ -47,11 +44,8 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.watch(tumblingTestProvider).currentEye=Eye.left;
-                    // ref.invalidate(resultStateProvider);
-                    // ref.read(patientTriageEyeScanProvider).printImage();
+                    ref.read(tumblingTestProvider).resetTumblingTest();
                     Navigator.of(context).popUntil((route) => route.isFirst);
-                    // ref.read(patientDashboardProvider).changeIndex(0);
                   },
                   child: const Text("Home"),
                 ),
@@ -62,9 +56,14 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.watch(tumblingTestProvider).currentEye=Eye.left;
-                    // ref.invalidate(resultStateProvider);
+                    ref.read(tumblingTestProvider).resetTumblingTest();
                     Navigator.of(context).popUntil((route) => route.isFirst);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const PatientVisualAcuityInstructionalVideoPage(),
+                      ),
+                    );
                   },
                   child: const Text("Test Again"),
                 ),

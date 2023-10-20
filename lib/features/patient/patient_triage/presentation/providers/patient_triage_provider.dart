@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tri
 import 'package:eye_care_for_all/features/patient/patient_triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/provider/patient_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -119,6 +120,13 @@ class PatientTriageProvider extends ChangeNotifier {
 
     logger.f(mediaCaptureList);
     return mediaCaptureList;
+  }
+
+  resetTriage() {
+    ref.invalidate(patientTriageQuestionnaireProvider);
+    ref.invalidate(patientTriageEyeScanProvider);
+    ref.invalidate(tumblingTestProvider);
+    ref.invalidate(patientTriageStepperProvider);
   }
 }
 

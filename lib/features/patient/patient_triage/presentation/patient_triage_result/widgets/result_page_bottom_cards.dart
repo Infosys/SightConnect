@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pages/patient_triage_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +50,8 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.watch(tumblingTestProvider).currentEye=Eye.left;
-                    ref.invalidate(patientTriageResultProvider);
-                    ref.read(patientTriageEyeScanProvider).printImage();
-                    ref.read(patientTriageStepperProvider).nextStep(4);
+                    ref.read(patientTriageProvider).resetTriage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
-                    ref.read(patientDashboardProvider).changeIndex(0);
                   },
                   child: const Text("Home"),
                 ),
@@ -64,9 +62,13 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.watch(tumblingTestProvider).currentEye=Eye.left;
-                    ref.invalidate(patientTriageResultProvider);
+                    ref.read(patientTriageProvider).resetTriage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const PatientTriagePage(),
+                      ),
+                    );
                   },
                   child: const Text("Test Again"),
                 ),

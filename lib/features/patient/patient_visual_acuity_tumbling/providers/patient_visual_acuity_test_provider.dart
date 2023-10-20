@@ -145,6 +145,11 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
         levels.reduce((curr, next) => curr > next ? curr : next);
     return _dataSource.getLogMarFromLevel(secondLargeLevel);
   }
+
+  resetTumblingTest() {
+    startGame(Eye.left);
+    notifyListeners();
+  }
 }
 
 var tumblingTestProvider = ChangeNotifierProvider(
