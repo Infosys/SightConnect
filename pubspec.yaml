@@ -30,7 +30,7 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_secure_storage: ^8.0.0
   dio: ^5.3.2
-
+  easy_stepper: ^0.8.1
   flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.3.8
   google_fonts: any
