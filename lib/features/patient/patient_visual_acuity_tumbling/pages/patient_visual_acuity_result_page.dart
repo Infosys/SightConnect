@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/result_page_bottom_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/result_page_eye_center_details_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/result_page_top_card.dart';
@@ -21,11 +24,14 @@ class TumblingResultReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
+    double leftEyeSight =
+        ref.read(tumblingTestProvider).calculateLeftEyeSigth();
+    double rightEyeSight =
+        ref.read(tumblingTestProvider).calculateRightEyeSigth();
     return WillPopScope(
       onWillPop: () async {
         ref.read(patientTriageProvider).resetTriage();
-        Navigator.of(context)
-            .popUntil((route) => route.isFirst);
+        Navigator.of(context).popUntil((route) => route.isFirst);
         return false;
       },
       child: Scaffold(
@@ -72,7 +78,8 @@ class TumblingResultReportPage extends ConsumerWidget {
                               height: AppSize.height(context) * 0.22,
                               child: Transform.translate(
                                 offset: const Offset(0, 28),
-                                child: buildGuage(),
+                                child: buildGuage(
+                                    min(rightEyeSight, leftEyeSight)),
                               ),
                             ),
                           ],
@@ -82,11 +89,19 @@ class TumblingResultReportPage extends ConsumerWidget {
                         height: AppSize.height(context) * 0.22,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            buildCol('Left Eye', '1.0', AppColor.green),
-                            buildCol('Right Eye', '0.8', AppColor.orange),
-                            buildCol('Both Eye', '1.0', AppColor.green),
+                            buildCol(
+                              'Left Eye',
+                              leftEyeSight.toString(),
+                              getColourScheme(leftEyeSight),
+                            ),
+                            buildCol(
+                              'Right Eye',
+                              rightEyeSight.toString(),
+                              getColourScheme(rightEyeSight),
+                            ),
+                            // buildCol('Both Eye', '1.0', AppColor.green),
                           ],
                         ),
                       ),
@@ -201,7 +216,17 @@ class TumblingResultReportPage extends ConsumerWidget {
     );
   }
 
-  buildGuage() {
+  getColourScheme(value) {
+    if (value > 0.7) {
+      return AppColor.green;
+    } else if (value > 0.4) {
+      return AppColor.orange;
+    } else {
+      return AppColor.red;
+    }
+  }
+
+  buildGuage(double value) {
     return SfRadialGauge(
       axes: [
         RadialAxis(
@@ -239,7 +264,7 @@ class TumblingResultReportPage extends ConsumerWidget {
               endWidth: 0.2,
             ),
           ],
-          pointers: const <GaugePointer>[NeedlePointer(value: 80)],
+          pointers: <GaugePointer>[NeedlePointer(value: value * 100)],
         )
       ],
     );
