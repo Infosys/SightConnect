@@ -1,9 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/local/tumbling_data_source.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../data/source/local/tumbling_data_source.dart';
 import '../providers/patient_visual_acuity_test_provider.dart';
 
 class TopReadingCard extends ConsumerWidget {

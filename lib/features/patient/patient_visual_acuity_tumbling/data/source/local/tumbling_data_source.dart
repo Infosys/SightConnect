@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
-import '../enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 
 int maxLevel = 8;
 // 0 to 8 total is 9

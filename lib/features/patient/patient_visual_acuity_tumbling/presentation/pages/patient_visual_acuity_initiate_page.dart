@@ -2,15 +2,16 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
+import '../../../patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
+
 import '../widgets/bottom_input_tab.dart';
 import '../widgets/top_reading_card.dart';
+import '../widgets/visual_acuity_tumbling_overlay.dart';
 
 class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
@@ -36,24 +37,24 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
         drawer: const PatientTriageStepsDrawer(),
         appBar: ref.watch(toggleTumblingResultPage)
             ? CustomAppbar(
-                  leadingIcon: IconButton(
-                    splashRadius: 20,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const TriageExitAlertBox(
-                          content:
-                              "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.arrow_back_ios),
-                  ),
-                  titleSpacing: 0,
-                  centerTitle: false,
-                  title: const Text("Visual Acuity Test"),
-                )
-              :  CustomAppbar(
+                leadingIcon: IconButton(
+                  splashRadius: 20,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const TriageExitAlertBox(
+                        content:
+                            "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.arrow_back_ios),
+                ),
+                titleSpacing: 0,
+                centerTitle: false,
+                title: const Text("Visual Acuity Test"),
+              )
+            : CustomAppbar(
                 leadingWidth: 60,
                 titleSpacing: 0.0,
                 centerTitle: false,

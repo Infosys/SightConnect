@@ -2,14 +2,15 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumling_instruction_carousel.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../widgets/visual_acuity_tumling_instruction_carousel.dart';
 
 class PatientVisualAcuityInstructionPage extends HookConsumerWidget {
   const PatientVisualAcuityInstructionPage({Key? key}) : super(key: key);

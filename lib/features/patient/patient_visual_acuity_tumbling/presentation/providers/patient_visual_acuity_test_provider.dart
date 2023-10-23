@@ -1,7 +1,6 @@
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/local/tumbling_data_source.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

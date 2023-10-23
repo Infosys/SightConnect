@@ -4,8 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acutiy_instruction_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acutiy_instruction_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -14,6 +13,8 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
 class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";

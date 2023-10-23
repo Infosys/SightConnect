@@ -1,11 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../shared/theme/text_theme.dart';
-import '../../patient_triage/data/enums/tumbling_enums.dart';
 import '../providers/patient_visual_acuity_test_provider.dart';
 import 'swipe_gesture_card.dart';
 import 'voice_assist_card.dart';

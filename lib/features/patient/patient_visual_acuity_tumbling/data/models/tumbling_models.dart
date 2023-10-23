@@ -1,5 +1,3 @@
-import 'package:eye_care_for_all/features/patient/patient_triage/data/enums/tumbling_enums.dart';
-
 class Level {
   int levelNumber;
   GameMode mode;
@@ -58,3 +56,11 @@ class UserResponse {
     return 'UserResponse(levelNumber: $levelNumber, swipeDirection: $swipeDirection, mode: $mode, questionIndex: $questionIndex, isUserResponseCorrect: $isUserResponseCorrect)';
   }
 }
+
+enum GameMode { regular, isFive }
+
+enum QuestionDirection { left, right, up, down }
+
+enum Eye { left, right, both }
+
+enum QuestionStatus { right, wrong, unattempted }

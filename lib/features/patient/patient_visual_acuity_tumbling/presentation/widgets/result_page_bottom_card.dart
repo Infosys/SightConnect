@@ -1,12 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/pages/patient_visual_acuity_instructional_video_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/providers/patient_visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_instructional_video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../core/constants/app_size.dart';
+import '../providers/patient_visual_acuity_test_provider.dart';
 
 class TumblingResultPageBottomCards extends ConsumerWidget {
   const TumblingResultPageBottomCards({super.key});

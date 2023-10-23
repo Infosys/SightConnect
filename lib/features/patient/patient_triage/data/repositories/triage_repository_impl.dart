@@ -1,179 +1,67 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/failure.dart';
-import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/network_info.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_response.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../contracts/triage_repository.dart';
 
 var triageRepositoryProvider = Provider<TriageRepository>(
-  (ref) => TriageRepositoryImpl(ref.read(dioProvider)),
+  (ref) => TriageRepositoryImpl(
+    ref.read(triageLocalSource),
+    ref.read(triageRemoteSource),
+    ref.read(connectivityProvider),
+  ),
 );
 
 class TriageRepositoryImpl implements TriageRepository {
-  Dio dio;
-  TriageRepositoryImpl(this.dio);
+  TriageLocalDataSource localDataSource;
+  TriageRemoteDataSource remoteDataSource;
+  NetworkInfo networkInfo;
+
+  TriageRepositoryImpl(
+      this.localDataSource, this.remoteDataSource, this.networkInfo);
 
   @override
   Future<Either<Failure, TriageAssessment>> getTriage() async {
-    TriageAssessment triageAssessment = const TriageAssessment(
-      mediaListSections: [],
-      observationsSections: [],
-      questionnaireSections: [
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description: "1.Are you facing sudden loss of vision?",
-              questions: [
-                Question(
-                  code: 30000001,
-                  statement: "No",
-                ),
-                Question(
-                  code: 30000034,
-                  statement: "Yes",
-                ),
-              ],
-            ),
-          ],
-        ),
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description:
-                  "2. Is your vision not clear or disturbed? Choose the symptoms you are facing.",
-              questions: [
-                Question(
-                  code: 30000002,
-                  statement: "I see halos or colored rings around lights",
-                ),
-                Question(
-                  code: 30000003,
-                  statement:
-                      "My vision is blocked partly or completely with dark shapes",
-                ),
-                Question(
-                  code: 30000004,
-                  statement: "I see two images of an object",
-                ),
-                Question(
-                  code: 30000005,
-                  statement:
-                      "I have pain or discomfort when viewing bright light",
-                ),
-                Question(
-                  code: 30000006,
-                  statement:
-                      "I see wavy lines or irregular shapes when viewing straight images",
-                ),
-                Question(
-                  code: 30000007,
-                  statement: "I see flashes and flickers when viewing objects",
-                ),
-                Question(
-                  code: 30000008,
-                  statement: "I see dark spots or shapes floating across",
-                ),
-              ],
-            ),
-          ],
-        ),
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description:
-                  "3.Are you experiencing any of the below problems in your eyes? Choose whichever problem is applicable.",
-              questions: [
-                Question(
-                  code: 30000009,
-                  statement: "Tears flow out of my eyes often",
-                ),
-                Question(
-                  code: 300000010,
-                  statement:
-                      "White part of my eye looks red with pain itching or swollen eyes",
-                ),
-                Question(
-                  code: 300000011,
-                  statement:
-                      "My eyes produce sticky yellow or green liquid with eye irritation",
-                ),
-                Question(
-                  code: 300000012,
-                  statement: "I have white spots on the black part of my eye",
-                ),
-                Question(
-                  code: 300000013,
-                  statement:
-                      "I have irritation in eyes with itching burning or pain",
-                ),
-                Question(
-                  code: 300000014,
-                  statement:
-                      "Particle of dust, wood, glass, metal or an insect got into my eye",
-                ),
-                Question(
-                  code: 300000015,
-                  statement:
-                      "My eyelids twitch uncontrollably with jerky contractions",
-                ),
-                Question(
-                  code: 300000016,
-                  statement:
-                      "My eyes close and open uncontrollably and rapidly",
-                ),
-                Question(
-                  code: 300000017,
-                  statement: "My eyes turn and point in different directions",
-                ),
-                Question(
-                  code: 300000018,
-                  statement: "My eyes involuntarily squeeze and shut tightly",
-                ),
-                Question(
-                  code: 300000019,
-                  statement: "My eyelids hang or droop at a lower level",
-                ),
-                Question(
-                  code: 300000020,
-                  statement: "My eyes appear wide open and bulged out",
-                ),
-                Question(
-                  code: 300000021,
-                  statement: "My eyes are of different sizes",
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-
-    return Right(triageAssessment);
+    if (await networkInfo.isConnected()) {
+      try {
+        final remoteResponse = await remoteDataSource.getTriage();
+        return Right(remoteResponse);
+      } on ServerException {
+        return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      }
+    } else {
+      try {
+        const localResponse = TriageAssessment();
+        return const Right(localResponse);
+      } on CacheException {
+        return Left(CacheFailure(errorMessage: 'No local data found'));
+      }
+    }
   }
 
   @override
   Future<Either<Failure, TriageResponse>> saveTriage(
       {required TriageResponse triage}) async {
-    var endpoint = "/patient-responses";
-    logger.d({
-      "API saveTriage": triage.toJson(),
-    });
-
-    try {
-      var response = await dio.post(
-        endpoint,
-        data: triage.toJson(),
-      );
-      if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        return Right(triage);
-      } else {
-        return Left(Failure(response.statusMessage!));
+    if (await networkInfo.isConnected()) {
+      try {
+        final remoteResponse =
+            await remoteDataSource.saveTriage(triage: triage);
+        return Right(remoteResponse);
+      } on ServerException {
+        return Left(ServerFailure(errorMessage: 'This is a server exception'));
       }
-    } catch (e) {
-      return Left(Failure(e.toString()));
+    } else {
+      try {
+        const localResponse = TriageResponse();
+        return const Right(localResponse);
+      } on CacheException {
+        return Left(CacheFailure(errorMessage: 'No local data found'));
+      }
     }
   }
 }
