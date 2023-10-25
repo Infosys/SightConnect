@@ -9,11 +9,25 @@
       {
         "questionnaire": [
           {
-            "description": null,
+            "description": "Are you facing sudden loss of vision?",
             "questions": [
               {
                 "code": 30000001,
-                "statement": "Are you facing sudden loss of vision?",
+                "statement": "Yes",
+                "constraint": "assertion",
+                "defaultValue": "Yes",
+                "mandatory": true,
+                "actionOn": [
+                  {
+                    "operator": "EQUALS",
+                    "actionType": "EXIT_ALL_QUESTIONNAIRE",
+                    "answer": "Yes"
+                  }
+                ]
+              },
+              {
+                "code": 30000033,
+                "statement": "No",
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,

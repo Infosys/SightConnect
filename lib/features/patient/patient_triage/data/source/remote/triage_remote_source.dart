@@ -9,158 +9,24 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-abstract class TriageRemoteDataSource {
+abstract class TriageRemoteSource {
   Future<TriageAssessment> getTriage();
   Future<TriageResponse> saveTriage({required TriageResponse triage});
 }
 
-class TriageRemoteSourceImpl implements TriageRemoteDataSource {
+class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
   TriageRemoteSourceImpl(this.dio);
 
   @override
   Future<TriageAssessment> getTriage() async {
-    // var response = await rootBundle.loadString("assets/care_assessment.json");
-    // if (response.isNotEmpty) {
-    //   var data = jsonDecode(response);
-    //   return TriageAssessment.fromJson(data["assessment"]);
-    // } else {
-    //   throw ServerException();
-    // }
-    TriageAssessment triageAssessment = const TriageAssessment(
-      mediaListSections: [],
-      observationsSections: [],
-      questionnaireSections: [
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description: "1.Are you facing sudden loss of vision?",
-              questions: [
-                Question(
-                  code: 30000001,
-                  statement: "No",
-                ),
-                Question(
-                  code: 30000034,
-                  statement: "Yes",
-                ),
-              ],
-            ),
-          ],
-        ),
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description:
-                  "2. Is your vision not clear or disturbed? Choose the symptoms you are facing.",
-              questions: [
-                Question(
-                  code: 30000002,
-                  statement: "I see halos or colored rings around lights",
-                ),
-                Question(
-                  code: 30000003,
-                  statement:
-                      "My vision is blocked partly or completely with dark shapes",
-                ),
-                Question(
-                  code: 30000004,
-                  statement: "I see two images of an object",
-                ),
-                Question(
-                  code: 30000005,
-                  statement:
-                      "I have pain or discomfort when viewing bright light",
-                ),
-                Question(
-                  code: 30000006,
-                  statement:
-                      "I see wavy lines or irregular shapes when viewing straight images",
-                ),
-                Question(
-                  code: 30000007,
-                  statement: "I see flashes and flickers when viewing objects",
-                ),
-                Question(
-                  code: 30000008,
-                  statement: "I see dark spots or shapes floating across",
-                ),
-              ],
-            ),
-          ],
-        ),
-        QuestionnaireSection(
-          questionnaire: [
-            Questionnaire(
-              description:
-                  "3.Are you experiencing any of the below problems in your eyes? Choose whichever problem is applicable.",
-              questions: [
-                Question(
-                  code: 30000009,
-                  statement: "Tears flow out of my eyes often",
-                ),
-                Question(
-                  code: 300000010,
-                  statement:
-                      "White part of my eye looks red with pain itching or swollen eyes",
-                ),
-                Question(
-                  code: 300000011,
-                  statement:
-                      "My eyes produce sticky yellow or green liquid with eye irritation",
-                ),
-                Question(
-                  code: 300000012,
-                  statement: "I have white spots on the black part of my eye",
-                ),
-                Question(
-                  code: 300000013,
-                  statement:
-                      "I have irritation in eyes with itching burning or pain",
-                ),
-                Question(
-                  code: 300000014,
-                  statement:
-                      "Particle of dust, wood, glass, metal or an insect got into my eye",
-                ),
-                Question(
-                  code: 300000015,
-                  statement:
-                      "My eyelids twitch uncontrollably with jerky contractions",
-                ),
-                Question(
-                  code: 300000016,
-                  statement:
-                      "My eyes close and open uncontrollably and rapidly",
-                ),
-                Question(
-                  code: 300000017,
-                  statement: "My eyes turn and point in different directions",
-                ),
-                Question(
-                  code: 300000018,
-                  statement: "My eyes involuntarily squeeze and shut tightly",
-                ),
-                Question(
-                  code: 300000019,
-                  statement: "My eyelids hang or droop at a lower level",
-                ),
-                Question(
-                  code: 300000020,
-                  statement: "My eyes appear wide open and bulged out",
-                ),
-                Question(
-                  code: 300000021,
-                  statement: "My eyes are of different sizes",
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-
-    return triageAssessment;
+    var response = await rootBundle.loadString("assets/care_assessment.json");
+    if (response.isNotEmpty) {
+      var data = jsonDecode(response);
+      return TriageAssessment.fromJson(data["assessment"]);
+    } else {
+      throw ServerException();
+    }
   }
 
   @override
@@ -182,7 +48,7 @@ class TriageRemoteSourceImpl implements TriageRemoteDataSource {
   }
 }
 
-var triageRemoteSource = Provider<TriageRemoteDataSource>(
+var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
     ref.read(dioProvider),
   ),

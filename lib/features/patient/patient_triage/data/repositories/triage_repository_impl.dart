@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/models/failure.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/source/local/triage_local_source.dart';
@@ -11,25 +11,29 @@ import '../contracts/triage_repository.dart';
 
 var triageRepositoryProvider = Provider<TriageRepository>(
   (ref) => TriageRepositoryImpl(
-    ref.read(triageLocalSource),
-    ref.read(triageRemoteSource),
-    ref.read(connectivityProvider),
+    ref.watch(triageLocalSource),
+    ref.watch(triageRemoteSource),
+    ref.watch(connectivityProvider),
   ),
 );
 
 class TriageRepositoryImpl implements TriageRepository {
-  TriageLocalDataSource localDataSource;
-  TriageRemoteDataSource remoteDataSource;
+  TriageLocalSource localDataSource;
+  TriageRemoteSource remoteDataSource;
   NetworkInfo networkInfo;
 
   TriageRepositoryImpl(
-      this.localDataSource, this.remoteDataSource, this.networkInfo);
+    this.localDataSource,
+    this.remoteDataSource,
+    this.networkInfo,
+  );
 
   @override
   Future<Either<Failure, TriageAssessment>> getTriage() async {
     if (await networkInfo.isConnected()) {
       try {
         final remoteResponse = await remoteDataSource.getTriage();
+
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));

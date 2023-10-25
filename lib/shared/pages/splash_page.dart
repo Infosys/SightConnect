@@ -57,7 +57,10 @@ class _SplashPageState extends State<SplashPage> {
           ),
           const Align(
             alignment: Alignment.bottomLeft,
-            child: BrandingWidgetV(),
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: BrandingWidgetV(),
+            ),
           ),
         ],
       ),

@@ -17,30 +17,28 @@ var patientTriageProvider = ChangeNotifierProvider(
 
 class PatientTriageProvider extends ChangeNotifier {
   Ref ref;
-
   List<QuestionnaireSection> _questionnaireSections = [];
-
   List<QuestionnaireSection> get questionnaireSections =>
       _questionnaireSections;
-
   PatientTriageProvider(this.ref) {
     getTriage();
   }
 
-  getTriage() async {
+  Future<void> getTriage() async {
     var response = await ref.read(triageRepositoryProvider).getTriage();
     response.fold(
-      (failure) => debugPrint("PatientTriageProvider:- $failure"),
+      (failure) {
+        logger.d("getTriage $failure");
+        debugPrint("PatientTriageProvider:- $failure");
+      },
       (triageAssessment) {
         _questionnaireSections = triageAssessment.questionnaireSections!;
-        notifyListeners();
       },
     );
     notifyListeners();
   }
 
   //set triage response based on the TriageResponse model
-
   Future<void> saveTriage() async {
     var triageresponse = TriageResponse(
       patientId: 99000001,
@@ -62,7 +60,7 @@ class PatientTriageProvider extends ChangeNotifier {
     );
   }
 
-  // set patient vision acuity tumbling based on the TriageAssessment model
+  /// set patient vision acuity tumbling based on the TriageAssessment model
   List<Observation> _getVisionAcuityTumblingResponse() {
     double leftEyeSight =
         ref.read(tumblingTestProvider).calculateLeftEyeSigth();
@@ -79,12 +77,11 @@ class PatientTriageProvider extends ChangeNotifier {
         response: rightEyeSight,
       ),
     ];
-
-    logger.i(observationList);
+    logger.d(observationList);
     return observationList;
   }
 
-  // set patient questionnaire based on the TriageAssessment model
+  /// set patient questionnaire based on the TriageAssessment model
   List<QuestionResponse> _getQuestionaireResponse() {
     List<bool> selectedOptions =
         ref.read(patientTriageQuestionnaireProvider).selectedOptions;
@@ -118,7 +115,7 @@ class PatientTriageProvider extends ChangeNotifier {
       encodingType: 'base64',
     ));
 
-    logger.f(mediaCaptureList);
+    logger.d(mediaCaptureList);
     return mediaCaptureList;
   }
 
@@ -128,16 +125,16 @@ class PatientTriageProvider extends ChangeNotifier {
     ref.invalidate(tumblingTestProvider);
     ref.invalidate(patientTriageStepperProvider);
   }
-}
 
-String generateUniqueKey() {
-  String uuid = const Uuid().v4();
-  String key = "WA${uuid.substring(0, 6)}";
-  return key;
-}
+  String generateUniqueKey() {
+    String uuid = const Uuid().v4();
+    String key = "WA${uuid.substring(0, 6)}";
+    return key;
+  }
 
-getUniqueFileName(String fileName) {
-  String patientID = "99000001";
-  String uniqueKey = generateUniqueKey();
-  return "${patientID}_$fileName-$uniqueKey";
+  getUniqueFileName(String fileName) {
+    String patientID = "99000001";
+    String uniqueKey = generateUniqueKey();
+    return "${patientID}_$fileName-$uniqueKey";
+  }
 }
