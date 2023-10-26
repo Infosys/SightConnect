@@ -4,14 +4,19 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/pages/patient_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/triage_eye_scan_dialog.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/pages/patient_triage_result_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,8 +44,8 @@ class _PatientEyeCaptureTriagePageState
     extends ConsumerState<PatientEyeCaptureTriagePage>
     with WidgetsBindingObserver {
   late CameraController _controller;
-  Completer<void>? _initializeControllerFuture;
-  ResolutionPreset defaultResolution = ResolutionPreset.high;
+  ResolutionPreset defaultResolution = ResolutionPreset.max;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -169,71 +174,140 @@ class _PatientEyeCaptureTriagePageState
                 onTap: () {
                   _toggleFlash();
                 },
-                child: const Padding(
-                  padding: EdgeInsets.only(right: 8),
-                  child: Icon(
-                    Icons.flash_off_outlined,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                  child: SvgPicture.asset(
+                    AppIcon.flash_on,
                     color: AppColor.white,
                   ),
                 ),
               ),
             ],
           ),
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: CameraPreview(_controller),
+          body: LoadingOverlay(
+            isLoading: isLoading,
+            child: Stack(
+              children: [
+                ClipRect(
+                  child: OverflowBox(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: SizedBox(
+                            width: AppSize.width(context),
+                            height: AppSize.height(context) /
+                                _controller.value.aspectRatio,
+                            child: AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: CameraPreview(_controller),
+                            ))),
+                  ),
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: EyeScanCameraControllers(
-                  onCapture: () => _takePicture(current, context),
-                  onFlash: () => _toggleFlash(),
-                  onSwitchCamera: () => _toggleCamera(),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: EyeScanCameraControllers(
+                    onCapture: () => _takePicture(current, context),
+                    onFlash: () => _toggleFlash(),
+                    onSwitchCamera: () => _toggleCamera(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
     }
   }
 
+  // Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
+  //   try {
+  //     if (!_controller.value.isInitialized) {
+  //       return;
+  //     }
+  //     _initializeControllerFuture;
+  //     final image = await _controller.takePicture();
+  //     if (currentEye == TriageEye.RIGHT_EYE) {
+  //       ref.read(patientTriageEyeScanProvider).setRightEyeImage(image);
+  //       ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
+  //       if (mounted) {
+  //         showDialog(
+  //             barrierDismissible: false,
+  //             context: context,
+  //             builder: (context) {
+  //               return TriageEyeScanDialog.showSuccessDialog(
+  //                   context, TriageEye.RIGHT_EYE);
+  //             });
+  //       }
+  //     } else {
+  //       ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
+  //       if (mounted) {
+  //         showDialog(
+  //           barrierDismissible: false,
+  //           context: context,
+  //           builder: (context) {
+  //             return TriageEyeScanDialog.showSuccessDialog(
+  //                 context, TriageEye.LEFT_EYE);
+  //           },
+  //         );
+  //       }
+  //     }
+  //   } on CameraException {
+  //     logger.d("Something went wrong");
+  //     Fluttertoast.showToast(msg: "Something went wrong");
+  //   } catch (e) {
+  //     logger.d(e);
+  //     Fluttertoast.showToast(msg: "Camera not found");
+  //   }
+  // }
+
   Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
     try {
       if (!_controller.value.isInitialized) {
         return;
       }
-      _initializeControllerFuture;
+
+      setState(() {
+        isLoading = true;
+      });
+
       final image = await _controller.takePicture();
-      if (currentEye == TriageEye.RIGHT_EYE) {
-        ref.read(patientTriageEyeScanProvider).setRightEyeImage(image);
-        ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
-        if (mounted) {
-          showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (context) {
-                return TriageEyeScanDialog.showSuccessDialog(
-                    context, TriageEye.RIGHT_EYE);
-              });
+      setState(() {
+        isLoading = false;
+      });
+      if (currentEye == TriageEye.RIGHT_EYE && mounted) {
+        XFile? verifiedImage = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PatientEyePreviewPage(imageFile: image),
+          ),
+        );
+        if (verifiedImage != null) {
+          ref
+              .read(patientTriageEyeScanProvider)
+              .setRightEyeImage(verifiedImage);
+          ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
+        } else {
+          return;
         }
-      } else {
-        ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
-        if (mounted) {
-          showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return TriageEyeScanDialog.showSuccessDialog(
-                  context, TriageEye.LEFT_EYE);
-            },
+      } else if (currentEye == TriageEye.LEFT_EYE && mounted) {
+        XFile? verifiedImage = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PatientEyePreviewPage(imageFile: image),
+          ),
+        );
+        if (verifiedImage != null && mounted) {
+          ref.read(patientTriageEyeScanProvider).setLeftEyeImage(verifiedImage);
+          ref.read(patientTriageStepperProvider).nextStep(3);
+          ref.read(currentEyeProvider.notifier).state = TriageEye.RIGHT_EYE;
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const PatientTriageResultPage(),
+            ),
           );
+        } else {
+          return;
         }
       }
     } on CameraException {
