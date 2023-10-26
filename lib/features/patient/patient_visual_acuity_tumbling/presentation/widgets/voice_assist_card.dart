@@ -261,9 +261,6 @@ class VoiceAssistCard extends HookConsumerWidget {
                             children: [
                               Expanded(
                                 child: ElevatedButton(
-                                  style: const ButtonStyle(
-                                    visualDensity: VisualDensity(vertical: -1),
-                                  ),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },

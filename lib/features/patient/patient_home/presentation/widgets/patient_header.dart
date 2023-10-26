@@ -24,7 +24,7 @@ class PatientHeader extends HookWidget {
         right: AppSize.kmpadding,
       ),
       decoration: BoxDecoration(
-        boxShadow: appShadow(),
+        boxShadow: applyLightShadow(),
       ),
       child: Column(
         children: [

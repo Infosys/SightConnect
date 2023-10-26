@@ -25,7 +25,7 @@ class GoodToKnowCardList extends StatelessWidget {
     ];
     return Container(
       decoration: BoxDecoration(
-        boxShadow: appShadow(),
+        boxShadow: applyLightShadow(),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

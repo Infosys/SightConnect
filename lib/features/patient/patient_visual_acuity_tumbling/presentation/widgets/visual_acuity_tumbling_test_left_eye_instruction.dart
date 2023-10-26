@@ -63,9 +63,6 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      style: const ButtonStyle(
-                        visualDensity: VisualDensity(vertical: -1),
-                      ),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

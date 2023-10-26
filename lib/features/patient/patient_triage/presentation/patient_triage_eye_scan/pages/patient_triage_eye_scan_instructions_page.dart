@@ -35,7 +35,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
       child: Scaffold(
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
-        appBar:CustomAppbar(
+        appBar: CustomAppbar(
           leadingWidth: 60,
           titleSpacing: 0.0,
           centerTitle: false,
@@ -99,7 +99,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(AppSize.klradius),
                     color: AppColor.black,
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                   ),
                   child: Center(
                     child: SvgPicture.asset(

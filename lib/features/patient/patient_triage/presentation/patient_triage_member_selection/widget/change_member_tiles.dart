@@ -59,7 +59,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: appShadow(),
+                  boxShadow: applyLightShadow(),
                   color: AppColor.white,
                 ),
                 child: RadioListTile<int>(

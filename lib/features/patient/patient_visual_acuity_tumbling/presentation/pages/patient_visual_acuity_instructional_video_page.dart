@@ -45,8 +45,8 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                       showDialog(
                         context: context,
                         builder: (context) => TriageExitAlertBox(
-                          content:
-                              AppLocalizations.of(context)!.visualAcuityExitDialog,
+                          content: AppLocalizations.of(context)!
+                              .visualAcuityExitDialog,
                         ),
                       );
                     },
@@ -147,7 +147,7 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                     width: AppSize.width(context) * 0.9,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppSize.klradius),
-                      boxShadow: appShadow(),
+                      boxShadow: applyLightShadow(),
                       color: AppColor.black,
                     ),
                     child: Center(

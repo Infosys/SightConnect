@@ -44,7 +44,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                     color: AppColor.white.withOpacity(0.5),
                   ),
                   child: RadioListTile<int>(
@@ -103,7 +103,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                   width: AppSize.width(context) * 0.88,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                     color: AppColor.white.withOpacity(0.5),
                   ),
                   child: RadioListTile<int>(

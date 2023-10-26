@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,15 +27,7 @@ class TopReadingCard extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSize.klradius),
-        boxShadow: [
-          //give custom shadow on bottom and left right
-          BoxShadow(
-            color: AppColor.primary.withOpacity(0.4),
-            blurRadius: 12,
-            spreadRadius: 0.8,
-            offset: const Offset(0, 10),
-          ),
-        ],
+        boxShadow: applyMediumShadow(),
         color: AppColor.white,
       ),
       child: Container(

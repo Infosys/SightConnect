@@ -30,23 +30,11 @@ class PatientVisualAcuityInstructionPage extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColor.primary.withOpacity(0.1),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                    offset: const Offset(20, 20),
-                  ),
-                ],
-              ),
-              child: VisualAcuityTumblingInstructionCarousel(
-                onPageChanged: (index) {
-                  activeIndex.value = index;
-                },
-                carouselController: carouselController.value,
-              ),
+            child: VisualAcuityTumblingInstructionCarousel(
+              onPageChanged: (index) {
+                activeIndex.value = index;
+              },
+              carouselController: carouselController.value,
             ),
           ),
           const SizedBox(

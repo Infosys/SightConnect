@@ -30,7 +30,7 @@ class PriorityNotificationList extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        boxShadow: appShadow(),
+        boxShadow: applyLightShadow(),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

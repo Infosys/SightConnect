@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends ConsumerWidget {
@@ -28,7 +27,7 @@ class MyApp extends ConsumerWidget {
         ),
         child: MaterialApp(
           title: 'Eye Care For All',
-          locale: const Locale('hi'),
+          locale: const Locale('en'),
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

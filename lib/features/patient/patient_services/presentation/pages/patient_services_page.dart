@@ -59,7 +59,7 @@ class PatientServicesPage extends ConsumerWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                     color: AppColor.white.withOpacity(0.5),
                   ),
                   child: Column(

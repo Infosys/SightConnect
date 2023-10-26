@@ -20,7 +20,7 @@ class ResultState extends ChangeNotifier {
       "issueLevel": "Normal",
     },
     {
-      "type": "Aquity\nTest",
+      "type": "Acuity\nTest",
       "state": "Completed",
       "issueLevel": "Normal",
     },
