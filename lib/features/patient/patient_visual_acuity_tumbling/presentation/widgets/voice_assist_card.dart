@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoiceAssistCard extends HookConsumerWidget {
   VoiceAssistCard({Key? key}) : super(key: key);
@@ -202,8 +203,9 @@ class VoiceAssistCard extends HookConsumerWidget {
               width: AppSize.width(context) * 1,
               height: AppSize.height(context) * 1,
               child: Scaffold(
-                  appBar: const CustomAppbar(
-                    title: Text("Visual Acuity Test"),
+                  appBar: CustomAppbar(
+                    title:
+                        Text(AppLocalizations.of(context)!.visualAcuityTitle),
                   ),
                   body: SizedBox(
                     width: AppSize.width(context) * 1,
@@ -214,7 +216,8 @@ class VoiceAssistCard extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Test 2 - Right Eye",
+                            AppLocalizations.of(context)!
+                                .visualAcuityRightEyeHeader,
                             style: applyFiraSansFont(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -225,7 +228,8 @@ class VoiceAssistCard extends HookConsumerWidget {
                             height: AppSize.kmheight,
                           ),
                           Text(
-                            "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+                            AppLocalizations.of(context)!
+                                .visualAcuityRightEyeInstructions,
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,

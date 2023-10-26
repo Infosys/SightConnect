@@ -11,8 +11,9 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'visual_acuity_tumbling_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VisualAcuityDialog {
   VisualAcuityDialog._();
@@ -38,7 +39,7 @@ class VisualAcuityDialog {
               height: AppSize.kmheight,
             ),
             Text(
-              "Done! Visual acuity test is completed for both eyes. You need to capture your eye photos next.",
+              AppLocalizations.of(context)!.visualAcuityCompletionDialog,
               style: applyRobotoFont(
                 fontSize: 14,
               ),
@@ -75,7 +76,7 @@ class VisualAcuityDialog {
                           );
                         }
                       },
-                      child: const Text("Proceed"),
+                      child: Text(AppLocalizations.of(context)!.proceedButton),
                     );
                   },
                 )
@@ -114,8 +115,8 @@ class VisualAcuityDialog {
           width: AppSize.width(context) * 1,
           height: AppSize.height(context) * 1,
           child: Scaffold(
-              appBar: const CustomAppbar(
-                title: Text("Visual Acuity Test"),
+              appBar: CustomAppbar(
+                title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
               ),
               body: SizedBox(
                 width: AppSize.width(context) * 1,
@@ -126,7 +127,8 @@ class VisualAcuityDialog {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Test 2 - Right Eye",
+                        AppLocalizations.of(context)!
+                            .visualAcuityRightEyeHeader,
                         style: applyFiraSansFont(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -137,7 +139,8 @@ class VisualAcuityDialog {
                         height: AppSize.kmheight,
                       ),
                       Text(
-                        "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+                        AppLocalizations.of(context)!
+                            .visualAcuityRightEyeInstructions,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -175,7 +178,8 @@ class VisualAcuityDialog {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text("Start"),
+                              child: Text(
+                                  AppLocalizations.of(context)!.startButton),
                             ),
                           ),
                         ],

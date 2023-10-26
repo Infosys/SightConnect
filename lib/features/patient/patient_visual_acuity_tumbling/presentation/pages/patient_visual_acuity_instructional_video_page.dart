@@ -13,6 +13,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
@@ -27,9 +28,8 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
         onWillPop: () async {
           var result = await showDialog(
             context: context,
-            builder: (context) => const TriageExitAlertBox(
-              content:
-                  "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+            builder: (context) => TriageExitAlertBox(
+              content: AppLocalizations.of(context)!.visualAcuityExitDialog,
             ),
           );
           return result ?? false;
@@ -44,9 +44,9 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) => const TriageExitAlertBox(
+                        builder: (context) => TriageExitAlertBox(
                           content:
-                              "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+                              AppLocalizations.of(context)!.visualAcuityExitDialog,
                         ),
                       );
                     },
@@ -54,7 +54,9 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                   titleSpacing: 0,
                   centerTitle: false,
-                  title: const Text("Visual Acuity Test"),
+                  title: Text(
+                    AppLocalizations.of(context)!.visualAcuityTitle,
+                  ),
                 )
               : CustomAppbar(
                   leadingWidth: 60,
@@ -80,7 +82,7 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                     children: [
                       const SizedBox(width: AppSize.kmwidth),
                       Text(
-                        "2 of 3",
+                        AppLocalizations.of(context)!.stepNumber('2', '3'),
                         style: applyRobotoFont(
                           color: AppColor.primary,
                           fontSize: 14,
@@ -89,7 +91,7 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                       ),
                       const SizedBox(width: AppSize.kswidth),
                       Text(
-                        'Visual Acuity Test',
+                        AppLocalizations.of(context)!.visualAcuityTitle,
                         style: applyFiraSansFont(
                           color: AppColor.black,
                           fontSize: 16,
@@ -113,7 +115,9 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 );
               },
-              child: const Text("Start"),
+              child: Text(
+                AppLocalizations.of(context)!.startButton,
+              ),
             ),
           ),
           body: SingleChildScrollView(
@@ -125,7 +129,7 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!",
+                    AppLocalizations.of(context)!.visualAcuityDescription,
                     softWrap: true,
                     style: applyRobotoFont(
                       fontSize: 14,
@@ -133,7 +137,7 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.kmheight),
                   Text(
-                    "How to perform the visual acuity test?",
+                    AppLocalizations.of(context)!.visualAcuityHowToPerform,
                     style: applyRobotoFont(
                         fontSize: 18, fontWeight: FontWeight.w600),
                   ),
@@ -188,7 +192,8 @@ class PatientVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                           const Icon(Icons.vibration, color: AppColor.blue),
                           const SizedBox(width: AppSize.kswidth),
                           Text(
-                            "View Steps to perform Tumbling E Test",
+                            AppLocalizations.of(context)!
+                                .visualAcuityViewStepsToPerform,
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.blue,

@@ -14,6 +14,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import '../widgets/option_grid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PatientTriageQuestionnairePage extends HookConsumerWidget {
   const PatientTriageQuestionnairePage({super.key});
@@ -28,9 +29,8 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageExitAlertBox(
-            content:
-                "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+          builder: (context) => TriageExitAlertBox(
+            content: AppLocalizations.of(context)!.questionnaireExitDialog,
           ),
         );
         return result ?? false;
@@ -59,7 +59,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
             children: [
               const SizedBox(width: AppSize.kmwidth),
               Text(
-                "1 of 3",
+                AppLocalizations.of(context)!.stepNumber("1", "3"),
                 style: applyRobotoFont(
                   color: AppColor.primary,
                   fontSize: 14,
@@ -67,7 +67,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
               ),
               const SizedBox(width: AppSize.kswidth),
               Text(
-                "Eye Assessment Questions",
+                AppLocalizations.of(context)!.questionnaireTitle,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -144,8 +144,8 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                         },
                         child: Text(
                           questionnaireSections.length - 1 == index
-                              ? "Proceed"
-                              : "Next",
+                              ? AppLocalizations.of(context)!.proceedButton
+                              : AppLocalizations.of(context)!.nextButton,
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.white),
                         ),

@@ -1,0 +1,65 @@
+{
+    "@@locale": "en",
+    "stepNumber": "{current} of {total}",
+    "@stepNumber":{
+        "placeholders": {
+            "current": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+        
+    },
+
+
+    "questionnaireTitle": "Eye Assessment Questions",
+    "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+
+
+    "visualAcuityTitle" : "Visual Acuity Test",
+    "visualAcuityDescription" : "A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!",
+    "visualAcuityHowToPerform" : "How to perform the visual acuity test?",
+    "visualAcuityViewStepsToPerform" : "View Steps to perform Visual Acuity Test",
+    "visualAcuityCompletionDialog":"Done! Visual Acuity Test is completed for both eyes. You need to capture your eye photos next.",
+    "visualAcuityExitDialog":"Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+    "swipeGestureTab": "Swipe Gesture",
+    "voiceAssistTab":"Voice Assist",
+    "distanceString":"distance",
+    "leftEyeString":"Left Eye",
+    "rightEyeString":"Right Eye",
+    "visualAcuityLeftEyeHeader" : "Test 1 - Left Eye",
+    "visualAcuityLeftEyeInstructions" : "Without pressing on the eyelid, cover the RIGHT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+    "visualAcuityRightEyeHeader" : "Test 2 - Right Eye",
+    "visualAcuityRightEyeInstructions" : "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+    "overlayHeaderDirection":"Direction",
+    "overlayDescription":"Here is how you understand the directions for each symbol.",
+    "overlaySymbolDirectionText":"Symbol Direction",
+    "directionDown":"Down",
+    "directionUp":"Up",
+    "directionLeft":"Left",
+    "directionRight":"Right",
+    "dontShowAgainString":"Don't show again",
+    "visualAcuityCarouselTitle": "Steps to perform Visual Acuity Test",
+
+
+    "eyeScanTitle":"Eye Scan",
+    "eyeScanDescription":"You are close! Just one more test to go. Capture the photos of your eyes next.",
+    "eyeScanHowToPerform":"How to scan your eyes?",
+    "eyeScanViewStepsToPerform":"View steps to know how to scan your eyes.",
+    "eyeScanExitDialog":"Eye Scan helps to understand more about your eye problem. Do you really wish to exit?",
+    "captureRightEyeString": "Capture Right Eye",
+    "captureLeftEyeString": "Capture Left Eye",
+
+
+    "skipButton":"Skip",
+    "startTestText":"Start Test",
+    "continueButton": "Continue",
+    "startButton":"Start",
+    "nextButton": "Next",
+    "proceedButton": "Proceed",
+    "yesButton": "Yes",
+    "noButton": "No"
+  }
+

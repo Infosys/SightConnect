@@ -1,0 +1,29 @@
+{
+    "@@locale": "hi",
+    "stepNumber": "{current} में से {total}",
+    "@stepNumber": {
+        "placeholders": {
+            "current": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "questionnaireTitle": "नेत्र मूल्यांकन प्रश्न",
+    "questionnaireExitDialog": "इन प्रश्नों के उत्तर देने से आपकी आंखों की समस्याओं की पहचान में मदद होगी। क्या आप वाकई बाहर निकलना चाहते हैं?",
+    "visualAcuityTitle": "दृष्टि तीक्ष्णता परीक्षण",
+    "visualAcuityDescription": "दृष्टि तीक्ष्णता परीक्षण एक आंख मूल्यांकन है जो जांचता है कि आप एक विशेष दूरी से एक अक्षर या प्रतीक का विवरण कैसे देखते हैं। अब इस त्वरित परीक्षण को करें!",
+    "visualAcuityHowToPerform": "दृष्टि तीक्ष्णता परीक्षण कैसे करें?",
+    "visualAcuityViewStepsToPerform": "दृष्टि तीक्ष्णता परीक्षण करने के लिए चरणों को देखें",
+    "visualAcuityCompletionDialog": "हो गया! दोनों आंखों के लिए दृष्टि तीक्ष्णता परीक्षण पूरा हो गया है। अगले आपकी आंखों की तस्वीरें कैप्चर करने की आवश्यकता है।",
+    "visualAcuityExitDialog": "दृष्टि तीक्ष्णता एक महत्वपूर्ण परीक्षण है जो आपकी आंखों की समस्या के बारे में समझने में मदद करता है। क्या आप वाकई बाहर निकलना चाहते हैं?",
+    "swipeGestureTab": "स्वाइप इशारा",
+    "voiceAssistTab": "आवाज सहायता",
+    "distanceString": "दूरी",
+    "leftEyeString": "बाएं आंख",
+    "rightEyeString": "दाएं आंख",
+    "visualAcuityLeftEyeHeader": "परीक्षण 1 - बाएं आंख",
+    "visualAcuityLeftEyeInstructions": "आंख की पलक पर दबाए बिना, अपने हाथ से दाएं आंख को कवर करें।"
+}

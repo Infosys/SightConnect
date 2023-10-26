@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/visual_acuity_tumling_instruction_carousel.dart';
 
@@ -21,8 +22,8 @@ class PatientVisualAcuityInstructionPage extends HookConsumerWidget {
     var activeIndex = useState<int>(0);
 
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Steps to do the retinal scanning"),
+      appBar: CustomAppbar(
+        title: Text(AppLocalizations.of(context)!.visualAcuityCarouselTitle),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,7 +121,9 @@ class PatientVisualAcuityInstructionPage extends HookConsumerWidget {
                 );
               },
               child: Text(
-                activeIndex.value == 4 ? "Start Test" : "Skip",
+                activeIndex.value == 3
+                    ? AppLocalizations.of(context)!.startTestText
+                    : AppLocalizations.of(context)!.skipButton,
                 style: applyRobotoFont(
                   fontWeight: FontWeight.w500,
                   color: activeIndex.value == 4

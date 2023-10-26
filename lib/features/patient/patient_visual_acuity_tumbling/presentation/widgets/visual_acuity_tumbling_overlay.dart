@@ -10,6 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/constants/app_size.dart';
 
 enum _TumblingDirection {
@@ -60,7 +61,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          "Direction",
+                          AppLocalizations.of(context)!.overlayHeaderDirection,
                           style: applyFiraSansFont(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
@@ -68,7 +69,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
                           height: AppSize.ksheight,
                         ),
                         Text(
-                          'Here is how you interpret the directions for each symbol',
+                          AppLocalizations.of(context)!.overlayDescription,
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -114,9 +115,9 @@ class _TumblingCarousel extends HookConsumerWidget {
               logger.d(index.toString());
               currentIndex.value = index;
               if (currentIndex.value > 2) {
-                buttonName.value = "Start";
+                buttonName.value = AppLocalizations.of(context)!.startButton;
               } else {
-                buttonName.value = "Skip";
+                buttonName.value = AppLocalizations.of(context)!.skipButton;
               }
             },
           ),
@@ -208,7 +209,7 @@ class _TumblingCarousel extends HookConsumerWidget {
                     },
                   ),
                   Text(
-                    "Don't show again",
+                    AppLocalizations.of(context)!.dontShowAgainString,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.grey,
@@ -343,7 +344,21 @@ class _TumblingDirectionRow extends StatelessWidget {
             ),
           ),
           Text(
-            getDirection(currentIndex).toString().split('.').last,
+            getDirection(currentIndex).toString().split('.').last == 'Up'
+                ? AppLocalizations.of(context)!.directionUp
+                : getDirection(currentIndex).toString().split('.').last ==
+                        'Down'
+                    ? AppLocalizations.of(context)!.directionDown
+                    : getDirection(currentIndex).toString().split('.').last ==
+                            'Left'
+                        ? AppLocalizations.of(context)!.directionLeft
+                        : getDirection(currentIndex)
+                                    .toString()
+                                    .split('.')
+                                    .last ==
+                                'Right'
+                            ? AppLocalizations.of(context)!.directionRight
+                            : AppLocalizations.of(context)!.directionUp,
             style: applyRobotoFont(
               fontSize: 32,
               fontWeight: FontWeight.w700,

@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../shared/theme/text_theme.dart';
 import '../providers/patient_visual_acuity_test_provider.dart';
@@ -40,7 +41,7 @@ class BottomInputTabState extends State<BottomInputTab>
               Row(
                 children: [
                   Text(
-                    "Distance:",
+                    AppLocalizations.of(context)!.distanceString,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.grey,
@@ -60,8 +61,8 @@ class BottomInputTabState extends State<BottomInputTab>
               Consumer(
                 builder: (context, ref, child) => Text(
                   ref.watch(tumblingTestProvider).currentEye == Eye.left
-                      ? "Left Eye"
-                      : "Right Eye",
+                      ? AppLocalizations.of(context)!.leftEyeString
+                      : AppLocalizations.of(context)!.rightEyeString,
                   style: applyFiraSansFont(
                     fontSize: 18,
                   ),
@@ -107,16 +108,16 @@ class ButtomNavigationBar extends HookWidget {
 
     return SegmentedButton(
       showSelectedIcon: false,
-      segments: const [
+      segments: [
         ButtonSegment(
           value: 0,
-          icon: Icon(Icons.touch_app),
-          label: Text("Swipe Gesture"),
+          icon: const Icon(Icons.touch_app),
+          label: Text(AppLocalizations.of(context)!.swipeGestureTab),
         ),
         ButtonSegment(
           value: 1,
-          icon: Icon(Icons.mic),
-          label: Text("Voice Assist"),
+          icon: const Icon(Icons.mic),
+          label: Text(AppLocalizations.of(context)!.voiceAssistTab),
         ),
       ],
       onSelectionChanged: (value) {

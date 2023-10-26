@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
@@ -11,8 +12,8 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppbar(
-          title: Text("Visual Acuity Test"),
+        appBar: CustomAppbar(
+          title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -20,7 +21,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Test 1 - Left Eye",
+                AppLocalizations.of(context)!.visualAcuityLeftEyeHeader,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -31,7 +32,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                 height: AppSize.kmheight,
               ),
               Text(
-                "Without pressing on the eyelid, cover the RIGHT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
+                AppLocalizations.of(context)!.visualAcuityLeftEyeInstructions,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -73,7 +74,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text("Continue"),
+                      child: Text(AppLocalizations.of(context)!.continueButton),
                     ),
                   ),
                 ],

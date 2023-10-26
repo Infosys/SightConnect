@@ -10,7 +10,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -94,9 +94,9 @@ class _PatientEyeCaptureTriagePageState
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageExitAlertBox(
+          builder: (context) => TriageExitAlertBox(
             content:
-                "Eye Scan helps to understand more about your eye problem. Do you really wish to exit?",
+                AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
         return result ?? false;
@@ -133,7 +133,7 @@ class _PatientEyeCaptureTriagePageState
             children: [
               const SizedBox(width: AppSize.kmwidth),
               Text(
-                "3 of 3",
+                AppLocalizations.of(context)!.stepNumber("3", "3"),
                 style: applyRobotoFont(
                   color: AppColor.white,
                   fontSize: 14,
@@ -143,7 +143,7 @@ class _PatientEyeCaptureTriagePageState
               const SizedBox(width: AppSize.kmwidth),
               Flexible(
                   child: Text(
-                "Eye Scan",
+                AppLocalizations.of(context)!.eyeScanTitle,
                 style: applyRobotoFont(
                   color: AppColor.white,
                   fontSize: 16,

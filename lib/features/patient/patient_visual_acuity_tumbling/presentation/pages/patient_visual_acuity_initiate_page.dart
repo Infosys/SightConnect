@@ -8,7 +8,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/bottom_input_tab.dart';
 import '../widgets/top_reading_card.dart';
 import '../widgets/visual_acuity_tumbling_overlay.dart';
@@ -25,9 +25,8 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageExitAlertBox(
-            content:
-                "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+          builder: (context) => TriageExitAlertBox(
+            content: AppLocalizations.of(context)!.visualAcuityExitDialog,
           ),
         );
         return result ?? false;
@@ -42,9 +41,9 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => const TriageExitAlertBox(
-                        content:
-                            "Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?",
+                      builder: (context) => TriageExitAlertBox(
+                        content: AppLocalizations.of(context)!
+                            .visualAcuityExitDialog,
                       ),
                     );
                   },
@@ -52,7 +51,7 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
                 ),
                 titleSpacing: 0,
                 centerTitle: false,
-                title: const Text("Visual Acuity Test"),
+                title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
               )
             : CustomAppbar(
                 leadingWidth: 60,
@@ -76,7 +75,7 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
                   children: [
                     const SizedBox(width: AppSize.kmwidth),
                     Text(
-                      "2 of 3",
+                      AppLocalizations.of(context)!.stepNumber('2', '3'),
                       style: applyRobotoFont(
                         color: AppColor.primary,
                         fontSize: 14,
@@ -84,9 +83,9 @@ class PatinetVisualAcuityInitiatePage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: AppSize.kmwidth),
-                    const Flexible(
+                    Flexible(
                         child: Text(
-                      "Visual Acuity Test",
+                      AppLocalizations.of(context)!.visualAcuityTitle,
                     )),
                   ],
                 ),
