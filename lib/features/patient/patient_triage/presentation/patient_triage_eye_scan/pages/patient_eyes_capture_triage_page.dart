@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/pages/patient_eye_preview_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/widgets/triage_eye_scan_dialog.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/pages/patient_triage_result_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
@@ -189,20 +187,9 @@ class _PatientEyeCaptureTriagePageState
             isLoading: isLoading,
             child: Stack(
               children: [
-                ClipRect(
-                  child: OverflowBox(
-                    alignment: Alignment.center,
-                    child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                            width: AppSize.width(context),
-                            height: AppSize.height(context) /
-                                _controller.value.aspectRatio,
-                            child: AspectRatio(
-                              aspectRatio: _controller.value.aspectRatio,
-                              child: CameraPreview(_controller),
-                            ))),
-                  ),
+                AspectRatio(
+                  aspectRatio: 1 / _controller.value.aspectRatio,
+                  child: CameraPreview(_controller),
                 ),
                 Positioned(
                   left: 0,

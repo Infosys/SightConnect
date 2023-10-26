@@ -22,7 +22,7 @@ class PatientAssessmentReportPage extends StatelessWidget {
       appBar: CustomAppbar(
         title: Row(
           children: [
-            const Text("IVR Eye Assessment"),
+            const Text("Eye Assessment"),
             const Spacer(),
             Container(
                 padding: EdgeInsets.symmetric(

@@ -12,37 +12,50 @@ class PatientEyePreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.black,
-      bottomNavigationBar: BottomAppBar(
-        color: AppColor.black.withOpacity(0.2),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(null);
-                },
-                style: TextButton.styleFrom(
-                  foregroundColor: AppColor.red,
-                ),
-                child: const Text("Discard"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(imageFile);
-                },
-                child: const Text("Save & Continue"),
-              ),
-            ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned.fill(
+            child: Image.file(
+              File(imageFile!.path),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-      ),
-      body: Center(
-        child: Image.file(
-          File(imageFile!.path),
-          fit: BoxFit.cover,
-        ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: AppColor.black.withOpacity(0.5),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).pop(null);
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColor.red,
+                    ),
+                    icon: const Icon(Icons.cancel, size: 22),
+                    label: const Text("Discard"),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).pop(imageFile);
+                    },
+                    icon: const Icon(Icons.check_circle, size: 22),
+                    label: const Text("Confirm"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

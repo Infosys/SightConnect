@@ -36,11 +36,6 @@ class ChangeMemberTiles extends HookConsumerWidget {
         'image': 'assets/images/profile_image.png',
         'about': 'Sister,18 years'
       },
-      {
-        'name': 'Rati Pandey',
-        'image': 'assets/images/profile_image.png',
-        'about': 'Sister,18 years'
-      },
     ];
     return Expanded(
       child: ListView.builder(
