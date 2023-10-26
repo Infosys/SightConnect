@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -61,7 +62,7 @@ class ResultState extends ChangeNotifier {
       } else if (issueLevel == 'Normal' && _highestPriority == '') {
         _highestPriority = 'Normal';
       }
-      print('$_highestPriority I have no clue');
+      logger.d('$_highestPriority I have no clue');
     }
 
     _topCardColor = _highestPriority == 'Normal'

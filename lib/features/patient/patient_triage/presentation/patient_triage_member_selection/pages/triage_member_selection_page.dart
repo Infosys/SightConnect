@@ -80,7 +80,7 @@ class TriageMemberSelectionPage extends HookWidget {
             ),
             const SizedBox(height: AppSize.ksheight),
             const ChangeMemberTiles(),
-            const Spacer(),
+            const SizedBox(height: AppSize.ksheight),
             SizedBox(
               width: AppSize.width(context) * 0.8,
               child: ElevatedButton(

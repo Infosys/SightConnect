@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,7 +26,7 @@ class ResultPageTopCard extends ConsumerWidget {
         : resultData.highestPriority == 'Minor'
             ? 'Early Consult'
             : 'Routine Consult';
-    print(
+    logger.d(
         '${resultData.highestPriority} wqeqlmdaldsmlasdlsadlsakdlsa\n${resultData.topCardColor}');
     return Padding(
       padding: const EdgeInsets.symmetric(

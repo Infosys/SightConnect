@@ -25,7 +25,7 @@ class TumblingResultPageTopCard extends ConsumerWidget {
     //     : resultData.highestPriority == 'Minor'
     //         ? 'Early Consult'
     //         : 'Routine Consult';
-    // print(
+    // logger.d(
     //     '${resultData.highestPriority} wqeqlmdaldsmlasdlsadlsakdlsa\n${resultData.topCardColor}');
     return Padding(
       padding: const EdgeInsets.symmetric(

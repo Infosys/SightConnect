@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,6 +12,6 @@ class TriageMemberProvider extends ChangeNotifier {
   setPeople(Map<String, dynamic> people) {
     this.people = people;
     notifyListeners();
-    print('$people\n');
+    logger.d('$people\n');
   }
 }
