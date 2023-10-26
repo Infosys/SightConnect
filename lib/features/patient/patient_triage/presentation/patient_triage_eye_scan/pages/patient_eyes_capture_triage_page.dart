@@ -9,9 +9,9 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/wi
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/patient_triage_eye_scan_provider.dart';
@@ -36,53 +36,40 @@ class PatientEyeCaptureTriagePage extends ConsumerStatefulWidget {
 
 class _PatientEyeCaptureTriagePageState
     extends ConsumerState<PatientEyeCaptureTriagePage> {
-  late CameraDescription cameraDescription;
-  late CameraController cameraController;
-  // static const maxPhotosAllowedPerEye = 2;
-  // popup to show  which eye image to be taken
-  // fix flash icon and fucntionality
-
-  var isLoading = false;
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+  ResolutionPreset defaultResolution = ResolutionPreset.medium;
 
   @override
   void initState() {
     super.initState();
-    _init();
-  }
-
-  _init() async {
-    await _intializeCamera();
-    if (!cameraController.value.isInitialized) {
-      if (mounted) {
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return TriageEyeScanDialog.showCameraNotFound(context);
-            });
-      }
-    }
-  }
-
-  _intializeCamera() async {
-    setState(() {
-      isLoading = true;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _initializeCamera(CameraLensDirection.front);
     });
-    cameraDescription = widget.cameras.firstWhere(
-        (element) => element.lensDirection == CameraLensDirection.front);
-    cameraController = CameraController(
-      cameraDescription,
-      ResolutionPreset.medium,
+  }
+
+  _initializeCamera(CameraLensDirection lensDirection) {
+    _controller = CameraController(
+      widget.cameras.firstWhere(
+        (element) => element.lensDirection == lensDirection,
+      ),
+      defaultResolution,
+      enableAudio: false,
     );
-    await cameraController.initialize();
-    setState(() {
-      isLoading = false;
-    });
+    if (!_controller.value.isInitialized) {
+      _initializeControllerFuture = _controller
+          .initialize()
+          .then((value) => setState(() {}))
+          .catchError((e) {
+        logger.d(e);
+        Fluttertoast.showToast(msg: "Camera not found");
+      });
+    }
   }
 
   @override
   void dispose() {
-    cameraController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -95,8 +82,7 @@ class _PatientEyeCaptureTriagePageState
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
-            content:
-                AppLocalizations.of(context)!.eyeScanExitDialog,
+            content: AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
         return result ?? false;
@@ -158,7 +144,7 @@ class _PatientEyeCaptureTriagePageState
                 _toggleFlash();
               },
               icon: Icon(
-                cameraController.value.flashMode == FlashMode.off
+                _controller.value.flashMode == FlashMode.off
                     ? Icons.flash_off_outlined
                     : Icons.flash_on_outlined,
                 color: AppColor.white,
@@ -166,28 +152,34 @@ class _PatientEyeCaptureTriagePageState
             ),
           ],
         ),
-        body: LoadingOverlay(
-          isLoading: isLoading,
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.bottomCenter,
-            children: [
-              EyeScanCamera(
-                controller: cameraController,
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: EyeScanCameraControllers(
-                  onCapture: () => _takePicture(current, context),
-                  onFlash: _toggleFlash,
-                  flashMode: cameraController.value.flashMode,
-                  onSwitchCamera: _toggleCamera,
-                ),
-              )
-            ],
-          ),
+        body: FutureBuilder<void>(
+          future: _initializeControllerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Stack(
+                fit: StackFit.expand,
+                alignment: Alignment.bottomCenter,
+                children: [
+                  EyeScanCamera(
+                    controller: _controller,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: EyeScanCameraControllers(
+                      onCapture: () => _takePicture(current, context),
+                      onFlash: () => _toggleFlash(),
+                      flashMode: _controller.value.flashMode,
+                      onSwitchCamera: () => _toggleCamera(),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );
@@ -195,19 +187,11 @@ class _PatientEyeCaptureTriagePageState
 
   Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
     try {
-      setState(() {
-        isLoading = true;
-      });
-      final image = await cameraController.takePicture();
-
-      logger.d(image.path);
-      setState(() {
-        isLoading = false;
-      });
+      await _initializeControllerFuture;
+      final image = await _controller.takePicture();
       if (currentEye == TriageEye.RIGHT_EYE) {
         ref.read(patientTriageEyeScanProvider).setRightEyeImage(image);
         ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
-        // _showSuccessDialog(TriageEye.RIGHT_EYE);
         if (mounted) {
           showDialog(
               barrierDismissible: false,
@@ -216,64 +200,40 @@ class _PatientEyeCaptureTriagePageState
                 return TriageEyeScanDialog.showSuccessDialog(
                     context, TriageEye.RIGHT_EYE);
               });
-        }
-      } else {
-        ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
-        // _showSuccessDialog(TriageEye.LEFT_EYE);
-        if (mounted) {
-          showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (context) {
-                return TriageEyeScanDialog.showSuccessDialog(
-                    context, TriageEye.LEFT_EYE);
-              });
+        } else {
+          ref.read(patientTriageEyeScanProvider).setLeftEyeImage(image);
+          if (mounted) {
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return TriageEyeScanDialog.showSuccessDialog(
+                      context, TriageEye.LEFT_EYE);
+                });
+          }
         }
       }
+      if (!mounted) return;
     } on CameraException catch (e) {
       logger.d(e);
-      // _showCameraNotFoundDialog();
-      if (mounted) {
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return TriageEyeScanDialog.showCameraNotFound(context);
-            });
-      }
+      Fluttertoast.showToast(msg: "Camera not found");
     }
   }
 
   Future<void> _toggleCamera() async {
-    setState(() {
-      isLoading = true;
-    });
-    if (cameraController.description.lensDirection ==
-        CameraLensDirection.front) {
-      cameraController = CameraController(
-        widget.cameras.firstWhere(
-            (element) => element.lensDirection == CameraLensDirection.back),
-        ResolutionPreset.medium,
-      );
+    if (_controller.description.lensDirection == CameraLensDirection.front) {
+      _initializeCamera(CameraLensDirection.back);
     } else {
-      cameraController = CameraController(
-        widget.cameras.firstWhere(
-            (element) => element.lensDirection == CameraLensDirection.front),
-        ResolutionPreset.medium,
-      );
+      _initializeCamera(CameraLensDirection.front);
     }
-
-    await cameraController.initialize();
-    setState(() {
-      isLoading = false;
-    });
+    setState(() {});
   }
 
   Future<void> _toggleFlash() async {
-    if (cameraController.value.flashMode == FlashMode.off) {
-      await cameraController.setFlashMode(FlashMode.torch);
+    if (_controller.value.flashMode == FlashMode.off) {
+      await _controller.setFlashMode(FlashMode.torch);
     } else {
-      await cameraController.setFlashMode(FlashMode.off);
+      await _controller.setFlashMode(FlashMode.off);
     }
     setState(() {});
   }

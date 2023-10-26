@@ -10,6 +10,9 @@ class EyeScanCamera extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CameraPreview(controller);
+    return AspectRatio(
+      aspectRatio: controller.value.aspectRatio,
+      child: CameraPreview(controller),
+    );
   }
 }

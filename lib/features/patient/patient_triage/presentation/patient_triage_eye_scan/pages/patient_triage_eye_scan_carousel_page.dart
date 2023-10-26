@@ -111,9 +111,8 @@ class PatientTriageEyeScanCarouselPage extends HookConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       fullscreenDialog: true,
-                      builder: (context) => PatientEyeCaptureTriagePage(
-                        cameras: cameras,
-                      ),
+                      builder: (context) =>
+                          PatientEyeCaptureTriagePage(cameras: cameras),
                     ),
                   );
                 }
