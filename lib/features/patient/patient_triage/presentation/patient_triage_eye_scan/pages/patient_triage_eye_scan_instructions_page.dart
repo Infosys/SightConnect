@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
@@ -165,18 +166,21 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
               padding: const EdgeInsets.all(AppSize.kmpadding),
               child: ElevatedButton(
                 onPressed: () async {
-                  var cameras = await availableCameras();
-                  if (cameras.isEmpty) {
-                    return;
-                  }
-                  if (context.mounted) {
-                    Navigator.of(context).push(
+                  try {
+                    var navigator = Navigator.of(context);
+                    var cameras = await availableCameras();
+                    if (cameras.isEmpty) {
+                      Fluttertoast.showToast(msg: "No camera found");
+                      return;
+                    }
+                    navigator.push(
                       MaterialPageRoute(
-                        fullscreenDialog: true,
                         builder: (context) =>
                             PatientEyeCaptureTriagePage(cameras: cameras),
                       ),
                     );
+                  } catch (e) {
+                    Fluttertoast.showToast(msg: "No camera found");
                   }
                 },
                 child: const Text(

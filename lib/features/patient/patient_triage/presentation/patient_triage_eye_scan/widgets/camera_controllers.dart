@@ -14,12 +14,10 @@ class EyeScanCameraControllers extends HookConsumerWidget {
     this.onCapture,
     this.onSwitchCamera,
     this.onFlash,
-    this.flashMode,
   });
   final VoidCallback? onCapture;
   final VoidCallback? onSwitchCamera;
   final VoidCallback? onFlash;
-  final FlashMode? flashMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -71,7 +69,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: (onFlash),
+                onTap: () {},
                 child: Container(
                   padding: const EdgeInsets.all(AppSize.kspadding),
                   decoration: const BoxDecoration(
@@ -80,9 +78,6 @@ class EyeScanCameraControllers extends HookConsumerWidget {
                   ),
                   child: SvgPicture.asset(
                     AppIcon.cam_info,
-                    // flashMode == FlashMode.off
-                    //     ? Icons.flash_off_outlined
-                    //     : Icons.flash_on_outlined,
                     color: AppColor.white,
                   ),
                 ),
