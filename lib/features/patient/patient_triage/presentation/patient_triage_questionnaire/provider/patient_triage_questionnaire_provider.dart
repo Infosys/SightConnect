@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,7 +26,7 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
-    print('\n\nquestionResponse: $questionResponse\n\n');
+    logger.d('\n\nquestionResponse: $questionResponse\n\n');
   }
 
   List<bool> get selectedOptions => _selectedOptions;

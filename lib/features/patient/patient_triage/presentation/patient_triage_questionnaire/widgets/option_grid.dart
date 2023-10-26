@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,7 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var resProvider = Provider<List<bool>>((ref) => selectedStates);
 //  List<bool> selectedStates = List<bool>.generate(21, (e) => false);
 
-   List<bool> selectedStates = [];
+List<bool> selectedStates = [];
+
 class OptionGrid extends ConsumerStatefulWidget {
   const OptionGrid({
     required this.question,
@@ -21,12 +23,10 @@ class OptionGrid extends ConsumerStatefulWidget {
   final Function(int)? onTap;
 
   @override
- _OptionGridState createState() => _OptionGridState();
+  _OptionGridState createState() => _OptionGridState();
 }
 
 class _OptionGridState extends ConsumerState<OptionGrid> {
-  
-
   @override
   void initState() {
     super.initState();
@@ -52,24 +52,20 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            
             if (widget.pageIndex == 0) {
-               if (selectedStates[index]) {
-               
+              if (selectedStates[index]) {
                 selectedStates[index] = false;
               } else {
-             
                 for (int i = 0; i < selectedStates.length; i++) {
                   selectedStates[i] = (i == index);
                 }
               }
             } else {
-          
               selectedStates[index] = !selectedStates[index];
             }
             widget.onTap?.call(index);
             setState(() {
-              print('\n\n$selectedStates\n\n');
+              logger.d('\n\n$selectedStates\n\n');
             });
           },
           child: Container(

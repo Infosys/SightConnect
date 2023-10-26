@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,25 +40,25 @@ class PatientMemberDetailsProvider extends ChangeNotifier {
   void setname(String name) {
     _name = name;
     notifyListeners();
-    print('\n\n$_name\n\n');
+    logger.d('\n\n$_name\n\n');
   }
 
   void setmobileNumber(String mobileNumber) {
     _mobileNumber = mobileNumber;
     notifyListeners();
-    print('\n\n$_mobileNumber\n\n');
+    logger.d('\n\n$_mobileNumber\n\n');
   }
 
   void setaddress(String address) {
     _address = address;
     notifyListeners();
-    print('\n\n$_address\n\n');
+    logger.d('\n\n$_address\n\n');
   }
 
   void setdob(String dob) {
     _dob = dob;
     notifyListeners();
-    print('\n\n$_dob\n\n');
+    logger.d('\n\n$_dob\n\n');
   }
 
   void setresponse() {
@@ -68,7 +69,7 @@ class PatientMemberDetailsProvider extends ChangeNotifier {
       'dob': _dob,
       'gender': _gender
     });
-    print('\n\n$response\n\n');
+    logger.d('\n\n$response\n\n');
     notifyListeners();
   }
 

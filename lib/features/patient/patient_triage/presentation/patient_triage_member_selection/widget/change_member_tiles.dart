@@ -42,76 +42,71 @@ class ChangeMemberTiles extends HookConsumerWidget {
         'about': 'Sister,18 years'
       },
     ];
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: SizedBox(
-        height: AppSize.height(context) * 0.32,
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: const AlwaysScrollableScrollPhysics(),
-          itemCount: people.length,
-          itemBuilder: (context, index) {
-            final person = people[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSize.ksheight - 2,
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: people.length,
+        itemBuilder: (context, index) {
+          final person = people[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.ksheight - 2,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: applyLightShadow(),
+                color: AppColor.white,
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: applyLightShadow(),
-                  color: AppColor.white,
+              child: RadioListTile<int>(
+                contentPadding: EdgeInsets.zero,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      person['image'],
+                      height: 40,
+                      width: 40,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          person['name'],
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          person['about'],
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                child: RadioListTile<int>(
-                  contentPadding: EdgeInsets.zero,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        person['image'],
-                        height: 40,
-                        width: 40,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            person['name'],
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            person['about'],
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  value: index,
-                  groupValue: selectedValue.value,
-                  onChanged: (value) {
-                    selectedValue.value = value!;
-                    memberProvider.setPeople(people[index]);
-                  },
-                ),
+                value: index,
+                groupValue: selectedValue.value,
+                onChanged: (value) {
+                  selectedValue.value = value!;
+                  memberProvider.setPeople(people[index]);
+                },
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

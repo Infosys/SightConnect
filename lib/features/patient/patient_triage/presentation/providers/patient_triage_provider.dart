@@ -29,7 +29,7 @@ class PatientTriageProvider extends ChangeNotifier {
     response.fold(
       (failure) {
         logger.d("getTriage $failure");
-        debugPrint("PatientTriageProvider:- $failure");
+        logger.d("PatientTriageProvider:- $failure");
       },
       (triageAssessment) {
         _questionnaireSections = triageAssessment.questionnaireSections!;
