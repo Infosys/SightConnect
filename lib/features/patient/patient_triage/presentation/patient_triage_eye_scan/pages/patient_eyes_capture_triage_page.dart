@@ -143,7 +143,7 @@ class _PatientEyeCaptureTriagePageState
               onTap: () {
                 _toggleFlash();
               },
-              icon: Icon(
+              child: Icon(
                 _controller.value.flashMode == FlashMode.off
                     ? Icons.flash_off_outlined
                     : Icons.flash_on_outlined,
