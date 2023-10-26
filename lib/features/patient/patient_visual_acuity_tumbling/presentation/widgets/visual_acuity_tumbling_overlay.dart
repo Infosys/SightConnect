@@ -336,7 +336,7 @@ class _TumblingDirectionRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "Symbol Direction: ",
+            AppLocalizations.of(context)!.overlaySymbolDirectionText,
             style: applyRobotoFont(
               fontSize: 18,
               color: const Color(0xFF888888),

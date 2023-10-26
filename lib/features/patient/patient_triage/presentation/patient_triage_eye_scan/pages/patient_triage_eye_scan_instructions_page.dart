@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'patient_eyes_capture_triage_page.dart';
@@ -26,9 +27,8 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
       onWillPop: () async {
         var result = await showDialog(
           context: context,
-          builder: (context) => const TriageExitAlertBox(
-            content:
-                "Eye Scan helps to understand more about your eye problem. Do you really wish to exit?",
+          builder: (context) => TriageExitAlertBox(
+            content: AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
         return result ?? false;
@@ -57,7 +57,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
             children: [
               const SizedBox(width: AppSize.kmwidth),
               Text(
-                "3 of 3",
+                AppLocalizations.of(context)!.stepNumber('3', '3'),
                 style: applyRobotoFont(
                   color: AppColor.primary,
                   fontSize: 14,
@@ -65,7 +65,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
               ),
               const SizedBox(width: AppSize.kswidth),
               Text(
-                "Eye Scan",
+                AppLocalizations.of(context)!.eyeScanTitle,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -81,7 +81,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'You are close! Just one more test to go. Capture the photos of your eyes next.',
+                  AppLocalizations.of(context)!.eyeScanDescription,
                   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -89,7 +89,7 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 Text(
-                  "How to scan your eyes?",
+                  AppLocalizations.of(context)!.eyeScanHowToPerform,
                   style: applyRobotoFont(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),
@@ -143,7 +143,8 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
                         const Icon(Icons.vibration, color: AppColor.blue),
                         const SizedBox(width: AppSize.kswidth),
                         Text(
-                          "View Steps to perform Tumbling E Test",
+                          AppLocalizations.of(context)!
+                              .eyeScanViewStepsToPerform,
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: AppColor.blue,
@@ -183,9 +184,9 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
                     Fluttertoast.showToast(msg: "No camera found");
                   }
                 },
-                child: const Text(
-                  "Start",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.startButton,
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),

@@ -1,7 +1,7 @@
 {
     "@@locale": "hi",
-    "stepNumber": "{current} में से {total}",
-    "@stepNumber": {
+    "stepNumber": "{current} का {total}",
+    "@stepNumber":{
         "placeholders": {
             "current": {
                 "type": "String"
@@ -11,19 +11,48 @@
             }
         }
     },
+
     "questionnaireTitle": "नेत्र मूल्यांकन प्रश्न",
-    "questionnaireExitDialog": "इन प्रश्नों के उत्तर देने से आपकी आंखों की समस्याओं की पहचान में मदद होगी। क्या आप वाकई बाहर निकलना चाहते हैं?",
-    "visualAcuityTitle": "दृष्टि तीक्ष्णता परीक्षण",
-    "visualAcuityDescription": "दृष्टि तीक्ष्णता परीक्षण एक आंख मूल्यांकन है जो जांचता है कि आप एक विशेष दूरी से एक अक्षर या प्रतीक का विवरण कैसे देखते हैं। अब इस त्वरित परीक्षण को करें!",
-    "visualAcuityHowToPerform": "दृष्टि तीक्ष्णता परीक्षण कैसे करें?",
-    "visualAcuityViewStepsToPerform": "दृष्टि तीक्ष्णता परीक्षण करने के लिए चरणों को देखें",
-    "visualAcuityCompletionDialog": "हो गया! दोनों आंखों के लिए दृष्टि तीक्ष्णता परीक्षण पूरा हो गया है। अगले आपकी आंखों की तस्वीरें कैप्चर करने की आवश्यकता है।",
-    "visualAcuityExitDialog": "दृष्टि तीक्ष्णता एक महत्वपूर्ण परीक्षण है जो आपकी आंखों की समस्या के बारे में समझने में मदद करता है। क्या आप वाकई बाहर निकलना चाहते हैं?",
+    "questionnaireExitDialog": "इन प्रश्नों के उत्तर देने से आपकी नेत्र समस्याओं की पहचान में मदद होगी। क्या आप सचमुच बाहर निकलना चाहते हैं?",
+
+    "visualAcuityTitle" : "दृष्टि तीक्ष्णता परीक्षण",
+    "visualAcuityDescription" : "दृष्टि तीक्ष्णता परीक्षण एक नेत्र परीक्षण है जिसमें देखा जाता है कि आप किस दूरी से किस प्रकार के पत्र या प्रतीक के विवरण को देखते हैं। अब इस तेज टेस्ट को करें!",
+    "visualAcuityHowToPerform" : "दृष्टि तीक्ष्णता परीक्षण कैसे करें?",
+    "visualAcuityViewStepsToPerform" : "दृष्टि तीक्ष्णता परीक्षण करने के चरणों को देखें",
+    "visualAcuityCompletionDialog":"बढ़िया! दृष्टि तीक्ष्णता परीक्षण दोनों नेत्रों के लिए पूरा हो गया है। अब आपके नेत्र फोटो खिचवाने होंगे।",
+    "visualAcuityExitDialog":"दृष्टि तीक्ष्णता आपकी नेत्र समस्या के बारे में जानने के लिए महत्वपूर्ण है। क्या आप सचमुच बाहर निकलना चाहते हैं?",
     "swipeGestureTab": "स्वाइप इशारा",
-    "voiceAssistTab": "आवाज सहायता",
-    "distanceString": "दूरी",
-    "leftEyeString": "बाएं आंख",
-    "rightEyeString": "दाएं आंख",
-    "visualAcuityLeftEyeHeader": "परीक्षण 1 - बाएं आंख",
-    "visualAcuityLeftEyeInstructions": "आंख की पलक पर दबाए बिना, अपने हाथ से दाएं आंख को कवर करें।"
+    "voiceAssistTab":"आवाज सहायता",
+    "distanceString":"दूरी",
+    "leftEyeString":"बाएँ नेत्र",
+    "rightEyeString":"दाएँ नेत्र",
+    "visualAcuityLeftEyeHeader" : "परीक्षण 1 - बाएँ नेत्र",
+    "visualAcuityLeftEyeInstructions" : "आंख की पलक पर दबाव नहीं देते हुए, अपने हाथ से दाएँ नेत्र को ढ़क लें। अगर आप चश्मा पहन रहे हैं तो अपने हाथ को चश्मे के ऊपर रखें।",
+    "visualAcuityRightEyeHeader" : "परीक्षण 2 - दाएँ नेत्र",
+    "visualAcuityRightEyeInstructions" : "आंख की पलक पर दबाव नहीं देते हुए, अपने हाथ से बाएँ नेत्र को ढ़क लें। अगर आप चश्मा पहन रहे हैं तो अपने हाथ को चश्मे के ऊपर रखें।",
+    "overlayHeaderDirection":"दिशा",
+    "overlayDescription":"यहां आप प्रत्येक प्रतीक के लिए दिशा को समझने के तरीके देख सकते हैं।",
+    "overlaySymbolDirectionText":"प्रतीक दिशा : ",
+    "directionDown":"नीचे",
+    "directionUp":"ऊपर",
+    "directionLeft":"बाएँ",
+    "directionRight":"दाएँ",
+    "dontShowAgainString":"फिर मत दिखाएं",
+    "visualAcuityCarouselTitle": "दृष्टि तीक्ष्णता परीक्षण करने के चरण",
+
+    "eyeScanTitle":"नेत्र स्कैन",
+    "eyeScanDescription":"आप करीब हैं! अब एक और टेस्ट को पूरा करने के लिए अपने नेत्रों की तस्वीरें खिचवाएं।",
+    "eyeScanHowToPerform":"नेत्रों को कैसे स्कैन करें?",
+    "eyeScanViewStepsToPerform":"नेत्रों को कैसे स्कैन करने के चरणों को देखने के लिए देखें।",
+    "eyeScanExitDialog":"नेत्र स्कैन नेत्र समस्या के बारे में और अधिक जानने में मदद करता है। क्या आप सचमुच बाहर निकलना चाहते हैं?",
+    "captureRightEyeString": "दाएँ नेत्र की तस्वीर खिचें",
+    "captureLeftEyeString": "बाएँ नेत्र की तस्वीर खिचें",
+    "skipButton":"छोड़ें",
+    "startTestText":"प्रारंभ करें",
+    "continueButton": "जारी रखें",
+    "startButton":"प्रारंभ करें",
+    "nextButton": "आगे",
+    "proceedButton": "आगे बढ़ें",
+    "yesButton": "हां",
+    "noButton": "नहीं"
 }

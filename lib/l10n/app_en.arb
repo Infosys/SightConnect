@@ -35,7 +35,7 @@
     "visualAcuityRightEyeInstructions" : "Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.",
     "overlayHeaderDirection":"Direction",
     "overlayDescription":"Here is how you understand the directions for each symbol.",
-    "overlaySymbolDirectionText":"Symbol Direction",
+    "overlaySymbolDirectionText":"Symbol Direction : ",
     "directionDown":"Down",
     "directionUp":"Up",
     "directionLeft":"Left",

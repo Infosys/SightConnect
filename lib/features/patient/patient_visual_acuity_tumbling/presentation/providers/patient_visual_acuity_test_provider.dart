@@ -16,7 +16,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   late int? currentLevel;
   late int? currentIndex;
   late bool? isGameOver;
-  late bool? isRetry;
+
   late int? totalWrongLevelResponse;
   late List<UserResponse>? currentLevelUserResponses;
   late Map<int, List<UserResponse>>? singleEyeReport;
@@ -30,7 +30,6 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     currentLevel = 0;
     currentIndex = 0;
     isGameOver = false;
-    isRetry = false;
     totalWrongLevelResponse = 0;
     currentLevelUserResponses = [];
     level = _dataSource.getLevel(0, GameMode.regular);
@@ -39,11 +38,11 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
 
   void handUserResponse(UserResponse userResponse) {
-    var response = _isUserSwipDirectionCorrect(
+    var isUserSwipeCorrect = _isUserSwipeDirectionCorrect(
       userResponse.swipeDirection,
       level!.questions[currentIndex!].direction,
     );
-    if (response) {
+    if (isUserSwipeCorrect) {
       userResponse.isUserResponseCorrect = true;
       level!.questions[currentIndex!].questionStatus = QuestionStatus.right;
     } else {
@@ -51,77 +50,78 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       level!.questions[currentIndex!].questionStatus = QuestionStatus.wrong;
     }
     currentLevelUserResponses!.add(userResponse);
-    if (response) {
-      singleEyeReport![currentLevel!] = currentLevelUserResponses!;
 
-      if (currentIndex! + 1 == level!.totalQuestions) {
-        currentLevel = currentLevel! + 1;
-        if (currentLevel! > maxLevel) {
-          isGameOver = true;
-          eyesFinalReport[currentEye!] = singleEyeReport!;
-          currentLevel = maxLevel;
-        }
-
-        currentIndex = 0;
-        isRetry = false;
-
-        totalWrongLevelResponse = 0;
-
-        currentLevelUserResponses = [];
-        level = _dataSource.getLevel(currentLevel!, gameMode!);
-      } else {
-        currentIndex = currentIndex! + 1;
-      }
+    if (isUserSwipeCorrect) {
+      _handleRightResponse(userResponse);
     } else {
-      // here you exit from regular mode
-      totalWrongLevelResponse = totalWrongLevelResponse! + 1;
-      if (currentLevel == 0) {
-        isGameOver = true;
-        eyesFinalReport[currentEye!] = singleEyeReport!;
-      }
-
-      if (userResponse.mode == GameMode.regular) {
-        isRetry = true;
-        gameMode = GameMode.isFive;
-        if (currentLevel! > 0) {
-          currentLevel = currentLevel! - 1;
-          _dataSource.resetDataSource();
-        }
-        currentIndex = 0;
-        singleEyeReport![currentLevel!] = currentLevelUserResponses!;
-        currentLevelUserResponses = [];
-        level = _dataSource.getLevel(currentLevel!, gameMode!);
-      } else if (userResponse.mode == GameMode.isFive) {
-        if (isRetry!) {
-          isGameOver = true;
-          eyesFinalReport[currentEye!] = singleEyeReport!;
-        } else {
-          if (totalWrongLevelResponse == 2) {
-            isRetry = true;
-            currentLevel = currentLevel! - 1;
-            _dataSource.resetDataSource();
-            currentIndex = 0;
-            singleEyeReport![currentLevel!] = currentLevelUserResponses!;
-            currentLevelUserResponses = [];
-            level = _dataSource.getLevel(currentLevel!, gameMode!);
-          } else {
-            currentIndex = currentIndex! + 1;
-          }
-        }
-      }
+      _handleWrongResponse(userResponse);
     }
     logger.d({
       'currentIndex': currentIndex,
       'currentLevel': currentLevel,
       'isGameOver': isGameOver,
       'gameMode': gameMode,
+      'totalWrongLevelResponse': totalWrongLevelResponse,
       "questionLength": level!.totalQuestions,
+      "singleEyeReport": singleEyeReport,
+      "eyesFinalReport": eyesFinalReport,
     });
 
     notifyListeners();
   }
 
-  bool _isUserSwipDirectionCorrect(
+  void _handleRightResponse(UserResponse userResponse) {
+    singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+
+    if (currentIndex! + 1 == level!.totalQuestions) {
+      currentLevel = currentLevel! + 1;
+      if (currentLevel! > maxLevel) {
+        isGameOver = true;
+        eyesFinalReport[currentEye!] = singleEyeReport!;
+        currentLevel = maxLevel;
+      }
+      currentIndex = 0;
+      totalWrongLevelResponse = 0;
+      currentLevelUserResponses = [];
+      level = _dataSource.getLevel(currentLevel!, gameMode!);
+    } else {
+      currentIndex = currentIndex! + 1;
+    }
+  }
+
+  void _handleWrongResponse(UserResponse userResponse) {
+    totalWrongLevelResponse = totalWrongLevelResponse! + 1;
+    if (currentLevel == 0 && gameMode == GameMode.regular) {
+      isGameOver = true;
+      eyesFinalReport[currentEye!] = singleEyeReport!;
+    }
+    if (userResponse.mode == GameMode.regular) {
+      gameMode = GameMode.isFive;
+      if (currentLevel! > 0) {
+        currentLevel = currentLevel! - 1;
+        _dataSource.resetDataSource();
+      }
+      currentIndex = 0;
+      singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+      currentLevelUserResponses = [];
+      level = _dataSource.getLevel(currentLevel!, gameMode!);
+    } else if (userResponse.mode == GameMode.isFive) {
+      if (totalWrongLevelResponse == 4) {
+        isGameOver = true;
+
+        _dataSource.resetDataSource();
+        currentIndex = 0;
+        singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+        eyesFinalReport[currentEye!] = singleEyeReport!;
+        currentLevelUserResponses = [];
+        level = _dataSource.getLevel(currentLevel!, gameMode!);
+      } else {
+        currentIndex = currentIndex! + 1;
+      }
+    }
+  }
+
+  bool _isUserSwipeDirectionCorrect(
     QuestionDirection userSwipDirection,
     QuestionDirection questionDirection,
   ) {
