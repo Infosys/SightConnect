@@ -158,6 +158,8 @@ class TriageEyeScanDialog {
                       return TextButton(
                         onPressed: () {
                           ref.read(patientTriageStepperProvider).nextStep(3);
+                          ref.read(currentEyeProvider.notifier).state =
+                              TriageEye.RIGHT_EYE;
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>

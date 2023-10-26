@@ -139,8 +139,8 @@ class _PatientEyeCaptureTriagePageState
             ],
           ),
           actions: [
-            IconButton(
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 _toggleFlash();
               },
               icon: Icon(
