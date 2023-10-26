@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/patient_triage_eye_scan_provider.dart';
@@ -72,7 +73,7 @@ class _PatientEyeCaptureTriagePageState
         (element) => element.lensDirection == CameraLensDirection.front);
     cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.medium,
+      ResolutionPreset.max,
     );
     await cameraController.initialize();
     setState(() {
@@ -95,8 +96,7 @@ class _PatientEyeCaptureTriagePageState
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
-            content:
-                AppLocalizations.of(context)!.eyeScanExitDialog,
+            content: AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
         return result ?? false;
@@ -153,14 +153,14 @@ class _PatientEyeCaptureTriagePageState
             ],
           ),
           actions: [
-            IconButton(
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 _toggleFlash();
               },
-              icon: Icon(
+              child: SvgPicture.asset(
                 cameraController.value.flashMode == FlashMode.off
-                    ? Icons.flash_off_outlined
-                    : Icons.flash_on_outlined,
+                    ? AppIcon.flash_on
+                    : AppIcon.flash_on,
                 color: AppColor.white,
               ),
             ),
