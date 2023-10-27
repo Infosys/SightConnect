@@ -22,6 +22,9 @@ class OptionGrid extends ConsumerStatefulWidget {
   final List<Question> question;
   final Function(int)? onTap;
 
+  // final TextEditingController remarksController = useTextEditingController();
+// bool isBottomSheetOpen = false;
+
   @override
   _OptionGridState createState() => _OptionGridState();
 }
