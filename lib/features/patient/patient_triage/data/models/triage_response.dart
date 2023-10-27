@@ -14,6 +14,7 @@ class TriageResponse with _$TriageResponse {
     @TimestampConverter() DateTime? assessmentStartTime,
     @TimestampConverter() DateTime? assessmentEndTime,
     String? capturedBy,
+    String? questionnaireRemarks,
     List<QuestionResponse>? questionResponse,
     List<Observation>? observations,
     List<MediaCapture>? mediaCapture,

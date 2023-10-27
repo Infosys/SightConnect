@@ -36,6 +36,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
         return result ?? false;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         key: scaffoldKey,
         drawer: const PatientTriageStepsDrawer(),
         appBar: CustomAppbar(
@@ -120,6 +121,12 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                           ref
                               .read(patientTriageQuestionnaireProvider)
                               .setSelectedOptions(ref.read(resProvider));
+                          if (index != 0) {
+                            ref
+                                .read(patientTriageQuestionnaireProvider)
+                                .setquestionnaireRemarks(
+                                    ref.read(remarksProvider));
+                          }
                           if (index == 2) {
                             ref
                                 .read(patientTriageQuestionnaireProvider)

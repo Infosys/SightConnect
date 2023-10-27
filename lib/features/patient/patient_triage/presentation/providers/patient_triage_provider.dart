@@ -47,6 +47,8 @@ class PatientTriageProvider extends ChangeNotifier {
       questionResponse: _getQuestionaireResponse(),
       mediaCapture: _getTriageEyeScanResponse(),
       observations: _getVisionAcuityTumblingResponse(),
+      questionnaireRemarks: _getQuestionaireRemarks(),
+          
     );
     var response = await ref.read(triageRepositoryProvider).saveTriage(
           triage: triageresponse,
@@ -58,6 +60,12 @@ class PatientTriageProvider extends ChangeNotifier {
       },
       (triageResponse) => logger.d("Final Triage Response:  $triageResponse"),
     );
+  }
+ 
+  String _getQuestionaireRemarks() {
+    String remarks = ref.read(patientTriageQuestionnaireProvider).questionnaireRemarks;
+    logger.d(remarks);
+    return remarks;
   }
 
   /// set patient vision acuity tumbling based on the TriageAssessment model
@@ -91,6 +99,7 @@ class PatientTriageProvider extends ChangeNotifier {
           questionCode: int.parse('3000000${i + 1}'),
           response: selectedOptions[i]));
     }
+
 
     logger.d(questionResponseList);
     return questionResponseList;

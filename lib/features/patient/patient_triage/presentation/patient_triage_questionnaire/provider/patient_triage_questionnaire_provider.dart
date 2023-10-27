@@ -6,9 +6,22 @@ var patientTriageQuestionnaireProvider = ChangeNotifierProvider(
   (ref) => PatientTriageQuestionnaireProvider(),
 );
 
+String remarks = '';
+var remarksProvider = StateProvider<String>((ref) => remarks);
+
 class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   final List<bool> _selectedOptions = [];
   List<Map<String, dynamic>> questionResponse = [];
+
+  String _questionnaireRemarks = '';
+
+  String get questionnaireRemarks => _questionnaireRemarks;
+
+  void setquestionnaireRemarks(String remarks) {
+    _questionnaireRemarks = '$_questionnaireRemarks/$remarks';
+    logger.d('\n\nremarks: $_questionnaireRemarks\n\n');
+    notifyListeners();
+  }
 
   void setSelectedOptions(List<bool> options) {
     _selectedOptions.addAll(options);
@@ -27,6 +40,7 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
     }
     notifyListeners();
     logger.d('\n\nquestionResponse: $questionResponse\n\n');
+    logger.d('\n\nremarks: $questionnaireRemarks\n\n');
   }
 
   List<bool> get selectedOptions => _selectedOptions;

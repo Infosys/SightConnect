@@ -17,6 +17,7 @@ _$_TriageResponse _$$_TriageResponseFromJson(Map<String, dynamic> json) =>
       assessmentEndTime: const TimestampConverter()
           .fromJson(json['assessmentEndTime'] as String?),
       capturedBy: json['capturedBy'] as String?,
+      questionnaireRemarks: json['questionnaireRemarks'] as String?,
       questionResponse: (json['questionResponse'] as List<dynamic>?)
           ?.map((e) => QuestionResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -39,6 +40,7 @@ Map<String, dynamic> _$$_TriageResponseToJson(_$_TriageResponse instance) =>
       'assessmentEndTime':
           const TimestampConverter().toJson(instance.assessmentEndTime),
       'capturedBy': instance.capturedBy,
+      'questionnaireRemarks': instance.questionnaireRemarks,
       'questionResponse':
           instance.questionResponse?.map((e) => e.toJson()).toList(),
       'observations': instance.observations?.map((e) => e.toJson()).toList(),

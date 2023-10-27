@@ -31,7 +31,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
   @override
   Future<TriageResponse> saveTriage({required TriageResponse triage}) async {
-    var endpoint = "/patient-responses";
+    var endpoint = "/api/patient-responses";
     logger.d({
       "API saveTriage": triage.toJson(),
     });

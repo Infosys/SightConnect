@@ -29,6 +29,7 @@ mixin _$TriageResponse {
   @TimestampConverter()
   DateTime? get assessmentEndTime => throw _privateConstructorUsedError;
   String? get capturedBy => throw _privateConstructorUsedError;
+  String? get questionnaireRemarks => throw _privateConstructorUsedError;
   List<QuestionResponse>? get questionResponse =>
       throw _privateConstructorUsedError;
   List<Observation>? get observations => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $TriageResponseCopyWith<$Res> {
       @TimestampConverter() DateTime? assessmentStartTime,
       @TimestampConverter() DateTime? assessmentEndTime,
       String? capturedBy,
+      String? questionnaireRemarks,
       List<QuestionResponse>? questionResponse,
       List<Observation>? observations,
       List<MediaCapture>? mediaCapture});
@@ -79,6 +81,7 @@ class _$TriageResponseCopyWithImpl<$Res, $Val extends TriageResponse>
     Object? assessmentStartTime = freezed,
     Object? assessmentEndTime = freezed,
     Object? capturedBy = freezed,
+    Object? questionnaireRemarks = freezed,
     Object? questionResponse = freezed,
     Object? observations = freezed,
     Object? mediaCapture = freezed,
@@ -112,6 +115,10 @@ class _$TriageResponseCopyWithImpl<$Res, $Val extends TriageResponse>
           ? _value.capturedBy
           : capturedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      questionnaireRemarks: freezed == questionnaireRemarks
+          ? _value.questionnaireRemarks
+          : questionnaireRemarks // ignore: cast_nullable_to_non_nullable
+              as String?,
       questionResponse: freezed == questionResponse
           ? _value.questionResponse
           : questionResponse // ignore: cast_nullable_to_non_nullable
@@ -144,6 +151,7 @@ abstract class _$$_TriageResponseCopyWith<$Res>
       @TimestampConverter() DateTime? assessmentStartTime,
       @TimestampConverter() DateTime? assessmentEndTime,
       String? capturedBy,
+      String? questionnaireRemarks,
       List<QuestionResponse>? questionResponse,
       List<Observation>? observations,
       List<MediaCapture>? mediaCapture});
@@ -167,6 +175,7 @@ class __$$_TriageResponseCopyWithImpl<$Res>
     Object? assessmentStartTime = freezed,
     Object? assessmentEndTime = freezed,
     Object? capturedBy = freezed,
+    Object? questionnaireRemarks = freezed,
     Object? questionResponse = freezed,
     Object? observations = freezed,
     Object? mediaCapture = freezed,
@@ -200,6 +209,10 @@ class __$$_TriageResponseCopyWithImpl<$Res>
           ? _value.capturedBy
           : capturedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      questionnaireRemarks: freezed == questionnaireRemarks
+          ? _value.questionnaireRemarks
+          : questionnaireRemarks // ignore: cast_nullable_to_non_nullable
+              as String?,
       questionResponse: freezed == questionResponse
           ? _value._questionResponse
           : questionResponse // ignore: cast_nullable_to_non_nullable
@@ -228,6 +241,7 @@ class _$_TriageResponse implements _TriageResponse {
       @TimestampConverter() this.assessmentStartTime,
       @TimestampConverter() this.assessmentEndTime,
       this.capturedBy,
+      this.questionnaireRemarks,
       final List<QuestionResponse>? questionResponse,
       final List<Observation>? observations,
       final List<MediaCapture>? mediaCapture})
@@ -254,6 +268,8 @@ class _$_TriageResponse implements _TriageResponse {
   final DateTime? assessmentEndTime;
   @override
   final String? capturedBy;
+  @override
+  final String? questionnaireRemarks;
   final List<QuestionResponse>? _questionResponse;
   @override
   List<QuestionResponse>? get questionResponse {
@@ -287,7 +303,7 @@ class _$_TriageResponse implements _TriageResponse {
 
   @override
   String toString() {
-    return 'TriageResponse(patientId: $patientId, source: $source, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, capturedBy: $capturedBy, questionResponse: $questionResponse, observations: $observations, mediaCapture: $mediaCapture)';
+    return 'TriageResponse(patientId: $patientId, source: $source, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, capturedBy: $capturedBy, questionnaireRemarks: $questionnaireRemarks, questionResponse: $questionResponse, observations: $observations, mediaCapture: $mediaCapture)';
   }
 
   @override
@@ -308,6 +324,8 @@ class _$_TriageResponse implements _TriageResponse {
                 other.assessmentEndTime == assessmentEndTime) &&
             (identical(other.capturedBy, capturedBy) ||
                 other.capturedBy == capturedBy) &&
+            (identical(other.questionnaireRemarks, questionnaireRemarks) ||
+                other.questionnaireRemarks == questionnaireRemarks) &&
             const DeepCollectionEquality()
                 .equals(other._questionResponse, _questionResponse) &&
             const DeepCollectionEquality()
@@ -327,6 +345,7 @@ class _$_TriageResponse implements _TriageResponse {
       assessmentStartTime,
       assessmentEndTime,
       capturedBy,
+      questionnaireRemarks,
       const DeepCollectionEquality().hash(_questionResponse),
       const DeepCollectionEquality().hash(_observations),
       const DeepCollectionEquality().hash(_mediaCapture));
@@ -354,6 +373,7 @@ abstract class _TriageResponse implements TriageResponse {
       @TimestampConverter() final DateTime? assessmentStartTime,
       @TimestampConverter() final DateTime? assessmentEndTime,
       final String? capturedBy,
+      final String? questionnaireRemarks,
       final List<QuestionResponse>? questionResponse,
       final List<Observation>? observations,
       final List<MediaCapture>? mediaCapture}) = _$_TriageResponse;
@@ -377,6 +397,8 @@ abstract class _TriageResponse implements TriageResponse {
   DateTime? get assessmentEndTime;
   @override
   String? get capturedBy;
+  @override
+  String? get questionnaireRemarks;
   @override
   List<QuestionResponse>? get questionResponse;
   @override

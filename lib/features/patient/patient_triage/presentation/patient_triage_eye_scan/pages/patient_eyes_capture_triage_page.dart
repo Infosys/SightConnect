@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/pages/patient_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/widget/patient_triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_result/pages/patient_triage_result_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -288,6 +289,7 @@ class _PatientEyeCaptureTriagePageState
           ref.read(patientTriageEyeScanProvider).setLeftEyeImage(verifiedImage);
           ref.read(patientTriageStepperProvider).nextStep(3);
           ref.read(currentEyeProvider.notifier).state = TriageEye.RIGHT_EYE;
+          ref.read(patientTriageProvider).saveTriage();
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const PatientTriageResultPage(),
