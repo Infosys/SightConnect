@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/pages/triage_steps_intro_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/vision_guardian_add_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -202,6 +203,7 @@ class VisionGuardianAddPatientPage extends ConsumerWidget {
                           ),
                           TextField(
                             keyboardType: TextInputType.name,
+                            readOnly: true,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 10,
@@ -233,7 +235,14 @@ class VisionGuardianAddPatientPage extends ConsumerWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.klpadding),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const TriageStepsIntroPage(),
+              ),
+            );
+          },
           child: const Text(
             'Start In-app Test',
           ),
