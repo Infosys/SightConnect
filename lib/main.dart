@@ -11,10 +11,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // transparent status bar
-  ));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.transparent, // transparent status bar
+  // ));
   runApp(
     const ProviderScope(
       child: MyApp(),
