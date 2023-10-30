@@ -62,83 +62,105 @@ class VisionGuardianAddPatientPage extends ConsumerWidget {
                     const SizedBox(
                       height: AppSize.klheight,
                     ),
-                    Column(
-                      children: model.searchPatientList
-                          .map((e) => Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSize.kmradius)),
-                                child: ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text(
-                                        e.id!,
-                                        style: applyRobotoFont(
-                                            fontSize: 14,
-                                            color: AppColor.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "  ${e.gender!} ${e.age!}",
-                                        style: applyRobotoFont(
-                                          fontSize: 12,
-                                          color: AppColor.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  trailing: Chip(
-                                    padding: const EdgeInsets.all(0),
-                                    backgroundColor: e.status == Status.complete
-                                        ? AppColor.green
-                                        : AppColor.orange,
-                                    label: e.status == Status.complete
-                                        ? const Text(
-                                            "Completed",
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              color: AppColor.white,
-                                            ),
-                                          )
-                                        : const Text(
-                                            "Pending",
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              color: AppColor.white,
-                                            ),
-                                          ),
-                                  ),
-                                  subtitle: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: AppSize.klpadding),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Start In-app Test",
-                                          style: applyRobotoFont(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColor.grey,
-                                          ),
-                                        ),
-                                        Text("Physical Test Data",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: e.status == Status.complete
-                                                  ? AppColor.grey
-                                                  : AppColor.primary,
-                                            )),
-                                        const SizedBox(),
-                                      ],
-                                    ),
-                                  ),
+                    model.searchPatientList.isEmpty
+                        ? Column(
+                            children: [
+                              Image(
+                                width: AppSize.width(context) * 0.5,
+                                image: const AssetImage(
+                                    "assets/images/search empty.png"),
+                              ),
+                              const SizedBox(
+                                height: AppSize.klheight,
+                              ),
+                              Text(
+                                "Sorry we couldn’t find any matches.\n Please try searching with other ID.",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.grey,
                                 ),
-                              ))
-                          .toList(),
-                    )
+                              ),
+                            ],
+                          )
+                        : Column(
+                            children: model.searchPatientList
+                                .map((e) => Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              AppSize.kmradius)),
+                                      child: ListTile(
+                                        title: Row(
+                                          children: [
+                                            Text(
+                                              e.id!,
+                                              style: applyRobotoFont(
+                                                  fontSize: 14,
+                                                  color: AppColor.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              "  ${e.gender!} ${e.age!}",
+                                              style: applyRobotoFont(
+                                                fontSize: 12,
+                                                color: AppColor.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        trailing: Chip(
+                                          padding: const EdgeInsets.all(0),
+                                          backgroundColor:
+                                              e.status == Status.complete
+                                                  ? AppColor.green
+                                                  : AppColor.orange,
+                                          label: e.status == Status.complete
+                                              ? const Text(
+                                                  "Completed",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: AppColor.white,
+                                                  ),
+                                                )
+                                              : const Text(
+                                                  "Pending",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: AppColor.white,
+                                                  ),
+                                                ),
+                                        ),
+                                        subtitle: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: AppSize.klpadding),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                "Start In-app Test",
+                                                style: applyRobotoFont(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColor.grey,
+                                                ),
+                                              ),
+                                              Text("Physical Test Data",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: e.status ==
+                                                            Status.complete
+                                                        ? AppColor.grey
+                                                        : AppColor.primary,
+                                                  )),
+                                              const SizedBox(),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          )
                   ],
                 ),
               )
