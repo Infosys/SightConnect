@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_add_optometric_data.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_add_patient_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -141,32 +142,39 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                     const SizedBox(height: AppSize.kmheight),
                     Card(
                       elevation: 2,
-                      //give the card rounded corners
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           AppSize.ksradius,
                         ),
                       ),
-                      child: ListTile(
-                        tileColor: AppColor.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            AppSize.kmradius,
+                      child: InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VgAddOptoData(),
+                              fullscreenDialog: true,
+                            )),
+                        child: ListTile(
+                          tileColor: AppColor.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppSize.kmradius,
+                            ),
                           ),
-                        ),
-                        title: Text(
-                          "OP 12345670",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                          title: Text(
+                            "OP 12345670",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        trailing: Text(
-                          "Diploma",
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                            fontWeight: FontWeight.w400,
+                          trailing: Text(
+                            "Diploma",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),
