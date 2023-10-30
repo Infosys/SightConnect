@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -65,22 +66,34 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/logo/logo.svg',
-                        height: 80,
-                        width: 80,
-                        color: AppColor.white,
-                      ),
-                      Text(
-                        'Eye Care For All',
-                        style: applyFiraSansFont(
-                          color: Colors.white,
-                          fontSize: 18,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.white,
+                          ),
+                          child: SvgPicture.asset(
+                            AppIcon.logo,
+                            height: 20,
+                            width: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: AppSize.kmpadding,
+                        ),
+                        Text(
+                          'Eye Care For All',
+                          style: applyFiraSansFont(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: Image.asset('assets/images/login.png'),

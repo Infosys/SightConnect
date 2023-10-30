@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_member_selection/pages/triage_steps_intro_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/pages/patient_triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/vision_guardian_add_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -239,7 +240,7 @@ class VisionGuardianAddPatientPage extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const TriageStepsIntroPage(),
+                builder: (context) => const PatientTriageQuestionnairePage(),
               ),
             );
           },
