@@ -41,6 +41,7 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
 
   @override
   Widget build(BuildContext context) {
+    var selectedData = ref.watch(resProvider);
     void showBottomSheet() {
       showModalBottomSheet(
         context: context,
@@ -112,35 +113,35 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
         return InkWell(
           onTap: () {
             if (widget.pageIndex == 0) {
-              if (selectedStates[index]) {
-                selectedStates[index] = false;
+              if (selectedData[index]) {
+                selectedData[index] = false;
               } else {
-                for (int i = 0; i < selectedStates.length; i++) {
-                  selectedStates[i] = (i == index);
+                for (int i = 0; i < selectedData.length; i++) {
+                  selectedData[i] = (i == index);
                 }
               }
             } else if (widget.pageIndex == 1 || widget.pageIndex == 2) {
               if (index == widget.question.length - 1) {
-                if (!selectedStates[index]) {
+                if (!selectedData[index]) {
                   setState(() {
                     isBottomSheetOpen = true;
                   });
                   showBottomSheet();
-                  selectedStates[index] = true;
+                  selectedData[index] = true;
                 } else {
-                  selectedStates[index] = false;
+                  selectedData[index] = false;
                   ref.read(remarksProvider.notifier).state = '';
                 }
               } else {
-                selectedStates[index] = !selectedStates[index];
+                selectedData[index] = !selectedData[index];
               }
             } else {
-              selectedStates[index] = !selectedStates[index];
+              selectedData[index] = !selectedData[index];
             }
 
             widget.onTap?.call(index);
             setState(() {
-              logger.d('\n\n$selectedStates\n\n');
+              logger.d('\n\n$selectedData\n\n');
             });
           },
           child: Container(
@@ -148,7 +149,7 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
-                color: selectedStates[index]
+                color: selectedData[index]
                     ? AppColor.primary
                     : AppColor.grey.withOpacity(0.5),
                 width: 1,
@@ -170,22 +171,5 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    remarksController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant OptionGrid oldWidget) {
-    if (oldWidget.question != widget.question) {
-      selectedStates.clear();
-      for (int i = 0; i < widget.question.length; i++) {
-        selectedStates.add(false);
-      }
-    }
-    super.didUpdateWidget(oldWidget);
   }
 }

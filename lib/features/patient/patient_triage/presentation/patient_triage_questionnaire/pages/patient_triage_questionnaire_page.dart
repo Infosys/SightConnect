@@ -25,6 +25,8 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
     var questionnaireSections =
         ref.watch(patientTriageProvider).questionnaireSections;
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    var isEmpty = useState(ref.watch(resProvider));
+    
     return WillPopScope(
       onWillPop: () async {
         var result = await showDialog(
@@ -117,38 +119,43 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          ref
-                              .read(patientTriageQuestionnaireProvider)
-                              .setSelectedOptions(ref.read(resProvider));
-                          if (index != 0) {
-                            ref
-                                .read(patientTriageQuestionnaireProvider)
-                                .setquestionnaireRemarks(
-                                    ref.read(remarksProvider));
-                          }
-                          if (index == 2) {
-                            ref
-                                .read(patientTriageQuestionnaireProvider)
-                                .setQuestionaireResponse();
+                        onPressed: isEmpty.value.isEmpty
+                            ? null
+                            : () {
+                                ref
+                                    .read(patientTriageQuestionnaireProvider)
+                                    .setSelectedOptions(ref.read(resProvider));
+                                if (index != 0) {
+                                  ref
+                                      .read(patientTriageQuestionnaireProvider)
+                                      .setquestionnaireRemarks(
+                                          ref.read(remarksProvider));
+                                }
+                                if (index == 2) {
+                                  ref
+                                      .read(patientTriageQuestionnaireProvider)
+                                      .setQuestionaireResponse();
 
-                            ref.read(toggleTumblingResultPage.notifier).state =
-                                false;
+                                  ref
+                                      .read(toggleTumblingResultPage.notifier)
+                                      .state = false;
 
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const PatientVisualAcuityInstructionalVideoPage(),
-                              ),
-                            );
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PatientVisualAcuityInstructionalVideoPage(),
+                                    ),
+                                  );
 
-                            ref.read(patientTriageStepperProvider).nextStep(1);
-                          }
-                          pageController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        },
+                                  ref
+                                      .read(patientTriageStepperProvider)
+                                      .nextStep(1);
+                                }
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              },
                         child: Text(
                           questionnaireSections.length - 1 == index
                               ? AppLocalizations.of(context)!.proceedButton
