@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_add_optometric_data.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_add_patient_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_search_patient.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -15,202 +17,226 @@ class VisionGuardianDashboardPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       extendBody: true,
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: 300,
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSize.kmpadding),
-              decoration: const BoxDecoration(
-                color: AppColor.primary,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(AppSize.klradius),
-                  bottomRight: Radius.circular(AppSize.klradius),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            height: 300,
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSize.kmpadding),
+            decoration: const BoxDecoration(
+              color: AppColor.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(AppSize.klradius),
+                bottomRight: Radius.circular(AppSize.klradius),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
+          ),
+          Container(
+            padding: const EdgeInsets.all(AppSize.kmpadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: AppSize.klheight * 1.2),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColor.white,
+                      ),
+                      child: SvgPicture.asset(
+                        AppIcon.logo,
+                        height: 20,
+                        width: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: AppSize.kmwidth,
+                    ),
+                    Text(
+                      'Optometric Validation',
+                      style: applyFiraSansFont(
+                        color: AppColor.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSize.klheight * 1.4),
+                Text(
+                  "Welcome back",
+                  style: applyFiraSansFont(
+                    color: AppColor.scaffold,
+                    fontSize: 28,
+                  ),
+                ),
+                Text(
+                  "Anne Mathew",
+                  style: applyFiraSansFont(
+                    color: AppColor.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 28,
+                  ),
+                ),
+                const SizedBox(height: AppSize.klheight),
+                Text(
+                  "Let's get started",
+                  style: applyFiraSansFont(
+                    fontSize: 14,
+                    color: AppColor.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: AppSize.klheight * 1.2),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.white,
-                        ),
-                        child: SvgPicture.asset(
-                          AppIcon.logo,
-                          height: 20,
-                          width: 20,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: AppSize.kmwidth,
-                      ),
-                      Text(
-                        'Optometric Validation',
-                        style: applyFiraSansFont(
-                          color: AppColor.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.klheight * 1.4),
-                  Text(
-                    "Welcome back",
-                    style: applyFiraSansFont(
-                      color: AppColor.scaffold,
-                      fontSize: 28,
-                    ),
-                  ),
-                  Text(
-                    "Anne Mathew",
-                    style: applyFiraSansFont(
-                      color: AppColor.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 28,
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppSize.width(context) * 0.09),
+                    margin: const EdgeInsets.only(top: 250),
+                    width: AppSize.width(context),
+                    child: const InfoCardOptometric(
+                      "Completed tests",
+                      "2,000",
+                      "2,480",
+                      "This month",
+                      "120",
+                      "148",
+                      "Today",
                     ),
                   ),
                   const SizedBox(height: AppSize.klheight),
-                  Text(
-                    "Have a nice day",
-                    style: applyFiraSansFont(
-                      fontSize: 14,
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kspadding,
+                        vertical: AppSize.kselevation),
+                    decoration: BoxDecoration(
                       color: AppColor.white,
+                      borderRadius: BorderRadius.circular(
+                        AppSize.kmradius,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColor.primary.withOpacity(0.1),
+                          spreadRadius: 10,
+                          blurRadius: 20,
+                          offset: const Offset(0, 0),
+                        )
+                      ],
                     ),
-                  )
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(AppImages.addPatient),
+                        const SizedBox(width: AppSize.kmwidth),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Add patient details for a quick in-app eye test",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: AppSize.kmheight),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OptometricianAddPatientPage()));
+                                },
+                                child: Text(
+                                  "Add New Patient   ",
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.primary,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.klheight),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kspadding,
+                        vertical: AppSize.kselevation),
+                    decoration: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.circular(
+                        AppSize.kmradius,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColor.primary.withOpacity(0.1),
+                          spreadRadius: 10,
+                          blurRadius: 20,
+                          offset: const Offset(0, 0),
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(AppImages.searchPatient),
+                        const SizedBox(width: AppSize.kmwidth),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "You can search for a patient ID and add details to start in-app eye test.",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: AppSize.kmheight),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VisionGuardianSearchPatientPage()));
+                                },
+                                child: Text(
+                                  "Search Patient   ",
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.primary,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  const BrandingWidgetH(),
+                  const SizedBox(height: AppSize.kmheight),
                 ],
               ),
             ),
-            Positioned(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 255),
-                      width: AppSize.width(context),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: InfoCardOptometric(
-                              "Completed tests",
-                              "2.5k",
-                              "2.8k",
-                              "This month",
-                              "20",
-                              "40",
-                              "Today",
-                            ),
-                          ),
-                          SizedBox(
-                            width: AppSize.kswidth,
-                          ),
-                          Flexible(
-                            child: InfoCardOptometric(
-                              "Pending tests",
-                              "08",
-                              "40",
-                              "Physical",
-                              "12",
-                              "40",
-                              "in-app",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.klheight),
-                    const Text(
-                      "Your Patients",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.kmheight),
-                    Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppSize.ksradius,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const VgAddOptoData(),
-                              fullscreenDialog: true,
-                            )),
-                        child: ListTile(
-                          tileColor: AppColor.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              AppSize.kmradius,
-                            ),
-                          ),
-                          title: Text(
-                            "OP 12345670",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          trailing: Text(
-                            "Diploma",
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const VisionGuardianAddPatientPage(),
-                fullscreenDialog: true,
-              ));
-        },
-        backgroundColor: AppColor.yellow,
-        label: const Text(
-          "Patient ID",
-          style: TextStyle(
-            color: AppColor.black,
-          ),
-        ),
-        icon: const Icon(
-          Icons.add,
-          color: AppColor.black,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            AppSize.ksradius,
-          ),
-        ),
+          )
+        ],
       ),
     );
   }
@@ -238,14 +264,12 @@ class InfoCardOptometric extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(
-        maxHeight: 100,
-      ),
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation),
       decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.9),
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppSize.ksradius),
+            Radius.circular(AppSize.kmradius + 2),
           ),
           boxShadow: [
             BoxShadow(
@@ -256,37 +280,30 @@ class InfoCardOptometric extends StatelessWidget {
             )
           ]),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            titleLarge,
-            style: applyRobotoFont(
-              fontSize: 12,
-            ),
-          ),
-          Flexible(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Flexible(
-                  child: _BuildScore(
-                    firstValue,
-                    totalFirstValue,
-                    firstsubTitle,
-                  ),
+          const Text("Validation Index"),
+          const SizedBox(height: AppSize.ksheight),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: _BuildScore(
+                  firstValue,
+                  totalFirstValue,
+                  firstsubTitle,
                 ),
-                Flexible(
-                  child: _BuildScore(
-                    secondValue,
-                    totalSecondValue,
-                    secondsubTitle,
-                  ),
-                )
-              ],
-            ),
-          )
+              ),
+              Flexible(
+                child: _BuildScore(
+                  secondValue,
+                  totalSecondValue,
+                  secondsubTitle,
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

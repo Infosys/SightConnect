@@ -89,4 +89,9 @@ class AppImages {
   static const String termsOfUse = "assets/images/terms_of_use.png";
   static const String privacyPolicy = "assets/images/privacy_policy.svg";
   static const String helpAndSupport = "assets/images/help_and_support.svg";
+
+  //optometric dashboard
+
+  static const String searchPatient = "assets/images/optometric_search_patient.svg";
+  static const String addPatient = "assets/images/optometric_add_patient.svg";
 }

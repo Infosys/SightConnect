@@ -7,9 +7,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var resProvider = Provider<List<bool>>((ref) => selectedStates);
+var resProvider = StateProvider<List<bool>>((ref) => selectedStates);
 List<bool> selectedStates = [];
-
 
 class OptionGrid extends ConsumerStatefulWidget {
   const OptionGrid({

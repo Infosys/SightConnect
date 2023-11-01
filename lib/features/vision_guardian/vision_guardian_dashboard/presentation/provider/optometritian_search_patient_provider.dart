@@ -2,70 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var visionGuardianAddPatientProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => VisionGuardianAddPatientProvider(),
+  (ref) => OptometricianSearchPatientProvider(),
 );
 
-class VisionGuardianAddPatientProvider extends ChangeNotifier {
+class OptometricianSearchPatientProvider extends ChangeNotifier {
   final List<PatientModel> _patientList = [
     PatientModel(
       id: "OP 12345670",
-      gender: "Female",
-      age: " 16 years",
-      status: Status.pending,
+      education: "No Education",
+      employment: "Unemployed/Home duties",
     ),
     PatientModel(
       id: "OP 12345671",
-      gender: "Male",
-      age: " 18 years",
-      status: Status.complete,
+      education: "High School",
+      employment: "Skilled labour",
     ),
     PatientModel(
       id: "OP 12345672",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
+      education: "Advanced Studies",
+      employment: "Skilled labour",
     ),
     PatientModel(
       id: "OP 12345673",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
+      education: "Graduate",
+      employment: "Skilled labour",
     ),
     PatientModel(
       id: "OP 12345674",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
+      education: "High School",
+      employment: "Skilled labour",
     ),
     PatientModel(
       id: "OP 12345675",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
-    ),
-    PatientModel(
-      id: "OP 12345676",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
-    ),
-    PatientModel(
-      id: "OP 12345677",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
-    ),
-    PatientModel(
-      id: "OP 12345678",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
-    ),
-    PatientModel(
-      id: "OP 12345679",
-      gender: "Male",
-      age: " 20 years",
-      status: Status.complete,
+      education: "High School",
+      employment: "Skilled labour",
     ),
   ];
 
@@ -78,6 +48,8 @@ class VisionGuardianAddPatientProvider extends ChangeNotifier {
 
   List<PatientModel> get searchPatientList => _searchPatientList;
   bool get isSearching => _isSearching;
+  bool _isMatched = false;
+  bool get isMatched => _isMatched;
 
   void startSearch() {
     _searchPatientList.clear();
@@ -95,10 +67,16 @@ class VisionGuardianAddPatientProvider extends ChangeNotifier {
     _searchPatientList.clear();
     if (query.isEmpty) {
       _searchPatientList.clear();
+      _isSearching = false;
     } else {
       for (var patient in _patientList) {
         if (patient.id!.toLowerCase().contains(query.toLowerCase())) {
+          _isMatched = true;
+          _isSearching = true;
           _searchPatientList.add(patient);
+        } else {
+          _isMatched = false;
+          _isSearching = true;
         }
       }
     }
@@ -108,15 +86,13 @@ class VisionGuardianAddPatientProvider extends ChangeNotifier {
 
 class PatientModel {
   String? id;
-  String? gender;
-  String? age;
-  Status? status;
+  String? education;
+  String? employment;
 
   PatientModel({
     this.id,
-    this.gender,
-    this.age,
-    this.status,
+    this.education,
+    this.employment,
   });
 }
 
