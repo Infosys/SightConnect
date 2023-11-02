@@ -100,7 +100,8 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(
-                        horizontal: AppSize.width(context) * 0.09),
+                      horizontal: AppSize.width(context) * 0.09,
+                    ),
                     margin: const EdgeInsets.only(top: 250),
                     width: AppSize.width(context),
                     child: const InfoCardOptometric(
@@ -265,7 +266,7 @@ class InfoCardOptometric extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation),
+          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
       decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.9),
           borderRadius: const BorderRadius.all(
@@ -283,7 +284,6 @@ class InfoCardOptometric extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text("Validation Index"),
-          const SizedBox(height: AppSize.ksheight),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

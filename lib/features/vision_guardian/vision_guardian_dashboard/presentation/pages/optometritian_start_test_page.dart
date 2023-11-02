@@ -18,7 +18,9 @@ class OptometricianStartTestPage extends StatelessWidget {
         centerTitle: false,
         leadingIcon: InkWell(
           customBorder: const CircleBorder(),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pop();
+          },
           child: const Icon(CupertinoIcons.chevron_back),
         ),
         title: const Text("Let's Start your eye test"),

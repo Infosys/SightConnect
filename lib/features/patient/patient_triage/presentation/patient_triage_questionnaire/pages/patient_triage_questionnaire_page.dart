@@ -25,7 +25,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
     var questionnaireSections =
         ref.watch(patientTriageProvider).questionnaireSections;
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    var isEmpty = useState(ref.watch(resProvider));
+    // var isEmpty = useState(ref.watch(resProvider));
     
     return WillPopScope(
       onWillPop: () async {
@@ -119,9 +119,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        onPressed: isEmpty.value.isEmpty
-                            ? null
-                            : () {
+                        onPressed: () {
                                 ref
                                     .read(patientTriageQuestionnaireProvider)
                                     .setSelectedOptions(ref.read(resProvider));

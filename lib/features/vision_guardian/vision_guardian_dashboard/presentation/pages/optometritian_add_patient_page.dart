@@ -330,9 +330,6 @@ class OptometricianAddPatientPage extends HookWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            SizedBox(
-              height: AppSize.height(context) * 0.05,
-            ),
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -340,13 +337,27 @@ class OptometricianAddPatientPage extends HookWidget {
               color: AppColor.white,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30),
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Add Patient Information",
+                      style: applyRobotoFont(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     TextField(
                       controller: patientIdController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Patient ID",
+                        labelStyle: applyRobotoFont(
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -356,6 +367,9 @@ class OptometricianAddPatientPage extends HookWidget {
                       controller: educationalQualificationController,
                       decoration: InputDecoration(
                         labelText: "Educational Qualification",
+                        labelStyle: applyRobotoFont(
+                          fontSize: 14,
+                        ),
                         suffixIcon: IconButton(
                           icon: const Icon(CupertinoIcons.chevron_down),
                           onPressed: showEducationalQualificationBottomSheet,
@@ -369,6 +383,9 @@ class OptometricianAddPatientPage extends HookWidget {
                       controller: professionController,
                       decoration: InputDecoration(
                         labelText: "Profession",
+                        labelStyle: applyRobotoFont(
+                          fontSize: 14,
+                        ),
                         suffixIcon: IconButton(
                           icon: const Icon(CupertinoIcons.chevron_down),
                           onPressed: showProfessionBottomSheet,
