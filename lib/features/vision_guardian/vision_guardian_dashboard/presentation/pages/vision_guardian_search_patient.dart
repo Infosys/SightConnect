@@ -293,16 +293,16 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
                                   Text(
                                     "${e.education}",
                                     style: applyRobotoFont(
-                                        fontSize: 14,
-                                        color: AppColor.grey,
-                                        fontWeight: FontWeight.w400),
+                                      fontSize: 14,
+                                      color: AppColor.grey,
+                                    ),
                                   ),
                                   Text(
                                     "${e.employment}",
                                     style: applyRobotoFont(
-                                        fontSize: 14,
-                                        color: AppColor.grey,
-                                        fontWeight: FontWeight.w400),
+                                      fontSize: 14,
+                                      color: AppColor.grey,
+                                    ),
                                   ),
                                 ],
                               ),

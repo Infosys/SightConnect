@@ -415,6 +415,7 @@ class OptometricianAddPatientPage extends HookWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  // CupertinoSwitch(value: false, onChanged: (value) {}),
                   ToggleSliderButton(
                       width: 50,
                       height: 25,
