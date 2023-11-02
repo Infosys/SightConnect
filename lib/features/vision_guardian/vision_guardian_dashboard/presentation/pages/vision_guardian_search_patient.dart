@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,6 +17,7 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuardianAddPatientProvider);
     var isSelected = useState<int>(-1);
+    var isReport = useState<int>(-1);
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
@@ -232,68 +234,83 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
                     ],
                   )
                 : Column(
-                    children: model.searchPatientList
-                        .map(
-                          (e) => Container(
-                            padding: const EdgeInsets.all(AppSize.kspadding),
-                            margin: const EdgeInsets.only(
-                              bottom: AppSize.kspadding + 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColor.white,
-                              borderRadius: BorderRadius.circular(
-                                AppSize.ksradius,
+                    children:
+                        model.searchPatientList.asMap().entries.map((entry) {
+                      var e = entry.value;
+                      return InkWell(
+                        onTap: () {
+                          isReport.value = entry.key;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OptometritianReportPage(
+                                id: e.id!,
+                                education: e.education!,
+                                employment: e.employment!,
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${e.id}",
-                                      style: applyFiraSansFont(
-                                          fontSize: 16,
-                                          color: AppColor.black,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Text(
-                                      "2 mins ago",
-                                      style: applyRobotoFont(
-                                          fontSize: 10,
-                                          color: AppColor.black,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${e.education}",
-                                      style: applyRobotoFont(
-                                          fontSize: 14,
-                                          color: AppColor.grey,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    Text(
-                                      "${e.employment}",
-                                      style: applyRobotoFont(
-                                          fontSize: 14,
-                                          color: AppColor.grey,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(AppSize.kspadding),
+                          margin: const EdgeInsets.only(
+                            bottom: AppSize.kspadding + 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            borderRadius: BorderRadius.circular(
+                              AppSize.ksradius,
                             ),
                           ),
-                        )
-                        .toList(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${e.id}",
+                                    style: applyFiraSansFont(
+                                        fontSize: 16,
+                                        color: AppColor.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "2 mins ago",
+                                    style: applyRobotoFont(
+                                        fontSize: 10,
+                                        color: AppColor.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${e.education}",
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        color: AppColor.grey,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    "${e.employment}",
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        color: AppColor.grey,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   )
           ],
         ),
