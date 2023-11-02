@@ -100,7 +100,7 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.width(context) * 0.09,
+                      horizontal: AppSize.width(context) * 0.07,
                     ),
                     margin: const EdgeInsets.only(top: 250),
                     width: AppSize.width(context),
@@ -259,7 +259,10 @@ class InfoCardOptometric extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Validation Index"),
+          Text(
+            "Eye Assessments",
+            style: applyRobotoFont(fontSize: 12),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
