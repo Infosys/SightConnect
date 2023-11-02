@@ -318,7 +318,7 @@ class OptometricianAddPatientPage extends HookWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppbar(
-        title: const Text("Add Patient ID"),
+        title: const Text("Start Assessment"),
         centerTitle: false,
         leadingIcon: InkWell(
             onTap: () {
@@ -337,7 +337,7 @@ class OptometricianAddPatientPage extends HookWidget {
               color: AppColor.white,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -399,6 +399,30 @@ class OptometricianAddPatientPage extends HookWidget {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Does the Patient need assistance?",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  ToggleSliderButton(
+                      width: 50,
+                      height: 25,
+                      initialValue: false,
+                      onChanged: (value) {}),
+                ],
+              ),
+            ),
             const Spacer(),
             Row(
               children: [
@@ -411,7 +435,7 @@ class OptometricianAddPatientPage extends HookWidget {
                             builder: (context) =>
                                 const OptometricianStartTestPage()));
                       },
-                      child: const Text("Start In-App Test"),
+                      child: const Text("Start Assessment"),
                     ),
                   ),
                 ),
@@ -421,6 +445,78 @@ class OptometricianAddPatientPage extends HookWidget {
               height: 20,
             ),
             const BrandingWidgetH(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ToggleSliderButton extends StatefulWidget {
+  final double width;
+  final double height;
+  final bool initialValue;
+  final ValueChanged<bool> onChanged;
+
+  const ToggleSliderButton({
+    Key? key,
+    required this.width,
+    required this.height,
+    required this.initialValue,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _ToggleSliderButtonState createState() => _ToggleSliderButtonState();
+}
+
+class _ToggleSliderButtonState extends State<ToggleSliderButton> {
+  bool _value = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onPanUpdate: (details) {
+        setState(() {
+          _value = details.localPosition.dx >= widget.width / 2;
+        });
+        widget.onChanged(_value);
+      },
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(widget.height / 2),
+          color: _value ? AppColor.primary : AppColor.grey,
+        ),
+        child: Stack(
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              left: _value ? widget.width / 2 : 0,
+              child: Container(
+                width: widget.width / 2,
+                height: widget.height,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.white,
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: _value ? AppColor.primary : AppColor.grey,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

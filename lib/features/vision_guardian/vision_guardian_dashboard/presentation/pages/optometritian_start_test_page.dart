@@ -23,7 +23,7 @@ class OptometricianStartTestPage extends StatelessWidget {
           },
           child: const Icon(CupertinoIcons.chevron_back),
         ),
-        title: const Text("Let's Start your eye test"),
+        title: const Text("Let's Start Your Eye Assessment"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

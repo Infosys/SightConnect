@@ -8,40 +8,62 @@ var visionGuardianAddPatientProvider = ChangeNotifierProvider.autoDispose(
 class OptometricianSearchPatientProvider extends ChangeNotifier {
   final List<PatientModel> _patientList = [
     PatientModel(
-      id: "OP 12345670",
+      id: "PID 12345670",
       education: "No Education",
       employment: "Unemployed/Home duties",
     ),
     PatientModel(
-      id: "OP 12345671",
+      id: "PID 12345671",
       education: "High School",
       employment: "Skilled labour",
     ),
     PatientModel(
-      id: "OP 12345672",
+      id: "PID 12345672",
       education: "Advanced Studies",
       employment: "Skilled labour",
     ),
     PatientModel(
-      id: "OP 12345673",
+      id: "PID 12345673",
       education: "Graduate",
       employment: "Skilled labour",
     ),
     PatientModel(
-      id: "OP 12345674",
+      id: "PID 12345674",
       education: "High School",
       employment: "Skilled labour",
     ),
     PatientModel(
-      id: "OP 12345675",
+      id: "PID 12345675",
+      education: "High School",
+      employment: "Skilled labour",
+    ),
+    PatientModel(
+      id: "PID 12345676",
+      education: "High School",
+      employment: "Skilled labour",
+    ),
+    PatientModel(
+      id: "PID 12345677",
+      education: "High School",
+      employment: "Skilled labour",
+    ),
+    PatientModel(
+      id: "PID 12345678",
       education: "High School",
       employment: "Skilled labour",
     ),
   ];
 
-  List<PatientModel> get patientList => _patientList;
+  final List<String> _timeFrame = [
+    "Today",
+    "This Week",
+    "This Month",
+    "This Year",
+  ];
 
-  // patient Search
+  List<String> get timeFrame => _timeFrame;
+
+  List<PatientModel> get patientList => _patientList;
 
   final List<PatientModel> _searchPatientList = [];
   bool _isSearching = false;

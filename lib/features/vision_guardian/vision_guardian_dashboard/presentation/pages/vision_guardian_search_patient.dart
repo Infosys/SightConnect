@@ -3,21 +3,25 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionGuardianSearchPatientPage extends ConsumerWidget {
+class VisionGuardianSearchPatientPage extends HookConsumerWidget {
   const VisionGuardianSearchPatientPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuardianAddPatientProvider);
+    var isSelected = useState<int>(-1);
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: AppSize.height(context) * 0.05,
@@ -33,10 +37,14 @@ class VisionGuardianSearchPatientPage extends ConsumerWidget {
                       Navigator.pop(context);
                     });
                   },
-                  icon: const Icon(Icons.arrow_back_ios),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColor.black.withOpacity(0.7),
+                  ),
                 ),
                 Expanded(
                   child: Container(
+                    height: AppSize.height(context) * 0.05,
                     decoration: BoxDecoration(
                       color: AppColor.white,
                       borderRadius: BorderRadius.circular(
@@ -57,10 +65,10 @@ class VisionGuardianSearchPatientPage extends ConsumerWidget {
                           horizontal: 10,
                           vertical: 10,
                         ),
-                        hintText: "Find a patient by ID",
+                        hintText: " Search Patient ID",
                         hintStyle: TextStyle(
                           fontSize: 14,
-                          color: AppColor.black,
+                          color: AppColor.grey,
                         ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -80,7 +88,82 @@ class VisionGuardianSearchPatientPage extends ConsumerWidget {
               ],
             ),
             const SizedBox(
-              height: AppSize.klheight + 20,
+              height: AppSize.kmheight + 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: AppSize.height(context) * 0.04,
+                  width: AppSize.width(context) * 0.77,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: model.timeFrame.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var data = model.timeFrame[index];
+
+                      return InkWell(
+                        onTap: () {
+                          isSelected.value = index;
+                        },
+                        child: Container(
+                          margin:
+                              const EdgeInsets.only(right: AppSize.kspadding),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: isSelected.value == index
+                                  ? AppColor.blue
+                                  : AppColor.grey,
+                            ),
+                            color: isSelected.value == index
+                                ? const Color(0xFFC9DAFD)
+                                : AppColor.white,
+                            borderRadius: BorderRadius.circular(
+                              AppSize.ksradius,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              data,
+                              style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.black,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  height: AppSize.height(context) * 0.04,
+                  width: 1.5,
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+                const CircleAvatar(
+                  backgroundColor: AppColor.white,
+                  radius: 14,
+                  child: Icon(
+                    CupertinoIcons.calendar,
+                    size: 14,
+                    color: AppColor.grey,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: AppSize.klheight,
+            ),
+            Text(
+              "Recent Assessments",
+              style: applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(
+              height: AppSize.klheight,
             ),
             model.searchPatientList.isEmpty
                 ? Column(
@@ -150,76 +233,66 @@ class VisionGuardianSearchPatientPage extends ConsumerWidget {
                   )
                 : Column(
                     children: model.searchPatientList
-                        .map((e) => Container(
-                            padding: const EdgeInsets.all(AppSize.kmpadding),
+                        .map(
+                          (e) => Container(
+                            padding: const EdgeInsets.all(AppSize.kspadding),
                             margin: const EdgeInsets.only(
-                              bottom: AppSize.klpadding,
+                              bottom: AppSize.kspadding + 5,
                             ),
                             decoration: BoxDecoration(
                               color: AppColor.white,
                               borderRadius: BorderRadius.circular(
-                                AppSize.klradius,
+                                AppSize.ksradius,
                               ),
                             ),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("${e.id}"),
+                                    Text(
+                                      "${e.id}",
+                                      style: applyFiraSansFont(
+                                          fontSize: 16,
+                                          color: AppColor.black,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "2 mins ago",
+                                      style: applyRobotoFont(
+                                          fontSize: 10,
+                                          color: AppColor.black,
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                   ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SizedBox(
-                                      width: AppSize.width(context) * 0.35,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Education",
-                                            style: applyRobotoFont(
-                                                fontSize: 12,
-                                                color: AppColor.grey,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            "${e.education}",
-                                            style: applyRobotoFont(
-                                                fontSize: 14,
-                                                color: AppColor.black,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
+                                    Text(
+                                      "${e.education}",
+                                      style: applyRobotoFont(
+                                          fontSize: 14,
+                                          color: AppColor.grey,
+                                          fontWeight: FontWeight.w400),
                                     ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Employment",
-                                          style: applyRobotoFont(
-                                              fontSize: 12,
-                                              color: AppColor.grey,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          "${e.employment}",
-                                          style: applyRobotoFont(
-                                              fontSize: 14,
-                                              color: AppColor.black,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${e.employment}",
+                                      style: applyRobotoFont(
+                                          fontSize: 14,
+                                          color: AppColor.grey,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
-                            )))
+                            ),
+                          ),
+                        )
                         .toList(),
                   )
           ],

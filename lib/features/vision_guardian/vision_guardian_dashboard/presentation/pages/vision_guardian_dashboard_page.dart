@@ -115,120 +115,96 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppSize.klheight),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kspadding,
-                        vertical: AppSize.kselevation),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(
-                        AppSize.kmradius,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColor.primary.withOpacity(0.1),
-                          spreadRadius: 10,
-                          blurRadius: 20,
-                          offset: const Offset(0, 0),
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(AppImages.addPatient),
-                        const SizedBox(width: AppSize.kmwidth),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Add patient details for a quick in-app eye test",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(height: AppSize.kmheight),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          const OptometricianAddPatientPage()));
-                                },
-                                child: Text(
-                                  "Add New Patient   ",
-                                  style: applyRobotoFont(
-                                    fontSize: 12,
-                                    color: AppColor.primary,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  Text(
+                    "Services",
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: AppSize.klheight),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kspadding,
-                        vertical: AppSize.kselevation),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(
-                        AppSize.kmradius,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColor.primary.withOpacity(0.1),
-                          spreadRadius: 10,
-                          blurRadius: 20,
-                          offset: const Offset(0, 0),
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(AppImages.searchPatient),
-                        const SizedBox(width: AppSize.kmwidth),
-                        Expanded(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const OptometricianAddPatientPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColor.cyanGreen,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.width(context) * 0.105,
+                              vertical: 15),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(
-                                "You can search for a patient ID and add details to start in-app eye test.",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                              SvgPicture.asset(
+                                AppIcon.optometritianAddPatient,
+                                height: 28,
+                                width: 23,
                               ),
-                              const SizedBox(height: AppSize.kmheight),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VisionGuardianSearchPatientPage()));
-                                },
-                                child: Text(
-                                  "Search Patient   ",
-                                  style: applyRobotoFont(
-                                    fontSize: 12,
-                                    color: AppColor.primary,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                              const SizedBox(height: 10),
+                              Text(
+                                "Start Assessment",
+                                softWrap: false,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisionGuardianSearchPatientPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColor.butterCream,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.width(context) * 0.105,
+                              vertical: 15),
+                          child: Column(
+                            children: [
+                              SvgPicture.asset(
+                                AppIcon.optometritianAddPatient,
+                                height: 28,
+                                width: 23,
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                "Past Assessments",
+                                softWrap: false,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   const BrandingWidgetH(),
