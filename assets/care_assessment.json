@@ -131,6 +131,20 @@
                     "answer": "Yes"
                   }
                 ]
+              },
+              {
+                "code": 30000010,
+                "statement": "None of these",
+                "constraint": "assertion",
+                "defaultValue": "No",
+                "mandatory": true,
+                "actionOn": [
+                  {
+                    "operator": "EQUALS",
+                    "actionType": "EXIT_ALL_QUESTIONNAIRE",
+                    "answer": "Yes"
+                  }
+                ]
               }
             ]
           }
@@ -263,6 +277,13 @@
               {
                 "code": 30000023,
                 "statement": "Other symptoms",
+                "constraint": "assertion",
+                "defaultValue": "No",
+                "mandatory": true
+              },
+              {
+                "code": 30000024,
+                "statement": "None of these",
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true

@@ -186,7 +186,7 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                           child: Column(
                             children: [
                               SvgPicture.asset(
-                                AppIcon.optometritianAddPatient,
+                                "assets/icons/optometritian_search_history.svg",
                                 height: 28,
                                 width: 23,
                               ),
