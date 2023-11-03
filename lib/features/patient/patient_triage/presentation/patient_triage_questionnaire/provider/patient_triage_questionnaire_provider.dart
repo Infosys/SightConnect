@@ -1,47 +1,56 @@
+import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var patientTriageQuestionnaireProvider = ChangeNotifierProvider(
-  (ref) => PatientTriageQuestionnaireProvider(),
+  (ref) => PatientTriageQuestionnaireProvider(
+    ref.watch(patientTriageProvider).questionnaireSections,
+  ),
 );
 
-String remarks = '';
-var remarksProvider = StateProvider<String>((ref) => remarks);
-
 class PatientTriageQuestionnaireProvider extends ChangeNotifier {
-  final List<bool> _selectedOptions = [];
-  List<Map<String, dynamic>> questionResponse = [];
+  final List<QuestionnaireSection> _questionnaireSections;
 
-  String _questionnaireRemarks = '';
+  late String _questionnaireRemarks;
+  late final Map<int, bool> _selectedOptions;
+  late final List<Map<int, bool>> _questionnaireResponse;
+  late final int _totalPages;
+
+  PatientTriageQuestionnaireProvider(this._questionnaireSections)
+      : _questionnaireRemarks = '',
+        _selectedOptions = {},
+        _questionnaireResponse = [],
+        _totalPages = _questionnaireSections.length;
 
   String get questionnaireRemarks => _questionnaireRemarks;
+  Map<int, bool> get selectedOptions => _selectedOptions;
+  int get totalPage => _totalPages;
+  List<QuestionnaireSection> get questionnaireSections =>
+      _questionnaireSections;
+  List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void setquestionnaireRemarks(String remarks) {
+  void setQuestionnaireRemarks(String remarks) {
     _questionnaireRemarks = '$_questionnaireRemarks/$remarks';
-    logger.d('\n\nremarks: $_questionnaireRemarks\n\n');
     notifyListeners();
   }
 
-  void setSelectedOptions(List<bool> options) {
-    _selectedOptions.addAll(options);
+  void addQuestionnaireAnswer(int questionCode, bool answer) {
+    _selectedOptions[questionCode] = answer;
     notifyListeners();
+    logger.d("Added Options: $_selectedOptions");
   }
 
-  void setQuestionaireResponse() {
-    _selectedOptions.removeAt(1);
-    for (int i = 0; i < _selectedOptions.length; i++) {
-      questionResponse.add(
-        {
-          "questionCode": '3000000${i + 1}',
-          "response": _selectedOptions[i],
-        },
-      );
-    }
+  void removeQuestionnaireAnswer(int questionCode) {
+    _selectedOptions.remove(questionCode);
     notifyListeners();
-    logger.d('\n\nquestionResponse: $questionResponse\n\n');
-    logger.d('\n\nremarks: $questionnaireRemarks\n\n');
+    logger.d("Removed Options: $_selectedOptions");
   }
 
-  List<bool> get selectedOptions => _selectedOptions;
+  void saveQuestionaireResponse() {
+    _questionnaireResponse.add(_selectedOptions);
+    _selectedOptions.clear();
+    notifyListeners();
+  }
 }
