@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_recommendation.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/eye_scan_tab_view.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/widgets/optometritian_report_questionnaire_card.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/widgets/optometritian_tumbling_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -101,10 +101,9 @@ class OptometritianReportPage extends StatelessWidget {
               ],
             ),
           ),
-          const ReportAssessmentQuestions(),
-          const TumblingEReportCard(),
+          const OptometritianReportQuestionnaireCard(),
+          const OptometritianTumblingReportCard(),
           const EyeScanTabView(),
-          const AssessmentRecommendation(),
           SizedBox(
             height: AppSize.height(context) * 0.03,
           ),
