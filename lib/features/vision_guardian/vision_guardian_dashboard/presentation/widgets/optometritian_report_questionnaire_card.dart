@@ -13,7 +13,10 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
     TriageUrgency urgency =
         ref.watch(optometricianReportProvider).calculateUrgency();
     List<Map<String, dynamic>> data = [
-      {"question": "Are you facing sudden loss of vision?", "answer": "No"},
+      {
+        "question": "Are you facing sudden loss of vision?",
+        "answer": ["No"]
+      },
       {
         "question": "2. Is your vision not clear or disturbed?",
         "answer": [
@@ -54,107 +57,60 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               var currentData = data[index];
-              return currentData['answer'] == "Yes" ||
-                      currentData['answer'] == "No"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          currentData['question'],
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black.withOpacity(0.8),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    currentData['question'],
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black.withOpacity(0.8),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  for (var i = 0; i < currentData['answer'].length; i++)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "\u2022  ",
+                            style: applyRobotoFont(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black.withOpacity(0.7),
+                                height: 1.5),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                "\u2022  ",
-                                style: applyRobotoFont(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black.withOpacity(0.7),
-                                    height: 1.5),
+                          Flexible(
+                            child: Text(
+                              currentData['answer'][i],
+                              softWrap: true,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
                               ),
-                              Text(
-                                currentData['answer'],
-                                style: applyRobotoFont(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(
-                            thickness: 1.5,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          currentData['question'],
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        for (var i = 0; i < currentData['answer'].length; i++)
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 2),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "\u2022  ",
-                                  style: applyRobotoFont(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black.withOpacity(0.7),
-                                      height: 1.5),
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    currentData['answer'][i],
-                                    softWrap: true,
-                                    style: applyRobotoFont(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(
-                            thickness: 1.5,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    );
+                        ],
+                      ),
+                    ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Divider(
+                      thickness: 1.5,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              );
             },
           ),
           const SizedBox(
@@ -186,6 +142,11 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                           : AppColor.green,
                   border: Border.all(
                     width: 1.5,
+                    color: urgency == TriageUrgency.EMERGENCY
+                        ? AppColor.red
+                        : urgency == TriageUrgency.PRIORITY
+                            ? AppColor.orange
+                            : AppColor.green,
                   ),
                 ),
                 child: Center(

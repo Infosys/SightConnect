@@ -152,21 +152,8 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  int urgency = 1;
-
-  void calculateTumblingEUrgency() {
-    double leftEyeSight = calculateLeftEyeSigth();
-    double rightEyeSight = calculateRightEyeSigth();
-
-    int _leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
-    int _rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
-
-    int _urgency = max(_leftEyeUrgency, _rightEyeUrgency);
-
-    logger.f("Tumbling Test Urgency: $_urgency");
-  }
-
   int _calculateUrgencyHelper(double value) {
+    logger.i("Tumbling Test Value: $value");
     if (value >= 1) {
       return 3;
     } else if (value >= 0.5) {
@@ -177,6 +164,14 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
 
   int getTumblingTestUrgency() {
+    double leftEyeSight = calculateLeftEyeSigth();
+    double rightEyeSight = calculateRightEyeSigth();
+
+    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
+    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
+
+    int urgency = max(leftEyeUrgency, rightEyeUrgency);
+
     return urgency;
   }
 }

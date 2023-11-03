@@ -12,16 +12,29 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
+    double leftEyeSigth = model.calculateLeftEyeSigth();
+    double rightEyeSigth = model.calculateRightEyeSigth();
+
+    getColor(double value) {
+      if (value >= 1) {
+        return AppColor.red;
+      } else if (value >= 0.5) {
+        return AppColor.orange;
+      } else {
+        return AppColor.green;
+      }
+    }
+
     final List<Map<String, dynamic>> tumblingEData = [
       {
         "eye": "Left Eye",
-        "value": model.calculateLeftEyeSigth().toString(),
-        "color": AppColor.green
+        "value": leftEyeSigth.toString(),
+        "color": getColor(leftEyeSigth)
       },
       {
         "eye": "Right Eye",
-        "value": model.calculateRightEyeSigth().toString(),
-        "color": AppColor.orange
+        "value": rightEyeSigth.toString(),
+        "color": getColor(rightEyeSigth)
       },
       {"eye": "Both Eyes", "value": "1.0", "color": AppColor.green},
     ];

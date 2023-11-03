@@ -77,6 +77,3 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
     return urgency;
   }
 }
-
-
-// red =3 , yellow = 2, green = 1
