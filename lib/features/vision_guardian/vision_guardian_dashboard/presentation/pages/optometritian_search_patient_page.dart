@@ -10,8 +10,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionGuardianSearchPatientPage extends HookConsumerWidget {
-  const VisionGuardianSearchPatientPage({super.key});
+class OptometritianSearchPatientPage extends HookConsumerWidget {
+  const OptometritianSearchPatientPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,6 +19,7 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
     var isSelected = useState<int>(-1);
     var isReport = useState<int>(-1);
     return Scaffold(
+      backgroundColor: AppColor.scaffold,
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -52,14 +53,6 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(
                         AppSize.klradius,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColor.primary.withOpacity(0.1),
-                          blurRadius: 30,
-                          spreadRadius: 30,
-                          offset: const Offset(0, 0),
-                        ),
-                      ],
                     ),
                     child: TextField(
                       decoration: const InputDecoration(
@@ -146,13 +139,29 @@ class VisionGuardianSearchPatientPage extends HookConsumerWidget {
                   width: 1.5,
                   color: Colors.grey.withOpacity(0.5),
                 ),
-                const CircleAvatar(
-                  backgroundColor: AppColor.white,
-                  radius: 14,
-                  child: Icon(
-                    CupertinoIcons.calendar,
-                    size: 14,
-                    color: AppColor.grey,
+                InkWell(
+                  onTap: () {
+                    DateTime now = DateTime.now();
+                    DateTime lastDate = DateTime(2022);
+
+                    DateTime initialDate =
+                        now.isBefore(lastDate) ? now : lastDate;
+
+                    showDatePicker(
+                      context: context,
+                      initialDate: initialDate,
+                      firstDate: DateTime(2019),
+                      lastDate: lastDate,
+                    );
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: AppColor.white,
+                    radius: 14,
+                    child: Icon(
+                      CupertinoIcons.calendar,
+                      size: 18,
+                      color: AppColor.grey,
+                    ),
                   ),
                 ),
               ],

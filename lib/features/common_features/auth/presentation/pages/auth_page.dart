@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_dashboard_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,7 +30,7 @@ class AuthPage extends ConsumerWidget {
           case Role.visionguardian:
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => const VisionGuardianDashboardPage(),
+                builder: (context) => const OptometritianDashboardPage(),
               ),
               (route) => false,
             );

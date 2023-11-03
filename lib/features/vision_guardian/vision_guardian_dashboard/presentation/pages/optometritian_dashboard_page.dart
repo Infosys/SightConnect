@@ -1,17 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vision_guardian_search_patient.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/widgets/report_end_popUp.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class VisionGuardianDashboardPage extends StatelessWidget {
-  const VisionGuardianDashboardPage({super.key});
+class OptometritianDashboardPage extends StatelessWidget {
+  const OptometritianDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +169,7 @@ class VisionGuardianDashboardPage extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const VisionGuardianSearchPatientPage(),
+                                  const OptometritianSearchPatientPage(),
                             ),
                           );
                         },
