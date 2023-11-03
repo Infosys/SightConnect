@@ -3,9 +3,8 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_instructional_video_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -22,11 +21,8 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var pageController = usePageController();
-    var questionnaireSections =
-        ref.watch(patientTriageProvider).questionnaireSections;
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    // var isEmpty = useState(ref.watch(resProvider));
-    
+    var scaffoldKey = useState(GlobalKey<ScaffoldState>());
+
     return WillPopScope(
       onWillPop: () async {
         var result = await showDialog(
@@ -39,7 +35,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        key: scaffoldKey,
+        key: scaffoldKey.value,
         drawer: const PatientTriageStepsDrawer(),
         appBar: CustomAppbar(
           leadingWidth: 60,
@@ -48,7 +44,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
           leadingIcon: InkWell(
             customBorder: const CircleBorder(),
             onTap: () {
-              scaffoldKey.currentState!.openDrawer();
+              scaffoldKey.value.currentState!.openDrawer();
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -79,96 +75,100 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: PageView.builder(
-            controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: questionnaireSections.length,
-            itemBuilder: (context, index) {
-              var questionnaire =
-                  questionnaireSections[index].questionnaire?.first;
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      questionnaire?.description ?? "",
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    OptionGrid(
-                      question: questionnaire?.questions ?? [],
-                      onTap: (optionIndex) {},
-                      pageIndex: index,
-                    ),
-                    const SizedBox(height: AppSize.klheight),
-                    SizedBox(
-                      width: questionnaireSections.length - 1 == index
-                          ? AppSize.width(context)
-                          : AppSize.width(context) * 0.45,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
+        body: Consumer(
+          builder: (context, ref, _) {
+            var model = ref.watch(patientTriageQuestionnaireProvider);
+
+            return Padding(
+              padding: const EdgeInsets.all(AppSize.kmpadding),
+              child: PageView.builder(
+                controller: pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: model.totalPage,
+                itemBuilder: (context, index) {
+                  var questionnaire =
+                      model.questionnaireSections[index].questionnaire?.first;
+                  var isLastPage = model.totalPage - 1 == index;
+                  var isButtonEnabled = model.selectedOptions.isNotEmpty &&
+                      model.selectedOptions.containsValue(true);
+
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          questionnaire?.description ?? "",
+                          style: applyFiraSansFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        OptionGrid(
+                          pageNumber: index,
+                          questions: questionnaire?.questions ?? [],
+                        ),
+                        const SizedBox(height: AppSize.klheight),
+                        SizedBox(
+                          width: isLastPage
+                              ? AppSize.width(context)
+                              : AppSize.width(context) * 0.45,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                              ),
+                            ),
+                            onPressed: !isButtonEnabled
+                                ? null
+                                : () {
+                                    model.saveQuestionaireResponse();
+                                    if (isLastPage) {
+                                      ref
+                                          .read(
+                                              toggleTumblingResultPage.notifier)
+                                          .state = false;
+                                      ref
+                                          .read(patientTriageStepperProvider)
+                                          .nextStep(1);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const PatientVisualAcuityInstructionalVideoPage(),
+                                        ),
+                                      );
+                                    } else {
+                                      pageController.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        curve: Curves.easeIn,
+                                      );
+                                    }
+                                  },
+                            child: Text(
+                              isLastPage
+                                  ? AppLocalizations.of(context)!.proceedButton
+                                  : AppLocalizations.of(context)!.nextButton,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
                             ),
                           ),
                         ),
-                        onPressed: () {
-                                ref
-                                    .read(patientTriageQuestionnaireProvider)
-                                    .setSelectedOptions(ref.read(resProvider));
-                                if (index != 0) {
-                                  ref
-                                      .read(patientTriageQuestionnaireProvider)
-                                      .setquestionnaireRemarks(
-                                          ref.read(remarksProvider));
-                                }
-                                if (index == 2) {
-                                  ref
-                                      .read(patientTriageQuestionnaireProvider)
-                                      .setQuestionaireResponse();
-
-                                  ref
-                                      .read(toggleTumblingResultPage.notifier)
-                                      .state = false;
-
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PatientVisualAcuityInstructionalVideoPage(),
-                                    ),
-                                  );
-
-                                  ref
-                                      .read(patientTriageStepperProvider)
-                                      .nextStep(1);
-                                }
-                                pageController.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn,
-                                );
-                              },
-                        child: Text(
-                          questionnaireSections.length - 1 == index
-                              ? AppLocalizations.of(context)!.proceedButton
-                              : AppLocalizations.of(context)!.nextButton,
-                          style: applyRobotoFont(
-                              fontSize: 14, color: AppColor.white),
+                        const SizedBox(
+                          height: AppSize.klheight,
                         ),
-                      ),
+                      ],
                     ),
-                    const SizedBox(height: AppSize.klheight),
-                  ],
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            );
+          },
         ),
       ),
     );

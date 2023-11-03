@@ -48,7 +48,6 @@ class PatientTriageProvider extends ChangeNotifier {
       mediaCapture: _getTriageEyeScanResponse(),
       observations: _getVisionAcuityTumblingResponse(),
       questionnaireRemarks: _getQuestionaireRemarks(),
-          
     );
     var response = await ref.read(triageRepositoryProvider).saveTriage(
           triage: triageresponse,
@@ -61,9 +60,10 @@ class PatientTriageProvider extends ChangeNotifier {
       (triageResponse) => logger.d("Final Triage Response:  $triageResponse"),
     );
   }
- 
+
   String _getQuestionaireRemarks() {
-    String remarks = ref.read(patientTriageQuestionnaireProvider).questionnaireRemarks;
+    String remarks =
+        ref.read(patientTriageQuestionnaireProvider).questionnaireRemarks;
     logger.d(remarks);
     return remarks;
   }
@@ -91,15 +91,18 @@ class PatientTriageProvider extends ChangeNotifier {
 
   /// set patient questionnaire based on the TriageAssessment model
   List<QuestionResponse> _getQuestionaireResponse() {
-    List<bool> selectedOptions =
-        ref.read(patientTriageQuestionnaireProvider).selectedOptions;
-    List<QuestionResponse> questionResponseList = [];
-    for (int i = 0; i < selectedOptions.length; i++) {
-      questionResponseList.add(QuestionResponse(
-          questionCode: int.parse('3000000${i + 1}'),
-          response: selectedOptions[i]));
-    }
+    var questionnairResponse =
+        ref.read(patientTriageQuestionnaireProvider).finalquestionnaireResponse;
 
+    List<QuestionResponse> questionResponseList = [];
+    for (Map<int, bool> page in questionnairResponse) {
+      page.forEach((key, value) {
+        questionResponseList.add(QuestionResponse(
+          questionCode: key,
+          response: value,
+        ));
+      });
+    }
 
     logger.d(questionResponseList);
     return questionResponseList;

@@ -1,108 +1,38 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var resProvider = StateProvider<List<bool>>((ref) => selectedStates);
-List<bool> selectedStates = [];
-
-class OptionGrid extends ConsumerStatefulWidget {
+class OptionGrid extends HookConsumerWidget {
   const OptionGrid({
-    required this.question,
-    this.onTap,
-    required this.pageIndex,
+    required this.questions,
+    required this.pageNumber,
     super.key,
   });
 
-  final int pageIndex;
-  final List<Question> question;
-  final Function(int)? onTap;
+  final List<Question> questions;
+  final int pageNumber;
 
   @override
-  _OptionGridState createState() => _OptionGridState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController remarksController = useTextEditingController();
 
-class _OptionGridState extends ConsumerState<OptionGrid> {
-  final TextEditingController remarksController = TextEditingController();
-  bool isBottomSheetOpen = false;
+    final totalQuestions = questions.length;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedStates.clear();
-    for (int i = 0; i < widget.question.length; i++) {
-      selectedStates.add(false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var selectedData = ref.watch(resProvider);
-    void showBottomSheet() {
-      showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(AppSize.klradius),
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: AppSize.height(context) * 0.7,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Other Symptoms",
-                        style: applyRobotoFont(
-                            fontSize: 16,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w500)),
-                    const SizedBox(height: 10),
-                    Container(
-                      padding: const EdgeInsets.all(12.0),
-                      color: const Color(0xFFFAFAFA),
-                      child: TextField(
-                        maxLines: 6,
-                        controller: remarksController,
-                        keyboardType: TextInputType.text,
-                        onSubmitted: (value) {
-                          ref.read(remarksProvider.notifier).state =
-                              remarksController.text;
-                          Navigator.pop(context);
-                          setState(() {
-                            isBottomSheetOpen = false;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            hintText: 'Enter your symptoms here',
-                            hintStyle: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.grey.withOpacity(0.4))),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    }
+    final selectedOptions =
+        ref.watch(patientTriageQuestionnaireProvider).selectedOptions;
 
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: widget.question.length,
+      itemCount: totalQuestions,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1.3,
@@ -110,46 +40,42 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
+        var isSelected = selectedOptions.containsKey(questions[index].code);
+        var model = ref.read(patientTriageQuestionnaireProvider);
+
         return InkWell(
           onTap: () {
-            if (widget.pageIndex == 0) {
-              if (selectedData[index]) {
-                selectedData[index] = false;
-              } else {
-                for (int i = 0; i < selectedData.length; i++) {
-                  selectedData[i] = (i == index);
-                }
-              }
-            } else if (widget.pageIndex == 1 || widget.pageIndex == 2) {
-              if (index == widget.question.length - 1) {
-                if (!selectedData[index]) {
-                  setState(() {
-                    isBottomSheetOpen = true;
-                  });
-                  showBottomSheet();
-                  selectedData[index] = true;
-                } else {
-                  selectedData[index] = false;
-                  ref.read(remarksProvider.notifier).state = '';
-                }
-              } else {
-                selectedData[index] = !selectedData[index];
-              }
+            if (isSelected) {
+              model.removeQuestionnaireAnswer(questions[index].code!);
             } else {
-              selectedData[index] = !selectedData[index];
+              model.addQuestionnaireAnswer(
+                questions[index].code ?? 0,
+                true,
+              );
             }
 
-            widget.onTap?.call(index);
-            setState(() {
-              logger.d('\n\n$selectedData\n\n');
-            });
+            if (questions[index].statement == "Other symptoms") {
+              _buildOtherOptionSheet(
+                context: context,
+                remarksController: remarksController,
+                onSubmitted: (remark) {
+                  if (remark.isEmpty) {
+                    model.removeQuestionnaireAnswer(questions[index].code!);
+                  } else {
+                    model.setQuestionnaireRemarks(remark);
+                  }
+
+                  Navigator.pop(context);
+                },
+              );
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
-                color: selectedData[index]
+                color: isSelected
                     ? AppColor.primary
                     : AppColor.grey.withOpacity(0.5),
                 width: 1,
@@ -158,13 +84,72 @@ class _OptionGridState extends ConsumerState<OptionGrid> {
             ),
             child: Center(
               child: Text(
-                widget.question[index].statement ?? "",
+                questions[index].statement ?? "",
                 textAlign: TextAlign.left,
                 softWrap: true,
                 style: applyRobotoFont(
                   fontSize: 16,
                   color: AppColor.black,
                 ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _buildOtherOptionSheet({
+    required BuildContext context,
+    required TextEditingController remarksController,
+    required Function(String) onSubmitted,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+            child: Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              height: AppSize.height(context) * 0.7,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Other Symptoms",
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    color: const Color(0xFFFAFAFA),
+                    child: TextField(
+                      maxLines: 6,
+                      controller: remarksController,
+                      keyboardType: TextInputType.text,
+                      onSubmitted: onSubmitted,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your symptoms here',
+                        hintStyle: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.grey.withOpacity(0.4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
