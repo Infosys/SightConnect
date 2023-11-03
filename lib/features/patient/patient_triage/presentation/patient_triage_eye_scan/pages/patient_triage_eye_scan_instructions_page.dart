@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_eye_scan/pages/patient_triage_eye_scan_carousel_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -176,9 +177,13 @@ class PatientTriageEyeScanInstructions extends ConsumerWidget {
                     }
                     navigator.push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            PatientEyeCaptureTriagePage(cameras: cameras),
-                      ),
+                          builder: (context) => const OptometritianReportPage(
+                              id: "",
+                              education: "education",
+                              employment: "employment")
+
+                          // PatientEyeCaptureTriagePage(cameras: cameras),
+                          ),
                     );
                   } catch (e) {
                     Fluttertoast.showToast(msg: "No camera found");

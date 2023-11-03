@@ -51,6 +51,7 @@ class Question with _$Question {
     String? defaultValue,
     bool? mandatory,
     List<ActionOn>? actionOn,
+    int? weight,
   }) = _Question;
 
   factory Question.fromJson(Map<String, dynamic> json) =>

@@ -1,17 +1,28 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/pages/patient_triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/providers/patient_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OptometritianTumblingReportCard extends StatelessWidget {
+class OptometritianTumblingReportCard extends ConsumerWidget {
   const OptometritianTumblingReportCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(tumblingTestProvider);
     final List<Map<String, dynamic>> tumblingEData = [
-      {"eye": "Left Eye", "value": "1.0", "color": AppColor.green},
-      {"eye": "Right Eye", "value": "0.8", "color": AppColor.orange},
+      {
+        "eye": "Left Eye",
+        "value": model.calculateLeftEyeSigth().toString(),
+        "color": AppColor.green
+      },
+      {
+        "eye": "Right Eye",
+        "value": model.calculateRightEyeSigth().toString(),
+        "color": AppColor.orange
+      },
       {"eye": "Both Eyes", "value": "1.0", "color": AppColor.green},
     ];
 

@@ -666,6 +666,7 @@ mixin _$Question {
   String? get defaultValue => throw _privateConstructorUsedError;
   bool? get mandatory => throw _privateConstructorUsedError;
   List<ActionOn>? get actionOn => throw _privateConstructorUsedError;
+  int? get weight => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -684,7 +685,8 @@ abstract class $QuestionCopyWith<$Res> {
       String? constraint,
       String? defaultValue,
       bool? mandatory,
-      List<ActionOn>? actionOn});
+      List<ActionOn>? actionOn,
+      int? weight});
 }
 
 /// @nodoc
@@ -706,6 +708,7 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
     Object? defaultValue = freezed,
     Object? mandatory = freezed,
     Object? actionOn = freezed,
+    Object? weight = freezed,
   }) {
     return _then(_value.copyWith(
       code: freezed == code
@@ -732,6 +735,10 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
           ? _value.actionOn
           : actionOn // ignore: cast_nullable_to_non_nullable
               as List<ActionOn>?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -749,7 +756,8 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
       String? constraint,
       String? defaultValue,
       bool? mandatory,
-      List<ActionOn>? actionOn});
+      List<ActionOn>? actionOn,
+      int? weight});
 }
 
 /// @nodoc
@@ -769,6 +777,7 @@ class __$$_QuestionCopyWithImpl<$Res>
     Object? defaultValue = freezed,
     Object? mandatory = freezed,
     Object? actionOn = freezed,
+    Object? weight = freezed,
   }) {
     return _then(_$_Question(
       code: freezed == code
@@ -795,6 +804,10 @@ class __$$_QuestionCopyWithImpl<$Res>
           ? _value._actionOn
           : actionOn // ignore: cast_nullable_to_non_nullable
               as List<ActionOn>?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -808,7 +821,8 @@ class _$_Question implements _Question {
       this.constraint,
       this.defaultValue,
       this.mandatory,
-      final List<ActionOn>? actionOn})
+      final List<ActionOn>? actionOn,
+      this.weight})
       : _actionOn = actionOn;
 
   factory _$_Question.fromJson(Map<String, dynamic> json) =>
@@ -835,8 +849,11 @@ class _$_Question implements _Question {
   }
 
   @override
+  final int? weight;
+
+  @override
   String toString() {
-    return 'Question(code: $code, statement: $statement, constraint: $constraint, defaultValue: $defaultValue, mandatory: $mandatory, actionOn: $actionOn)';
+    return 'Question(code: $code, statement: $statement, constraint: $constraint, defaultValue: $defaultValue, mandatory: $mandatory, actionOn: $actionOn, weight: $weight)';
   }
 
   @override
@@ -853,13 +870,21 @@ class _$_Question implements _Question {
                 other.defaultValue == defaultValue) &&
             (identical(other.mandatory, mandatory) ||
                 other.mandatory == mandatory) &&
-            const DeepCollectionEquality().equals(other._actionOn, _actionOn));
+            const DeepCollectionEquality().equals(other._actionOn, _actionOn) &&
+            (identical(other.weight, weight) || other.weight == weight));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, code, statement, constraint,
-      defaultValue, mandatory, const DeepCollectionEquality().hash(_actionOn));
+  int get hashCode => Object.hash(
+      runtimeType,
+      code,
+      statement,
+      constraint,
+      defaultValue,
+      mandatory,
+      const DeepCollectionEquality().hash(_actionOn),
+      weight);
 
   @JsonKey(ignore: true)
   @override
@@ -882,7 +907,8 @@ abstract class _Question implements Question {
       final String? constraint,
       final String? defaultValue,
       final bool? mandatory,
-      final List<ActionOn>? actionOn}) = _$_Question;
+      final List<ActionOn>? actionOn,
+      final int? weight}) = _$_Question;
 
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
@@ -898,6 +924,8 @@ abstract class _Question implements Question {
   bool? get mandatory;
   @override
   List<ActionOn>? get actionOn;
+  @override
+  int? get weight;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionCopyWith<_$_Question> get copyWith =>

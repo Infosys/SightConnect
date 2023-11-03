@@ -17,6 +17,7 @@
                 "constraint": "assertion",
                 "defaultValue": "Yes",
                 "mandatory": true,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -31,6 +32,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -54,6 +56,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -68,6 +71,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -81,28 +85,32 @@
                 "statement": "I see two images of an object",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000005,
                 "statement": "I have pain or discomfort when viewing bright light",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000006,
                 "statement": "I see wavy lines or irregular shapes when viewing straight images",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000007,
                 "statement": "I see flashes and flickers when viewing objects",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000008,
@@ -110,6 +118,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -124,6 +133,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -138,6 +148,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -161,6 +172,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -175,6 +187,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -189,6 +202,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -203,6 +217,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
+                "weight": 1,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -216,77 +231,88 @@
                 "statement": "I have irritation in eyes with itching burning or pain",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000015,
                 "statement": "Particle of dust, wood, glass, metal or an insect got into my eye",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000016,
                 "statement": "My eyelids twitch uncontrollably with jerky contractions",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000017,
                 "statement": "My eyes close and open uncontrollably and rapidly",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000018,
                 "statement": "My eyes turn and point in different directions",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000019,
                 "statement": "My eyes involuntarily squeeze and shut tightly",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000020,
                 "statement": "My eyelids hang or droop at a lower level",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000021,
                 "statement": "My eyes appear wide open and bulged out",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000022,
                 "statement": "My eyes are of different sizes",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000023,
                 "statement": "Other symptoms",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               },
               {
                 "code": 30000024,
                 "statement": "None of these",
                 "constraint": "assertion",
                 "defaultValue": "No",
-                "mandatory": true
+                "mandatory": true,
+                "weight": 1
               }
             ]
           }

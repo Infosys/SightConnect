@@ -73,6 +73,7 @@ _$_Question _$$_QuestionFromJson(Map<String, dynamic> json) => _$_Question(
       actionOn: (json['actionOn'] as List<dynamic>?)
           ?.map((e) => ActionOn.fromJson(e as Map<String, dynamic>))
           .toList(),
+      weight: json['weight'] as int?,
     );
 
 Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
@@ -83,6 +84,7 @@ Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
       'defaultValue': instance.defaultValue,
       'mandatory': instance.mandatory,
       'actionOn': instance.actionOn,
+      'weight': instance.weight,
     };
 
 _$_ActionOn _$$_ActionOnFromJson(Map<String, dynamic> json) => _$_ActionOn(

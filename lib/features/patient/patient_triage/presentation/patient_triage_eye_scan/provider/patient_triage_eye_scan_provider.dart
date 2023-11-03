@@ -26,6 +26,10 @@ class PatientTriageEyeScanProvider with ChangeNotifier {
       _rightEyeImage!.path,
     ]);
   }
+
+  int getTriageEyeScanUrgency() {
+    return 1;
+  }
 }
 
 var patientTriageEyeScanProvider =
