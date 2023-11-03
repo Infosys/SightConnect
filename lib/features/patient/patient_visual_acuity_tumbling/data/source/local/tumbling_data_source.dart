@@ -427,23 +427,23 @@ class TumblingDataSource {
 
   getLogMarFromLevel(int level) {
     switch (level) {
-      case 0:
+      case 8:
         return 0.1;
-      case 1:
+      case 7:
         return 0.2;
-      case 2:
+      case 6:
         return 0.25;
-      case 3:
+      case 5:
         return 0.32;
       case 4:
         return 0.4;
-      case 5:
+      case 3:
         return 0.5;
-      case 6:
+      case 2:
         return 0.63;
-      case 7:
+      case 1:
         return 0.8;
-      case 8:
+      case 0:
         return 1.0;
 
       default:

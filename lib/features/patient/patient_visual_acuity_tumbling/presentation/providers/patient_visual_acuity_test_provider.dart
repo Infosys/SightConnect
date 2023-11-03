@@ -167,7 +167,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
 
   int _calculateUrgencyHelper(double value) {
-    if (value > 1) {
+    if (value >= 1) {
       return 3;
     } else if (value >= 0.5) {
       return 2;
