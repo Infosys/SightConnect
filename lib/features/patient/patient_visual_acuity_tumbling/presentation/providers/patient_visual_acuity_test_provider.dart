@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
@@ -110,11 +110,14 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
         endGame();
         return;
       }
+
       _gameMode = GameMode.isFive;
       _moveToPreviousLevel();
     } else {
       if (_totalWrongLevelResponse == 3) {
         endGame();
+      } else if (_currentIndex! + 1 == _level!.totalQuestions) {
+        _moveToNextLevel();
       } else {
         _currentIndex = _currentIndex! + 1;
       }
@@ -159,27 +162,44 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   double calculateLeftEyeSigth() {
     var leftEyeReport = _eyesFinalReport[Eye.left];
     var levels = leftEyeReport!.keys.toList();
-    var maxLevel = levels.reduce(max); //LOSTLEVEL
-    var mode = leftEyeReport[maxLevel]!.first.mode;
-    if (mode == GameMode.isFive) {
-      return _dataSource.getLevel(maxLevel, mode).logMar;
+    var lastLevel = _findMax(levels);
+    var mode = leftEyeReport[lastLevel]!.first.mode;
+    if (mode == GameMode.regular) {
+      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
     } else {
-      return _dataSource.getLevel(maxLevel, mode).logMar;
+      var secondMax = _findSecondMax(levels);
+      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
     }
   }
 
   double calculateRightEyeSigth() {
     var leftEyeReport = _eyesFinalReport[Eye.right];
-
-    if (currentLevel == maxLevel) {
-      var userResponses = leftEyeReport![_currentLevel!];
-      var mode = userResponses!.first.mode;
-      return _dataSource.getLevel(_currentLevel!, mode).logMar;
+    var levels = leftEyeReport!.keys.toList();
+    var lastLevel = _findMax(levels);
+    var mode = leftEyeReport[lastLevel]!.first.mode;
+    if (mode == GameMode.regular) {
+      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
     } else {
-      var userResponses =
-          leftEyeReport![_currentLevel! < 1 ? 0 : _currentLevel! - 1];
-      var mode = userResponses!.first.mode;
-      return _dataSource.getLevel(_currentLevel!, mode).logMar;
+      var secondMax = _findSecondMax(levels);
+      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
     }
+  }
+
+  int _findMax(List<int> input) {
+    int max = input[0];
+    for (int i = 1; i < input.length; i++) {
+      if (input[i] > max) {
+        max = input[i];
+      }
+    }
+    return max;
+  }
+
+  int _findSecondMax(List<int> input) {
+    if (input.length > 1) {
+      input.sort();
+      return input[input.length - 2];
+    }
+    return input.first;
   }
 }
