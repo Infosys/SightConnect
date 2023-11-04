@@ -21,309 +21,313 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: AppSize.height(context) * 0.05,
-            ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    model.stopSearch();
-                    //pop context
-                    FocusScope.of(context).unfocus();
-                    Future.delayed(const Duration(milliseconds: 300), () {
-                      Navigator.pop(context);
-                    });
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColor.black.withOpacity(0.7),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: AppSize.height(context) * 0.05,
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      model.stopSearch();
+                      //pop context
+                      FocusScope.of(context).unfocus();
+                      Future.delayed(const Duration(milliseconds: 300), () {
+                        Navigator.pop(context);
+                      });
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColor.black.withOpacity(0.7),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: AppSize.height(context) * 0.05,
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(
-                        AppSize.klradius,
+                  Expanded(
+                    child: Container(
+                      height: AppSize.height(context) * 0.05,
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(
+                          AppSize.klradius,
+                        ),
+                      ),
+                      child: TextField(
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
+                          hintText: " Search Patient ID",
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: AppColor.grey,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColor.primary,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppSize.klradius),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          model.searchPatient(value);
+                        },
                       ),
                     ),
-                    child: TextField(
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                        hintText: " Search Patient ID",
-                        hintStyle: TextStyle(
-                          fontSize: 14,
-                          color: AppColor.grey,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColor.primary,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: AppSize.kmheight + 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: AppSize.height(context) * 0.04,
+                    width: AppSize.width(context) * 0.77,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: model.timeFrame.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var data = model.timeFrame[index];
+
+                        return InkWell(
+                          onTap: () {
+                            isSelected.value = index;
+                          },
+                          child: Container(
+                            margin:
+                                const EdgeInsets.only(right: AppSize.kspadding),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: isSelected.value == index
+                                    ? AppColor.blue
+                                    : AppColor.grey,
+                              ),
+                              color: isSelected.value == index
+                                  ? const Color(0xFFC9DAFD)
+                                  : AppColor.white,
+                              borderRadius: BorderRadius.circular(
+                                AppSize.ksradius,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                data,
+                                style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: AppColor.black,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
                           ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(AppSize.klradius),
-                          ),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        model.searchPatient(value);
+                        );
                       },
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: AppSize.kmheight + 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: AppSize.height(context) * 0.04,
-                  width: AppSize.width(context) * 0.77,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: model.timeFrame.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var data = model.timeFrame[index];
-
-                      return InkWell(
-                        onTap: () {
-                          isSelected.value = index;
-                        },
-                        child: Container(
-                          margin:
-                              const EdgeInsets.only(right: AppSize.kspadding),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: isSelected.value == index
-                                  ? AppColor.blue
-                                  : AppColor.grey,
-                            ),
-                            color: isSelected.value == index
-                                ? const Color(0xFFC9DAFD)
-                                : AppColor.white,
-                            borderRadius: BorderRadius.circular(
-                              AppSize.ksradius,
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              data,
-                              style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: AppColor.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                  Container(
+                    height: AppSize.height(context) * 0.04,
+                    width: 1.5,
+                    color: Colors.grey.withOpacity(0.5),
                   ),
-                ),
-                Container(
-                  height: AppSize.height(context) * 0.04,
-                  width: 1.5,
-                  color: Colors.grey.withOpacity(0.5),
-                ),
-                InkWell(
-                  onTap: () {
-                    DateTime now = DateTime.now();
-                    DateTime lastDate = DateTime(2022);
-
-                    DateTime initialDate =
-                        now.isBefore(lastDate) ? now : lastDate;
-
-                    showDatePicker(
-                      context: context,
-                      initialDate: initialDate,
-                      firstDate: DateTime(2019),
-                      lastDate: lastDate,
-                    );
-                  },
-                  child: const CircleAvatar(
-                    backgroundColor: AppColor.white,
-                    radius: 14,
-                    child: Icon(
-                      CupertinoIcons.calendar,
-                      size: 18,
-                      color: AppColor.grey,
+                  InkWell(
+                    onTap: () {
+                      final pickedDate = _showDateRangePicker(context);
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: AppColor.white,
+                      radius: 14,
+                      child: Icon(
+                        CupertinoIcons.calendar,
+                        size: 18,
+                        color: AppColor.grey,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: AppSize.klheight,
-            ),
-            Text(
-              "Recent Assessments",
-              style: applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(
-              height: AppSize.klheight,
-            ),
-            model.searchPatientList.isEmpty
-                ? Column(
-                    children: [
-                      model.isMatched == false && model.isSearching == true
-                          ? Image(
-                              width: AppSize.width(context) * 0.5,
-                              image: const AssetImage(
-                                  "assets/images/search empty.png"),
-                            )
-                          : SvgPicture.asset(
-                              "assets/images/optometric_empty_search.svg",
-                              width: AppSize.width(context) * 0.5,
-                            ),
-                      const SizedBox(
-                        height: AppSize.klheight,
-                      ),
-                      Text(
+                ],
+              ),
+              const SizedBox(
+                height: AppSize.klheight,
+              ),
+              Text(
+                "Recent Assessments",
+                style:
+                    applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: AppSize.klheight,
+              ),
+              model.searchPatientList.isEmpty
+                  ? Column(
+                      children: [
                         model.isMatched == false && model.isSearching == true
-                            ? "Sorry we couldn’t find any matches.\n Please try searching with other ID."
-                            : "Find the Patient by searching with the Identification number or add new patient.",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.grey,
+                            ? Image(
+                                width: AppSize.width(context) * 0.5,
+                                image: const AssetImage(
+                                    "assets/images/search empty.png"),
+                              )
+                            : SvgPicture.asset(
+                                "assets/images/optometric_empty_search.svg",
+                                width: AppSize.width(context) * 0.5,
+                              ),
+                        const SizedBox(
+                          height: AppSize.klheight,
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(AppSize.klpadding),
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  shadowColor: MaterialStateProperty.all(
-                                    AppColor.white,
-                                  ),
-                                  backgroundColor: MaterialStateProperty.all(
-                                    AppColor.white,
-                                  ),
-                                  side: MaterialStateProperty.all(
-                                    const BorderSide(
-                                        color: AppColor.blue, width: 1.5),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const OptometricianAddPatientPage(),
+                        Text(
+                          model.isMatched == false && model.isSearching == true
+                              ? "Sorry we couldn’t find any matches.\n Please try searching with other ID."
+                              : "Find the Patient by searching with the Identification number or add new patient.",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.all(AppSize.klpadding),
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    shadowColor: MaterialStateProperty.all(
+                                      AppColor.white,
                                     ),
-                                  );
-                                },
-                                child: Text(
-                                  'Add New Patient',
-                                  style: applyRobotoFont(
-                                    color: AppColor.blue,
-                                    fontSize: 14,
+                                    backgroundColor: MaterialStateProperty.all(
+                                      AppColor.white,
+                                    ),
+                                    side: MaterialStateProperty.all(
+                                      const BorderSide(
+                                          color: AppColor.blue, width: 1.5),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const OptometricianAddPatientPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Add New Patient',
+                                    style: applyRobotoFont(
+                                      color: AppColor.blue,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                : Column(
-                    children:
-                        model.searchPatientList.asMap().entries.map((entry) {
-                      var e = entry.value;
-                      return InkWell(
-                        onTap: () {
-                          isReport.value = entry.key;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OptometritianReportPage(
-                                id: e.id!,
-                                education: e.education!,
-                                employment: e.employment!,
+                          ],
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: model.searchPatientList.asMap().entries.map(
+                        (entry) {
+                          var e = entry.value;
+                          return InkWell(
+                            onTap: () {
+                              isReport.value = entry.key;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OptometritianReportPage(
+                                    id: e.id!,
+                                    education: e.education!,
+                                    employment: e.employment!,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(AppSize.kspadding),
+                              margin: const EdgeInsets.only(
+                                bottom: AppSize.kspadding + 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColor.white,
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.ksradius,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${e.id}",
+                                        style: applyFiraSansFont(
+                                            fontSize: 16,
+                                            color: AppColor.black,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        "2 mins ago",
+                                        style: applyRobotoFont(
+                                            fontSize: 10,
+                                            color: AppColor.black,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${e.education}",
+                                        style: applyRobotoFont(
+                                          fontSize: 14,
+                                          color: AppColor.grey,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${e.employment}",
+                                        style: applyRobotoFont(
+                                          fontSize: 14,
+                                          color: AppColor.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           );
                         },
-                        child: Container(
-                          padding: const EdgeInsets.all(AppSize.kspadding),
-                          margin: const EdgeInsets.only(
-                            bottom: AppSize.kspadding + 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColor.white,
-                            borderRadius: BorderRadius.circular(
-                              AppSize.ksradius,
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${e.id}",
-                                    style: applyFiraSansFont(
-                                        fontSize: 16,
-                                        color: AppColor.black,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Text(
-                                    "2 mins ago",
-                                    style: applyRobotoFont(
-                                        fontSize: 10,
-                                        color: AppColor.black,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${e.education}",
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      color: AppColor.grey,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${e.employment}",
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      color: AppColor.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  )
-          ],
+                      ).toList(),
+                    )
+            ],
+          ),
         ),
-      )),
+      ),
     );
+  }
+
+  Future<DateTimeRange?> _showDateRangePicker(BuildContext context) async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      initialEntryMode: DatePickerEntryMode.input,
+      firstDate: DateTime.now().subtract(const Duration(days: 365 * 2)),
+      lastDate: DateTime.now(),
+    );
+
+    return picked;
   }
 }

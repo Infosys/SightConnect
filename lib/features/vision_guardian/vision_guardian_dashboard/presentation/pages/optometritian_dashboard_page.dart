@@ -179,8 +179,9 @@ class OptometritianDashboardPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: AppSize.width(context) * 0.105,
-                              vertical: 15),
+                            horizontal: AppSize.width(context) * 0.105,
+                            vertical: 15,
+                          ),
                           child: Column(
                             children: [
                               SvgPicture.asset(

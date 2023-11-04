@@ -16,6 +16,7 @@ class OptometricianAddPatientPage extends HookWidget {
     final patientIdController = useTextEditingController();
     final educationalQualificationController = useTextEditingController();
     final professionController = useTextEditingController();
+    final isAssistanceNeeded = useState<bool>(false);
 
     final educationalQualifications = [
       'Not applicable (Children <= 5years)',
@@ -67,11 +68,14 @@ class OptometricianAddPatientPage extends HookWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Other Qualifications",
-                            style: applyRobotoFont(
-                                fontSize: 16,
-                                color: AppColor.black,
-                                fontWeight: FontWeight.w500)),
+                        Text(
+                          "Other Qualifications",
+                          style: applyRobotoFont(
+                            fontSize: 16,
+                            color: AppColor.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         Container(
                           padding: const EdgeInsets.all(12.0),
@@ -399,9 +403,7 @@ class OptometricianAddPatientPage extends HookWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 16),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
@@ -415,12 +417,13 @@ class OptometricianAddPatientPage extends HookWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  // CupertinoSwitch(value: false, onChanged: (value) {}),
-                  ToggleSliderButton(
-                      width: 50,
-                      height: 25,
-                      initialValue: false,
-                      onChanged: (value) {}),
+                  CupertinoSwitch(
+                    activeColor: AppColor.primary,
+                    value: isAssistanceNeeded.value,
+                    onChanged: (value) {
+                      isAssistanceNeeded.value = value;
+                    },
+                  ),
                 ],
               ),
             ),
@@ -446,78 +449,6 @@ class OptometricianAddPatientPage extends HookWidget {
               height: 20,
             ),
             const BrandingWidgetH(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ToggleSliderButton extends StatefulWidget {
-  final double width;
-  final double height;
-  final bool initialValue;
-  final ValueChanged<bool> onChanged;
-
-  const ToggleSliderButton({
-    Key? key,
-    required this.width,
-    required this.height,
-    required this.initialValue,
-    required this.onChanged,
-  }) : super(key: key);
-
-  @override
-  _ToggleSliderButtonState createState() => _ToggleSliderButtonState();
-}
-
-class _ToggleSliderButtonState extends State<ToggleSliderButton> {
-  bool _value = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _value = widget.initialValue;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanUpdate: (details) {
-        setState(() {
-          _value = details.localPosition.dx >= widget.width / 2;
-        });
-        widget.onChanged(_value);
-      },
-      child: Container(
-        width: widget.width,
-        height: widget.height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.height / 2),
-          color: _value ? AppColor.primary : AppColor.grey,
-        ),
-        child: Stack(
-          children: [
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              left: _value ? widget.width / 2 : 0,
-              child: Container(
-                width: widget.width / 2,
-                height: widget.height,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColor.white,
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.check,
-                    size: 15,
-                    color: _value ? AppColor.primary : AppColor.grey,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
