@@ -56,7 +56,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -71,7 +71,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -86,7 +86,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000005,
@@ -94,7 +94,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000006,
@@ -102,7 +102,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000007,
@@ -110,7 +110,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000008,
@@ -118,7 +118,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 2,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -172,7 +172,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 2,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -187,7 +187,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -202,7 +202,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -217,7 +217,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1,
+                "weight": 3,
                 "actionOn": [
                   {
                     "operator": "EQUALS",
@@ -232,7 +232,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000015,
@@ -240,7 +240,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000016,
@@ -248,7 +248,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000017,
@@ -256,7 +256,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000018,
@@ -264,7 +264,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 3
               },
               {
                 "code": 30000019,
@@ -272,7 +272,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000020,
@@ -280,7 +280,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000021,
@@ -288,7 +288,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000022,
@@ -296,7 +296,7 @@
                 "constraint": "assertion",
                 "defaultValue": "No",
                 "mandatory": true,
-                "weight": 1
+                "weight": 2
               },
               {
                 "code": 30000023,

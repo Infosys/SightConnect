@@ -36,7 +36,6 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
         "value": rightEyeSigth.toString(),
         "color": getColor(rightEyeSigth)
       },
-      {"eye": "Both Eyes", "value": "1.0", "color": AppColor.green},
     ];
 
     return Padding(
@@ -72,9 +71,9 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: 3,
+              itemCount: 2,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 childAspectRatio: 1.4,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,

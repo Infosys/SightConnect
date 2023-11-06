@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/patient/patient_triage/presentation/pa
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/widgets/report_end_popUp.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -290,13 +291,17 @@ class _PatientEyeCaptureTriagePageState
           ref.read(patientTriageStepperProvider).nextStep(3);
           ref.read(currentEyeProvider.notifier).state = TriageEye.RIGHT_EYE;
           ref.read(patientTriageProvider).saveTriage();
-          Navigator.of(context).popUntil((route) => route.isFirst);
-          showReportPopUp(context);
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(
-          //     builder: (context) => const PatientTriageResultPage(),
-          //   ),
-          // );
+          // Navigator.of(context).popUntil((route) => route.isFirst);
+          // showReportPopUp(context);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const OptometritianReportPage(
+                id: 'PID 12345687',
+                education: 'No Education',
+                employment: 'Unemployed/ Home duties',
+              ),
+            ),
+          );
         } else {
           return;
         }

@@ -25,7 +25,7 @@ class OptometritianReportPage extends StatelessWidget {
       appBar: CustomAppbar(
         leadingIcon: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).popUntil((route) => route.isFirst);
           },
           icon: Icon(
             Icons.arrow_back_ios,

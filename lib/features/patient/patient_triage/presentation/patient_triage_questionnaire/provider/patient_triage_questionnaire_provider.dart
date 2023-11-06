@@ -26,6 +26,8 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireResponse = [],
         _totalPages = _questionnaireSections.length;
 
+  List<String>allRemarks = ['',];
+  List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
   int get totalPage => _totalPages;
@@ -34,9 +36,11 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
   void setQuestionnaireRemarks(String remarks) {
-    _questionnaireRemarks = '$_questionnaireRemarks/$remarks';
+    _questionnaireRemarks = remarks;
+    allRemarks.add(remarks);
     notifyListeners();
   }
+
 
   void addQuestionnaireAnswer(int questionCode, bool answer) {
     _selectedOptions[questionCode] = answer;
