@@ -252,6 +252,8 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   int getTumblingTestUrgency() {
     double leftEyeSight = calculateLeftEyeSigth();
     double rightEyeSight = calculateRightEyeSigth();
+    leftEyeSight = _dataSource.lookUpLogMarTable(leftEyeSight);
+    rightEyeSight = _dataSource.lookUpLogMarTable(rightEyeSight);
 
     int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
     int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
