@@ -2,7 +2,6 @@ import 'dart:math' as math;
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
 import 'dart:math';
 
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/foundation.dart';
@@ -94,7 +93,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
 
     if (_currentLevel! >= _maxLevel!) {
-      endGame();
+      _endGame();
       return;
     }
     if (_currentIndex! + 1 == _level!.totalQuestions) {
@@ -110,7 +109,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
     if (gameMode == GameMode.regular) {
       if (_currentLevel! < 1) {
-        endGame();
+        _endGame();
         return;
       }
 
@@ -118,7 +117,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       _moveToPreviousLevel();
     } else {
       if (_totalWrongLevelResponse == 3) {
-        endGame();
+        _endGame();
       } else if (_currentIndex! + 1 == _level!.totalQuestions) {
         _moveToNextLevel();
       } else {
@@ -151,15 +150,28 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     return userSwipDirection == questionDirection;
   }
 
-  void endGame() {
+  void _endGame() {
     _isGameOver = true;
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;
     notifyListeners();
   }
 
-  void resetTumblingTest() {
-    startGame(Eye.left);
-    notifyListeners();
+  int _findMax(List<int> input) {
+    int max = input[0];
+    for (int i = 1; i < input.length; i++) {
+      if (input[i] > max) {
+        max = input[i];
+      }
+    }
+    return max;
+  }
+
+  int _findSecondMax(List<int> input) {
+    if (input.length > 1) {
+      input.sort();
+      return input[input.length - 2];
+    }
+    return input.first;
   }
 
   int _calculateUrgencyHelper(double value) {
@@ -171,6 +183,11 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     } else {
       return 1;
     }
+  }
+
+  void resetTumblingTest() {
+    startGame(Eye.left);
+    notifyListeners();
   }
 
   int getTumblingTestUrgency() {
@@ -209,23 +226,5 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       var secondMax = _findSecondMax(levels);
       return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
     }
-  }
-
-  int _findMax(List<int> input) {
-    int max = input[0];
-    for (int i = 1; i < input.length; i++) {
-      if (input[i] > max) {
-        max = input[i];
-      }
-    }
-    return max;
-  }
-
-  int _findSecondMax(List<int> input) {
-    if (input.length > 1) {
-      input.sort();
-      return input[input.length - 2];
-    }
-    return input.first;
   }
 }
