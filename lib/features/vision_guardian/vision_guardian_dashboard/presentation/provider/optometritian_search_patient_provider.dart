@@ -39,12 +39,16 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
 
   set setToDate(DateTime date) {
     _selectedToDate = date;
+    print(_selectedToDate);
     notifyListeners();
+    searchByDate();
   }
 
   set setFromDate(DateTime date) {
     _selectedFromDate = date;
+    print(_selectedFromDate);
     notifyListeners();
+    searchByDate();
   }
 
   void searchByTimeFrame() {
@@ -59,6 +63,18 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
         .where((element) =>
             element.id!.toLowerCase().contains(_query.toLowerCase()))
         .toList();
+    notifyListeners();
+  }
+
+  void searchByDate() {
+    _searchPatientList = _patientList.where((element) {
+      if (_selectedFromDate.isBefore(element.date!) &&
+          _selectedToDate
+              .isAfter(element.date!.subtract(const Duration(days: 1)))) {
+        return true;
+      }
+      return false;
+    }).toList();
     notifyListeners();
   }
 

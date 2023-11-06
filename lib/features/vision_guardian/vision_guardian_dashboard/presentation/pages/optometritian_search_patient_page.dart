@@ -18,6 +18,8 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
     var model = ref.watch(visionGuardianAddPatientProvider);
     var isSelected = useState<int>(-1);
     var isReport = useState<int>(-1);
+    var selectedDateRange = useState<DateTimeRange?>(null);
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       body: SingleChildScrollView(
@@ -134,8 +136,14 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                     color: Colors.grey.withOpacity(0.5),
                   ),
                   InkWell(
-                    onTap: () {
-                      final pickedDate = _showDateRangePicker(context);
+                    onTap: () async {
+                      var pickedDateRange = await _showDateRangePicker(context);
+                      if (pickedDateRange != null) {
+                        selectedDateRange.value = pickedDateRange;
+                      }
+
+                      model.setFromDate = selectedDateRange.value!.start;
+                      model.setToDate = selectedDateRange.value!.end;
                     },
                     child: const CircleAvatar(
                       backgroundColor: AppColor.white,
@@ -177,46 +185,6 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                             fontSize: 14,
                             color: AppColor.grey,
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.all(AppSize.klpadding),
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    shadowColor: MaterialStateProperty.all(
-                                      AppColor.white,
-                                    ),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      AppColor.white,
-                                    ),
-                                    side: MaterialStateProperty.all(
-                                      const BorderSide(
-                                          color: AppColor.blue, width: 1.5),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const OptometricianAddPatientPage(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Add New Patient',
-                                    style: applyRobotoFont(
-                                      color: AppColor.blue,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     )
@@ -314,7 +282,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
       firstDate: DateTime.now().subtract(const Duration(days: 365 * 2)),
       lastDate: DateTime.now(),
     );
-
+    print("$picked \nkk/ngg\n");
     return picked;
   }
 }
