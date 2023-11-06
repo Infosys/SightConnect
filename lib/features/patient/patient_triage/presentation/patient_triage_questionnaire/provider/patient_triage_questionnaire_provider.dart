@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -50,7 +52,28 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
 
   void saveQuestionaireResponse() {
     _questionnaireResponse.add(_selectedOptions);
+    calculateQuestionnaireUrgency(_selectedOptions);
     _selectedOptions.clear();
     notifyListeners();
+  }
+
+  int urgency = 1;
+
+  void calculateQuestionnaireUrgency(Map<int, bool> selectedOptions) {
+    List<int> selectedOptionsID = selectedOptions.keys.toList();
+    for (var questionnaire in _questionnaireSections) {
+      for (var question in questionnaire.questionnaire!) {
+        for (var question in question.questions!) {
+          if (selectedOptionsID.contains(question.code)) {
+            urgency = max(urgency, question.weight!);
+          }
+        }
+      }
+    }
+    logger.f("Questionnaire Urgency: $urgency");
+  }
+
+  int getTriageQuestionnaireUrgency() {
+    return urgency;
   }
 }

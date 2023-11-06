@@ -1,5 +1,8 @@
 import 'dart:math' as math;
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
+import 'dart:math';
+
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_data_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/foundation.dart';
@@ -157,6 +160,29 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   void resetTumblingTest() {
     startGame(Eye.left);
     notifyListeners();
+  }
+
+  int _calculateUrgencyHelper(double value) {
+    logger.i("Tumbling Test Value: $value");
+    if (value >= 1) {
+      return 3;
+    } else if (value >= 0.5) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+
+  int getTumblingTestUrgency() {
+    double leftEyeSight = calculateLeftEyeSigth();
+    double rightEyeSight = calculateRightEyeSigth();
+
+    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
+    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
+
+    int urgency = max(leftEyeUrgency, rightEyeUrgency);
+
+    return urgency;
   }
 
   double calculateLeftEyeSigth() {
