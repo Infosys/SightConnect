@@ -3,11 +3,11 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OptometritianSearchPatientPage extends HookConsumerWidget {
@@ -26,15 +26,11 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: AppSize.height(context) * 0.05,
-              ),
+              SizedBox(height: AppSize.height(context) * 0.05),
               Row(
                 children: [
                   IconButton(
                     onPressed: () {
-                      model.stopSearch();
-                      //pop context
                       FocusScope.of(context).unfocus();
                       Future.delayed(const Duration(milliseconds: 300), () {
                         Navigator.pop(context);
@@ -56,11 +52,8 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                       ),
                       child: TextField(
                         decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                          hintText: " Search Patient ID",
+                          contentPadding: EdgeInsets.all(16),
+                          hintText: "Search Patient ID",
                           hintStyle: TextStyle(
                             fontSize: 14,
                             color: AppColor.grey,
@@ -75,16 +68,14 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                           ),
                         ),
                         onChanged: (value) {
-                          model.searchPatient(value);
+                          model.setQuery = value;
                         },
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: AppSize.kmheight + 5,
-              ),
+              const SizedBox(height: AppSize.kmheight + 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -94,19 +85,22 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: model.timeFrame.length,
+                      itemCount: model.timeFrameList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        var data = model.timeFrame[index];
+                        var data = model.timeFrameList[index];
 
                         return InkWell(
                           onTap: () {
                             isSelected.value = index;
+                            model.setTimeFrame = data;
                           },
                           child: Container(
                             margin:
                                 const EdgeInsets.only(right: AppSize.kspadding),
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: isSelected.value == index
@@ -122,7 +116,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                             ),
                             child: Center(
                               child: Text(
-                                data,
+                                data.toString().split('.').last.capitalize(),
                                 style: applyRobotoFont(
                                     fontSize: 14,
                                     color: AppColor.black,
@@ -169,23 +163,16 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
               model.searchPatientList.isEmpty
                   ? Column(
                       children: [
-                        model.isMatched == false && model.isSearching == true
-                            ? Image(
-                                width: AppSize.width(context) * 0.5,
-                                image: const AssetImage(
-                                    "assets/images/search empty.png"),
-                              )
-                            : SvgPicture.asset(
-                                "assets/images/optometric_empty_search.svg",
-                                width: AppSize.width(context) * 0.5,
-                              ),
+                        Image(
+                          width: AppSize.width(context) * 0.5,
+                          image: const AssetImage(
+                              "assets/images/search empty.png"),
+                        ),
                         const SizedBox(
                           height: AppSize.klheight,
                         ),
                         Text(
-                          model.isMatched == false && model.isSearching == true
-                              ? "Sorry we couldn’t find any matches.\n Please try searching with other ID."
-                              : "Find the Patient by searching with the Identification number or add new patient.",
+                          "Find the Patient by searching with the Identification number or add new patient.",
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: AppColor.grey,

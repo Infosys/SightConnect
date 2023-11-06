@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/patient_triage_questionnaire/provider/patient_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/providers/patient_triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -28,7 +29,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
-            content: AppLocalizations.of(context)!.questionnaireExitDialog,
+            content: context.loc!.questionnaireExitDialog,
           ),
         );
         return result ?? false;
@@ -58,7 +59,7 @@ class PatientTriageQuestionnairePage extends HookConsumerWidget {
             children: [
               const SizedBox(width: AppSize.kmwidth),
               Text(
-                AppLocalizations.of(context)!.stepNumber("1", "3"),
+                context.loc!.stepNumber("1", "3"),
                 style: applyRobotoFont(
                   color: AppColor.primary,
                   fontSize: 14,
