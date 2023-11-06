@@ -459,23 +459,26 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
   @override
   double lookUpLogMarTable(double decimal) {
     switch (decimal) {
-      case 0.10:
-        return 0.1;
-      case 0.125:
-        return 0.90;
+      case 0.1:
+        return 1.0;
+      case 0.2:
+        return 0.6989;
       case 0.25:
-        return 0.25;
+        return 0.6021;
       case 0.32:
-        return 0.32;
+        return 0.4947;
       case 0.4:
-        return 0.4;
+        return 0.3979;
       case 0.5:
-        return 0.5;
+        return 0.3010;
       case 0.63:
-        return 0.63;
-
+        return 0.1761;
+      case 0.8:
+        return 0.0969;
+      case 1.0:
+        return 0.0;
       default:
-        return 0.1;
+        return 0.0;
     }
   }
 }

@@ -176,7 +176,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double calculateLeftEyeSigth() {
+  double _calculateLeftEyeSigth() {
     var leftEyeReport = _eyesFinalReport[Eye.left];
     var levels = leftEyeReport!.keys.toList();
     var isAllRegularMode = leftEyeReport.values.every((element) {
@@ -207,7 +207,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     }
   }
 
-  double calculateRightEyeSigth() {
+  double _calculateRightEyeSigth() {
     var leftEyeReport = _eyesFinalReport[Eye.right];
     var levels = leftEyeReport!.keys.toList();
     var isAllRegularMode = leftEyeReport.values.every((element) {
@@ -239,6 +239,14 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
   //
 
+  double leftEyeSight() {
+    return _dataSource.lookUpLogMarTable(_calculateLeftEyeSigth());
+  }
+
+  double rightEyeSight() {
+    return _dataSource.lookUpLogMarTable(_calculateRightEyeSigth());
+  }
+
   int _findMax(List<int> input) {
     int max = input[0];
     for (int i = 1; i < input.length; i++) {
@@ -250,16 +258,16 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   }
 
   int getTumblingTestUrgency() {
-    double leftEyeSight = calculateLeftEyeSigth();
-    double rightEyeSight = calculateRightEyeSigth();
+    double leftSight = leftEyeSight();
+    double rightSight = rightEyeSight();
 
-    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
-    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
+    int leftEyeUrgency = _calculateUrgencyHelper(leftSight);
+    int rightEyeUrgency = _calculateUrgencyHelper(rightSight);
 
     int urgency = math.max(leftEyeUrgency, rightEyeUrgency);
     logger.i({
-      "leftEyeSight": leftEyeSight,
-      "rightEyeSight": rightEyeSight,
+      "leftEyeSight": leftSight,
+      "rightEyeSight": rightSight,
       "leftEyeUrgency": leftEyeUrgency,
       "rightEyeUrgency": rightEyeUrgency,
     });

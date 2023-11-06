@@ -53,12 +53,34 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   void saveQuestionaireResponse() {
     _questionnaireResponse.add(_selectedOptions);
     calculateQuestionnaireUrgency(_selectedOptions);
+    getquestionnaireForReportPage(_selectedOptions);
     logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
     notifyListeners();
   }
 
   int urgency = 1;
+  int index = 0;
+  List<Map<String, dynamic>> questionnaireForReportPage = [];
+
+  List<Map<String, dynamic>> getquestionnaireForReportPage(selectedOptions) {
+    List<int> selectedOptionsID = selectedOptions.keys.toList();
+
+    for (var question in questionnaireSections[index].questionnaire!) {
+      List<String> temp = [];
+      for (var question in question.questions!) {
+        if (selectedOptionsID.contains(question.code)) {
+          temp.add(question.statement!);
+        }
+      }
+      questionnaireForReportPage
+          .add({"question": question.description, "answer": temp});
+      index++;
+    }
+
+    logger.f("Questionnaire for Report Page: $questionnaireForReportPage");
+    return questionnaireForReportPage;
+  }
 
   void calculateQuestionnaireUrgency(Map<int, bool> selectedOptions) {
     List<int> selectedOptionsID = selectedOptions.keys.toList();
