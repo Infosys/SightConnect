@@ -1,7 +1,5 @@
 import 'dart:math' as math;
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
-import 'dart:math';
-
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/foundation.dart';
@@ -27,12 +25,14 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   late bool? _isGameOver;
   late int? _maxLevel;
   late int? _totalWrongLevelResponse;
+
   late List<UserResponse>? _currentLevelUserResponses;
   late SingleEyeReport? _singleEyeReport;
   final FinalEyesReport _eyesFinalReport = {};
 
   void startGame(Eye eye) {
     _eyesFinalReport[eye] = {};
+
     _gameMode = GameMode.regular;
     _currentEye = eye;
     _currentLevel = 0;
@@ -93,7 +93,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
 
     if (_currentLevel! >= _maxLevel!) {
-      _endGame();
+      endGame();
       return;
     }
     if (_currentIndex! + 1 == _level!.totalQuestions) {
@@ -109,7 +109,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
     if (gameMode == GameMode.regular) {
       if (_currentLevel! < 1) {
-        _endGame();
+        endGame();
         return;
       }
 
@@ -117,7 +117,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       _moveToPreviousLevel();
     } else {
       if (_totalWrongLevelResponse == 3) {
-        _endGame();
+        endGame();
       } else if (_currentIndex! + 1 == _level!.totalQuestions) {
         _moveToNextLevel();
       } else {
@@ -128,6 +128,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
 
   void _moveToNextLevel() {
     _currentLevel = _currentLevel! + 1;
+
     _currentIndex = 0;
     _totalWrongLevelResponse = 0;
     _currentLevelUserResponses = [];
@@ -136,6 +137,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
 
   void _moveToPreviousLevel() {
     _currentLevel = _currentLevel! - 1;
+
     _currentIndex = 0;
     _totalWrongLevelResponse = 0;
     _currentLevelUserResponses = [];
@@ -150,10 +152,77 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     return userSwipDirection == questionDirection;
   }
 
-  void _endGame() {
+  void endGame() {
     _isGameOver = true;
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;
     notifyListeners();
+  }
+
+  void resetTumblingTest() {
+    startGame(Eye.left);
+    notifyListeners();
+  }
+
+  double calculateLeftEyeSigth() {
+    var leftEyeReport = _eyesFinalReport[Eye.left];
+    var levels = leftEyeReport!.keys.toList();
+    var isAllRegularMode = leftEyeReport.values.every((element) {
+      return element.first.mode == GameMode.regular;
+    });
+    if (isAllRegularMode) {
+      return _dataSource.getLevel(_findMax(levels), GameMode.regular).logMar;
+    } else {
+      var allWrongLevels = leftEyeReport.keys.where((element) {
+        return leftEyeReport[element]!.first.mode == GameMode.isFive;
+      }).toList();
+      var maxLevel = _findMax(allWrongLevels);
+      if (maxLevel == 0) {
+        return _dataSource.getLevel(maxLevel, GameMode.isFive).logMar;
+      } else if (maxLevel == 8) {
+        var isThreeWrong = leftEyeReport[maxLevel]!
+                .where((element) => element.isUserResponseCorrect == false)
+                .length ==
+            3;
+        if (isThreeWrong) {
+          return _dataSource.getLevel(maxLevel - 1, GameMode.isFive).logMar;
+        } else {
+          return _dataSource.getLevel(maxLevel, GameMode.isFive).logMar;
+        }
+      } else {
+        return _dataSource.getLevel(maxLevel - 1, GameMode.isFive).logMar;
+      }
+    }
+  }
+
+  double calculateRightEyeSigth() {
+    var leftEyeReport = _eyesFinalReport[Eye.right];
+    var levels = leftEyeReport!.keys.toList();
+    var isAllRegularMode = leftEyeReport.values.every((element) {
+      return element.first.mode == GameMode.regular;
+    });
+    if (isAllRegularMode) {
+      return _dataSource.getLevel(_findMax(levels), GameMode.regular).logMar;
+    } else {
+      var allWrongLevels = leftEyeReport.keys.where((element) {
+        return leftEyeReport[element]!.first.mode == GameMode.isFive;
+      }).toList();
+      var maxLevel = _findMax(allWrongLevels);
+      if (maxLevel == 0) {
+        return _dataSource.getLevel(maxLevel, GameMode.isFive).logMar;
+      } else if (maxLevel == 8) {
+        var isThreeWrong = leftEyeReport[maxLevel]!
+                .where((element) => element.isUserResponseCorrect == false)
+                .length ==
+            3;
+        if (isThreeWrong) {
+          return _dataSource.getLevel(maxLevel - 1, GameMode.isFive).logMar;
+        } else {
+          return _dataSource.getLevel(maxLevel, GameMode.isFive).logMar;
+        }
+      } else {
+        return _dataSource.getLevel(maxLevel - 1, GameMode.isFive).logMar;
+      }
+    }
   }
 
   int _findMax(List<int> input) {
@@ -166,12 +235,22 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     return max;
   }
 
-  int _findSecondMax(List<int> input) {
-    if (input.length > 1) {
-      input.sort();
-      return input[input.length - 2];
-    }
-    return input.first;
+  int getTumblingTestUrgency() {
+    double leftEyeSight = calculateLeftEyeSigth();
+    double rightEyeSight = calculateRightEyeSigth();
+
+    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
+    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
+
+    int urgency = math.max(leftEyeUrgency, rightEyeUrgency);
+    logger.i({
+      "leftEyeSight": leftEyeSight,
+      "rightEyeSight": rightEyeSight,
+      "leftEyeUrgency": leftEyeUrgency,
+      "rightEyeUrgency": rightEyeUrgency,
+    });
+
+    return urgency;
   }
 
   int _calculateUrgencyHelper(double value) {
@@ -182,49 +261,6 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       return 2;
     } else {
       return 1;
-    }
-  }
-
-  void resetTumblingTest() {
-    startGame(Eye.left);
-    notifyListeners();
-  }
-
-  int getTumblingTestUrgency() {
-    double leftEyeSight = calculateLeftEyeSigth();
-    double rightEyeSight = calculateRightEyeSigth();
-
-    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
-    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
-
-    int urgency = max(leftEyeUrgency, rightEyeUrgency);
-
-    return urgency;
-  }
-
-  double calculateLeftEyeSigth() {
-    var leftEyeReport = _eyesFinalReport[Eye.left];
-    var levels = leftEyeReport!.keys.toList();
-    var lastLevel = _findMax(levels);
-    var mode = leftEyeReport[lastLevel]!.first.mode;
-    if (mode == GameMode.regular) {
-      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
-    } else {
-      var secondMax = _findSecondMax(levels);
-      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
-    }
-  }
-
-  double calculateRightEyeSigth() {
-    var leftEyeReport = _eyesFinalReport[Eye.right];
-    var levels = leftEyeReport!.keys.toList();
-    var lastLevel = _findMax(levels);
-    var mode = leftEyeReport[lastLevel]!.first.mode;
-    if (mode == GameMode.regular) {
-      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
-    } else {
-      var secondMax = _findSecondMax(levels);
-      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
     }
   }
 }
