@@ -45,8 +45,7 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
 
   void addQuestionnaireAnswer(int questionCode, bool answer) {
     _selectedOptions[questionCode] = answer;
-    _selectedOptions.forEach((key, value) {
-    });
+    
     notifyListeners();
     logger.d("Added Options: $_selectedOptions");
   }

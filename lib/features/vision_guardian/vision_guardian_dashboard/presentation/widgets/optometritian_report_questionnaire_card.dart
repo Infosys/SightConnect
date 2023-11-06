@@ -57,7 +57,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                     height: 8,
                   ),
                   for (var i = 0; i < currentData['answer'].length; i++)
-                    if (currentData['answer'][i] != "None of These")
+                    if (currentData['answer'][i] != "None of these")
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 2),
