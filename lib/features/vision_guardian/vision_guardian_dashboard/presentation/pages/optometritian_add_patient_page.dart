@@ -17,6 +17,19 @@ class OptometricianAddPatientPage extends HookWidget {
     final educationalQualificationController = useTextEditingController();
     final professionController = useTextEditingController();
     final isAssistanceNeeded = useState<bool>(false);
+    final isButtonEnabled = useState<bool>(false);
+
+    useEffect(() {
+      listener() {
+        final patientId = patientIdController.text;
+        final validPatientId = RegExp(r'^[0-9]+$').hasMatch(patientId);
+        isButtonEnabled.value = validPatientId;
+      }
+      patientIdController.addListener(listener);
+      return () {
+        patientIdController.removeListener(listener);
+      };
+    }, const []);
 
     final educationalQualifications = [
       'Not applicable (Children <= 5years)',
@@ -332,124 +345,128 @@ class OptometricianAddPatientPage extends HookWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+        child: Form(
+          child: Column(
+            children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                color: AppColor.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Add Patient Information",
+                        style: applyRobotoFont(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: patientIdController,
+                        decoration: InputDecoration(
+                          labelText: "Patient ID",
+                          labelStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: educationalQualificationController,
+                        decoration: InputDecoration(
+                          labelText: "Educational Qualification",
+                          labelStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: const Icon(CupertinoIcons.chevron_down),
+                            onPressed: showEducationalQualificationBottomSheet,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: professionController,
+                        decoration: InputDecoration(
+                          labelText: "Profession",
+                          labelStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: const Icon(CupertinoIcons.chevron_down),
+                            onPressed: showProfessionBottomSheet,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  ),
+                ),
               ),
-              color: AppColor.white,
-              child: Padding(
+              const SizedBox(height: 16),
+              Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Add Patient Information",
+                      "Does the Patient need assistance?",
                       style: applyRobotoFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    CupertinoSwitch(
+                      activeColor: AppColor.primary,
+                      value: isAssistanceNeeded.value,
+                      onChanged: (value) {
+                        isAssistanceNeeded.value = value;
+                      },
                     ),
-                    TextField(
-                      controller: patientIdController,
-                      decoration: InputDecoration(
-                        labelText: "Patient ID",
-                        labelStyle: applyRobotoFont(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      controller: educationalQualificationController,
-                      decoration: InputDecoration(
-                        labelText: "Educational Qualification",
-                        labelStyle: applyRobotoFont(
-                          fontSize: 14,
-                        ),
-                        suffixIcon: IconButton(
-                          icon: const Icon(CupertinoIcons.chevron_down),
-                          onPressed: showEducationalQualificationBottomSheet,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      controller: professionController,
-                      decoration: InputDecoration(
-                        labelText: "Profession",
-                        labelStyle: applyRobotoFont(
-                          fontSize: 14,
-                        ),
-                        suffixIcon: IconButton(
-                          icon: const Icon(CupertinoIcons.chevron_down),
-                          onPressed: showProfessionBottomSheet,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const Spacer(),
+              Row(
                 children: [
-                  Text(
-                    "Does the Patient need assistance?",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: ElevatedButton(
+                        onPressed: isButtonEnabled.value
+                            ? () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const OptometricianStartTestPage()));
+                              }
+                            : null,
+                        child: const Text("Start Assessment"),
+                      ),
                     ),
-                  ),
-                  CupertinoSwitch(
-                    activeColor: AppColor.primary,
-                    value: isAssistanceNeeded.value,
-                    onChanged: (value) {
-                      isAssistanceNeeded.value = value;
-                    },
                   ),
                 ],
               ),
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const OptometricianStartTestPage()));
-                      },
-                      child: const Text("Start Assessment"),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const BrandingWidgetH(),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              const BrandingWidgetH(),
+            ],
+          ),
         ),
       ),
     );
