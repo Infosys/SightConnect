@@ -1,18 +1,25 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-int maxLevel = 8;
-// 0 to 8 total is 9
+var tumlingLocalSource = Provider((ref) => TumblingLocalSourceImpl());
 
-class TumblingDataSource {
-  TumblingDataSource();
+abstract class TumblingLocalSource {
+  List<Level> getLevels();
+  Level getLevel(int levelNumber, GameMode mode);
+  void resetTestState();
+  int get maxLevel;
+}
 
-  List<Level> levels = [
+class TumblingLocalSourceImpl implements TumblingLocalSource {
+  final List<Level> _levels = [
     Level(
       levelNumber: 0,
+      size: 0.5817,
+      logMar: 0.1,
+      snellerFraction: "20/200",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -23,9 +30,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 1,
+      size: 0.29,
+      logMar: 0.2,
+      snellerFraction: "20/100",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -36,9 +45,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 2,
+      size: 0.23,
+      logMar: 0.25,
+      snellerFraction: "20/80",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -49,9 +60,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 3,
+      size: 0.18,
+      logMar: 0.32,
+      snellerFraction: "20/62.5",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -60,12 +73,13 @@ class TumblingDataSource {
         ),
       ],
     ),
-
     Level(
       levelNumber: 4,
+      size: 0.1454,
+      logMar: 0.4,
+      snellerFraction: "20/50",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -74,12 +88,13 @@ class TumblingDataSource {
         ),
       ],
     ),
-
     Level(
       levelNumber: 5,
+      size: 0.1163,
+      logMar: 0.5,
+      snellerFraction: "20/40",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -90,9 +105,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 6,
+      size: 0.093,
+      logMar: 0.63,
+      snellerFraction: "20/31.77",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -103,9 +120,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 7,
+      size: 0.0727,
+      logMar: 0.8,
+      snellerFraction: "20/25",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -114,12 +133,13 @@ class TumblingDataSource {
         ),
       ],
     ),
-
     Level(
       levelNumber: 8,
+      size: 0.0581,
+      logMar: 1.0,
+      snellerFraction: "20/20",
       mode: GameMode.regular,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 1,
       questions: [
         Question(
@@ -129,11 +149,14 @@ class TumblingDataSource {
       ],
     ),
     ////////////////////////
+
     Level(
       levelNumber: 0,
+      size: 0.5817,
+      logMar: 0.1,
+      snellerFraction: "20/200",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -160,9 +183,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 1,
+      size: 0.29,
+      logMar: 0.2,
+      snellerFraction: "20/100",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -189,9 +214,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 2,
+      size: 0.23,
+      logMar: 0.25,
+      snellerFraction: "20/80",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -218,9 +245,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 3,
+      size: 0.18,
+      logMar: 0.32,
+      snellerFraction: "20/62.5",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -247,9 +276,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 4,
+      size: 0.1454,
+      logMar: 0.4,
+      snellerFraction: "20/50",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -277,9 +308,11 @@ class TumblingDataSource {
 
     Level(
       levelNumber: 5,
+      size: 0.1163,
+      logMar: 0.5,
+      snellerFraction: "20/40",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -306,9 +339,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 6,
+      size: 0.093,
+      logMar: 0.63,
+      snellerFraction: "20/31.77",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -335,9 +370,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 7,
+      size: 0.0727,
+      logMar: 0.8,
+      snellerFraction: "20/25",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -364,9 +401,11 @@ class TumblingDataSource {
     ),
     Level(
       levelNumber: 8,
+      size: 0.0581,
+      logMar: 1.0,
+      snellerFraction: "20/20",
       mode: GameMode.isFive,
       image: AppImages.tumblingE,
-      size: 22,
       totalQuestions: 5,
       questions: [
         Question(
@@ -393,95 +432,28 @@ class TumblingDataSource {
     ),
   ];
 
+  @override
+  List<Level> getLevels() {
+    return _levels;
+  }
+
+  @override
   Level getLevel(int levelNumber, GameMode mode) {
-    return levels.firstWhere(
+    return _levels.firstWhere(
       (element) => element.levelNumber == levelNumber && element.mode == mode,
     );
   }
 
-  getESizeFromLevel(int level) {
-    switch (level) {
-      case 0:
-        return 0.5817;
-      case 1:
-        return 0.29;
-      case 2:
-        return 0.23;
-      case 3:
-        return 0.18;
-      case 4:
-        return 0.1454;
-      case 5:
-        return 0.1163;
-      case 6:
-        return 0.093;
-      case 7:
-        return 0.0727;
-      case 8:
-        return 0.0581;
-
-      default:
-        return 0.0581;
-    }
-  }
-
-  getLogMarFromLevel(int level) {
-    switch (level) {
-      case 0:
-        return 0.1;
-      case 1:
-        return 0.2;
-      case 2:
-        return 0.25;
-      case 3:
-        return 0.32;
-      case 4:
-        return 0.4;
-      case 5:
-        return 0.5;
-      case 6:
-        return 0.63;
-      case 7:
-        return 0.8;
-      case 8:
-        return 1.0;
-
-      default:
-        return 1.0;
-    }
-  }
-
-  getSnellerFraction(int level) {
-    switch (level) {
-      case 0:
-        return "20/200";
-      case 1:
-        return "20/100";
-      case 2:
-        return "20/80";
-      case 3:
-        return "20/62.5";
-      case 4:
-        return "20/50";
-      case 5:
-        return "20/40";
-      case 6:
-        return "20/31.77";
-      case 7:
-        return "20/25";
-      case 8:
-        return "20/20";
-
-      default:
-        return "20/20";
-    }
-  }
-
-  resetDataSource() {
-    for (var level in levels) {
+  @override
+  void resetTestState() {
+    for (var level in _levels) {
       for (var question in level.questions) {
         question.questionStatus = QuestionStatus.unattempted;
       }
     }
   }
+
+  @override
+  // TODO: implement maxLevel
+  int get maxLevel => 8;
 }

@@ -31,14 +31,6 @@ class SwipeGestureCard extends HookConsumerWidget {
         next.startGame(Eye.right);
       } else if (next.currentEye == Eye.right && next.isGameOver!) {
         logger.d("Game Over for both eyes");
-
-        logger.d(next.eyesFinalReport);
-
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => const TumblingResultReportPage(),
-        //   ),
-        // );
         showDialog(
             barrierDismissible: false,
             context: context,

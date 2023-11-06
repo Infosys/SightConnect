@@ -3,6 +3,8 @@ class Level {
   GameMode mode;
   String image;
   double size;
+  double logMar;
+  String snellerFraction;
   int totalQuestions;
   List<Question> questions;
 
@@ -11,6 +13,8 @@ class Level {
     required this.mode,
     required this.image,
     required this.size,
+    required this.logMar,
+    required this.snellerFraction,
     required this.totalQuestions,
     required this.questions,
   });
@@ -24,17 +28,17 @@ class Level {
 class Question {
   QuestionDirection direction;
   int angle;
-  String image;
+
   QuestionStatus questionStatus;
   Question({
     required this.angle,
-    this.image = "",
     required this.direction,
     this.questionStatus = QuestionStatus.unattempted,
   });
 
   @override
-  String toString() => 'Question(angle: $angle)';
+  String toString() =>
+      'Question(angle: $angle, direction: $direction , questionStatus: $questionStatus)';
 }
 
 class UserResponse {

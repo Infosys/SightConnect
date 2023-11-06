@@ -26,9 +26,9 @@ class TumblingResultReportPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
     double leftEyeSight =
-        ref.read(tumblingTestProvider).calculateLeftEyeSigth();
+        ref.watch(tumblingTestProvider).calculateLeftEyeSigth();
     double rightEyeSight =
-        ref.read(tumblingTestProvider).calculateRightEyeSigth();
+        ref.watch(tumblingTestProvider).calculateRightEyeSigth();
     return WillPopScope(
       onWillPop: () async {
         ref.read(patientTriageProvider).resetTriage();

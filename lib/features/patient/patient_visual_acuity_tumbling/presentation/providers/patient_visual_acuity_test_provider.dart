@@ -1,158 +1,205 @@
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_data_source.dart';
+import 'dart:math' as math;
+import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
+typedef SingleEyeReport = Map<int, List<UserResponse>>;
+
+var tumblingTestProvider = ChangeNotifierProvider(
+  (ref) => PatientVisualAcuityTestProvider(ref.watch(tumlingLocalSource)),
+);
+
 class PatientVisualAcuityTestProvider with ChangeNotifier {
-  final TumblingDataSource _dataSource;
+  final TumblingLocalSource _dataSource;
   PatientVisualAcuityTestProvider(this._dataSource) {
     startGame(Eye.left);
   }
-
-  late Level? level;
-  late GameMode? gameMode;
-  late Eye? currentEye;
-  late int? currentLevel;
-  late int? currentIndex;
-  late bool? isGameOver;
-
-  late int? totalWrongLevelResponse;
-  late List<UserResponse>? currentLevelUserResponses;
-  late Map<int, List<UserResponse>>? singleEyeReport;
-  Map<Eye, Map> eyesFinalReport = {};
-  TumblingDataSource get dataSource => _dataSource;
+  late Level? _level;
+  late GameMode? _gameMode;
+  late Eye? _currentEye;
+  late int? _currentLevel;
+  late int? _currentIndex;
+  late bool? _isGameOver;
+  late int? _maxLevel;
+  late int? _totalWrongLevelResponse;
+  late List<UserResponse>? _currentLevelUserResponses;
+  late SingleEyeReport? _singleEyeReport;
+  final FinalEyesReport _eyesFinalReport = {};
 
   void startGame(Eye eye) {
-    eyesFinalReport[eye] = {};
-    gameMode = GameMode.regular;
-    currentEye = eye;
-    currentLevel = 0;
-    currentIndex = 0;
-    isGameOver = false;
-    totalWrongLevelResponse = 0;
-    currentLevelUserResponses = [];
-    level = _dataSource.getLevel(0, GameMode.regular);
-    singleEyeReport = {};
-    _dataSource.resetDataSource();
+    _eyesFinalReport[eye] = {};
+    _gameMode = GameMode.regular;
+    _currentEye = eye;
+    _currentLevel = 0;
+    _currentIndex = 0;
+    _maxLevel = _dataSource.maxLevel;
+    _isGameOver = false;
+    _totalWrongLevelResponse = 0;
+    _currentLevelUserResponses = [];
+    _level = _dataSource.getLevel(0, GameMode.regular);
+    _singleEyeReport = {};
+    _dataSource.resetTestState();
   }
 
+  Level? get level => _level;
+  GameMode? get gameMode => _gameMode;
+  Eye? get currentEye => _currentEye;
+  int? get currentLevel => _currentLevel;
+  int? get currentIndex => _currentIndex;
+  bool? get isGameOver => _isGameOver;
+  int? get maxLevel => _maxLevel;
+
   void handUserResponse(UserResponse userResponse) {
-    var isUserSwipeCorrect = _isUserSwipeDirectionCorrect(
+    bool isSwipeCorrect = _isUserSwipeDirectionRight(
       userResponse.swipeDirection,
-      level!.questions[currentIndex!].direction,
+      _level!.questions[_currentIndex!].direction,
     );
-    if (isUserSwipeCorrect) {
+
+    if (isSwipeCorrect) {
       userResponse.isUserResponseCorrect = true;
-      level!.questions[currentIndex!].questionStatus = QuestionStatus.right;
+      _level!.questions[_currentIndex!].questionStatus = QuestionStatus.right;
     } else {
       userResponse.isUserResponseCorrect = false;
-      level!.questions[currentIndex!].questionStatus = QuestionStatus.wrong;
+      _level!.questions[_currentIndex!].questionStatus = QuestionStatus.wrong;
     }
-    currentLevelUserResponses!.add(userResponse);
-
-    if (isUserSwipeCorrect) {
+    _currentLevelUserResponses!.add(userResponse);
+    if (isSwipeCorrect) {
       _handleRightResponse(userResponse);
     } else {
       _handleWrongResponse(userResponse);
     }
-    logger.d({
-      'currentIndex': currentIndex,
-      'currentLevel': currentLevel,
-      'isGameOver': isGameOver,
-      'gameMode': gameMode,
-      'totalWrongLevelResponse': totalWrongLevelResponse,
-      "questionLength": level!.totalQuestions,
-      "singleEyeReport": singleEyeReport,
-      "eyesFinalReport": eyesFinalReport,
-    });
+
+    if (kDebugMode) {
+      logger.d({
+        '_currentIndex': _currentIndex,
+        '_currentLevel': _currentLevel,
+        '_isGameOver': _isGameOver,
+        '_gameMode': _gameMode,
+        '_totalWrongLevelResponse': _totalWrongLevelResponse,
+        "questionLength": _level!.totalQuestions,
+        "_eyesFinalReport": _eyesFinalReport,
+      });
+    }
 
     notifyListeners();
   }
 
   void _handleRightResponse(UserResponse userResponse) {
-    singleEyeReport![currentLevel!] = currentLevelUserResponses!;
+    _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
 
-    if (currentIndex! + 1 == level!.totalQuestions) {
-      currentLevel = currentLevel! + 1;
-      if (currentLevel! > maxLevel) {
-        isGameOver = true;
-        eyesFinalReport[currentEye!] = singleEyeReport!;
-        currentLevel = maxLevel;
-      }
-      currentIndex = 0;
-      totalWrongLevelResponse = 0;
-      currentLevelUserResponses = [];
-      level = _dataSource.getLevel(currentLevel!, gameMode!);
-    } else {
-      currentIndex = currentIndex! + 1;
+    if (_currentLevel! >= _maxLevel!) {
+      endGame();
+      return;
     }
+    if (_currentIndex! + 1 == _level!.totalQuestions) {
+      _moveToNextLevel();
+    } else {
+      _currentIndex = _currentIndex! + 1;
+    }
+    notifyListeners();
   }
 
   void _handleWrongResponse(UserResponse userResponse) {
-    totalWrongLevelResponse = totalWrongLevelResponse! + 1;
-    if (currentLevel == 0 && gameMode == GameMode.regular) {
-      isGameOver = true;
-      eyesFinalReport[currentEye!] = singleEyeReport!;
-    }
-    if (userResponse.mode == GameMode.regular) {
-      gameMode = GameMode.isFive;
-      if (currentLevel! > 0) {
-        currentLevel = currentLevel! - 1;
-        _dataSource.resetDataSource();
+    _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
+    _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
+    if (gameMode == GameMode.regular) {
+      if (_currentLevel! < 1) {
+        endGame();
+        return;
       }
-      currentIndex = 0;
-      singleEyeReport![currentLevel!] = currentLevelUserResponses!;
-      currentLevelUserResponses = [];
-      level = _dataSource.getLevel(currentLevel!, gameMode!);
-    } else if (userResponse.mode == GameMode.isFive) {
-      if (totalWrongLevelResponse == 4) {
-        isGameOver = true;
 
-        _dataSource.resetDataSource();
-        currentIndex = 0;
-        singleEyeReport![currentLevel!] = currentLevelUserResponses!;
-        eyesFinalReport[currentEye!] = singleEyeReport!;
-        currentLevelUserResponses = [];
-        level = _dataSource.getLevel(currentLevel!, gameMode!);
+      _gameMode = GameMode.isFive;
+      _moveToPreviousLevel();
+    } else {
+      if (_totalWrongLevelResponse == 3) {
+        endGame();
+      } else if (_currentIndex! + 1 == _level!.totalQuestions) {
+        _moveToNextLevel();
       } else {
-        currentIndex = currentIndex! + 1;
+        _currentIndex = _currentIndex! + 1;
       }
     }
   }
 
-  bool _isUserSwipeDirectionCorrect(
+  void _moveToNextLevel() {
+    _currentLevel = _currentLevel! + 1;
+    _currentIndex = 0;
+    _totalWrongLevelResponse = 0;
+    _currentLevelUserResponses = [];
+    _level = _dataSource.getLevel(_currentLevel!, _gameMode!);
+  }
+
+  void _moveToPreviousLevel() {
+    _currentLevel = _currentLevel! - 1;
+    _currentIndex = 0;
+    _totalWrongLevelResponse = 0;
+    _currentLevelUserResponses = [];
+    _level = _dataSource.getLevel(_currentLevel!, _gameMode!);
+    notifyListeners();
+  }
+
+  bool _isUserSwipeDirectionRight(
     QuestionDirection userSwipDirection,
     QuestionDirection questionDirection,
   ) {
     return userSwipDirection == questionDirection;
   }
 
-  double calculateLeftEyeSigth() {
-    List<int> levels = eyesFinalReport[Eye.left]!.keys.toList() as List<int>;
-
-    int secondLargeLevel =
-        levels.reduce((curr, next) => curr > next ? curr : next);
-
-    return _dataSource.getLogMarFromLevel(secondLargeLevel);
+  void endGame() {
+    _isGameOver = true;
+    _eyesFinalReport[_currentEye!] = _singleEyeReport!;
+    notifyListeners();
   }
 
-  double calculateRightEyeSigth() {
-    List<int> levels = eyesFinalReport[Eye.right]!.keys.toList() as List<int>;
-
-    int secondLargeLevel =
-        levels.reduce((curr, next) => curr > next ? curr : next);
-    return _dataSource.getLogMarFromLevel(secondLargeLevel);
-  }
-
-  resetTumblingTest() {
+  void resetTumblingTest() {
     startGame(Eye.left);
     notifyListeners();
   }
-}
 
-var tumblingTestProvider = ChangeNotifierProvider(
-  (ref) => PatientVisualAcuityTestProvider(
-    TumblingDataSource(),
-  ),
-);
+  double calculateLeftEyeSigth() {
+    var leftEyeReport = _eyesFinalReport[Eye.left];
+    var levels = leftEyeReport!.keys.toList();
+    var lastLevel = _findMax(levels);
+    var mode = leftEyeReport[lastLevel]!.first.mode;
+    if (mode == GameMode.regular) {
+      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
+    } else {
+      var secondMax = _findSecondMax(levels);
+      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
+    }
+  }
+
+  double calculateRightEyeSigth() {
+    var leftEyeReport = _eyesFinalReport[Eye.right];
+    var levels = leftEyeReport!.keys.toList();
+    var lastLevel = _findMax(levels);
+    var mode = leftEyeReport[lastLevel]!.first.mode;
+    if (mode == GameMode.regular) {
+      return _dataSource.getLevel(lastLevel, GameMode.regular).logMar;
+    } else {
+      var secondMax = _findSecondMax(levels);
+      return _dataSource.getLevel(secondMax, GameMode.isFive).logMar;
+    }
+  }
+
+  int _findMax(List<int> input) {
+    int max = input[0];
+    for (int i = 1; i < input.length; i++) {
+      if (input[i] > max) {
+        max = input[i];
+      }
+    }
+    return max;
+  }
+
+  int _findSecondMax(List<int> input) {
+    if (input.length > 1) {
+      input.sort();
+      return input[input.length - 2];
+    }
+    return input.first;
+  }
+}

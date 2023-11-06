@@ -35,7 +35,7 @@ class VoiceAssistCard extends HookConsumerWidget {
         next.startGame(Eye.right);
       } else if (next.currentEye == Eye.right && next.isGameOver!) {
         logger.d("Game Over for both eyes");
-        logger.d(next.eyesFinalReport);
+
         _showSuccessTemp(context, ref);
       }
     });

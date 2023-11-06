@@ -10,8 +10,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import '../../data/source/local/tumbling_data_source.dart';
 import '../providers/patient_visual_acuity_test_provider.dart';
 
 class TopReadingCard extends ConsumerWidget {
@@ -20,10 +18,13 @@ class TopReadingCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
-    var size = model.dataSource.getESizeFromLevel(model.currentLevel!);
+    var currentLevel = model.level;
+
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
-    var dimension = mm(size) * 10;
+    // final size = mm(currentLevel!.size) * 10;
+    final size = currentLevel!.size * 60;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSize.klradius),
@@ -42,13 +43,14 @@ class TopReadingCard extends ConsumerWidget {
                 child: Wrap(
                   runAlignment: WrapAlignment.center,
                   runSpacing: 10,
-                  spacing: dimension,
+                  spacing: size,
                   children: List.generate(
                     model.level!.questions.length,
                     (index) {
                       var question = model.level!.questions[index];
+
                       return _RotatedTumblingE(
-                        size: dimension,
+                        size: size,
                         question: question,
                         index: index,
                         selectedIndex: model.currentIndex!,
@@ -61,7 +63,7 @@ class TopReadingCard extends ConsumerWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                model.dataSource.getSnellerFraction(model.currentLevel!),
+                currentLevel.snellerFraction,
                 style: applyFiraSansFont(
                   color: AppColor.grey,
                 ),
@@ -72,7 +74,7 @@ class TopReadingCard extends ConsumerWidget {
               child: LinearPercentIndicator(
                 padding: const EdgeInsets.all(2),
                 lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                percent: ((model.currentLevel!) / maxLevel).clamp(0, 1),
+                percent: (model.currentLevel! / model.maxLevel!).clamp(0, 1),
                 barRadius: const Radius.circular(AppSize.klradius),
                 progressColor: AppColor.green,
               ),

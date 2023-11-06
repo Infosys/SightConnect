@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'visual_acuity_tumbling_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VisualAcuityDialog {
   VisualAcuityDialog._();
