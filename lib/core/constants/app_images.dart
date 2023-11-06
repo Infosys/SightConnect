@@ -17,7 +17,7 @@ class AppImages {
   static const String swipeUp = 'assets/images/swipe_up.svg';
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
-  static const String tumblingE = 'assets/images/tumbling_E.svg';
+  static const String tumblingE = 'assets/images/tumbling_e.svg';
 
   ///services
 
@@ -92,6 +92,7 @@ class AppImages {
 
   //optometric dashboard
 
-  static const String searchPatient = "assets/images/optometric_search_patient.svg";
+  static const String searchPatient =
+      "assets/images/optometric_search_patient.svg";
   static const String addPatient = "assets/images/optometric_add_patient.svg";
 }
