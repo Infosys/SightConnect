@@ -129,18 +129,18 @@ class OptometritianDashboardPage extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         const OptometricianAddPatientPage(),
-                          //   ),
-                          // );
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const PatientVisualAcuityTumblingPage(),
+                                  const OptometricianAddPatientPage(),
                             ),
                           );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) =>
+                          //         const PatientVisualAcuityTumblingPage(),
+                          //   ),
+                          // );
                         },
                         child: Container(
                           decoration: BoxDecoration(
