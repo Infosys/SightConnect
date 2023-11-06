@@ -17,6 +17,8 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
         .watch(patientTriageQuestionnaireProvider)
         .questionnaireForReportPage;
 
+    var remarksData = ref.watch(patientTriageQuestionnaireProvider).allRemarks;
+
     return Container(
       color: AppColor.white,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -70,7 +72,15 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                                 height: 1.5),
                           ),
                           Flexible(
-                            child: Text(
+                            child: currentData['answer'][i]=="Other symptoms"? Text(
+                              currentData['answer'][i] + " - " + remarksData[index],
+                              softWrap: true,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
+                              ),
+                            ):Text(
                               currentData['answer'][i],
                               softWrap: true,
                               style: applyRobotoFont(
@@ -83,6 +93,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                         ],
                       ),
                     ),
+                 
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Divider(
