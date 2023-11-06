@@ -70,10 +70,8 @@ class PatientTriageProvider extends ChangeNotifier {
 
   /// set patient vision acuity tumbling based on the TriageAssessment model
   List<Observation> _getVisionAcuityTumblingResponse() {
-    double leftEyeSight =
-        ref.read(tumblingTestProvider).calculateLeftEyeSigth();
-    double rightEyeSight =
-        ref.read(tumblingTestProvider).calculateRightEyeSigth();
+    double leftEyeSight = ref.read(tumblingTestProvider).leftEyeSight();
+    double rightEyeSight = ref.read(tumblingTestProvider).rightEyeSight();
 
     List<Observation> observationList = [
       Observation(

@@ -12,8 +12,8 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
-    double leftEyeSigth = model.calculateLeftEyeSigth();
-    double rightEyeSigth = model.calculateRightEyeSigth();
+    double leftEyeSigth = model.leftEyeSight();
+    double rightEyeSigth = model.rightEyeSight();
 
     getColor(double value) {
       if (value >= 1) {
