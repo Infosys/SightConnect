@@ -67,6 +67,16 @@ class OptionGrid extends HookConsumerWidget {
                     Navigator.pop(context);
                   },
                 );
+              } else if (questions[index].statement == "None of these") {
+                model.removeAllQuestionnaireAnswer();
+                if (isSelected) {
+                  model.removeQuestionnaireAnswer(questions[index].code!);
+                } else {
+                  model.addQuestionnaireAnswer(
+                    questions[index].code ?? 0,
+                    true,
+                  );
+                }
               }
             } else {
               if (questions[index].statement == "Yes") {

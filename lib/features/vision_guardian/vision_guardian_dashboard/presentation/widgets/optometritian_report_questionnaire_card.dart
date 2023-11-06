@@ -57,43 +57,48 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                     height: 8,
                   ),
                   for (var i = 0; i < currentData['answer'].length; i++)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 2),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "\u2022  ",
-                            style: applyRobotoFont(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black.withOpacity(0.7),
-                                height: 1.5),
-                          ),
-                          Flexible(
-                            child: currentData['answer'][i]=="Other symptoms"? Text(
-                              currentData['answer'][i] + " - " + remarksData[index],
-                              softWrap: true,
+                    if (currentData['answer'][i] != "None of These")
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 2),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "\u2022  ",
                               style: applyRobotoFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.black,
-                              ),
-                            ):Text(
-                              currentData['answer'][i],
-                              softWrap: true,
-                              style: applyRobotoFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.black,
-                              ),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black.withOpacity(0.7),
+                                  height: 1.5),
                             ),
-                          ),
-                        ],
+                            Flexible(
+                              child:
+                                  currentData['answer'][i] == "Other symptoms"
+                                      ? Text(
+                                          currentData['answer'][i] +
+                                              " - " +
+                                              remarksData[index],
+                                          softWrap: true,
+                                          style: applyRobotoFont(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      : Text(
+                                          currentData['answer'][i],
+                                          softWrap: true,
+                                          style: applyRobotoFont(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                 
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Divider(

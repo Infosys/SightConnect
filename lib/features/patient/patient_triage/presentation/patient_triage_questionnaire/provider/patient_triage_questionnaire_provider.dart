@@ -26,7 +26,9 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireResponse = [],
         _totalPages = _questionnaireSections.length;
 
-  List<String>allRemarks = ['',];
+  List<String> allRemarks = [
+    '',
+  ];
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
@@ -41,15 +43,22 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void addQuestionnaireAnswer(int questionCode, bool answer) {
     _selectedOptions[questionCode] = answer;
+    _selectedOptions.forEach((key, value) {
+    });
     notifyListeners();
     logger.d("Added Options: $_selectedOptions");
   }
 
   void removeQuestionnaireAnswer(int questionCode) {
     _selectedOptions.remove(questionCode);
+    notifyListeners();
+    logger.d("Removed Options: $_selectedOptions");
+  }
+
+  void removeAllQuestionnaireAnswer() {
+    _selectedOptions.clear();
     notifyListeners();
     logger.d("Removed Options: $_selectedOptions");
   }
