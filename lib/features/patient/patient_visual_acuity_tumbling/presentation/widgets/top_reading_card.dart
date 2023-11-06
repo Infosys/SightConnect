@@ -22,7 +22,8 @@ class TopReadingCard extends ConsumerWidget {
 
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
-    final size = mm(currentLevel!.size) * 10;
+    // final size = mm(currentLevel!.size) * 10;
+    final size = currentLevel!.size * 60;
 
     return Container(
       decoration: BoxDecoration(

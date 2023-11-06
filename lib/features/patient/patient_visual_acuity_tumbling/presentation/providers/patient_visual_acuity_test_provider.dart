@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -32,7 +33,6 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
 
   void startGame(Eye eye) {
     _eyesFinalReport[eye] = {};
-
     _gameMode = GameMode.regular;
     _currentEye = eye;
     _currentLevel = 0;
@@ -92,13 +92,19 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
   void _handleRightResponse(UserResponse userResponse) {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
 
-    if (_currentLevel! >= _maxLevel!) {
+    if (_currentLevel! > _maxLevel! ||
+        _currentLevel == _maxLevel &&
+            _currentIndex! + 1 == _level!.totalQuestions) {
+      log("One");
       endGame();
       return;
     }
     if (_currentIndex! + 1 == _level!.totalQuestions) {
+      log("Two");
+
       _moveToNextLevel();
     } else {
+      log("Three");
       _currentIndex = _currentIndex! + 1;
     }
     notifyListeners();
@@ -108,7 +114,9 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
     if (gameMode == GameMode.regular) {
+      log("Four");
       if (_currentLevel! < 1) {
+        log("Five");
         endGame();
         return;
       }
@@ -117,13 +125,17 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       _moveToPreviousLevel();
     } else {
       if (_totalWrongLevelResponse == 3) {
+        log("Six");
         endGame();
       } else if (_currentIndex! + 1 == _level!.totalQuestions) {
+        log("Seven");
         _moveToNextLevel();
       } else {
+        log("Eight");
         _currentIndex = _currentIndex! + 1;
       }
     }
+    notifyListeners();
   }
 
   void _moveToNextLevel() {
@@ -133,11 +145,11 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
     _totalWrongLevelResponse = 0;
     _currentLevelUserResponses = [];
     _level = _dataSource.getLevel(_currentLevel!, _gameMode!);
+    notifyListeners();
   }
 
   void _moveToPreviousLevel() {
     _currentLevel = _currentLevel! - 1;
-
     _currentIndex = 0;
     _totalWrongLevelResponse = 0;
     _currentLevelUserResponses = [];
@@ -154,6 +166,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
 
   void endGame() {
     _isGameOver = true;
+    log("game");
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;
     notifyListeners();
   }
@@ -224,6 +237,7 @@ class PatientVisualAcuityTestProvider with ChangeNotifier {
       }
     }
   }
+  //
 
   int _findMax(List<int> input) {
     int max = input[0];
