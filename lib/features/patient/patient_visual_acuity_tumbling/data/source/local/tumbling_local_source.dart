@@ -9,6 +9,7 @@ abstract class TumblingLocalSource {
   Level getLevel(int levelNumber, GameMode mode);
   void resetTestState();
   int get maxLevel;
+  double lookUpLogMarTable(double decimal);
 }
 
 class TumblingLocalSourceImpl implements TumblingLocalSource {
@@ -454,4 +455,27 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
   }
   @override
   int get maxLevel => 8;
+
+  @override
+  double lookUpLogMarTable(double decimal) {
+    switch (decimal) {
+      case 0.10:
+        return 0.1;
+      case 0.125:
+        return 0.90;
+      case 0.25:
+        return 0.25;
+      case 0.32:
+        return 0.32;
+      case 0.4:
+        return 0.4;
+      case 0.5:
+        return 0.5;
+      case 0.63:
+        return 0.63;
+
+      default:
+        return 0.1;
+    }
+  }
 }

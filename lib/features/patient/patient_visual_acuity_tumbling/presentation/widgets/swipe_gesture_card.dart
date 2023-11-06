@@ -19,7 +19,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
 
-    ref.listen(tumblingTestProvider, (previous, next) {
+    ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.left && next.isGameOver!) {
         logger.d("Game Over for left eye");
         showDialog(
@@ -30,7 +30,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             });
         next.startGame(Eye.right);
       } else if (next.currentEye == Eye.right && next.isGameOver!) {
-        logger.d("Game Over for both eyes");
+        logger.d("Game Over for right eye");
         showDialog(
             barrierDismissible: false,
             context: context,

@@ -8,6 +8,8 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../patient/patient_visual_acuity_tumbling/presentation/pages/patient_visual_acuity_tumbling_page.dart';
+
 class OptometritianDashboardPage extends StatelessWidget {
   const OptometritianDashboardPage({super.key});
 
@@ -133,6 +135,12 @@ class OptometritianDashboardPage extends StatelessWidget {
                                   const OptometricianAddPatientPage(),
                             ),
                           );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) =>
+                          //         const PatientVisualAcuityTumblingPage(),
+                          //   ),
+                          // );
                         },
                         child: Container(
                           decoration: BoxDecoration(
