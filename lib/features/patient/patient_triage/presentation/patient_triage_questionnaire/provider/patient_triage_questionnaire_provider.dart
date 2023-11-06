@@ -53,6 +53,7 @@ class PatientTriageQuestionnaireProvider extends ChangeNotifier {
   void saveQuestionaireResponse() {
     _questionnaireResponse.add(_selectedOptions);
     calculateQuestionnaireUrgency(_selectedOptions);
+    logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
     notifyListeners();
   }

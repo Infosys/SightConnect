@@ -1,5 +1,3 @@
-
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
@@ -45,29 +43,45 @@ class OptionGrid extends HookConsumerWidget {
 
         return InkWell(
           onTap: () {
-            if (isSelected) {
-              model.removeQuestionnaireAnswer(questions[index].code!);
+            if (pageNumber != 0) {
+              if (isSelected) {
+                model.removeQuestionnaireAnswer(questions[index].code!);
+              } else {
+                model.addQuestionnaireAnswer(
+                  questions[index].code ?? 0,
+                  true,
+                );
+              }
+
+              if (questions[index].statement == "Other symptoms") {
+                _buildOtherOptionSheet(
+                  context: context,
+                  remarksController: remarksController,
+                  onSubmitted: (remark) {
+                    if (remark.isEmpty) {
+                      model.removeQuestionnaireAnswer(questions[index].code!);
+                    } else {
+                      model.setQuestionnaireRemarks(remark);
+                    }
+
+                    Navigator.pop(context);
+                  },
+                );
+              }
             } else {
-              model.addQuestionnaireAnswer(
-                questions[index].code ?? 0,
-                true,
-              );
-            }
-
-            if (questions[index].statement == "Other symptoms") {
-              _buildOtherOptionSheet(
-                context: context,
-                remarksController: remarksController,
-                onSubmitted: (remark) {
-                  if (remark.isEmpty) {
-                    model.removeQuestionnaireAnswer(questions[index].code!);
-                  } else {
-                    model.setQuestionnaireRemarks(remark);
-                  }
-
-                  Navigator.pop(context);
-                },
-              );
+              if (questions[index].statement == "Yes") {
+                model.addQuestionnaireAnswer(
+                  questions[index].code ?? 0,
+                  true,
+                );
+                model.removeQuestionnaireAnswer(questions[index + 1].code!);
+              } else if (questions[index].statement == "No") {
+                model.addQuestionnaireAnswer(
+                  questions[index].code ?? 0,
+                  true,
+                );
+                model.removeQuestionnaireAnswer(questions[index - 1].code!);
+              }
             }
           },
           child: Container(

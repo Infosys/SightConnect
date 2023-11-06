@@ -67,11 +67,14 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   }
 
   void searchByDate() {
-    _searchPatientList = _patientList
-        .where((element) =>
-            element.date!.isAfter(_selectedFromDate) &&
-            element.date!.isBefore(_selectedToDate))
-        .toList();
+    _searchPatientList = _patientList.where((element) {
+      if (_selectedFromDate.isBefore(element.date!) &&
+          _selectedToDate
+              .isAfter(element.date!.subtract(const Duration(days: 1)))) {
+        return true;
+      }
+      return false;
+    }).toList();
     notifyListeners();
   }
 
