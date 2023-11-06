@@ -2,12 +2,11 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -18,30 +17,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isMobileNumberEntered = false;
-  String mobileNumber = "";
-  String otp = "";
-
-  validateMobileNumber() {
-    var regx = RegExp(r"^[0-9]*$");
-
-    if (regx.hasMatch(mobileNumber)) {
-      if (mobileNumber.length == 10) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  validateOTP() {
-    var regx = RegExp(r"^[0-9]*$");
-    if (regx.hasMatch(otp)) {
-      if (otp.length == 4) {
-        return true;
-      }
-    }
-    return false;
-  }
+  String emailID = "";
+  String password = "";
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
           children: [
             Container(
-              height: AppSize.height(context) * 0.5,
+              height: AppSize.height(context) * 0.4,
               width: AppSize.width(context),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -122,108 +100,84 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(
                 AppSize.kmpadding,
               ),
-              child: isMobileNumberEntered
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                        Text(
-                          "Verify Mobile Number",
-                          style: applyFiraSansFont(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.ksheight,
-                        ),
-                        Text(
-                          "Please enter the OTP we have sent to ********90",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.klheight * 2,
-                        ),
-                        Center(
-                          child: OTPTextField(
-                            length: 4,
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            style: const TextStyle(fontSize: 17),
-                            textFieldAlignment: MainAxisAlignment.spaceAround,
-                            fieldStyle: FieldStyle.underline,
-                            onCompleted: (pin) {
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: AppSize.klheight,
+                  ),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (emailID.isEmpty ||
+                                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                      .hasMatch(emailID)) {
+                                return "Please enter valid email";
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
                               setState(() {
-                                otp = pin;
+                                emailID = value;
                               });
                             },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Didn’t receive the OTP?",
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                  )),
-                              const SizedBox(
-                                width: 5,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
                               ),
-                              Text(
-                                "Resend OTP",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 1.0,
                                   color: AppColor.primary,
-                                  decoration: TextDecoration.underline,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                        TextField(
-                          onChanged: (value) {
-                            setState(() {
-                              mobileNumber = value;
-                            });
-                          },
-                          keyboardType: const TextInputType.numberWithOptions(
-                            signed: true,
-                            decimal: true,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1.0,
-                                color: AppColor.primary,
+                              labelText: "Email",
+                              labelStyle: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.black,
                               ),
                             ),
-                            labelText: "Mobile Number",
-                            labelStyle: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.black,
-                            ),
                           ),
-                        )
-                      ],
-                    ),
+                          const SizedBox(
+                            height: AppSize.klheight,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter password";
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 1.0,
+                                  color: AppColor.primary,
+                                ),
+                              ),
+                              labelText: "Password",
+                              labelStyle: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ],
+              ),
             )
           ],
         )),
@@ -239,38 +193,18 @@ class _LoginPageState extends State<LoginPage> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                   onPressed: () {
-                    if (isMobileNumberEntered) {
-                      if (validateOTP()) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AuthPage(),
-                          ),
-                          (route) => false,
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please enter valid OTP'),
-                          ),
-                        );
-                      }
-                    } else {
-                      if (validateMobileNumber()) {
-                        setState(() {
-                          isMobileNumberEntered = true;
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please enter valid mobile number'),
-                          ),
-                        );
-                      }
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AuthPage(),
+                        ),
+                        (route) => false,
+                      );
                     }
                   },
                   child: Text(
-                    isMobileNumberEntered ? 'Login' : 'Get OTP',
+                    'Login',
                   ),
                 ),
               ),
@@ -298,9 +232,6 @@ class _LoginPageState extends State<LoginPage> {
                 height: 8,
               ),
               const Center(child: BrandingWidgetH()),
-              const SizedBox(
-                height: 8,
-              ),
             ],
           ),
         ));
