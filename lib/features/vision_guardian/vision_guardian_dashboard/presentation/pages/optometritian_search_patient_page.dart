@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,7 +15,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuardianAddPatientProvider);
     var isSelected = useState<int>(-1);
-    var isReport = useState<int>(-1);
+    // var isReport = useState<int>(-1);
     var selectedDateRange = useState<DateTimeRange?>(null);
 
     return Scaffold(
