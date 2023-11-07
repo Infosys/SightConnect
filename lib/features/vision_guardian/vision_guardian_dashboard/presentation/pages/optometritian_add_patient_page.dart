@@ -25,6 +25,7 @@ class OptometricianAddPatientPage extends HookWidget {
         final validPatientId = RegExp(r'^[0-9]+$').hasMatch(patientId);
         isButtonEnabled.value = validPatientId;
       }
+
       patientIdController.addListener(listener);
       return () {
         patientIdController.removeListener(listener);
@@ -61,55 +62,54 @@ class OptometricianAddPatientPage extends HookWidget {
 
     void showOtherQualificationBottomSheet() {
       showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         backgroundColor: Colors.transparent,
         builder: (BuildContext context) {
           return StatefulBuilder(
             builder: (BuildContext context,
                 void Function(void Function()) setState) {
-              return SingleChildScrollView(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
-                  child: Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: AppSize.height(context) * 0.7,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Other Qualifications",
-                          style: applyRobotoFont(
-                            fontSize: 16,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w500,
-                          ),
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(AppSize.klradius),
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  height: AppSize.height(context) * 0.7,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Other Qualifications",
+                        style: applyRobotoFont(
+                          fontSize: 16,
+                          color: AppColor.black,
+                          fontWeight: FontWeight.w500,
                         ),
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(12.0),
-                          color: const Color(0xFFFAFAFA),
-                          child: TextField(
-                            maxLines: 6,
-                            keyboardType: TextInputType.text,
-                            onSubmitted: (value) {
-                              educationalQualificationController.text = value;
-                              setState(() {});
-                              Navigator.pop(context);
-                            },
-                            decoration: InputDecoration(
-                                hintText: 'Enter details here',
-                                hintStyle: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: AppColor.grey.withOpacity(0.4))),
-                          ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(12.0),
+                        color: const Color(0xFFFAFAFA),
+                        child: TextField(
+                          maxLines: 6,
+                          keyboardType: TextInputType.text,
+                          onSubmitted: (value) {
+                            educationalQualificationController.text = value;
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          decoration: InputDecoration(
+                              hintText: 'Enter details here',
+                              hintStyle: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.grey.withOpacity(0.4))),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -121,52 +121,51 @@ class OptometricianAddPatientPage extends HookWidget {
 
     void showOtherProfessionBottomSheet() {
       showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         backgroundColor: Colors.transparent,
         builder: (BuildContext context) {
           return StatefulBuilder(
             builder: (BuildContext context,
                 void Function(void Function()) setState) {
-              return SingleChildScrollView(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
-                  child: Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: AppSize.height(context) * 0.7,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Other Qualifications",
-                            style: applyRobotoFont(
-                                fontSize: 16,
-                                color: AppColor.black,
-                                fontWeight: FontWeight.w500)),
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(12.0),
-                          color: const Color(0xFFFAFAFA),
-                          child: TextField(
-                            maxLines: 6,
-                            keyboardType: TextInputType.text,
-                            onSubmitted: (value) {
-                              professionController.text = value;
-                              setState(() {});
-                              Navigator.pop(context);
-                            },
-                            decoration: InputDecoration(
-                                hintText: 'Enter details here',
-                                hintStyle: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: AppColor.grey.withOpacity(0.4))),
-                          ),
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(AppSize.klradius),
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  height: AppSize.height(context) * 0.7,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Other Profession",
+                          style: applyRobotoFont(
+                              fontSize: 16,
+                              color: AppColor.black,
+                              fontWeight: FontWeight.w500)),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(12.0),
+                        color: const Color(0xFFFAFAFA),
+                        child: TextField(
+                          maxLines: 6,
+                          keyboardType: TextInputType.text,
+                          onSubmitted: (value) {
+                            professionController.text = value;
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          decoration: InputDecoration(
+                              hintText: 'Enter details here',
+                              hintStyle: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.grey.withOpacity(0.4))),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );

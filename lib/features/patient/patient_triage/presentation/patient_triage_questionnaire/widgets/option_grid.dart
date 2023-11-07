@@ -47,6 +47,7 @@ class OptionGrid extends HookConsumerWidget {
           onTap: () {
             if (pageNumber != 0) {
               if (questions[index].statement == "None of these") {
+                print("111111111111111111111");
                 model.removeAllQuestionnaireAnswer();
                 if (isSelected) {
                   model.removeQuestionnaireAnswer(questions[index].code!);
@@ -56,11 +57,6 @@ class OptionGrid extends HookConsumerWidget {
                     true,
                   );
                 }
-              } else if (model.selectedOptions.containsValue(false) &&
-                  questions[index].statement != "None of these") {
-                print("1111111111111111111111111111111");
-                print(questions[index].statement);
-                return;
               } else if (questions[index].statement == "Other symptoms") {
                 print("222222222222222222222");
                 _buildOtherOptionSheet(
@@ -81,10 +77,15 @@ class OptionGrid extends HookConsumerWidget {
                 if (isSelected) {
                   model.removeQuestionnaireAnswer(questions[index].code!);
                 } else {
-                  model.addQuestionnaireAnswer(
-                    questions[index].code ?? 0,
-                    true,
-                  );
+                  if (model.selectedOptions.containsKey(30000025) ||
+                      model.selectedOptions.containsKey(30000010)) {
+                    model.removeQuestionnaireAnswer(questions[index].code!);
+                  } else {
+                    model.addQuestionnaireAnswer(
+                      questions[index].code ?? 0,
+                      true,
+                    );
+                  }
                 }
               }
             } else {
