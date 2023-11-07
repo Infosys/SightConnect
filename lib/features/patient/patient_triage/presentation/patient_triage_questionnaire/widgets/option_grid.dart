@@ -66,6 +66,10 @@ class OptionGrid extends HookConsumerWidget {
                     if (remark.isEmpty) {
                       model.removeQuestionnaireAnswer(questions[index].code!);
                     } else {
+                      model.addQuestionnaireAnswer(
+                        questions[index].code ?? 0,
+                        true,
+                      );
                       model.setQuestionnaireRemarks(remark);
                     }
 
@@ -139,6 +143,7 @@ class OptionGrid extends HookConsumerWidget {
     required Function(String) onSubmitted,
   }) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       backgroundColor: Colors.transparent,
       isDismissible: false,
