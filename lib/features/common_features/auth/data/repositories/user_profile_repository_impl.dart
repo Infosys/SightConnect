@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/contract/user_profile_repository.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/user_profile.dart';
