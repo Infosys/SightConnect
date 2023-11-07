@@ -19,6 +19,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
   late final int _totalPages;
+  int _currentQuestionnairePageIndex = 0;
 
   TriageQuestionnaireProvider(this._questionnaireSections)
       : _questionnaireRemarks = '',
@@ -63,51 +64,58 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   void saveQuestionaireResponse() {
     _questionnaireResponse.add(_selectedOptions);
+
     calculateQuestionnaireUrgency(_selectedOptions);
-    getquestionnaireForReportPage(_selectedOptions);
+    addQuestionnaireToReportPageList(_selectedOptions);
+    _currentQuestionnairePageIndex++;
     logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
     notifyListeners();
   }
 
-  int urgency = 1;
-  int index = 0;
+  int _triageQuestionnaireUrgency = 1;
+
   List<Map<String, dynamic>> questionnaireForReportPage = [];
 
-  List<Map<String, dynamic>> getquestionnaireForReportPage(selectedOptions) {
+  void addQuestionnaireToReportPageList(selectedOptions) {
     List<int> selectedOptionsID = selectedOptions.keys.toList();
+    List<Questionnaire> currentQuestionnaireSections =
+        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
 
-    for (var question in questionnaireSections[index].questionnaire!) {
-      List<String> temp = [];
+    for (var question in currentQuestionnaireSections) {
+      List<String> currentQuestionStatement = [];
       for (var question in question.questions!) {
         if (selectedOptionsID.contains(question.code)) {
-          temp.add(question.statement!);
+          currentQuestionStatement.add(
+            question.statement!,
+          );
         }
       }
-      questionnaireForReportPage
-          .add({"question": question.description, "answer": temp});
-      index++;
+      questionnaireForReportPage.add({
+        "question": question.description,
+        "answer": currentQuestionStatement,
+      });
     }
-
-    logger.f("Questionnaire for Report Page: $questionnaireForReportPage");
-    return questionnaireForReportPage;
   }
 
   void calculateQuestionnaireUrgency(Map<int, bool> selectedOptions) {
     List<int> selectedOptionsID = selectedOptions.keys.toList();
-    for (var questionnaire in _questionnaireSections) {
-      for (var question in questionnaire.questionnaire!) {
-        for (var question in question.questions!) {
-          if (selectedOptionsID.contains(question.code)) {
-            urgency = max(urgency, question.weight!);
-          }
+    List<Questionnaire> currentQuestionnaireSections =
+        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
+
+    for (var question in currentQuestionnaireSections) {
+      for (var question in question.questions!) {
+        if (selectedOptionsID.contains(question.code)) {
+          _triageQuestionnaireUrgency =
+              max(_triageQuestionnaireUrgency, question.weight!);
         }
       }
     }
-    logger.f("Questionnaire Urgency: $urgency");
+    logger.d(
+        "Questionnaire Urgency After ${_currentQuestionnairePageIndex + 1} Question: $_triageQuestionnaireUrgency");
   }
 
   int getTriageQuestionnaireUrgency() {
-    return urgency;
+    return _triageQuestionnaireUrgency;
   }
 }

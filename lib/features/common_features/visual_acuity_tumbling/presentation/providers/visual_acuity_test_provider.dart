@@ -265,7 +265,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
     int rightEyeUrgency = _calculateUrgencyHelper(rightSight);
 
     int urgency = math.max(leftEyeUrgency, rightEyeUrgency);
-    logger.i({
+    logger.d({
       "leftEyeSight": leftSight,
       "rightEyeSight": rightSight,
       "leftEyeUrgency": leftEyeUrgency,

@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_report_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +13,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TriageUrgency urgency =
-        ref.watch(optometricianReportProvider).calculateUrgency();
+        ref.watch(triageUrgencyRepositoryProvider).calculateTriageUrgency();
     List<Map<String, dynamic>> data =
         ref.watch(triageQuestionnaireProvider).questionnaireForReportPage;
 
