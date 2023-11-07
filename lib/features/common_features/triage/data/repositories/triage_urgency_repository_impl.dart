@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/contracts/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
@@ -12,7 +11,6 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
     ref.watch(triageQuestionnaireProvider),
     ref.watch(triageEyeScanProvider),
     ref.watch(tumblingTestProvider),
-    ref.watch(connectivityProvider),
   ),
 );
 
@@ -20,13 +18,11 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageQuestionnaireProvider triageQuestionnaireProvider;
   TriageEyeScanProvider triageEyeScanProvider;
   VisualAcuityTestProvider tumblingTestProvider;
-  NetworkInfo networkInfo;
 
   TriageUrgencyRepositoryImpl(
     this.triageQuestionnaireProvider,
     this.triageEyeScanProvider,
     this.tumblingTestProvider,
-    this.networkInfo,
   );
   @override
   TriageUrgency calculateTriageUrgency() {
