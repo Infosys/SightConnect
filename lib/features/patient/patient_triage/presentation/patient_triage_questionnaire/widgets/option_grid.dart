@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
@@ -24,9 +22,79 @@ class OptionGrid extends HookConsumerWidget {
     final TextEditingController remarksController = useTextEditingController();
 
     final totalQuestions = questions.length;
+    final model = ref.watch(patientTriageQuestionnaireProvider);
+    final selectedOptions = model.selectedOptions;
+    var isNoneOfTheseSelected = useState<bool>(false);
 
-    final selectedOptions =
-        ref.watch(patientTriageQuestionnaireProvider).selectedOptions;
+    void addAndRemoveResponse(bool isSelected, int index) {
+      if (isSelected) {
+        model.removeQuestionnaireAnswer(questions[index].code!);
+      } else {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+      }
+    }
+
+    void handleNonOfThese(int index, bool isSelected) {
+      if (isSelected) {
+        model.removeQuestionnaireAnswer(questions[index].code!);
+        isNoneOfTheseSelected.value = false;
+      } else {
+        model.removeAllQuestionnaireAnswer();
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        isNoneOfTheseSelected.value = true;
+      }
+    }
+
+    void handleSingleOptionPage(int index) {
+      if (questions[index].statement == "Yes") {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        model.removeQuestionnaireAnswer(questions[index + 1].code!);
+      } else if (questions[index].statement == "No") {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        model.removeQuestionnaireAnswer(questions[index - 1].code!);
+      }
+    }
+
+    void handleMultipleOptionPage(int index, bool isSelected) {
+      if (questions[index].statement == "None of these") {
+        handleNonOfThese(index, isSelected);
+      } else if (isNoneOfTheseSelected.value &&
+          questions[index].statement != "None of these") {
+        return;
+      } else if (questions[index].statement == "Other symptoms") {
+        _buildOtherOptionSheet(
+          context: context,
+          remarksController: remarksController,
+          onSubmitted: (remark) {
+            if (remark.isEmpty) {
+              model.removeQuestionnaireAnswer(questions[index].code!);
+            } else {
+              model.addQuestionnaireAnswer(
+                questions[index].code ?? 0,
+                true,
+              );
+              model.setQuestionnaireRemarks(remark);
+            }
+
+            Navigator.pop(context);
+          },
+        );
+      } else {
+        addAndRemoveResponse(isSelected, index);
+      }
+    }
 
     return GridView.builder(
       shrinkWrap: true,
@@ -41,71 +109,13 @@ class OptionGrid extends HookConsumerWidget {
       ),
       itemBuilder: (context, index) {
         var isSelected = selectedOptions.containsKey(questions[index].code);
-        var model = ref.read(patientTriageQuestionnaireProvider);
 
         return InkWell(
           onTap: () {
             if (pageNumber != 0) {
-              if (questions[index].statement == "None of these") {
-                print("111111111111111111111");
-                model.removeAllQuestionnaireAnswer();
-                if (isSelected) {
-                  model.removeQuestionnaireAnswer(questions[index].code!);
-                } else {
-                  model.addQuestionnaireAnswer(
-                    questions[index].code ?? 0,
-                    true,
-                  );
-                }
-              } else if (questions[index].statement == "Other symptoms") {
-                print("222222222222222222222");
-                _buildOtherOptionSheet(
-                  context: context,
-                  remarksController: remarksController,
-                  onSubmitted: (remark) {
-                    if (remark.isEmpty) {
-                      model.removeQuestionnaireAnswer(questions[index].code!);
-                    } else {
-                      model.addQuestionnaireAnswer(
-                        questions[index].code ?? 0,
-                        true,
-                      );
-                      model.setQuestionnaireRemarks(remark);
-                    }
-
-                    Navigator.pop(context);
-                  },
-                );
-              } else {
-                print("3333333333333333333333333");
-                if (isSelected) {
-                  model.removeQuestionnaireAnswer(questions[index].code!);
-                } else {
-                  if (model.selectedOptions.containsKey(30000025) ||
-                      model.selectedOptions.containsKey(30000010)) {
-                    model.removeQuestionnaireAnswer(questions[index].code!);
-                  } else {
-                    model.addQuestionnaireAnswer(
-                      questions[index].code ?? 0,
-                      true,
-                    );
-                  }
-                }
-              }
+              handleMultipleOptionPage(index, isSelected);
             } else {
-              if (questions[index].statement == "Yes") {
-                model.addQuestionnaireAnswer(
-                  questions[index].code ?? 0,
-                  true,
-                );
-                model.removeQuestionnaireAnswer(questions[index + 1].code!);
-              } else if (questions[index].statement == "No") {
-                model.addQuestionnaireAnswer(
-                  questions[index].code ?? 0,
-                  true,
-                );
-                model.removeQuestionnaireAnswer(questions[index - 1].code!);
-              }
+              handleSingleOptionPage(index);
             }
           },
           child: Container(

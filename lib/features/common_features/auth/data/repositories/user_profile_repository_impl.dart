@@ -23,6 +23,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
   @override
   Either<Failure, UserProfile> getUserProfile() {
     // TODO: implement getUserProfile
+    
     throw UnimplementedError();
   }
 
