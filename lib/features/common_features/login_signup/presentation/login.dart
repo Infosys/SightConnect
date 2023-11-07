@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
@@ -197,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AuthPage(),
+                          builder: (context) => const SplashPage(),
                         ),
                         (route) => false,
                       );
