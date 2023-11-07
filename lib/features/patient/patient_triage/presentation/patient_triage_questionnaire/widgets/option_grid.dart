@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_triage/data/models/triage_assessment.dart';
@@ -44,16 +46,23 @@ class OptionGrid extends HookConsumerWidget {
         return InkWell(
           onTap: () {
             if (pageNumber != 0) {
-              if (isSelected) {
-                model.removeQuestionnaireAnswer(questions[index].code!);
-              } else {
-                model.addQuestionnaireAnswer(
-                  questions[index].code ?? 0,
-                  true,
-                );
-              }
-
-              if (questions[index].statement == "Other symptoms") {
+              if (questions[index].statement == "None of these") {
+                model.removeAllQuestionnaireAnswer();
+                if (isSelected) {
+                  model.removeQuestionnaireAnswer(questions[index].code!);
+                } else {
+                  model.addQuestionnaireAnswer(
+                    questions[index].code ?? 0,
+                    true,
+                  );
+                }
+              } else if (model.selectedOptions.containsValue(false) &&
+                  questions[index].statement != "None of these") {
+                print("1111111111111111111111111111111");
+                print(questions[index].statement);
+                return;
+              } else if (questions[index].statement == "Other symptoms") {
+                print("222222222222222222222");
                 _buildOtherOptionSheet(
                   context: context,
                   remarksController: remarksController,
@@ -67,8 +76,8 @@ class OptionGrid extends HookConsumerWidget {
                     Navigator.pop(context);
                   },
                 );
-              } else if (questions[index].statement == "None of these") {
-                model.removeAllQuestionnaireAnswer();
+              } else {
+                print("3333333333333333333333333");
                 if (isSelected) {
                   model.removeQuestionnaireAnswer(questions[index].code!);
                 } else {
