@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/features/common_features/login_signup/presentation/login.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -44,7 +46,7 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          initialRoute: AuthPage.routeName,
+          initialRoute: SplashPage.routeName,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {

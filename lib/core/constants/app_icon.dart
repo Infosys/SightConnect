@@ -52,4 +52,10 @@ class AppIcon {
   static const String cam_info = "assets/icons/cam_info.svg";
   static const String cam_close = "assets/icons/close.svg";
   static const String cam_capture = "assets/icons/camera.svg";
+
+  //optometritian icons
+
+  //dashboard
+
+  static const String optometritianAddPatient = "assets/icons/optometritian_start_assessment.svg";
 }
