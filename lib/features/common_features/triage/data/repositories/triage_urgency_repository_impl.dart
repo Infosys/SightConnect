@@ -42,6 +42,35 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     );
   }
 
+  @override
+  QuestionnaireUrgency questionnaireUrgency() {
+    int questionnaireUrgency =
+        triageQuestionnaireProvider.getTriageQuestionnaireUrgency();
+    logger.d(
+        "Questionnaire Urgency frooooooooooooooooom IMPL: $questionnaireUrgency");
+    if (questionnaireUrgency >= 3) {
+      return QuestionnaireUrgency.EMERGENCY;
+    } else if (questionnaireUrgency >= 2) {
+      return QuestionnaireUrgency.PRIORITY;
+    } else {
+      return QuestionnaireUrgency.ROUTINE;
+    }
+  }
+
+  @override
+  VisualAcuityUrgency visualAcuityUrgency() {
+    int visionAcuityUrgency = tumblingTestProvider.getTumblingTestUrgency();
+    logger.d(
+        "Vision Acuity Urgency frooooooooooooooooom IMPL: $visionAcuityUrgency");
+    if (visionAcuityUrgency >= 3) {
+      return VisualAcuityUrgency.EMERGENCY;
+    } else if (visionAcuityUrgency >= 2) {
+      return VisualAcuityUrgency.PRIORITY;
+    } else {
+      return VisualAcuityUrgency.ROUTINE;
+    }
+  }
+
   TriageUrgency _triageUrgency(int urgency) {
     if (urgency > 5) {
       return TriageUrgency.EMERGENCY;

@@ -11,3 +11,7 @@ enum TriageReason { CATARACT, GLAUCOMA, RETINA, OTHERS }
 enum TriageEyeCondition { NORMAL, CATARACT, GLAUCOMA, RETINA, OTHERS }
 
 enum TriageEyeType { LEFT, RIGHT, BOTH }
+
+enum QuestionnaireUrgency { EMERGENCY, PRIORITY, ROUTINE }
+
+enum VisualAcuityUrgency { EMERGENCY, PRIORITY, ROUTINE }

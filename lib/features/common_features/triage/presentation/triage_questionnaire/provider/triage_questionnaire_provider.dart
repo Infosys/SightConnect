@@ -40,6 +40,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   void setQuestionnaireRemarks(String remarks) {
     _questionnaireRemarks = remarks;
+    
     allRemarks.add(remarks);
     notifyListeners();
   }
