@@ -1,37 +1,238 @@
-// import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-// import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
-// import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
-// import 'package:flutter/material.dart';
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import '../provider/user_details_provider.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-// class AuthPage extends ConsumerWidget {
-//   static const String routeName = '/auth';
-//   const AuthPage({super.key});
+class AuthPage extends StatefulWidget {
+  static const String routeName = '/auth';
+  const AuthPage({super.key});
 
-//   final role = Role.optometrist;
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     // ref.listen(authProvider, (previous, next) {
-//     //   if (next.userInfo != null) {
-//     //     Navigator.of(context).pushAndRemoveUntil(
-//     //       MaterialPageRoute(
-//     //         builder: (context) => const PatientDashboardPage(),
-//     //       ),
-//     //       (route) => false,
-//     //     );
-//     //   } else {
-//     //     ScaffoldMessenger.of(context).showSnackBar(
-//     //       const SnackBar(
-//     //         content: Text('Authentication failed'),
-//     //       ),
-//     //     );
-//     //   }
-//     // });
+class _AuthPageState extends State<AuthPage> {
+  String emailID = "";
+  String password = "";
+  final _formKey = GlobalKey<FormState>();
 
-//     return const SplashPage();
-//   }
-// }
-
-// enum Role { patient, doctor, visionguardian, optometrist }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: AppColor.scaffold,
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            Container(
+              height: AppSize.height(context) * 0.4,
+              width: AppSize.width(context),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+                color: AppColor.primary,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.white,
+                          ),
+                          child: SvgPicture.asset(
+                            AppIcon.logo,
+                            height: 20,
+                            width: 20,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: AppSize.kmpadding,
+                        ),
+                        Text(
+                          'Eye Care For All',
+                          style: applyFiraSansFont(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Image.asset('assets/images/login.png'),
+                  ),
+                  const Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'Sign In',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(
+                AppSize.kmpadding,
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: AppSize.klheight,
+                  ),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (emailID.isEmpty ||
+                                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                      .hasMatch(emailID)) {
+                                return "Please enter valid email";
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                emailID = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 1.0,
+                                  color: AppColor.primary,
+                                ),
+                              ),
+                              labelText: "Email",
+                              labelStyle: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: AppSize.klheight,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter password";
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 1.0,
+                                  color: AppColor.primary,
+                                ),
+                              ),
+                              labelText: "Password",
+                              labelStyle: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ],
+              ),
+            )
+          ],
+        )),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SplashPage(),
+                        ),
+                        (route) => false,
+                      );
+                    }
+                  },
+                  child: const Text(
+                    'Login',
+                  ),
+                ),
+              ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don’t have an account?",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                        )),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text("Sign Up?",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.primary,
+                          decoration: TextDecoration.underline,
+                        )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const Center(child: BrandingWidgetH()),
+            ],
+          ),
+        ));
+  }
+}
