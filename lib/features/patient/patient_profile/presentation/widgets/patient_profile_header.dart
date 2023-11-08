@@ -15,7 +15,7 @@ class ProfileHeader extends StatelessWidget {
       height: AppSize.height(context) * 0.31,
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
-        boxShadow: appShadow(),
+        boxShadow: applyLightShadow(),
         image: const DecorationImage(
           fit: BoxFit.fitWidth,
           image: AssetImage(AppImages.profileBg),

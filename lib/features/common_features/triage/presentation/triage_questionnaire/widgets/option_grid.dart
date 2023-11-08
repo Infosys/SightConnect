@@ -1,0 +1,209 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class OptionGrid extends HookConsumerWidget {
+  const OptionGrid({
+    required this.questions,
+    required this.pageNumber,
+    super.key,
+  });
+
+  final List<Question> questions;
+  final int pageNumber;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController remarksController = useTextEditingController();
+
+    final totalQuestions = questions.length;
+    final model = ref.watch(triageQuestionnaireProvider);
+    final selectedOptions = model.selectedOptions;
+    var isNoneOfTheseSelected = useState<bool>(false);
+
+    void addAndRemoveResponse(bool isSelected, int index) {
+      if (isSelected) {
+        model.removeQuestionnaireAnswer(questions[index].code!);
+      } else {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+      }
+    }
+
+    void handleNonOfThese(int index, bool isSelected) {
+      if (isSelected) {
+        model.removeQuestionnaireAnswer(questions[index].code!);
+        isNoneOfTheseSelected.value = false;
+      } else {
+        model.removeAllQuestionnaireAnswer();
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        isNoneOfTheseSelected.value = true;
+      }
+    }
+
+    void handleSingleOptionPage(int index) {
+      if (questions[index].statement == "Yes") {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        model.removeQuestionnaireAnswer(questions[index + 1].code!);
+      } else if (questions[index].statement == "No") {
+        model.addQuestionnaireAnswer(
+          questions[index].code ?? 0,
+          true,
+        );
+        model.removeQuestionnaireAnswer(questions[index - 1].code!);
+      }
+    }
+
+    void handleMultipleOptionPage(int index, bool isSelected) {
+      if (questions[index].statement == "None of these") {
+        handleNonOfThese(index, isSelected);
+      } else if (isNoneOfTheseSelected.value &&
+          questions[index].statement != "None of these") {
+        return;
+      } else if (questions[index].statement == "Other symptoms") {
+        _buildOtherOptionSheet(
+          context: context,
+          remarksController: remarksController,
+          onSubmitted: (remark) {
+            if (remark.isEmpty) {
+              model.removeQuestionnaireAnswer(questions[index].code!);
+            } else {
+              model.addQuestionnaireAnswer(
+                questions[index].code ?? 0,
+                true,
+              );
+              model.setQuestionnaireRemarks(remark);
+            }
+
+            Navigator.pop(context);
+          },
+        );
+      } else {
+        addAndRemoveResponse(isSelected, index);
+      }
+    }
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
+      itemCount: totalQuestions,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.3,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+      itemBuilder: (context, index) {
+        var isSelected = selectedOptions.containsKey(questions[index].code);
+
+        return InkWell(
+          onTap: () {
+            if (pageNumber != 0) {
+              handleMultipleOptionPage(index, isSelected);
+            } else {
+              handleSingleOptionPage(index);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: isSelected
+                    ? AppColor.primary
+                    : AppColor.grey.withOpacity(0.5),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                questions[index].statement ?? "",
+                textAlign: TextAlign.left,
+                softWrap: true,
+                style: applyRobotoFont(
+                  fontSize: 16,
+                  color: AppColor.black,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _buildOtherOptionSheet({
+    required BuildContext context,
+    required TextEditingController remarksController,
+    required Function(String) onSubmitted,
+  }) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+            child: Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              height: AppSize.height(context) * 0.7,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Other Symptoms",
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    color: const Color(0xFFFAFAFA),
+                    child: TextField(
+                      maxLines: 6,
+                      controller: remarksController,
+                      keyboardType: TextInputType.text,
+                      onSubmitted: onSubmitted,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your symptoms here',
+                        hintStyle: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.grey.withOpacity(0.4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
