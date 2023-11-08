@@ -1,9 +1,10 @@
 import 'dart:math' as math;
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/source/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/features/patient/patient_visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
