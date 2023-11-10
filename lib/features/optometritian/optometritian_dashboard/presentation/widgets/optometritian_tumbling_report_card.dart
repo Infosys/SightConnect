@@ -128,9 +128,58 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
           const SizedBox(
             height: AppSize.ksheight,
           ),
-         
-          
-        
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Category",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(
+                height: AppSize.ksheight,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                width: AppSize.width(context) * 0.35,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: urgency == VisualAcuityUrgency.EMERGENCY
+                      ? AppColor.red
+                      : urgency == VisualAcuityUrgency.PRIORITY
+                          ? AppColor.orange
+                          : AppColor.green,
+                  border: Border.all(
+                    width: 1.5,
+                    color: urgency == VisualAcuityUrgency.EMERGENCY
+                        ? AppColor.red
+                        : urgency == VisualAcuityUrgency.PRIORITY
+                            ? AppColor.orange
+                            : AppColor.green,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    urgency == VisualAcuityUrgency.EMERGENCY
+                        ? 'Urgent Consult'
+                        : urgency == VisualAcuityUrgency.PRIORITY
+                            ? 'Early Consult'
+                            : 'Regular Consult',
+                    style: applyRobotoFont(
+                      fontSize: 12,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
+          ),
         ],
       ),
     );

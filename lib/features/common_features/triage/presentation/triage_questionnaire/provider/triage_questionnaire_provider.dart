@@ -28,7 +28,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _totalPages = _questionnaireSections.length;
 
   List<String> allRemarks = [
-    '',
+    '','',''
   ];
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
@@ -38,10 +38,15 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void setQuestionnaireRemarks(String remarks) {
+  void setQuestionnaireRemarks(String remarks, currentPageIndex) {
     _questionnaireRemarks = remarks;
     
-    allRemarks.add(remarks);
+    allRemarks.insert(currentPageIndex, remarks);
+    notifyListeners();
+  }
+
+  void removeLastQuestionnaireRemark(){
+    allRemarks.removeLast();
     notifyListeners();
   }
 
