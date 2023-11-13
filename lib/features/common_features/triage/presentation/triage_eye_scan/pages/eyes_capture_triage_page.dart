@@ -245,7 +245,7 @@ class _PatientEyeCaptureTriagePageState
           model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).nextStep(3);
           model.setCurrentEye(TriageEye.RIGHT_EYE);
-          ref.read(triageProvider).saveTriage();
+          await ref.read(triageProvider).saveTriage();
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
           Navigator.of(context).push(
