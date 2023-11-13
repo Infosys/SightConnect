@@ -178,7 +178,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                     fullscreenDialog: true,
                   ),
                 );
-                ref.read(triageStepperProvider).nextStep(2);
+                ref.read(triageStepperProvider).nextStep();
               },
               child: const Text("Proceed"),
             )

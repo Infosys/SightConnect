@@ -284,7 +284,7 @@ class _PatientEyeCaptureTriagePageState
         );
         if (verifiedImage != null && mounted) {
           ref.read(triageEyeScanProvider).setLeftEyeImage(verifiedImage);
-          ref.read(triageStepperProvider).nextStep(3);
+          ref.read(triageStepperProvider).nextStep();
           ref.read(currentEyeProvider.notifier).state = TriageEye.RIGHT_EYE;
           await ref.read(triageProvider).saveTriage();
           // Navigator.of(context).popUntil((route) => route.isFirst);

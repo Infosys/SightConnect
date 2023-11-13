@@ -152,7 +152,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                           ),
                         ),
                       ],
-                      onStepReached: (index) => model.nextStep(index),
+                      onStepReached: (index) => model.nextStep(),
                     ),
                   ),
                   SizedBox(

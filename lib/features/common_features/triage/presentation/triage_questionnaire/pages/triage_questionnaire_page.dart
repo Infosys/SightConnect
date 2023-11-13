@@ -140,7 +140,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                           .state = false;
                                       ref
                                           .read(triageStepperProvider)
-                                          .nextStep(1);
+                                          .nextStep();
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>

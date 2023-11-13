@@ -9,9 +9,9 @@ class TriageStepperProvider extends ChangeNotifier {
   int _currentStep = 0;
   int get currentStep => _currentStep;
 
-  void nextStep(value) {
+  void nextStep() {
     if (_currentStep <= 4) {
-      _currentStep = value;
+      _currentStep++;
     }
     logger.f("Current Step: $_currentStep");
     notifyListeners();

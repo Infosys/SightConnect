@@ -65,7 +65,7 @@ class VisualAcuityDialog {
                               fullscreenDialog: true,
                             ),
                           );
-                          ref.read(triageStepperProvider).nextStep(2);
+                          ref.read(triageStepperProvider).nextStep();
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute(
