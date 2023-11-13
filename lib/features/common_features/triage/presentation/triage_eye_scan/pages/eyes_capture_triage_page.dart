@@ -22,7 +22,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/camera_controllers.dart';
 
-
 class EyeCaptureTriagePage extends ConsumerStatefulWidget {
   static const String routeName = "/patientEyeCapturePage";
   const EyeCaptureTriagePage({
@@ -89,7 +88,6 @@ class _PatientEyeCaptureTriagePageState
 
   @override
   Widget build(BuildContext context) {
-   
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     var model = ref.watch(triageEyeScanProvider);
     var current = model.currentEye;
@@ -208,8 +206,8 @@ class _PatientEyeCaptureTriagePageState
     }
   }
 
-
-  Future<void> _takePicture( TriageEyeScanProvider model, BuildContext context) async {
+  Future<void> _takePicture(
+      TriageEyeScanProvider model, BuildContext context) async {
     try {
       if (!_controller.value.isInitialized) {
         return;
@@ -245,7 +243,7 @@ class _PatientEyeCaptureTriagePageState
           model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).nextStep(3);
           model.setCurrentEye(TriageEye.RIGHT_EYE);
-          await ref.read(triageProvider).saveTriage();
+          // await ref.read(triageProvider).saveTriage();
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
           Navigator.of(context).push(
@@ -265,7 +263,8 @@ class _PatientEyeCaptureTriagePageState
       logger.d("Something went wrong");
       Fluttertoast.showToast(msg: "Something went wrong");
     } catch (e) {
-      logger.d('Error: Circular Dependency Error Coming from take Picture ${e.toString()}');
+      logger.d(
+          'Error: Circular Dependency Error Coming from take Picture ${e.toString()}');
       Fluttertoast.showToast(msg: "Camera not found");
     }
   }

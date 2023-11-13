@@ -32,7 +32,7 @@ class OptionGrid extends HookConsumerWidget {
         model.removeQuestionnaireAnswer(questions[index].code!);
        
         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
-          model.removeLastQuestionnaireRemark();
+          // model.removeLastQuestionnaireRemark( );
         }
       } else {
         model.addQuestionnaireAnswer(
