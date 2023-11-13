@@ -1,31 +1,28 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider(
-  (ref) => TriageQuestionnaireProvider(
-    ref.watch(triageProvider).questionnaireSections,
-  ),
+  (ref) => TriageQuestionnaireProvider(),
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-  final List<QuestionnaireSection> _questionnaireSections;
+  List<QuestionnaireSection> _questionnaireSections;
 
   late String _questionnaireRemarks;
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-  late final int _totalPages;
+
   int _currentQuestionnairePageIndex = 0;
 
-  TriageQuestionnaireProvider(this._questionnaireSections)
+  TriageQuestionnaireProvider()
       : _questionnaireRemarks = '',
         _selectedOptions = {},
-        _questionnaireResponse = [],
-        _totalPages = _questionnaireSections.length;
+        _questionnaireSections = [],
+        _questionnaireResponse = [];
 
   List<String> allRemarks = [
     '',
@@ -33,10 +30,16 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
-  int get totalPage => _totalPages;
+
   List<QuestionnaireSection> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
+
+  void getQuestionnaire(List<QuestionnaireSection> data) async {
+    _questionnaireSections = data;
+
+    notifyListeners();
+  }
 
   void setQuestionnaireRemarks(String remarks) {
     _questionnaireRemarks = remarks;

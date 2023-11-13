@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
@@ -23,6 +24,10 @@ class TriageQuestionnairePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var pageController = usePageController();
     var scaffoldKey = useState(GlobalKey<ScaffoldState>());
+    var triageModel = ref.watch(triageProvider);
+    ref
+        .watch(triageQuestionnaireProvider)
+        .getQuestionnaire(triageModel.questionnaireSections);
 
     return WillPopScope(
       onWillPop: () async {
@@ -85,11 +90,12 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               child: PageView.builder(
                 controller: pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: model.totalPage,
+                itemCount: model.questionnaireSections.length,
                 itemBuilder: (context, index) {
                   var questionnaire =
                       model.questionnaireSections[index].questionnaire?.first;
-                  var isLastPage = model.totalPage - 1 == index;
+                  var isLastPage =
+                      model.questionnaireSections.length - 1 == index;
                   var isButtonEnabled = model.selectedOptions.isNotEmpty &&
                       model.selectedOptions.containsValue(true);
 
