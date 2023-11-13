@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eyes_capture_triage_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -158,8 +159,9 @@ class TriageEyeScanDialog {
                       return TextButton(
                         onPressed: () {
                           ref.read(triageStepperProvider).nextStep(3);
-                          ref.read(currentEyeProvider.notifier).state =
-                              TriageEye.RIGHT_EYE;
+                          ref.read(triageEyeScanProvider).setCurrentEye(
+                                TriageEye.RIGHT_EYE,
+                              );
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => const TriageResultPage(),

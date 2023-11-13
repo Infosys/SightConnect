@@ -38,40 +38,40 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    // ref.listen(userDetailsProvider, (previous, next) async {
-    //   var profile = next.userProfile;
-    //   if (profile != null) {
-    //     switch (role) {
-    //       case Role.patient:
-    //         Navigator.of(context).pushAndRemoveUntil(
-    //           MaterialPageRoute(
-    //             builder: (context) => const PatientDashboardPage(),
-    //           ),
-    //           (route) => false,
-    //         );
-    //         break;
+    ref.listen(userDetailsProvider, (previous, next) async {
+      var profile = next.userProfile;
+      if (profile != null) {
+        switch (role) {
+          case Role.patient:
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const PatientDashboardPage(),
+              ),
+              (route) => false,
+            );
+            break;
 
-    //       case Role.optometrist:
-    //         Navigator.of(context).pushAndRemoveUntil(
-    //           MaterialPageRoute(
-    //             builder: (context) => const OptometritianDashboardPage(),
-    //           ),
-    //           (route) => false,
-    //         );
+          case Role.optometrist:
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const OptometritianDashboardPage(),
+              ),
+              (route) => false,
+            );
 
-    //       case Role.doctor:
-    //         break;
+          case Role.doctor:
+            break;
 
-    //       case Role.visionguardian:
-    //     }
-    //   } else {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       const SnackBar(
-    //         content: Text('Authentication failed'),
-    //       ),
-    //     );
-    //   }
-    // });
+          case Role.visionguardian:
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Authentication failed'),
+          ),
+        );
+      }
+    });
 
     return Scaffold(
       backgroundColor: AppColor.primary,
