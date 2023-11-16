@@ -27,9 +27,16 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 300), () {
-      Navigator.of(context).pushAndRemoveUntil(
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   MaterialPageRoute(
+      //     builder: (context) => const AuthPage(),
+      //   ),
+      //   (route) => false,
+      // );
+      Navigator.pushAndRemoveUntil(
+        context,
         MaterialPageRoute(
-          builder: (context) => const AuthPage(),
+          builder: (context) => const OptometritianDashboardPage(),
         ),
         (route) => false,
       );
