@@ -12,7 +12,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(optometritianReportProvider);
-    var urgency = model.calculateTriageUrgency();
+    var urgency = model.getQuestionnaireUrgency();
     List<Map<String, dynamic>> data =
         ref.watch(triageQuestionnaireProvider).questionnaireForReportPage;
 

@@ -22,6 +22,14 @@ class OptometritianReportProvider extends ChangeNotifier {
     return _triageUrgencyRepository.calculateTriageUrgency();
   }
 
+  TriageUrgency getQuestionnaireUrgency() {
+    return _triageUrgencyRepository.questionnaireUrgency();
+  }
+
+  TriageUrgency visualAcuityUrgency() {
+    return _triageUrgencyRepository.visualAcuityUrgency();
+  }
+
   Color getColorOnUrgency(TriageUrgency urgency) {
     return switch (urgency) {
       TriageUrgency.EMERGENCY => AppColor.red,

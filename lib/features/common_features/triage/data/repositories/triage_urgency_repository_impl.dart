@@ -38,7 +38,7 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
       'visionAcuityUrgency': visionAcuityUrgency,
     });
 
-    return _triageUrgency(
+    return _triageCompleteUrgency(
       (questionnaireUrgency + eyeScanUrgency + visionAcuityUrgency),
     );
   }
@@ -56,13 +56,26 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     return _triageUrgency(visionAcuityUrgency);
   }
 
-  TriageUrgency _triageUrgency(int urgency) {
+  TriageUrgency _triageCompleteUrgency(int urgency) {
     if (urgency > 5) {
       return TriageUrgency.EMERGENCY;
     } else if (urgency > 3) {
       return TriageUrgency.PRIORITY;
     } else {
       return TriageUrgency.ROUTINE;
+    }
+  }
+
+  TriageUrgency _triageUrgency(int urgency) {
+    switch (urgency) {
+      case 3:
+        return TriageUrgency.EMERGENCY;
+      case 2:
+        return TriageUrgency.PRIORITY;
+      case 1:
+        return TriageUrgency.ROUTINE;
+      default:
+        return TriageUrgency.ROUTINE;
     }
   }
 }

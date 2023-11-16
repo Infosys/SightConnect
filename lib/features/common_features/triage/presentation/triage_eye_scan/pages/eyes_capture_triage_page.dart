@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -242,7 +244,9 @@ class _PatientEyeCaptureTriagePageState
           model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).goToNextStep();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
+
           // await ref.read(triageProvider).saveTriage();
+
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
           Navigator.of(context).push(

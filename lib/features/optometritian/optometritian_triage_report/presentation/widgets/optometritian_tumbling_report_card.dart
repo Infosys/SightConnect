@@ -18,7 +18,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
     double rightEyeSigth = eyeModel.calculateEyeSight(Eye.right);
     double bothEyeSigth = eyeModel.calculateEyeSight(Eye.both);
     var model = ref.watch(optometritianReportProvider);
-    var urgency = model.calculateTriageUrgency();
+    var urgency = model.visualAcuityUrgency();
     var tumblingEData = model.getTumblingEData(
       leftEyeSigth,
       rightEyeSigth,
