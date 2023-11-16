@@ -1,10 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../shared/theme/text_theme.dart';
 import '../providers/visual_acuity_test_provider.dart';
@@ -41,7 +41,7 @@ class BottomInputTabState extends State<BottomInputTab>
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.distanceString,
+                    context.loc!.distanceString,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.grey,
@@ -59,14 +59,19 @@ class BottomInputTabState extends State<BottomInputTab>
               ),
               const Spacer(),
               Consumer(
-                builder: (context, ref, child) => Text(
-                  ref.watch(tumblingTestProvider).currentEye == Eye.left
-                      ? AppLocalizations.of(context)!.leftEyeString
-                      : (ref.watch(tumblingTestProvider).currentEye == Eye.right ? AppLocalizations.of(context)!.rightEyeString : AppLocalizations.of(context)!.bothEyeString),
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                  ),
-                ),
+                builder: (context, ref, child) {
+                  var model = ref.watch(tumblingTestProvider);
+                  return Text(
+                    model.currentEye == Eye.left
+                        ? context.loc!.leftEyeString
+                        : (model.currentEye == Eye.right
+                            ? context.loc!.rightEyeString
+                            : "Both Eye"),
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -112,12 +117,12 @@ class ButtomNavigationBar extends HookWidget {
         ButtonSegment(
           value: 0,
           icon: const Icon(Icons.touch_app),
-          label: Text(AppLocalizations.of(context)!.swipeGestureTab),
+          label: Text(context.loc!.swipeGestureTab),
         ),
         ButtonSegment(
           value: 1,
           icon: const Icon(Icons.mic),
-          label: Text(AppLocalizations.of(context)!.voiceAssistTab),
+          label: Text(context.loc!.voiceAssistTab),
         ),
       ],
       onSelectionChanged: (value) {

@@ -262,4 +262,12 @@ class VisualAcuityTestProvider with ChangeNotifier {
       return 1;
     }
   }
+
+  String getCurrentEyeText(Eye eye) {
+    return switch (eye) {
+      Eye.left => "Left Eye",
+      Eye.right => "Right Eye",
+      Eye.both => "Both Eye",
+    };
+  }
 }
