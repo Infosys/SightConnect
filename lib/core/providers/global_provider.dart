@@ -12,12 +12,10 @@ class GlobalProvider extends ChangeNotifier {
 
   set setGlobalInitialTextScaleFactor(double data) {
     _globalInitialTextScaleFactor = data;
-    notifyListeners();
   }
 
   set setHideTumblingElement(bool data) {
     _hideTumblingElement = data;
-    notifyListeners();
   }
 }
 

@@ -52,7 +52,28 @@ class VisualAcuityDialog {
                       (BuildContext context, WidgetRef ref, Widget? child) {
                     return TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        ref
+                            .read(
+                                visualAcuityTumblingTestDialogProvider.notifier)
+                            .state = true;
+
+                        if (!ref.read(globalProvider).hideTumblingElement) {
+                          ref.read(triageStepperProvider).goToNextStep();
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const TriageEyeScanPage(),
+                              fullscreenDialog: true,
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const TumblingResultReportPage(),
+                            ),
+                          );
+                        }
                       },
                       child: Text(AppLocalizations.of(context)!.proceedButton),
                     );

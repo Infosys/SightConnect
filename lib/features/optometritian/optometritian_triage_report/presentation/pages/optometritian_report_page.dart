@@ -1,14 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/eye_scan_tab_view.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/widgets/optometritian_report_questionnaire_card.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/widgets/optometritian_tumbling_report_card.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_report_questionnaire_card.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_tumbling_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -16,21 +15,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/optometritian_report_provider.dart';
+
 class OptometritianReportPage extends ConsumerWidget {
-  const OptometritianReportPage(
-      {required this.id,
-      required this.education,
-      required this.employment,
-      super.key});
+  const OptometritianReportPage({
+    required this.id,
+    required this.education,
+    required this.employment,
+    super.key,
+  });
 
   final String id;
   final String education;
   final String employment;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
-    TriageUrgency urgency =
-        ref.watch(triageUrgencyRepositoryProvider).calculateTriageUrgency();
+    var model = ref.watch(optometritianReportProvider);
+    TriageUrgency urgency = model.calculateTriageUrgency();
     return WillPopScope(
       onWillPop: () async {
         ref.read(triageProvider).resetTriage();
@@ -38,7 +39,7 @@ class OptometritianReportPage extends ConsumerWidget {
         return false;
       },
       child: Scaffold(
-        key: scaffoldKey,
+        key: model.scaffoldKey,
         appBar: CustomAppbar(
           leadingIcon: IconButton(
             onPressed: () {
@@ -150,27 +151,15 @@ class OptometritianReportPage extends ConsumerWidget {
                   width: AppSize.width(context) * 0.35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
-                    color: urgency == TriageUrgency.EMERGENCY
-                        ? AppColor.red
-                        : urgency == TriageUrgency.PRIORITY
-                            ? AppColor.orange
-                            : AppColor.green,
+                    color: model.getColorOnUrgency(urgency),
                     border: Border.all(
                       width: 1.5,
-                      color: urgency == TriageUrgency.EMERGENCY
-                          ? AppColor.red
-                          : urgency == TriageUrgency.PRIORITY
-                              ? AppColor.orange
-                              : AppColor.green,
+                      color: model.getColorOnUrgency(urgency),
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      urgency == TriageUrgency.EMERGENCY
-                          ? 'Urgent Consult'
-                          : urgency == TriageUrgency.PRIORITY
-                              ? 'Early Consult'
-                              : 'Regular Consult',
+                      model.getUrgencyText(urgency),
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.white,
@@ -180,14 +169,10 @@ class OptometritianReportPage extends ConsumerWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: AppSize.ksheight),
             const OptometritianReportQuestionnaireCard(),
             const OptometritianTumblingReportCard(),
             const EyeScanTabView(),
-            // SizedBox(
-            //   height: AppSize.height(context) * 0.01,
-            // ),
             const BrandingWidgetH(),
           ]),
         )),

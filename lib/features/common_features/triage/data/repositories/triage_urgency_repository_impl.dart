@@ -17,6 +17,7 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
 class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageQuestionnaireProvider triageQuestionnaireProvider;
   TriageEyeScanProvider triageEyeScanProvider;
+  int maxUrgency = 5;
   VisualAcuityTestProvider tumblingTestProvider;
 
   TriageUrgencyRepositoryImpl(
@@ -72,7 +73,7 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   }
 
   TriageUrgency _triageUrgency(int urgency) {
-    if (urgency > 5) {
+    if (urgency > maxUrgency) {
       return TriageUrgency.EMERGENCY;
     } else if (urgency > 3) {
       return TriageUrgency.PRIORITY;

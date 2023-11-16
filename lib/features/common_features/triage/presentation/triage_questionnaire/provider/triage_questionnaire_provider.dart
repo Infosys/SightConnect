@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider(
