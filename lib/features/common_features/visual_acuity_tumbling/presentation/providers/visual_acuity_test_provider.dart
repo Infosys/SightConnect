@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' as math;
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
@@ -207,7 +206,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
       var maxLevelNew = math.max(_currentMaxLevelLeftEye! - 1, 0);
       print("maxLevelNew Left: $maxLevelNew");
 
-      return _dataSource.getLevel(_maxLevel!, GameMode.regular).logMar;
+      return _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
     } else if (eye == Eye.right) {
       var maxLevelNew = math.max(_currentMaxLevelRightEye! - 1, 0);
       print("maxLevelNew Right: $maxLevelNew");
