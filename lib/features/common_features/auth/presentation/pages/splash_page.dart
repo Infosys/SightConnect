@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
@@ -21,6 +22,20 @@ class SplashPage extends ConsumerStatefulWidget {
 
 class _SplashPageState extends ConsumerState<SplashPage> {
   final role = Role.optometrist;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const AuthPage(),
+        ),
+        (route) => false,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ref.listen(userDetailsProvider, (previous, next) async {
@@ -57,6 +72,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         );
       }
     });
+
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: Stack(

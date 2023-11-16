@@ -25,15 +25,23 @@ class OptionGrid extends HookConsumerWidget {
     final model = ref.watch(triageQuestionnaireProvider);
     final selectedOptions = model.selectedOptions;
     var isNoneOfTheseSelected = useState<bool>(false);
+    var isOtherSymptomsSelected = useState<bool>(false);
 
     void addAndRemoveResponse(bool isSelected, int index) {
       if (isSelected) {
         model.removeQuestionnaireAnswer(questions[index].code!);
+       
+        if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
+          // model.removeLastQuestionnaireRemark( );
+        }
       } else {
         model.addQuestionnaireAnswer(
           questions[index].code ?? 0,
           true,
         );
+         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
+          model.setQuestionnaireRemarks('', pageNumber);
+        }
       }
     }
 
@@ -69,11 +77,17 @@ class OptionGrid extends HookConsumerWidget {
 
     void handleMultipleOptionPage(int index, bool isSelected) {
       if (questions[index].statement == "None of these") {
+        if (isOtherSymptomsSelected.value == false) {
+          if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
+            model.setQuestionnaireRemarks('', pageNumber);
+          }
+        }
         handleNonOfThese(index, isSelected);
       } else if (isNoneOfTheseSelected.value &&
           questions[index].statement != "None of these") {
         return;
       } else if (questions[index].statement == "Other symptoms") {
+        isOtherSymptomsSelected.value = !isOtherSymptomsSelected.value;
         _buildOtherOptionSheet(
           context: context,
           remarksController: remarksController,
@@ -85,7 +99,7 @@ class OptionGrid extends HookConsumerWidget {
                 questions[index].code ?? 0,
                 true,
               );
-              model.setQuestionnaireRemarks(remark);
+              model.setQuestionnaireRemarks(remark, pageNumber);
             }
 
             Navigator.pop(context);

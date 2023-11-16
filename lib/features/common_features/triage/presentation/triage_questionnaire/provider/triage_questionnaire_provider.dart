@@ -25,9 +25,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireSections = [],
         _questionnaireResponse = [];
 
-  List<String> allRemarks = [
-    '',
-  ];
+  List<String> allRemarks = ['', '', ''];
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
@@ -36,17 +34,21 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void getQuestionnaire(List<QuestionnaireSection> data) async {
-    _questionnaireSections = data;
-
-    // notifyListeners();
-  }
-
-  void setQuestionnaireRemarks(String remarks) {
-    _questionnaireRemarks = remarks;
-    allRemarks.add(remarks);
+  void setQuestionnaireRemarks(String remarks, currentPageIndex) {
+    _questionnaireRemarks = _questionnaireRemarks + remarks;
+    allRemarks.insert(currentPageIndex, remarks);
     notifyListeners();
   }
+
+  void getQuestionnaire(List<QuestionnaireSection> data) async {
+    _questionnaireSections = data;
+  }
+
+  // void setQuestionnaireRemarks(String remarks) {
+  //   _questionnaireRemarks = remarks;
+  //   allRemarks.add(remarks);
+  //   notifyListeners();
+  // }
 
   void addQuestionnaireAnswer(int questionCode, bool answer) {
     _selectedOptions[questionCode] = answer;

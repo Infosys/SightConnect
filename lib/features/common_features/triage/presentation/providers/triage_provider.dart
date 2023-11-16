@@ -51,6 +51,7 @@ class TriageProvider extends ChangeNotifier {
       observations: _getVisionAcuityTumblingResponse(),
       questionnaireRemarks: _getQuestionaireRemarks(),
     );
+    logger.d("Triage Response before api call:  $triageresponse");
     var response = await ref.read(triageRepositoryProvider).saveTriage(
           triage: triageresponse,
         );

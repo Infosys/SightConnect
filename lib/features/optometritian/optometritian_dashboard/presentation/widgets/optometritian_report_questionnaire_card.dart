@@ -12,8 +12,8 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TriageUrgency urgency =
-        ref.watch(triageUrgencyRepositoryProvider).calculateTriageUrgency();
+    QuestionnaireUrgency urgency =
+        ref.watch(triageUrgencyRepositoryProvider).questionnaireUrgency();
     List<Map<String, dynamic>> data =
         ref.watch(triageQuestionnaireProvider).questionnaireForReportPage;
 
@@ -134,25 +134,25 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: urgency == TriageUrgency.EMERGENCY
+                  color: urgency == QuestionnaireUrgency.EMERGENCY
                       ? AppColor.red
-                      : urgency == TriageUrgency.PRIORITY
+                      : urgency == QuestionnaireUrgency.PRIORITY
                           ? AppColor.orange
                           : AppColor.green,
                   border: Border.all(
                     width: 1.5,
-                    color: urgency == TriageUrgency.EMERGENCY
+                    color: urgency == QuestionnaireUrgency.EMERGENCY
                         ? AppColor.red
-                        : urgency == TriageUrgency.PRIORITY
+                        : urgency == QuestionnaireUrgency.PRIORITY
                             ? AppColor.orange
                             : AppColor.green,
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    urgency == TriageUrgency.EMERGENCY
+                    urgency == QuestionnaireUrgency.EMERGENCY
                         ? 'Urgent Consult'
-                        : urgency == TriageUrgency.PRIORITY
+                        : urgency == QuestionnaireUrgency.PRIORITY
                             ? 'Early Consult'
                             : 'Regular Consult',
                     style: applyRobotoFont(

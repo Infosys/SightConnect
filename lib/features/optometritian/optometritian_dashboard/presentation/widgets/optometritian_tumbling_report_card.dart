@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -14,6 +13,8 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    VisualAcuityUrgency urgency =
+        ref.watch(triageUrgencyRepositoryProvider).visualAcuityUrgency();
     var model = ref.watch(tumblingTestProvider);
     double leftEyeSigth = model.calculateEyeSight(Eye.left);
     double rightEyeSigth = model.calculateEyeSight(Eye.right);
@@ -128,38 +129,57 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
           const SizedBox(
             height: AppSize.ksheight,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  ref.invalidate(triageProvider);
-                  ref.invalidate(tumblingTestProvider);
-                  ref.invalidate(triageQuestionnaireProvider);
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TriageQuestionnairePage(),
-                    ),
-                  );
-                },
-                child: const Text("Start New Assessment"),
+              Text(
+                "Category",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black.withOpacity(0.8),
+                ),
               ),
               const SizedBox(
-                width: AppSize.kmheight,
+                height: AppSize.ksheight,
               ),
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {
-                    ref.invalidate(triageProvider);
-                    ref.invalidate(tumblingTestProvider);
-                    ref.invalidate(triageQuestionnaireProvider);
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  },
-                  child: const Text("Home"),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                width: AppSize.width(context) * 0.35,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: urgency == VisualAcuityUrgency.EMERGENCY
+                      ? AppColor.red
+                      : urgency == VisualAcuityUrgency.PRIORITY
+                          ? AppColor.orange
+                          : AppColor.green,
+                  border: Border.all(
+                    width: 1.5,
+                    color: urgency == VisualAcuityUrgency.EMERGENCY
+                        ? AppColor.red
+                        : urgency == VisualAcuityUrgency.PRIORITY
+                            ? AppColor.orange
+                            : AppColor.green,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    urgency == VisualAcuityUrgency.EMERGENCY
+                        ? 'Urgent Consult'
+                        : urgency == VisualAcuityUrgency.PRIORITY
+                            ? 'Early Consult'
+                            : 'Regular Consult',
+                    style: applyRobotoFont(
+                      fontSize: 12,
+                      color: AppColor.white,
+                    ),
+                  ),
                 ),
               ),
             ],
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
           ),
         ],
       ),

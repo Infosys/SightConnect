@@ -1,5 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/eye_scan_tab_view.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/widgets/optometritian_report_questionnaire_card.dart';
@@ -24,8 +29,10 @@ class OptometritianReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
+    TriageUrgency urgency =
+        ref.watch(triageUrgencyRepositoryProvider).calculateTriageUrgency();
     return WillPopScope(
-        onWillPop: () async {
+      onWillPop: () async {
         ref.read(triageProvider).resetTriage();
         Navigator.of(context).popUntil((route) => route.isFirst);
         return false;
@@ -45,7 +52,7 @@ class OptometritianReportPage extends ConsumerWidget {
           ),
           centerTitle: false,
           title: Text(
-            "in-app assessment Report",
+            "Assessment Report",
             style: applyFiraSansFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -55,7 +62,8 @@ class OptometritianReportPage extends ConsumerWidget {
         body: SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               decoration: BoxDecoration(
                 color: AppColor.primary,
@@ -120,17 +128,105 @@ class OptometritianReportPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kspadding + 5,
+              height: AppSize.klheight,
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Category",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ),
+                const SizedBox(
+                  height: AppSize.ksheight,
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                  width: AppSize.width(context) * 0.35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: urgency == TriageUrgency.EMERGENCY
+                        ? AppColor.red
+                        : urgency == TriageUrgency.PRIORITY
+                            ? AppColor.orange
+                            : AppColor.green,
+                    border: Border.all(
+                      width: 1.5,
+                      color: urgency == TriageUrgency.EMERGENCY
+                          ? AppColor.red
+                          : urgency == TriageUrgency.PRIORITY
+                              ? AppColor.orange
+                              : AppColor.green,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      urgency == TriageUrgency.EMERGENCY
+                          ? 'Urgent Consult'
+                          : urgency == TriageUrgency.PRIORITY
+                              ? 'Early Consult'
+                              : 'Regular Consult',
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: AppSize.ksheight),
             const OptometritianReportQuestionnaireCard(),
             const OptometritianTumblingReportCard(),
             const EyeScanTabView(),
-            SizedBox(
-              height: AppSize.height(context) * 0.03,
-            ),
+            // SizedBox(
+            //   height: AppSize.height(context) * 0.01,
+            // ),
             const BrandingWidgetH(),
           ]),
         )),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  ref.invalidate(triageProvider);
+                  ref.invalidate(tumblingTestProvider);
+                  ref.invalidate(triageQuestionnaireProvider);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TriageQuestionnairePage(),
+                    ),
+                  );
+                },
+                child: const Text("Start New Assessment"),
+              ),
+              const SizedBox(
+                width: AppSize.kmheight,
+              ),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    ref.invalidate(triageProvider);
+                    ref.invalidate(tumblingTestProvider);
+                    ref.invalidate(triageQuestionnaireProvider);
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                  child: const Text("Home"),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
