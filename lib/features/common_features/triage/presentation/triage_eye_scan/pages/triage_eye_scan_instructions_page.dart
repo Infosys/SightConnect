@@ -170,7 +170,8 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                     var navigator = Navigator.of(context);
                     var cameras = await availableCameras();
                     if (cameras.isEmpty) {
-                      Fluttertoast.showToast(msg: "No camera found");
+                      Fluttertoast.showToast(
+                          msg: "camera found ${cameras.length}");
                       return;
                     }
                     navigator.push(
@@ -180,7 +181,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                       ),
                     );
                   } catch (e) {
-                    Fluttertoast.showToast(msg: "No camera found");
+                    Fluttertoast.showToast(msg: e.toString());
                   }
                 },
                 child: Text(

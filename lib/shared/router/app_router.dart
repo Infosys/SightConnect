@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/features/common_features/auth/presentation/page
 import 'package:flutter/material.dart';
 
 class AppRouter {
-  AppRouter._();
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static Map<String, Widget Function(BuildContext)> routes = {
     SplashPage.routeName: (context) => const SplashPage(),
