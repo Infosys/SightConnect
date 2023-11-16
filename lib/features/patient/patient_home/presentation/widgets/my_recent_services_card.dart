@@ -21,7 +21,7 @@ class RecentServicesCard extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             if (data["text"] == "Visual Acuity Test") {
-              ref.read(toggleTumblingResultPage.notifier).state = true;
+              ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) =>
@@ -29,6 +29,7 @@ class RecentServicesCard extends ConsumerWidget {
                 ),
               );
             } else if (data["text"] == "Eye Assessment") {
+              ref.read(globalProvider).setHideTumblingElement = false;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const TriagePage(),

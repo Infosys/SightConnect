@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -59,7 +60,7 @@ class OptometricianStartTestPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const TriageQuestionnairePage(),
+                          builder: (context) => const TriagePage(),
                         ),
                       );
                     },

@@ -449,9 +449,12 @@ class OptometricianAddPatientPage extends HookWidget {
                       child: ElevatedButton(
                         onPressed: isButtonEnabled.value
                             ? () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
                                     builder: (context) =>
-                                        const OptometricianStartTestPage()));
+                                        const OptometricianStartTestPage(),
+                                  ),
+                                );
                               }
                             : null,
                         child: const Text("Start Assessment"),

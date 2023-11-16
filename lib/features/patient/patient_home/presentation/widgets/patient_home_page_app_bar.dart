@@ -65,24 +65,24 @@ class PatientHomePageAppBar extends StatelessWidget
                   color: Colors.white,
                 ),
               ),
-              Positioned(
-                right: 0,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: Consumer(
-                    builder: (context, ref, child) {
-                      var user = ref.watch(userDetailsProvider).userProfile;
+              // Positioned(
+              //   right: 0,
+              //   child: CircleAvatar(
+              //     radius: 20,
+              //     backgroundColor: Theme.of(context).primaryColor,
+              //     child: Consumer(
+              //       builder: (context, ref, child) {
+              //         var user = ref.watch(userDetailsProvider).userProfile;
 
-                      return CircleAvatar(
-                        radius: 18,
-                        backgroundImage:
-                            AssetImage(user!.profile!.patient!.profilePhoto!),
-                      );
-                    },
-                  ),
-                ),
-              ),
+              //         return CircleAvatar(
+              //           radius: 18,
+              //           backgroundImage:
+              //               AssetImage(user!.profile!.patient!.profilePhoto!),
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

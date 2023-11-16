@@ -5,8 +5,6 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
@@ -136,18 +134,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                     model.saveQuestionaireResponse();
                                     if (isLastPage) {
                                       ref
-                                          .read(
-                                              toggleTumblingResultPage.notifier)
-                                          .state = false;
-                                      ref
                                           .read(triageStepperProvider)
-                                          .nextStep();
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const VisualAcuityTumblingPage(),
-                                        ),
-                                      );
+                                          .goToNextStep();
                                     } else {
                                       pageController.nextPage(
                                         duration:

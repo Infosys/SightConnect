@@ -18,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/camera_controllers.dart';
 
@@ -241,7 +240,7 @@ class _PatientEyeCaptureTriagePageState
         );
         if (verifiedImage != null && mounted) {
           model.setLeftEyeImage(verifiedImage);
-          ref.read(triageStepperProvider).nextStep();
+          ref.read(triageStepperProvider).goToNextStep();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
           // await ref.read(triageProvider).saveTriage();
           // Navigator.of(context).popUntil((route) => route.isFirst);

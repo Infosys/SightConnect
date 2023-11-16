@@ -26,6 +26,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
   late bool? _isGameOver;
   late int? _maxLevel;
   late int? _totalWrongLevelResponse;
+  bool isTestCompleted = false;
 
   late int? _currentMaxLevelLeftEye;
   late int? _currentMaxLevelRightEye;
@@ -34,6 +35,10 @@ class VisualAcuityTestProvider with ChangeNotifier {
   late List<UserResponse>? _currentLevelUserResponses;
   late SingleEyeReport? _singleEyeReport;
   final FinalEyesReport _eyesFinalReport = {};
+  set setIsTestCompleted(bool value) {
+    isTestCompleted = value;
+    notifyListeners();
+  }
 
   void startGame(Eye eye) {
     _eyesFinalReport[eye] = {};

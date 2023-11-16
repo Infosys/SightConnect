@@ -158,7 +158,7 @@ class TriageEyeScanDialog {
                         (BuildContext context, WidgetRef ref, Widget? child) {
                       return TextButton(
                         onPressed: () {
-                          ref.read(triageStepperProvider).nextStep();
+                          ref.read(triageStepperProvider).goToNextStep();
                           ref
                               .read(triageEyeScanProvider)
                               .setCurrentEye(TriageEye.RIGHT_EYE);

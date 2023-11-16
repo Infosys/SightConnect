@@ -40,7 +40,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
         child: Scaffold(
           key: scaffoldKey,
           drawer: const TriageStepsDrawer(),
-          appBar: ref.watch(toggleTumblingResultPage)
+          appBar: ref.watch(globalProvider).hideTumblingElement
               ? CustomAppbar(
                   leadingIcon: IconButton(
                     splashRadius: 20,

@@ -1,7 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_overlay.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +46,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             });
         next.startGame(Eye.both);
       } else if (next.currentEye == Eye.both && next.isGameOver!) {
+        next.isTestCompleted = true;
         logger.d("Game Over for both eye");
         showDialog(
             barrierDismissible: false,
@@ -49,6 +54,26 @@ class SwipeGestureCard extends HookConsumerWidget {
             builder: (context) {
               return VisualAcuityDialog.showSuccessTemp(context);
             });
+      }
+
+      if (next.isTestCompleted) {
+        ref.read(visualAcuityTumblingTestDialogProvider.notifier).state = true;
+        var isSkip = ref.watch(globalProvider).hideTumblingElement;
+        if (!isSkip) {
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) => const TriageEyeScanPage(),
+          //     fullscreenDialog: true,
+          //   ),
+          // );
+          ref.read(triageStepperProvider).goToNextStep();
+        } else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const TumblingResultReportPage(),
+            ),
+          );
+        }
       }
     });
 
