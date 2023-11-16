@@ -7,6 +7,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../provider/triage_eye_scan_provider.dart';
+
 class EyeScanCameraControllers extends HookConsumerWidget {
   const EyeScanCameraControllers({
     super.key,
@@ -20,7 +22,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var current = ref.watch(currentEyeProvider);
+    var current = ref.watch(triageEyeScanProvider);
     var isClosed = useState<bool>(false);
     return Column(
       children: [

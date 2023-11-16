@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
@@ -12,8 +12,8 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../triage/presentation/providers/triage_stepper_provider.dart';
 import 'visual_acuity_tumbling_overlay.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VisualAcuityDialog {
   VisualAcuityDialog._();
@@ -104,7 +104,7 @@ class VisualAcuityDialog {
     );
   }
 
-  static SizedBox showTestCompleteDialog(BuildContext context) {
+  static SizedBox showEyeInstructionDialog(BuildContext context, Eye eye) {
     return SizedBox(
       width: AppSize.width(context) * 1,
       height: AppSize.height(context) * 1,
@@ -114,76 +114,93 @@ class VisualAcuityDialog {
           width: AppSize.width(context) * 1,
           height: AppSize.height(context) * 1,
           child: Scaffold(
-              appBar: CustomAppbar(
-                title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
-              ),
-              body: SizedBox(
-                width: AppSize.width(context) * 1,
-                height: AppSize.height(context) * 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!
-                            .visualAcuityRightEyeHeader,
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        softWrap: true,
+            appBar: CustomAppbar(
+              title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
+            ),
+            body: SizedBox(
+              width: AppSize.width(context) * 1,
+              height: AppSize.height(context) * 1,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      eye == Eye.left
+                          ? AppLocalizations.of(context)!
+                              .visualAcuityLeftEyeHeader
+                          : (eye == Eye.right
+                              ? AppLocalizations.of(context)!
+                                  .visualAcuityRightEyeHeader
+                              : "Both Eyes"),
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
-                      const SizedBox(
-                        height: AppSize.kmheight,
+                      softWrap: true,
+                    ),
+                    const SizedBox(
+                      height: AppSize.kmheight,
+                    ),
+                    Text(
+                      eye == Eye.left
+                          ? AppLocalizations.of(context)!
+                              .visualAcuityLeftEyeInstructions
+                          : eye == Eye.right
+                              ? AppLocalizations.of(context)!
+                                  .visualAcuityRightEyeInstructions
+                              : AppLocalizations.of(context)!
+                                  .visualAcuityRightEyeInstructions,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                      Text(
-                        AppLocalizations.of(context)!
-                            .visualAcuityRightEyeInstructions,
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        softWrap: true,
-                      ),
-                      const SizedBox(
-                        height: AppSize.kmheight + 2,
-                      ),
-                      Center(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColor.primary.withOpacity(0.12),
-                                  offset: const Offset(0, 2),
-                                  blurRadius: 20,
-                                  spreadRadius: 20,
-                                ),
-                              ],
-                            ),
-                            height: AppSize.height(context) * 0.5,
-                            width: AppSize.width(context) * 0.7,
-                            child:
-                                Image.asset("assets/images/Test1RightEye.png")),
-                      ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                  AppLocalizations.of(context)!.startButton),
-                            ),
+                      softWrap: true,
+                    ),
+                    const SizedBox(
+                      height: AppSize.kmheight + 2,
+                    ),
+                    Center(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColor.primary.withOpacity(0.12),
+                                offset: const Offset(0, 2),
+                                blurRadius: 20,
+                                spreadRadius: 20,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          height: AppSize.height(context) * 0.5,
+                          width: AppSize.width(context) * 0.7,
+                          child: eye == Eye.left
+                              ? Image.asset("assets/images/Test1LeftEye.png")
+                              : eye == Eye.right
+                                  ? Image.asset(
+                                      "assets/images/Test1RightEye.png")
+                                  : Image.asset(
+                                      "assets/images/Test1BothEye.png")),
+                    ),
+                    const Spacer(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child:
+                                Text(AppLocalizations.of(context)!.startButton),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )),
+              ),
+            ),
+          ),
         ),
       ),
     );

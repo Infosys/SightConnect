@@ -4,6 +4,8 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acutiy_instruction_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../widgets/visual_acuity_dialog.dart';
 import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
@@ -107,13 +110,22 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
               vertical: AppSize.height(context) * 0.02,
             ),
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const VisualAcuityTumblingLeftEyeInstruction(),
-                  ),
+              onPressed: () async {
+                await showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return VisualAcuityDialog.showEyeInstructionDialog(
+                        context, Eye.right);
+                  },
                 );
+                if (context.mounted) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const VisualAcuityInitiatePage(),
+                    ),
+                  );
+                }
               },
               child: Text(
                 AppLocalizations.of(context)!.startButton,

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../visual_acuity_tumbling/data/models/tumbling_models.dart';
+
 var triageProvider = ChangeNotifierProvider(
   (ref) => TriageProvider(ref),
 );
@@ -69,8 +71,10 @@ class TriageProvider extends ChangeNotifier {
 
   /// set patient vision acuity tumbling based on the TriageAssessment model
   List<Observation> _getVisionAcuityTumblingResponse() {
-    double leftEyeSight = ref.read(tumblingTestProvider).leftEyeSight();
-    double rightEyeSight = ref.read(tumblingTestProvider).rightEyeSight();
+    double leftEyeSight =
+        ref.read(tumblingTestProvider).calculateEyeSight(Eye.left);
+    double rightEyeSight =
+        ref.read(tumblingTestProvider).calculateEyeSight(Eye.right);
 
     List<Observation> observationList = [
       Observation(

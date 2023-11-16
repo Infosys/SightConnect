@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../models/tumbling_models.dart';
 
 var tumlingLocalSource = Provider((ref) => TumblingLocalSourceImpl());
 
@@ -433,6 +434,13 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
     ),
   ];
 
+  final List<Level> levelToRegular = [];
+  final List<Level> levelToIsFive = [];
+
+  TumblingLocalSourceImpl() {
+    mapLevelsToLevelNumber();
+  }
+
   @override
   List<Level> getLevels() {
     return _levels;
@@ -440,9 +448,14 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
 
   @override
   Level getLevel(int levelNumber, GameMode mode) {
-    return _levels.firstWhere(
-      (element) => element.levelNumber == levelNumber && element.mode == mode,
-    );
+    // return _levels.firstWhere(
+    //   (element) => element.levelNumber == levelNumber && element.mode == mode,
+    // );
+    if (mode == GameMode.regular) {
+      return levelToRegular[levelNumber];
+    } else {
+      return levelToIsFive[levelNumber];
+    }
   }
 
   @override
@@ -454,7 +467,6 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
     }
   }
 
-  @override
   @override
   int get maxLevel => 8;
 
@@ -481,6 +493,17 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
         return 0.0;
       default:
         return 0.0;
+    }
+  }
+
+  void mapLevelsToLevelNumber() {
+    for (var level in _levels) {
+      GameMode mode = level.mode;
+      if (mode == GameMode.regular) {
+        levelToRegular.add(level);
+      } else {
+        levelToIsFive.add(level);
+      }
     }
   }
 }

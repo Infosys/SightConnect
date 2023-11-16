@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
-    double leftEyeSigth = model.leftEyeSight();
-    double rightEyeSigth = model.rightEyeSight();
+    double leftEyeSigth = model.calculateEyeSight(Eye.left);
+    double rightEyeSigth = model.calculateEyeSight(Eye.right);
 
     getColor(double value) {
       if (value >= 1) {

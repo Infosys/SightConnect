@@ -22,10 +22,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/camera_controllers.dart';
 
-enum TriageEye { RIGHT_EYE, LEFT_EYE }
-
-var currentEyeProvider = StateProvider<TriageEye>((ref) => TriageEye.RIGHT_EYE);
-
 class EyeCaptureTriagePage extends ConsumerStatefulWidget {
   static const String routeName = "/patientEyeCapturePage";
   const EyeCaptureTriagePage({
@@ -93,7 +89,8 @@ class _PatientEyeCaptureTriagePageState
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    var current = ref.watch(currentEyeProvider);
+    var model = ref.watch(triageEyeScanProvider);
+    var current = model.currentEye;
     logger.d("Current Eye: $current");
 
     if (!_controller.value.isInitialized) {
@@ -196,7 +193,7 @@ class _PatientEyeCaptureTriagePageState
                   right: 0,
                   bottom: 0,
                   child: EyeScanCameraControllers(
-                    onCapture: () => _takePicture(current, context),
+                    onCapture: () => _takePicture(model, context),
                     onFlash: () => _toggleFlash(),
                     onSwitchCamera: () => _toggleCamera(),
                   ),
@@ -209,48 +206,8 @@ class _PatientEyeCaptureTriagePageState
     }
   }
 
-  // Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
-  //   try {
-  //     if (!_controller.value.isInitialized) {
-  //       return;
-  //     }
-  //     _initializeControllerFuture;
-  //     final image = await _controller.takePicture();
-  //     if (currentEye == TriageEye.RIGHT_EYE) {
-  //       ref.read(triageEyeScanProvider).setRightEyeImage(image);
-  //       ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
-  //       if (mounted) {
-  //         showDialog(
-  //             barrierDismissible: false,
-  //             context: context,
-  //             builder: (context) {
-  //               return TriageEyeScanDialog.showSuccessDialog(
-  //                   context, TriageEye.RIGHT_EYE);
-  //             });
-  //       }
-  //     } else {
-  //       ref.read(triageEyeScanProvider).setLeftEyeImage(image);
-  //       if (mounted) {
-  //         showDialog(
-  //           barrierDismissible: false,
-  //           context: context,
-  //           builder: (context) {
-  //             return TriageEyeScanDialog.showSuccessDialog(
-  //                 context, TriageEye.LEFT_EYE);
-  //           },
-  //         );
-  //       }
-  //     }
-  //   } on CameraException {
-  //     logger.d("Something went wrong");
-  //     Fluttertoast.showToast(msg: "Something went wrong");
-  //   } catch (e) {
-  //     logger.d(e);
-  //     Fluttertoast.showToast(msg: "Camera not found");
-  //   }
-  // }
-
-  Future<void> _takePicture(TriageEye currentEye, BuildContext context) async {
+  Future<void> _takePicture(
+      TriageEyeScanProvider model, BuildContext context) async {
     try {
       if (!_controller.value.isInitialized) {
         return;
@@ -264,29 +221,29 @@ class _PatientEyeCaptureTriagePageState
       setState(() {
         isLoading = false;
       });
-      if (currentEye == TriageEye.RIGHT_EYE && mounted) {
+      if (model.currentEye == TriageEye.RIGHT_EYE && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => EyePreviewPage(imageFile: image),
           ),
         );
         if (verifiedImage != null) {
-          ref.read(triageEyeScanProvider).setRightEyeImage(verifiedImage);
-          ref.read(currentEyeProvider.notifier).state = TriageEye.LEFT_EYE;
+          model.setRightEyeImage(verifiedImage);
+          model.setCurrentEye(TriageEye.LEFT_EYE);
         } else {
           return;
         }
-      } else if (currentEye == TriageEye.LEFT_EYE && mounted) {
+      } else if (model.currentEye == TriageEye.LEFT_EYE && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => EyePreviewPage(imageFile: image),
           ),
         );
         if (verifiedImage != null && mounted) {
-          ref.read(triageEyeScanProvider).setLeftEyeImage(verifiedImage);
+          model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).nextStep();
-          ref.read(currentEyeProvider.notifier).state = TriageEye.RIGHT_EYE;
-          await ref.read(triageProvider).saveTriage();
+          model.setCurrentEye(TriageEye.RIGHT_EYE);
+          // await ref.read(triageProvider).saveTriage();
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
           Navigator.of(context).push(
@@ -306,7 +263,8 @@ class _PatientEyeCaptureTriagePageState
       logger.d("Something went wrong");
       Fluttertoast.showToast(msg: "Something went wrong");
     } catch (e) {
-      logger.d(e);
+      logger.d(
+          'Error: Circular Dependency Error Coming from take Picture ${e.toString()}');
       Fluttertoast.showToast(msg: "Camera not found");
     }
   }
