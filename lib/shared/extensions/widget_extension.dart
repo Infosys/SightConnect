@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-extension ScaffoldExtension on BuildContext {
-  ScaffoldState get scaffold => Scaffold.of(this);
-}
-
 // Extension usage
 // final scaffold = context.scaffold;
 // scaffold.showSnackBar(SnackBar(
@@ -13,6 +9,7 @@ extension ScaffoldExtension on BuildContext {
 
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
+  ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
   AppLocalizations? get loc => AppLocalizations.of(this);
   TargetPlatform get platform => Theme.of(this).platform;
 }

@@ -6,9 +6,11 @@ import 'package:eye_care_for_all/features/common_features/auth/presentation/page
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,20 +28,44 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 300), () async {
+      var jailbroken = await FlutterJailbreakDetection.jailbroken;
+      var developerMode = await FlutterJailbreakDetection.developerMode;
+      if (jailbroken) {
+        if (mounted) {
+          context.scaffoldMessenger.showSnackBar(
+            const SnackBar(
+              content: Text('Jailbroken device detected'),
+            ),
+          );
+        }
+        return;
+      } else if (developerMode) {
+        if (mounted) {
+          context.scaffoldMessenger.showSnackBar(
+            const SnackBar(
+              content: Text('Developer mode detected'),
+            ),
+          );
+        }
+        return;
+      }
+
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const OptometritianDashboardPage()),
+          (route) => false,
+        );
+      }
+
       // Navigator.of(context).pushAndRemoveUntil(
       //   MaterialPageRoute(
       //     builder: (context) => const AuthPage(),
       //   ),
       //   (route) => false,
       // );
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const OptometritianDashboardPage(),
-        ),
-        (route) => false,
-      );
     });
   }
 

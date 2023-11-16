@@ -204,39 +204,44 @@ class VisualAcuityTestProvider with ChangeNotifier {
   double calculateEyeSight(Eye eye) {
     if (eye == Eye.left) {
       var maxLevelNew = math.max(_currentMaxLevelLeftEye! - 1, 0);
-      print("maxLevelNew Left: $maxLevelNew");
+      logger.d("maxLevelNew Left: $maxLevelNew");
 
-      return _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+      var log = _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+      return _dataSource.lookUpLogMarTable(log);
     } else if (eye == Eye.right) {
       var maxLevelNew = math.max(_currentMaxLevelRightEye! - 1, 0);
-      print("maxLevelNew Right: $maxLevelNew");
+      logger.d("maxLevelNew Right: $maxLevelNew");
 
-      return _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+      var log = _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+      return _dataSource.lookUpLogMarTable(log);
     }
 
     var maxLevelNew = math.max(_currentMaxLevelBothEye! - 1, 0);
-    print("maxLevelNew Both: $maxLevelNew");
-    return _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+    logger.d("maxLevelNew Both: $maxLevelNew");
+    var log = _dataSource.getLevel(maxLevelNew, GameMode.regular).logMar;
+    return _dataSource.lookUpLogMarTable(log);
   }
 
   int getTumblingTestUrgency() {
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
-    leftEyeSight = _dataSource.lookUpLogMarTable(leftEyeSight);
-    rightEyeSight = _dataSource.lookUpLogMarTable(rightEyeSight);
-    bothEyeSight = _dataSource.lookUpLogMarTable(bothEyeSight);
 
     int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
     int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
-    // int bothEyeUrgency = _calculateUrgencyHelper(bothEyeSight);
+    int bothEyeUrgency = _calculateUrgencyHelper(bothEyeSight);
 
-    int urgency = math.max(leftEyeUrgency, rightEyeUrgency);
+    int urgency =
+        [leftEyeUrgency, rightEyeUrgency, bothEyeUrgency].reduce(math.max);
+
     logger.i({
       "leftEyeSight": leftEyeSight,
-      "rightEyeSight": rightEyeSight,
       "leftEyeUrgency": leftEyeUrgency,
+      "rightEyeSight": rightEyeSight,
       "rightEyeUrgency": rightEyeUrgency,
+      "bothEyeSight": bothEyeSight,
+      "bothEyeUrgency": bothEyeUrgency,
+      "FINAL URGENCY": urgency,
     });
 
     return urgency;

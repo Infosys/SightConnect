@@ -18,6 +18,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     double leftEyeSigth = model.calculateEyeSight(Eye.left);
     double rightEyeSigth = model.calculateEyeSight(Eye.right);
+    double bothEyeSigth = model.calculateEyeSight(Eye.both);
 
     getColor(double value) {
       if (value >= 1) {
@@ -39,6 +40,11 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
         "eye": "Right Eye",
         "value": rightEyeSigth.toString(),
         "color": getColor(rightEyeSigth)
+      },
+      {
+        "eye": "Both Eye",
+        "value": bothEyeSigth.toString(),
+        "color": getColor(bothEyeSigth)
       },
     ];
 
@@ -75,7 +81,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: 2,
+              itemCount: tumblingEData.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.4,
