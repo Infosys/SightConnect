@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/providers/optometritian_report_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,8 +11,8 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    QuestionnaireUrgency urgency =
-        ref.watch(triageUrgencyRepositoryProvider).questionnaireUrgency();
+    var model = ref.watch(optometritianReportProvider);
+    var urgency = model.calculateTriageUrgency();
     List<Map<String, dynamic>> data =
         ref.watch(triageQuestionnaireProvider).questionnaireForReportPage;
 
@@ -134,27 +133,15 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: urgency == QuestionnaireUrgency.EMERGENCY
-                      ? AppColor.red
-                      : urgency == QuestionnaireUrgency.PRIORITY
-                          ? AppColor.orange
-                          : AppColor.green,
+                  color: model.getColorOnUrgency(urgency),
                   border: Border.all(
                     width: 1.5,
-                    color: urgency == QuestionnaireUrgency.EMERGENCY
-                        ? AppColor.red
-                        : urgency == QuestionnaireUrgency.PRIORITY
-                            ? AppColor.orange
-                            : AppColor.green,
+                    color: model.getColorOnUrgency(urgency),
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    urgency == QuestionnaireUrgency.EMERGENCY
-                        ? 'Urgent Consult'
-                        : urgency == QuestionnaireUrgency.PRIORITY
-                            ? 'Early Consult'
-                            : 'Regular Consult',
+                    model.getUrgencyText(urgency),
                     style: applyRobotoFont(
                       fontSize: 12,
                       color: AppColor.white,

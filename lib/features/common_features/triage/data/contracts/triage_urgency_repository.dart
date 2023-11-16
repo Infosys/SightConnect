@@ -2,6 +2,6 @@ import 'package:eye_care_for_all/features/common_features/triage/data/enums/tria
 
 abstract class TriageUrgencyRepository {
   TriageUrgency calculateTriageUrgency();
-  QuestionnaireUrgency questionnaireUrgency();
-  VisualAcuityUrgency visualAcuityUrgency();
+  TriageUrgency questionnaireUrgency();
+  TriageUrgency visualAcuityUrgency();
 }

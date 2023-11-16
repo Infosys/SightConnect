@@ -37,4 +37,38 @@ class OptometritianReportProvider extends ChangeNotifier {
       TriageUrgency.ROUTINE => "Regular Consult",
     };
   }
+
+  Color _getChipUrgencyColor(double value) {
+    if (value >= 1) {
+      return AppColor.red;
+    } else if (value >= 0.5) {
+      return AppColor.orange;
+    } else {
+      return AppColor.green;
+    }
+  }
+
+  List<Map<String, dynamic>> getTumblingEData(
+    double leftEyeSigth,
+    double rightEyeSigth,
+    double bothEyeSigth,
+  ) {
+    return [
+      {
+        "eye": "Left Eye",
+        "value": leftEyeSigth.toString(),
+        "color": _getChipUrgencyColor(leftEyeSigth)
+      },
+      {
+        "eye": "Right Eye",
+        "value": rightEyeSigth.toString(),
+        "color": _getChipUrgencyColor(rightEyeSigth)
+      },
+      {
+        "eye": "Both Eye",
+        "value": bothEyeSigth.toString(),
+        "color": _getChipUrgencyColor(bothEyeSigth)
+      },
+    ];
+  }
 }

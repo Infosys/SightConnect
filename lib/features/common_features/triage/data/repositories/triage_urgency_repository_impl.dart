@@ -17,7 +17,7 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
 class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageQuestionnaireProvider triageQuestionnaireProvider;
   TriageEyeScanProvider triageEyeScanProvider;
-  int maxUrgency = 5;
+
   VisualAcuityTestProvider tumblingTestProvider;
 
   TriageUrgencyRepositoryImpl(
@@ -44,36 +44,20 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   }
 
   @override
-  QuestionnaireUrgency questionnaireUrgency() {
+  TriageUrgency questionnaireUrgency() {
     int questionnaireUrgency =
         triageQuestionnaireProvider.getTriageQuestionnaireUrgency();
-    logger.d(
-        "Questionnaire Urgency frooooooooooooooooom IMPL: $questionnaireUrgency");
-    if (questionnaireUrgency >= 3) {
-      return QuestionnaireUrgency.EMERGENCY;
-    } else if (questionnaireUrgency >= 2) {
-      return QuestionnaireUrgency.PRIORITY;
-    } else {
-      return QuestionnaireUrgency.ROUTINE;
-    }
+    return _triageUrgency(questionnaireUrgency);
   }
 
   @override
-  VisualAcuityUrgency visualAcuityUrgency() {
+  TriageUrgency visualAcuityUrgency() {
     int visionAcuityUrgency = tumblingTestProvider.getTumblingTestUrgency();
-    logger.d(
-        "Vision Acuity Urgency frooooooooooooooooom IMPL: $visionAcuityUrgency");
-    if (visionAcuityUrgency >= 3) {
-      return VisualAcuityUrgency.EMERGENCY;
-    } else if (visionAcuityUrgency >= 2) {
-      return VisualAcuityUrgency.PRIORITY;
-    } else {
-      return VisualAcuityUrgency.ROUTINE;
-    }
+    return _triageUrgency(visionAcuityUrgency);
   }
 
   TriageUrgency _triageUrgency(int urgency) {
-    if (urgency > maxUrgency) {
+    if (urgency > 5) {
       return TriageUrgency.EMERGENCY;
     } else if (urgency > 3) {
       return TriageUrgency.PRIORITY;
