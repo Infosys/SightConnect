@@ -62,7 +62,7 @@ class BottomInputTabState extends State<BottomInputTab>
                 builder: (context, ref, child) => Text(
                   ref.watch(tumblingTestProvider).currentEye == Eye.left
                       ? AppLocalizations.of(context)!.leftEyeString
-                      : AppLocalizations.of(context)!.rightEyeString,
+                      : (ref.watch(tumblingTestProvider).currentEye == Eye.right ? AppLocalizations.of(context)!.rightEyeString : AppLocalizations.of(context)!.bothEyeString),
                   style: applyFiraSansFont(
                     fontSize: 18,
                   ),
