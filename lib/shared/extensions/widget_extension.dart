@@ -14,6 +14,7 @@ extension ScaffoldExtension on BuildContext {
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
   AppLocalizations? get loc => AppLocalizations.of(this);
+  TargetPlatform get platform => Theme.of(this).platform;
 }
 
 

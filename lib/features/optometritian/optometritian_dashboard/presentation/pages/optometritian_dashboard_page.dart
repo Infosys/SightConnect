@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -136,7 +137,7 @@ class OptometritianDashboardPage extends StatelessWidget {
                           // Navigator.of(context).push(
                           //   MaterialPageRoute(
                           //     builder: (context) =>
-                          //         const PatientVisualAcuityTumblingPage(),
+                          //         const VisualAcuityTumblingPage(),
                           //   ),
                           // );
                         },

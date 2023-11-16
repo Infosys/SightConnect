@@ -92,9 +92,11 @@ class PatientServicesPage extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                              BottomNavItems.service.svgImage,
-                              color: AppColor.primary,
-                            ),
+                                BottomNavItems.service.svgImage,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColor.primary,
+                                  BlendMode.srcIn,
+                                )),
                           ),
                           Container(
                             padding: const EdgeInsets.all(8.0),
@@ -109,16 +111,20 @@ class PatientServicesPage extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                              BottomNavItems.notification.svgImage,
-                              color: AppColor.grey,
-                            ),
+                                BottomNavItems.notification.svgImage,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColor.grey,
+                                  BlendMode.srcIn,
+                                )),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: SvgPicture.asset(
-                              BottomNavItems.drawer.svgImage,
-                              color: AppColor.grey,
-                            ),
+                            child:
+                                SvgPicture.asset(BottomNavItems.drawer.svgImage,
+                                    colorFilter: const ColorFilter.mode(
+                                      AppColor.grey,
+                                      BlendMode.srcIn,
+                                    )),
                           ),
                         ],
                       ),

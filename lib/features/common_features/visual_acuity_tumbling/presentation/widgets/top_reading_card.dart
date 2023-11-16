@@ -1,7 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -22,8 +25,10 @@ class TopReadingCard extends ConsumerWidget {
 
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
-    final size = mm(currentLevel!.size) * 10;
-    // final size = currentLevel!.size * 60;
+    final optoTypeSize = mm(currentLevel!.size * 10 * 3);
+    // final optoTypeSize = context.platform == TargetPlatform.iOS
+    //     ? IOSDeviceInfoService.getOptoTypeSize(currentLevel.size)
+    //     : size;
 
     return Container(
       decoration: BoxDecoration(
@@ -43,14 +48,14 @@ class TopReadingCard extends ConsumerWidget {
                 child: Wrap(
                   runAlignment: WrapAlignment.center,
                   runSpacing: 10,
-                  spacing: size,
+                  spacing: optoTypeSize,
                   children: List.generate(
                     model.level!.questions.length,
                     (index) {
                       var question = model.level!.questions[index];
 
                       return _RotatedTumblingE(
-                        size: size,
+                        size: optoTypeSize,
                         question: question,
                         index: index,
                         selectedIndex: model.currentIndex!,
@@ -67,6 +72,13 @@ class TopReadingCard extends ConsumerWidget {
                 style: applyFiraSansFont(
                   color: AppColor.grey,
                 ),
+              ),
+            ),
+            const SizedBox(height: AppSize.ksheight),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                optoTypeSize.toString(),
               ),
             ),
             const SizedBox(height: AppSize.ksheight),
