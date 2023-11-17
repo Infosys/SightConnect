@@ -19,6 +19,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   OptometricianSearchPatientProvider();
   List<PatientModel> get searchPatientList => _searchPatientList;
   List<TimeFrame> get timeFrameList => TimeFrame.values;
+  String get query => _query;
 
   set setTimeFrame(TimeFrame timeFrame) {
     _selectedTimeFrame = timeFrame;
@@ -53,28 +54,28 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
 
   void searchByTimeFrame() {
     var time = calculateDateFromTimeFrame(_selectedTimeFrame);
-    _searchPatientList =
-        _patientList.where((element) => element.date!.isAfter(time)).toList();
+    // _searchPatientList =
+    //     _patientList.where((element) => element.date!.isAfter(time)).toList();
     notifyListeners();
   }
 
   void searchByQuery() {
-    _searchPatientList = _patientList
-        .where((element) =>
-            element.id!.toLowerCase().contains(_query.toLowerCase()))
-        .toList();
+    // _searchPatientList = _patientList
+    //     .where((element) =>
+    //         element.id!.toLowerCase().contains(_query.toLowerCase()))
+    //     .toList();
     notifyListeners();
   }
 
   void searchByDate() {
-    _searchPatientList = _patientList.where((element) {
-      if (_selectedFromDate.isBefore(element.date!) &&
-          _selectedToDate
-              .isAfter(element.date!.subtract(const Duration(days: 1)))) {
-        return true;
-      }
-      return false;
-    }).toList();
+    // _searchPatientList = _patientList.where((element) {
+    //   if (_selectedFromDate.isBefore(element.date!) &&
+    //       _selectedToDate
+    //           .isAfter(element.date!.subtract(const Duration(days: 1)))) {
+    //     return true;
+    //   }
+    //   return false;
+    // }).toList();
     notifyListeners();
   }
 

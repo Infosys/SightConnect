@@ -15,6 +15,7 @@ class OptometritianDashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       body: Stack(
         children: [
@@ -31,7 +32,7 @@ class OptometritianDashboardPage extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            padding: const EdgeInsets.all(AppSize.klpadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
