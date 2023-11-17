@@ -9,7 +9,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -263,11 +263,10 @@ class _PatientEyeCaptureTriagePageState
         }
       }
     } on CameraException {
-      logger.d("Something went wrong");
+      logger.d("Something went wrong : CameraException");
       Fluttertoast.showToast(msg: "Something went wrong");
     } catch (e) {
-      logger.d(
-          'Error: Circular Dependency Error Coming from take Picture ${e.toString()}');
+      logger.d(e.toString());
       Fluttertoast.showToast(msg: "Camera not found");
     }
   }

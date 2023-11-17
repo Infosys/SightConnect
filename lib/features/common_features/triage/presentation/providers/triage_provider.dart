@@ -136,7 +136,8 @@ class TriageProvider extends ChangeNotifier {
   resetTriage() {
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
-    ref.invalidate(tumblingTestProvider);
+
+    ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
   }
 

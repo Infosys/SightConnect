@@ -49,21 +49,21 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       //   return;
       // }
 
-      // if (mounted) {
-      //   Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const OptometritianDashboardPage()),
-      //     (route) => false,
-      //   );
-      // }
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const OptometritianDashboardPage()),
+          (route) => false,
+        );
+      }
 
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const AuthPage(),
-        ),
-        (route) => false,
-      );
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   MaterialPageRoute(
+      //     builder: (context) => const AuthPage(),
+      //   ),
+      //   (route) => false,
+      // );
     });
   }
 

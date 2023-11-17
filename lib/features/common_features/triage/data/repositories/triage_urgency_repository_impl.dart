@@ -17,7 +17,6 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
 class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageQuestionnaireProvider triageQuestionnaireProvider;
   TriageEyeScanProvider triageEyeScanProvider;
-
   VisualAcuityTestProvider tumblingTestProvider;
 
   TriageUrgencyRepositoryImpl(

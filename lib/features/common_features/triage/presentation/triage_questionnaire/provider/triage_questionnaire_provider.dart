@@ -9,13 +9,12 @@ var triageQuestionnaireProvider = ChangeNotifierProvider(
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-  List<QuestionnaireSection> _questionnaireSections;
-
+  late List<QuestionnaireSection> _questionnaireSections;
   late String _questionnaireRemarks;
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-
   int _currentQuestionnairePageIndex = 0;
+  List<String> allRemarks = ['', '', ''];
 
   TriageQuestionnaireProvider()
       : _questionnaireRemarks = '',
@@ -23,11 +22,9 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireSections = [],
         _questionnaireResponse = [];
 
-  List<String> allRemarks = ['', '', ''];
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
-
   List<QuestionnaireSection> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;

@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eyes_capture_triage_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -201,7 +201,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return userSwipDirection == questionDirection;
   }
 
-  void resetTumblingTest() {
+  void reset() {
     startGame(Eye.right);
     notifyListeners();
   }

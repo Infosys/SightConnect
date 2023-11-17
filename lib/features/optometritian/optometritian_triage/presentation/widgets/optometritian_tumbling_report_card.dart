@@ -14,15 +14,12 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var eyeModel = ref.watch(tumblingTestProvider);
-    double leftEyeSigth = eyeModel.calculateEyeSight(Eye.left);
-    double rightEyeSigth = eyeModel.calculateEyeSight(Eye.right);
-    double bothEyeSigth = eyeModel.calculateEyeSight(Eye.both);
     var model = ref.watch(optometritianReportProvider);
     var urgency = model.visualAcuityUrgency();
     var tumblingEData = model.getTumblingEData(
-      leftEyeSigth,
-      rightEyeSigth,
-      bothEyeSigth,
+      eyeModel.calculateEyeSight(Eye.left),
+      eyeModel.calculateEyeSight(Eye.right),
+      eyeModel.calculateEyeSight(Eye.both),
     );
 
     return Padding(

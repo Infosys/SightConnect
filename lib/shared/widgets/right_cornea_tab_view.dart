@@ -9,7 +9,7 @@ class RightCorneaTabView extends ConsumerWidget {
   const RightCorneaTabView({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final XFile? imageFile = ref.read(triageEyeScanProvider).rightEyeImage;
+    final XFile? imageFile = ref.watch(triageEyeScanProvider).rightEyeImage;
     // List<String> data = [
     //   "assets/images/mask_a_one.png",
     //   "assets/images/mask_b_one.png",
@@ -48,8 +48,11 @@ class RightCorneaTabView extends ConsumerWidget {
               ),
               itemBuilder: (context, index) {
                 // var currentData = data[index];
+                if (imageFile == null) {
+                  return const SizedBox();
+                }
                 return Image.file(
-                  File(imageFile!.path),
+                  File(imageFile.path),
                   fit: BoxFit.cover,
                 );
               }),
