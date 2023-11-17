@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +172,8 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                         Image(
                           width: AppSize.width(context) * 0.5,
                           image: const AssetImage(
-                              "assets/images/search empty.png"),
+                            "assets/images/search empty.png",
+                          ),
                         ),
                         const SizedBox(
                           height: AppSize.klheight,

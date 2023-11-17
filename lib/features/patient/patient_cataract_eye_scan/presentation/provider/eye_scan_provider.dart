@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import './../../data/local/fake_data_source_cataract.dart';
 
 var patientEyeScanProvider = ChangeNotifierProvider.autoDispose(
@@ -11,7 +9,19 @@ var patientEyeScanProvider = ChangeNotifierProvider.autoDispose(
 );
 
 class EyeScanProvider extends ChangeNotifier {
-  var generalAdvice = [
+  EyeScanProvider();
+  XFile? _leftEyeImage;
+  XFile? _rightEyeImage;
+  Eye _selectedEye = Eye.RIGHT_EYE;
+  var previousReports = [];
+
+  File? get leftEyeImage =>
+      _leftEyeImage != null ? File(_leftEyeImage!.path) : null;
+  File? get rightEyeImage =>
+      _rightEyeImage != null ? File(_rightEyeImage!.path) : null;
+  Eye get selectedEye => _selectedEye;
+
+  List<String> generalAdvice = [
     "1. Make sure your eyeglasses or contact lenses are the most accurate prescription possible",
     "2. Use a magnifying glass to read if you need additional help reading",
     "3. Improve the lightning in your home with more or brighter lamps",
@@ -19,7 +29,7 @@ class EyeScanProvider extends ChangeNotifier {
     "5. Limit your night driving",
     "6. Consider sugery when vision deteriorates and starts affecting your daily activities"
   ];
-  var watchWhatYouEat = [
+  List<String> watchWhatYouEat = [
     "Nutrients that must be a part of your daily diet to support a good eye function :",
     "Vitamin A",
     "Vitamin C",
@@ -29,49 +39,45 @@ class EyeScanProvider extends ChangeNotifier {
     "Niacin"
   ];
 
-  var previousReports = [];
-
-  Eye currentEye = Eye.RIGHT_EYE;
-  setCurrentEye(eye) {
-    currentEye = eye;
+  void setCurrentEye(eye) {
+    _selectedEye = eye;
   }
 
-  XFile? _leftEyeImage;
-  XFile? _rightEyeImage;
-
-  File? get leftEyeImage =>
-      _leftEyeImage != null ? File(_leftEyeImage!.path) : null;
-  File? get rightEyeImage =>
-      _rightEyeImage != null ? File(_rightEyeImage!.path) : null;
-
-  EyeScanProvider();
-  setLeftEyeImage(XFile image) {
+  void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
 
     notifyListeners();
   }
 
-  setRightEyeImage(XFile image) {
+  void setRightEyeImage(XFile image) {
     _rightEyeImage = image;
-    currentEye = Eye.LEFT_EYE;
+    _selectedEye = Eye.LEFT_EYE;
     notifyListeners();
   }
 
-  resetRightImage(eye) {
+  void resetRightImage(eye) {
     _rightEyeImage = null;
-    currentEye = eye;
+    _selectedEye = eye;
     notifyListeners();
   }
 
-  resetLeftImage(eye) {
+  void resetLeftImage(eye) {
     _leftEyeImage = null;
-    currentEye = eye;
+    _selectedEye = eye;
     notifyListeners();
   }
 
-  resetImages() {
+  void resetImages() {
     _leftEyeImage = null;
     _rightEyeImage = null;
     notifyListeners();
+  }
+
+  String getEyeText() {
+    return switch (_selectedEye) {
+      Eye.RIGHT_EYE => "Right Eye",
+      Eye.LEFT_EYE => "Left Eye",
+      Eye.BOTH_EYES => "Both Eyes",
+    };
   }
 }
