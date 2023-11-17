@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,16 +14,16 @@ class PatientAppointmentSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
+    return const Scaffold(
+      appBar: CustomAppbar(
+        title: Text(
           'Appointment Booking',
         ),
-        actions: const [
+        actions: [
           Icon(Icons.more_vert),
         ],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(

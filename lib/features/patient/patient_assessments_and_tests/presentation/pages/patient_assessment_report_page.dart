@@ -6,7 +6,8 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/fake_data_source.dart';
@@ -18,10 +19,10 @@ class PatientAssessmentReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentData = data[index];
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppbar(
         title: Row(
           children: [
-            const Text("IVR Eye Assessment"),
+            const Text("Eye Assessment"),
             const Spacer(),
             Container(
                 padding: EdgeInsets.symmetric(
@@ -56,7 +57,7 @@ class PatientAssessmentReportPage extends StatelessWidget {
           SizedBox(
             height: AppSize.height(context) * 0.03,
           ),
-          const BrandingWidget(),
+          const BrandingWidgetH(),
         ]),
       )),
     );

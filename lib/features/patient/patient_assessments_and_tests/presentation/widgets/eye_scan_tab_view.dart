@@ -27,17 +27,17 @@ class EyeScanTabView extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Sed ut perspiciatis unde omnis iste natus error sit",
-              style: applyRobotoFont(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.black.withOpacity(0.8),
-              ),
-            ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // Text(
+            //   "Sed ut perspiciatis unde omnis iste natus error sit",
+            //   style: applyRobotoFont(
+            //     fontSize: 14,
+            //     fontWeight: FontWeight.w400,
+            //     color: Colors.black.withOpacity(0.8),
+            //   ),
+            // ),
             const SizedBox(
               height: 10,
             ),

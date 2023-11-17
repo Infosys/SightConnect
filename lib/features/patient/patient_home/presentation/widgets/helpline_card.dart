@@ -18,7 +18,8 @@ class HelplineCard extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                boxShadow: appShadow(), color: AppColor.white.withOpacity(0.3)),
+                boxShadow: applyLightShadow(),
+                color: AppColor.white.withOpacity(0.3)),
             child: SizedBox(
               width: AppSize.width(context) * 0.75,
               child: ListTile(
@@ -60,7 +61,7 @@ class HelplineCard extends StatelessWidget {
           const Spacer(),
           Container(
             decoration: BoxDecoration(
-              boxShadow: appShadow(),
+              boxShadow: applyLightShadow(),
             ),
             child: CircleAvatar(
               backgroundColor: AppColor.white,

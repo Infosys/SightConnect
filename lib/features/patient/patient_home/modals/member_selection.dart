@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
@@ -18,8 +16,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
     var model = ref.watch(userDetailsProvider);
     var patient = model.userProfile!.profile!.patient!;
     var relatedParty = model.familyMembers;
-    var currentIndex = useState<int>(-1);
-    log(currentIndex.value.toString());
+    var currentIndex = useState<int>(0);
 
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
@@ -47,7 +44,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                     color: AppColor.white.withOpacity(0.5),
                   ),
                   child: RadioListTile<int>(
@@ -106,7 +103,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                   width: AppSize.width(context) * 0.88,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: appShadow(),
+                    boxShadow: applyLightShadow(),
                     color: AppColor.white.withOpacity(0.5),
                   ),
                   child: RadioListTile<int>(
@@ -167,8 +164,13 @@ class MemberSelectionPopUp extends HookConsumerWidget {
               style: ElevatedButton.styleFrom(
                 visualDensity: const VisualDensity(vertical: -1),
               ),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.pop(context);
+
+                // ref
+                //     .read(userDetailsProvider)
+                //     .updateCurrentProfile()
+                //     .then((value) => Navigator.pop(context));
               },
               child: const Text('Apply'),
             ),

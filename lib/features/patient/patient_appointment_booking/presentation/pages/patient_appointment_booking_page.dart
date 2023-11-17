@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_appointment_booking/pr
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/widgets/appointment_booking_input_tile.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/widgets/appointment_booking_popup.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/widgets/appointment_booking_remote_tele_consultation_switch.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,11 +16,11 @@ class PatientAppointmentBookingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text(
+      appBar: const CustomAppbar(
+        title: Text(
           'Appointment Booking',
         ),
-        actions: const [
+        actions: [
           Icon(Icons.more_vert),
         ],
       ),

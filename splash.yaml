@@ -1,0 +1,13 @@
+flutter_native_splash:
+  color: "#286DF6"
+  image: assets/logo/logo.png
+  branding: assets/logo/infosys logo.png
+  icon_background_color: "#ffffff"
+
+  android_12:
+    color: "#286DF6"
+    image: assets/logo/logo.png
+    branding: assets/logo/infosys logo.png
+    icon_background_color: "#ffffff"
+
+  web: false

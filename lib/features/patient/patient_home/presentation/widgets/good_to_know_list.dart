@@ -25,7 +25,7 @@ class GoodToKnowCardList extends StatelessWidget {
     ];
     return Container(
       decoration: BoxDecoration(
-        boxShadow: appShadow(),
+        boxShadow: applyLightShadow(),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -57,7 +57,6 @@ class GoodToKnowCardList extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

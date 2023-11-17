@@ -21,6 +21,7 @@ class MyConnectionsCard extends HookWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
+            customBorder: const CircleBorder(),
             onTap: () {
               isSelected.value = !isSelected.value;
             },

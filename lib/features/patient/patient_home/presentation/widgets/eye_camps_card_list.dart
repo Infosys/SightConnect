@@ -41,7 +41,7 @@ class EyeCampsCardList extends StatelessWidget {
         const SizedBox(height: AppSize.kmheight),
         Container(
           decoration: BoxDecoration(
-            boxShadow: appShadow(),
+            boxShadow: applyLightShadow(),
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

@@ -10,6 +10,7 @@ class AppIcon {
   static const String navProfile = 'assets/icons/account.svg';
   static const String navDrawer = 'assets/icons/burger_menu.svg';
   static const String navTriage = 'assets/icons/triage.svg';
+  static const String hamburgerIcon = 'assets/icons/hamburger_icon.png';
 
   //Patient Appointment Booking
   static const String patientAppointmentBookingCalander =
@@ -45,4 +46,16 @@ class AppIcon {
   static const String drawerHelpAndSupport =
       "assets/icons/drawer_help_and_support.svg";
   static const String drawerSignOut = "assets/icons/drawer_sign_out.svg";
+
+  static const String swap_camera = "assets/icons/swap_cam.svg";
+  static const String flash_on = "assets/icons/flash.svg";
+  static const String cam_info = "assets/icons/cam_info.svg";
+  static const String cam_close = "assets/icons/close.svg";
+  static const String cam_capture = "assets/icons/camera.svg";
+
+  //optometritian icons
+
+  //dashboard
+
+  static const String optometritianAddPatient = "assets/icons/optometritian_start_assessment.svg";
 }

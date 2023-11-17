@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="info" transform="translate(-314 -802)">
+    <path id="Path_37895" data-name="Path 37895" d="M82,42A20,20,0,1,0,62,22,20,20,0,0,0,82,42Z" transform="translate(252 800)" fill="#fff" fill-rule="evenodd" opacity="0.25"/>
+    <path id="instructions" d="M14,12a1,1,0,0,1,1,1v6a1,1,0,0,1-2,0V13A1,1,0,0,1,14,12Zm0-1.5A1.5,1.5,0,1,0,12.5,9,1.5,1.5,0,0,0,14,10.5ZM2,14A12,12,0,1,1,14,26,12,12,0,0,1,2,14ZM14,4A10,10,0,1,0,24,14,10,10,0,0,0,14,4Z" transform="translate(320 808)" fill="#f7faff"/>
+  </g>
+</svg>

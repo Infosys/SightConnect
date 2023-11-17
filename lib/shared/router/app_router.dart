@@ -1,15 +1,13 @@
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
-import 'package:eye_care_for_all/features/common_features/login_signup/presentation/login.dart';
-import 'package:eye_care_for_all/shared/pages/splash_page.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
-  AppRouter._();
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static Map<String, Widget Function(BuildContext)> routes = {
     SplashPage.routeName: (context) => const SplashPage(),
     AuthPage.routeName: (context) => const AuthPage(),
-    LoginPage.routeName: (context) => const LoginPage(),
   };
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {

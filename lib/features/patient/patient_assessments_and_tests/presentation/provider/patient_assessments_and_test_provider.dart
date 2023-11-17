@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,19 +40,19 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
     },
   ];
 
- List<Map<String, dynamic>> stateData = [];
+  List<Map<String, dynamic>> stateData = [];
   int selectedOption = 1;
   String selectedName = people[0]['name'];
   set setSelectedName(String value) {
     selectedName = value;
-    print('\n\n$selectedName\n\n');
+    logger.d('\n\n$selectedName\n\n');
     notifyListeners();
   }
 
   set setSelectedOption(int value) {
     selectedOption = value;
     notifyListeners();
-    print('\n\n$selectedOption\n\n');
+    logger.d('\n\n$selectedOption\n\n');
   }
 
   get getStateData => stateData;
@@ -63,7 +64,6 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
       stateData =
           data.where((element) => element['name'] == selectedName).toList();
     }
-    print('Function k andar ka\n\n$stateData\n\n');
-    
+    logger.d('Function k andar ka\n\n$stateData\n\n');
   }
 }

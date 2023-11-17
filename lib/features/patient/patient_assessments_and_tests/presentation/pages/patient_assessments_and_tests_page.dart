@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,8 +19,8 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
     var selectedName = useState<String>(people[0]['name']);
     // var isDropDownOpen = useState<bool>(false);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Assessments and Tests"),
+      appBar: const CustomAppbar(
+        title: Text("Assessments and Tests"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
