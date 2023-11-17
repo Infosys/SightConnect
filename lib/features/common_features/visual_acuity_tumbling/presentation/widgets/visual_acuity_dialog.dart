@@ -150,7 +150,7 @@ class VisualAcuityDialog {
                               ? AppLocalizations.of(context)!
                                   .visualAcuityRightEyeInstructions
                               : AppLocalizations.of(context)!
-                                  .visualAcuityRightEyeInstructions,
+                                  .visualAcuityBothEyeInstructions,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

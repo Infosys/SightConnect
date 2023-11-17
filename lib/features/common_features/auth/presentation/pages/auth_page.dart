@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -112,7 +111,7 @@ class _AuthPageState extends State<AuthPage> {
                           TextFormField(
                             validator: (value) {
                               if (emailID.isEmpty ||
-                                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                  !RegExp("Optometrist@eyecare4all")
                                       .hasMatch(emailID)) {
                                 return "Please enter valid email";
                               }
@@ -146,7 +145,7 @@ class _AuthPageState extends State<AuthPage> {
                           ),
                           TextFormField(
                             validator: (value) {
-                              if (value!.isEmpty) {
+                              if (value!.isEmpty || value != "Validation@123") {
                                 return "Please enter password";
                               }
                               return null;

@@ -28,9 +28,9 @@ class VisualAcuityTestProvider with ChangeNotifier {
   late int? _totalWrongLevelResponse;
   bool isTestCompleted = false;
 
-  late int? _currentMaxLevelLeftEye;
-  late int? _currentMaxLevelRightEye;
-  late int? _currentMaxLevelBothEye;
+  int? _currentMaxLevelLeftEye;
+  int? _currentMaxLevelRightEye;
+  int? _currentMaxLevelBothEye;
 
   late List<UserResponse>? _currentLevelUserResponses;
   late SingleEyeReport? _singleEyeReport;
