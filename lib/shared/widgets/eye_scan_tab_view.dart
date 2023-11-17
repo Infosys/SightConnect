@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/left_cornea_tab_view.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/right_cornea_tab_view.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/left_cornea_tab_view.dart';
+import 'package:eye_care_for_all/shared/widgets/right_cornea_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class EyeScanTabView extends StatelessWidget {

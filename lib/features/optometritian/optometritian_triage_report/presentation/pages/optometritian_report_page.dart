@@ -1,16 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/eye_scan_tab_view.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_report_questionnaire_card.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_tumbling_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -183,9 +184,8 @@ class OptometritianReportPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  ref.invalidate(triageProvider);
-                  ref.invalidate(tumblingTestProvider);
-                  ref.invalidate(triageQuestionnaireProvider);
+                  ref.read(triageProvider).resetTriage();
+
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -201,9 +201,7 @@ class OptometritianReportPage extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.invalidate(triageProvider);
-                    ref.invalidate(tumblingTestProvider);
-                    ref.invalidate(triageQuestionnaireProvider);
+                   ref.read(triageProvider).resetTriage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Home"),

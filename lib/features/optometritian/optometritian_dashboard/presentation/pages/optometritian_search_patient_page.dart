@@ -68,7 +68,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                           ),
                         ),
                         onChanged: (value) {
-                          model.setQuery = value;
+                          // model.setQuery = value;
                         },
                       ),
                     ),
