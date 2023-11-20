@@ -53,6 +53,7 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                         ),
                         TextButton(
                           onPressed: () {
+                            
                             Navigator.of(context).pop();
                           },
                           child: const Text('Reset to Default'),
@@ -75,7 +76,7 @@ class _AutoBrightnessWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = useState<double>(0.0);
+    var brightness = useState<double>(0.8);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,

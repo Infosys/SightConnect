@@ -13,7 +13,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   DateTime _selectedFromDate = DateTime.now();
 
   final List<PatientModel> _patientList = fakePatients;
-  List<PatientModel> _searchPatientList = [];
+  final List<PatientModel> _searchPatientList = [];
   String _query = "";
 
   OptometricianSearchPatientProvider();
@@ -28,11 +28,11 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   }
 
   set setQuery(String query) {
-    if (query.isEmpty) {
-      _searchPatientList = [];
-      notifyListeners();
-      return;
-    }
+    // if (query.isEmpty) {
+    //   _searchPatientList = [];
+    //   notifyListeners();
+    //   return;
+    // }
     _query = query;
     notifyListeners();
     searchByQuery();

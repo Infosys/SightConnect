@@ -92,8 +92,12 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
 
                         return InkWell(
                           onTap: () {
-                            isSelected.value = index;
-                            model.setTimeFrame = data;
+                            if (isSelected.value == index) {
+                              isSelected.value = -1;
+                            } else {
+                              isSelected.value = index;
+                              model.setTimeFrame = data;
+                            }
                           },
                           child: Container(
                             margin:
@@ -174,49 +178,40 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
               const SizedBox(
                 height: AppSize.klheight,
               ),
-              model.query.isEmpty
-                  ? Column(
-                      children: [
-                        Image(
-                          width: AppSize.width(context) * 0.5,
-                          image: const AssetImage(
-                            "assets/images/search empty.png",
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image(
+                      width: AppSize.width(context) * 0.55,
+                      image: const AssetImage(
+                        "assets/images/search empty.png",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.klheight,
+                  ),
+                  isSelected.value != -1
+                      ? Text(
+                          "Data not found for this search",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
                           ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                        Text(
-                          "Find the Patient by searching with the Identification number or add new patient.",
+                        )
+                      : Text(
+                          model.query.isEmpty
+                              ? "This feature will be made available shortly."
+                              : "This Patient ID is not found. Please try searching with a different Patient ID.",
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: AppColor.grey,
                           ),
                         ),
-                      ],
-                    )
-                  : model.query.isNotEmpty
-                      ? Column(
-                          children: [
-                            Image(
-                              width: AppSize.width(context) * 0.8,
-                              image: const AssetImage(
-                                "assets/images/search empty.png",
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.klheight,
-                            ),
-                            Text(
-                              "Data not found for this search",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox(),
+                ],
+              ),
+
               // Column(
               //     children: model.searchPatientList.asMap().entries.map(
               //       (entry) {

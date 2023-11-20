@@ -26,11 +26,12 @@ class OptionGrid extends HookConsumerWidget {
     final selectedOptions = model.selectedOptions;
     var isNoneOfTheseSelected = useState<bool>(false);
     var isOtherSymptomsSelected = useState<bool>(false);
+    var noneOfTheseIndexValue = useState<int>(0);
 
     void addAndRemoveResponse(bool isSelected, int index) {
       if (isSelected) {
         model.removeQuestionnaireAnswer(questions[index].code!);
-       
+
         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
           // model.removeLastQuestionnaireRemark( );
         }
@@ -39,13 +40,14 @@ class OptionGrid extends HookConsumerWidget {
           questions[index].code ?? 0,
           true,
         );
-         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
+        if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
           model.setQuestionnaireRemarks('', pageNumber);
         }
       }
     }
 
     void handleNonOfThese(int index, bool isSelected) {
+      noneOfTheseIndexValue.value = index;
       if (isSelected) {
         model.removeQuestionnaireAnswer(questions[index].code!);
         isNoneOfTheseSelected.value = false;
@@ -85,7 +87,10 @@ class OptionGrid extends HookConsumerWidget {
         handleNonOfThese(index, isSelected);
       } else if (isNoneOfTheseSelected.value &&
           questions[index].statement != "None of these") {
-        return;
+        isNoneOfTheseSelected.value = false;
+        model.removeQuestionnaireAnswer(
+            questions[noneOfTheseIndexValue.value].code!);
+        addAndRemoveResponse(isSelected, index);
       } else if (questions[index].statement == "Other symptoms") {
         isOtherSymptomsSelected.value = !isOtherSymptomsSelected.value;
         _buildOtherOptionSheet(
