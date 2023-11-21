@@ -114,9 +114,7 @@ class PatientProfilePage extends ConsumerWidget {
                   ),
                 ),
                 const PatientFamilyDetails(),
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: AppSize.kmheight),
                 const BrandingWidgetH(),
               ],
             ),
