@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -63,7 +64,7 @@ class _AuthPageState extends State<AuthPage> {
                           width: AppSize.kmpadding,
                         ),
                         Text(
-                          'Eye Care For All',
+                          AppText.appName,
                           style: applyFiraSansFont(
                             color: Colors.white,
                             fontSize: 18,

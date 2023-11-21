@@ -35,7 +35,6 @@ class BlurDialogBox extends StatelessWidget {
         ),
         contentPadding: contentPadding,
         insetPadding: insetPadding,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
         title: title,
         content: content,
         actions: actions,

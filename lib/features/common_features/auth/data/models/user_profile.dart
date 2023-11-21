@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_profile.freezed.dart';
 part 'user_profile.g.dart';
@@ -5,10 +6,8 @@ part 'user_profile.g.dart';
 @freezed
 class UserProfile with _$UserProfile {
   const factory UserProfile({
-    String? requestId,
-    String? timestamp,
-    Map<String, dynamic>? intent,
-    Map<String, dynamic>? location,
+    String? intent,
+    MetaData? metaData,
     Profile? profile,
   }) = _UserProfile;
 
@@ -19,7 +18,6 @@ class UserProfile with _$UserProfile {
 @freezed
 class Profile with _$Profile {
   const factory Profile({
-    String? hipCode,
     Patient? patient,
   }) = _Profile;
 
@@ -30,19 +28,19 @@ class Profile with _$Profile {
 @freezed
 class Patient with _$Patient {
   const factory Patient({
-    String? healthId,
-    String? healthIdNumber,
+    int? abhaNumber,
+    String? abhaAddress,
     String? name,
-    String? gender,
-    String? profilePhoto,
+    Gender? gender,
+    @TimestampConverter() DateTime? dayOfBirth,
+    @TimestampConverter() DateTime? monthOfBirth,
+    @TimestampConverter() DateTime? yearOfBirth,
+    String? phoneNumber,
+    int? parentPatientId,
     List<PatientAddress>? address,
-    int? yearOfBirth,
-    int? dayOfBirth,
-    int? monthOfBirth,
-    String? parentPatientId,
     List<RelatedParty>? relatedParty,
-    List<Map<String, dynamic>>? identifiers,
-    List<Map<String, dynamic>>? medicalRecords,
+    List<Identifiers>? identifiers,
+    List<MedicalRecords>? medicalRecords,
   }) = _Patient;
 
   factory Patient.fromJson(Map<String, dynamic> json) =>
@@ -52,6 +50,7 @@ class Patient with _$Patient {
 @freezed
 class PatientAddress with _$PatientAddress {
   const factory PatientAddress({
+    int? id,
     String? line,
     String? district,
     String? state,
@@ -59,7 +58,7 @@ class PatientAddress with _$PatientAddress {
     String? label,
     bool? isPrimary,
     bool? isDeleted,
-    String? status,
+    Status? status,
   }) = _PatientAddress;
 
   factory PatientAddress.fromJson(Map<String, dynamic> json) =>
@@ -69,13 +68,61 @@ class PatientAddress with _$PatientAddress {
 @freezed
 class RelatedParty with _$RelatedParty {
   const factory RelatedParty({
-    String? patientId,
-    String? name,
-    String? profilePhoto,
-    String? relationship,
-    String? age,
+    int? patientId,
+    Relation? relation,
+    int? parentPatientId,
+    String? regRef,
   }) = _RelatedParty;
 
   factory RelatedParty.fromJson(Map<String, dynamic> json) =>
       _$RelatedPartyFromJson(json);
+}
+
+@freezed
+class Identifiers with _$Identifiers {
+  const factory Identifiers({
+    int? id,
+    IdentfierType? type,
+    String? value,
+  }) = _Identifiers;
+
+  factory Identifiers.fromJson(Map<String, dynamic> json) =>
+      _$IdentifiersFromJson(json);
+}
+
+@freezed
+class MedicalRecords with _$MedicalRecords {
+  const factory MedicalRecords({
+    int? id,
+    @TimestampConverter() DateTime? registrationDate,
+    String? organisationId,
+  }) = _MedicalRecords;
+
+  factory MedicalRecords.fromJson(Map<String, dynamic> json) =>
+      _$MedicalRecordsFromJson(json);
+}
+
+@freezed
+class MetaData with _$MetaData {
+  const factory MetaData({
+    String? hipId,
+    String? counterId,
+    String? hprId,
+    String? latitude,
+    String? longitude,
+  }) = _MetaData;
+
+  factory MetaData.fromJson(Map<String, dynamic> json) =>
+      _$MetaDataFromJson(json);
+}
+
+enum Gender { MALE, FEMALE, OTHERS }
+
+enum Status { ACTIVE, INACTIVE }
+
+enum Relation { FATHER, MOTHER, SPOUSE, CHILD, OTHERS }
+
+enum IdentfierType {
+  EMAIL,
+  MOBILE,
 }

@@ -14,9 +14,24 @@ class MemberSelectionPopUp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(userDetailsProvider);
-    var patient = model.userProfile!.profile!.patient!;
+    var patient = model.userProfile?.profile?.patient;
     var relatedParty = model.familyMembers;
     var currentIndex = useState<int>(0);
+
+    if (patient == null) {
+      return AlertDialog(
+        title: const Text('No Member Found'),
+        content: const Text('Please add a member to continue'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Ok'),
+          ),
+        ],
+      );
+    }
 
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
@@ -53,11 +68,11 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          patient.profilePhoto!,
-                          height: 40,
-                          width: 40,
-                        ),
+                        // Image.asset(
+                        //   patient.profilePhoto!,
+                        //   height: 40,
+                        //   width: 40,
+                        // ),
                         const SizedBox(
                           width: 20,
                         ),
@@ -112,11 +127,11 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          member.profilePhoto!,
-                          height: 40,
-                          width: 40,
-                        ),
+                        // Image.asset(
+                        //   member.profilePhoto!,
+                        //   height: 40,
+                        //   width: 40,
+                        // ),
                         const SizedBox(
                           width: 20,
                         ),
@@ -126,7 +141,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                member.name ?? "",
+                                "ABC",
                                 style: applyRobotoFont(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -136,7 +151,7 @@ class MemberSelectionPopUp extends HookConsumerWidget {
                                 height: 5,
                               ),
                               Text(
-                                "${member.relationship ?? ""}, ${member.age ?? ""} Years",
+                                "Me, ${patient.dayOfBirth ?? ""} Years",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.grey,

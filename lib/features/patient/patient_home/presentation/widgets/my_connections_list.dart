@@ -4,29 +4,14 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/source/fake_data_source.dart';
+
 class MyConnectionsList extends StatelessWidget {
   const MyConnectionsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> doctors = [
-      {
-        'name': 'Raghavi',
-        'image': 'assets/images/connection_dp_one.png',
-      },
-      {
-        'name': 'Chunkey',
-        'image': 'assets/images/connection_dp_two.png',
-      },
-      {
-        'name': 'Mangal',
-        'image': 'assets/images/connections_dp_three.png',
-      },
-      {
-        'name': 'Rati',
-        'image': 'assets/images/profile_image.png',
-      },
-    ];
+    var data = connectionList;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,7 +48,7 @@ class MyConnectionsList extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
-                  ...doctors
+                  ...data
                       .asMap()
                       .entries
                       .map(

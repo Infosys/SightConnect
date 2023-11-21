@@ -5,27 +5,15 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/source/fake_data_source.dart';
+
 class NearbyVisionCentersList extends StatelessWidget {
   const NearbyVisionCentersList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> data = [
-      {
-        "name": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
-        "location": "Near Gudavalli Village, Cherukupalli, Guntur",
-        "phone": "99634 78759",
-        "speciality":
-            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-      },
-      {
-        "name": "Edward and Soona Brown Eye Centre",
-        "location": "Pindugurala Road, Sattanapalli, Guntur",
-        "phone": "99634 78760",
-        "speciality":
-            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-      },
-    ];
+    var data = nearByVisionCenter;
+
     return Container(
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -26,7 +27,7 @@ class MyApp extends ConsumerWidget {
           textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.3,
         ),
         child: MaterialApp(
-          title: 'Eye Care For All',
+          title: AppText.appName,
           locale: const Locale('en'),
           localizationsDelegates: const [
             AppLocalizations.delegate,

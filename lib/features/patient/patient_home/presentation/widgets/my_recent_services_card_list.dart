@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/data/source/fake_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -11,28 +12,7 @@ class RecentServicesCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data = [
-      {
-        "icon": AppIcon.triage,
-        "text": "Eye Assessment",
-        "color": AppColor.paleYellow,
-      },
-      {
-        "icon": AppIcon.acuityTest,
-        "text": "Visual Acuity Test",
-        "color": AppColor.lavanderBlue
-      },
-      {
-        "icon": AppIcon.pledge,
-        "text": "Pledge",
-        "color": AppColor.teaGreen,
-      },
-      {
-        "icon": AppIcon.eyeScanner,
-        "text": "Eye Scanner",
-        "color": AppColor.bisque
-      },
-    ];
+    var data = recentService;
     return SizedBox(
       width: Responsive.isMobile(context)
           ? AppSize.width(context) * 0.9

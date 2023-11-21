@@ -6,23 +6,14 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/source/fake_data_source.dart';
+
 class GoodToKnowCardList extends StatelessWidget {
   const GoodToKnowCardList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var data = [
-      {
-        "image": AppImages.goodToKnowOne,
-        "name":
-            "The eye is the window to the world, at the same time, it is the window of the soul",
-      },
-      {
-        "image": AppImages.discover,
-        "name":
-            "Myopia Education Program successfully organized at Kode Venkatadri Chowdary campus, Vijayawada",
-      },
-    ];
+    var data = goodToKnow;
     return Container(
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),

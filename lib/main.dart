@@ -9,13 +9,8 @@ import 'package:logger/logger.dart';
 var logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   HttpOverrides.global = MyHttpOverrides();
   IOSDeviceInfoService.init();
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Colors.transparent, // transparent status bar
-  // ));
   runApp(
     const ProviderScope(
       child: MyApp(),

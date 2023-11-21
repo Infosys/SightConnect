@@ -20,10 +20,8 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserProfile {
-  String? get requestId => throw _privateConstructorUsedError;
-  String? get timestamp => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get intent => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get location => throw _privateConstructorUsedError;
+  String? get intent => throw _privateConstructorUsedError;
+  MetaData? get metaData => throw _privateConstructorUsedError;
   Profile? get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,13 +36,9 @@ abstract class $UserProfileCopyWith<$Res> {
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call(
-      {String? requestId,
-      String? timestamp,
-      Map<String, dynamic>? intent,
-      Map<String, dynamic>? location,
-      Profile? profile});
+  $Res call({String? intent, MetaData? metaData, Profile? profile});
 
+  $MetaDataCopyWith<$Res>? get metaData;
   $ProfileCopyWith<$Res>? get profile;
 }
 
@@ -61,34 +55,36 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestId = freezed,
-    Object? timestamp = freezed,
     Object? intent = freezed,
-    Object? location = freezed,
+    Object? metaData = freezed,
     Object? profile = freezed,
   }) {
     return _then(_value.copyWith(
-      requestId: freezed == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as String?,
       intent: freezed == intent
           ? _value.intent
           : intent // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as String?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as MetaData?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as Profile?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MetaDataCopyWith<$Res>? get metaData {
+    if (_value.metaData == null) {
+      return null;
+    }
+
+    return $MetaDataCopyWith<$Res>(_value.metaData!, (value) {
+      return _then(_value.copyWith(metaData: value) as $Val);
+    });
   }
 
   @override
@@ -112,13 +108,10 @@ abstract class _$$_UserProfileCopyWith<$Res>
       __$$_UserProfileCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? requestId,
-      String? timestamp,
-      Map<String, dynamic>? intent,
-      Map<String, dynamic>? location,
-      Profile? profile});
+  $Res call({String? intent, MetaData? metaData, Profile? profile});
 
+  @override
+  $MetaDataCopyWith<$Res>? get metaData;
   @override
   $ProfileCopyWith<$Res>? get profile;
 }
@@ -134,29 +127,19 @@ class __$$_UserProfileCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestId = freezed,
-    Object? timestamp = freezed,
     Object? intent = freezed,
-    Object? location = freezed,
+    Object? metaData = freezed,
     Object? profile = freezed,
   }) {
     return _then(_$_UserProfile(
-      requestId: freezed == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as String?,
       intent: freezed == intent
-          ? _value._intent
+          ? _value.intent
           : intent // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      location: freezed == location
-          ? _value._location
-          : location // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as String?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as MetaData?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -168,48 +151,21 @@ class __$$_UserProfileCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserProfile implements _UserProfile {
-  const _$_UserProfile(
-      {this.requestId,
-      this.timestamp,
-      final Map<String, dynamic>? intent,
-      final Map<String, dynamic>? location,
-      this.profile})
-      : _intent = intent,
-        _location = location;
+  const _$_UserProfile({this.intent, this.metaData, this.profile});
 
   factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
       _$$_UserProfileFromJson(json);
 
   @override
-  final String? requestId;
+  final String? intent;
   @override
-  final String? timestamp;
-  final Map<String, dynamic>? _intent;
-  @override
-  Map<String, dynamic>? get intent {
-    final value = _intent;
-    if (value == null) return null;
-    if (_intent is EqualUnmodifiableMapView) return _intent;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  final Map<String, dynamic>? _location;
-  @override
-  Map<String, dynamic>? get location {
-    final value = _location;
-    if (value == null) return null;
-    if (_location is EqualUnmodifiableMapView) return _location;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
+  final MetaData? metaData;
   @override
   final Profile? profile;
 
   @override
   String toString() {
-    return 'UserProfile(requestId: $requestId, timestamp: $timestamp, intent: $intent, location: $location, profile: $profile)';
+    return 'UserProfile(intent: $intent, metaData: $metaData, profile: $profile)';
   }
 
   @override
@@ -217,24 +173,15 @@ class _$_UserProfile implements _UserProfile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserProfile &&
-            (identical(other.requestId, requestId) ||
-                other.requestId == requestId) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp) &&
-            const DeepCollectionEquality().equals(other._intent, _intent) &&
-            const DeepCollectionEquality().equals(other._location, _location) &&
+            (identical(other.intent, intent) || other.intent == intent) &&
+            (identical(other.metaData, metaData) ||
+                other.metaData == metaData) &&
             (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      requestId,
-      timestamp,
-      const DeepCollectionEquality().hash(_intent),
-      const DeepCollectionEquality().hash(_location),
-      profile);
+  int get hashCode => Object.hash(runtimeType, intent, metaData, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -252,23 +199,17 @@ class _$_UserProfile implements _UserProfile {
 
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
-      {final String? requestId,
-      final String? timestamp,
-      final Map<String, dynamic>? intent,
-      final Map<String, dynamic>? location,
+      {final String? intent,
+      final MetaData? metaData,
       final Profile? profile}) = _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$_UserProfile.fromJson;
 
   @override
-  String? get requestId;
+  String? get intent;
   @override
-  String? get timestamp;
-  @override
-  Map<String, dynamic>? get intent;
-  @override
-  Map<String, dynamic>? get location;
+  MetaData? get metaData;
   @override
   Profile? get profile;
   @override
@@ -283,7 +224,6 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Profile {
-  String? get hipCode => throw _privateConstructorUsedError;
   Patient? get patient => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -296,7 +236,7 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({String? hipCode, Patient? patient});
+  $Res call({Patient? patient});
 
   $PatientCopyWith<$Res>? get patient;
 }
@@ -314,14 +254,9 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hipCode = freezed,
     Object? patient = freezed,
   }) {
     return _then(_value.copyWith(
-      hipCode: freezed == hipCode
-          ? _value.hipCode
-          : hipCode // ignore: cast_nullable_to_non_nullable
-              as String?,
       patient: freezed == patient
           ? _value.patient
           : patient // ignore: cast_nullable_to_non_nullable
@@ -349,7 +284,7 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$_ProfileCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? hipCode, Patient? patient});
+  $Res call({Patient? patient});
 
   @override
   $PatientCopyWith<$Res>? get patient;
@@ -365,14 +300,9 @@ class __$$_ProfileCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hipCode = freezed,
     Object? patient = freezed,
   }) {
     return _then(_$_Profile(
-      hipCode: freezed == hipCode
-          ? _value.hipCode
-          : hipCode // ignore: cast_nullable_to_non_nullable
-              as String?,
       patient: freezed == patient
           ? _value.patient
           : patient // ignore: cast_nullable_to_non_nullable
@@ -384,19 +314,17 @@ class __$$_ProfileCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Profile implements _Profile {
-  const _$_Profile({this.hipCode, this.patient});
+  const _$_Profile({this.patient});
 
   factory _$_Profile.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileFromJson(json);
 
   @override
-  final String? hipCode;
-  @override
   final Patient? patient;
 
   @override
   String toString() {
-    return 'Profile(hipCode: $hipCode, patient: $patient)';
+    return 'Profile(patient: $patient)';
   }
 
   @override
@@ -404,13 +332,12 @@ class _$_Profile implements _Profile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Profile &&
-            (identical(other.hipCode, hipCode) || other.hipCode == hipCode) &&
             (identical(other.patient, patient) || other.patient == patient));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, hipCode, patient);
+  int get hashCode => Object.hash(runtimeType, patient);
 
   @JsonKey(ignore: true)
   @override
@@ -427,13 +354,10 @@ class _$_Profile implements _Profile {
 }
 
 abstract class _Profile implements Profile {
-  const factory _Profile({final String? hipCode, final Patient? patient}) =
-      _$_Profile;
+  const factory _Profile({final Patient? patient}) = _$_Profile;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
-  @override
-  String? get hipCode;
   @override
   Patient? get patient;
   @override
@@ -448,20 +372,22 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Patient {
-  String? get healthId => throw _privateConstructorUsedError;
-  String? get healthIdNumber => throw _privateConstructorUsedError;
+  int? get abhaNumber => throw _privateConstructorUsedError;
+  String? get abhaAddress => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get gender => throw _privateConstructorUsedError;
-  String? get profilePhoto => throw _privateConstructorUsedError;
+  Gender? get gender => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get dayOfBirth => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get monthOfBirth => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get yearOfBirth => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  int? get parentPatientId => throw _privateConstructorUsedError;
   List<PatientAddress>? get address => throw _privateConstructorUsedError;
-  int? get yearOfBirth => throw _privateConstructorUsedError;
-  int? get dayOfBirth => throw _privateConstructorUsedError;
-  int? get monthOfBirth => throw _privateConstructorUsedError;
-  String? get parentPatientId => throw _privateConstructorUsedError;
   List<RelatedParty>? get relatedParty => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>>? get identifiers =>
-      throw _privateConstructorUsedError;
-  List<Map<String, dynamic>>? get medicalRecords =>
+  List<Identifiers>? get identifiers => throw _privateConstructorUsedError;
+  List<MedicalRecords>? get medicalRecords =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -475,19 +401,19 @@ abstract class $PatientCopyWith<$Res> {
       _$PatientCopyWithImpl<$Res, Patient>;
   @useResult
   $Res call(
-      {String? healthId,
-      String? healthIdNumber,
+      {int? abhaNumber,
+      String? abhaAddress,
       String? name,
-      String? gender,
-      String? profilePhoto,
+      Gender? gender,
+      @TimestampConverter() DateTime? dayOfBirth,
+      @TimestampConverter() DateTime? monthOfBirth,
+      @TimestampConverter() DateTime? yearOfBirth,
+      String? phoneNumber,
+      int? parentPatientId,
       List<PatientAddress>? address,
-      int? yearOfBirth,
-      int? dayOfBirth,
-      int? monthOfBirth,
-      String? parentPatientId,
       List<RelatedParty>? relatedParty,
-      List<Map<String, dynamic>>? identifiers,
-      List<Map<String, dynamic>>? medicalRecords});
+      List<Identifiers>? identifiers,
+      List<MedicalRecords>? medicalRecords});
 }
 
 /// @nodoc
@@ -503,28 +429,28 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? healthId = freezed,
-    Object? healthIdNumber = freezed,
+    Object? abhaNumber = freezed,
+    Object? abhaAddress = freezed,
     Object? name = freezed,
     Object? gender = freezed,
-    Object? profilePhoto = freezed,
-    Object? address = freezed,
-    Object? yearOfBirth = freezed,
     Object? dayOfBirth = freezed,
     Object? monthOfBirth = freezed,
+    Object? yearOfBirth = freezed,
+    Object? phoneNumber = freezed,
     Object? parentPatientId = freezed,
+    Object? address = freezed,
     Object? relatedParty = freezed,
     Object? identifiers = freezed,
     Object? medicalRecords = freezed,
   }) {
     return _then(_value.copyWith(
-      healthId: freezed == healthId
-          ? _value.healthId
-          : healthId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      healthIdNumber: freezed == healthIdNumber
-          ? _value.healthIdNumber
-          : healthIdNumber // ignore: cast_nullable_to_non_nullable
+      abhaNumber: freezed == abhaNumber
+          ? _value.abhaNumber
+          : abhaNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      abhaAddress: freezed == abhaAddress
+          ? _value.abhaAddress
+          : abhaAddress // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -533,31 +459,31 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
+              as Gender?,
+      dayOfBirth: freezed == dayOfBirth
+          ? _value.dayOfBirth
+          : dayOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      monthOfBirth: freezed == monthOfBirth
+          ? _value.monthOfBirth
+          : monthOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      yearOfBirth: freezed == yearOfBirth
+          ? _value.yearOfBirth
+          : yearOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
+      parentPatientId: freezed == parentPatientId
+          ? _value.parentPatientId
+          : parentPatientId // ignore: cast_nullable_to_non_nullable
+              as int?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as List<PatientAddress>?,
-      yearOfBirth: freezed == yearOfBirth
-          ? _value.yearOfBirth
-          : yearOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dayOfBirth: freezed == dayOfBirth
-          ? _value.dayOfBirth
-          : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      monthOfBirth: freezed == monthOfBirth
-          ? _value.monthOfBirth
-          : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      parentPatientId: freezed == parentPatientId
-          ? _value.parentPatientId
-          : parentPatientId // ignore: cast_nullable_to_non_nullable
-              as String?,
       relatedParty: freezed == relatedParty
           ? _value.relatedParty
           : relatedParty // ignore: cast_nullable_to_non_nullable
@@ -565,11 +491,11 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
       identifiers: freezed == identifiers
           ? _value.identifiers
           : identifiers // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>?,
+              as List<Identifiers>?,
       medicalRecords: freezed == medicalRecords
           ? _value.medicalRecords
           : medicalRecords // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>?,
+              as List<MedicalRecords>?,
     ) as $Val);
   }
 }
@@ -582,19 +508,19 @@ abstract class _$$_PatientCopyWith<$Res> implements $PatientCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? healthId,
-      String? healthIdNumber,
+      {int? abhaNumber,
+      String? abhaAddress,
       String? name,
-      String? gender,
-      String? profilePhoto,
+      Gender? gender,
+      @TimestampConverter() DateTime? dayOfBirth,
+      @TimestampConverter() DateTime? monthOfBirth,
+      @TimestampConverter() DateTime? yearOfBirth,
+      String? phoneNumber,
+      int? parentPatientId,
       List<PatientAddress>? address,
-      int? yearOfBirth,
-      int? dayOfBirth,
-      int? monthOfBirth,
-      String? parentPatientId,
       List<RelatedParty>? relatedParty,
-      List<Map<String, dynamic>>? identifiers,
-      List<Map<String, dynamic>>? medicalRecords});
+      List<Identifiers>? identifiers,
+      List<MedicalRecords>? medicalRecords});
 }
 
 /// @nodoc
@@ -607,28 +533,28 @@ class __$$_PatientCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? healthId = freezed,
-    Object? healthIdNumber = freezed,
+    Object? abhaNumber = freezed,
+    Object? abhaAddress = freezed,
     Object? name = freezed,
     Object? gender = freezed,
-    Object? profilePhoto = freezed,
-    Object? address = freezed,
-    Object? yearOfBirth = freezed,
     Object? dayOfBirth = freezed,
     Object? monthOfBirth = freezed,
+    Object? yearOfBirth = freezed,
+    Object? phoneNumber = freezed,
     Object? parentPatientId = freezed,
+    Object? address = freezed,
     Object? relatedParty = freezed,
     Object? identifiers = freezed,
     Object? medicalRecords = freezed,
   }) {
     return _then(_$_Patient(
-      healthId: freezed == healthId
-          ? _value.healthId
-          : healthId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      healthIdNumber: freezed == healthIdNumber
-          ? _value.healthIdNumber
-          : healthIdNumber // ignore: cast_nullable_to_non_nullable
+      abhaNumber: freezed == abhaNumber
+          ? _value.abhaNumber
+          : abhaNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      abhaAddress: freezed == abhaAddress
+          ? _value.abhaAddress
+          : abhaAddress // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -637,31 +563,31 @@ class __$$_PatientCopyWithImpl<$Res>
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
+              as Gender?,
+      dayOfBirth: freezed == dayOfBirth
+          ? _value.dayOfBirth
+          : dayOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      monthOfBirth: freezed == monthOfBirth
+          ? _value.monthOfBirth
+          : monthOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      yearOfBirth: freezed == yearOfBirth
+          ? _value.yearOfBirth
+          : yearOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
+      parentPatientId: freezed == parentPatientId
+          ? _value.parentPatientId
+          : parentPatientId // ignore: cast_nullable_to_non_nullable
+              as int?,
       address: freezed == address
           ? _value._address
           : address // ignore: cast_nullable_to_non_nullable
               as List<PatientAddress>?,
-      yearOfBirth: freezed == yearOfBirth
-          ? _value.yearOfBirth
-          : yearOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dayOfBirth: freezed == dayOfBirth
-          ? _value.dayOfBirth
-          : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      monthOfBirth: freezed == monthOfBirth
-          ? _value.monthOfBirth
-          : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as int?,
-      parentPatientId: freezed == parentPatientId
-          ? _value.parentPatientId
-          : parentPatientId // ignore: cast_nullable_to_non_nullable
-              as String?,
       relatedParty: freezed == relatedParty
           ? _value._relatedParty
           : relatedParty // ignore: cast_nullable_to_non_nullable
@@ -669,11 +595,11 @@ class __$$_PatientCopyWithImpl<$Res>
       identifiers: freezed == identifiers
           ? _value._identifiers
           : identifiers // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>?,
+              as List<Identifiers>?,
       medicalRecords: freezed == medicalRecords
           ? _value._medicalRecords
           : medicalRecords // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>?,
+              as List<MedicalRecords>?,
     ));
   }
 }
@@ -682,19 +608,19 @@ class __$$_PatientCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Patient implements _Patient {
   const _$_Patient(
-      {this.healthId,
-      this.healthIdNumber,
+      {this.abhaNumber,
+      this.abhaAddress,
       this.name,
       this.gender,
-      this.profilePhoto,
-      final List<PatientAddress>? address,
-      this.yearOfBirth,
-      this.dayOfBirth,
-      this.monthOfBirth,
+      @TimestampConverter() this.dayOfBirth,
+      @TimestampConverter() this.monthOfBirth,
+      @TimestampConverter() this.yearOfBirth,
+      this.phoneNumber,
       this.parentPatientId,
+      final List<PatientAddress>? address,
       final List<RelatedParty>? relatedParty,
-      final List<Map<String, dynamic>>? identifiers,
-      final List<Map<String, dynamic>>? medicalRecords})
+      final List<Identifiers>? identifiers,
+      final List<MedicalRecords>? medicalRecords})
       : _address = address,
         _relatedParty = relatedParty,
         _identifiers = identifiers,
@@ -704,15 +630,26 @@ class _$_Patient implements _Patient {
       _$$_PatientFromJson(json);
 
   @override
-  final String? healthId;
+  final int? abhaNumber;
   @override
-  final String? healthIdNumber;
+  final String? abhaAddress;
   @override
   final String? name;
   @override
-  final String? gender;
+  final Gender? gender;
   @override
-  final String? profilePhoto;
+  @TimestampConverter()
+  final DateTime? dayOfBirth;
+  @override
+  @TimestampConverter()
+  final DateTime? monthOfBirth;
+  @override
+  @TimestampConverter()
+  final DateTime? yearOfBirth;
+  @override
+  final String? phoneNumber;
+  @override
+  final int? parentPatientId;
   final List<PatientAddress>? _address;
   @override
   List<PatientAddress>? get address {
@@ -723,14 +660,6 @@ class _$_Patient implements _Patient {
     return EqualUnmodifiableListView(value);
   }
 
-  @override
-  final int? yearOfBirth;
-  @override
-  final int? dayOfBirth;
-  @override
-  final int? monthOfBirth;
-  @override
-  final String? parentPatientId;
   final List<RelatedParty>? _relatedParty;
   @override
   List<RelatedParty>? get relatedParty {
@@ -741,9 +670,9 @@ class _$_Patient implements _Patient {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<Map<String, dynamic>>? _identifiers;
+  final List<Identifiers>? _identifiers;
   @override
-  List<Map<String, dynamic>>? get identifiers {
+  List<Identifiers>? get identifiers {
     final value = _identifiers;
     if (value == null) return null;
     if (_identifiers is EqualUnmodifiableListView) return _identifiers;
@@ -751,9 +680,9 @@ class _$_Patient implements _Patient {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<Map<String, dynamic>>? _medicalRecords;
+  final List<MedicalRecords>? _medicalRecords;
   @override
-  List<Map<String, dynamic>>? get medicalRecords {
+  List<MedicalRecords>? get medicalRecords {
     final value = _medicalRecords;
     if (value == null) return null;
     if (_medicalRecords is EqualUnmodifiableListView) return _medicalRecords;
@@ -763,7 +692,7 @@ class _$_Patient implements _Patient {
 
   @override
   String toString() {
-    return 'Patient(healthId: $healthId, healthIdNumber: $healthIdNumber, name: $name, gender: $gender, profilePhoto: $profilePhoto, address: $address, yearOfBirth: $yearOfBirth, dayOfBirth: $dayOfBirth, monthOfBirth: $monthOfBirth, parentPatientId: $parentPatientId, relatedParty: $relatedParty, identifiers: $identifiers, medicalRecords: $medicalRecords)';
+    return 'Patient(abhaNumber: $abhaNumber, abhaAddress: $abhaAddress, name: $name, gender: $gender, dayOfBirth: $dayOfBirth, monthOfBirth: $monthOfBirth, yearOfBirth: $yearOfBirth, phoneNumber: $phoneNumber, parentPatientId: $parentPatientId, address: $address, relatedParty: $relatedParty, identifiers: $identifiers, medicalRecords: $medicalRecords)';
   }
 
   @override
@@ -771,23 +700,23 @@ class _$_Patient implements _Patient {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Patient &&
-            (identical(other.healthId, healthId) ||
-                other.healthId == healthId) &&
-            (identical(other.healthIdNumber, healthIdNumber) ||
-                other.healthIdNumber == healthIdNumber) &&
+            (identical(other.abhaNumber, abhaNumber) ||
+                other.abhaNumber == abhaNumber) &&
+            (identical(other.abhaAddress, abhaAddress) ||
+                other.abhaAddress == abhaAddress) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.profilePhoto, profilePhoto) ||
-                other.profilePhoto == profilePhoto) &&
-            const DeepCollectionEquality().equals(other._address, _address) &&
-            (identical(other.yearOfBirth, yearOfBirth) ||
-                other.yearOfBirth == yearOfBirth) &&
             (identical(other.dayOfBirth, dayOfBirth) ||
                 other.dayOfBirth == dayOfBirth) &&
             (identical(other.monthOfBirth, monthOfBirth) ||
                 other.monthOfBirth == monthOfBirth) &&
+            (identical(other.yearOfBirth, yearOfBirth) ||
+                other.yearOfBirth == yearOfBirth) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
             (identical(other.parentPatientId, parentPatientId) ||
                 other.parentPatientId == parentPatientId) &&
+            const DeepCollectionEquality().equals(other._address, _address) &&
             const DeepCollectionEquality()
                 .equals(other._relatedParty, _relatedParty) &&
             const DeepCollectionEquality()
@@ -800,16 +729,16 @@ class _$_Patient implements _Patient {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      healthId,
-      healthIdNumber,
+      abhaNumber,
+      abhaAddress,
       name,
       gender,
-      profilePhoto,
-      const DeepCollectionEquality().hash(_address),
-      yearOfBirth,
       dayOfBirth,
       monthOfBirth,
+      yearOfBirth,
+      phoneNumber,
       parentPatientId,
+      const DeepCollectionEquality().hash(_address),
       const DeepCollectionEquality().hash(_relatedParty),
       const DeepCollectionEquality().hash(_identifiers),
       const DeepCollectionEquality().hash(_medicalRecords));
@@ -830,48 +759,51 @@ class _$_Patient implements _Patient {
 
 abstract class _Patient implements Patient {
   const factory _Patient(
-      {final String? healthId,
-      final String? healthIdNumber,
+      {final int? abhaNumber,
+      final String? abhaAddress,
       final String? name,
-      final String? gender,
-      final String? profilePhoto,
+      final Gender? gender,
+      @TimestampConverter() final DateTime? dayOfBirth,
+      @TimestampConverter() final DateTime? monthOfBirth,
+      @TimestampConverter() final DateTime? yearOfBirth,
+      final String? phoneNumber,
+      final int? parentPatientId,
       final List<PatientAddress>? address,
-      final int? yearOfBirth,
-      final int? dayOfBirth,
-      final int? monthOfBirth,
-      final String? parentPatientId,
       final List<RelatedParty>? relatedParty,
-      final List<Map<String, dynamic>>? identifiers,
-      final List<Map<String, dynamic>>? medicalRecords}) = _$_Patient;
+      final List<Identifiers>? identifiers,
+      final List<MedicalRecords>? medicalRecords}) = _$_Patient;
 
   factory _Patient.fromJson(Map<String, dynamic> json) = _$_Patient.fromJson;
 
   @override
-  String? get healthId;
+  int? get abhaNumber;
   @override
-  String? get healthIdNumber;
+  String? get abhaAddress;
   @override
   String? get name;
   @override
-  String? get gender;
+  Gender? get gender;
   @override
-  String? get profilePhoto;
+  @TimestampConverter()
+  DateTime? get dayOfBirth;
+  @override
+  @TimestampConverter()
+  DateTime? get monthOfBirth;
+  @override
+  @TimestampConverter()
+  DateTime? get yearOfBirth;
+  @override
+  String? get phoneNumber;
+  @override
+  int? get parentPatientId;
   @override
   List<PatientAddress>? get address;
   @override
-  int? get yearOfBirth;
-  @override
-  int? get dayOfBirth;
-  @override
-  int? get monthOfBirth;
-  @override
-  String? get parentPatientId;
-  @override
   List<RelatedParty>? get relatedParty;
   @override
-  List<Map<String, dynamic>>? get identifiers;
+  List<Identifiers>? get identifiers;
   @override
-  List<Map<String, dynamic>>? get medicalRecords;
+  List<MedicalRecords>? get medicalRecords;
   @override
   @JsonKey(ignore: true)
   _$$_PatientCopyWith<_$_Patient> get copyWith =>
@@ -884,6 +816,7 @@ PatientAddress _$PatientAddressFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PatientAddress {
+  int? get id => throw _privateConstructorUsedError;
   String? get line => throw _privateConstructorUsedError;
   String? get district => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
@@ -891,7 +824,7 @@ mixin _$PatientAddress {
   String? get label => throw _privateConstructorUsedError;
   bool? get isPrimary => throw _privateConstructorUsedError;
   bool? get isDeleted => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  Status? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -906,14 +839,15 @@ abstract class $PatientAddressCopyWith<$Res> {
       _$PatientAddressCopyWithImpl<$Res, PatientAddress>;
   @useResult
   $Res call(
-      {String? line,
+      {int? id,
+      String? line,
       String? district,
       String? state,
       String? pincode,
       String? label,
       bool? isPrimary,
       bool? isDeleted,
-      String? status});
+      Status? status});
 }
 
 /// @nodoc
@@ -929,6 +863,7 @@ class _$PatientAddressCopyWithImpl<$Res, $Val extends PatientAddress>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? line = freezed,
     Object? district = freezed,
     Object? state = freezed,
@@ -939,6 +874,10 @@ class _$PatientAddressCopyWithImpl<$Res, $Val extends PatientAddress>
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       line: freezed == line
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
@@ -970,7 +909,7 @@ class _$PatientAddressCopyWithImpl<$Res, $Val extends PatientAddress>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
     ) as $Val);
   }
 }
@@ -984,14 +923,15 @@ abstract class _$$_PatientAddressCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? line,
+      {int? id,
+      String? line,
       String? district,
       String? state,
       String? pincode,
       String? label,
       bool? isPrimary,
       bool? isDeleted,
-      String? status});
+      Status? status});
 }
 
 /// @nodoc
@@ -1005,6 +945,7 @@ class __$$_PatientAddressCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? line = freezed,
     Object? district = freezed,
     Object? state = freezed,
@@ -1015,6 +956,10 @@ class __$$_PatientAddressCopyWithImpl<$Res>
     Object? status = freezed,
   }) {
     return _then(_$_PatientAddress(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       line: freezed == line
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
@@ -1046,7 +991,7 @@ class __$$_PatientAddressCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
     ));
   }
 }
@@ -1055,7 +1000,8 @@ class __$$_PatientAddressCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PatientAddress implements _PatientAddress {
   const _$_PatientAddress(
-      {this.line,
+      {this.id,
+      this.line,
       this.district,
       this.state,
       this.pincode,
@@ -1067,6 +1013,8 @@ class _$_PatientAddress implements _PatientAddress {
   factory _$_PatientAddress.fromJson(Map<String, dynamic> json) =>
       _$$_PatientAddressFromJson(json);
 
+  @override
+  final int? id;
   @override
   final String? line;
   @override
@@ -1082,11 +1030,11 @@ class _$_PatientAddress implements _PatientAddress {
   @override
   final bool? isDeleted;
   @override
-  final String? status;
+  final Status? status;
 
   @override
   String toString() {
-    return 'PatientAddress(line: $line, district: $district, state: $state, pincode: $pincode, label: $label, isPrimary: $isPrimary, isDeleted: $isDeleted, status: $status)';
+    return 'PatientAddress(id: $id, line: $line, district: $district, state: $state, pincode: $pincode, label: $label, isPrimary: $isPrimary, isDeleted: $isDeleted, status: $status)';
   }
 
   @override
@@ -1094,6 +1042,7 @@ class _$_PatientAddress implements _PatientAddress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PatientAddress &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.line, line) || other.line == line) &&
             (identical(other.district, district) ||
                 other.district == district) &&
@@ -1109,8 +1058,8 @@ class _$_PatientAddress implements _PatientAddress {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, line, district, state, pincode,
-      label, isPrimary, isDeleted, status);
+  int get hashCode => Object.hash(runtimeType, id, line, district, state,
+      pincode, label, isPrimary, isDeleted, status);
 
   @JsonKey(ignore: true)
   @override
@@ -1128,18 +1077,21 @@ class _$_PatientAddress implements _PatientAddress {
 
 abstract class _PatientAddress implements PatientAddress {
   const factory _PatientAddress(
-      {final String? line,
+      {final int? id,
+      final String? line,
       final String? district,
       final String? state,
       final String? pincode,
       final String? label,
       final bool? isPrimary,
       final bool? isDeleted,
-      final String? status}) = _$_PatientAddress;
+      final Status? status}) = _$_PatientAddress;
 
   factory _PatientAddress.fromJson(Map<String, dynamic> json) =
       _$_PatientAddress.fromJson;
 
+  @override
+  int? get id;
   @override
   String? get line;
   @override
@@ -1155,7 +1107,7 @@ abstract class _PatientAddress implements PatientAddress {
   @override
   bool? get isDeleted;
   @override
-  String? get status;
+  Status? get status;
   @override
   @JsonKey(ignore: true)
   _$$_PatientAddressCopyWith<_$_PatientAddress> get copyWith =>
@@ -1168,11 +1120,10 @@ RelatedParty _$RelatedPartyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RelatedParty {
-  String? get patientId => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get profilePhoto => throw _privateConstructorUsedError;
-  String? get relationship => throw _privateConstructorUsedError;
-  String? get age => throw _privateConstructorUsedError;
+  int? get patientId => throw _privateConstructorUsedError;
+  Relation? get relation => throw _privateConstructorUsedError;
+  int? get parentPatientId => throw _privateConstructorUsedError;
+  String? get regRef => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1187,11 +1138,10 @@ abstract class $RelatedPartyCopyWith<$Res> {
       _$RelatedPartyCopyWithImpl<$Res, RelatedParty>;
   @useResult
   $Res call(
-      {String? patientId,
-      String? name,
-      String? profilePhoto,
-      String? relationship,
-      String? age});
+      {int? patientId,
+      Relation? relation,
+      int? parentPatientId,
+      String? regRef});
 }
 
 /// @nodoc
@@ -1208,31 +1158,26 @@ class _$RelatedPartyCopyWithImpl<$Res, $Val extends RelatedParty>
   @override
   $Res call({
     Object? patientId = freezed,
-    Object? name = freezed,
-    Object? profilePhoto = freezed,
-    Object? relationship = freezed,
-    Object? age = freezed,
+    Object? relation = freezed,
+    Object? parentPatientId = freezed,
+    Object? regRef = freezed,
   }) {
     return _then(_value.copyWith(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      relationship: freezed == relationship
-          ? _value.relationship
-          : relationship // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
+      relation: freezed == relation
+          ? _value.relation
+          : relation // ignore: cast_nullable_to_non_nullable
+              as Relation?,
+      parentPatientId: freezed == parentPatientId
+          ? _value.parentPatientId
+          : parentPatientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -1247,11 +1192,10 @@ abstract class _$$_RelatedPartyCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? patientId,
-      String? name,
-      String? profilePhoto,
-      String? relationship,
-      String? age});
+      {int? patientId,
+      Relation? relation,
+      int? parentPatientId,
+      String? regRef});
 }
 
 /// @nodoc
@@ -1266,31 +1210,26 @@ class __$$_RelatedPartyCopyWithImpl<$Res>
   @override
   $Res call({
     Object? patientId = freezed,
-    Object? name = freezed,
-    Object? profilePhoto = freezed,
-    Object? relationship = freezed,
-    Object? age = freezed,
+    Object? relation = freezed,
+    Object? parentPatientId = freezed,
+    Object? regRef = freezed,
   }) {
     return _then(_$_RelatedParty(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      relationship: freezed == relationship
-          ? _value.relationship
-          : relationship // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
+      relation: freezed == relation
+          ? _value.relation
+          : relation // ignore: cast_nullable_to_non_nullable
+              as Relation?,
+      parentPatientId: freezed == parentPatientId
+          ? _value.parentPatientId
+          : parentPatientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1300,29 +1239,23 @@ class __$$_RelatedPartyCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RelatedParty implements _RelatedParty {
   const _$_RelatedParty(
-      {this.patientId,
-      this.name,
-      this.profilePhoto,
-      this.relationship,
-      this.age});
+      {this.patientId, this.relation, this.parentPatientId, this.regRef});
 
   factory _$_RelatedParty.fromJson(Map<String, dynamic> json) =>
       _$$_RelatedPartyFromJson(json);
 
   @override
-  final String? patientId;
+  final int? patientId;
   @override
-  final String? name;
+  final Relation? relation;
   @override
-  final String? profilePhoto;
+  final int? parentPatientId;
   @override
-  final String? relationship;
-  @override
-  final String? age;
+  final String? regRef;
 
   @override
   String toString() {
-    return 'RelatedParty(patientId: $patientId, name: $name, profilePhoto: $profilePhoto, relationship: $relationship, age: $age)';
+    return 'RelatedParty(patientId: $patientId, relation: $relation, parentPatientId: $parentPatientId, regRef: $regRef)';
   }
 
   @override
@@ -1332,18 +1265,17 @@ class _$_RelatedParty implements _RelatedParty {
             other is _$_RelatedParty &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.profilePhoto, profilePhoto) ||
-                other.profilePhoto == profilePhoto) &&
-            (identical(other.relationship, relationship) ||
-                other.relationship == relationship) &&
-            (identical(other.age, age) || other.age == age));
+            (identical(other.relation, relation) ||
+                other.relation == relation) &&
+            (identical(other.parentPatientId, parentPatientId) ||
+                other.parentPatientId == parentPatientId) &&
+            (identical(other.regRef, regRef) || other.regRef == regRef));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, patientId, name, profilePhoto, relationship, age);
+  int get hashCode =>
+      Object.hash(runtimeType, patientId, relation, parentPatientId, regRef);
 
   @JsonKey(ignore: true)
   @override
@@ -1361,27 +1293,598 @@ class _$_RelatedParty implements _RelatedParty {
 
 abstract class _RelatedParty implements RelatedParty {
   const factory _RelatedParty(
-      {final String? patientId,
-      final String? name,
-      final String? profilePhoto,
-      final String? relationship,
-      final String? age}) = _$_RelatedParty;
+      {final int? patientId,
+      final Relation? relation,
+      final int? parentPatientId,
+      final String? regRef}) = _$_RelatedParty;
 
   factory _RelatedParty.fromJson(Map<String, dynamic> json) =
       _$_RelatedParty.fromJson;
 
   @override
-  String? get patientId;
+  int? get patientId;
   @override
-  String? get name;
+  Relation? get relation;
   @override
-  String? get profilePhoto;
+  int? get parentPatientId;
   @override
-  String? get relationship;
-  @override
-  String? get age;
+  String? get regRef;
   @override
   @JsonKey(ignore: true)
   _$$_RelatedPartyCopyWith<_$_RelatedParty> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Identifiers _$IdentifiersFromJson(Map<String, dynamic> json) {
+  return _Identifiers.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Identifiers {
+  int? get id => throw _privateConstructorUsedError;
+  IdentfierType? get type => throw _privateConstructorUsedError;
+  String? get value => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $IdentifiersCopyWith<Identifiers> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $IdentifiersCopyWith<$Res> {
+  factory $IdentifiersCopyWith(
+          Identifiers value, $Res Function(Identifiers) then) =
+      _$IdentifiersCopyWithImpl<$Res, Identifiers>;
+  @useResult
+  $Res call({int? id, IdentfierType? type, String? value});
+}
+
+/// @nodoc
+class _$IdentifiersCopyWithImpl<$Res, $Val extends Identifiers>
+    implements $IdentifiersCopyWith<$Res> {
+  _$IdentifiersCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? type = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as IdentfierType?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_IdentifiersCopyWith<$Res>
+    implements $IdentifiersCopyWith<$Res> {
+  factory _$$_IdentifiersCopyWith(
+          _$_Identifiers value, $Res Function(_$_Identifiers) then) =
+      __$$_IdentifiersCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, IdentfierType? type, String? value});
+}
+
+/// @nodoc
+class __$$_IdentifiersCopyWithImpl<$Res>
+    extends _$IdentifiersCopyWithImpl<$Res, _$_Identifiers>
+    implements _$$_IdentifiersCopyWith<$Res> {
+  __$$_IdentifiersCopyWithImpl(
+      _$_Identifiers _value, $Res Function(_$_Identifiers) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? type = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_$_Identifiers(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as IdentfierType?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Identifiers implements _Identifiers {
+  const _$_Identifiers({this.id, this.type, this.value});
+
+  factory _$_Identifiers.fromJson(Map<String, dynamic> json) =>
+      _$$_IdentifiersFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final IdentfierType? type;
+  @override
+  final String? value;
+
+  @override
+  String toString() {
+    return 'Identifiers(id: $id, type: $type, value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Identifiers &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, type, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IdentifiersCopyWith<_$_Identifiers> get copyWith =>
+      __$$_IdentifiersCopyWithImpl<_$_Identifiers>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_IdentifiersToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Identifiers implements Identifiers {
+  const factory _Identifiers(
+      {final int? id,
+      final IdentfierType? type,
+      final String? value}) = _$_Identifiers;
+
+  factory _Identifiers.fromJson(Map<String, dynamic> json) =
+      _$_Identifiers.fromJson;
+
+  @override
+  int? get id;
+  @override
+  IdentfierType? get type;
+  @override
+  String? get value;
+  @override
+  @JsonKey(ignore: true)
+  _$$_IdentifiersCopyWith<_$_Identifiers> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MedicalRecords _$MedicalRecordsFromJson(Map<String, dynamic> json) {
+  return _MedicalRecords.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MedicalRecords {
+  int? get id => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get registrationDate => throw _privateConstructorUsedError;
+  String? get organisationId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MedicalRecordsCopyWith<MedicalRecords> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MedicalRecordsCopyWith<$Res> {
+  factory $MedicalRecordsCopyWith(
+          MedicalRecords value, $Res Function(MedicalRecords) then) =
+      _$MedicalRecordsCopyWithImpl<$Res, MedicalRecords>;
+  @useResult
+  $Res call(
+      {int? id,
+      @TimestampConverter() DateTime? registrationDate,
+      String? organisationId});
+}
+
+/// @nodoc
+class _$MedicalRecordsCopyWithImpl<$Res, $Val extends MedicalRecords>
+    implements $MedicalRecordsCopyWith<$Res> {
+  _$MedicalRecordsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? registrationDate = freezed,
+    Object? organisationId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registrationDate: freezed == registrationDate
+          ? _value.registrationDate
+          : registrationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      organisationId: freezed == organisationId
+          ? _value.organisationId
+          : organisationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MedicalRecordsCopyWith<$Res>
+    implements $MedicalRecordsCopyWith<$Res> {
+  factory _$$_MedicalRecordsCopyWith(
+          _$_MedicalRecords value, $Res Function(_$_MedicalRecords) then) =
+      __$$_MedicalRecordsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @TimestampConverter() DateTime? registrationDate,
+      String? organisationId});
+}
+
+/// @nodoc
+class __$$_MedicalRecordsCopyWithImpl<$Res>
+    extends _$MedicalRecordsCopyWithImpl<$Res, _$_MedicalRecords>
+    implements _$$_MedicalRecordsCopyWith<$Res> {
+  __$$_MedicalRecordsCopyWithImpl(
+      _$_MedicalRecords _value, $Res Function(_$_MedicalRecords) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? registrationDate = freezed,
+    Object? organisationId = freezed,
+  }) {
+    return _then(_$_MedicalRecords(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registrationDate: freezed == registrationDate
+          ? _value.registrationDate
+          : registrationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      organisationId: freezed == organisationId
+          ? _value.organisationId
+          : organisationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MedicalRecords implements _MedicalRecords {
+  const _$_MedicalRecords(
+      {this.id,
+      @TimestampConverter() this.registrationDate,
+      this.organisationId});
+
+  factory _$_MedicalRecords.fromJson(Map<String, dynamic> json) =>
+      _$$_MedicalRecordsFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  @TimestampConverter()
+  final DateTime? registrationDate;
+  @override
+  final String? organisationId;
+
+  @override
+  String toString() {
+    return 'MedicalRecords(id: $id, registrationDate: $registrationDate, organisationId: $organisationId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MedicalRecords &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.registrationDate, registrationDate) ||
+                other.registrationDate == registrationDate) &&
+            (identical(other.organisationId, organisationId) ||
+                other.organisationId == organisationId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, registrationDate, organisationId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MedicalRecordsCopyWith<_$_MedicalRecords> get copyWith =>
+      __$$_MedicalRecordsCopyWithImpl<_$_MedicalRecords>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MedicalRecordsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MedicalRecords implements MedicalRecords {
+  const factory _MedicalRecords(
+      {final int? id,
+      @TimestampConverter() final DateTime? registrationDate,
+      final String? organisationId}) = _$_MedicalRecords;
+
+  factory _MedicalRecords.fromJson(Map<String, dynamic> json) =
+      _$_MedicalRecords.fromJson;
+
+  @override
+  int? get id;
+  @override
+  @TimestampConverter()
+  DateTime? get registrationDate;
+  @override
+  String? get organisationId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MedicalRecordsCopyWith<_$_MedicalRecords> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MetaData _$MetaDataFromJson(Map<String, dynamic> json) {
+  return _MetaData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MetaData {
+  String? get hipId => throw _privateConstructorUsedError;
+  String? get counterId => throw _privateConstructorUsedError;
+  String? get hprId => throw _privateConstructorUsedError;
+  String? get latitude => throw _privateConstructorUsedError;
+  String? get longitude => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MetaDataCopyWith<MetaData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MetaDataCopyWith<$Res> {
+  factory $MetaDataCopyWith(MetaData value, $Res Function(MetaData) then) =
+      _$MetaDataCopyWithImpl<$Res, MetaData>;
+  @useResult
+  $Res call(
+      {String? hipId,
+      String? counterId,
+      String? hprId,
+      String? latitude,
+      String? longitude});
+}
+
+/// @nodoc
+class _$MetaDataCopyWithImpl<$Res, $Val extends MetaData>
+    implements $MetaDataCopyWith<$Res> {
+  _$MetaDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hipId = freezed,
+    Object? counterId = freezed,
+    Object? hprId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+  }) {
+    return _then(_value.copyWith(
+      hipId: freezed == hipId
+          ? _value.hipId
+          : hipId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      counterId: freezed == counterId
+          ? _value.counterId
+          : counterId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hprId: freezed == hprId
+          ? _value.hprId
+          : hprId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MetaDataCopyWith<$Res> implements $MetaDataCopyWith<$Res> {
+  factory _$$_MetaDataCopyWith(
+          _$_MetaData value, $Res Function(_$_MetaData) then) =
+      __$$_MetaDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? hipId,
+      String? counterId,
+      String? hprId,
+      String? latitude,
+      String? longitude});
+}
+
+/// @nodoc
+class __$$_MetaDataCopyWithImpl<$Res>
+    extends _$MetaDataCopyWithImpl<$Res, _$_MetaData>
+    implements _$$_MetaDataCopyWith<$Res> {
+  __$$_MetaDataCopyWithImpl(
+      _$_MetaData _value, $Res Function(_$_MetaData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hipId = freezed,
+    Object? counterId = freezed,
+    Object? hprId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+  }) {
+    return _then(_$_MetaData(
+      hipId: freezed == hipId
+          ? _value.hipId
+          : hipId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      counterId: freezed == counterId
+          ? _value.counterId
+          : counterId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hprId: freezed == hprId
+          ? _value.hprId
+          : hprId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MetaData implements _MetaData {
+  const _$_MetaData(
+      {this.hipId, this.counterId, this.hprId, this.latitude, this.longitude});
+
+  factory _$_MetaData.fromJson(Map<String, dynamic> json) =>
+      _$$_MetaDataFromJson(json);
+
+  @override
+  final String? hipId;
+  @override
+  final String? counterId;
+  @override
+  final String? hprId;
+  @override
+  final String? latitude;
+  @override
+  final String? longitude;
+
+  @override
+  String toString() {
+    return 'MetaData(hipId: $hipId, counterId: $counterId, hprId: $hprId, latitude: $latitude, longitude: $longitude)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MetaData &&
+            (identical(other.hipId, hipId) || other.hipId == hipId) &&
+            (identical(other.counterId, counterId) ||
+                other.counterId == counterId) &&
+            (identical(other.hprId, hprId) || other.hprId == hprId) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, hipId, counterId, hprId, latitude, longitude);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
+      __$$_MetaDataCopyWithImpl<_$_MetaData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MetaDataToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MetaData implements MetaData {
+  const factory _MetaData(
+      {final String? hipId,
+      final String? counterId,
+      final String? hprId,
+      final String? latitude,
+      final String? longitude}) = _$_MetaData;
+
+  factory _MetaData.fromJson(Map<String, dynamic> json) = _$_MetaData.fromJson;
+
+  @override
+  String? get hipId;
+  @override
+  String? get counterId;
+  @override
+  String? get hprId;
+  @override
+  String? get latitude;
+  @override
+  String? get longitude;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
       throw _privateConstructorUsedError;
 }

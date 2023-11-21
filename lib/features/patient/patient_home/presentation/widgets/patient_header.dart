@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/source/local/fake_data_source.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../data/source/fake_data_source.dart';
 
 class PatientHeader extends HookWidget {
   const PatientHeader({super.key});
@@ -48,76 +48,73 @@ class PatientHeader extends HookWidget {
                 var textColor = index == 0 ? AppColor.black : AppColor.white;
                 var buttonColor =
                     index == 0 ? AppColor.primary : AppColor.white;
-                return Container(
-                  // padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(AppSize.klradius),
-                        child: Image.asset(
-                          data["image"],
-                          fit: BoxFit.fill,
-                        ),
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(AppSize.klradius),
+                      child: Image.asset(
+                        data["image"],
+                        fit: BoxFit.fill,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(AppSize.kmpadding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              data["title"],
-                              style: applyFiraSansFont(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: textColor),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(AppSize.kmpadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            data["title"],
+                            style: applyFiraSansFont(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: textColor),
+                          ),
+                          const SizedBox(height: AppSize.ksheight),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: Responsive.isMobile(context)
+                                  ? AppSize.width(context) * 0.6
+                                  : AppSize.width(context) * 0.5,
                             ),
-                            const SizedBox(height: AppSize.ksheight),
-                            Container(
-                              constraints: BoxConstraints(
-                                maxWidth: Responsive.isMobile(context)
-                                    ? AppSize.width(context) * 0.6
-                                    : AppSize.width(context) * 0.5,
+                            child: Text(
+                              data["description"],
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: textColor,
+                                height: 1.4,
                               ),
+                              softWrap: true,
+                              // maxLines: 4,
+                              // overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.kmheight),
+                          // const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 0.0),
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                visualDensity:
+                                    const VisualDensity(vertical: -1),
+                                side: BorderSide(
+                                  color: buttonColor,
+                                ),
+                              ),
+                              onPressed: () {},
                               child: Text(
-                                data["description"],
+                                "Know More",
                                 style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: textColor,
-                                  height: 1.4,
-                                ),
-                                softWrap: true,
-                                // maxLines: 4,
-                                // overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            const SizedBox(height: AppSize.kmheight),
-                            // const Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 0.0),
-                              child: OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  visualDensity:
-                                      const VisualDensity(vertical: -1),
-                                  side: BorderSide(
-                                    color: buttonColor,
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  "Know More",
-                                  style: applyRobotoFont(
-                                    color: buttonColor,
-                                  ),
+                                  color: buttonColor,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 );
               }),
           Transform.translate(

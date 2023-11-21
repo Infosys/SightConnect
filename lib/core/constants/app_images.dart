@@ -84,7 +84,6 @@ class AppImages {
   static const String inviteBg = "assets/images/invite_bg.png";
 
   //Drawer Page assets
-
   static const String aboutUs = "assets/images/about_us.png";
   static const String termsOfUse = "assets/images/terms_of_use.png";
   static const String privacyPolicy = "assets/images/privacy_policy.svg";

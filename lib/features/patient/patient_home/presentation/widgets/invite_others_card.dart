@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class InviteCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "As a delighted user, you could invite your family and friends to join and explore the benefits of the Eye Care for All app.",
+                  "As a delighted user, you could invite your family and friends to join and explore the benefits of the ${AppText.appName} app.",
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
