@@ -40,14 +40,12 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
 
   set setToDate(DateTime date) {
     _selectedToDate = date;
-    print(_selectedToDate);
     notifyListeners();
     searchByDate();
   }
 
   set setFromDate(DateTime date) {
     _selectedFromDate = date;
-    print(_selectedFromDate);
     notifyListeners();
     searchByDate();
   }

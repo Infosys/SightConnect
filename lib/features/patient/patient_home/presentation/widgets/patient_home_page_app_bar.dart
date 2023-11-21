@@ -1,12 +1,11 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 
 class PatientHomePageAppBar extends StatelessWidget
@@ -65,24 +64,17 @@ class PatientHomePageAppBar extends StatelessWidget
                   color: Colors.white,
                 ),
               ),
-              // Positioned(
-              //   right: 0,
-              //   child: CircleAvatar(
-              //     radius: 20,
-              //     backgroundColor: Theme.of(context).primaryColor,
-              //     child: Consumer(
-              //       builder: (context, ref, child) {
-              //         var user = ref.watch(userDetailsProvider).userProfile;
-
-              //         return CircleAvatar(
-              //           radius: 18,
-              //           backgroundImage:
-              //               AssetImage(user!.profile!.patient!.profilePhoto!),
-              //         );
-              //       },
-              //     ),
-              //   ),
-              // ),
+              Positioned(
+                right: 0,
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: const CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage(AppImages.raghavi),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

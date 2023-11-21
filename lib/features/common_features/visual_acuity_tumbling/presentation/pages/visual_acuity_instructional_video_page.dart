@@ -18,6 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/visual_acuity_dialog.dart';
+// ignore: unused_import
 import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {

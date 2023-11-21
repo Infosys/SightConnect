@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
@@ -30,7 +29,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   @override
   Widget build(BuildContext context) {
     var currentStep = ref.watch(triageStepperProvider).currentStep;
-    log("rebuliding triage page");
 
     switch (currentStep) {
       case 0:

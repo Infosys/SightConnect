@@ -52,8 +52,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-              builder: (context) => const OptometritianDashboardPage()),
+          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
           (route) => false,
         );
       }

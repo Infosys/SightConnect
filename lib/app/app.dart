@@ -34,10 +34,7 @@ class MyApp extends ConsumerWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [
-            Locale('en'), // English
-            Locale('hi') //Hindi
-          ],
+          supportedLocales: const [Locale('en'), Locale('hi')],
           debugShowCheckedModeBanner: false,
           themeMode: ref.watch(themeProvider),
           theme: ref.watch(themeProvider) == ThemeMode.light
