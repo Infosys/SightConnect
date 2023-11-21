@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
-import '../../data/local/fake_data_source.dart';
+import '../../../../common_features/auth/data/source/local/fake_data_source.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
