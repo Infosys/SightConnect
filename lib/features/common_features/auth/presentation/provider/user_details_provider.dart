@@ -6,6 +6,8 @@ import '../../data/models/user_profile.dart';
 var userDetailsProvider =
     ChangeNotifierProvider((ref) => UserDetailsProvider());
 
+enum Role { patient, doctor, visionguardian, optometrist }
+
 class UserDetailsProvider extends ChangeNotifier {
   UserProfile? userProfile;
   List<RelatedParty> familyMembers = [];

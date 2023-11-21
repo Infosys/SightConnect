@@ -3,9 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/auth_page.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/user_details_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
@@ -22,8 +19,6 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> {
-  final role = Role.optometrist;
-
   @override
   void initState() {
     super.initState();
@@ -118,5 +113,3 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     );
   }
 }
-
-enum Role { patient, doctor, visionguardian, optometrist }
