@@ -2,11 +2,13 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/modals/camera_snack_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/local/fake_data_source_cataract.dart';
@@ -68,9 +70,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
 
   @override
   Widget build(BuildContext context) {
-    var eye = ref.watch(patientEyeScanProvider).currentEye == Eye.RIGHT_EYE
-        ? "Right Eye"
-        : "Left Eye";
+    var eye = ref.watch(patientEyeScanProvider).getEyeText();
     return Scaffold(
       appBar: CustomAppbar(
         title: Text("Eye Scanner - $eye"),
@@ -91,16 +91,6 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                             null ||
                         ref.watch(patientEyeScanProvider).leftEyeImage == null)
                       CameraPreview(cameraController!),
-                    // if (ref.watch(patientEyeScanProvider).rightEyeImage != null)
-                    //   Image.file(
-                    //     ref.watch(patientEyeScanProvider).rightEyeImage!,
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // if (ref.watch(patientEyeScanProvider).leftEyeImage != null)
-                    //   Image.file(
-                    //     ref.watch(patientEyeScanProvider).leftEyeImage!,
-                    //     fit: BoxFit.cover,
-                    //   ),
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
@@ -127,19 +117,20 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
 
   _takePicture() {
     if (!cameraController!.value.isInitialized) {
-      showCameraSnackBar(context, "Error: select a camera first.");
+      Fluttertoast.showToast(msg: "Error: select a camera first.");
+
       return null;
     }
     if (cameraController!.value.isTakingPicture) {
       return null;
     }
     setState(() {
-      isProcessing =
-          true; // Set the flag to indicate that the picture is being processed
+      // Set the flag to indicate that the picture is being processed
+      isProcessing = true;
     });
     try {
       cameraController!.takePicture().then((image) {
-        var eye = ref.watch(patientEyeScanProvider).currentEye;
+        var eye = ref.read(patientEyeScanProvider).selectedEye;
         if (eye == Eye.RIGHT_EYE) {
           ref.read(patientEyeScanProvider).setRightEyeImage(image);
         } else {
@@ -148,7 +139,12 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
         cameraCaptureAlert(context, eye);
       });
     } on CameraException catch (e) {
-      showCameraSnackBar(context, "Error: ${e.code}\n${e.description}");
+      if (kDebugMode) {
+        logger.d({
+          "CameraException": e,
+        });
+      }
+      Fluttertoast.showToast(msg: "$e");
 
       return null;
     }

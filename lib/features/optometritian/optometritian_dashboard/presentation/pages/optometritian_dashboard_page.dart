@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,6 +15,7 @@ class OptometritianDashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       body: Stack(
         children: [
@@ -32,7 +32,7 @@ class OptometritianDashboardPage extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            padding: const EdgeInsets.all(AppSize.klpadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,7 +55,7 @@ class OptometritianDashboardPage extends StatelessWidget {
                       width: AppSize.kmwidth,
                     ),
                     Text(
-                      'Optometric Validation',
+                      'ClinicalVal',
                       style: applyFiraSansFont(
                         color: AppColor.white,
                         fontWeight: FontWeight.w600,
@@ -63,23 +63,15 @@ class OptometritianDashboardPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.klheight * 1.4),
+                const SizedBox(height: AppSize.klheight * 1.5),
                 Text(
-                  "Welcome back",
+                  "Welcome",
                   style: applyFiraSansFont(
                     color: AppColor.scaffold,
                     fontSize: 28,
                   ),
                 ),
-                Text(
-                  "Anne Mathew",
-                  style: applyFiraSansFont(
-                    color: AppColor.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 28,
-                  ),
-                ),
-                const SizedBox(height: AppSize.klheight),
+                const SizedBox(height: AppSize.ksheight),
                 Text(
                   "Let's get started",
                   style: applyFiraSansFont(

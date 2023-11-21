@@ -136,8 +136,9 @@ class TriageProvider extends ChangeNotifier {
   resetTriage() {
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
-    ref.invalidate(tumblingTestProvider);
-    ref.invalidate(triageStepperProvider);
+
+    ref.read(tumblingTestProvider).reset();
+    ref.read(triageStepperProvider).reset();
   }
 
   String generateUniqueKey() {

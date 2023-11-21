@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -24,6 +23,11 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     var pageController = usePageController();
     var scaffoldKey = useState(GlobalKey<ScaffoldState>());
     var triageModel = ref.watch(triageProvider);
+    var model = ref.watch(triageQuestionnaireProvider);
+    var pageIndex = useState<int>(0);
+    var isLastPage = model.questionnaireSections.length - 1 == pageIndex.value;
+    var isButtonEnabled = model.selectedOptions.isNotEmpty &&
+        model.selectedOptions.containsValue(true);
     ref
         .watch(triageQuestionnaireProvider)
         .getQuestionnaire(triageModel.questionnaireSections);
@@ -82,8 +86,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
         ),
         body: Consumer(
           builder: (context, ref, _) {
-            var model = ref.watch(triageQuestionnaireProvider);
-
             return Padding(
               padding: const EdgeInsets.all(AppSize.kmpadding),
               child: PageView.builder(
@@ -93,10 +95,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 itemBuilder: (context, index) {
                   var questionnaire =
                       model.questionnaireSections[index].questionnaire?.first;
-                  var isLastPage =
-                      model.questionnaireSections.length - 1 == index;
-                  var isButtonEnabled = model.selectedOptions.isNotEmpty &&
-                      model.selectedOptions.containsValue(true);
 
                   return SingleChildScrollView(
                     child: Column(
@@ -116,45 +114,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           questions: questionnaire?.questions ?? [],
                         ),
                         const SizedBox(height: AppSize.klheight),
-                        SizedBox(
-                          width: isLastPage
-                              ? AppSize.width(context)
-                              : AppSize.width(context) * 0.45,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                              ),
-                            ),
-                            onPressed: !isButtonEnabled
-                                ? null
-                                : () {
-                                    model.saveQuestionaireResponse();
-                                    if (isLastPage) {
-                                      ref
-                                          .read(triageStepperProvider)
-                                          .goToNextStep();
-                                    } else {
-                                      pageController.nextPage(
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        curve: Curves.easeIn,
-                                      );
-                                    }
-                                  },
-                            child: Text(
-                              isLastPage
-                                  ? AppLocalizations.of(context)!.proceedButton
-                                  : AppLocalizations.of(context)!.nextButton,
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          ),
-                        ),
                         const SizedBox(
                           height: AppSize.klheight,
                         ),
@@ -165,6 +124,45 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               ),
             );
           },
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+          width: isLastPage
+              ? AppSize.width(context)
+              : AppSize.width(context) * 0.45,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+              ),
+            ),
+            onPressed: !isButtonEnabled
+                ? null
+                : () {
+                    model.saveQuestionaireResponse();
+                    if (isLastPage) {
+                      ref.read(triageStepperProvider).goToNextStep();
+                      pageIndex.value = 0;
+                    } else {
+                      pageIndex.value = pageIndex.value + 1;
+                      pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    }
+                  },
+            child: Text(
+              isLastPage
+                  ? AppLocalizations.of(context)!.proceedButton
+                  : AppLocalizations.of(context)!.nextButton,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.white,
+              ),
+            ),
+          ),
         ),
       ),
     );

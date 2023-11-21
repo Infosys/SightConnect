@@ -1,9 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/providers/optometritian_report_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/widgets/optometritian_report_questionnaire_card.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/widgets/optometritian_tumbling_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -13,7 +12,7 @@ import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import '../providers/optometritian_report_provider.dart';
 
 class OptometritianReportPage extends ConsumerWidget {
   const OptometritianReportPage({
@@ -32,8 +31,8 @@ class OptometritianReportPage extends ConsumerWidget {
     TriageUrgency urgency = model.calculateTriageUrgency();
     return WillPopScope(
       onWillPop: () async {
-        ref.read(triageProvider).resetTriage();
         Navigator.of(context).popUntil((route) => route.isFirst);
+        ref.read(triageProvider).resetTriage();
         return false;
       },
       child: Scaffold(
@@ -41,8 +40,8 @@ class OptometritianReportPage extends ConsumerWidget {
         appBar: CustomAppbar(
           leadingIcon: IconButton(
             onPressed: () {
-              ref.read(triageProvider).resetTriage();
               Navigator.of(context).popUntil((route) => route.isFirst);
+              ref.read(triageProvider).resetTriage();
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -181,12 +180,11 @@ class OptometritianReportPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  ref.read(triageProvider).resetTriage();
-
                   Navigator.of(context).popUntil((route) => route.isFirst);
+                  ref.read(triageProvider).resetTriage();
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const TriageQuestionnairePage(),
+                      builder: (context) => const TriagePage(),
                     ),
                   );
                 },
@@ -198,8 +196,8 @@ class OptometritianReportPage extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                   ref.read(triageProvider).resetTriage();
                     Navigator.of(context).popUntil((route) => route.isFirst);
+                    ref.read(triageProvider).resetTriage();
                   },
                   child: const Text("Home"),
                 ),

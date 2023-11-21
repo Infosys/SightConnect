@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_start_test_page.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/pages/optometritian_triage_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -22,7 +22,7 @@ class OptometricianAddPatientPage extends HookWidget {
     useEffect(() {
       listener() {
         final patientId = patientIdController.text;
-        final validPatientId = RegExp(r'^[0-9]+$').hasMatch(patientId);
+        final validPatientId = RegExp(r'^[0-9a-zA-Z]+$').hasMatch(patientId);
         isButtonEnabled.value = validPatientId;
       }
 
@@ -95,12 +95,15 @@ class OptometricianAddPatientPage extends HookWidget {
                         padding: const EdgeInsets.all(12.0),
                         color: const Color(0xFFFAFAFA),
                         child: TextField(
+                          style: const TextStyle(
+                            fontFamily: 'Roboto',
+                          ),
                           maxLines: 6,
                           keyboardType: TextInputType.text,
-                          onSubmitted: (value) {
-                            educationalQualificationController.text = value;
+                          onChanged: (value) {
+                            selectedEducationalQualification = value;
+
                             setState(() {});
-                            Navigator.pop(context);
                           },
                           decoration: InputDecoration(
                               hintText: 'Enter details here',
@@ -108,6 +111,30 @@ class OptometricianAddPatientPage extends HookWidget {
                                   fontSize: 14,
                                   color: AppColor.grey.withOpacity(0.4))),
                         ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.klheight,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (educationalQualificationController
+                                      .text.isNotEmpty) {
+                                    educationalQualificationController.text =
+                                        selectedEducationalQualification!;
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: const Text("Update"),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -151,12 +178,14 @@ class OptometricianAddPatientPage extends HookWidget {
                         padding: const EdgeInsets.all(12.0),
                         color: const Color(0xFFFAFAFA),
                         child: TextField(
+                          style: const TextStyle(
+                            fontFamily: 'Roboto',
+                          ),
                           maxLines: 6,
                           keyboardType: TextInputType.text,
-                          onSubmitted: (value) {
-                            professionController.text = value;
+                          onChanged: (value) {
+                            selectedProfession = value;
                             setState(() {});
-                            Navigator.pop(context);
                           },
                           decoration: InputDecoration(
                               hintText: 'Enter details here',
@@ -164,6 +193,29 @@ class OptometricianAddPatientPage extends HookWidget {
                                   fontSize: 14,
                                   color: AppColor.grey.withOpacity(0.4))),
                         ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.klheight,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (professionController.text.isNotEmpty) {
+                                    professionController.text =
+                                        selectedProfession!;
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: const Text("Update"),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -191,7 +243,7 @@ class OptometricianAddPatientPage extends HookWidget {
           return StatefulBuilder(builder:
               (BuildContext context, void Function(void Function()) setState) {
             return Container(
-              height: AppSize.height(context) * 0.6,
+              height: AppSize.height(context) * 0.7,
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +255,7 @@ class OptometricianAddPatientPage extends HookWidget {
                   ),
                   const SizedBox(height: AppSize.kmpadding),
                   SizedBox(
-                    height: AppSize.height(context) * 0.4,
+                    height: AppSize.height(context) * 0.52,
                     child: ListView.builder(
                       itemCount: educationalQualifications.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -218,6 +270,9 @@ class OptometricianAddPatientPage extends HookWidget {
                           groupValue: selectedEducationalQualification,
                           onChanged: (value) {
                             selectedEducationalQualification = value;
+                            educationalQualificationController.text =
+                                selectedEducationalQualification!;
+
                             if (value == "Others (Please specify)") {
                               Navigator.pop(context);
                               showOtherQualificationBottomSheet();
@@ -227,24 +282,6 @@ class OptometricianAddPatientPage extends HookWidget {
                         );
                       },
                     ),
-                  ),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              educationalQualificationController.text =
-                                  selectedEducationalQualification!;
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Update"),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -270,7 +307,7 @@ class OptometricianAddPatientPage extends HookWidget {
           return StatefulBuilder(builder:
               (BuildContext context, void Function(void Function()) setState) {
             return Container(
-              height: AppSize.height(context) * 0.6,
+              height: AppSize.height(context) * 0.7,
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,7 +319,7 @@ class OptometricianAddPatientPage extends HookWidget {
                   ),
                   const SizedBox(height: AppSize.kmpadding),
                   SizedBox(
-                    height: AppSize.height(context) * 0.4,
+                    height: AppSize.height(context) * 0.52,
                     child: ListView.builder(
                       itemCount: professions.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -296,6 +333,7 @@ class OptometricianAddPatientPage extends HookWidget {
                           groupValue: selectedProfession,
                           onChanged: (value) {
                             selectedProfession = value;
+                            professionController.text = selectedProfession!;
                             if (value == "Others (Please specify)") {
                               Navigator.pop(context);
                               showOtherProfessionBottomSheet();
@@ -305,23 +343,6 @@ class OptometricianAddPatientPage extends HookWidget {
                         );
                       },
                     ),
-                  ),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              professionController.text = selectedProfession!;
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Update"),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -369,7 +390,20 @@ class OptometricianAddPatientPage extends HookWidget {
                         height: 20,
                       ),
                       TextFormField(
+                        style: const TextStyle(
+                          fontFamily: 'Roboto',
+                        ),
                         controller: patientIdController,
+                        validator: (value) {
+                          if (patientIdController.text.isEmpty) {
+                            return "Patient ID cannot be empty";
+                          } else if (RegExp(r'^[0-9a-zA-Z]+$')
+                              .hasMatch(patientIdController.text)) {
+                            return "Patient ID can only contain alphabets and numbers";
+                          } else {
+                            return null;
+                          }
+                        },
                         decoration: InputDecoration(
                           labelText: "Patient ID",
                           labelStyle: applyRobotoFont(
@@ -381,6 +415,10 @@ class OptometricianAddPatientPage extends HookWidget {
                         height: 20,
                       ),
                       TextFormField(
+                        style: const TextStyle(
+                          fontFamily: 'Roboto',
+                        ),
+                        readOnly: true,
                         controller: educationalQualificationController,
                         decoration: InputDecoration(
                           labelText: "Educational Qualification",
@@ -397,6 +435,11 @@ class OptometricianAddPatientPage extends HookWidget {
                         height: 20,
                       ),
                       TextFormField(
+                        
+                        style: const TextStyle(
+                          fontFamily: 'Roboto',
+                        ),
+                        readOnly: true,
                         controller: professionController,
                         decoration: InputDecoration(
                           labelText: "Profession",
@@ -452,7 +495,7 @@ class OptometricianAddPatientPage extends HookWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const OptometricianStartTestPage(),
+                                        const OptometritianTriagePage(),
                                   ),
                                 );
                               }

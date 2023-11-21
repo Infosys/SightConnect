@@ -1,14 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eyes_capture_triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../provider/triage_eye_scan_provider.dart';
 
 class EyeScanCameraControllers extends HookConsumerWidget {
   const EyeScanCameraControllers({
@@ -42,7 +39,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    current == TriageEye.RIGHT_EYE
+                    current.currentEye == TriageEye.RIGHT_EYE
                         ? "Capture Right Eye"
                         : "Capture Left Eye",
                     style: const TextStyle(color: AppColor.white),

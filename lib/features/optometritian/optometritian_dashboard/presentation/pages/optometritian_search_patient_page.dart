@@ -1,11 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/string_extension.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OptometritianSearchPatientPage extends HookConsumerWidget {
@@ -15,8 +18,6 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuardianAddPatientProvider);
     var isSelected = useState<int>(-1);
-    // var isReport = useState<int>(-1);
-    var selectedDateRange = useState<DateTimeRange?>(null);
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
@@ -91,8 +92,12 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
 
                         return InkWell(
                           onTap: () {
-                            isSelected.value = index;
-                            model.setTimeFrame = data;
+                            if (isSelected.value == index) {
+                              isSelected.value = -1;
+                            } else {
+                              isSelected.value = index;
+                              model.setTimeFrame = data;
+                            }
                           },
                           child: Container(
                             margin:
@@ -136,12 +141,19 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                   InkWell(
                     onTap: () async {
                       var pickedDateRange = await _showDateRangePicker(context);
-                      if (pickedDateRange != null) {
-                        selectedDateRange.value = pickedDateRange;
+                      if (kDebugMode) {
+                        logger.d({
+                          "from": pickedDateRange?.start,
+                          "to": pickedDateRange?.end
+                        });
                       }
-
-                      model.setFromDate = selectedDateRange.value!.start;
-                      model.setToDate = selectedDateRange.value!.end;
+                      if (pickedDateRange == null) {
+                        Fluttertoast.showToast(
+                            msg: "Please select a date range");
+                        return;
+                      }
+                      model.setFromDate = pickedDateRange.start;
+                      model.setToDate = pickedDateRange.end;
                     },
                     child: const CircleAvatar(
                       backgroundColor: AppColor.white,
@@ -166,91 +178,105 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
               const SizedBox(
                 height: AppSize.klheight,
               ),
-              model.searchPatientList.isEmpty
-                  ? Column(
-                      children: [
-                        Image(
-                          width: AppSize.width(context) * 0.5,
-                          image: const AssetImage(
-                              "assets/images/search empty.png"),
-                        ),
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                        Text(
-                          "Find the Patient by searching with the Identification number or add new patient.",
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image(
+                      width: AppSize.width(context) * 0.55,
+                      image: const AssetImage(
+                        "assets/images/search empty.png",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.klheight,
+                  ),
+                  isSelected.value != -1
+                      ? Text(
+                          "Data not found for this search",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
+                          ),
+                        )
+                      : Text(
+                          model.query.isEmpty
+                              ? "This feature will be made available shortly."
+                              : "This Patient ID is not found. Please try searching with a different Patient ID.",
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: AppColor.grey,
                           ),
                         ),
-                      ],
-                    )
-                  : Column(
-                      children: model.searchPatientList.asMap().entries.map(
-                        (entry) {
-                          var e = entry.value;
-                          return Container(
-                            padding: const EdgeInsets.all(AppSize.kspadding),
-                            margin: const EdgeInsets.only(
-                              bottom: AppSize.kspadding + 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColor.white,
-                              borderRadius: BorderRadius.circular(
-                                AppSize.ksradius,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${e.id}",
-                                      style: applyFiraSansFont(
-                                          fontSize: 16,
-                                          color: AppColor.black,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Text(
-                                      "2 mins ago",
-                                      style: applyRobotoFont(
-                                          fontSize: 10,
-                                          color: AppColor.black,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${e.education}",
-                                      style: applyRobotoFont(
-                                        fontSize: 14,
-                                        color: AppColor.grey,
-                                      ),
-                                    ),
-                                    Text(
-                                      "${e.employment}",
-                                      style: applyRobotoFont(
-                                        fontSize: 14,
-                                        color: AppColor.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ).toList(),
-                    )
+                ],
+              ),
+
+              // Column(
+              //     children: model.searchPatientList.asMap().entries.map(
+              //       (entry) {
+              //         var e = entry.value;
+              //         return Container(
+              //           padding: const EdgeInsets.all(AppSize.kspadding),
+              //           margin: const EdgeInsets.only(
+              //             bottom: AppSize.kspadding + 5,
+              //           ),
+              //           decoration: BoxDecoration(
+              //             color: AppColor.white,
+              //             borderRadius: BorderRadius.circular(
+              //               AppSize.ksradius,
+              //             ),
+              //           ),
+              //           child: Column(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: [
+              //               Row(
+              //                 mainAxisAlignment:
+              //                     MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Text(
+              //                     "${e.id}",
+              //                     style: applyFiraSansFont(
+              //                         fontSize: 16,
+              //                         color: AppColor.black,
+              //                         fontWeight: FontWeight.w500),
+              //                   ),
+              //                   Text(
+              //                     "2 mins ago",
+              //                     style: applyRobotoFont(
+              //                         fontSize: 10,
+              //                         color: AppColor.black,
+              //                         fontWeight: FontWeight.w500),
+              //                   ),
+              //                 ],
+              //               ),
+              //               Row(
+              //                 crossAxisAlignment: CrossAxisAlignment.end,
+              //                 mainAxisAlignment:
+              //                     MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Text(
+              //                     "${e.education}",
+              //                     style: applyRobotoFont(
+              //                       fontSize: 14,
+              //                       color: AppColor.grey,
+              //                     ),
+              //                   ),
+              //                   Text(
+              //                     "${e.employment}",
+              //                     style: applyRobotoFont(
+              //                       fontSize: 14,
+              //                       color: AppColor.grey,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ],
+              //           ),
+              //         );
+              //       },
+              //     ).toList(),
+              //   )
             ],
           ),
         ),
@@ -264,8 +290,23 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
       initialEntryMode: DatePickerEntryMode.input,
       firstDate: DateTime.now().subtract(const Duration(days: 365 * 2)),
       lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            iconTheme: const IconThemeData(color: AppColor.white),
+            primaryColor: AppColor.primary,
+            buttonTheme:
+                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            colorScheme: const ColorScheme.light(
+              primary: AppColor.primary,
+            ).copyWith(
+              secondary: AppColor.lightBlue,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
-    print("$picked \nkk/ngg\n");
     return picked;
   }
 }
