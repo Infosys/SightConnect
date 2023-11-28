@@ -3,14 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
   Future<TriageAssessment> getTriage();
-  Future<TriageResponse> saveTriage({required TriageResponse triage});
+  Future<TriageModel> saveTriage({required TriageModel triage});
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -29,8 +29,8 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }
 
   @override
-  Future<TriageResponse> saveTriage({required TriageResponse triage}) async {
-    var endpoint = "/api/patient-responses";
+  Future<TriageModel> saveTriage({required TriageModel triage}) async {
+    var endpoint = "/api/triage-report";
     logger.d({
       "API saveTriage": triage.toJson(),
     });
@@ -40,7 +40,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       data: triage.toJson(),
     );
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
-      return TriageResponse.fromJson(response.data);
+      return TriageModel.fromJson(response.data);
     } else {
       throw ServerException();
     }

@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -242,7 +243,7 @@ class _PatientEyeCaptureTriagePageState
           ref.read(triageStepperProvider).goToNextStep();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
 
-          // await ref.read(triageProvider).saveTriage();
+          await ref.read(triageProvider).saveTriage();
 
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);

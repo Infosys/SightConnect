@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../models/triage_assessment.dart';
@@ -9,9 +9,9 @@ abstract class TriageLocalSource {
   Future<TriageAssessment> updateTriage({required TriageAssessment triage});
   Future<void> saveTriage({required TriageAssessment triage});
   Future<void> deleteTriage();
-  Future<TriageResponse> saveTriageResponse(
-      {required TriageResponse triageResponse});
-  Future<TriageResponse> getTriageResponse();
+  Future<TriageModel> saveTriageResponse(
+      {required TriageModel triageResponse});
+  Future<TriageModel> getTriageResponse();
 }
 
 class TriageLocalSourceImpl implements TriageLocalSource {
@@ -31,7 +31,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageResponse> getTriageResponse() {
+  Future<TriageModel> getTriageResponse() {
     // TODO: implement getTriageResponse
     throw UnimplementedError();
   }
@@ -43,8 +43,8 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageResponse> saveTriageResponse(
-      {required TriageResponse triageResponse}) {
+  Future<TriageModel> saveTriageResponse(
+      {required TriageModel triageResponse}) {
     // TODO: implement saveTriageResponse
     throw UnimplementedError();
   }

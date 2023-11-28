@@ -1,0 +1,3 @@
+enum TestName {
+  QUESTIONNAIRE, OBSERVATION, IMAGING
+}
