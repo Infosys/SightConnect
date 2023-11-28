@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/widgets/white_field_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -113,12 +114,7 @@ class PatientRegistrationPage extends ConsumerWidget {
                           onChanged: (value) {
                             model.setName = value;
                           },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Name cannot be empty';
-                            }
-                            return null;
-                          },
+                          validator: model.validateName,
                           decoration: InputDecoration(
                             hintText: 'Name',
                             hintStyle: applyRobotoFont(
@@ -211,12 +207,7 @@ class PatientRegistrationPage extends ConsumerWidget {
                           onChanged: (value) {
                             model.setMobileNumber = value;
                           },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Mobile Number cannot be empty';
-                            }
-                            return null;
-                          },
+                          validator: model.validateMobileNumber,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: 'Mobile Number',
@@ -232,12 +223,7 @@ class PatientRegistrationPage extends ConsumerWidget {
                           onChanged: (value) {
                             model.setPincode = value;
                           },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Pincode cannot be empty';
-                            }
-                            return null;
-                          },
+                          validator: model.validatePincode,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             hintText: 'Pincode (Optional)',
@@ -247,6 +233,25 @@ class PatientRegistrationPage extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: AppSize.klheight),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Already have an account?"),
+                          const SizedBox(width: AppSize.klwidth),
+                          InkWell(
+                            onTap: () {},
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(
+                                color: AppColor.primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSize.ksheight),
+                      const BrandingWidgetH(),
                       const SizedBox(height: AppSize.klheight),
                     ],
                   ),

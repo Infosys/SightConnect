@@ -54,6 +54,34 @@ class PatientRegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? validateName(String? value) {
+    if (value!.isEmpty) {
+      return "Name cannot be empty";
+    }
+    return null;
+  }
+
+  String? validateMobileNumber(String? value) {
+    if (value!.isEmpty || value.length != 10) {
+      return "Invalid Mobile Number";
+    }
+    return null;
+  }
+
+  String? validatePincode(String? value) {
+    if (value!.isEmpty || value.length != 6) {
+      return "Invalid Pincode";
+    }
+    return null;
+  }
+
+  String? validateAge(String? value) {
+    if (value!.isEmpty) {
+      return "Age cannot be empty";
+    }
+    return null;
+  }
+
   Future<void> registerPatient() async {
     _isLoading = true;
     notifyListeners();
