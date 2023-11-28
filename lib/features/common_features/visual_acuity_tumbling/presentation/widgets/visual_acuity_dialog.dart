@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -59,6 +60,9 @@ class VisualAcuityDialog {
 
                         if (!ref.read(globalProvider).hideTumblingElement) {
                           ref.read(triageStepperProvider).goToNextStep();
+                          ref
+                              .read(tumblingTestProvider)
+                              .saveVisionAcuityResponseToDB();
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(

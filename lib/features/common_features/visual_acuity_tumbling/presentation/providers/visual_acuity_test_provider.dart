@@ -1,4 +1,6 @@
 import 'dart:math' as math;
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,12 +12,19 @@ typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
 var tumblingTestProvider = ChangeNotifierProvider(
-  (ref) => VisualAcuityTestProvider(ref.watch(tumlingLocalSource)),
+  (ref) => VisualAcuityTestProvider(
+    ref.watch(tumlingLocalSource),
+    ref.read(triageLocalSourceProvider),
+  ),
 );
 
 class VisualAcuityTestProvider with ChangeNotifier {
   final TumblingLocalSource _dataSource;
-  VisualAcuityTestProvider(this._dataSource) {
+  TriageLocalSource triageLocalSourceProvider;
+  VisualAcuityTestProvider(
+    this._dataSource,
+    this.triageLocalSourceProvider,
+  ) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -269,5 +278,32 @@ class VisualAcuityTestProvider with ChangeNotifier {
       Eye.right => "Right Eye",
       Eye.both => "Both Eye",
     };
+  }
+
+  /// set patient vision acuity tumbling based on the TriageAssessment model
+  List<PostObservationsModel> getVisionAcuityTumblingResponse() {
+    double leftEyeSight = calculateEyeSight(Eye.left);
+    double rightEyeSight = calculateEyeSight(Eye.right);
+
+    List<PostObservationsModel> observationList = [
+      PostObservationsModel(
+        identifier: 50000001,
+        value: "leftEyeSight",
+        score: leftEyeSight,
+      ),
+      PostObservationsModel(
+        identifier: 50000002,
+        value: "rightEyeSight",
+        score: rightEyeSight,
+      ),
+    ];
+    logger.d(observationList);
+    return observationList;
+  }
+
+  saveVisionAcuityResponseToDB() {
+    logger.f("Saving Vision Acuity Response to DB");
+    triageLocalSourceProvider.saveTriageVisualAcuityLocally(
+        triageVisualAcuity: getVisionAcuityTumblingResponse());
   }
 }

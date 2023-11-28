@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acutiy_instruction_page.dart';
@@ -121,6 +122,9 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   },
                 );
                 if (context.mounted) {
+                  ref
+                      .read(triageQuestionnaireProvider)
+                      .saveQuestionaireResponseToDB();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const VisualAcuityInitiatePage(),

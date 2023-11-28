@@ -241,6 +241,7 @@ class _PatientEyeCaptureTriagePageState
         if (verifiedImage != null && mounted) {
           model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).goToNextStep();
+          ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
 
           await ref.read(triageProvider).saveTriage();

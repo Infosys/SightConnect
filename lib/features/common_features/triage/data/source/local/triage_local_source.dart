@@ -1,7 +1,12 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'dart:convert';
 
-import '../../models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
@@ -9,9 +14,18 @@ abstract class TriageLocalSource {
   Future<TriageAssessment> updateTriage({required TriageAssessment triage});
   Future<void> saveTriage({required TriageAssessment triage});
   Future<void> deleteTriage();
-  Future<TriageModel> saveTriageResponse(
-      {required TriageModel triageResponse});
+  Future<TriageModel> saveTriageResponse({required TriageModel triageResponse});
   Future<TriageModel> getTriageResponse();
+  Future<void> saveTriageQuestionnaireLocally(
+      {required List<PostQuestionResponseModel> triageQuestionnaireResponse});
+  Future<void> saveTriageVisualAcuityLocally(
+      {required List<PostObservationsModel> triageVisualAcuity});
+  Future<void> saveTriageEyeScanLocally(
+      {required List<PostImagingSelectionModel> triageEyeScan});
+
+  Future<List<PostQuestionResponseModel>> getQuestionaireResponse();
+  Future<List<PostObservationsModel>> getVisionAcuityTumblingResponse();
+  Future<List<PostImagingSelectionModel>> getTriageEyeScanResponse();
 }
 
 class TriageLocalSourceImpl implements TriageLocalSource {
@@ -25,28 +39,83 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageAssessment> getTriage() {
-    // TODO: implement getTriage
-    throw UnimplementedError();
+  Future<TriageAssessment> getTriage() async {
+    logger.f("No Internet Connection - Getting Triage from Local DB");
+    final response = await triageDBHelper.getTriageAssessment();
+    if (response.isNotEmpty) {
+      final triageAssessment = TriageAssessment.fromJson(response);
+      return triageAssessment;
+    } else {
+      throw Exception("No Triage Assessment Found");
+    }
   }
 
   @override
   Future<TriageModel> getTriageResponse() {
-    // TODO: implement getTriageResponse
     throw UnimplementedError();
   }
 
   @override
-  Future<void> saveTriage({required TriageAssessment triage}) {
-    // TODO: implement saveTriage
-    throw UnimplementedError();
+  Future<void> saveTriage({required TriageAssessment triage}) async {
+    logger.f("Saving Triage to Local DB");
+    triageDBHelper.insertTriageAssessment(triageAssessment: triage);
   }
 
   @override
   Future<TriageModel> saveTriageResponse(
-      {required TriageModel triageResponse}) {
-    // TODO: implement saveTriageResponse
-    throw UnimplementedError();
+      {required TriageModel triageResponse}) async {
+    await triageDBHelper.insertTriageResponse(triageResponse: triageResponse);
+    await triageDBHelper.deleteAllTriageSteps();
+    return triageResponse;
+  }
+
+  @override
+  Future<void> saveTriageQuestionnaireLocally(
+      {required List<PostQuestionResponseModel>
+          triageQuestionnaireResponse}) async {
+    logger.f(triageQuestionnaireResponse);
+    logger.f(
+        "Saving Triage Questionnaire to Local DB${json.encode(triageQuestionnaireResponse)}}");
+    triageDBHelper.insertTriageQuestionnaire(
+        triageQuestionnaire: triageQuestionnaireResponse);
+  }
+
+  @override
+  Future<void> saveTriageVisualAcuityLocally(
+      {required List<PostObservationsModel> triageVisualAcuity}) async {
+    logger.f(
+        "Saving Triage Visual Acuity to Local DB ${json.encode(triageVisualAcuity)}");
+    triageDBHelper.insertTriageVisualAcuity(
+        triageVisualAcuity: triageVisualAcuity);
+  }
+
+  @override
+  Future<void> saveTriageEyeScanLocally(
+      {required List<PostImagingSelectionModel> triageEyeScan}) async {
+    logger
+        .f("Saving Triage Eye Scan to Local DB ${json.encode(triageEyeScan)}}");
+    triageDBHelper.insertTriageEyeScan(triageEyeScan: triageEyeScan);
+  }
+
+  @override
+  Future<List<PostQuestionResponseModel>> getQuestionaireResponse() async {
+    List<PostQuestionResponseModel> response =
+        await triageDBHelper.getTriageQuestionnaire();
+    return response;
+  }
+
+  @override
+  Future<List<PostImagingSelectionModel>> getTriageEyeScanResponse() async {
+    List<PostImagingSelectionModel> response =
+        await triageDBHelper.getTriageEyeScan();
+    return response;
+  }
+
+  @override
+  Future<List<PostObservationsModel>> getVisionAcuityTumblingResponse() async {
+    List<PostObservationsModel> response =
+        await triageDBHelper.getTriageVisualAcuity();
+    return response;
   }
 
   @override
@@ -56,6 +125,6 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 }
 
-var triageLocalSource = Provider<TriageLocalSource>(
+var triageLocalSourceProvider = Provider<TriageLocalSource>(
   (ref) => TriageLocalSourceImpl(ref.watch(triageDBHelperProvider)),
 );

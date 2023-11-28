@@ -39,7 +39,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
       case 2:
         return const TriageEyeScanPage();
       default:
-        return Container();
+        return const TriageQuestionnairePage();
     }
   }
 

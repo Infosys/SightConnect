@@ -1,11 +1,14 @@
 import 'dart:math';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_answer_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider(
-  (ref) => TriageQuestionnaireProvider(),
+  (ref) => TriageQuestionnaireProvider(ref.watch(triageLocalSourceProvider)),
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
@@ -15,8 +18,9 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final List<Map<int, bool>> _questionnaireResponse;
   int _currentQuestionnairePageIndex = 0;
   List<String> allRemarks = ['', '', ''];
+  TriageLocalSource triageLocalSource;
 
-  TriageQuestionnaireProvider()
+  TriageQuestionnaireProvider(this.triageLocalSource)
       : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
@@ -68,6 +72,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
     calculateQuestionnaireUrgency(_selectedOptions);
     addQuestionnaireToReportPageList(_selectedOptions);
+    addtoFinalResponse(_selectedOptions);
     _currentQuestionnairePageIndex++;
     logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
@@ -118,5 +123,32 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   int getTriageQuestionnaireUrgency() {
     return _triageQuestionnaireUrgency;
+  }
+
+  List<PostQuestionResponseModel> _questionResponseList = [];
+
+  void addtoFinalResponse(selectedOptions) {
+    selectedOptions.forEach((key, value) {
+      _questionResponseList.add(PostQuestionResponseModel(
+        linkId: key,
+        answer: [
+          PostAnswerModel(
+            value: "Answer",
+            score: value ? 1 : 0,
+          )
+        ],
+      ));
+    });
+  }
+
+  getQuestionaireResponse() {
+    return _questionResponseList;
+  }
+
+  void saveQuestionaireResponseToDB() {
+    logger.f("Saving Questionnaire Response to DB");
+    triageLocalSource.saveTriageQuestionnaireLocally(
+        triageQuestionnaireResponse: getQuestionaireResponse());
+    notifyListeners();
   }
 }
