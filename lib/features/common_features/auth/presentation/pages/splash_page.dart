@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/patient_registration_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
@@ -48,21 +49,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       // }
 
       if (mounted) {
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
-        //   (route) => false,
-        // );
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => const OptometritianDashboardPage()),
-        //   (route) => false,
-        // );
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => const VisionTechnicianDashboardPage()),
+              builder: (context) => const PatientRegistrationPage()),
           (route) => false,
         );
       }
