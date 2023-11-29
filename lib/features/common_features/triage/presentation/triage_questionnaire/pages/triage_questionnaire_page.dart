@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/option_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
-import '../widgets/option_grid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
@@ -98,24 +97,33 @@ class TriageQuestionnairePage extends HookConsumerWidget {
 
                   return SingleChildScrollView(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          questionnaire?.description ?? "",
-                          style: applyFiraSansFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        OptionGrid(
-                          pageNumber: index,
+                        // Text(
+                        //   questionnaire?.description ?? "",
+                        //   style: applyRobotoFont(
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.w500,
+                        //   ),
+                        // ),
+                        OptionList(
                           questions: questionnaire?.questions ?? [],
-                        ),
-                        const SizedBox(height: AppSize.klheight),
-                        const SizedBox(
-                          height: AppSize.klheight,
+                          onPageChanged: (index) {
+                            int len = questionnaire?.questions?.length ?? 0;
+
+                            if (index == len - 1) {
+                              if (isLastPage) {
+                                pageIndex.value = 0;
+                              } else {
+                                pageIndex.value = pageIndex.value + 1;
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -125,45 +133,45 @@ class TriageQuestionnairePage extends HookConsumerWidget {
             );
           },
         ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
-          width: isLastPage
-              ? AppSize.width(context)
-              : AppSize.width(context) * 0.45,
-          child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-            ),
-            onPressed: !isButtonEnabled
-                ? null
-                : () {
-                    model.saveQuestionaireResponse();
-                    if (isLastPage) {
-                      ref.read(triageStepperProvider).goToNextStep();
-                      pageIndex.value = 0;
-                    } else {
-                      pageIndex.value = pageIndex.value + 1;
-                      pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn,
-                      );
-                    }
-                  },
-            child: Text(
-              isLastPage
-                  ? AppLocalizations.of(context)!.proceedButton
-                  : AppLocalizations.of(context)!.nextButton,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.white,
-              ),
-            ),
-          ),
-        ),
+        // bottomNavigationBar: Container(
+        //   padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+        //   width: isLastPage
+        //       ? AppSize.width(context)
+        //       : AppSize.width(context) * 0.45,
+        //   child: ElevatedButton(
+        //     style: ButtonStyle(
+        //       shape: MaterialStatePropertyAll(
+        //         RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(100),
+        //         ),
+        //       ),
+        //     ),
+        //     onPressed: !isButtonEnabled
+        //         ? null
+        //         : () {
+        //             model.saveQuestionaireResponse();
+        //             if (isLastPage) {
+        //               ref.read(triageStepperProvider).goToNextStep();
+        //               pageIndex.value = 0;
+        //             } else {
+        //               pageIndex.value = pageIndex.value + 1;
+        //               pageController.nextPage(
+        //                 duration: const Duration(milliseconds: 500),
+        //                 curve: Curves.easeIn,
+        //               );
+        //             }
+        //           },
+        //     child: Text(
+        //       isLastPage
+        //           ? AppLocalizations.of(context)!.proceedButton
+        //           : AppLocalizations.of(context)!.nextButton,
+        //       style: applyRobotoFont(
+        //         fontSize: 14,
+        //         color: AppColor.white,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }
