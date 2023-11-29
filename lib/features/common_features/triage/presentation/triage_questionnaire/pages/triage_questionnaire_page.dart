@@ -2,6 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_other_symptom_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/option_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -24,9 +26,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     var triageModel = ref.watch(triageProvider);
     var model = ref.watch(triageQuestionnaireProvider);
     var pageIndex = useState<int>(0);
-    var isLastPage = model.questionnaireSections.length - 1 == pageIndex.value;
-    var isButtonEnabled = model.selectedOptions.isNotEmpty &&
-        model.selectedOptions.containsValue(true);
+    model.selectedOptions.containsValue(true);
     ref
         .watch(triageQuestionnaireProvider)
         .getQuestionnaire(triageModel.questionnaireSections);
@@ -109,20 +109,29 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                         // ),
                         OptionList(
                           questions: questionnaire?.questions ?? [],
-                          onPageChanged: (index) {
-                            int len = questionnaire?.questions?.length ?? 0;
-
-                            if (index == len - 1) {
-                              if (isLastPage) {
-                                pageIndex.value = 0;
-                              } else {
-                                pageIndex.value = pageIndex.value + 1;
-                                pageController.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn,
-                                );
-                              }
+                          onPageChanged: () {
+                            model.saveQuestionaireResponse();
+                            if (pageIndex.value ==
+                                model.questionnaireSections.length - 1) {
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          fullscreenDialog: true,
+                                          builder: (_) =>
+                                              TriageQuestionnaireOtherSymptomPage()))
+                                  .then((value) => {
+                                        ref
+                                            .read(triageStepperProvider)
+                                            .goToNextStep()
+                                      });
+                              pageIndex.value = 0;
                             }
+                            pageIndex.value += 1;
+                            pageController.animateToPage(
+                              pageIndex.value,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
                           },
                         ),
                       ],

@@ -96,4 +96,7 @@ class AppImages {
   static const String addPatient = "assets/images/optometric_add_patient.svg";
 
   static const String q3 = "assets/images/q3.png";
+  static const String accessability = "assets/icons/accessability.svg";
+  static const String speaker = "assets/icons/speaker.svg";
+  static const String mic = "assets/icons/mic.svg";
 }

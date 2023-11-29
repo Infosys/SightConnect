@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../data/models/triage_assessment.dart';
 
 class OptionList extends HookConsumerWidget {
@@ -19,7 +15,7 @@ class OptionList extends HookConsumerWidget {
   });
 
   final List<Question> questions;
-  final Function(int) onPageChanged;
+  final VoidCallback onPageChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -75,7 +71,6 @@ class OptionList extends HookConsumerWidget {
             scrollDirection: Axis.horizontal,
             initialPage: questionIndex.value,
             onPageChanged: (index, reason) {
-              log("onPageChanged $index");
               questionIndex.value = index;
             },
           ),
@@ -96,9 +91,10 @@ class OptionList extends HookConsumerWidget {
               ),
               child: IconButton(
                 onPressed: () {
-                  if (questionIndex.value < questions.length - 1) {
-                    questionIndex.value = questionIndex.value + 1;
-                    onPageChanged(questionIndex.value);
+                  if (questionIndex.value > 0) {
+                    questionIndex.value = questionIndex.value - 1;
+                  } else {
+                    onPageChanged();
                   }
                 },
                 icon: const Icon(
@@ -123,7 +119,8 @@ class OptionList extends HookConsumerWidget {
                 onPressed: () {
                   if (questionIndex.value < questions.length - 1) {
                     questionIndex.value = questionIndex.value + 1;
-                    onPageChanged(questionIndex.value);
+                  } else {
+                    onPageChanged();
                   }
                 },
                 icon: const Icon(
