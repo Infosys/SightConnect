@@ -15,7 +15,7 @@
                 "code": 30000001,
                 "statement": "Yes",
                 "constraint": "assertion",
-                "defaultValue": "Yes",
+                "defaultValue": "",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -30,7 +30,7 @@
                 "code": 30000033,
                 "statement": "No",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "",
                 "mandatory": true,
                 "weight": 1,
                 "actionOn": [
@@ -52,9 +52,9 @@
             "questions": [
               {
                 "code": 30000002,
-                "statement": "I see halos or colored rings around lights",
+                "statement": "Do you see halos or colored rings around lights?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q1.png",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -69,7 +69,7 @@
                 "code": 30000003,
                 "statement": "My vision is blocked partly or completely with dark shapes",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q2.png",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -84,39 +84,39 @@
                 "code": 30000004,
                 "statement": "I see two images of an object",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q3.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000005,
-                "statement": "I have pain or discomfort when viewing bright light",
+                "statement": "Do you have pain or discomfort when viewing bright light?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q4.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000006,
-                "statement": "I see wavy lines or irregular shapes when viewing straight images",
+                "statement": "Do you see wavy lines or irregular shapes when viewing straight images?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q5.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000007,
-                "statement": "I see flashes and flickers when viewing objects",
+                "statement": "Do you see flashes and flickers when viewing objects?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q6.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000008,
-                "statement": "I see dark spots or shapes floating across",
+                "statement": "Do you see dark spots or shapes floating across?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q7.png",
                 "mandatory": true,
                 "weight": 2,
                 "actionOn": [
@@ -126,37 +126,7 @@
                     "answer": "Yes"
                   }
                 ]
-              },
-              {
-                "code": 30000009,
-                "statement": "Other symptoms",
-                "constraint": "assertion",
-                "defaultValue": "No",
-                "mandatory": true,
-                "weight": 1,
-                "actionOn": [
-                  {
-                    "operator": "EQUALS",
-                    "actionType": "EXIT_ALL_QUESTIONNAIRE",
-                    "answer": "Yes"
-                  }
-                ]
-              },
-              {
-                "code": 30000010,
-                "statement": "None of these",
-                "constraint": "assertion",
-                "defaultValue": "No",
-                "mandatory": true,
-                "weight": 1,
-                "actionOn": [
-                  {
-                    "operator": "EQUALS",
-                    "actionType": "EXIT_ALL_QUESTIONNAIRE",
-                    "answer": "Yes"
-                  }
-                ]
-              }
+              }   
             ]
           }
         ]
@@ -168,9 +138,9 @@
             "questions": [
               {
                 "code": 30000011,
-                "statement": "Tears flow out of my eyes often",
+                "statement": "Do you have blocked side vision that prevents you from viewing or reading properly?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q8.png",
                 "mandatory": true,
                 "weight": 2,
                 "actionOn": [
@@ -183,9 +153,9 @@
               },
               {
                 "code": 30000012,
-                "statement": "White part of my eye looks red with pain itching or swollen eyes",
+                "statement": "Does tears flow out of your eyes often?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q9.png",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -198,9 +168,9 @@
               },
               {
                 "code": 30000013,
-                "statement": "My eyes produce sticky yellow or green liquid with eye irritation",
+                "statement": "Does the white part of your eye look red with pain itching or swelling in eyes?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q10.png",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -213,9 +183,9 @@
               },
               {
                 "code": 30000014,
-                "statement": "I have white spots on the black part of my eye",
+                "statement": "Do your eyes produce sticky yellow or green liquid with eye irritation?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q11.png",
                 "mandatory": true,
                 "weight": 3,
                 "actionOn": [
@@ -228,92 +198,77 @@
               },
               {
                 "code": 30000015,
-                "statement": "I have irritation in eyes with itching burning or pain",
+                "statement": "Do you have white spots on the black part of your eye?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q12.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000016,
-                "statement": "Particle of dust, wood, glass, metal or an insect got into my eye",
+                "statement": "Do you have irritation in eyes with itching burning or pain?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q13.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000017,
-                "statement": "My eyelids twitch uncontrollably with jerky contractions",
+                "statement": "Did particles of dust, wood, glass, metal or an insect get into your eye?s",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q14.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000018,
-                "statement": "My eyes close and open uncontrollably and rapidly",
+                "statement": "Do your eyelids twitch uncontrollably with jerky contractions?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q15.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000019,
-                "statement": "My eyes turn and point in different directions",
+                "statement": "Do your eyes close and open uncontrollably and rapidly?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q16.png",
                 "mandatory": true,
                 "weight": 3
               },
               {
                 "code": 30000020,
-                "statement": "My eyes involuntarily squeeze and shut tightly",
+                "statement": "Do your eyes turn and point in different directions?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q17.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000021,
-                "statement": "My eyelids hang or droop at a lower level",
+                "statement": "Do your eyes appear wide open and bulged out?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q18.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000022,
-                "statement": "My eyes appear wide open and bulged out",
+                "statement": "Do your eyelids involuntarily hang or droop at a lower level?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q19.png",
                 "mandatory": true,
                 "weight": 2
               },
               {
                 "code": 30000023,
-                "statement": "My eyes are of different sizes",
+                "statement": "Are your eyes of different sizes?",
                 "constraint": "assertion",
-                "defaultValue": "No",
+                "defaultValue": "assets/images/q20.png",
                 "mandatory": true,
                 "weight": 2
-              },
-              {
-                "code": 30000024,
-                "statement": "Other symptoms",
-                "constraint": "assertion",
-                "defaultValue": "No",
-                "mandatory": true,
-                "weight": 1
-              },
-              {
-                "code": 30000025,
-                "statement": "None of these",
-                "constraint": "assertion",
-                "defaultValue": "No",
-                "mandatory": true,
-                "weight": 1
               }
+            
             ]
           }
         ]

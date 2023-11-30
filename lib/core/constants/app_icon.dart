@@ -57,5 +57,7 @@ class AppIcon {
 
   //dashboard
 
-  static const String optometritianAddPatient = "assets/icons/optometritian_start_assessment.svg";
+  static const String optometritianAddPatient =
+      "assets/icons/optometritian_start_assessment.svg";
+  static const String question = "assets/images/question.svg";
 }

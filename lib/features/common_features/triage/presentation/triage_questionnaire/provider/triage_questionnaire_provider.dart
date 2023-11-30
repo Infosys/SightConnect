@@ -14,7 +14,6 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
   int _currentQuestionnairePageIndex = 0;
-  List<String> allRemarks = ['', '', ''];
 
   TriageQuestionnaireProvider()
       : _questionnaireRemarks = '',
@@ -22,45 +21,26 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireSections = [],
         _questionnaireResponse = [];
 
-  List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
+
+  set questionnaireRemarks(String value) {
+    _questionnaireRemarks = value;
+    notifyListeners();
+  }
+
   Map<int, bool> get selectedOptions => _selectedOptions;
   List<QuestionnaireSection> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void setQuestionnaireRemarks(String remarks, currentPageIndex) {
-    _questionnaireRemarks = _questionnaireRemarks + remarks;
-    allRemarks.insert(currentPageIndex, remarks);
-    notifyListeners();
-  }
-
   void getQuestionnaire(List<QuestionnaireSection> data) async {
     _questionnaireSections = data;
   }
-
-  // void setQuestionnaireRemarks(String remarks) {
-  //   _questionnaireRemarks = remarks;
-  //   allRemarks.add(remarks);
-  //   notifyListeners();
-  // }
 
   void addQuestionnaireAnswer(int questionCode, bool answer) {
     _selectedOptions[questionCode] = answer;
     notifyListeners();
     logger.d("Added Options: $_selectedOptions");
-  }
-
-  void removeQuestionnaireAnswer(int questionCode) {
-    _selectedOptions.remove(questionCode);
-    notifyListeners();
-    logger.d("Removed Options: $_selectedOptions");
-  }
-
-  void removeAllQuestionnaireAnswer() {
-    _selectedOptions.clear();
-    notifyListeners();
-    logger.d("Removed Options: $_selectedOptions");
   }
 
   void saveQuestionaireResponse() {

@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/models/triage_assessment.dart';
 
@@ -20,6 +22,7 @@ class OptionList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var questionIndex = useState<int>(0);
+    var model = ref.watch(triageQuestionnaireProvider);
 
     return Column(
       children: [
@@ -51,11 +54,35 @@ class OptionList extends HookConsumerWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          AppImages.q3,
-                        ),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: question.defaultValue != null
+                                ? Image.asset(
+                                    question.defaultValue!,
+                                  )
+                                : SizedBox(),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: EdgeInsets.all(AppSize.kmpadding * 2),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SvgPicture.asset(
+                                    AppImages.mic,
+                                  ),
+                                  SvgPicture.asset(
+                                    AppImages.speaker,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -91,8 +118,8 @@ class OptionList extends HookConsumerWidget {
               ),
               child: IconButton(
                 onPressed: () {
-                  if (questionIndex.value > 0) {
-                    questionIndex.value = questionIndex.value - 1;
+                  if (questionIndex.value < questions.length - 1) {
+                    questionIndex.value = questionIndex.value + 1;
                   } else {
                     onPageChanged();
                   }
@@ -118,6 +145,8 @@ class OptionList extends HookConsumerWidget {
               child: IconButton(
                 onPressed: () {
                   if (questionIndex.value < questions.length - 1) {
+                    model.addQuestionnaireAnswer(
+                        questions[questionIndex.value].code!, true);
                     questionIndex.value = questionIndex.value + 1;
                   } else {
                     onPageChanged();

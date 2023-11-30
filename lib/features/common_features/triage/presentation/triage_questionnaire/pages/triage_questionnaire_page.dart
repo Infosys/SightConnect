@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_other_symptom_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/custom_pop_up.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/option_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -96,46 +97,51 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       model.questionnaireSections[index].questionnaire?.first;
 
                   return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Text(
-                        //   questionnaire?.description ?? "",
-                        //   style: applyRobotoFont(
-                        //     fontSize: 16,
-                        //     fontWeight: FontWeight.w500,
-                        //   ),
-                        // ),
-                        OptionList(
-                          questions: questionnaire?.questions ?? [],
-                          onPageChanged: () {
-                            model.saveQuestionaireResponse();
-                            if (pageIndex.value ==
-                                model.questionnaireSections.length - 1) {
-                              Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          fullscreenDialog: true,
-                                          builder: (_) =>
-                                              TriageQuestionnaireOtherSymptomPage()))
-                                  .then((value) => {
-                                        ref
-                                            .read(triageStepperProvider)
-                                            .goToNextStep()
-                                      });
-                              pageIndex.value = 0;
-                            }
-                            pageIndex.value += 1;
-                            pageController.animateToPage(
-                              pageIndex.value,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeIn,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                    child: index == 0
+                        ? CustomPopUp(
+                            questionCode: questionnaire?.questions?.first.code,
+                            onPageChanged: () {
+                              model.saveQuestionaireResponse();
+                              pageIndex.value += 1;
+                              pageController.nextPage(
+                                duration: const Duration(milliseconds: 1),
+                                curve: Curves.easeIn,
+                              );
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              OptionList(
+                                questions: questionnaire?.questions ?? [],
+                                onPageChanged: () {
+                                  model.saveQuestionaireResponse();
+                                  if (pageIndex.value ==
+                                      model.questionnaireSections.length - 1) {
+                                    Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                fullscreenDialog: true,
+                                                builder: (_) =>
+                                                    TriageQuestionnaireOtherSymptomPage()))
+                                        .then((value) => {
+                                              ref
+                                                  .read(triageStepperProvider)
+                                                  .goToNextStep()
+                                            });
+                                    pageIndex.value = 0;
+                                  }
+                                  pageIndex.value += 1;
+                                  pageController.animateToPage(
+                                    pageIndex.value,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeIn,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                   );
                 },
               ),
