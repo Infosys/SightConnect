@@ -1,12 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/data/models/related_party_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/related_party_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/source/local/fake_data_source.dart';
 
 class MyConnectionsList extends StatelessWidget {
   const MyConnectionsList({super.key, required this.connectionsList});
@@ -14,8 +12,6 @@ class MyConnectionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data = connectionList;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

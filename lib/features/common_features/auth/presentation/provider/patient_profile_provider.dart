@@ -1,27 +1,24 @@
-import 'package:eye_care_for_all/features/patient/patient_profile/data/models/patient_response_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_profile_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../data/models/patient_response_model.dart';
 
 var patientProfileProvider = ChangeNotifierProvider(
   (ref) => PatientProfileProvider(ref),
 );
 
 class PatientProfileProvider extends ChangeNotifier {
-
   Ref ref;
 
   bool _isLoading = false;
-  
-  
-  PatientResponseModel _patient = PatientResponseModel();
 
-  PatientProfileProvider(this.ref){
-   
-    if(isPOC) {
+  PatientResponseModel _patient = const PatientResponseModel();
+
+  PatientProfileProvider(this.ref) {
+    if (isPOC) {
       _patient = PatientResponseModel.fromJson({
-        
         "intent": "PROFILE_SHARE",
         "metaData": {
           "hipId": null,
@@ -87,34 +84,28 @@ class PatientProfileProvider extends ChangeNotifier {
             "medicalRecords": null
           }
         }
-
       });
-    }
-    else {
-       getPatientProfile();
+    } else {
+      getPatientProfile();
     }
   }
 
   bool get isLoading => _isLoading;
-
-  set isLoading(bool value) => _isLoading = value;
-
   PatientResponseModel get patient => _patient;
-
-  set patient(PatientResponseModel value) => _patient = value;
 
   Future<void> getPatientProfile() async {
     _isLoading = true;
     notifyListeners();
     try {
-      var response = await ref.read(patientProfileRepositoryProvider).getPatientDetails(1204);
+      var response = await ref
+          .read(patientAuthenticationRepositoryProvider)
+          .getPatientProfile(1204);
       _patient = response;
-    } catch(e) {
-      throw e;
+    } catch (e) {
+      rethrow;
     }
-    
+
     _isLoading = false;
     notifyListeners();
   }
-
 }

@@ -1,24 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
-var onboardingRemoteSourceProvider = Provider<OnboardingRemoteSource>((ref) {
-  return OnboardingRemoteSourceImpl(
-    ref.read(dioProvider)
-  );
+var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
+  return PatientAuthRemoteSourceImpl(ref.read(dioProvider));
 });
 
-abstract class OnboardingRemoteSource {
+abstract class PatientAuthRemoteSource {
   Future<PatientModel> onboardPatient(PatientModel patientDTO);
+  Future<PatientResponseModel> getPatientProfile(int patientId);
 }
 
-class OnboardingRemoteSourceImpl implements OnboardingRemoteSource {
+class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
+  final Dio _dio;
 
-  Dio _dio;
-
-  OnboardingRemoteSourceImpl(this._dio);
+  PatientAuthRemoteSourceImpl(this._dio);
 
   @override
   Future<PatientModel> onboardPatient(PatientModel patientDTO) async {
@@ -30,6 +28,17 @@ class OnboardingRemoteSourceImpl implements OnboardingRemoteSource {
       return PatientModel.fromJson(response.data);
     } else {
       throw Exception("Failed to onboard patient");
+    }
+  }
+
+  @override
+  Future<PatientResponseModel> getPatientProfile(int patientId) async {
+    var endpoint = '/api/patients/extended/$patientId';
+    try {
+      final response = await _dio.get(endpoint);
+      return PatientResponseModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
     }
   }
 }

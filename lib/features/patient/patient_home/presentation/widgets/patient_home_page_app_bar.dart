@@ -39,12 +39,12 @@ class PatientHomePageAppBar extends StatelessWidget
         InkWell(
           customBorder: const CircleBorder(),
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => const MemberSelectionPopUp(),
-              barrierDismissible: false,
-              barrierColor: AppColor.blackOpacity,
-            );
+            // showDialog(
+            //   context: context,
+            //   builder: (context) => const MemberSelectionPopUp(),
+            //   barrierDismissible: false,
+            //   barrierColor: AppColor.blackOpacity,
+            // );
           },
           child: Stack(
             alignment: Alignment.center,

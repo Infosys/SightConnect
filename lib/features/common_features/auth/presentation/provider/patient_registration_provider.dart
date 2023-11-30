@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/enums/gender.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/address_model.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/repositories/onboarding_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -98,28 +98,32 @@ class PatientRegistrationProvider extends ChangeNotifier {
       dayOfBirth: DateFormat('dd').format(_dateOfBirth),
       monthOfBirth: DateFormat('MM').format(_dateOfBirth),
       yearOfBirth: DateFormat('yyyy').format(_dateOfBirth),
-      gender: _gender == "MALE" ? Gender.MALE : _gender == "FEMALE" ? Gender.FEMALE : Gender.OTHER,
+      gender: _gender == "MALE"
+          ? Gender.MALE
+          : _gender == "FEMALE"
+              ? Gender.FEMALE
+              : Gender.OTHER,
       profilePhoto: AppImages.raghavi,
       mobile: _mobileNumber,
       email: "${_name.replaceAll(" ", "")}@gmail.com",
       address: [
         AddressModel(
-          line: "Line 1",
-          ward: "Ward 1",
-          town: "Madhurawada",
-          village: "Madhurawada",
-          district: "Visakhapatnam",
-          state: "Andhra Pradesh",
-          pinCode: _pincode,
-          primary: true
-        )
+            line: "Line 1",
+            ward: "Ward 1",
+            town: "Madhurawada",
+            village: "Madhurawada",
+            district: "Visakhapatnam",
+            state: "Andhra Pradesh",
+            pinCode: _pincode,
+            primary: true)
       ],
     );
-    try{
-      var response = await ref.read(onboardingRepositoryProvider).onboardPatient(patient);
+    try {
+      var response = await ref
+          .read(patientAuthenticationRepositoryProvider)
+          .onboardPatient(patient);
       logger.d(response);
-    }
-    catch(e) {
+    } catch (e) {
       logger.d(e);
     }
     _isLoading = false;

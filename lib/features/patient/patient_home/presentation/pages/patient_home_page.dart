@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/campaigns_list.dart';
@@ -20,7 +21,7 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(patientHomeProvider);
+    var model = ref.watch(patientProfileProvider);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const PatientHomePageAppBar(),
@@ -28,16 +29,19 @@ class PatientHomePage extends ConsumerWidget {
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 1));
         },
-        child: model.isLoading ? const CircularProgressIndicator() : SingleChildScrollView(
+        child: SingleChildScrollView(
           controller: ref.read(patientDashboardProvider).scrollController,
-          child:  Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const PatientHeader(),
               const SizedBox(height: AppSize.kmheight),
               const PriorityNotificationList(),
               const SizedBox(height: AppSize.kmheight),
-              MyConnectionsList(connectionsList: model.patient.profile!.patient!.relatedParty ?? [],),
+              MyConnectionsList(
+                connectionsList:
+                    model.patient.profile!.patient!.relatedParty ?? [],
+              ),
               const SizedBox(height: AppSize.kmheight),
               const RecentServicesCardList(),
               const SizedBox(height: AppSize.kmheight),

@@ -20,6 +20,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
 
   static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: false,
       primarySwatch: MaterialColor(
         const Color(0xff286DF6).value,
         const {
@@ -127,6 +128,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
 
   static ThemeData getDarkTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: false,
       primarySwatch: MaterialColor(
         const Color(0xff296DF6).value,
         const {

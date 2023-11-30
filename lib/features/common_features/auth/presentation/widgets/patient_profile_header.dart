@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/data/models/patient_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +34,10 @@ class ProfileHeader extends StatelessWidget {
           SizedBox(height: AppSize.height(context) * 0.11),
           ListTile(
             leading: ClipRRect(
-              borderRadius:
-              
-               BorderRadius.circular(130),
-              child:  Image.asset(
-                patient.profile!.patient!.profilePhoto ?? "assets/images/user.png",
+              borderRadius: BorderRadius.circular(130),
+              child: Image.asset(
+                patient.profile!.patient!.profilePhoto ??
+                    "assets/images/user.png",
                 fit: BoxFit.cover,
               ),
             ),
