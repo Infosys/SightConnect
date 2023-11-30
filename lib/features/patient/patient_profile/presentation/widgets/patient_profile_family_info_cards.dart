@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/models/related_party_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
-  const PatientFamilyDetails({super.key});
+  const PatientFamilyDetails({super.key, required this.relations});
+  final List<RelatedPartyModel> relations;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class PatientFamilyDetails extends StatelessWidget {
           const SizedBox(
             height: AppSize.ksheight,
           ),
-          ...data
+          ...relations
               .map(
                 (data) => ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
@@ -52,18 +54,20 @@ class PatientFamilyDetails extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundColor: AppColor.black,
                     child: Image.asset(
-                      data["image"],
+                      data.profilePicture ?? "assets/images/user.png",
                     ),
                   ),
                   title: Text(
-                    data["name"],
+                    data.name ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   subtitle: Text(
-                    data["about"],
+                    data.parentPatientId != null
+                        ? "${data.relation}"
+                        : "Self, ${data.age} years",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
@@ -76,11 +80,11 @@ class PatientFamilyDetails extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        data["completion"],
+                        "Profile completion 100%",
                         softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 12,
-                          color: data['color'],
+                          color: AppColor.green,
                         ),
                       ),
                       IconButton(

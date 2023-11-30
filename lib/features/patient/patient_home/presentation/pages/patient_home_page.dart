@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/campaigns_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/good_to_know_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/eye_camps_card_list.dart';
@@ -19,6 +20,7 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(patientHomeProvider);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const PatientHomePageAppBar(),
@@ -26,30 +28,30 @@ class PatientHomePage extends ConsumerWidget {
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 1));
         },
-        child: SingleChildScrollView(
+        child: model.isLoading ? const CircularProgressIndicator() : SingleChildScrollView(
           controller: ref.read(patientDashboardProvider).scrollController,
-          child: const Column(
+          child:  Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              PatientHeader(),
-              SizedBox(height: AppSize.kmheight),
-              PriorityNotificationList(),
-              SizedBox(height: AppSize.kmheight),
-              MyConnectionsList(),
-              SizedBox(height: AppSize.kmheight),
-              RecentServicesCardList(),
-              SizedBox(height: AppSize.kmheight),
-              NearbyVisionCentersList(),
-              SizedBox(height: AppSize.kmheight),
-              HelplineCard(),
-              SizedBox(height: AppSize.kmheight),
-              InviteCard(),
-              EyeCampsCardList(),
-              SizedBox(height: AppSize.kmheight),
-              GoodToKnowCardList(),
-              SizedBox(height: AppSize.kmheight),
-              CampaginsList(),
-              SizedBox(height: AppSize.klheight * 4),
+              const PatientHeader(),
+              const SizedBox(height: AppSize.kmheight),
+              const PriorityNotificationList(),
+              const SizedBox(height: AppSize.kmheight),
+              MyConnectionsList(connectionsList: model.patient.profile!.patient!.relatedParty ?? [],),
+              const SizedBox(height: AppSize.kmheight),
+              const RecentServicesCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const NearbyVisionCentersList(),
+              const SizedBox(height: AppSize.kmheight),
+              const HelplineCard(),
+              const SizedBox(height: AppSize.kmheight),
+              const InviteCard(),
+              const EyeCampsCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const GoodToKnowCardList(),
+              const SizedBox(height: AppSize.kmheight),
+              const CampaginsList(),
+              const SizedBox(height: AppSize.klheight * 4),
             ],
           ),
         ),

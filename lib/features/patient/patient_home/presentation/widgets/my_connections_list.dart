@@ -1,13 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/models/related_party_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/source/fake_data_source.dart';
+import '../../data/source/local/fake_data_source.dart';
 
 class MyConnectionsList extends StatelessWidget {
-  const MyConnectionsList({super.key});
+  const MyConnectionsList({super.key, required this.connectionsList});
+  final List<RelatedPartyModel> connectionsList;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +51,13 @@ class MyConnectionsList extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
-                  ...data
+                  ...connectionsList
                       .asMap()
                       .entries
                       .map(
                         (e) => MyConnectionsCard(
-                          doctor: e.value,
+                          image: e.value.profilePicture ?? AppImages.raghavi,
+                          name: e.value.name ?? "",
                           index: e.key,
                         ),
                       )
