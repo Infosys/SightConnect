@@ -1,14 +1,15 @@
 import 'package:eye_care_for_all/features/patient/patient_profile/data/models/patient_response_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/data/repositories/patient_dashboard_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_profile_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var patientHomeProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => PatientHomeProvider(ref),
+var patientProfileProvider = ChangeNotifierProvider(
+  (ref) => PatientProfileProvider(ref),
 );
 
-class PatientHomeProvider extends ChangeNotifier {
+class PatientProfileProvider extends ChangeNotifier {
+
   Ref ref;
 
   bool _isLoading = false;
@@ -16,7 +17,8 @@ class PatientHomeProvider extends ChangeNotifier {
   
   PatientResponseModel _patient = PatientResponseModel();
 
-  PatientHomeProvider(this.ref){
+  PatientProfileProvider(this.ref){
+   
     if(isPOC) {
       _patient = PatientResponseModel.fromJson({
         
@@ -87,10 +89,10 @@ class PatientHomeProvider extends ChangeNotifier {
         }
 
       });
-    } else {
-      getPatientProfile();
     }
-    
+    else {
+       getPatientProfile();
+    }
   }
 
   bool get isLoading => _isLoading;
@@ -105,7 +107,7 @@ class PatientHomeProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      var response = await ref.read(patientDashboardRepositoryProvider).getPatientDashboard(1204);
+      var response = await ref.read(patientProfileRepositoryProvider).getPatientDetails(1204);
       _patient = response;
     } catch(e) {
       throw e;

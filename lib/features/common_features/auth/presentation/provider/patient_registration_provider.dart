@@ -1,12 +1,20 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/enums/gender.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/address_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/repositories/onboarding_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 final patientRegistrationProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => PatientRegistrationProvider(),
+  (ref) => PatientRegistrationProvider(ref),
 );
 
 class PatientRegistrationProvider extends ChangeNotifier {
+  Ref ref;
+
   String _name;
   String _gender;
   DateTime _dateOfBirth;
@@ -14,10 +22,10 @@ class PatientRegistrationProvider extends ChangeNotifier {
   String _pincode;
   bool _isLoading;
 
-  PatientRegistrationProvider()
+  PatientRegistrationProvider(this.ref)
       : _isLoading = false,
         _name = "",
-        _gender = "",
+        _gender = "MALE",
         _dateOfBirth = DateTime.now(),
         _mobileNumber = "",
         _pincode = "";
@@ -85,7 +93,35 @@ class PatientRegistrationProvider extends ChangeNotifier {
   Future<void> registerPatient() async {
     _isLoading = true;
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 2));
+    var patient = PatientModel(
+      name: _name,
+      dayOfBirth: DateFormat('dd').format(_dateOfBirth),
+      monthOfBirth: DateFormat('MM').format(_dateOfBirth),
+      yearOfBirth: DateFormat('yyyy').format(_dateOfBirth),
+      gender: _gender == "MALE" ? Gender.MALE : _gender == "FEMALE" ? Gender.FEMALE : Gender.OTHER,
+      profilePhoto: AppImages.raghavi,
+      mobile: _mobileNumber,
+      email: "${_name.replaceAll(" ", "")}@gmail.com",
+      address: [
+        AddressModel(
+          line: "Line 1",
+          ward: "Ward 1",
+          town: "Madhurawada",
+          village: "Madhurawada",
+          district: "Visakhapatnam",
+          state: "Andhra Pradesh",
+          pinCode: _pincode,
+          primary: true
+        )
+      ],
+    );
+    try{
+      var response = await ref.read(onboardingRepositoryProvider).onboardPatient(patient);
+      logger.d(response);
+    }
+    catch(e) {
+      logger.d(e);
+    }
     _isLoading = false;
     notifyListeners();
     logger.d({

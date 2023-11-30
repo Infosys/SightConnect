@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/source/fake_data_source.dart';
+import '../../data/source/local/fake_data_source.dart';
 
 class NearbyVisionCentersList extends StatelessWidget {
   const NearbyVisionCentersList({super.key});

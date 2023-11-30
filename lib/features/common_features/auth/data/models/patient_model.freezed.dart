@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'patient_DTO.dart';
+part of 'patient_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,16 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PatientDTO _$PatientDTOFromJson(Map<String, dynamic> json) {
-  return _PatientDTO.fromJson(json);
+PatientModel _$PatientModelFromJson(Map<String, dynamic> json) {
+  return _PatientModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PatientDTO {
+mixin _$PatientModel {
   String? get counterId => throw _privateConstructorUsedError;
   String? get hprID => throw _privateConstructorUsedError;
   String? get hipCode => throw _privateConstructorUsedError;
-  LocationDTO? get location => throw _privateConstructorUsedError;
+  LocationModel? get location => throw _privateConstructorUsedError;
   String? get abhaId => throw _privateConstructorUsedError;
   String? get abhaAddress => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
@@ -32,30 +32,30 @@ mixin _$PatientDTO {
   String? get email => throw _privateConstructorUsedError;
   String? get profilePhoto => throw _privateConstructorUsedError;
   String? get yearOfBirth => throw _privateConstructorUsedError;
-  double? get monthOfBirth => throw _privateConstructorUsedError;
-  double? get dayOfBirth => throw _privateConstructorUsedError;
+  String? get monthOfBirth => throw _privateConstructorUsedError;
+  String? get dayOfBirth => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
   String? get parentPatientId => throw _privateConstructorUsedError;
   Relationship? get relationship => throw _privateConstructorUsedError;
-  List<AddressDTO>? get address => throw _privateConstructorUsedError;
+  List<AddressModel>? get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PatientDTOCopyWith<PatientDTO> get copyWith =>
+  $PatientModelCopyWith<PatientModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PatientDTOCopyWith<$Res> {
-  factory $PatientDTOCopyWith(
-          PatientDTO value, $Res Function(PatientDTO) then) =
-      _$PatientDTOCopyWithImpl<$Res, PatientDTO>;
+abstract class $PatientModelCopyWith<$Res> {
+  factory $PatientModelCopyWith(
+          PatientModel value, $Res Function(PatientModel) then) =
+      _$PatientModelCopyWithImpl<$Res, PatientModel>;
   @useResult
   $Res call(
       {String? counterId,
       String? hprID,
       String? hipCode,
-      LocationDTO? location,
+      LocationModel? location,
       String? abhaId,
       String? abhaAddress,
       String? name,
@@ -64,20 +64,20 @@ abstract class $PatientDTOCopyWith<$Res> {
       String? email,
       String? profilePhoto,
       String? yearOfBirth,
-      double? monthOfBirth,
-      double? dayOfBirth,
+      String? monthOfBirth,
+      String? dayOfBirth,
       int? age,
       String? parentPatientId,
       Relationship? relationship,
-      List<AddressDTO>? address});
+      List<AddressModel>? address});
 
-  $LocationDTOCopyWith<$Res>? get location;
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
-class _$PatientDTOCopyWithImpl<$Res, $Val extends PatientDTO>
-    implements $PatientDTOCopyWith<$Res> {
-  _$PatientDTOCopyWithImpl(this._value, this._then);
+class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
+    implements $PatientModelCopyWith<$Res> {
+  _$PatientModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -122,7 +122,7 @@ class _$PatientDTOCopyWithImpl<$Res, $Val extends PatientDTO>
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as LocationDTO?,
+              as LocationModel?,
       abhaId: freezed == abhaId
           ? _value.abhaId
           : abhaId // ignore: cast_nullable_to_non_nullable
@@ -158,11 +158,11 @@ class _$PatientDTOCopyWithImpl<$Res, $Val extends PatientDTO>
       monthOfBirth: freezed == monthOfBirth
           ? _value.monthOfBirth
           : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       dayOfBirth: freezed == dayOfBirth
           ? _value.dayOfBirth
           : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -178,36 +178,36 @@ class _$PatientDTOCopyWithImpl<$Res, $Val extends PatientDTO>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as List<AddressDTO>?,
+              as List<AddressModel>?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationDTOCopyWith<$Res>? get location {
+  $LocationModelCopyWith<$Res>? get location {
     if (_value.location == null) {
       return null;
     }
 
-    return $LocationDTOCopyWith<$Res>(_value.location!, (value) {
+    return $LocationModelCopyWith<$Res>(_value.location!, (value) {
       return _then(_value.copyWith(location: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_PatientDTOCopyWith<$Res>
-    implements $PatientDTOCopyWith<$Res> {
-  factory _$$_PatientDTOCopyWith(
-          _$_PatientDTO value, $Res Function(_$_PatientDTO) then) =
-      __$$_PatientDTOCopyWithImpl<$Res>;
+abstract class _$$_PatientModelCopyWith<$Res>
+    implements $PatientModelCopyWith<$Res> {
+  factory _$$_PatientModelCopyWith(
+          _$_PatientModel value, $Res Function(_$_PatientModel) then) =
+      __$$_PatientModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? counterId,
       String? hprID,
       String? hipCode,
-      LocationDTO? location,
+      LocationModel? location,
       String? abhaId,
       String? abhaAddress,
       String? name,
@@ -216,23 +216,23 @@ abstract class _$$_PatientDTOCopyWith<$Res>
       String? email,
       String? profilePhoto,
       String? yearOfBirth,
-      double? monthOfBirth,
-      double? dayOfBirth,
+      String? monthOfBirth,
+      String? dayOfBirth,
       int? age,
       String? parentPatientId,
       Relationship? relationship,
-      List<AddressDTO>? address});
+      List<AddressModel>? address});
 
   @override
-  $LocationDTOCopyWith<$Res>? get location;
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
-class __$$_PatientDTOCopyWithImpl<$Res>
-    extends _$PatientDTOCopyWithImpl<$Res, _$_PatientDTO>
-    implements _$$_PatientDTOCopyWith<$Res> {
-  __$$_PatientDTOCopyWithImpl(
-      _$_PatientDTO _value, $Res Function(_$_PatientDTO) _then)
+class __$$_PatientModelCopyWithImpl<$Res>
+    extends _$PatientModelCopyWithImpl<$Res, _$_PatientModel>
+    implements _$$_PatientModelCopyWith<$Res> {
+  __$$_PatientModelCopyWithImpl(
+      _$_PatientModel _value, $Res Function(_$_PatientModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -257,7 +257,7 @@ class __$$_PatientDTOCopyWithImpl<$Res>
     Object? relationship = freezed,
     Object? address = freezed,
   }) {
-    return _then(_$_PatientDTO(
+    return _then(_$_PatientModel(
       counterId: freezed == counterId
           ? _value.counterId
           : counterId // ignore: cast_nullable_to_non_nullable
@@ -273,7 +273,7 @@ class __$$_PatientDTOCopyWithImpl<$Res>
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as LocationDTO?,
+              as LocationModel?,
       abhaId: freezed == abhaId
           ? _value.abhaId
           : abhaId // ignore: cast_nullable_to_non_nullable
@@ -309,11 +309,11 @@ class __$$_PatientDTOCopyWithImpl<$Res>
       monthOfBirth: freezed == monthOfBirth
           ? _value.monthOfBirth
           : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       dayOfBirth: freezed == dayOfBirth
           ? _value.dayOfBirth
           : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -329,15 +329,15 @@ class __$$_PatientDTOCopyWithImpl<$Res>
       address: freezed == address
           ? _value._address
           : address // ignore: cast_nullable_to_non_nullable
-              as List<AddressDTO>?,
+              as List<AddressModel>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatientDTO implements _PatientDTO {
-  const _$_PatientDTO(
+class _$_PatientModel implements _PatientModel {
+  const _$_PatientModel(
       {this.counterId,
       this.hprID,
       this.hipCode,
@@ -355,11 +355,11 @@ class _$_PatientDTO implements _PatientDTO {
       this.age,
       this.parentPatientId,
       this.relationship,
-      final List<AddressDTO>? address})
+      final List<AddressModel>? address})
       : _address = address;
 
-  factory _$_PatientDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_PatientDTOFromJson(json);
+  factory _$_PatientModel.fromJson(Map<String, dynamic> json) =>
+      _$$_PatientModelFromJson(json);
 
   @override
   final String? counterId;
@@ -368,7 +368,7 @@ class _$_PatientDTO implements _PatientDTO {
   @override
   final String? hipCode;
   @override
-  final LocationDTO? location;
+  final LocationModel? location;
   @override
   final String? abhaId;
   @override
@@ -386,18 +386,18 @@ class _$_PatientDTO implements _PatientDTO {
   @override
   final String? yearOfBirth;
   @override
-  final double? monthOfBirth;
+  final String? monthOfBirth;
   @override
-  final double? dayOfBirth;
+  final String? dayOfBirth;
   @override
   final int? age;
   @override
   final String? parentPatientId;
   @override
   final Relationship? relationship;
-  final List<AddressDTO>? _address;
+  final List<AddressModel>? _address;
   @override
-  List<AddressDTO>? get address {
+  List<AddressModel>? get address {
     final value = _address;
     if (value == null) return null;
     if (_address is EqualUnmodifiableListView) return _address;
@@ -407,14 +407,14 @@ class _$_PatientDTO implements _PatientDTO {
 
   @override
   String toString() {
-    return 'PatientDTO(counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, name: $name, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
+    return 'PatientModel(counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, name: $name, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatientDTO &&
+            other is _$_PatientModel &&
             (identical(other.counterId, counterId) ||
                 other.counterId == counterId) &&
             (identical(other.hprID, hprID) || other.hprID == hprID) &&
@@ -470,23 +470,23 @@ class _$_PatientDTO implements _PatientDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatientDTOCopyWith<_$_PatientDTO> get copyWith =>
-      __$$_PatientDTOCopyWithImpl<_$_PatientDTO>(this, _$identity);
+  _$$_PatientModelCopyWith<_$_PatientModel> get copyWith =>
+      __$$_PatientModelCopyWithImpl<_$_PatientModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatientDTOToJson(
+    return _$$_PatientModelToJson(
       this,
     );
   }
 }
 
-abstract class _PatientDTO implements PatientDTO {
-  const factory _PatientDTO(
+abstract class _PatientModel implements PatientModel {
+  const factory _PatientModel(
       {final String? counterId,
       final String? hprID,
       final String? hipCode,
-      final LocationDTO? location,
+      final LocationModel? location,
       final String? abhaId,
       final String? abhaAddress,
       final String? name,
@@ -495,15 +495,15 @@ abstract class _PatientDTO implements PatientDTO {
       final String? email,
       final String? profilePhoto,
       final String? yearOfBirth,
-      final double? monthOfBirth,
-      final double? dayOfBirth,
+      final String? monthOfBirth,
+      final String? dayOfBirth,
       final int? age,
       final String? parentPatientId,
       final Relationship? relationship,
-      final List<AddressDTO>? address}) = _$_PatientDTO;
+      final List<AddressModel>? address}) = _$_PatientModel;
 
-  factory _PatientDTO.fromJson(Map<String, dynamic> json) =
-      _$_PatientDTO.fromJson;
+  factory _PatientModel.fromJson(Map<String, dynamic> json) =
+      _$_PatientModel.fromJson;
 
   @override
   String? get counterId;
@@ -512,7 +512,7 @@ abstract class _PatientDTO implements PatientDTO {
   @override
   String? get hipCode;
   @override
-  LocationDTO? get location;
+  LocationModel? get location;
   @override
   String? get abhaId;
   @override
@@ -530,9 +530,9 @@ abstract class _PatientDTO implements PatientDTO {
   @override
   String? get yearOfBirth;
   @override
-  double? get monthOfBirth;
+  String? get monthOfBirth;
   @override
-  double? get dayOfBirth;
+  String? get dayOfBirth;
   @override
   int? get age;
   @override
@@ -540,9 +540,9 @@ abstract class _PatientDTO implements PatientDTO {
   @override
   Relationship? get relationship;
   @override
-  List<AddressDTO>? get address;
+  List<AddressModel>? get address;
   @override
   @JsonKey(ignore: true)
-  _$$_PatientDTOCopyWith<_$_PatientDTO> get copyWith =>
+  _$$_PatientModelCopyWith<_$_PatientModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

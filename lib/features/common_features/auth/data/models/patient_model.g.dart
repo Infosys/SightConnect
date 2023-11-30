@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'patient_DTO.dart';
+part of 'patient_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PatientDTO _$$_PatientDTOFromJson(Map<String, dynamic> json) =>
-    _$_PatientDTO(
+_$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
+    _$_PatientModel(
       counterId: json['counterId'] as String?,
       hprID: json['hprID'] as String?,
       hipCode: json['hipCode'] as String?,
       location: json['location'] == null
           ? null
-          : LocationDTO.fromJson(json['location'] as Map<String, dynamic>),
+          : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
       abhaId: json['abhaId'] as String?,
       abhaAddress: json['abhaAddress'] as String?,
       name: json['name'] as String?,
@@ -22,18 +22,18 @@ _$_PatientDTO _$$_PatientDTOFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String?,
       profilePhoto: json['profilePhoto'] as String?,
       yearOfBirth: json['yearOfBirth'] as String?,
-      monthOfBirth: (json['monthOfBirth'] as num?)?.toDouble(),
-      dayOfBirth: (json['dayOfBirth'] as num?)?.toDouble(),
+      monthOfBirth: json['monthOfBirth'] as String?,
+      dayOfBirth: json['dayOfBirth'] as String?,
       age: json['age'] as int?,
       parentPatientId: json['parentPatientId'] as String?,
       relationship:
           $enumDecodeNullable(_$RelationshipEnumMap, json['relationship']),
       address: (json['address'] as List<dynamic>?)
-          ?.map((e) => AddressDTO.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AddressModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_PatientDTOToJson(_$_PatientDTO instance) =>
+Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
     <String, dynamic>{
       'counterId': instance.counterId,
       'hprID': instance.hprID,

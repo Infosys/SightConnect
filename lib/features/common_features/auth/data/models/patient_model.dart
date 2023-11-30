@@ -1,19 +1,19 @@
 import 'package:eye_care_for_all/features/common_features/auth/data/enums/gender.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/enums/relationship.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/address_DTO.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/location_DTO.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/address_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/data/models/location_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'patient_DTO.freezed.dart';
-part 'patient_DTO.g.dart';
+part 'patient_model.freezed.dart';
+part 'patient_model.g.dart';
 
 @freezed
-class PatientDTO with _$PatientDTO {
-  const factory PatientDTO({
+class PatientModel with _$PatientModel {
+  const factory PatientModel({
     String? counterId,
     String? hprID,
     String? hipCode,
-    LocationDTO? location,
+    LocationModel? location,
     String? abhaId,
     String? abhaAddress,
     String? name,
@@ -22,14 +22,14 @@ class PatientDTO with _$PatientDTO {
     String? email,
     String? profilePhoto,
     String? yearOfBirth,
-    double? monthOfBirth,
-    double? dayOfBirth,
+    String? monthOfBirth,
+    String? dayOfBirth,
     int? age,
     String? parentPatientId,
     Relationship? relationship,
-    List<AddressDTO>? address
-  }) = _PatientDTO;
+    List<AddressModel>? address
+  }) = _PatientModel;
 
-  factory PatientDTO.fromJson(Map<String, dynamic> json) =>
-      _$PatientDTOFromJson(json); 
+  factory PatientModel.fromJson(Map<String, dynamic> json) =>
+      _$PatientModelFromJson(json); 
 }

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/models/patient_response_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import '../../../../../core/constants/app_images.dart';
 import '../../../../common_features/auth/data/source/local/fake_data_source.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  const ProfileHeader({super.key, required this.patient});
+  final PatientResponseModel patient;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,11 @@ class ProfileHeader extends StatelessWidget {
           SizedBox(height: AppSize.height(context) * 0.11),
           ListTile(
             leading: ClipRRect(
-              borderRadius: BorderRadius.circular(130),
-              child: Image.asset(
-                AppImages.raghavi,
+              borderRadius:
+              
+               BorderRadius.circular(130),
+              child:  Image.asset(
+                patient.profile!.patient!.profilePhoto ?? "assets/images/user.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,7 +46,7 @@ class ProfileHeader extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
-                "Raghavi Pandey",
+                patient.profile!.patient!.name ?? "",
                 style: applyFiraSansFont(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
@@ -88,7 +92,7 @@ class ProfileHeader extends StatelessWidget {
                         width: AppSize.ksheight / 2,
                       ),
                       Text(
-                        profile["mobile"] ?? "",
+                        patient.profile!.patient!.phoneNumber ?? "",
                         softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 14,
@@ -118,7 +122,7 @@ class ProfileHeader extends StatelessWidget {
                       const SizedBox(width: AppSize.ksheight / 2),
                       Flexible(
                         child: Text(
-                          profile["email"] ?? "",
+                          patient.profile!.patient!.email ?? "",
                           softWrap: true,
                           style: applyRobotoFont(
                             fontSize: 14,
