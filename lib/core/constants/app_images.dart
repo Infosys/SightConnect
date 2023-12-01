@@ -94,4 +94,8 @@ class AppImages {
   static const String searchPatient =
       "assets/images/optometric_search_patient.svg";
   static const String addPatient = "assets/images/optometric_add_patient.svg";
+
+  //vision technician
+  static const String searchEmpty = "assets/images/search_empty.png";
+
 }

@@ -337,6 +337,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
+  data_table_2:
+    dependency: "direct main"
+    description:
+      name: data_table_2
+      sha256: "3ce61e066aba255b2b346a62984dfb0effddb8ca34c123c23c5c3d0f3c4e9fb7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.9"
   dbus:
     dependency: transitive
     description:
@@ -994,6 +1002,14 @@ packages:
     description:
       name: petitparser
       sha256: cb3798bef7fc021ac45b308f4b51208a152792445cce0448c9a4ba5879dd8750
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.0"
+  pie_chart:
+    dependency: "direct main"
+    description:
+      name: pie_chart
+      sha256: "58e6a46999ac938bfa1c3e5be414d6e149f037647197dca03ba3614324c12c82"
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
