@@ -101,6 +101,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
           remarksData.isEmpty
               ? const SizedBox()
               : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Other Symptoms",
