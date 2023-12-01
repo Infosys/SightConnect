@@ -14,6 +14,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
   int _currentQuestionnairePageIndex = 0;
+  TextEditingController textEditingController = TextEditingController();
 
   TriageQuestionnaireProvider()
       : _questionnaireRemarks = '',
@@ -22,6 +23,8 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireResponse = [];
 
   String get questionnaireRemarks => _questionnaireRemarks;
+
+  TextEditingController get textController => textEditingController;
 
   set questionnaireRemarks(String value) {
     _questionnaireRemarks = value;

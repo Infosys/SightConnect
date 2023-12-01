@@ -12,7 +12,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController _textEditingController = TextEditingController();
+    final model = ref.watch(triageQuestionnaireProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -68,7 +68,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                       ),
                     ),
                     child: TextFormField(
-                      controller: _textEditingController,
+                      controller: model.textEditingController,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -127,8 +127,9 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         ref
-                            .watch(triageQuestionnaireProvider)
-                            .questionnaireRemarks = _textEditingController.text;
+                                .watch(triageQuestionnaireProvider)
+                                .questionnaireRemarks =
+                            model.textEditingController.text;
                         Navigator.pop(context);
                       },
                       child: const Text(
