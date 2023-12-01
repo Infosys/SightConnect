@@ -197,7 +197,7 @@ class AssessmentList extends StatelessWidget {
   }
 }
 
-List<DataCell> generateListTile(data) {
+List<DataCell> generateListTile(AssessmentModel data) {
   return [
     DataCell(
       Column(
@@ -209,7 +209,7 @@ List<DataCell> generateListTile(data) {
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.serialNo,
+            data.patientId,
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.grey,
