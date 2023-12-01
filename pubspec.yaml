@@ -33,7 +33,6 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_secure_storage: ^8.0.0
   dio: ^5.3.2
-  easy_stepper: ^0.8.1
   flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.3.8
   google_fonts: any
@@ -70,7 +69,7 @@ dependencies:
   fluttertoast: ^8.2.2
   device_info_plus: ^9.1.0
   flutter_jailbreak_detection: ^1.10.0
-
+  file_picker: ^5.5.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
