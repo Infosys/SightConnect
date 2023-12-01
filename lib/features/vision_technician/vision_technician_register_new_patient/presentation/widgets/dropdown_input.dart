@@ -24,10 +24,16 @@ class _DropdownInputState extends State<DropdownInput> {
         hasFocus = _focusNode.hasFocus;
       });
     });
-    return TextField(
+    return TextFormField(
       focusNode: _focusNode,
       autofocus: false,
       controller: _controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+          return 'Please Select State';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         labelText: widget.title,
         labelStyle: applyRobotoFont(

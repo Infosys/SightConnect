@@ -70,6 +70,7 @@ dependencies:
   device_info_plus: ^9.1.0
   flutter_jailbreak_detection: ^1.10.0
   file_picker: ^5.5.0
+  easy_stepper: ^0.8.3
 
 flutter_launcher_icons:
   android: "launcher_icon"

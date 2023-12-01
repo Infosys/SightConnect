@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AddressDetails extends StatelessWidget {
-  const AddressDetails({super.key});
+   AddressDetails({super.key});
   static List<String> listOfStates = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -16,11 +16,20 @@ class AddressDetails extends StatelessWidget {
     "Goa"
   ];
 
+  var doorNoContoller = TextEditingController();
+  var streetContoller = TextEditingController();
+  var districtContoller = TextEditingController();
+  var cityContoller = TextEditingController();
+  var stateContoller = TextEditingController();
+  var landMarkContoller = TextEditingController();
+  var pinCodeContoller = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: AppSize.klheight * 16,
+        height: AppSize.klheight * 20,
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.kmradius),
@@ -52,18 +61,21 @@ class AddressDetails extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child:  Input(
                               title: "Door Number",
-                              keyboardType: TextInputType.name),
+                              keyboardType: TextInputType.name,
+                              controller: doorNoContoller,
+                              ),
                         ),
                         const SizedBox(
                           width: AppSize.kmwidth,
                         ),
                         SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child:  Input(
                               title: "Street",
-                              keyboardType: TextInputType.name),
+                              keyboardType: TextInputType.name,
+                              controller: streetContoller,),
                         ),
                       ],
                     ),
@@ -71,18 +83,20 @@ class AddressDetails extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child:  Input(
                               title: "District",
-                              keyboardType: TextInputType.name),
+                              keyboardType: TextInputType.name,
+                              controller: districtContoller,),
                         ),
                         const SizedBox(
                           width: AppSize.kmwidth,
                         ),
                         SizedBox(
                             width: AppSize.width(context) * 0.4,
-                            child: const Input(
+                            child:  Input(
                                 title: "City",
-                                keyboardType: TextInputType.name)),
+                                keyboardType: TextInputType.name,
+                                controller: cityContoller,)),
                       ],
                     ),
                     Row(
@@ -98,18 +112,20 @@ class AddressDetails extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child:  Input(
                               title: "Landmark",
-                              keyboardType: TextInputType.name),
+                              keyboardType: TextInputType.name,
+                              controller: landMarkContoller,),
                         ),
                         const SizedBox(
                           width: AppSize.kmwidth,
                         ),
                         SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child:  Input(
                               title: "Pincode",
-                              keyboardType: TextInputType.number),
+                              keyboardType: TextInputType.number,
+                              controller: pinCodeContoller,),
                         ),
                       ],
                     ),

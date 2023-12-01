@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class VisionTechnicianRegisterNewPatientPage extends StatelessWidget {
-  const VisionTechnicianRegisterNewPatientPage({super.key});
+   VisionTechnicianRegisterNewPatientPage({super.key});
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,41 +22,46 @@ class VisionTechnicianRegisterNewPatientPage extends StatelessWidget {
         centerTitle: false,
         title: Text('Register New Patient'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(AppSize.klpadding + 5),
-            child: Column(children: [
-              const BasicDetails(),
-              const SizedBox(height: AppSize.klheight),
-              const EyeCareDetails(),
-              const SizedBox(height: AppSize.klheight),
-              const AddressDetails(),
-              const SizedBox(height: AppSize.klheight),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: AppColor.shadowColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
+      body: Form(
+        key:_formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(AppSize.klpadding + 5),
+              child: Column(children: [
+                 BasicDetails(),
+                const SizedBox(height: AppSize.klheight),
+                 EyeCareDetails(),
+                const SizedBox(height: AppSize.klheight),
+                 AddressDetails(),
+                const SizedBox(height: AppSize.klheight),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: AppColor.shadowColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSize.klradius),
+                      ),
+                    ),
+                    onPressed: () {
+                         if (_formKey.currentState!.validate()) {
+                      showToastMessage(
+                          "Done! Patient has been registred with ID-OP-934567.",
+                          context,0);
+                      return;
+                         }
+                    },
+                    child: Text(
+                      "Save & Proceed",
+                      style: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
-                  onPressed: () {
-                    showToastMessage(
-                        "Done! Patient has been registred with ID-OP-934567.",
-                        context,0);
-                    return;
-                  },
-                  child: Text(
-                    "Save & Proceed",
-                    style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-            ])),
+                )
+              ])),
+        ),
       ),
     );
   }

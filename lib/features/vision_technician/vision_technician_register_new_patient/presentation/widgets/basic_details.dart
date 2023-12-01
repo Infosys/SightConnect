@@ -10,13 +10,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class BasicDetails extends StatelessWidget {
-  const BasicDetails({super.key});
+  BasicDetails({super.key});
+
+  var firstNameContoller = TextEditingController();
+  var middleNameContoller = TextEditingController();
+  var emailContoller = TextEditingController();
+  var abhaIdContoller = TextEditingController();
+  var LastNameContoller = TextEditingController();
+
+  var dateofBirtContollerh = TextEditingController();
+  var mobileNumberContoller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: AppSize.klheight * 22,
+        height: AppSize.klheight * 25,
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.kmradius),
@@ -51,20 +60,23 @@ class BasicDetails extends StatelessWidget {
                     children: [
                       SizedBox(
                           width: AppSize.width(context) * 0.2,
-                          child: const Input(
-                            title: 'First Name',
-                            keyboardType: TextInputType.name,
-                          )),
+                          child: Input(
+                              title: 'First Name',
+                              keyboardType: TextInputType.name,
+                              controller: firstNameContoller)),
                       SizedBox(
                           width: AppSize.width(context) * 0.2,
-                          child: const Input(
+                          child: Input(
                               title: 'Middle Name',
-                              keyboardType: TextInputType.name)),
+                              keyboardType: TextInputType.name,
+                              controller: middleNameContoller)),
                       SizedBox(
                           width: AppSize.width(context) * 0.2,
-                          child: const Input(
-                              title: 'Last Name',
-                              keyboardType: TextInputType.name)),
+                          child: Input(
+                            title: 'Last Name',
+                            keyboardType: TextInputType.name,
+                            controller: LastNameContoller,
+                          )),
                       Column(
                         children: [
                           SizedBox(
@@ -131,7 +143,7 @@ class BasicDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const AgeInput(),
+                  AgeInput(),
                   const SizedBox(height: AppSize.klheight * 2),
                   Wrap(
                     direction: Axis.horizontal,
@@ -144,9 +156,11 @@ class BasicDetails extends StatelessWidget {
                       ),
                       SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
-                              title: 'ABHA ID (Optional)',
-                              keyboardType: TextInputType.name)),
+                          child: Input(
+                            title: 'ABHA ID (Optional)',
+                            keyboardType: TextInputType.name,
+                            controller: abhaIdContoller,
+                          )),
                     ],
                   ),
                   const SizedBox(height: AppSize.klheight * 2),
@@ -154,18 +168,21 @@ class BasicDetails extends StatelessWidget {
                     children: [
                       SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
+                          child: Input(
                             title: "Mobile Number",
                             keyboardType: TextInputType.number,
+                            controller: mobileNumberContoller,
                           )),
                       const SizedBox(
                         width: AppSize.kmwidth,
                       ),
                       SizedBox(
                           width: AppSize.width(context) * 0.4,
-                          child: const Input(
-                              title: 'Email (Optional)',
-                              keyboardType: TextInputType.emailAddress)),
+                          child: Input(
+                            title: 'Email (Optional)',
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailContoller,
+                          )),
                     ],
                   ),
                 ],

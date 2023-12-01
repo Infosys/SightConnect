@@ -8,7 +8,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EyeCareDetails extends HookConsumerWidget {
-  const EyeCareDetails({Key? key}) : super(key: key);
+  EyeCareDetails({Key? key}) : super(key: key);
+
+  var whereController1 = TextEditingController();
+  var whereController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,10 +22,11 @@ class EyeCareDetails extends HookConsumerWidget {
     ]);
     List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
       EyeCareDetailsQuestionModel(
-          questionId: 1,
-          question: "Did you have eye examination done previously",
-          answer: "",
-          answerDescription: ""),
+        questionId: 1,
+        question: "Did you have eye examination done previously",
+        answer: "",
+        answerDescription: "",
+      ),
       EyeCareDetailsQuestionModel(
           questionId: 2,
           question: "Did you have cataract surgery",
@@ -138,12 +142,16 @@ class EyeCareDetails extends HookConsumerWidget {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(AppSize.ksradius),
-                              color: AppColor.lightGrey),
+                              color: Color(0xffFFFFFF)),
                           width: AppSize.width(context) * 0.4,
                           height: AppSize.height(context) * 0.15,
-                          child: const Input(
-                              title: "Where?",
-                              keyboardType: TextInputType.name),
+                          child: Input(
+                            title: "Where?",
+                            keyboardType: TextInputType.name,
+                            controller: questionModel.questionId == 1
+                                ? whereController1
+                                : whereController2,
+                          ),
                         ),
                       const SizedBox(
                         height: AppSize.kmheight,

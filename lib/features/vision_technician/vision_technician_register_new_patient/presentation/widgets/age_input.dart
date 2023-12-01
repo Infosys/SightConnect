@@ -6,15 +6,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AgeInput extends StatelessWidget {
-  const AgeInput({super.key});
-
+   AgeInput({super.key});
+  var ageContoller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
           width: AppSize.width(context) * 0.2,
-          child: const Input(title: "Age", keyboardType: TextInputType.name),
+          child:  Input(title: "Age", keyboardType: TextInputType.name,controller: ageContoller,),
         ),
         const SizedBox(width: AppSize.klwidth),
         Text("OR", style: applyRobotoFont(fontSize: 14)),

@@ -9,7 +9,13 @@ class DateInput extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+          if (value == null || value.isEmpty) {
+          return 'Please enter Date';
+        }
+        return null;
+      },
       controller: controller,
       decoration: InputDecoration(
         hintText: title,

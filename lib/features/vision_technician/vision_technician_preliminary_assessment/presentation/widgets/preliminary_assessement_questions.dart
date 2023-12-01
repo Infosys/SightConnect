@@ -9,7 +9,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentQuestions extends HookConsumerWidget {
-  const PreliminaryAssessmentQuestions({super.key});
+   PreliminaryAssessmentQuestions({super.key});
+  var recommendationsController=TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -145,8 +146,10 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
             name: "Refer To Eye Specailist Who Deals With",
             includeInputBox: 0,
           ),
-          const Input(
-              title: "Recommendations", keyboardType: TextInputType.multiline),
+           Input(
+              title: "Recommendations", keyboardType: TextInputType.multiline,
+              controller: recommendationsController,
+              ),
         ]),
       ),
     ]);

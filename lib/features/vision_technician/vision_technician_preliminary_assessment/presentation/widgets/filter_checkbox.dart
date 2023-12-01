@@ -8,8 +8,9 @@ class FilterCheckBox extends StatelessWidget {
   final dynamic items;
   final String? name;
   final int includeInputBox;
-  const FilterCheckBox({super.key, this.items, this.name,required this.includeInputBox});
-
+   FilterCheckBox({super.key, this.items, this.name,required this.includeInputBox});
+  var otherController=TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,9 +52,10 @@ class FilterCheckBox extends StatelessWidget {
                 padding: const EdgeInsets.only(left: AppSize.klpadding),
                 child: SizedBox(
                     width: AppSize.width(context) * 0.2,
-                    child: const Input(
+                    child:  Input(
                       title: 'Others',
                       keyboardType: TextInputType.name,
+                      controller: otherController,
                     )),
               ),
           ],

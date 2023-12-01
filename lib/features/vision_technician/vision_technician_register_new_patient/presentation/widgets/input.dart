@@ -3,9 +3,14 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class Input extends StatefulWidget {
-  const Input({super.key, required this.title, required this.keyboardType});
+  const Input(
+      {super.key,
+      required this.title,
+      required this.keyboardType,
+      required this.controller});
   final String title;
   final TextInputType keyboardType;
+  final TextEditingController controller;
   @override
   State<Input> createState() => _InputState();
 }
@@ -21,9 +26,15 @@ class _InputState extends State<Input> {
         hasFocus = _focusNode.hasFocus;
       });
     });
-    return TextField(
-      
-      maxLines: widget.keyboardType==TextInputType.multiline?2:1,
+    return TextFormField(
+      controller: widget.controller,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter ${widget.title}';
+        }
+        return null;
+      },
+      maxLines: widget.keyboardType == TextInputType.multiline ? 2 : 1,
       keyboardType: widget.keyboardType,
       focusNode: _focusNode,
       autofocus: false,

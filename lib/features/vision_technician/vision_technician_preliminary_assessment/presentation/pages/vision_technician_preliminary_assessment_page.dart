@@ -20,6 +20,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends StatefulWidget {
 
 class _VisionTechnicianPreliminaryAssessmentPageState
     extends State<VisionTechnicianPreliminaryAssessmentPage> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,50 +30,55 @@ class _VisionTechnicianPreliminaryAssessmentPageState
         centerTitle: false,
         title: Text('Preliminary Assessment'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(AppSize.klpadding + 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-              const PreliminaryAssessmentCard(),
-              const SizedBox(height: AppSize.klheight),
-              const PreliminaryAssessmentIvrCard(),
-              const SizedBox(height: AppSize.klheight),
-              const PreliminaryAssessmentQuestions(),
-              const SizedBox(height: AppSize.klheight),
-              const PreliminaryAssessmentVisionCenter(),
-              const SizedBox(height: AppSize.klheight),
-             
-                     
-                   
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: AppColor.shadowColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                    ),
-                  ),
-                  onPressed: () {
-                    showToastMessage(
-                        "Done! Assessment with ID EA 010101 has been created for Sumanta.",
-                        context,
-                        1);
-                    return;
-                  },
-                  child: Text(
-                    "Submit",
-                    style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-            ])),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(AppSize.klpadding + 5),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const PreliminaryAssessmentCard(),
+                    const SizedBox(height: AppSize.klheight),
+                    const PreliminaryAssessmentIvrCard(),
+                    const SizedBox(height: AppSize.klheight),
+                    PreliminaryAssessmentQuestions(),
+                    const SizedBox(height: AppSize.klheight),
+                    const PreliminaryAssessmentVisionCenter(),
+                    const SizedBox(height: AppSize.klheight),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: AppColor.shadowColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(AppSize.klradius),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            showToastMessage(
+                                "Done! Assessment with ID EA 010101 has been created for Sumanta.",
+                                context,
+                                1);
+                                 return;
+                          }
+
+                         
+                        },
+                        child: Text(
+                          "Submit",
+                          style: applyRobotoFont(
+                              fontSize: 14,
+                              color: AppColor.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                  ])),
+        ),
       ),
     );
   }
