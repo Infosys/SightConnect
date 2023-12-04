@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_answer_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_sections_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -12,7 +14,7 @@ var triageQuestionnaireProvider = ChangeNotifierProvider(
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-  late List<QuestionnaireSection> _questionnaireSections;
+  late List<QuestionnaireSectionsResponseModel> _questionnaireSections;
   late String _questionnaireRemarks;
   late final Map<int, bool> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
@@ -29,7 +31,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, bool> get selectedOptions => _selectedOptions;
-  List<QuestionnaireSection> get questionnaireSections =>
+  List<QuestionnaireSectionsResponseModel> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
@@ -39,7 +41,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getQuestionnaire(List<QuestionnaireSection> data) async {
+  void getQuestionnaire(List<QuestionnaireSectionsResponseModel> data) async {
     _questionnaireSections = data;
   }
 
@@ -85,15 +87,15 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   void addQuestionnaireToReportPageList(selectedOptions) {
     List<int> selectedOptionsID = selectedOptions.keys.toList();
-    List<Questionnaire> currentQuestionnaireSections =
-        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
+    List<QuestionnaireResponseModel> currentQuestionnaireSections =
+        questionnaireSections[_currentQuestionnairePageIndex].questionnaireResponseDTOList!;
 
     for (var question in currentQuestionnaireSections) {
       List<String> currentQuestionStatement = [];
-      for (var question in question.questions!) {
-        if (selectedOptionsID.contains(question.code)) {
+      for (var question in question.questionResponseDTO!) {
+        if (selectedOptionsID.contains(question.id)) {
           currentQuestionStatement.add(
-            question.statement!,
+            question.definition!,
           );
         }
       }
@@ -106,12 +108,12 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   void calculateQuestionnaireUrgency(Map<int, bool> selectedOptions) {
     List<int> selectedOptionsID = selectedOptions.keys.toList();
-    List<Questionnaire> currentQuestionnaireSections =
-        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
+    List<QuestionnaireResponseModel> currentQuestionnaireSections =
+        questionnaireSections[_currentQuestionnairePageIndex].questionnaireResponseDTOList!;
 
     for (var question in currentQuestionnaireSections) {
-      for (var question in question.questions!) {
-        if (selectedOptionsID.contains(question.code)) {
+      for (var question in question.questionResponseDTO!) {
+        if (selectedOptionsID.contains(question.id)) {
           _triageQuestionnaireUrgency =
               max(_triageQuestionnaireUrgency, question.weight!);
         }

@@ -99,7 +99,7 @@ class PatientProfileProvider extends ChangeNotifier {
     try {
       var response = await ref
           .read(patientAuthenticationRepositoryProvider)
-          .getPatientProfile(1204);
+          .getPatientProfile(1202);
       _patient = response;
     } catch (e) {
       rethrow;

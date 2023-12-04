@@ -40,7 +40,7 @@ class MyConnectionsList extends StatelessWidget {
             )
           ],
         ),
-        Row(
+        connectionsList.isEmpty ? const Text("No data") : Row(
           children: [
             Expanded(
               child: SingleChildScrollView(

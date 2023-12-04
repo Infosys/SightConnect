@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/srouce.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/performer_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_sections_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
@@ -19,11 +20,12 @@ var triageProvider = ChangeNotifierProvider(
 
 class TriageProvider extends ChangeNotifier {
   Ref ref;
-  List<QuestionnaireSection> _questionnaireSections = [];
-  List<QuestionnaireSection> get questionnaireSections =>
+  List<QuestionnaireSectionsResponseModel> _questionnaireSections = [];
+  List<QuestionnaireSectionsResponseModel> get questionnaireSections =>
       _questionnaireSections;
   TriageProvider(this.ref) {
     getTriage();
+
   }
 
   Future<void> getTriage() async {
@@ -34,7 +36,7 @@ class TriageProvider extends ChangeNotifier {
         logger.d("TriageProvider:- $failure");
       },
       (triageAssessment) {
-        _questionnaireSections = triageAssessment.questionnaireSections!;
+        _questionnaireSections = triageAssessment.questionnaireSectionsResponseDTOList!;
       },
     );
     notifyListeners();

@@ -94,7 +94,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 itemCount: model.questionnaireSections.length,
                 itemBuilder: (context, index) {
                   var questionnaire =
-                      model.questionnaireSections[index].questionnaire?.first;
+                      model.questionnaireSections[index].questionnaireResponseDTOList?.first;
 
                   return SingleChildScrollView(
                     child: Column(
@@ -111,7 +111,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                         const SizedBox(height: 20),
                         OptionGrid(
                           pageNumber: index,
-                          questions: questionnaire?.questions ?? [],
+                          questions: questionnaire?.questionResponseDTO ?? [],
                         ),
                         const SizedBox(height: AppSize.klheight),
                         const SizedBox(

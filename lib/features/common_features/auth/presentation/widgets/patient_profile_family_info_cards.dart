@@ -67,7 +67,7 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                   subtitle: Text(
                     data.parentPatientId != null
-                        ? "${data.relation}"
+                        ? "${data.relation.toString().split(".").last}"
                         : "Self, ${data.age} years",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

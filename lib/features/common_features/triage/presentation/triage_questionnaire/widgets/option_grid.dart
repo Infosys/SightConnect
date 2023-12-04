@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/question_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -14,7 +15,7 @@ class OptionGrid extends HookConsumerWidget {
     super.key,
   });
 
-  final List<Question> questions;
+  final List<QuestionResponseModel> questions;
   final int pageNumber;
 
   @override
@@ -30,14 +31,14 @@ class OptionGrid extends HookConsumerWidget {
 
     void addAndRemoveResponse(bool isSelected, int index) {
       if (isSelected) {
-        model.removeQuestionnaireAnswer(questions[index].code!);
+        model.removeQuestionnaireAnswer(questions[index].id!);
 
         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
           // model.removeLastQuestionnaireRemark( );
         }
       } else {
         model.addQuestionnaireAnswer(
-          questions[index].code ?? 0,
+          questions[index].id ?? 0,
           true,
         );
         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
@@ -49,12 +50,12 @@ class OptionGrid extends HookConsumerWidget {
     void handleNonOfThese(int index, bool isSelected) {
       noneOfTheseIndexValue.value = index;
       if (isSelected) {
-        model.removeQuestionnaireAnswer(questions[index].code!);
+        model.removeQuestionnaireAnswer(questions[index].id!);
         isNoneOfTheseSelected.value = false;
       } else {
         model.removeAllQuestionnaireAnswer();
         model.addQuestionnaireAnswer(
-          questions[index].code ?? 0,
+          questions[index].id ?? 0,
           true,
         );
         isNoneOfTheseSelected.value = true;
@@ -62,23 +63,23 @@ class OptionGrid extends HookConsumerWidget {
     }
 
     void handleSingleOptionPage(int index) {
-      if (questions[index].statement == "Yes") {
+      if (questions[index].definition == "Yes") {
         model.addQuestionnaireAnswer(
-          questions[index].code ?? 0,
+          questions[index].id ?? 0,
           true,
         );
-        model.removeQuestionnaireAnswer(questions[index + 1].code!);
-      } else if (questions[index].statement == "No") {
+        model.removeQuestionnaireAnswer(questions[index + 1].id!);
+      } else if (questions[index].definition == "No") {
         model.addQuestionnaireAnswer(
-          questions[index].code ?? 0,
+          questions[index].id ?? 0,
           true,
         );
-        model.removeQuestionnaireAnswer(questions[index - 1].code!);
+        model.removeQuestionnaireAnswer(questions[index - 1].id!);
       }
     }
 
     void handleMultipleOptionPage(int index, bool isSelected) {
-      if (questions[index].statement == "None of these") {
+      if (questions[index].definition == "None of these") {
         if (isOtherSymptomsSelected.value == false) {
           if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
             model.setQuestionnaireRemarks('', pageNumber);
@@ -86,22 +87,22 @@ class OptionGrid extends HookConsumerWidget {
         }
         handleNonOfThese(index, isSelected);
       } else if (isNoneOfTheseSelected.value &&
-          questions[index].statement != "None of these") {
+          questions[index].definition != "None of these") {
         isNoneOfTheseSelected.value = false;
         model.removeQuestionnaireAnswer(
-            questions[noneOfTheseIndexValue.value].code!);
+            questions[noneOfTheseIndexValue.value].id!);
         addAndRemoveResponse(isSelected, index);
-      } else if (questions[index].statement == "Other symptoms") {
+      } else if (questions[index].definition == "Other symptoms") {
         isOtherSymptomsSelected.value = !isOtherSymptomsSelected.value;
         _buildOtherOptionSheet(
           context: context,
           remarksController: remarksController,
           onSubmitted: (remark) {
             if (remark.isEmpty) {
-              model.removeQuestionnaireAnswer(questions[index].code!);
+              model.removeQuestionnaireAnswer(questions[index].id!);
             } else {
               model.addQuestionnaireAnswer(
-                questions[index].code ?? 0,
+                questions[index].id ?? 0,
                 true,
               );
               model.setQuestionnaireRemarks(remark, pageNumber);
@@ -127,7 +128,7 @@ class OptionGrid extends HookConsumerWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        var isSelected = selectedOptions.containsKey(questions[index].code);
+        var isSelected = selectedOptions.containsKey(questions[index].id);
 
         return InkWell(
           onTap: () {
@@ -151,7 +152,7 @@ class OptionGrid extends HookConsumerWidget {
             ),
             child: Center(
               child: Text(
-                questions[index].statement ?? "",
+                questions[index].definition ?? "",
                 textAlign: TextAlign.left,
                 softWrap: true,
                 style: applyRobotoFont(

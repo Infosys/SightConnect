@@ -13,7 +13,8 @@ import '../../../../../core/constants/app_color.dart';
 
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const PatientHomePageAppBar({super.key});
+  const PatientHomePageAppBar({super.key, required this.patientProfileImage});
+  final String patientProfileImage;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +71,9 @@ class PatientHomePageAppBar extends StatelessWidget
                 child: CircleAvatar(
                   radius: 20,
                   backgroundColor: Theme.of(context).primaryColor,
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage(AppImages.raghavi),
+                    backgroundImage: AssetImage(patientProfileImage),
                   ),
                 ),
               ),

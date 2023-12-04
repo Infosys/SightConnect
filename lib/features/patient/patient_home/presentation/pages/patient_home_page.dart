@@ -24,7 +24,7 @@ class PatientHomePage extends ConsumerWidget {
     var model = ref.watch(patientProfileProvider);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const PatientHomePageAppBar(),
+      appBar: PatientHomePageAppBar(patientProfileImage: model.patient.profile?.patient?.profilePhoto ?? 'assets/images/user.png',),
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 1));
@@ -40,7 +40,7 @@ class PatientHomePage extends ConsumerWidget {
               const SizedBox(height: AppSize.kmheight),
               MyConnectionsList(
                 connectionsList:
-                    model.patient.profile!.patient!.relatedParty ?? [],
+                    model.patient.profile?.patient?.relatedParty ?? [],
               ),
               const SizedBox(height: AppSize.kmheight),
               const RecentServicesCardList(),

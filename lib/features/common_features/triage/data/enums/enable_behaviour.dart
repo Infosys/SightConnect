@@ -1,0 +1,3 @@
+enum EnableBehaviour {
+  ALL, ANY
+}

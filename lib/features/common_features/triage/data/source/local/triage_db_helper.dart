@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:eye_care_for_all/features/common_features/triage/data/models/assessment_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
@@ -101,7 +102,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageAssessment(
-      {required TriageAssessment triageAssessment}) async {
+      {required AssessmentResponseModel triageAssessment}) async {
     var dbClient = await database;
     await dbClient.insert(_triageAssessmentTableName, {
       _responseColumnName: json.encode(

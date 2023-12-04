@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:eye_care_for_all/features/common_features/triage/data/models/assessment_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
@@ -10,9 +11,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
-  Future<TriageAssessment> getTriage();
-  Future<TriageAssessment> updateTriage({required TriageAssessment triage});
-  Future<void> saveTriage({required TriageAssessment triage});
+  Future<AssessmentResponseModel> getTriage();
+  Future<AssessmentResponseModel> updateTriage({required AssessmentResponseModel triage});
+  Future<void> saveTriage({required AssessmentResponseModel triage});
   Future<void> deleteTriage();
   Future<TriageModel> saveTriageResponse({required TriageModel triageResponse});
   Future<TriageModel> getTriageResponse();
@@ -39,11 +40,11 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageAssessment> getTriage() async {
+  Future<AssessmentResponseModel> getTriage() async {
     logger.f("No Internet Connection - Getting Triage from Local DB");
     final response = await triageDBHelper.getTriageAssessment();
     if (response.isNotEmpty) {
-      final triageAssessment = TriageAssessment.fromJson(response);
+      final triageAssessment = AssessmentResponseModel.fromJson(response);
       return triageAssessment;
     } else {
       throw Exception("No Triage Assessment Found");
@@ -56,7 +57,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<void> saveTriage({required TriageAssessment triage}) async {
+  Future<void> saveTriage({required AssessmentResponseModel triage}) async {
     logger.f("Saving Triage to Local DB");
     triageDBHelper.insertTriageAssessment(triageAssessment: triage);
   }
@@ -119,7 +120,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageAssessment> updateTriage({required TriageAssessment triage}) {
+  Future<AssessmentResponseModel> updateTriage({required AssessmentResponseModel triage}) {
     // TODO: implement updateTriage
     throw UnimplementedError();
   }
