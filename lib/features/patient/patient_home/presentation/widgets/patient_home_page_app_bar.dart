@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -32,7 +33,15 @@ class PatientHomePageAppBar extends StatelessWidget
         children: [
           SvgPicture.asset(AppIcon.logo),
           const SizedBox(width: AppSize.kmwidth),
-          const Text(AppText.appName),
+          InkWell(
+              onTap: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const OptometritianDashboardPage()),
+                    (route) => false);
+              },
+              child: const Text(AppText.appName)),
         ],
       ),
       actions: [
