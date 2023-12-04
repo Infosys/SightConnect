@@ -21,7 +21,7 @@ class AgeInput extends StatelessWidget {
         const SizedBox(width: AppSize.klwidth),
         SizedBox(
           width: AppSize.width(context) * 0.2,
-          child: const DateInput(title: "Date of Birth"),
+          child:  DateInput(title: "Date of Birth",controller: TextEditingController(),),
         ),
       ],
     );

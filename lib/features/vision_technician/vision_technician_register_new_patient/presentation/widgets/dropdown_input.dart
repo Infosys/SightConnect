@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,9 @@ class DropdownInput extends StatefulWidget {
 }
 
 class _DropdownInputState extends State<DropdownInput> {
-  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   bool hasFocus = false;
+  var dropdownvalue;
 
   @override
   Widget build(BuildContext context) {
@@ -24,38 +25,22 @@ class _DropdownInputState extends State<DropdownInput> {
         hasFocus = _focusNode.hasFocus;
       });
     });
-    return TextFormField(
-      focusNode: _focusNode,
-      autofocus: false,
-      controller: _controller,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-          return 'Please Select State';
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: widget.title,
-        labelStyle: applyRobotoFont(
-          fontWeight: FontWeight.w400,
-          fontSize: 14,
-          color: hasFocus ? AppColor.primary : AppColor.black,
-        ),
-        suffixIcon: PopupMenuButton<String>(
-          initialValue: "",
-          icon: const Icon(Icons.arrow_drop_down),
-          onSelected: (value) {
-            _controller.text = value.toString();
-          },
-          itemBuilder: (context) {
-            return widget.listOfOptions.map<PopupMenuItem<String>>((value) {
-              return PopupMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList();
-          },
-        ),
+    return Container(
+      width: AppSize.klwidth*10,
+      child: DropdownButton(
+        isExpanded: true,
+        value: dropdownvalue,
+        items: widget.listOfOptions.map((String items) {
+          return DropdownMenuItem(
+            value: items,
+            child: Text(items),
+          );
+        }).toList(),
+        onChanged: (value) {
+          setState(() {
+            dropdownvalue = value!;
+          });
+        },
       ),
     );
   }

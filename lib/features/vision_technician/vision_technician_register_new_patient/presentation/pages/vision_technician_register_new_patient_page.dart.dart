@@ -48,6 +48,8 @@ class VisionTechnicianRegisterNewPatientPage extends StatelessWidget {
                       showToastMessage(
                           "Done! Patient has been registred with ID-OP-934567.",
                           context,0);
+
+                        
                       return;
                          }
                     },

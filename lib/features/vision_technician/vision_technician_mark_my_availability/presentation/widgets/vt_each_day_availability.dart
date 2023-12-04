@@ -1,108 +1,122 @@
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_each_row_day.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/dropdown_input.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+class VTEachDayAvailability extends HookConsumerWidget {
+  VTEachDayAvailability({super.key, this.dayAvailability});
 
-class VTEachDayAvailability extends StatelessWidget {
-  const VTEachDayAvailability({super.key, dayAvailability});
-
+  var dayAvailability;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context, WidgetRef ref) {
+    var dayAvailabilityState = useState(dayAvailability);
+
+    void removeDayAvailability(int index) {
+      print("object");
+      print(index);
+      Map newstate = {...dayAvailabilityState.value};
+
+      newstate["time"].removeAt(index);
+      dayAvailabilityState.value = newstate;
+      print(dayAvailabilityState.value);
+    }
+
+    return Wrap(
+      runSpacing: AppSize.kmheight,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              width: AppSize.klwidth * 7,
-              child: CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                title: const Text("Monday"), // <-- label
-                value: true,
-                onChanged: (newValue) {},
-              ),
+            Row(
+              children: [
+                Transform.scale(
+                  scale: 1.0,
+                  child: Checkbox(
+                      value: dayAvailabilityState.value["checked"],
+                      onChanged: (value) {
+                        Map newstate = {...dayAvailabilityState.value};
+                        newstate["checked"] = !newstate["checked"];
+                        dayAvailabilityState.value = newstate;
+                      }),
+                ),
+                SizedBox(
+                  width: AppSize.klwidth * 5,
+                  child: Text(
+                    dayAvailabilityState.value["day"],
+                    style: applyRobotoFont(
+                        fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                )
+              ],
             ),
             const SizedBox(
-              width: AppSize.klwidth * 1,
+              width: AppSize.kmwidth,
             ),
-            Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+            Expanded(
+              child: Column(
                 children: [
-                  SizedBox(
-                      width: AppSize.width(context) * 0.2,
-                      child: const DropdownInput(
-                        title: "9:00 AM",
-                        listOfOptions: ["9:00 AM", "10:00 AM", "11:00 AM"],
-                      )),
-                  const SizedBox(
-                    width: AppSize.klwidth,
-                  ),
-                  SizedBox(
-                      width: AppSize.width(context) * 0.2,
-                      child: const DropdownInput(
-                        title: "9:00 AM",
-                        listOfOptions: ["9:00 AM", "10:00 AM", "11:00 AM"],
-                      )),
-                  const SizedBox(
-                    width: AppSize.klwidth * 2,
-                  ),
-                  Text(
-                    "4 Hrs",
-                    style: applyFiraSansFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                      fontWeight: FontWeight.w400,
+                  ListView(shrinkWrap: true, children: [
+                    ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return VTEachRow(
+                            functionhandler: removeDayAvailability,
+                            index: index,
+                            daydata: dayAvailabilityState.value);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: AppSize.kmheight,
+                        );
+                      },
+                      itemCount: dayAvailabilityState.value["time"].length,
                     ),
-                  ),
+                  ]),
                   const SizedBox(
-                    width: AppSize.klwidth * 3.4,
+                    height: AppSize.kmheight,
                   ),
-                  Container(
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.grey),
-                        color: Colors.white,
+                        border: Border.all(
+                            width: 2,
+                            color: const Color.fromARGB(255, 186, 183, 183)),
+                        color: dayAvailabilityState.value["checked"] == false
+                            ? Color.fromARGB(255, 225, 220, 220)
+                            : Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: Center(
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.remove,
-                            color: AppColor.grey,
-                          ),
-                          onPressed: () {},
+                      child: IconButton(
+                        disabledColor: AppColor.white,
+                        icon: Icon(
+                          Icons.add,
+                          color: AppColor.grey,
                         ),
-                      ))
+                        onPressed: dayAvailabilityState.value["checked"] ==
+                                false
+                            ? null
+                            : () {
+                                Map newstate = {...dayAvailabilityState.value};
+
+                                newstate["time"].add([""]);
+                                dayAvailabilityState.value = newstate;
+                                print(dayAvailabilityState.value);
+                              },
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ]),
+            ),
           ],
         ),
         const SizedBox(
           height: AppSize.klheight,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.grey),
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.add,
-                  color: AppColor.grey,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ],
         ),
       ],
     );

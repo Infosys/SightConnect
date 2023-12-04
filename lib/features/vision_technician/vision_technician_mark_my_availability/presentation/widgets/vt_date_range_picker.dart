@@ -22,9 +22,7 @@ class VtDateRangePicker extends StatelessWidget {
         suffixIcon: IconButton(
           onPressed: () async {
             var pickedDateRange = await _showDateRangePicker(context);
-            var result = DateFormat('dd MMM').format(pickedDateRange!.start) +
-                " - " +
-                DateFormat('dd MMM yyyy').format(pickedDateRange.end);
+            var result = "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
             print(result);
             controller.text = result;
             print("object");
