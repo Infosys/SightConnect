@@ -72,11 +72,6 @@ var recentService = [
     "text": "Visual Acuity Test",
     "color": AppColor.lavanderBlue
   },
-  {
-    "icon": AppIcon.pledge,
-    "text": "Pledge",
-    "color": AppColor.teaGreen,
-  },
   {"icon": AppIcon.eyeScanner, "text": "Eye Scanner", "color": AppColor.bisque},
 ];
 

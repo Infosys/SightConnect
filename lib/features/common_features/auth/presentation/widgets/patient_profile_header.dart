@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../../../common_features/auth/data/source/local/fake_data_source.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key, required this.patient});
@@ -72,56 +73,35 @@ class ProfileHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(AppSize.kspadding),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white12,
+                  child: InkWell(
+                    onTap: () {
+                      Uri phoneno = Uri.parse("tel:${profile["mobile"]}");
+                      canLaunchUrl(number) {
+                        launchUrl(number);
+                      }
+
+                      canLaunchUrl(phoneno);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(AppSize.kspadding),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white12,
+                          ),
+                          child: const Icon(
+                            Icons.call_outlined,
+                            color: Colors.white,
+                            size: 16,
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.call_outlined,
-                          color: Colors.white,
-                          size: 16,
+                        const SizedBox(
+                          width: AppSize.ksheight / 2,
                         ),
-                      ),
-                      const SizedBox(
-                        width: AppSize.ksheight / 2,
-                      ),
-                      Text(
-                        patient.profile!.patient!.phoneNumber ?? "",
-                        softWrap: true,
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.white.withOpacity(0.8),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(AppSize.kspadding),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white12,
-                        ),
-                        child: const Icon(
-                          Icons.email_outlined,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                      ),
-                      const SizedBox(width: AppSize.ksheight / 2),
-                      Flexible(
-                        child: Text(
-                          patient.profile!.patient!.email ?? "",
+                        Text(
+                          patient.profile!.patient!.phoneNumber ?? "",
                           softWrap: true,
                           style: applyRobotoFont(
                             fontSize: 14,
@@ -129,8 +109,48 @@ class ProfileHeader extends StatelessWidget {
                             color: AppColor.white.withOpacity(0.8),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: InkWell(
+                    onTap: () {
+                      Uri email = Uri.parse("mailto:${profile["email"]}");
+                      canLaunchUrl(email) {
+                        launchUrl(email);
+                      }
+                      canLaunchUrl(email);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(AppSize.kspadding),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white12,
+                          ),
+                          child: const Icon(
+                            Icons.email_outlined,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ),
+                        const SizedBox(width: AppSize.ksheight / 2),
+                        Flexible(
+                          child: Text(
+                            patient.profile!.patient!.email ?? "",
+                            softWrap: true,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.white.withOpacity(0.8),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

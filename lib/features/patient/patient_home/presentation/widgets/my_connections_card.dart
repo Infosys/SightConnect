@@ -53,6 +53,7 @@ class MyConnectionsCard extends HookWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
+          
         ],
       ),
     );

@@ -11,6 +11,7 @@ import flutter_secure_storage_macos
 import millimeters
 import path_provider_foundation
 import screen_brightness_macos
+import share_plus
 import speech_to_text_macos
 import sqflite
 import url_launcher_macos
@@ -22,6 +23,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   MillimetersPlugin.register(with: registry.registrar(forPlugin: "MillimetersPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   ScreenBrightnessMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenBrightnessMacosPlugin"))
+  SharePlusMacosPlugin.register(with: registry.registrar(forPlugin: "SharePlusMacosPlugin"))
   SpeechToTextMacosPlugin.register(with: registry.registrar(forPlugin: "SpeechToTextMacosPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
