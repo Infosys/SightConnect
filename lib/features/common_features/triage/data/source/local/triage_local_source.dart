@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/common_features/triage/data/models/ass
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +11,8 @@ import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
   Future<AssessmentResponseModel> getTriage();
-  Future<AssessmentResponseModel> updateTriage({required AssessmentResponseModel triage});
+  Future<AssessmentResponseModel> updateTriage(
+      {required AssessmentResponseModel triage});
   Future<void> saveTriage({required AssessmentResponseModel triage});
   Future<void> deleteTriage();
   Future<TriageModel> saveTriageResponse({required TriageModel triageResponse});
@@ -27,6 +27,8 @@ abstract class TriageLocalSource {
   Future<List<PostQuestionResponseModel>> getQuestionaireResponse();
   Future<List<PostObservationsModel>> getVisionAcuityTumblingResponse();
   Future<List<PostImagingSelectionModel>> getTriageEyeScanResponse();
+
+  Future<void> resetTriage();
 }
 
 class TriageLocalSourceImpl implements TriageLocalSource {
@@ -52,8 +54,14 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageModel> getTriageResponse() {
-    throw UnimplementedError();
+  Future<TriageModel> getTriageResponse() async {
+    final response = await triageDBHelper.getTriageAssessmentResponse();
+    if (response.isNotEmpty) {
+      final triageAssessment = TriageModel.fromJson(response);
+      return triageAssessment;
+    } else {
+      throw Exception("No Triage Assessment Found");
+    }
   }
 
   @override
@@ -120,9 +128,15 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<AssessmentResponseModel> updateTriage({required AssessmentResponseModel triage}) {
+  Future<AssessmentResponseModel> updateTriage(
+      {required AssessmentResponseModel triage}) {
     // TODO: implement updateTriage
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> resetTriage() async {
+    await triageDBHelper.deleteAllTriageSteps();
   }
 }
 

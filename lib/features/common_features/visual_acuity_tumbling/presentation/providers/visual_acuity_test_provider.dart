@@ -236,39 +236,14 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  int getTumblingTestUrgency() {
-    double leftEyeSight = calculateEyeSight(Eye.left);
-    double rightEyeSight = calculateEyeSight(Eye.right);
-    double bothEyeSight = calculateEyeSight(Eye.both);
-
-    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
-    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
-    int bothEyeUrgency = _calculateUrgencyHelper(bothEyeSight);
-
-    int urgency =
-        [leftEyeUrgency, rightEyeUrgency, bothEyeUrgency].reduce(math.max);
-
-    logger.i({
-      "leftEyeSight": leftEyeSight,
-      "leftEyeUrgency": leftEyeUrgency,
-      "rightEyeSight": rightEyeSight,
-      "rightEyeUrgency": rightEyeUrgency,
-      "bothEyeSight": bothEyeSight,
-      "bothEyeUrgency": bothEyeUrgency,
-      "FINAL URGENCY": urgency,
-    });
-
-    return urgency;
-  }
-
-  int _calculateUrgencyHelper(double value) {
+  double _calculateScore(double value) {
     logger.i("Tumbling Test Value: $value");
     if (value >= 1) {
-      return 3;
+      return 3.0;
     } else if (value >= 0.5) {
-      return 2;
+      return 2.0;
     } else {
-      return 1;
+      return 1.0;
     }
   }
 
@@ -284,17 +259,27 @@ class VisualAcuityTestProvider with ChangeNotifier {
   List<PostObservationsModel> getVisionAcuityTumblingResponse() {
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
+    double bothEyeSight = calculateEyeSight(Eye.both);
+
+    double leftEyeUrgency = _calculateScore(leftEyeSight);
+    double rightEyeUrgency = _calculateScore(rightEyeSight);
+    double bothEyeUrgency = _calculateScore(bothEyeSight);
 
     List<PostObservationsModel> observationList = [
       PostObservationsModel(
         identifier: 50000001,
-        value: "leftEyeSight",
-        score: leftEyeSight,
+        value: leftEyeSight.toString(),
+        score: leftEyeUrgency,
       ),
       PostObservationsModel(
         identifier: 50000002,
-        value: "rightEyeSight",
-        score: rightEyeSight,
+        value: rightEyeSight.toString(),
+        score: rightEyeUrgency,
+      ),
+      PostObservationsModel(
+        identifier: 50000003,
+        value: bothEyeSight.toString(),
+        score: bothEyeUrgency,
       ),
     ];
     logger.d(observationList);

@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/question_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +39,7 @@ class OptionGrid extends HookConsumerWidget {
         model.addQuestionnaireAnswer(
           questions[index].id ?? 0,
           true,
+          questions[index].weight ?? 0,
         );
         if (model.allRemarks.length == 1 || model.allRemarks.length == 2) {
           model.setQuestionnaireRemarks('', pageNumber);
@@ -57,6 +57,7 @@ class OptionGrid extends HookConsumerWidget {
         model.addQuestionnaireAnswer(
           questions[index].id ?? 0,
           true,
+          questions[index].weight ?? 0,
         );
         isNoneOfTheseSelected.value = true;
       }
@@ -67,12 +68,14 @@ class OptionGrid extends HookConsumerWidget {
         model.addQuestionnaireAnswer(
           questions[index].id ?? 0,
           true,
+          questions[index].weight ?? 0,
         );
         model.removeQuestionnaireAnswer(questions[index + 1].id!);
       } else if (questions[index].definition == "No") {
         model.addQuestionnaireAnswer(
           questions[index].id ?? 0,
           true,
+          questions[index].weight ?? 0,
         );
         model.removeQuestionnaireAnswer(questions[index - 1].id!);
       }
@@ -104,6 +107,7 @@ class OptionGrid extends HookConsumerWidget {
               model.addQuestionnaireAnswer(
                 questions[index].id ?? 0,
                 true,
+                questions[index].weight ?? 0,
               );
               model.setQuestionnaireRemarks(remark, pageNumber);
             }

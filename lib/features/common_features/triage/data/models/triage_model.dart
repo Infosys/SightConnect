@@ -12,24 +12,25 @@ part 'triage_model.g.dart';
 
 @freezed
 class TriageModel with _$TriageModel {
-  const factory TriageModel({
-    int? patientId,
-    int? encounterId,
-    String? serviceType,
-    int? organizationCode,
-    List<PerformerModel>? performer,
-    int? assessmentCode,
-    String? assessmentVersion,
-    @TimestampConverter() DateTime? issued,
-    @TimestampConverter() DateTime? userStartDate,
-    Source? source,
-    String? sourceVersion,
-    List<IncompleteTestModel>? incompleteSection,
-    List<PostImagingSelectionModel>? imagingSelection,
-    List<PostObservationsModel>? observations,
-    List<PostQuestionResponseModel>? questionResponse
-  }) = _TriageModel;
+  const factory TriageModel(
+      {int? patientId,
+      int? encounterId,
+      String? serviceType,
+      int? organizationCode,
+      List<PerformerModel>? performer,
+      int? assessmentCode,
+      String? assessmentVersion,
+      @TimestampConverter() DateTime? issued,
+      @TimestampConverter() DateTime? userStartDate,
+      Source? source,
+      String? sourceVersion,
+      List<IncompleteTestModel>? incompleteSection,
+      double? cummulativeScore,
+      List<Map<String, double>>? score,
+      List<PostImagingSelectionModel>? imagingSelection,
+      List<PostObservationsModel>? observations,
+      List<PostQuestionResponseModel>? questionResponse}) = _TriageModel;
 
   factory TriageModel.fromJson(Map<String, dynamic> json) =>
-      _$TriageModelFromJson(json); 
+      _$TriageModelFromJson(json);
 }

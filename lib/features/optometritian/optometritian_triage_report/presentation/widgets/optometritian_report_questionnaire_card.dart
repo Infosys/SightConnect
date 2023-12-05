@@ -1,21 +1,22 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/providers/optometritian_report_provider.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/provider/optometritian_report_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OptometritianReportQuestionnaireCard extends ConsumerWidget {
-  const OptometritianReportQuestionnaireCard({super.key});
-
+  final List<Map<String, dynamic>> data;
+  final TriageUrgency urgency;
+  const OptometritianReportQuestionnaireCard({
+    super.key,
+    required this.data,
+    required this.urgency,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(optometritianReportProvider);
-    var urgency = model.getQuestionnaireUrgency();
-    List<Map<String, dynamic>> data =
-        ref.watch(triageQuestionnaireProvider).questionnaireForReportPage;
-
     var remarksData = ref.watch(triageQuestionnaireProvider).allRemarks;
 
     return Container(
@@ -133,15 +134,15 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: model.getColorOnUrgency(urgency),
+                  color: getColorOnUrgency(urgency),
                   border: Border.all(
                     width: 1.5,
-                    color: model.getColorOnUrgency(urgency),
+                    color: getColorOnUrgency(urgency),
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    model.getUrgencyText(urgency),
+                    getUrgencyText(urgency),
                     style: applyRobotoFont(
                       fontSize: 12,
                       color: AppColor.white,
