@@ -2,9 +2,13 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/related_party_model.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 
 class MyConnectionsList extends StatelessWidget {
   const MyConnectionsList({super.key, required this.connectionsList});
@@ -28,7 +32,14 @@ class MyConnectionsList extends StatelessWidget {
             ),
             const Spacer(),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PatientProfilePage(),
+                  ),
+                );
+              },
               child: Text(
                 "See All",
                 style: applyRobotoFont(
@@ -44,7 +55,7 @@ class MyConnectionsList extends StatelessWidget {
             ? const Text("No data")
             : Row(
                 children: [
-                  Expanded(
+                  Flexible(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -64,47 +75,55 @@ class MyConnectionsList extends StatelessWidget {
                       ]),
                     ),
                   ),
-                  const SizedBox(width: AppSize.kswidth),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Transform.translate(
-                            offset: const Offset(0, 10),
-                            child: InkWell(
-                              customBorder: const CircleBorder(),
-                              onTap: () {},
-                              child: Container(
-                                width: 40.0,
-                                height: 40.0,
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: AppColor.lightBlue,
-                                    width: 1.0,
-                                  ),
+                  const SizedBox(width: AppSize.kswidth + 2),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Transform.translate(
+                          offset: const Offset(0, 10),
+                          child: InkWell(
+                            customBorder: const CircleBorder(),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TriageAddMemberPage(),
                                 ),
-                                child: const Icon(
+                              );
+                            },
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: AppColor.lightBlue,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: const Center(
+                                child: Icon(
                                   Icons.add,
                                   color: AppColor.blue,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(height: AppSize.height(context) * 0.037),
-                          Text(
-                            "Add",
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                            ),
+                        ),
+                        SizedBox(height: AppSize.height(context) * 0.029),
+                        Text(
+                          "Add",
+                          style: applyFiraSansFont(
+                            fontSize: 14,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

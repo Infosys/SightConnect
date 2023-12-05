@@ -79,15 +79,60 @@ class PatientProfileProvider extends ChangeNotifier {
                 "age": 0,
                 "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
               },
-              {
-                "patientId": 69,
-                "relation": "FATHER",
-                "parentPatientId": 420,
-                "name": "Henry Kissinger",
-                "profilePicture": "assets/images/user.png",
-                "age": 0,
-                "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-              }
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
             ],
             "identifiers": null,
             "medicalRecords": null

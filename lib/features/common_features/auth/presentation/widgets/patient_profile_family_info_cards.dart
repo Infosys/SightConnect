@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,7 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                   subtitle: Text(
                     data.parentPatientId != null
-                        ? "${data.relation.toString().split(".").last}"
+                        ? data.relation.toString().split(".").last
                         : "Self, ${data.age} years",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -106,7 +107,14 @@ class PatientFamilyDetails extends StatelessWidget {
             children: [
               InkWell(
                 customBorder: const CircleBorder(),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TriageAddMemberPage(),
+                    ),
+                  );
+                },
                 child: Container(
                   width: 42.0,
                   height: 42.0,

@@ -6,6 +6,8 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../patient_services/presentation/pages/patient_services_page.dart';
+
 class RecentServicesCardList extends StatelessWidget {
   const RecentServicesCardList({super.key});
 
@@ -33,7 +35,16 @@ class RecentServicesCardList extends StatelessWidget {
               ),
               const Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return const PatientServicesPage();
+                    },
+                  );
+                },
                 child: Text(
                   "See All",
                   style: applyRobotoFont(

@@ -15,32 +15,9 @@ class PatientServicesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Map<String, List<String>> services = {
       "Patient Care": [
-        "Buy Spectacles",
-        "Reminders",
-        "Appointment Booking",
-      ],
-      "Remote Care": [
         "Eye Scan",
-        "Eye Exercise",
-        "Cataract Test",
-      ],
-      "Special Care": [
-        "Keratoconus",
-        "Paediatric Eye Care",
-        "Post Op Care",
-        "Cataract Eyecare",
-      ],
-      "Guided Care": [
-        "Schedule Booking",
-        "Cataract Test",
-        "Vision Screening",
-        "Eye Scan",
-      ],
-      "Other Services": [
-        "Diet Plan",
-        "Calendar Check",
-        "Doctors Nearby",
-        "Hospitals Nearby"
+        "Visual Acuity Test",
+        "Eye Assessment",
       ],
     };
 
