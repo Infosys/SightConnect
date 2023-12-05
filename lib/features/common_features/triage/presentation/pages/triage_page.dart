@@ -9,6 +9,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+import '../../../visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+
 class TriagePage extends ConsumerStatefulWidget {
   const TriagePage({super.key});
 
@@ -18,10 +20,12 @@ class TriagePage extends ConsumerStatefulWidget {
 
 class _TriagePageState extends ConsumerState<TriagePage> {
   @override
+  
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () async {
       await _setBrightness(0.8);
+      ref.read(accessibilityProvider).setBrightness(80.0);
       Fluttertoast.showToast(msg: "Brightness set to 80%");
     });
   }

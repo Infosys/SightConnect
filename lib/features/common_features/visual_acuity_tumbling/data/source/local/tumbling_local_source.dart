@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -498,12 +500,43 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
 
   void mapLevelsToLevelNumber() {
     for (var level in _levels) {
+      level = getRandomQuestionDirectionFromLevel(level);
       GameMode mode = level.mode;
       if (mode == GameMode.regular) {
         levelToRegular.add(level);
       } else {
         levelToIsFive.add(level);
       }
+    }
+  }
+
+  Level getRandomQuestionDirectionFromLevel(Level level) {
+    var questions = level.questions;
+    for (var question in questions) {
+      question.direction = randomQuestionDirection(question);
+      question.angle = lookUpQuestionAngle(question.direction);
+    }
+    return level;
+  }
+
+  QuestionDirection randomQuestionDirection(Question question) {
+    var random = Random();
+    var randomNumber = random.nextInt(4);
+    return QuestionDirection.values[randomNumber];
+  }
+
+  int lookUpQuestionAngle(QuestionDirection questionDirection) {
+    switch (questionDirection) {
+      case QuestionDirection.left:
+        return 2;
+      case QuestionDirection.right:
+        return 4;
+      case QuestionDirection.up:
+        return 3;
+      case QuestionDirection.down:
+        return 1;
+      default:
+        return 0;
     }
   }
 }

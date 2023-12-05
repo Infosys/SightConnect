@@ -133,6 +133,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     selectedOptions.forEach((key, value) {
       _questionResponseList.add(PostQuestionResponseModel(
         linkId: key,
+        score: 1,
         answer: [
           PostAnswerModel(
             value: "Answer",

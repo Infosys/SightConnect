@@ -9,6 +9,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+import '../providers/accessibility_provider.dart';
+
 void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
   showDialog(
     barrierDismissible: false,
@@ -42,24 +44,28 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                     const SizedBox(height: AppSize.kmheight),
                     const _AutoContrastWidget(),
                     const SizedBox(height: AppSize.kmheight),
+                    const _BlurThreshold(),
+                    const SizedBox(height: AppSize.kmheight),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
                           onPressed: () {
+                            setState(() {});
+
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save Changes'),
                         ),
                         TextButton(
                           onPressed: () {
-                            
+                            ref.read(accessibilityProvider).reset();
                             Navigator.of(context).pop();
                           },
                           child: const Text('Reset to Default'),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -71,12 +77,12 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
   );
 }
 
-class _AutoBrightnessWidget extends HookWidget {
+class _AutoBrightnessWidget extends HookConsumerWidget {
   const _AutoBrightnessWidget();
 
   @override
-  Widget build(BuildContext context) {
-    var brightness = useState<double>(0.8);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(accessibilityProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,13 +107,14 @@ class _AutoBrightnessWidget extends HookWidget {
               Flexible(
                 child: Slider(
                   min: 0.0,
-                  max: 1.0,
+                  max: 100.0,
                   divisions: 10,
-                  value: brightness.value,
-                  label: '${brightness.value.round()}',
+                  value: model.brightness,
+                  label: '${model.brightness.round()}',
                   onChanged: (double value) async {
-                    brightness.value = value;
-                    await _setBrightness(value);
+                    model.setBrightness(value);
+                    double brightnessToggle = value / 100;
+                    await _setBrightness(brightnessToggle);
                   },
                 ),
               ),
@@ -140,6 +147,71 @@ class _AutoBrightnessWidget extends HookWidget {
     }
   }
 }
+
+class _BlurThreshold extends HookConsumerWidget {
+  const _BlurThreshold();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(accessibilityProvider);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          "Blur-Threshold",
+          style: applyFiraSansFont(),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColor.lightGrey.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(AppSize.kmradius),
+          ),
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/brightnesslow.png",
+                width: 30,
+              ),
+              Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  return Flexible(
+                    child: Slider(
+                      min: 0.0,
+                      max: 100.0,
+                      divisions: 10,
+                      value: model.threshold,
+                      label: '${model.threshold.round()}',
+                      onChanged: (double value) async {
+                        model.setThreshold(value);
+                        model.setServerThreshold(value.toInt());
+                      },
+                    ),
+                  );
+                },
+              ),
+              Image.asset(
+                "assets/images/autobrightness.png",
+                width: 30,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// Future<void> _setBlurThreshold(int threshold) async {
+//   try {
+
+//   } catch (e) {
+//     logger.d(e.toString());
+//     throw 'Failed to set blur threshold';
+//   }
+// }
 
 class _AutoFontSizeWidget extends HookWidget {
   const _AutoFontSizeWidget();

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
@@ -42,7 +43,8 @@ class PatientDashboardPage extends ConsumerWidget {
                     case 2:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const TriagePage(),
+                          builder: (context) =>
+                              const TriageMemberSelectionPage(),
                         ),
                       );
 

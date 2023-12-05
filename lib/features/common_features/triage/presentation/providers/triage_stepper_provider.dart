@@ -15,7 +15,7 @@ class TriageStepperProvider extends ChangeNotifier {
   }
 
   void getTriageCurrentStep() async {
-    _currentStep = await localDB.getTriageCurrentStep();
+    // _currentStep = await localDB.getTriageCurrentStep();
     notifyListeners();
   }
 
