@@ -1,10 +1,8 @@
 import 'dart:convert';
 
-import 'package:eye_care_for_all/features/common_features/triage/data/models/assessment_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart';
@@ -111,7 +109,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageAssessment(
-      {required AssessmentResponseModel triageAssessment}) async {
+      {required TriageAssessmentModel triageAssessment}) async {
     var dbClient = await database;
     await dbClient.insert(_triageAssessmentTableName, {
       _responseColumnName: json.encode(
@@ -122,7 +120,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageResponse(
-      {required TriageModel triageResponse}) async {
+      {required TriageResponseModel triageResponse}) async {
     var dbClient = await database;
     await dbClient.insert(_triageResponseTableName, {
       _responseColumnName: json.encode(

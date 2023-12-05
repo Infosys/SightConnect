@@ -1,14 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/assessment_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/observation_set_section_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_sections_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/data/repository/triage_offline_urgency_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +36,7 @@ class OptometritianOfflineReportProvider extends ChangeNotifier {
   List<PostImagingSelectionModel> _eyeScanResponse = [];
 
   Future<void> getTriage() async {
-    AssessmentResponseModel triageResponse =
-        await _triageLocalSource.getTriage();
+    TriageAssessmentModel triageResponse = await _triageLocalSource.getTriage();
     _questionnaireData =
         triageResponse.questionnaireSectionsResponseDTOList ?? [];
     _visionAcuityData =
@@ -60,7 +53,8 @@ class OptometritianOfflineReportProvider extends ChangeNotifier {
   }
 
   Future<void> getTriageResponse() async {
-    TriageModel triageResponse = await _triageLocalSource.getTriageResponse();
+    TriageResponseModel triageResponse =
+        await _triageLocalSource.getTriageResponse();
     _questionnaireResponse = triageResponse.questionResponse ?? [];
     _visionAcuityResponse = triageResponse.observations ?? [];
     _eyeScanResponse = triageResponse.imagingSelection ?? [];
@@ -114,13 +108,13 @@ class OptometritianOfflineReportProvider extends ChangeNotifier {
   List<Map<String, dynamic>> getVisionAcquityResult() {
     List<Map<String, dynamic>> data = [];
 
-    _visionAcuityResponse.forEach((element) {
+    for (var element in _visionAcuityResponse) {
       data.add({
         "eye": element.value,
         "value": element.score.toString(),
         "color": _getChipUrgencyColor(element.score!),
       });
-    });
+    }
     return data;
   }
 

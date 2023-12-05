@@ -1,9 +1,6 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/enums/performer_role.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/enums/srouce.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/performer_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_sections_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/srouce.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
@@ -13,6 +10,8 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../domain/models/triage_assessment_model.dart';
 
 var triageProvider = ChangeNotifierProvider(
   (ref) => TriageProvider(ref),
@@ -25,7 +24,6 @@ class TriageProvider extends ChangeNotifier {
       _questionnaireSections;
   TriageProvider(this.ref) {
     getTriage();
-
   }
 
   Future<void> getTriage() async {
@@ -36,7 +34,8 @@ class TriageProvider extends ChangeNotifier {
         logger.d("TriageProvider:- $failure");
       },
       (triageAssessment) {
-        _questionnaireSections = triageAssessment.questionnaireSectionsResponseDTOList!;
+        _questionnaireSections =
+            triageAssessment.questionnaireSectionsResponseDTOList!;
       },
     );
     notifyListeners();
@@ -44,7 +43,7 @@ class TriageProvider extends ChangeNotifier {
 
   //set triage response based on the TriageResponse model
   Future<void> saveTriage() async {
-    var triage = TriageModel(
+    var triage = TriageResponseModel(
       patientId: 99000001,
       encounterId: 100001,
       serviceType: 'OPTOMETRY',

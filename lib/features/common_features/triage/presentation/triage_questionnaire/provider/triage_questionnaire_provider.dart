@@ -1,6 +1,4 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_answer_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/questionnaire_sections_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +73,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   List<Map<String, dynamic>> questionnaireForReportPage = [];
 
-  List<PostQuestionResponseModel> _questionResponseList = [];
+  final List<PostQuestionResponseModel> _questionResponseList = [];
 
   void addtoFinalResponse(selectedOptions) {
     selectedOptions.forEach((key, score) {

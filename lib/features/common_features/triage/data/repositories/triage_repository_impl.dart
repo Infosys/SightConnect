@@ -2,14 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/assessment_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../contracts/triage_repository.dart';
+import '../../domain/repositories/triage_repository.dart';
 
 var triageRepositoryProvider = Provider<TriageRepository>(
   (ref) => TriageRepositoryImpl(
@@ -31,7 +30,7 @@ class TriageRepositoryImpl implements TriageRepository {
   );
 
   @override
-  Future<Either<Failure, AssessmentResponseModel>> getTriage() async {
+  Future<Either<Failure, TriageAssessmentModel>> getTriage() async {
     if (await networkInfo.isConnected()) {
       try {
         final remoteResponse = await remoteDataSource.getTriage();
@@ -54,8 +53,8 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageModel>> saveTriage(
-      {required TriageModel triage}) async {
+  Future<Either<Failure, TriageResponseModel>> saveTriage(
+      {required TriageResponseModel triage}) async {
     if (await networkInfo.isConnected()) {
       try {
         final remoteResponse =

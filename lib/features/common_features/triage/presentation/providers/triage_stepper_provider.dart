@@ -4,7 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageStepperProvider = ChangeNotifierProvider(
-    (ref) => TriageStepperProvider(ref.watch(triageDBHelperProvider)));
+  (ref) => TriageStepperProvider(
+    ref.watch(triageDBHelperProvider),
+  ),
+);
 
 class TriageStepperProvider extends ChangeNotifier {
   int maxSteps = 4;
@@ -15,7 +18,7 @@ class TriageStepperProvider extends ChangeNotifier {
   }
 
   void getTriageCurrentStep() async {
-    // _currentStep = await localDB.getTriageCurrentStep();
+    _currentStep = await localDB.getTriageCurrentStep();
     notifyListeners();
   }
 

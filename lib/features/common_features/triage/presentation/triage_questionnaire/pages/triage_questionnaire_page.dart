@@ -22,14 +22,14 @@ class TriageQuestionnairePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var pageController = usePageController();
     var scaffoldKey = useState(GlobalKey<ScaffoldState>());
-    var triageModel = ref.watch(triageProvider);
+    var TriageResponseModel = ref.watch(triageProvider);
     var model = ref.watch(triageQuestionnaireProvider);
     var pageIndex = useState<int>(0);
     var isLastPage = model.questionnaireSections.length - 1 == pageIndex.value;
     var isButtonEnabled = model.selectedOptions.isNotEmpty;
     ref
         .watch(triageQuestionnaireProvider)
-        .getQuestionnaire(triageModel.questionnaireSections);
+        .getQuestionnaire(TriageResponseModel.questionnaireSections);
 
     return WillPopScope(
       onWillPop: () async {

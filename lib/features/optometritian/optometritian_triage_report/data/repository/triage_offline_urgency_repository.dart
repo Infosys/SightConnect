@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageUrgencyRepository {
