@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/common_features/triage/data/models/ass
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_imaging_selection_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_observations_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/post_question_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -94,6 +93,16 @@ class TriageDBHelper {
   Future getTriageAssessment() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageAssessmentTableName,
+        orderBy: "id DESC", limit: 1);
+    if (response.isNotEmpty) {
+      return json.decode(response.first[_responseColumnName].toString());
+    }
+    return [];
+  }
+
+  Future getTriageAssessmentResponse() async {
+    var dbClient = await database;
+    var response = await dbClient.query(_triageResponseTableName,
         orderBy: "id DESC", limit: 1);
     if (response.isNotEmpty) {
       return json.decode(response.first[_responseColumnName].toString());

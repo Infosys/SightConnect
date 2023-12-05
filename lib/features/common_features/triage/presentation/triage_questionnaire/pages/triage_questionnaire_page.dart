@@ -26,8 +26,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     var model = ref.watch(triageQuestionnaireProvider);
     var pageIndex = useState<int>(0);
     var isLastPage = model.questionnaireSections.length - 1 == pageIndex.value;
-    var isButtonEnabled = model.selectedOptions.isNotEmpty &&
-        model.selectedOptions.containsValue(true);
+    var isButtonEnabled = model.selectedOptions.isNotEmpty;
     ref
         .watch(triageQuestionnaireProvider)
         .getQuestionnaire(triageModel.questionnaireSections);
@@ -93,8 +92,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: model.questionnaireSections.length,
                 itemBuilder: (context, index) {
-                  var questionnaire =
-                      model.questionnaireSections[index].questionnaireResponseDTOList?.first;
+                  var questionnaire = model.questionnaireSections[index]
+                      .questionnaireResponseDTOList?.first;
 
                   return SingleChildScrollView(
                     child: Column(

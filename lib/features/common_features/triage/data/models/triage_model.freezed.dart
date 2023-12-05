@@ -35,6 +35,8 @@ mixin _$TriageModel {
   String? get sourceVersion => throw _privateConstructorUsedError;
   List<IncompleteTestModel>? get incompleteSection =>
       throw _privateConstructorUsedError;
+  double? get cummulativeScore => throw _privateConstructorUsedError;
+  List<Map<String, double>>? get score => throw _privateConstructorUsedError;
   List<PostImagingSelectionModel>? get imagingSelection =>
       throw _privateConstructorUsedError;
   List<PostObservationsModel>? get observations =>
@@ -67,6 +69,8 @@ abstract class $TriageModelCopyWith<$Res> {
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
+      double? cummulativeScore,
+      List<Map<String, double>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -97,6 +101,8 @@ class _$TriageModelCopyWithImpl<$Res, $Val extends TriageModel>
     Object? source = freezed,
     Object? sourceVersion = freezed,
     Object? incompleteSection = freezed,
+    Object? cummulativeScore = freezed,
+    Object? score = freezed,
     Object? imagingSelection = freezed,
     Object? observations = freezed,
     Object? questionResponse = freezed,
@@ -150,6 +156,14 @@ class _$TriageModelCopyWithImpl<$Res, $Val extends TriageModel>
           ? _value.incompleteSection
           : incompleteSection // ignore: cast_nullable_to_non_nullable
               as List<IncompleteTestModel>?,
+      cummulativeScore: freezed == cummulativeScore
+          ? _value.cummulativeScore
+          : cummulativeScore // ignore: cast_nullable_to_non_nullable
+              as double?,
+      score: freezed == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, double>>?,
       imagingSelection: freezed == imagingSelection
           ? _value.imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -187,6 +201,8 @@ abstract class _$$_TriageModelCopyWith<$Res>
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
+      double? cummulativeScore,
+      List<Map<String, double>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -215,6 +231,8 @@ class __$$_TriageModelCopyWithImpl<$Res>
     Object? source = freezed,
     Object? sourceVersion = freezed,
     Object? incompleteSection = freezed,
+    Object? cummulativeScore = freezed,
+    Object? score = freezed,
     Object? imagingSelection = freezed,
     Object? observations = freezed,
     Object? questionResponse = freezed,
@@ -268,6 +286,14 @@ class __$$_TriageModelCopyWithImpl<$Res>
           ? _value._incompleteSection
           : incompleteSection // ignore: cast_nullable_to_non_nullable
               as List<IncompleteTestModel>?,
+      cummulativeScore: freezed == cummulativeScore
+          ? _value.cummulativeScore
+          : cummulativeScore // ignore: cast_nullable_to_non_nullable
+              as double?,
+      score: freezed == score
+          ? _value._score
+          : score // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, double>>?,
       imagingSelection: freezed == imagingSelection
           ? _value._imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -300,11 +326,14 @@ class _$_TriageModel implements _TriageModel {
       this.source,
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
+      this.cummulativeScore,
+      final List<Map<String, double>>? score,
       final List<PostImagingSelectionModel>? imagingSelection,
       final List<PostObservationsModel>? observations,
       final List<PostQuestionResponseModel>? questionResponse})
       : _performer = performer,
         _incompleteSection = incompleteSection,
+        _score = score,
         _imagingSelection = imagingSelection,
         _observations = observations,
         _questionResponse = questionResponse;
@@ -355,6 +384,18 @@ class _$_TriageModel implements _TriageModel {
     return EqualUnmodifiableListView(value);
   }
 
+  @override
+  final double? cummulativeScore;
+  final List<Map<String, double>>? _score;
+  @override
+  List<Map<String, double>>? get score {
+    final value = _score;
+    if (value == null) return null;
+    if (_score is EqualUnmodifiableListView) return _score;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<PostImagingSelectionModel>? _imagingSelection;
   @override
   List<PostImagingSelectionModel>? get imagingSelection {
@@ -389,7 +430,7 @@ class _$_TriageModel implements _TriageModel {
 
   @override
   String toString() {
-    return 'TriageModel(patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageModel(patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -419,6 +460,9 @@ class _$_TriageModel implements _TriageModel {
                 other.sourceVersion == sourceVersion) &&
             const DeepCollectionEquality()
                 .equals(other._incompleteSection, _incompleteSection) &&
+            (identical(other.cummulativeScore, cummulativeScore) ||
+                other.cummulativeScore == cummulativeScore) &&
+            const DeepCollectionEquality().equals(other._score, _score) &&
             const DeepCollectionEquality()
                 .equals(other._imagingSelection, _imagingSelection) &&
             const DeepCollectionEquality()
@@ -443,6 +487,8 @@ class _$_TriageModel implements _TriageModel {
       source,
       sourceVersion,
       const DeepCollectionEquality().hash(_incompleteSection),
+      cummulativeScore,
+      const DeepCollectionEquality().hash(_score),
       const DeepCollectionEquality().hash(_imagingSelection),
       const DeepCollectionEquality().hash(_observations),
       const DeepCollectionEquality().hash(_questionResponse));
@@ -475,6 +521,8 @@ abstract class _TriageModel implements TriageModel {
           final Source? source,
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
+          final double? cummulativeScore,
+          final List<Map<String, double>>? score,
           final List<PostImagingSelectionModel>? imagingSelection,
           final List<PostObservationsModel>? observations,
           final List<PostQuestionResponseModel>? questionResponse}) =
@@ -509,6 +557,10 @@ abstract class _TriageModel implements TriageModel {
   String? get sourceVersion;
   @override
   List<IncompleteTestModel>? get incompleteSection;
+  @override
+  double? get cummulativeScore;
+  @override
+  List<Map<String, double>>? get score;
   @override
   List<PostImagingSelectionModel>? get imagingSelection;
   @override

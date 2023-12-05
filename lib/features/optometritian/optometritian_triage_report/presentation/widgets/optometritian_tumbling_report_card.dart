@@ -1,27 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../providers/optometritian_report_provider.dart';
+import '../provider/optometritian_report_provider.dart';
 
 class OptometritianTumblingReportCard extends ConsumerWidget {
-  const OptometritianTumblingReportCard({super.key});
+  final List<Map<String, dynamic>> data;
+  final TriageUrgency urgency;
+  const OptometritianTumblingReportCard({
+    super.key,
+    required this.data,
+    required this.urgency,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var eyeModel = ref.watch(tumblingTestProvider);
-    var model = ref.watch(optometritianReportProvider);
-    var urgency = model.visualAcuityUrgency();
-    var tumblingEData = model.getTumblingEData(
-      eyeModel.calculateEyeSight(Eye.left),
-      eyeModel.calculateEyeSight(Eye.right),
-      eyeModel.calculateEyeSight(Eye.both),
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Column(
@@ -51,7 +47,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: tumblingEData.length,
+              itemCount: data.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.4,
@@ -75,7 +71,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          tumblingEData[index]["eye"],
+                          data[index]["eye"],
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -83,11 +79,11 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          tumblingEData[index]["value"],
+                          data[index]["value"],
                           style: applyRobotoFont(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: tumblingEData[index]["color"],
+                            color: data[index]["color"],
                           ),
                           textAlign: TextAlign.left,
                         )
@@ -129,15 +125,15 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: model.getColorOnUrgency(urgency),
+                  color: getColorOnUrgency(urgency),
                   border: Border.all(
                     width: 1.5,
-                    color: model.getColorOnUrgency(urgency),
+                    color: getColorOnUrgency(urgency),
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    model.getUrgencyText(urgency),
+                    getUrgencyText(urgency),
                     style: applyRobotoFont(
                       fontSize: 12,
                       color: AppColor.white,

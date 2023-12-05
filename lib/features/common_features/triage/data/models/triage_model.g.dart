@@ -25,6 +25,12 @@ _$_TriageModel _$$_TriageModelFromJson(Map<String, dynamic> json) =>
       incompleteSection: (json['incompleteSection'] as List<dynamic>?)
           ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      cummulativeScore: (json['cummulativeScore'] as num?)?.toDouble(),
+      score: (json['score'] as List<dynamic>?)
+          ?.map((e) => (e as Map<String, dynamic>).map(
+                (k, e) => MapEntry(k, (e as num).toDouble()),
+              ))
+          .toList(),
       imagingSelection: (json['imagingSelection'] as List<dynamic>?)
           ?.map((e) =>
               PostImagingSelectionModel.fromJson(e as Map<String, dynamic>))
@@ -54,6 +60,8 @@ Map<String, dynamic> _$$_TriageModelToJson(_$_TriageModel instance) =>
       'source': _$SourceEnumMap[instance.source],
       'sourceVersion': instance.sourceVersion,
       'incompleteSection': instance.incompleteSection,
+      'cummulativeScore': instance.cummulativeScore,
+      'score': instance.score,
       'imagingSelection': instance.imagingSelection,
       'observations': instance.observations,
       'questionResponse': instance.questionResponse,

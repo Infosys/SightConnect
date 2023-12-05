@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/widgets/optometritian_report_questionnaire_card.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/widgets/optometritian_tumbling_report_card.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_report_questionnaire_card.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_tumbling_report_card.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/provider/optometritian_report_provider_offline.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -12,36 +14,29 @@ import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../providers/optometritian_report_provider.dart';
 
-class OptometritianReportPage extends ConsumerWidget {
-  const OptometritianReportPage({
-    required this.id,
-    required this.education,
-    required this.employment,
+class OptometritianReportPageOffline extends ConsumerWidget {
+  const OptometritianReportPageOffline({
     super.key,
   });
 
-  final String id;
-  final String education;
-  final String employment;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(optometritianReportProvider);
+    var model = ref.watch(optometritianOfflineReportProvider);
     TriageUrgency urgency = model.calculateTriageUrgency();
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).popUntil((route) => route.isFirst);
         ref.read(triageProvider).resetTriage();
+        Navigator.of(context).popUntil((route) => route.isFirst);
         return false;
       },
       child: Scaffold(
-        key: model.scaffoldKey,
         appBar: CustomAppbar(
           leadingIcon: IconButton(
             onPressed: () {
-              Navigator.of(context).popUntil((route) => route.isFirst);
               ref.read(triageProvider).resetTriage();
+              Navigator.of(context).popUntil((route) => route.isFirst);
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -50,12 +45,20 @@ class OptometritianReportPage extends ConsumerWidget {
           ),
           centerTitle: false,
           title: Text(
-            "Assessment Report",
+            "Assessment Offline Report",
             style: applyFiraSansFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                ref.read(triageLocalSourceProvider).resetTriage();
+              },
+              icon: const Icon(Icons.restore),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
             child: Padding(
@@ -84,14 +87,14 @@ class OptometritianReportPage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              id,
+                              "Local ID",
                               style: applyFiraSansFont(
                                   fontSize: 16,
                                   color: AppColor.white,
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "AID ${id}1",
+                              "AID1",
                               style: applyRobotoFont(
                                   fontSize: 14,
                                   color: AppColor.white,
@@ -104,14 +107,14 @@ class OptometritianReportPage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              education,
+                              "Education",
                               style: applyRobotoFont(
                                   fontSize: 14,
                                   color: AppColor.white,
                                   fontWeight: FontWeight.w300),
                             ),
                             Text(
-                              employment,
+                              "Employment",
                               style: applyRobotoFont(
                                   fontSize: 14,
                                   color: AppColor.white,
@@ -148,15 +151,15 @@ class OptometritianReportPage extends ConsumerWidget {
                   width: AppSize.width(context) * 0.35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
-                    color: model.getColorOnUrgency(urgency),
+                    color: getColorOnUrgency(urgency),
                     border: Border.all(
                       width: 1.5,
-                      color: model.getColorOnUrgency(urgency),
+                      color: getColorOnUrgency(urgency),
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      model.getUrgencyText(urgency),
+                      getUrgencyText(urgency),
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.white,
@@ -167,8 +170,14 @@ class OptometritianReportPage extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: AppSize.ksheight),
-            const OptometritianReportQuestionnaireCard(),
-            const OptometritianTumblingReportCard(),
+            OptometritianReportQuestionnaireCard(
+              data: model.getQuestionnaireResult(),
+              urgency: TriageUrgency.ROUTINE,
+            ),
+            OptometritianTumblingReportCard(
+              data: model.getVisionAcquityResult(),
+              urgency: TriageUrgency.ROUTINE,
+            ),
             const EyeScanTabView(),
             const BrandingWidgetH(),
           ]),
@@ -180,11 +189,12 @@ class OptometritianReportPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
                   ref.read(triageProvider).resetTriage();
+
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const TriagePage(),
+                      builder: (context) => const TriageQuestionnairePage(),
                     ),
                   );
                 },
@@ -196,8 +206,8 @@ class OptometritianReportPage extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
                     ref.read(triageProvider).resetTriage();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Home"),
                 ),

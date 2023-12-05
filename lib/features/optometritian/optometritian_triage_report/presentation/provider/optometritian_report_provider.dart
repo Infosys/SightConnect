@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/contracts/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_repository_impl.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/data/repository/triage_offline_urgency_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,22 +27,6 @@ class OptometritianReportProvider extends ChangeNotifier {
 
   TriageUrgency visualAcuityUrgency() {
     return _triageUrgencyRepository.visualAcuityUrgency();
-  }
-
-  Color getColorOnUrgency(TriageUrgency urgency) {
-    return switch (urgency) {
-      TriageUrgency.EMERGENCY => AppColor.red,
-      TriageUrgency.PRIORITY => AppColor.orange,
-      TriageUrgency.ROUTINE => AppColor.green,
-    };
-  }
-
-  String getUrgencyText(TriageUrgency urgency) {
-    return switch (urgency) {
-      TriageUrgency.EMERGENCY => "Urgent Consult",
-      TriageUrgency.PRIORITY => "Early Consult",
-      TriageUrgency.ROUTINE => "Regular Consult",
-    };
   }
 
   Color _getChipUrgencyColor(double value) {
@@ -79,4 +62,20 @@ class OptometritianReportProvider extends ChangeNotifier {
       },
     ];
   }
+}
+
+Color getColorOnUrgency(TriageUrgency urgency) {
+  return switch (urgency) {
+    TriageUrgency.EMERGENCY => AppColor.red,
+    TriageUrgency.PRIORITY => AppColor.orange,
+    TriageUrgency.ROUTINE => AppColor.green,
+  };
+}
+
+String getUrgencyText(TriageUrgency urgency) {
+  return switch (urgency) {
+    TriageUrgency.EMERGENCY => "Urgent Consult",
+    TriageUrgency.PRIORITY => "Early Consult",
+    TriageUrgency.ROUTINE => "Regular Consult",
+  };
 }
