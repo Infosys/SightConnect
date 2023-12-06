@@ -9,44 +9,28 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/models/triage_assessment_model.dart';
 
-var triageProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => TriageProvider(ref),
+var getTriageProvider = FutureProvider.autoDispose<TriageAssessmentModel>(
+  (ref) async {
+    var response = await ref.read(triageRepositoryProvider).getTriage();
+    return response.fold((failure) {
+      logger.d({
+        "getTriageProvider": failure,
+      });
+
+      throw failure;
+    }, (triageAssessment) {
+      return triageAssessment;
+    });
+  },
 );
 
-class TriageProvider extends ChangeNotifier {
-  Ref ref;
-  List<QuestionnaireSectionsResponseModel> _questionnaireSections = [];
-  List<QuestionnaireSectionsResponseModel> get questionnaireSections =>
-      _questionnaireSections;
-  TriageProvider(this.ref) {
-    getTriage();
-  }
-
-  Future<void> getTriage() async {
-    var response = await ref.read(triageRepositoryProvider).getTriage();
-    response.fold(
-      (failure) {
-        logger.d("getTriage $failure");
-        logger.d("TriageProvider:- $failure");
-        Fluttertoast.showToast(
-          msg: "Something went wrong, please try again with internet",
-        );
-      },
-      (triageAssessment) {
-        _questionnaireSections =
-            triageAssessment.questionnaireSectionsResponseDTOList!;
-      },
-    );
-    notifyListeners();
-  }
-
-  //set triage response based on the TriageResponse model
-  Future<void> saveTriage() async {
+var saveTriageProvider = FutureProvider.autoDispose<TriageResponseModel>(
+  (ref) async {
     var triage = TriageResponseModel(
       patientId: 99000001,
       encounterId: 100001,
@@ -54,7 +38,9 @@ class TriageProvider extends ChangeNotifier {
       organizationCode: 231000,
       performer: [
         const PerformerModel(
-            role: PerformerRole.MEDICAL_DOCTOR, identifier: 200102)
+          role: PerformerRole.MEDICAL_DOCTOR,
+          identifier: 200102,
+        )
       ],
       assessmentCode: 30001,
       assessmentVersion: "v1",
@@ -71,24 +57,32 @@ class TriageProvider extends ChangeNotifier {
       questionResponse:
           await ref.read(triageLocalSourceProvider).getQuestionaireResponse(),
     );
-    logger.d("Triage Response before api call:  $triage");
-    var response = await ref.read(triageRepositoryProvider).saveTriage(
+
+    final response = await ref.read(triageRepositoryProvider).saveTriage(
           triage: triage,
         );
-    response.fold(
+    return response.fold(
       (failure) {
-        logger.d("saveTriage $failure");
+        logger.d({
+          "saveTriageProvider": failure,
+        });
         throw failure;
       },
-      (triageResponse) => logger.d("Final Triage Response:  $triageResponse"),
+      (result) {
+        return result;
+      },
     );
-  }
+  },
+);
 
-  String _getQuestionaireRemarks() {
-    String remarks = ref.read(triageQuestionnaireProvider).questionnaireRemarks;
-    logger.d(remarks);
-    return remarks;
-  }
+var triageProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => TriageProvider(ref),
+);
+
+class TriageProvider extends ChangeNotifier {
+  Ref ref;
+
+  TriageProvider(this.ref);
 
   resetTriage() {
     ref.invalidate(triageQuestionnaireProvider);

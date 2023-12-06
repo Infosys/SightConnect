@@ -15,7 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
-import 'eyes_capture_triage_page.dart';
+import 'triage_eye_capturing_page.dart';
 
 class TriageEyeScanInstructions extends ConsumerWidget {
   const TriageEyeScanInstructions({super.key});
@@ -177,7 +177,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                     navigator.push(
                       MaterialPageRoute(
                         builder: (context) =>
-                            EyeCaptureTriagePage(cameras: cameras),
+                            TriageEyeCapturingPage(cameras: cameras),
                       ),
                     );
                   } catch (e) {

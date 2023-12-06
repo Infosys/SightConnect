@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -11,25 +10,31 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../domain/models/triage_assessment_model.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import '../widgets/option_grid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
-  const TriageQuestionnairePage({super.key});
+  const TriageQuestionnairePage({
+    required this.questionnaireSections,
+    super.key,
+  });
+
+  final List<QuestionnaireSectionsResponseModel> questionnaireSections;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var pageController = usePageController();
-    var scaffoldKey = useState(GlobalKey<ScaffoldState>());
-    var TriageResponseModel = ref.watch(triageProvider);
-    var model = ref.watch(triageQuestionnaireProvider);
+    final pageController = usePageController();
+    final scaffoldKey = useState(GlobalKey<ScaffoldState>());
+    final model = ref.watch(triageQuestionnaireProvider);
     var pageIndex = useState<int>(0);
-    var isLastPage = model.questionnaireSections.length - 1 == pageIndex.value;
-    var isButtonEnabled = model.selectedOptions.isNotEmpty;
-    ref
-        .watch(triageQuestionnaireProvider)
-        .getQuestionnaire(TriageResponseModel.questionnaireSections);
+    final isLastPage =
+        model.questionnaireSections.length - 1 == pageIndex.value;
+    final isButtonEnabled = model.selectedOptions.isNotEmpty;
+    ref.watch(triageQuestionnaireProvider).getQuestionnaire(
+          questionnaireSections,
+        );
 
     return WillPopScope(
       onWillPop: () async {

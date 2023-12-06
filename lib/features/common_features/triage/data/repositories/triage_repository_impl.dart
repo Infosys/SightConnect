@@ -75,4 +75,14 @@ class TriageRepositoryImpl implements TriageRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, int>> getTriageCurrentStep() async {
+    try {
+      final localResponse = await localDataSource.getTriageCurrentStep();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
+  }
 }

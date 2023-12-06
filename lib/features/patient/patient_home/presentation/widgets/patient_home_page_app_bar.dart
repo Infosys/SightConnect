@@ -4,8 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
-import 'package:eye_care_for_all/main.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -67,26 +65,32 @@ class PatientHomePageAppBar extends StatelessWidget
               ),
               Consumer(
                 builder: (context, ref, child) {
-                  var model = ref.watch(getPatientProfileProvider);
-
-                  model.whenData(
-                    (patient) {
-                      return CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Theme.of(context).primaryColor,
+                  return ref.watch(getPatientProfileProvider).when(
+                    data: (patient) {
+                      return Positioned(
+                        right: -10,
                         child: CircleAvatar(
-                          radius: 18,
-                          backgroundImage:
-                              patient.profile?.patient?.profilePhoto == null
-                                  ? const AssetImage('assets/images/user.png')
-                                  : CachedNetworkImageProvider(
-                                      patient.profile!.patient!.profilePhoto!,
-                                    ) as ImageProvider,
+                          radius: 20,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundImage:
+                                patient.profile?.patient?.profilePhoto == null
+                                    ? const AssetImage('assets/images/user.png')
+                                    : CachedNetworkImageProvider(
+                                        patient.profile!.patient!.profilePhoto!,
+                                      ) as ImageProvider,
+                          ),
                         ),
                       );
                     },
+                    loading: () {
+                      return const SizedBox();
+                    },
+                    error: (e, s) {
+                      return const SizedBox();
+                    },
                   );
-                  return const SizedBox();
                 },
               ),
             ],

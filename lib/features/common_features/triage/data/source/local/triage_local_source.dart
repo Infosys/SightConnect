@@ -7,24 +7,33 @@ import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
   Future<TriageAssessmentModel> getTriage();
-  Future<TriageAssessmentModel> updateTriage(
-      {required TriageAssessmentModel triage});
-  Future<void> saveTriage({required TriageAssessmentModel triage});
+  Future<TriageAssessmentModel> updateTriage({
+    required TriageAssessmentModel triage,
+  });
+  Future<void> saveTriage({
+    required TriageAssessmentModel triage,
+  });
   Future<void> deleteTriage();
-  Future<TriageResponseModel> saveTriageResponse(
-      {required TriageResponseModel triageResponse});
-  Future<TriageResponseModel> getTriageResponse();
-  Future<void> saveTriageQuestionnaireLocally(
-      {required List<PostQuestionResponseModel> triageQuestionnaireResponse});
-  Future<void> saveTriageVisualAcuityLocally(
-      {required List<PostObservationsModel> triageVisualAcuity});
-  Future<void> saveTriageEyeScanLocally(
-      {required List<PostImagingSelectionModel> triageEyeScan});
 
+  Future<TriageResponseModel> saveTriageResponse({
+    required TriageResponseModel triageResponse,
+  });
+  Future<TriageResponseModel> getTriageResponse();
+
+  Future<void> saveTriageQuestionnaireLocally({
+    required List<PostQuestionResponseModel> triageQuestionnaireResponse,
+  });
+  Future<void> saveTriageVisualAcuityLocally({
+    required List<PostObservationsModel> triageVisualAcuity,
+  });
+  Future<void> saveTriageEyeScanLocally({
+    required List<PostImagingSelectionModel> triageEyeScan,
+  });
   Future<List<PostQuestionResponseModel>> getQuestionaireResponse();
   Future<List<PostObservationsModel>> getVisionAcuityTumblingResponse();
   Future<List<PostImagingSelectionModel>> getTriageEyeScanResponse();
   Future<void> resetTriage();
+  Future<int> getTriageCurrentStep();
 }
 
 class TriageLocalSourceImpl implements TriageLocalSource {
@@ -147,6 +156,11 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   @override
   Future<void> resetTriage() async {
     await triageDBHelper.deleteAllTriageSteps();
+  }
+
+  @override
+  Future<int> getTriageCurrentStep() async {
+    return await triageDBHelper.getTriageCurrentStep();
   }
 }
 

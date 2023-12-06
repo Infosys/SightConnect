@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
-class EyePreviewPage extends StatelessWidget {
-  const EyePreviewPage({super.key, required this.imageFile});
+class TriageEyePreviewPage extends StatelessWidget {
+  const TriageEyePreviewPage({super.key, required this.imageFile});
   final XFile? imageFile;
 
   @override

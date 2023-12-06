@@ -23,7 +23,7 @@ final getPatientProfileProvider =
           "abhaAddress": null,
           "name": "Raghavi Mishra",
           "gender": "FEMALE",
-          "profilePhoto": "assets/images/user.png",
+          "profilePhoto": null,
           "email": "RaghaviMishra@gmail.com",
           "dayOfBirth": "15",
           "monthOfBirth": "08",

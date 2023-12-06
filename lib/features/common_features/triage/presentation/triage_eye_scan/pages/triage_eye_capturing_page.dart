@@ -3,15 +3,12 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eye_preview_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page_offline.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -24,9 +21,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/camera_controllers.dart';
 
-class EyeCaptureTriagePage extends ConsumerStatefulWidget {
-  static const String routeName = "/patientEyeCapturePage";
-  const EyeCaptureTriagePage({
+class TriageEyeCapturingPage extends ConsumerStatefulWidget {
+  const TriageEyeCapturingPage({
     required this.cameras,
     super.key,
   });
@@ -34,11 +30,11 @@ class EyeCaptureTriagePage extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PatientEyeCaptureTriagePageState();
+      _PatientTriageEyeCapturingPageState();
 }
 
-class _PatientEyeCaptureTriagePageState
-    extends ConsumerState<EyeCaptureTriagePage> with WidgetsBindingObserver {
+class _PatientTriageEyeCapturingPageState
+    extends ConsumerState<TriageEyeCapturingPage> with WidgetsBindingObserver {
   late CameraController _controller;
   ResolutionPreset defaultResolution = ResolutionPreset.max;
   bool isLoading = false;
@@ -226,7 +222,7 @@ class _PatientEyeCaptureTriagePageState
       if (model.currentEye == TriageEye.RIGHT_EYE && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EyePreviewPage(imageFile: image),
+            builder: (context) => TriageEyePreviewPage(imageFile: image),
           ),
         );
         if (verifiedImage != null) {
@@ -238,7 +234,7 @@ class _PatientEyeCaptureTriagePageState
       } else if (model.currentEye == TriageEye.LEFT_EYE && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EyePreviewPage(imageFile: image),
+            builder: (context) => TriageEyePreviewPage(imageFile: image),
           ),
         );
         if (verifiedImage != null && mounted) {
@@ -247,16 +243,16 @@ class _PatientEyeCaptureTriagePageState
           ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
 
-          try {
-            await ref.read(triageProvider).saveTriage();
-          } on Exception catch (e) {
-            logger.d(e.toString());
-          }
-
-          if (mounted) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => const TriageResultPage())));
-          }
+          ref.read(saveTriageProvider).maybeWhen(
+                data: (data) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: ((context) => const TriageResultPage()),
+                    ),
+                  );
+                },
+                orElse: () {},
+              );
 
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
