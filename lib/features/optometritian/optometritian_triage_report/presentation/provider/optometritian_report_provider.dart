@@ -18,15 +18,23 @@ class OptometritianReportProvider extends ChangeNotifier {
   OptometritianReportProvider(this._triageUrgencyRepository, this._scaffoldKey);
   GlobalKey<NavigatorState> get scaffoldKey => _scaffoldKey;
   TriageUrgency calculateTriageUrgency() {
-    return _triageUrgencyRepository.calculateTriageUrgency();
+    return _triageUrgencyRepository.calculateTriageUrgency(
+      getQuestionnaireUrgency(),
+      visualAcuityUrgency(),
+      eyeScanUrgency(),
+    );
   }
 
   TriageUrgency getQuestionnaireUrgency() {
-    return _triageUrgencyRepository.questionnaireUrgency();
+    return _triageUrgencyRepository.questionnaireUrgency([]);
   }
 
   TriageUrgency visualAcuityUrgency() {
-    return _triageUrgencyRepository.visualAcuityUrgency();
+    return _triageUrgencyRepository.visualAcuityUrgency([]);
+  }
+
+  TriageUrgency eyeScanUrgency() {
+    return _triageUrgencyRepository.visualAcuityUrgency([]);
   }
 
   Color _getChipUrgencyColor(double value) {

@@ -44,6 +44,12 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   void addQuestionnaireAnswer(int questionCode, bool answer, int score) {
     _selectedOptions[questionCode] = score;
     notifyListeners();
+    logger.f({
+      "Added Options: $_selectedOptions",
+      "Answer: $answer",
+      "Score: $score",
+    });
+
     logger.d("Added Options: $_selectedOptions");
   }
 

@@ -119,15 +119,24 @@ class OptometritianOfflineReportProvider extends ChangeNotifier {
   }
 
   TriageUrgency calculateTriageUrgency() {
-    return _triageUrgencyRepository.calculateTriageUrgency();
+    return _triageUrgencyRepository.calculateTriageUrgency(
+      getQuestionnaireUrgency(),
+      visualAcuityUrgency(),
+      eyeScanUrgency(),
+    );
   }
 
   TriageUrgency getQuestionnaireUrgency() {
-    return _triageUrgencyRepository.questionnaireUrgency();
+    return _triageUrgencyRepository
+        .questionnaireUrgency(_questionnaireResponse);
   }
 
   TriageUrgency visualAcuityUrgency() {
-    return _triageUrgencyRepository.visualAcuityUrgency();
+    return _triageUrgencyRepository.visualAcuityUrgency(_visionAcuityResponse);
+  }
+
+  TriageUrgency eyeScanUrgency() {
+    return _triageUrgencyRepository.eyeScanUrgency(_eyeScanResponse);
   }
 }
 

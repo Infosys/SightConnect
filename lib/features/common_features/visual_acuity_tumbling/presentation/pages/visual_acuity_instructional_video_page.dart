@@ -122,9 +122,6 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   },
                 );
                 if (context.mounted) {
-                  ref
-                      .read(triageQuestionnaireProvider)
-                      .saveQuestionaireResponseToDB();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const VisualAcuityInitiatePage(),
