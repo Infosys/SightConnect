@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/srouce.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';

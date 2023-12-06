@@ -13,7 +13,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/models/triage_assessment_model.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import '../widgets/option_grid.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -36,8 +35,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
           questionnaireSections,
         );
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (value) async {
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
@@ -79,7 +78,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               ),
               const SizedBox(width: AppSize.kswidth),
               Text(
-                AppLocalizations.of(context)!.questionnaireTitle,
+                context.loc!.questionnaireTitle,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -161,9 +160,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                     }
                   },
             child: Text(
-              isLastPage
-                  ? AppLocalizations.of(context)!.proceedButton
-                  : AppLocalizations.of(context)!.nextButton,
+              isLastPage ? context.loc!.proceedButton : context.loc!.nextButton,
               style: applyRobotoFont(
                 fontSize: 14,
                 color: AppColor.white,

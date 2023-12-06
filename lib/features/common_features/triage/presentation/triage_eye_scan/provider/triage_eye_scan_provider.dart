@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -6,10 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-enum TriageEye { RIGHT_EYE, LEFT_EYE }
-
 class TriageEyeScanProvider with ChangeNotifier {
-  TriageEye _currentEye = TriageEye.RIGHT_EYE;
+  TriageEyeType _currentEye = TriageEyeType.RIGHT;
   TriageLocalSource triageLocalSourceProvider;
 
   XFile? _leftEyeImage;
@@ -19,7 +18,7 @@ class TriageEyeScanProvider with ChangeNotifier {
 
   XFile? get leftEyeImage => _leftEyeImage;
   XFile? get rightEyeImage => _rightEyeImage;
-  TriageEye get currentEye => _currentEye;
+  TriageEyeType get currentEye => _currentEye;
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
@@ -31,7 +30,7 @@ class TriageEyeScanProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setCurrentEye(TriageEye eye) {
+  void setCurrentEye(TriageEyeType eye) {
     _currentEye = eye;
     notifyListeners();
   }
@@ -76,13 +75,13 @@ class TriageEyeScanProvider with ChangeNotifier {
     return key;
   }
 
-  getUniqueFileName(String fileName) {
+  String getUniqueFileName(String fileName) {
     String patientID = "99000001";
     String uniqueKey = generateUniqueKey();
     return "${patientID}_$fileName-$uniqueKey";
   }
 
-  saveTriageEyeScanResponseToDB() {
+  void saveTriageEyeScanResponseToDB() {
     logger.f("Saving Triage Eye Scan Response to DB");
     triageLocalSourceProvider.saveTriageEyeScanLocally(
         triageEyeScan: getTriageEyeScanResponse());
@@ -90,4 +89,7 @@ class TriageEyeScanProvider with ChangeNotifier {
 }
 
 var triageEyeScanProvider = ChangeNotifierProvider(
-    (ref) => TriageEyeScanProvider(ref.read(triageLocalSourceProvider)));
+  (ref) => TriageEyeScanProvider(
+    ref.watch(triageLocalSourceProvider),
+  ),
+);

@@ -25,9 +25,14 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () async {
-      await _setBrightness(0.8);
-      ref.read(accessibilityProvider).setBrightness(80.0);
-      Fluttertoast.showToast(msg: "Brightness set to 80%");
+      try {
+        await ref.read(accessibilityProvider).setBrightness(80.0);
+        Fluttertoast.showToast(msg: "Brightness set to 80%");
+      } catch (e) {
+        Fluttertoast.showToast(
+          msg: "Please set the brightness manually to 80%",
+        );
+      }
     });
   }
 
@@ -89,14 +94,5 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         );
       },
     );
-  }
-
-  Future<void> _setBrightness(double brightness) async {
-    try {
-      await ScreenBrightness().setScreenBrightness(brightness);
-    } catch (e) {
-      logger.d(e.toString());
-      throw 'Failed to set brightness';
-    }
   }
 }

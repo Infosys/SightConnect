@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
@@ -41,8 +42,8 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void initState() {
-    _initializeCamera(CameraLensDirection.front);
     super.initState();
+    _initializeCamera(CameraLensDirection.front);
   }
 
   _initializeCamera(CameraLensDirection lensDirection) async {
@@ -219,7 +220,7 @@ class _PatientTriageEyeCapturingPageState
       setState(() {
         isLoading = false;
       });
-      if (model.currentEye == TriageEye.RIGHT_EYE && mounted) {
+      if (model.currentEye == TriageEyeType.RIGHT && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => TriageEyePreviewPage(imageFile: image),
@@ -227,11 +228,11 @@ class _PatientTriageEyeCapturingPageState
         );
         if (verifiedImage != null) {
           model.setRightEyeImage(verifiedImage);
-          model.setCurrentEye(TriageEye.LEFT_EYE);
+          model.setCurrentEye(TriageEyeType.LEFT);
         } else {
           return;
         }
-      } else if (model.currentEye == TriageEye.LEFT_EYE && mounted) {
+      } else if (model.currentEye == TriageEyeType.LEFT && mounted) {
         XFile? verifiedImage = await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => TriageEyePreviewPage(imageFile: image),
@@ -241,7 +242,7 @@ class _PatientTriageEyeCapturingPageState
           model.setLeftEyeImage(verifiedImage);
           ref.read(triageStepperProvider).goToNextStep();
           ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
-          model.setCurrentEye(TriageEye.RIGHT_EYE);
+          model.setCurrentEye(TriageEyeType.RIGHT);
 
           ref.read(saveTriageProvider).maybeWhen(
                 data: (data) {

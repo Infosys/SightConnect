@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/srouce.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
