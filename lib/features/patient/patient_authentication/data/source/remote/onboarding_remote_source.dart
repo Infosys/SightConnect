@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../domain/models/profile_model.dart';
 
 var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
   return PatientAuthRemoteSourceImpl(ref.read(dioProvider));

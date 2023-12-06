@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/app_environment.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/repositories/patient_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../data/models/patient_response_model.dart';
+import '../../domain/models/profile_model.dart';
 
 final getPatientProfileProvider =
     FutureProvider<PatientResponseModel>((ref) async {

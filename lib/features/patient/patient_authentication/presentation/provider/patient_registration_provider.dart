@@ -1,12 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/enums/gender.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/address_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/repositories/patient_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/gender.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+
+import '../../domain/models/profile_model.dart';
 
 final patientRegistrationProvider = ChangeNotifierProvider.autoDispose(
   (ref) => PatientRegistrationProvider(ref),

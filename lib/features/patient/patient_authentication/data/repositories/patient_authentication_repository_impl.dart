@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/contract/patient_authentication_repository.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/source/remote/onboarding_remote_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/repositories/patient_authentication_repository.dart';
+
+import 'package:eye_care_for_all/features/patient/patient_authentication/data/source/remote/onboarding_remote_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var patientAuthenticationRepositoryProvider =
@@ -21,13 +21,16 @@ class PatientAuthenticationRepositoryImpl
 
   @override
   Future<Either<Failure, PatientModel>> onboardPatient(
-      PatientModel triageDTO) async {
+    PatientModel triageDTO,
+  ) async {
     try {
       final remoteResponse =
           await _patientAuthRemoteSource.onboardPatient(triageDTO);
       return Right(remoteResponse);
     } catch (e) {
-      return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      return Left(
+        ServerFailure(errorMessage: 'This is a server exception'),
+      );
     }
   }
 
@@ -39,7 +42,9 @@ class PatientAuthenticationRepositoryImpl
           await _patientAuthRemoteSource.getPatientProfile(patientId);
       return Right(remoteResponse);
     } catch (e) {
-      return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      return Left(
+        ServerFailure(errorMessage: 'This is a server exception'),
+      );
     }
   }
 }

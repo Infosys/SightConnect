@@ -1,12 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
-import '../../../../common_features/auth/data/source/local/fake_data_source.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../data/source/local/fake_data_source.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key, required this.patient});
@@ -120,6 +121,7 @@ class ProfileHeader extends StatelessWidget {
                       canLaunchUrl(email) {
                         launchUrl(email);
                       }
+
                       canLaunchUrl(email);
                     },
                     child: Row(

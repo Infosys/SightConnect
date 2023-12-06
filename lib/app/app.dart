@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';

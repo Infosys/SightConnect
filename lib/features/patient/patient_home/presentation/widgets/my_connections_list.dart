@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/related_party_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,9 @@ class MyConnectionsList extends ConsumerWidget {
   }
 
   Widget _content(
-      BuildContext context, List<RelatedPartyModel> connectionsList) {
+    BuildContext context,
+    List<RelatedPartyModel> connectionsList,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
