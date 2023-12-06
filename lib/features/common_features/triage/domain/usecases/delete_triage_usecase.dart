@@ -11,12 +11,14 @@ var deleteTriageUseCase = Provider(
   ),
 );
 
-class DeleteTriageUseCase implements UseCase<void, void> {
+class DeleteTriageUseCase implements UseCase<void, DeleteTriageParam> {
   final TriageRepository _repository;
   DeleteTriageUseCase(this._repository);
   @override
-  Future<Either<Failure, void>> call(void params) async {
+  Future<Either<Failure, void>> call(DeleteTriageParam params) async {
     final response = await _repository.deleteTriage();
     return response;
   }
 }
+
+class DeleteTriageParam {}
