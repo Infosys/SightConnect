@@ -172,11 +172,11 @@ class OptometritianReportPageOffline extends ConsumerWidget {
             const SizedBox(height: AppSize.ksheight),
             OptometritianReportQuestionnaireCard(
               data: model.getQuestionnaireResult(),
-              urgency: TriageUrgency.ROUTINE,
+              urgency: model.getQuestionnaireUrgency(),
             ),
             OptometritianTumblingReportCard(
               data: model.getVisionAcquityResult(),
-              urgency: TriageUrgency.ROUTINE,
+              urgency: model.visualAcuityUrgency(),
             ),
             const EyeScanTabView(),
             const BrandingWidgetH(),

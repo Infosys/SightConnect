@@ -18,6 +18,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<String> eye = ["Left Eye", "Right Eye", "Both Eye"];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Column(
@@ -71,7 +72,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          data[index]["eye"],
+                          eye[index],
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -79,7 +80,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          data[index]["value"],
+                          data[index]["eye"],
                           style: applyRobotoFont(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,

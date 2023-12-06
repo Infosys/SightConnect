@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/pages/optometritian_report_page_offline.dart';
@@ -252,27 +253,32 @@ class _PatientEyeCaptureTriagePageState
             logger.d(e.toString());
           }
 
+          if (mounted) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => const TriageResultPage())));
+          }
+
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
-          if (await ref.read(connectivityProvider).isConnected() || false) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    // const TriageResultPage()
-                    const OptometritianReportPage(
-                  id: 'PID 12345687',
-                  education: 'No Education',
-                  employment: 'Unemployed/ Home duties',
-                ),
-              ),
-            );
-          } else {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const OptometritianReportPageOffline(),
-              ),
-            );
-          }
+          // if (await ref.read(connectivityProvider).isConnected() || false) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) =>
+          //           // const TriageResultPage()
+          //           const OptometritianReportPage(
+          //         id: 'PID 12345687',
+          //         education: 'No Education',
+          //         employment: 'Unemployed/ Home duties',
+          //       ),
+          //     ),
+          //   );
+          // } else {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => const OptometritianReportPageOffline(),
+          //     ),
+          //   );
+          // }
         } else {
           return;
         }

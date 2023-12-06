@@ -1,10 +1,26 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageUrgencyRepository {
-  TriageUrgency calculateTriageUrgency();
-  TriageUrgency questionnaireUrgency();
-  TriageUrgency visualAcuityUrgency();
+  TriageUrgency calculateTriageUrgency(
+    TriageUrgency quessionnaireUrgency,
+    TriageUrgency visualAcuityUrgency,
+    TriageUrgency eyeScanUrgency,
+  );
+  TriageUrgency questionnaireUrgency(
+    List<PostQuestionResponseModel> questionnaireResponse,
+  );
+  TriageUrgency visualAcuityUrgency(
+    List<PostObservationsModel> visionAcuityResponse,
+  );
+
+  TriageUrgency eyeScanUrgency(
+    List<PostImagingSelectionModel> eyeScanResponse,
+  );
 }
 
 var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
@@ -13,20 +29,51 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
 
 class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   @override
-  TriageUrgency calculateTriageUrgency() {
-    return _triageUrgency(1);
+  TriageUrgency calculateTriageUrgency(
+    TriageUrgency quessionnaireUrgency,
+    TriageUrgency visualAcuityUrgency,
+    TriageUrgency eyeScanUrgency,
+  ) {
+    int score = _triageScore(quessionnaireUrgency) +
+        _triageScore(visualAcuityUrgency) +
+        _triageScore(eyeScanUrgency);
+    return _triageCompleteUrgency(score);
   }
 
   @override
-  TriageUrgency questionnaireUrgency() {
-    return _triageUrgency(1);
+  TriageUrgency questionnaireUrgency(
+      List<PostQuestionResponseModel> questionnaireResponse) {
+    int questionnaireScore = 1;
+    questionnaireResponse.forEach((PostQuestionResponseModel questions) {
+      questions.answer!.forEach((answer) {
+        questionnaireScore = max(questionnaireScore, answer.score!.toInt());
+      });
+    });
+
+    return _triageUrgency(questionnaireScore);
   }
 
   @override
-  TriageUrgency visualAcuityUrgency() {
-    return _triageUrgency(1);
+  TriageUrgency visualAcuityUrgency(
+      List<PostObservationsModel> visionAcuityResponse) {
+    int visionAcuityScore = 1;
+    visionAcuityResponse.forEach((PostObservationsModel observation) {
+      visionAcuityScore = max(visionAcuityScore, observation.score!.toInt());
+    });
+    return _triageUrgency(visionAcuityScore);
   }
 
+  @override
+  TriageUrgency eyeScanUrgency(
+      List<PostImagingSelectionModel> eyeScanResponse) {
+    int eyeScanScore = 1;
+    eyeScanResponse.forEach((PostImagingSelectionModel observation) {
+      eyeScanScore = max(eyeScanScore, observation.score!.toInt());
+    });
+    return _triageUrgency(eyeScanScore);
+  }
+
+  @override
   TriageUrgency _triageCompleteUrgency(int urgency) {
     if (urgency > 5) {
       return TriageUrgency.EMERGENCY;
@@ -47,6 +94,19 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
         return TriageUrgency.ROUTINE;
       default:
         return TriageUrgency.ROUTINE;
+    }
+  }
+
+  int _triageScore(TriageUrgency urgency) {
+    switch (urgency) {
+      case TriageUrgency.EMERGENCY:
+        return 3;
+      case TriageUrgency.PRIORITY:
+        return 2;
+      case TriageUrgency.ROUTINE:
+        return 1;
+      default:
+        return 1;
     }
   }
 }

@@ -9,11 +9,12 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/models/triage_assessment_model.dart';
 
-var triageProvider = ChangeNotifierProvider(
+var triageProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageProvider(ref),
 );
 
@@ -32,6 +33,9 @@ class TriageProvider extends ChangeNotifier {
       (failure) {
         logger.d("getTriage $failure");
         logger.d("TriageProvider:- $failure");
+        Fluttertoast.showToast(
+          msg: "Something went wrong, please try again with internet",
+        );
       },
       (triageAssessment) {
         _questionnaireSections =
@@ -89,7 +93,6 @@ class TriageProvider extends ChangeNotifier {
   resetTriage() {
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
-
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
   }
