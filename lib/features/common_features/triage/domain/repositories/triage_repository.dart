@@ -14,10 +14,10 @@ abstract class TriageRepository {
   Future<Either<Failure, void>> deleteTriage();
   Future<Either<Failure, int>> getTriageCurrentStep();
 
-  Future<Either<Failure, TriageResponseModel>> saveFinalTriageResponse({
+  Future<Either<Failure, TriageResponseModel>> saveTriageResponse({
     required TriageResponseModel triageResponse,
   });
-  Future<Either<Failure, TriageResponseModel>> getFinalTriageResponse();
+  Future<Either<Failure, TriageResponseModel>> getTriageResponse();
 
   Future<Either<Failure, void>> saveTriageQuestionnaireLocally({
     required List<PostQuestionResponseModel> triageQuestionnaireResponse,

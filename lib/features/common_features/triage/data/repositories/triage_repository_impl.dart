@@ -101,76 +101,173 @@ class TriageRepositoryImpl implements TriageRepository {
 
   @override
   Future<Either<Failure, void>> deleteTriage() async {
-    // TODO: implement deleteTriage
-    throw UnimplementedError();
+    logger.d({
+      "message": "Deleting triage from local",
+    });
+
+    try {
+      final localResponse = await localDataSource.deleteTriage();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, TriageResponseModel>> getFinalTriageResponse() async {
-    // TODO: implement getFinalTriageResponse
-    throw UnimplementedError();
+  Future<Either<Failure, TriageResponseModel>> getTriageResponse() async {
+    logger.d({
+      "message": "Getting final triage response from local",
+    });
+
+    try {
+      final localResponse = await localDataSource.getTriageResponse();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
   }
 
   @override
   Future<Either<Failure, List<PostQuestionResponseModel>>>
       getQuestionaireResponseLocally() async {
-    // TODO: implement getQuestionaireResponseLocally
-    throw UnimplementedError();
+    logger.d({
+      "message": "Getting questionaire response from local",
+    });
+
+    try {
+      final localResponse = await localDataSource.getQuestionaireResponse();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
   }
 
   @override
   Future<Either<Failure, List<PostImagingSelectionModel>>>
       getTriageEyeScanResponseLocally() async {
-    // TODO: implement getTriageEyeScanResponseLocally
-    throw UnimplementedError();
+    logger.d({
+      "message": "Getting triage eye scan response from local",
+    });
+
+    try {
+      final localResponse = await localDataSource.getTriageEyeScanResponse();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
   }
 
   @override
   Future<Either<Failure, List<PostObservationsModel>>>
       getVisionAcuityTumblingResponseLocally() async {
-    // TODO: implement getVisionAcuityTumblingResponseLocally
-    throw UnimplementedError();
+    logger.d({
+      "message": "Getting vision acuity tumbling response from local",
+    });
+
+    try {
+      final localResponse =
+          await localDataSource.getVisionAcuityTumblingResponse();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
   }
 
   @override
   Future<Either<Failure, void>> resetTriage() async {
-    // TODO: implement resetTriage
-    throw UnimplementedError();
+    logger.d({
+      "message": "Resetting triage from local",
+    });
+
+    try {
+      final localResponse = await localDataSource.resetTriage();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, TriageResponseModel>> saveFinalTriageResponse(
-      {required TriageResponseModel triageResponse}) async {
-    // TODO: implement saveFinalTriageResponse
-    throw UnimplementedError();
+  Future<Either<Failure, TriageResponseModel>> saveTriageResponse({
+    required TriageResponseModel triageResponse,
+  }) async {
+    logger.d({
+      "message": "Saving final triage response to local",
+    });
+
+    try {
+      final localResponse = await localDataSource.saveTriageResponse(
+          triageResponse: triageResponse);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> saveTriageEyeScanLocally(
-      {required List<PostImagingSelectionModel> triageEyeScan}) async {
-    // TODO: implement saveTriageEyeScanLocally
-    throw UnimplementedError();
+  Future<Either<Failure, void>> saveTriageEyeScanLocally({
+    required List<PostImagingSelectionModel> triageEyeScan,
+  }) async {
+    logger.d({
+      "message": "Saving triage eye scan to local",
+    });
+
+    try {
+      final localResponse = await localDataSource.saveTriageEyeScanLocally(
+          triageEyeScan: triageEyeScan);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> saveTriageQuestionnaireLocally(
-      {required List<PostQuestionResponseModel>
-          triageQuestionnaireResponse}) async {
-    // TODO: implement saveTriageQuestionnaireLocally
-    throw UnimplementedError();
+  Future<Either<Failure, void>> saveTriageQuestionnaireLocally({
+    required List<PostQuestionResponseModel> triageQuestionnaireResponse,
+  }) async {
+    logger.d({
+      "message": "Saving triage questionnaire to local",
+    });
+    try {
+      final localResponse =
+          await localDataSource.saveTriageQuestionnaireLocally(
+              triageQuestionnaireResponse: triageQuestionnaireResponse);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> saveTriageVisualAcuityLocally(
-      {required List<PostObservationsModel> triageVisualAcuity}) async {
-    // TODO: implement saveTriageVisualAcuityLocally
-    throw UnimplementedError();
+  Future<Either<Failure, void>> saveTriageVisualAcuityLocally({
+    required List<PostObservationsModel> triageVisualAcuity,
+  }) async {
+    logger.d({
+      "message": "Saving triage visual acuity to local",
+    });
+
+    try {
+      final localResponse = await localDataSource.saveTriageVisualAcuityLocally(
+          triageVisualAcuity: triageVisualAcuity);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, TriageAssessmentModel>> updateTriage(
-      {required TriageAssessmentModel triage}) async {
-    // TODO: implement updateTriage
-    throw UnimplementedError();
+  Future<Either<Failure, TriageAssessmentModel>> updateTriage({
+    required TriageAssessmentModel triage,
+  }) async {
+    logger.d({
+      "message": "Updating triage to local",
+    });
+
+    try {
+      final localResponse = await localDataSource.updateTriage(triage: triage);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
   }
 }
