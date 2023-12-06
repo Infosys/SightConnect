@@ -71,8 +71,7 @@ class PatientProfilePage extends ConsumerWidget {
                               height: AppSize.ksheight,
                             ),
                             Text(
-                              "${model.patient.profile!.patient!.address![0].line}, ${model.patient.profile!.patient!.address![0].ward}, ${model.patient.profile!.patient!.address![0].district}, ${model.patient.profile!.patient!.address![0].state}" ??
-                                  "",
+                              "${model.patient.profile!.patient!.address![0].line}, ${model.patient.profile!.patient!.address![0].ward}, ${model.patient.profile!.patient!.address![0].district}, ${model.patient.profile!.patient!.address![0].state}",
                               style: applyRobotoFont(
                                   fontSize: 14, fontWeight: FontWeight.w400),
                             ),

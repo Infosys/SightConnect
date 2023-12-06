@@ -1,10 +1,9 @@
+import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/enums/gender.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/widgets/white_field_box.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -33,9 +32,8 @@ class PatientRegistrationPage extends ConsumerWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
                     onPressed: () {
-                      
                       if (Form.of(context).validate()) {
-                        if(isPOC){
+                        if (AppEnv.isDev) {
                           return;
                         }
                         model.registerPatient();

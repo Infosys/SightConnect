@@ -241,7 +241,7 @@ class _AutoFontSizeWidget extends HookWidget {
               children: [
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
                 Consumer(
@@ -265,7 +265,7 @@ class _AutoFontSizeWidget extends HookWidget {
                 ),
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
               ],
@@ -275,7 +275,7 @@ class _AutoFontSizeWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Text(
           "Turning off auto-brightness or auto-contrast may affect test performance and accuracy. These parameters have been preset for optimal levels. However, you may change these parameters to suit your visual comfort levels.",
-          textScaleFactor: scaleFactor.value,
+          textScaler: TextScaler.linear(scaleFactor.value),
           style: applyRobotoFont(),
         ),
       ],

@@ -7,35 +7,14 @@ import 'package:flutter/material.dart';
 import '../../data/models/related_party_model.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
-  const PatientFamilyDetails({super.key, required this.relations});
+  const PatientFamilyDetails({
+    super.key,
+    required this.relations,
+  });
   final List<RelatedPartyModel> relations;
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> data = [
-      {
-        'name': 'Chunkey Pandey',
-        'image': 'assets/images/connection_dp_two.png',
-        'about': 'Father,65 years',
-        'completion': 'Profile completion 100%',
-        'color': AppColor.green,
-      },
-      {
-        'name': 'Mangal Pandey',
-        'image': 'assets/images/connections_dp_three.png',
-        'about': 'Brother,28 years',
-        'completion': 'Profile completion 100%',
-        'color': AppColor.green,
-      },
-      {
-        'name': 'Rati Pandey',
-        'image': 'assets/images/profile_image.png',
-        'about': 'Sister,18 years',
-        'completion': 'Profile completion 80%',
-        'color': AppColor.orange,
-      },
-    ];
-
     return ListTile(
       visualDensity: VisualDensity.compact,
       title: Column(

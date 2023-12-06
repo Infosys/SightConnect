@@ -1,15 +1,11 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/constants/app_color.dart';
 
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {

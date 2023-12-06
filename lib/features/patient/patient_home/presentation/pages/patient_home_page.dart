@@ -1,10 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/campaigns_list.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/good_to_know_list.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/eye_camps_card_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_list.dart';

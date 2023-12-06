@@ -24,7 +24,8 @@ class MyApp extends ConsumerWidget {
     return Millimeters.fromView(
       child: MediaQuery(
         data: mediaQueryData.copyWith(
-          textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.3,
+          textScaler:
+              TextScaler.linear(Responsive.isMobile(context) ? 1.0 : 1.3),
         ),
         child: MaterialApp(
           title: AppText.appName,
@@ -43,6 +44,7 @@ class MyApp extends ConsumerWidget {
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
+          onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {

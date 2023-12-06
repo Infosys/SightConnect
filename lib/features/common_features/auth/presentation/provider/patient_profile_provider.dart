@@ -1,8 +1,7 @@
+import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/repositories/patient_authentication_repository_impl.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../data/models/patient_response_model.dart';
 
 var patientProfileProvider = ChangeNotifierProvider(
@@ -17,7 +16,7 @@ class PatientProfileProvider extends ChangeNotifier {
   PatientResponseModel _patient = const PatientResponseModel();
 
   PatientProfileProvider(this.ref) {
-    if (isPOC) {
+    if (AppEnv.isDev) {
       _patient = PatientResponseModel.fromJson({
         "intent": "PROFILE_SHARE",
         "metaData": {
