@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 
 class EyePreviewPage extends StatelessWidget {
@@ -15,11 +16,11 @@ class EyePreviewPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Positioned.fill(
-            child: Image.asset(AppImages.aboutUs),
-            // child: Image.file(
-            //   File(imageFile!.path),
-            //   fit: BoxFit.cover,
-            // ),
+            // child: Image.asset(AppImages.aboutUs)
+            child: Image.file(
+              File(imageFile!.path),
+              fit: BoxFit.cover,
+            ),
           ),
           Positioned(
             bottom: 0,

@@ -3,9 +3,13 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/condition.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/organ.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'enums/action_type.dart';
+import 'enums/constraint.dart';
+import 'enums/disabled_display.dart';
+import 'enums/enable_behaviour.dart';
 import 'enums/media_type.dart';
+import 'enums/operator.dart';
 import 'enums/value_type.dart';
-import 'triage_response_model.dart';
 
 part 'triage_assessment_model.freezed.dart';
 part 'triage_assessment_model.g.dart';
@@ -30,18 +34,36 @@ class TriageAssessmentModel with _$TriageAssessmentModel {
       _$TriageAssessmentModelFromJson(json);
 }
 
+///////////////////////////////////////////////////////////////////
+
 @freezed
-class MediaListSectionModel with _$MediaListSectionModel {
-  const factory MediaListSectionModel({
+class QuestionnaireSectionsResponseModel
+    with _$QuestionnaireSectionsResponseModel {
+  const factory QuestionnaireSectionsResponseModel({
     int? id,
     int? index,
     String? description,
-    MediaListModel? mediaList,
-    AssessmentModel? assessment,
-  }) = _MediaListSectionModel;
+    QuestionnaireSectionModel? supersection,
+    List<QuestionnaireResponseModel>? questionnaireResponseDTOList,
+  }) = _QuestionnaireSectionsResponseModel;
 
-  factory MediaListSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListSectionModelFromJson(json);
+  factory QuestionnaireSectionsResponseModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$QuestionnaireSectionsResponseModelFromJson(json);
+}
+
+@freezed
+class QuestionnaireSectionModel with _$QuestionnaireSectionModel {
+  const factory QuestionnaireSectionModel({
+    int? id,
+    int? index,
+    String? description,
+    QuestionnaireModel? questionnaire,
+    AssessmentModel? assessment,
+  }) = _QuestionnaireSectionModel;
+
+  factory QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireSectionModelFromJson(json);
 }
 
 @freezed
@@ -82,87 +104,60 @@ class QuestionnaireModel with _$QuestionnaireModel {
 }
 
 @freezed
-class PostQuestionResponseModel with _$PostQuestionResponseModel {
-  const factory PostQuestionResponseModel({
-    int? linkId,
-    double? score,
-    List<PostAnswerModel>? answer,
-  }) = _PostQuestionResponseModel;
-
-  factory PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$PostQuestionResponseModelFromJson(json);
-}
-
-@freezed
-class PostAnswerModel with _$PostAnswerModel {
-  const factory PostAnswerModel({
-    String? value,
-    double? score,
-  }) = _PostAnswerModel;
-
-  factory PostAnswerModel.fromJson(Map<String, dynamic> json) =>
-      _$PostAnswerModelFromJson(json);
-}
-
-@freezed
-class ObservationSetSectionResponseModel
-    with _$ObservationSetSectionResponseModel {
-  const factory ObservationSetSectionResponseModel({
-    int? id,
-    int? index,
-    String? description,
-    List<ObservationSetResponseModel>? observationSetResponseDTOList,
-    ObservationSetSectionModel? supersection,
-  }) = _ObservationSetSectionResponseModel;
-
-  factory ObservationSetSectionResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$ObservationSetSectionResponseModelFromJson(json);
-}
-
-@freezed
-class ObservationSetSectionModel with _$ObservationSetSectionModel {
-  const factory ObservationSetSectionModel({
-    int? id,
-    int? index,
-    String? description,
-    ObservationSetModel? observationSet,
-    AssessmentModel? assessment,
-  }) = _ObservationSetSectionModel;
-
-  factory ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationSetSectionModelFromJson(json);
-}
-
-@freezed
-class ObservationSetModel with _$ObservationSetModel {
-  const factory ObservationSetModel({
+class QuestionnaireResponseModel with _$QuestionnaireResponseModel {
+  const factory QuestionnaireResponseModel({
     int? id,
     String? name,
+    String? description,
     String? version,
-    String? description,
+    @TimestampConverter() DateTime? approvalDate,
+    @TimestampConverter() DateTime? lastReviewDate,
+    @TimestampConverter() DateTime? effectiveFrom,
+    @TimestampConverter() DateTime? effectiveTill,
     @TimestampConverter() DateTime? creationDate,
-  }) = _ObservationSetModel;
+    @TimestampConverter() DateTime? lastModifiedDate,
+    int? publisherCode,
+    String? publisherType,
+    List<QuestionResponseModel>? questionResponseDTO,
+  }) = _QuestionnaireResponseModel;
 
-  factory ObservationSetModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationSetModelFromJson(json);
+  factory QuestionnaireResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireResponseModelFromJson(json);
 }
 
 @freezed
-class ObservationResponseModel with _$ObservationResponseModel {
-  const factory ObservationResponseModel({
+class QuestionResponseModel with _$QuestionResponseModel {
+  const factory QuestionResponseModel({
     int? id,
-    String? name,
-    ValueType? valueType,
-    String? hiThreshold,
-    String? loThreshold,
-    @TimestampConverter() DateTime? creationDate,
-    String? configs,
-    double? weightage,
-  }) = _ObservationResponseModel;
+    String? definition,
+    Constraint? constraint,
+    String? defaultValue,
+    EnableBehaviour? enableBehaviour,
+    int? maxLength,
+    DisabledDisplay? disabledDisplay,
+    String? prefix,
+    int? weight,
+    String? image,
+    List<ActionOnResponseModel>? actionOnResponseDTO,
+    bool? readOnly,
+    bool? required,
+  }) = _QuestionResponseModel;
 
-  factory ObservationResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationResponseModelFromJson(json);
+  factory QuestionResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionResponseModelFromJson(json);
+}
+
+@freezed
+class ActionOnResponseModel with _$ActionOnResponseModel {
+  const factory ActionOnResponseModel({
+    int? id,
+    Operator? operator,
+    String? answer,
+    ActionType? actionType,
+  }) = _ActionOnResponseModel;
+
+  factory ActionOnResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$ActionOnResponseModelFromJson(json);
 }
 
 @freezed
@@ -195,50 +190,6 @@ class MediaListResponseModel with _$MediaListResponseModel {
 }
 
 @freezed
-class MediaListModel with _$MediaListModel {
-  const factory MediaListModel({
-    int? id,
-    String? name,
-    String? version,
-    String? description,
-    @TimestampConverter() DateTime? creationDate,
-  }) = _MediaListModel;
-
-  factory MediaListModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListModelFromJson(json);
-}
-
-@freezed
-class QuestionnaireSectionsResponseModel
-    with _$QuestionnaireSectionsResponseModel {
-  const factory QuestionnaireSectionsResponseModel({
-    int? id,
-    int? index,
-    String? description,
-    QuestionnaireSectionModel? supersection,
-    List<QuestionnaireResponseModel>? questionnaireResponseDTOList,
-  }) = _QuestionnaireSectionsResponseModel;
-
-  factory QuestionnaireSectionsResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$QuestionnaireSectionsResponseModelFromJson(json);
-}
-
-@freezed
-class QuestionnaireSectionModel with _$QuestionnaireSectionModel {
-  const factory QuestionnaireSectionModel({
-    int? id,
-    int? index,
-    String? description,
-    QuestionnaireModel? questionnaire,
-    AssessmentModel? assessment,
-  }) = _QuestionnaireSectionModel;
-
-  factory QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionnaireSectionModelFromJson(json);
-}
-
-@freezed
 class MediaResponseModel with _$MediaResponseModel {
   const factory MediaResponseModel({
     int? id,
@@ -251,6 +202,22 @@ class MediaResponseModel with _$MediaResponseModel {
 
   factory MediaResponseModel.fromJson(Map<String, dynamic> json) =>
       _$MediaResponseModelFromJson(json);
+}
+
+@freezed
+class ObservationSetSectionResponseModel
+    with _$ObservationSetSectionResponseModel {
+  const factory ObservationSetSectionResponseModel({
+    int? id,
+    int? index,
+    String? description,
+    List<ObservationSetResponseModel>? observationSetResponseDTOList,
+    ObservationSetSectionModel? supersection,
+  }) = _ObservationSetSectionResponseModel;
+
+  factory ObservationSetSectionResponseModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$ObservationSetSectionResponseModelFromJson(json);
 }
 
 @freezed
@@ -268,3 +235,101 @@ class ObservationSetResponseModel with _$ObservationSetResponseModel {
   factory ObservationSetResponseModel.fromJson(Map<String, dynamic> json) =>
       _$ObservationSetResponseModelFromJson(json);
 }
+
+
+
+
+@freezed
+class ObservationResponseModel with _$ObservationResponseModel {
+  const factory ObservationResponseModel({
+    int? id,
+    String? name,
+    ValueType? valueType,
+    String? hiThreshold,
+    String? loThreshold,
+    @TimestampConverter() DateTime? creationDate,
+    String? configs,
+    double? weightage,
+  }) = _ObservationResponseModel;
+
+  factory ObservationResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$ObservationResponseModelFromJson(json);
+}
+
+@freezed
+class ObservationSetSectionModel with _$ObservationSetSectionModel {
+  const factory ObservationSetSectionModel({
+    int? id,
+    int? index,
+    String? description,
+    ObservationSetModel? observationSet,
+    AssessmentModel? assessment,
+  }) = _ObservationSetSectionModel;
+
+  factory ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$ObservationSetSectionModelFromJson(json);
+}
+
+@freezed
+class ObservationSetModel with _$ObservationSetModel {
+  const factory ObservationSetModel({
+    int? id,
+    String? name,
+    String? version,
+    String? description,
+    @TimestampConverter() DateTime? creationDate,
+  }) = _ObservationSetModel;
+
+  factory ObservationSetModel.fromJson(Map<String, dynamic> json) =>
+      _$ObservationSetModelFromJson(json);
+}
+
+@freezed
+class MediaListSectionModel with _$MediaListSectionModel {
+  const factory MediaListSectionModel({
+    int? id,
+    int? index,
+    String? description,
+    MediaListModel? mediaList,
+    AssessmentModel? assessment,
+  }) = _MediaListSectionModel;
+
+  factory MediaListSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$MediaListSectionModelFromJson(json);
+}
+
+@freezed
+class MediaListModel with _$MediaListModel {
+  const factory MediaListModel({
+    int? id,
+    String? name,
+    String? version,
+    String? description,
+    @TimestampConverter() DateTime? creationDate,
+  }) = _MediaListModel;
+
+  factory MediaListModel.fromJson(Map<String, dynamic> json) =>
+      _$MediaListModelFromJson(json);
+}
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,13 +1,6 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/srouce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'triage_assessment_model.dart';
-import 'enums/action_type.dart';
-import 'enums/constraint.dart';
-import 'enums/disabled_display.dart';
-import 'enums/enable_behaviour.dart';
-import 'enums/operator.dart';
 import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
 part 'triage_response_model.freezed.dart';
@@ -38,6 +31,52 @@ class TriageResponseModel with _$TriageResponseModel {
   factory TriageResponseModel.fromJson(Map<String, dynamic> json) =>
       _$TriageResponseModelFromJson(json);
 }
+/////////////////////////////////////////////////////////
+
+@freezed
+class PostQuestionResponseModel with _$PostQuestionResponseModel {
+  const factory PostQuestionResponseModel({
+    int? linkId,
+    double? score,
+    List<PostAnswerModel>? answer,
+  }) = _PostQuestionResponseModel;
+
+  factory PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$PostQuestionResponseModelFromJson(json);
+}
+
+@freezed
+class PostAnswerModel with _$PostAnswerModel {
+  const factory PostAnswerModel({
+    String? value,
+    double? score,
+  }) = _PostAnswerModel;
+
+  factory PostAnswerModel.fromJson(Map<String, dynamic> json) =>
+      _$PostAnswerModelFromJson(json);
+}
+
+@freezed
+class PerformerModel with _$PerformerModel {
+  const factory PerformerModel({
+    PerformerRole? role,
+    int? identifier,
+  }) = _PerformerModel;
+
+  factory PerformerModel.fromJson(Map<String, dynamic> json) =>
+      _$PerformerModelFromJson(json);
+}
+
+@freezed
+class IncompleteTestModel with _$IncompleteTestModel {
+  const factory IncompleteTestModel({
+    int? id,
+    TestName? testName,
+  }) = _IncompleteTestModel;
+
+  factory IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
+      _$IncompleteTestModelFromJson(json);
+}
 
 @freezed
 class PostImagingSelectionModel with _$PostImagingSelectionModel {
@@ -64,81 +103,18 @@ class PostObservationsModel with _$PostObservationsModel {
       _$PostObservationsModelFromJson(json);
 }
 
-@freezed
-class QuestionnaireResponseModel with _$QuestionnaireResponseModel {
-  const factory QuestionnaireResponseModel({
-    int? id,
-    String? name,
-    String? description,
-    String? version,
-    @TimestampConverter() DateTime? approvalDate,
-    @TimestampConverter() DateTime? lastReviewDate,
-    @TimestampConverter() DateTime? effectiveFrom,
-    @TimestampConverter() DateTime? effectiveTill,
-    @TimestampConverter() DateTime? creationDate,
-    @TimestampConverter() DateTime? lastModifiedDate,
-    int? publisherCode,
-    String? publisherType,
-    List<QuestionResponseModel>? questionResponseDTO,
-  }) = _QuestionnaireResponseModel;
+//////////////////////////////////////////////////////////
 
-  factory QuestionnaireResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionnaireResponseModelFromJson(json);
-}
 
-@freezed
-class QuestionResponseModel with _$QuestionResponseModel {
-  const factory QuestionResponseModel({
-    int? id,
-    String? definition,
-    Constraint? constraint,
-    String? defaultValue,
-    EnableBehaviour? enableBehaviour,
-    int? maxLength,
-    DisabledDisplay? disabledDisplay,
-    String? prefix,
-    int? weight,
-    String? image,
-    List<ActionOnResponseModel>? actionOnResponseDTO,
-    bool? readOnly,
-    bool? required,
-  }) = _QuestionResponseModel;
 
-  factory QuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionResponseModelFromJson(json);
-}
 
-@freezed
-class ActionOnResponseModel with _$ActionOnResponseModel {
-  const factory ActionOnResponseModel({
-    int? id,
-    Operator? operator,
-    String? answer,
-    ActionType? actionType,
-  }) = _ActionOnResponseModel;
 
-  factory ActionOnResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ActionOnResponseModelFromJson(json);
-}
 
-@freezed
-class IncompleteTestModel with _$IncompleteTestModel {
-  const factory IncompleteTestModel({
-    int? id,
-    TestName? testName,
-  }) = _IncompleteTestModel;
 
-  factory IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
-      _$IncompleteTestModelFromJson(json);
-}
 
-@freezed
-class PerformerModel with _$PerformerModel {
-  const factory PerformerModel({
-    PerformerRole? role,
-    int? identifier,
-  }) = _PerformerModel;
 
-  factory PerformerModel.fromJson(Map<String, dynamic> json) =>
-      _$PerformerModelFromJson(json);
-}
+
+
+
+
+

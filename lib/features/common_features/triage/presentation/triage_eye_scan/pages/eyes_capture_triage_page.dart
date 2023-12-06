@@ -246,11 +246,15 @@ class _PatientEyeCaptureTriagePageState
           ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
           model.setCurrentEye(TriageEye.RIGHT_EYE);
 
-          await ref.read(triageProvider).saveTriage();
+          try {
+            await ref.read(triageProvider).saveTriage();
+          } on Exception catch (e) {
+            logger.d(e.toString());
+          }
 
           // Navigator.of(context).popUntil((route) => route.isFirst);
           // showReportPopUp(context);
-          if (await ref.read(connectivityProvider).isConnected()) {
+          if (await ref.read(connectivityProvider).isConnected() || false) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) =>

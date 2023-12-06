@@ -396,47 +396,51 @@ abstract class _TriageAssessmentModel implements TriageAssessmentModel {
       throw _privateConstructorUsedError;
 }
 
-MediaListSectionModel _$MediaListSectionModelFromJson(
+QuestionnaireSectionsResponseModel _$QuestionnaireSectionsResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _MediaListSectionModel.fromJson(json);
+  return _QuestionnaireSectionsResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MediaListSectionModel {
+mixin _$QuestionnaireSectionsResponseModel {
   int? get id => throw _privateConstructorUsedError;
   int? get index => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  MediaListModel? get mediaList => throw _privateConstructorUsedError;
-  AssessmentModel? get assessment => throw _privateConstructorUsedError;
+  QuestionnaireSectionModel? get supersection =>
+      throw _privateConstructorUsedError;
+  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MediaListSectionModelCopyWith<MediaListSectionModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $QuestionnaireSectionsResponseModelCopyWith<
+          QuestionnaireSectionsResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MediaListSectionModelCopyWith<$Res> {
-  factory $MediaListSectionModelCopyWith(MediaListSectionModel value,
-          $Res Function(MediaListSectionModel) then) =
-      _$MediaListSectionModelCopyWithImpl<$Res, MediaListSectionModel>;
+abstract class $QuestionnaireSectionsResponseModelCopyWith<$Res> {
+  factory $QuestionnaireSectionsResponseModelCopyWith(
+          QuestionnaireSectionsResponseModel value,
+          $Res Function(QuestionnaireSectionsResponseModel) then) =
+      _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
+          QuestionnaireSectionsResponseModel>;
   @useResult
   $Res call(
       {int? id,
       int? index,
       String? description,
-      MediaListModel? mediaList,
-      AssessmentModel? assessment});
+      QuestionnaireSectionModel? supersection,
+      List<QuestionnaireResponseModel>? questionnaireResponseDTOList});
 
-  $MediaListModelCopyWith<$Res>? get mediaList;
-  $AssessmentModelCopyWith<$Res>? get assessment;
+  $QuestionnaireSectionModelCopyWith<$Res>? get supersection;
 }
 
 /// @nodoc
-class _$MediaListSectionModelCopyWithImpl<$Res,
-        $Val extends MediaListSectionModel>
-    implements $MediaListSectionModelCopyWith<$Res> {
-  _$MediaListSectionModelCopyWithImpl(this._value, this._then);
+class _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
+        $Val extends QuestionnaireSectionsResponseModel>
+    implements $QuestionnaireSectionsResponseModelCopyWith<$Res> {
+  _$QuestionnaireSectionsResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -449,7 +453,279 @@ class _$MediaListSectionModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? index = freezed,
     Object? description = freezed,
-    Object? mediaList = freezed,
+    Object? supersection = freezed,
+    Object? questionnaireResponseDTOList = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      supersection: freezed == supersection
+          ? _value.supersection
+          : supersection // ignore: cast_nullable_to_non_nullable
+              as QuestionnaireSectionModel?,
+      questionnaireResponseDTOList: freezed == questionnaireResponseDTOList
+          ? _value.questionnaireResponseDTOList
+          : questionnaireResponseDTOList // ignore: cast_nullable_to_non_nullable
+              as List<QuestionnaireResponseModel>?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionnaireSectionModelCopyWith<$Res>? get supersection {
+    if (_value.supersection == null) {
+      return null;
+    }
+
+    return $QuestionnaireSectionModelCopyWith<$Res>(_value.supersection!,
+        (value) {
+      return _then(_value.copyWith(supersection: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_QuestionnaireSectionsResponseModelCopyWith<$Res>
+    implements $QuestionnaireSectionsResponseModelCopyWith<$Res> {
+  factory _$$_QuestionnaireSectionsResponseModelCopyWith(
+          _$_QuestionnaireSectionsResponseModel value,
+          $Res Function(_$_QuestionnaireSectionsResponseModel) then) =
+      __$$_QuestionnaireSectionsResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      QuestionnaireSectionModel? supersection,
+      List<QuestionnaireResponseModel>? questionnaireResponseDTOList});
+
+  @override
+  $QuestionnaireSectionModelCopyWith<$Res>? get supersection;
+}
+
+/// @nodoc
+class __$$_QuestionnaireSectionsResponseModelCopyWithImpl<$Res>
+    extends _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
+        _$_QuestionnaireSectionsResponseModel>
+    implements _$$_QuestionnaireSectionsResponseModelCopyWith<$Res> {
+  __$$_QuestionnaireSectionsResponseModelCopyWithImpl(
+      _$_QuestionnaireSectionsResponseModel _value,
+      $Res Function(_$_QuestionnaireSectionsResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? supersection = freezed,
+    Object? questionnaireResponseDTOList = freezed,
+  }) {
+    return _then(_$_QuestionnaireSectionsResponseModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      supersection: freezed == supersection
+          ? _value.supersection
+          : supersection // ignore: cast_nullable_to_non_nullable
+              as QuestionnaireSectionModel?,
+      questionnaireResponseDTOList: freezed == questionnaireResponseDTOList
+          ? _value._questionnaireResponseDTOList
+          : questionnaireResponseDTOList // ignore: cast_nullable_to_non_nullable
+              as List<QuestionnaireResponseModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_QuestionnaireSectionsResponseModel
+    implements _QuestionnaireSectionsResponseModel {
+  const _$_QuestionnaireSectionsResponseModel(
+      {this.id,
+      this.index,
+      this.description,
+      this.supersection,
+      final List<QuestionnaireResponseModel>? questionnaireResponseDTOList})
+      : _questionnaireResponseDTOList = questionnaireResponseDTOList;
+
+  factory _$_QuestionnaireSectionsResponseModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_QuestionnaireSectionsResponseModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? index;
+  @override
+  final String? description;
+  @override
+  final QuestionnaireSectionModel? supersection;
+  final List<QuestionnaireResponseModel>? _questionnaireResponseDTOList;
+  @override
+  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList {
+    final value = _questionnaireResponseDTOList;
+    if (value == null) return null;
+    if (_questionnaireResponseDTOList is EqualUnmodifiableListView)
+      return _questionnaireResponseDTOList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'QuestionnaireSectionsResponseModel(id: $id, index: $index, description: $description, supersection: $supersection, questionnaireResponseDTOList: $questionnaireResponseDTOList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_QuestionnaireSectionsResponseModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.supersection, supersection) ||
+                other.supersection == supersection) &&
+            const DeepCollectionEquality().equals(
+                other._questionnaireResponseDTOList,
+                _questionnaireResponseDTOList));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      index,
+      description,
+      supersection,
+      const DeepCollectionEquality().hash(_questionnaireResponseDTOList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_QuestionnaireSectionsResponseModelCopyWith<
+          _$_QuestionnaireSectionsResponseModel>
+      get copyWith => __$$_QuestionnaireSectionsResponseModelCopyWithImpl<
+          _$_QuestionnaireSectionsResponseModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QuestionnaireSectionsResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _QuestionnaireSectionsResponseModel
+    implements QuestionnaireSectionsResponseModel {
+  const factory _QuestionnaireSectionsResponseModel(
+          {final int? id,
+          final int? index,
+          final String? description,
+          final QuestionnaireSectionModel? supersection,
+          final List<QuestionnaireResponseModel>?
+              questionnaireResponseDTOList}) =
+      _$_QuestionnaireSectionsResponseModel;
+
+  factory _QuestionnaireSectionsResponseModel.fromJson(
+          Map<String, dynamic> json) =
+      _$_QuestionnaireSectionsResponseModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get index;
+  @override
+  String? get description;
+  @override
+  QuestionnaireSectionModel? get supersection;
+  @override
+  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList;
+  @override
+  @JsonKey(ignore: true)
+  _$$_QuestionnaireSectionsResponseModelCopyWith<
+          _$_QuestionnaireSectionsResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+QuestionnaireSectionModel _$QuestionnaireSectionModelFromJson(
+    Map<String, dynamic> json) {
+  return _QuestionnaireSectionModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$QuestionnaireSectionModel {
+  int? get id => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  QuestionnaireModel? get questionnaire => throw _privateConstructorUsedError;
+  AssessmentModel? get assessment => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $QuestionnaireSectionModelCopyWith<QuestionnaireSectionModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $QuestionnaireSectionModelCopyWith<$Res> {
+  factory $QuestionnaireSectionModelCopyWith(QuestionnaireSectionModel value,
+          $Res Function(QuestionnaireSectionModel) then) =
+      _$QuestionnaireSectionModelCopyWithImpl<$Res, QuestionnaireSectionModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      QuestionnaireModel? questionnaire,
+      AssessmentModel? assessment});
+
+  $QuestionnaireModelCopyWith<$Res>? get questionnaire;
+  $AssessmentModelCopyWith<$Res>? get assessment;
+}
+
+/// @nodoc
+class _$QuestionnaireSectionModelCopyWithImpl<$Res,
+        $Val extends QuestionnaireSectionModel>
+    implements $QuestionnaireSectionModelCopyWith<$Res> {
+  _$QuestionnaireSectionModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? questionnaire = freezed,
     Object? assessment = freezed,
   }) {
     return _then(_value.copyWith(
@@ -465,10 +741,10 @@ class _$MediaListSectionModelCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      mediaList: freezed == mediaList
-          ? _value.mediaList
-          : mediaList // ignore: cast_nullable_to_non_nullable
-              as MediaListModel?,
+      questionnaire: freezed == questionnaire
+          ? _value.questionnaire
+          : questionnaire // ignore: cast_nullable_to_non_nullable
+              as QuestionnaireModel?,
       assessment: freezed == assessment
           ? _value.assessment
           : assessment // ignore: cast_nullable_to_non_nullable
@@ -478,13 +754,13 @@ class _$MediaListSectionModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $MediaListModelCopyWith<$Res>? get mediaList {
-    if (_value.mediaList == null) {
+  $QuestionnaireModelCopyWith<$Res>? get questionnaire {
+    if (_value.questionnaire == null) {
       return null;
     }
 
-    return $MediaListModelCopyWith<$Res>(_value.mediaList!, (value) {
-      return _then(_value.copyWith(mediaList: value) as $Val);
+    return $QuestionnaireModelCopyWith<$Res>(_value.questionnaire!, (value) {
+      return _then(_value.copyWith(questionnaire: value) as $Val);
     });
   }
 
@@ -502,32 +778,35 @@ class _$MediaListSectionModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MediaListSectionModelCopyWith<$Res>
-    implements $MediaListSectionModelCopyWith<$Res> {
-  factory _$$_MediaListSectionModelCopyWith(_$_MediaListSectionModel value,
-          $Res Function(_$_MediaListSectionModel) then) =
-      __$$_MediaListSectionModelCopyWithImpl<$Res>;
+abstract class _$$_QuestionnaireSectionModelCopyWith<$Res>
+    implements $QuestionnaireSectionModelCopyWith<$Res> {
+  factory _$$_QuestionnaireSectionModelCopyWith(
+          _$_QuestionnaireSectionModel value,
+          $Res Function(_$_QuestionnaireSectionModel) then) =
+      __$$_QuestionnaireSectionModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int? id,
       int? index,
       String? description,
-      MediaListModel? mediaList,
+      QuestionnaireModel? questionnaire,
       AssessmentModel? assessment});
 
   @override
-  $MediaListModelCopyWith<$Res>? get mediaList;
+  $QuestionnaireModelCopyWith<$Res>? get questionnaire;
   @override
   $AssessmentModelCopyWith<$Res>? get assessment;
 }
 
 /// @nodoc
-class __$$_MediaListSectionModelCopyWithImpl<$Res>
-    extends _$MediaListSectionModelCopyWithImpl<$Res, _$_MediaListSectionModel>
-    implements _$$_MediaListSectionModelCopyWith<$Res> {
-  __$$_MediaListSectionModelCopyWithImpl(_$_MediaListSectionModel _value,
-      $Res Function(_$_MediaListSectionModel) _then)
+class __$$_QuestionnaireSectionModelCopyWithImpl<$Res>
+    extends _$QuestionnaireSectionModelCopyWithImpl<$Res,
+        _$_QuestionnaireSectionModel>
+    implements _$$_QuestionnaireSectionModelCopyWith<$Res> {
+  __$$_QuestionnaireSectionModelCopyWithImpl(
+      _$_QuestionnaireSectionModel _value,
+      $Res Function(_$_QuestionnaireSectionModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -536,10 +815,10 @@ class __$$_MediaListSectionModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? index = freezed,
     Object? description = freezed,
-    Object? mediaList = freezed,
+    Object? questionnaire = freezed,
     Object? assessment = freezed,
   }) {
-    return _then(_$_MediaListSectionModel(
+    return _then(_$_QuestionnaireSectionModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -552,10 +831,10 @@ class __$$_MediaListSectionModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      mediaList: freezed == mediaList
-          ? _value.mediaList
-          : mediaList // ignore: cast_nullable_to_non_nullable
-              as MediaListModel?,
+      questionnaire: freezed == questionnaire
+          ? _value.questionnaire
+          : questionnaire // ignore: cast_nullable_to_non_nullable
+              as QuestionnaireModel?,
       assessment: freezed == assessment
           ? _value.assessment
           : assessment // ignore: cast_nullable_to_non_nullable
@@ -566,12 +845,16 @@ class __$$_MediaListSectionModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaListSectionModel implements _MediaListSectionModel {
-  const _$_MediaListSectionModel(
-      {this.id, this.index, this.description, this.mediaList, this.assessment});
+class _$_QuestionnaireSectionModel implements _QuestionnaireSectionModel {
+  const _$_QuestionnaireSectionModel(
+      {this.id,
+      this.index,
+      this.description,
+      this.questionnaire,
+      this.assessment});
 
-  factory _$_MediaListSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaListSectionModelFromJson(json);
+  factory _$_QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionnaireSectionModelFromJson(json);
 
   @override
   final int? id;
@@ -580,60 +863,60 @@ class _$_MediaListSectionModel implements _MediaListSectionModel {
   @override
   final String? description;
   @override
-  final MediaListModel? mediaList;
+  final QuestionnaireModel? questionnaire;
   @override
   final AssessmentModel? assessment;
 
   @override
   String toString() {
-    return 'MediaListSectionModel(id: $id, index: $index, description: $description, mediaList: $mediaList, assessment: $assessment)';
+    return 'QuestionnaireSectionModel(id: $id, index: $index, description: $description, questionnaire: $questionnaire, assessment: $assessment)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaListSectionModel &&
+            other is _$_QuestionnaireSectionModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.mediaList, mediaList) ||
-                other.mediaList == mediaList) &&
+            (identical(other.questionnaire, questionnaire) ||
+                other.questionnaire == questionnaire) &&
             (identical(other.assessment, assessment) ||
                 other.assessment == assessment));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, index, description, mediaList, assessment);
+  int get hashCode => Object.hash(
+      runtimeType, id, index, description, questionnaire, assessment);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaListSectionModelCopyWith<_$_MediaListSectionModel> get copyWith =>
-      __$$_MediaListSectionModelCopyWithImpl<_$_MediaListSectionModel>(
-          this, _$identity);
+  _$$_QuestionnaireSectionModelCopyWith<_$_QuestionnaireSectionModel>
+      get copyWith => __$$_QuestionnaireSectionModelCopyWithImpl<
+          _$_QuestionnaireSectionModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaListSectionModelToJson(
+    return _$$_QuestionnaireSectionModelToJson(
       this,
     );
   }
 }
 
-abstract class _MediaListSectionModel implements MediaListSectionModel {
-  const factory _MediaListSectionModel(
+abstract class _QuestionnaireSectionModel implements QuestionnaireSectionModel {
+  const factory _QuestionnaireSectionModel(
       {final int? id,
       final int? index,
       final String? description,
-      final MediaListModel? mediaList,
-      final AssessmentModel? assessment}) = _$_MediaListSectionModel;
+      final QuestionnaireModel? questionnaire,
+      final AssessmentModel? assessment}) = _$_QuestionnaireSectionModel;
 
-  factory _MediaListSectionModel.fromJson(Map<String, dynamic> json) =
-      _$_MediaListSectionModel.fromJson;
+  factory _QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =
+      _$_QuestionnaireSectionModel.fromJson;
 
   @override
   int? get id;
@@ -642,13 +925,13 @@ abstract class _MediaListSectionModel implements MediaListSectionModel {
   @override
   String? get description;
   @override
-  MediaListModel? get mediaList;
+  QuestionnaireModel? get questionnaire;
   @override
   AssessmentModel? get assessment;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaListSectionModelCopyWith<_$_MediaListSectionModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_QuestionnaireSectionModelCopyWith<_$_QuestionnaireSectionModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AssessmentModel _$AssessmentModelFromJson(Map<String, dynamic> json) {
@@ -1316,391 +1599,68 @@ abstract class _QuestionnaireModel implements QuestionnaireModel {
       throw _privateConstructorUsedError;
 }
 
-PostQuestionResponseModel _$PostQuestionResponseModelFromJson(
+QuestionnaireResponseModel _$QuestionnaireResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _PostQuestionResponseModel.fromJson(json);
+  return _QuestionnaireResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PostQuestionResponseModel {
-  int? get linkId => throw _privateConstructorUsedError;
-  double? get score => throw _privateConstructorUsedError;
-  List<PostAnswerModel>? get answer => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PostQuestionResponseModelCopyWith<PostQuestionResponseModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PostQuestionResponseModelCopyWith<$Res> {
-  factory $PostQuestionResponseModelCopyWith(PostQuestionResponseModel value,
-          $Res Function(PostQuestionResponseModel) then) =
-      _$PostQuestionResponseModelCopyWithImpl<$Res, PostQuestionResponseModel>;
-  @useResult
-  $Res call({int? linkId, double? score, List<PostAnswerModel>? answer});
-}
-
-/// @nodoc
-class _$PostQuestionResponseModelCopyWithImpl<$Res,
-        $Val extends PostQuestionResponseModel>
-    implements $PostQuestionResponseModelCopyWith<$Res> {
-  _$PostQuestionResponseModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? linkId = freezed,
-    Object? score = freezed,
-    Object? answer = freezed,
-  }) {
-    return _then(_value.copyWith(
-      linkId: freezed == linkId
-          ? _value.linkId
-          : linkId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double?,
-      answer: freezed == answer
-          ? _value.answer
-          : answer // ignore: cast_nullable_to_non_nullable
-              as List<PostAnswerModel>?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_PostQuestionResponseModelCopyWith<$Res>
-    implements $PostQuestionResponseModelCopyWith<$Res> {
-  factory _$$_PostQuestionResponseModelCopyWith(
-          _$_PostQuestionResponseModel value,
-          $Res Function(_$_PostQuestionResponseModel) then) =
-      __$$_PostQuestionResponseModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int? linkId, double? score, List<PostAnswerModel>? answer});
-}
-
-/// @nodoc
-class __$$_PostQuestionResponseModelCopyWithImpl<$Res>
-    extends _$PostQuestionResponseModelCopyWithImpl<$Res,
-        _$_PostQuestionResponseModel>
-    implements _$$_PostQuestionResponseModelCopyWith<$Res> {
-  __$$_PostQuestionResponseModelCopyWithImpl(
-      _$_PostQuestionResponseModel _value,
-      $Res Function(_$_PostQuestionResponseModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? linkId = freezed,
-    Object? score = freezed,
-    Object? answer = freezed,
-  }) {
-    return _then(_$_PostQuestionResponseModel(
-      linkId: freezed == linkId
-          ? _value.linkId
-          : linkId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double?,
-      answer: freezed == answer
-          ? _value._answer
-          : answer // ignore: cast_nullable_to_non_nullable
-              as List<PostAnswerModel>?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_PostQuestionResponseModel implements _PostQuestionResponseModel {
-  const _$_PostQuestionResponseModel(
-      {this.linkId, this.score, final List<PostAnswerModel>? answer})
-      : _answer = answer;
-
-  factory _$_PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostQuestionResponseModelFromJson(json);
-
-  @override
-  final int? linkId;
-  @override
-  final double? score;
-  final List<PostAnswerModel>? _answer;
-  @override
-  List<PostAnswerModel>? get answer {
-    final value = _answer;
-    if (value == null) return null;
-    if (_answer is EqualUnmodifiableListView) return _answer;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'PostQuestionResponseModel(linkId: $linkId, score: $score, answer: $answer)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PostQuestionResponseModel &&
-            (identical(other.linkId, linkId) || other.linkId == linkId) &&
-            (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality().equals(other._answer, _answer));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, linkId, score, const DeepCollectionEquality().hash(_answer));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PostQuestionResponseModelCopyWith<_$_PostQuestionResponseModel>
-      get copyWith => __$$_PostQuestionResponseModelCopyWithImpl<
-          _$_PostQuestionResponseModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PostQuestionResponseModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _PostQuestionResponseModel implements PostQuestionResponseModel {
-  const factory _PostQuestionResponseModel(
-      {final int? linkId,
-      final double? score,
-      final List<PostAnswerModel>? answer}) = _$_PostQuestionResponseModel;
-
-  factory _PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_PostQuestionResponseModel.fromJson;
-
-  @override
-  int? get linkId;
-  @override
-  double? get score;
-  @override
-  List<PostAnswerModel>? get answer;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PostQuestionResponseModelCopyWith<_$_PostQuestionResponseModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-PostAnswerModel _$PostAnswerModelFromJson(Map<String, dynamic> json) {
-  return _PostAnswerModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PostAnswerModel {
-  String? get value => throw _privateConstructorUsedError;
-  double? get score => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PostAnswerModelCopyWith<PostAnswerModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PostAnswerModelCopyWith<$Res> {
-  factory $PostAnswerModelCopyWith(
-          PostAnswerModel value, $Res Function(PostAnswerModel) then) =
-      _$PostAnswerModelCopyWithImpl<$Res, PostAnswerModel>;
-  @useResult
-  $Res call({String? value, double? score});
-}
-
-/// @nodoc
-class _$PostAnswerModelCopyWithImpl<$Res, $Val extends PostAnswerModel>
-    implements $PostAnswerModelCopyWith<$Res> {
-  _$PostAnswerModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? value = freezed,
-    Object? score = freezed,
-  }) {
-    return _then(_value.copyWith(
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_PostAnswerModelCopyWith<$Res>
-    implements $PostAnswerModelCopyWith<$Res> {
-  factory _$$_PostAnswerModelCopyWith(
-          _$_PostAnswerModel value, $Res Function(_$_PostAnswerModel) then) =
-      __$$_PostAnswerModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? value, double? score});
-}
-
-/// @nodoc
-class __$$_PostAnswerModelCopyWithImpl<$Res>
-    extends _$PostAnswerModelCopyWithImpl<$Res, _$_PostAnswerModel>
-    implements _$$_PostAnswerModelCopyWith<$Res> {
-  __$$_PostAnswerModelCopyWithImpl(
-      _$_PostAnswerModel _value, $Res Function(_$_PostAnswerModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? value = freezed,
-    Object? score = freezed,
-  }) {
-    return _then(_$_PostAnswerModel(
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_PostAnswerModel implements _PostAnswerModel {
-  const _$_PostAnswerModel({this.value, this.score});
-
-  factory _$_PostAnswerModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostAnswerModelFromJson(json);
-
-  @override
-  final String? value;
-  @override
-  final double? score;
-
-  @override
-  String toString() {
-    return 'PostAnswerModel(value: $value, score: $score)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PostAnswerModel &&
-            (identical(other.value, value) || other.value == value) &&
-            (identical(other.score, score) || other.score == score));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, value, score);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PostAnswerModelCopyWith<_$_PostAnswerModel> get copyWith =>
-      __$$_PostAnswerModelCopyWithImpl<_$_PostAnswerModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PostAnswerModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _PostAnswerModel implements PostAnswerModel {
-  const factory _PostAnswerModel({final String? value, final double? score}) =
-      _$_PostAnswerModel;
-
-  factory _PostAnswerModel.fromJson(Map<String, dynamic> json) =
-      _$_PostAnswerModel.fromJson;
-
-  @override
-  String? get value;
-  @override
-  double? get score;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PostAnswerModelCopyWith<_$_PostAnswerModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ObservationSetSectionResponseModel _$ObservationSetSectionResponseModelFromJson(
-    Map<String, dynamic> json) {
-  return _ObservationSetSectionResponseModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ObservationSetSectionResponseModel {
+mixin _$QuestionnaireResponseModel {
   int? get id => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  List<ObservationSetResponseModel>? get observationSetResponseDTOList =>
-      throw _privateConstructorUsedError;
-  ObservationSetSectionModel? get supersection =>
+  String? get version => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get approvalDate => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get lastReviewDate => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get effectiveFrom => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get effectiveTill => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get creationDate => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get lastModifiedDate => throw _privateConstructorUsedError;
+  int? get publisherCode => throw _privateConstructorUsedError;
+  String? get publisherType => throw _privateConstructorUsedError;
+  List<QuestionResponseModel>? get questionResponseDTO =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ObservationSetSectionResponseModelCopyWith<
-          ObservationSetSectionResponseModel>
+  $QuestionnaireResponseModelCopyWith<QuestionnaireResponseModel>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ObservationSetSectionResponseModelCopyWith<$Res> {
-  factory $ObservationSetSectionResponseModelCopyWith(
-          ObservationSetSectionResponseModel value,
-          $Res Function(ObservationSetSectionResponseModel) then) =
-      _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
-          ObservationSetSectionResponseModel>;
+abstract class $QuestionnaireResponseModelCopyWith<$Res> {
+  factory $QuestionnaireResponseModelCopyWith(QuestionnaireResponseModel value,
+          $Res Function(QuestionnaireResponseModel) then) =
+      _$QuestionnaireResponseModelCopyWithImpl<$Res,
+          QuestionnaireResponseModel>;
   @useResult
   $Res call(
       {int? id,
-      int? index,
+      String? name,
       String? description,
-      List<ObservationSetResponseModel>? observationSetResponseDTOList,
-      ObservationSetSectionModel? supersection});
-
-  $ObservationSetSectionModelCopyWith<$Res>? get supersection;
+      String? version,
+      @TimestampConverter() DateTime? approvalDate,
+      @TimestampConverter() DateTime? lastReviewDate,
+      @TimestampConverter() DateTime? effectiveFrom,
+      @TimestampConverter() DateTime? effectiveTill,
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastModifiedDate,
+      int? publisherCode,
+      String? publisherType,
+      List<QuestionResponseModel>? questionResponseDTO});
 }
 
 /// @nodoc
-class _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
-        $Val extends ObservationSetSectionResponseModel>
-    implements $ObservationSetSectionResponseModelCopyWith<$Res> {
-  _$ObservationSetSectionResponseModelCopyWithImpl(this._value, this._then);
+class _$QuestionnaireResponseModelCopyWithImpl<$Res,
+        $Val extends QuestionnaireResponseModel>
+    implements $QuestionnaireResponseModelCopyWith<$Res> {
+  _$QuestionnaireResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1711,168 +1671,281 @@ class _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = freezed,
-    Object? index = freezed,
+    Object? name = freezed,
     Object? description = freezed,
-    Object? observationSetResponseDTOList = freezed,
-    Object? supersection = freezed,
+    Object? version = freezed,
+    Object? approvalDate = freezed,
+    Object? lastReviewDate = freezed,
+    Object? effectiveFrom = freezed,
+    Object? effectiveTill = freezed,
+    Object? creationDate = freezed,
+    Object? lastModifiedDate = freezed,
+    Object? publisherCode = freezed,
+    Object? publisherType = freezed,
+    Object? questionResponseDTO = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      observationSetResponseDTOList: freezed == observationSetResponseDTOList
-          ? _value.observationSetResponseDTOList
-          : observationSetResponseDTOList // ignore: cast_nullable_to_non_nullable
-              as List<ObservationSetResponseModel>?,
-      supersection: freezed == supersection
-          ? _value.supersection
-          : supersection // ignore: cast_nullable_to_non_nullable
-              as ObservationSetSectionModel?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      approvalDate: freezed == approvalDate
+          ? _value.approvalDate
+          : approvalDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastReviewDate: freezed == lastReviewDate
+          ? _value.lastReviewDate
+          : lastReviewDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      effectiveFrom: freezed == effectiveFrom
+          ? _value.effectiveFrom
+          : effectiveFrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      effectiveTill: freezed == effectiveTill
+          ? _value.effectiveTill
+          : effectiveTill // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastModifiedDate: freezed == lastModifiedDate
+          ? _value.lastModifiedDate
+          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publisherCode: freezed == publisherCode
+          ? _value.publisherCode
+          : publisherCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      publisherType: freezed == publisherType
+          ? _value.publisherType
+          : publisherType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      questionResponseDTO: freezed == questionResponseDTO
+          ? _value.questionResponseDTO
+          : questionResponseDTO // ignore: cast_nullable_to_non_nullable
+              as List<QuestionResponseModel>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ObservationSetSectionModelCopyWith<$Res>? get supersection {
-    if (_value.supersection == null) {
-      return null;
-    }
-
-    return $ObservationSetSectionModelCopyWith<$Res>(_value.supersection!,
-        (value) {
-      return _then(_value.copyWith(supersection: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$_ObservationSetSectionResponseModelCopyWith<$Res>
-    implements $ObservationSetSectionResponseModelCopyWith<$Res> {
-  factory _$$_ObservationSetSectionResponseModelCopyWith(
-          _$_ObservationSetSectionResponseModel value,
-          $Res Function(_$_ObservationSetSectionResponseModel) then) =
-      __$$_ObservationSetSectionResponseModelCopyWithImpl<$Res>;
+abstract class _$$_QuestionnaireResponseModelCopyWith<$Res>
+    implements $QuestionnaireResponseModelCopyWith<$Res> {
+  factory _$$_QuestionnaireResponseModelCopyWith(
+          _$_QuestionnaireResponseModel value,
+          $Res Function(_$_QuestionnaireResponseModel) then) =
+      __$$_QuestionnaireResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int? id,
-      int? index,
+      String? name,
       String? description,
-      List<ObservationSetResponseModel>? observationSetResponseDTOList,
-      ObservationSetSectionModel? supersection});
-
-  @override
-  $ObservationSetSectionModelCopyWith<$Res>? get supersection;
+      String? version,
+      @TimestampConverter() DateTime? approvalDate,
+      @TimestampConverter() DateTime? lastReviewDate,
+      @TimestampConverter() DateTime? effectiveFrom,
+      @TimestampConverter() DateTime? effectiveTill,
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastModifiedDate,
+      int? publisherCode,
+      String? publisherType,
+      List<QuestionResponseModel>? questionResponseDTO});
 }
 
 /// @nodoc
-class __$$_ObservationSetSectionResponseModelCopyWithImpl<$Res>
-    extends _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
-        _$_ObservationSetSectionResponseModel>
-    implements _$$_ObservationSetSectionResponseModelCopyWith<$Res> {
-  __$$_ObservationSetSectionResponseModelCopyWithImpl(
-      _$_ObservationSetSectionResponseModel _value,
-      $Res Function(_$_ObservationSetSectionResponseModel) _then)
+class __$$_QuestionnaireResponseModelCopyWithImpl<$Res>
+    extends _$QuestionnaireResponseModelCopyWithImpl<$Res,
+        _$_QuestionnaireResponseModel>
+    implements _$$_QuestionnaireResponseModelCopyWith<$Res> {
+  __$$_QuestionnaireResponseModelCopyWithImpl(
+      _$_QuestionnaireResponseModel _value,
+      $Res Function(_$_QuestionnaireResponseModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? index = freezed,
+    Object? name = freezed,
     Object? description = freezed,
-    Object? observationSetResponseDTOList = freezed,
-    Object? supersection = freezed,
+    Object? version = freezed,
+    Object? approvalDate = freezed,
+    Object? lastReviewDate = freezed,
+    Object? effectiveFrom = freezed,
+    Object? effectiveTill = freezed,
+    Object? creationDate = freezed,
+    Object? lastModifiedDate = freezed,
+    Object? publisherCode = freezed,
+    Object? publisherType = freezed,
+    Object? questionResponseDTO = freezed,
   }) {
-    return _then(_$_ObservationSetSectionResponseModel(
+    return _then(_$_QuestionnaireResponseModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      observationSetResponseDTOList: freezed == observationSetResponseDTOList
-          ? _value._observationSetResponseDTOList
-          : observationSetResponseDTOList // ignore: cast_nullable_to_non_nullable
-              as List<ObservationSetResponseModel>?,
-      supersection: freezed == supersection
-          ? _value.supersection
-          : supersection // ignore: cast_nullable_to_non_nullable
-              as ObservationSetSectionModel?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      approvalDate: freezed == approvalDate
+          ? _value.approvalDate
+          : approvalDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastReviewDate: freezed == lastReviewDate
+          ? _value.lastReviewDate
+          : lastReviewDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      effectiveFrom: freezed == effectiveFrom
+          ? _value.effectiveFrom
+          : effectiveFrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      effectiveTill: freezed == effectiveTill
+          ? _value.effectiveTill
+          : effectiveTill // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastModifiedDate: freezed == lastModifiedDate
+          ? _value.lastModifiedDate
+          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publisherCode: freezed == publisherCode
+          ? _value.publisherCode
+          : publisherCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      publisherType: freezed == publisherType
+          ? _value.publisherType
+          : publisherType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      questionResponseDTO: freezed == questionResponseDTO
+          ? _value._questionResponseDTO
+          : questionResponseDTO // ignore: cast_nullable_to_non_nullable
+              as List<QuestionResponseModel>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ObservationSetSectionResponseModel
-    implements _ObservationSetSectionResponseModel {
-  const _$_ObservationSetSectionResponseModel(
+class _$_QuestionnaireResponseModel implements _QuestionnaireResponseModel {
+  const _$_QuestionnaireResponseModel(
       {this.id,
-      this.index,
+      this.name,
       this.description,
-      final List<ObservationSetResponseModel>? observationSetResponseDTOList,
-      this.supersection})
-      : _observationSetResponseDTOList = observationSetResponseDTOList;
+      this.version,
+      @TimestampConverter() this.approvalDate,
+      @TimestampConverter() this.lastReviewDate,
+      @TimestampConverter() this.effectiveFrom,
+      @TimestampConverter() this.effectiveTill,
+      @TimestampConverter() this.creationDate,
+      @TimestampConverter() this.lastModifiedDate,
+      this.publisherCode,
+      this.publisherType,
+      final List<QuestionResponseModel>? questionResponseDTO})
+      : _questionResponseDTO = questionResponseDTO;
 
-  factory _$_ObservationSetSectionResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_ObservationSetSectionResponseModelFromJson(json);
+  factory _$_QuestionnaireResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionnaireResponseModelFromJson(json);
 
   @override
   final int? id;
   @override
-  final int? index;
+  final String? name;
   @override
   final String? description;
-  final List<ObservationSetResponseModel>? _observationSetResponseDTOList;
   @override
-  List<ObservationSetResponseModel>? get observationSetResponseDTOList {
-    final value = _observationSetResponseDTOList;
+  final String? version;
+  @override
+  @TimestampConverter()
+  final DateTime? approvalDate;
+  @override
+  @TimestampConverter()
+  final DateTime? lastReviewDate;
+  @override
+  @TimestampConverter()
+  final DateTime? effectiveFrom;
+  @override
+  @TimestampConverter()
+  final DateTime? effectiveTill;
+  @override
+  @TimestampConverter()
+  final DateTime? creationDate;
+  @override
+  @TimestampConverter()
+  final DateTime? lastModifiedDate;
+  @override
+  final int? publisherCode;
+  @override
+  final String? publisherType;
+  final List<QuestionResponseModel>? _questionResponseDTO;
+  @override
+  List<QuestionResponseModel>? get questionResponseDTO {
+    final value = _questionResponseDTO;
     if (value == null) return null;
-    if (_observationSetResponseDTOList is EqualUnmodifiableListView)
-      return _observationSetResponseDTOList;
+    if (_questionResponseDTO is EqualUnmodifiableListView)
+      return _questionResponseDTO;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
-  final ObservationSetSectionModel? supersection;
-
-  @override
   String toString() {
-    return 'ObservationSetSectionResponseModel(id: $id, index: $index, description: $description, observationSetResponseDTOList: $observationSetResponseDTOList, supersection: $supersection)';
+    return 'QuestionnaireResponseModel(id: $id, name: $name, description: $description, version: $version, approvalDate: $approvalDate, lastReviewDate: $lastReviewDate, effectiveFrom: $effectiveFrom, effectiveTill: $effectiveTill, creationDate: $creationDate, lastModifiedDate: $lastModifiedDate, publisherCode: $publisherCode, publisherType: $publisherType, questionResponseDTO: $questionResponseDTO)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ObservationSetSectionResponseModel &&
+            other is _$_QuestionnaireResponseModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.index, index) || other.index == index) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(
-                other._observationSetResponseDTOList,
-                _observationSetResponseDTOList) &&
-            (identical(other.supersection, supersection) ||
-                other.supersection == supersection));
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.approvalDate, approvalDate) ||
+                other.approvalDate == approvalDate) &&
+            (identical(other.lastReviewDate, lastReviewDate) ||
+                other.lastReviewDate == lastReviewDate) &&
+            (identical(other.effectiveFrom, effectiveFrom) ||
+                other.effectiveFrom == effectiveFrom) &&
+            (identical(other.effectiveTill, effectiveTill) ||
+                other.effectiveTill == effectiveTill) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate) &&
+            (identical(other.lastModifiedDate, lastModifiedDate) ||
+                other.lastModifiedDate == lastModifiedDate) &&
+            (identical(other.publisherCode, publisherCode) ||
+                other.publisherCode == publisherCode) &&
+            (identical(other.publisherType, publisherType) ||
+                other.publisherType == publisherType) &&
+            const DeepCollectionEquality()
+                .equals(other._questionResponseDTO, _questionResponseDTO));
   }
 
   @JsonKey(ignore: true)
@@ -1880,100 +1953,148 @@ class _$_ObservationSetSectionResponseModel
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      index,
+      name,
       description,
-      const DeepCollectionEquality().hash(_observationSetResponseDTOList),
-      supersection);
+      version,
+      approvalDate,
+      lastReviewDate,
+      effectiveFrom,
+      effectiveTill,
+      creationDate,
+      lastModifiedDate,
+      publisherCode,
+      publisherType,
+      const DeepCollectionEquality().hash(_questionResponseDTO));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationSetSectionResponseModelCopyWith<
-          _$_ObservationSetSectionResponseModel>
-      get copyWith => __$$_ObservationSetSectionResponseModelCopyWithImpl<
-          _$_ObservationSetSectionResponseModel>(this, _$identity);
+  _$$_QuestionnaireResponseModelCopyWith<_$_QuestionnaireResponseModel>
+      get copyWith => __$$_QuestionnaireResponseModelCopyWithImpl<
+          _$_QuestionnaireResponseModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ObservationSetSectionResponseModelToJson(
+    return _$$_QuestionnaireResponseModelToJson(
       this,
     );
   }
 }
 
-abstract class _ObservationSetSectionResponseModel
-    implements ObservationSetSectionResponseModel {
-  const factory _ObservationSetSectionResponseModel(
-      {final int? id,
-      final int? index,
-      final String? description,
-      final List<ObservationSetResponseModel>? observationSetResponseDTOList,
-      final ObservationSetSectionModel?
-          supersection}) = _$_ObservationSetSectionResponseModel;
+abstract class _QuestionnaireResponseModel
+    implements QuestionnaireResponseModel {
+  const factory _QuestionnaireResponseModel(
+          {final int? id,
+          final String? name,
+          final String? description,
+          final String? version,
+          @TimestampConverter() final DateTime? approvalDate,
+          @TimestampConverter() final DateTime? lastReviewDate,
+          @TimestampConverter() final DateTime? effectiveFrom,
+          @TimestampConverter() final DateTime? effectiveTill,
+          @TimestampConverter() final DateTime? creationDate,
+          @TimestampConverter() final DateTime? lastModifiedDate,
+          final int? publisherCode,
+          final String? publisherType,
+          final List<QuestionResponseModel>? questionResponseDTO}) =
+      _$_QuestionnaireResponseModel;
 
-  factory _ObservationSetSectionResponseModel.fromJson(
-          Map<String, dynamic> json) =
-      _$_ObservationSetSectionResponseModel.fromJson;
+  factory _QuestionnaireResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_QuestionnaireResponseModel.fromJson;
 
   @override
   int? get id;
   @override
-  int? get index;
+  String? get name;
   @override
   String? get description;
   @override
-  List<ObservationSetResponseModel>? get observationSetResponseDTOList;
+  String? get version;
   @override
-  ObservationSetSectionModel? get supersection;
+  @TimestampConverter()
+  DateTime? get approvalDate;
+  @override
+  @TimestampConverter()
+  DateTime? get lastReviewDate;
+  @override
+  @TimestampConverter()
+  DateTime? get effectiveFrom;
+  @override
+  @TimestampConverter()
+  DateTime? get effectiveTill;
+  @override
+  @TimestampConverter()
+  DateTime? get creationDate;
+  @override
+  @TimestampConverter()
+  DateTime? get lastModifiedDate;
+  @override
+  int? get publisherCode;
+  @override
+  String? get publisherType;
+  @override
+  List<QuestionResponseModel>? get questionResponseDTO;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationSetSectionResponseModelCopyWith<
-          _$_ObservationSetSectionResponseModel>
+  _$$_QuestionnaireResponseModelCopyWith<_$_QuestionnaireResponseModel>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-ObservationSetSectionModel _$ObservationSetSectionModelFromJson(
+QuestionResponseModel _$QuestionResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _ObservationSetSectionModel.fromJson(json);
+  return _QuestionResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ObservationSetSectionModel {
+mixin _$QuestionResponseModel {
   int? get id => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  ObservationSetModel? get observationSet => throw _privateConstructorUsedError;
-  AssessmentModel? get assessment => throw _privateConstructorUsedError;
+  String? get definition => throw _privateConstructorUsedError;
+  Constraint? get constraint => throw _privateConstructorUsedError;
+  String? get defaultValue => throw _privateConstructorUsedError;
+  EnableBehaviour? get enableBehaviour => throw _privateConstructorUsedError;
+  int? get maxLength => throw _privateConstructorUsedError;
+  DisabledDisplay? get disabledDisplay => throw _privateConstructorUsedError;
+  String? get prefix => throw _privateConstructorUsedError;
+  int? get weight => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  List<ActionOnResponseModel>? get actionOnResponseDTO =>
+      throw _privateConstructorUsedError;
+  bool? get readOnly => throw _privateConstructorUsedError;
+  bool? get required => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ObservationSetSectionModelCopyWith<ObservationSetSectionModel>
-      get copyWith => throw _privateConstructorUsedError;
+  $QuestionResponseModelCopyWith<QuestionResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ObservationSetSectionModelCopyWith<$Res> {
-  factory $ObservationSetSectionModelCopyWith(ObservationSetSectionModel value,
-          $Res Function(ObservationSetSectionModel) then) =
-      _$ObservationSetSectionModelCopyWithImpl<$Res,
-          ObservationSetSectionModel>;
+abstract class $QuestionResponseModelCopyWith<$Res> {
+  factory $QuestionResponseModelCopyWith(QuestionResponseModel value,
+          $Res Function(QuestionResponseModel) then) =
+      _$QuestionResponseModelCopyWithImpl<$Res, QuestionResponseModel>;
   @useResult
   $Res call(
       {int? id,
-      int? index,
-      String? description,
-      ObservationSetModel? observationSet,
-      AssessmentModel? assessment});
-
-  $ObservationSetModelCopyWith<$Res>? get observationSet;
-  $AssessmentModelCopyWith<$Res>? get assessment;
+      String? definition,
+      Constraint? constraint,
+      String? defaultValue,
+      EnableBehaviour? enableBehaviour,
+      int? maxLength,
+      DisabledDisplay? disabledDisplay,
+      String? prefix,
+      int? weight,
+      String? image,
+      List<ActionOnResponseModel>? actionOnResponseDTO,
+      bool? readOnly,
+      bool? required});
 }
 
 /// @nodoc
-class _$ObservationSetSectionModelCopyWithImpl<$Res,
-        $Val extends ObservationSetSectionModel>
-    implements $ObservationSetSectionModelCopyWith<$Res> {
-  _$ObservationSetSectionModelCopyWithImpl(this._value, this._then);
+class _$QuestionResponseModelCopyWithImpl<$Res,
+        $Val extends QuestionResponseModel>
+    implements $QuestionResponseModelCopyWith<$Res> {
+  _$QuestionResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1984,255 +2105,391 @@ class _$ObservationSetSectionModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? observationSet = freezed,
-    Object? assessment = freezed,
+    Object? definition = freezed,
+    Object? constraint = freezed,
+    Object? defaultValue = freezed,
+    Object? enableBehaviour = freezed,
+    Object? maxLength = freezed,
+    Object? disabledDisplay = freezed,
+    Object? prefix = freezed,
+    Object? weight = freezed,
+    Object? image = freezed,
+    Object? actionOnResponseDTO = freezed,
+    Object? readOnly = freezed,
+    Object? required = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      definition: freezed == definition
+          ? _value.definition
+          : definition // ignore: cast_nullable_to_non_nullable
               as String?,
-      observationSet: freezed == observationSet
-          ? _value.observationSet
-          : observationSet // ignore: cast_nullable_to_non_nullable
-              as ObservationSetModel?,
-      assessment: freezed == assessment
-          ? _value.assessment
-          : assessment // ignore: cast_nullable_to_non_nullable
-              as AssessmentModel?,
+      constraint: freezed == constraint
+          ? _value.constraint
+          : constraint // ignore: cast_nullable_to_non_nullable
+              as Constraint?,
+      defaultValue: freezed == defaultValue
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enableBehaviour: freezed == enableBehaviour
+          ? _value.enableBehaviour
+          : enableBehaviour // ignore: cast_nullable_to_non_nullable
+              as EnableBehaviour?,
+      maxLength: freezed == maxLength
+          ? _value.maxLength
+          : maxLength // ignore: cast_nullable_to_non_nullable
+              as int?,
+      disabledDisplay: freezed == disabledDisplay
+          ? _value.disabledDisplay
+          : disabledDisplay // ignore: cast_nullable_to_non_nullable
+              as DisabledDisplay?,
+      prefix: freezed == prefix
+          ? _value.prefix
+          : prefix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      actionOnResponseDTO: freezed == actionOnResponseDTO
+          ? _value.actionOnResponseDTO
+          : actionOnResponseDTO // ignore: cast_nullable_to_non_nullable
+              as List<ActionOnResponseModel>?,
+      readOnly: freezed == readOnly
+          ? _value.readOnly
+          : readOnly // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      required: freezed == required
+          ? _value.required
+          : required // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ObservationSetModelCopyWith<$Res>? get observationSet {
-    if (_value.observationSet == null) {
-      return null;
-    }
-
-    return $ObservationSetModelCopyWith<$Res>(_value.observationSet!, (value) {
-      return _then(_value.copyWith(observationSet: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AssessmentModelCopyWith<$Res>? get assessment {
-    if (_value.assessment == null) {
-      return null;
-    }
-
-    return $AssessmentModelCopyWith<$Res>(_value.assessment!, (value) {
-      return _then(_value.copyWith(assessment: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$_ObservationSetSectionModelCopyWith<$Res>
-    implements $ObservationSetSectionModelCopyWith<$Res> {
-  factory _$$_ObservationSetSectionModelCopyWith(
-          _$_ObservationSetSectionModel value,
-          $Res Function(_$_ObservationSetSectionModel) then) =
-      __$$_ObservationSetSectionModelCopyWithImpl<$Res>;
+abstract class _$$_QuestionResponseModelCopyWith<$Res>
+    implements $QuestionResponseModelCopyWith<$Res> {
+  factory _$$_QuestionResponseModelCopyWith(_$_QuestionResponseModel value,
+          $Res Function(_$_QuestionResponseModel) then) =
+      __$$_QuestionResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int? id,
-      int? index,
-      String? description,
-      ObservationSetModel? observationSet,
-      AssessmentModel? assessment});
-
-  @override
-  $ObservationSetModelCopyWith<$Res>? get observationSet;
-  @override
-  $AssessmentModelCopyWith<$Res>? get assessment;
+      String? definition,
+      Constraint? constraint,
+      String? defaultValue,
+      EnableBehaviour? enableBehaviour,
+      int? maxLength,
+      DisabledDisplay? disabledDisplay,
+      String? prefix,
+      int? weight,
+      String? image,
+      List<ActionOnResponseModel>? actionOnResponseDTO,
+      bool? readOnly,
+      bool? required});
 }
 
 /// @nodoc
-class __$$_ObservationSetSectionModelCopyWithImpl<$Res>
-    extends _$ObservationSetSectionModelCopyWithImpl<$Res,
-        _$_ObservationSetSectionModel>
-    implements _$$_ObservationSetSectionModelCopyWith<$Res> {
-  __$$_ObservationSetSectionModelCopyWithImpl(
-      _$_ObservationSetSectionModel _value,
-      $Res Function(_$_ObservationSetSectionModel) _then)
+class __$$_QuestionResponseModelCopyWithImpl<$Res>
+    extends _$QuestionResponseModelCopyWithImpl<$Res, _$_QuestionResponseModel>
+    implements _$$_QuestionResponseModelCopyWith<$Res> {
+  __$$_QuestionResponseModelCopyWithImpl(_$_QuestionResponseModel _value,
+      $Res Function(_$_QuestionResponseModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? observationSet = freezed,
-    Object? assessment = freezed,
+    Object? definition = freezed,
+    Object? constraint = freezed,
+    Object? defaultValue = freezed,
+    Object? enableBehaviour = freezed,
+    Object? maxLength = freezed,
+    Object? disabledDisplay = freezed,
+    Object? prefix = freezed,
+    Object? weight = freezed,
+    Object? image = freezed,
+    Object? actionOnResponseDTO = freezed,
+    Object? readOnly = freezed,
+    Object? required = freezed,
   }) {
-    return _then(_$_ObservationSetSectionModel(
+    return _then(_$_QuestionResponseModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      definition: freezed == definition
+          ? _value.definition
+          : definition // ignore: cast_nullable_to_non_nullable
               as String?,
-      observationSet: freezed == observationSet
-          ? _value.observationSet
-          : observationSet // ignore: cast_nullable_to_non_nullable
-              as ObservationSetModel?,
-      assessment: freezed == assessment
-          ? _value.assessment
-          : assessment // ignore: cast_nullable_to_non_nullable
-              as AssessmentModel?,
+      constraint: freezed == constraint
+          ? _value.constraint
+          : constraint // ignore: cast_nullable_to_non_nullable
+              as Constraint?,
+      defaultValue: freezed == defaultValue
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enableBehaviour: freezed == enableBehaviour
+          ? _value.enableBehaviour
+          : enableBehaviour // ignore: cast_nullable_to_non_nullable
+              as EnableBehaviour?,
+      maxLength: freezed == maxLength
+          ? _value.maxLength
+          : maxLength // ignore: cast_nullable_to_non_nullable
+              as int?,
+      disabledDisplay: freezed == disabledDisplay
+          ? _value.disabledDisplay
+          : disabledDisplay // ignore: cast_nullable_to_non_nullable
+              as DisabledDisplay?,
+      prefix: freezed == prefix
+          ? _value.prefix
+          : prefix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      actionOnResponseDTO: freezed == actionOnResponseDTO
+          ? _value._actionOnResponseDTO
+          : actionOnResponseDTO // ignore: cast_nullable_to_non_nullable
+              as List<ActionOnResponseModel>?,
+      readOnly: freezed == readOnly
+          ? _value.readOnly
+          : readOnly // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      required: freezed == required
+          ? _value.required
+          : required // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ObservationSetSectionModel implements _ObservationSetSectionModel {
-  const _$_ObservationSetSectionModel(
+class _$_QuestionResponseModel implements _QuestionResponseModel {
+  const _$_QuestionResponseModel(
       {this.id,
-      this.index,
-      this.description,
-      this.observationSet,
-      this.assessment});
+      this.definition,
+      this.constraint,
+      this.defaultValue,
+      this.enableBehaviour,
+      this.maxLength,
+      this.disabledDisplay,
+      this.prefix,
+      this.weight,
+      this.image,
+      final List<ActionOnResponseModel>? actionOnResponseDTO,
+      this.readOnly,
+      this.required})
+      : _actionOnResponseDTO = actionOnResponseDTO;
 
-  factory _$_ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ObservationSetSectionModelFromJson(json);
+  factory _$_QuestionResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionResponseModelFromJson(json);
 
   @override
   final int? id;
   @override
-  final int? index;
+  final String? definition;
   @override
-  final String? description;
+  final Constraint? constraint;
   @override
-  final ObservationSetModel? observationSet;
+  final String? defaultValue;
   @override
-  final AssessmentModel? assessment;
+  final EnableBehaviour? enableBehaviour;
+  @override
+  final int? maxLength;
+  @override
+  final DisabledDisplay? disabledDisplay;
+  @override
+  final String? prefix;
+  @override
+  final int? weight;
+  @override
+  final String? image;
+  final List<ActionOnResponseModel>? _actionOnResponseDTO;
+  @override
+  List<ActionOnResponseModel>? get actionOnResponseDTO {
+    final value = _actionOnResponseDTO;
+    if (value == null) return null;
+    if (_actionOnResponseDTO is EqualUnmodifiableListView)
+      return _actionOnResponseDTO;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final bool? readOnly;
+  @override
+  final bool? required;
 
   @override
   String toString() {
-    return 'ObservationSetSectionModel(id: $id, index: $index, description: $description, observationSet: $observationSet, assessment: $assessment)';
+    return 'QuestionResponseModel(id: $id, definition: $definition, constraint: $constraint, defaultValue: $defaultValue, enableBehaviour: $enableBehaviour, maxLength: $maxLength, disabledDisplay: $disabledDisplay, prefix: $prefix, weight: $weight, image: $image, actionOnResponseDTO: $actionOnResponseDTO, readOnly: $readOnly, required: $required)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ObservationSetSectionModel &&
+            other is _$_QuestionResponseModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.index, index) || other.index == index) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.observationSet, observationSet) ||
-                other.observationSet == observationSet) &&
-            (identical(other.assessment, assessment) ||
-                other.assessment == assessment));
+            (identical(other.definition, definition) ||
+                other.definition == definition) &&
+            (identical(other.constraint, constraint) ||
+                other.constraint == constraint) &&
+            (identical(other.defaultValue, defaultValue) ||
+                other.defaultValue == defaultValue) &&
+            (identical(other.enableBehaviour, enableBehaviour) ||
+                other.enableBehaviour == enableBehaviour) &&
+            (identical(other.maxLength, maxLength) ||
+                other.maxLength == maxLength) &&
+            (identical(other.disabledDisplay, disabledDisplay) ||
+                other.disabledDisplay == disabledDisplay) &&
+            (identical(other.prefix, prefix) || other.prefix == prefix) &&
+            (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality()
+                .equals(other._actionOnResponseDTO, _actionOnResponseDTO) &&
+            (identical(other.readOnly, readOnly) ||
+                other.readOnly == readOnly) &&
+            (identical(other.required, required) ||
+                other.required == required));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, index, description, observationSet, assessment);
+      runtimeType,
+      id,
+      definition,
+      constraint,
+      defaultValue,
+      enableBehaviour,
+      maxLength,
+      disabledDisplay,
+      prefix,
+      weight,
+      image,
+      const DeepCollectionEquality().hash(_actionOnResponseDTO),
+      readOnly,
+      required);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationSetSectionModelCopyWith<_$_ObservationSetSectionModel>
-      get copyWith => __$$_ObservationSetSectionModelCopyWithImpl<
-          _$_ObservationSetSectionModel>(this, _$identity);
+  _$$_QuestionResponseModelCopyWith<_$_QuestionResponseModel> get copyWith =>
+      __$$_QuestionResponseModelCopyWithImpl<_$_QuestionResponseModel>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ObservationSetSectionModelToJson(
+    return _$$_QuestionResponseModelToJson(
       this,
     );
   }
 }
 
-abstract class _ObservationSetSectionModel
-    implements ObservationSetSectionModel {
-  const factory _ObservationSetSectionModel(
+abstract class _QuestionResponseModel implements QuestionResponseModel {
+  const factory _QuestionResponseModel(
       {final int? id,
-      final int? index,
-      final String? description,
-      final ObservationSetModel? observationSet,
-      final AssessmentModel? assessment}) = _$_ObservationSetSectionModel;
+      final String? definition,
+      final Constraint? constraint,
+      final String? defaultValue,
+      final EnableBehaviour? enableBehaviour,
+      final int? maxLength,
+      final DisabledDisplay? disabledDisplay,
+      final String? prefix,
+      final int? weight,
+      final String? image,
+      final List<ActionOnResponseModel>? actionOnResponseDTO,
+      final bool? readOnly,
+      final bool? required}) = _$_QuestionResponseModel;
 
-  factory _ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =
-      _$_ObservationSetSectionModel.fromJson;
+  factory _QuestionResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_QuestionResponseModel.fromJson;
 
   @override
   int? get id;
   @override
-  int? get index;
+  String? get definition;
   @override
-  String? get description;
+  Constraint? get constraint;
   @override
-  ObservationSetModel? get observationSet;
+  String? get defaultValue;
   @override
-  AssessmentModel? get assessment;
+  EnableBehaviour? get enableBehaviour;
+  @override
+  int? get maxLength;
+  @override
+  DisabledDisplay? get disabledDisplay;
+  @override
+  String? get prefix;
+  @override
+  int? get weight;
+  @override
+  String? get image;
+  @override
+  List<ActionOnResponseModel>? get actionOnResponseDTO;
+  @override
+  bool? get readOnly;
+  @override
+  bool? get required;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationSetSectionModelCopyWith<_$_ObservationSetSectionModel>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_QuestionResponseModelCopyWith<_$_QuestionResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
-ObservationSetModel _$ObservationSetModelFromJson(Map<String, dynamic> json) {
-  return _ObservationSetModel.fromJson(json);
+ActionOnResponseModel _$ActionOnResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _ActionOnResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ObservationSetModel {
+mixin _$ActionOnResponseModel {
   int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get version => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get creationDate => throw _privateConstructorUsedError;
+  Operator? get operator => throw _privateConstructorUsedError;
+  String? get answer => throw _privateConstructorUsedError;
+  ActionType? get actionType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ObservationSetModelCopyWith<ObservationSetModel> get copyWith =>
+  $ActionOnResponseModelCopyWith<ActionOnResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ObservationSetModelCopyWith<$Res> {
-  factory $ObservationSetModelCopyWith(
-          ObservationSetModel value, $Res Function(ObservationSetModel) then) =
-      _$ObservationSetModelCopyWithImpl<$Res, ObservationSetModel>;
+abstract class $ActionOnResponseModelCopyWith<$Res> {
+  factory $ActionOnResponseModelCopyWith(ActionOnResponseModel value,
+          $Res Function(ActionOnResponseModel) then) =
+      _$ActionOnResponseModelCopyWithImpl<$Res, ActionOnResponseModel>;
   @useResult
   $Res call(
-      {int? id,
-      String? name,
-      String? version,
-      String? description,
-      @TimestampConverter() DateTime? creationDate});
+      {int? id, Operator? operator, String? answer, ActionType? actionType});
 }
 
 /// @nodoc
-class _$ObservationSetModelCopyWithImpl<$Res, $Val extends ObservationSetModel>
-    implements $ObservationSetModelCopyWith<$Res> {
-  _$ObservationSetModelCopyWithImpl(this._value, this._then);
+class _$ActionOnResponseModelCopyWithImpl<$Res,
+        $Val extends ActionOnResponseModel>
+    implements $ActionOnResponseModelCopyWith<$Res> {
+  _$ActionOnResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -2243,479 +2500,158 @@ class _$ObservationSetModelCopyWithImpl<$Res, $Val extends ObservationSetModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? version = freezed,
-    Object? description = freezed,
-    Object? creationDate = freezed,
+    Object? operator = freezed,
+    Object? answer = freezed,
+    Object? actionType = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      operator: freezed == operator
+          ? _value.operator
+          : operator // ignore: cast_nullable_to_non_nullable
+              as Operator?,
+      answer: freezed == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
               as String?,
-      version: freezed == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      actionType: freezed == actionType
+          ? _value.actionType
+          : actionType // ignore: cast_nullable_to_non_nullable
+              as ActionType?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ObservationSetModelCopyWith<$Res>
-    implements $ObservationSetModelCopyWith<$Res> {
-  factory _$$_ObservationSetModelCopyWith(_$_ObservationSetModel value,
-          $Res Function(_$_ObservationSetModel) then) =
-      __$$_ObservationSetModelCopyWithImpl<$Res>;
+abstract class _$$_ActionOnResponseModelCopyWith<$Res>
+    implements $ActionOnResponseModelCopyWith<$Res> {
+  factory _$$_ActionOnResponseModelCopyWith(_$_ActionOnResponseModel value,
+          $Res Function(_$_ActionOnResponseModel) then) =
+      __$$_ActionOnResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? id,
-      String? name,
-      String? version,
-      String? description,
-      @TimestampConverter() DateTime? creationDate});
+      {int? id, Operator? operator, String? answer, ActionType? actionType});
 }
 
 /// @nodoc
-class __$$_ObservationSetModelCopyWithImpl<$Res>
-    extends _$ObservationSetModelCopyWithImpl<$Res, _$_ObservationSetModel>
-    implements _$$_ObservationSetModelCopyWith<$Res> {
-  __$$_ObservationSetModelCopyWithImpl(_$_ObservationSetModel _value,
-      $Res Function(_$_ObservationSetModel) _then)
+class __$$_ActionOnResponseModelCopyWithImpl<$Res>
+    extends _$ActionOnResponseModelCopyWithImpl<$Res, _$_ActionOnResponseModel>
+    implements _$$_ActionOnResponseModelCopyWith<$Res> {
+  __$$_ActionOnResponseModelCopyWithImpl(_$_ActionOnResponseModel _value,
+      $Res Function(_$_ActionOnResponseModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? version = freezed,
-    Object? description = freezed,
-    Object? creationDate = freezed,
+    Object? operator = freezed,
+    Object? answer = freezed,
+    Object? actionType = freezed,
   }) {
-    return _then(_$_ObservationSetModel(
+    return _then(_$_ActionOnResponseModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      operator: freezed == operator
+          ? _value.operator
+          : operator // ignore: cast_nullable_to_non_nullable
+              as Operator?,
+      answer: freezed == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
               as String?,
-      version: freezed == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      actionType: freezed == actionType
+          ? _value.actionType
+          : actionType // ignore: cast_nullable_to_non_nullable
+              as ActionType?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ObservationSetModel implements _ObservationSetModel {
-  const _$_ObservationSetModel(
-      {this.id,
-      this.name,
-      this.version,
-      this.description,
-      @TimestampConverter() this.creationDate});
+class _$_ActionOnResponseModel implements _ActionOnResponseModel {
+  const _$_ActionOnResponseModel(
+      {this.id, this.operator, this.answer, this.actionType});
 
-  factory _$_ObservationSetModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ObservationSetModelFromJson(json);
+  factory _$_ActionOnResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ActionOnResponseModelFromJson(json);
 
   @override
   final int? id;
   @override
-  final String? name;
+  final Operator? operator;
   @override
-  final String? version;
+  final String? answer;
   @override
-  final String? description;
-  @override
-  @TimestampConverter()
-  final DateTime? creationDate;
+  final ActionType? actionType;
 
   @override
   String toString() {
-    return 'ObservationSetModel(id: $id, name: $name, version: $version, description: $description, creationDate: $creationDate)';
+    return 'ActionOnResponseModel(id: $id, operator: $operator, answer: $answer, actionType: $actionType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ObservationSetModel &&
+            other is _$_ActionOnResponseModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.version, version) || other.version == version) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.creationDate, creationDate) ||
-                other.creationDate == creationDate));
+            (identical(other.operator, operator) ||
+                other.operator == operator) &&
+            (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.actionType, actionType) ||
+                other.actionType == actionType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, version, description, creationDate);
+      Object.hash(runtimeType, id, operator, answer, actionType);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationSetModelCopyWith<_$_ObservationSetModel> get copyWith =>
-      __$$_ObservationSetModelCopyWithImpl<_$_ObservationSetModel>(
+  _$$_ActionOnResponseModelCopyWith<_$_ActionOnResponseModel> get copyWith =>
+      __$$_ActionOnResponseModelCopyWithImpl<_$_ActionOnResponseModel>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ObservationSetModelToJson(
+    return _$$_ActionOnResponseModelToJson(
       this,
     );
   }
 }
 
-abstract class _ObservationSetModel implements ObservationSetModel {
-  const factory _ObservationSetModel(
-          {final int? id,
-          final String? name,
-          final String? version,
-          final String? description,
-          @TimestampConverter() final DateTime? creationDate}) =
-      _$_ObservationSetModel;
-
-  factory _ObservationSetModel.fromJson(Map<String, dynamic> json) =
-      _$_ObservationSetModel.fromJson;
-
-  @override
-  int? get id;
-  @override
-  String? get name;
-  @override
-  String? get version;
-  @override
-  String? get description;
-  @override
-  @TimestampConverter()
-  DateTime? get creationDate;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ObservationSetModelCopyWith<_$_ObservationSetModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ObservationResponseModel _$ObservationResponseModelFromJson(
-    Map<String, dynamic> json) {
-  return _ObservationResponseModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ObservationResponseModel {
-  int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  ValueType? get valueType => throw _privateConstructorUsedError;
-  String? get hiThreshold => throw _privateConstructorUsedError;
-  String? get loThreshold => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get creationDate => throw _privateConstructorUsedError;
-  String? get configs => throw _privateConstructorUsedError;
-  double? get weightage => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ObservationResponseModelCopyWith<ObservationResponseModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ObservationResponseModelCopyWith<$Res> {
-  factory $ObservationResponseModelCopyWith(ObservationResponseModel value,
-          $Res Function(ObservationResponseModel) then) =
-      _$ObservationResponseModelCopyWithImpl<$Res, ObservationResponseModel>;
-  @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      ValueType? valueType,
-      String? hiThreshold,
-      String? loThreshold,
-      @TimestampConverter() DateTime? creationDate,
-      String? configs,
-      double? weightage});
-}
-
-/// @nodoc
-class _$ObservationResponseModelCopyWithImpl<$Res,
-        $Val extends ObservationResponseModel>
-    implements $ObservationResponseModelCopyWith<$Res> {
-  _$ObservationResponseModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? valueType = freezed,
-    Object? hiThreshold = freezed,
-    Object? loThreshold = freezed,
-    Object? creationDate = freezed,
-    Object? configs = freezed,
-    Object? weightage = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      valueType: freezed == valueType
-          ? _value.valueType
-          : valueType // ignore: cast_nullable_to_non_nullable
-              as ValueType?,
-      hiThreshold: freezed == hiThreshold
-          ? _value.hiThreshold
-          : hiThreshold // ignore: cast_nullable_to_non_nullable
-              as String?,
-      loThreshold: freezed == loThreshold
-          ? _value.loThreshold
-          : loThreshold // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      configs: freezed == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weightage: freezed == weightage
-          ? _value.weightage
-          : weightage // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_ObservationResponseModelCopyWith<$Res>
-    implements $ObservationResponseModelCopyWith<$Res> {
-  factory _$$_ObservationResponseModelCopyWith(
-          _$_ObservationResponseModel value,
-          $Res Function(_$_ObservationResponseModel) then) =
-      __$$_ObservationResponseModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      ValueType? valueType,
-      String? hiThreshold,
-      String? loThreshold,
-      @TimestampConverter() DateTime? creationDate,
-      String? configs,
-      double? weightage});
-}
-
-/// @nodoc
-class __$$_ObservationResponseModelCopyWithImpl<$Res>
-    extends _$ObservationResponseModelCopyWithImpl<$Res,
-        _$_ObservationResponseModel>
-    implements _$$_ObservationResponseModelCopyWith<$Res> {
-  __$$_ObservationResponseModelCopyWithImpl(_$_ObservationResponseModel _value,
-      $Res Function(_$_ObservationResponseModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? valueType = freezed,
-    Object? hiThreshold = freezed,
-    Object? loThreshold = freezed,
-    Object? creationDate = freezed,
-    Object? configs = freezed,
-    Object? weightage = freezed,
-  }) {
-    return _then(_$_ObservationResponseModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      valueType: freezed == valueType
-          ? _value.valueType
-          : valueType // ignore: cast_nullable_to_non_nullable
-              as ValueType?,
-      hiThreshold: freezed == hiThreshold
-          ? _value.hiThreshold
-          : hiThreshold // ignore: cast_nullable_to_non_nullable
-              as String?,
-      loThreshold: freezed == loThreshold
-          ? _value.loThreshold
-          : loThreshold // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      configs: freezed == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weightage: freezed == weightage
-          ? _value.weightage
-          : weightage // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_ObservationResponseModel implements _ObservationResponseModel {
-  const _$_ObservationResponseModel(
-      {this.id,
-      this.name,
-      this.valueType,
-      this.hiThreshold,
-      this.loThreshold,
-      @TimestampConverter() this.creationDate,
-      this.configs,
-      this.weightage});
-
-  factory _$_ObservationResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ObservationResponseModelFromJson(json);
-
-  @override
-  final int? id;
-  @override
-  final String? name;
-  @override
-  final ValueType? valueType;
-  @override
-  final String? hiThreshold;
-  @override
-  final String? loThreshold;
-  @override
-  @TimestampConverter()
-  final DateTime? creationDate;
-  @override
-  final String? configs;
-  @override
-  final double? weightage;
-
-  @override
-  String toString() {
-    return 'ObservationResponseModel(id: $id, name: $name, valueType: $valueType, hiThreshold: $hiThreshold, loThreshold: $loThreshold, creationDate: $creationDate, configs: $configs, weightage: $weightage)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ObservationResponseModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.valueType, valueType) ||
-                other.valueType == valueType) &&
-            (identical(other.hiThreshold, hiThreshold) ||
-                other.hiThreshold == hiThreshold) &&
-            (identical(other.loThreshold, loThreshold) ||
-                other.loThreshold == loThreshold) &&
-            (identical(other.creationDate, creationDate) ||
-                other.creationDate == creationDate) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.weightage, weightage) ||
-                other.weightage == weightage));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, valueType, hiThreshold,
-      loThreshold, creationDate, configs, weightage);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ObservationResponseModelCopyWith<_$_ObservationResponseModel>
-      get copyWith => __$$_ObservationResponseModelCopyWithImpl<
-          _$_ObservationResponseModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ObservationResponseModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ObservationResponseModel implements ObservationResponseModel {
-  const factory _ObservationResponseModel(
+abstract class _ActionOnResponseModel implements ActionOnResponseModel {
+  const factory _ActionOnResponseModel(
       {final int? id,
-      final String? name,
-      final ValueType? valueType,
-      final String? hiThreshold,
-      final String? loThreshold,
-      @TimestampConverter() final DateTime? creationDate,
-      final String? configs,
-      final double? weightage}) = _$_ObservationResponseModel;
+      final Operator? operator,
+      final String? answer,
+      final ActionType? actionType}) = _$_ActionOnResponseModel;
 
-  factory _ObservationResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_ObservationResponseModel.fromJson;
+  factory _ActionOnResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_ActionOnResponseModel.fromJson;
 
   @override
   int? get id;
   @override
-  String? get name;
+  Operator? get operator;
   @override
-  ValueType? get valueType;
+  String? get answer;
   @override
-  String? get hiThreshold;
-  @override
-  String? get loThreshold;
-  @override
-  @TimestampConverter()
-  DateTime? get creationDate;
-  @override
-  String? get configs;
-  @override
-  double? get weightage;
+  ActionType? get actionType;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationResponseModelCopyWith<_$_ObservationResponseModel>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ActionOnResponseModelCopyWith<_$_ActionOnResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 MediaListSectionResponseModel _$MediaListSectionResponseModelFromJson(
@@ -3248,770 +3184,6 @@ abstract class _MediaListResponseModel implements MediaListResponseModel {
       throw _privateConstructorUsedError;
 }
 
-MediaListModel _$MediaListModelFromJson(Map<String, dynamic> json) {
-  return _MediaListModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$MediaListModel {
-  int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get version => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get creationDate => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $MediaListModelCopyWith<MediaListModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MediaListModelCopyWith<$Res> {
-  factory $MediaListModelCopyWith(
-          MediaListModel value, $Res Function(MediaListModel) then) =
-      _$MediaListModelCopyWithImpl<$Res, MediaListModel>;
-  @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      String? version,
-      String? description,
-      @TimestampConverter() DateTime? creationDate});
-}
-
-/// @nodoc
-class _$MediaListModelCopyWithImpl<$Res, $Val extends MediaListModel>
-    implements $MediaListModelCopyWith<$Res> {
-  _$MediaListModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? version = freezed,
-    Object? description = freezed,
-    Object? creationDate = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      version: freezed == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_MediaListModelCopyWith<$Res>
-    implements $MediaListModelCopyWith<$Res> {
-  factory _$$_MediaListModelCopyWith(
-          _$_MediaListModel value, $Res Function(_$_MediaListModel) then) =
-      __$$_MediaListModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      String? version,
-      String? description,
-      @TimestampConverter() DateTime? creationDate});
-}
-
-/// @nodoc
-class __$$_MediaListModelCopyWithImpl<$Res>
-    extends _$MediaListModelCopyWithImpl<$Res, _$_MediaListModel>
-    implements _$$_MediaListModelCopyWith<$Res> {
-  __$$_MediaListModelCopyWithImpl(
-      _$_MediaListModel _value, $Res Function(_$_MediaListModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? version = freezed,
-    Object? description = freezed,
-    Object? creationDate = freezed,
-  }) {
-    return _then(_$_MediaListModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      version: freezed == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_MediaListModel implements _MediaListModel {
-  const _$_MediaListModel(
-      {this.id,
-      this.name,
-      this.version,
-      this.description,
-      @TimestampConverter() this.creationDate});
-
-  factory _$_MediaListModel.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaListModelFromJson(json);
-
-  @override
-  final int? id;
-  @override
-  final String? name;
-  @override
-  final String? version;
-  @override
-  final String? description;
-  @override
-  @TimestampConverter()
-  final DateTime? creationDate;
-
-  @override
-  String toString() {
-    return 'MediaListModel(id: $id, name: $name, version: $version, description: $description, creationDate: $creationDate)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_MediaListModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.version, version) || other.version == version) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.creationDate, creationDate) ||
-                other.creationDate == creationDate));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, version, description, creationDate);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_MediaListModelCopyWith<_$_MediaListModel> get copyWith =>
-      __$$_MediaListModelCopyWithImpl<_$_MediaListModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_MediaListModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _MediaListModel implements MediaListModel {
-  const factory _MediaListModel(
-      {final int? id,
-      final String? name,
-      final String? version,
-      final String? description,
-      @TimestampConverter() final DateTime? creationDate}) = _$_MediaListModel;
-
-  factory _MediaListModel.fromJson(Map<String, dynamic> json) =
-      _$_MediaListModel.fromJson;
-
-  @override
-  int? get id;
-  @override
-  String? get name;
-  @override
-  String? get version;
-  @override
-  String? get description;
-  @override
-  @TimestampConverter()
-  DateTime? get creationDate;
-  @override
-  @JsonKey(ignore: true)
-  _$$_MediaListModelCopyWith<_$_MediaListModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-QuestionnaireSectionsResponseModel _$QuestionnaireSectionsResponseModelFromJson(
-    Map<String, dynamic> json) {
-  return _QuestionnaireSectionsResponseModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$QuestionnaireSectionsResponseModel {
-  int? get id => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  QuestionnaireSectionModel? get supersection =>
-      throw _privateConstructorUsedError;
-  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList =>
-      throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $QuestionnaireSectionsResponseModelCopyWith<
-          QuestionnaireSectionsResponseModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $QuestionnaireSectionsResponseModelCopyWith<$Res> {
-  factory $QuestionnaireSectionsResponseModelCopyWith(
-          QuestionnaireSectionsResponseModel value,
-          $Res Function(QuestionnaireSectionsResponseModel) then) =
-      _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
-          QuestionnaireSectionsResponseModel>;
-  @useResult
-  $Res call(
-      {int? id,
-      int? index,
-      String? description,
-      QuestionnaireSectionModel? supersection,
-      List<QuestionnaireResponseModel>? questionnaireResponseDTOList});
-
-  $QuestionnaireSectionModelCopyWith<$Res>? get supersection;
-}
-
-/// @nodoc
-class _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
-        $Val extends QuestionnaireSectionsResponseModel>
-    implements $QuestionnaireSectionsResponseModelCopyWith<$Res> {
-  _$QuestionnaireSectionsResponseModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? supersection = freezed,
-    Object? questionnaireResponseDTOList = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supersection: freezed == supersection
-          ? _value.supersection
-          : supersection // ignore: cast_nullable_to_non_nullable
-              as QuestionnaireSectionModel?,
-      questionnaireResponseDTOList: freezed == questionnaireResponseDTOList
-          ? _value.questionnaireResponseDTOList
-          : questionnaireResponseDTOList // ignore: cast_nullable_to_non_nullable
-              as List<QuestionnaireResponseModel>?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuestionnaireSectionModelCopyWith<$Res>? get supersection {
-    if (_value.supersection == null) {
-      return null;
-    }
-
-    return $QuestionnaireSectionModelCopyWith<$Res>(_value.supersection!,
-        (value) {
-      return _then(_value.copyWith(supersection: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$_QuestionnaireSectionsResponseModelCopyWith<$Res>
-    implements $QuestionnaireSectionsResponseModelCopyWith<$Res> {
-  factory _$$_QuestionnaireSectionsResponseModelCopyWith(
-          _$_QuestionnaireSectionsResponseModel value,
-          $Res Function(_$_QuestionnaireSectionsResponseModel) then) =
-      __$$_QuestionnaireSectionsResponseModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? id,
-      int? index,
-      String? description,
-      QuestionnaireSectionModel? supersection,
-      List<QuestionnaireResponseModel>? questionnaireResponseDTOList});
-
-  @override
-  $QuestionnaireSectionModelCopyWith<$Res>? get supersection;
-}
-
-/// @nodoc
-class __$$_QuestionnaireSectionsResponseModelCopyWithImpl<$Res>
-    extends _$QuestionnaireSectionsResponseModelCopyWithImpl<$Res,
-        _$_QuestionnaireSectionsResponseModel>
-    implements _$$_QuestionnaireSectionsResponseModelCopyWith<$Res> {
-  __$$_QuestionnaireSectionsResponseModelCopyWithImpl(
-      _$_QuestionnaireSectionsResponseModel _value,
-      $Res Function(_$_QuestionnaireSectionsResponseModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? supersection = freezed,
-    Object? questionnaireResponseDTOList = freezed,
-  }) {
-    return _then(_$_QuestionnaireSectionsResponseModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supersection: freezed == supersection
-          ? _value.supersection
-          : supersection // ignore: cast_nullable_to_non_nullable
-              as QuestionnaireSectionModel?,
-      questionnaireResponseDTOList: freezed == questionnaireResponseDTOList
-          ? _value._questionnaireResponseDTOList
-          : questionnaireResponseDTOList // ignore: cast_nullable_to_non_nullable
-              as List<QuestionnaireResponseModel>?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_QuestionnaireSectionsResponseModel
-    implements _QuestionnaireSectionsResponseModel {
-  const _$_QuestionnaireSectionsResponseModel(
-      {this.id,
-      this.index,
-      this.description,
-      this.supersection,
-      final List<QuestionnaireResponseModel>? questionnaireResponseDTOList})
-      : _questionnaireResponseDTOList = questionnaireResponseDTOList;
-
-  factory _$_QuestionnaireSectionsResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_QuestionnaireSectionsResponseModelFromJson(json);
-
-  @override
-  final int? id;
-  @override
-  final int? index;
-  @override
-  final String? description;
-  @override
-  final QuestionnaireSectionModel? supersection;
-  final List<QuestionnaireResponseModel>? _questionnaireResponseDTOList;
-  @override
-  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList {
-    final value = _questionnaireResponseDTOList;
-    if (value == null) return null;
-    if (_questionnaireResponseDTOList is EqualUnmodifiableListView)
-      return _questionnaireResponseDTOList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'QuestionnaireSectionsResponseModel(id: $id, index: $index, description: $description, supersection: $supersection, questionnaireResponseDTOList: $questionnaireResponseDTOList)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_QuestionnaireSectionsResponseModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.index, index) || other.index == index) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.supersection, supersection) ||
-                other.supersection == supersection) &&
-            const DeepCollectionEquality().equals(
-                other._questionnaireResponseDTOList,
-                _questionnaireResponseDTOList));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      index,
-      description,
-      supersection,
-      const DeepCollectionEquality().hash(_questionnaireResponseDTOList));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_QuestionnaireSectionsResponseModelCopyWith<
-          _$_QuestionnaireSectionsResponseModel>
-      get copyWith => __$$_QuestionnaireSectionsResponseModelCopyWithImpl<
-          _$_QuestionnaireSectionsResponseModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_QuestionnaireSectionsResponseModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _QuestionnaireSectionsResponseModel
-    implements QuestionnaireSectionsResponseModel {
-  const factory _QuestionnaireSectionsResponseModel(
-          {final int? id,
-          final int? index,
-          final String? description,
-          final QuestionnaireSectionModel? supersection,
-          final List<QuestionnaireResponseModel>?
-              questionnaireResponseDTOList}) =
-      _$_QuestionnaireSectionsResponseModel;
-
-  factory _QuestionnaireSectionsResponseModel.fromJson(
-          Map<String, dynamic> json) =
-      _$_QuestionnaireSectionsResponseModel.fromJson;
-
-  @override
-  int? get id;
-  @override
-  int? get index;
-  @override
-  String? get description;
-  @override
-  QuestionnaireSectionModel? get supersection;
-  @override
-  List<QuestionnaireResponseModel>? get questionnaireResponseDTOList;
-  @override
-  @JsonKey(ignore: true)
-  _$$_QuestionnaireSectionsResponseModelCopyWith<
-          _$_QuestionnaireSectionsResponseModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-QuestionnaireSectionModel _$QuestionnaireSectionModelFromJson(
-    Map<String, dynamic> json) {
-  return _QuestionnaireSectionModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$QuestionnaireSectionModel {
-  int? get id => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  QuestionnaireModel? get questionnaire => throw _privateConstructorUsedError;
-  AssessmentModel? get assessment => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $QuestionnaireSectionModelCopyWith<QuestionnaireSectionModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $QuestionnaireSectionModelCopyWith<$Res> {
-  factory $QuestionnaireSectionModelCopyWith(QuestionnaireSectionModel value,
-          $Res Function(QuestionnaireSectionModel) then) =
-      _$QuestionnaireSectionModelCopyWithImpl<$Res, QuestionnaireSectionModel>;
-  @useResult
-  $Res call(
-      {int? id,
-      int? index,
-      String? description,
-      QuestionnaireModel? questionnaire,
-      AssessmentModel? assessment});
-
-  $QuestionnaireModelCopyWith<$Res>? get questionnaire;
-  $AssessmentModelCopyWith<$Res>? get assessment;
-}
-
-/// @nodoc
-class _$QuestionnaireSectionModelCopyWithImpl<$Res,
-        $Val extends QuestionnaireSectionModel>
-    implements $QuestionnaireSectionModelCopyWith<$Res> {
-  _$QuestionnaireSectionModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? questionnaire = freezed,
-    Object? assessment = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      questionnaire: freezed == questionnaire
-          ? _value.questionnaire
-          : questionnaire // ignore: cast_nullable_to_non_nullable
-              as QuestionnaireModel?,
-      assessment: freezed == assessment
-          ? _value.assessment
-          : assessment // ignore: cast_nullable_to_non_nullable
-              as AssessmentModel?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuestionnaireModelCopyWith<$Res>? get questionnaire {
-    if (_value.questionnaire == null) {
-      return null;
-    }
-
-    return $QuestionnaireModelCopyWith<$Res>(_value.questionnaire!, (value) {
-      return _then(_value.copyWith(questionnaire: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AssessmentModelCopyWith<$Res>? get assessment {
-    if (_value.assessment == null) {
-      return null;
-    }
-
-    return $AssessmentModelCopyWith<$Res>(_value.assessment!, (value) {
-      return _then(_value.copyWith(assessment: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$_QuestionnaireSectionModelCopyWith<$Res>
-    implements $QuestionnaireSectionModelCopyWith<$Res> {
-  factory _$$_QuestionnaireSectionModelCopyWith(
-          _$_QuestionnaireSectionModel value,
-          $Res Function(_$_QuestionnaireSectionModel) then) =
-      __$$_QuestionnaireSectionModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? id,
-      int? index,
-      String? description,
-      QuestionnaireModel? questionnaire,
-      AssessmentModel? assessment});
-
-  @override
-  $QuestionnaireModelCopyWith<$Res>? get questionnaire;
-  @override
-  $AssessmentModelCopyWith<$Res>? get assessment;
-}
-
-/// @nodoc
-class __$$_QuestionnaireSectionModelCopyWithImpl<$Res>
-    extends _$QuestionnaireSectionModelCopyWithImpl<$Res,
-        _$_QuestionnaireSectionModel>
-    implements _$$_QuestionnaireSectionModelCopyWith<$Res> {
-  __$$_QuestionnaireSectionModelCopyWithImpl(
-      _$_QuestionnaireSectionModel _value,
-      $Res Function(_$_QuestionnaireSectionModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? description = freezed,
-    Object? questionnaire = freezed,
-    Object? assessment = freezed,
-  }) {
-    return _then(_$_QuestionnaireSectionModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      questionnaire: freezed == questionnaire
-          ? _value.questionnaire
-          : questionnaire // ignore: cast_nullable_to_non_nullable
-              as QuestionnaireModel?,
-      assessment: freezed == assessment
-          ? _value.assessment
-          : assessment // ignore: cast_nullable_to_non_nullable
-              as AssessmentModel?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_QuestionnaireSectionModel implements _QuestionnaireSectionModel {
-  const _$_QuestionnaireSectionModel(
-      {this.id,
-      this.index,
-      this.description,
-      this.questionnaire,
-      this.assessment});
-
-  factory _$_QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_QuestionnaireSectionModelFromJson(json);
-
-  @override
-  final int? id;
-  @override
-  final int? index;
-  @override
-  final String? description;
-  @override
-  final QuestionnaireModel? questionnaire;
-  @override
-  final AssessmentModel? assessment;
-
-  @override
-  String toString() {
-    return 'QuestionnaireSectionModel(id: $id, index: $index, description: $description, questionnaire: $questionnaire, assessment: $assessment)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_QuestionnaireSectionModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.index, index) || other.index == index) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.questionnaire, questionnaire) ||
-                other.questionnaire == questionnaire) &&
-            (identical(other.assessment, assessment) ||
-                other.assessment == assessment));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, id, index, description, questionnaire, assessment);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_QuestionnaireSectionModelCopyWith<_$_QuestionnaireSectionModel>
-      get copyWith => __$$_QuestionnaireSectionModelCopyWithImpl<
-          _$_QuestionnaireSectionModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_QuestionnaireSectionModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _QuestionnaireSectionModel implements QuestionnaireSectionModel {
-  const factory _QuestionnaireSectionModel(
-      {final int? id,
-      final int? index,
-      final String? description,
-      final QuestionnaireModel? questionnaire,
-      final AssessmentModel? assessment}) = _$_QuestionnaireSectionModel;
-
-  factory _QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =
-      _$_QuestionnaireSectionModel.fromJson;
-
-  @override
-  int? get id;
-  @override
-  int? get index;
-  @override
-  String? get description;
-  @override
-  QuestionnaireModel? get questionnaire;
-  @override
-  AssessmentModel? get assessment;
-  @override
-  @JsonKey(ignore: true)
-  _$$_QuestionnaireSectionModelCopyWith<_$_QuestionnaireSectionModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
 MediaResponseModel _$MediaResponseModelFromJson(Map<String, dynamic> json) {
   return _MediaResponseModel.fromJson(json);
 }
@@ -4254,6 +3426,282 @@ abstract class _MediaResponseModel implements MediaResponseModel {
   @JsonKey(ignore: true)
   _$$_MediaResponseModelCopyWith<_$_MediaResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+ObservationSetSectionResponseModel _$ObservationSetSectionResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _ObservationSetSectionResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ObservationSetSectionResponseModel {
+  int? get id => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  List<ObservationSetResponseModel>? get observationSetResponseDTOList =>
+      throw _privateConstructorUsedError;
+  ObservationSetSectionModel? get supersection =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ObservationSetSectionResponseModelCopyWith<
+          ObservationSetSectionResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ObservationSetSectionResponseModelCopyWith<$Res> {
+  factory $ObservationSetSectionResponseModelCopyWith(
+          ObservationSetSectionResponseModel value,
+          $Res Function(ObservationSetSectionResponseModel) then) =
+      _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
+          ObservationSetSectionResponseModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      List<ObservationSetResponseModel>? observationSetResponseDTOList,
+      ObservationSetSectionModel? supersection});
+
+  $ObservationSetSectionModelCopyWith<$Res>? get supersection;
+}
+
+/// @nodoc
+class _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
+        $Val extends ObservationSetSectionResponseModel>
+    implements $ObservationSetSectionResponseModelCopyWith<$Res> {
+  _$ObservationSetSectionResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? observationSetResponseDTOList = freezed,
+    Object? supersection = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationSetResponseDTOList: freezed == observationSetResponseDTOList
+          ? _value.observationSetResponseDTOList
+          : observationSetResponseDTOList // ignore: cast_nullable_to_non_nullable
+              as List<ObservationSetResponseModel>?,
+      supersection: freezed == supersection
+          ? _value.supersection
+          : supersection // ignore: cast_nullable_to_non_nullable
+              as ObservationSetSectionModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ObservationSetSectionModelCopyWith<$Res>? get supersection {
+    if (_value.supersection == null) {
+      return null;
+    }
+
+    return $ObservationSetSectionModelCopyWith<$Res>(_value.supersection!,
+        (value) {
+      return _then(_value.copyWith(supersection: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_ObservationSetSectionResponseModelCopyWith<$Res>
+    implements $ObservationSetSectionResponseModelCopyWith<$Res> {
+  factory _$$_ObservationSetSectionResponseModelCopyWith(
+          _$_ObservationSetSectionResponseModel value,
+          $Res Function(_$_ObservationSetSectionResponseModel) then) =
+      __$$_ObservationSetSectionResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      List<ObservationSetResponseModel>? observationSetResponseDTOList,
+      ObservationSetSectionModel? supersection});
+
+  @override
+  $ObservationSetSectionModelCopyWith<$Res>? get supersection;
+}
+
+/// @nodoc
+class __$$_ObservationSetSectionResponseModelCopyWithImpl<$Res>
+    extends _$ObservationSetSectionResponseModelCopyWithImpl<$Res,
+        _$_ObservationSetSectionResponseModel>
+    implements _$$_ObservationSetSectionResponseModelCopyWith<$Res> {
+  __$$_ObservationSetSectionResponseModelCopyWithImpl(
+      _$_ObservationSetSectionResponseModel _value,
+      $Res Function(_$_ObservationSetSectionResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? observationSetResponseDTOList = freezed,
+    Object? supersection = freezed,
+  }) {
+    return _then(_$_ObservationSetSectionResponseModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationSetResponseDTOList: freezed == observationSetResponseDTOList
+          ? _value._observationSetResponseDTOList
+          : observationSetResponseDTOList // ignore: cast_nullable_to_non_nullable
+              as List<ObservationSetResponseModel>?,
+      supersection: freezed == supersection
+          ? _value.supersection
+          : supersection // ignore: cast_nullable_to_non_nullable
+              as ObservationSetSectionModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ObservationSetSectionResponseModel
+    implements _ObservationSetSectionResponseModel {
+  const _$_ObservationSetSectionResponseModel(
+      {this.id,
+      this.index,
+      this.description,
+      final List<ObservationSetResponseModel>? observationSetResponseDTOList,
+      this.supersection})
+      : _observationSetResponseDTOList = observationSetResponseDTOList;
+
+  factory _$_ObservationSetSectionResponseModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_ObservationSetSectionResponseModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? index;
+  @override
+  final String? description;
+  final List<ObservationSetResponseModel>? _observationSetResponseDTOList;
+  @override
+  List<ObservationSetResponseModel>? get observationSetResponseDTOList {
+    final value = _observationSetResponseDTOList;
+    if (value == null) return null;
+    if (_observationSetResponseDTOList is EqualUnmodifiableListView)
+      return _observationSetResponseDTOList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final ObservationSetSectionModel? supersection;
+
+  @override
+  String toString() {
+    return 'ObservationSetSectionResponseModel(id: $id, index: $index, description: $description, observationSetResponseDTOList: $observationSetResponseDTOList, supersection: $supersection)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ObservationSetSectionResponseModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(
+                other._observationSetResponseDTOList,
+                _observationSetResponseDTOList) &&
+            (identical(other.supersection, supersection) ||
+                other.supersection == supersection));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      index,
+      description,
+      const DeepCollectionEquality().hash(_observationSetResponseDTOList),
+      supersection);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ObservationSetSectionResponseModelCopyWith<
+          _$_ObservationSetSectionResponseModel>
+      get copyWith => __$$_ObservationSetSectionResponseModelCopyWithImpl<
+          _$_ObservationSetSectionResponseModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ObservationSetSectionResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ObservationSetSectionResponseModel
+    implements ObservationSetSectionResponseModel {
+  const factory _ObservationSetSectionResponseModel(
+      {final int? id,
+      final int? index,
+      final String? description,
+      final List<ObservationSetResponseModel>? observationSetResponseDTOList,
+      final ObservationSetSectionModel?
+          supersection}) = _$_ObservationSetSectionResponseModel;
+
+  factory _ObservationSetSectionResponseModel.fromJson(
+          Map<String, dynamic> json) =
+      _$_ObservationSetSectionResponseModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get index;
+  @override
+  String? get description;
+  @override
+  List<ObservationSetResponseModel>? get observationSetResponseDTOList;
+  @override
+  ObservationSetSectionModel? get supersection;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ObservationSetSectionResponseModelCopyWith<
+          _$_ObservationSetSectionResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ObservationSetResponseModel _$ObservationSetResponseModelFromJson(
@@ -4569,4 +4017,1271 @@ abstract class _ObservationSetResponseModel
   @JsonKey(ignore: true)
   _$$_ObservationSetResponseModelCopyWith<_$_ObservationSetResponseModel>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+ObservationResponseModel _$ObservationResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _ObservationResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ObservationResponseModel {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  ValueType? get valueType => throw _privateConstructorUsedError;
+  String? get hiThreshold => throw _privateConstructorUsedError;
+  String? get loThreshold => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get creationDate => throw _privateConstructorUsedError;
+  String? get configs => throw _privateConstructorUsedError;
+  double? get weightage => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ObservationResponseModelCopyWith<ObservationResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ObservationResponseModelCopyWith<$Res> {
+  factory $ObservationResponseModelCopyWith(ObservationResponseModel value,
+          $Res Function(ObservationResponseModel) then) =
+      _$ObservationResponseModelCopyWithImpl<$Res, ObservationResponseModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      ValueType? valueType,
+      String? hiThreshold,
+      String? loThreshold,
+      @TimestampConverter() DateTime? creationDate,
+      String? configs,
+      double? weightage});
+}
+
+/// @nodoc
+class _$ObservationResponseModelCopyWithImpl<$Res,
+        $Val extends ObservationResponseModel>
+    implements $ObservationResponseModelCopyWith<$Res> {
+  _$ObservationResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? valueType = freezed,
+    Object? hiThreshold = freezed,
+    Object? loThreshold = freezed,
+    Object? creationDate = freezed,
+    Object? configs = freezed,
+    Object? weightage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      valueType: freezed == valueType
+          ? _value.valueType
+          : valueType // ignore: cast_nullable_to_non_nullable
+              as ValueType?,
+      hiThreshold: freezed == hiThreshold
+          ? _value.hiThreshold
+          : hiThreshold // ignore: cast_nullable_to_non_nullable
+              as String?,
+      loThreshold: freezed == loThreshold
+          ? _value.loThreshold
+          : loThreshold // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      configs: freezed == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as String?,
+      weightage: freezed == weightage
+          ? _value.weightage
+          : weightage // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ObservationResponseModelCopyWith<$Res>
+    implements $ObservationResponseModelCopyWith<$Res> {
+  factory _$$_ObservationResponseModelCopyWith(
+          _$_ObservationResponseModel value,
+          $Res Function(_$_ObservationResponseModel) then) =
+      __$$_ObservationResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      ValueType? valueType,
+      String? hiThreshold,
+      String? loThreshold,
+      @TimestampConverter() DateTime? creationDate,
+      String? configs,
+      double? weightage});
+}
+
+/// @nodoc
+class __$$_ObservationResponseModelCopyWithImpl<$Res>
+    extends _$ObservationResponseModelCopyWithImpl<$Res,
+        _$_ObservationResponseModel>
+    implements _$$_ObservationResponseModelCopyWith<$Res> {
+  __$$_ObservationResponseModelCopyWithImpl(_$_ObservationResponseModel _value,
+      $Res Function(_$_ObservationResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? valueType = freezed,
+    Object? hiThreshold = freezed,
+    Object? loThreshold = freezed,
+    Object? creationDate = freezed,
+    Object? configs = freezed,
+    Object? weightage = freezed,
+  }) {
+    return _then(_$_ObservationResponseModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      valueType: freezed == valueType
+          ? _value.valueType
+          : valueType // ignore: cast_nullable_to_non_nullable
+              as ValueType?,
+      hiThreshold: freezed == hiThreshold
+          ? _value.hiThreshold
+          : hiThreshold // ignore: cast_nullable_to_non_nullable
+              as String?,
+      loThreshold: freezed == loThreshold
+          ? _value.loThreshold
+          : loThreshold // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      configs: freezed == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as String?,
+      weightage: freezed == weightage
+          ? _value.weightage
+          : weightage // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ObservationResponseModel implements _ObservationResponseModel {
+  const _$_ObservationResponseModel(
+      {this.id,
+      this.name,
+      this.valueType,
+      this.hiThreshold,
+      this.loThreshold,
+      @TimestampConverter() this.creationDate,
+      this.configs,
+      this.weightage});
+
+  factory _$_ObservationResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ObservationResponseModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+  @override
+  final ValueType? valueType;
+  @override
+  final String? hiThreshold;
+  @override
+  final String? loThreshold;
+  @override
+  @TimestampConverter()
+  final DateTime? creationDate;
+  @override
+  final String? configs;
+  @override
+  final double? weightage;
+
+  @override
+  String toString() {
+    return 'ObservationResponseModel(id: $id, name: $name, valueType: $valueType, hiThreshold: $hiThreshold, loThreshold: $loThreshold, creationDate: $creationDate, configs: $configs, weightage: $weightage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ObservationResponseModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.valueType, valueType) ||
+                other.valueType == valueType) &&
+            (identical(other.hiThreshold, hiThreshold) ||
+                other.hiThreshold == hiThreshold) &&
+            (identical(other.loThreshold, loThreshold) ||
+                other.loThreshold == loThreshold) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.weightage, weightage) ||
+                other.weightage == weightage));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, valueType, hiThreshold,
+      loThreshold, creationDate, configs, weightage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ObservationResponseModelCopyWith<_$_ObservationResponseModel>
+      get copyWith => __$$_ObservationResponseModelCopyWithImpl<
+          _$_ObservationResponseModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ObservationResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ObservationResponseModel implements ObservationResponseModel {
+  const factory _ObservationResponseModel(
+      {final int? id,
+      final String? name,
+      final ValueType? valueType,
+      final String? hiThreshold,
+      final String? loThreshold,
+      @TimestampConverter() final DateTime? creationDate,
+      final String? configs,
+      final double? weightage}) = _$_ObservationResponseModel;
+
+  factory _ObservationResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_ObservationResponseModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  ValueType? get valueType;
+  @override
+  String? get hiThreshold;
+  @override
+  String? get loThreshold;
+  @override
+  @TimestampConverter()
+  DateTime? get creationDate;
+  @override
+  String? get configs;
+  @override
+  double? get weightage;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ObservationResponseModelCopyWith<_$_ObservationResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ObservationSetSectionModel _$ObservationSetSectionModelFromJson(
+    Map<String, dynamic> json) {
+  return _ObservationSetSectionModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ObservationSetSectionModel {
+  int? get id => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  ObservationSetModel? get observationSet => throw _privateConstructorUsedError;
+  AssessmentModel? get assessment => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ObservationSetSectionModelCopyWith<ObservationSetSectionModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ObservationSetSectionModelCopyWith<$Res> {
+  factory $ObservationSetSectionModelCopyWith(ObservationSetSectionModel value,
+          $Res Function(ObservationSetSectionModel) then) =
+      _$ObservationSetSectionModelCopyWithImpl<$Res,
+          ObservationSetSectionModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      ObservationSetModel? observationSet,
+      AssessmentModel? assessment});
+
+  $ObservationSetModelCopyWith<$Res>? get observationSet;
+  $AssessmentModelCopyWith<$Res>? get assessment;
+}
+
+/// @nodoc
+class _$ObservationSetSectionModelCopyWithImpl<$Res,
+        $Val extends ObservationSetSectionModel>
+    implements $ObservationSetSectionModelCopyWith<$Res> {
+  _$ObservationSetSectionModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? observationSet = freezed,
+    Object? assessment = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationSet: freezed == observationSet
+          ? _value.observationSet
+          : observationSet // ignore: cast_nullable_to_non_nullable
+              as ObservationSetModel?,
+      assessment: freezed == assessment
+          ? _value.assessment
+          : assessment // ignore: cast_nullable_to_non_nullable
+              as AssessmentModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ObservationSetModelCopyWith<$Res>? get observationSet {
+    if (_value.observationSet == null) {
+      return null;
+    }
+
+    return $ObservationSetModelCopyWith<$Res>(_value.observationSet!, (value) {
+      return _then(_value.copyWith(observationSet: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AssessmentModelCopyWith<$Res>? get assessment {
+    if (_value.assessment == null) {
+      return null;
+    }
+
+    return $AssessmentModelCopyWith<$Res>(_value.assessment!, (value) {
+      return _then(_value.copyWith(assessment: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_ObservationSetSectionModelCopyWith<$Res>
+    implements $ObservationSetSectionModelCopyWith<$Res> {
+  factory _$$_ObservationSetSectionModelCopyWith(
+          _$_ObservationSetSectionModel value,
+          $Res Function(_$_ObservationSetSectionModel) then) =
+      __$$_ObservationSetSectionModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      ObservationSetModel? observationSet,
+      AssessmentModel? assessment});
+
+  @override
+  $ObservationSetModelCopyWith<$Res>? get observationSet;
+  @override
+  $AssessmentModelCopyWith<$Res>? get assessment;
+}
+
+/// @nodoc
+class __$$_ObservationSetSectionModelCopyWithImpl<$Res>
+    extends _$ObservationSetSectionModelCopyWithImpl<$Res,
+        _$_ObservationSetSectionModel>
+    implements _$$_ObservationSetSectionModelCopyWith<$Res> {
+  __$$_ObservationSetSectionModelCopyWithImpl(
+      _$_ObservationSetSectionModel _value,
+      $Res Function(_$_ObservationSetSectionModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? observationSet = freezed,
+    Object? assessment = freezed,
+  }) {
+    return _then(_$_ObservationSetSectionModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationSet: freezed == observationSet
+          ? _value.observationSet
+          : observationSet // ignore: cast_nullable_to_non_nullable
+              as ObservationSetModel?,
+      assessment: freezed == assessment
+          ? _value.assessment
+          : assessment // ignore: cast_nullable_to_non_nullable
+              as AssessmentModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ObservationSetSectionModel implements _ObservationSetSectionModel {
+  const _$_ObservationSetSectionModel(
+      {this.id,
+      this.index,
+      this.description,
+      this.observationSet,
+      this.assessment});
+
+  factory _$_ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ObservationSetSectionModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? index;
+  @override
+  final String? description;
+  @override
+  final ObservationSetModel? observationSet;
+  @override
+  final AssessmentModel? assessment;
+
+  @override
+  String toString() {
+    return 'ObservationSetSectionModel(id: $id, index: $index, description: $description, observationSet: $observationSet, assessment: $assessment)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ObservationSetSectionModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.observationSet, observationSet) ||
+                other.observationSet == observationSet) &&
+            (identical(other.assessment, assessment) ||
+                other.assessment == assessment));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, index, description, observationSet, assessment);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ObservationSetSectionModelCopyWith<_$_ObservationSetSectionModel>
+      get copyWith => __$$_ObservationSetSectionModelCopyWithImpl<
+          _$_ObservationSetSectionModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ObservationSetSectionModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ObservationSetSectionModel
+    implements ObservationSetSectionModel {
+  const factory _ObservationSetSectionModel(
+      {final int? id,
+      final int? index,
+      final String? description,
+      final ObservationSetModel? observationSet,
+      final AssessmentModel? assessment}) = _$_ObservationSetSectionModel;
+
+  factory _ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =
+      _$_ObservationSetSectionModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get index;
+  @override
+  String? get description;
+  @override
+  ObservationSetModel? get observationSet;
+  @override
+  AssessmentModel? get assessment;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ObservationSetSectionModelCopyWith<_$_ObservationSetSectionModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ObservationSetModel _$ObservationSetModelFromJson(Map<String, dynamic> json) {
+  return _ObservationSetModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ObservationSetModel {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get version => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get creationDate => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ObservationSetModelCopyWith<ObservationSetModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ObservationSetModelCopyWith<$Res> {
+  factory $ObservationSetModelCopyWith(
+          ObservationSetModel value, $Res Function(ObservationSetModel) then) =
+      _$ObservationSetModelCopyWithImpl<$Res, ObservationSetModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? version,
+      String? description,
+      @TimestampConverter() DateTime? creationDate});
+}
+
+/// @nodoc
+class _$ObservationSetModelCopyWithImpl<$Res, $Val extends ObservationSetModel>
+    implements $ObservationSetModelCopyWith<$Res> {
+  _$ObservationSetModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? description = freezed,
+    Object? creationDate = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ObservationSetModelCopyWith<$Res>
+    implements $ObservationSetModelCopyWith<$Res> {
+  factory _$$_ObservationSetModelCopyWith(_$_ObservationSetModel value,
+          $Res Function(_$_ObservationSetModel) then) =
+      __$$_ObservationSetModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? version,
+      String? description,
+      @TimestampConverter() DateTime? creationDate});
+}
+
+/// @nodoc
+class __$$_ObservationSetModelCopyWithImpl<$Res>
+    extends _$ObservationSetModelCopyWithImpl<$Res, _$_ObservationSetModel>
+    implements _$$_ObservationSetModelCopyWith<$Res> {
+  __$$_ObservationSetModelCopyWithImpl(_$_ObservationSetModel _value,
+      $Res Function(_$_ObservationSetModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? description = freezed,
+    Object? creationDate = freezed,
+  }) {
+    return _then(_$_ObservationSetModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ObservationSetModel implements _ObservationSetModel {
+  const _$_ObservationSetModel(
+      {this.id,
+      this.name,
+      this.version,
+      this.description,
+      @TimestampConverter() this.creationDate});
+
+  factory _$_ObservationSetModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ObservationSetModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+  @override
+  final String? version;
+  @override
+  final String? description;
+  @override
+  @TimestampConverter()
+  final DateTime? creationDate;
+
+  @override
+  String toString() {
+    return 'ObservationSetModel(id: $id, name: $name, version: $version, description: $description, creationDate: $creationDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ObservationSetModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, version, description, creationDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ObservationSetModelCopyWith<_$_ObservationSetModel> get copyWith =>
+      __$$_ObservationSetModelCopyWithImpl<_$_ObservationSetModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ObservationSetModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ObservationSetModel implements ObservationSetModel {
+  const factory _ObservationSetModel(
+          {final int? id,
+          final String? name,
+          final String? version,
+          final String? description,
+          @TimestampConverter() final DateTime? creationDate}) =
+      _$_ObservationSetModel;
+
+  factory _ObservationSetModel.fromJson(Map<String, dynamic> json) =
+      _$_ObservationSetModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  String? get version;
+  @override
+  String? get description;
+  @override
+  @TimestampConverter()
+  DateTime? get creationDate;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ObservationSetModelCopyWith<_$_ObservationSetModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MediaListSectionModel _$MediaListSectionModelFromJson(
+    Map<String, dynamic> json) {
+  return _MediaListSectionModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MediaListSectionModel {
+  int? get id => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  MediaListModel? get mediaList => throw _privateConstructorUsedError;
+  AssessmentModel? get assessment => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MediaListSectionModelCopyWith<MediaListSectionModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MediaListSectionModelCopyWith<$Res> {
+  factory $MediaListSectionModelCopyWith(MediaListSectionModel value,
+          $Res Function(MediaListSectionModel) then) =
+      _$MediaListSectionModelCopyWithImpl<$Res, MediaListSectionModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      MediaListModel? mediaList,
+      AssessmentModel? assessment});
+
+  $MediaListModelCopyWith<$Res>? get mediaList;
+  $AssessmentModelCopyWith<$Res>? get assessment;
+}
+
+/// @nodoc
+class _$MediaListSectionModelCopyWithImpl<$Res,
+        $Val extends MediaListSectionModel>
+    implements $MediaListSectionModelCopyWith<$Res> {
+  _$MediaListSectionModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? mediaList = freezed,
+    Object? assessment = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediaList: freezed == mediaList
+          ? _value.mediaList
+          : mediaList // ignore: cast_nullable_to_non_nullable
+              as MediaListModel?,
+      assessment: freezed == assessment
+          ? _value.assessment
+          : assessment // ignore: cast_nullable_to_non_nullable
+              as AssessmentModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MediaListModelCopyWith<$Res>? get mediaList {
+    if (_value.mediaList == null) {
+      return null;
+    }
+
+    return $MediaListModelCopyWith<$Res>(_value.mediaList!, (value) {
+      return _then(_value.copyWith(mediaList: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AssessmentModelCopyWith<$Res>? get assessment {
+    if (_value.assessment == null) {
+      return null;
+    }
+
+    return $AssessmentModelCopyWith<$Res>(_value.assessment!, (value) {
+      return _then(_value.copyWith(assessment: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_MediaListSectionModelCopyWith<$Res>
+    implements $MediaListSectionModelCopyWith<$Res> {
+  factory _$$_MediaListSectionModelCopyWith(_$_MediaListSectionModel value,
+          $Res Function(_$_MediaListSectionModel) then) =
+      __$$_MediaListSectionModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      int? index,
+      String? description,
+      MediaListModel? mediaList,
+      AssessmentModel? assessment});
+
+  @override
+  $MediaListModelCopyWith<$Res>? get mediaList;
+  @override
+  $AssessmentModelCopyWith<$Res>? get assessment;
+}
+
+/// @nodoc
+class __$$_MediaListSectionModelCopyWithImpl<$Res>
+    extends _$MediaListSectionModelCopyWithImpl<$Res, _$_MediaListSectionModel>
+    implements _$$_MediaListSectionModelCopyWith<$Res> {
+  __$$_MediaListSectionModelCopyWithImpl(_$_MediaListSectionModel _value,
+      $Res Function(_$_MediaListSectionModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? index = freezed,
+    Object? description = freezed,
+    Object? mediaList = freezed,
+    Object? assessment = freezed,
+  }) {
+    return _then(_$_MediaListSectionModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediaList: freezed == mediaList
+          ? _value.mediaList
+          : mediaList // ignore: cast_nullable_to_non_nullable
+              as MediaListModel?,
+      assessment: freezed == assessment
+          ? _value.assessment
+          : assessment // ignore: cast_nullable_to_non_nullable
+              as AssessmentModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MediaListSectionModel implements _MediaListSectionModel {
+  const _$_MediaListSectionModel(
+      {this.id, this.index, this.description, this.mediaList, this.assessment});
+
+  factory _$_MediaListSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$$_MediaListSectionModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? index;
+  @override
+  final String? description;
+  @override
+  final MediaListModel? mediaList;
+  @override
+  final AssessmentModel? assessment;
+
+  @override
+  String toString() {
+    return 'MediaListSectionModel(id: $id, index: $index, description: $description, mediaList: $mediaList, assessment: $assessment)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MediaListSectionModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.mediaList, mediaList) ||
+                other.mediaList == mediaList) &&
+            (identical(other.assessment, assessment) ||
+                other.assessment == assessment));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, index, description, mediaList, assessment);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MediaListSectionModelCopyWith<_$_MediaListSectionModel> get copyWith =>
+      __$$_MediaListSectionModelCopyWithImpl<_$_MediaListSectionModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MediaListSectionModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MediaListSectionModel implements MediaListSectionModel {
+  const factory _MediaListSectionModel(
+      {final int? id,
+      final int? index,
+      final String? description,
+      final MediaListModel? mediaList,
+      final AssessmentModel? assessment}) = _$_MediaListSectionModel;
+
+  factory _MediaListSectionModel.fromJson(Map<String, dynamic> json) =
+      _$_MediaListSectionModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get index;
+  @override
+  String? get description;
+  @override
+  MediaListModel? get mediaList;
+  @override
+  AssessmentModel? get assessment;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MediaListSectionModelCopyWith<_$_MediaListSectionModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MediaListModel _$MediaListModelFromJson(Map<String, dynamic> json) {
+  return _MediaListModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MediaListModel {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get version => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get creationDate => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MediaListModelCopyWith<MediaListModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MediaListModelCopyWith<$Res> {
+  factory $MediaListModelCopyWith(
+          MediaListModel value, $Res Function(MediaListModel) then) =
+      _$MediaListModelCopyWithImpl<$Res, MediaListModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? version,
+      String? description,
+      @TimestampConverter() DateTime? creationDate});
+}
+
+/// @nodoc
+class _$MediaListModelCopyWithImpl<$Res, $Val extends MediaListModel>
+    implements $MediaListModelCopyWith<$Res> {
+  _$MediaListModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? description = freezed,
+    Object? creationDate = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MediaListModelCopyWith<$Res>
+    implements $MediaListModelCopyWith<$Res> {
+  factory _$$_MediaListModelCopyWith(
+          _$_MediaListModel value, $Res Function(_$_MediaListModel) then) =
+      __$$_MediaListModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? version,
+      String? description,
+      @TimestampConverter() DateTime? creationDate});
+}
+
+/// @nodoc
+class __$$_MediaListModelCopyWithImpl<$Res>
+    extends _$MediaListModelCopyWithImpl<$Res, _$_MediaListModel>
+    implements _$$_MediaListModelCopyWith<$Res> {
+  __$$_MediaListModelCopyWithImpl(
+      _$_MediaListModel _value, $Res Function(_$_MediaListModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? description = freezed,
+    Object? creationDate = freezed,
+  }) {
+    return _then(_$_MediaListModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MediaListModel implements _MediaListModel {
+  const _$_MediaListModel(
+      {this.id,
+      this.name,
+      this.version,
+      this.description,
+      @TimestampConverter() this.creationDate});
+
+  factory _$_MediaListModel.fromJson(Map<String, dynamic> json) =>
+      _$$_MediaListModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+  @override
+  final String? version;
+  @override
+  final String? description;
+  @override
+  @TimestampConverter()
+  final DateTime? creationDate;
+
+  @override
+  String toString() {
+    return 'MediaListModel(id: $id, name: $name, version: $version, description: $description, creationDate: $creationDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MediaListModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, version, description, creationDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MediaListModelCopyWith<_$_MediaListModel> get copyWith =>
+      __$$_MediaListModelCopyWithImpl<_$_MediaListModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MediaListModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MediaListModel implements MediaListModel {
+  const factory _MediaListModel(
+      {final int? id,
+      final String? name,
+      final String? version,
+      final String? description,
+      @TimestampConverter() final DateTime? creationDate}) = _$_MediaListModel;
+
+  factory _MediaListModel.fromJson(Map<String, dynamic> json) =
+      _$_MediaListModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  String? get version;
+  @override
+  String? get description;
+  @override
+  @TimestampConverter()
+  DateTime? get creationDate;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MediaListModelCopyWith<_$_MediaListModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
