@@ -1,16 +1,19 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/common_features/auth/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const PatientHomePageAppBar({super.key, required this.patientProfileImage});
-  final String patientProfileImage;
+  const PatientHomePageAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +65,29 @@ class PatientHomePageAppBar extends StatelessWidget
                   color: Colors.white,
                 ),
               ),
-              Positioned(
-                right: 0,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage(patientProfileImage),
-                  ),
-                ),
+              Consumer(
+                builder: (context, ref, child) {
+                  var model = ref.watch(getPatientProfileProvider);
+
+                  model.whenData(
+                    (patient) {
+                      return CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        child: CircleAvatar(
+                          radius: 18,
+                          backgroundImage:
+                              patient.profile?.patient?.profilePhoto == null
+                                  ? const AssetImage('assets/images/user.png')
+                                  : CachedNetworkImageProvider(
+                                      patient.profile!.patient!.profilePhoto!,
+                                    ) as ImageProvider,
+                        ),
+                      );
+                    },
+                  );
+                  return const SizedBox();
+                },
               ),
             ],
           ),

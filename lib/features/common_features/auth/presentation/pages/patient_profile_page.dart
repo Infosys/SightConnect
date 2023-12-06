@@ -46,7 +46,7 @@ class PatientProfilePage extends ConsumerWidget {
           ],
         ),
       ),
-      body: ref.watch(getpatientProfileProvider).when(
+      body: ref.watch(getPatientProfileProvider).when(
         data: (patient) {
           return _content(context, patient);
         },

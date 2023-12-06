@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/features/common_features/auth/data/repositories
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/models/patient_response_model.dart';
 
-final getpatientProfileProvider =
+final getPatientProfileProvider =
     FutureProvider<PatientResponseModel>((ref) async {
   const patientId = 1202;
   if (AppEnv.isDev) {
