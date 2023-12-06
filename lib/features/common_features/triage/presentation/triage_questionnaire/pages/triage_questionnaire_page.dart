@@ -142,6 +142,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 : () {
                     model.saveQuestionaireResponse();
                     if (isLastPage) {
+                      ref
+                          .read(triageQuestionnaireProvider)
+                          .saveQuestionaireResponseToDB();
                       ref.read(triageStepperProvider).goToNextStep();
                       pageIndex.value = 0;
                     } else {
