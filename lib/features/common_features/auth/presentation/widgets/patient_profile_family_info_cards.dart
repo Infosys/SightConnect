@@ -15,6 +15,10 @@ class PatientFamilyDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (relations.isEmpty) {
+      return const SizedBox();
+    }
+
     return ListTile(
       visualDensity: VisualDensity.compact,
       title: Column(

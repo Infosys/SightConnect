@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/contract/patient_authentication_repository.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_model.dart';
 import 'package:eye_care_for_all/features/common_features/auth/data/models/patient_response_model.dart';
@@ -18,22 +20,26 @@ class PatientAuthenticationRepositoryImpl
   PatientAuthenticationRepositoryImpl(this._patientAuthRemoteSource);
 
   @override
-  Future<PatientModel> onboardPatient(PatientModel triageDTO) async {
+  Future<Either<Failure, PatientModel>> onboardPatient(
+      PatientModel triageDTO) async {
     try {
       final remoteResponse =
           await _patientAuthRemoteSource.onboardPatient(triageDTO);
-      return remoteResponse;
+      return Right(remoteResponse);
     } catch (e) {
-      rethrow;
+      return Left(ServerFailure(errorMessage: 'This is a server exception'));
     }
   }
 
   @override
-  Future<PatientResponseModel> getPatientProfile(int patientId) async {
+  Future<Either<Failure, PatientResponseModel>> getPatientProfile(
+      int patientId) async {
     try {
-      return await _patientAuthRemoteSource.getPatientProfile(patientId);
+      final remoteResponse =
+          await _patientAuthRemoteSource.getPatientProfile(patientId);
+      return Right(remoteResponse);
     } catch (e) {
-      rethrow;
+      return Left(ServerFailure(errorMessage: 'This is a server exception'));
     }
   }
 }

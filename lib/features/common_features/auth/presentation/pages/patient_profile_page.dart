@@ -4,9 +4,9 @@ import 'package:eye_care_for_all/features/common_features/auth/presentation/prov
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../data/models/patient_response_model.dart';
 import '../../data/source/local/fake_data_source.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
@@ -19,7 +19,6 @@ class PatientProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(patientProfileProvider);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -47,89 +46,139 @@ class PatientProfilePage extends ConsumerWidget {
           ],
         ),
       ),
-      body: model.isLoading
-          ? const CircularProgressIndicator()
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ProfileHeader(patient: model.patient),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: AppSize.ksheight),
-                      ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Address",
-                              style: applyFiraSansFont(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight,
-                            ),
-                            Text(
-                              "${model.patient.profile!.patient!.address![0].line}, ${model.patient.profile!.patient!.address![0].ward}, ${model.patient.profile!.patient!.address![0].district}, ${model.patient.profile!.patient!.address![0].state}",
-                              style: applyRobotoFont(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: AppSize.ksheight),
-                      ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "General Information",
-                              style: applyFiraSansFont(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight,
-                            ),
-                            PatientInfoCard(
-                              keyText: "Date of Birth",
-                              valueText:
-                                  "${model.patient.profile!.patient!.dayOfBirth}, ${model.patient.profile!.patient!.monthOfBirth}, ${model.patient.profile!.patient!.yearOfBirth}",
-                            ),
-                            PatientInfoCard(
-                              keyText: "Blood Group",
-                              valueText: profile["blood_group"]!,
-                            ),
-                            PatientInfoCard(
-                              keyText: "Height",
-                              valueText: profile["height"]!,
-                            ),
-                            PatientInfoCard(
-                              keyText: "Weight",
-                              valueText: profile["weight"]!,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Divider(
-                          thickness: 1,
-                          color: AppColor.black,
-                        ),
-                      ),
-                      PatientFamilyDetails(
-                          relations:
-                              model.patient.profile!.patient!.relatedParty ??
-                                  []),
-                      const SizedBox(height: AppSize.kmheight),
-                      const BrandingWidgetH(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+      body: ref.watch(getpatientProfileProvider).when(
+        data: (patient) {
+          return _content(context, patient);
+        },
+        error: (error, trace) {
+          return Center(
+            child: Text(error.toString()),
+          );
+        },
+        loading: () {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
+  }
+
+  Widget _content(BuildContext context, PatientResponseModel patient) {
+    final dob = _formateAge(
+      day: patient.profile?.patient?.dayOfBirth ?? "",
+      mon: patient.profile?.patient?.monthOfBirth ?? "",
+      year: patient.profile?.patient?.yearOfBirth ?? "",
+    );
+
+    final address = _formateAddress(
+      line: patient.profile?.patient?.address?.first.line ?? "",
+      ward: patient.profile?.patient?.address?.first.ward ?? "",
+      district: patient.profile?.patient?.address?.first.district ?? "",
+      state: patient.profile?.patient?.address?.first.state ?? "",
+    );
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ProfileHeader(patient: patient),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: AppSize.ksheight),
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Address",
+                      style: applyFiraSansFont(
+                          fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                    Text(
+                      address,
+                      style: applyRobotoFont(
+                          fontSize: 14, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSize.ksheight),
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "General Information",
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                    PatientInfoCard(
+                      keyText: "Date of Birth",
+                      valueText: dob,
+                    ),
+                    PatientInfoCard(
+                      keyText: "Blood Group",
+                      valueText: profile["blood_group"]!,
+                    ),
+                    PatientInfoCard(
+                      keyText: "Height",
+                      valueText: profile["height"]!,
+                    ),
+                    PatientInfoCard(
+                      keyText: "Weight",
+                      valueText: profile["weight"]!,
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Divider(
+                  thickness: 1,
+                  color: AppColor.black,
+                ),
+              ),
+              PatientFamilyDetails(
+                relations: patient.profile?.patient?.relatedParty ?? [],
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              const BrandingWidgetH(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formateAge({
+    required String day,
+    required String mon,
+    required String year,
+  }) {
+    final dob = DateTime(
+      int.parse(year),
+      int.parse(mon),
+      int.parse(day),
+    );
+    final age = DateTime.now().difference(dob).inDays ~/ 365;
+    return "$day/$mon/$year ($age years)";
+  }
+
+  String _formateAddress({
+    required String line,
+    required String ward,
+    required String district,
+    required String state,
+  }) {
+    return "$line, $ward, $district, $state";
   }
 }
