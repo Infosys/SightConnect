@@ -21,7 +21,7 @@ class TriageExitAlertBox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
-      actionsPadding: EdgeInsets.zero,
+      // actionsPadding: EdgeInsets.zero,
       title: const Icon(
         Icons.warning_amber_outlined,
         color: AppColor.orange,
