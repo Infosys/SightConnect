@@ -6,7 +6,9 @@ import 'package:openid_client/openid_client.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:openid_client/openid_client_io.dart' as io;
 
-var authProvider = ChangeNotifierProvider((ref) => AuthPageProvider());
+var authProvider = ChangeNotifierProvider(
+  (ref) => AuthPageProvider(),
+);
 
 class AuthPageProvider extends ChangeNotifier {
   static const keycloakUri = 'http://localhost:8080/realms/test';

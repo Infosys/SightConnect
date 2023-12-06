@@ -31,4 +31,11 @@ class AppEnv {
       Env.PROD => 'https://eyecareforall.in/api/v1/',
     };
   }
+
+  static String get baseKeycloakUrl {
+    return switch (env) {
+      Env.DEV => 'http://localhost:8080/realms/test',
+      Env.PROD => 'http://localhost:8080/realms/test',
+    };
+  }
 }
