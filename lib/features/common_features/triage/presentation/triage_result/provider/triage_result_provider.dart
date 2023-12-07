@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
@@ -19,12 +20,14 @@ class TriageResultProvider extends ChangeNotifier {
   final TriageResponseModel _model;
   final ProfileModel? _profile;
 
-  TriageResultProvider(this._model, this._profile);
+  TriageResultProvider(this._model, this._profile) {
+    logger.d({"TriageResultProvider": _model.toString()});
+  }
 
   ProfileModel get profile => _profile!;
 
   Map<String, dynamic> getOverallTriageResult() {
-    final totalUgency = _model.cummulativeScore!;
+    final totalUgency = _model.cummulativeScore ?? 0;
     return _setPropertiesByUrgency(totalUgency);
   }
 
@@ -37,25 +40,33 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> _getQuestionnaireResult() {
-    final steps = _model.score!;
+    final steps = _model.score ?? [];
+    if (steps.isEmpty) {
+      return {};
+    }
     final questionnaireUrgency = steps.map((step) {
       return step[TriageStep.QUESTIONNAIRE]!;
     }).first;
-
     return _setPropertiesByUrgency(questionnaireUrgency);
   }
 
   Map<String, dynamic> _getAcuityResult() {
-    final steps = _model.score!;
+    final steps = _model.score ?? [];
+    if (steps.isEmpty) {
+      return {};
+    }
+
     final acuityUrgency = steps.map((step) {
       return step[TriageStep.OBSERVATION]!;
     }).first;
-
     return _setPropertiesByUrgency(acuityUrgency);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
-    final steps = _model.score!;
+    final steps = _model.score ?? [];
+    if (steps.isEmpty) {
+      return {};
+    }
     final eyeScanUrgency = steps.map((step) {
       return step[TriageStep.IMAGING]!;
     }).first;
@@ -72,8 +83,9 @@ class TriageResultProvider extends ChangeNotifier {
         'backColor': AppColor.lightGreen.withOpacity(0.4),
         'checkColor': AppColor.green,
         "labelText": "Routine Consult",
-        "issueInfo": 'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
-        "state" : "Completed",
+        "issueInfo":
+            'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+        "state": "Completed",
       };
     } else if (urgency == 2) {
       return {
@@ -83,19 +95,21 @@ class TriageResultProvider extends ChangeNotifier {
         'backColor': AppColor.lightOrange.withOpacity(0.4),
         'checkColor': AppColor.orange,
         "labelText": "Early Consult",
-        "issueInfo": 'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
-        "state" : "Completed",
+        "issueInfo":
+            'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
+        "state": "Completed",
       };
-    } else if (urgency == 3 ) {
+    } else if (urgency == 3) {
       return {
         'urgency': TriageUrgency.EMERGENCY,
         'color': AppColor.red,
         'icon': Icons.check,
         'backColor': AppColor.lightRed.withOpacity(0.4),
         'checkColor': AppColor.red,
-        "message": "Urgent Consult",
-        "issueInfo": 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
-        "state" : "Completed",
+        "labelText": "Urgent Consult",
+        "issueInfo":
+            'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
+        "state": "Completed",
       };
     } else {
       return {
@@ -105,7 +119,9 @@ class TriageResultProvider extends ChangeNotifier {
         'backColor': AppColor.lightGreen.withOpacity(0.4),
         'checkColor': AppColor.green,
         "message": "Routine Consult",
-        "state" : "Completed",
+        "issueInfo":
+            'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+        "state": "Completed",
       };
     }
   }

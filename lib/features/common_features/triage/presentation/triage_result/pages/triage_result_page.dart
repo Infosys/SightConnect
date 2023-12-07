@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_offline_result_helper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
@@ -56,11 +56,11 @@ class TriageResultPage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: AppSize.kmheight),
-                // ResultPageTopCard(
-                //   triageResult: model.getOverallTriageResult(),
-                //   id: "${model.profile.patient?.abhaNumber ?? ""}",
-                //   name: "${model.profile.patient?.name ?? ""}",
-                // ),
+                ResultPageTopCard(
+                  triageResult: model.getOverallTriageResult(),
+                  id: "${model.profile.patient?.abhaNumber ?? ""}",
+                  name: model.profile.patient?.name ?? "",
+                ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(
                   triageResult: model.getCompleteTriageResultList(),

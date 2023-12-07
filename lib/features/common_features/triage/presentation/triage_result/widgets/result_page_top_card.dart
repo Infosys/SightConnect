@@ -101,7 +101,7 @@ class ResultPageTopCard extends StatelessWidget {
                           color: triageResult['color'],
                         ),
                         child: Text(
-                          triageResult['labelText'],
+                          triageResult['labelText'] ?? "",
                           style: applyRobotoFont(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -109,7 +109,7 @@ class ResultPageTopCard extends StatelessWidget {
                         )),
                     const Spacer(),
                     Text(
-                      triageResult['urgency'],
+                      triageResult['urgency'] ?? "",
                       style: applyRobotoFont(
                           fontSize: 12, fontWeight: FontWeight.w400),
                     ),
