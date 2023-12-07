@@ -21,6 +21,7 @@ class ProfileModel with _$ProfileModel {
 
 @freezed
 class RelatedPartyModel with _$RelatedPartyModel {
+  const RelatedPartyModel._();
   const factory RelatedPartyModel({
     int? patientId,
     Relationship? relation,
@@ -30,6 +31,21 @@ class RelatedPartyModel with _$RelatedPartyModel {
     String? profilePicture,
     int? age,
   }) = _RelatedPartyModel;
+
+  static String relationMapper(Relationship relationship) {
+    return switch (relationship) {
+      Relationship.FATHER => 'Father',
+      Relationship.MOTHER => 'Mother',
+      Relationship.SPOUSE => 'Spouse',
+      Relationship.CHILD => 'Child',
+      Relationship.SIBING => 'Sibling',
+      Relationship.UNCLE => 'Uncle',
+      Relationship.AUNT => 'Aunt',
+      Relationship.GRANDFATHER => 'Grandfather',
+      Relationship.GRANDMOTHER => 'Grandmother',
+      Relationship.OTHER => 'Other',
+    };
+  }
 
   factory RelatedPartyModel.fromJson(Map<String, dynamic> json) =>
       _$RelatedPartyModelFromJson(json);

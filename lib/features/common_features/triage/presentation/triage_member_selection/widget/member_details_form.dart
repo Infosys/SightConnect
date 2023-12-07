@@ -8,18 +8,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/member_details_provider.dart';
 
 class MemberDetailsForm extends HookConsumerWidget {
-  const MemberDetailsForm(
-      {super.key,
-      required this.text,
-      this.isDate = false,
-      this.numberKeyboard = false});
+  const MemberDetailsForm({
+    super.key,
+    required this.text,
+    this.isDate = false,
+    this.numberKeyboard = false,
+  });
   final String text;
   final bool isDate;
   final bool numberKeyboard;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // String isdata = text;
     var data = ref.watch(memberDetailsProvider);
     final controller = useTextEditingController();
     final dateController = useTextEditingController();

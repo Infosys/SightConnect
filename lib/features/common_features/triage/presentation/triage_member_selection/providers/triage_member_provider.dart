@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -7,11 +6,11 @@ var traiageMemberProvider = ChangeNotifierProvider<TriageMemberProvider>((ref) {
 });
 
 class TriageMemberProvider extends ChangeNotifier {
-  late Map<String, dynamic> people;
+  late dynamic people;
 
-  setPeople(Map<String, dynamic> people) {
+  setPeople(dynamic people) {
+    //check type of people
     this.people = people;
     notifyListeners();
-    logger.d('$people\n');
   }
 }

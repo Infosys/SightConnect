@@ -1,9 +1,10 @@
 import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,12 +38,12 @@ class PatientHomePageAppBar extends StatelessWidget
         InkWell(
           customBorder: const CircleBorder(),
           onTap: () {
-            // showDialog(
-            //   context: context,
-            //   builder: (context) => const MemberSelectionPopUp(),
-            //   barrierDismissible: false,
-            //   barrierColor: AppColor.blackOpacity,
-            // );
+            showDialog(
+              context: context,
+              builder: (ctx) => const MemberSelectionPopUp(),
+              barrierDismissible: false,
+              barrierColor: AppColor.blackOpacity,
+            );
           },
           child: Stack(
             alignment: Alignment.center,
@@ -67,6 +68,8 @@ class PatientHomePageAppBar extends StatelessWidget
                 builder: (context, ref, child) {
                   return ref.watch(getPatientProfileProvider).when(
                     data: (patient) {
+                      final profilePhoto =
+                          patient.profile?.patient?.profilePhoto;
                       return Positioned(
                         right: -10,
                         child: CircleAvatar(
@@ -74,12 +77,11 @@ class PatientHomePageAppBar extends StatelessWidget
                           backgroundColor: Theme.of(context).primaryColor,
                           child: CircleAvatar(
                             radius: 18,
-                            backgroundImage:
-                                patient.profile?.patient?.profilePhoto == null
-                                    ? const AssetImage('assets/images/user.png')
-                                    : CachedNetworkImageProvider(
-                                        patient.profile!.patient!.profilePhoto!,
-                                      ) as ImageProvider,
+                            backgroundImage: profilePhoto == null
+                                ? const AssetImage('assets/images/user.png')
+                                : AssetImage(
+                                    patient.profile!.patient!.profilePhoto!,
+                                  ) as ImageProvider,
                           ),
                         ),
                       );

@@ -7,14 +7,17 @@ var memberDetailsProvider = ChangeNotifierProvider(
 );
 
 class MemberDetailsProvider extends ChangeNotifier {
-  late String _name;
-  late String _mobileNumber;
-  late String _address;
-  late String _dob;
-  late String _gender;
+  String _name = "";
+  String _mobileNumber = "";
+  String _address = "";
+  String _dob = "";
+  String _gender = "";
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   List<Map<String, dynamic>> response = [];
 
+  GlobalKey<FormState> get formKey => _formKey;
   void setInfo(String type, String value) {
     switch (type) {
       case 'Name':

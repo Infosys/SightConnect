@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/app_environment.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
@@ -23,7 +24,7 @@ final getPatientProfileProvider =
           "abhaAddress": null,
           "name": "Raghavi Mishra",
           "gender": "FEMALE",
-          "profilePhoto": null,
+          "profilePhoto": AppImages.profieImage,
           "email": "RaghaviMishra@gmail.com",
           "dayOfBirth": "15",
           "monthOfBirth": "08",
@@ -54,7 +55,7 @@ final getPatientProfileProvider =
               "patientId": 1201,
               "relation": "MOTHER",
               "parentPatientId": 1202,
-              "name": "Raghavi Sharma",
+              "name": "Aditi Pandey",
               "profilePicture": "assets/images/user.png",
               "age": 20,
               "regRef": "1-07b601cf-cc06-4ec1-95ca-d2d0dd16439b"
@@ -65,45 +66,28 @@ final getPatientProfileProvider =
               "parentPatientId": 1202,
               "name": "Mangal Pandey",
               "profilePicture": "assets/images/user.png",
+              "age": 10,
+              "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+            },
+
+            {
+              "patientId": 1204,
+              "relation": "FATHER",
+              "parentPatientId": 1202,
+              "name": "Arjun Pandey",
+              "profilePicture": "assets/images/user.png",
               "age": 0,
               "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
             },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
+            {
+              "patientId": 1205,
+              "relation": "FATHER",
+              "parentPatientId": 1202,
+              "name": "Hitesh Pandey",
+              "profilePicture": "assets/images/user.png",
+              "age": 0,
+              "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+            },
             // {
             //   "patientId": 1203,
             //   "relation": "FATHER",

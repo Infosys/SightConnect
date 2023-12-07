@@ -36,10 +36,11 @@ class PatientFamilyDetails extends StatelessWidget {
                   visualDensity: const VisualDensity(vertical: -4),
                   contentPadding: const EdgeInsets.all(0),
                   leading: CircleAvatar(
-                    backgroundColor: AppColor.black,
-                    child: Image.asset(
-                      data.profilePicture ?? "assets/images/user.png",
-                    ),
+                    child: data.profilePicture != null
+                        ? Image.asset(
+                            data.profilePicture!,
+                          )
+                        : const SizedBox(),
                   ),
                   title: Text(
                     data.name ?? "",

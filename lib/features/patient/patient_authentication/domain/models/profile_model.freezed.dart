@@ -330,7 +330,7 @@ class __$$_RelatedPartyModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RelatedPartyModel implements _RelatedPartyModel {
+class _$_RelatedPartyModel extends _RelatedPartyModel {
   const _$_RelatedPartyModel(
       {this.patientId,
       this.relation,
@@ -338,7 +338,8 @@ class _$_RelatedPartyModel implements _RelatedPartyModel {
       this.regRef,
       this.name,
       this.profilePicture,
-      this.age});
+      this.age})
+      : super._();
 
   factory _$_RelatedPartyModel.fromJson(Map<String, dynamic> json) =>
       _$$_RelatedPartyModelFromJson(json);
@@ -401,7 +402,7 @@ class _$_RelatedPartyModel implements _RelatedPartyModel {
   }
 }
 
-abstract class _RelatedPartyModel implements RelatedPartyModel {
+abstract class _RelatedPartyModel extends RelatedPartyModel {
   const factory _RelatedPartyModel(
       {final int? patientId,
       final Relationship? relation,
@@ -410,6 +411,7 @@ abstract class _RelatedPartyModel implements RelatedPartyModel {
       final String? name,
       final String? profilePicture,
       final int? age}) = _$_RelatedPartyModel;
+  const _RelatedPartyModel._() : super._();
 
   factory _RelatedPartyModel.fromJson(Map<String, dynamic> json) =
       _$_RelatedPartyModel.fromJson;

@@ -133,7 +133,10 @@ class AppDrawer extends StatelessWidget {
                                         height: 40,
                                         width: 40,
                                         transform: Matrix4.translationValues(
-                                            -10, 0, 0),
+                                          -10,
+                                          0,
+                                          0,
+                                        ),
                                         child: Image.asset(
                                           item.value.icon,
                                           alignment: Alignment.centerLeft,
