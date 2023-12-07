@@ -1,19 +1,23 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final triageResultProvider = ChangeNotifierProvider((ref) => ResultState());
+import '../../../../../../core/constants/app_color.dart';
+import '../../../../../../main.dart';
 
-class ResultState extends ChangeNotifier {
-  //state - Completed, Complete test, Not Applicable
-  //issueLevel - Normal, Minor, Major
+var triageResultColorProvider =
+    ChangeNotifierProvider((ref) => TriageResultColorProvider());
 
-  // ResultState() {
-  //   setTopColors();
-  // }
+class TriageResultColorProvider extends ChangeNotifier {
 
-  final List<Map<String, String>> _resultState = [
+  bool _isOffline = true;
+  set isOfflineState(bool value) {
+    _isOffline = value;
+    notifyListeners();
+  }
+
+  bool get isOffline => _isOffline;
+
+  final List<Map<String, String>> _onlineResultState = [
     {
       "type": "Assessment\nQuestions",
       "state": "Completed",
@@ -31,6 +35,12 @@ class ResultState extends ChangeNotifier {
     },
   ];
 
+  set onlineResultState(List<Map<String, String>> value) {
+    _onlineResultState.clear();
+    _onlineResultState.addAll(value);
+    notifyListeners();
+  }
+
   Color _backColor = AppColor.lightGrey.withOpacity(0.4);
   Color _checkColor = AppColor.red;
   Color _topCardColor = AppColor.green;
@@ -39,7 +49,7 @@ class ResultState extends ChangeNotifier {
 
   IconData _icon = Icons.close;
 
-  List<Map<String, String>> get resultState => _resultState;
+  List<Map<String, String>> get onlineResultState => _onlineResultState;
 
   Color get topCardColor => _topCardColor;
 
@@ -52,7 +62,7 @@ class ResultState extends ChangeNotifier {
   String get highestPriority => _highestPriority;
 
   setTopColors() {
-    for (var map in _resultState) {
+    for (var map in _onlineResultState) {
       final issueLevel = map['issueLevel'];
       if (issueLevel == 'Major') {
         _highestPriority = 'Major';
@@ -74,23 +84,23 @@ class ResultState extends ChangeNotifier {
   }
 
   setColors(int index) {
-    if (_resultState[index]["state"] == "Completed") {
-      _backColor = _resultState[index]["issueLevel"] == "Normal"
+    if (_onlineResultState[index]["state"] == "Completed") {
+      _backColor = _onlineResultState[index]["issueLevel"] == "Normal"
           ? AppColor.lightGreen.withOpacity(0.4)
-          : _resultState[index]["issueLevel"] == "Minor"
+          : _onlineResultState[index]["issueLevel"] == "Minor"
               ? AppColor.lightOrange.withOpacity(0.4)
               : AppColor.lightRed.withOpacity(0.4);
-      _checkColor = _resultState[index]["issueLevel"] == "Normal"
+      _checkColor = _onlineResultState[index]["issueLevel"] == "Normal"
           ? AppColor.green
-          : _resultState[index]["issueLevel"] == "Minor"
+          : _onlineResultState[index]["issueLevel"] == "Minor"
               ? AppColor.orange
               : AppColor.red;
       _icon = Icons.check;
-    } else if (_resultState[index]["state"] == "Complete test") {
+    } else if (_onlineResultState[index]["state"] == "Complete test") {
       _checkColor = AppColor.red;
       _icon = Icons.close;
       _backColor = AppColor.lightGrey.withOpacity(0.4);
-    } else if (_resultState[index]["state"] == "Not Applicable") {
+    } else if (_onlineResultState[index]["state"] == "Not Applicable") {
       _checkColor = AppColor.altGrey;
       _icon = Icons.remove;
       _backColor = AppColor.lightGrey.withOpacity(0.4);
@@ -98,9 +108,7 @@ class ResultState extends ChangeNotifier {
     setTopColors();
   }
 
-  setResultState(int index, String state, String issueLevel) {
-    _resultState[index]["state"] = state;
-    _resultState[index]["issueLevel"] = issueLevel;
+  setResultState(int index) {
     setColors(index);
   }
 }

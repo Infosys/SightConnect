@@ -34,7 +34,7 @@ class OptometritianReportProvider extends ChangeNotifier {
   }
 
   TriageUrgency eyeScanUrgency() {
-    return _triageUrgencyRepository.visualAcuityUrgency([]);
+    return _triageUrgencyRepository.visualAcuityUrgency([]);  
   }
 
   Color _getChipUrgencyColor(double value) {
