@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
@@ -22,7 +23,7 @@ class TriageResponseModel with _$TriageResponseModel {
     String? sourceVersion,
     List<IncompleteTestModel>? incompleteSection,
     double? cummulativeScore,
-    List<Map<String, double>>? score,
+    List<Map<TriageStep, double>>? score,
     List<PostImagingSelectionModel>? imagingSelection,
     List<PostObservationsModel>? observations,
     List<PostQuestionResponseModel>? questionResponse,

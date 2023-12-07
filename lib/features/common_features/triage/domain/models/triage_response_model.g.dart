@@ -29,7 +29,8 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
       cummulativeScore: (json['cummulativeScore'] as num?)?.toDouble(),
       score: (json['score'] as List<dynamic>?)
           ?.map((e) => (e as Map<String, dynamic>).map(
-                (k, e) => MapEntry(k, (e as num).toDouble()),
+                (k, e) => MapEntry(
+                    $enumDecode(_$TriageStepEnumMap, k), (e as num).toDouble()),
               ))
           .toList(),
       imagingSelection: (json['imagingSelection'] as List<dynamic>?)
@@ -63,7 +64,9 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
       'sourceVersion': instance.sourceVersion,
       'incompleteSection': instance.incompleteSection,
       'cummulativeScore': instance.cummulativeScore,
-      'score': instance.score,
+      'score': instance.score
+          ?.map((e) => e.map((k, e) => MapEntry(_$TriageStepEnumMap[k]!, e)))
+          .toList(),
       'imagingSelection': instance.imagingSelection,
       'observations': instance.observations,
       'questionResponse': instance.questionResponse,
@@ -76,6 +79,12 @@ const _$SourceEnumMap = {
   Source.IVR: 'IVR',
   Source.IN_PERSION: 'IN_PERSION',
   Source.OTHERS: 'OTHERS',
+};
+
+const _$TriageStepEnumMap = {
+  TriageStep.QUESTIONNAIRE: 'QUESTIONNAIRE',
+  TriageStep.OBSERVATION: 'OBSERVATION',
+  TriageStep.IMAGING: 'IMAGING',
 };
 
 _$_PostQuestionResponseModel _$$_PostQuestionResponseModelFromJson(

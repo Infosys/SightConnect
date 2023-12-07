@@ -36,7 +36,8 @@ mixin _$TriageResponseModel {
   List<IncompleteTestModel>? get incompleteSection =>
       throw _privateConstructorUsedError;
   double? get cummulativeScore => throw _privateConstructorUsedError;
-  List<Map<String, double>>? get score => throw _privateConstructorUsedError;
+  List<Map<TriageStep, double>>? get score =>
+      throw _privateConstructorUsedError;
   List<PostImagingSelectionModel>? get imagingSelection =>
       throw _privateConstructorUsedError;
   List<PostObservationsModel>? get observations =>
@@ -70,7 +71,7 @@ abstract class $TriageResponseModelCopyWith<$Res> {
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      List<Map<String, double>>? score,
+      List<Map<TriageStep, double>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -163,7 +164,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, double>>?,
+              as List<Map<TriageStep, double>>?,
       imagingSelection: freezed == imagingSelection
           ? _value.imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -202,7 +203,7 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      List<Map<String, double>>? score,
+      List<Map<TriageStep, double>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -293,7 +294,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       score: freezed == score
           ? _value._score
           : score // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, double>>?,
+              as List<Map<TriageStep, double>>?,
       imagingSelection: freezed == imagingSelection
           ? _value._imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -327,7 +328,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
       this.cummulativeScore,
-      final List<Map<String, double>>? score,
+      final List<Map<TriageStep, double>>? score,
       final List<PostImagingSelectionModel>? imagingSelection,
       final List<PostObservationsModel>? observations,
       final List<PostQuestionResponseModel>? questionResponse})
@@ -386,9 +387,9 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   final double? cummulativeScore;
-  final List<Map<String, double>>? _score;
+  final List<Map<TriageStep, double>>? _score;
   @override
-  List<Map<String, double>>? get score {
+  List<Map<TriageStep, double>>? get score {
     final value = _score;
     if (value == null) return null;
     if (_score is EqualUnmodifiableListView) return _score;
@@ -523,7 +524,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
           final double? cummulativeScore,
-          final List<Map<String, double>>? score,
+          final List<Map<TriageStep, double>>? score,
           final List<PostImagingSelectionModel>? imagingSelection,
           final List<PostObservationsModel>? observations,
           final List<PostQuestionResponseModel>? questionResponse}) =
@@ -561,7 +562,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   double? get cummulativeScore;
   @override
-  List<Map<String, double>>? get score;
+  List<Map<TriageStep, double>>? get score;
   @override
   List<PostImagingSelectionModel>? get imagingSelection;
   @override
