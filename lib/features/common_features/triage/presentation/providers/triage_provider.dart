@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
@@ -38,8 +40,16 @@ class TriageProvider extends ChangeNotifier {
 
   TriageProvider(this.ref);
 
-  Future<void> saveTriage() async {
-    var triage = TriageResponseModel(
+  Future<Either<Failure, TriageResponseModel>> saveTriage() async {
+    final imageSelection =
+        await ref.read(triageLocalSourceProvider).getTriageEyeScanResponse();
+    final observations = await ref
+        .read(triageLocalSourceProvider)
+        .getVisionAcuityTumblingResponse();
+
+    final questionResponse =
+        await ref.read(triageLocalSourceProvider).getQuestionaireResponse();
+    final triage = TriageResponseModel(
       patientId: 99000001,
       encounterId: 100001,
       serviceType: 'OPTOMETRY',
@@ -57,31 +67,12 @@ class TriageProvider extends ChangeNotifier {
       source: Source.PATIENT_APP,
       sourceVersion: "v1",
       incompleteSection: [],
-      imagingSelection:
-          await ref.read(triageLocalSourceProvider).getTriageEyeScanResponse(),
-      observations: await ref
-          .read(triageLocalSourceProvider)
-          .getVisionAcuityTumblingResponse(),
-      questionResponse:
-          await ref.read(triageLocalSourceProvider).getQuestionaireResponse(),
+      imagingSelection: imageSelection,
+      observations: observations,
+      questionResponse: questionResponse,
     );
 
-    final response = await ref.read(triageRepositoryProvider).saveTriage(
-          triage: triage,
-        );
-    response.fold(
-      (failure) {
-        logger.d({
-          "saveTriageProvider": failure,
-        });
-        throw failure;
-      },
-      (result) {
-        logger.d({
-          "saveTriageProvider": result,
-        });
-      },
-    );
+    return await ref.read(triageRepositoryProvider).saveTriage(triage: triage);
   }
 
   resetTriage() {

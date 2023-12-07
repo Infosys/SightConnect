@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../models/tumbling_models.dart';
+import '../../../domain/models/enums/tumbling_enums.dart';
+import '../../../domain/models/tumbling_models.dart';
 
 var tumlingLocalSource = Provider((ref) => TumblingLocalSourceImpl());
 

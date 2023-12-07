@@ -328,19 +328,25 @@ class _PatientTriageEyeCapturingPageState
               : TextButton(
                   onPressed: () async {
                     final navigator = Navigator.of(context);
-                    await Future.wait([
-                      ref
-                          .read(triageEyeScanProvider)
-                          .saveTriageEyeScanResponseToDB(),
-                      ref.read(triageProvider).saveTriage(),
-                    ]);
-                    ref.read(triageStepperProvider).goToNextStep();
-                    navigator.pop();
-                    navigator.push(
-                      MaterialPageRoute(
-                        builder: (context) => const TriageResultPage(),
-                      ),
-                    );
+                    await ref
+                        .read(triageEyeScanProvider)
+                        .saveTriageEyeScanResponseToDB();
+                    final response =
+                        await ref.read(triageProvider).saveTriage();
+
+                    response.fold((failure) {
+                      Fluttertoast.showToast(msg: failure.toString());
+                    }, (result) {
+                      ref.read(triageStepperProvider).goToNextStep();
+                      navigator.pop();
+                      navigator.push(
+                        MaterialPageRoute(
+                          builder: (context) => TriageResultPage(
+                            triageResult: result,
+                          ),
+                        ),
+                      );
+                    });
                   },
                   child: Text(
                     "View Result",

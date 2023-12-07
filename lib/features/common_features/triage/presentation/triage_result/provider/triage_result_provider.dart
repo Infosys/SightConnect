@@ -1,10 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final triageResultProvider = ChangeNotifierProvider((ref) => ResultState(
-));
+final triageResultProvider = ChangeNotifierProvider(
+  (
+    ref,
+  ) =>
+      ResultState(),
+);
 
 class ResultState extends ChangeNotifier {
   //state - Completed, Complete test, Not Applicable

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
@@ -15,11 +16,14 @@ import '../../../../../patient/patient_assessments_and_tests/presentation/pages/
 import '../widgets/result_page_bottom_cards.dart';
 
 class TriageResultPage extends ConsumerWidget {
-  const TriageResultPage({super.key});
-
+  const TriageResultPage({
+    required this.triageResult,
+    super.key,
+  });
+  final TriageResponseModel triageResult;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(triageResultProvider);
+    final model = ref.watch(triageResultProvider);
 
     return WillPopScope(
       onWillPop: () async {

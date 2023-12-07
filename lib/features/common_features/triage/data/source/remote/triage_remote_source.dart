@@ -47,8 +47,9 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }
 
   @override
-  Future<TriageResponseModel> saveTriage(
-      {required TriageResponseModel triage}) async {
+  Future<TriageResponseModel> saveTriage({
+    required TriageResponseModel triage,
+  }) async {
     var endpoint = "/api/triage-report";
     logger.d({
       "API saveTriage": triage.toJson(),
@@ -58,8 +59,12 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       endpoint,
       data: triage.toJson(),
     );
-    if (response.statusCode! >= 200 && response.statusCode! < 210) {
-      return TriageResponseModel.fromJson(response.data);
+    if (response.statusCode != null) {
+      if (response.statusCode! >= 200 && response.statusCode! < 210) {
+        return TriageResponseModel.fromJson(response.data);
+      } else {
+        throw ServerException();
+      }
     } else {
       throw ServerException();
     }
@@ -68,6 +73,6 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
 var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.watch(dioProvider),
   ),
 );
