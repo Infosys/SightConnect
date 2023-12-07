@@ -10,6 +10,9 @@ class AssessmentResultCards extends StatelessWidget {
   final List<Map<String, dynamic>> triageResult;
   @override
   Widget build(BuildContext context) {
+    if (triageResult.isEmpty) {
+      return const SizedBox();
+    }
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

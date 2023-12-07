@@ -75,54 +75,51 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(double urgency) {
-    if (urgency == 1) {
-      return {
-        'urgency': TriageUrgency.ROUTINE,
-        'color': AppColor.green,
-        'icon': Icons.check,
-        'backColor': AppColor.lightGreen.withOpacity(0.4),
-        'checkColor': AppColor.green,
-        "labelText": "Routine Consult",
-        "issueInfo":
-            'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
-        "state": "Completed",
-      };
-    } else if (urgency == 2) {
-      return {
-        'urgency': TriageUrgency.PRIORITY,
-        'color': AppColor.orange,
-        'icon': Icons.check,
-        'backColor': AppColor.lightOrange.withOpacity(0.4),
-        'checkColor': AppColor.orange,
-        "labelText": "Early Consult",
-        "issueInfo":
-            'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
-        "state": "Completed",
-      };
-    } else if (urgency == 3) {
-      return {
-        'urgency': TriageUrgency.EMERGENCY,
-        'color': AppColor.red,
-        'icon': Icons.check,
-        'backColor': AppColor.lightRed.withOpacity(0.4),
-        'checkColor': AppColor.red,
-        "labelText": "Urgent Consult",
-        "issueInfo":
-            'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
-        "state": "Completed",
-      };
-    } else {
-      return {
-        'urgency': TriageUrgency.ROUTINE,
-        'color': AppColor.green,
-        'icon': Icons.check,
-        'backColor': AppColor.lightGreen.withOpacity(0.4),
-        'checkColor': AppColor.green,
-        "message": "Routine Consult",
-        "issueInfo":
-            'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
-        "state": "Completed",
-      };
-    }
+    return switch (urgency) {
+      1 => {
+          'urgency': TriageUrgency.ROUTINE,
+          'color': AppColor.green,
+          'icon': Icons.check,
+          'backColor': AppColor.lightGreen.withOpacity(0.4),
+          'checkColor': AppColor.green,
+          "labelText": "Routine Consult",
+          "issueInfo":
+              'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+          "state": "Completed",
+        },
+      2 => {
+          'urgency': TriageUrgency.PRIORITY,
+          'color': AppColor.orange,
+          'icon': Icons.check,
+          'backColor': AppColor.lightOrange.withOpacity(0.4),
+          'checkColor': AppColor.orange,
+          "labelText": "Early Consult",
+          "issueInfo":
+              'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
+          "state": "Completed",
+        },
+      3 => {
+          'urgency': TriageUrgency.EMERGENCY,
+          'color': AppColor.red,
+          'icon': Icons.check,
+          'backColor': AppColor.lightRed.withOpacity(0.4),
+          'checkColor': AppColor.red,
+          "labelText": "Urgent Consult",
+          "issueInfo":
+              'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
+          "state": "Completed",
+        },
+      _ => {
+          'urgency': TriageUrgency.ROUTINE,
+          'color': AppColor.green,
+          'icon': Icons.check,
+          'backColor': AppColor.lightGreen.withOpacity(0.4),
+          'checkColor': AppColor.green,
+          "message": "Routine Consult",
+          "issueInfo":
+              'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+          "state": "Completed",
+        }
+    };
   }
 }

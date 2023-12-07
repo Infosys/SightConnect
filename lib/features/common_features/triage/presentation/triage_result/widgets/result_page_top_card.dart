@@ -17,6 +17,9 @@ class ResultPageTopCard extends StatelessWidget {
   final String id;
   @override
   Widget build(BuildContext context) {
+    if (triageResult.isEmpty) {
+      return const SizedBox();
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,

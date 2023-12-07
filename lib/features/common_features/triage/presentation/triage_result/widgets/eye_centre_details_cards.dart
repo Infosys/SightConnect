@@ -53,7 +53,7 @@ class EyeCentreDetailsCards extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      e["name"],
+                      e["name"] ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class EyeCentreDetailsCards extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          e["location"],
+                          e["location"] ?? "",
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: const Color(0xff333333),
@@ -98,7 +98,7 @@ class EyeCentreDetailsCards extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          e["phone"],
+                          e["phone"] ?? "",
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: const Color(0xff333333),
@@ -122,7 +122,7 @@ class EyeCentreDetailsCards extends StatelessWidget {
                         SizedBox(
                           width: AppSize.width(context) * 0.7,
                           child: Text(
-                            e["speciality"],
+                            e["speciality"] ?? "",
                             softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 14,
