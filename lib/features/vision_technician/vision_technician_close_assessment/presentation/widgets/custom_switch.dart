@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class CustomSwitch extends HookWidget {
@@ -8,13 +7,11 @@ class CustomSwitch extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = useState(true);
 
-    return Switch(
-      // thumbIcon: thumbIcon,
-      // trackOutlineWidth: 20,
+    var state = useState<bool>(false);
+
+    return CupertinoSwitch(
       value: state.value,
-      focusColor: Colors.red,
       activeColor: AppColor.primary,
       onChanged: (bool value) {
         state.value = value;

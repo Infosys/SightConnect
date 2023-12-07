@@ -18,7 +18,9 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                print("working");
+                ref
+              .read(visionTechnicianDashboardProvider.notifier)
+              .changeIndex(0);
               },
               icon: const Icon(
                 Icons.home_outlined,
@@ -30,7 +32,9 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                print("working");
+                ref
+              .read(visionTechnicianDashboardProvider.notifier)
+              .changeIndex(1);
               },
               icon: const Icon(
                 CupertinoIcons.person_add,
@@ -42,7 +46,9 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                print("working");
+                ref
+              .read(visionTechnicianDashboardProvider.notifier)
+              .changeIndex(2);
               },
               icon: const Icon(
                 CupertinoIcons.person_add,
@@ -54,7 +60,8 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                print("working");
+                // print("working");
+                
               },
               icon: const Icon(
                 CupertinoIcons.phone,
@@ -64,8 +71,11 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             label: 'IVR Call History',
           ),
         ],
-        currentIndex: 0,
-        onTap: (index) {},
+        currentIndex: model.currentIndex,
+        onTap: (index) {
+          // print(index);
+          
+        },
       ),
     );
   }

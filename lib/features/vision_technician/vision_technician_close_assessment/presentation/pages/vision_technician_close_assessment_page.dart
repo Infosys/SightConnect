@@ -3,6 +3,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/close_heading.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/custom_switch.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,43 +24,65 @@ class VisionTechnicianCloseAssessmentPage extends StatelessWidget {
           style: applyFiraSansFont(),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: Column(
-          children: [
-            const CloseHeading(),
-            EyeScanCard(),
-            SizedBox(
-              width: AppSize.width(context),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Solutions(s)",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Container(
-                    // width: AppSize.width(context),
-      // margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      decoration: BoxDecoration(
-        color: AppColor.white,
-        boxShadow: applyLightShadow(),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
-      ),
-      child: const Row(
+      bottomNavigationBar: Row(
         children: [
-          
-          CustomSwitch(),
+          SizedBox(width: AppSize.width(context) * 0.05),
+          Expanded(
+            child: TextButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(AppColor.primary),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    side: BorderSide(color: AppColor.primary),
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
+                  ),
+                ),
+              ),
+              child: Text(
+                "Back",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.primary,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: AppSize.width(context) * 0.05),
+          Expanded(
+            child: TextButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColor.primary),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    side: BorderSide(color: AppColor.primary),
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
+                  ),
+                ),
+              ),
+              child: Text(
+                "Submit",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.white,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: AppSize.width(context) * 0.05),
         ],
       ),
-                  ),
-                ],
-              ),
-            )
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(AppSize.kmpadding),
+        child: Column(
+          children: [
+            CloseHeading(),
+            EyeScanCard(),
+            SolutionCard(),
+            Recommendations(),
           ],
         ),
       ),

@@ -31,7 +31,9 @@ class EyeScanCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              
+            },
             style: ButtonStyle(
               padding: MaterialStateProperty.all(
                 const EdgeInsets.symmetric(
