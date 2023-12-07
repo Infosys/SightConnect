@@ -4,6 +4,9 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/accessibility_settings.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/acuity_distance_tile.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/swipe_gesture_card.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/voice_assist_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +25,8 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (value) async {
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
@@ -83,7 +86,9 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
                     child: Image.asset(
                       AppIcon.hamburgerIcon,
                     ),
@@ -123,11 +128,17 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TopReadingCard(),
-                  SizedBox(
-                    height: AppSize.klpadding,
+                  SizedBox(height: AppSize.klpadding),
+                  AcuityDistanceTile(
+                    distanceInCms: 40,
                   ),
                   Expanded(
-                    child: BottomInputTab(),
+                    child: BottomInputTab(
+                      tabs: [
+                        SwipeGestureCard(),
+                        VoiceAssistCard(),
+                      ],
+                    ),
                   ),
                 ],
               ),

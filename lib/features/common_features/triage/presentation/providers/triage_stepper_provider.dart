@@ -37,7 +37,7 @@ class TriageStepperProvider extends ChangeNotifier {
       notifyListeners();
     }
     logger.d({
-      'goToNextStep': _currentStep,
+      'currentStep': _currentStep,
     });
   }
 
@@ -47,7 +47,7 @@ class TriageStepperProvider extends ChangeNotifier {
       notifyListeners();
     }
     logger.d({
-      'goToPreviousStep': _currentStep,
+      'currentStep': _currentStep,
     });
   }
 

@@ -20,7 +20,8 @@ class UpdateTriageUseCase
   UpdateTriageUseCase(this._repository);
   @override
   Future<Either<Failure, TriageAssessmentModel>> call(
-      UpdateTriageParam params) async {
+    UpdateTriageParam params,
+  ) async {
     final response = await _repository.updateTriage(triage: params.triage);
     return response;
   }

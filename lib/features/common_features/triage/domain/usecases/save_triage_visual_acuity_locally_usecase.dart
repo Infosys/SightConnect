@@ -6,28 +6,30 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var saveTriageUseCase = Provider(
-  (ref) => SaveTriageUseCase(
+var saveTriageVisualAcuityLocallyUseCase = Provider(
+  (ref) => SaveTriageVisualAcuityLocallyUseCase(
     ref.watch(triageRepositoryProvider),
   ),
 );
 
-class SaveTriageUseCase
-    implements UseCase<TriageResponseModel, SaveTriageParam> {
+class SaveTriageVisualAcuityLocallyUseCase
+    implements UseCase<void, SaveTriageVisualAcuityLocallyParam> {
   final TriageRepository _repository;
-  SaveTriageUseCase(this._repository);
+  SaveTriageVisualAcuityLocallyUseCase(this._repository);
   @override
-  Future<Either<Failure, TriageResponseModel>> call(
-    SaveTriageParam params,
+  Future<Either<Failure, void>> call(
+    SaveTriageVisualAcuityLocallyParam params,
   ) async {
-    final response = await _repository.saveTriage(
-      triage: params.triageResponse,
+    final response = await _repository.saveTriageVisualAcuityLocally(
+      triageVisualAcuity: params.observations,
     );
     return response;
   }
 }
 
-class SaveTriageParam {
-  final TriageResponseModel triageResponse;
-  SaveTriageParam({required this.triageResponse});
+class SaveTriageVisualAcuityLocallyParam {
+  final List<PostObservationsModel> observations;
+  SaveTriageVisualAcuityLocallyParam({
+    required this.observations,
+  });
 }

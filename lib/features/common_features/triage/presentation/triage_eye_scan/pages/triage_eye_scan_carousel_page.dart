@@ -29,7 +29,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text(
-          "Steps to do the retinal scanning",
+          "Steps to do the scan ",
         ),
       ),
       body: Column(

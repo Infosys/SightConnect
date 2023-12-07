@@ -9,6 +9,8 @@ import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
 
+var kTriageCacheCleared = false;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferenceService.init();

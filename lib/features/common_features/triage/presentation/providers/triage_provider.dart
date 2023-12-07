@@ -29,8 +29,16 @@ var getTriageProvider = FutureProvider.autoDispose<TriageAssessmentModel>(
   },
 );
 
-var saveTriageProvider = FutureProvider.autoDispose<TriageResponseModel>(
-  (ref) async {
+var triageProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => TriageProvider(ref),
+);
+
+class TriageProvider extends ChangeNotifier {
+  Ref ref;
+
+  TriageProvider(this.ref);
+
+  Future<void> saveTriage() async {
     var triage = TriageResponseModel(
       patientId: 99000001,
       encounterId: 100001,
@@ -61,7 +69,7 @@ var saveTriageProvider = FutureProvider.autoDispose<TriageResponseModel>(
     final response = await ref.read(triageRepositoryProvider).saveTriage(
           triage: triage,
         );
-    return response.fold(
+    response.fold(
       (failure) {
         logger.d({
           "saveTriageProvider": failure,
@@ -69,20 +77,12 @@ var saveTriageProvider = FutureProvider.autoDispose<TriageResponseModel>(
         throw failure;
       },
       (result) {
-        return result;
+        logger.d({
+          "saveTriageProvider": result,
+        });
       },
     );
-  },
-);
-
-var triageProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => TriageProvider(ref),
-);
-
-class TriageProvider extends ChangeNotifier {
-  Ref ref;
-
-  TriageProvider(this.ref);
+  }
 
   resetTriage() {
     ref.invalidate(triageQuestionnaireProvider);

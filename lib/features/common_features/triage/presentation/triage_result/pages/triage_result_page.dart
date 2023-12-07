@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_centre_details_cards.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

@@ -22,9 +22,9 @@ class TriageEyeScanInstructions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    return WillPopScope(
-      onWillPop: () async {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    return PopScope(
+      onPopInvoked: (value) async {
         var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(

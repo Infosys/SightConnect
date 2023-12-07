@@ -282,13 +282,13 @@ class VisualAcuityTestProvider with ChangeNotifier {
         score: bothEyeUrgency,
       ),
     ];
-    logger.d(observationList);
+
     return observationList;
   }
 
-  saveVisionAcuityResponseToDB() {
-    logger.f("Saving Vision Acuity Response to DB");
-    triageLocalSourceProvider.saveTriageVisualAcuityLocally(
-        triageVisualAcuity: getVisionAcuityTumblingResponse());
+  Future<void> saveVisionAcuityResponseToDB() async {
+    await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
+      triageVisualAcuity: getVisionAcuityTumblingResponse(),
+    );
   }
 }
