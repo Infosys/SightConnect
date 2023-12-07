@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ResultPageTopCard extends StatelessWidget {
   const ResultPageTopCard({
@@ -15,8 +16,11 @@ class ResultPageTopCard extends StatelessWidget {
   final Map<String, dynamic> triageResult;
   final String name;
   final String id;
+ 
   @override
   Widget build(BuildContext context) {
+     DateTime dateToday = DateTime.now(); 
+     String formattedDate = DateFormat('d MMM yyyy').format(dateToday);
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -109,7 +113,7 @@ class ResultPageTopCard extends StatelessWidget {
                         )),
                     const Spacer(),
                     Text(
-                      triageResult['urgency'],
+                      formattedDate,
                       style: applyRobotoFont(
                           fontSize: 12, fontWeight: FontWeight.w400),
                     ),
