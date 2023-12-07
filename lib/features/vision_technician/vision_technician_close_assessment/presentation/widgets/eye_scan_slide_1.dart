@@ -22,13 +22,13 @@ class _EyeScanSlide1State extends State<EyeScanSlide1> {
   }
 
   void getCameras() async {
-    controller = CameraController(cameras![1], ResolutionPreset.max);
-    controller?.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
+    // controller = CameraController(cameras![1], ResolutionPreset.max);
+    // controller?.initialize().then((_) {
+    //   if (!mounted) {
+    //     return;
+    //   }
+    //   setState(() {});
+    // });
   }
 
   @override
