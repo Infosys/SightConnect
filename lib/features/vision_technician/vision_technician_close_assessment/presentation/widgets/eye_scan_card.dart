@@ -1,5 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_slide_1.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,8 +33,24 @@ class EyeScanCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           TextButton(
-            onPressed: () {
-              
+            onPressed: () async {
+              var cameras = await availableCameras();
+                if (cameras.isEmpty) {
+                  return;
+                }
+                if (context.mounted) {
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     fullscreenDialog: true,
+                  //     builder: (context) =>
+                  //         EyeScanSlide1(cameras: cameras),
+                  //   ),
+                  // );
+                }
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const EyeScanSlide1()),
+              // );
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all(
