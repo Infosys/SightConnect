@@ -55,7 +55,7 @@ class AssessmentResultCards extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                resultData['type'],
+                index==0?'Assessment\nQuestions':index==1?'Acuity\nTest':'Eye Scan',
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

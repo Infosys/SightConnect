@@ -17,19 +17,6 @@ class ResultPageTopCard extends StatelessWidget {
   final String id;
   @override
   Widget build(BuildContext context) {
-    // var resultData = ref.watch(triageOfflineResultColorProvider);
-    // resultData.setTopColors();
-    // String issueInfo = resultData.highestPriority == 'Major'
-    //     ? 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.'
-    //     : resultData.highestPriority == 'Minor'
-    //         ? 'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.'
-    //         : 'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.';
-
-    // String issueLabelText = resultData.highestPriority == 'Major'
-    //     ? 'Urgent Consult'
-    //     : resultData.highestPriority == 'Minor'
-    //         ? 'Early Consult'
-    //         : 'Routine Consult';
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -114,7 +101,7 @@ class ResultPageTopCard extends StatelessWidget {
                           color: triageResult['color'],
                         ),
                         child: Text(
-                          triageResult['message'],
+                          triageResult['labelText'],
                           style: applyRobotoFont(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -132,7 +119,7 @@ class ResultPageTopCard extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  triageResult['message'],
+                  triageResult['issueInfo'],
                   textAlign: TextAlign.left,
                   softWrap: true,
                   style: applyRobotoFont(

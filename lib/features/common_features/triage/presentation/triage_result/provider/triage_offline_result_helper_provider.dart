@@ -64,32 +64,38 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(double urgency) {
-    if (urgency >= 0 && urgency <= 3) {
+    if (urgency == 1) {
       return {
         'urgency': TriageUrgency.ROUTINE,
         'color': AppColor.green,
         'icon': Icons.check,
         'backColor': AppColor.lightGreen.withOpacity(0.4),
         'checkColor': AppColor.green,
-        "message": "Routine Consult"
+        "labelText": "Routine Consult",
+        "issueInfo": 'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+        "state" : "Completed",
       };
-    } else if (urgency >= 4 && urgency <= 6) {
+    } else if (urgency == 2) {
       return {
         'urgency': TriageUrgency.PRIORITY,
         'color': AppColor.orange,
         'icon': Icons.check,
         'backColor': AppColor.lightOrange.withOpacity(0.4),
         'checkColor': AppColor.orange,
-        "message": "Early Consult"
+        "labelText": "Early Consult",
+        "issueInfo": 'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
+        "state" : "Completed",
       };
-    } else if (urgency >= 7 && urgency <= 10) {
+    } else if (urgency == 3 ) {
       return {
         'urgency': TriageUrgency.EMERGENCY,
         'color': AppColor.red,
         'icon': Icons.check,
         'backColor': AppColor.lightRed.withOpacity(0.4),
         'checkColor': AppColor.red,
-        "message": "Urgent Consult"
+        "message": "Urgent Consult",
+        "issueInfo": 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
+        "state" : "Completed",
       };
     } else {
       return {
@@ -98,7 +104,8 @@ class TriageResultProvider extends ChangeNotifier {
         'icon': Icons.check,
         'backColor': AppColor.lightGreen.withOpacity(0.4),
         'checkColor': AppColor.green,
-        "message": "Routine Consult"
+        "message": "Routine Consult",
+        "state" : "Completed",
       };
     }
   }

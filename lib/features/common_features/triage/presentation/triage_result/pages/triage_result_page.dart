@@ -56,11 +56,11 @@ class TriageResultPage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: AppSize.kmheight),
-                ResultPageTopCard(
-                  triageResult: model.getOverallTriageResult(),
-                  id: "${model.profile.patient?.abhaNumber ?? ""}",
-                  name: model.profile.patient?.name ?? "",
-                ),
+                // ResultPageTopCard(
+                //   triageResult: model.getOverallTriageResult(),
+                //   id: "${model.profile.patient?.abhaNumber ?? ""}",
+                //   name: "${model.profile.patient?.name ?? ""}",
+                // ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(
                   triageResult: model.getCompleteTriageResultList(),
