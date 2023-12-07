@@ -1,39 +1,44 @@
-import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_current_step_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageStepperProvider = ChangeNotifierProvider(
   (ref) => TriageStepperProvider(
-    ref.watch(triageDBHelperProvider),
+    ref.watch(getTriageCurrentStepUseCase),
   ),
 );
 
 class TriageStepperProvider extends ChangeNotifier {
   int maxSteps = 4;
   int _currentStep = 0;
-  TriageDBHelper localDB;
-  TriageStepperProvider(this.localDB) {
+  final GetTriageCurrentStepUseCase _useCase;
+  TriageStepperProvider(this._useCase) {
     getTriageCurrentStep();
   }
 
-  void getTriageCurrentStep() async {
-    // _currentStep = await localDB.getTriageCurrentStep();
-    notifyListeners();
-  }
-
   int get currentStep => _currentStep;
+
+  Future<void> getTriageCurrentStep() async {
+    final response = await _useCase.call(GetTriageCurrentStepParam());
+    response.fold((failure) {
+      logger.d({
+        'getTriageCurrentStep': failure,
+      });
+    }, (result) {
+      _currentStep = result;
+      notifyListeners();
+    });
+  }
 
   void goToNextStep() {
     if (_currentStep < maxSteps) {
       _currentStep++;
       notifyListeners();
     }
-    if (kDebugMode) {
-      logger.d({
-        'currentStep': _currentStep,
-      });
-    }
+    logger.d({
+      'currentStep': _currentStep,
+    });
   }
 
   void goToPreviousStep() {
@@ -41,11 +46,9 @@ class TriageStepperProvider extends ChangeNotifier {
       _currentStep--;
       notifyListeners();
     }
-    if (kDebugMode) {
-      logger.d({
-        'currentStep': _currentStep,
-      });
-    }
+    logger.d({
+      'currentStep': _currentStep,
+    });
   }
 
   void reset() {

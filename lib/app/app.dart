@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -24,7 +24,8 @@ class MyApp extends ConsumerWidget {
     return Millimeters.fromView(
       child: MediaQuery(
         data: mediaQueryData.copyWith(
-          textScaleFactor: Responsive.isMobile(context) ? 1.0 : 1.3,
+          textScaler:
+              TextScaler.linear(Responsive.isMobile(context) ? 1.0 : 1.3),
         ),
         child: MaterialApp(
           title: AppText.appName,
@@ -43,6 +44,7 @@ class MyApp extends ConsumerWidget {
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
+          onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {

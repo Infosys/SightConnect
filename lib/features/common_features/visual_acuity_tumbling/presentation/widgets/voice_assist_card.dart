@@ -18,14 +18,12 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoiceAssistCard extends HookConsumerWidget {
-  VoiceAssistCard({Key? key}) : super(key: key);
-
-  final SpeechToText speechToText = SpeechToText();
+  const VoiceAssistCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final SpeechToText speechToText = SpeechToText();
     final isListening = useState<bool>(false);
-
     var model = ref.watch(tumblingTestProvider);
 
     ref.listen(tumblingTestProvider, (previous, next) {
@@ -74,7 +72,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                     repeat: true,
                     repeatPauseDuration: const Duration(milliseconds: 100),
                     child: GestureDetector(
-                      onTapDown: ((details) async {
+                      onTapDown: (details) async {
                         if (!isListening.value) {
                           var available = await speechToText.initialize();
 
@@ -106,7 +104,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                             );
                           }
                         }
-                      }),
+                      },
                       onTapUp: ((details) {
                         isListening.value = false;
 

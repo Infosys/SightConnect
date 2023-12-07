@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class TriageAddMemberPage extends HookConsumerWidget {
             provider.setresponse();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const TriageQuestionnairePage(),
+                builder: (context) => const TriagePage(),
                 fullscreenDialog: true,
               ),
             );

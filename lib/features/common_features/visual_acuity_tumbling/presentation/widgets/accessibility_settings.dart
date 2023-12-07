@@ -2,12 +2,10 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 
 import '../providers/accessibility_provider.dart';
 
@@ -113,8 +111,6 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
                   label: '${model.brightness.round()}',
                   onChanged: (double value) async {
                     model.setBrightness(value);
-                    double brightnessToggle = value / 100;
-                    await _setBrightness(brightnessToggle);
                   },
                 ),
               ),
@@ -127,24 +123,6 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
         ),
       ],
     );
-  }
-
-  Future<double> _currentBrightness() async {
-    try {
-      return await ScreenBrightness().current;
-    } catch (e) {
-      logger.d(e.toString());
-      throw 'Failed to get current brightness';
-    }
-  }
-
-  Future<void> _setBrightness(double brightness) async {
-    try {
-      await ScreenBrightness().setScreenBrightness(brightness);
-    } catch (e) {
-      logger.d(e.toString());
-      throw 'Failed to set brightness';
-    }
   }
 }
 
@@ -204,15 +182,6 @@ class _BlurThreshold extends HookConsumerWidget {
   }
 }
 
-// Future<void> _setBlurThreshold(int threshold) async {
-//   try {
-
-//   } catch (e) {
-//     logger.d(e.toString());
-//     throw 'Failed to set blur threshold';
-//   }
-// }
-
 class _AutoFontSizeWidget extends HookWidget {
   const _AutoFontSizeWidget();
 
@@ -241,7 +210,7 @@ class _AutoFontSizeWidget extends HookWidget {
               children: [
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
                 Consumer(
@@ -265,7 +234,7 @@ class _AutoFontSizeWidget extends HookWidget {
                 ),
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
               ],
@@ -275,7 +244,7 @@ class _AutoFontSizeWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Text(
           "Turning off auto-brightness or auto-contrast may affect test performance and accuracy. These parameters have been preset for optimal levels. However, you may change these parameters to suit your visual comfort levels.",
-          textScaleFactor: scaleFactor.value,
+          textScaler: TextScaler.linear(scaleFactor.value),
           style: applyRobotoFont(),
         ),
       ],

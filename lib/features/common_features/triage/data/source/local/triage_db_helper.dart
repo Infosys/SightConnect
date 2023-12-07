@@ -88,7 +88,7 @@ class TriageDBHelper {
     );
   }
 
-  Future getTriageAssessment() async {
+  Future<dynamic> getTriageAssessment() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageAssessmentTableName,
         orderBy: "id DESC", limit: 1);
@@ -98,7 +98,7 @@ class TriageDBHelper {
     return [];
   }
 
-  Future getTriageAssessmentResponse() async {
+  Future<dynamic> getTriageAssessmentResponse() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageResponseTableName,
         orderBy: "id DESC", limit: 1);

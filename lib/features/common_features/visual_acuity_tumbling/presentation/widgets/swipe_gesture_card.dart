@@ -48,6 +48,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             builder: (context) {
               return VisualAcuityDialog.showSuccessTemp(context);
             });
+        // next.setIsTestCompleted = true;
       }
     });
 

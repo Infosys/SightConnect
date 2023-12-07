@@ -1,21 +1,44 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/auth/data/models/related_party_model.dart';
-import 'package:eye_care_for_all/features/common_features/auth/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 
-class MyConnectionsList extends StatelessWidget {
-  const MyConnectionsList({super.key, required this.connectionsList});
-  final List<RelatedPartyModel> connectionsList;
+class MyConnectionsList extends ConsumerWidget {
+  const MyConnectionsList({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(getPatientProfileProvider).when(
+      data: (patient) {
+        final connectionsList = patient.profile?.patient?.relatedParty;
+        return _content(context, connectionsList ?? []);
+      },
+      error: (error, trace) {
+        return Center(
+          child: Text(error.toString()),
+        );
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+
+  Widget _content(
+    BuildContext context,
+    List<RelatedPartyModel> connectionsList,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -52,7 +75,9 @@ class MyConnectionsList extends StatelessWidget {
           ],
         ),
         connectionsList.isEmpty
-            ? const Text("No data")
+            ? const Center(
+                child: Text("No Members Added"),
+              )
             : Row(
                 children: [
                   Flexible(

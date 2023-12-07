@@ -20,6 +20,7 @@ linter:
   rules:
     avoid_print: false  
     non_constant_identifier_names: false
+    constant_identifier_names: false
     
 
 # Additional information about this file can be found at

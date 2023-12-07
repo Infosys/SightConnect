@@ -7,8 +7,6 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../triage_questionnaire/pages/triage_questionnaire_page.dart';
 import '../widget/change_member_tiles.dart';
 
 class TriageMemberSelectionPage extends HookWidget {
