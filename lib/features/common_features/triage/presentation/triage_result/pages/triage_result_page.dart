@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_offline_result_color_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_offline_result_helper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
@@ -13,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
+import '../../../../visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import '../widgets/result_page_bottom_cards.dart';
 
 class TriageResultPage extends ConsumerWidget {
@@ -25,7 +25,7 @@ class TriageResultPage extends ConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        ref.read(triageProvider).resetTriage();
+        ref.read(tumblingTestProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
 
         return true;
@@ -34,7 +34,7 @@ class TriageResultPage extends ConsumerWidget {
         appBar: CustomAppbar(
           leadingIcon: InkWell(
             onTap: () {
-              ref.read(triageProvider).resetTriage();
+              ref.read(tumblingTestProvider).reset();
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(

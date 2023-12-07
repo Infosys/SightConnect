@@ -3,8 +3,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/triage_offline_result_color_provider.dart';
-import '../provider/triage_result_provider.dart';
+import '../provider/triage_offline_result_helper_provider.dart';
 
 class AssessmentResultCards extends ConsumerWidget {
   const AssessmentResultCards({super.key});

@@ -39,8 +39,19 @@ class TumblingResultReportPage extends ConsumerWidget {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: AppColor.scaffold,
-        appBar: const CustomAppbar(
-          title: Text("Visual Acuity Test Results"),
+        appBar: CustomAppbar(
+          title: const Text("Visual Acuity Test Results"),
+          leadingIcon: InkWell(
+            onTap: () {
+              ref.read(triageProvider).resetTriage();
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+            child: const Icon(
+              Icons.chevron_left_sharp,
+              color: AppColor.black,
+              size: 35,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(

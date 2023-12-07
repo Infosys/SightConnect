@@ -7,11 +7,11 @@ var memberDetailsProvider = ChangeNotifierProvider(
 );
 
 class MemberDetailsProvider extends ChangeNotifier {
-  late String _name;
-  late String _mobileNumber;
-  late String _address;
-  late String _dob;
-  late String _gender;
+   String? _name;
+   String? _mobileNumber;
+   String? _address;
+   String? _dob;
+   String? _gender;
 
   List<Map<String, dynamic>> response = [];
 
@@ -75,8 +75,8 @@ class MemberDetailsProvider extends ChangeNotifier {
 
   set gender(String gender) => _gender = gender;
 
-  String get name => _name;
-  String get mobileNumber => _mobileNumber;
-  String get address => _address;
-  String get dob => _dob;
+  String? get name => _name;
+  String? get mobileNumber => _mobileNumber;
+  String? get address => _address;
+  String? get dob => _dob;
 }
