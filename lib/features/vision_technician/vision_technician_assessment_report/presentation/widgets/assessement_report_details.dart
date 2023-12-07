@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'dart:js';
 
 class AssessmentReportDetails extends StatelessWidget {
-  const   AssessmentReportDetails({super.key});
+  const AssessmentReportDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,46 +26,72 @@ class AssessmentReportDetails extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               )),
           const SizedBox(height: AppSize.ksheight),
-          Wrap(spacing: AppSize.kmwidth * 5, children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "1. Patient has the following eyesight related problems:",
-                  style: applyRobotoFont(
-                     fontWeight: FontWeight.w400),
+          Consumer(
+            builder: (context, ref, child) {
+              var eyeSightProblems =
+                  ref.watch(preliminaryAssessmentProvider).eyeSightProblem;
+              print(eyeSightProblems);
+              var eyeRelatedProblems =
+                  ref.watch(preliminaryAssessmentProvider).eyeRelatedProblem;
+
+              var eyeRelatedProblemsFilter = eyeRelatedProblems
+                  .where((e) => e["checked"] == true)
+                  .toList();
+              var eyeSightProblemsFilter =
+                  eyeSightProblems.where((e) => e["checked"] == true).toList();
+
+              return Wrap(spacing: AppSize.kmwidth * 5, children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "1. Patient has the following eyesight related problems:",
+                      style: applyRobotoFont(fontWeight: FontWeight.w400),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    ListView.builder(
+                      itemCount: eyeSightProblemsFilter.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Text("* ${eyeSightProblemsFilter[index]["type"]}",
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ));
+                      },
+                    )
+                  ],
                 ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(" * (None)",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                    )),
-              ],
-            ),
-            Divider(
-              thickness: 1,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "2. Patient has the following eye related problems:",
-                  style: applyRobotoFont(
-                     fontWeight: FontWeight.w400),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(" * Sticky discharge in eyes",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                    )),
                 Divider(
                   thickness: 1,
                 ),
-              ],
-            ),
-          ]),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "2. Patient has the following eye related problems:",
+                      style: applyRobotoFont(fontWeight: FontWeight.w400),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    ListView.builder(
+                      itemCount: eyeRelatedProblemsFilter.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Text("* ${eyeRelatedProblemsFilter[index]["type"]}",
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ));
+                      },
+                    ),
+                    Divider(
+                      thickness: 1,
+                    ),
+                  ],
+                ),
+              ]);
+            },
+          )
         ]));
   }
 }

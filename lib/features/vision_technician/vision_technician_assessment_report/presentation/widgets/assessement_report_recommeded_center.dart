@@ -1,13 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentReportRecommendedCenter extends StatelessWidget {
+class AssessmentReportRecommendedCenter extends ConsumerWidget {
   const AssessmentReportRecommendedCenter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    var recommendedCenter=ref.watch(preliminaryAssessmentProvider).visonCenters.where((element) => element["checked"]==true).toList()[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,13 +35,13 @@ class AssessmentReportRecommendedCenter extends StatelessWidget {
             direction: Axis.vertical,
             children: [
               Text(
-                "LVPEI Eye Institute - Chudi Bazaar",
+                recommendedCenter["type"] as String,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Wrap(
+               Wrap(
                 spacing: AppSize.kmwidth,
                 direction: Axis.horizontal,
                 children: [
@@ -46,7 +49,7 @@ class AssessmentReportRecommendedCenter extends StatelessWidget {
                   SizedBox(
                     width: AppSize.klwidth * 15,
                     child: Text(
-                        "14,Nagar Khana Hanuman Temple Road,Begum Bazar Chatri,Gowsala Nagar,Chudi Bazaar,Hyderabad,Telegana 500012"),
+                       recommendedCenter["completeAddress"] as String),
                   ),
                   Wrap(direction: Axis.vertical, children: [
                     Wrap(
@@ -56,7 +59,7 @@ class AssessmentReportRecommendedCenter extends StatelessWidget {
                         Icon(Icons.phone_outlined, color: AppColor.grey),
                         SizedBox(
                           width: AppSize.klwidth * 18,
-                          child: Text("9963478759"),
+                          child: Text(recommendedCenter["phoneno"].toString()),
                         ),
                       ],
                     ),
@@ -70,7 +73,7 @@ class AssessmentReportRecommendedCenter extends StatelessWidget {
                         ),
                         SizedBox(
                           width: AppSize.klwidth * 18,
-                          child: Text("Monday - Friday 10:00 AM - 5:00 PM"),
+                          child: Text(recommendedCenter["time"].toString()),
                         ),
                       ],
                     ),

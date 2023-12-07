@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class TimelineProfile extends StatelessWidget {
         child: Wrap(direction: Axis.horizontal, children: [
           Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
-              width: AppSize.klwidth * 18,
+              width: Responsive.isTablet(context)?AppSize.klwidth*18:AppSize.width(context)/2,
               child: ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(130),

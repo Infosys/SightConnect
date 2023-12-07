@@ -1,12 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/dropdown_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddressDetails extends StatelessWidget {
-   AddressDetails({super.key});
+  const AddressDetails({super.key});
   static List<String> listOfStates = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -15,15 +17,6 @@ class AddressDetails extends StatelessWidget {
     "Chhattisgarh",
     "Goa"
   ];
-
-  var doorNoContoller = TextEditingController();
-  var streetContoller = TextEditingController();
-  var districtContoller = TextEditingController();
-  var cityContoller = TextEditingController();
-  var stateContoller = TextEditingController();
-  var landMarkContoller = TextEditingController();
-  var pinCodeContoller = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,82 +47,108 @@ class AddressDetails extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSize.klheight),
-                Wrap(
-                  spacing: AppSize.klwidth,
-                  children: [
-                    Row(
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Wrap(
+                      spacing: AppSize.klwidth,
                       children: [
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child:  Input(
-                              title: "Door Number",
-                              keyboardType: TextInputType.name,
-                              controller: doorNoContoller,
-                              ),
-                        ),
-                        const SizedBox(
-                          width: AppSize.kmwidth,
-                        ),
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child:  Input(
-                              title: "Street",
-                              keyboardType: TextInputType.name,
-                              controller: streetContoller,),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child:  Input(
-                              title: "District",
-                              keyboardType: TextInputType.name,
-                              controller: districtContoller,),
-                        ),
-                        const SizedBox(
-                          width: AppSize.kmwidth,
-                        ),
-                        SizedBox(
-                            width: AppSize.width(context) * 0.4,
-                            child:  Input(
-                                title: "City",
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: Input(
+                                title: "Door Number",
                                 keyboardType: TextInputType.name,
-                                controller: cityContoller,)),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child: DropdownInput(
-                              title: "State", listOfOptions: listOfStates),
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "doorNoController"]!,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: AppSize.kmwidth,
+                            ),
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: Input(
+                                title: "Street",
+                                keyboardType: TextInputType.name,
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "streetController"]!,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: Input(
+                                title: "District",
+                                keyboardType: TextInputType.name,
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "districtController"]!,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: AppSize.kmwidth,
+                            ),
+                            SizedBox(
+                                width: AppSize.width(context) * 0.4,
+                                child: Input(
+                                  title: "City",
+                                  keyboardType: TextInputType.name,
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .addressDetailsTextEditingControllers[
+                                      "cityController"]!,
+                                )),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: DropdownInput(listOfOptions: listOfStates),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: Input(
+                                title: "Landmark",
+                                keyboardType: TextInputType.name,
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "landMarkController"]!,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: AppSize.kmwidth,
+                            ),
+                            SizedBox(
+                              width: AppSize.width(context) * 0.4,
+                              child: Input(
+                                title: "Pincode",
+                                keyboardType: TextInputType.number,
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "pinCodeController"]!,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child:  Input(
-                              title: "Landmark",
-                              keyboardType: TextInputType.name,
-                              controller: landMarkContoller,),
-                        ),
-                        const SizedBox(
-                          width: AppSize.kmwidth,
-                        ),
-                        SizedBox(
-                          width: AppSize.width(context) * 0.4,
-                          child:  Input(
-                              title: "Pincode",
-                              keyboardType: TextInputType.number,
-                              controller: pinCodeContoller,),
-                        ),
-                      ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ],
             )));

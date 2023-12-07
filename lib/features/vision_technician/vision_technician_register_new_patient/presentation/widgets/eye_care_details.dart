@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/data/model/eye_care_details_question_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EyeCareDetails extends HookConsumerWidget {
-  EyeCareDetails({Key? key}) : super(key: key);
-
-  var whereController1 = TextEditingController();
-  var whereController2 = TextEditingController();
+  const EyeCareDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,27 +17,12 @@ class EyeCareDetails extends HookConsumerWidget {
       [0, 0],
       [0, 0]
     ]);
-    List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
-      EyeCareDetailsQuestionModel(
-        questionId: 1,
-        question: "Did you have eye examination done previously",
-        answer: "",
-        answerDescription: "",
-      ),
-      EyeCareDetailsQuestionModel(
-          questionId: 2,
-          question: "Did you have cataract surgery",
-          answer: "",
-          answerDescription: ""),
-      EyeCareDetailsQuestionModel(
-          questionId: 3,
-          question: "Are you using eye glasses",
-          answer: "",
-          answerDescription: ""),
-    ];
+
+    var eyeCareDetailsQuestion =
+        ref.watch(registerNewPatientProvider).eyeCareDetailsQuestion;
+
     return Container(
         width: double.infinity,
-        height: AppSize.klheight * 22,
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.kmradius),
@@ -127,7 +109,22 @@ class EyeCareDetails extends HookConsumerWidget {
                               }
 
                               selectedAnswer.value = newstate;
-                              print(selectedAnswer.value);
+                              var answers = [];
+                              for (index = 0;
+                                  index < selectedAnswer.value.length;
+                                  index++) {
+                                if (selectedAnswer.value[index][0] == 1) {
+                                  answers.add("No");
+                                } else if (selectedAnswer.value[index][1] ==
+                                    1) {
+                                  answers.add("Yes");
+                                } else {
+                                  answers.add("UnSelected");
+                                }
+                              }
+                              ref
+                                  .read(registerNewPatientProvider.notifier)
+                                  .seteyeCareDetails(answers);
                             },
                             selected: true,
                           ),
@@ -137,21 +134,30 @@ class EyeCareDetails extends HookConsumerWidget {
                         height: AppSize.kmheight,
                       ),
                       if (questionModel.questionId != 3)
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.kmpadding),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(AppSize.ksradius),
-                              color: Color(0xffFFFFFF)),
-                          width: AppSize.width(context) * 0.4,
-                          height: AppSize.height(context) * 0.15,
-                          child: Input(
-                            title: "Where?",
-                            keyboardType: TextInputType.name,
-                            controller: questionModel.questionId == 1
-                                ? whereController1
-                                : whereController2,
-                          ),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return Container(
+                              padding: const EdgeInsets.all(AppSize.kmpadding),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.ksradius),
+                                  color: Color(0xffFFFFFF)),
+                              width: AppSize.width(context) * 0.4,
+                              height: AppSize.klheight * 5,
+                              child: Input(
+                                  title: "Where?",
+                                  keyboardType: TextInputType.name,
+                                  controller: questionModel.questionId == 1
+                                      ? ref
+                                              .read(registerNewPatientProvider)
+                                              .eyeCareDetailsTextEditingControllers[
+                                          "whereController1"]!
+                                      : ref
+                                              .read(registerNewPatientProvider)
+                                              .eyeCareDetailsTextEditingControllers[
+                                          "whereController2"]!),
+                            );
+                          },
                         ),
                       const SizedBox(
                         height: AppSize.kmheight,

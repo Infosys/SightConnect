@@ -22,7 +22,7 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
           SizedBox(
             height: AppSize.klheight,
           ),
-          Wrap(
+          Row(
             children: [
               for (int index = 0; index < tablefilter.length; index++) ...[
                 ChoiceChip(

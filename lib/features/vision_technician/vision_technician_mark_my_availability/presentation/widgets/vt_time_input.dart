@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimeInput extends StatelessWidget {
-  const TimeInput({super.key, required this.title});
-  static TextEditingController controller = TextEditingController();
+   TimeInput({super.key, required this.title,required this.controller});
+
   final String title;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(

@@ -27,6 +27,9 @@ class VisionTechnicianIvrCallHistory extends StatelessWidget {
             ],
           ),
         ),
-        body: IvrCallHistoryTableView());
+        body: Padding(
+          padding: const EdgeInsets.all(AppSize.klpadding),
+          child: IvrCallHistoryTableView(),
+        ));
   }
 }

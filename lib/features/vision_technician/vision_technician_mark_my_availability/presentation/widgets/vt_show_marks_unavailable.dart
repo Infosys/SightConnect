@@ -11,6 +11,13 @@ import 'package:flutter/material.dart';
 
 void showMarksUnAvaialbility(BuildContext context) {
   final formKey = GlobalKey<FormState>();
+  var startTimeController = TextEditingController();
+  var endTimeController = TextEditingController();
+  var endDateController = TextEditingController();
+  var startDateController = TextEditingController();
+
+  var remarksController = TextEditingController();
+
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -23,7 +30,6 @@ void showMarksUnAvaialbility(BuildContext context) {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.klradius),
               ),
-              
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,7 +90,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                               width: AppSize.klwidth * 15,
                               child: DateInput(
                                 title: "Start Date",
-                                controller: TextEditingController(),
+                                controller: startDateController,
                               )),
                           SizedBox(
                             width: AppSize.klwidth,
@@ -92,31 +98,38 @@ void showMarksUnAvaialbility(BuildContext context) {
                           SizedBox(
                               width: AppSize.klwidth * 15,
                               child: DateInput(
-                                  title: "End Date",
-                                  controller: TextEditingController())),
+                                title: "End Date",
+                                controller: endDateController,
+                              )),
                         ],
                       ),
                       const SizedBox(
                         height: AppSize.klheight,
                       ),
-                      const Row(
+                      Row(
                         children: [
                           SizedBox(
                               width: AppSize.klwidth * 15,
-                              child: TimeInput(title: "Start Time")),
+                              child: TimeInput(
+                                title: "Start Time",
+                                controller: startTimeController,
+                              )),
                           SizedBox(
                             width: AppSize.klwidth,
                           ),
                           SizedBox(
                               width: AppSize.klwidth * 15,
-                              child: TimeInput(title: "End Time")),
+                              child: TimeInput(
+                                title: "End Time",
+                                controller: endTimeController,
+                              )),
                         ],
                       ),
                       const SizedBox(
                         height: AppSize.klheight,
                       ),
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: remarksController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter Remark';
@@ -145,6 +158,14 @@ void showMarksUnAvaialbility(BuildContext context) {
                           ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
+                                var result = {
+                                  "start Date": startDateController.text,
+                                  "end Date": endDateController.text,
+                                  "start Time": startTimeController.text,
+                                  "end Time": endTimeController.text,
+                                  "remarks": remarksController.text,
+                                };
+                                print(result);
                                 Navigator.of(context).pop();
                               }
                             },

@@ -1,45 +1,67 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_myavailable_dropdown.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTEachRow extends StatelessWidget {
+class VTEachRow extends ConsumerWidget {
   VTEachRow(
       {super.key,
-      required this.functionhandler,
+      required this.dayAvailabilityindex,
       required this.index,
       required this.daydata});
-  var functionhandler;
   var index;
   var daydata;
+  var dayAvailabilityindex;
 
   @override
-  Widget build(BuildContext context) {
-    print(daydata);
+  Widget build(BuildContext context, WidgetRef ref) {
+    print(daydata["time"]);
     return Wrap(
       children: [
         const SizedBox(
           width: AppSize.klwidth,
         ),
         VTMarkMyAvailableDropdown(
+          dayAvailabilityindex: dayAvailabilityindex,
+          index: index,
+          dropDownNo: 0,
           disable: daydata["checked"],
           title: "9:00 AM",
-          listOfOptions: ["9:00 AM", "10:00 AM", "11:00 AM"],
+          listOfOptions: [
+            "9:00 AM",
+            "10:00 AM",
+            "11:00 AM",
+            "12:00 PM",
+            "1:00 PM",
+            "2:00 PM"
+          ],
         ),
         const SizedBox(
           width: AppSize.klwidth * 2,
         ),
         VTMarkMyAvailableDropdown(
+          dayAvailabilityindex: dayAvailabilityindex,
+          index: index,
+          dropDownNo: 1,
           disable: daydata["checked"],
           title: "11:00 AM",
-          listOfOptions: ["9:00 AM", "10:00 AM", "11:00 AM"],
+          listOfOptions: [
+            "9:00 AM",
+            "10:00 AM",
+            "11:00 AM",
+            "12:00 PM",
+            "1:00 PM",
+            "2:00 PM"
+          ],
         ),
         const SizedBox(
           width: AppSize.klwidth * 2,
         ),
         Text(
-          "4 Hrs",
+        (daydata["time"][index][2])+" hrs",
           style: applyFiraSansFont(
             fontSize: 14,
             color: AppColor.grey,
@@ -69,7 +91,10 @@ class VTEachRow extends StatelessWidget {
                   onPressed: daydata["checked"] == false
                       ? null
                       : () {
-                          functionhandler(index);
+                          ref
+                              .read(markMyAvailabilityProvider.notifier)
+                              .removeDayAvailability(
+                                  dayAvailabilityindex, index);
                         },
                 )),
           ],

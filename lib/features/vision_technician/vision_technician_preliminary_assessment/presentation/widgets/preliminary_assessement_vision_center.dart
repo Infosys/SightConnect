@@ -1,30 +1,21 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
-  const PreliminaryAssessmentVisionCenter({super.key});
+  PreliminaryAssessmentVisionCenter({super.key});
+  var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var visonCenter = useState([]);
-
-    useEffect(() {
-      visonCenter.value = [
-        {"type": "LVPEI Eye Institute - Chudi Bazaar", "checked": true},
-        {"type": "LVPEI Eye Institute - Gachibowli", "checked": false},
-        {"type": "LVPEI Eye Institute - Kala Pahar", "checked": false},
-        {"type": "LVPEI Eye Institute - Gachibowli", "checked": false},
-        {"type": "LVPEI Eye Institute - Kala Pahar", "checked": false},
-      ];
-
-      return null;
-    }, []);
-
+    var visonCenter = ref.watch(preliminaryAssessmentProvider).visonCenters;
     var firstcontroller = ScrollController();
+
     return Container(
         width: double.infinity,
         padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -43,6 +34,17 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         child: Wrap(
           direction: Axis.vertical,
           children: [
+            SizedBox(
+              width: AppSize.klwidth*32,
+              child: Input(
+                title: "Recommendations",
+                keyboardType: TextInputType.multiline,
+                controller: ref
+                    .read(preliminaryAssessmentProvider)
+                    .recommendationController,
+              ),
+            ),
+            SizedBox(height: AppSize.klheight,),
             Text(
               "Vision Center",
               style: applyFiraSansFont(
@@ -53,7 +55,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
             const SizedBox(
               height: AppSize.klheight,
             ),
-            Wrap(spacing: AppSize.klwidth , children: [
+            Wrap(spacing: AppSize.klwidth, children: [
               Container(
                 width: AppSize.klwidth * 15,
                 padding: const EdgeInsets.all(AppSize.kspadding + 2),
@@ -79,19 +81,16 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                                   right: AppSize.kmpadding + 4),
                               child: InkWell(
                                 onTap: () {
-                                  var newMap = [...visonCenter.value];
-                                  for (var element in newMap) {
-                                    element["checked"] = false;
-                                  }
-                                  newMap[index]["checked"] =
-                                      !newMap[index]["checked"];
-                                  visonCenter.value = newMap;
-                                  print(visonCenter);
+                                  selectedIndex = index;
+                                  ref
+                                      .read(preliminaryAssessmentProvider
+                                          .notifier)
+                                      .toogleVisionCenters(index);
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: visonCenter.value[index]
+                                          color: visonCenter[index]
                                                       ["checked"] ==
                                                   false
                                               ? AppColor.lightGrey
@@ -106,18 +105,17 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(visonCenter.value[index]["type"],
-                                        style: applyRobotoFont(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                        )
-                                        ),
-                                        
+                                        Text(
+                                            visonCenter[index]["type"]
+                                                as String,
+                                            style: applyRobotoFont(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            )),
                                         Icon(
-                                          
                                           Icons.check_circle,
                                           size: 10,
-                                          color: visonCenter.value[index]
+                                          color: visonCenter[index]
                                                       ["checked"] ==
                                                   true
                                               ? AppColor.green
@@ -141,44 +139,58 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Wrap(
+                  Wrap(
                     spacing: AppSize.kmwidth,
                     direction: Axis.horizontal,
                     children: [
                       Icon(Icons.location_on_outlined),
                       SizedBox(
                         width: AppSize.klwidth * 15,
-                        child: Text(
-                            "14,Nagar Khana Hanuman Temple Road,Begum Bazar Chatri,Gowsala Nagar,Chudi Bazaar,Hyderabad,Telegana 500012"),
+                        child: Text(visonCenter[selectedIndex]
+                            ["completeAddress"] as String),
                       ),
                     ],
                   ),
-                  const Wrap(
+                  Wrap(
                     spacing: AppSize.kmwidth,
                     direction: Axis.horizontal,
                     children: [
                       Icon(Icons.phone_outlined),
                       SizedBox(
                         width: AppSize.klwidth * 18,
-                        child: Text("9963478759"),
+                        child: Text(
+                            visonCenter[selectedIndex]["phoneno"] as String),
                       ),
                     ],
                   ),
-                  const Wrap(
+                  Wrap(
                     spacing: AppSize.kmwidth,
                     direction: Axis.horizontal,
                     children: [
                       Icon(Icons.access_time),
                       SizedBox(
                         width: AppSize.klwidth * 18,
-                        child: Text("Monday - Friday 10:00 AM - 5:00 PM"),
+                        child:
+                            Text(visonCenter[selectedIndex]["time"] as String),
                       ),
                     ],
                   )
                 ],
               ),
             ]),
+              SizedBox(height: AppSize.klheight,),
+               SizedBox(
+              width: AppSize.klwidth*32,
+              child: Input(
+                title: "Remarks",
+                keyboardType: TextInputType.multiline,
+                controller: ref
+                    .read(preliminaryAssessmentProvider)
+                    .remarksController,
+              ),
+            ),
           ],
+          
         ));
   }
 }

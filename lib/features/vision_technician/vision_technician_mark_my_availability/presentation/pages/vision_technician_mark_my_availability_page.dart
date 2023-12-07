@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_each_day_availability.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_show_marks_unavailable.dart';
@@ -8,63 +9,16 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
+class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
   const VisionTechnicianMarkMyAvailabilityPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var markMyAvailabilityList = [
-      {
-        "day": "Monday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Tuesday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Wednessday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Thursday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Friday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Saturday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-      {
-        "day": "Sunday",
-        "time": [
-          ["9:00 AM", "10:00 AM", "4 hrs"]
-        ],
-        "checked": true
-      },
-    ];
+  Widget build(BuildContext context,WidgetRef ref) {
+
+    var markMyAvailabilityList=ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
+    
 
     return Scaffold(
         backgroundColor: AppColor.scaffold,
@@ -178,6 +132,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                                 return VTEachDayAvailability(
                                   dayAvailability:
                                       markMyAvailabilityList[index],
+                                  dayAvailabilityindex:index
                                 );
                               },
                               separatorBuilder: (context, index) {

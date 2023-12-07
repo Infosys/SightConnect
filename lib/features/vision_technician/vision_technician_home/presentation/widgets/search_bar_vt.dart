@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/repositories/vision_technician_home_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class SearchBarVT extends ConsumerWidget {
           prefixIcon: IconButton(
             onPressed: () {
               print("search");
+              showVtSearchFilter(context);
             },
             icon: const Icon(
               CupertinoIcons.search,

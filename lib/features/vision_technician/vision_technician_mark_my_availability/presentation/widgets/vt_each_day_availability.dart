@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_each_row_day.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -6,24 +8,18 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTEachDayAvailability extends HookConsumerWidget {
-  VTEachDayAvailability({super.key, this.dayAvailability});
+class VTEachDayAvailability extends ConsumerWidget {
+  VTEachDayAvailability(
+      {super.key, this.dayAvailability, required this.dayAvailabilityindex});
 
   var dayAvailability;
+  var dayAvailabilityindex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var dayAvailabilityState = useState(dayAvailability);
-
-    void removeDayAvailability(int index) {
-      print("object");
-      print(index);
-      Map newstate = {...dayAvailabilityState.value};
-
-      newstate["time"].removeAt(index);
-      dayAvailabilityState.value = newstate;
-      print(dayAvailabilityState.value);
-    }
+    var dayAvailabilityState = ref
+        .watch(markMyAvailabilityProvider)
+        .markMyAvailabilityList[dayAvailabilityindex];
 
     return Wrap(
       runSpacing: AppSize.kmheight,
@@ -36,18 +32,19 @@ class VTEachDayAvailability extends HookConsumerWidget {
                 Transform.scale(
                   scale: 1.0,
                   child: Checkbox(
-                      value: dayAvailabilityState.value["checked"],
+                      value: dayAvailabilityState["checked"] as bool,
                       onChanged: (value) {
-                        Map newstate = {...dayAvailabilityState.value};
-                        newstate["checked"] = !newstate["checked"];
-                        dayAvailabilityState.value = newstate;
+                        ref
+                            .read(markMyAvailabilityProvider)
+                            .toogleDay(dayAvailabilityindex);
                       }),
                 ),
                 SizedBox(
                   width: AppSize.klwidth * 5,
                   child: Text(
-                    dayAvailabilityState.value["day"],
+                    dayAvailabilityState["day"] as String,
                     style: applyRobotoFont(
+                      color:dayAvailabilityState["checked"] == true? AppColor.black:AppColor.grey,
                         fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                 )
@@ -64,29 +61,30 @@ class VTEachDayAvailability extends HookConsumerWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return VTEachRow(
-                            functionhandler: removeDayAvailability,
+                            dayAvailabilityindex: dayAvailabilityindex,
                             index: index,
-                            daydata: dayAvailabilityState.value);
+                            daydata: dayAvailabilityState);
                       },
                       separatorBuilder: (context, index) {
                         return const SizedBox(
                           height: AppSize.kmheight,
                         );
                       },
-                      itemCount: dayAvailabilityState.value["time"].length,
+                      itemCount: (dayAvailabilityState["time"] as List).length,
                     ),
                   ]),
                   const SizedBox(
                     height: AppSize.kmheight,
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
+                  Padding(
+                    padding:EdgeInsets.only(left:Responsive.isTablet(context)?AppSize.width(context)/1.6:AppSize.width(context)/16),
+                    
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
                             width: 2,
                             color: const Color.fromARGB(255, 186, 183, 183)),
-                        color: dayAvailabilityState.value["checked"] == false
+                        color: dayAvailabilityState["checked"] == false
                             ? Color.fromARGB(255, 225, 220, 220)
                             : Colors.white,
                         shape: BoxShape.circle,
@@ -97,15 +95,12 @@ class VTEachDayAvailability extends HookConsumerWidget {
                           Icons.add,
                           color: AppColor.grey,
                         ),
-                        onPressed: dayAvailabilityState.value["checked"] ==
-                                false
+                        onPressed: dayAvailabilityState["checked"] == false
                             ? null
                             : () {
-                                Map newstate = {...dayAvailabilityState.value};
-
-                                newstate["time"].add([""]);
-                                dayAvailabilityState.value = newstate;
-                                print(dayAvailabilityState.value);
+                                ref
+                                    .read(markMyAvailabilityProvider.notifier)
+                                    .addDayAvailability(dayAvailabilityindex);
                               },
                       ),
                     ),

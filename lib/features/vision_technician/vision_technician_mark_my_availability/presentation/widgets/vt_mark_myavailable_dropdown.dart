@@ -1,58 +1,50 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTMarkMyAvailableDropdown extends StatefulWidget {
-  const VTMarkMyAvailableDropdown(
+class VTMarkMyAvailableDropdown extends ConsumerWidget {
+  VTMarkMyAvailableDropdown(
       {super.key,
       required this.title,
       required this.listOfOptions,
-      required this.disable});
+      required this.disable,
+      required this.dayAvailabilityindex,
+      required this.index,
+      required this.dropDownNo});
 
   final String title;
   final List<String> listOfOptions;
   final bool disable;
-  @override
-  State<VTMarkMyAvailableDropdown> createState() =>
-      _VTMarkMyAvailableDropdownState();
-}
-
-class _VTMarkMyAvailableDropdownState extends State<VTMarkMyAvailableDropdown> {
-  final FocusNode _focusNode = FocusNode();
-  bool hasFocus = false;
-  var dropdownvalue;
+  final dayAvailabilityindex;
+  final index;
+  final dropDownNo;
 
   @override
-  void initState() {
-    super.initState();
-    dropdownvalue = widget.title; // Initialize dropdownvalue in initState
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    var dropdownlist = ref
+        .read(markMyAvailabilityProvider)
+        .markMyAvailabilityList[dayAvailabilityindex];
+    var dropdownvalue = (dropdownlist["time"] as List)[index][dropDownNo ];
 
-  @override
-  Widget build(BuildContext context) {
-    _focusNode.addListener(() {
-      setState(() {
-        hasFocus = _focusNode.hasFocus;
-      });
-    });
     return Container(
       width: AppSize.klwidth * 7.36,
       child: DropdownButton(
         iconSize: 40,
         isExpanded: true,
         value: dropdownvalue,
-        items: widget.listOfOptions.map((String items) {
+        items: listOfOptions.map((String items) {
           return DropdownMenuItem(
             value: items,
             child: Text(items),
           );
         }).toList(),
-        onChanged: widget.disable == true
+        onChanged: disable == true
             ? (value) {
-                setState(() {
-                  print(value);
-                  dropdownvalue = value!;
-                });
+                dropdownvalue = value!;
+                ref.read(markMyAvailabilityProvider.notifier).updatedropdown(
+                    dayAvailabilityindex, index, value, dropDownNo);
               }
             : null,
       ),

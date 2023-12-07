@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_resport_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -130,16 +131,25 @@ class AssessmentTimelineView extends StatelessWidget {
                               const SizedBox(
                                 width: AppSize.kswidth,
                               ),
-                              Text(
-                                timeLineList[index]["assessmentId"]!,
-                                style: applyRobotoFont(
-                                    fontSize: 12,
-                                    color: AppColor.blue,
-                                    decoration: TextDecoration.combine(
-                                      [
-                                        TextDecoration.underline,
-                                      ],
-                                    )),
+                              InkWell(
+                                onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return VisionTechnicianAssessmentReportPage();
+                          },
+                        ));
+                                },
+                                child: Text(
+                                  timeLineList[index]["assessmentId"]!,
+                                  style: applyRobotoFont(
+                                      fontSize: 12,
+                                      color: AppColor.blue,
+                                      decoration: TextDecoration.combine(
+                                        [
+                                          TextDecoration.underline,
+                                        ],
+                                      )),
+                                ),
                               ),
                             ],
                           ),
