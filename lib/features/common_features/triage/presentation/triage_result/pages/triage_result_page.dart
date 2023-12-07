@@ -2,7 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_offline_result_helper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
@@ -28,7 +29,7 @@ class TriageResultPage extends ConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        ref.read(tumblingTestProvider).reset();
+        ref.read(triageProvider).resetTriage();
         Navigator.of(context).popUntil((route) => route.isFirst);
 
         return true;
@@ -37,7 +38,7 @@ class TriageResultPage extends ConsumerWidget {
         appBar: CustomAppbar(
           leadingIcon: InkWell(
             onTap: () {
-              ref.read(tumblingTestProvider).reset();
+              ref.read(triageProvider).resetTriage();
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(

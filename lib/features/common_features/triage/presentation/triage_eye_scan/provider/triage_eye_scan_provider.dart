@@ -81,13 +81,13 @@ class TriageEyeScanProvider with ChangeNotifier {
       identifier: 70000001,
       endpoint: getUniqueFileName(XleftEyeImage.name),
       baseUrl: XleftEyeImage.mimeType,
-      score: 14,
+      score: 1,
     ));
     mediaCaptureList.add(PostImagingSelectionModel(
       identifier: 70000002,
       endpoint: getUniqueFileName(XrightEyeImage.name),
       baseUrl: XrightEyeImage.mimeType,
-      score: 20,
+      score: 1,
     ));
 
     return mediaCaptureList;

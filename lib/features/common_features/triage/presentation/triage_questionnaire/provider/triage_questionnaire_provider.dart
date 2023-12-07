@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/models/triage_response_model.dart';
 
-var triageQuestionnaireProvider = ChangeNotifierProvider(
+var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageQuestionnaireProvider(
     ref.watch(triageLocalSourceProvider),
   ),

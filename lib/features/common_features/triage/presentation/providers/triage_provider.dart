@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -49,6 +50,7 @@ class TriageProvider extends ChangeNotifier {
 
     final questionResponse =
         await ref.read(triageLocalSourceProvider).getQuestionaireResponse();
+
     final triage = TriageResponseModel(
       patientId: 99000001,
       encounterId: 100001,
@@ -62,6 +64,14 @@ class TriageProvider extends ChangeNotifier {
       ],
       assessmentCode: 30001,
       assessmentVersion: "v1",
+      cummulativeScore: 0,
+      score: [
+        {
+          TriageStep.QUESTIONNAIRE: 0,
+          TriageStep.OBSERVATION: 0,
+          TriageStep.IMAGING: 0,
+        }
+      ],
       issued: DateTime.now(),
       userStartDate: DateTime.now(),
       source: Source.PATIENT_APP,

@@ -10,6 +10,9 @@ class AssessmentResultCards extends StatelessWidget {
   final List<Map<String, dynamic>> triageResult;
   @override
   Widget build(BuildContext context) {
+    if (triageResult.isEmpty) {
+      return const SizedBox();
+    }
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -41,11 +44,11 @@ class AssessmentResultCards extends StatelessWidget {
                 height: 20,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: resultData['checkColor'],
+                  color: resultData['checkColor'] ?? "",
                 ),
                 child: Center(
                   child: Icon(
-                    resultData['icon'],
+                    resultData['icon'] ?? "",
                     color: Colors.white,
                     size: 15,
                   ),
@@ -55,7 +58,11 @@ class AssessmentResultCards extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                index==0?'Assessment\nQuestions':index==1?'Acuity\nTest':'Eye Scan',
+                index == 0
+                    ? 'Assessment\nQuestions'
+                    : index == 1
+                        ? 'Acuity\nTest'
+                        : 'Eye Scan',
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -65,7 +72,7 @@ class AssessmentResultCards extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                resultData['state'],
+                resultData['state'] ?? "",
                 style: applyRobotoFont(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,

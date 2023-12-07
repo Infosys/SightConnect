@@ -12,7 +12,7 @@ import '../../data/source/local/tumbling_local_source.dart';
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
-var tumblingTestProvider = ChangeNotifierProvider(
+var tumblingTestProvider = ChangeNotifierProvider.autoDispose(
   (ref) => VisualAcuityTestProvider(
     ref.watch(tumlingLocalSource),
     ref.read(triageLocalSourceProvider),
