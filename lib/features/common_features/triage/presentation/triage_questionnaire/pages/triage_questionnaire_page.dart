@@ -34,16 +34,19 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     ref.watch(triageQuestionnaireProvider).getQuestionnaire(
           questionnaireSections,
         );
-
+        
     return PopScope(
-      onPopInvoked: (value) async {
-        var result = await showDialog(
+      canPop: false,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
+        showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
             content: context.loc!.questionnaireExitDialog,
           ),
         );
-        return result ?? false;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,

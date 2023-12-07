@@ -3,20 +3,20 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/triage_result_provider.dart';
+import '../provider/triage_offline_result_helper_provider.dart';
 
 class AssessmentResultCards extends ConsumerWidget {
   const AssessmentResultCards({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(triageResultProvider);
-
+    var resultData = ref.watch(triageOfflineResultColorProvider);
+    
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: resultData.resultState.length,
+      itemCount: 3,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 1,
@@ -24,7 +24,7 @@ class AssessmentResultCards extends ConsumerWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        resultData.setColors(index);
+        resultData.setData(index);
         return Container(
           padding: EdgeInsets.only(
             left: AppSize.width(context) * 0.03,
@@ -57,7 +57,7 @@ class AssessmentResultCards extends ConsumerWidget {
                 height: 8,
               ),
               Text(
-                resultData.resultState[index]['type']!,
+                resultData.offlineResultState[index]['type']!,
                 style:
                     applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w600),
               ),
@@ -65,7 +65,7 @@ class AssessmentResultCards extends ConsumerWidget {
                 height: 8,
               ),
               Text(
-                resultData.resultState[index]['state']!,
+                resultData.offlineResultState[index]['state']!,
                 style:
                     applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
               )
@@ -75,4 +75,6 @@ class AssessmentResultCards extends ConsumerWidget {
       },
     );
   }
+
+  
 }

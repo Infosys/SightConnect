@@ -92,6 +92,10 @@ class VisualAcuityDialog {
       actions: [
         Container(
           decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
             boxShadow: [
               BoxShadow(
                 color: AppColor.black.withOpacity(0.04),

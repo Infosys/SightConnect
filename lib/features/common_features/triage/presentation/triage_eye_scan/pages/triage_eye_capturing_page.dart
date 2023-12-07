@@ -16,7 +16,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -99,14 +98,17 @@ class _PatientTriageEyeCapturingPageState
       );
     } else {
       return PopScope(
-        onPopInvoked: (value) async {
-          var result = await showDialog(
+        canPop: false,
+        onPopInvoked: (value) {
+          if (value) {
+            return;
+          }
+          showDialog(
             context: context,
             builder: (context) => TriageExitAlertBox(
               content: context.loc!.eyeScanExitDialog,
             ),
           );
-          return result ?? false;
         },
         child: Scaffold(
           key: scaffoldKey,

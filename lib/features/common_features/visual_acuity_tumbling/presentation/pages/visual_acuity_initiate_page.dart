@@ -26,14 +26,17 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
     return PopScope(
-      onPopInvoked: (value) async {
-        var result = await showDialog(
+      canPop: false,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
+        showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
-            content: AppLocalizations.of(context)!.visualAcuityExitDialog,
+            content: AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
-        return result ?? false;
       },
       child: Scaffold(
         key: scaffoldKey,

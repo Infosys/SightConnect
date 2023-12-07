@@ -1,19 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_offline_result_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/triage_result_provider.dart';
 
 class ResultPageTopCard extends ConsumerWidget {
   const ResultPageTopCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(triageResultProvider);
+    var resultData = ref.watch(triageOfflineResultColorProvider);
     resultData.setTopColors();
     String issueInfo = resultData.highestPriority == 'Major'
         ? 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.'
@@ -26,8 +25,6 @@ class ResultPageTopCard extends ConsumerWidget {
         : resultData.highestPriority == 'Minor'
             ? 'Early Consult'
             : 'Routine Consult';
-    logger.d(
-        '${resultData.highestPriority} wqeqlmdaldsmlasdlsadlsakdlsa\n${resultData.topCardColor}');
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,

@@ -78,8 +78,8 @@ class MemberDetailsProvider extends ChangeNotifier {
 
   set gender(String gender) => _gender = gender;
 
-  String get name => _name;
-  String get mobileNumber => _mobileNumber;
-  String get address => _address;
-  String get dob => _dob;
+  String? get name => _name;
+  String? get mobileNumber => _mobileNumber;
+  String? get address => _address;
+  String? get dob => _dob;
 }
