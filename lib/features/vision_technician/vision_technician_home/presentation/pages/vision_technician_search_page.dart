@@ -2,11 +2,14 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessment_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/search_bar_vt.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,14 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
         toolbarHeight: AppSize.klheight * 3,
         // backgroundColor: Colors.red,
         title: const SearchBarVT(readOnly: false),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showVtSearchFilter(context);
+            },
+            icon: const Icon(Icons.filter_list),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -41,6 +52,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                     horizontalMargin: 12,
                     dataRowHeight: AppSize.klheight * 2.5,
                     minWidth: 100,
+                    showCheckboxColumn: false,
                     decoration: BoxDecoration(
                       color: AppColor.white,
                       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -55,9 +67,19 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                             color: AppColor.grey,
                           ),
                         ),
-                        size: ColumnSize.L,
+                        // size: ColumnSize.L,
                       ),
-                      DataColumn(
+                      DataColumn2(
+                        label: Text(
+                          "Mobile",
+                          style: applyFiraSansFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                        size: ColumnSize.S,
+                      ),
+                      DataColumn2(
                         label: Text(
                           "Assessment ID",
                           style: applyFiraSansFont(
@@ -65,6 +87,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                             color: AppColor.grey,
                           ),
                         ),
+                        size: ColumnSize.S,
                       ),
                       DataColumn(
                         label: Text(
@@ -88,7 +111,16 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                     rows: List<DataRow>.generate(
                       list.length,
                       (index) => DataRow(
-                        cells: generateListTile(list[index]),
+                        onSelectChanged: (value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisionTechnicianAssessmentTimeline(),
+                            ),
+                          );
+                        },
+                        cells: generateListTileSearchResults(list[index]),
                       ),
                     ),
                   ),
@@ -99,4 +131,82 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
       ),
     );
   }
+}
+
+List<DataCell> generateListTileSearchResults(AssessmentModel data) {
+  return [
+    // DataCell({child: Image.asset(AppImages.patient)}),
+    // DataCell(child: Image.asset(AppImages.patient),),
+    DataCell(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            data.name,
+            style: applyRobotoFont(fontSize: 14),
+          ),
+          Text(
+            data.patientId,
+            style: applyRobotoFont(
+              fontSize: 12,
+              color: AppColor.grey,
+            ),
+          ),
+        ],
+      ),
+    ),
+    DataCell(
+      Text(
+        data.mobileNo,
+        style: applyRobotoFont(fontSize: 14),
+      ),
+    ),
+    DataCell(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            data.id,
+            style: applyRobotoFont(fontSize: 14),
+          ),
+          Text(
+            data.date,
+            style: applyRobotoFont(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColor.grey,
+            ),
+          ),
+        ],
+      ),
+    ),
+    DataCell(
+      Text(
+        data.status,
+        style: applyRobotoFont(fontSize: 14),
+      ),
+    ),
+    DataCell(
+      Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppSize.kspadding / 1.5,
+          horizontal: AppSize.kspadding * 1.5,
+        ),
+        decoration: BoxDecoration(
+          color:
+              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+          borderRadius: BorderRadius.circular(AppSize.klradius),
+        ),
+        child: Text(
+          data.category,
+          style: applyRobotoFont(
+            fontSize: 14,
+            color: AppColor.white,
+          ),
+        ),
+      ),
+    ),
+  ];
 }

@@ -52,7 +52,9 @@ class VisionTechnicianCloseAssessmentPage extends StatelessWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(AppColor.primary),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -247,7 +247,11 @@ List<DataCell> generateListTile(AssessmentModel data) {
     DataCell(
       Text(
         data.category,
-        style: applyRobotoFont(),
+        style: applyRobotoFont(
+          fontSize: 14,
+          color:
+              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+        ),
       ),
     ),
   ];

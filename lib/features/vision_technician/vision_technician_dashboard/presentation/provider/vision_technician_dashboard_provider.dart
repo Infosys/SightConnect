@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/pages/vision_technician_register_new_patient_page.dart.dart';
 // import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/pages/vision_technician_register_new_patient_page.dart.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,9 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
   final List<Widget> _pages = [
     const VisionTechnicianHomePage(),
     VisionTechnicianRegisterNewPatientPage(),
-    VisionTechnicianCloseAssessmentPage(),
-    SizedBox(),
+    // VisionTechnicianCloseAssessmentPage(),
+    const VisionTechnicianMarkMyAvailabilityPage(),
+    const VisionTechnicianIvrCallHistory(),
   ];
 
   void changeIndex(int index) {
