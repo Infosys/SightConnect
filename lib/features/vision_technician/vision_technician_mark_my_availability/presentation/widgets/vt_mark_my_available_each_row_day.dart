@@ -1,0 +1,99 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_myavailable_dropdown.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class VtMarkMyAvailableEachRow extends ConsumerWidget {
+  VtMarkMyAvailableEachRow(
+      {super.key,
+      required this.dayAvailabilityindex,
+      required this.index,
+      required this.daydata});
+  int index;
+  MarkMyAvailabilityModel daydata;
+  int dayAvailabilityindex;
+  List<String> listOfOptions = [
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM"
+  ];
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    print(daydata.time);
+    return Wrap(
+      children: [
+        const SizedBox(
+          width: AppSize.klwidth,
+        ),
+        VtMarkMyAvailableDropdown(
+          dayAvailabilityindex: dayAvailabilityindex,
+          index: index,
+          dropDownNo: 0,
+          disable: daydata.checked,
+          title: "9:00 AM",
+          listOfOptions: listOfOptions,
+        ),
+        const SizedBox(
+          width: AppSize.klwidth * 2,
+        ),
+        VtMarkMyAvailableDropdown(
+          dayAvailabilityindex: dayAvailabilityindex,
+          index: index,
+          dropDownNo: 1,
+          disable: daydata.checked,
+          title: "11:00 AM",
+          listOfOptions: listOfOptions,
+        ),
+        const SizedBox(
+          width: AppSize.klwidth * 2,
+        ),
+        Text(
+          "${daydata.time[index][2]} hrs",
+          style: applyFiraSansFont(
+            fontSize: 14,
+            color: AppColor.grey,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(
+          width: AppSize.klwidth * 2.1,
+        ),
+        Wrap(
+          direction: Axis.vertical,
+          spacing: AppSize.kmheight,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.grey),
+                  color: daydata.checked == false
+                      ? AppColor.lightGrey
+                      : AppColor.white,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.remove,
+                    color: AppColor.grey,
+                  ),
+                  onPressed: daydata.checked == false
+                      ? null
+                      : () {
+                          ref
+                              .read(markMyAvailabilityProvider.notifier)
+                              .removeDayAvailability(
+                                  dayAvailabilityindex, index);
+                        },
+                )),
+          ],
+        )
+      ],
+    );
+  }
+}

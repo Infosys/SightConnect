@@ -4,20 +4,22 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 // import 'dart:js';
 
-class PreliminaryAssessmentIvrCard extends StatelessWidget {
-  const PreliminaryAssessmentIvrCard({super.key});
+class AssessmentReportIvrCard extends StatelessWidget {
+  const AssessmentReportIvrCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
-            )),
-        padding: const EdgeInsets.all(AppSize.klpadding),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          color: AppColor.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.kmradius - 5),
+          )),
+      padding: const EdgeInsets.all(AppSize.klpadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text("IVR Selections",
               style: applyFiraSansFont(
                 fontSize: 18,
@@ -30,13 +32,13 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
               children: [
                 Text(
                   "Language Selection",
-                  style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  style: applyFiraSansFont(
+                      color: AppColor.grey, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text("English",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
                       fontSize: 14,
                     )),
               ],
@@ -46,14 +48,14 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
               children: [
                 Text(
                   "Patient Type",
-                  style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  style: applyFiraSansFont(
+                      color: AppColor.grey, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
                   "English",
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
-                    color: AppColor.grey,
                     fontSize: 14,
                   ),
                 ),
@@ -64,20 +66,40 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
               children: [
                 Text(
                   "Problem",
-                  style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  style: applyFiraSansFont(
+                      color: AppColor.grey, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
                   "Eye Sight",
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
-                    color: AppColor.grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Vision Technician",
+                  style: applyFiraSansFont(
+                      color: AppColor.grey, fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: AppSize.ksheight),
+                Text(
+                  "Geetha R (ID314232)",
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w400,
                     fontSize: 14,
                   ),
                 ),
               ],
             ),
           ]),
-        ]));
+        ],
+      ),
+    );
   }
 }

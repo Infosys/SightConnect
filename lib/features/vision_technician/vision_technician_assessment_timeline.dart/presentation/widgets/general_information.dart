@@ -27,7 +27,7 @@ class GeneralInformation extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: AppSize.klheight,
             ),
             Wrap(

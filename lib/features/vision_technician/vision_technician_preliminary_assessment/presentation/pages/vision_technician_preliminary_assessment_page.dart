@@ -1,9 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessement_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessement_ivr_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessement_questions.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessement_vision_center.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
@@ -45,7 +46,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                     const SizedBox(height: AppSize.klheight),
                     PreliminaryAssessmentQuestions(),
                     const SizedBox(height: AppSize.klheight),
-                    const PreliminaryAssessmentVisionCenter(),
+                    PreliminaryAssessmentVisionCenter(),
                     const SizedBox(height: AppSize.klheight),
                     SizedBox(
                       width: double.infinity,
@@ -63,10 +64,14 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                                 "Done! Assessment with ID EA 010101 has been created for Sumanta.",
                                 context,
                                 1);
-                                 return;
-                          }
 
-                         
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return const VisionTechnicianAssessmentTimeline();
+                              },
+                            ));
+                            return;
+                          }
                         },
                         child: Text(
                           "Submit",
