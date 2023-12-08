@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/filter_checkbox.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,12 +44,12 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
             Wrap(
               runSpacing: AppSize.klheight,
               children: [
-                FilterCheckBox(
+                PreliminaryAssessmentFilterCheckBox(
                   itemName: "eyeSightProblem",
                   name: "Patient has following eyesight releated problems",
                   includeInputBox: 1,
                 ),
-                FilterCheckBox(
+                PreliminaryAssessmentFilterCheckBox(
                   itemName: "eyeRelatedProblem",
                   name: "Patient has following eyesight releated problems",
                   includeInputBox: 1,
@@ -75,12 +75,12 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
           ],
         ),
         child: Wrap(runSpacing: AppSize.klheight, children: [
-          FilterCheckBox(
+          PreliminaryAssessmentFilterCheckBox(
             itemName: "eyeIssueType",
             name: "Eye Issue Type",
             includeInputBox: 0,
           ),
-          FilterCheckBox(
+          PreliminaryAssessmentFilterCheckBox(
             itemName: "eyeSpecialistDeals",
             name: "Refer To Eye Specailist Who Deals With",
             includeInputBox: 0,

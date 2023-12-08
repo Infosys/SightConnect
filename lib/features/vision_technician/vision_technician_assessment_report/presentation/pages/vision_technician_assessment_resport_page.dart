@@ -24,7 +24,7 @@ class VisionTechnicianAssessmentReportPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             child: Padding(
-          padding: EdgeInsets.all(AppSize.klpadding + 5),
+          padding: const EdgeInsets.all(AppSize.klpadding + 5),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,

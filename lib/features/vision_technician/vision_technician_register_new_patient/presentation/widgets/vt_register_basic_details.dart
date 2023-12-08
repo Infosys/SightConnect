@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/age_input.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/gender_input.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_age_input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_gender_input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/upload_photo_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:file_picker/file_picker.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class BasicDetails extends StatelessWidget {
-  BasicDetails({super.key});
+ const BasicDetails({super.key});
 
   
 
@@ -57,19 +57,19 @@ class BasicDetails extends StatelessWidget {
                         children: [
                           SizedBox(
                               width: AppSize.width(context) * 0.2,
-                              child: Input(
+                              child: VTRegisterInput(
                                   title: 'First Name',
                                   keyboardType: TextInputType.name,
                                   controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["firstNameController"]!)),
                           SizedBox(
                               width: AppSize.width(context) * 0.2,
-                              child: Input(
+                              child: VTRegisterInput(
                                   title: 'Middle Name',
                                   keyboardType: TextInputType.name,
                                   controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["middleNameController"]!)),
                           SizedBox(
                               width: AppSize.width(context) * 0.2,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: 'Last Name',
                                 keyboardType: TextInputType.name,
                                 controller:  ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["lastNameController"]!)),
@@ -140,20 +140,20 @@ class BasicDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AgeInput(),
+                     const VTRegisterAgeInput(),
                       const SizedBox(height: AppSize.klheight * 2),
                       Wrap(
                         direction: Axis.horizontal,
                         children: [
                           SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: const GenderInput()),
+                              child: const VTRegisterGenderInput()),
                           const SizedBox(
                             width: AppSize.kmwidth,
                           ),
                           SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: 'ABHA ID (Optional)',
                                 keyboardType: TextInputType.name,
                                 controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["abhaIdController"]!)),
@@ -164,7 +164,7 @@ class BasicDetails extends StatelessWidget {
                         children: [
                           SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "Mobile Number",
                                 keyboardType: TextInputType.number,
                                 controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["mobileNumberController"]!)),
@@ -173,7 +173,7 @@ class BasicDetails extends StatelessWidget {
                           ),
                           SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: 'Email (Optional)',
                                 keyboardType: TextInputType.emailAddress,
                                 controller:  ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["emailIdController"]!)),

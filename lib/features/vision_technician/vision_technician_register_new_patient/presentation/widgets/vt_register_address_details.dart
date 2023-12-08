@@ -1,14 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/dropdown_input.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_dropdown_input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddressDetails extends StatelessWidget {
-  const AddressDetails({super.key});
+class VTRegisterAddressDetails extends StatelessWidget {
+  const VTRegisterAddressDetails({super.key});
   static List<String> listOfStates = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -56,7 +56,7 @@ class AddressDetails extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "Door Number",
                                 keyboardType: TextInputType.name,
                                 controller: ref
@@ -70,7 +70,7 @@ class AddressDetails extends StatelessWidget {
                             ),
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "Street",
                                 keyboardType: TextInputType.name,
                                 controller: ref
@@ -85,7 +85,7 @@ class AddressDetails extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "District",
                                 keyboardType: TextInputType.name,
                                 controller: ref
@@ -99,7 +99,7 @@ class AddressDetails extends StatelessWidget {
                             ),
                             SizedBox(
                                 width: AppSize.width(context) * 0.4,
-                                child: Input(
+                                child: VTRegisterInput(
                                   title: "City",
                                   keyboardType: TextInputType.name,
                                   controller: ref
@@ -113,7 +113,7 @@ class AddressDetails extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: DropdownInput(listOfOptions: listOfStates),
+                              child: VTRegisterDropdownInput(listOfOptions: listOfStates),
                             ),
                           ],
                         ),
@@ -121,7 +121,7 @@ class AddressDetails extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "Landmark",
                                 keyboardType: TextInputType.name,
                                 controller: ref
@@ -135,7 +135,7 @@ class AddressDetails extends StatelessWidget {
                             ),
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: Input(
+                              child: VTRegisterInput(
                                 title: "Pincode",
                                 keyboardType: TextInputType.number,
                                 controller: ref

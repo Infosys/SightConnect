@@ -1,16 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/preliminary_assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class FilterCheckBox extends StatelessWidget {
+class PreliminaryAssessmentFilterCheckBox extends StatelessWidget {
   final String itemName;
   final String? name;
   final int includeInputBox;
-  FilterCheckBox(
+  PreliminaryAssessmentFilterCheckBox(
       {super.key,
       required this.itemName,
       this.name,
@@ -31,7 +32,7 @@ class FilterCheckBox extends StatelessWidget {
         ),
         Consumer(
           builder: (context, ref, child) {
-            var items;
+            List<PreliminaryAssessmentModel> items;
             if (itemName == "eyeIssueType") {
               items = ref.watch(preliminaryAssessmentProvider).eyeIssueType;
             } else if (itemName == "eyeSpecialistDeals")
@@ -51,13 +52,13 @@ class FilterCheckBox extends StatelessWidget {
                     child: CheckboxListTile(
                       controlAffinity: ListTileControlAffinity.leading,
                       title: Text(
-                        items[index]["type"],
+                        items[index].type,
                         style: applyRobotoFont(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                             color: AppColor.grey),
                       ),
-                      value: items[index]["checked"],
+                      value: items[index].checked,
                       onChanged: (bool? value) {
                         print(items[index]);
                         ref
@@ -73,7 +74,7 @@ class FilterCheckBox extends StatelessWidget {
                     padding: const EdgeInsets.only(left: AppSize.klpadding),
                     child: SizedBox(
                         width: AppSize.width(context) * 0.2,
-                        child: Input(
+                        child: VTRegisterInput(
                           title: 'Others',
                           keyboardType: TextInputType.name,
                           controller: itemName == "eyeSightProblem"

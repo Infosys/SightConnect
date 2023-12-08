@@ -1,19 +1,21 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/vision_center_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/input.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
   PreliminaryAssessmentVisionCenter({super.key});
-  var selectedIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var visonCenter = ref.watch(preliminaryAssessmentProvider).visonCenters;
+    List<VisionCenterModel> visionCenter =
+        ref.watch(preliminaryAssessmentProvider).visionCenters;
     var firstcontroller = ScrollController();
 
     return Container(
@@ -35,8 +37,10 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
           direction: Axis.vertical,
           children: [
             SizedBox(
-              width: AppSize.klwidth*32,
-              child: Input(
+              width: (Responsive.isTablet(context) || Responsive.isMobile(context))
+                  ? AppSize.klwidth * 32
+                  : AppSize.klwidth * 50,
+              child: VTRegisterInput(
                 title: "Recommendations",
                 keyboardType: TextInputType.multiline,
                 controller: ref
@@ -44,7 +48,9 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                     .recommendationController,
               ),
             ),
-            SizedBox(height: AppSize.klheight,),
+            const SizedBox(
+              height: AppSize.klheight,
+            ),
             Text(
               "Vision Center",
               style: applyFiraSansFont(
@@ -63,7 +69,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                   border: Border.all(color: AppColor.lightGrey),
                   borderRadius: BorderRadius.circular(AppSize.kmradius),
                 ),
-                child: Container(
+                child: SizedBox(
                     width: AppSize.klwidth * 15,
                     height: AppSize.klheight * 8,
                     child: Scrollbar(
@@ -90,8 +96,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                                 child: Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: visonCenter[index]
-                                                      ["checked"] ==
+                                          color: visionCenter[index].checked ==
                                                   false
                                               ? AppColor.lightGrey
                                               : AppColor.blue,
@@ -105,9 +110,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            visonCenter[index]["type"]
-                                                as String,
+                                        Text(visionCenter[index].type,
                                             style: applyRobotoFont(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
@@ -115,8 +118,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                                         Icon(
                                           Icons.check_circle,
                                           size: 10,
-                                          color: visonCenter[index]
-                                                      ["checked"] ==
+                                          color: visionCenter[index].checked ==
                                                   true
                                               ? AppColor.green
                                               : AppColor.grey,
@@ -143,54 +145,54 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                     spacing: AppSize.kmwidth,
                     direction: Axis.horizontal,
                     children: [
-                      Icon(Icons.location_on_outlined),
+                      const Icon(Icons.location_on_outlined),
                       SizedBox(
                         width: AppSize.klwidth * 15,
-                        child: Text(visonCenter[selectedIndex]
-                            ["completeAddress"] as String),
-                      ),
-                    ],
-                  ),
-                  Wrap(
-                    spacing: AppSize.kmwidth,
-                    direction: Axis.horizontal,
-                    children: [
-                      Icon(Icons.phone_outlined),
-                      SizedBox(
-                        width: AppSize.klwidth * 18,
-                        child: Text(
-                            visonCenter[selectedIndex]["phoneno"] as String),
-                      ),
-                    ],
-                  ),
-                  Wrap(
-                    spacing: AppSize.kmwidth,
-                    direction: Axis.horizontal,
-                    children: [
-                      Icon(Icons.access_time),
-                      SizedBox(
-                        width: AppSize.klwidth * 18,
                         child:
-                            Text(visonCenter[selectedIndex]["time"] as String),
+                            Text(visionCenter[selectedIndex].completeAddress),
+                      ),
+                    ],
+                  ),
+                  Wrap(
+                    spacing: AppSize.kmwidth,
+                    direction: Axis.horizontal,
+                    children: [
+                      const Icon(Icons.phone_outlined),
+                      SizedBox(
+                        width: AppSize.klwidth * 18,
+                        child: Text(visionCenter[selectedIndex].phoneno),
+                      ),
+                    ],
+                  ),
+                  Wrap(
+                    spacing: AppSize.kmwidth,
+                    direction: Axis.horizontal,
+                    children: [
+                      const Icon(Icons.access_time),
+                      SizedBox(
+                        width: AppSize.klwidth * 18,
+                        child: Text(visionCenter[selectedIndex].time),
                       ),
                     ],
                   )
                 ],
               ),
             ]),
-              SizedBox(height: AppSize.klheight,),
-               SizedBox(
-              width: AppSize.klwidth*32,
-              child: Input(
+            const SizedBox(
+              height: AppSize.klheight,
+            ),
+            SizedBox(
+                width: (Responsive.isTablet(context) || Responsive.isMobile(context))
+                  ? AppSize.klwidth * 32
+                  : AppSize.klwidth * 50,
+              child: VTRegisterInput(
                 title: "Remarks",
                 keyboardType: TextInputType.multiline,
-                controller: ref
-                    .read(preliminaryAssessmentProvider)
-                    .remarksController,
+                controller:
+                    ref.read(preliminaryAssessmentProvider).remarksController,
               ),
             ),
           ],
-          
         ));
   }
 }

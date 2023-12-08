@@ -1,23 +1,21 @@
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_each_row_day.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_row_day.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTEachDayAvailability extends ConsumerWidget {
-  VTEachDayAvailability(
-      {super.key, this.dayAvailability, required this.dayAvailabilityindex});
+class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
+  const VtMarkMyAvailableEachDayAvailability({super.key, required this.dayAvailabilityindex});
 
-  var dayAvailability;
-  var dayAvailabilityindex;
+  final int dayAvailabilityindex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var dayAvailabilityState = ref
+    MarkMyAvailabilityModel dayAvailabilityState = ref
         .watch(markMyAvailabilityProvider)
         .markMyAvailabilityList[dayAvailabilityindex];
 
@@ -32,7 +30,7 @@ class VTEachDayAvailability extends ConsumerWidget {
                 Transform.scale(
                   scale: 1.0,
                   child: Checkbox(
-                      value: dayAvailabilityState["checked"] as bool,
+                      value: dayAvailabilityState.checked,
                       onChanged: (value) {
                         ref
                             .read(markMyAvailabilityProvider)
@@ -42,10 +40,13 @@ class VTEachDayAvailability extends ConsumerWidget {
                 SizedBox(
                   width: AppSize.klwidth * 5,
                   child: Text(
-                    dayAvailabilityState["day"] as String,
+                    dayAvailabilityState.day,
                     style: applyRobotoFont(
-                      color:dayAvailabilityState["checked"] == true? AppColor.black:AppColor.grey,
-                        fontSize: 14, fontWeight: FontWeight.w400),
+                        color: dayAvailabilityState.checked == true
+                            ? AppColor.black
+                            : AppColor.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
                   ),
                 )
               ],
@@ -60,7 +61,7 @@ class VTEachDayAvailability extends ConsumerWidget {
                     ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return VTEachRow(
+                        return VtMarkMyAvailableEachRow(
                             dayAvailabilityindex: dayAvailabilityindex,
                             index: index,
                             daydata: dayAvailabilityState);
@@ -70,32 +71,34 @@ class VTEachDayAvailability extends ConsumerWidget {
                           height: AppSize.kmheight,
                         );
                       },
-                      itemCount: (dayAvailabilityState["time"] as List).length,
+                      itemCount: (dayAvailabilityState.time).length,
                     ),
                   ]),
                   const SizedBox(
                     height: AppSize.kmheight,
                   ),
                   Padding(
-                    padding:EdgeInsets.only(left:Responsive.isTablet(context)?AppSize.width(context)/1.6:AppSize.width(context)/16),
-                    
+                    padding: EdgeInsets.only(
+                        left: Responsive.isTablet(context)
+                            ? AppSize.width(context) / 1.6
+                            : AppSize.width(context) / 16),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
                             width: 2,
                             color: const Color.fromARGB(255, 186, 183, 183)),
-                        color: dayAvailabilityState["checked"] == false
-                            ? Color.fromARGB(255, 225, 220, 220)
-                            : Colors.white,
+                        color: dayAvailabilityState.checked == false
+                            ? AppColor.lightGrey
+                            : AppColor.white,
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
                         disabledColor: AppColor.white,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add,
                           color: AppColor.grey,
                         ),
-                        onPressed: dayAvailabilityState["checked"] == false
+                        onPressed: dayAvailabilityState.checked == false
                             ? null
                             : () {
                                 ref

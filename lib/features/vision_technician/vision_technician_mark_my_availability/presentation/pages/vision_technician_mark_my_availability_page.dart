@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_date_range_picker.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_each_day_availability.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_show_marks_unavailable.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,10 +15,9 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
   const VisionTechnicianMarkMyAvailabilityPage({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-
-    var markMyAvailabilityList=ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
-    
+  Widget build(BuildContext context, WidgetRef ref) {
+    var markMyAvailabilityList =
+        ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
 
     return Scaffold(
         backgroundColor: AppColor.scaffold,
@@ -40,23 +39,22 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 onTap: () {
                   showMarksUnAvaialbility(context);
                 },
-                child: SizedBox(
-                  width: AppSize.klwidth * 10,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: AppSize.klpadding),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColor.blue),
-                        borderRadius: BorderRadius.circular(AppSize.klradius),
-                        color: Colors.transparent,
-                      ),
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      child: Row(
+                child: Container(
+                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColor.blue),
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
+                    color: Colors.transparent,
+                  ),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      Row(
                         children: [
-                          IconButton(
+                          const Icon(
+                            Icons.edit_calendar_rounded,
+                            size: 20,
                             color: AppColor.blue,
-                            onPressed: () {},
-                            icon: const Icon(Icons.edit_calendar_rounded),
                           ),
                           Text(
                             "Mark as Unavailable",
@@ -68,7 +66,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
                 ),
               )
@@ -121,7 +119,8 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                                     color: AppColor.white,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const VtDateRangePicker()),
+                                  child:
+                                      const VtMarkMyAvailableDateRangePicker()),
                             ]),
                             const SizedBox(
                               height: AppSize.klheight,
@@ -129,11 +128,8 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                             ListView.separated(
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return VTEachDayAvailability(
-                                  dayAvailability:
-                                      markMyAvailabilityList[index],
-                                  dayAvailabilityindex:index
-                                );
+                                return VtMarkMyAvailableEachDayAvailability(
+                                    dayAvailabilityindex: index);
                               },
                               separatorBuilder: (context, index) {
                                 return const Column(
@@ -151,7 +147,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                               itemCount: markMyAvailabilityList.length,
                             )
                           ])),
-                  SizedBox(
+                  const SizedBox(
                     height: AppSize.klheight,
                   ),
                   Row(
@@ -164,7 +160,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                           child: const Text("Cancel"),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: AppSize.klwidth,
                       ),
                       Expanded(

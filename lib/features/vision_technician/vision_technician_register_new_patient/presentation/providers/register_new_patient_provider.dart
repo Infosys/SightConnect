@@ -7,7 +7,7 @@ var registerNewPatientProvider =
         (ref) => RegisterNewPatientNotifier());
 
 class RegisterNewPatientNotifier extends ChangeNotifier {
-  var basicDetailsTextEditingControllers = {
+  Map<String, TextEditingController> basicDetailsTextEditingControllers = {
     "firstNameController": TextEditingController(),
     "middleNameController": TextEditingController(),
     "emailIdController": TextEditingController(),
@@ -17,7 +17,7 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     "dateofBirthController": TextEditingController(),
     "mobileNumberController": TextEditingController(),
   };
-  var eyeCareDetailsTextEditingControllers = {
+  Map<String, TextEditingController> eyeCareDetailsTextEditingControllers = {
     "whereController1": TextEditingController(),
     "whereController2": TextEditingController()
   };
@@ -31,8 +31,8 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     "pinCodeController": TextEditingController(),
   };
 
-  var stateDropDownValue = "Andhra Pradesh";
-  var genderValue = -1;
+  String stateDropDownValue = "Andhra Pradesh";
+  int genderValue = -1;
 
   List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
     EyeCareDetailsQuestionModel(
@@ -89,12 +89,8 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void seteyeCareDetails(value) {
-    int index = 0;
-    eyeCareDetailsQuestion.forEach((element) {
-      element.answer = value[index];
-      index = index + 1;
-    });
+  void seteyeCareAnser(index, value) {
+    eyeCareDetailsQuestion[index].answer = value;
     print(eyeCareDetailsQuestion);
     notifyListeners();
   }

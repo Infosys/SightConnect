@@ -1,8 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/pages/vision_technician_register_new_patient_page.dart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,9 +31,6 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: IconButton(
               onPressed: () {
                 print("working");
-                Navigator.push(context,MaterialPageRoute(builder:(context) {
-                  return VisionTechnicianRegisterNewPatientPage();
-                },));
               },
               icon: const Icon(
                 CupertinoIcons.person_add,
@@ -49,9 +43,6 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: IconButton(
               onPressed: () {
                 print("working");
-                  Navigator.push(context,MaterialPageRoute(builder:(context) {
-                  return VisionTechnicianMarkMyAvailabilityPage();
-                },));
               },
               icon: const Icon(
                 CupertinoIcons.person_add,
@@ -64,9 +55,6 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: IconButton(
               onPressed: () {
                 print("working");
-                  Navigator.push(context,MaterialPageRoute(builder:(context) {
-                  return VisionTechnicianIvrCallHistory();
-                },));
               },
               icon: const Icon(
                 CupertinoIcons.phone,

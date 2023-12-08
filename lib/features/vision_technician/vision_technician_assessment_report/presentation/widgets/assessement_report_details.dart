@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'dart:js';
 
 class AssessmentReportDetails extends StatelessWidget {
   const AssessmentReportDetails({super.key});
@@ -14,10 +13,11 @@ class AssessmentReportDetails extends StatelessWidget {
     return Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
-            )),
+          color: AppColor.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.kmradius - 5),
+          ),
+        ),
         padding: const EdgeInsets.all(AppSize.klpadding),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Assessment",
@@ -30,15 +30,15 @@ class AssessmentReportDetails extends StatelessWidget {
             builder: (context, ref, child) {
               var eyeSightProblems =
                   ref.watch(preliminaryAssessmentProvider).eyeSightProblem;
-              print(eyeSightProblems);
+
               var eyeRelatedProblems =
                   ref.watch(preliminaryAssessmentProvider).eyeRelatedProblem;
 
               var eyeRelatedProblemsFilter = eyeRelatedProblems
-                  .where((e) => e["checked"] == true)
+                  .where((e) => e.checked == true)
                   .toList();
               var eyeSightProblemsFilter =
-                  eyeSightProblems.where((e) => e["checked"] == true).toList();
+                  eyeSightProblems.where((e) => e.checked == true).toList();
 
               return Wrap(spacing: AppSize.kmwidth * 5, children: [
                 Column(
@@ -53,7 +53,8 @@ class AssessmentReportDetails extends StatelessWidget {
                       itemCount: eyeSightProblemsFilter.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Text("* ${eyeSightProblemsFilter[index]["type"]}",
+                        return Text(
+                            "* ${eyeSightProblemsFilter[index].type}",
                             style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
@@ -62,7 +63,7 @@ class AssessmentReportDetails extends StatelessWidget {
                     )
                   ],
                 ),
-                Divider(
+                const Divider(
                   thickness: 1,
                 ),
                 Column(
@@ -77,14 +78,15 @@ class AssessmentReportDetails extends StatelessWidget {
                       itemCount: eyeRelatedProblemsFilter.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Text("* ${eyeRelatedProblemsFilter[index]["type"]}",
+                        return Text(
+                            "* ${eyeRelatedProblemsFilter[index].type}",
                             style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                             ));
                       },
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                     ),
                   ],

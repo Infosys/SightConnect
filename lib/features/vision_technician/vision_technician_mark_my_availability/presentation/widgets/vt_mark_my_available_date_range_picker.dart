@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class VtDateRangePicker extends StatelessWidget {
-  const VtDateRangePicker({super.key});
+class VtMarkMyAvailableDateRangePicker extends StatelessWidget {
+  const VtMarkMyAvailableDateRangePicker({super.key});
   static TextEditingController controller = TextEditingController(text: "12 Nov - 30 Nov 2023");
 
   @override

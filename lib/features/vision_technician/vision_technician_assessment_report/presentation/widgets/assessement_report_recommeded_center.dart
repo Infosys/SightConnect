@@ -9,8 +9,12 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
   const AssessmentReportRecommendedCenter({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    var recommendedCenter=ref.watch(preliminaryAssessmentProvider).visonCenters.where((element) => element["checked"]==true).toList()[0];
+  Widget build(BuildContext context, WidgetRef ref) {
+    var recommendedCenter = ref
+        .watch(preliminaryAssessmentProvider)
+        .visionCenters
+        .where((element) => element.checked == true)
+        .toList()[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,7 +25,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-         SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.klheight),
         Container(
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -35,31 +39,30 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
             direction: Axis.vertical,
             children: [
               Text(
-                recommendedCenter["type"] as String,
+                recommendedCenter.type,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-               Wrap(
+              Wrap(
                 spacing: AppSize.kmwidth,
                 direction: Axis.horizontal,
                 children: [
-                  Icon(Icons.location_on_outlined, color: AppColor.grey),
+                  const Icon(Icons.location_on_outlined, color: AppColor.grey),
                   SizedBox(
                     width: AppSize.klwidth * 15,
-                    child: Text(
-                       recommendedCenter["completeAddress"] as String),
+                    child: Text(recommendedCenter.completeAddress),
                   ),
                   Wrap(direction: Axis.vertical, children: [
                     Wrap(
                       spacing: AppSize.kmwidth,
                       direction: Axis.horizontal,
                       children: [
-                        Icon(Icons.phone_outlined, color: AppColor.grey),
+                        const Icon(Icons.phone_outlined, color: AppColor.grey),
                         SizedBox(
                           width: AppSize.klwidth * 18,
-                          child: Text(recommendedCenter["phoneno"].toString()),
+                          child: Text(recommendedCenter.phoneno),
                         ),
                       ],
                     ),
@@ -67,13 +70,13 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                       spacing: AppSize.kmwidth,
                       direction: Axis.horizontal,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.access_time_rounded,
                           color: AppColor.grey,
                         ),
                         SizedBox(
                           width: AppSize.klwidth * 18,
-                          child: Text(recommendedCenter["time"].toString()),
+                          child: Text(recommendedCenter.time),
                         ),
                       ],
                     ),

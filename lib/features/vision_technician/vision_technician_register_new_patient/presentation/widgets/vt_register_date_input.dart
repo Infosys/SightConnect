@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DateInput extends StatelessWidget {
-  const DateInput({super.key, required this.title, required this.controller});
+class VTRegisterDateInput extends StatelessWidget {
+  const VTRegisterDateInput({super.key, required this.title, required this.controller});
   final TextEditingController controller;
   final String title;
   @override

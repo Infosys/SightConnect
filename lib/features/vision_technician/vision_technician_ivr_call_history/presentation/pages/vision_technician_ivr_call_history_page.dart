@@ -20,7 +20,7 @@ class VisionTechnicianIvrCallHistory extends StatelessWidget {
                 style: applyFiraSansFont(
                     fontWeight: FontWeight.w500, fontSize: 16),
               ),
-              SizedBox(
+              const SizedBox(
                 width: AppSize.klwidth,
               ),
               const IvrCallHistorySearchBarVT(readOnly: false),

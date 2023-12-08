@@ -49,7 +49,6 @@ class SearchBarVT extends ConsumerWidget {
           prefixIcon: IconButton(
             onPressed: () {
               print("search");
-              showVtSearchFilter(context);
             },
             icon: const Icon(
               CupertinoIcons.search,

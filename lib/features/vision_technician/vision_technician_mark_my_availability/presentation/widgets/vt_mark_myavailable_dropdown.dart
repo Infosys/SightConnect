@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ma
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTMarkMyAvailableDropdown extends ConsumerWidget {
-  VTMarkMyAvailableDropdown(
+class VtMarkMyAvailableDropdown extends ConsumerWidget {
+  VtMarkMyAvailableDropdown(
       {super.key,
       required this.title,
       required this.listOfOptions,
@@ -17,18 +17,18 @@ class VTMarkMyAvailableDropdown extends ConsumerWidget {
   final String title;
   final List<String> listOfOptions;
   final bool disable;
-  final dayAvailabilityindex;
-  final index;
-  final dropDownNo;
+  final int dayAvailabilityindex;
+  final int index;
+  final int dropDownNo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var dropdownlist = ref
         .read(markMyAvailabilityProvider)
         .markMyAvailabilityList[dayAvailabilityindex];
-    var dropdownvalue = (dropdownlist["time"] as List)[index][dropDownNo ];
+    var dropdownvalue = (dropdownlist.time)[index][dropDownNo];
 
-    return Container(
+    return SizedBox(
       width: AppSize.klwidth * 7.36,
       child: DropdownButton(
         iconSize: 40,
@@ -42,7 +42,7 @@ class VTMarkMyAvailableDropdown extends ConsumerWidget {
         }).toList(),
         onChanged: disable == true
             ? (value) {
-                dropdownvalue = value!;
+                dropdownvalue = value.toString();
                 ref.read(markMyAvailabilityProvider.notifier).updatedropdown(
                     dayAvailabilityindex, index, value, dropDownNo);
               }

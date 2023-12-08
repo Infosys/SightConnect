@@ -10,14 +10,16 @@ class AssessmentReportIvrCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
-            )),
-        padding: const EdgeInsets.all(AppSize.klpadding),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          color: AppColor.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.kmradius - 5),
+          )),
+      padding: const EdgeInsets.all(AppSize.klpadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text("IVR Selections",
               style: applyFiraSansFont(
                 fontSize: 18,
@@ -96,6 +98,8 @@ class AssessmentReportIvrCard extends StatelessWidget {
               ],
             ),
           ]),
-        ]));
+        ],
+      ),
+    );
   }
 }

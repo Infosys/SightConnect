@@ -1,45 +1,44 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_resport_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/data/models/assessment_timeline_view_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentTimelineView extends StatelessWidget {
   AssessmentTimelineView({super.key});
-  var timeLineList = [
-    {
-      "type": "Success",
-      "title": "2nd Reminder Call",
-      "subtitle": "Patient Agreed to meet VT",
-      "date": "16 Sep 2023, 9:30 AM",
-      "call": "VT Call",
-      "assessmentId": ""
-    },
-    {
-      "type": "fail",
-      "title": "1st Reminder Call",
-      "subtitle": "No Response from Patient",
-      "date": "10 Sep 2023, 10:30 AM",
-      "call": "IVR Call",
-      "assessmentId": ""
-    },
-    {
-      "type": "Success",
-      "title": "Preliminary Assessment",
-      "subtitle": "Obstructed Vision due to Sticky Discharge.",
-      "date": "11 Apr 23, 3:30 PM",
-      "call": "IVR Call",
-      "assessmentId": "Assessment ID: EA 010101"
-    },
-    {
-      "type": "Success ",
-      "title": "Patient Registered",
-      "subtitle": "Patient Registered",
-      "date": "11 Apr 23, 3:10 PM",
-      "call": "IVR Call",
-      "assessmentId": ""
-    }
+
+  List<AssessmentTimelineViewModel> timeLineList = [
+    AssessmentTimelineViewModel(
+        type: "Success",
+        title: "2nd Reminder Call",
+        subtitle: "Patient Agreed to meet VT",
+        date: "16 Sep 2023, 9:30 AM",
+        call: "VT Call",
+        assessmentId: ""),
+    AssessmentTimelineViewModel(
+        type: "fail",
+        title: "1st Reminder Call",
+        subtitle: "No Response from Patient",
+        date: "10 Sep 2023, 10:30 AM",
+        call: "IVR Call",
+        assessmentId: ""),
+    AssessmentTimelineViewModel(
+        type: "Success",
+        title: "Preliminary Assessment",
+        subtitle: "Obstructed Vision due to Sticky Discharge.",
+        date: "11 Apr 23, 3:30 PM",
+        call: "IVR Call",
+        assessmentId: "Assessment ID: EA 010101"),
+    AssessmentTimelineViewModel(
+        type: "Success",
+        title: "Patient Registered",
+        subtitle: "PID: OP 934567.",
+        date: "11 Apr 23, 3:10 PM",
+        call: "IVR Call",
+        assessmentId: ""),
   ];
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -52,12 +51,12 @@ class AssessmentTimelineView extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: timeLineList[index]["type"] == "Success"
+                color: timeLineList[index].type == "Success"
                     ? AppColor.altGreen
                     : AppColor.red,
               ),
             ),
-            child: timeLineList[index]["type"] == "Success"
+            child: timeLineList[index].type == "Success"
                 ? const Icon(
                     Icons.check,
                     color: AppColor.altGreen,
@@ -73,13 +72,13 @@ class AssessmentTimelineView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                timeLineList[index]["title"]!,
+                timeLineList[index].title,
                 style: applyRobotoFont(
                   fontSize: 14,
                   color: AppColor.black,
                 ),
               ),
-              Text(timeLineList[index]["date"]!,
+              Text(timeLineList[index].date,
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.grey,
@@ -93,7 +92,7 @@ class AssessmentTimelineView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    timeLineList[index]["subtitle"]!,
+                    timeLineList[index].subtitle,
                     style: applyRobotoFont(
                       fontSize: 12,
                       color: AppColor.grey,
@@ -111,7 +110,7 @@ class AssessmentTimelineView extends StatelessWidget {
                             width: AppSize.kswidth,
                           ),
                           Text(
-                            timeLineList[index]["call"]!,
+                            timeLineList[index].call,
                             style: applyRobotoFont(
                               fontSize: 12,
                               color: AppColor.grey,
@@ -119,7 +118,7 @@ class AssessmentTimelineView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (timeLineList[index]["assessmentId"] != "")
+                      if (timeLineList[index].assessmentId != "")
                         InkWell(
                           onTap: () {},
                           child: Row(
@@ -133,14 +132,14 @@ class AssessmentTimelineView extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return VisionTechnicianAssessmentReportPage();
-                          },
-                        ));
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return VisionTechnicianAssessmentReportPage();
+                                    },
+                                  ));
                                 },
                                 child: Text(
-                                  timeLineList[index]["assessmentId"]!,
+                                  timeLineList[index].assessmentId,
                                   style: applyRobotoFont(
                                       fontSize: 12,
                                       color: AppColor.blue,
