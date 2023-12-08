@@ -1,17 +1,29 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_slide_1.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_eye_scan_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EyeScanCard extends StatelessWidget {
+class EyeScanCard extends ConsumerWidget {
   const EyeScanCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    String leftEyeImagePath =
+        ref.watch(visionTechnicianEyeScanProvider).leftEyeImage.path;
+    String rightEyeImagePath =
+        ref.watch(visionTechnicianEyeScanProvider).rightEyeImage.path;
+    String bothEyeImagePath =
+        ref.watch(visionTechnicianEyeScanProvider).bothEyeImage.path;
+    bool allImagesCaptured =
+        ref.watch(visionTechnicianEyeScanProvider).allImagesCaptured;
     return Container(
       width: AppSize.width(context),
       margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
@@ -32,25 +44,22 @@ class EyeScanCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.kmheight),
+          if(!allImagesCaptured)
           TextButton(
             onPressed: () async {
               var cameras = await availableCameras();
-                if (cameras.isEmpty) {
-                  return;
-                }
-                if (context.mounted) {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     fullscreenDialog: true,
-                  //     builder: (context) =>
-                  //         EyeScanSlide1(cameras: cameras),
-                  //   ),
-                  // );
-                }
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const EyeScanSlide1()),
-              // );
+              if (cameras.isEmpty) {
+                return;
+              }
+              if (context.mounted) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) =>
+                        VisionTechnicianEyeCapture(cameras: cameras),
+                  ),
+                );
+              }
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all(
@@ -86,6 +95,34 @@ class EyeScanCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.ksheight),
+          if(allImagesCaptured)
+          Row(
+            children: [
+              SizedBox(
+                width: 150,
+                height: 100,
+                child: Image.file(
+                  File(leftEyeImagePath),
+                ),
+              ),
+              const SizedBox(width: AppSize.kswidth),
+              SizedBox(
+                width: 150,
+                height: 100,
+                child: Image.file(
+                  File(rightEyeImagePath),
+                ),
+              ),
+              const SizedBox(width: AppSize.kswidth),
+              SizedBox(
+                width: 250,
+                height: 100,
+                child: Image.file(
+                  File(bothEyeImagePath),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
