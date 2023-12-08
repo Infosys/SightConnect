@@ -62,7 +62,7 @@ class AssessmentResultCards extends StatelessWidget {
                     ? 'Assessment\nQuestions'
                     : index == 1
                         ? 'Acuity\nTest'
-                        : 'Eye Scan',
+                        : 'Eye\nScan',
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
