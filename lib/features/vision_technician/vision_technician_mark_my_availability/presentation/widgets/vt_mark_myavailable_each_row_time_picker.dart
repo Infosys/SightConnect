@@ -9,13 +9,11 @@ import 'package:intl/intl.dart';
 class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
   VtMarkMyAvailableEachRowTimePicker(
       {super.key,
-      required this.title,
       required this.disable,
       required this.dayAvailabilityindex,
       required this.index,
       required this.dropDownNo});
 
-  final String title;
   final bool disable;
   final int dayAvailabilityindex;
   final int index;

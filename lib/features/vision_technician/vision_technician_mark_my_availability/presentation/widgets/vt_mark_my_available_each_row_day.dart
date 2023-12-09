@@ -31,14 +31,12 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
               index: index,
               dropDownNo: 0,
               disable: daydata.checked,
-              title: "9:00 AM",
             ),
             VtMarkMyAvailableEachRowTimePicker(
               dayAvailabilityindex: dayAvailabilityindex,
               index: index,
               dropDownNo: 1,
               disable: daydata.checked,
-              title: "11:00 AM",
             ),
             Text(
               "${daydata.time[index][2]} hrs",
