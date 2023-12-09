@@ -86,8 +86,7 @@ class VTRegisterEyeCareDetails extends ConsumerWidget {
                                           ? AppColor.lightBlue
                                           : AppColor.white,
                               onSelected: (bool selected) {
-                                print("seleceted anser");
-                                print(index);
+
                                 if (eyeCareDetailsQuestion[index].answer ==
                                         "Yes" &&
                                     index1 == 1) {

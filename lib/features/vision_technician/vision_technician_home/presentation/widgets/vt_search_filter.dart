@@ -40,7 +40,6 @@ void showVtSearchFilter(BuildContext context) {
                 ),
                 content: Consumer(
                   builder: (context, ref, child) {
-                    print("rebuild");
                     var gender =
                         ref.watch(visionTechnicianSearchFilterProvider).gender;
                     var location = ref

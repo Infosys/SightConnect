@@ -14,7 +14,7 @@ class CustomChip extends HookWidget {
 
     return InkWell(
       onTap: () {
-        print("working");
+
 
         backgroundColor.value = backgroundColor.value == AppColor.white
             ? AppColor.primary.withOpacity(0.2)
@@ -23,7 +23,7 @@ class CustomChip extends HookWidget {
         borderColor.value = borderColor.value == AppColor.grey
             ? AppColor.primary
             : AppColor.grey;
-        print(backgroundColor);
+
       },
       child: Container(
         margin: const EdgeInsets.symmetric(

@@ -11,8 +11,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var gender = ref.watch(registerNewPatientProvider).genderValue;
-    print(gender);
-    print("value");
+
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(

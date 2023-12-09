@@ -28,7 +28,8 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
 
     TextEditingController controller =
         TextEditingController(text: dropdownvalue);
-
+    var hour=( dropdownvalue.split(':')[0]);
+    var minute=( dropdownvalue.split(':')[1]).split(' ')[0];
     return SizedBox(
         width: AppSize.klwidth * 7.36,
         child: TextFormField(
@@ -46,7 +47,7 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
               onPressed: () {
                 showTimePicker(
                   context: context,
-                  initialTime: const TimeOfDay(hour: 8, minute: 0),
+                  initialTime: TimeOfDay(hour: int.parse(hour), minute: int.parse(minute)),
                 ).then((selectedDate) {
                   if (selectedDate != null) {
                     var startingValue = dropdownlist.time[index][0];
@@ -61,8 +62,10 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
                     var difference =
                         endTimeDropDown.difference(startTimeDropDown);
                     var differenceInHours = difference.inHours;
+                    var differenceMinutes=difference.inMinutes;
+          
 
-                    if (differenceInHours < 0) {
+                    if (differenceInHours <= 0) {
                       return null;
                     }
 

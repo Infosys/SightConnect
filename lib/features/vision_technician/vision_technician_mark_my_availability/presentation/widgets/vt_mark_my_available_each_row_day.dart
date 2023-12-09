@@ -19,7 +19,6 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(daydata.time);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [

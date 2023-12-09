@@ -60,11 +60,11 @@ class PreliminaryAssessmentFilterCheckBox extends StatelessWidget {
                       ),
                       value: items[index].checked,
                       onChanged: (bool? value) {
-                        print(items[index]);
+     
                         ref
                             .read(preliminaryAssessmentProvider.notifier)
                             .toogleFilterBoxes(itemName, index);
-                        print(items[index]);
+   
                       },
                     ),
                   )

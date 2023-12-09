@@ -91,7 +91,6 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
 
   void seteyeCareAnser(index, value) {
     eyeCareDetailsQuestion[index].answer = value;
-    print(eyeCareDetailsQuestion);
     notifyListeners();
   }
 }
