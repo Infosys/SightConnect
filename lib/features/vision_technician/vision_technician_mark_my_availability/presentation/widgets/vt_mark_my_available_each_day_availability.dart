@@ -9,7 +9,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
-  const VtMarkMyAvailableEachDayAvailability({super.key, required this.dayAvailabilityindex});
+  const VtMarkMyAvailableEachDayAvailability(
+      {super.key, required this.dayAvailabilityindex});
 
   final int dayAvailabilityindex;
 
@@ -56,6 +57,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
             ),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   ListView(shrinkWrap: true, children: [
                     ListView.separated(
@@ -77,37 +79,20 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                   const SizedBox(
                     height: AppSize.kmheight,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: Responsive.isTablet(context)
-                            ? AppSize.width(context) / 1.6
-                            : AppSize.width(context) / 16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 2,
-                            color: const Color.fromARGB(255, 186, 183, 183)),
+                  IconButton(
+                    icon: Icon(Icons.add_circle_outline,
                         color: dayAvailabilityState.checked == false
                             ? AppColor.lightGrey
-                            : AppColor.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        disabledColor: AppColor.white,
-                        icon: const Icon(
-                          Icons.add,
-                          color: AppColor.grey,
-                        ),
-                        onPressed: dayAvailabilityState.checked == false
-                            ? null
-                            : () {
-                                ref
-                                    .read(markMyAvailabilityProvider.notifier)
-                                    .addDayAvailability(dayAvailabilityindex);
-                              },
-                      ),
-                    ),
-                  ),
+                            : AppColor.grey,
+                        size: AppSize.klwidth * 1.7),
+                    onPressed: dayAvailabilityState.checked == false
+                        ? null
+                        : () {
+                            ref
+                                .read(markMyAvailabilityProvider.notifier)
+                                .addDayAvailability(dayAvailabilityindex);
+                          },
+                  )
                 ],
               ),
             ),

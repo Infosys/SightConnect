@@ -8,7 +8,7 @@ class MarkMyAvailabilityModel
   MarkMyAvailabilityModel({required this.day,required this.time,required this.checked});
 
   String toString() {
-    return "day: $day, time: $time, checked: $checked";
+    return "day: $day, time: $time, checked: $checked,";
   }
 
 }

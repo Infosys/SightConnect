@@ -1,16 +1,20 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class VtMarkMyAvailableDateRangePicker extends StatelessWidget {
+class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
   const VtMarkMyAvailableDateRangePicker({super.key});
-  static TextEditingController controller = TextEditingController(text: "12 Nov - 30 Nov 2023");
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+     TextEditingController controller =TextEditingController(text: ref.watch(markMyAvailabilityProvider).markMyAvailabilityDataRange);
     return TextField(
+      readOnly: true,
       controller: controller,
       decoration: InputDecoration(
         border: InputBorder.none,

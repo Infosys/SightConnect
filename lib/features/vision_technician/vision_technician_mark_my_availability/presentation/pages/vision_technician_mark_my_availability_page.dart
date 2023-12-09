@@ -111,16 +111,19 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                                 width: AppSize.klwidth,
                               ),
                               Container(
-                                  padding: const EdgeInsets.all(0),
+                                
                                   width: AppSize.klwidth * 11,
                                   height: AppSize.klheight * 2,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColor.blue),
-                                    color: AppColor.white,
-                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppColor.lightBlue,
+                                    borderRadius: BorderRadius.circular(AppSize.kmradius),
                                   ),
                                   child:
-                                      const VtMarkMyAvailableDateRangePicker()),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left:AppSize.kspadding),
+                                        child: const VtMarkMyAvailableDateRangePicker(),
+                                      )),
                             ]),
                             const SizedBox(
                               height: AppSize.klheight,
