@@ -34,7 +34,7 @@ class TimeInput extends StatelessWidget {
               }
             });
           },
-          icon: const Icon(CupertinoIcons.time),
+          icon: const Icon(Icons.expand_more),
         ),
       ),
     );

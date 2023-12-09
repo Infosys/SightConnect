@@ -19,6 +19,8 @@ void showMarksUnAvaialbility(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Consumer(builder: (context, ref, child) {
+        bool markmyAvailableStatus =
+            ref.watch(markMyAvailabilityProvider).markmyAvailableStatus;
         TextEditingController startDateController =
             ref.watch(markMyAvailabilityProvider).startDateController;
         TextEditingController startTimeController =
@@ -39,7 +41,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                   borderRadius: BorderRadius.circular(AppSize.klradius),
                 ),
                 title: SizedBox(
-                  width: AppSize.width(context) / 2,
+                  width: AppSize.width(context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -80,10 +82,13 @@ void showMarksUnAvaialbility(BuildContext context) {
                                   fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             CupertinoSwitch(
-                              // This bool value toggles the switch.
-                              value: true,
+                              value: markmyAvailableStatus,
                               activeColor: AppColor.blue,
-                              onChanged: (bool value) {},
+                              onChanged: (bool value) {
+                                ref
+                                    .watch(markMyAvailabilityProvider.notifier)
+                                    .toggleMarkMyAvailableStatus(value);
+                              },
                             ),
                           ],
                         ),

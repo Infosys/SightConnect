@@ -2,19 +2,21 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ma
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart';
 
 var markMyAvailabilityProvider =
     ChangeNotifierProvider<MarkMyAvailabilityNotifier>(
         (ref) => MarkMyAvailabilityNotifier());
 
 class MarkMyAvailabilityNotifier extends ChangeNotifier {
+    String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
   var markMyAvailabilityList = [
     MarkMyAvailabilityModel(
         day: "Monday",
         time: [
           ["9:00 AM", "10:00 AM", "1"]
         ],
-        checked: true),
+        checked: true,),
     MarkMyAvailabilityModel(
         day: "Tuesday",
         time: [
@@ -53,13 +55,13 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
         checked: true),
   ];
 
-  var startTimeController = TextEditingController();
-  var endTimeController = TextEditingController();
-  var endDateController = TextEditingController();
-  var startDateController = TextEditingController();
+  TextEditingController startTimeController = TextEditingController();
+  TextEditingController endTimeController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
 
   var remarksController = TextEditingController();
-
+  bool markmyAvailableStatus=true;
   void removeDayAvailability(int dayAvailabilityindex, int index) {
     print("object remove");
     print(markMyAvailabilityList[dayAvailabilityindex].time);
@@ -86,7 +88,6 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
     var time1 = (markMyAvailabilityList[dayAvailabilityindex].time)[index][0];
     var time2 = (markMyAvailabilityList[dayAvailabilityindex].time)[index][1];
 
-    
     var format = DateFormat('h:mm a');
     var startTimeDropDown = format.parse(time1);
     var endTimeDropDown = format.parse(time2);
@@ -97,10 +98,15 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
     print(difference);
 
     (markMyAvailabilityList[dayAvailabilityindex].time)[index][2] =
-        differenceInHours.toString();
-
-  
+     differenceInHours.toString();
 
     notifyListeners();
   }
+
+  void toggleMarkMyAvailableStatus(value)
+  {
+    markmyAvailableStatus=value;
+    notifyListeners();
+  }
+
 }
