@@ -63,8 +63,7 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
   var remarksController = TextEditingController();
   bool markmyAvailableStatus=true;
   void removeDayAvailability(int dayAvailabilityindex, int index) {
-    print("object remove");
-    print(markMyAvailabilityList[dayAvailabilityindex].time);
+
     (markMyAvailabilityList[dayAvailabilityindex].time).removeAt(index);
     notifyListeners();
   }
@@ -95,10 +94,10 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
     var difference = endTimeDropDown.difference(startTimeDropDown);
     var differenceInHours = difference.inHours;
 
-    print(difference);
+
 
     (markMyAvailabilityList[dayAvailabilityindex].time)[index][2] =
-     differenceInHours.toString();
+     differenceInHours.toString()+":"+difference.inMinutes.remainder(60).toString();
 
     notifyListeners();
   }
