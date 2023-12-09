@@ -1,12 +1,9 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/assessment_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessment_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/search_bar_vt.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
@@ -20,8 +17,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<AssessmentModel> list =
-        ref.watch(visionTechnicianSearchProvider).searchedAssessmentUserList;
+    List<VTPatientModel> list =
+        ref.watch(visionTechnicianSearchProvider).searchedPatientUserList;
 
     return Scaffold(
       appBar: AppBar(
@@ -133,7 +130,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateListTileSearchResults(AssessmentModel data) {
+List<DataCell> generateListTileSearchResults(VTPatientModel data) {
   return [
     // DataCell({child: Image.asset(AppImages.patient)}),
     // DataCell(child: Image.asset(AppImages.patient),),

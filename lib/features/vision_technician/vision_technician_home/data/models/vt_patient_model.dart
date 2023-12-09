@@ -1,4 +1,4 @@
-class AssessmentModel {
+class VTPatientModel {
   String name;
   String patientId;
   String id;
@@ -6,8 +6,13 @@ class AssessmentModel {
   String status;
   String category;
   String mobileNo;
+  bool closed = false;
+  bool spectacles = false;
+  bool cataractSurgery = false;
+  bool eyeDrops = false;
+  bool oralMedication = false;
 
-  AssessmentModel({
+  VTPatientModel({
     required this.name,
     required this.patientId,
     required this.id,
@@ -16,4 +21,5 @@ class AssessmentModel {
     required this.category,
     required this.mobileNo,
   });
+  
 }

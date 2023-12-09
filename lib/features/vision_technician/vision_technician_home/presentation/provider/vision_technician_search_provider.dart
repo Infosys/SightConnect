@@ -1,50 +1,32 @@
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/assessment_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/repositories/vision_technician_home_repository_impl.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/source/vision_technician_home_local_source.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var visionTechnicianSearchProvider = ChangeNotifierProvider((ref) => VisionTechnicianSearchProvider());
+var visionTechnicianSearchProvider =
+    ChangeNotifierProvider((ref) => VisionTechnicianSearchProvider());
 
 class VisionTechnicianSearchProvider extends ChangeNotifier {
+  VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
+      VisionTechnicianHomeRepositoryImpl();
 
-  List<AssessmentModel> _searchedAssessmentUserList = [];
-  List<AssessmentModel> get searchedAssessmentUserList => _searchedAssessmentUserList;
+  VisionTechnicianSearchProvider() {
+    _listOfPatients = visionTechnicianHomeRepositoryImpl.listOfPatients();
+  }
 
-  void setSearchAssessmentUserList(String query) {
-    VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
-        VisionTechnicianHomeRepositoryImpl();
-    // for (int i = 0;
-    //     i < VisionTechnicianLocalSourceImpl().getAssessmentDetails().length;
-    //     i++) {
-    //   //name
-    //   if (VisionTechnicianLocalSourceImpl()
-    //       .getAssessmentDetails()[i]
-    //       .name
-    //       .toLowerCase()
-    //       .contains(query.toLowerCase())) {
-    //     list.add(VisionTechnicianLocalSourceImpl().getAssessmentDetails()[i]);
-    //   }
-    //   //patientId
-    //   if (VisionTechnicianLocalSourceImpl()
-    //       .getAssessmentDetails()[i]
-    //       .patientId
-    //       .toLowerCase()
-    //       .contains(query.toLowerCase())) {
-    //     list.add(VisionTechnicianLocalSourceImpl().getAssessmentDetails()[i]);
-    //   }
-    //   //mobileNo
-    //   if (VisionTechnicianLocalSourceImpl()
-    //       .getAssessmentDetails()[i]
-    //       .mobileNo
-    //       .toLowerCase()
-    //       .contains(query.toLowerCase())) {
-    //     list.add(VisionTechnicianLocalSourceImpl().getAssessmentDetails()[i]);
-    //   }
-    // }
+  List<VTPatientModel> _listOfPatients = [];
+  List<VTPatientModel> _searchedPatientList = [];
+  List<VTPatientModel> get listOfPatients => _listOfPatients;
+  List<VTPatientModel> get searchedPatientUserList => _searchedPatientList;
 
-    _searchedAssessmentUserList = visionTechnicianHomeRepositoryImpl.searchUsers(query);
+  void setSearchPatientList(String query) {
+    _searchedPatientList =
+        visionTechnicianHomeRepositoryImpl.searchUsers(query);
     notifyListeners();
   }
 
+  void closeAssessment(int index) {
+    visionTechnicianHomeRepositoryImpl.closeAssessment(index);
+    notifyListeners();
+  }
 }

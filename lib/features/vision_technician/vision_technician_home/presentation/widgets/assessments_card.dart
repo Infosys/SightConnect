@@ -27,7 +27,7 @@ class AssessmentCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSize.kmheight),
-          const AssessmentList(),
+          const VTPatientList(),
         ],
       ),
     );
