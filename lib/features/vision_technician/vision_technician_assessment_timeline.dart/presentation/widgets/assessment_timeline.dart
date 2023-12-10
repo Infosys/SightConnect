@@ -71,7 +71,7 @@ class AssessmentTimeline extends StatelessWidget {
               color: AppColor.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(AppSize.kmradius - 5),
-              )),
+              ),),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

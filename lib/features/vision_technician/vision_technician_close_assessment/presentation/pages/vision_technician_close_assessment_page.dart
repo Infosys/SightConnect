@@ -4,14 +4,16 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianCloseAssessmentPage extends StatelessWidget {
+class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   const VisionTechnicianCloseAssessmentPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
@@ -50,13 +52,15 @@ class VisionTechnicianCloseAssessmentPage extends StatelessWidget {
           Expanded(
             child: TextButton(
               onPressed: () {
+                ref.read(registerNewPatientProvider.notifier).closeAssessment();
+                // print()
                 Navigator.pop(context);
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(AppColor.primary),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                    side: BorderSide(color: AppColor.primary),
+                    side: const BorderSide(color: AppColor.primary),
                     borderRadius: BorderRadius.circular(AppSize.klradius),
                   ),
                 ),

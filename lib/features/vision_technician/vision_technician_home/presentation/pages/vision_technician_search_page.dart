@@ -140,7 +140,7 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            data.name,
+            "${data.firstName} ${data.lastName}",
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
@@ -165,11 +165,11 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            data.id,
+            data.assessmentId,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.date,
+            data.assessmentDate!,
             style: applyRobotoFont(
               fontSize: 12,
               fontWeight: FontWeight.w400,
@@ -181,7 +181,7 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
     ),
     DataCell(
       Text(
-        data.status,
+        data.status!,
         style: applyRobotoFont(fontSize: 14),
       ),
     ),
@@ -193,11 +193,11 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         ),
         decoration: BoxDecoration(
           color:
-              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+              data.category!.contains("Early") ? AppColor.orange : AppColor.red,
           borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
         child: Text(
-          data.category,
+          data.category!,
           style: applyRobotoFont(
             fontSize: 14,
             color: AppColor.white,

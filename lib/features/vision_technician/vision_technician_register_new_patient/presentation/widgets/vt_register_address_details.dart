@@ -15,7 +15,8 @@ class VTRegisterAddressDetails extends StatelessWidget {
     "Assam",
     "Bihar",
     "Chhattisgarh",
-    "Goa"
+    "Goa",
+    "Madhya Pradesh",
   ];
 
   @override
@@ -98,22 +99,24 @@ class VTRegisterAddressDetails extends StatelessWidget {
                               width: AppSize.kmwidth,
                             ),
                             SizedBox(
-                                width: AppSize.width(context) * 0.4,
-                                child: VTRegisterInput(
-                                  title: "City",
-                                  keyboardType: TextInputType.name,
-                                  controller: ref
-                                          .read(registerNewPatientProvider)
-                                          .addressDetailsTextEditingControllers[
-                                      "cityController"]!,
-                                )),
+                              width: AppSize.width(context) * 0.4,
+                              child: VTRegisterInput(
+                                title: "City",
+                                keyboardType: TextInputType.name,
+                                controller: ref
+                                        .read(registerNewPatientProvider)
+                                        .addressDetailsTextEditingControllers[
+                                    "cityController"]!,
+                              ),
+                            ),
                           ],
                         ),
                         Row(
                           children: [
                             SizedBox(
                               width: AppSize.width(context) * 0.4,
-                              child: VTRegisterDropdownInput(listOfOptions: listOfStates),
+                              child: VTRegisterDropdownInput(
+                                  listOfOptions: listOfStates),
                             ),
                           ],
                         ),

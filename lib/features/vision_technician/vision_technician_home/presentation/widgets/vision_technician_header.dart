@@ -11,11 +11,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class VisionTechnicianHeader extends HookWidget {
   const VisionTechnicianHeader({super.key});
-
+  @override
   Widget build(BuildContext context) {
-    final CarouselController _controller = CarouselController();
+    final CarouselController controller = CarouselController();
 
-    var _current = useState<int>(0);
+    var current = useState<int>(0);
 
     final List<Widget> slides = [
       const AnalyticsSlide1(),
@@ -64,10 +64,10 @@ class VisionTechnicianHeader extends HookWidget {
                         color: AppColor.white,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.keyboard_arrow_down_outlined,
                       color: AppColor.white,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -76,15 +76,14 @@ class VisionTechnicianHeader extends HookWidget {
         ),
         CarouselSlider(
           items: slides,
-          carouselController: _controller,
+          carouselController: controller,
           options: CarouselOptions(
               height: 220,
-              // enlargeCenterPage: true/
               aspectRatio: 1.0,
               viewportFraction: 1,
               onPageChanged: (index, reason) {
-                _current.value = index;
-              }),
+                current.value = index;
+              },),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -103,8 +102,8 @@ class VisionTechnicianHeader extends HookWidget {
                     width: 1.5,
                   ),
                   boxShadow:
-                      _current.value == entry.key ? applyMediumShadow() : [],
-                  color: _current.value == entry.key
+                      current.value == entry.key ? applyMediumShadow() : [],
+                  color: current.value == entry.key
                       ? AppColor.primary
                       : AppColor.primary.withOpacity(0.5),
                 ),

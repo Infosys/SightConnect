@@ -4,22 +4,31 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/general_information.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_profile.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianAssessmentTimeline extends StatelessWidget {
+class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
   const VisionTechnicianAssessmentTimeline({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    VTPatientModel patient =
+        ref.watch(registerNewPatientProvider).patientDetails!;
+
+    bool closed = ref.watch(registerNewPatientProvider).patientDetails!.closed!;
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
-        title: Text('Sumanta Chaudhury - OP 5356785'),
+        title: Text(
+            '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -27,9 +36,7 @@ class VisionTechnicianAssessmentTimeline extends StatelessWidget {
           child: Column(
             children: [
               const TimelineProfile(),
-              const SizedBox(
-                height: AppSize.ksheight,
-              ),
+              const SizedBox(height: AppSize.ksheight),
               const GeneralInformation(),
               const SizedBox(
                 height: AppSize.ksheight,
@@ -42,26 +49,30 @@ class VisionTechnicianAssessmentTimeline extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: AppColor.shadowColor,
+                    backgroundColor:
+                        closed ? AppColor.lightGrey : AppColor.shadowColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppSize.klradius),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const VisionTechnicianCloseAssessmentPage(),
-                      ),
-                    );
-                  },
+                  onPressed: closed
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisionTechnicianCloseAssessmentPage(),
+                            ),
+                          );
+                        },
                   child: Text(
                     "Close",
                     style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w500),
+                      fontSize: 14,
+                      color: closed ? AppColor.grey : AppColor.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               )

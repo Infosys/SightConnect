@@ -1,8 +1,9 @@
+
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VTRegisterGenderInput extends ConsumerWidget {
@@ -10,8 +11,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var gender = ref.watch(registerNewPatientProvider).genderValue;
-
+    String gender = ref.watch(registerNewPatientProvider).genderValue;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
@@ -25,7 +25,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: RadioListTile<int>(
+            child: RadioListTile<String>(
               visualDensity: VisualDensity.compact,
               contentPadding: EdgeInsets.zero,
               title: Text(
@@ -35,17 +35,17 @@ class VTRegisterGenderInput extends ConsumerWidget {
                   color: AppColor.grey,
                 ),
               ),
-              value: 1,
+              value: "Male",
               groupValue: gender,
               onChanged: (value) {
                 ref
                     .read(registerNewPatientProvider.notifier)
-                    .setGenderValue(value);
+                    .setGenderValue(value.toString());
               },
             ),
           ),
           Expanded(
-            child: RadioListTile<int>(
+            child: RadioListTile<String>(
               visualDensity: VisualDensity.compact,
               contentPadding: EdgeInsets.zero,
               title: Text(
@@ -55,17 +55,17 @@ class VTRegisterGenderInput extends ConsumerWidget {
                   color: AppColor.grey,
                 ),
               ),
-              value: 2,
+              value: "Female",
               groupValue: gender,
               onChanged: (value) {
                 ref
                     .read(registerNewPatientProvider.notifier)
-                    .setGenderValue(value);
+                    .setGenderValue(value.toString());
               },
             ),
           ),
           Expanded(
-            child: RadioListTile<int>(
+            child: RadioListTile<String>(
               visualDensity: VisualDensity.compact,
               contentPadding: EdgeInsets.zero,
               title: Text(
@@ -75,12 +75,12 @@ class VTRegisterGenderInput extends ConsumerWidget {
                   color: AppColor.grey,
                 ),
               ),
-              value: 3,
+              value: "Others",
               groupValue: gender,
               onChanged: (value) {
                 ref
                     .read(registerNewPatientProvider.notifier)
-                    .setGenderValue(value);
+                    .setGenderValue(value.toString());
               },
             ),
           ),

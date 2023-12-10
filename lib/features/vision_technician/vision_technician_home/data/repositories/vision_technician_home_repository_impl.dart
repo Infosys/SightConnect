@@ -13,6 +13,11 @@ class VisionTechnicianHomeRepositoryImpl
   }
 
   @override
+  void addPatient(VTPatientModel patient) {
+    visionTechnicianLocalSourceImpl.addPatient(patient);
+  }
+
+  @override
   List<VTPatientModel> searchUsers(String query) {
     List<VTPatientModel> searchResults = [];
     print(query);
@@ -26,7 +31,7 @@ class VisionTechnicianHomeRepositoryImpl
     for (int i = 0; i < listOfAllPatients.length; i++) {
       //name
       if (listOfAllPatients[i]
-          .name
+          .firstName
           .toLowerCase()
           .contains(query.toLowerCase())) {
         searchResults.add(listOfAllPatients[i]);
@@ -61,26 +66,26 @@ class VisionTechnicianHomeRepositoryImpl
       visionTechnicianLocalSourceImpl.getListOfPatients()[index].spectacles =
           !visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
-              .spectacles;
+              .spectacles!;
     } else if (solution == 'cataractSurgery') {
       visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
               .cataractSurgery =
           !visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
-              .cataractSurgery;
+              .cataractSurgery!;
     } else if (solution == 'eyeDrops') {
       visionTechnicianLocalSourceImpl.getListOfPatients()[index].eyeDrops =
           !visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
-              .eyeDrops;
+              .eyeDrops!;
     } else if (solution == 'oralMedication') {
       visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
               .oralMedication =
           !visionTechnicianLocalSourceImpl
               .getListOfPatients()[index]
-              .oralMedication;
+              .oralMedication!;
     }
   }
 }

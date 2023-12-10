@@ -1,17 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'dart:js';
 
-class TimelineProfile extends StatelessWidget {
+class TimelineProfile extends ConsumerWidget {
   const TimelineProfile({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    VTPatientModel? patient =
+        ref.watch(registerNewPatientProvider).patientDetails;
+
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
@@ -28,11 +34,11 @@ class TimelineProfile extends StatelessWidget {
         direction: Axis.horizontal,
         children: [
           Wrap(
-            spacing:Responsive.isTablet(context)? 0 :AppSize.klwidth * 4.5,
+            spacing: Responsive.isTablet(context) ? 0 : AppSize.klwidth * 4.5,
             children: [
               SizedBox(
                 width: Responsive.isTablet(context)
-                    ?AppSize.width(context)/2
+                    ? AppSize.width(context) / 2
                     : AppSize.width(context) / 2,
                 child: ListTile(
                   leading: ClipRRect(
@@ -46,7 +52,7 @@ class TimelineProfile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppSize.kmpadding),
                     child: Text(
-                      "Preethan Kumar",
+                      "${patient?.firstName} ${patient?.lastName}",
                       style: applyFiraSansFont(
                           fontSize: 24,
                           fontWeight: FontWeight.w400,
@@ -57,7 +63,7 @@ class TimelineProfile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppSize.kmpadding),
                     child: Text(
-                      "PID: OP 5356785",
+                      "PID: OP ${patient?.patientId}",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -89,13 +95,15 @@ class TimelineProfile extends StatelessWidget {
                           const SizedBox(
                             width: AppSize.ksheight,
                           ),
-                          Text("9876543210",
-                              softWrap: true,
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.white.withOpacity(0.8),
-                              )),
+                          Text(
+                            "${patient?.mobileNo.toString()}",
+                            softWrap: true,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.white.withOpacity(0.8),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -104,26 +112,29 @@ class TimelineProfile extends StatelessWidget {
                       Wrap(
                         children: [
                           Container(
-                              padding: const EdgeInsets.all(AppSize.kspadding),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white12,
-                              ),
-                              child: const Icon(
-                                Icons.email,
-                                color: Colors.white,
-                                size: 18,
-                              )),
+                            padding: const EdgeInsets.all(AppSize.kspadding),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white12,
+                            ),
+                            child: const Icon(
+                              Icons.email,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
                           const SizedBox(
                             width: AppSize.kswidth,
                           ),
-                          Text("SumantaC@gmail.com",
-                              softWrap: true,
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.white.withOpacity(0.8),
-                              )),
+                          Text(
+                            "${patient?.email}",
+                            softWrap: true,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.white.withOpacity(0.8),
+                            ),
+                          ),
                         ],
                       ),
                     ],

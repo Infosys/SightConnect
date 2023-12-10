@@ -28,8 +28,9 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.all(AppSize.klpadding + 5),
-              child: Column(children: [
+            padding: const EdgeInsets.all(AppSize.klpadding + 5),
+            child: Column(
+              children: [
                 const BasicDetails(),
                 const SizedBox(height: AppSize.klheight),
                 const VTRegisterEyeCareDetails(),
@@ -46,15 +47,18 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      /*  if (_formKey.currentState!.validate()) { */
-                      print(_formKey.currentState?.save);
-                      print(ref
+                      ref
                           .read(registerNewPatientProvider.notifier)
-                          .getFormDetails());
-                      showToastMessage(
-                          "Done! Patient has been registred with ID-OP-934567.",
-                          context,
-                          0);
+                          .saveAndProceed();
+                      /*  if (_formKey.currentState!.validate()) { */
+
+                      // ref.read(registerNewPatientProvider).saveAndProceed();
+
+                      // print(_formKey.currentState?.save);
+                      // ref
+                      //     .read(registerNewPatientProvider)
+                      //     .saveAndProceed();
+                      showToastMessage("Patient details saved!", context, 0);
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return const VisionTechnicianPreliminaryAssessmentPage();
@@ -73,7 +77,9 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
                     ),
                   ),
                 )
-              ])),
+              ],
+            ),
+          ),
         ),
       ),
     );

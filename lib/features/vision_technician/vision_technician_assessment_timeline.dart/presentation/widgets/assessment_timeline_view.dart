@@ -4,10 +4,16 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/data/models/assessment_timeline_view_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentTimelineView extends StatelessWidget {
+class AssessmentTimelineView extends StatefulWidget {
   AssessmentTimelineView({super.key});
 
+  @override
+  State<AssessmentTimelineView> createState() => _AssessmentTimelineViewState();
+}
+
+class _AssessmentTimelineViewState extends State<AssessmentTimelineView> {
   List<AssessmentTimelineViewModel> timeLineList = [
     AssessmentTimelineViewModel(
         type: "Success",
@@ -17,27 +23,56 @@ class AssessmentTimelineView extends StatelessWidget {
         call: "VT Call",
         assessmentId: ""),
     AssessmentTimelineViewModel(
-        type: "fail",
-        title: "1st Reminder Call",
-        subtitle: "No Response from Patient",
-        date: "10 Sep 2023, 10:30 AM",
-        call: "IVR Call",
-        assessmentId: ""),
+      type: "fail",
+      title: "1st Reminder Call",
+      subtitle: "No Response from Patient",
+      date: "10 Sep 2023, 10:30 AM",
+      call: "IVR Call",
+      assessmentId: "",
+    ),
     AssessmentTimelineViewModel(
-        type: "Success",
-        title: "Preliminary Assessment",
-        subtitle: "Obstructed Vision due to Sticky Discharge.",
-        date: "11 Apr 23, 3:30 PM",
-        call: "IVR Call",
-        assessmentId: "Assessment ID: EA 010101"),
+      type: "Success",
+      title: "Preliminary Assessment",
+      subtitle: "Obstructed Vision due to Sticky Discharge.",
+      date: "11 Apr 23, 3:30 PM",
+      call: "IVR Call",
+      assessmentId: "Assessment ID: EA 010101",
+    ),
     AssessmentTimelineViewModel(
-        type: "Success",
-        title: "Patient Registered",
-        subtitle: "PID: OP 934567.",
-        date: "11 Apr 23, 3:10 PM",
-        call: "IVR Call",
-        assessmentId: ""),
+      type: "Success",
+      title: "Patient Registered",
+      subtitle: "PID: OP 934567.",
+      date: "11 Apr 23, 3:10 PM",
+      call: "IVR Call",
+      assessmentId: "",
+    ),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (!alreadyAdded) {
+      addToTimeline();
+    }
+  }
+
+  bool alreadyAdded = false;
+
+  void addToTimeline() {
+    alreadyAdded = true;
+    timeLineList.insert(
+      0,
+      AssessmentTimelineViewModel(
+        type: "Success",
+        title: "Case Closed",
+        subtitle: "",
+        date: "11 Apr 23, 3:30 PM",
+        call: "",
+        assessmentId: "",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +113,13 @@ class AssessmentTimelineView extends StatelessWidget {
                   color: AppColor.black,
                 ),
               ),
-              Text(timeLineList[index].date,
-                  style: applyRobotoFont(
-                    fontSize: 12,
-                    color: AppColor.grey,
-                  )),
+              Text(
+                timeLineList[index].date,
+                style: applyRobotoFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
+              ),
             ],
           ),
           subtitle: Column(
@@ -100,24 +137,25 @@ class AssessmentTimelineView extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.add_call,
-                            size: 20,
-                          ),
-                          const SizedBox(
-                            width: AppSize.kswidth,
-                          ),
-                          Text(
-                            timeLineList[index].call,
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                      if (timeLineList[index].call.isNotEmpty)
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.add_call,
+                              size: 20,
                             ),
-                          ),
-                        ],
-                      ),
+                            const SizedBox(
+                              width: AppSize.kswidth,
+                            ),
+                            Text(
+                              timeLineList[index].call,
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                          ],
+                        ),
                       if (timeLineList[index].assessmentId != "")
                         InkWell(
                           onTap: () {},

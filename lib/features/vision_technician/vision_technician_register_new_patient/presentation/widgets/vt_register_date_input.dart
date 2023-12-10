@@ -34,7 +34,7 @@ class VTRegisterDateInput extends StatelessWidget {
               if (selectedDate != null) {
                 /* controller.text = selectedDate.formateDate.toString(); */
 
-                var result = DateFormat('dd MMM yy').format(selectedDate);
+                var result = DateFormat('dd MMM yyyy').format(selectedDate);
                 controller.text = result;
               }
             });
