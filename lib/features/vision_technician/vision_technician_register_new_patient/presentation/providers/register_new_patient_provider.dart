@@ -86,6 +86,9 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     return registerNewPatientDetails;
   }
 
+  String patientId = "";
+  String assessmentId = "";
+
   void saveAndProceed() {
     String firstName =
         basicDetailsTextEditingControllers["firstNameController"]!.text;
@@ -103,12 +106,14 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
         basicDetailsTextEditingControllers["mobileNumberController"]!.text;
     String email =
         basicDetailsTextEditingControllers["emailIdController"]!.text;
-    String? patientId = patientDetails?.patientId == ""
-        ? _generateId(7)
-        : patientDetails?.patientId;
-    String? assessmentId = patientDetails?.assessmentId == ""
-        ? _generateId(6)
-        : patientDetails?.assessmentId;
+
+    if (patientId.isEmpty) {
+      patientId = _generateId(7);
+    }
+
+    if (assessmentId.isEmpty) {
+      assessmentId = _generateId(6);
+    }
 
     DateTime now = DateTime.now();
     String date = DateTime(
