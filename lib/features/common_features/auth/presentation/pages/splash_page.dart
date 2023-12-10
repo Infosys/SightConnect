@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
+
 class SplashPage extends ConsumerStatefulWidget {
   static const String routeName = '/';
   const SplashPage({super.key});
@@ -50,7 +52,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+          MaterialPageRoute(builder: (context) => const VisionGuardianDashboardPage()),
           (route) => false,
         );
         // Navigator.pushAndRemoveUntil(

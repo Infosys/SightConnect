@@ -20,7 +20,8 @@ enum _TumblingDirection {
   Right,
 }
 
-var visualAcuityTumblingTestDialogProvider = StateProvider<bool>((ref) => true);
+var visualAcuityTumblingTestDialogProvider =
+    StateProvider<bool>((ref) => false);
 
 class VisualAcuityTumblingOverlay extends ConsumerStatefulWidget {
   const VisualAcuityTumblingOverlay({

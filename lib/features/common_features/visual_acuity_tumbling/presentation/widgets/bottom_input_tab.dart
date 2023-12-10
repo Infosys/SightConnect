@@ -36,45 +36,6 @@ class BottomInputTabState extends State<BottomInputTab>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Row(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    context.loc!.distanceString,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  const SizedBox(width: AppSize.kswidth),
-                  Text(
-                    "40 cms",
-                    style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.green),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Consumer(
-                builder: (context, ref, child) {
-                  var model = ref.watch(tumblingTestProvider);
-                  return Text(
-                    model.currentEye == Eye.left
-                        ? context.loc!.leftEyeString
-                        : (model.currentEye == Eye.right
-                            ? context.loc!.rightEyeString
-                            : "Both Eye"),
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
           Expanded(
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
@@ -84,15 +45,15 @@ class BottomInputTabState extends State<BottomInputTab>
           ),
         ],
       ),
-      bottomNavigationBar: ButtomNavigationBar(
-        onTap: (index) {
-          setState(() {
-            _index = index;
-            _controller!.index = _index ?? 0;
-          });
-        },
-        currentIndex: _index ?? 0,
-      ),
+      // bottomNavigationBar: ButtomNavigationBar(
+      //   onTap: (index) {
+      //     setState(() {
+      //       _index = index;
+      //       _controller!.index = _index ?? 0;
+      //     });
+      //   },
+      //   currentIndex: _index ?? 0,
+      // ),
     );
   }
 }

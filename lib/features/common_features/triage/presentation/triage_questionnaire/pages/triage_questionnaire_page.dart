@@ -124,7 +124,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             MaterialPageRoute(
                                                 fullscreenDialog: true,
                                                 builder: (_) =>
-                                                    TriageQuestionnaireOtherSymptomPage()))
+                                                    const TriageQuestionnaireOtherSymptomPage()))
                                         .then((value) => {
                                               ref
                                                   .read(triageStepperProvider)

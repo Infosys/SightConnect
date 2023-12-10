@@ -60,4 +60,7 @@ class AppIcon {
   static const String optometritianAddPatient =
       "assets/icons/optometritian_start_assessment.svg";
   static const String question = "assets/images/question.svg";
+
+  //vg
+  static const String filterIcon = "assets/icons/filter.svg";
 }

@@ -16,7 +16,7 @@ class CustomPopUp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(triageQuestionnaireProvider);
-    return Container(
+    return SizedBox(
       height: AppSize.height(context) * 0.7,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,11 +24,11 @@ class CustomPopUp extends ConsumerWidget {
           Card(
             elevation: AppSize.kselevation,
             color: Colors.white,
-            child: Container(
-              height: 152,
+            child: SizedBox(
+              height: AppSize.height(context) * 0.24,
               width: AppSize.width(context) * 0.8,
               child: Padding(
-                padding: EdgeInsets.all(AppSize.kmpadding),
+                padding: const EdgeInsets.all(AppSize.kmpadding),
                 child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
