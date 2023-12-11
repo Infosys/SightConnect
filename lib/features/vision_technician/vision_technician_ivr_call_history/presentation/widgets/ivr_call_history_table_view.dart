@@ -43,7 +43,7 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
               isHorizontalScrollBarVisible: true,
               columnSpacing: 0,
               dataRowHeight: AppSize.klheight * 2.5,
-              horizontalMargin: 12,
+              horizontalMargin: 20,
               decoration: BoxDecoration(
                 color: AppColor.white,
                 borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -101,9 +101,7 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
             Icons.phone_callback_rounded,
             color: data.calltype == "in" ? AppColor.green : AppColor.red,
           ),
-          const SizedBox(
-            width: AppSize.klwidth,
-          ),
+        
           Text(
             data.duration,
             style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),

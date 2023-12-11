@@ -13,15 +13,14 @@ class IvrCallHistorySearchBarVT extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      width: AppSize.klwidth * 25,
+    return Expanded(
       child: TextField(
         readOnly: readOnly,
         onTap: () {},
         decoration: InputDecoration(
           prefixIcon: IconButton(
             onPressed: () {
-
+    
             },
             icon: const Icon(
               CupertinoIcons.search,

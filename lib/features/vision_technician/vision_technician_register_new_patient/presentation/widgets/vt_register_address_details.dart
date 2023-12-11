@@ -10,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class VTRegisterAddressDetails extends StatelessWidget {
   const VTRegisterAddressDetails({super.key});
   static List<String> listOfStates = [
+    "",
     "Andhra Pradesh",
     "Arunachal Pradesh",
     "Assam",

@@ -146,13 +146,13 @@ class BasicDetails extends StatelessWidget {
                         direction: Axis.horizontal,
                         children: [
                           SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                              width: AppSize.width(context) * 0.5,
                               child: const VTRegisterGenderInput()),
                           const SizedBox(
                             width: AppSize.kmwidth,
                           ),
                           SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                              width: AppSize.width(context) * 0.35,
                               child: VTRegisterInput(
                                 title: 'ABHA ID (Optional)',
                                 keyboardType: TextInputType.name,

@@ -34,9 +34,8 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                 Radius.circular(AppSize.kmradius - 5),
               )),
           padding: const EdgeInsets.all(AppSize.klpadding),
-          child: Wrap(
-            spacing: AppSize.kmheight,
-            direction: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 recommendedCenter.type,
@@ -45,42 +44,52 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Wrap(
-                spacing: AppSize.kmwidth,
-                direction: Axis.horizontal,
+              const SizedBox(height: AppSize.ksheight),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.location_on_outlined, color: AppColor.grey),
                   SizedBox(
                     width: AppSize.klwidth * 15,
                     child: Text(recommendedCenter.completeAddress),
                   ),
-                  Wrap(direction: Axis.vertical, children: [
-                    Wrap(
-                      spacing: AppSize.kmwidth,
-                      direction: Axis.horizontal,
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.phone_outlined, color: AppColor.grey),
-                        SizedBox(
-                          width: AppSize.klwidth * 18,
-                          child: Text(recommendedCenter.phoneno),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.phone_outlined,
+                                color: AppColor.grey),
+                            SizedBox(
+                                width: AppSize.klwidth * 5,
+                                child: Text(recommendedCenter.phoneno,
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400)))
+                          ],
                         ),
-                      ],
-                    ),
-                    Wrap(
-                      spacing: AppSize.kmwidth,
-                      direction: Axis.horizontal,
-                      children: [
-                        const Icon(
-                          Icons.access_time_rounded,
-                          color: AppColor.grey,
+                        const SizedBox(height: AppSize.ksheight),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.access_time_rounded,
+                              color: AppColor.grey,
+                            ),
+                            
+                            SizedBox(
+                              width: AppSize.klwidth * 8,
+                              child: Text(
+                                recommendedCenter.time,
+                                softWrap: true,
+                                style: applyRobotoFont(
+                                    fontSize: 14, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: AppSize.klwidth * 18,
-                          child: Text(recommendedCenter.time),
-                        ),
-                      ],
-                    ),
-                  ]),
+                      ]),
                 ],
               ),
             ],
