@@ -24,7 +24,7 @@ class MarkMyAvailabilityNotifier extends ChangeNotifier {
         ],
         checked: true),
     MarkMyAvailabilityModel(
-        day: "Wednessday",
+        day: "Wednesday",
         time: [
           ["9:00 AM", "10:00 AM", "1"]
         ],

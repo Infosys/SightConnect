@@ -39,7 +39,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                       }),
                 ),
                 SizedBox(
-                  width: AppSize.klwidth * 5,
+                  width: AppSize.klwidth * 2.5,
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
@@ -53,7 +53,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
               ],
             ),
             const SizedBox(
-              width: AppSize.kmwidth,
+              width: AppSize.klwidth,
             ),
             Expanded(
               child: Column(
