@@ -71,41 +71,41 @@ class VGAddEventDetailsPage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            data.image == null
-                                ? InkWell(
-                                    onTap: () async {
-                                      try {
-                                        var navigator = Navigator.of(context);
-                                        var cameras = await availableCameras();
-                                        if (cameras.isEmpty) {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "camera found ${cameras.length}");
-                                          return;
-                                        }
-                                        navigator.push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                CameraHelper(cameras: cameras, provider: visionGuardianMemberDetailsProvider,),
-                                          ),
-                                        );
-                                      } catch (e) {
-                                        Fluttertoast.showToast(
-                                            msg: e.toString());
-                                      }
-                                    },
-                                    child: const Icon(
-                                      Icons.camera_alt_outlined,
-                                      color: AppColor.grey,
-                                      size: 45,
-                                    ),
-                                  )
-                                : Image.file(
-                                    File(data.image!.path),
-                                    fit: BoxFit.cover,
-                                    height: 50,
-                                    width: 50,
-                                  ),
+                            // data.image == null
+                            //     ? InkWell(
+                            //         onTap: () async {
+                            //           try {
+                            //             var navigator = Navigator.of(context);
+                            //             var cameras = await availableCameras();
+                            //             if (cameras.isEmpty) {
+                            //               Fluttertoast.showToast(
+                            //                   msg:
+                            //                       "camera found ${cameras.length}");
+                            //               return;
+                            //             }
+                            //             navigator.push(
+                            //               MaterialPageRoute(
+                            //                 builder: (context) =>
+                            //                     CameraHelper(cameras: cameras, provider: visionGuardianMemberDetailsProvider,),
+                            //               ),
+                            //             );
+                            //           } catch (e) {
+                            //             Fluttertoast.showToast(
+                            //                 msg: e.toString());
+                            //           }
+                            //         },
+                            //         child: const Icon(
+                            //           Icons.camera_alt_outlined,
+                            //           color: AppColor.grey,
+                            //           size: 45,
+                            //         ),
+                            //       )
+                            //     : Image.file(
+                            //         File(data.image!.path),
+                            //         fit: BoxFit.cover,
+                            //         height: 50,
+                            //         width: 50,
+                            //       ),
                             Text(
                               "Click to add Patient’s profile photo",
                               style: applyRobotoFont(
@@ -117,34 +117,34 @@ class VGAddEventDetailsPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      customTextFieldRows(
-                          data.name, data.lastName, "First Name", "Last Name"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextFieldRowsAgeDob(
-                          data.age, data.dob, "Age", "Date of Birth", context),
-                      const SizedBox(height: AppSize.klheight),
+                      // customTextFieldRows(
+                      //     data.name, data.lastName, "First Name", "Last Name"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextFieldRowsAgeDob(
+                      //     data.age, data.dob, "Age", "Date of Birth", context),
+                      // const SizedBox(height: AppSize.klheight),
                       
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.abhaid, "Abha ID(Optional)"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.mobileNumber, "Mobile Number"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.email, "Email ID(Optional)"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.doorNo, "Door Number"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.street, "Street"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.subDistrict, "Sub District Name"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.district, "District"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.city, "City"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.state, "State"),
-                      const SizedBox(height: AppSize.klheight),
-                      customTextField(data.pincode, "Pincode"),
-                      const SizedBox(height: AppSize.klheight),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.abhaid, "Abha ID(Optional)"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.mobileNumber, "Mobile Number"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.email, "Email ID(Optional)"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.doorNo, "Door Number"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.street, "Street"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.subDistrict, "Sub District Name"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.district, "District"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.city, "City"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.state, "State"),
+                      // const SizedBox(height: AppSize.klheight),
+                      // customTextField(data.pincode, "Pincode"),
+                      // const SizedBox(height: AppSize.klheight),
                     ],
                   ),
                 ),

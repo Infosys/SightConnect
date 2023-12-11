@@ -25,16 +25,16 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context) * 0.32,
+                  height: AppSize.height(context) * 0.28,
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSize.kmpadding),
-                  decoration: const BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(AppSize.klradius),
-                      bottomRight: Radius.circular(AppSize.klradius),
-                    ),
-                  ),
+                  color: AppColor.primary,
+                  // decoration: const BoxDecoration(
+                  //   borderRadius: BorderRadius.only(
+                  //     bottomLeft: Radius.circular(AppSize.klradius),
+                  //     bottomRight: Radius.circular(AppSize.klradius),
+                  //   ),
+                  // ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(AppSize.klpadding),
@@ -86,6 +86,21 @@ class VisionGuardianHomePage extends StatelessWidget {
                         ),
                       )
                     ],
+                  ),
+                ),
+              ],
+            ),
+            Stack(
+              children: [
+                Container(
+                  height: AppSize.klheight,
+                  width: AppSize.width(context),
+                  decoration: const BoxDecoration(
+                    color: AppColor.primary,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(AppSize.klradius),
+                      bottomRight: Radius.circular(AppSize.klradius),
+                    ),
                   ),
                 ),
               ],
