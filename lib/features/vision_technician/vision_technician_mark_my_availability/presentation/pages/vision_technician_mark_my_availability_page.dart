@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
@@ -20,10 +21,15 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
         ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
 
     return Scaffold(
-        backgroundColor: AppColor.scaffold,
         appBar: CustomAppbar(
           leadingWidth: 70,
           centerTitle: false,
+          leadingIcon: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new),
+            onPressed: () {
+              ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+            },
+          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -111,19 +117,20 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                                 width: AppSize.klwidth,
                               ),
                               Container(
-                                
                                   width: AppSize.klwidth * 11,
                                   height: AppSize.klheight * 2,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColor.blue),
                                     color: AppColor.lightBlue,
-                                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.kmradius),
                                   ),
-                                  child:
-                                      Padding(
-                                        padding: const EdgeInsets.only(left:AppSize.kspadding),
-                                        child: const VtMarkMyAvailableDateRangePicker(),
-                                      )),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: AppSize.kspadding),
+                                    child:
+                                        const VtMarkMyAvailableDateRangePicker(),
+                                  )),
                             ]),
                             const SizedBox(
                               height: AppSize.klheight,

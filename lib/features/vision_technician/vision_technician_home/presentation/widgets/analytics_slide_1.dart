@@ -10,6 +10,8 @@ class AnalyticsSlide1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: AppSize.kmpadding,
@@ -18,7 +20,9 @@ class AnalyticsSlide1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: AppSize.width(context) * 0.45,
+            width: width < 850
+                ? AppSize.width(context) * 0.4
+                : AppSize.width(context) * 0.45,
             padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: boxDecoration,
             child: Column(
@@ -94,7 +98,9 @@ class AnalyticsSlide1 extends StatelessWidget {
             ),
           ),
           Container(
-            width: AppSize.width(context) * 0.22,
+            width: width < 850
+                ? AppSize.width(context) * 0.25
+                : AppSize.width(context) * 0.22,
             padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: boxDecoration,
             child: Column(
@@ -160,7 +166,9 @@ class AnalyticsSlide1 extends StatelessWidget {
             ),
           ),
           Container(
-            width: AppSize.width(context) * 0.22,
+            width: width < 850
+                ? AppSize.width(context) * 0.25
+                : AppSize.width(context) * 0.22,
             padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: boxDecoration,
             child: Column(

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_address_details.dart';
@@ -19,10 +20,19 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: const CustomAppbar(
+      appBar: AppBar(
         leadingWidth: 70,
         centerTitle: false,
-        title: Text('Register New Patient'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () {
+            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+          },
+        ),
+        title: Text(
+          'Register Patient',
+          style: applyFiraSansFont(fontWeight: FontWeight.w500),
+        ),
       ),
       body: Form(
         key: _formKey,
