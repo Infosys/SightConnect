@@ -9,7 +9,7 @@
       {
         "questionnaire": [
           {
-            "description": "Are you facing sudden loss of vision?",
+            "description": "Are you having any eyesight related problem?",
             "questions": [
               {
                 "code": 30000001,

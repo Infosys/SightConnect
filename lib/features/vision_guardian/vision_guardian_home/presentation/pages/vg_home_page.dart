@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -102,6 +103,38 @@ class VisionGuardianHomePage extends StatelessWidget {
               height: AppSize.height(context) * 0.02,
             ),
             const VisionGuardianServicesCardList(),
+            SizedBox(
+              height: AppSize.height(context) * 0.02,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Events',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Text(
+                    'View All',
+                    style: applyFiraSansFont(
+                      fontSize: 14,
+                      color: AppColor.primary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: AppSize.height(context) * 0.02,
+            ),
+            vgEventDataCards(context),
             SizedBox(
               height: AppSize.height(context) * 0.2,
             ),

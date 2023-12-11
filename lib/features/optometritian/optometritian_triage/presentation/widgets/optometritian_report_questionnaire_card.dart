@@ -146,41 +146,41 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                     ),
                   ],
                 ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Category",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-              ),
-              const SizedBox(
-                height: AppSize.ksheight,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                width: AppSize.width(context) * 0.35,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: model.getColorOnUrgency(urgency),
-                  border: Border.all(
-                    width: 1.5,
-                    color: model.getColorOnUrgency(urgency),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    model.getUrgencyText(urgency),
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ),
-              ),
+              // Text(
+              //   "Category",
+              //   style: applyRobotoFont(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w400,
+              //     color: Colors.black.withOpacity(0.8),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: AppSize.ksheight,
+              // ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+              //   width: AppSize.width(context) * 0.35,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(40),
+              //     color: model.getColorOnUrgency(urgency),
+              //     border: Border.all(
+              //       width: 1.5,
+              //       color: model.getColorOnUrgency(urgency),
+              //     ),
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       model.getUrgencyText(urgency),
+              //       style: applyRobotoFont(
+              //         fontSize: 12,
+              //         color: AppColor.white,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           )
         ],

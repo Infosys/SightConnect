@@ -53,7 +53,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               padding: EdgeInsets.zero,
               itemCount: tumblingEData.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 childAspectRatio: 1.4,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,
@@ -110,44 +110,44 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
           const SizedBox(
             height: AppSize.ksheight,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Category",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-              ),
-              const SizedBox(
-                height: AppSize.ksheight,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                width: AppSize.width(context) * 0.35,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: model.getColorOnUrgency(urgency),
-                  border: Border.all(
-                    width: 1.5,
-                    color: model.getColorOnUrgency(urgency),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    model.getUrgencyText(urgency),
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ),
-              ),
+              // Text(
+              //   "Category",
+              //   style: applyRobotoFont(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w400,
+              //     color: Colors.black.withOpacity(0.8),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: AppSize.ksheight,
+              // ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+              //   width: AppSize.width(context) * 0.35,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(40),
+              //     color: model.getColorOnUrgency(urgency),
+              //     border: Border.all(
+              //       width: 1.5,
+              //       color: model.getColorOnUrgency(urgency),
+              //     ),
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       model.getUrgencyText(urgency),
+              //       style: applyRobotoFont(
+              //         fontSize: 12,
+              //         color: AppColor.white,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          // const SizedBox(height: AppSize.ksheight),
         ],
       ),
     );
