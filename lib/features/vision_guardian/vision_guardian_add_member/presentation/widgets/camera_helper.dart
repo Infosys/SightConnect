@@ -24,8 +24,10 @@ class CameraHelper extends ConsumerStatefulWidget {
   static const String routeName = "/VisionGuardianEyeCapturePage";
   const CameraHelper({
     required this.cameras,
+    required this.provider,
     super.key,
   });
+  final provider;
   final List<CameraDescription> cameras;
 
   @override
@@ -187,7 +189,7 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
           ),
         );
         if (verifiedImage != null) {
-          ref.read(visionGuardianMemberDetailsProvider).image = verifiedImage;
+          ref.read(widget.provider).image = verifiedImage;
         } else {
           return;
         }
