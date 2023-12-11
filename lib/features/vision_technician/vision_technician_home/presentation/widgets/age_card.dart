@@ -8,13 +8,9 @@ class AgeCard extends StatelessWidget {
   final String data;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSize.kmheight * 2,
-      width: AppSize.klwidth * 5,
-      alignment: Alignment.center,
-      child: Row(
-        children: [ColorDot(color: color), Text(data)],
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [ColorDot(color: color), Text(data)],
     );
   }
 }

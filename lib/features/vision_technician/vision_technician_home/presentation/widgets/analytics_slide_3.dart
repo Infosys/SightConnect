@@ -83,8 +83,8 @@ class AnalyticsSlide3 extends StatelessWidget {
                 const SizedBox(width: AppSize.klwidth),
                 Expanded(
                   child: Wrap(
-                    runSpacing: AppSize.klwidth,
-                    spacing: AppSize.kmwidth * 2,
+                    runSpacing: AppSize.kmwidth,
+                    spacing: AppSize.kmwidth,
                     children: [
                       SymptomsCard(
                         color: colorList[0],
