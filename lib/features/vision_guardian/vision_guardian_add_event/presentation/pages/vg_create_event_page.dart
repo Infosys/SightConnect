@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/pages/vg_member_details_form_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_icon.dart';
 import '../../../../../core/constants/app_size.dart';
-import '../../../../../shared/responsive/responsive.dart';
 import '../widgets/vg_event_heder_chips.dart';
 
 class VisionGuardianEventPage extends HookWidget {
@@ -109,7 +108,14 @@ class VisionGuardianEventPage extends HookWidget {
           children: [
             vgEventHeaderChips(isSelected, context, eventStatus),
             const SizedBox(height: AppSize.klheight),
-            InkWell(onTap: () {}, child: vgEventDataCards(context)),
+            InkWell(onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VisionGuardianEventDetailsPage(),
+                ),
+              );
+            }, child: vgEventDataCards(context)),
             const Spacer(),
             const BrandingWidgetH(),
           ],
