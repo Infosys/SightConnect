@@ -24,7 +24,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
         // backgroundColor: Colors.red,
-        title: const SearchBarVT(readOnly: false),
+        title: SearchBarVT(readOnly: false),
         actions: [
           IconButton(
             onPressed: () {

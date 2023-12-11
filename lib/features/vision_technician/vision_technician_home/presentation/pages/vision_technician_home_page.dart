@@ -18,7 +18,9 @@ class VisionTechnicianHomePage extends StatelessWidget {
       appBar: AppBar(
         leading: Container(
           margin: const EdgeInsets.only(
-              top: AppSize.kspadding, left: AppSize.kmpadding,),
+            top: AppSize.kspadding,
+            left: AppSize.kmpadding,
+          ),
           padding: const EdgeInsets.all(5),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
@@ -41,7 +43,7 @@ class VisionTechnicianHomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSize.kswidth),
-            const SearchBarVT(readOnly: true),
+            Expanded(child: const SearchBarVT(readOnly: true)),
           ],
         ),
         centerTitle: false,

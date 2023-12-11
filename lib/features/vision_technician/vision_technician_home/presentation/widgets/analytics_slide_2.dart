@@ -88,8 +88,6 @@ class AnalyticsSlide2 extends StatelessWidget {
                     ),
                     Expanded(
                       child: Wrap(
-                        // runSpacing: AppSize.kswidth,
-                        spacing: AppSize.kswidth,
                         children: [
                           AgeCard(colorList[0], dataMapAge.keys.elementAt(0)),
                           AgeCard(colorList[1], dataMapAge.keys.elementAt(1)),
