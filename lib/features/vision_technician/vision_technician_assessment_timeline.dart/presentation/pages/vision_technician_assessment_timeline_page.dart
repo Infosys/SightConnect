@@ -33,6 +33,40 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: TextButton(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.all(AppSize.kmpadding)),
+            backgroundColor: MaterialStateProperty.all(AppColor.primary),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.klradius * 5),
+              ),
+            ),
+          ),
+          onPressed: closed
+              ? null
+              : () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const VisionTechnicianCloseAssessmentPage(),
+                    ),
+                  );
+                },
+          child: Text(
+            "Close",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: closed ? AppColor.grey : AppColor.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
       appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
@@ -41,8 +75,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.klpadding + 5),
+          padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const TimelineProfile(),
               const SizedBox(height: AppSize.ksheight),

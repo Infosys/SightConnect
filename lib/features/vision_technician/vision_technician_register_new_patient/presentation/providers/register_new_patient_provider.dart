@@ -89,6 +89,17 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
   String patientId = "";
   String assessmentId = "";
 
+   List<String> listOfStates = [
+    "",
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Madhya Pradesh",
+  ];
+
   void saveAndProceed() {
     String firstName =
         basicDetailsTextEditingControllers["firstNameController"]!.text;

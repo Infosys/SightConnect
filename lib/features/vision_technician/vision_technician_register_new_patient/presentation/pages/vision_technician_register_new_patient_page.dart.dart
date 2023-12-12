@@ -19,6 +19,46 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: TextButton(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.all(AppSize.kmpadding)),
+            backgroundColor: MaterialStateProperty.all(AppColor.primary),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.klradius * 5),
+              ),
+            ),
+          ),
+          onPressed: () {
+            ref.read(registerNewPatientProvider.notifier).saveAndProceed();
+            /*  if (_formKey.currentState!.validate()) { */
+            
+            // ref.read(registerNewPatientProvider).saveAndProceed();
+            
+            // print(_formKey.currentState?.save);
+            // ref
+            //     .read(registerNewPatientProvider)
+            //     .saveAndProceed();
+            showToastMessage("Patient details saved!", context, 0);
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return const VisionTechnicianPreliminaryAssessmentPage();
+              },
+            ));
+            
+            return;
+            /* } */
+          },
+          child: Text(
+            "Save & Proceed",
+            style: applyRobotoFont(
+                fontSize: 14, color: AppColor.white, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
       backgroundColor: AppColor.scaffold,
       appBar: AppBar(
         leadingWidth: 70,
@@ -38,7 +78,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(AppSize.klpadding + 5),
+            padding: const EdgeInsets.all(AppSize.kmpadding),
             child: Column(
               children: [
                 const BasicDetails(),
@@ -47,46 +87,6 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
                 const SizedBox(height: AppSize.klheight),
                 const VTRegisterAddressDetails(),
                 const SizedBox(height: AppSize.klheight),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: AppColor.shadowColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.klradius),
-                      ),
-                    ),
-                    onPressed: () {
-                      ref
-                          .read(registerNewPatientProvider.notifier)
-                          .saveAndProceed();
-                      /*  if (_formKey.currentState!.validate()) { */
-
-                      // ref.read(registerNewPatientProvider).saveAndProceed();
-
-                      // print(_formKey.currentState?.save);
-                      // ref
-                      //     .read(registerNewPatientProvider)
-                      //     .saveAndProceed();
-                      showToastMessage("Patient details saved!", context, 0);
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const VisionTechnicianPreliminaryAssessmentPage();
-                        },
-                      ));
-
-                      return;
-                      /* } */
-                    },
-                    child: Text(
-                      "Save & Proceed",
-                      style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

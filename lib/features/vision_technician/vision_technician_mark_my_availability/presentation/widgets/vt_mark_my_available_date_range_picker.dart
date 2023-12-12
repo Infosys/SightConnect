@@ -14,28 +14,29 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
     TextEditingController controller = TextEditingController(
         text:
             ref.watch(markMyAvailabilityProvider).markMyAvailabilityDataRange);
-    return TextField(
-      readOnly: true,
-      controller: controller,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: "",
-        hintStyle: applyRobotoFont(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
+    return  TextField(
+        readOnly: true,
+        controller: controller,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "",
+          hintStyle: applyRobotoFont(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          suffixIcon: IconButton(
+            onPressed: () async {
+              var pickedDateRange = await _showDateRangePicker(context);
+    
+              var result =
+                  "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
+              controller.text = result;
+            },
+            icon: const Icon(CupertinoIcons.calendar),
+          ),
         ),
-        suffixIcon: IconButton(
-          onPressed: () async {
-            var pickedDateRange = await _showDateRangePicker(context);
-
-            var result =
-                "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
-            controller.text = result;
-          },
-          icon: const Icon(CupertinoIcons.calendar),
-        ),
-      ),
-    );
+      );
+    
   }
 
   Future<DateTimeRange?> _showDateRangePicker(BuildContext context) async {

@@ -31,6 +31,7 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
               dropDownNo: 0,
               disable: daydata.checked,
             ),
+            SizedBox(width: AppSize.kmwidth,),
             VtMarkMyAvailableEachRowTimePicker(
               dayAvailabilityindex: dayAvailabilityindex,
               index: index,
@@ -50,7 +51,7 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
                   color: daydata.checked == false
                       ? AppColor.lightGrey
                       : AppColor.grey,
-                  size: AppSize.klwidth * 1.7),
+                  size: 30),
               onPressed: daydata.checked == false
                   ? null
                   : () {

@@ -24,6 +24,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       ),
       padding: const EdgeInsets.all(AppSize.klpadding),
       child: Wrap(
+        runSpacing: AppSize.ksheight,
         direction: Axis.horizontal,
         children: [
           Wrap(

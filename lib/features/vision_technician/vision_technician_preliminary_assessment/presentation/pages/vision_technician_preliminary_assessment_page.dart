@@ -33,6 +33,47 @@ class _VisionTechnicianPreliminaryAssessmentPageState
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: TextButton(
+          onPressed: () {
+            // ref.read(registerNewPatientProvider).submit();
+      
+            showToastMessage(
+              "Done! Assessment with ID EA 010101 has been created for Sumanta.",
+              context,
+              1,
+            );
+      
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const VisionTechnicianAssessmentTimeline();
+                },
+              ),
+            );
+          },
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.all(AppSize.kmpadding)),
+            backgroundColor: MaterialStateProperty.all(AppColor.primary),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.klradius * 5),
+              ),
+            ),
+          ),
+          child: Text(
+            "Submit",
+            style: applyRobotoFont(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: AppColor.white,
+            ),
+          ),
+        ),
+      ),
       appBar: const CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
@@ -42,7 +83,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
         key: _formKey,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(AppSize.klpadding + 5),
+            padding: const EdgeInsets.all(AppSize.kmpadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -55,11 +96,6 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                 const SizedBox(height: AppSize.klheight),
                 PreliminaryAssessmentVisionCenter(),
                 const SizedBox(height: AppSize.klheight),
-                SizedBox(
-                  width: AppSize.width(context),
-                  child: TextButton(
-                    onPressed: () {
-                      // ref.read(registerNewPatientProvider).submit();
 
                       showToastMessage(
                         "Done! Assessment with ID EA 010101 has been created for Sumanta.",

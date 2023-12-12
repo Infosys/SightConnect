@@ -35,7 +35,11 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
           ],
         ),
       ),
-      body: const IvrCallHistoryTableView(),
+      body:const SingleChildScrollView(
+        child:  Padding(
+          padding: EdgeInsets.all(AppSize.kmpadding),
+          child:  IvrCallHistoryTableView()),
+      ),
     );
   }
 }

@@ -20,26 +20,23 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
         .watch(markMyAvailabilityProvider)
         .markMyAvailabilityList[dayAvailabilityindex];
 
-    return Wrap(
-      runSpacing: AppSize.kmheight,
+    return Column(
+     
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Transform.scale(
-                  scale: 1.0,
-                  child: Checkbox(
-                      value: dayAvailabilityState.checked,
-                      onChanged: (value) {
-                        ref
-                            .read(markMyAvailabilityProvider)
-                            .toogleDay(dayAvailabilityindex);
-                      }),
-                ),
+                Checkbox(
+                    value: dayAvailabilityState.checked,
+                    onChanged: (value) {
+                      ref
+                          .read(markMyAvailabilityProvider)
+                          .toogleDay(dayAvailabilityindex);
+                    }),
                 SizedBox(
-                  width: AppSize.klwidth * 2.5,
+                  width: AppSize.klwidth*3,
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
@@ -77,14 +74,14 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                     ),
                   ]),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.ksheight,
                   ),
                   IconButton(
                     icon: Icon(Icons.add_circle_outline,
                         color: dayAvailabilityState.checked == false
                             ? AppColor.lightGrey
                             : AppColor.grey,
-                        size: AppSize.klwidth * 1.7),
+                        size: 30),
                     onPressed: dayAvailabilityState.checked == false
                         ? null
                         : () {

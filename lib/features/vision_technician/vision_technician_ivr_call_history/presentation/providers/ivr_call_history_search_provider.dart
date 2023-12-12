@@ -56,6 +56,15 @@ class IvrCallHistorySearchNotifier extends ChangeNotifier {
     ),
   ];
 
+    List<String> tableHeading = [
+      "Patient ID",
+      "Name",
+      "Duration",
+      "Day",
+      "Time",
+      "Status",
+      ""
+    ];
   void setTableFilter(index) {
     tablefilter[index]["checked"] = !(tablefilter[index]["checked"] as bool);
     notifyListeners();

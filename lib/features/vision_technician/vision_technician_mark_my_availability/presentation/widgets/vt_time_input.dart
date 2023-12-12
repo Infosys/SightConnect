@@ -9,32 +9,34 @@ class TimeInput extends StatelessWidget {
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter Time';
-        }
-        return null;
-      },
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-        hintStyle: applyRobotoFont(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-        suffixIcon: IconButton(
-          onPressed: () {
-            showTimePicker(
-              context: context,
-              initialTime: const TimeOfDay(hour: 8, minute: 0),
-            ).then((selectedDate) {
-              if (selectedDate != null) {
-                controller.text = selectedDate.format(context);
-              }
-            });
-          },
-          icon: const Icon(Icons.expand_more),
+    return Flexible(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter Time';
+          }
+          return null;
+        },
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: title,
+          hintStyle: applyRobotoFont(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          suffixIcon: IconButton(
+            onPressed: () {
+              showTimePicker(
+                context: context,
+                initialTime: const TimeOfDay(hour: 8, minute: 0),
+              ).then((selectedDate) {
+                if (selectedDate != null) {
+                  controller.text = selectedDate.format(context);
+                }
+              });
+            },
+            icon: const Icon(Icons.expand_more),
+          ),
         ),
       ),
     );
