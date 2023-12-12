@@ -70,24 +70,6 @@ final getPatientProfileProvider =
               "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
             },
 
-            {
-              "patientId": 1204,
-              "relation": "FATHER",
-              "parentPatientId": 1202,
-              "name": "Arjun Pandey",
-              "profilePicture": "assets/images/user.png",
-              "age": 0,
-              "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            },
-            {
-              "patientId": 1205,
-              "relation": "FATHER",
-              "parentPatientId": 1202,
-              "name": "Hitesh Pandey",
-              "profilePicture": "assets/images/user.png",
-              "age": 0,
-              "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            },
             // {
             //   "patientId": 1203,
             //   "relation": "FATHER",

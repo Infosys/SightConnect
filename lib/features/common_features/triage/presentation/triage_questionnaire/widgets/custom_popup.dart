@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -25,6 +27,9 @@ class CustomPopUp extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.kmradius),
+            ),
             elevation: AppSize.kselevation,
             color: Colors.white,
             child: SizedBox(

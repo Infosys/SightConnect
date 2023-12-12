@@ -23,7 +23,7 @@ class TriageResponseModel with _$TriageResponseModel {
     String? sourceVersion,
     List<IncompleteTestModel>? incompleteSection,
     double? cummulativeScore,
-    List<Map<TriageStep, double>>? score,
+    Map<TriageStep, double>? score,
     List<PostImagingSelectionModel>? imagingSelection,
     List<PostObservationsModel>? observations,
     List<PostQuestionResponseModel>? questionResponse,

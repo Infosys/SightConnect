@@ -103,10 +103,11 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     return _questionResponseList;
   }
 
-  void saveQuestionaireResponseToDB() {
+  Future<void> saveQuestionaireResponseToDB() async {
     logger.f("Saving Questionnaire Response to DB");
-    triageLocalSource.saveTriageQuestionnaireLocally(
-        triageQuestionnaireResponse: getQuestionaireResponse());
+    await triageLocalSource.saveTriageQuestionnaireLocally(
+      triageQuestionnaireResponse: getQuestionaireResponse(),
+    );
     notifyListeners();
   }
 }

@@ -130,10 +130,12 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             const TriageQuestionnaireOtherSymptomPage(),
                                       ),
                                     ).then(
-                                      (value) => {
+                                      (value) async {
+                                        await model
+                                            .saveQuestionaireResponseToDB();
                                         ref
                                             .read(triageStepperProvider)
-                                            .goToNextStep()
+                                            .goToNextStep();
                                       },
                                     );
                                     pageIndex.value = 0;
