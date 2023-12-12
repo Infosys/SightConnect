@@ -11,22 +11,19 @@ class VTRegisterDropdownInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      width: AppSize.klwidth * 10,
-      child: DropdownButton(
-        
-        isExpanded: true,
-        value: ref.watch(registerNewPatientProvider).stateDropDownValue,
-        items: listOfOptions.map((String items) {
-          return DropdownMenuItem(
-            value: items,
-            child: Text(items),
-          );
-        }).toList(),
-        onChanged: (value) {
-          ref.read(registerNewPatientProvider.notifier).setStateDropDown(value);
-        },
-      ),
+    return DropdownButton(
+      
+      isExpanded: true,
+      value: ref.watch(registerNewPatientProvider).stateDropDownValue,
+      items: listOfOptions.map((String items) {
+        return DropdownMenuItem(
+          value: items,
+          child: Text(items),
+        );
+      }).toList(),
+      onChanged: (value) {
+        ref.read(registerNewPatientProvider.notifier).setStateDropDown(value);
+      },
     );
   }
 }

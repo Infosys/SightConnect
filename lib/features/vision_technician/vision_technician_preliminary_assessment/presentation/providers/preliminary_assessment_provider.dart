@@ -206,5 +206,14 @@ class PreliminaryAssessmentNotifier extends ChangeNotifier {
   }
 
   
+  dynamic getCheckedVisionCenter() {
+    for (VisionCenterModel element in visionCenters) {
+      if(element.checked==true)
+        return element;
+    }
+     return null;
+  }
+
+  
 
 } 

@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_resport_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/data/models/assessment_timeline_view_model.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -81,6 +82,7 @@ class _AssessmentTimelineViewState extends State<AssessmentTimelineView> {
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         return ListTile(
+          contentPadding: EdgeInsets.all(0),
           leading: Container(
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
@@ -125,76 +127,34 @@ class _AssessmentTimelineViewState extends State<AssessmentTimelineView> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    timeLineList[index].subtitle,
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      if (timeLineList[index].call.isNotEmpty)
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.add_call,
-                              size: 20,
-                            ),
-                            const SizedBox(
-                              width: AppSize.kswidth,
-                            ),
-                            Text(
-                              timeLineList[index].call,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if (timeLineList[index].assessmentId != "")
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.file_open,
-                                size: 20,
-                              ),
-                              const SizedBox(
-                                width: AppSize.kswidth,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return VisionTechnicianAssessmentReportPage();
-                                    },
-                                  ));
-                                },
-                                child: Text(
-                                  timeLineList[index].assessmentId,
-                                  style: applyRobotoFont(
-                                      fontSize: 12,
-                                      color: AppColor.blue,
-                                      decoration: TextDecoration.combine(
-                                        [
-                                          TextDecoration.underline,
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            ],
+              Responsive.isMobile(context)
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          timeLineList[index].subtitle,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
                           ),
                         ),
-                    ],
-                  ),
-                ],
-              ),
+                        TimeWidgetRender(context, timeLineList[index], index)
+                      ],
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                          Text(
+                            timeLineList[index].subtitle,
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                          TimeWidgetRender(context, timeLineList[index], index)
+                        ]),
               const SizedBox(
                 height: AppSize.kmheight,
               ),
@@ -210,7 +170,7 @@ class _AssessmentTimelineViewState extends State<AssessmentTimelineView> {
       separatorBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 26,
+            horizontal: AppSize.kspadding + 2,
           ),
           child: Row(
             children: [
@@ -229,4 +189,69 @@ class _AssessmentTimelineViewState extends State<AssessmentTimelineView> {
       },
     );
   }
+}
+
+Widget TimeWidgetRender(
+    context, AssessmentTimelineViewModel timeLine, int index) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      if (timeLine.call.isNotEmpty)
+        Row(
+          children: [
+            const Icon(
+              Icons.add_call,
+              size: 20,
+            ),
+            const SizedBox(
+              width: AppSize.kswidth,
+            ),
+            Text(
+              timeLine.call,
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
+          ],
+        ),
+      if (timeLine.assessmentId != "")
+        InkWell(
+          onTap: () {},
+          child: Row(
+            children: [
+              const Icon(
+                Icons.file_open,
+                size: 20,
+              ),
+              const SizedBox(
+                width: AppSize.kswidth,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return VisionTechnicianAssessmentReportPage();
+                    },
+                  ));
+                },
+                child: Text(
+                  timeLine.assessmentId,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: applyRobotoFont(
+                      fontSize: 12,
+                      color: AppColor.blue,
+                      decoration: TextDecoration.combine(
+                        [
+                          TextDecoration.underline,
+                        ],
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+    ],
+  );
 }

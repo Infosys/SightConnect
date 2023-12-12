@@ -27,7 +27,8 @@ class AssessmentTimeline extends StatelessWidget {
         const SizedBox(
           height: AppSize.kmheight,
         ),
-        Row(
+        Wrap(
+          direction: Axis.horizontal,
           children: [
             for (int index = 0; index < 2; index++) ...[
               Container(
@@ -66,12 +67,12 @@ class AssessmentTimeline extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.all(AppSize.kmpadding),
-          width: double.infinity,
           decoration: const BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(AppSize.kmradius - 5),
-              ),),
+            color: AppColor.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(AppSize.kmradius - 5),
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

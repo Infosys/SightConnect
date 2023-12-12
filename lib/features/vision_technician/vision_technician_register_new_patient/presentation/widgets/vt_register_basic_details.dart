@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_gender_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/upload_photo_bottom_sheet.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +13,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class BasicDetails extends StatelessWidget {
- const BasicDetails({super.key});
-
-  
+  const BasicDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: AppSize.klheight * 25,
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.kmradius),
@@ -46,83 +44,90 @@ class BasicDetails extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Wrap(
-                    direction: Axis.vertical,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        spacing: AppSize.kmwidth,
-                        runSpacing: AppSize.kmheight,
-                        direction: Axis.horizontal,
+                      Row(
                         children: [
-                          SizedBox(
-                              width: AppSize.width(context) * 0.2,
+                          Flexible(
                               child: VTRegisterInput(
                                   title: 'First Name',
                                   keyboardType: TextInputType.name,
-                                  controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["firstNameController"]!)),
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .basicDetailsTextEditingControllers[
+                                      "firstNameController"]!)),
                           SizedBox(
-                              width: AppSize.width(context) * 0.2,
+                            width: AppSize.klwidth,
+                          ),
+                          Flexible(
                               child: VTRegisterInput(
                                   title: 'Middle Name',
                                   keyboardType: TextInputType.name,
-                                  controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["middleNameController"]!)),
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .basicDetailsTextEditingControllers[
+                                      "middleNameController"]!)),
                           SizedBox(
-                              width: AppSize.width(context) * 0.2,
+                            width: AppSize.klwidth,
+                          ),
+                          Flexible(
                               child: VTRegisterInput(
-                                title: 'Last Name',
-                                keyboardType: TextInputType.name,
-                                controller:  ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["lastNameController"]!)),
+                                  title: 'Last Name',
+                                  keyboardType: TextInputType.name,
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .basicDetailsTextEditingControllers[
+                                      "lastNameController"]!)),
+                          SizedBox(
+                            width: AppSize.klwidth,
+                          ),
                           Column(
                             children: [
-                              SizedBox(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) {
-                                          return UploadPhotoBottomSheet(
-                                            pickFile: () async {
-                                              FilePickerResult? result =
-                                                  await FilePicker.platform
-                                                      .pickFiles(
-                                                type: FileType.custom,
-                                                allowedExtensions: ['jpg'],
-                                              );
+                              Align(
+                                alignment: Alignment.center,
+                                child: InkWell(
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return UploadPhotoBottomSheet(
+                                          pickFile: () async {
+                                            FilePickerResult? result =
+                                                await FilePicker.platform
+                                                    .pickFiles(
+                                              type: FileType.custom,
+                                              allowedExtensions: ['jpg'],
+                                            );
 
-                                              if (result != null) {
-                                                // PlatformFile file = result.files.first;
-                                                if (context.mounted) {
-                                                  Navigator.of(context).pop();
-                                                }
+                                            if (result != null) {
+                                              // PlatformFile file = result.files.first;
+                                              if (context.mounted) {
+                                                Navigator.of(context).pop();
                                               }
-                                            },
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      width: AppSize.klwidth * 5,
-                                      height: AppSize.klheight * 5,
-                                      decoration: BoxDecoration(
-                                        color: AppColor.white,
-                                        borderRadius: BorderRadius.circular(
-                                            AppSize.kmradius),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: AppColor.lightGrey, //New
-                                            blurRadius: AppSize.ksradius / 2,
-                                            spreadRadius: AppSize.ksradius / 8,
-                                          )
-                                        ],
-                                      ),
-                                      child: const Icon(
-                                        CupertinoIcons.person_add_solid,
-                                        size: AppSize.klheight * 4,
-                                        color: AppColor.lightGrey,
-                                      ),
+                                            }
+                                          },
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: BorderRadius.circular(
+                                          AppSize.kmradius),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: AppColor.lightGrey, //New
+                                          blurRadius: AppSize.ksradius / 2,
+                                          spreadRadius: AppSize.ksradius / 8,
+                                        )
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      CupertinoIcons.person_add_solid,
+                                      size: AppSize.klheight * 4,
+                                      color: AppColor.lightGrey,
                                     ),
                                   ),
                                 ),
@@ -140,43 +145,45 @@ class BasicDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                     const VTRegisterAgeInput(),
+                      const VTRegisterAgeInput(),
                       const SizedBox(height: AppSize.klheight * 2),
-                      Wrap(
-                        direction: Axis.horizontal,
+                      Column(
                         children: [
-                          SizedBox(
-                              width: AppSize.width(context) * 0.5,
-                              child: const VTRegisterGenderInput()),
+                          const VTRegisterGenderInput(),
                           const SizedBox(
                             width: AppSize.kmwidth,
                           ),
-                          SizedBox(
-                              width: AppSize.width(context) * 0.35,
-                              child: VTRegisterInput(
-                                title: 'ABHA ID (Optional)',
-                                keyboardType: TextInputType.name,
-                                controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["abhaIdController"]!)),
+                          VTRegisterInput(
+                              title: 'ABHA ID (Optional)',
+                              keyboardType: TextInputType.name,
+                              controller: ref
+                                      .read(registerNewPatientProvider)
+                                      .basicDetailsTextEditingControllers[
+                                  "abhaIdController"]!),
                         ],
                       ),
                       const SizedBox(height: AppSize.klheight * 2),
                       Row(
                         children: [
-                          SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                          Flexible(
                               child: VTRegisterInput(
-                                title: "Mobile Number",
-                                keyboardType: TextInputType.number,
-                                controller: ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["mobileNumberController"]!)),
+                                  title: "Mobile Number",
+                                  keyboardType: TextInputType.number,
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .basicDetailsTextEditingControllers[
+                                      "mobileNumberController"]!)),
                           const SizedBox(
                             width: AppSize.kmwidth,
                           ),
-                          SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                          Flexible(
                               child: VTRegisterInput(
-                                title: 'Email (Optional)',
-                                keyboardType: TextInputType.emailAddress,
-                                controller:  ref.read(registerNewPatientProvider).basicDetailsTextEditingControllers["emailIdController"]!)),
+                                  title: 'Email (Optional)',
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: ref
+                                          .read(registerNewPatientProvider)
+                                          .basicDetailsTextEditingControllers[
+                                      "emailIdController"]!)),
                         ],
                       ),
                     ],
