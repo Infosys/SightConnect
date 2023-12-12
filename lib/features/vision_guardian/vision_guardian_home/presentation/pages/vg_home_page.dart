@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context) * 0.28,
+                  height: AppSize.klheight * 9,
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSize.kmpadding),
                   color: AppColor.primary,
@@ -93,7 +94,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.klheight,
+                  height: AppSize.klheight * 3,
                   width: AppSize.width(context),
                   decoration: const BoxDecoration(
                     color: AppColor.primary,
@@ -103,6 +104,7 @@ class VisionGuardianHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
+                VGCarousel()
               ],
             ),
             SizedBox(

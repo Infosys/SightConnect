@@ -188,7 +188,9 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
             builder: (context) => EyePreviewPage(imageFile: image),
           ),
         );
+
         if (verifiedImage != null) {
+          
           ref.read(widget.provider).image = verifiedImage;
         } else {
           return;
