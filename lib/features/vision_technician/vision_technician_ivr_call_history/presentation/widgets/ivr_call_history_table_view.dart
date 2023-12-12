@@ -26,18 +26,19 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
 
     List<IvrCallHistoryModel> ivrCallHistoryDetails =
         ref.watch(ivrCallHistorySearchProvider).ivrCallHistoryDetails;
+
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
-          const IvrCallHistorySearchBarChips(),
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
-          Expanded(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const IvrCallHistorySearchBarChips(),
+        const SizedBox(
+          height: AppSize.klheight,
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
             child: DataTable2(
               minWidth: 100,
               isHorizontalScrollBarVisible: true,
@@ -54,6 +55,8 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
                   (index) => DataColumn(
                         label: Text(
                           tableHeading[index],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: applyFiraSansFont(
                             fontSize: 12,
                             color: AppColor.grey,
@@ -69,7 +72,9 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
               ),
             ),
           ),
-        ]);
+        ),
+      ],
+    );
   }
 }
 
@@ -78,6 +83,8 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     DataCell(
       Text(
         data.patientId,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(
             fontSize: 14,
             fontWeight: FontWeight.w400,
@@ -88,6 +95,8 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     DataCell(
       Text(
         data.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(
           fontSize: 14,
           fontWeight: FontWeight.w400,
@@ -97,14 +106,19 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     DataCell(
       Row(
         children: [
-          Icon(
-            Icons.phone_callback_rounded,
-            color: data.calltype == "in" ? AppColor.green : AppColor.red,
+          Flexible(
+            child: Icon(
+              Icons.phone_callback_rounded,
+              color: data.calltype == "in" ? AppColor.green : AppColor.red,
+            ),
           ),
-        
-          Text(
-            data.duration,
-            style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+          Flexible(
+            child: Text(
+              data.duration,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
           ),
         ],
       ),
@@ -112,47 +126,48 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     DataCell(
       Text(
         data.day,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
       ),
     ),
     DataCell(
       Text(
         data.time,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
       ),
     ),
     DataCell(
-      Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: data.status == "COMPLETED"
-                    ? AppColor.lightGreen
-                    : (data.status == "FAILED")
-                        ? AppColor.lightRed
-                        : AppColor.lightOrange,
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(AppSize.kspadding))),
-            child: Padding(
-              padding: const EdgeInsets.all(AppSize.kspadding),
-              child: Text(
-                data.status,
-                style: applyRobotoFont(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                  color: data.status == "COMPLETED"
-                      ? AppColor.green
-                      : (data.status == "FAILED")
-                          ? AppColor.red
-                          : AppColor.orange,
-                ),
-              ),
+      Container(
+        decoration: BoxDecoration(
+            color: data.status == "COMPLETED"
+                ? AppColor.lightGreen
+                : (data.status == "FAILED")
+                    ? AppColor.lightRed
+                    : AppColor.lightOrange,
+            borderRadius:
+                const BorderRadius.all(Radius.circular(AppSize.kspadding))),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kspadding),
+          child: Text(
+            data.status,
+            style: applyRobotoFont(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: data.status == "COMPLETED"
+                  ? AppColor.green
+                  : (data.status == "FAILED")
+                      ? AppColor.red
+                      : AppColor.orange,
             ),
           ),
-        ],
+        ),
       ),
     ),
-    DataCell(CircleAvatar(
+    DataCell(
+      CircleAvatar(
         backgroundColor: data.status == "COMPLETED"
             ? const Color(0xffFAFAFA)
             : AppColor.lightBlue,
@@ -161,6 +176,8 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
           color: data.status == "COMPLETED"
               ? const Color(0xffBBBBBB)
               : AppColor.blue,
-        ))),
+        ),
+      ),
+    ),
   ];
 }

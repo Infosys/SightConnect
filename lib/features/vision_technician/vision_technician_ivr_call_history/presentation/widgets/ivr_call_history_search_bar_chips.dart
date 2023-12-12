@@ -14,46 +14,57 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
     var tableFilter = ref.watch(ivrCallHistorySearchProvider).tablefilter;
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        for (int index = 0; index < tableFilter.length; index++) ...[
-          InkWell(
-            onTap: () {
-              ref
-                  .watch(ivrCallHistorySearchProvider.notifier)
-                  .setTableFilter(index);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kspadding / 2,
-                  vertical: AppSize.kspadding / 2),
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSize.width(context) * 0.01,
-                vertical: AppSize.kspadding,
-              ),
-              decoration: BoxDecoration(
-                color: tableFilter[index]["checked"] as bool
-                    ? AppColor.primary.withOpacity(0.2)
-                    : AppColor.white,
-                border: Border.all(
-                    color: tableFilter[index]["checked"] as bool
-                        ? AppColor.primary
-                        : AppColor.grey),
-                borderRadius: BorderRadius.circular(AppSize.klradius / 2),
-              ),
-              child: Text(
-                tableFilter[index]["type"].toString(),
-                style: applyRobotoFont(fontSize: 14),
-              ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (int index = 0; index < tableFilter.length; index++) ...[
+                  InkWell(
+                    onTap: () {
+                      ref
+                          .watch(ivrCallHistorySearchProvider.notifier)
+                          .setTableFilter(index);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: AppSize.kspadding / 2,
+                          vertical: AppSize.kspadding / 2),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSize.width(context) * 0.01,
+                        vertical: AppSize.kspadding,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tableFilter[index]["checked"] as bool
+                            ? AppColor.primary.withOpacity(0.2)
+                            : AppColor.white,
+                        border: Border.all(
+                            color: tableFilter[index]["checked"] as bool
+                                ? AppColor.primary
+                                : AppColor.grey),
+                        borderRadius:
+                            BorderRadius.circular(AppSize.klradius / 2),
+                      ),
+                      child: Text(
+                        tableFilter[index]["type"].toString(),
+                        style: applyRobotoFont(fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
-        ],
-        Spacer(),
+        ),
         const CircleAvatar(
-            backgroundColor: AppColor.white,
-            child: Icon(
-              Icons.calendar_month_rounded,
-              color: AppColor.grey,
-            ))
+          backgroundColor: AppColor.white,
+          child: Icon(
+            Icons.calendar_month_rounded,
+            color: AppColor.grey,
+          ),
+        )
       ],
     );
   }
