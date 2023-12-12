@@ -3,20 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddEventDetailsNotifier extends ChangeNotifier {
-  XFile? image;
-  TextEditingController eventTitle = TextEditingController();
-  TextEditingController eventDescription = TextEditingController();
-  TextEditingController startDate = TextEditingController();
-  TextEditingController endDate = TextEditingController();
-  TextEditingController startTime = TextEditingController();
-  TextEditingController endTime = TextEditingController();
-  TextEditingController venueName = TextEditingController();
-  TextEditingController pincode = TextEditingController();
-  TextEditingController city = TextEditingController();
+  XFile? _image;
+  XFile? get image => _image;
+  set image(XFile? value) {
+    _image = value;
+    notifyListeners();
+  }
+
+  final TextEditingController _eventTitle = TextEditingController();
+  final TextEditingController _eventDescription = TextEditingController();
+  final TextEditingController _startDate = TextEditingController();
+  final TextEditingController _endDate = TextEditingController();
+  final TextEditingController _startTime = TextEditingController();
+  final TextEditingController _endTime = TextEditingController();
+  final TextEditingController _venueName = TextEditingController();
+  final TextEditingController _pincode = TextEditingController();
+  final TextEditingController _city = TextEditingController();
+
+  TextEditingController get eventTitle => _eventTitle;
+  TextEditingController get eventDescription => _eventDescription;
+  TextEditingController get startDate => _startDate;
+  TextEditingController get endDate => _endDate;
+  TextEditingController get startTime => _startTime;
+  TextEditingController get endTime => _endTime;
+  TextEditingController get venueName => _venueName;
+  TextEditingController get pincode => _pincode;
+  TextEditingController get city => _city;
 }
 
-// Finally, we are using ChangeNotifierProvider to allow the UI to interact with
-// our TodosNotifier class.
 final addEventDetailsProvider =
     ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
   return AddEventDetailsNotifier();
