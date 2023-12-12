@@ -50,7 +50,7 @@ class MyApp extends ConsumerWidget {
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
-          onUnknownRoute: AppRouter.onUnknownRoute,
+
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {
