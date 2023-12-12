@@ -16,97 +16,86 @@ class GeneralInformation extends ConsumerWidget {
         ref.watch(registerNewPatientProvider).patientDetails;
 
     return Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
-            )),
-        padding: const EdgeInsets.all(AppSize.klpadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "General Information",
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
+      decoration: const BoxDecoration(
+          color: AppColor.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.kmradius - 5),
+          )),
+      padding: const EdgeInsets.all(AppSize.kspadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "General Information",
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.klheight,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Date of Birth",
+                style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
-            ),
-            const SizedBox(
-              height: AppSize.klheight,
-            ),
-            Wrap(
-                runSpacing: 10,
-                spacing: 100,
-                direction: Axis.horizontal,
-                children: [
-                  Wrap(
-                    spacing: AppSize.kmpadding,
-                    children: [
-                      Text(
-                        "Date of Birth",
-                        style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(height: AppSize.ksheight),
-                      if (patient!.dateOfBirth!.isNotEmpty)
-                        Text(
-                          "${patient.dateOfBirth}",
-                          style: applyRobotoFont(
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.grey,
-                            fontSize: 14,
-                          ),
-                        ),
-                      if (patient.age!.isNotEmpty)
-                        Text(
-                          "(${patient.age})",
-                          style: applyRobotoFont(
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.grey,
-                            fontSize: 14,
-                          ),
-                        ),
-                    ],
+              if (patient!.dateOfBirth!.isNotEmpty)
+                Text(
+                  "${patient.dateOfBirth}",
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.grey,
+                    fontSize: 14,
                   ),
-                  Wrap(
-                    spacing: AppSize.kmpadding,
-                    children: [
-                      Text(
-                        "Gender",
-                        style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(height: AppSize.ksheight),
-                      Text(
-                        patient.gender!,
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                ),
+              if (patient.age!.isNotEmpty)
+                Text(
+                  "(${patient.age})",
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.grey,
+                    fontSize: 14,
                   ),
-                  Wrap(
-                    spacing: AppSize.kmpadding + 20,
-                    children: [
-                      Text(
-                        "Address",
-                        style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(height: AppSize.ksheight),
-                      Text(
-                        "${patient.address!.doorNumber} ${patient.address!.city}, ${patient.address!.district}, ${patient.address!.state}",
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ]),
-          ],
-        ));
+                ),
+              Text(
+                "Gender",
+                style: applyFiraSansFont(fontWeight: FontWeight.w500),
+              ),
+              Text(
+                patient.gender!,
+                style: applyRobotoFont(
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.grey,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          Wrap(
+            direction: Axis.horizontal,
+            children: [
+              Text(
+                "Address",
+                style: applyFiraSansFont(fontWeight: FontWeight.w500),
+              ),
+              Text(
+                "${patient.address!.doorNumber} ${patient.address!.city}, ${patient.address!.district}, ${patient.address!.state}",
+                style: applyRobotoFont(
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.grey,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -21,168 +21,195 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
         ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
 
     return Scaffold(
-        appBar: CustomAppbar(
-          leadingWidth: 70,
-          centerTitle: false,
-          leadingIcon: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new),
-            onPressed: () {
-              ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            },
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Mark My Availability',
-                style: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.black,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.all(AppSize.kmpadding)),
+                
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppSize.klradius * 5),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text("Cancel",
+                    style: applyRobotoFont(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.blue,
+                    )),
+              ),
+            ),
+            const SizedBox(
+              width: AppSize.klwidth,
+            ),
+            Expanded(
+              child: TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.all(AppSize.kmpadding)),
+                  backgroundColor: MaterialStateProperty.all(AppColor.primary),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppSize.klradius * 5),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Save",
+                  style: applyRobotoFont(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.white,
+                  ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  showMarksUnAvaialbility(context);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.blue),
-                    borderRadius: BorderRadius.circular(AppSize.klradius),
-                    color: Colors.transparent,
-                  ),
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.edit_calendar_rounded,
-                            size: 20,
-                            color: AppColor.blue,
-                          ),
-                          Text(
-                            "Mark as Unavailable",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+            ),
+          ],
+        ),
+      ),
+      appBar: CustomAppbar(
+        titleSpacing: 0,
+        centerTitle: false,
+        leadingIcon: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () {
+            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+          },
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Mark My Availability',
+              style: applyFiraSansFont(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColor.black,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                showMarksUnAvaialbility(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(AppSize.kspadding),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.blue),
+                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  color: Colors.transparent,
                 ),
-              )
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.edit_calendar_rounded,
+                      size: 20,
+                      color: AppColor.blue,
+                    ),
+                    Text(
+                      "Mark as Unavailable",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            children: [
+              Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(AppSize.kmradius - 5),
+                      )),
+                  padding: const EdgeInsets.all(AppSize.klpadding),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(children: [
+                          Flexible(
+                            child: Container(
+                                height: AppSize.klheight * 2,
+                                padding:
+                                    const EdgeInsets.all(AppSize.kspadding),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColor.blue),
+                                  color: AppColor.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text(
+                                  "Oct 2023",
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )),
+                          ),
+                          const SizedBox(
+                            width: AppSize.klwidth,
+                          ),
+                          Flexible(
+                            child: Container(
+                                height: AppSize.klheight * 2,
+                                             
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColor.blue),
+                                  color: AppColor.lightBlue,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child:
+                                    const VtMarkMyAvailableDateRangePicker()),
+                          ),
+                        ]),
+                        const SizedBox(
+                          height: AppSize.klheight,
+                        ),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return VtMarkMyAvailableEachDayAvailability(
+                                dayAvailabilityindex: index);
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Column(
+                              children: [
+                                SizedBox(
+                                  height: AppSize.klheight,
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  color: AppColor.grey,
+                                )
+                              ],
+                            );
+                          },
+                          itemCount: markMyAvailabilityList.length,
+                        )
+                      ])),
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.all(AppSize.klpadding),
-              child: Column(
-                children: [
-                  Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          color: AppColor.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(AppSize.kmradius - 5),
-                          )),
-                      padding: const EdgeInsets.all(AppSize.klpadding),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(children: [
-                              Container(
-                                  padding:
-                                      const EdgeInsets.all(AppSize.kspadding),
-                                  width: AppSize.klwidth * 4,
-                                  height: AppSize.klheight * 2,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: AppColor.blue),
-                                    color: AppColor.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    "Oct 2023",
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )),
-                              const SizedBox(
-                                width: AppSize.klwidth,
-                              ),
-                              Container(
-                                  width: AppSize.klwidth * 11,
-                                  height: AppSize.klheight * 2,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: AppColor.blue),
-                                    color: AppColor.lightBlue,
-                                    borderRadius:
-                                        BorderRadius.circular(AppSize.kmradius),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: AppSize.kspadding),
-                                    child:
-                                        const VtMarkMyAvailableDateRangePicker(),
-                                  )),
-                            ]),
-                            const SizedBox(
-                              height: AppSize.klheight,
-                            ),
-                            ListView.separated(
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return VtMarkMyAvailableEachDayAvailability(
-                                    dayAvailabilityindex: index);
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Column(
-                                  children: [
-                                    SizedBox(
-                                      height: AppSize.klheight,
-                                    ),
-                                    Divider(
-                                      thickness: 1,
-                                      color: AppColor.grey,
-                                    )
-                                  ],
-                                );
-                              },
-                              itemCount: markMyAvailabilityList.length,
-                            )
-                          ])),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          child: const Text("Cancel"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: AppSize.klwidth,
-                      ),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Save"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
-        ));
+      ),
+    );
   }
 }

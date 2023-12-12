@@ -16,8 +16,7 @@ class VTRegisterAgeInput extends StatelessWidget {
       builder: (context, ref, child) {
         return Row(
           children: [
-            SizedBox(
-              width: AppSize.width(context) * 0.2,
+            Flexible(
               child: VTRegisterInput(
                 title: "Age",
                 keyboardType: TextInputType.name,
@@ -29,8 +28,7 @@ class VTRegisterAgeInput extends StatelessWidget {
             const SizedBox(width: AppSize.klwidth),
             Text("OR", style: applyRobotoFont(fontSize: 14)),
             const SizedBox(width: AppSize.klwidth),
-            SizedBox(
-              width: AppSize.width(context) * 0.2,
+            Flexible(
               child: VTRegisterDateInput(
                 title: "Date of Birth",
                 controller: ref

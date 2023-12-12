@@ -7,24 +7,15 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTRegisterAddressDetails extends StatelessWidget {
+class VTRegisterAddressDetails extends ConsumerWidget {
   const VTRegisterAddressDetails({super.key});
-  static List<String> listOfStates = [
-    "",
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Madhya Pradesh",
-  ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<String> listOfStates =
+        ref.watch(registerNewPatientProvider).listOfStates;
     return Container(
         width: double.infinity,
-        height: AppSize.klheight * 20,
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(AppSize.kmradius),
@@ -56,8 +47,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "Door Number",
                                 keyboardType: TextInputType.name,
@@ -70,8 +60,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                             const SizedBox(
                               width: AppSize.kmwidth,
                             ),
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "Street",
                                 keyboardType: TextInputType.name,
@@ -85,8 +74,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "District",
                                 keyboardType: TextInputType.name,
@@ -99,8 +87,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                             const SizedBox(
                               width: AppSize.kmwidth,
                             ),
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "City",
                                 keyboardType: TextInputType.name,
@@ -114,8 +101,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterDropdownInput(
                                   listOfOptions: listOfStates),
                             ),
@@ -123,8 +109,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "Landmark",
                                 keyboardType: TextInputType.name,
@@ -137,8 +122,7 @@ class VTRegisterAddressDetails extends StatelessWidget {
                             const SizedBox(
                               width: AppSize.kmwidth,
                             ),
-                            SizedBox(
-                              width: AppSize.width(context) * 0.4,
+                            Flexible(
                               child: VTRegisterInput(
                                 title: "Pincode",
                                 keyboardType: TextInputType.number,

@@ -14,21 +14,13 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var tableHeading = [
-      "Patient ID",
-      "Name",
-      "Duration",
-      "Day",
-      "Time",
-      "Status",
-      ""
-    ];
+    List<String> tableHeading =
+        ref.watch(ivrCallHistorySearchProvider).tableHeading;
 
     List<IvrCallHistoryModel> ivrCallHistoryDetails =
         ref.watch(ivrCallHistorySearchProvider).ivrCallHistoryDetails;
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -36,30 +28,30 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
         const SizedBox(
           height: AppSize.klheight,
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: DataTable2(
-              minWidth: 100,
-              isHorizontalScrollBarVisible: true,
-              columnSpacing: 0,
-              dataRowHeight: AppSize.klheight * 2.5,
-              horizontalMargin: 20,
+        SizedBox(
+          width: double.infinity,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columnSpacing: 8,
+              horizontalMargin: 12,
               decoration: BoxDecoration(
                 color: AppColor.white,
                 borderRadius: BorderRadius.circular(AppSize.ksradius),
                 boxShadow: applyLightShadow(),
               ),
               columns: List<DataColumn>.generate(
-                  7,
+                  tableHeading.length,
                   (index) => DataColumn(
-                        label: Text(
-                          tableHeading[index],
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        label: Flexible(
+                          child: Text(
+                            tableHeading[index],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
                       )),
@@ -105,20 +97,18 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     ),
     DataCell(
       Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            child: Icon(
-              Icons.phone_callback_rounded,
-              color: data.calltype == "in" ? AppColor.green : AppColor.red,
-            ),
+          Icon(
+            Icons.phone_callback_rounded,
+            color: data.calltype == "in" ? AppColor.green : AppColor.red,
           ),
-          Flexible(
-            child: Text(
-              data.duration,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
-            ),
+          Text(
+            data.duration,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ],
       ),
@@ -153,6 +143,8 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
           padding: const EdgeInsets.all(AppSize.kspadding),
           child: Text(
             data.status,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 10,
               fontWeight: FontWeight.w600,
