@@ -28,8 +28,5 @@ class GetQuestionnaireResponseLocallyUseCase
 }
 
 class GetQuestionnaireResponseLocallyParam {
-  List<PostQuestionResponseModel> questionResponses;
-  GetQuestionnaireResponseLocallyParam({
-    required this.questionResponses,
-  });
+  GetQuestionnaireResponseLocallyParam();
 }

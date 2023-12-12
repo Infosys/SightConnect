@@ -28,7 +28,7 @@ class TriageResultPage extends ConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        ref.read(triageProvider).resetTriage();
+        ref.read(triageProvider);
         Navigator.of(context).popUntil((route) => route.isFirst);
 
         return true;
@@ -37,7 +37,7 @@ class TriageResultPage extends ConsumerWidget {
         appBar: CustomAppbar(
           leadingIcon: InkWell(
             onTap: () {
-              ref.read(triageProvider).resetTriage();
+              ref.read(triageProvider);
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(

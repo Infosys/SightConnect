@@ -44,7 +44,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.read(triageProvider).resetTriage();
+                    ref.read(triageProvider);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Home"),
@@ -56,7 +56,7 @@ class ResultPageBottomCards extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.read(triageProvider).resetTriage();
+                    ref.read(triageProvider);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     Navigator.of(context).push(
                       MaterialPageRoute(

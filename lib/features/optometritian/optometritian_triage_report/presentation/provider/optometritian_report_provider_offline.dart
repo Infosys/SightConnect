@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var optometritianOfflineReportProvider =
     ChangeNotifierProvider<OptometritianOfflineReportProvider>((ref) {
   return OptometritianOfflineReportProvider(
-    ref.watch(triageUrgencyRepositoryProvider),
+    ref.watch(triageUrgencyOfflineRepositoryProvider),
     ref.watch(triageLocalSourceProvider),
   );
 });

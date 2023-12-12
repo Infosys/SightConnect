@@ -24,7 +24,7 @@ abstract class TriageUrgencyRepository {
   int triageScore(TriageUrgency urgency);
 }
 
-var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
+var triageUrgencyOfflineRepositoryProvider = Provider<TriageUrgencyRepository>(
   (ref) => TriageUrgencyRepositoryImpl(),
 );
 

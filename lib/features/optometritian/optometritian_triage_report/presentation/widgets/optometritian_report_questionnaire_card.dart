@@ -17,7 +17,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var remarksData = ref.watch(triageQuestionnaireProvider).allRemarks;
+    var remarksData = "";
 
     return Container(
       color: AppColor.white,
