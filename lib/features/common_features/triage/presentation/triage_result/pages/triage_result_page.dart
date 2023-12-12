@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
-import '../../../../visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 
 import '../widgets/result_page_bottom_cards.dart';
 

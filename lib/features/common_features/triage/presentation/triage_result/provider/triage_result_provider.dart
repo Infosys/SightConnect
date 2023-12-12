@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
@@ -59,24 +58,28 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> _getQuestionnaireResult() {
-    var score = 0.0;
-    if (_model.score != null && _model.score!.isNotEmpty) {}
+    double score = 0.0;
+    if (_model.score != null && _model.score!.isNotEmpty) {
+      score = _model.score![TriageStep.QUESTIONNAIRE] ?? 0.0;
+    }
 
-    return _setPropertiesByUrgency(_questionnaireScore!.toDouble());
+    return _setPropertiesByUrgency(score);
   }
 
   Map<String, dynamic> _getAcuityResult() {
     var score = 0.0;
-
-    logger.d(
-        "this is vision acuity score from inside method call $_visionAcuityScore");
-    return _setPropertiesByUrgency(_visionAcuityScore!.toDouble());
+    if (_model.score != null && _model.score!.isNotEmpty) {
+      score = _model.score![TriageStep.OBSERVATION] ?? 0.0;
+    }
+    return _setPropertiesByUrgency(score);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
     var score = 0.0;
-    logger.d("this is eye scan score from inside method call $_eyeScanScore");
-    return _setPropertiesByUrgency(_eyeScanScore!.toDouble());
+    if (_model.score != null && _model.score!.isNotEmpty) {
+      score = _model.score![TriageStep.IMAGING] ?? 0.0;
+    }
+    return _setPropertiesByUrgency(score);
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(double urgency) {

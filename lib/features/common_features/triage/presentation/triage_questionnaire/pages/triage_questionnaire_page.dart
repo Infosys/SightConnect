@@ -16,7 +16,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../widgets/option_grid.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
