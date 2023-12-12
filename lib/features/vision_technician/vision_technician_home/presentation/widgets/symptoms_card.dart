@@ -16,7 +16,6 @@ class SymptomsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: AppSize.kmheight * 2,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,6 +23,8 @@ class SymptomsCard extends StatelessWidget {
         children: [
           Text(
             value.toInt().toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
               fontSize: 24,
               height: 1,
@@ -34,6 +35,8 @@ class SymptomsCard extends StatelessWidget {
           const SizedBox(width: AppSize.kswidth),
           Text(
             symptom,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               height: 1,
               fontWeight: FontWeight.w400,

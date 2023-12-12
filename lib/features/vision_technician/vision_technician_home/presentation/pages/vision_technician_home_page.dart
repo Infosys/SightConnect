@@ -43,17 +43,22 @@ class VisionTechnicianHomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSize.kswidth),
-            Expanded(child: const SearchBarVT(readOnly: true)),
+            const Expanded(
+              child: SearchBarVT(readOnly: true),
+            ),
           ],
         ),
         centerTitle: false,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(
+              Icons.notifications,
+              color: AppColor.white,
+            ),
           ),
           const CircleAvatar(
-            backgroundColor: AppColor.darkGrey,
+            backgroundColor: AppColor.white,
           )
         ],
       ),
@@ -63,7 +68,7 @@ class VisionTechnicianHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 300,
+              // height: 300,
               child: Stack(
                 children: [
                   Container(
