@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/color_dot.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AgeCard extends StatelessWidget {
@@ -8,11 +10,18 @@ class AgeCard extends StatelessWidget {
   final String data;
   @override
   Widget build(BuildContext context) {
+    bool isMobile = Responsive.isMobile(context);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         ColorDot(color: color),
-        Text(data),
+        Text(
+          data,
+          style: applyRobotoFont(
+            fontSize: isMobile ? 12 : 16,
+          ),
+        ),
       ],
     );
   }

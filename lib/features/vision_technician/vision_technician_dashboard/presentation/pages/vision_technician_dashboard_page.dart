@@ -12,71 +12,73 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
     var model = ref.watch(visionTechnicianDashboardProvider);
     return Scaffold(
       body: model.pages[model.currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                ref
-                    .read(visionTechnicianDashboardProvider.notifier)
-                    .changeIndex(0);
+      bottomNavigationBar: model.currentIndex == 0
+          ? BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      ref
+                          .read(visionTechnicianDashboardProvider.notifier)
+                          .changeIndex(0);
+                    },
+                    icon: const Icon(
+                      Icons.home_outlined,
+                      size: AppSize.kmheight * 2,
+                    ),
+                  ),
+                  label: 'Dashboard',
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      ref
+                          .read(visionTechnicianDashboardProvider.notifier)
+                          .changeIndex(1);
+                    },
+                    icon: const Icon(
+                      CupertinoIcons.person_add,
+                      size: AppSize.kmheight * 2,
+                    ),
+                  ),
+                  label: 'Register Patient',
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      ref
+                          .read(visionTechnicianDashboardProvider.notifier)
+                          .changeIndex(2);
+                    },
+                    icon: const Icon(
+                      CupertinoIcons.person_add,
+                      size: AppSize.kmheight * 2,
+                    ),
+                  ),
+                  label: 'Mark My Availability',
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      ref
+                          .read(visionTechnicianDashboardProvider.notifier)
+                          .changeIndex(3);
+                    },
+                    icon: const Icon(
+                      CupertinoIcons.phone,
+                      size: AppSize.kmheight * 2,
+                    ),
+                  ),
+                  label: 'IVR Call History',
+                ),
+              ],
+              currentIndex: model.currentIndex,
+              onTap: (index) {
+                print(index);
               },
-              icon: const Icon(
-                Icons.home_outlined,
-                size: AppSize.kmheight * 2,
-              ),
-            ),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                ref
-                    .read(visionTechnicianDashboardProvider.notifier)
-                    .changeIndex(1);
-              },
-              icon: const Icon(
-                CupertinoIcons.person_add,
-                size: AppSize.kmheight * 2,
-              ),
-            ),
-            label: 'Register Patient',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                ref
-                    .read(visionTechnicianDashboardProvider.notifier)
-                    .changeIndex(2);
-              },
-              icon: const Icon(
-                CupertinoIcons.person_add,
-                size: AppSize.kmheight * 2,
-              ),
-            ),
-            label: 'Mark My Availability',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                ref
-                    .read(visionTechnicianDashboardProvider.notifier)
-                    .changeIndex(3);
-              },
-              icon: const Icon(
-                CupertinoIcons.phone,
-                size: AppSize.kmheight * 2,
-              ),
-            ),
-            label: 'IVR Call History',
-          ),
-        ],
-        currentIndex: model.currentIndex,
-        onTap: (index) {
-          // print(index);
-        },
-      ),
+            )
+          : null,
     );
   }
 }

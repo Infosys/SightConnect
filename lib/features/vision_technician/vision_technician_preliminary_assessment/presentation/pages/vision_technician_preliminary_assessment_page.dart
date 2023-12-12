@@ -67,14 +67,14 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                         1,
                       );
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const VisionTechnicianAssessmentTimeline();
-                          },
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return const VisionTechnicianAssessmentTimeline();
+                      //     },
+                      //   ),
+                      // );
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all<EdgeInsets>(

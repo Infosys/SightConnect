@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 class ColorDot extends StatelessWidget {
@@ -6,9 +7,12 @@ class ColorDot extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
+
+    bool isMobile = Responsive.isMobile(context);
+
     return Container(
-      height: AppSize.kmheight,
-      width: AppSize.kmwidth,
+      height: isMobile ? AppSize.kmheight/2 : AppSize.kmheight,
+      width: isMobile ? AppSize.kmwidth/2 : AppSize.kmwidth,
       margin: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
         color: color,

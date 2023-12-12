@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/search_bar_vt.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -24,7 +24,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
         // backgroundColor: Colors.red,
-        title: SearchBarVT(readOnly: false),
+        title: VTSearchBar(readOnly: false),
         actions: [
           IconButton(
             onPressed: () {
@@ -37,18 +37,20 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:
+              list.isEmpty ? MainAxisAlignment.center : MainAxisAlignment.start,
           children: [
             if (list.isEmpty) const EmptyResultCard(),
             if (list.isNotEmpty)
               SingleChildScrollView(
                 child: SizedBox(
-                  height: 300,
-                  child: DataTable2(
+                  width: AppSize.width(context),
+                  // height: 300,
+                  child: DataTable(
                     columnSpacing: 12,
                     horizontalMargin: 12,
-                    dataRowHeight: AppSize.klheight * 2.5,
-                    minWidth: 100,
+                    // dataRowHeight: AppSize.klheight * 2.5,
+                    // minWidth: 100,
                     showCheckboxColumn: false,
                     decoration: BoxDecoration(
                       color: AppColor.white,
@@ -56,51 +58,68 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                       boxShadow: applyLightShadow(),
                     ),
                     columns: [
-                      DataColumn2(
-                        label: Text(
-                          "Patient",
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                        // size: ColumnSize.L,
-                      ),
-                      DataColumn2(
-                        label: Text(
-                          "Mobile",
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                        size: ColumnSize.S,
-                      ),
-                      DataColumn2(
-                        label: Text(
-                          "Assessment ID",
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                        size: ColumnSize.S,
-                      ),
                       DataColumn(
-                        label: Text(
-                          "Status",
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        label: Flexible(
+                          child: Text(
+                            "Patient",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
                       ),
                       DataColumn(
-                        label: Text(
-                          "Category",
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        label: Flexible(
+                          child: Text(
+                            "Mobile",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Flexible(
+                          child: Text(
+                            "Assessment ID",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Flexible(
+                          child: Text(
+                            "Status",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Flexible(
+                          child: Text(
+                            "Category",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
                       ),
@@ -109,6 +128,10 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                       list.length,
                       (index) => DataRow(
                         onSelectChanged: (value) {
+                          // print(list[index].toString());
+                          ref
+                              .read(visionTechnicianSearchProvider)
+                              .setPatientDetails(list[index]);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -132,8 +155,6 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
 
 List<DataCell> generateListTileSearchResults(VTPatientModel data) {
   return [
-    // DataCell({child: Image.asset(AppImages.patient)}),
-    // DataCell(child: Image.asset(AppImages.patient),),
     DataCell(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,10 +162,14 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         children: [
           Text(
             "${data.firstName} ${data.lastName}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
             data.patientId,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.grey,
@@ -156,6 +181,8 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
     DataCell(
       Text(
         data.mobileNo,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
       ),
     ),
@@ -166,10 +193,14 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         children: [
           Text(
             data.assessmentId,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.assessmentDate!,
+            data.assessmentDate,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 12,
               fontWeight: FontWeight.w400,
@@ -181,7 +212,9 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
     ),
     DataCell(
       Text(
-        data.status!,
+        data.status,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
       ),
     ),
@@ -193,11 +226,13 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         ),
         decoration: BoxDecoration(
           color:
-              data.category!.contains("Early") ? AppColor.orange : AppColor.red,
+              data.category.contains("Early") ? AppColor.orange : AppColor.red,
           borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
         child: Text(
-          data.category!,
+          data.category,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
             fontSize: 14,
             color: AppColor.white,

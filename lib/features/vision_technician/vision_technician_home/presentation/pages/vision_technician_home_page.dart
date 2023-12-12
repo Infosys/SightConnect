@@ -1,9 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/search_bar_vt.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vision_technician_header.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class VisionTechnicianHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = Responsive.isMobile(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -44,11 +47,21 @@ class VisionTechnicianHomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSize.kswidth),
-            Responsive.isMobile(context) ? const Spacer() : const SizedBox(),
-            Responsive.isMobile(context)
-                ? const Icon(Icons.search, color: AppColor.white)
+            isMobile ? const Spacer() : const SizedBox(),
+            isMobile
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const VisionTechnicianSearchPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.search, color: AppColor.white))
                 : const Expanded(
-                    child: SearchBarVT(readOnly: true),
+                    child: VTSearchBar(readOnly: true),
                   ),
           ],
         ),
@@ -85,7 +98,7 @@ class VisionTechnicianHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const VisionTechnicianHeader()
+                  const VTHeader()
                 ],
               ),
             ),

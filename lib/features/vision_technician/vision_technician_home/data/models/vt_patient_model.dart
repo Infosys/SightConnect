@@ -2,26 +2,26 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 
 class VTPatientModel {
   String firstName;
-  String? middleName = "";
+  String middleName;
   String lastName;
-  String? gender = "";
-  String? abhaId = "";
-  String? email = "";
-  String? age = "";
-  String? dateOfBirth = "";
+  String gender;
+  String abhaId;
+  String email ;
+  String age ;
+  String dateOfBirth ;
   String patientId;
   String assessmentId;
-  String? assessmentDate = "";
-  String? status = "";
-  String? category = "";
+  String assessmentDate;
+  String status;
+  String category;
   String mobileNo;
-  bool? closed = false;
-  bool? spectacles = false;
-  bool? cataractSurgery = false;
-  bool? eyeDrops = false;
-  bool? oralMedication = false;
-  List<EyeCareDetailsQuestionModel>? eyeCareDetailsQuestion;
-  Address? address;
+  bool closed;
+  bool spectacles;
+  bool cataractSurgery;
+  bool eyeDrops;
+  bool oralMedication;
+  List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion;
+  Address address;
 
   VTPatientModel({
     required this.firstName,

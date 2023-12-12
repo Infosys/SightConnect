@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/data/model/eye_care_details_question_model.dart';
 
 abstract class VisionTechnicianLocalSource {
   List<VTPatientModel> getListOfPatients();
@@ -27,8 +28,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     VTPatientModel(
       firstName: "Chunky",
@@ -50,8 +62,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     VTPatientModel(
       firstName: "Raj",
@@ -73,8 +96,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     VTPatientModel(
       firstName: "Ajay",
@@ -96,8 +130,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     VTPatientModel(
       firstName: "Rahul",
@@ -119,8 +164,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     VTPatientModel(
       firstName: "Paul",
@@ -142,8 +198,19 @@ class VisionTechnicianLocalSourceImpl implements VisionTechnicianLocalSource {
       cataractSurgery: false,
       eyeDrops: false,
       oralMedication: false,
-      eyeCareDetailsQuestion: null,
-      address: null,
+      eyeCareDetailsQuestion: [
+        EyeCareDetailsQuestionModel(
+            questionId: 0, question: "question", answer: "answer")
+      ],
+      address: Address(
+        doorNumber: "doorNumber",
+        street: "street",
+        district: "district",
+        city: "city",
+        state: "state",
+        landmark: "landmark",
+        pincode: "pincode",
+      ),
     ),
     //   category: "Early Consultation",
     //   mobileNo: '9876543210',

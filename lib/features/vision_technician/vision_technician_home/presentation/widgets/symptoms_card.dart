@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class SymptomsCard extends StatelessWidget {
   final String symptom;
   @override
   Widget build(BuildContext context) {
+    bool isMobile = Responsive.isMobile(context);
     return SizedBox(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -26,7 +28,7 @@ class SymptomsCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
-              fontSize: 24,
+              fontSize: isMobile ? 16 : 24,
               height: 1,
               fontWeight: FontWeight.w500,
               color: color,
@@ -40,7 +42,7 @@ class SymptomsCard extends StatelessWidget {
             style: applyRobotoFont(
               height: 1,
               fontWeight: FontWeight.w400,
-              fontSize: 12,
+              fontSize: isMobile ? 10 : 12,
               color: AppColor.grey,
             ),
           )

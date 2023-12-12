@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SearchBarVT extends ConsumerWidget {
-  const SearchBarVT({super.key, required this.readOnly});
+class VTSearchBar extends ConsumerWidget {
+  const VTSearchBar({super.key, required this.readOnly});
   final bool readOnly;
 
   @override

@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessment_list.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_patient_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/custom_chip.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,10 @@ class AssessmentCard extends StatelessWidget {
         children: [
           Text(
             "Assessments",
-            style: applyFiraSansFont(fontSize: 18, fontWeight: FontWeight.w500,),
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: AppSize.klheight),
           const Row(

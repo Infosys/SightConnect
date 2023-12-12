@@ -14,10 +14,19 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
     _listOfPatients = visionTechnicianHomeRepositoryImpl.listOfPatients();
   }
 
+  VTPatientModel? _patientDetails;
+
   List<VTPatientModel> _listOfPatients = [];
   List<VTPatientModel> _searchedPatientList = [];
   List<VTPatientModel> get listOfPatients => _listOfPatients;
   List<VTPatientModel> get searchedPatientUserList => _searchedPatientList;
+  VTPatientModel? get patientDetails => _patientDetails;
+
+  void setPatientDetails(VTPatientModel patientDetails) {
+    _patientDetails = patientDetails;
+
+    notifyListeners();
+  }
 
   void setSearchPatientList(String query) {
     _searchedPatientList =

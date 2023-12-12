@@ -12,34 +12,36 @@ class CustomChip extends HookWidget {
     var backgroundColor = useState(AppColor.white);
     var borderColor = useState(AppColor.grey);
 
-    return InkWell(
-      onTap: () {
+    return Flexible(
+      child: InkWell(
+        onTap: () {
+          backgroundColor.value = backgroundColor.value == AppColor.white
+              ? AppColor.primary.withOpacity(0.2)
+              : AppColor.white;
 
-
-        backgroundColor.value = backgroundColor.value == AppColor.white
-            ? AppColor.primary.withOpacity(0.2)
-            : AppColor.white;
-
-        borderColor.value = borderColor.value == AppColor.grey
-            ? AppColor.primary
-            : AppColor.grey;
-
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-            horizontal: AppSize.kspadding / 2, vertical: AppSize.kspadding / 2),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding,
-          vertical: AppSize.kspadding,
-        ),
-        decoration: BoxDecoration(
-          color: backgroundColor.value,
-          border: Border.all(color: borderColor.value),
-          borderRadius: BorderRadius.circular(AppSize.klradius / 2),
-        ),
-        child: Text(
-          title,
-          style: applyRobotoFont(fontSize: 14),
+          borderColor.value = borderColor.value == AppColor.grey
+              ? AppColor.primary
+              : AppColor.grey;
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+              horizontal: AppSize.kspadding / 2,
+              vertical: AppSize.kspadding / 2),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSize.kmpadding,
+            vertical: AppSize.kspadding,
+          ),
+          decoration: BoxDecoration(
+            color: backgroundColor.value,
+            border: Border.all(color: borderColor.value),
+            borderRadius: BorderRadius.circular(AppSize.klradius / 2),
+          ),
+          child: Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(fontSize: 14),
+          ),
         ),
       ),
     );

@@ -1,16 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_1.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_2.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_cases_analytics.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_age_analytics.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_symptoms_ananlytics.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class VisionTechnicianHeader extends HookWidget {
-  const VisionTechnicianHeader({super.key});
+class VTHeader extends HookWidget {
+  const VTHeader({super.key});
   @override
   Widget build(BuildContext context) {
     final CarouselController controller = CarouselController();
@@ -19,8 +21,8 @@ class VisionTechnicianHeader extends HookWidget {
 
     final List<Widget> slides = [
       const PatientCasesAnalytics(),
-      const PatientSymptomsAnanlytics(),
       const PatientAgeAnalytics(),
+      const PatientSymptomsAnalytics(),
     ];
 
     return Column(
@@ -79,7 +81,7 @@ class VisionTechnicianHeader extends HookWidget {
           items: slides,
           carouselController: controller,
           options: CarouselOptions(
-            height: 220,
+            height: Responsive.isMobile(context) ? 130 : 180,
             // aspectRatio: 1.3,
             viewportFraction: 1,
             onPageChanged: (index, reason) {

@@ -17,30 +17,38 @@ class PatientCasesAnalytics extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           AnalyticsCard(
-            name: "Total Cases",
-            analyticsTitle: "22",
-            analyticsDescription: "14",
+            title: "Total Cases",
+            firstValue: "60",
+            secondValue: "72",
+            firstAnalyticsDescription: "IVR Calls",
+            secondAnalyticsDescription: "Clinic Visits",
+            firstValueColor: AppColor.black,
+            secondValueColor: AppColor.black,
             width: Responsive.isMobile(context)
                 ? AppSize.width(context) * 0.3
-                : AppSize.width(context) * 0.3,
+                : AppSize.width(context) * 0.45,
           ),
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
-            name: "Total Cases",
-            analyticsTitle: "22",
-            analyticsDescription: "14",
+            title: "Cases Closed",
+            firstValue: "14",
+            secondValue: "8",
+            firstAnalyticsDescription: "Critical",
+            secondAnalyticsDescription: "Regular",
             width: Responsive.isMobile(context)
                 ? AppSize.width(context) * 0.3
-                : AppSize.width(context) * 0.4,
+                : AppSize.width(context) * 0.25,
           ),
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
-            name: "Total Cases",
-            analyticsTitle: "22",
-            analyticsDescription: "14",
+            title: "Avg. Closure Time",
+            firstValue: "1wk",
+            secondValue: "3d",
+            firstAnalyticsDescription: "Critical",
+            secondAnalyticsDescription: "Regular",
             width: Responsive.isMobile(context)
                 ? AppSize.width(context) * 0.3
-                : AppSize.width(context) * 0.2,
+                : AppSize.width(context) * 0.25,
           ),
         ],
       ),
@@ -51,25 +59,29 @@ class PatientCasesAnalytics extends StatelessWidget {
 class AnalyticsCardData extends StatelessWidget {
   const AnalyticsCardData({
     super.key,
-    required this.title,
+    required this.value,
     required this.description,
+    required this.color,
   });
 
-  final String title;
+  final String value;
   final String description;
-
+  final Color color;
   @override
   Widget build(BuildContext context) {
+    bool isMobile = Responsive.isMobile(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          value,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(
             fontWeight: FontWeight.w500,
-            fontSize: 32,
+            fontSize: isMobile ? 20 : 32,
+            color: color,
           ),
         ),
         Text(
@@ -78,7 +90,7 @@ class AnalyticsCardData extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
             fontWeight: FontWeight.w400,
-            fontSize: 12,
+            fontSize: isMobile ? 10 : 12,
             color: AppColor.grey,
           ),
         ),
@@ -91,20 +103,24 @@ class AnalyticsCardData extends StatelessWidget {
 class AnalyticsCard extends StatelessWidget {
   const AnalyticsCard({
     super.key,
-    required this.name,
-    required this.analyticsTitle,
-    required this.analyticsDescription,
+    required this.title,
+    required this.firstValue,
+    required this.secondValue,
+    required this.firstAnalyticsDescription,
+    required this.secondAnalyticsDescription,
     this.pieChart = false,
-    this.activeColor = AppColor.green,
-    this.inactiveColor = AppColor.red,
+    this.firstValueColor = AppColor.red,
+    this.secondValueColor = AppColor.green,
     this.width = 300,
   });
-  final String name;
-  final String analyticsTitle;
-  final String analyticsDescription;
+  final String title;
+  final String firstValue;
+  final String secondValue;
+  final String firstAnalyticsDescription;
+  final String secondAnalyticsDescription;
   final bool pieChart;
-  final Color activeColor;
-  final Color inactiveColor;
+  final Color firstValueColor;
+  final Color secondValueColor;
   final double width;
 
   @override
@@ -119,32 +135,37 @@ class AnalyticsCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            name,
+            title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: AnalyticsCardData(
-                  title: analyticsTitle,
-                  description: analyticsDescription,
+          const SizedBox(height: AppSize.ksheight),
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: AnalyticsCardData(
+                    value: firstValue,
+                    description: firstAnalyticsDescription,
+                    color: firstValueColor,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: AnalyticsCardData(
-                  title: analyticsTitle,
-                  description: analyticsDescription,
+                Expanded(
+                  child: AnalyticsCardData(
+                    value: secondValue,
+                    description: secondAnalyticsDescription,
+                    color: secondValueColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           if (pieChart) const SizedBox()
         ],
