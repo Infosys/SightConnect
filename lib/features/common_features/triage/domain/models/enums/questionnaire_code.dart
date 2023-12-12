@@ -1,0 +1,3 @@
+enum QuestionnaireCode {
+  Physical_findings_of_Eye_Narrative, History_of_Eyes_disorders_Narrative
+}

@@ -1,0 +1,3 @@
+enum PermittedUnit {
+  Cm, Number
+}

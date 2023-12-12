@@ -108,6 +108,7 @@ flutter:
     - assets/services/
     - assets/new_assessment.json
     - assets/profile.json
+    - assets/triage_assessment.json
   
   #   - images/a_dot_ham.jpeg
 
