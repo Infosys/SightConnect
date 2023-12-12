@@ -10,35 +10,37 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:snowplow_tracker/snowplow_tracker.dart';
 
-
 class PatientDashboardPage extends ConsumerStatefulWidget {
-  const PatientDashboardPage({super.key, required this.tracker});
-  final SnowplowTracker tracker;
+  const PatientDashboardPage({
+    super.key,
+  });
 
   @override
   ConsumerState<PatientDashboardPage> createState() =>
       _PatientDashboardPageState();
 }
 
-class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage>{
-
-
+class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   Future<void> trackEvent(event, {List<SelfDescribing>? contexts}) async {
     widget.tracker.track(event, contexts: contexts);
 
     logger.d("track event called");
-
   }
 
   Future<void> startTracker() async {
-    widget.tracker.track(ScreenView(name: 'Dashboard', id: "2c295365-eae9-4243-a3ee-5c4b7baccc8f", type: "full", transitionType: 'none'));
+    widget.tracker.track(const ScreenView(
+        name: 'Dashboard',
+        id: "2c295365-eae9-4243-a3ee-5c4b7baccc8f",
+        type: "full",
+        transitionType: 'none'));
 //     await widget.tracker.track(SelfDescribing(
 //     schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
 //     data: {'targetUrl': 'http://0.0.0.0:9090'}
 // ));
-  logger.d('Tracker started');
+    logger.d('Tracker started');
   }
 
+  @override
   void initState() {
     super.initState();
     startTracker();

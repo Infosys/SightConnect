@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_logger.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -9,11 +11,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:snowplow_tracker/snowplow_tracker.dart';
 
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key, required this.tracker});
-  final SnowplowTracker tracker;
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,9 +34,8 @@ class MyApp extends ConsumerWidget {
         child: MaterialApp(
           title: AppText.appName,
           locale: const Locale('en'),
-          navigatorObservers: [
-            tracker.getObserver()
-          ],
+          navigatorObservers:
+              !AppEnv.isDev ? [AppLogger.tracker.getObserver()] : [],
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -48,8 +49,7 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          // initialRoute: SplashPage.routeName,
-          home: SplashPage(tracker: tracker,),
+          initialRoute: SplashPage.routeName,
           onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(

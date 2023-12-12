@@ -1,21 +1,17 @@
+import 'package:eye_care_for_all/main.dart';
+
 enum Env { DEV, PROD }
 
 class AppEnv {
   AppEnv._();
-  static late Env env;
+  static Env env = Env.DEV;
   static bool get isDev => env == Env.DEV;
 
-  static void setupEnv(Env env) {
-    switch (env) {
-      case Env.DEV:
-        env = Env.DEV;
-        break;
-      case Env.PROD:
-        env = Env.PROD;
-        break;
-      default:
-        env = Env.DEV;
-    }
+  static void setupEnv(Env currentEnv) {
+    env = currentEnv;
+    logger.d({
+      "env": env.toString(),
+    });
   }
 
   static String get baseUrl {
