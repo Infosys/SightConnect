@@ -9,10 +9,11 @@ import 'package:intl/intl.dart';
 class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
   const VtMarkMyAvailableDateRangePicker({super.key});
 
-
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-     TextEditingController controller =TextEditingController(text: ref.watch(markMyAvailabilityProvider).markMyAvailabilityDataRange);
+  Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController controller = TextEditingController(
+        text:
+            ref.watch(markMyAvailabilityProvider).markMyAvailabilityDataRange);
     return TextField(
       readOnly: true,
       controller: controller,
@@ -26,7 +27,9 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
         suffixIcon: IconButton(
           onPressed: () async {
             var pickedDateRange = await _showDateRangePicker(context);
-            var result = "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
+
+            var result =
+                "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
             controller.text = result;
           },
           icon: const Icon(CupertinoIcons.calendar),

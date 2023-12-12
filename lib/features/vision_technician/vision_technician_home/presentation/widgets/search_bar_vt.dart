@@ -29,18 +29,12 @@ class SearchBarVT extends ConsumerWidget {
               builder: (context) => const VisionTechnicianSearchPage(),
             ),
           );
-          
         }
       },
       decoration: InputDecoration(
-        prefixIcon: IconButton(
-          onPressed: () {
-            
-          },
-          icon: const Icon(
-            CupertinoIcons.search,
-            color: AppColor.primary,
-          ),
+        prefixIcon: const Icon(
+          CupertinoIcons.search,
+          color: AppColor.primary,
         ),
         suffixIcon: Container(
           decoration: BoxDecoration(

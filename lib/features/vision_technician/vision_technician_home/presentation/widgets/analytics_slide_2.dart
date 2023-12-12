@@ -3,13 +3,20 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/age_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_1.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/gender_pie_chart.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class AnalyticsSlide2 extends StatelessWidget {
-  const AnalyticsSlide2({super.key});
+final boxDecoration = BoxDecoration(
+  color: AppColor.white,
+  borderRadius: BorderRadius.circular(AppSize.kmradius),
+  boxShadow: applyLightShadow(),
+);
+
+class PatientAgeAnalytics extends StatelessWidget {
+  const PatientAgeAnalytics({super.key});
 
   static Map<String, double> dataMapAge = {
     "10 - 29 Yrs": 10,
@@ -45,7 +52,7 @@ class AnalyticsSlide2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: AppSize.width(context) * 0.45,
+            width: AppSize.width(context) * 0.5,
             padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: boxDecoration,
             child: Column(
@@ -58,45 +65,47 @@ class AnalyticsSlide2 extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      child: PieChart(
-                        dataMap: dataMapAge,
-                        animationDuration: const Duration(milliseconds: 800),
-                        chartRadius: 80,
-                        colorList: colorList,
-                        initialAngleInDegree: 270,
-                        chartType: ChartType.ring,
-                        ringStrokeWidth: 10,
-                        centerWidget: Text(
-                          "32",
-                          style: applyFiraSansFont(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.orange,
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        child: PieChart(
+                          dataMap: dataMapAge,
+                          animationDuration: const Duration(milliseconds: 800),
+                          chartRadius: 80,
+                          colorList: colorList,
+                          initialAngleInDegree: 270,
+                          chartType: ChartType.ring,
+                          ringStrokeWidth: 10,
+                          centerWidget: Text(
+                            "32",
+                            style: applyFiraSansFont(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.orange,
+                            ),
+                          ),
+                          legendOptions: const LegendOptions(
+                            showLegends: false,
+                          ),
+                          chartValuesOptions: const ChartValuesOptions(
+                            showChartValues: false,
                           ),
                         ),
-                        legendOptions: const LegendOptions(
-                          showLegends: false,
-                        ),
-                        chartValuesOptions: const ChartValuesOptions(
-                          showChartValues: false,
+                      ),
+                      Expanded(
+                        child: Wrap(
+                          children: [
+                            AgeCard(colorList[0], dataMapAge.keys.elementAt(0)),
+                            AgeCard(colorList[1], dataMapAge.keys.elementAt(1)),
+                            AgeCard(colorList[2], dataMapAge.keys.elementAt(2)),
+                            AgeCard(colorList[3], dataMapAge.keys.elementAt(3)),
+                          ],
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Wrap(
-                        children: [
-                          AgeCard(colorList[0], dataMapAge.keys.elementAt(0)),
-                          AgeCard(colorList[1], dataMapAge.keys.elementAt(1)),
-                          AgeCard(colorList[2], dataMapAge.keys.elementAt(2)),
-                          AgeCard(colorList[3], dataMapAge.keys.elementAt(3)),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               ],
             ),

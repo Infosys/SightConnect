@@ -18,8 +18,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
     var firstcontroller = ScrollController();
 
     return Container(
-     
-        padding: const EdgeInsets.all(AppSize.kmpadding-2),
+        padding: const EdgeInsets.all(AppSize.kmpadding - 2),
         decoration: BoxDecoration(
           border: Border.all(color: AppColor.lightGrey),
           color: AppColor.white,
@@ -55,153 +54,158 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
             const SizedBox(
               height: AppSize.klheight,
             ),
-            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                width: AppSize.klwidth * 14,
-                height: AppSize.klheight * 10,
-                padding: const EdgeInsets.all(AppSize.kspadding + 2),
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColor.lightGrey),
-                  borderRadius: BorderRadius.circular(AppSize.kmradius),
-                ),
-                child: Scrollbar(
-                  thumbVisibility: true,
-                  controller: firstcontroller,
-                  child: ListView.builder(
-                      shrinkWrap: true,
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: AppSize.width(context) / 2.2,
+                    height: AppSize.klheight * 10,
+                    padding: const EdgeInsets.all(AppSize.kspadding + 2),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColor.lightGrey),
+                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    ),
+                    child: Scrollbar(
+                      thumbVisibility: true,
                       controller: firstcontroller,
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(AppSize.kspadding),
-                          child: InkWell(
-                            onTap: () {
-                              selectedIndex = index;
-                              ref
-                                  .read(preliminaryAssessmentProvider.notifier)
-                                  .toogleVisionCenters(index);
-                            },
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color:
-                                          visionCenter[index].checked == false
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          controller: firstcontroller,
+                          itemCount: 5,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(AppSize.kspadding),
+                              child: InkWell(
+                                onTap: () {
+                                  selectedIndex = index;
+                                  ref
+                                      .read(preliminaryAssessmentProvider
+                                          .notifier)
+                                      .toogleVisionCenters(index);
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: visionCenter[index].checked ==
+                                                  false
                                               ? AppColor.lightGrey
                                               : AppColor.blue,
-                                      width: 2),
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.ksradius),
-                                ),
-                                padding:
-                                    const EdgeInsets.all(AppSize.kspadding + 3),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(visionCenter[index].type,
-                                        style: applyRobotoFont(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                        )),
-                                    Icon(
-                                      Icons.check_circle,
-                                      size: 20,
-                                      color: visionCenter[index].checked == true
-                                          ? AppColor.green
-                                          : AppColor.grey,
-                                    )
-                                  ],
-                                )),
-                          ),
-                        );
-                      }),
-                ),
-              ),
-              
-              const SizedBox(
-                width: AppSize.klwidth*2,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "LVPEI Eye Institute",
-                    style: applyFiraSansFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                                          width: 2),
+                                      borderRadius: BorderRadius.circular(
+                                          AppSize.ksradius),
+                                    ),
+                                    padding: const EdgeInsets.all(
+                                        AppSize.kspadding + 3),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(visionCenter[index].type,
+                                            style: applyRobotoFont(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                        Icon(
+                                          Icons.check_circle,
+                                          size: 20,
+                                          color: visionCenter[index].checked ==
+                                                  true
+                                              ? AppColor.green
+                                              : AppColor.grey,
+                                        )
+                                      ],
+                                    )),
+                              ),
+                            );
+                          }),
                     ),
                   ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
-                  Row(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: AppColor.grey,
-                      ),
-                      const SizedBox(
-                        width: AppSize.kswidth,
-                      ),
-                      SizedBox(
-                        width: AppSize.klwidth *15,
-                        child: Text(
-                          visionCenter[selectedIndex].completeAddress,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                   const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.phone_outlined,
-                        color: AppColor.grey,),
-                      const SizedBox(
-                        width: AppSize.kswidth,
-                      ),
                       Text(
-                        visionCenter[selectedIndex].phoneno,
-                        style: applyRobotoFont(
+                        "LVPEI Eye Institute",
+                        style: applyFiraSansFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ],
-                  ),
-                     const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.access_time,
-                        color: AppColor.grey,),
                       const SizedBox(
-                        width: AppSize.kswidth,
+                        height: AppSize.klheight,
                       ),
-                      SizedBox(
-                        width: AppSize.klwidth * 15,
-                        child: Text(
-                          visionCenter[selectedIndex].time,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.location_on_outlined,
+                            color: AppColor.grey,
                           ),
-                        ),
+                          const SizedBox(
+                            width: AppSize.kswidth,
+                          ),
+                          SizedBox(
+                            width: AppSize.klwidth * 10,
+                            child: Text(
+                              visionCenter[selectedIndex].completeAddress,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      const SizedBox(
+                        height: AppSize.ksheight,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.phone_outlined,
+                            color: AppColor.grey,
+                          ),
+                          const SizedBox(
+                            width: AppSize.kswidth,
+                          ),
+                          Text(
+                            visionCenter[selectedIndex].phoneno,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: AppSize.ksheight,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.access_time,
+                            color: AppColor.grey,
+                          ),
+                          const SizedBox(
+                            width: AppSize.kswidth,
+                          ),
+                          SizedBox(
+                            width: AppSize.klwidth * 10,
+                            child: Text(
+                              visionCenter[selectedIndex].time,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
-            ]),
+                  ),
+                ]),
             const SizedBox(
               height: AppSize.klheight,
             ),

@@ -13,57 +13,58 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var tableFilter = ref.watch(ivrCallHistorySearchProvider).tablefilter;
 
-    return Wrap(
-      spacing: Responsive.isTablet(context)
-          ? AppSize.klwidth * 4
-          : AppSize.klwidth * 24,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Wrap(
-          runSpacing: AppSize.kmheight,
-          children: [
-            for (int index = 0; index < tableFilter.length; index++) ...[
-              InkWell(
-                onTap: () {
-                  ref
-                      .watch(ivrCallHistorySearchProvider.notifier)
-                      .setTableFilter(index);
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: AppSize.kspadding / 2,
-                      vertical: AppSize.kspadding / 2),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
-                    vertical: AppSize.kspadding,
-                  ),
-                  decoration: BoxDecoration(
-                    color: tableFilter[index]["checked"] as bool
-                        ? AppColor.primary.withOpacity(0.2)
-                        : AppColor.white,
-                    border: Border.all(
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (int index = 0; index < tableFilter.length; index++) ...[
+                  InkWell(
+                    onTap: () {
+                      ref
+                          .watch(ivrCallHistorySearchProvider.notifier)
+                          .setTableFilter(index);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: AppSize.kspadding / 2,
+                          vertical: AppSize.kspadding / 2),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSize.width(context) * 0.01,
+                        vertical: AppSize.kspadding,
+                      ),
+                      decoration: BoxDecoration(
                         color: tableFilter[index]["checked"] as bool
-                            ? AppColor.primary
-                            : AppColor.grey),
-                    borderRadius: BorderRadius.circular(AppSize.klradius / 2),
+                            ? AppColor.primary.withOpacity(0.2)
+                            : AppColor.white,
+                        border: Border.all(
+                            color: tableFilter[index]["checked"] as bool
+                                ? AppColor.primary
+                                : AppColor.grey),
+                        borderRadius:
+                            BorderRadius.circular(AppSize.klradius / 2),
+                      ),
+                      child: Text(
+                        tableFilter[index]["type"].toString(),
+                        style: applyRobotoFont(fontSize: 14),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    tableFilter[index]["type"].toString(),
-                    style: applyRobotoFont(fontSize: 14),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: AppSize.kswidth,
-              )
-            ],
-          ],
+                ],
+              ],
+            ),
+          ),
         ),
         const CircleAvatar(
-            backgroundColor: AppColor.white,
-            child: Icon(
-              Icons.calendar_month_rounded,
-              color: AppColor.grey,
-            ))
+          backgroundColor: AppColor.white,
+          child: Icon(
+            Icons.calendar_month_rounded,
+            color: AppColor.grey,
+          ),
+        )
       ],
     );
   }

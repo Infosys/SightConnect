@@ -14,6 +14,7 @@ class VTRegisterDropdownInput extends ConsumerWidget {
     return Container(
       width: AppSize.klwidth * 10,
       child: DropdownButton(
+        
         isExpanded: true,
         value: ref.watch(registerNewPatientProvider).stateDropDownValue,
         items: listOfOptions.map((String items) {

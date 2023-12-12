@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_1.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_2.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/analytics_slide_3.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_symptoms_ananlytics.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +18,9 @@ class VisionTechnicianHeader extends HookWidget {
     var current = useState<int>(0);
 
     final List<Widget> slides = [
-      const AnalyticsSlide1(),
-      const AnalyticsSlide2(),
-      const AnalyticsSlide3(),
+      const PatientCasesAnalytics(),
+      const PatientSymptomsAnanlytics(),
+      const PatientAgeAnalytics(),
     ];
 
     return Column(
@@ -74,16 +74,18 @@ class VisionTechnicianHeader extends HookWidget {
             ],
           ),
         ),
+        const SizedBox(height: AppSize.klheight),
         CarouselSlider(
           items: slides,
           carouselController: controller,
           options: CarouselOptions(
-              height: 220,
-              aspectRatio: 1.0,
-              viewportFraction: 1,
-              onPageChanged: (index, reason) {
-                current.value = index;
-              },),
+            height: 220,
+            // aspectRatio: 1.3,
+            viewportFraction: 1,
+            onPageChanged: (index, reason) {
+              current.value = index;
+            },
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

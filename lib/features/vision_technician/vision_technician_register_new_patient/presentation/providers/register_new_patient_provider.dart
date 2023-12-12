@@ -35,7 +35,7 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     "pinCodeController": TextEditingController(),
   };
 
-  String stateDropDownValue = "Andhra Pradesh";
+  String stateDropDownValue = "";
   String genderValue = "";
   VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
       VisionTechnicianHomeRepositoryImpl();

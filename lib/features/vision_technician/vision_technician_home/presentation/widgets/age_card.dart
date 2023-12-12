@@ -10,7 +10,10 @@ class AgeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [ColorDot(color: color), Text(data)],
+      children: [
+        ColorDot(color: color),
+        Text(data),
+      ],
     );
   }
 }

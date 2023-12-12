@@ -13,31 +13,29 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        appBar: CustomAppbar(
-          // backgroundColor: Colors.red,
-          leadingIcon: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new),
-            onPressed: () {
-              ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            },
-          ),
-          title: Row(
-            children: [
-              Text(
-                "IVR Call History",
-                style: applyFiraSansFont(
-                    fontWeight: FontWeight.w500, fontSize: 16),
-              ),
-              const SizedBox(
-                width: AppSize.klwidth,
-              ),
-              const IvrCallHistorySearchBarVT(readOnly: false),
-            ],
-          ),
+      appBar: CustomAppbar(
+        // backgroundColor: Colors.red,
+        leadingIcon: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () {
+            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+          },
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(AppSize.klpadding),
-          child: IvrCallHistoryTableView(),
-        ));
+        title: Row(
+          children: [
+            Text(
+              "IVR Call History",
+              style:
+                  applyFiraSansFont(fontWeight: FontWeight.w500, fontSize: 16),
+            ),
+            const SizedBox(
+              width: AppSize.klwidth,
+            ),
+            const IvrCallHistorySearchBarVT(readOnly: false),
+          ],
+        ),
+      ),
+      body: const IvrCallHistoryTableView(),
+    );
   }
 }
