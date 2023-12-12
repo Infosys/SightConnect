@@ -33,7 +33,7 @@ class TumblingResultReportPage extends ConsumerWidget {
         ref.watch(tumblingTestProvider).calculateEyeSight(Eye.right);
     return WillPopScope(
       onWillPop: () async {
-        ref.read(triageProvider);
+        ref.read(resetProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
         return false;
       },
@@ -44,7 +44,7 @@ class TumblingResultReportPage extends ConsumerWidget {
           title: const Text("Visual Acuity Test Results"),
           leadingIcon: InkWell(
             onTap: () {
-              ref.read(triageProvider);
+              ref.read(resetProvider).reset();
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(
