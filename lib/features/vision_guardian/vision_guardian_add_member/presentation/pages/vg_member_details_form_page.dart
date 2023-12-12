@@ -90,7 +90,7 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
                                         navigator.push(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                CameraHelper(cameras: cameras),
+                                                CameraHelper(cameras: cameras, provider: visionGuardianMemberDetailsProvider,),
                                           ),
                                         );
                                       } catch (e) {

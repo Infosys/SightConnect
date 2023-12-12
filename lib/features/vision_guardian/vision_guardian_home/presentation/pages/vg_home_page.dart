@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -26,16 +27,16 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context) * 0.32,
+                  height: AppSize.klheight * 9,
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSize.kmpadding),
-                  decoration: const BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(AppSize.klradius),
-                      bottomRight: Radius.circular(AppSize.klradius),
-                    ),
-                  ),
+                  color: AppColor.primary,
+                  // decoration: const BoxDecoration(
+                  //   borderRadius: BorderRadius.only(
+                  //     bottomLeft: Radius.circular(AppSize.klradius),
+                  //     bottomRight: Radius.circular(AppSize.klradius),
+                  //   ),
+                  // ),
                 ),
                 Container(
                   padding: const EdgeInsets.all(AppSize.klpadding),
@@ -89,6 +90,22 @@ class VisionGuardianHomePage extends StatelessWidget {
                     ],
                   ),
                 ),
+              ],
+            ),
+            Stack(
+              children: [
+                Container(
+                  height: AppSize.klheight * 3,
+                  width: AppSize.width(context),
+                  decoration: const BoxDecoration(
+                    color: AppColor.primary,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(AppSize.klradius),
+                      bottomRight: Radius.circular(AppSize.klradius),
+                    ),
+                  ),
+                ),
+                VGCarousel()
               ],
             ),
             SizedBox(

@@ -70,7 +70,7 @@ dependencies:
   fluttertoast: ^8.2.2
   device_info_plus: ^9.1.0
   flutter_jailbreak_detection: ^1.10.0
-
+  pie_chart: ^5.4.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

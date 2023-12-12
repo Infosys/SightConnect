@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/pages/vg_member_details_form_page.dart';
@@ -57,7 +58,7 @@ class VisionGuardianEventPage extends HookWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const VisionGuardianMemberDetailsPage(),
+              builder: (context) => const VGAddEventDetailsPage(),
             ),
           );
         },
