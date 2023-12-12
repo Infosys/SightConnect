@@ -9,10 +9,12 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:snowplow_tracker/snowplow_tracker.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   static const String routeName = '/';
-  const SplashPage({super.key});
+  const SplashPage({super.key, required this.tracker});
+  final SnowplowTracker tracker;
 
   @override
   ConsumerState<SplashPage> createState() => _SplashPageState();
@@ -48,7 +50,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+          MaterialPageRoute(builder: (context) => PatientDashboardPage(tracker: widget.tracker)),
           (route) => false,
         );
       }

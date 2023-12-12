@@ -9,9 +9,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:snowplow_tracker/snowplow_tracker.dart';
 
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.tracker});
+  final SnowplowTracker tracker;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,6 +32,9 @@ class MyApp extends ConsumerWidget {
         child: MaterialApp(
           title: AppText.appName,
           locale: const Locale('en'),
+          navigatorObservers: [
+            tracker.getObserver()
+          ],
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -43,7 +48,8 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          initialRoute: SplashPage.routeName,
+          // initialRoute: SplashPage.routeName,
+          home: SplashPage(tracker: tracker,),
           onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(

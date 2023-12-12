@@ -55,7 +55,7 @@ final getPatientProfileProvider =
               "patientId": 1201,
               "relation": "MOTHER",
               "parentPatientId": 1202,
-              "name": "Aditi Pandey",
+              "name": "Raghavi Pandey",
               "profilePicture": "assets/images/user.png",
               "age": 20,
               "regRef": "1-07b601cf-cc06-4ec1-95ca-d2d0dd16439b"

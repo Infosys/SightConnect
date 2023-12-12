@@ -10,6 +10,14 @@ var dioProvider = Provider(
   ),
 );
 
+var onboardingDioProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(
+      baseUrl: AppEnv.baseUrl2,
+    ),
+  ),
+);
+
 var authDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(

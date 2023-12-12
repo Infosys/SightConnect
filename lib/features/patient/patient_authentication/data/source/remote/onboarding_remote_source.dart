@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/models/profile_model.dart';
 
 var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
-  return PatientAuthRemoteSourceImpl(ref.read(dioProvider));
+  return PatientAuthRemoteSourceImpl(ref.read(onboardingDioProvider));
 });
 
 abstract class PatientAuthRemoteSource {

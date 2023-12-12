@@ -2,7 +2,7 @@ enum Env { DEV, PROD }
 
 class AppEnv {
   AppEnv._();
-  static Env env = Env.DEV;
+  static late Env env;
   static bool get isDev => env == Env.DEV;
 
   static void setupEnv(Env env) {
@@ -20,15 +20,15 @@ class AppEnv {
 
   static String get baseUrl {
     return switch (env) {
-      Env.DEV => 'http://localhost:8074/orchestration',
-      Env.PROD => 'http://localhost:8074/orchestration',
+      Env.DEV => 'http://localhost:8085',
+      Env.PROD => 'http://localhost:8085',
     };
   }
 
   static String get baseUrl2 {
     return switch (env) {
-      Env.DEV => 'https://eyecareforall.in/api/v1/',
-      Env.PROD => 'https://eyecareforall.in/api/v1/',
+      Env.DEV => 'http://localhost:8075/orchestration',
+      Env.PROD => 'http://localhost:8075/orchestration',
     };
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppRouter {
   static Map<String, Widget Function(BuildContext)> routes = {
-    SplashPage.routeName: (context) => const SplashPage(),
+    // SplashPage.routeName: (context) => const SplashPage(),
     AuthPage.routeName: (context) => const AuthPage(),
   };
 
