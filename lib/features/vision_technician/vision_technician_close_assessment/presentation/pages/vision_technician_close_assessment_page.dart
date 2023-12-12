@@ -4,6 +4,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +16,19 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    VTPatientModel? patient =
+        ref.watch(visionTechnicianSearchProvider).patientDetails;
+
+    if (patient == null) return const SizedBox();
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
         // backgroundColor: AppColor.primary,
         title: Text(
-          'Sumanta Chaudhury - OP 5356785',
+          '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(),
         ),
       ),

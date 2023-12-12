@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,7 +16,12 @@ class TimelineProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     VTPatientModel? patient =
-        ref.watch(registerNewPatientProvider).patientDetails;
+        ref.watch(visionTechnicianSearchProvider).patientDetails;
+    // VTPatientModel? patient =
+    //     ref.watch(registerNewPatientProvider).patientDetails;
+
+    if (patient == null) return SizedBox();
+
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
@@ -35,7 +40,7 @@ class TimelineProfile extends ConsumerWidget {
           const SizedBox(width: AppSize.kswidth),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
-              "${patient?.firstName} ${patient?.lastName}",
+              "${patient.firstName} ${patient.lastName}",
               softWrap: true,
               style: applyRobotoFont(
                   fontSize: 24,
@@ -44,7 +49,7 @@ class TimelineProfile extends ConsumerWidget {
             ),
             const SizedBox(height: AppSize.ksheight),
             Text(
-              "PID: OP ${patient?.patientId}",
+              "PID: OP ${patient.patientId}",
               softWrap: true,
               style: applyRobotoFont(
                 fontSize: 14,
@@ -53,33 +58,36 @@ class TimelineProfile extends ConsumerWidget {
               ),
             ),
           ]),
-          const SizedBox(width: AppSize.klwidth ),
+          const SizedBox(width: AppSize.klwidth),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Container(
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white12,
-                      ),
-                      child: const Icon(
-                        Icons.call_outlined,
-                        color: Colors.white,
-                        size: 18,
-                      )),
+                    padding: const EdgeInsets.all(AppSize.kspadding),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white12,
+                    ),
+                    child: const Icon(
+                      Icons.call_outlined,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
                   const SizedBox(
                     width: AppSize.ksheight,
                   ),
-                  Text("${patient?.mobileNo.toString()}",
-                      softWrap: true,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.white.withOpacity(0.8),
-                      )),
+                  Text(
+                    patient.mobileNo,
+                    softWrap: true,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.white.withOpacity(0.8),
+                    ),
+                  ),
                   const SizedBox(width: AppSize.klwidth * 3),
                   if (!Responsive.isMobile(context))
                     ElevatedButton(
@@ -97,26 +105,29 @@ class TimelineProfile extends ConsumerWidget {
               Row(
                 children: [
                   Container(
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white12,
-                      ),
-                      child: const Icon(
-                        Icons.email,
-                        color: Colors.white,
-                        size: 18,
-                      )),
+                    padding: const EdgeInsets.all(AppSize.kspadding),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white12,
+                    ),
+                    child: const Icon(
+                      Icons.email,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
                   const SizedBox(
                     width: AppSize.kswidth,
                   ),
-                  Text("${patient?.email}",
-                      softWrap: true,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.white.withOpacity(0.8),
-                      )),
+                  Text(
+                    patient.email,
+                    softWrap: true,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.white.withOpacity(0.8),
+                    ),
+                  ),
                 ],
               ),
               if (Responsive.isMobile(context))
@@ -125,9 +136,10 @@ class TimelineProfile extends ConsumerWidget {
                   child: Text(
                     "View Family",
                     style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.white),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.white,
+                    ),
                   ),
                 )
             ],

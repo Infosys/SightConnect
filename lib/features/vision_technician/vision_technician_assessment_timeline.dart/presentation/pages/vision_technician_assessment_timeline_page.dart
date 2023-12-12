@@ -46,22 +46,24 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
               ),
             ),
           ),
-          onPressed: closed
-              ? null
-              : () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const VisionTechnicianCloseAssessmentPage(),
-                    ),
-                  );
-                },
+          onPressed:
+              // closed
+              //     ? null
+              //     :
+              () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const VisionTechnicianCloseAssessmentPage(),
+              ),
+            );
+          },
           child: Text(
             "Close",
             style: applyRobotoFont(
               fontSize: 14,
-              color: closed ? AppColor.grey : AppColor.white,
+              // color: closed ? AppColor.grey : AppColor.white,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -89,39 +91,6 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
               const SizedBox(
                 height: AppSize.ksheight,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    // backgroundColor:
-                    //     closed ? AppColor.lightGrey : AppColor.shadowColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                    ),
-                  ),
-                  onPressed:
-                      //  closed
-                      //     ? null
-                      //     :
-                      () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const VisionTechnicianCloseAssessmentPage(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Close",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      // color: closed ? AppColor.grey : AppColor.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         ),
