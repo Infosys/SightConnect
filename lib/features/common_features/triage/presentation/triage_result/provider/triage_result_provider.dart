@@ -8,8 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
 import '../../../../../../main.dart';
 
-var triageResultProvider =
-    ChangeNotifierProvider.autoDispose.family<TriageResultProvider, TriageResponseModel>(
+var triageResultProvider = ChangeNotifierProvider.autoDispose
+    .family<TriageResultProvider, TriageResponseModel>(
   (ref, result) {
     final patient = ref.watch(getPatientProfileProvider).asData?.value.profile;
     return TriageResultProvider(result, patient);
@@ -25,13 +25,13 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   ProfileModel get profile => _profile!;
-  int? _questionnaireScore;
-  int? _visionAcuityScore;
-  int? _eyeScanScore;
+  double? _questionnaireScore;
+  double? _visionAcuityScore;
+  double? _eyeScanScore;
 
   Map<String, dynamic> getOverallTriageResult() {
     getCompleteTriageResultList();
-    int totalUrgency =
+    double totalUrgency =
         _questionnaireScore! + _visionAcuityScore! + _eyeScanScore!;
     logger.d("this is total urgency $totalUrgency");
     logger.d(
@@ -57,7 +57,7 @@ class TriageResultProvider extends ChangeNotifier {
     _questionnaireScore = 1;
     for (var questions in _model.questionResponse!) {
       for (var answer in questions.answer!) {
-        _questionnaireScore = max(_questionnaireScore!, answer.score!.toInt());
+        _questionnaireScore = max(_questionnaireScore!, answer.score!);
       }
       logger.d(
           "this is questionnaire score from inside method call $_questionnaireScore");
@@ -69,7 +69,7 @@ class TriageResultProvider extends ChangeNotifier {
   Map<String, dynamic> _getAcuityResult() {
     _visionAcuityScore = 1;
     for (var observation in _model.observations!) {
-      _visionAcuityScore = max(_visionAcuityScore!, observation.score!.toInt());
+      _visionAcuityScore = max(_visionAcuityScore!, observation.score!);
     }
     logger.d(
         "this is vision acuity score from inside method call $_visionAcuityScore");
@@ -79,7 +79,7 @@ class TriageResultProvider extends ChangeNotifier {
   Map<String, dynamic> _getEyeScanResult() {
     _eyeScanScore = 1;
     for (var observation in _model.imagingSelection!) {
-      _eyeScanScore = max(_eyeScanScore!, observation.score!.toInt());
+      _eyeScanScore = max(_eyeScanScore!, observation.score!);
     }
     logger.d("this is eye scan score from inside method call $_eyeScanScore");
     return _setPropertiesByUrgency(_eyeScanScore!.toDouble());
