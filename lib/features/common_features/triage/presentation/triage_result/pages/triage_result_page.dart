@@ -55,7 +55,6 @@ class TriageResultPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: AppSize.kmheight),
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
                   id: "${model.profile.patient?.abhaNumber ?? ""}",
