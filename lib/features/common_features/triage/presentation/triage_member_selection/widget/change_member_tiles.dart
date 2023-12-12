@@ -16,8 +16,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var memberProvider = ref.watch(traiageMemberProvider);
-    final selectedValue = useState<int>(-1);
+    var memberProvider = ref.watch(triageMemberProvider);
+    final selectedValue = useState<int>(0);
 
     return ref.watch(getPatientProfileProvider).when(
           data: (patient) {
@@ -109,7 +109,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   groupValue: selectedValue.value,
                   onChanged: (value) {
                     selectedValue.value = value!;
-                    memberProvider.setPeople(person);
+                    memberProvider.setTestPerson(person, 0);
                   },
                 ),
               ),
@@ -173,7 +173,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   groupValue: selectedValue.value,
                   onChanged: (value) {
                     selectedValue.value = value!;
-                    memberProvider.setPeople(person);
+                    memberProvider.setTestPerson(person, index - 1);
                   },
                 ),
               ),

@@ -1,0 +1,7 @@
+<svg id="mic" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+  <g id="Rectangle_7908" data-name="Rectangle 7908" fill="#fff" stroke="#888" stroke-width="1">
+    <rect width="56" height="56" rx="28" stroke="none"/>
+    <rect x="0.5" y="0.5" width="55" height="55" rx="27.5" fill="none"/>
+  </g>
+  <path id="Path_38539" data-name="Path 38539" d="M16,2a6,6,0,0,0-6,6v8a6,6,0,0,0,12,0V8A6,6,0,0,0,16,2Zm4,14a4,4,0,0,1-8,0V8a4,4,0,0,1,8,0ZM7,15a1,1,0,0,1,1,1,8,8,0,0,0,16,0,1,1,0,0,1,2,0,10,10,0,0,1-9,9.951c0,.016,0,.033,0,.049v3a1,1,0,0,1-2,0V26c0-.017,0-.033,0-.049A10,10,0,0,1,6,16,1,1,0,0,1,7,15Z" transform="translate(12 12)" fill="#333"/>
+</svg>

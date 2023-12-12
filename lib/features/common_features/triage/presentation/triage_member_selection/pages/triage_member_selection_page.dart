@@ -28,7 +28,9 @@ class TriageMemberSelectionPage extends HookWidget {
               height: AppSize.height(context) * 0.19,
               fit: BoxFit.fill,
             ),
-            SizedBox(height: AppSize.height(context) * 0.02),
+            SizedBox(
+              height: AppSize.height(context) * 0.02,
+            ),
             Text(
               'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
               style: applyRobotoFont(fontSize: 14),
@@ -58,11 +60,13 @@ class TriageMemberSelectionPage extends HookWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                            text: '+ ',
-                            style: applyRobotoFont(
-                                fontSize: 21,
-                                color: AppColor.primary,
-                                fontWeight: FontWeight.w300)),
+                          text: '+ ',
+                          style: applyRobotoFont(
+                            fontSize: 21,
+                            color: AppColor.primary,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
                         TextSpan(
                           text: 'Add Member',
                           style: applyRobotoFont(

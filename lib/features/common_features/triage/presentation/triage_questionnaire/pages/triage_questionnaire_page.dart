@@ -1,8 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/trige_questionnaire_other_symptoms_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/custom_popup.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/option_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
@@ -10,8 +14,8 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../domain/models/triage_assessment_model.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/option_grid.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
@@ -19,34 +23,25 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     required this.questionnaireSections,
     super.key,
   });
-
   final List<QuestionnaireSectionsResponseModel> questionnaireSections;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageController = usePageController();
     final scaffoldKey = useState(GlobalKey<ScaffoldState>());
     final model = ref.watch(triageQuestionnaireProvider);
     var pageIndex = useState<int>(0);
-    final isLastPage =
-        model.questionnaireSections.length - 1 == pageIndex.value;
-    final isButtonEnabled = model.selectedOptions.isNotEmpty;
-    ref.watch(triageQuestionnaireProvider).getQuestionnaire(
-          questionnaireSections,
-        );
-        
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (value) {
-        if (value) {
-          return;
-        }
-        showDialog(
+    model.selectedOptions.containsValue(true);
+    model.getQuestionnaire(questionnaireSections);
+
+    return WillPopScope(
+      onWillPop: () async {
+        var result = await showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
             content: context.loc!.questionnaireExitDialog,
           ),
         );
+        return result ?? false;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -81,7 +76,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               ),
               const SizedBox(width: AppSize.kswidth),
               Text(
-                context.loc!.questionnaireTitle,
+                AppLocalizations.of(context)!.questionnaireTitle,
                 style: applyFiraSansFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -100,76 +95,66 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 itemCount: model.questionnaireSections.length,
                 itemBuilder: (context, index) {
                   var questionnaire = model.questionnaireSections[index]
-                      .questionnaireResponseDTOList?.first;
+                      .questionnaireResponseDTOList;
 
                   return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          questionnaire?.description ?? "",
-                          style: applyFiraSansFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                    child: index == 0
+                        ? CustomPopUp(
+                            questionCode: questionnaire?.first.id ?? 0,
+                            onPageChanged: () {
+                              model.saveQuestionaireResponse();
+                              pageIndex.value += 1;
+                              pageController.nextPage(
+                                duration: const Duration(milliseconds: 1),
+                                curve: Curves.easeIn,
+                              );
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              OptionList(
+                                questions:
+                                    questionnaire!.first.questionResponseDTO ??
+                                        [],
+                                onPageChanged: () {
+                                  model.saveQuestionaireResponse();
+                                  if (pageIndex.value ==
+                                      model.questionnaireSections.length - 1) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (_) =>
+                                            const TriageQuestionnaireOtherSymptomPage(),
+                                      ),
+                                    ).then(
+                                      (value) async {
+                                        await model
+                                            .saveQuestionaireResponseToDB();
+                                        ref
+                                            .read(triageStepperProvider)
+                                            .goToNextStep();
+                                      },
+                                    );
+                                    pageIndex.value = 0;
+                                  }
+                                  pageIndex.value += 1;
+                                  pageController.animateToPage(
+                                    pageIndex.value,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeIn,
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        OptionGrid(
-                          pageNumber: index,
-                          questions: questionnaire?.questionResponseDTO ?? [],
-                        ),
-                        const SizedBox(height: AppSize.klheight),
-                        const SizedBox(
-                          height: AppSize.klheight,
-                        ),
-                      ],
-                    ),
                   );
                 },
               ),
             );
           },
-        ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
-          width: isLastPage
-              ? AppSize.width(context)
-              : AppSize.width(context) * 0.45,
-          child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-            ),
-            onPressed: !isButtonEnabled
-                ? null
-                : () {
-                    model.saveQuestionaireResponse();
-                    if (isLastPage) {
-                      ref
-                          .read(triageQuestionnaireProvider)
-                          .saveQuestionaireResponseToDB();
-                      ref.read(triageStepperProvider).goToNextStep();
-                      pageIndex.value = 0;
-                    } else {
-                      pageIndex.value = pageIndex.value + 1;
-                      pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn,
-                      );
-                    }
-                  },
-            child: Text(
-              isLastPage ? context.loc!.proceedButton : context.loc!.nextButton,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.white,
-              ),
-            ),
-          ),
         ),
       ),
     );

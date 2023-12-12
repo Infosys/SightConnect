@@ -61,17 +61,21 @@ class TriageRepositoryImpl implements TriageRepository {
       {required TriageResponseModel triage}) async {
     if (await networkInfo.isConnected()) {
       try {
-        logger.d({"message": "Internet is connected Saving triage to remote"});
-        final remoteResponse =
-            await remoteDataSource.saveTriage(triage: triage);
-        localDataSource.deleteTriage();
-
-        return Right(remoteResponse);
-      } on ServerException {
-        logger.d({"message": "ServerException Saving triage to local"});
+        // logger.d({"message": "Internet is connected Saving triage to remote"});
+        // final remoteResponse =
+        //     await remoteDataSource.saveTriage(triage: triage);
+        // localDataSource.deleteTriage();
         final localResponse =
             await localDataSource.saveTriageResponse(triageResponse: triage);
         return Right(localResponse);
+
+        //return Right(remoteResponse);
+      } on ServerException {
+        logger.d({"message": "ServerException Saving triage to local"});
+        // final localResponse =
+        //     await localDataSource.saveTriageResponse(triageResponse: triage);
+        // return Right(localResponse);
+        return Left(CacheFailure(errorMessage: 'No local data found'));
       }
     } else {
       try {

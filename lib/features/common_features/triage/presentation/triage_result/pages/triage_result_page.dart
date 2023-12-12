@@ -61,6 +61,7 @@ class TriageResultPage extends ConsumerWidget {
                   triageResult: model.getOverallTriageResult(),
                   id: "${model.profile.patient?.abhaNumber ?? ""}",
                   name: model.profile.patient?.name ?? "",
+                  patientImage: model.profile.patient?.profilePhoto ?? "",
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(

@@ -17,7 +17,9 @@
         "testName":"QUESTIONNAIRE"
     }],
     "cummulativeScore":10.0,   
-    "score":[{"QUESTIONNAIRE":8.0},{"OBSERVATION":1.0},{"IMAGING":1.5}],
+    "score":
+    
+    [{"QUESTIONNAIRE":8.0},{"OBSERVATION":1.0},{"IMAGING":1.5}],
     "imagingSelection": [
       {
         "identifier": 1,

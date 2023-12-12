@@ -21,6 +21,7 @@ abstract class TriageUrgencyRepository {
   TriageUrgency eyeScanUrgency(
     List<PostImagingSelectionModel> eyeScanResponse,
   );
+  int triageScore(TriageUrgency urgency);
 }
 
 var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
@@ -34,9 +35,9 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     TriageUrgency visualAcuityUrgency,
     TriageUrgency eyeScanUrgency,
   ) {
-    int score = _triageScore(quessionnaireUrgency) +
-        _triageScore(visualAcuityUrgency) +
-        _triageScore(eyeScanUrgency);
+    int score = triageScore(quessionnaireUrgency) +
+        triageScore(visualAcuityUrgency) +
+        triageScore(eyeScanUrgency);
     return _triageCompleteUrgency(score);
   }
 
@@ -44,11 +45,11 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageUrgency questionnaireUrgency(
       List<PostQuestionResponseModel> questionnaireResponse) {
     int questionnaireScore = 1;
-    questionnaireResponse.forEach((PostQuestionResponseModel questions) {
-      questions.answer!.forEach((answer) {
+    for (var questions in questionnaireResponse) {
+      for (var answer in questions.answer!) {
         questionnaireScore = max(questionnaireScore, answer.score!.toInt());
-      });
-    });
+      }
+    }
 
     return _triageUrgency(questionnaireScore);
   }
@@ -57,9 +58,9 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageUrgency visualAcuityUrgency(
       List<PostObservationsModel> visionAcuityResponse) {
     int visionAcuityScore = 1;
-    visionAcuityResponse.forEach((PostObservationsModel observation) {
+    for (var observation in visionAcuityResponse) {
       visionAcuityScore = max(visionAcuityScore, observation.score!.toInt());
-    });
+    }
     return _triageUrgency(visionAcuityScore);
   }
 
@@ -67,9 +68,9 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   TriageUrgency eyeScanUrgency(
       List<PostImagingSelectionModel> eyeScanResponse) {
     int eyeScanScore = 1;
-    eyeScanResponse.forEach((PostImagingSelectionModel observation) {
+    for (var observation in eyeScanResponse) {
       eyeScanScore = max(eyeScanScore, observation.score!.toInt());
-    });
+    }
     return _triageUrgency(eyeScanScore);
   }
 
@@ -97,7 +98,8 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     }
   }
 
-  int _triageScore(TriageUrgency urgency) {
+  @override
+  int triageScore(TriageUrgency urgency) {
     switch (urgency) {
       case TriageUrgency.EMERGENCY:
         return 3;

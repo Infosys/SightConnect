@@ -17,8 +17,10 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late String _questionnaireRemarks;
   late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
+
   List<String> allRemarks = ['', '', ''];
   TriageLocalSource triageLocalSource;
+  TextEditingController textEditingController = TextEditingController();
 
   TriageQuestionnaireProvider(this.triageLocalSource)
       : _questionnaireRemarks = '',
@@ -33,9 +35,8 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void setQuestionnaireRemarks(String remarks, currentPageIndex) {
-    _questionnaireRemarks = _questionnaireRemarks + remarks;
-    allRemarks.insert(currentPageIndex, remarks);
+  set questionnaireRemarks(String value) {
+    _questionnaireRemarks = value;
     notifyListeners();
   }
 
@@ -102,10 +103,11 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     return _questionResponseList;
   }
 
-  void saveQuestionaireResponseToDB() {
+  Future<void> saveQuestionaireResponseToDB() async {
     logger.f("Saving Questionnaire Response to DB");
-    triageLocalSource.saveTriageQuestionnaireLocally(
-        triageQuestionnaireResponse: getQuestionaireResponse());
+    await triageLocalSource.saveTriageQuestionnaireLocally(
+      triageQuestionnaireResponse: getQuestionaireResponse(),
+    );
     notifyListeners();
   }
 }

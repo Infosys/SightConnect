@@ -1,10 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ResultPageTopCard extends StatelessWidget {
   const ResultPageTopCard({
@@ -12,15 +10,17 @@ class ResultPageTopCard extends StatelessWidget {
     required this.triageResult,
     required this.name,
     required this.id,
+    required this.patientImage,
   });
   final Map<String, dynamic> triageResult;
   final String name;
   final String id;
- 
+  final String patientImage;
+
   @override
   Widget build(BuildContext context) {
-     DateTime dateToday = DateTime.now(); 
-     String formattedDate = DateFormat('d MMM yyyy').format(dateToday);
+    DateTime todayDate = DateTime.now();
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -113,7 +113,7 @@ class ResultPageTopCard extends StatelessWidget {
                         )),
                     const Spacer(),
                     Text(
-                      formattedDate,
+                      todayDate.formateDate,
                       style: applyRobotoFont(
                           fontSize: 12, fontWeight: FontWeight.w400),
                     ),
@@ -153,11 +153,13 @@ class ResultPageTopCard extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 40,
-                backgroundImage: AssetImage(
-                  AppImages.raghavi,
-                ),
+                backgroundImage: patientImage.isEmpty
+                    ? null
+                    : AssetImage(
+                        patientImage,
+                      ),
               ),
             ),
           )
