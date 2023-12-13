@@ -29,6 +29,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
         ),
         const SizedBox(height: AppSize.klheight),
         Container(
+           width: AppSize.width(context),
           decoration: const BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.all(
@@ -42,7 +43,8 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.location_on_outlined, color: AppColor.grey),
-                  Flexible(
+             SizedBox(
+                    width:AppSize.width(context)/2 ,
                     child: Text(
                       recommendedCenter.completeAddress,
                       overflow: TextOverflow.ellipsis,
@@ -62,18 +64,14 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Flexible(
-                          child:
-                              Icon(Icons.phone_outlined, color: AppColor.grey)),
-                      Flexible(
-                        child: Text(
-                          recommendedCenter.phoneno,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Icon(Icons.phone_outlined, color: AppColor.grey),
+                      Text(
+                        recommendedCenter.phoneno,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -89,7 +87,8 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                           color: AppColor.grey,
                         ),
                       ),
-                      Flexible(
+                      SizedBox(
+                          width:AppSize.width(context)/4,
                         child: Text(
                           recommendedCenter.time,
                           // softWrap: true,
