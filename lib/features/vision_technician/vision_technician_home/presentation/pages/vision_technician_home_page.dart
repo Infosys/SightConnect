@@ -13,6 +13,8 @@ import 'package:flutter_svg/svg.dart';
 class VisionTechnicianHomePage extends StatelessWidget {
   const VisionTechnicianHomePage({super.key});
 
+  static const routeName = '/vision-technician-home';
+
   @override
   Widget build(BuildContext context) {
     bool isMobile = Responsive.isMobile(context);
