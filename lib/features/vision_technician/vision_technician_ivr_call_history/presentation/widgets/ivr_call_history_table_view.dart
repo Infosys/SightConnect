@@ -29,11 +29,11 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
           height: AppSize.klheight,
         ),
         SizedBox(
-          width: double.infinity,
+            width: AppSize.width(context),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
-              columnSpacing: 8,
+             columnSpacing: AppSize.width(context)/10,
               horizontalMargin: 12,
               decoration: BoxDecoration(
                 color: AppColor.white,

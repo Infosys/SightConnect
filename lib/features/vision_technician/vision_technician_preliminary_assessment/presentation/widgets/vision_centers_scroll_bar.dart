@@ -17,7 +17,7 @@ class VisionCentersScrollBar extends ConsumerWidget {
     var firstcontroller = ScrollController();
     return Container(
       width: Responsive.isMobile(context)?AppSize.width(context): AppSize.width(context)/2,
-      height: Responsive.isMobile(context)?AppSize.height(context) / 4:AppSize.height(context) / 4,
+        height: Responsive.isMobile(context)?AppSize.height(context) / 5:Responsive.isTablet(context)?AppSize.height(context) / 4:AppSize.height(context) /2.5,
       padding: const EdgeInsets.all(AppSize.kspadding + 2),
       decoration: BoxDecoration(
         border: Border.all(color: AppColor.lightGrey),
