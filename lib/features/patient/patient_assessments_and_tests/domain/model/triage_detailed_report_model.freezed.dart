@@ -14,6 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+TriageDetailedReportModel _$TriageDetailedReportModelFromJson(
+    Map<String, dynamic> json) {
+  return _TriageDetailedReportModel.fromJson(json);
+}
+
 /// @nodoc
 mixin _$TriageDetailedReportModel {
   int? get encounterId => throw _privateConstructorUsedError;
@@ -43,6 +48,7 @@ mixin _$TriageDetailedReportModel {
   List<Media>? get media => throw _privateConstructorUsedError;
   List<CarePlan>? get carePlans => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TriageDetailedReportModelCopyWith<TriageDetailedReportModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -402,7 +408,7 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   const _$_TriageDetailedReportModel(
       {this.encounterId,
@@ -433,6 +439,9 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
         _observations = observations,
         _media = media,
         _carePlans = carePlans;
+
+  factory _$_TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TriageDetailedReportModelFromJson(json);
 
   @override
   final int? encounterId;
@@ -574,6 +583,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 .equals(other._carePlans, _carePlans));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -608,6 +618,13 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   _$$_TriageDetailedReportModelCopyWith<_$_TriageDetailedReportModel>
       get copyWith => __$$_TriageDetailedReportModelCopyWithImpl<
           _$_TriageDetailedReportModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TriageDetailedReportModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
@@ -635,6 +652,9 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
       final List<Observation>? observations,
       final List<Media>? media,
       final List<CarePlan>? carePlans}) = _$_TriageDetailedReportModel;
+
+  factory _TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =
+      _$_TriageDetailedReportModel.fromJson;
 
   @override
   int? get encounterId;

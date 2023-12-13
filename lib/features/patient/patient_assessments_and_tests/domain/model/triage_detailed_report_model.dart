@@ -53,6 +53,11 @@ class TriageDetailedReportModel with _$TriageDetailedReportModel {
 
      
   }) = _TriageDetailedReportModel;
+  factory TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =>
+      _$TriageDetailedReportModelFromJson(json);
+
+     
+  
   
 }
 

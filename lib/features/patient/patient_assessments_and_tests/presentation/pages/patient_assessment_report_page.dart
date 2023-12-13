@@ -12,13 +12,15 @@ import 'package:flutter/material.dart';
 
 import '../../data/fake_data_source.dart';
 
-class PatientAssessmentReportPage extends StatelessWidget {
+class PatientAssessmentReportPage extends ConsumerWidget {
   const PatientAssessmentReportPage({super.key, required this.index});
+
   final int index;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var currentData = data[index];
-    return Scaffold(
+    var model = ref.watch(triageReportProvider);
+    return model. ? CircularProgressIndicator(): Scaffold(
       appBar: CustomAppbar(
         title: Row(
           children: [

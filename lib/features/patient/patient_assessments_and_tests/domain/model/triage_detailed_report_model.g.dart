@@ -6,6 +6,123 @@ part of 'triage_detailed_report_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_TriageDetailedReportModel(
+      encounterId: json['encounterId'] as int?,
+      organizationCode: json['organizationCode'] as int?,
+      serviceType:
+          $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
+      encounterStatus: $enumDecodeNullable(
+          _$EncounterStatusEnumMap, json['encounterStatus']),
+      remarks: json['remarks'] as String?,
+      encounterPeriod: json['encounterPeriod'] == null
+          ? null
+          : EncounterPeriod.fromJson(
+              json['encounterPeriod'] as Map<String, dynamic>),
+      diagnosticReportId: json['diagnosticReportId'] as int?,
+      assessmentCode: json['assessmentCode'] as int?,
+      assessmentVersion: json['assessmentVersion'] as String?,
+      category: json['category'] as String?,
+      code: json['code'] as String?,
+      issued: const TimestampConverter().fromJson(json['issued'] as String?),
+      userStartDate:
+          const TimestampConverter().fromJson(json['userStartDate'] as String?),
+      source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
+      status:
+          $enumDecodeNullable(_$DiagnosticReportStatusEnumMap, json['status']),
+      sourceVersion: json['sourceVersion'] as String?,
+      performerId: json['performerId'] as int?,
+      performerRole:
+          $enumDecodeNullable(_$PerformerRoleEnumMap, json['performerRole']),
+      incompleteTests: (json['incompleteTests'] as List<dynamic>?)
+          ?.map((e) => IncompleteTest.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      responses: (json['responses'] as List<dynamic>?)
+          ?.map((e) => Response.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      observations: (json['observations'] as List<dynamic>?)
+          ?.map((e) => Observation.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      media: (json['media'] as List<dynamic>?)
+          ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      carePlans: (json['carePlans'] as List<dynamic>?)
+          ?.map((e) => CarePlan.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
+        _$_TriageDetailedReportModel instance) =>
+    <String, dynamic>{
+      'encounterId': instance.encounterId,
+      'organizationCode': instance.organizationCode,
+      'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
+      'encounterStatus': _$EncounterStatusEnumMap[instance.encounterStatus],
+      'remarks': instance.remarks,
+      'encounterPeriod': instance.encounterPeriod,
+      'diagnosticReportId': instance.diagnosticReportId,
+      'assessmentCode': instance.assessmentCode,
+      'assessmentVersion': instance.assessmentVersion,
+      'category': instance.category,
+      'code': instance.code,
+      'issued': const TimestampConverter().toJson(instance.issued),
+      'userStartDate':
+          const TimestampConverter().toJson(instance.userStartDate),
+      'source': _$SourceEnumMap[instance.source],
+      'status': _$DiagnosticReportStatusEnumMap[instance.status],
+      'sourceVersion': instance.sourceVersion,
+      'performerId': instance.performerId,
+      'performerRole': _$PerformerRoleEnumMap[instance.performerRole],
+      'incompleteTests': instance.incompleteTests,
+      'responses': instance.responses,
+      'observations': instance.observations,
+      'media': instance.media,
+      'carePlans': instance.carePlans,
+    };
+
+const _$ServiceTypeEnumMap = {
+  ServiceType.OPTOMETRY: 'OPTOMETRY',
+};
+
+const _$EncounterStatusEnumMap = {
+  EncounterStatus.IN_PROGRESS: 'IN_PROGRESS',
+  EncounterStatus.COMPLETED: 'COMPLETED',
+  EncounterStatus.CANCELLED: 'CANCELLED',
+};
+
+const _$SourceEnumMap = {
+  Source.PATIENT_APP: 'PATIENT_APP',
+  Source.VT_APP: 'VT_APP',
+  Source.VG_APP: 'VG_APP',
+  Source.IVR: 'IVR',
+  Source.IN_PERSON: 'IN_PERSON',
+  Source.OTHERS: 'OTHERS',
+};
+
+const _$DiagnosticReportStatusEnumMap = {
+  DiagnosticReportStatus.REGISTERED: 'REGISTERED',
+  DiagnosticReportStatus.PARTIAL: 'PARTIAL',
+  DiagnosticReportStatus.PRELIMINARY: 'PRELIMINARY',
+  DiagnosticReportStatus.FINAL: 'FINAL',
+  DiagnosticReportStatus.AMENDED: 'AMENDED',
+  DiagnosticReportStatus.CORRECTED: 'CORRECTED',
+  DiagnosticReportStatus.APPENDED: 'APPENDED',
+  DiagnosticReportStatus.CANCELLED: 'CANCELLED',
+  DiagnosticReportStatus.ENTERED_IN_ERROR: 'ENTERED_IN_ERROR',
+  DiagnosticReportStatus.UNKNOWN: 'UNKNOWN',
+};
+
+const _$PerformerRoleEnumMap = {
+  PerformerRole.MEDICAL_DOCTOR: 'MEDICAL_DOCTOR',
+  PerformerRole.MEDICAL_PRACTITIONER: 'MEDICAL_PRACTITIONER',
+  PerformerRole.VISION_TECHNICIAN: 'VISION_TECHNICIAN',
+  PerformerRole.VISION_GUARDIAN: 'VISION_GUARDIAN',
+  PerformerRole.NURSE: 'NURSE',
+  PerformerRole.SYSTEM: 'SYSTEM',
+  PerformerRole.PATIENT: 'PATIENT',
+};
+
 _$_EncounterPeriod _$$_EncounterPeriodFromJson(Map<String, dynamic> json) =>
     _$_EncounterPeriod(
       id: json['id'] as int,
