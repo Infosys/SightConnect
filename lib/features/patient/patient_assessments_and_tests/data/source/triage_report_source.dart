@@ -45,7 +45,7 @@ class TriageReportSourceImpl implements TriageReportSource {
   
 }
 
-var triagReportSource = Provider<TriageReportSource>(
+var triagReportSourceProvider = Provider<TriageReportSource>(
   (ref) => TriageReportSourceImpl(
     ref.watch(dioProvider),
   ),
