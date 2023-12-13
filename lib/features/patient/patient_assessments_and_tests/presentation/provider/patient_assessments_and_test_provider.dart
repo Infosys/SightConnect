@@ -1,44 +1,44 @@
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var assessmentsAndTestProvider =
-    ChangeNotifierProvider((ref) => AssessmentsAndTestProvider());
+var assessmentsAndTestProvider = ChangeNotifierProvider(
+  (ref) => AssessmentsAndTestProvider(
+    ref.watch(triageReportRepositoryProvider),
+  ),
+);
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
-  List<Map<String, dynamic>> data = [
-    {
-      'name': 'Raghavi Pandey',
-      'image': 'assets/images/connection_dp_one.png',
-      'about': 'Me,22 years',
-      'checkupType': "Routine Checkup",
-      'reminderMessage': "Post OPS Care",
-      "appointmentType": "IVR",
-      "MessageText":
-          "Cataract Surgery completed. Recommended to continue post operative care follow-ups.",
-    },
-    {
-      'name': 'Raghavi Pandey',
-      'image': 'assets/images/connection_dp_one.png',
-      'about': 'Me,22 years',
-      'checkupType': "Urgent Checkup",
-      'reminderMessage': "3rd Reminder Sent",
-      "appointmentType": "APP",
-      "MessageText":
-          "Hi Raghavi, this is a gentle reminder to visit an eye specialist to prevent eye problems in future.",
-    },
-    {
-      'name': 'Chunkey Pandey',
-      'image': 'assets/images/connection_dp_two.png',
-      'about': 'Father,65 years',
-      'checkupType': "Routine Checkup",
-      'reminderMessage': "Visit Vision Center",
-      "appointmentType": "IVR",
-      "MessageText":
-          "Patient consistently identifies the orientation of most “E” letters but struggles with a few.",
-    },
-  ];
+  final TriageReportRepository triageReportRepositoryProvider;
+  final int _patientId = 1;
+  List<TriageDetailedReportModel> _triageReports = [];
+
+  AssessmentsAndTestProvider(
+    this.triageReportRepositoryProvider,
+  ) {
+    getTriageReports();
+  }
+
+  getTriageReports() async {
+    var response = await triageReportRepositoryProvider
+        .getAllTriageReportsByPatientId(_patientId);
+    response.fold((failure) {
+      logger.d({
+        "getTriageReports ": failure,
+      });
+      throw failure;
+    }, (triageAssessment) {
+      _triageReports = triageAssessment;
+      notifyListeners();
+    });
+  }
+
+  get getTriageReportsData => _triageReports;
+
 
   List<Map<String, dynamic>> stateData = [];
   int selectedOption = 1;
