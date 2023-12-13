@@ -12,6 +12,37 @@ var assessmentsAndTestProvider = ChangeNotifierProvider(
   ),
 );
 
+var getEyeAssessmentReport = FutureProvider((ref) async {
+  const int patientId = 1;
+  var response = await ref
+      .watch(triageReportRepositoryProvider)
+      .getAllTriageReportsByPatientId(patientId);
+  return response.fold((failure) {
+    logger.d({
+      "getTriageReports ": failure,
+    });
+    throw failure;
+  }, (triageAssessment) {
+    return triageAssessment;
+  });
+});
+
+var getAssementDetailsReport =
+    FutureProvider.family((ref, assessmentCode) async {
+  const int patientId = 1;
+  var response = await ref
+      .watch(triageReportRepositoryProvider)
+      .getAllTriageReportsByPatientId(patientId);
+  return response.fold((failure) {
+    logger.d({
+      "getTriageReports ": failure,
+    });
+    throw failure;
+  }, (triageAssessment) {
+    return triageAssessment;
+  });
+});
+
 class AssessmentsAndTestProvider extends ChangeNotifier {
   final TriageReportRepository triageReportRepositoryProvider;
   final int _patientId = 1;
@@ -38,7 +69,6 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
   }
 
   get getTriageReportsData => _triageReports;
-
 
   List<Map<String, dynamic>> stateData = [];
   int selectedOption = 1;

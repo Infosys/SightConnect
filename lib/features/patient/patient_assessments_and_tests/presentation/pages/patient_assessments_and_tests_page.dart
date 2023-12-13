@@ -17,7 +17,6 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(assessmentsAndTestProvider);
     var selectedName = useState<String>(people[0]['name']);
-    // var isDropDownOpen = useState<bool>(false);
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text("Assessments and Tests"),
@@ -125,8 +124,24 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: AppSize.kmheight),
-            const Expanded(
-              child: AssessmentCards(),
+            Consumer(
+              builder: (context, ref, child) {
+                return ref.watch(getEyeAssessmentReport).when(
+                  data: (data) {
+                    return Expanded(
+                      child: AssessmentCards(
+                        data: data,
+                      ),
+                    );
+                  },
+                  error: (error, _) {
+                    return Text("No Data Found");
+                  },
+                  loading: () {
+                    return CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
