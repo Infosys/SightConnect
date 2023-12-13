@@ -28,24 +28,21 @@ class DashboardFilterCheckBoxes extends StatelessWidget {
             return Wrap(
               children: [
                 for (int index = 0; index < items.length; index++) ...[
-                  SizedBox(
-                    width: AppSize.width(context) * 0.4,
-                    child: CheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      title: Text(
-                        items[index]["type"] as String,
-                        style: applyRobotoFont(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.grey),
-                      ),
-                      value: items[index]["checked"] as bool,
-                      onChanged: (bool? value) {
-                        ref
-                            .read(visionTechnicianSearchFilterProvider.notifier)
-                            .toggleFilterBoxes(name, index);
-                      },
+                  CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text(
+                      items[index]["type"] as String,
+                      style: applyRobotoFont(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.grey),
                     ),
+                    value: items[index]["checked"] as bool,
+                    onChanged: (bool? value) {
+                      ref
+                          .read(visionTechnicianSearchFilterProvider.notifier)
+                          .toggleFilterBoxes(name, index);
+                    },
                   )
                 ],
               ],

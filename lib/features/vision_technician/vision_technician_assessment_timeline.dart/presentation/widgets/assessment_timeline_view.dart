@@ -12,8 +12,9 @@ class AssessmentTimelineView extends ConsumerWidget {
   AssessmentTimelineView({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-     List<AssessmentTimelineViewModel> timeLineList =ref.watch(assessmentTimelineProvider).timeLineList;
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<AssessmentTimelineViewModel> timeLineList =
+        ref.watch(assessmentTimelineProvider).timeLineList;
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
@@ -45,11 +46,14 @@ class AssessmentTimelineView extends ConsumerWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                timeLineList[index].title,
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.black,
+              SizedBox(
+                width: AppSize.width(context) / 5,
+                child: Text(
+                  timeLineList[index].title,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.black,
+                  ),
                 ),
               ),
               Text(

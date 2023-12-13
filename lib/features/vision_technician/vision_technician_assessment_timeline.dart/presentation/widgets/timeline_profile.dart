@@ -34,122 +34,116 @@ class TimelineProfile extends ConsumerWidget {
           Radius.circular(AppSize.klradius),
         ),
       ),
-      child: Row(
-        children: [
-          const CircleAvatar(radius: AppSize.klradius),
-          const SizedBox(width: AppSize.kswidth),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              "${patient.firstName} ${patient.lastName}",
-              // softWrap: true,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.white.withOpacity(0.8)),
-            ),
-            const SizedBox(height: AppSize.ksheight),
-            Text(
-              "PID: OP ${patient.patientId}",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColor.white.withOpacity(0.8),
-              ),
-            ),
-          ]),
-          const SizedBox(width: AppSize.klwidth),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: SizedBox(
+        width: AppSize.width(context),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white12,
-                    ),
-                    child: const Icon(
-                      Icons.call_outlined,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: AppSize.ksheight,
-                  ),
-                  Text(
-                    patient.mobileNo,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 14,
+              const CircleAvatar(radius: AppSize.klradius),
+              const SizedBox(width: AppSize.kswidth),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  "${patient.firstName} ${patient.lastName}",
+                  // softWrap: true,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                      fontSize: 24,
                       fontWeight: FontWeight.w400,
-                      color: AppColor.white.withOpacity(0.8),
-                    ),
+                      color: AppColor.white.withOpacity(0.8)),
+                ),
+                const SizedBox(height: AppSize.ksheight),
+                Text(
+                  "PID: OP ${patient.patientId}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.white.withOpacity(0.8),
                   ),
-                  const SizedBox(width: AppSize.klwidth * 3),
-                  if (!Responsive.isMobile(context))
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "View Family",
-                        style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.white),
+                ),
+              ]),
+              const SizedBox(width: AppSize.klwidth),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white12,
+                        ),
+                        child: const Icon(
+                          Icons.call_outlined,
+                          color: Colors.white,
+                          size: 18,
+                        ),
                       ),
-                    )
+                      const SizedBox(
+                        width: AppSize.ksheight,
+                      ),
+                      Text(
+                        patient.mobileNo,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.white.withOpacity(0.8),
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.klwidth * 3),
+                   
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            "View Family",
+                            style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.white),
+                          ),
+                        )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white12,
+                        ),
+                        child: const Icon(
+                          Icons.email,
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: AppSize.kswidth,
+                      ),
+                      Text(
+                        patient.email,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.white.withOpacity(0.8),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white12,
-                    ),
-                    child: const Icon(
-                      Icons.email,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: AppSize.kswidth,
-                  ),
-                  Text(
-                    patient.email,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.white.withOpacity(0.8),
-                    ),
-                  ),
-                ],
-              ),
-              if (Responsive.isMobile(context))
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "View Family",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.white,
-                    ),
-                  ),
-                )
             ],
           ),
-        ],
+        ),
       ),
     );
   }

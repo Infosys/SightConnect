@@ -79,11 +79,16 @@ class AssessmentTimeline extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Timeline: EA 010101",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  SizedBox(
+                    width: AppSize.width(context)/5,
+                    child: Text(
+                      "Timeline: EA 010101",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   Container(
@@ -109,12 +114,17 @@ class AssessmentTimeline extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                "Start Date: 11 Apr 2023, 10:20 AM",
-                style: applyRobotoFont(
-                  color: AppColor.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+              SizedBox(
+                width: AppSize.width(context)/5,
+                child: Text(
+                  "Start Date: 11 Apr 2023, 10:20 AM",
+                  style: applyRobotoFont(
+                    color: AppColor.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                   overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                 ),
               ),
               const SizedBox(
