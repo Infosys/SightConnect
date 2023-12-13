@@ -11,6 +11,7 @@ var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
 abstract class PatientAuthRemoteSource {
   Future<PatientModel> onboardPatient(PatientModel patientDTO);
   Future<PatientResponseModel> getPatientProfile(int patientId);
+  Future<PatientResponseModel> updatePatientProfile(PatientModel patientDTO);
 }
 
 class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
@@ -41,4 +42,19 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       rethrow;
     }
   }
+
+  @override
+  Future<PatientResponseModel> updatePatientProfile(
+      PatientModel patientDTO) async {
+    var endpoint = "/api/patients/${patientDTO.id}";
+
+    var response = await _dio.post(endpoint, data: patientDTO.toJson());
+
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return PatientResponseModel.fromJson(response.data);
+    } else {
+      throw Exception("Failed to update patient");
+    }
+  }
+
 }

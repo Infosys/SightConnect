@@ -66,6 +66,8 @@ class PatientResponseModel with _$PatientResponseModel {
 @freezed
 class PatientModel with _$PatientModel {
   const factory PatientModel({
+    int? id,
+    String? regRef,
     String? counterId,
     String? hprID,
     String? hipCode,

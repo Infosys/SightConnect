@@ -3,13 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
-  Future<TriageAssessmentModel> getTriage();
+  Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
 }
 
@@ -18,7 +19,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
 
   @override
-  Future<TriageAssessmentModel> getTriage() async {
+  Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
     var endpoint = "/api/careQuestionnaireGenerator";
     logger.d({
       "API getTriageQuestionnaire": endpoint,
@@ -32,15 +33,15 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     };
 
     // var response = await dio.get(endpoint, queryParameters: bodyData);
-    var response = await rootBundle.loadString("assets/new_assessment.json");
+    var response = await rootBundle.loadString("assets/triage_assessment.json");
     // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return TriageAssessmentModel.fromJson(response.data);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     // } else {
     //   throw ServerException();
     // }
     if (response.isNotEmpty) {
       var data = jsonDecode(response);
-      return TriageAssessmentModel.fromJson(data);
+      return DiagnosticReportTemplateFHIRModel.fromJson(data);
     } else {
       throw ServerException();
     }

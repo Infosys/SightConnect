@@ -44,7 +44,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
           case 0:
             return TriageQuestionnairePage(
               questionnaireSections:
-                  data.questionnaireSectionsResponseDTOList ?? [],
+                  data.questionnaire?.questionnaireItem ?? [],
             );
           case 1:
             ref.read(globalProvider).setHideTumblingElement = false;
@@ -54,7 +54,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
           default:
             return TriageQuestionnairePage(
               questionnaireSections:
-                  data.questionnaireSectionsResponseDTOList ?? [],
+                  data.questionnaire?.questionnaireItem ?? [],
             );
         }
       },

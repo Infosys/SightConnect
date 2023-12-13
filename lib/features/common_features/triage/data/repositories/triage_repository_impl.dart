@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
@@ -30,14 +31,14 @@ class TriageRepositoryImpl implements TriageRepository {
   );
 
   @override
-  Future<Either<Failure, TriageAssessmentModel>> getTriage() async {
+  Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> getTriage() async {
     if (await networkInfo.isConnected()) {
       try {
         logger
             .d({"message": "Internet is connected Getting triage from remote"});
         final remoteResponse = await remoteDataSource.getTriage();
 
-        localDataSource.saveTriage(triage: remoteResponse);
+        // localDataSource.saveTriage(triage: remoteResponse);
 
         return Right(remoteResponse);
       } on ServerException {

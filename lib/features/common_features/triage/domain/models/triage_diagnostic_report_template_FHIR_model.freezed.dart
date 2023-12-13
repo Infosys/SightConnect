@@ -23,6 +23,7 @@ DiagnosticReportTemplateFHIRModel _$DiagnosticReportTemplateFHIRModelFromJson(
 mixin _$DiagnosticReportTemplateFHIRModel {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+  int? get organizationCode => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   BodySite? get bodySite => throw _privateConstructorUsedError;
   TestCode? get code => throw _privateConstructorUsedError;
@@ -32,9 +33,7 @@ mixin _$DiagnosticReportTemplateFHIRModel {
       throw _privateConstructorUsedError;
   QuestionnaireFHIRModel? get questionnaire =>
       throw _privateConstructorUsedError;
-  LanguageBasedTextModel? get languageBasedText =>
-      throw _privateConstructorUsedError;
-  ObservationValueWeightModel? get observationValueWeight =>
+  List<ObservationValueWeightModel>? get observationValueWeight =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,6 +53,7 @@ abstract class $DiagnosticReportTemplateFHIRModelCopyWith<$Res> {
   $Res call(
       {int? id,
       String? name,
+      int? organizationCode,
       Category? category,
       BodySite? bodySite,
       TestCode? code,
@@ -61,14 +61,11 @@ abstract class $DiagnosticReportTemplateFHIRModelCopyWith<$Res> {
       ImagingStudyFHIRModel? study,
       ObservationDefinitionFHIRModel? observations,
       QuestionnaireFHIRModel? questionnaire,
-      LanguageBasedTextModel? languageBasedText,
-      ObservationValueWeightModel? observationValueWeight});
+      List<ObservationValueWeightModel>? observationValueWeight});
 
   $ImagingStudyFHIRModelCopyWith<$Res>? get study;
   $ObservationDefinitionFHIRModelCopyWith<$Res>? get observations;
   $QuestionnaireFHIRModelCopyWith<$Res>? get questionnaire;
-  $LanguageBasedTextModelCopyWith<$Res>? get languageBasedText;
-  $ObservationValueWeightModelCopyWith<$Res>? get observationValueWeight;
 }
 
 /// @nodoc
@@ -87,6 +84,7 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? organizationCode = freezed,
     Object? category = freezed,
     Object? bodySite = freezed,
     Object? code = freezed,
@@ -94,7 +92,6 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
     Object? study = freezed,
     Object? observations = freezed,
     Object? questionnaire = freezed,
-    Object? languageBasedText = freezed,
     Object? observationValueWeight = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,6 +103,10 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      organizationCode: freezed == organizationCode
+          ? _value.organizationCode
+          : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -134,14 +135,10 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
           ? _value.questionnaire
           : questionnaire // ignore: cast_nullable_to_non_nullable
               as QuestionnaireFHIRModel?,
-      languageBasedText: freezed == languageBasedText
-          ? _value.languageBasedText
-          : languageBasedText // ignore: cast_nullable_to_non_nullable
-              as LanguageBasedTextModel?,
       observationValueWeight: freezed == observationValueWeight
           ? _value.observationValueWeight
           : observationValueWeight // ignore: cast_nullable_to_non_nullable
-              as ObservationValueWeightModel?,
+              as List<ObservationValueWeightModel>?,
     ) as $Val);
   }
 
@@ -182,32 +179,6 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
       return _then(_value.copyWith(questionnaire: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LanguageBasedTextModelCopyWith<$Res>? get languageBasedText {
-    if (_value.languageBasedText == null) {
-      return null;
-    }
-
-    return $LanguageBasedTextModelCopyWith<$Res>(_value.languageBasedText!,
-        (value) {
-      return _then(_value.copyWith(languageBasedText: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ObservationValueWeightModelCopyWith<$Res>? get observationValueWeight {
-    if (_value.observationValueWeight == null) {
-      return null;
-    }
-
-    return $ObservationValueWeightModelCopyWith<$Res>(
-        _value.observationValueWeight!, (value) {
-      return _then(_value.copyWith(observationValueWeight: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -222,6 +193,7 @@ abstract class _$$_DiagnosticReportTemplateFHIRModelCopyWith<$Res>
   $Res call(
       {int? id,
       String? name,
+      int? organizationCode,
       Category? category,
       BodySite? bodySite,
       TestCode? code,
@@ -229,8 +201,7 @@ abstract class _$$_DiagnosticReportTemplateFHIRModelCopyWith<$Res>
       ImagingStudyFHIRModel? study,
       ObservationDefinitionFHIRModel? observations,
       QuestionnaireFHIRModel? questionnaire,
-      LanguageBasedTextModel? languageBasedText,
-      ObservationValueWeightModel? observationValueWeight});
+      List<ObservationValueWeightModel>? observationValueWeight});
 
   @override
   $ImagingStudyFHIRModelCopyWith<$Res>? get study;
@@ -238,10 +209,6 @@ abstract class _$$_DiagnosticReportTemplateFHIRModelCopyWith<$Res>
   $ObservationDefinitionFHIRModelCopyWith<$Res>? get observations;
   @override
   $QuestionnaireFHIRModelCopyWith<$Res>? get questionnaire;
-  @override
-  $LanguageBasedTextModelCopyWith<$Res>? get languageBasedText;
-  @override
-  $ObservationValueWeightModelCopyWith<$Res>? get observationValueWeight;
 }
 
 /// @nodoc
@@ -259,6 +226,7 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? organizationCode = freezed,
     Object? category = freezed,
     Object? bodySite = freezed,
     Object? code = freezed,
@@ -266,7 +234,6 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
     Object? study = freezed,
     Object? observations = freezed,
     Object? questionnaire = freezed,
-    Object? languageBasedText = freezed,
     Object? observationValueWeight = freezed,
   }) {
     return _then(_$_DiagnosticReportTemplateFHIRModel(
@@ -278,6 +245,10 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      organizationCode: freezed == organizationCode
+          ? _value.organizationCode
+          : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -306,14 +277,10 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
           ? _value.questionnaire
           : questionnaire // ignore: cast_nullable_to_non_nullable
               as QuestionnaireFHIRModel?,
-      languageBasedText: freezed == languageBasedText
-          ? _value.languageBasedText
-          : languageBasedText // ignore: cast_nullable_to_non_nullable
-              as LanguageBasedTextModel?,
       observationValueWeight: freezed == observationValueWeight
-          ? _value.observationValueWeight
+          ? _value._observationValueWeight
           : observationValueWeight // ignore: cast_nullable_to_non_nullable
-              as ObservationValueWeightModel?,
+              as List<ObservationValueWeightModel>?,
     ));
   }
 }
@@ -325,6 +292,7 @@ class _$_DiagnosticReportTemplateFHIRModel
   const _$_DiagnosticReportTemplateFHIRModel(
       {this.id,
       this.name,
+      this.organizationCode,
       this.category,
       this.bodySite,
       this.code,
@@ -332,8 +300,8 @@ class _$_DiagnosticReportTemplateFHIRModel
       this.study,
       this.observations,
       this.questionnaire,
-      this.languageBasedText,
-      this.observationValueWeight});
+      final List<ObservationValueWeightModel>? observationValueWeight})
+      : _observationValueWeight = observationValueWeight;
 
   factory _$_DiagnosticReportTemplateFHIRModel.fromJson(
           Map<String, dynamic> json) =>
@@ -343,6 +311,8 @@ class _$_DiagnosticReportTemplateFHIRModel
   final int? id;
   @override
   final String? name;
+  @override
+  final int? organizationCode;
   @override
   final Category? category;
   @override
@@ -357,14 +327,20 @@ class _$_DiagnosticReportTemplateFHIRModel
   final ObservationDefinitionFHIRModel? observations;
   @override
   final QuestionnaireFHIRModel? questionnaire;
+  final List<ObservationValueWeightModel>? _observationValueWeight;
   @override
-  final LanguageBasedTextModel? languageBasedText;
-  @override
-  final ObservationValueWeightModel? observationValueWeight;
+  List<ObservationValueWeightModel>? get observationValueWeight {
+    final value = _observationValueWeight;
+    if (value == null) return null;
+    if (_observationValueWeight is EqualUnmodifiableListView)
+      return _observationValueWeight;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'DiagnosticReportTemplateFHIRModel(id: $id, name: $name, category: $category, bodySite: $bodySite, code: $code, version: $version, study: $study, observations: $observations, questionnaire: $questionnaire, languageBasedText: $languageBasedText, observationValueWeight: $observationValueWeight)';
+    return 'DiagnosticReportTemplateFHIRModel(id: $id, name: $name, organizationCode: $organizationCode, category: $category, bodySite: $bodySite, code: $code, version: $version, study: $study, observations: $observations, questionnaire: $questionnaire, observationValueWeight: $observationValueWeight)';
   }
 
   @override
@@ -374,6 +350,8 @@ class _$_DiagnosticReportTemplateFHIRModel
             other is _$_DiagnosticReportTemplateFHIRModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.organizationCode, organizationCode) ||
+                other.organizationCode == organizationCode) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.bodySite, bodySite) ||
@@ -385,10 +363,8 @@ class _$_DiagnosticReportTemplateFHIRModel
                 other.observations == observations) &&
             (identical(other.questionnaire, questionnaire) ||
                 other.questionnaire == questionnaire) &&
-            (identical(other.languageBasedText, languageBasedText) ||
-                other.languageBasedText == languageBasedText) &&
-            (identical(other.observationValueWeight, observationValueWeight) ||
-                other.observationValueWeight == observationValueWeight));
+            const DeepCollectionEquality().equals(
+                other._observationValueWeight, _observationValueWeight));
   }
 
   @JsonKey(ignore: true)
@@ -397,6 +373,7 @@ class _$_DiagnosticReportTemplateFHIRModel
       runtimeType,
       id,
       name,
+      organizationCode,
       category,
       bodySite,
       code,
@@ -404,8 +381,7 @@ class _$_DiagnosticReportTemplateFHIRModel
       study,
       observations,
       questionnaire,
-      languageBasedText,
-      observationValueWeight);
+      const DeepCollectionEquality().hash(_observationValueWeight));
 
   @JsonKey(ignore: true)
   @override
@@ -428,6 +404,7 @@ abstract class _DiagnosticReportTemplateFHIRModel
   const factory _DiagnosticReportTemplateFHIRModel(
           {final int? id,
           final String? name,
+          final int? organizationCode,
           final Category? category,
           final BodySite? bodySite,
           final TestCode? code,
@@ -435,8 +412,7 @@ abstract class _DiagnosticReportTemplateFHIRModel
           final ImagingStudyFHIRModel? study,
           final ObservationDefinitionFHIRModel? observations,
           final QuestionnaireFHIRModel? questionnaire,
-          final LanguageBasedTextModel? languageBasedText,
-          final ObservationValueWeightModel? observationValueWeight}) =
+          final List<ObservationValueWeightModel>? observationValueWeight}) =
       _$_DiagnosticReportTemplateFHIRModel;
 
   factory _DiagnosticReportTemplateFHIRModel.fromJson(
@@ -447,6 +423,8 @@ abstract class _DiagnosticReportTemplateFHIRModel
   int? get id;
   @override
   String? get name;
+  @override
+  int? get organizationCode;
   @override
   Category? get category;
   @override
@@ -462,9 +440,7 @@ abstract class _DiagnosticReportTemplateFHIRModel
   @override
   QuestionnaireFHIRModel? get questionnaire;
   @override
-  LanguageBasedTextModel? get languageBasedText;
-  @override
-  ObservationValueWeightModel? get observationValueWeight;
+  List<ObservationValueWeightModel>? get observationValueWeight;
   @override
   @JsonKey(ignore: true)
   _$$_DiagnosticReportTemplateFHIRModelCopyWith<
@@ -483,6 +459,8 @@ mixin _$ImagingStudyFHIRModel {
   String? get description => throw _privateConstructorUsedError;
   List<ImagingSelectionTemplateFHIRModel>? get imagingSelectionTemplate =>
       throw _privateConstructorUsedError;
+  List<LanguageBasedTextModel>? get languageBasedText =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -499,7 +477,8 @@ abstract class $ImagingStudyFHIRModelCopyWith<$Res> {
   $Res call(
       {int? id,
       String? description,
-      List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate});
+      List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate,
+      List<LanguageBasedTextModel>? languageBasedText});
 }
 
 /// @nodoc
@@ -519,6 +498,7 @@ class _$ImagingStudyFHIRModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? description = freezed,
     Object? imagingSelectionTemplate = freezed,
+    Object? languageBasedText = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -533,6 +513,10 @@ class _$ImagingStudyFHIRModelCopyWithImpl<$Res,
           ? _value.imagingSelectionTemplate
           : imagingSelectionTemplate // ignore: cast_nullable_to_non_nullable
               as List<ImagingSelectionTemplateFHIRModel>?,
+      languageBasedText: freezed == languageBasedText
+          ? _value.languageBasedText
+          : languageBasedText // ignore: cast_nullable_to_non_nullable
+              as List<LanguageBasedTextModel>?,
     ) as $Val);
   }
 }
@@ -548,7 +532,8 @@ abstract class _$$_ImagingStudyFHIRModelCopyWith<$Res>
   $Res call(
       {int? id,
       String? description,
-      List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate});
+      List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate,
+      List<LanguageBasedTextModel>? languageBasedText});
 }
 
 /// @nodoc
@@ -565,6 +550,7 @@ class __$$_ImagingStudyFHIRModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? description = freezed,
     Object? imagingSelectionTemplate = freezed,
+    Object? languageBasedText = freezed,
   }) {
     return _then(_$_ImagingStudyFHIRModel(
       id: freezed == id
@@ -579,6 +565,10 @@ class __$$_ImagingStudyFHIRModelCopyWithImpl<$Res>
           ? _value._imagingSelectionTemplate
           : imagingSelectionTemplate // ignore: cast_nullable_to_non_nullable
               as List<ImagingSelectionTemplateFHIRModel>?,
+      languageBasedText: freezed == languageBasedText
+          ? _value._languageBasedText
+          : languageBasedText // ignore: cast_nullable_to_non_nullable
+              as List<LanguageBasedTextModel>?,
     ));
   }
 }
@@ -589,8 +579,10 @@ class _$_ImagingStudyFHIRModel implements _ImagingStudyFHIRModel {
   const _$_ImagingStudyFHIRModel(
       {this.id,
       this.description,
-      final List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate})
-      : _imagingSelectionTemplate = imagingSelectionTemplate;
+      final List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate,
+      final List<LanguageBasedTextModel>? languageBasedText})
+      : _imagingSelectionTemplate = imagingSelectionTemplate,
+        _languageBasedText = languageBasedText;
 
   factory _$_ImagingStudyFHIRModel.fromJson(Map<String, dynamic> json) =>
       _$$_ImagingStudyFHIRModelFromJson(json);
@@ -610,9 +602,20 @@ class _$_ImagingStudyFHIRModel implements _ImagingStudyFHIRModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<LanguageBasedTextModel>? _languageBasedText;
+  @override
+  List<LanguageBasedTextModel>? get languageBasedText {
+    final value = _languageBasedText;
+    if (value == null) return null;
+    if (_languageBasedText is EqualUnmodifiableListView)
+      return _languageBasedText;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'ImagingStudyFHIRModel(id: $id, description: $description, imagingSelectionTemplate: $imagingSelectionTemplate)';
+    return 'ImagingStudyFHIRModel(id: $id, description: $description, imagingSelectionTemplate: $imagingSelectionTemplate, languageBasedText: $languageBasedText)';
   }
 
   @override
@@ -624,13 +627,19 @@ class _$_ImagingStudyFHIRModel implements _ImagingStudyFHIRModel {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(
-                other._imagingSelectionTemplate, _imagingSelectionTemplate));
+                other._imagingSelectionTemplate, _imagingSelectionTemplate) &&
+            const DeepCollectionEquality()
+                .equals(other._languageBasedText, _languageBasedText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, description,
-      const DeepCollectionEquality().hash(_imagingSelectionTemplate));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      description,
+      const DeepCollectionEquality().hash(_imagingSelectionTemplate),
+      const DeepCollectionEquality().hash(_languageBasedText));
 
   @JsonKey(ignore: true)
   @override
@@ -651,8 +660,9 @@ abstract class _ImagingStudyFHIRModel implements ImagingStudyFHIRModel {
   const factory _ImagingStudyFHIRModel(
       {final int? id,
       final String? description,
-      final List<ImagingSelectionTemplateFHIRModel>?
-          imagingSelectionTemplate}) = _$_ImagingStudyFHIRModel;
+      final List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate,
+      final List<LanguageBasedTextModel>?
+          languageBasedText}) = _$_ImagingStudyFHIRModel;
 
   factory _ImagingStudyFHIRModel.fromJson(Map<String, dynamic> json) =
       _$_ImagingStudyFHIRModel.fromJson;
@@ -663,6 +673,8 @@ abstract class _ImagingStudyFHIRModel implements ImagingStudyFHIRModel {
   String? get description;
   @override
   List<ImagingSelectionTemplateFHIRModel>? get imagingSelectionTemplate;
+  @override
+  List<LanguageBasedTextModel>? get languageBasedText;
   @override
   @JsonKey(ignore: true)
   _$$_ImagingStudyFHIRModelCopyWith<_$_ImagingStudyFHIRModel> get copyWith =>
@@ -1173,6 +1185,8 @@ mixin _$ObservationDefinitionFHIRModel {
       throw _privateConstructorUsedError;
   List<QualifiedValueModel>? get qualifiedValue =>
       throw _privateConstructorUsedError;
+  List<LanguageBasedTextModel>? get languageBasedText =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1199,7 +1213,8 @@ abstract class $ObservationDefinitionFHIRModelCopyWith<$Res> {
       ObservationDefinitionModel? observationDefinition,
       List<DataComponentFHIRModel>? dataComponent,
       List<RelatedImageFHIRModel>? relatedImage,
-      List<QualifiedValueModel>? qualifiedValue});
+      List<QualifiedValueModel>? qualifiedValue,
+      List<LanguageBasedTextModel>? languageBasedText});
 
   $ObservationDefinitionModelCopyWith<$Res>? get observationDefinition;
 }
@@ -1229,6 +1244,7 @@ class _$ObservationDefinitionFHIRModelCopyWithImpl<$Res,
     Object? dataComponent = freezed,
     Object? relatedImage = freezed,
     Object? qualifiedValue = freezed,
+    Object? languageBasedText = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1275,6 +1291,10 @@ class _$ObservationDefinitionFHIRModelCopyWithImpl<$Res,
           ? _value.qualifiedValue
           : qualifiedValue // ignore: cast_nullable_to_non_nullable
               as List<QualifiedValueModel>?,
+      languageBasedText: freezed == languageBasedText
+          ? _value.languageBasedText
+          : languageBasedText // ignore: cast_nullable_to_non_nullable
+              as List<LanguageBasedTextModel>?,
     ) as $Val);
   }
 
@@ -1312,7 +1332,8 @@ abstract class _$$_ObservationDefinitionFHIRModelCopyWith<$Res>
       ObservationDefinitionModel? observationDefinition,
       List<DataComponentFHIRModel>? dataComponent,
       List<RelatedImageFHIRModel>? relatedImage,
-      List<QualifiedValueModel>? qualifiedValue});
+      List<QualifiedValueModel>? qualifiedValue,
+      List<LanguageBasedTextModel>? languageBasedText});
 
   @override
   $ObservationDefinitionModelCopyWith<$Res>? get observationDefinition;
@@ -1342,6 +1363,7 @@ class __$$_ObservationDefinitionFHIRModelCopyWithImpl<$Res>
     Object? dataComponent = freezed,
     Object? relatedImage = freezed,
     Object? qualifiedValue = freezed,
+    Object? languageBasedText = freezed,
   }) {
     return _then(_$_ObservationDefinitionFHIRModel(
       id: freezed == id
@@ -1388,6 +1410,10 @@ class __$$_ObservationDefinitionFHIRModelCopyWithImpl<$Res>
           ? _value._qualifiedValue
           : qualifiedValue // ignore: cast_nullable_to_non_nullable
               as List<QualifiedValueModel>?,
+      languageBasedText: freezed == languageBasedText
+          ? _value._languageBasedText
+          : languageBasedText // ignore: cast_nullable_to_non_nullable
+              as List<LanguageBasedTextModel>?,
     ));
   }
 }
@@ -1407,10 +1433,12 @@ class _$_ObservationDefinitionFHIRModel
       this.observationDefinition,
       final List<DataComponentFHIRModel>? dataComponent,
       final List<RelatedImageFHIRModel>? relatedImage,
-      final List<QualifiedValueModel>? qualifiedValue})
+      final List<QualifiedValueModel>? qualifiedValue,
+      final List<LanguageBasedTextModel>? languageBasedText})
       : _dataComponent = dataComponent,
         _relatedImage = relatedImage,
-        _qualifiedValue = qualifiedValue;
+        _qualifiedValue = qualifiedValue,
+        _languageBasedText = languageBasedText;
 
   factory _$_ObservationDefinitionFHIRModel.fromJson(
           Map<String, dynamic> json) =>
@@ -1462,9 +1490,20 @@ class _$_ObservationDefinitionFHIRModel
     return EqualUnmodifiableListView(value);
   }
 
+  final List<LanguageBasedTextModel>? _languageBasedText;
+  @override
+  List<LanguageBasedTextModel>? get languageBasedText {
+    final value = _languageBasedText;
+    if (value == null) return null;
+    if (_languageBasedText is EqualUnmodifiableListView)
+      return _languageBasedText;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'ObservationDefinitionFHIRModel(id: $id, name: $name, category: $category, bodySite: $bodySite, code: $code, method: $method, jurisdiction: $jurisdiction, observationDefinition: $observationDefinition, dataComponent: $dataComponent, relatedImage: $relatedImage, qualifiedValue: $qualifiedValue)';
+    return 'ObservationDefinitionFHIRModel(id: $id, name: $name, category: $category, bodySite: $bodySite, code: $code, method: $method, jurisdiction: $jurisdiction, observationDefinition: $observationDefinition, dataComponent: $dataComponent, relatedImage: $relatedImage, qualifiedValue: $qualifiedValue, languageBasedText: $languageBasedText)';
   }
 
   @override
@@ -1489,7 +1528,9 @@ class _$_ObservationDefinitionFHIRModel
             const DeepCollectionEquality()
                 .equals(other._relatedImage, _relatedImage) &&
             const DeepCollectionEquality()
-                .equals(other._qualifiedValue, _qualifiedValue));
+                .equals(other._qualifiedValue, _qualifiedValue) &&
+            const DeepCollectionEquality()
+                .equals(other._languageBasedText, _languageBasedText));
   }
 
   @JsonKey(ignore: true)
@@ -1506,7 +1547,8 @@ class _$_ObservationDefinitionFHIRModel
       observationDefinition,
       const DeepCollectionEquality().hash(_dataComponent),
       const DeepCollectionEquality().hash(_relatedImage),
-      const DeepCollectionEquality().hash(_qualifiedValue));
+      const DeepCollectionEquality().hash(_qualifiedValue),
+      const DeepCollectionEquality().hash(_languageBasedText));
 
   @JsonKey(ignore: true)
   @override
@@ -1536,7 +1578,8 @@ abstract class _ObservationDefinitionFHIRModel
           final ObservationDefinitionModel? observationDefinition,
           final List<DataComponentFHIRModel>? dataComponent,
           final List<RelatedImageFHIRModel>? relatedImage,
-          final List<QualifiedValueModel>? qualifiedValue}) =
+          final List<QualifiedValueModel>? qualifiedValue,
+          final List<LanguageBasedTextModel>? languageBasedText}) =
       _$_ObservationDefinitionFHIRModel;
 
   factory _ObservationDefinitionFHIRModel.fromJson(Map<String, dynamic> json) =
@@ -1564,6 +1607,8 @@ abstract class _ObservationDefinitionFHIRModel
   List<RelatedImageFHIRModel>? get relatedImage;
   @override
   List<QualifiedValueModel>? get qualifiedValue;
+  @override
+  List<LanguageBasedTextModel>? get languageBasedText;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationDefinitionFHIRModelCopyWith<_$_ObservationDefinitionFHIRModel>
@@ -3967,9 +4012,12 @@ mixin _$QuestionnaireItemFHIRModel {
   QuestionnaireModel? get questionnaire => throw _privateConstructorUsedError;
   QuestionnaireItemModel? get questionnaireItem =>
       throw _privateConstructorUsedError;
-  ActionOnModel? get actionOn => throw _privateConstructorUsedError;
-  AnswerOptionModel? get answerOption => throw _privateConstructorUsedError;
-  EnableWhenModel? get enableWhen => throw _privateConstructorUsedError;
+  List<ActionOnModel>? get actionOn => throw _privateConstructorUsedError;
+  List<AnswerOptionModel>? get answerOption =>
+      throw _privateConstructorUsedError;
+  List<EnableWhenModel>? get enableWhen => throw _privateConstructorUsedError;
+  List<AnswerItemWeightModel>? get answerItemWeight =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -4001,17 +4049,15 @@ abstract class $QuestionnaireItemFHIRModelCopyWith<$Res> {
       AnswerModel? initial,
       QuestionnaireModel? questionnaire,
       QuestionnaireItemModel? questionnaireItem,
-      ActionOnModel? actionOn,
-      AnswerOptionModel? answerOption,
-      EnableWhenModel? enableWhen});
+      List<ActionOnModel>? actionOn,
+      List<AnswerOptionModel>? answerOption,
+      List<EnableWhenModel>? enableWhen,
+      List<AnswerItemWeightModel>? answerItemWeight});
 
   $AnswerValueSetModelCopyWith<$Res>? get ansewrValueSet;
   $AnswerModelCopyWith<$Res>? get initial;
   $QuestionnaireModelCopyWith<$Res>? get questionnaire;
   $QuestionnaireItemModelCopyWith<$Res>? get questionnaireItem;
-  $ActionOnModelCopyWith<$Res>? get actionOn;
-  $AnswerOptionModelCopyWith<$Res>? get answerOption;
-  $EnableWhenModelCopyWith<$Res>? get enableWhen;
 }
 
 /// @nodoc
@@ -4047,6 +4093,7 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
     Object? actionOn = freezed,
     Object? answerOption = freezed,
     Object? enableWhen = freezed,
+    Object? answerItemWeight = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -4116,15 +4163,19 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
       actionOn: freezed == actionOn
           ? _value.actionOn
           : actionOn // ignore: cast_nullable_to_non_nullable
-              as ActionOnModel?,
+              as List<ActionOnModel>?,
       answerOption: freezed == answerOption
           ? _value.answerOption
           : answerOption // ignore: cast_nullable_to_non_nullable
-              as AnswerOptionModel?,
+              as List<AnswerOptionModel>?,
       enableWhen: freezed == enableWhen
           ? _value.enableWhen
           : enableWhen // ignore: cast_nullable_to_non_nullable
-              as EnableWhenModel?,
+              as List<EnableWhenModel>?,
+      answerItemWeight: freezed == answerItemWeight
+          ? _value.answerItemWeight
+          : answerItemWeight // ignore: cast_nullable_to_non_nullable
+              as List<AnswerItemWeightModel>?,
     ) as $Val);
   }
 
@@ -4176,42 +4227,6 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
       return _then(_value.copyWith(questionnaireItem: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ActionOnModelCopyWith<$Res>? get actionOn {
-    if (_value.actionOn == null) {
-      return null;
-    }
-
-    return $ActionOnModelCopyWith<$Res>(_value.actionOn!, (value) {
-      return _then(_value.copyWith(actionOn: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AnswerOptionModelCopyWith<$Res>? get answerOption {
-    if (_value.answerOption == null) {
-      return null;
-    }
-
-    return $AnswerOptionModelCopyWith<$Res>(_value.answerOption!, (value) {
-      return _then(_value.copyWith(answerOption: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $EnableWhenModelCopyWith<$Res>? get enableWhen {
-    if (_value.enableWhen == null) {
-      return null;
-    }
-
-    return $EnableWhenModelCopyWith<$Res>(_value.enableWhen!, (value) {
-      return _then(_value.copyWith(enableWhen: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -4240,9 +4255,10 @@ abstract class _$$_QuestionnaireItemFHIRModelCopyWith<$Res>
       AnswerModel? initial,
       QuestionnaireModel? questionnaire,
       QuestionnaireItemModel? questionnaireItem,
-      ActionOnModel? actionOn,
-      AnswerOptionModel? answerOption,
-      EnableWhenModel? enableWhen});
+      List<ActionOnModel>? actionOn,
+      List<AnswerOptionModel>? answerOption,
+      List<EnableWhenModel>? enableWhen,
+      List<AnswerItemWeightModel>? answerItemWeight});
 
   @override
   $AnswerValueSetModelCopyWith<$Res>? get ansewrValueSet;
@@ -4252,12 +4268,6 @@ abstract class _$$_QuestionnaireItemFHIRModelCopyWith<$Res>
   $QuestionnaireModelCopyWith<$Res>? get questionnaire;
   @override
   $QuestionnaireItemModelCopyWith<$Res>? get questionnaireItem;
-  @override
-  $ActionOnModelCopyWith<$Res>? get actionOn;
-  @override
-  $AnswerOptionModelCopyWith<$Res>? get answerOption;
-  @override
-  $EnableWhenModelCopyWith<$Res>? get enableWhen;
 }
 
 /// @nodoc
@@ -4292,6 +4302,7 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
     Object? actionOn = freezed,
     Object? answerOption = freezed,
     Object? enableWhen = freezed,
+    Object? answerItemWeight = freezed,
   }) {
     return _then(_$_QuestionnaireItemFHIRModel(
       id: freezed == id
@@ -4359,17 +4370,21 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
           : questionnaireItem // ignore: cast_nullable_to_non_nullable
               as QuestionnaireItemModel?,
       actionOn: freezed == actionOn
-          ? _value.actionOn
+          ? _value._actionOn
           : actionOn // ignore: cast_nullable_to_non_nullable
-              as ActionOnModel?,
+              as List<ActionOnModel>?,
       answerOption: freezed == answerOption
-          ? _value.answerOption
+          ? _value._answerOption
           : answerOption // ignore: cast_nullable_to_non_nullable
-              as AnswerOptionModel?,
+              as List<AnswerOptionModel>?,
       enableWhen: freezed == enableWhen
-          ? _value.enableWhen
+          ? _value._enableWhen
           : enableWhen // ignore: cast_nullable_to_non_nullable
-              as EnableWhenModel?,
+              as List<EnableWhenModel>?,
+      answerItemWeight: freezed == answerItemWeight
+          ? _value._answerItemWeight
+          : answerItemWeight // ignore: cast_nullable_to_non_nullable
+              as List<AnswerItemWeightModel>?,
     ));
   }
 }
@@ -4394,9 +4409,14 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
       this.initial,
       this.questionnaire,
       this.questionnaireItem,
-      this.actionOn,
-      this.answerOption,
-      this.enableWhen});
+      final List<ActionOnModel>? actionOn,
+      final List<AnswerOptionModel>? answerOption,
+      final List<EnableWhenModel>? enableWhen,
+      final List<AnswerItemWeightModel>? answerItemWeight})
+      : _actionOn = actionOn,
+        _answerOption = answerOption,
+        _enableWhen = enableWhen,
+        _answerItemWeight = answerItemWeight;
 
   factory _$_QuestionnaireItemFHIRModel.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionnaireItemFHIRModelFromJson(json);
@@ -4433,16 +4453,50 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
   final QuestionnaireModel? questionnaire;
   @override
   final QuestionnaireItemModel? questionnaireItem;
+  final List<ActionOnModel>? _actionOn;
   @override
-  final ActionOnModel? actionOn;
+  List<ActionOnModel>? get actionOn {
+    final value = _actionOn;
+    if (value == null) return null;
+    if (_actionOn is EqualUnmodifiableListView) return _actionOn;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AnswerOptionModel>? _answerOption;
   @override
-  final AnswerOptionModel? answerOption;
+  List<AnswerOptionModel>? get answerOption {
+    final value = _answerOption;
+    if (value == null) return null;
+    if (_answerOption is EqualUnmodifiableListView) return _answerOption;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<EnableWhenModel>? _enableWhen;
   @override
-  final EnableWhenModel? enableWhen;
+  List<EnableWhenModel>? get enableWhen {
+    final value = _enableWhen;
+    if (value == null) return null;
+    if (_enableWhen is EqualUnmodifiableListView) return _enableWhen;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AnswerItemWeightModel>? _answerItemWeight;
+  @override
+  List<AnswerItemWeightModel>? get answerItemWeight {
+    final value = _answerItemWeight;
+    if (value == null) return null;
+    if (_answerItemWeight is EqualUnmodifiableListView)
+      return _answerItemWeight;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen)';
+    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight)';
   }
 
   @override
@@ -4475,12 +4529,13 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
                 other.questionnaire == questionnaire) &&
             (identical(other.questionnaireItem, questionnaireItem) ||
                 other.questionnaireItem == questionnaireItem) &&
-            (identical(other.actionOn, actionOn) ||
-                other.actionOn == actionOn) &&
-            (identical(other.answerOption, answerOption) ||
-                other.answerOption == answerOption) &&
-            (identical(other.enableWhen, enableWhen) ||
-                other.enableWhen == enableWhen));
+            const DeepCollectionEquality().equals(other._actionOn, _actionOn) &&
+            const DeepCollectionEquality()
+                .equals(other._answerOption, _answerOption) &&
+            const DeepCollectionEquality()
+                .equals(other._enableWhen, _enableWhen) &&
+            const DeepCollectionEquality()
+                .equals(other._answerItemWeight, _answerItemWeight));
   }
 
   @JsonKey(ignore: true)
@@ -4503,9 +4558,10 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
         initial,
         questionnaire,
         questionnaireItem,
-        actionOn,
-        answerOption,
-        enableWhen
+        const DeepCollectionEquality().hash(_actionOn),
+        const DeepCollectionEquality().hash(_answerOption),
+        const DeepCollectionEquality().hash(_enableWhen),
+        const DeepCollectionEquality().hash(_answerItemWeight)
       ]);
 
   @JsonKey(ignore: true)
@@ -4526,25 +4582,27 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
 abstract class _QuestionnaireItemFHIRModel
     implements QuestionnaireItemFHIRModel {
   const factory _QuestionnaireItemFHIRModel(
-      {final int? id,
-      final String? linkId,
-      final String? prefix,
-      final String? text,
-      final QuestionnaireType? type,
-      final EnableBehaviour? enableBehaviour,
-      final bool? required,
-      final bool? repeats,
-      final bool? readOnly,
-      final int? maxlength,
-      final DisabledDisplay? disabledDisplay,
-      final AnswerConstraint? answerConstraint,
-      final AnswerValueSetModel? ansewrValueSet,
-      final AnswerModel? initial,
-      final QuestionnaireModel? questionnaire,
-      final QuestionnaireItemModel? questionnaireItem,
-      final ActionOnModel? actionOn,
-      final AnswerOptionModel? answerOption,
-      final EnableWhenModel? enableWhen}) = _$_QuestionnaireItemFHIRModel;
+          {final int? id,
+          final String? linkId,
+          final String? prefix,
+          final String? text,
+          final QuestionnaireType? type,
+          final EnableBehaviour? enableBehaviour,
+          final bool? required,
+          final bool? repeats,
+          final bool? readOnly,
+          final int? maxlength,
+          final DisabledDisplay? disabledDisplay,
+          final AnswerConstraint? answerConstraint,
+          final AnswerValueSetModel? ansewrValueSet,
+          final AnswerModel? initial,
+          final QuestionnaireModel? questionnaire,
+          final QuestionnaireItemModel? questionnaireItem,
+          final List<ActionOnModel>? actionOn,
+          final List<AnswerOptionModel>? answerOption,
+          final List<EnableWhenModel>? enableWhen,
+          final List<AnswerItemWeightModel>? answerItemWeight}) =
+      _$_QuestionnaireItemFHIRModel;
 
   factory _QuestionnaireItemFHIRModel.fromJson(Map<String, dynamic> json) =
       _$_QuestionnaireItemFHIRModel.fromJson;
@@ -4582,11 +4640,13 @@ abstract class _QuestionnaireItemFHIRModel
   @override
   QuestionnaireItemModel? get questionnaireItem;
   @override
-  ActionOnModel? get actionOn;
+  List<ActionOnModel>? get actionOn;
   @override
-  AnswerOptionModel? get answerOption;
+  List<AnswerOptionModel>? get answerOption;
   @override
-  EnableWhenModel? get enableWhen;
+  List<EnableWhenModel>? get enableWhen;
+  @override
+  List<AnswerItemWeightModel>? get answerItemWeight;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionnaireItemFHIRModelCopyWith<_$_QuestionnaireItemFHIRModel>
@@ -5008,13 +5068,15 @@ AnswerModel _$AnswerModelFromJson(Map<String, dynamic> json) {
 mixin _$AnswerModel {
   int? get id => throw _privateConstructorUsedError;
   bool? get answerBoolean => throw _privateConstructorUsedError;
-  bool? get answerDecimal => throw _privateConstructorUsedError;
+  double? get answerDecimal => throw _privateConstructorUsedError;
   int? get answerInteger => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get answerDateTime => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get answerTime => throw _privateConstructorUsedError;
   String? get answerString => throw _privateConstructorUsedError;
+  AnswerItemWeightModel? get answerItemWeight =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5031,11 +5093,14 @@ abstract class $AnswerModelCopyWith<$Res> {
   $Res call(
       {int? id,
       bool? answerBoolean,
-      bool? answerDecimal,
+      double? answerDecimal,
       int? answerInteger,
       @TimestampConverter() DateTime? answerDateTime,
       @TimestampConverter() DateTime? answerTime,
-      String? answerString});
+      String? answerString,
+      AnswerItemWeightModel? answerItemWeight});
+
+  $AnswerItemWeightModelCopyWith<$Res>? get answerItemWeight;
 }
 
 /// @nodoc
@@ -5058,6 +5123,7 @@ class _$AnswerModelCopyWithImpl<$Res, $Val extends AnswerModel>
     Object? answerDateTime = freezed,
     Object? answerTime = freezed,
     Object? answerString = freezed,
+    Object? answerItemWeight = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -5071,7 +5137,7 @@ class _$AnswerModelCopyWithImpl<$Res, $Val extends AnswerModel>
       answerDecimal: freezed == answerDecimal
           ? _value.answerDecimal
           : answerDecimal // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as double?,
       answerInteger: freezed == answerInteger
           ? _value.answerInteger
           : answerInteger // ignore: cast_nullable_to_non_nullable
@@ -5088,7 +5154,24 @@ class _$AnswerModelCopyWithImpl<$Res, $Val extends AnswerModel>
           ? _value.answerString
           : answerString // ignore: cast_nullable_to_non_nullable
               as String?,
+      answerItemWeight: freezed == answerItemWeight
+          ? _value.answerItemWeight
+          : answerItemWeight // ignore: cast_nullable_to_non_nullable
+              as AnswerItemWeightModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AnswerItemWeightModelCopyWith<$Res>? get answerItemWeight {
+    if (_value.answerItemWeight == null) {
+      return null;
+    }
+
+    return $AnswerItemWeightModelCopyWith<$Res>(_value.answerItemWeight!,
+        (value) {
+      return _then(_value.copyWith(answerItemWeight: value) as $Val);
+    });
   }
 }
 
@@ -5103,11 +5186,15 @@ abstract class _$$_AnswerModelCopyWith<$Res>
   $Res call(
       {int? id,
       bool? answerBoolean,
-      bool? answerDecimal,
+      double? answerDecimal,
       int? answerInteger,
       @TimestampConverter() DateTime? answerDateTime,
       @TimestampConverter() DateTime? answerTime,
-      String? answerString});
+      String? answerString,
+      AnswerItemWeightModel? answerItemWeight});
+
+  @override
+  $AnswerItemWeightModelCopyWith<$Res>? get answerItemWeight;
 }
 
 /// @nodoc
@@ -5128,6 +5215,7 @@ class __$$_AnswerModelCopyWithImpl<$Res>
     Object? answerDateTime = freezed,
     Object? answerTime = freezed,
     Object? answerString = freezed,
+    Object? answerItemWeight = freezed,
   }) {
     return _then(_$_AnswerModel(
       id: freezed == id
@@ -5141,7 +5229,7 @@ class __$$_AnswerModelCopyWithImpl<$Res>
       answerDecimal: freezed == answerDecimal
           ? _value.answerDecimal
           : answerDecimal // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as double?,
       answerInteger: freezed == answerInteger
           ? _value.answerInteger
           : answerInteger // ignore: cast_nullable_to_non_nullable
@@ -5158,6 +5246,10 @@ class __$$_AnswerModelCopyWithImpl<$Res>
           ? _value.answerString
           : answerString // ignore: cast_nullable_to_non_nullable
               as String?,
+      answerItemWeight: freezed == answerItemWeight
+          ? _value.answerItemWeight
+          : answerItemWeight // ignore: cast_nullable_to_non_nullable
+              as AnswerItemWeightModel?,
     ));
   }
 }
@@ -5172,7 +5264,8 @@ class _$_AnswerModel implements _AnswerModel {
       this.answerInteger,
       @TimestampConverter() this.answerDateTime,
       @TimestampConverter() this.answerTime,
-      this.answerString});
+      this.answerString,
+      this.answerItemWeight});
 
   factory _$_AnswerModel.fromJson(Map<String, dynamic> json) =>
       _$$_AnswerModelFromJson(json);
@@ -5182,7 +5275,7 @@ class _$_AnswerModel implements _AnswerModel {
   @override
   final bool? answerBoolean;
   @override
-  final bool? answerDecimal;
+  final double? answerDecimal;
   @override
   final int? answerInteger;
   @override
@@ -5193,10 +5286,12 @@ class _$_AnswerModel implements _AnswerModel {
   final DateTime? answerTime;
   @override
   final String? answerString;
+  @override
+  final AnswerItemWeightModel? answerItemWeight;
 
   @override
   String toString() {
-    return 'AnswerModel(id: $id, answerBoolean: $answerBoolean, answerDecimal: $answerDecimal, answerInteger: $answerInteger, answerDateTime: $answerDateTime, answerTime: $answerTime, answerString: $answerString)';
+    return 'AnswerModel(id: $id, answerBoolean: $answerBoolean, answerDecimal: $answerDecimal, answerInteger: $answerInteger, answerDateTime: $answerDateTime, answerTime: $answerTime, answerString: $answerString, answerItemWeight: $answerItemWeight)';
   }
 
   @override
@@ -5216,13 +5311,23 @@ class _$_AnswerModel implements _AnswerModel {
             (identical(other.answerTime, answerTime) ||
                 other.answerTime == answerTime) &&
             (identical(other.answerString, answerString) ||
-                other.answerString == answerString));
+                other.answerString == answerString) &&
+            (identical(other.answerItemWeight, answerItemWeight) ||
+                other.answerItemWeight == answerItemWeight));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, answerBoolean, answerDecimal,
-      answerInteger, answerDateTime, answerTime, answerString);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      answerBoolean,
+      answerDecimal,
+      answerInteger,
+      answerDateTime,
+      answerTime,
+      answerString,
+      answerItemWeight);
 
   @JsonKey(ignore: true)
   @override
@@ -5242,11 +5347,12 @@ abstract class _AnswerModel implements AnswerModel {
   const factory _AnswerModel(
       {final int? id,
       final bool? answerBoolean,
-      final bool? answerDecimal,
+      final double? answerDecimal,
       final int? answerInteger,
       @TimestampConverter() final DateTime? answerDateTime,
       @TimestampConverter() final DateTime? answerTime,
-      final String? answerString}) = _$_AnswerModel;
+      final String? answerString,
+      final AnswerItemWeightModel? answerItemWeight}) = _$_AnswerModel;
 
   factory _AnswerModel.fromJson(Map<String, dynamic> json) =
       _$_AnswerModel.fromJson;
@@ -5256,7 +5362,7 @@ abstract class _AnswerModel implements AnswerModel {
   @override
   bool? get answerBoolean;
   @override
-  bool? get answerDecimal;
+  double? get answerDecimal;
   @override
   int? get answerInteger;
   @override
@@ -5268,9 +5374,454 @@ abstract class _AnswerModel implements AnswerModel {
   @override
   String? get answerString;
   @override
+  AnswerItemWeightModel? get answerItemWeight;
+  @override
   @JsonKey(ignore: true)
   _$$_AnswerModelCopyWith<_$_AnswerModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+AnswerItemWeightModel _$AnswerItemWeightModelFromJson(
+    Map<String, dynamic> json) {
+  return _AnswerItemWeightModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AnswerItemWeightModel {
+  int? get id => throw _privateConstructorUsedError;
+  double? get value => throw _privateConstructorUsedError;
+  int? get answerId => throw _privateConstructorUsedError;
+  QuestionResponseWeightModel? get questionResponseWeight =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AnswerItemWeightModelCopyWith<AnswerItemWeightModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AnswerItemWeightModelCopyWith<$Res> {
+  factory $AnswerItemWeightModelCopyWith(AnswerItemWeightModel value,
+          $Res Function(AnswerItemWeightModel) then) =
+      _$AnswerItemWeightModelCopyWithImpl<$Res, AnswerItemWeightModel>;
+  @useResult
+  $Res call(
+      {int? id,
+      double? value,
+      int? answerId,
+      QuestionResponseWeightModel? questionResponseWeight});
+
+  $QuestionResponseWeightModelCopyWith<$Res>? get questionResponseWeight;
+}
+
+/// @nodoc
+class _$AnswerItemWeightModelCopyWithImpl<$Res,
+        $Val extends AnswerItemWeightModel>
+    implements $AnswerItemWeightModelCopyWith<$Res> {
+  _$AnswerItemWeightModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? value = freezed,
+    Object? answerId = freezed,
+    Object? questionResponseWeight = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answerId: freezed == answerId
+          ? _value.answerId
+          : answerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      questionResponseWeight: freezed == questionResponseWeight
+          ? _value.questionResponseWeight
+          : questionResponseWeight // ignore: cast_nullable_to_non_nullable
+              as QuestionResponseWeightModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionResponseWeightModelCopyWith<$Res>? get questionResponseWeight {
+    if (_value.questionResponseWeight == null) {
+      return null;
+    }
+
+    return $QuestionResponseWeightModelCopyWith<$Res>(
+        _value.questionResponseWeight!, (value) {
+      return _then(_value.copyWith(questionResponseWeight: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_AnswerItemWeightModelCopyWith<$Res>
+    implements $AnswerItemWeightModelCopyWith<$Res> {
+  factory _$$_AnswerItemWeightModelCopyWith(_$_AnswerItemWeightModel value,
+          $Res Function(_$_AnswerItemWeightModel) then) =
+      __$$_AnswerItemWeightModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      double? value,
+      int? answerId,
+      QuestionResponseWeightModel? questionResponseWeight});
+
+  @override
+  $QuestionResponseWeightModelCopyWith<$Res>? get questionResponseWeight;
+}
+
+/// @nodoc
+class __$$_AnswerItemWeightModelCopyWithImpl<$Res>
+    extends _$AnswerItemWeightModelCopyWithImpl<$Res, _$_AnswerItemWeightModel>
+    implements _$$_AnswerItemWeightModelCopyWith<$Res> {
+  __$$_AnswerItemWeightModelCopyWithImpl(_$_AnswerItemWeightModel _value,
+      $Res Function(_$_AnswerItemWeightModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? value = freezed,
+    Object? answerId = freezed,
+    Object? questionResponseWeight = freezed,
+  }) {
+    return _then(_$_AnswerItemWeightModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answerId: freezed == answerId
+          ? _value.answerId
+          : answerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      questionResponseWeight: freezed == questionResponseWeight
+          ? _value.questionResponseWeight
+          : questionResponseWeight // ignore: cast_nullable_to_non_nullable
+              as QuestionResponseWeightModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_AnswerItemWeightModel implements _AnswerItemWeightModel {
+  const _$_AnswerItemWeightModel(
+      {this.id, this.value, this.answerId, this.questionResponseWeight});
+
+  factory _$_AnswerItemWeightModel.fromJson(Map<String, dynamic> json) =>
+      _$$_AnswerItemWeightModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final double? value;
+  @override
+  final int? answerId;
+  @override
+  final QuestionResponseWeightModel? questionResponseWeight;
+
+  @override
+  String toString() {
+    return 'AnswerItemWeightModel(id: $id, value: $value, answerId: $answerId, questionResponseWeight: $questionResponseWeight)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AnswerItemWeightModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.answerId, answerId) ||
+                other.answerId == answerId) &&
+            (identical(other.questionResponseWeight, questionResponseWeight) ||
+                other.questionResponseWeight == questionResponseWeight));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, value, answerId, questionResponseWeight);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AnswerItemWeightModelCopyWith<_$_AnswerItemWeightModel> get copyWith =>
+      __$$_AnswerItemWeightModelCopyWithImpl<_$_AnswerItemWeightModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AnswerItemWeightModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AnswerItemWeightModel implements AnswerItemWeightModel {
+  const factory _AnswerItemWeightModel(
+          {final int? id,
+          final double? value,
+          final int? answerId,
+          final QuestionResponseWeightModel? questionResponseWeight}) =
+      _$_AnswerItemWeightModel;
+
+  factory _AnswerItemWeightModel.fromJson(Map<String, dynamic> json) =
+      _$_AnswerItemWeightModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  double? get value;
+  @override
+  int? get answerId;
+  @override
+  QuestionResponseWeightModel? get questionResponseWeight;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AnswerItemWeightModelCopyWith<_$_AnswerItemWeightModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+QuestionResponseWeightModel _$QuestionResponseWeightModelFromJson(
+    Map<String, dynamic> json) {
+  return _QuestionResponseWeightModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$QuestionResponseWeightModel {
+  int? get id => throw _privateConstructorUsedError;
+  int? get quesId => throw _privateConstructorUsedError;
+  bool? get isRange => throw _privateConstructorUsedError;
+  bool? get isCompare => throw _privateConstructorUsedError;
+  bool? get isAbsolute => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $QuestionResponseWeightModelCopyWith<QuestionResponseWeightModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $QuestionResponseWeightModelCopyWith<$Res> {
+  factory $QuestionResponseWeightModelCopyWith(
+          QuestionResponseWeightModel value,
+          $Res Function(QuestionResponseWeightModel) then) =
+      _$QuestionResponseWeightModelCopyWithImpl<$Res,
+          QuestionResponseWeightModel>;
+  @useResult
+  $Res call(
+      {int? id, int? quesId, bool? isRange, bool? isCompare, bool? isAbsolute});
+}
+
+/// @nodoc
+class _$QuestionResponseWeightModelCopyWithImpl<$Res,
+        $Val extends QuestionResponseWeightModel>
+    implements $QuestionResponseWeightModelCopyWith<$Res> {
+  _$QuestionResponseWeightModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? quesId = freezed,
+    Object? isRange = freezed,
+    Object? isCompare = freezed,
+    Object? isAbsolute = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quesId: freezed == quesId
+          ? _value.quesId
+          : quesId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isRange: freezed == isRange
+          ? _value.isRange
+          : isRange // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isCompare: freezed == isCompare
+          ? _value.isCompare
+          : isCompare // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAbsolute: freezed == isAbsolute
+          ? _value.isAbsolute
+          : isAbsolute // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_QuestionResponseWeightModelCopyWith<$Res>
+    implements $QuestionResponseWeightModelCopyWith<$Res> {
+  factory _$$_QuestionResponseWeightModelCopyWith(
+          _$_QuestionResponseWeightModel value,
+          $Res Function(_$_QuestionResponseWeightModel) then) =
+      __$$_QuestionResponseWeightModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id, int? quesId, bool? isRange, bool? isCompare, bool? isAbsolute});
+}
+
+/// @nodoc
+class __$$_QuestionResponseWeightModelCopyWithImpl<$Res>
+    extends _$QuestionResponseWeightModelCopyWithImpl<$Res,
+        _$_QuestionResponseWeightModel>
+    implements _$$_QuestionResponseWeightModelCopyWith<$Res> {
+  __$$_QuestionResponseWeightModelCopyWithImpl(
+      _$_QuestionResponseWeightModel _value,
+      $Res Function(_$_QuestionResponseWeightModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? quesId = freezed,
+    Object? isRange = freezed,
+    Object? isCompare = freezed,
+    Object? isAbsolute = freezed,
+  }) {
+    return _then(_$_QuestionResponseWeightModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quesId: freezed == quesId
+          ? _value.quesId
+          : quesId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isRange: freezed == isRange
+          ? _value.isRange
+          : isRange // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isCompare: freezed == isCompare
+          ? _value.isCompare
+          : isCompare // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAbsolute: freezed == isAbsolute
+          ? _value.isAbsolute
+          : isAbsolute // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_QuestionResponseWeightModel implements _QuestionResponseWeightModel {
+  const _$_QuestionResponseWeightModel(
+      {this.id, this.quesId, this.isRange, this.isCompare, this.isAbsolute});
+
+  factory _$_QuestionResponseWeightModel.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionResponseWeightModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? quesId;
+  @override
+  final bool? isRange;
+  @override
+  final bool? isCompare;
+  @override
+  final bool? isAbsolute;
+
+  @override
+  String toString() {
+    return 'QuestionResponseWeightModel(id: $id, quesId: $quesId, isRange: $isRange, isCompare: $isCompare, isAbsolute: $isAbsolute)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_QuestionResponseWeightModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.quesId, quesId) || other.quesId == quesId) &&
+            (identical(other.isRange, isRange) || other.isRange == isRange) &&
+            (identical(other.isCompare, isCompare) ||
+                other.isCompare == isCompare) &&
+            (identical(other.isAbsolute, isAbsolute) ||
+                other.isAbsolute == isAbsolute));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, quesId, isRange, isCompare, isAbsolute);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_QuestionResponseWeightModelCopyWith<_$_QuestionResponseWeightModel>
+      get copyWith => __$$_QuestionResponseWeightModelCopyWithImpl<
+          _$_QuestionResponseWeightModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QuestionResponseWeightModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _QuestionResponseWeightModel
+    implements QuestionResponseWeightModel {
+  const factory _QuestionResponseWeightModel(
+      {final int? id,
+      final int? quesId,
+      final bool? isRange,
+      final bool? isCompare,
+      final bool? isAbsolute}) = _$_QuestionResponseWeightModel;
+
+  factory _QuestionResponseWeightModel.fromJson(Map<String, dynamic> json) =
+      _$_QuestionResponseWeightModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get quesId;
+  @override
+  bool? get isRange;
+  @override
+  bool? get isCompare;
+  @override
+  bool? get isAbsolute;
+  @override
+  @JsonKey(ignore: true)
+  _$$_QuestionResponseWeightModelCopyWith<_$_QuestionResponseWeightModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 QuestionnaireItemModel _$QuestionnaireItemModelFromJson(

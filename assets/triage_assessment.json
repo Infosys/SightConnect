@@ -58,7 +58,7 @@
                         "isRange": true,
                         "value": "3.0",
                         "rangeCategory": "Absolute",
-                        "gender": "Male",
+                        "gender": "MALE",
                         "range": {
                             "id": 1401,
                             "low": 1.1,
@@ -77,7 +77,7 @@
                         "isRange": true,
                         "value": "2.0",
                         "rangeCategory": "Absolute",
-                        "gender": "Male",
+                        "gender": "MALE",
                         "range": {
                             "id": 1402,
                             "low": 0.5,
@@ -138,8 +138,8 @@
                 "id": 1151,
                 "linkId": "string",
                 "prefix": "string",
-                "text": "1751",
-                "type": "Choice",
+                "text": "Are you having any eye sight related problems?",
+                "type": "Group",
                 "enableBehavior": "ALL",
                 "required": true,
                 "repeats": false,
@@ -156,7 +156,19 @@
                     "answerDate": null,
                     "answerDateTime": null,
                     "answerTime": null,
-                    "answerString": "1002"
+                    "answerString": "No",
+                    "answerItemWeight": {
+                        "id": 1951,
+                        "value": 1.0,
+                        "answerId": 1052,
+                        "questionResponseWeight": {
+                            "id": 1901,
+                            "quesId": 1151,
+                            "isRange": false,
+                            "isCompare": false,
+                            "isAbsolute": true
+                        }
+                    }
                 },
                 "questionnaire": {
                     "id": 1101,
@@ -193,7 +205,19 @@
                             "answerDate": null,
                             "answerDateTime": null,
                             "answerTime": null,
-                            "answerString": "1001"
+                            "answerString": "No",
+                            "answerItemWeight": {
+                                "id": 1952,
+                                "value": 0.0,
+                                "answerId": 1051,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
                         },
                         "questionnaireItem": {
                             "id": 1151,
@@ -211,7 +235,10 @@
                             "answerValueSet": null,
                             "initial": null,
                             "questionnaire": null,
-                            "questionnaireItem": null
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
                         }
                     }
                 ],
@@ -227,7 +254,19 @@
                             "answerDate": null,
                             "answerDateTime": null,
                             "answerTime": null,
-                            "answerString": "1002"
+                            "answerString": "Yes",
+                            "answerItemWeight": {
+                                "id": 1951,
+                                "value": 1.0,
+                                "answerId": 1052,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
                         },
                         "questionnaireItem": {
                             "id": 1151,
@@ -245,7 +284,10 @@
                             "answerValueSet": null,
                             "initial": null,
                             "questionnaire": null,
-                            "questionnaireItem": null
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
                         }
                     },
                     {
@@ -259,7 +301,19 @@
                             "answerDate": null,
                             "answerDateTime": null,
                             "answerTime": null,
-                            "answerString": "1001"
+                            "answerString": "No",
+                            "answerItemWeight": {
+                                "id": 1952,
+                                "value": 0.0,
+                                "answerId": 1051,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
                         },
                         "questionnaireItem": {
                             "id": 1151,
@@ -277,11 +331,24 @@
                             "answerValueSet": null,
                             "initial": null,
                             "questionnaire": null,
-                            "questionnaireItem": null
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
                         }
                     }
                 ],
-                "enableWhen": []
+                "enableWhen": [],
+                "answerItemWeight": null,
+                "questionResponseWeight": {
+                    "id": 1901,
+                    "quesId": 1151,
+                    "answerRangeWeight": [],
+                    "answerComparisonWeight": [],
+                    "range": null,
+                    "compare": null,
+                    "absolute": null
+                }
             }
         ],
         "languageBasedText": [
@@ -309,4 +376,4 @@
         ]
     },
     "observationValueWeight": []
-  }
+}

@@ -47,4 +47,19 @@ class PatientAuthenticationRepositoryImpl
       );
     }
   }
+
+  @override
+  Future<Either<Failure, PatientResponseModel>> updatePatientProfile(
+      PatientModel patientDTO) async {
+    try {
+      final remoteResponse =
+          await _patientAuthRemoteSource.updatePatientProfile(patientDTO);
+      return Right(remoteResponse);
+    } catch (e) {
+      return Left(
+        ServerFailure(errorMessage: 'This is a server exception'),
+      );
+    }
+  }
+
 }

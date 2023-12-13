@@ -77,6 +77,8 @@ Map<String, dynamic> _$$_PatientResponseModelToJson(
 
 _$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
     _$_PatientModel(
+      id: json['id'] as int?,
+      regRef: json['regRef'] as String?,
       counterId: json['counterId'] as String?,
       hprID: json['hprID'] as String?,
       hipCode: json['hipCode'] as String?,
@@ -104,6 +106,8 @@ _$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'regRef': instance.regRef,
       'counterId': instance.counterId,
       'hprID': instance.hprID,
       'hipCode': instance.hipCode,

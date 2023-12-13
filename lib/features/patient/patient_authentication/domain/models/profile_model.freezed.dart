@@ -648,6 +648,8 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PatientModel {
+  int? get id => throw _privateConstructorUsedError;
+  String? get regRef => throw _privateConstructorUsedError;
   String? get counterId => throw _privateConstructorUsedError;
   String? get hprID => throw _privateConstructorUsedError;
   String? get hipCode => throw _privateConstructorUsedError;
@@ -680,7 +682,9 @@ abstract class $PatientModelCopyWith<$Res> {
       _$PatientModelCopyWithImpl<$Res, PatientModel>;
   @useResult
   $Res call(
-      {String? counterId,
+      {int? id,
+      String? regRef,
+      String? counterId,
       String? hprID,
       String? hipCode,
       LocationModel? location,
@@ -715,6 +719,8 @@ class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
+    Object? regRef = freezed,
     Object? counterId = freezed,
     Object? hprID = freezed,
     Object? hipCode = freezed,
@@ -735,6 +741,14 @@ class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
     Object? address = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
+              as String?,
       counterId: freezed == counterId
           ? _value.counterId
           : counterId // ignore: cast_nullable_to_non_nullable
@@ -832,7 +846,9 @@ abstract class _$$_PatientModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? counterId,
+      {int? id,
+      String? regRef,
+      String? counterId,
       String? hprID,
       String? hipCode,
       LocationModel? location,
@@ -866,6 +882,8 @@ class __$$_PatientModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
+    Object? regRef = freezed,
     Object? counterId = freezed,
     Object? hprID = freezed,
     Object? hipCode = freezed,
@@ -886,6 +904,14 @@ class __$$_PatientModelCopyWithImpl<$Res>
     Object? address = freezed,
   }) {
     return _then(_$_PatientModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
+              as String?,
       counterId: freezed == counterId
           ? _value.counterId
           : counterId // ignore: cast_nullable_to_non_nullable
@@ -966,7 +992,9 @@ class __$$_PatientModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PatientModel implements _PatientModel {
   const _$_PatientModel(
-      {this.counterId,
+      {this.id,
+      this.regRef,
+      this.counterId,
       this.hprID,
       this.hipCode,
       this.location,
@@ -989,6 +1017,10 @@ class _$_PatientModel implements _PatientModel {
   factory _$_PatientModel.fromJson(Map<String, dynamic> json) =>
       _$$_PatientModelFromJson(json);
 
+  @override
+  final int? id;
+  @override
+  final String? regRef;
   @override
   final String? counterId;
   @override
@@ -1035,7 +1067,7 @@ class _$_PatientModel implements _PatientModel {
 
   @override
   String toString() {
-    return 'PatientModel(counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, name: $name, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
+    return 'PatientModel(id: $id, regRef: $regRef, counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, name: $name, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
   }
 
   @override
@@ -1043,6 +1075,8 @@ class _$_PatientModel implements _PatientModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PatientModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.regRef, regRef) || other.regRef == regRef) &&
             (identical(other.counterId, counterId) ||
                 other.counterId == counterId) &&
             (identical(other.hprID, hprID) || other.hprID == hprID) &&
@@ -1074,26 +1108,29 @@ class _$_PatientModel implements _PatientModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      counterId,
-      hprID,
-      hipCode,
-      location,
-      abhaId,
-      abhaAddress,
-      name,
-      gender,
-      mobile,
-      email,
-      profilePhoto,
-      yearOfBirth,
-      monthOfBirth,
-      dayOfBirth,
-      age,
-      parentPatientId,
-      relationship,
-      const DeepCollectionEquality().hash(_address));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        regRef,
+        counterId,
+        hprID,
+        hipCode,
+        location,
+        abhaId,
+        abhaAddress,
+        name,
+        gender,
+        mobile,
+        email,
+        profilePhoto,
+        yearOfBirth,
+        monthOfBirth,
+        dayOfBirth,
+        age,
+        parentPatientId,
+        relationship,
+        const DeepCollectionEquality().hash(_address)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -1111,7 +1148,9 @@ class _$_PatientModel implements _PatientModel {
 
 abstract class _PatientModel implements PatientModel {
   const factory _PatientModel(
-      {final String? counterId,
+      {final int? id,
+      final String? regRef,
+      final String? counterId,
       final String? hprID,
       final String? hipCode,
       final LocationModel? location,
@@ -1133,6 +1172,10 @@ abstract class _PatientModel implements PatientModel {
   factory _PatientModel.fromJson(Map<String, dynamic> json) =
       _$_PatientModel.fromJson;
 
+  @override
+  int? get id;
+  @override
+  String? get regRef;
   @override
   String? get counterId;
   @override

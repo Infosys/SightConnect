@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
-  Future<TriageAssessmentModel> getTriage();
+  Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriageAssessmentModel> updateTriage({
     required TriageAssessmentModel triage,
   });
@@ -47,13 +48,13 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriageAssessmentModel> getTriage() async {
+  Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
     logger.d({
       "getTriage": "Getting Triage Locally",
     });
     final response = await triageDBHelper.getTriageAssessment();
     if (response.isNotEmpty) {
-      final triageAssessment = TriageAssessmentModel.fromJson(response);
+      final triageAssessment = DiagnosticReportTemplateFHIRModel.fromJson(response);
       return triageAssessment;
     } else {
       throw Exception("No Triage Assessment Found");

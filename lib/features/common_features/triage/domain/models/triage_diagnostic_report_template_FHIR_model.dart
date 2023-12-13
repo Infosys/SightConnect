@@ -30,6 +30,7 @@ class DiagnosticReportTemplateFHIRModel with _$DiagnosticReportTemplateFHIRModel
   const factory DiagnosticReportTemplateFHIRModel({
     int? id,
     String? name,
+    int? organizationCode,
     Category? category,
     BodySite? bodySite,
     TestCode? code,
@@ -37,8 +38,7 @@ class DiagnosticReportTemplateFHIRModel with _$DiagnosticReportTemplateFHIRModel
     ImagingStudyFHIRModel? study,
     ObservationDefinitionFHIRModel? observations,
     QuestionnaireFHIRModel? questionnaire,
-    LanguageBasedTextModel? languageBasedText,
-    ObservationValueWeightModel? observationValueWeight
+    List<ObservationValueWeightModel>? observationValueWeight
   }) = _DiagnosticReportTemplateFHIRModel;
 
   factory DiagnosticReportTemplateFHIRModel.fromJson(Map<String, dynamic> json) =>
@@ -52,7 +52,8 @@ class ImagingStudyFHIRModel with _$ImagingStudyFHIRModel {
   const factory ImagingStudyFHIRModel({
     int? id,
     String? description,
-    List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate
+    List<ImagingSelectionTemplateFHIRModel>? imagingSelectionTemplate,
+    List<LanguageBasedTextModel>? languageBasedText,
   }) = _ImagingStudyFHIRModel;
 
   factory ImagingStudyFHIRModel.fromJson(Map<String, dynamic> json) =>
@@ -108,8 +109,8 @@ class ObservationDefinitionFHIRModel with _$ObservationDefinitionFHIRModel {
     ObservationDefinitionModel? observationDefinition,
     List<DataComponentFHIRModel>? dataComponent,
     List<RelatedImageFHIRModel>? relatedImage,
-    List<QualifiedValueModel>? qualifiedValue
-
+    List<QualifiedValueModel>? qualifiedValue,
+    List<LanguageBasedTextModel>? languageBasedText,
     
   }) = _ObservationDefinitionFHIRModel;
 
@@ -284,9 +285,10 @@ class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
       AnswerModel? initial,
       QuestionnaireModel? questionnaire,
       QuestionnaireItemModel? questionnaireItem,
-      ActionOnModel? actionOn,
-      AnswerOptionModel? answerOption,
-      EnableWhenModel? enableWhen,
+      List<ActionOnModel>? actionOn,
+      List<AnswerOptionModel>? answerOption,
+      List<EnableWhenModel>? enableWhen,
+      List<AnswerItemWeightModel>? answerItemWeight,
 
   }) = _QuestionnaireItemFHIRModel;
 
@@ -335,12 +337,13 @@ class AnswerModel with _$AnswerModel {
 
       int? id,
       bool? answerBoolean,
-      bool? answerDecimal,
+      double? answerDecimal,
       int? answerInteger,
       @TimestampConverter() DateTime? answerDateTime,
       @TimestampConverter() DateTime? answerTime,
-      String? answerString
-      
+      String? answerString,
+      AnswerItemWeightModel? answerItemWeight,
+
   }) = _AnswerModel;
 
   factory AnswerModel.fromJson(Map<String, dynamic> json) =>
@@ -348,6 +351,41 @@ class AnswerModel with _$AnswerModel {
 }
 
 // ----------------------------------------------------------------------------------------------------------------------
+
+@freezed
+class AnswerItemWeightModel with _$AnswerItemWeightModel {
+  const factory AnswerItemWeightModel({
+
+      int? id,
+      double? value,
+      int? answerId,
+      QuestionResponseWeightModel? questionResponseWeight
+
+  }) = _AnswerItemWeightModel;
+
+  factory AnswerItemWeightModel.fromJson(Map<String, dynamic> json) =>
+      _$AnswerItemWeightModelFromJson(json);
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------
+
+@freezed
+class QuestionResponseWeightModel with _$QuestionResponseWeightModel {
+  const factory QuestionResponseWeightModel({
+
+      int? id,
+      int? quesId,
+      bool? isRange,
+      bool? isCompare,
+      bool? isAbsolute
+
+  }) = _QuestionResponseWeightModel;
+
+  factory QuestionResponseWeightModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionResponseWeightModelFromJson(json);
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------
 
 @freezed
 class QuestionnaireItemModel with _$QuestionnaireItemModel {

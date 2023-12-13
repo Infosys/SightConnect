@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +14,7 @@ var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-  late List<QuestionnaireSectionsResponseModel> _questionnaireSections;
+  late List<QuestionnaireItemFHIRModel> _questionnaireSections;
   late String _questionnaireRemarks;
   late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
@@ -31,7 +32,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, int> get selectedOptions => _selectedOptions;
-  List<QuestionnaireSectionsResponseModel> get questionnaireSections =>
+  List<QuestionnaireItemFHIRModel> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
@@ -40,7 +41,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getQuestionnaire(List<QuestionnaireSectionsResponseModel> data) async {
+  void getQuestionnaire(List<QuestionnaireItemFHIRModel> data) async {
     _questionnaireSections = data;
   }
 

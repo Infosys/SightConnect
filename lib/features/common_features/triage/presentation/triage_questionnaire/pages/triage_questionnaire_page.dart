@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/trige_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
@@ -23,7 +24,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     required this.questionnaireSections,
     super.key,
   });
-  final List<QuestionnaireSectionsResponseModel> questionnaireSections;
+  final List<QuestionnaireItemFHIRModel> questionnaireSections;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageController = usePageController();
@@ -94,13 +95,12 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: model.questionnaireSections.length,
                 itemBuilder: (context, index) {
-                  var questionnaire = model.questionnaireSections[index]
-                      .questionnaireResponseDTOList;
+                  QuestionnaireItemFHIRModel questionnaire = model.questionnaireSections[index];
 
                   return SingleChildScrollView(
                     child: index == 0
                         ? CustomPopUp(
-                            questionCode: questionnaire?.first.id ?? 0,
+                            questionCode: questionnaire.id ?? 0,
                             onPageChanged: () {
                               model.saveQuestionaireResponse();
                               pageIndex.value += 1;
@@ -115,9 +115,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               OptionList(
-                                questions:
-                                    questionnaire!.first.questionResponseDTO ??
-                                        [],
+                                questions: questionnaire.answerOption ?? []
+                                    ,
                                 onPageChanged: () {
                                   model.saveQuestionaireResponse();
                                   if (pageIndex.value ==

@@ -7,4 +7,7 @@ abstract class PatientAuthenticationRepository {
   Future<Either<Failure, PatientResponseModel>> getPatientProfile(
     int patientId,
   );
+  Future<Either<Failure, PatientResponseModel>> updatePatientProfile(
+    PatientModel patientDTO,
+  );
 }

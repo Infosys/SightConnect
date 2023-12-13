@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,7 +19,7 @@ class OptionList extends HookConsumerWidget {
     super.key,
   });
 
-  final List<QuestionResponseModel> questions;
+  final List<AnswerOptionModel> questions;
   final VoidCallback onPageChanged;
 
   @override
@@ -32,8 +33,8 @@ class OptionList extends HookConsumerWidget {
           items: List.generate(
             questions.length,
             (index) {
-              QuestionResponseModel question = questions[questionIndex.value];
-
+              // QuestionResponseModel question = questions[questionIndex.value];
+              AnswerModel question = questions[index].answer ?? AnswerModel();
               return Container(
                 margin: const EdgeInsets.all(8),
                 width: AppSize.width(context) * 0.95,
@@ -42,7 +43,7 @@ class OptionList extends HookConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      question.definition ?? '',
+                      question.answerString ?? '',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -60,9 +61,9 @@ class OptionList extends HookConsumerWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: question.defaultValue != null
+                            child: question.answerString != null
                                 ? Image.asset(
-                                    question.defaultValue!,
+                                    "assets/images/q1.png",
                                   )
                                 : const SizedBox(),
                           ),
@@ -153,7 +154,7 @@ class OptionList extends HookConsumerWidget {
                     model.addQuestionnaireAnswer(
                         questions[questionIndex.value].id!,
                         true,
-                        questions[questionIndex.value].weight!);
+                        questions[questionIndex.value].answer?.answerItemWeight?.value?.toInt() ?? 0);
                     questionIndex.value = questionIndex.value + 1;
                   } else {
                     onPageChanged();

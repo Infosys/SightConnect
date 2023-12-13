@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -18,7 +19,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/models/triage_assessment_model.dart';
 
-var getTriageProvider = FutureProvider.autoDispose<TriageAssessmentModel>(
+var getTriageProvider = FutureProvider.autoDispose<DiagnosticReportTemplateFHIRModel>(
   (ref) async {
     var response = await ref.read(triageRepositoryProvider).getTriage();
     return response.fold((failure) {
