@@ -2,8 +2,10 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -153,8 +155,8 @@ class AssessmentCards extends ConsumerWidget {
                   height: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const SizedBox(width: 10),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -174,7 +176,6 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 20),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -186,6 +187,26 @@ class AssessmentCards extends ConsumerWidget {
                       },
                       child: Text(
                         'View Timeline',
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.primary,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const BlurDialogBox(
+                                actions: [],
+                                content: UpdateTriageAlertBox(),
+                              );
+                            });
+                      },
+                      child: Text(
+                        'Update',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
