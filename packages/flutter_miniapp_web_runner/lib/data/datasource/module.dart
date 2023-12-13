@@ -10,7 +10,6 @@ var miniAppRemoteSourceProvider = Provider(
 
 var miniAppLocalSourceProvider = Provider(
   (ref) => MiniAppLocalSourceImpl(
-    ref.read(pathProvider).asData?.value,
     ref.read(loggerProvider),
   ),
 );

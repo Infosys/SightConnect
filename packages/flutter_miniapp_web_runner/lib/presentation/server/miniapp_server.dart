@@ -1,5 +1,4 @@
 import 'package:flutter_miniapp_web_runner/core/global_provider.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:shelf/shelf.dart';
@@ -27,5 +26,13 @@ class MiniAppServer {
 
   Response _echoRequest(Request request) {
     return Response.ok('Request for "${request.url}"');
+  }
+
+  Future<int> closeServer(int port) async {
+    var server = await shelf_io.serve((Request request) {
+      return Response.ok('Request for "${request.url}"');
+    }, 'localhost', port);
+    await server.close();
+    return server.port;
   }
 }

@@ -1,7 +1,12 @@
 library flutter_miniapp_web_runner;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
+export 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_grid_view.dart';
+export 'package:flutter_miniapp_web_runner/data/datasource/miniapp_local_source.dart';
+export 'package:flutter_miniapp_web_runner/data/datasource/miniapp_remote_source.dart';
+export 'package:flutter_miniapp_web_runner/data/datasource/module.dart';
+export 'package:flutter_miniapp_web_runner/data/repositories/miniapp_repository_impl.dart';
+export 'package:flutter_miniapp_web_runner/data/module.dart';
+
+export 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
+export 'package:flutter_miniapp_web_runner/domain/repositories/miniapp_repository.dart';

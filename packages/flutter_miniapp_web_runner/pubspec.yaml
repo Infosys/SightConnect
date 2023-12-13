@@ -21,6 +21,7 @@ dependencies:
   logger: ^2.0.2+1
   path_provider: ^2.1.1
   permission_handler: ^11.1.0
+  flutter_archive: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/sample.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -42,9 +43,10 @@ class MyApp extends ConsumerWidget {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
-          routes: AppRouter.routes,
-          initialRoute: SplashPage.routeName,
-          onUnknownRoute: AppRouter.onUnknownRoute,
+          home: const SamplePage(),
+          // routes: AppRouter.routes,
+          // initialRoute: SplashPage.routeName,
+          // onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {
