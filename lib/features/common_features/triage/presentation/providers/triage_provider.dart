@@ -133,11 +133,20 @@ class TriageProvider extends ChangeNotifier {
   }
 }
 
-final resetProvider = Provider.autoDispose(
-  (ref) {
-    ref.invalidate(triageQuestionnaireProvider);
+var resetProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => TriageReset(ref),
+);
+
+class TriageReset extends ChangeNotifier{
+  final Ref ref;
+  TriageReset(this.ref);
+
+   void reset(){
+      ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
-  },
-);
+    notifyListeners();
+    }
+
+}

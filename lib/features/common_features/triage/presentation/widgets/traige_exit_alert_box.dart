@@ -44,7 +44,7 @@ class TriageExitAlertBox extends ConsumerWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    ref.read(triageProvider);
+                    ref.read(resetProvider).reset();
 
                     Navigator.popUntil(context, (route) => route.isFirst);
                     onYesPressed?.call();
