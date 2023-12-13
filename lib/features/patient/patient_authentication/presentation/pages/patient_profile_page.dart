@@ -11,6 +11,7 @@ import '../../data/source/local/fake_data_source.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
 import '../widgets/patient_profile_patient_info.dart';
+import 'patient_edit_profile_page.dart';
 
 class PatientProfilePage extends ConsumerWidget {
   const PatientProfilePage({super.key});
@@ -37,7 +38,10 @@ class PatientProfilePage extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const PatientEditProfilePage()));
+              },
               icon: const Icon(
                 Icons.edit_outlined,
                 color: AppColor.white,
