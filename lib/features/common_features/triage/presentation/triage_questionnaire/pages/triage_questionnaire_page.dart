@@ -17,7 +17,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../widgets/option_grid.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -93,62 +92,49 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               child: PageView.builder(
                 controller: pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: model.questionnaireSections.length,
+                itemCount: 1,
                 itemBuilder: (context, index) {
-                  QuestionnaireItemFHIRModel questionnaire = model.questionnaireSections[index];
+                  QuestionnaireItemFHIRModel questionnaire =
+                      model.questionnaireSections[index];
 
                   return SingleChildScrollView(
-                    child: index == 0
-                        ? CustomPopUp(
-                            questionCode: questionnaire.id ?? 0,
-                            onPageChanged: () {
-                              model.saveQuestionaireResponse();
-                              pageIndex.value += 1;
-                              pageController.nextPage(
-                                duration: const Duration(milliseconds: 1),
-                                curve: Curves.easeIn,
-                              );
-                            },
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              OptionList(
-                                questions: questionnaire.answerOption ?? []
-                                    ,
-                                onPageChanged: () {
-                                  model.saveQuestionaireResponse();
-                                  if (pageIndex.value ==
-                                      model.questionnaireSections.length - 1) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        builder: (_) =>
-                                            const TriageQuestionnaireOtherSymptomPage(),
-                                      ),
-                                    ).then(
-                                      (value) async {
-                                        await model
-                                            .saveQuestionaireResponseToDB();
-                                        ref
-                                            .read(triageStepperProvider)
-                                            .goToNextStep();
-                                      },
-                                    );
-                                    pageIndex.value = 0;
-                                  }
-                                  pageIndex.value += 1;
-                                  pageController.animateToPage(
-                                    pageIndex.value,
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeIn,
-                                  );
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        OptionList(
+                          questions: questionnaire.answerOption ?? [],
+                          onPageChanged: () {
+                            model.saveQuestionaireResponse();
+                            if (pageIndex.value ==
+                                model.questionnaireSections.length - 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (_) =>
+                                      const TriageQuestionnaireOtherSymptomPage(),
+                                ),
+                              ).then(
+                                (value) async {
+                                  await model.saveQuestionaireResponseToDB();
+                                  ref
+                                      .read(triageStepperProvider)
+                                      .goToNextStep();
                                 },
-                              ),
-                            ],
-                          ),
+                              );
+                              pageIndex.value = 0;
+                            }
+                            pageIndex.value += 1;
+                            pageController.animateToPage(
+                              pageIndex.value,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
