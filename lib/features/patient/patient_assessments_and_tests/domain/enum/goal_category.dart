@@ -1,0 +1,3 @@
+enum GoalCategory {
+    TREATMENT,
+}

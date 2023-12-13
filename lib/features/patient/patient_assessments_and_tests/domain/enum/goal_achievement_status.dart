@@ -1,0 +1,11 @@
+enum GoalAchievement {
+    IN_PROGRESS,
+    IMPROVING,
+    WORSENING,
+    NO_CHANGE,
+    ACHIEVED,
+    SUSTAINING,
+    NOT_ACHIEVED,
+    NO_PROGRESS,
+    NOT_ATTAINABLE,
+}

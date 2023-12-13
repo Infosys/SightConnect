@@ -1,0 +1,272 @@
+
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/body_site.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/care_plan_category.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/care_plan_status.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/encounter_status.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/gaol_outcome.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/goal_achievement_status.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/goal_category.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/goal_lifecycle_status.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/goal_measure.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/goal_parameter.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'triage_detailed_report_model.freezed.dart';
+part 'triage_detailed_report_model.g.dart';
+
+@freezed
+class TriageDetailedReportModel with _$TriageDetailedReportModel {
+  const factory TriageDetailedReportModel({
+    int ?encounterId,
+    int ?organizationCode,
+    ServiceType ?serviceType,
+    EncounterStatus ?encounterStatus, 
+     String? remarks,
+     EncounterPeriod ? encounterPeriod,
+     int ?diagnosticReportId,
+     int ?assessmentCode,
+     String ? assessmentVersion,
+     String ? category,
+     String? code,
+     @TimestampConverter() DateTime? issued,
+     @TimestampConverter() DateTime? userStartDate,
+     Source ? source, 
+     DiagnosticReportStatus ? status ,
+     String ? sourceVersion,
+     int ? performerId,
+     PerformerRole ? performerRole, 
+     List<IncompleteTest> ? incompleteTests,
+     List<Response> ? responses,
+     List<Observation> ? observations,
+     List<Media> ? media,
+     List<CarePlan> ? carePlans
+
+
+
+     
+  }) = _TriageDetailedReportModel;
+  
+}
+
+@freezed
+class EncounterPeriod with _$EncounterPeriod {
+  const factory EncounterPeriod({
+    required int id,
+    @TimestampConverter() DateTime? start,
+    @TimestampConverter() DateTime? end,
+  }) = _EncounterPeriod;
+
+  factory EncounterPeriod.fromJson(Map<String, dynamic> json) =>
+      _$EncounterPeriodFromJson(json);
+}
+
+@freezed
+class IncompleteTest with _$IncompleteTest {
+  const factory IncompleteTest({
+    required int id,
+    required TestType testName,
+  }) = _IncompleteTest;
+
+  factory IncompleteTest.fromJson(Map<String, dynamic> json) =>
+      _$IncompleteTestFromJson(json);
+}
+
+@freezed
+class Answer with _$Answer {
+  const factory Answer({
+    required int id,
+    required double score,
+    int ?  answerCode,
+    required String value,
+  }) = _Answer;
+
+  factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
+}
+
+@freezed
+class Response with _$Response {
+  const factory Response({
+    required int id,
+    @TimestampConverter() DateTime? authored,
+    required int linkId,
+    required double score,
+    dynamic author,
+     List<Answer> ?answers,
+  }) = _Response;
+
+  factory Response.fromJson(Map<String, dynamic> json) =>
+      _$ResponseFromJson(json);
+}
+
+@freezed
+class Observation with _$Observation {
+  const factory Observation({
+    required int id,
+    int? performer,
+    @TimestampConverter() DateTime? issued,
+     int ?identifier,
+    Severity? interpretation,
+     String ?value,
+     double ?score,
+  }) = _Observation;
+
+  factory Observation.fromJson(Map<String, dynamic> json) =>
+      _$ObservationFromJson(json);
+}
+
+@freezed
+class Media with _$Media {
+  const factory Media({
+    required int id,
+    int? performer,
+    @TimestampConverter() DateTime? issued,
+    int? identifier,
+     String ? baseUrl,
+     String ? endpoint,
+    BodySite? bodySite,
+     double ? score,
+    int ? fileId,
+  }) = _Media;
+
+  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+}
+
+@freezed
+class CarePlan with _$CarePlan {
+  const factory CarePlan({
+     required int carePlanId,
+     RequestStatus? carePlanStatus,
+     CarePlanCategory? category,
+    String ? title,
+    String ? description,
+     int ?subject,  //patient id
+    @TimestampConverter() DateTime? created,
+    int ? careTeam,
+    String ?  note,
+     EncounterPeriod ? period,
+    dynamic  custodian,
+    dynamic partOf,
+    dynamic carePlan,
+     List<Condition> ?conditions,
+     List<Activity> ?activities,
+     List<Goal> ?goals,
+  }) = _CarePlan;
+
+  factory CarePlan.fromJson(Map<String, dynamic> json) =>
+      _$CarePlanFromJson(json);
+}
+
+@freezed
+class Condition with _$Condition {
+  const factory Condition({
+    int ? id,
+     @TimestampConverter() DateTime? recordedDate,
+    BodySite? bodySite,
+     String ? code,
+    String ? note,
+  }) = _Condition;
+
+  factory Condition.fromJson(Map<String, dynamic> json) =>
+      _$ConditionFromJson(json);
+}
+
+@freezed
+class Activity with _$Activity {
+  const factory Activity({
+    required int  id,
+    String ? progress,
+     PlannedActivityReference ? plannedActivityReference,
+  }) = _Activity;
+
+  factory Activity.fromJson(Map<String, dynamic> json) =>
+      _$ActivityFromJson(json);
+}
+
+@freezed
+class PlannedActivityReference with _$PlannedActivityReference {
+  const factory PlannedActivityReference({
+     required int  id,
+     String ? type,
+     ServiceRequest ? serviceRequest,
+     Communication ? communication,
+  }) = _PlannedActivityReference;
+
+  factory PlannedActivityReference.fromJson(Map<String, dynamic> json) =>
+      _$PlannedActivityReferenceFromJson(json);
+}
+
+@freezed
+class ServiceRequest with _$ServiceRequest {
+  const factory ServiceRequest({
+   required int id,
+    String ? note,
+     String ? patientInstruction,
+    BodySite? bodySite,
+     RequestPriority ? priority,
+  }) = _ServiceRequest;
+
+  factory ServiceRequest.fromJson(Map<String, dynamic> json) =>
+      _$ServiceRequestFromJson(json);
+}
+
+@freezed
+class Communication with _$Communication {
+  const factory Communication({
+    dynamic id,
+    dynamic status,
+    dynamic statusReason,
+    dynamic category,
+    dynamic priority,
+    dynamic doNotPerform,
+    dynamic medium,
+    dynamic subject,
+    dynamic about,
+    dynamic authoredOn,
+    dynamic reason,
+    dynamic note,
+  }) = _Communication;
+
+  factory Communication.fromJson(Map<String, dynamic> json) =>
+      _$CommunicationFromJson(json);
+}
+
+@freezed
+class Goal with _$Goal {
+  const factory Goal({
+   required int id,
+   @TimestampConverter() DateTime? statusDate,
+     String ? statusReason,
+   GoalAchievement? achievementStatus,
+    GoalLifecycleStatus? lifecycleStatus,
+     GoalCategory ? category,
+    GoalOutcome ? outcome,
+    @TimestampConverter() DateTime? startDate,
+   @TimestampConverter() DateTime? dueDate,
+     List<Target> ?targets,
+  }) = _Goal;
+
+  factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
+}
+
+@freezed
+class Target with _$Target {
+  const factory Target({
+    int ? id,
+    GoalMeasure ? measure,
+    String? detailString,
+    int? detailQuantity,
+    String?  detailRange,
+    GoalParameter? detailCodeableConcept,
+    @TimestampConverter() DateTime? dueDate,
+  }) = _Target;
+
+  factory Target.fromJson(Map<String, dynamic> json) => _$TargetFromJson(json);
+}
