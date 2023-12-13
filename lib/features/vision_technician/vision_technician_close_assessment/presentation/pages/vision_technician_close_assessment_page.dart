@@ -37,7 +37,9 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               style: ButtonStyle(
                 // backgroundColor: MaterialStateProperty.all(AppColor.primary),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -61,8 +63,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
           Expanded(
             child: TextButton(
               onPressed: () {
-                ref.read(registerNewPatientProvider.notifier).closeAssessment();
-                // print()
+                ref.read(visionTechnicianSearchProvider).closeAssessment();
                 Navigator.pop(context);
               },
               style: ButtonStyle(

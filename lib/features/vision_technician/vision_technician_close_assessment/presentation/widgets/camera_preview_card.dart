@@ -12,8 +12,8 @@ class CameraPreviewCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: 536,
-      height: 714,
+      width: AppSize.width(context) * 0.8,
+      height: AppSize.width(context) * 0.9,
       decoration: BoxDecoration(
         color: AppColor.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(AppSize.klradius),
@@ -41,10 +41,11 @@ class CameraPreviewCard extends ConsumerWidget {
             ),
           ),
           SizedBox(
-            width: 536,
-            height: 402,
+            width: AppSize.width(context) * 0.8,
+            height: AppSize.width(context) * 0.5,
             child: CameraPreview(controller),
           ),
+          
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

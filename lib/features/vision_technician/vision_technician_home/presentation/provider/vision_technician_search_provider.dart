@@ -34,8 +34,11 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void closeAssessment(int index) {
-    visionTechnicianHomeRepositoryImpl.closeAssessment(index);
+  void closeAssessment() {
+    if(_patientDetails == null){
+      return;
+      }
+    _patientDetails!.closed = true;
     notifyListeners();
   }
 }

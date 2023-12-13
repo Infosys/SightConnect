@@ -21,8 +21,9 @@ class VTPatientList extends ConsumerWidget {
     return Column(
       children: [
         SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
           child: SizedBox(
-            width: AppSize.width(context),
+            width: AppSize.width(context) * 0.99,
             child: DataTable(
               columnSpacing: 8,
               horizontalMargin: 12,
@@ -33,54 +34,46 @@ class VTPatientList extends ConsumerWidget {
               ),
               columns: [
                 DataColumn(
-                  label: Flexible(
-                    child: Text(
-                      "Patient",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyFiraSansFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
-                      ),
+                  label: Text(
+                    "Patient",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
+                      fontSize: 12,
+                      color: AppColor.grey,
                     ),
                   ),
                 ),
                 DataColumn(
-                  label: Flexible(
-                    child: Text(
-                      "Assessment ID",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyFiraSansFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
-                      ),
+                  label: Text(
+                    "Assessment ID",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
+                      fontSize: 12,
+                      color: AppColor.grey,
                     ),
                   ),
                 ),
                 DataColumn(
-                  label: Flexible(
-                    child: Text(
-                      "Status",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyFiraSansFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
-                      ),
+                  label: Text(
+                    "Status",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
+                      fontSize: 12,
+                      color: AppColor.grey,
                     ),
                   ),
                 ),
                 DataColumn(
-                  label: Flexible(
-                    child: Text(
-                      "Category",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyFiraSansFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
-                      ),
+                  label: Text(
+                    "Category",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
+                      fontSize: 12,
+                      color: AppColor.grey,
                     ),
                   ),
                 ),
@@ -161,27 +154,22 @@ List<DataCell> generateListTile(VTPatientModel data) {
       ),
     ),
     DataCell(
-      Flexible(
-        child: Text(
-          data.status!,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(fontSize: 14),
-        ),
+      Text(
+        data.status,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: applyRobotoFont(fontSize: 14),
       ),
     ),
     DataCell(
-      Flexible(
-        child: Text(
-          data.category!,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 14,
-            color: data.category!.contains("Early")
-                ? AppColor.orange
-                : AppColor.red,
-          ),
+      Text(
+        data.category,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: applyRobotoFont(
+          fontSize: 14,
+          color:
+              data.category.contains("Early") ? AppColor.orange : AppColor.red,
         ),
       ),
     ),

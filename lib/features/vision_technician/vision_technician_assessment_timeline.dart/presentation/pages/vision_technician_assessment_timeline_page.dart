@@ -25,7 +25,8 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     VTPatientModel? patient =
         ref.watch(visionTechnicianSearchProvider).patientDetails;
-    // bool closed = ref.watch(registerNewPatientProvider).patientDetails!.closed;
+    bool closed =
+        ref.watch(visionTechnicianSearchProvider).patientDetails!.closed;
 
     // print("value is ${patient.firstName}");
 
@@ -39,31 +40,31 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsets>(
                 const EdgeInsets.all(AppSize.kmpadding)),
-            backgroundColor: MaterialStateProperty.all(AppColor.primary),
+            backgroundColor: closed
+                ? MaterialStateProperty.all(AppColor.lightGrey)
+                : MaterialStateProperty.all(AppColor.primary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.klradius * 5),
               ),
             ),
           ),
-          onPressed:
-              // closed
-              //     ? null
-              //     :
-              () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const VisionTechnicianCloseAssessmentPage(),
-              ),
-            );
-          },
+          onPressed: closed
+              ? null
+              : () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const VisionTechnicianCloseAssessmentPage(),
+                    ),
+                  );
+                },
           child: Text(
             "Close",
             style: applyRobotoFont(
               fontSize: 14,
-              // color: closed ? AppColor.grey : AppColor.white,
+              color: closed ? AppColor.grey : AppColor.white,
               fontWeight: FontWeight.w500,
             ),
           ),

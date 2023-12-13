@@ -220,12 +220,7 @@ class RegisterNewPatientNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void closeAssessment() {
-    patientDetails!.closed = true;
-    int length = visionTechnicianHomeRepositoryImpl.listOfPatients().length;
-    visionTechnicianHomeRepositoryImpl.closeAssessment(length - 1);
-    notifyListeners();
-  }
+  
 
   void submit() {
     visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
