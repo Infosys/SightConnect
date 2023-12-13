@@ -5,6 +5,12 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+var triagReportSourceProvider = Provider<TriageReportSource>(
+  (ref) => TriageReportSourceImpl(
+    ref.watch(dioProvider),
+  ),
+);
+
 abstract class TriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(int patientId);
 
@@ -45,8 +51,3 @@ class TriageReportSourceImpl implements TriageReportSource {
   
 }
 
-var triagReportSourceProvider = Provider<TriageReportSource>(
-  (ref) => TriageReportSourceImpl(
-    ref.watch(dioProvider),
-  ),
-);
