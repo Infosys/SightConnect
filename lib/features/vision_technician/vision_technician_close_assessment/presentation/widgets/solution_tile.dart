@@ -64,40 +64,61 @@ class SolutionTile extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Wrap(
+                    spacing: AppSize.klwidth * 3,
+                    runSpacing: AppSize.kmheight,
                     children: [
-                      Text(
-                        "$title Name",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "$title Name",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                          const SizedBox(width: AppSize.klwidth),
+                          Text(
+                            "Soothe XP",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: AppSize.klwidth),
-                      Text(
-                        "Soothe XP",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        "Dosage",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                      const SizedBox(width: AppSize.klwidth),
-                      Text(
-                        "3 Times a Day",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+
+                      // const Spacer(),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Dosage",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                          const SizedBox(width: AppSize.klwidth),
+                          Text(
+                            "3 Times a Day",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
