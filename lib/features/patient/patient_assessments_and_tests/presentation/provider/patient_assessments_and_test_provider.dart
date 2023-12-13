@@ -45,7 +45,7 @@ var getAssementDetailsReport =
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
   final TriageReportRepository triageReportRepositoryProvider;
-  final int _patientId = 1;
+  final int _patientId = 9627849171;
   List<TriageDetailedReportModel> _triageReports = [];
 
   AssessmentsAndTestProvider(
@@ -64,6 +64,9 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
       throw failure;
     }, (triageAssessment) {
       _triageReports = triageAssessment;
+      logger.d({
+        "getTriageReports details": triageAssessment,
+      });
       notifyListeners();
     });
   }

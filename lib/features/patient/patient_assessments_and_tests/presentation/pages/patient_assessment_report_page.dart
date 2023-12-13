@@ -23,9 +23,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(getAssementDetailsReport(
-      triageDetailedReportModel.assessmentCode,
-    ));
+    var currentData = data[index];
+
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(

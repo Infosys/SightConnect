@@ -159,7 +159,7 @@ class AssessmentCards extends ConsumerWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PatientAssessmentReportPage(
-                              index: index,
+                              triageDetailedReportModel: report,
                             ),
                           ),
                         );
