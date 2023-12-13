@@ -75,7 +75,7 @@ class AppDrawer extends StatelessWidget {
                                       );
                                       break;
 
-                                    case 3:
+                                    case 2:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -83,7 +83,7 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
-                                    case 5:
+                                    case 3:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -91,7 +91,7 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
-                                    case 6:
+                                    case 4:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -99,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
-                                    case 7:
+                                    case 5:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -107,7 +107,7 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
-                                    case 8:
+                                    case 6:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
