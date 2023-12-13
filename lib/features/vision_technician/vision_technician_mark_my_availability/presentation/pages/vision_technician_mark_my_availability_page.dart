@@ -32,7 +32,6 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all<EdgeInsets>(
                       const EdgeInsets.all(AppSize.kmpadding)),
-                
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppSize.klradius * 5),
@@ -89,12 +88,16 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Mark My Availability',
-              style: applyFiraSansFont(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppColor.black,
+            Flexible(
+              child: Text(
+                'Mark My Availability',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.black,
+                ),
               ),
             ),
             InkWell(
@@ -138,10 +141,11 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
               Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppSize.kmradius - 5),
-                      )),
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppSize.kmradius - 5),
+                    ),
+                  ),
                   padding: const EdgeInsets.all(AppSize.klpadding),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +175,6 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                           Flexible(
                             child: Container(
                                 height: AppSize.klheight * 2,
-                                             
                                 decoration: BoxDecoration(
                                   border: Border.all(color: AppColor.blue),
                                   color: AppColor.lightBlue,

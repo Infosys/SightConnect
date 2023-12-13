@@ -34,10 +34,32 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void closeAssessment() {
-    if(_patientDetails == null){
+  void addSolutions(String solution) {
+    if (_patientDetails == null) {
       return;
-      }
+    }
+
+    if (solution == "Spectacles") {
+      _patientDetails!.spectacles = true;
+    }
+
+    if (solution == "Cataract Surgery") {
+      _patientDetails!.cataractSurgery = true;
+    }
+
+    if (solution == "Eye Drops") {
+      _patientDetails!.eyeDrops = true;
+    }
+
+    if (solution == "Oral Medication") {
+      _patientDetails!.oralMedication = true;
+    }
+  }
+
+  void closeAssessment() {
+    if (_patientDetails == null) {
+      return;
+    }
     _patientDetails!.closed = true;
     notifyListeners();
   }

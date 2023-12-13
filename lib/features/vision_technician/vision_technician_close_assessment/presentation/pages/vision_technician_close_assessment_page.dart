@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/close_heading.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
@@ -64,6 +65,8 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
             child: TextButton(
               onPressed: () {
                 ref.read(visionTechnicianSearchProvider).closeAssessment();
+                ref.read(assessmentTimelineProvider).addToTimeline(patient);
+
                 Navigator.pop(context);
               },
               style: ButtonStyle(

@@ -36,44 +36,46 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
       ),
       body: list.isEmpty
           ? const Center(child: EmptyResultCard())
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: list.isEmpty
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      width: AppSize.width(context),
-                      // height: 300,
-                      child: DataTable(
-                        columnSpacing: 12,
-                        horizontalMargin: 12,
-                        // dataRowHeight: AppSize.klheight * 2.5,
-                        // minWidth: 100,
-                        showCheckboxColumn: false,
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          borderRadius: BorderRadius.circular(AppSize.ksradius),
-                          boxShadow: applyLightShadow(),
-                        ),
-                        columns: [
-                          DataColumn(
-                            label: Text(
-                              "Patient",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+          : Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: list.isEmpty
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.start,
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: SizedBox(
+                        // width: AppSize.width(context),
+                        // height: 300,
+                        child: DataTable(
+                          columnSpacing: AppSize.width(context) * 0.09,
+                          horizontalMargin: 12,
+                          // dataRowHeight: AppSize.klheight * 2.5,
+                          // minWidth: 100,
+                          showCheckboxColumn: false,
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            borderRadius:
+                                BorderRadius.circular(AppSize.ksradius),
+                            boxShadow: applyLightShadow(),
+                          ),
+                          columns: [
+                            DataColumn(
+                              label: Text(
+                                "Patient",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
                               ),
                             ),
-                          ),
-                          DataColumn(
-                            label: Flexible(
-                              child: Text(
+                            DataColumn(
+                              label: Text(
                                 "Mobile",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -83,10 +85,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                          ),
-                          DataColumn(
-                            label: Flexible(
-                              child: Text(
+                            DataColumn(
+                              label: Text(
                                 "Assessment ID",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -96,10 +96,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                          ),
-                          DataColumn(
-                            label: Flexible(
-                              child: Text(
+                            DataColumn(
+                              label: Text(
                                 "Status",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -109,10 +107,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                          ),
-                          DataColumn(
-                            label: Flexible(
-                              child: Text(
+                            DataColumn(
+                              label: Text(
                                 "Category",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -122,31 +118,31 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                        rows: List<DataRow>.generate(
-                          list.length,
-                          (index) => DataRow(
-                            onSelectChanged: (value) {
-                              // print(list[index].toString());
-                              ref
-                                  .read(visionTechnicianSearchProvider)
-                                  .setPatientDetails(list[index]);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VisionTechnicianAssessmentTimeline(),
-                                ),
-                              );
-                            },
-                            cells: generateListTileSearchResults(list[index]),
+                          ],
+                          rows: List<DataRow>.generate(
+                            list.length,
+                            (index) => DataRow(
+                              onSelectChanged: (value) {
+                                // print(list[index].toString());
+                                ref
+                                    .read(visionTechnicianSearchProvider)
+                                    .setPatientDetails(list[index]);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisionTechnicianAssessmentTimeline(),
+                                  ),
+                                );
+                              },
+                              cells: generateListTileSearchResults(list[index]),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
     );

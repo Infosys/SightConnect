@@ -18,14 +18,14 @@ class VTPatientList extends ConsumerWidget {
     final List<VTPatientModel> listOfAssessments =
         ref.watch(visionTechnicianHomeProvider.notifier).listOfAssessments;
 
-    return Column(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SizedBox(
-            width: AppSize.width(context) * 0.99,
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: DataTable(
-              columnSpacing: 8,
+              columnSpacing: AppSize.width(context) * 0.09,
               horizontalMargin: 12,
               decoration: BoxDecoration(
                 color: AppColor.white,
@@ -86,20 +86,20 @@ class VTPatientList extends ConsumerWidget {
               ),
             ),
           ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            "Show More",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontWeight: FontWeight.w500,
-              color: AppColor.primary,
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "Show More",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontWeight: FontWeight.w500,
+                color: AppColor.primary,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

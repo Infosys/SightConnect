@@ -41,7 +41,9 @@ class TimelineProfile extends ConsumerWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               "${patient.firstName} ${patient.lastName}",
-              softWrap: true,
+              // softWrap: true,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
                   fontSize: 24,
                   fontWeight: FontWeight.w400,
@@ -50,7 +52,8 @@ class TimelineProfile extends ConsumerWidget {
             const SizedBox(height: AppSize.ksheight),
             Text(
               "PID: OP ${patient.patientId}",
-              softWrap: true,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -81,7 +84,8 @@ class TimelineProfile extends ConsumerWidget {
                   ),
                   Text(
                     patient.mobileNo,
-                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -121,7 +125,8 @@ class TimelineProfile extends ConsumerWidget {
                   ),
                   Text(
                     patient.email,
-                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
