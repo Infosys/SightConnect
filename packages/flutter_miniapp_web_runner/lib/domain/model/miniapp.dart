@@ -18,6 +18,7 @@ class MiniApp with _$MiniApp {
   factory MiniApp({
     dynamic type,
     dynamic id,
+    dynamic version,
     dynamic identifier,
     dynamic name,
     dynamic summary,

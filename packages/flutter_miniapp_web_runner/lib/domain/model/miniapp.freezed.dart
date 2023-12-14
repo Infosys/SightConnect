@@ -187,6 +187,7 @@ MiniApp _$MiniAppFromJson(Map<String, dynamic> json) {
 mixin _$MiniApp {
   dynamic get type => throw _privateConstructorUsedError;
   dynamic get id => throw _privateConstructorUsedError;
+  dynamic get version => throw _privateConstructorUsedError;
   dynamic get identifier => throw _privateConstructorUsedError;
   dynamic get name => throw _privateConstructorUsedError;
   dynamic get summary => throw _privateConstructorUsedError;
@@ -210,6 +211,7 @@ abstract class $MiniAppCopyWith<$Res> {
   $Res call(
       {dynamic type,
       dynamic id,
+      dynamic version,
       dynamic identifier,
       dynamic name,
       dynamic summary,
@@ -236,6 +238,7 @@ class _$MiniAppCopyWithImpl<$Res, $Val extends MiniApp>
   $Res call({
     Object? type = freezed,
     Object? id = freezed,
+    Object? version = freezed,
     Object? identifier = freezed,
     Object? name = freezed,
     Object? summary = freezed,
@@ -254,6 +257,10 @@ class _$MiniAppCopyWithImpl<$Res, $Val extends MiniApp>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
               as dynamic,
       identifier: freezed == identifier
           ? _value.identifier
@@ -305,6 +312,7 @@ abstract class _$$_MiniAppCopyWith<$Res> implements $MiniAppCopyWith<$Res> {
   $Res call(
       {dynamic type,
       dynamic id,
+      dynamic version,
       dynamic identifier,
       dynamic name,
       dynamic summary,
@@ -328,6 +336,7 @@ class __$$_MiniAppCopyWithImpl<$Res>
   $Res call({
     Object? type = freezed,
     Object? id = freezed,
+    Object? version = freezed,
     Object? identifier = freezed,
     Object? name = freezed,
     Object? summary = freezed,
@@ -346,6 +355,10 @@ class __$$_MiniAppCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
               as dynamic,
       identifier: freezed == identifier
           ? _value.identifier
@@ -393,6 +406,7 @@ class _$_MiniApp implements _MiniApp {
   _$_MiniApp(
       {this.type,
       this.id,
+      this.version,
       this.identifier,
       this.name,
       this.summary,
@@ -410,6 +424,8 @@ class _$_MiniApp implements _MiniApp {
   final dynamic type;
   @override
   final dynamic id;
+  @override
+  final dynamic version;
   @override
   final dynamic identifier;
   @override
@@ -431,7 +447,7 @@ class _$_MiniApp implements _MiniApp {
 
   @override
   String toString() {
-    return 'MiniApp(type: $type, id: $id, identifier: $identifier, name: $name, summary: $summary, owner: $owner, iconUrl: $iconUrl, displayName: $displayName, redirectPage: $redirectPage, tags: $tags, sourceurl: $sourceurl)';
+    return 'MiniApp(type: $type, id: $id, version: $version, identifier: $identifier, name: $name, summary: $summary, owner: $owner, iconUrl: $iconUrl, displayName: $displayName, redirectPage: $redirectPage, tags: $tags, sourceurl: $sourceurl)';
   }
 
   @override
@@ -441,6 +457,7 @@ class _$_MiniApp implements _MiniApp {
             other is _$_MiniApp &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.version, version) &&
             const DeepCollectionEquality()
                 .equals(other.identifier, identifier) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -461,6 +478,7 @@ class _$_MiniApp implements _MiniApp {
       runtimeType,
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(version),
       const DeepCollectionEquality().hash(identifier),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(summary),
@@ -489,6 +507,7 @@ abstract class _MiniApp implements MiniApp {
   factory _MiniApp(
       {final dynamic type,
       final dynamic id,
+      final dynamic version,
       final dynamic identifier,
       final dynamic name,
       final dynamic summary,
@@ -505,6 +524,8 @@ abstract class _MiniApp implements MiniApp {
   dynamic get type;
   @override
   dynamic get id;
+  @override
+  dynamic get version;
   @override
   dynamic get identifier;
   @override

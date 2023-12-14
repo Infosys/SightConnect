@@ -19,6 +19,7 @@ class SamplePage extends ConsumerWidget {
                 builder: (context) => MiniAppDisplayPage(
                   miniapp: MiniApp(
                     id: "1",
+                    version: "1",
                     name: "MiniApp",
                     displayName: "MiniApp",
                     sourceurl: "assets/miniapp/miniapp.zip",

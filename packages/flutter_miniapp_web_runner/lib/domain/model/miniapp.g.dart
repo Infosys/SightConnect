@@ -23,6 +23,7 @@ Map<String, dynamic> _$$_MiniAppsToJson(_$_MiniApps instance) =>
 _$_MiniApp _$$_MiniAppFromJson(Map<String, dynamic> json) => _$_MiniApp(
       type: json['type'],
       id: json['id'],
+      version: json['version'],
       identifier: json['identifier'],
       name: json['name'],
       summary: json['summary'],
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_MiniAppToJson(_$_MiniApp instance) =>
     <String, dynamic>{
       'type': instance.type,
       'id': instance.id,
+      'version': instance.version,
       'identifier': instance.identifier,
       'name': instance.name,
       'summary': instance.summary,

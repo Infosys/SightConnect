@@ -1,19 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_miniapp_web_runner/core/global_provider.dart';
-import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
-import 'package:flutter_miniapp_web_runner/presentation/provider/miniapp_display_provider.dart';
 import 'package:flutter_miniapp_web_runner/presentation/server/miniapp_server.dart';
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+
+import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
@@ -33,6 +29,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
   late InAppWebViewController _webViewController;
   bool? isMiniAppLoaded;
   int port = 8081;
+  String _progressMessage = "";
 
   @override
   void initState() {
@@ -45,7 +42,11 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
   }
 
   _loadMiniApp() async {
-    var scaffoldMessenger = ScaffoldMessenger.of(context);
+    setState(() {
+      isMiniAppLoaded = false;
+      _progressMessage = "Loading MiniApp";
+    });
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     if (widget.miniapp == null) {
       scaffoldMessenger.showSnackBar(
         const SnackBar(
@@ -54,18 +55,19 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
       );
       return;
     }
-    setState(() {
-      isMiniAppLoaded = false;
-    });
 
     try {
       var id = widget.miniapp!.id;
-      var version = "1";
+      var version = widget.miniapp!.version;
       var path = widget.miniapp!.sourceurl;
       final zipPath = await _storeFileToLocalFromAsset(path, version, id);
-      log("Zip path: $zipPath");
+      setState(() {
+        _progressMessage = "Extracting MiniApp";
+      });
       final extractedPath = await _extractFile(zipPath, version, id);
-      log("Extracted path: $extractedPath");
+      setState(() {
+        _progressMessage = "Starting MiniApp";
+      });
       final miniAppServer = ref.read(localServerProvider);
       await miniAppServer.startServer(extractedPath, port);
       setState(() {
@@ -79,6 +81,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
       );
       setState(() {
         isMiniAppLoaded = null;
+        _progressMessage = "Something went wrong";
       });
       return;
     }
@@ -131,10 +134,9 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
   }
 
   Future<void> closeMiniApp() async {
-    var navigator = Navigator.of(context);
-    await ref.read(localServerProvider).closeServer(port);
-    setState(() {});
-    navigator.pop();
+    if (await _webViewController.canGoBack()) {
+      _webViewController.goBack();
+    }
   }
 
   @override
@@ -158,9 +160,18 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
           },
         ),
         body: Center(
-          child: Text(
-            "Downloading...",
-            style: Theme.of(context).textTheme.headlineMedium,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(height: 10),
+              Text(
+                _progressMessage,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
           ),
         ),
       );
@@ -169,31 +180,36 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
         onPopInvoked: (value) {
           closeMiniApp();
         },
-        child: SafeArea(
-          child: Scaffold(
-            appBar: WebViewAppBar(
-              title: widget.miniapp!.displayName,
-              onBack: () {
-                closeMiniApp();
-              },
-            ),
-            body: InAppWebView(
-              initialUrlRequest: URLRequest(
-                url: Uri.parse("http://127.0.0.1:$port/"),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await _loadMiniApp();
+          },
+          child: SafeArea(
+            child: Scaffold(
+              appBar: WebViewAppBar(
+                title: widget.miniapp!.displayName,
+                onBack: () {
+                  closeMiniApp();
+                },
               ),
-              initialOptions: InAppWebViewGroupOptions(
-                ios: IOSInAppWebViewOptions(
-                  useOnNavigationResponse: true,
-                  allowsInlineMediaPlayback: true,
+              body: InAppWebView(
+                initialUrlRequest: URLRequest(
+                  url: Uri.parse("http://127.0.0.1:$port/"),
                 ),
-                android: AndroidInAppWebViewOptions(
-                  useHybridComposition: true,
-                  useShouldInterceptRequest: true,
+                initialOptions: InAppWebViewGroupOptions(
+                  ios: IOSInAppWebViewOptions(
+                    useOnNavigationResponse: true,
+                    allowsInlineMediaPlayback: true,
+                  ),
+                  android: AndroidInAppWebViewOptions(
+                    useHybridComposition: true,
+                    useShouldInterceptRequest: true,
+                  ),
                 ),
+                onWebViewCreated: (controller) {
+                  _webViewController = controller;
+                },
               ),
-              onWebViewCreated: (controller) {
-                _webViewController = controller;
-              },
             ),
           ),
         ),
