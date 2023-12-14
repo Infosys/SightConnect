@@ -220,10 +220,15 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  dynamic getCheckedVisionCenter() {
-    for (VisionCenterModel element in visionCenters) {
-      if (element.checked == true) return element;
+  VisionCenterModel getCheckedVisionCenter() {
+    VisionCenterModel visionCenter = VisionCenterModel(
+        type: "", checked: false, completeAddress: "", phoneno: "", time: "");
+    for (int i = 0; i < visionCenters.length; i++) {
+      if (visionCenters[i].checked == true) {
+        visionCenter = visionCenters[i];
+        break;
+      }
     }
-    return null;
+    return visionCenter;
   }
 }
