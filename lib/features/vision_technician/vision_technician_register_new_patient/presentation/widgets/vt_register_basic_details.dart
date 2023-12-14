@@ -56,7 +56,7 @@ class BasicDetails extends StatelessWidget {
                                   controller: ref
                                           .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
-                                      "firstNameController"]!)),
+                                      "firstNameController"]!),),
                           SizedBox(
                             width: AppSize.klwidth,
                           ),

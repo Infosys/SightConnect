@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_recommeded_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_profile.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,72 +36,66 @@ class VisionTechnicianAssessmentReportPage extends StatelessWidget {
               const SizedBox(height: AppSize.klheight),
               const AssessmentReportDetails(),
               const SizedBox(height: AppSize.klheight),
-              Consumer(
-                builder: (context, ref, child) {
-                  return Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(AppSize.kmradius - 5),
-                        )),
-                    padding: const EdgeInsets.all(AppSize.klpadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Recommendation",
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        const SizedBox(height: AppSize.kmheight),
-                        Text(
-                          ref
-                              .watch(preliminaryAssessmentHelperProvider)
-                              .recommendationController
-                              .text,
-                          style: applyRobotoFont(
-                              fontSize: 16, fontWeight: FontWeight.w400),
-                        )
-                      ],
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  boxShadow: applyLightShadow(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSize.kmradius - 5),
+                  ),
+                ),
+                padding: const EdgeInsets.all(AppSize.klpadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Recommendation",
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  );
-                },
+                    const SizedBox(height: AppSize.kmheight),
+                    Text(
+                      "Patient has sticky discharge in eyes and needs to be referred to a specialist who deals with corneal disorders.",
+                      style: applyRobotoFont(
+                          fontSize: 16, fontWeight: FontWeight.w400),
+                    )
+                  ],
+                ),
               ),
               const SizedBox(height: AppSize.klheight),
               const AssessmentReportRecommendedCenter(),
               const SizedBox(height: AppSize.klheight),
-              Consumer(
-                builder: (context, ref, child) {
-                  return Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(AppSize.kmradius - 5),
-                        )),
-                    padding: const EdgeInsets.all(AppSize.klpadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Remarks",
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        const SizedBox(height: AppSize.kmheight),
-                        Text(
-                          ref
-                              .watch(preliminaryAssessmentHelperProvider)
-                              .remarksController
-                              .text,
-                          style: applyRobotoFont(
-                              fontSize: 16, fontWeight: FontWeight.w400),
-                        )
-                      ],
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  boxShadow: applyLightShadow(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSize.kmradius - 5),
+                  ),
+                ),
+                padding: const EdgeInsets.all(AppSize.klpadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Remarks",
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  );
-                },
+                    const SizedBox(height: AppSize.kmheight),
+                    Text(
+                      "Patient has sticky discharge in eyes and has agreed to meet up a specialist from the recommended vision center today.",
+                      style: applyRobotoFont(
+                          fontSize: 16, fontWeight: FontWeight.w400),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
