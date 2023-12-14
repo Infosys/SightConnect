@@ -12,42 +12,33 @@ var triagReportSourceProvider = Provider<TriageReportSource>(
 );
 
 abstract class TriageReportSource {
-  Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(int patientId);
-
+  Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
+      int patientId);
 }
 
 class TriageReportSourceImpl implements TriageReportSource {
   Dio dio;
   TriageReportSourceImpl(this.dio);
 
- 
-
- 
-  
   @override
-  Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(int patientId) async {
-    var endpoint = "/services/triage/api/triage/triage-report?patient-id=$patientId";
+  Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
+      int patientId) async {
+    var endpoint =
+        "/services/triage/api/triage/triage-report?patient-id=$patientId";
     logger.d({
       "api url to get all triages reports by patient id": endpoint,
     });
-    //generate headers for bearer token
-   
-
 
     var response = await dio.get(endpoint);
-   
+
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       List<TriageDetailedReportModel> triageReports = [];
       response.data.forEach((element) {
         triageReports.add(TriageDetailedReportModel.fromJson(element));
       });
-      return triageReports ;
+      return triageReports;
     } else {
       throw ServerException();
     }
-    
   }
-  
-  
 }
-
