@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -16,6 +15,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../widgets/option_card.dart';
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -92,6 +93,10 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               itemCount: model.questionnaireSections.length,
               itemBuilder: (context, index) {
                 var question = model.questionnaireSections[index];
+                var isLastQuestion =
+                    (model.questionnaireSections.length - 1 == index);
+                double weightage = _getWeightage(question.answerOption ?? []);
+
                 if (index == 0) {
                   return Center(
                     child: Card(
@@ -167,158 +172,55 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                     ),
                   );
                 } else {
-                  return Container(
-                    margin: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          question.text ?? '',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                  return OptionCard(
+                    question: question,
+                    onNoButtonPressed: () {
+                      model.addQuestionnaireAnswer(
+                        question.id!,
+                        false,
+                        weightage.toInt(),
+                      );
+                      model.saveQuestionaireResponse();
+
+                      if (isLastQuestion) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) =>
+                                const TriageQuestionnaireOtherSymptomPage(),
                           ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.kmheight,
-                        ),
-                        AspectRatio(
-                          aspectRatio: 0.8,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      "assets/images/q1.png",
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: AppSize.klpadding * 2,
-                                      vertical: AppSize.klpadding,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SvgPicture.asset(
-                                          AppImages.mic,
-                                        ),
-                                        SvgPicture.asset(
-                                          AppImages.speaker,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                        ).then(
+                          (value) async {
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                          },
+                        );
+                      }
+                    },
+                    onYesButtonPressed: () {
+                      model.addQuestionnaireAnswer(
+                        question.id!,
+                        true,
+                        weightage.toInt(),
+                      );
+                      model.saveQuestionaireResponse();
+                      if (isLastQuestion) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) =>
+                                const TriageQuestionnaireOtherSymptomPage(),
                           ),
-                        ),
-                        const SizedBox(height: AppSize.klheight),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                model.saveQuestionaireResponse();
-                                if (model.questionnaireSections.length - 1 ==
-                                    index) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      fullscreenDialog: true,
-                                      builder: (_) =>
-                                          const TriageQuestionnaireOtherSymptomPage(),
-                                    ),
-                                  ).then(
-                                    (value) async {
-                                      await model
-                                          .saveQuestionaireResponseToDB();
-                                      ref
-                                          .read(triageStepperProvider)
-                                          .goToNextStep();
-                                    },
-                                  );
-                                }
-                              },
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.all(AppSize.kspadding),
-                                decoration: const BoxDecoration(
-                                  color: AppColor.red,
-                                  shape: BoxShape.circle,
-                                  border: Border.fromBorderSide(
-                                    BorderSide(
-                                      color: AppColor.white,
-                                    ),
-                                  ),
-                                ),
-                                child: const Icon(
-                                  Icons.close,
-                                  color: AppColor.white,
-                                  size: 35,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 30),
-                            InkWell(
-                              onTap: () {
-                                model.saveQuestionaireResponse();
-                                if (model.questionnaireSections.length - 1 ==
-                                    index) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      fullscreenDialog: true,
-                                      builder: (_) =>
-                                          const TriageQuestionnaireOtherSymptomPage(),
-                                    ),
-                                  ).then(
-                                    (value) async {
-                                      await model
-                                          .saveQuestionaireResponseToDB();
-                                      ref
-                                          .read(triageStepperProvider)
-                                          .goToNextStep();
-                                    },
-                                  );
-                                }
-                              },
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.all(AppSize.kspadding),
-                                decoration: const BoxDecoration(
-                                  color: AppColor.green,
-                                  shape: BoxShape.circle,
-                                  border: Border.fromBorderSide(
-                                    BorderSide(
-                                      color: AppColor.white,
-                                    ),
-                                  ),
-                                ),
-                                child: const Icon(
-                                  Icons.check,
-                                  color: AppColor.white,
-                                  size: 35,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ).then(
+                          (value) async {
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                          },
+                        );
+                      }
+                    },
                   );
                 }
               },
@@ -327,5 +229,20 @@ class TriageQuestionnairePage extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  double _getWeightage(List<AnswerOptionModel> answerOption) {
+    var weightage = 0.0;
+    for (var answer in answerOption) {
+      var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
+      if (answerString == "yes") {
+        weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+      } else if (answerString == "no") {
+        weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+      } else {
+        weightage = 0;
+      }
+    }
+    return weightage;
   }
 }
