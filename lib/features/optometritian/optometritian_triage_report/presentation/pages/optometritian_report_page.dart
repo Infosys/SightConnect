@@ -32,7 +32,7 @@ class OptometritianReportPage extends ConsumerWidget {
     // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
-        ref.read(triageProvider).resetTriage();
+        ref.read(resetProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
         return false;
       },
@@ -41,7 +41,7 @@ class OptometritianReportPage extends ConsumerWidget {
         appBar: CustomAppbar(
           leadingIcon: IconButton(
             onPressed: () {
-              ref.read(triageProvider).resetTriage();
+              ref.read(resetProvider).reset();
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
             icon: Icon(
@@ -183,7 +183,7 @@ class OptometritianReportPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  ref.read(triageProvider).resetTriage();
+                  ref.read(resetProvider).reset();
 
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).push(
@@ -200,7 +200,7 @@ class OptometritianReportPage extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.read(triageProvider).resetTriage();
+                    ref.read(resetProvider).reset();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Home"),

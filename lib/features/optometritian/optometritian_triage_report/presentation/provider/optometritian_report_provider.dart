@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var optometritianReportProvider =
     ChangeNotifierProvider<OptometritianReportProvider>((ref) {
   return OptometritianReportProvider(
-    ref.watch(triageUrgencyRepositoryProvider),
+    ref.watch(triageUrgencyOfflineRepositoryProvider),
     GlobalKey<NavigatorState>(),
   );
 });
@@ -34,7 +34,7 @@ class OptometritianReportProvider extends ChangeNotifier {
   }
 
   TriageUrgency eyeScanUrgency() {
-    return _triageUrgencyRepository.visualAcuityUrgency([]);  
+    return _triageUrgencyRepository.visualAcuityUrgency([]);
   }
 
   Color _getChipUrgencyColor(double value) {

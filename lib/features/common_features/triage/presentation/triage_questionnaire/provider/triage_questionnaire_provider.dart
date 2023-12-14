@@ -4,32 +4,30 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../domain/models/triage_response_model.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageQuestionnaireProvider(
-    ref.watch(triageLocalSourceProvider),
+    ref.watch(saveTriageQuestionnaireLocallyUseCaseProvider),
   ),
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
+
   late List<QuestionnaireItemFHIRModel> _questionnaireSections;
+
   late String _questionnaireRemarks;
   late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-
-  List<String> allRemarks = ['', '', ''];
-  TriageLocalSource triageLocalSource;
+  final List<PostQuestionResponseModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
 
-  TriageQuestionnaireProvider(this.triageLocalSource)
+  TriageQuestionnaireProvider(this._saveTriageQuestionnaireLocallyUseCase)
       : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
         _questionnaireResponse = [];
 
-  List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
   Map<int, int> get selectedOptions => _selectedOptions;
   List<QuestionnaireItemFHIRModel> get questionnaireSections =>
@@ -48,25 +46,27 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   void addQuestionnaireAnswer(int questionCode, bool answer, int score) {
     _selectedOptions[questionCode] = score;
     notifyListeners();
-    logger.f({
+    logger.d({
       "Added Options: $_selectedOptions",
       "Answer: $answer",
       "Score: $score",
     });
-
-    logger.d("Added Options: $_selectedOptions");
   }
 
   void removeQuestionnaireAnswer(int questionCode) {
     _selectedOptions.remove(questionCode);
     notifyListeners();
-    logger.d("Removed Options: $_selectedOptions");
+    logger.d({
+      "Removed Options: $_selectedOptions",
+    });
   }
 
   void removeAllQuestionnaireAnswer() {
     _selectedOptions.clear();
     notifyListeners();
-    logger.d("Removed Options: $_selectedOptions");
+    logger.d({
+      "Removed All Options: $_selectedOptions",
+    });
   }
 
   void saveQuestionaireResponse() {
@@ -81,33 +81,35 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> questionnaireForReportPage = [];
-
-  final List<PostQuestionResponseModel> _questionResponseList = [];
-
   void addtoFinalResponse(selectedOptions) {
-    selectedOptions.forEach((key, score) {
-      _questionResponseList.add(PostQuestionResponseModel(
-        linkId: key,
-        score: 1,
-        answer: [
-          PostAnswerModel(
-            value: "YES",
-            score: double.parse(score.toString()),
-          )
-        ],
-      ));
-    });
+    selectedOptions.forEach(
+      (key, score) {
+        _questionResponseList.add(
+          PostQuestionResponseModel(
+            linkId: key,
+            score: 1,
+            answer: [
+              PostAnswerModel(
+                value: "YES",
+                score: double.parse(score.toString()),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  getQuestionaireResponse() {
+  List<PostQuestionResponseModel> getQuestionaireResponse() {
     return _questionResponseList;
   }
 
   Future<void> saveQuestionaireResponseToDB() async {
-    logger.f("Saving Questionnaire Response to DB");
-    await triageLocalSource.saveTriageQuestionnaireLocally(
-      triageQuestionnaireResponse: getQuestionaireResponse(),
+    final response = getQuestionaireResponse();
+    await _saveTriageQuestionnaireLocallyUseCase.call(
+      SaveTriageQuestionnaireLocallyParam(
+        triageQuestionnaireResponse: response,
+      ),
     );
     notifyListeners();
   }

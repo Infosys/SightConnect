@@ -1,13 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentsAndTestsPage extends HookConsumerWidget {
@@ -15,9 +15,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(assessmentsAndTestProvider);
-    var selectedName = useState<String>(people[0]['name']);
-    // var isDropDownOpen = useState<bool>(false);
+    var model = ref.watch(assessmentsAndTestProvider);
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text("Assessments and Tests"),
@@ -49,9 +47,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: InkWell(
-                      onTap: () {
-                        state.setSelectedOption = 1;
-                      },
+                      onTap: () {},
                       child: Text(
                         "All",
                         style: applyRobotoFont(
@@ -82,11 +78,9 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        value: selectedName.value,
+                        value: model.selectedUser.name,
                         onChanged: (newValue) {
-                          selectedName.value = newValue!;
-                          state.setSelectedOption = 2;
-                          state.setSelectedName = newValue;
+                          model.setSelectedUser = newValue;
                         },
                         icon: const Icon(
                           CupertinoIcons.chevron_down,
@@ -95,20 +89,22 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                         iconSize: 18,
                         elevation: 0,
                         dropdownColor: AppColor.white,
-                        items: people.map((person) {
+                        items: model
+                            .getUsers()
+                            .map((TriageResultUserEntity person) {
                           return DropdownMenuItem<String>(
                             enabled: true,
-                            value: person['name'],
+                            value: person.name,
                             child: Row(
                               children: [
                                 Image.asset(
-                                  person['image'],
+                                  person.image,
                                   width: 25,
                                   height: 25,
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
-                                  person['name'],
+                                  person.name,
                                   style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -125,8 +121,35 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: AppSize.kmheight),
-            const Expanded(
-              child: AssessmentCards(),
+            Consumer(
+              builder: (context, ref, child) {
+                return ref
+                    .watch(getEyeTriageReport(model.selectedUser.id))
+                    .when(
+                  data: (data) {
+                    return Expanded(
+                      child: AssessmentCards(
+                        data: data,
+                      ),
+                    );
+                  },
+                  error: (error, _) {
+                    logger.d({"error": error});
+                    
+                    return const Text(
+                      "No Data Found",
+                    );
+                  },
+                  loading: () {
+                    return const Center(
+                      child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator()),
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),

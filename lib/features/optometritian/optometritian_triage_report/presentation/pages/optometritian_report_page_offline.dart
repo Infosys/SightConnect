@@ -20,7 +20,6 @@
 //   const OptometritianReportPageOffline({
 //     super.key,
 //   });
-
 //   @override
 //   Widget build(BuildContext context, WidgetRef ref) {
 //     var model = ref.watch(optometritianOfflineReportProvider);
@@ -220,3 +219,4 @@
 //     );
 //   }
 // }
+

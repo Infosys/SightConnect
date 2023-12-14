@@ -66,17 +66,18 @@ class TriageRepositoryImpl implements TriageRepository {
         // final remoteResponse =
         //     await remoteDataSource.saveTriage(triage: triage);
         // localDataSource.deleteTriage();
+        logger.d({"message": "ServerException Saving triage to local"});
         final localResponse =
             await localDataSource.saveTriageResponse(triageResponse: triage);
         return Right(localResponse);
 
-        //return Right(remoteResponse);
+        // return Right(remoteResponse);
       } on ServerException {
-        logger.d({"message": "ServerException Saving triage to local"});
+        // logger.d({"message": "ServerException Saving triage to local"});
         // final localResponse =
         //     await localDataSource.saveTriageResponse(triageResponse: triage);
         // return Right(localResponse);
-        return Left(CacheFailure(errorMessage: 'No local data found'));
+        return Left(ServerFailure(errorMessage: 'This is a server exception'));
       }
     } else {
       try {

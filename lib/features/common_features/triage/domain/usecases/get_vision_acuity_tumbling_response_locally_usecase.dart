@@ -28,8 +28,5 @@ class GetVisionAcuityTumblingResponseLocallyUseCase
 }
 
 class GetVisionAcuityTumblingResponseLocallyParam {
-  List<PostObservationsModel> observations;
-  GetVisionAcuityTumblingResponseLocallyParam({
-    required this.observations,
-  });
+  GetVisionAcuityTumblingResponseLocallyParam();
 }

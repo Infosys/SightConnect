@@ -28,8 +28,5 @@ class GetTriageEyeScanResponseLocallyUseCase
 }
 
 class GetTriageEyeScanResponseLocallyParam {
-  List<PostImagingSelectionModel> imagingSelections;
-  GetTriageEyeScanResponseLocallyParam({
-    required this.imagingSelections,
-  });
+  GetTriageEyeScanResponseLocallyParam();
 }
