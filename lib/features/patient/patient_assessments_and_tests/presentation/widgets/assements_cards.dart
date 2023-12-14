@@ -3,10 +3,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
-import 'package:eye_care_for_all/main.dart';
-
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +18,6 @@ class AssessmentCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
@@ -95,7 +91,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Eye Assessment',
+                          currentData.triageResultType,
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -105,7 +101,7 @@ class AssessmentCards extends ConsumerWidget {
                           height: 2,
                         ),
                         Text(
-                          " currentData['appointmentType']",
+                          currentData.reportTag,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -119,7 +115,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Test ID: AT 010101',
+                          'Test ID: ${currentData.triageResultID}',
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -128,7 +124,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          '19 Sep 2023',
+                          currentData.triageResultStartDate.toString(),
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -141,7 +137,7 @@ class AssessmentCards extends ConsumerWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  "currentData['MessageText']",
+                  currentData.triageResultDescription,
                   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -151,8 +147,8 @@ class AssessmentCards extends ConsumerWidget {
                   height: 15,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    const SizedBox(width: 10),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -173,6 +169,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 20),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
