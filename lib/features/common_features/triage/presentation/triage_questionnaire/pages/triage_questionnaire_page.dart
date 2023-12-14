@@ -1,19 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/trige_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/custom_popup.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/option_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,12 +25,11 @@ class TriageQuestionnairePage extends HookConsumerWidget {
   final List<QuestionnaireItemFHIRModel> questionnaireSections;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageController = usePageController();
     final scaffoldKey = useState(GlobalKey<ScaffoldState>());
-    final model = ref.watch(triageQuestionnaireProvider);
-    var pageIndex = useState<int>(0);
+    var model = ref.watch(triageQuestionnaireProvider);
     model.selectedOptions.containsValue(true);
     model.getQuestionnaire(questionnaireSections);
+    var pageController = usePageController();
 
     return WillPopScope(
       onWillPop: () async {
@@ -87,57 +85,243 @@ class TriageQuestionnairePage extends HookConsumerWidget {
         ),
         body: Consumer(
           builder: (context, ref, _) {
-            return Padding(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
-              child: PageView.builder(
-                controller: pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  QuestionnaireItemFHIRModel questionnaire =
-                      model.questionnaireSections[index];
-
-                  return SingleChildScrollView(
+            return PageView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: pageController,
+              scrollDirection: Axis.horizontal,
+              itemCount: model.questionnaireSections.length,
+              itemBuilder: (context, index) {
+                var question = model.questionnaireSections[index];
+                if (index == 0) {
+                  return Center(
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSize.kmradius),
+                      ),
+                      elevation: AppSize.kselevation,
+                      color: Colors.white,
+                      child: SizedBox(
+                        width: AppSize.width(context) * 0.8,
+                        child: Padding(
+                          padding: const EdgeInsets.all(AppSize.kmpadding),
+                          child:
+                              Column(mainAxisSize: MainAxisSize.min, children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Assessment",
+                                  style: applyFiraSansFont(fontSize: 24),
+                                ),
+                                SvgPicture.asset(
+                                  AppIcon.question,
+                                  height: 32,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: AppSize.ksheight,
+                            ),
+                            Text(
+                              question.text ?? '',
+                              style: applyRobotoFont(fontSize: 14),
+                            ),
+                            const SizedBox(
+                              height: AppSize.ksheight,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    pageController.animateToPage(
+                                      1,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeIn,
+                                    );
+                                  },
+                                  child: Text(
+                                    "Yes",
+                                    style: applyRobotoFont(
+                                        fontSize: 14, color: AppColor.primary),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    "No",
+                                    style: applyRobotoFont(
+                                      fontSize: 14,
+                                      color: AppColor.primary,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ]),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(
+                    margin: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        OptionList(
-                          questions: questionnaire.answerOption ?? [],
-                          onPageChanged: () {
-                            model.saveQuestionaireResponse();
-                            if (pageIndex.value ==
-                                model.questionnaireSections.length - 1) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  fullscreenDialog: true,
-                                  builder: (_) =>
-                                      const TriageQuestionnaireOtherSymptomPage(),
+                        Text(
+                          question.text ?? '',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: AppSize.kmheight,
+                        ),
+                        AspectRatio(
+                          aspectRatio: 0.8,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset(
+                                      "assets/images/q1.png",
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
                                 ),
-                              ).then(
-                                (value) async {
-                                  await model.saveQuestionaireResponseToDB();
-                                  ref
-                                      .read(triageStepperProvider)
-                                      .goToNextStep();
-                                },
-                              );
-                              pageIndex.value = 0;
-                            }
-                            pageIndex.value += 1;
-                            pageController.animateToPage(
-                              pageIndex.value,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeIn,
-                            );
-                          },
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSize.klpadding * 2,
+                                      vertical: AppSize.klpadding,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SvgPicture.asset(
+                                          AppImages.mic,
+                                        ),
+                                        SvgPicture.asset(
+                                          AppImages.speaker,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.klheight),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                model.saveQuestionaireResponse();
+                                if (model.questionnaireSections.length - 1 ==
+                                    index) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      fullscreenDialog: true,
+                                      builder: (_) =>
+                                          const TriageQuestionnaireOtherSymptomPage(),
+                                    ),
+                                  ).then(
+                                    (value) async {
+                                      await model
+                                          .saveQuestionaireResponseToDB();
+                                      ref
+                                          .read(triageStepperProvider)
+                                          .goToNextStep();
+                                    },
+                                  );
+                                }
+                              },
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.all(AppSize.kspadding),
+                                decoration: const BoxDecoration(
+                                  color: AppColor.red,
+                                  shape: BoxShape.circle,
+                                  border: Border.fromBorderSide(
+                                    BorderSide(
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.close,
+                                  color: AppColor.white,
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 30),
+                            InkWell(
+                              onTap: () {
+                                model.saveQuestionaireResponse();
+                                if (model.questionnaireSections.length - 1 ==
+                                    index) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      fullscreenDialog: true,
+                                      builder: (_) =>
+                                          const TriageQuestionnaireOtherSymptomPage(),
+                                    ),
+                                  ).then(
+                                    (value) async {
+                                      await model
+                                          .saveQuestionaireResponseToDB();
+                                      ref
+                                          .read(triageStepperProvider)
+                                          .goToNextStep();
+                                    },
+                                  );
+                                }
+                              },
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.all(AppSize.kspadding),
+                                decoration: const BoxDecoration(
+                                  color: AppColor.green,
+                                  shape: BoxShape.circle,
+                                  border: Border.fromBorderSide(
+                                    BorderSide(
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: AppColor.white,
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   );
-                },
-              ),
+                }
+              },
             );
           },
         ),

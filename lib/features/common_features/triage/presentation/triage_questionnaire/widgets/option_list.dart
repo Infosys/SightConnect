@@ -86,8 +86,7 @@ class OptionList extends HookConsumerWidget {
                                 children: [
                                   TextButton(
                                     onPressed: () {
-                                      if (index <
-                                          questions.length - 1) {
+                                      if (index < questions.length - 1) {
                                         logger.d(
                                             "Question Index: ${questions[index].id}");
                                         model.addQuestionnaireAnswer(
@@ -99,9 +98,8 @@ class OptionList extends HookConsumerWidget {
                                                     ?.value
                                                     ?.toInt() ??
                                                 0);
-                                        index =
-                                            index + 1;
-                                            questionIndex.value = index;
+                                        index = index + 1;
+                                        questionIndex.value = index;
                                       } else {
                                         onPageChanged();
                                       }
@@ -192,7 +190,6 @@ class OptionList extends HookConsumerWidget {
             },
           ),
           options: CarouselOptions(
-            
             scrollPhysics: const NeverScrollableScrollPhysics(),
             height: AppSize.height(context) * 0.7,
             viewportFraction: 1,
