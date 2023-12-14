@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/vision_center_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_address_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_scroll_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
@@ -16,7 +16,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentProvider.notifier).getCheckedVisionCenter();
+    VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
         padding: const EdgeInsets.all(AppSize.kmpadding - 2),
         decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
               title: "Recommendations",
               keyboardType: TextInputType.multiline,
               controller: ref
-                  .read(preliminaryAssessmentProvider)
+                  .read(preliminaryAssessmentHelperProvider)
                   .recommendationController,
             ),
             const SizedBox(
@@ -81,7 +81,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
               title: "Remarks",
               keyboardType: TextInputType.multiline,
               controller:
-                  ref.read(preliminaryAssessmentProvider).remarksController,
+                  ref.read(preliminaryAssessmentHelperProvider).remarksController,
             ),
           ],
         ));

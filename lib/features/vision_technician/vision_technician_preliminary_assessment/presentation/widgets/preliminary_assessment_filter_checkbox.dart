@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/preliminary_assessment_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/preliminary_assessment_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,15 +34,15 @@ class PreliminaryAssessmentFilterCheckBox extends StatelessWidget {
           builder: (context, ref, child) {
             List<PreliminaryAssessmentModel> items;
             if (itemName == "eyeIssueType") {
-              items = ref.watch(preliminaryAssessmentProvider).eyeIssueType;
+              items = ref.watch(preliminaryAssessmentHelperProvider).eyeIssueType;
             } else if (itemName == "eyeSpecialistDeals")
               items =
-                  ref.watch(preliminaryAssessmentProvider).eyeSpecialistDeals;
+                  ref.watch(preliminaryAssessmentHelperProvider).eyeSpecialistDeals;
             else if (itemName == "eyeSightProblem")
-              items = ref.watch(preliminaryAssessmentProvider).eyeSightProblem;
+              items = ref.watch(preliminaryAssessmentHelperProvider).eyeSightProblem;
             else
               items =
-                  ref.watch(preliminaryAssessmentProvider).eyeRelatedProblem;
+                  ref.watch(preliminaryAssessmentHelperProvider).eyeRelatedProblem;
 
             return Wrap(
               children: [
@@ -62,7 +62,7 @@ class PreliminaryAssessmentFilterCheckBox extends StatelessWidget {
                       onChanged: (bool? value) {
      
                         ref
-                            .read(preliminaryAssessmentProvider.notifier)
+                            .read(preliminaryAssessmentHelperProvider.notifier)
                             .toogleFilterBoxes(itemName, index);
    
                       },
@@ -79,10 +79,10 @@ class PreliminaryAssessmentFilterCheckBox extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           controller: itemName == "eyeSightProblem"
                               ? ref
-                                  .read(preliminaryAssessmentProvider)
+                                  .read(preliminaryAssessmentHelperProvider)
                                   .eyeSightProblemotherController
                               : ref
-                                  .read(preliminaryAssessmentProvider)
+                                  .read(preliminaryAssessmentHelperProvider)
                                   .eyeRelatedProblemotherController,
                         )),
                   ),

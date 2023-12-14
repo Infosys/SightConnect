@@ -1,16 +1,15 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/preliminary_assessment_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
 
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/repositories/vision_technician_home_repository_impl.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/preliminary_assessment_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/vision_center_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var preliminaryAssessmentProvider =
-    ChangeNotifierProvider<PreliminaryAssessmentNotifier>(
-        (ref) => PreliminaryAssessmentNotifier());
+var preliminaryAssessmentHelperProvider =
+    ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
+        (ref) => PreliminaryAssessmentHelperNotifier());
 
-class PreliminaryAssessmentNotifier extends ChangeNotifier {
+class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   var eyeIssueType = [
     PreliminaryAssessmentModel(
         type: "Loss of Vision", checked: true, name: "Eye Issue Type"),
