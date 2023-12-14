@@ -8,14 +8,14 @@ class AssessmentReportMapper {
       priority: model.carePlans!.first.activities!.first
           .plannedActivityReference!.serviceRequest!.priority!,
       reportTag: 'Post Op Care',
-      patientName: 'Raghavi Mishra',
-      patientImage: '/apc.png',
       triageResultType: 'Eye Assesment',
       triageResultSource: model.source!,
       assessmentID: model.assessmentCode!,
       triageResultStartDate: model.userStartDate!,
-      triageResultDescription: model.diagnosticReportDescription??"NA",
-      isUpdateEnabled:model.updateEndTime==null?true: model.updateEndTime!.isAfter(DateTime.now()),
+      triageResultDescription: model.diagnosticReportDescription ?? "NA",
+      isUpdateEnabled: model.updateEndTime == null
+          ? true
+          : model.updateEndTime!.isAfter(DateTime.now()),
     );
   }
 }

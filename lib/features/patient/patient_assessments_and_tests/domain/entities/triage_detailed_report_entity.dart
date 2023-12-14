@@ -25,8 +25,6 @@ class TriageResultBriefCardEntiry extends Equatable {
   final int triageResultID;
   final RequestPriority priority;
   final String reportTag;
-  final String patientName;
-  final String patientImage;
   final String triageResultType;
   final Source triageResultSource;
   final int assessmentID;
@@ -38,8 +36,6 @@ class TriageResultBriefCardEntiry extends Equatable {
     required this.triageResultID,
     required this.priority,
     required this.reportTag,
-    required this.patientName,
-    required this.patientImage,
     required this.triageResultType,
     required this.triageResultSource,
     required this.assessmentID,
@@ -53,8 +49,6 @@ class TriageResultBriefCardEntiry extends Equatable {
         triageResultID,
         priority,
         reportTag,
-        patientName,
-        patientImage,
         triageResultType,
         triageResultSource,
         assessmentID,
