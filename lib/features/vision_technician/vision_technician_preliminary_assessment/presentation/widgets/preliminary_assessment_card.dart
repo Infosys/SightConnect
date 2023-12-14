@@ -12,8 +12,8 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel patient =
-        ref.read(registerNewPatientHelperProvider).patientDetails!;
+    // VTPatientModel patient =
+    //     ref.read(registerNewPatientHelperProvider).patientDetails!;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -36,12 +36,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "${patient.firstName} ${patient.lastName}",
+                    "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "OP ${patient.patientId}",
+                    "OP ",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -64,7 +64,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    patient.age.toString(),
+                    "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -82,7 +82,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    patient.gender.toString(),
+                    "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -91,24 +91,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                 ],
               ),
-              Wrap(
-                direction: Axis.vertical,
-                children: [
-                  Text(
-                    "Vison Center",
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    "LVPEI Vison Center",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
+             
             ]),
             Wrap(
               direction: Axis.vertical,
@@ -119,7 +102,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "${patient.address!.doorNumber} ${patient.address!.city}, ${patient.address!.district}, ${patient.address!.state}",
+                  "",
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,

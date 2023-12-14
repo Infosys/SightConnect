@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
@@ -46,7 +45,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
              SizedBox(
                     width:AppSize.width(context)/2 ,
                     child: Text(
-                      recommendedCenter.completeAddress,
+                      recommendedCenter.completeAddress?? "",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4,
                       style: applyRobotoFont(
@@ -66,7 +65,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                     children: [
                       Icon(Icons.phone_outlined, color: AppColor.grey),
                       Text(
-                        recommendedCenter.phoneno,
+                        recommendedCenter.phoneno??"",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
@@ -90,7 +89,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                       SizedBox(
                           width:AppSize.width(context)/4,
                         child: Text(
-                          recommendedCenter.time,
+                          recommendedCenter.time??"",
                           // softWrap: true,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,

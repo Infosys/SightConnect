@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+
 var visionTechnicianDashboardProvider =
     ChangeNotifierProvider((ref) => VisionTechnicianDashboardProvider());
 
@@ -17,6 +19,7 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
     const VisionTechnicianHomePage(),
     VisionTechnicianRegisterNewPatientPage(),
     // VisionTechnicianCloseAssessmentPage(),
+    const VisionTechnicianPreliminaryAssessmentPage(),
     const VisionTechnicianMarkMyAvailabilityPage(),
     const VisionTechnicianIvrCallHistory(),
   ];

@@ -44,12 +44,26 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                   ),
                   label: 'Register Patient',
                 ),
-                BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
                       ref
                           .read(visionTechnicianDashboardProvider.notifier)
                           .changeIndex(2);
+                    },
+                    icon: const Icon(
+                      CupertinoIcons.person_add,
+                      size: AppSize.kmheight * 2,
+                    ),
+                  ),
+                  label: 'Preliminary Assessment',
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      ref
+                          .read(visionTechnicianDashboardProvider.notifier)
+                          .changeIndex(3);
                     },
                     icon: const Icon(
                       CupertinoIcons.person_add,
@@ -63,7 +77,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                     onPressed: () {
                       ref
                           .read(visionTechnicianDashboardProvider.notifier)
-                          .changeIndex(3);
+                          .changeIndex(4);
                     },
                     icon: const Icon(
                       CupertinoIcons.phone,

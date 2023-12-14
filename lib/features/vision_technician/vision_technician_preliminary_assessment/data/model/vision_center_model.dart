@@ -1,9 +1,9 @@
 class VisionCenterModel {
-   String type;
-   bool checked;
-   String completeAddress;
-   String phoneno;
-   String time;
+   String? type;
+   bool? checked;
+   String? completeAddress;
+   String? phoneno;
+   String? time;
 
   VisionCenterModel(
       {required this.type,

@@ -16,7 +16,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
+    // VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
         padding: const EdgeInsets.all(AppSize.kmpadding - 2),
         decoration: BoxDecoration(

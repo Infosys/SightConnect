@@ -8,16 +8,23 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionCentersScrollBar extends ConsumerWidget {
-  VisionCentersScrollBar({super.key});
-  int selectedIndex = 0;
+  const VisionCentersScrollBar({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<VisionCenterModel> visionCenter =
+    final List<VisionCenterModel> visionCenter =
         ref.watch(preliminaryAssessmentHelperProvider).visionCenters;
-    var firstcontroller = ScrollController();
+    final firstcontroller = ScrollController();
+    int selectedIndex = 0;
     return Container(
-      width: Responsive.isMobile(context)?AppSize.width(context): AppSize.width(context)/2,
-        height: Responsive.isMobile(context)?AppSize.height(context) / 5:Responsive.isTablet(context)?AppSize.height(context) / 4:AppSize.height(context) /2.5,
+      width: Responsive.isMobile(context)
+          ? AppSize.width(context)
+          : AppSize.width(context) / 2,
+      height: Responsive.isMobile(context)
+          ? AppSize.height(context) / 5
+          : Responsive.isTablet(context)
+              ? AppSize.height(context) / 4
+              : AppSize.height(context) / 2.5,
       padding: const EdgeInsets.all(AppSize.kspadding + 2),
       decoration: BoxDecoration(
         border: Border.all(color: AppColor.lightGrey),
@@ -53,7 +60,7 @@ class VisionCentersScrollBar extends ConsumerWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(visionCenter[index].type,
+                          Text(visionCenter[index].type ?? "",
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,

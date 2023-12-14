@@ -41,7 +41,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                visionCenter.completeAddress,
+                visionCenter.completeAddress ?? "",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -64,7 +64,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
               width: AppSize.kswidth,
             ),
             Text(
-              visionCenter.phoneno,
+              visionCenter.phoneno ?? "",
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -88,7 +88,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                visionCenter.time,
+                visionCenter.time ?? "",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

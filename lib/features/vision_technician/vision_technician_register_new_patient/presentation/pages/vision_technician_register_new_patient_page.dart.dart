@@ -47,6 +47,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
                 return const VisionTechnicianPreliminaryAssessmentPage();
               },
             ));
+            // ref.read(visionTechnicianDashboardProvider).changeIndex(0);
             
             return;
             /* } */
@@ -82,7 +83,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
               children: [
                 BasicDetails(),
                 SizedBox(height: AppSize.klheight),
-                VTRegisterEyeCareDetails(),
+                // VTRegisterEyeCareDetails(),
                 SizedBox(height: AppSize.klheight),
                 VTRegisterAddressDetails(),
                 SizedBox(height: AppSize.klheight),

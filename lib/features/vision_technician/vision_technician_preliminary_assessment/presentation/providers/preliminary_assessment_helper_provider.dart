@@ -1,9 +1,10 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/preliminary_assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../main.dart';
 
 var preliminaryAssessmentHelperProvider =
     ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
@@ -12,87 +13,102 @@ var preliminaryAssessmentHelperProvider =
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   var eyeIssueType = [
     PreliminaryAssessmentModel(
-        type: "Loss of Vision", checked: true, name: "Eye Issue Type"),
+        type: "Loss of Vision", checked: false, name: "Eye Issue Type"),
     PreliminaryAssessmentModel(
-        type: "Power Problem", checked: true, name: "Eye Issue Type"),
+        type: "Power Problem", checked: false, name: "Eye Issue Type"),
     PreliminaryAssessmentModel(
-        type: "Neurological Problem", checked: true, name: "Eye Issue Type"),
+        type: "Neurological Problem", checked: false, name: "Eye Issue Type"),
     PreliminaryAssessmentModel(
         type: "Allergy", checked: false, name: "Eye Issue Type"),
     PreliminaryAssessmentModel(
-        type: "No Eye Problem", checked: true, name: "Eye Issue Type"),
+        type: "No Eye Problem", checked: false, name: "Eye Issue Type"),
   ];
+
+  void details() {
+    List<Map<String, dynamic>> list = [];
+
+    eyeIssueType.forEach((element) {
+      if (element.checked == true) {
+        list.add({
+          element.type: element.checked,
+        });
+      }
+    });
+    logger.d("Issue type : $list");
+  }
 
   var eyeSpecialistDeals = [
     PreliminaryAssessmentModel(
         type: "Emergency consultation",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Urgent consultation",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Regular consultation",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Early consultation",
         checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Corneal disorder", checked: true, name: "Eye Specialist Deals"),
+        type: "Corneal disorder", checked: false, name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Regular consultation",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Squint disorder", checked: true, name: "Eye Specialist Deals"),
+        type: "Squint disorder", checked: false, name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Neurophthalmology", checked: true, name: "Eye Specialist Deals"),
+        type: "Neurophthalmology",
+        checked: false,
+        name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Conditions of eyelids",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Conditions of retina",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "Cornea and Anterior segment",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
         type: "General ophthalmology",
-        checked: true,
+        checked: false,
         name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Eye plasty", checked: true, name: "Eye Specialist Deals"),
+        type: "Eye plasty", checked: false, name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Oculoplasty", checked: true, name: "Eye Specialist Deals"),
+        type: "Oculoplasty", checked: false, name: "Eye Specialist Deals"),
     PreliminaryAssessmentModel(
-        type: "Children", checked: true, name: "Eye Specialist Deals"),
+        type: "Children", checked: false, name: "Eye Specialist Deals"),
   ];
 
   var eyeSightProblem = [
     PreliminaryAssessmentModel(
-        type: "Colored halos", checked: true, name: "Eye Sight Problem"),
+        type: "Colored halos", checked: false, name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
         type: "Curtain-like appearances",
-        checked: true,
+        checked: false,
         name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
-        type: "Double vision", checked: true, name: "Eye Sight Problem"),
+        type: "Double vision", checked: false, name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
         type: "Difficulty looking at light",
         checked: false,
         name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
-        type: "Waviness of vision", checked: true, name: "Eye Sight Problem"),
+        type: "Waviness of vision", checked: false, name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
-        type: "Flashes of light", checked: true, name: "Eye Sight Problem"),
+        type: "Flashes of light", checked: false, name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
-        type: "Floaters", checked: true, name: "Eye Sight Problem"),
+        type: "Floaters", checked: false, name: "Eye Sight Problem"),
     PreliminaryAssessmentModel(
         type: "Loss of field of vision",
         checked: false,
@@ -101,12 +117,12 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
 
   var eyeRelatedProblem = [
     PreliminaryAssessmentModel(
-        type: "Watering of eyes", checked: true, name: "Eye Related Problem"),
+        type: "Watering of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
-        type: "Redness of eyes", checked: true, name: "Eye Related Problem"),
+        type: "Redness of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Sticky discharge in eyes",
-        checked: true,
+        checked: false,
         name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "White spots in black part of the eye",
@@ -114,24 +130,24 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
         name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Itching burning or pain in eyes",
-        checked: true,
+        checked: false,
         name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
-        type: "Twitching of eyes", checked: true, name: "Eye Related Problem"),
+        type: "Twitching of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Foreign body in eyes",
-        checked: true,
+        checked: false,
         name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Frequent blinking of eyes",
         checked: false,
         name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
-        type: "Deviation of eyes", checked: true, name: "Eye Related Problem"),
+        type: "Deviation of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Squeezing of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
-        type: "Drooping  of eyes", checked: true, name: "Eye Related Problem"),
+        type: "Drooping  of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
         type: "Bulging of eyes", checked: false, name: "Eye Related Problem"),
     PreliminaryAssessmentModel(
@@ -148,7 +164,7 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   var visionCenters = [
     VisionCenterModel(
         type: "LVPEI Eye Institute - Chudi Bazaar",
-        checked: true,
+        checked: false,
         completeAddress:
             "14,Nagar Khana Hanuman Temple Road,Begum Bazar Chatri,Gowsala Nagar,Chudi Bazaar,Hyderabad,Telegana 500012",
         phoneno: "99634 78759",
@@ -204,15 +220,10 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  
   dynamic getCheckedVisionCenter() {
     for (VisionCenterModel element in visionCenters) {
-      if(element.checked==true)
-        return element;
+      if (element.checked == true) return element;
     }
-     return null;
+    return null;
   }
-
-  
-
-} 
+}
