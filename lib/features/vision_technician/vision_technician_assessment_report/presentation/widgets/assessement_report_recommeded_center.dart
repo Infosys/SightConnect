@@ -13,7 +13,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var recommendedCenter = ref
-        .watch(preliminaryAssessmentProvider)
+        .watch(preliminaryAssessmentHelperProvider)
         .visionCenters
         .where((element) => element.checked == true)
         .toList()[0];

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vision_technician_home_repository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,10 +23,34 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
     "dateOfBirthController": TextEditingController(),
     "mobileNumberController": TextEditingController(),
   };
+
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _middleNameController = TextEditingController();
+  final TextEditingController _emailIdController = TextEditingController();
+  final TextEditingController _abhaIdController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _dateOfBirthController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  final TextEditingController _whereController1 = TextEditingController();
+  final TextEditingController _whereController2 = TextEditingController();
+
+  TextEditingController get firstNameController => _firstNameController;
+  TextEditingController get middleNameController => _middleNameController;
+  TextEditingController get emailIdController => _emailIdController;
+  TextEditingController get abhaIdController => _abhaIdController;
+  TextEditingController get lastNameController => _lastNameController;
+  TextEditingController get ageController => _ageController;
+  TextEditingController get dateOfBirthController => _dateOfBirthController;
+  TextEditingController get mobileNumberController => _mobileNumberController;
+  TextEditingController get whereController1 => _whereController1;
+  TextEditingController get whereController2 => _whereController2;
+
   Map<String, TextEditingController> eyeCareDetailsTextEditingControllers = {
     "whereController1": TextEditingController(),
     "whereController2": TextEditingController()
   };
+
   var addressDetailsTextEditingControllers = {
     "doorNoController": TextEditingController(),
     "streetController": TextEditingController(),
@@ -35,6 +60,25 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
     "landMarkController": TextEditingController(),
     "pinCodeController": TextEditingController(),
   };
+
+  final TextEditingController _doorNoController = TextEditingController();
+  final TextEditingController _streetController = TextEditingController();
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _landMarkController = TextEditingController();
+  final TextEditingController _pinCodeController = TextEditingController();
+  TextEditingController get doorNoController => _doorNoController;
+  TextEditingController get streetController => _streetController;
+  TextEditingController get districtController => _districtController;
+  TextEditingController get cityController => _cityController;
+  TextEditingController get stateController => _stateController;
+  TextEditingController get landMarkController => _landMarkController;
+  TextEditingController get pinCodeController => _pinCodeController;
+
+  void printData(){
+    logger.d("firstNameController: ${firstNameController.text}");
+  }
 
   String stateDropDownValue = "";
   String genderValue = "";

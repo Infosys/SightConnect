@@ -29,10 +29,10 @@ class AssessmentReportDetails extends StatelessWidget {
           Consumer(
             builder: (context, ref, child) {
               var eyeSightProblems =
-                  ref.watch(preliminaryAssessmentProvider).eyeSightProblem;
+                  ref.watch(preliminaryAssessmentHelperProvider).eyeSightProblem;
 
               var eyeRelatedProblems =
-                  ref.watch(preliminaryAssessmentProvider).eyeRelatedProblem;
+                  ref.watch(preliminaryAssessmentHelperProvider).eyeRelatedProblem;
 
               var eyeRelatedProblemsFilter = eyeRelatedProblems
                   .where((e) => e.checked == true)

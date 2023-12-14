@@ -56,7 +56,7 @@ class VisionTechnicianAssessmentReportPage extends StatelessWidget {
                         const SizedBox(height: AppSize.kmheight),
                         Text(
                           ref
-                              .watch(preliminaryAssessmentProvider)
+                              .watch(preliminaryAssessmentHelperProvider)
                               .recommendationController
                               .text,
                           style: applyRobotoFont(
@@ -91,7 +91,7 @@ class VisionTechnicianAssessmentReportPage extends StatelessWidget {
                         const SizedBox(height: AppSize.kmheight),
                         Text(
                           ref
-                              .watch(preliminaryAssessmentProvider)
+                              .watch(preliminaryAssessmentHelperProvider)
                               .remarksController
                               .text,
                           style: applyRobotoFont(
