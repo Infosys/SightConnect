@@ -33,6 +33,7 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
             .d({"message": "Internet is connected Getting triage from remote"});
         final remoteResponse =
             await triageReportSource.getTriageReportsByPatientId(patientId);
+            logger.d({"remoteResponse for triage reports ": remoteResponse});
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
