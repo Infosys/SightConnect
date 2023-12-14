@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +40,11 @@ class AssessmentCards extends ConsumerWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: AppColor.orange,
+                      decoration:  BoxDecoration(
+                        color: getRequestPriorityColor(currentData.priority),
                       ),
                       child: Text(
-                        currentData.priority.toString(),
+                        getRequestPriorityText(currentData.priority),
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -69,22 +71,7 @@ class AssessmentCards extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Image.asset(
-                      currentData.patientImage,
-                      height: 25,
-                      width: 25,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      currentData.patientName,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+               
                 Row(
                   children: [
                     Column(
@@ -124,7 +111,9 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          currentData.triageResultStartDate.toString(),
+                          
+                          currentData.triageResultStartDate.formateDate
+        ,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -147,13 +136,15 @@ class AssessmentCards extends ConsumerWidget {
                   height: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                
                   children: [
-                    const SizedBox(width: 10),
+                    
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => PatientAssessmentReportPage(
+                            builder: (context) => const PatientAssessmentReportPage(
                               triageDetailedReportModel:
                                   TriageDetailedReportModel(),
                             ),
@@ -169,7 +160,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 20),
+                    
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -217,4 +208,32 @@ class AssessmentCards extends ConsumerWidget {
       },
     );
   }
+}
+
+getRequestPriorityText(RequestPriority priority){
+  switch(priority){
+    case RequestPriority.URGENT:
+      return "Urgent Consult";
+    case RequestPriority.ROUTINE:
+      return "Routine Checkup";
+    case RequestPriority.ASAP:
+      return "ASAP";
+    case RequestPriority.STAT:
+      return "STAT";
+  }
+  
+}
+ 
+Color getRequestPriorityColor(RequestPriority priority ){
+  switch(priority){
+    case RequestPriority.URGENT:
+      return AppColor.red;
+    case RequestPriority.ROUTINE:
+      return AppColor.green;
+    case RequestPriority.ASAP:
+      return AppColor.orange;
+    case RequestPriority.STAT:
+      return AppColor.red;
+  }
+
 }
