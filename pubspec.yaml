@@ -74,6 +74,8 @@ dependencies:
   shared_preferences: ^2.2.2
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
+  superapp_scanner:
+    path: packages/superapp_scanner/
 
 
 flutter_launcher_icons:

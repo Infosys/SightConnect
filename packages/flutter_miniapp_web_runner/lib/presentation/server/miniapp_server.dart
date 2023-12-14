@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/core/global_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -23,7 +21,7 @@ class MiniAppServer {
     return await sh
         .serve(handler, '0.0.0.0', port, shared: true)
         .then((server) {
-      debugPrint('Serving at http://${server.address.host}:${server.port}');
+      _logger.d('Serving at http://${server.address.host}:${server.port}');
       return server.port;
     });
   }

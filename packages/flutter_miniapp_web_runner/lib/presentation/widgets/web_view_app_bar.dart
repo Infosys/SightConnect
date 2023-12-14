@@ -19,13 +19,13 @@ class WebViewAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 25,
       titleSpacing: 0,
       leading: IconButton(
+        onPressed: onBack,
         padding: const EdgeInsets.all(0),
         icon: const Icon(
           Icons.keyboard_double_arrow_left,
           size: 20,
           color: Colors.white,
         ),
-        onPressed: onBack,
       ),
       title: Text(
         title ?? "",

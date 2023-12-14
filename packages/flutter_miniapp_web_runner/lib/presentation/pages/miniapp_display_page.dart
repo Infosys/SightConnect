@@ -1,5 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_archive/flutter_archive.dart';
@@ -7,8 +7,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_miniapp_web_runner/presentation/server/miniapp_server.dart';
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-
 import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
@@ -25,12 +25,13 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
       _MiniAppDisplayPageState();
 }
 
-class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
-  late InAppWebViewController _webViewController;
-  bool? isMiniAppLoaded;
+class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
+    with WidgetsBindingObserver {
+  late InAppWebViewController webViewController;
+  Logger logger = Logger();
+  bool? isMiniAppLoaded = false;
   int port = 8081;
-  String _progressMessage = "";
-
+  String progressMessage = "";
   @override
   void initState() {
     super.initState();
@@ -41,10 +42,74 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
     );
   }
 
-  _loadMiniApp() async {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!kIsWeb) {
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        if (state == AppLifecycleState.paused) {
+          webViewController.pauseTimers();
+        } else {
+          webViewController.resumeTimers();
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.miniapp == null || isMiniAppLoaded == false) {
+      return Scaffold(
+        appBar: WebViewAppBar(
+          onBack: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return RefreshIndicator(
+        onRefresh: () async {
+          await _loadMiniApp();
+        },
+        child: PopScope(
+          onPopInvoked: (value) async {},
+          child: Scaffold(
+            appBar: WebViewAppBar(
+              title: widget.miniapp!.displayName,
+              onBack: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            body: InAppWebView(
+              initialUrlRequest: URLRequest(
+                url: Uri.parse("http://127.0.0.1:$port/"),
+              ),
+              initialOptions: InAppWebViewGroupOptions(
+                ios: IOSInAppWebViewOptions(
+                  useOnNavigationResponse: true,
+                  allowsInlineMediaPlayback: true,
+                ),
+                android: AndroidInAppWebViewOptions(
+                  useHybridComposition: true,
+                  useShouldInterceptRequest: true,
+                ),
+              ),
+              onWebViewCreated: (controller) {
+                webViewController = controller;
+              },
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _loadMiniApp() async {
     setState(() {
       isMiniAppLoaded = false;
-      _progressMessage = "Loading MiniApp";
+      progressMessage = "Loading MiniApp";
     });
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     if (widget.miniapp == null) {
@@ -62,11 +127,11 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
       var path = widget.miniapp!.sourceurl;
       final zipPath = await _storeFileToLocalFromAsset(path, version, id);
       setState(() {
-        _progressMessage = "Extracting MiniApp";
+        progressMessage = "Extracting MiniApp";
       });
       final extractedPath = await _extractFile(zipPath, version, id);
       setState(() {
-        _progressMessage = "Starting MiniApp";
+        progressMessage = "Starting MiniApp";
       });
       final miniAppServer = ref.read(localServerProvider);
       await miniAppServer.startServer(extractedPath, port);
@@ -76,12 +141,12 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
     } catch (e) {
       scaffoldMessenger.showSnackBar(
         const SnackBar(
-          content: Text("Error loading MiniApp"),
+          content: Text("Something went wrong"),
         ),
       );
       setState(() {
         isMiniAppLoaded = null;
-        _progressMessage = "Something went wrong";
+        progressMessage = "Something went wrong";
       });
       return;
     }
@@ -103,7 +168,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
       );
       return '${tempDir.path}/$id/$version';
     } catch (e) {
-      log("Error during extraction: ${e.toString()}");
+      logger.d("Error during extraction: ${e.toString()}");
       throw Exception("Error during extraction: ${e.toString()}");
     }
   }
@@ -128,92 +193,8 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
         },
       );
     } catch (e) {
-      log("Error during store file: ${e.toString()}");
+      logger.d("Error during store file: ${e.toString()}");
       throw Exception("Error during store file: ${e.toString()}");
-    }
-  }
-
-  Future<void> closeMiniApp() async {
-    if (await _webViewController.canGoBack()) {
-      _webViewController.goBack();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (isMiniAppLoaded == null) {
-      return Scaffold(
-        appBar: WebViewAppBar(
-          onBack: () {
-            closeMiniApp();
-          },
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else if (!isMiniAppLoaded!) {
-      return Scaffold(
-        appBar: WebViewAppBar(
-          onBack: () {
-            closeMiniApp();
-          },
-        ),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 10),
-              Text(
-                _progressMessage,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return PopScope(
-        onPopInvoked: (value) {
-          closeMiniApp();
-        },
-        child: RefreshIndicator(
-          onRefresh: () async {
-            await _loadMiniApp();
-          },
-          child: SafeArea(
-            child: Scaffold(
-              appBar: WebViewAppBar(
-                title: widget.miniapp!.displayName,
-                onBack: () {
-                  closeMiniApp();
-                },
-              ),
-              body: InAppWebView(
-                initialUrlRequest: URLRequest(
-                  url: Uri.parse("http://127.0.0.1:$port/"),
-                ),
-                initialOptions: InAppWebViewGroupOptions(
-                  ios: IOSInAppWebViewOptions(
-                    useOnNavigationResponse: true,
-                    allowsInlineMediaPlayback: true,
-                  ),
-                  android: AndroidInAppWebViewOptions(
-                    useHybridComposition: true,
-                    useShouldInterceptRequest: true,
-                  ),
-                ),
-                onWebViewCreated: (controller) {
-                  _webViewController = controller;
-                },
-              ),
-            ),
-          ),
-        ),
-      );
     }
   }
 }
