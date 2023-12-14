@@ -15,23 +15,23 @@ class SamplePage extends ConsumerWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => MiniAppDisplayPage(
-            //       miniapp: MiniApp(
-            //         id: "1",
-            //         version: "1",
-            //         name: "MiniApp",
-            //         displayName: "MiniApp",
-            //         sourceurl: "assets/miniapp/miniapp.zip",
-            //       ),
-            //     ),
-            //   ),
-            // );
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => const SuperAppScannerPage()),
+                builder: (context) => MiniAppDisplayPage(
+                  miniapp: MiniApp(
+                    id: "1",
+                    version: "1",
+                    name: "MiniApp",
+                    displayName: "MiniApp",
+                    sourceurl: "assets/miniapps/vt_register_patient.zip",
+                  ),
+                ),
+              ),
             );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //       builder: (context) => const SuperAppScannerPage()),
+            // );
           },
           child: const Text("Load"),
         ),

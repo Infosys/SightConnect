@@ -111,7 +111,7 @@ flutter:
     - assets/services/
     - assets/new_assessment.json
     - assets/profile.json
-    - assets/miniapp/miniapp.zip
+    - assets/miniapps/vt_register_patient.zip
   
   #   - images/a_dot_ham.jpeg
 
