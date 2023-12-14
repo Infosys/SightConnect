@@ -48,7 +48,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       PatientModel patientDTO) async {
     var endpoint = "/api/patients/${patientDTO.id}";
 
-    var response = await _dio.post(endpoint, data: patientDTO.toJson());
+    var response = await _dio.put(endpoint, data: patientDTO.toJson());
 
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       return PatientResponseModel.fromJson(response.data);
