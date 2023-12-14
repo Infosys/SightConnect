@@ -1,8 +1,10 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
@@ -27,16 +29,10 @@ class TriageResultProvider extends ChangeNotifier {
   ProfileModel get profile => _profile!;
 
   Map<String, dynamic> getOverallTriageResult() {
-    getCompleteTriageResultList();
-    double totalUrgency =
-        (_questionnaireScore ?? 0.0 )+ (_visionAcuityScore ?? 0.0) +( _eyeScanScore ?? 0.0);
-    logger.d("this is total urgency $totalUrgency");
-    logger.d(
-        "these are questionnaire, vision acuity and eye scan scores from the overall method call $_questionnaireScore, $_visionAcuityScore, $_eyeScanScore");
+    var totalUrgency = _model.cummulativeScore ?? 0.0;
     if (totalUrgency > 5) {
-
       return _setPropertiesByUrgency(3);
-    } else if (score > 3) {
+    } else if (totalUrgency > 3) {
       return _setPropertiesByUrgency(2);
     } else {
       return _setPropertiesByUrgency(1);
@@ -57,27 +53,23 @@ class TriageResultProvider extends ChangeNotifier {
       score = _model.score![TriageStep.QUESTIONNAIRE] ?? 0.0;
     }
 
-
-    return _setPropertiesByUrgency(_questionnaireScore?.toDouble() ?? 0.0);
-
+    return _setPropertiesByUrgency(score.toDouble());
   }
 
   Map<String, dynamic> _getAcuityResult() {
     var score = 0.0;
-
-
-    logger.d(
-        "this is vision acuity score from inside method call $_visionAcuityScore");
-    return _setPropertiesByUrgency(_visionAcuityScore?.toDouble() ?? 0.0);
-
+    if (_model.score != null && _model.score!.isNotEmpty) {
+      score = _model.score![TriageStep.OBSERVATION] ?? 0.0;
+    }
+    return _setPropertiesByUrgency(score.toDouble());
   }
 
   Map<String, dynamic> _getEyeScanResult() {
     var score = 0.0;
-
-    logger.d("this is eye scan score from inside method call $_eyeScanScore");
-    return _setPropertiesByUrgency(_eyeScanScore?.toDouble() ?? 0.0);
-
+    if (_model.score != null && _model.score!.isNotEmpty) {
+      score = _model.score![TriageStep.IMAGING] ?? 0.0;
+    }
+    return _setPropertiesByUrgency(score.toDouble());
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(double urgency) {

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_questionnaire_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,9 +14,9 @@ var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-
   late List<QuestionnaireItemFHIRModel> _questionnaireSections;
-
+  final SaveTriageQuestionnaireLocallyUseCase
+      _saveTriageQuestionnaireLocallyUseCase;
   late String _questionnaireRemarks;
   late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
