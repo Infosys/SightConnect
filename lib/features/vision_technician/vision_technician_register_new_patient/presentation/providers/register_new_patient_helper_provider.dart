@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/models/vt_eyecare_details_question_model.dart';
+
 var registerNewPatientHelperProvider =
     ChangeNotifierProvider<RegisterNewPatientHelperNotifier>(
         (ref) => RegisterNewPatientHelperNotifier());
@@ -37,195 +39,196 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
   String stateDropDownValue = "";
   String genderValue = "";
 
+  ///////////////////////////////////////////////////////////////////////////////////////
   
-  // VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
-  //     VisionTechnicianHomeRepositoryImpl();
-  // VTPatientModel? patientDetails;
+  VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
+      VisionTechnicianHomeRepositoryImpl();
+  VTPatientModel? patientDetails;
 
-  // List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
-  //   EyeCareDetailsQuestionModel(
-  //     questionId: 1,
-  //     question: "Did you have eye examination done previously",
-  //     answer: "UnSelected",
-  //     answerDescription: "",
-  //   ),
-  //   EyeCareDetailsQuestionModel(
-  //       questionId: 2,
-  //       question: "Did you have cataract surgery",
-  //       answer: "UnSelected",
-  //       answerDescription: ""),
-  //   EyeCareDetailsQuestionModel(
-  //       questionId: 3,
-  //       question: "Are you using eye glasses",
-  //       answer: "UnSelected",
-  //       answerDescription: ""),
-  // ];
+  List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
+    EyeCareDetailsQuestionModel(
+      questionId: 1,
+      question: "Did you have eye examination done previously",
+      answer: "UnSelected",
+      answerDescription: "",
+    ),
+    EyeCareDetailsQuestionModel(
+        questionId: 2,
+        question: "Did you have cataract surgery",
+        answer: "UnSelected",
+        answerDescription: ""),
+    EyeCareDetailsQuestionModel(
+        questionId: 3,
+        question: "Are you using eye glasses",
+        answer: "UnSelected",
+        answerDescription: ""),
+  ];
 
-  // Map<String, String> getFormDetails() {
-  //   var registerNewPatientDetails = {
-  //     ...basicDetailsTextEditingControllers.map((key, value) {
-  //       return MapEntry(key, value.text);
-  //     })
-  //   };
-  //   registerNewPatientDetails
-  //       .addAll(eyeCareDetailsTextEditingControllers.map((key, value) {
-  //     return MapEntry(key, value.text);
-  //   }));
+  Map<String, String> getFormDetails() {
+    var registerNewPatientDetails = {
+      ...basicDetailsTextEditingControllers.map((key, value) {
+        return MapEntry(key, value.text);
+      })
+    };
+    registerNewPatientDetails
+        .addAll(eyeCareDetailsTextEditingControllers.map((key, value) {
+      return MapEntry(key, value.text);
+    }));
 
-  //   registerNewPatientDetails
-  //       .addAll(addressDetailsTextEditingControllers.map((key, value) {
-  //     return MapEntry(key, value.text);
-  //   }));
+    registerNewPatientDetails
+        .addAll(addressDetailsTextEditingControllers.map((key, value) {
+      return MapEntry(key, value.text);
+    }));
 
-  //   registerNewPatientDetails.addAll({"stateDropDown": stateDropDownValue});
-  //   registerNewPatientDetails.addAll({
-  //     "Gender": (genderValue == 1)
-  //         ? "Male"
-  //         : (genderValue == 2 ? "Female" : (genderValue == 3 ? "Others" : ""))
-  //   });
+    registerNewPatientDetails.addAll({"stateDropDown": stateDropDownValue});
+    registerNewPatientDetails.addAll({
+      "Gender": (genderValue == 1)
+          ? "Male"
+          : (genderValue == 2 ? "Female" : (genderValue == 3 ? "Others" : ""))
+    });
 
-  //   return registerNewPatientDetails;
-  // }
+    return registerNewPatientDetails;
+  }
 
-  // String patientId = "";
-  // String assessmentId = "";
+  String patientId = "";
+  String assessmentId = "";
 
-  //  List<String> listOfStates = [
-  //   "",
-  //   "Andhra Pradesh",
-  //   "Arunachal Pradesh",
-  //   "Assam",
-  //   "Bihar",
-  //   "Chhattisgarh",
-  //   "Goa",
-  //   "Madhya Pradesh",
-  // ];
+   List<String> listOfStates = [
+    "",
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Madhya Pradesh",
+  ];
 
-  // void saveAndProceed() {
-  //   String firstName =
-  //       basicDetailsTextEditingControllers["firstNameController"]!.text;
-  //   String middleName =
-  //       basicDetailsTextEditingControllers["middleNameController"]!.text;
-  //   String abhaId =
-  //       basicDetailsTextEditingControllers["abhaIdController"]!.text;
-  //   String lastName =
-  //       basicDetailsTextEditingControllers["lastNameController"]!.text;
-  //   String age = basicDetailsTextEditingControllers["ageController"]!.text;
-  //   String dateOfBirth =
-  //       basicDetailsTextEditingControllers["dateOfBirthController"]!.text;
-  //   String gender = genderValue;
-  //   String mobileNo =
-  //       basicDetailsTextEditingControllers["mobileNumberController"]!.text;
-  //   String email =
-  //       basicDetailsTextEditingControllers["emailIdController"]!.text;
+  void saveAndProceed() {
+    String firstName =
+        basicDetailsTextEditingControllers["firstNameController"]!.text;
+    String middleName =
+        basicDetailsTextEditingControllers["middleNameController"]!.text;
+    String abhaId =
+        basicDetailsTextEditingControllers["abhaIdController"]!.text;
+    String lastName =
+        basicDetailsTextEditingControllers["lastNameController"]!.text;
+    String age = basicDetailsTextEditingControllers["ageController"]!.text;
+    String dateOfBirth =
+        basicDetailsTextEditingControllers["dateOfBirthController"]!.text;
+    String gender = genderValue;
+    String mobileNo =
+        basicDetailsTextEditingControllers["mobileNumberController"]!.text;
+    String email =
+        basicDetailsTextEditingControllers["emailIdController"]!.text;
 
-  //   if (patientId.isEmpty) {
-  //     patientId = _generateId(7);
-  //   }
+    if (patientId.isEmpty) {
+      patientId = _generateId(7);
+    }
 
-  //   if (assessmentId.isEmpty) {
-  //     assessmentId = _generateId(6);
-  //   }
+    if (assessmentId.isEmpty) {
+      assessmentId = _generateId(6);
+    }
 
-  //   DateTime now = DateTime.now();
-  //   String date = DateTime(
-  //     now.year,
-  //     now.month,
-  //     now.day,
-  //   ).toString();
+    DateTime now = DateTime.now();
+    String date = DateTime(
+      now.year,
+      now.month,
+      now.day,
+    ).toString();
 
-  //   EyeCareDetailsQuestionModel question1 = EyeCareDetailsQuestionModel(
-  //     questionId: 1,
-  //     question: "Did you have eye examination done previously",
-  //     answer: "UnSelected",
-  //     answerDescription:
-  //         eyeCareDetailsTextEditingControllers["whereController1"]!.text,
-  //   );
-  //   EyeCareDetailsQuestionModel question2 = EyeCareDetailsQuestionModel(
-  //     questionId: 2,
-  //     question: "Did you have cataract surgery",
-  //     answer: "UnSelected",
-  //     answerDescription:
-  //         eyeCareDetailsTextEditingControllers["whereController2"]!.text,
-  //   );
+    EyeCareDetailsQuestionModel question1 = EyeCareDetailsQuestionModel(
+      questionId: 1,
+      question: "Did you have eye examination done previously",
+      answer: "UnSelected",
+      answerDescription:
+          eyeCareDetailsTextEditingControllers["whereController1"]!.text,
+    );
+    EyeCareDetailsQuestionModel question2 = EyeCareDetailsQuestionModel(
+      questionId: 2,
+      question: "Did you have cataract surgery",
+      answer: "UnSelected",
+      answerDescription:
+          eyeCareDetailsTextEditingControllers["whereController2"]!.text,
+    );
 
-  //   List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
-  //     question1,
-  //     question2,
-  //   ];
+    List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
+      question1,
+      question2,
+    ];
 
-  //   Address address = Address(
-  //     doorNumber:
-  //         addressDetailsTextEditingControllers["doorNoController"]!.text,
-  //     street: addressDetailsTextEditingControllers["streetController"]!.text,
-  //     district:
-  //         addressDetailsTextEditingControllers["districtController"]!.text,
-  //     city: addressDetailsTextEditingControllers["cityController"]!.text,
-  //     state: stateDropDownValue,
-  //     landmark:
-  //         addressDetailsTextEditingControllers["landMarkController"]!.text,
-  //     pincode: addressDetailsTextEditingControllers["pinCodeController"]!.text,
-  //   );
+    Address address = Address(
+      doorNumber:
+          addressDetailsTextEditingControllers["doorNoController"]!.text,
+      street: addressDetailsTextEditingControllers["streetController"]!.text,
+      district:
+          addressDetailsTextEditingControllers["districtController"]!.text,
+      city: addressDetailsTextEditingControllers["cityController"]!.text,
+      state: stateDropDownValue,
+      landmark:
+          addressDetailsTextEditingControllers["landMarkController"]!.text,
+      pincode: addressDetailsTextEditingControllers["pinCodeController"]!.text,
+    );
 
-  //   VTPatientModel patient = VTPatientModel(
-  //     firstName: firstName,
-  //     middleName: middleName,
-  //     lastName: lastName,
-  //     gender: gender,
-  //     abhaId: abhaId,
-  //     email: email,
-  //     age: age,
-  //     dateOfBirth: dateOfBirth,
-  //     patientId: patientId!,
-  //     assessmentId: assessmentId!,
-  //     assessmentDate: date,
-  //     status: "status",
-  //     category: "category",
-  //     mobileNo: mobileNo,
-  //     closed: false,
-  //     spectacles: false,
-  //     cataractSurgery: false,
-  //     eyeDrops: false,
-  //     oralMedication: false,
-  //     eyeCareDetailsQuestion: eyeCareDetailsQuestion,
-  //     address: address,
-  //   );
-  //   patientDetails = patient;
-  //   notifyListeners();
-  // }
+    VTPatientModel patient = VTPatientModel(
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      gender: gender,
+      abhaId: abhaId,
+      email: email,
+      age: age,
+      dateOfBirth: dateOfBirth,
+      patientId: patientId!,
+      assessmentId: assessmentId!,
+      assessmentDate: date,
+      status: "status",
+      category: "category",
+      mobileNo: mobileNo,
+      closed: false,
+      spectacles: false,
+      cataractSurgery: false,
+      eyeDrops: false,
+      oralMedication: false,
+      eyeCareDetailsQuestion: eyeCareDetailsQuestion,
+      address: address,
+    );
+    patientDetails = patient;
+    notifyListeners();
+  }
 
-  // String _generateId(int length) {
-  //   String id = "";
-  //   for (int i = 0; i < length; i++) {
-  //     id += _random(0, 10).toString();
-  //   }
-  //   return id;
-  // }
+  String _generateId(int length) {
+    String id = "";
+    for (int i = 0; i < length; i++) {
+      id += _random(0, 10).toString();
+    }
+    return id;
+  }
 
-  // int _random(int min, int max) {
-  //   return min + Random().nextInt(max - min);
-  // }
+  int _random(int min, int max) {
+    return min + Random().nextInt(max - min);
+  }
 
-  // void setStateDropDown(value) {
-  //   stateDropDownValue = value;
-  //   notifyListeners();
-  // }
+  void setStateDropDown(value) {
+    stateDropDownValue = value;
+    notifyListeners();
+  }
 
-  // void setGenderValue(value) {
-  //   genderValue = value;
-  //   notifyListeners();
-  // }
+  void setGenderValue(value) {
+    genderValue = value;
+    notifyListeners();
+  }
 
-  // void seteyeCareAnser(index, value) {
-  //   eyeCareDetailsQuestion[index].answer = value;
-  //   notifyListeners();
-  // }
+  void seteyeCareAnser(index, value) {
+    eyeCareDetailsQuestion[index].answer = value;
+    notifyListeners();
+  }
 
   
 
-  // void submit() {
-  //   visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
+  void submit() {
+    visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
 
-  //   print(visionTechnicianHomeRepositoryImpl.listOfPatients());
-  // }
+    print(visionTechnicianHomeRepositoryImpl.listOfPatients());
+  }
 }

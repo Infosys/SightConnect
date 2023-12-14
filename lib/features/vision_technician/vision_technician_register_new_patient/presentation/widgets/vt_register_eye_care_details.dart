@@ -12,7 +12,7 @@ class VTRegisterEyeCareDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var eyeCareDetailsQuestion =
-        ref.watch(registerNewPatientProvider).eyeCareDetailsQuestion;
+        ref.watch(registerNewPatientHelperProvider).eyeCareDetailsQuestion;
 
     return Container(
       width: double.infinity,
@@ -91,18 +91,18 @@ class VTRegisterEyeCareDetails extends ConsumerWidget {
                                         "Yes" &&
                                     index1 == 1) {
                                   ref
-                                      .read(registerNewPatientProvider.notifier)
+                                      .read(registerNewPatientHelperProvider.notifier)
                                       .seteyeCareAnser(index, "UnSelected");
                                 } else if (eyeCareDetailsQuestion[index]
                                             .answer ==
                                         "No" &&
                                     index1 == 0) {
                                   ref
-                                      .read(registerNewPatientProvider.notifier)
+                                      .read(registerNewPatientHelperProvider.notifier)
                                       .seteyeCareAnser(index, "UnSelected");
                                 } else {
                                   ref
-                                      .read(registerNewPatientProvider.notifier)
+                                      .read(registerNewPatientHelperProvider.notifier)
                                       .seteyeCareAnser(
                                           index, (index1 == 0 ? "No" : "Yes"));
                                 }
@@ -133,11 +133,11 @@ class VTRegisterEyeCareDetails extends ConsumerWidget {
                                                 .questionId ==
                                             1
                                         ? ref
-                                                .read(registerNewPatientProvider)
+                                                .read(registerNewPatientHelperProvider)
                                                 .eyeCareDetailsTextEditingControllers[
                                             "whereController1"]!
                                         : ref
-                                                .read(registerNewPatientProvider)
+                                                .read(registerNewPatientHelperProvider)
                                                 .eyeCareDetailsTextEditingControllers[
                                             "whereController2"]!),
                               );
