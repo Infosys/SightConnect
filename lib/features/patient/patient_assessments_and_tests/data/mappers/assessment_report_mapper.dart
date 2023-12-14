@@ -14,8 +14,8 @@ class AssessmentReportMapper {
       triageResultSource: model.source!,
       assessmentID: model.assessmentCode!,
       triageResultStartDate: model.userStartDate!,
-      triageResultDescription: model.diagnosticReportDescription!,
-      isUpdateEnabled: model.updateEndTime!.isAfter(DateTime.now()),
+      triageResultDescription: model.diagnosticReportDescription??"NA",
+      isUpdateEnabled:model.updateEndTime==null?true: model.updateEndTime!.isAfter(DateTime.now()),
     );
   }
 }
