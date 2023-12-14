@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
@@ -17,8 +18,8 @@ var getEyeTriageReport = FutureProvider.family((ref, int patientId) async {
     });
     throw failure;
   }, (triageAssessment) {
-    triageAssessment.forEach((element) {
-      data.add(TriageResultBriefCardEntiry(
+    triageAssessment.forEach((TriageDetailedReportModel element) {
+      data.add(const TriageResultBriefCardEntiry(
         triageResultID: 'element.triageResultID!',
         priority: 'element.priority!',
         reportTag: 'element.reportTag!',
@@ -32,8 +33,8 @@ var getEyeTriageReport = FutureProvider.family((ref, int patientId) async {
         isUpdateEnabled: false,
       ));
     });
+    return data;
   });
-  return data;
 });
 
 var getAssementDetailsReport =
