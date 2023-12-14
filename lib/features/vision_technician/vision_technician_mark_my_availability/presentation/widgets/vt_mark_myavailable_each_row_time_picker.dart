@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,7 +22,7 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var dropdownlist = ref
-        .read(markMyAvailabilityProvider)
+        .read(markMyAvailabilityHelperProvider)
         .markMyAvailabilityList[dayAvailabilityindex];
     var dropdownvalue = (dropdownlist.time)[index][dropDownNo];
 
@@ -70,7 +70,7 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
     
                   controller.text = selectedDate.format(context);
                   ref
-                      .read(markMyAvailabilityProvider.notifier)
+                      .read(markMyAvailabilityHelperProvider.notifier)
                       .updatedropdown(dayAvailabilityindex, index,
                           controller.text, dropDownNo);
                 }

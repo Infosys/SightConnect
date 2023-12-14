@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_show_marks_unavailable.dart';
@@ -18,7 +18,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var markMyAvailabilityList =
-        ref.watch(markMyAvailabilityProvider).markMyAvailabilityList;
+        ref.watch(markMyAvailabilityHelperProvider).markMyAvailabilityList;
 
     return Scaffold(
       bottomNavigationBar: Padding(

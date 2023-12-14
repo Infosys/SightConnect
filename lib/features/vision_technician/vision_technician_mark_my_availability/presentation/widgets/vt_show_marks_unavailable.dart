@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_time_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_date_input.dart';
@@ -20,17 +20,17 @@ void showMarksUnAvaialbility(BuildContext context) {
     builder: (BuildContext context) {
       return Consumer(builder: (context, ref, child) {
         bool markmyAvailableStatus =
-            ref.watch(markMyAvailabilityProvider).markmyAvailableStatus;
+            ref.watch(markMyAvailabilityHelperProvider).markmyAvailableStatus;
         TextEditingController startDateController =
-            ref.watch(markMyAvailabilityProvider).startDateController;
+            ref.watch(markMyAvailabilityHelperProvider).startDateController;
         TextEditingController startTimeController =
-            ref.watch(markMyAvailabilityProvider).startTimeController;
+            ref.watch(markMyAvailabilityHelperProvider).startTimeController;
         TextEditingController endDateController =
-            ref.watch(markMyAvailabilityProvider).endDateController;
+            ref.watch(markMyAvailabilityHelperProvider).endDateController;
         TextEditingController endTimeController =
-            ref.watch(markMyAvailabilityProvider).endTimeController;
+            ref.watch(markMyAvailabilityHelperProvider).endTimeController;
         TextEditingController remarksController =
-            ref.watch(markMyAvailabilityProvider).remarksController;
+            ref.watch(markMyAvailabilityHelperProvider).remarksController;
 
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -86,7 +86,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                               activeColor: AppColor.blue,
                               onChanged: (bool value) {
                                 ref
-                                    .watch(markMyAvailabilityProvider.notifier)
+                                    .watch(markMyAvailabilityHelperProvider.notifier)
                                     .toggleMarkMyAvailableStatus(value);
                               },
                             ),

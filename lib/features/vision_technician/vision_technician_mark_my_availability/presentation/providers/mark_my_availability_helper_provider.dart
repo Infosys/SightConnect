@@ -4,11 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
-var markMyAvailabilityProvider =
-    ChangeNotifierProvider<MarkMyAvailabilityNotifier>(
-        (ref) => MarkMyAvailabilityNotifier());
+var markMyAvailabilityHelperProvider =
+    ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>(
+        (ref) => MarkMyAvailabilityHelperNotifier());
 
-class MarkMyAvailabilityNotifier extends ChangeNotifier {
+class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
     String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
   var markMyAvailabilityList = [
     MarkMyAvailabilityModel(

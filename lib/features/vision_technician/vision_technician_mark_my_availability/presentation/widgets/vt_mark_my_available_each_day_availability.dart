@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_row_day.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,7 +17,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     MarkMyAvailabilityModel dayAvailabilityState = ref
-        .watch(markMyAvailabilityProvider)
+        .watch(markMyAvailabilityHelperProvider)
         .markMyAvailabilityList[dayAvailabilityindex];
 
     return Column(
@@ -32,7 +32,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                     value: dayAvailabilityState.checked,
                     onChanged: (value) {
                       ref
-                          .read(markMyAvailabilityProvider)
+                          .read(markMyAvailabilityHelperProvider)
                           .toogleDay(dayAvailabilityindex);
                     }),
                 SizedBox(
@@ -86,7 +86,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                         ? null
                         : () {
                             ref
-                                .read(markMyAvailabilityProvider.notifier)
+                                .read(markMyAvailabilityHelperProvider.notifier)
                                 .addDayAvailability(dayAvailabilityindex);
                           },
                   )
