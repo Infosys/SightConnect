@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/features/patient/patient_authentication/present
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
-import '../../../../../../main.dart';
 
 var triageResultProvider = ChangeNotifierProvider.autoDispose
     .family<TriageResultProvider, TriageResponseModel>(
@@ -24,25 +23,15 @@ class TriageResultProvider extends ChangeNotifier {
   final TriageResponseModel _model;
   final ProfileModel? _profile;
 
-  TriageResultProvider(this._model, this._profile) {
-    logger.d('model is : ${_model.questionResponse}');
-  }
-
+  TriageResultProvider(this._model, this._profile);
   ProfileModel get profile => _profile!;
-  double? _questionnaireScore;
-  double? _visionAcuityScore;
-  double? _eyeScanScore;
 
   Map<String, dynamic> getOverallTriageResult() {
-    getCompleteTriageResultList();
-    double totalUrgency =
-        _questionnaireScore! + _visionAcuityScore! + _eyeScanScore!;
-    logger.d("this is total urgency $totalUrgency");
-    logger.d(
-        "these are questionnaire, vision acuity and eye scan scores from the overall method call $_questionnaireScore, $_visionAcuityScore, $_eyeScanScore");
-    if (totalUrgency > 5) {
+    final score = _model.cummulativeScore ?? 0.0;
+
+    if (score > 5) {
       return _setPropertiesByUrgency(3);
-    } else if (totalUrgency > 3) {
+    } else if (score > 3) {
       return _setPropertiesByUrgency(2);
     } else {
       return _setPropertiesByUrgency(1);
