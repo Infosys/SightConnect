@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
 
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentCards extends ConsumerWidget {
-  final List<TriageDetailedReportModel> data;
+  final List<Map<String, String>> data;
   const AssessmentCards({
     required this.data,
     super.key,
@@ -36,12 +36,10 @@ class AssessmentCards extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: currentData['checkupType'] == "Routine Checkup"
-                            ? AppColor.green
-                            : AppColor.orange,
+                        color: AppColor.orange,
                       ),
                       child: Text(
-                        currentData['checkupType'],
+                        " currentData['checkupType']",
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -54,15 +52,10 @@ class AssessmentCards extends ConsumerWidget {
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: currentData['reminderMessage'] == "Post OPS Care"
-                            ? AppColor.green.withOpacity(0.6)
-                            : currentData['reminderMessage'] ==
-                                    "3rd Reminder Sent"
-                                ? AppColor.red.withOpacity(0.4)
-                                : AppColor.green.withOpacity(0.4),
+                        color: AppColor.green.withOpacity(0.4),
                       ),
                       child: Text(
-                        currentData['reminderMessage'],
+                        " currentData['reminderMessage']",
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -76,13 +69,13 @@ class AssessmentCards extends ConsumerWidget {
                 Row(
                   children: [
                     Image.asset(
-                      currentData['image'],
+                      "currentData['image']",
                       height: 25,
                       width: 25,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      currentData['name'],
+                      "currentData['name']",
                       style: applyRobotoFont(
                         fontSize: 14,
                       ),
@@ -105,7 +98,7 @@ class AssessmentCards extends ConsumerWidget {
                           height: 2,
                         ),
                         Text(
-                          currentData['appointmentType'],
+                          " currentData['appointmentType']",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -141,7 +134,7 @@ class AssessmentCards extends ConsumerWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  currentData['MessageText'],
+                  "currentData['MessageText']",
                   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -158,7 +151,8 @@ class AssessmentCards extends ConsumerWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PatientAssessmentReportPage(
-                              triageDetailedReportModel: report,
+                              triageDetailedReportModel:
+                                  TriageDetailedReportModel(),
                             ),
                           ),
                         );

@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentsAndTestsPage extends HookConsumerWidget {
@@ -15,8 +14,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(assessmentsAndTestProvider);
-    var selectedName = useState<String>(people[0]['name']);
+    var model = ref.watch(assessmentsAndTestProvider);
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text("Assessments and Tests"),
@@ -48,9 +46,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: InkWell(
-                      onTap: () {
-                        state.setSelectedOption = 1;
-                      },
+                      onTap: () {},
                       child: Text(
                         "All",
                         style: applyRobotoFont(
@@ -81,12 +77,8 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        value: selectedName.value,
-                        onChanged: (newValue) {
-                          selectedName.value = newValue!;
-                          state.setSelectedOption = 2;
-                          state.setSelectedName = newValue;
-                        },
+                        value: "selectedName.value",
+                        onChanged: (newValue) {},
                         icon: const Icon(
                           CupertinoIcons.chevron_down,
                           color: AppColor.black,
@@ -94,29 +86,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                         iconSize: 18,
                         elevation: 0,
                         dropdownColor: AppColor.white,
-                        items: people.map((person) {
-                          return DropdownMenuItem<String>(
-                            enabled: true,
-                            value: person['name'],
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  person['image'],
-                                  width: 25,
-                                  height: 25,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  person['name'],
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                        items: [],
                       ),
                     ),
                   ),
@@ -126,7 +96,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
             const SizedBox(height: AppSize.kmheight),
             Consumer(
               builder: (context, ref, child) {
-                return ref.watch(getEyeAssessmentReport).when(
+                return ref.watch(getEyeTriageReport).when(
                   data: (data) {
                     return Expanded(
                       child: AssessmentCards(

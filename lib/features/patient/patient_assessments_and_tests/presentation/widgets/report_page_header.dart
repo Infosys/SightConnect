@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class ReportPageHeader extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    var currentData = data[index];
     return Column(
       children: [
         Row(
@@ -35,7 +33,7 @@ class ReportPageHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage(
-                  currentData['image'],
+                  "assets/images/doctor.png",
                 ),
               ),
             ),
@@ -46,7 +44,7 @@ class ReportPageHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  currentData['name'],
+                  "ABC",
                   style: applyFiraSansFont(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
