@@ -79,7 +79,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                       child: DropdownButton<String>(
                         value: model.selectedUser.name,
                         onChanged: (newValue) {
-                          model.setSelectedUser(newValue);
+                          model.setSelectedUser(newValue!);
                         },
                         icon: const Icon(
                           CupertinoIcons.chevron_down,

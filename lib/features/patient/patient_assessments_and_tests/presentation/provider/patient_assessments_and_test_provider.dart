@@ -70,8 +70,12 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   TriageResultUserEntity get selectedUser => _selectedUser;
 
-  set setSelectedUser(TriageResultUserEntity value) {
-    _selectedUser = value;
+
+
+  set setSelectedUser(String value) {
+    _selectedUser = getUsers().firstWhere((element) => element.name == value);
     notifyListeners();
   }
+
+
 }
