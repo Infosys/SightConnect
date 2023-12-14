@@ -34,9 +34,14 @@ var assessmentsAndTestProvider = ChangeNotifierProvider(
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
   Ref ref;
+  TriageResultUserEntity _selectedUser = TriageResultUserEntity();
+
+
   AssessmentsAndTestProvider(this.ref) {
     getUsers();
   }
+
+
 
   List<TriageResultUserEntity> getUsers() {
     PatientResponseModel? patient =
@@ -49,6 +54,8 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
       image: patient?.profile?.patient?.profilePhoto! ?? "",
       id: 9627849171,
     ));
+
+    _selectedUser = users[0];
 
     patient?.profile?.patient?.relatedParty
         ?.forEach((RelatedPartyModel element) {
@@ -64,5 +71,12 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
     });
 
     return users;
+  }
+
+  TriageResultUserEntity get selectedUser => _selectedUser;
+
+  set selectedUser(TriageResultUserEntity value) {
+    _selectedUser = value;
+    notifyListeners();
   }
 }
