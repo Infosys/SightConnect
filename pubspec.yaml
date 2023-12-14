@@ -72,6 +72,7 @@ dependencies:
   flutter_jailbreak_detection: ^1.10.0
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
+  equatable: ^2.0.5
 
 
 flutter_launcher_icons:

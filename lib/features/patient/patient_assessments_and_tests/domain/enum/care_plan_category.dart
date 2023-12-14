@@ -1,0 +1,3 @@
+enum CarePlanCategory {
+    OPHTHALMOLOGY,
+}

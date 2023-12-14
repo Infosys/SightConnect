@@ -11,7 +11,7 @@ class AppEnv {
 
   static String get baseUrl {
     return switch (env) {
-      Env.DEV => 'http://localhost:8074/orchestration',
+      Env.DEV => 'http://10.0.2.2:8081',
       Env.PROD => 'http://localhost:8074/orchestration',
     };
   }

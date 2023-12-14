@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_recommendation.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
@@ -9,15 +11,20 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/fake_data_source.dart';
+class PatientAssessmentReportPage extends ConsumerWidget {
+  final TriageDetailedReportModel triageDetailedReportModel;
+  const PatientAssessmentReportPage({
+    super.key,
+    required this.triageDetailedReportModel,
+  });
 
-class PatientAssessmentReportPage extends StatelessWidget {
-  const PatientAssessmentReportPage({super.key, required this.index});
-  final int index;
   @override
-  Widget build(BuildContext context) {
-    var currentData = data[index];
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(getAssementDetailsReport(
+      triageDetailedReportModel.assessmentCode,
+    ));
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
@@ -28,13 +35,11 @@ class PatientAssessmentReportPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: AppSize.width(context) * 0.01,
                 ),
-                decoration: BoxDecoration(
-                  color: currentData['checkupType'] == "Routine Checkup"
-                      ? AppColor.green
-                      : AppColor.orange,
+                decoration: const BoxDecoration(
+                  color: AppColor.orange,
                 ),
                 child: Text(
-                  currentData['checkupType'],
+                  "currentData['checkupType']",
                   style: applyRobotoFont(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -48,7 +53,7 @@ class PatientAssessmentReportPage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ReportPageHeader(
-            index: index,
+            index: 0,
           ),
           const ReportAssessmentQuestions(),
           const TumblingEReportCard(),

@@ -1,69 +1,81 @@
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var assessmentsAndTestProvider =
-    ChangeNotifierProvider((ref) => AssessmentsAndTestProvider());
+var getEyeTriageReport = FutureProvider.family(
+  (ref, int pId) async {
+    var response = await ref
+        .watch(triageReportRepositoryProvider)
+        .getAllTriageReportsByPatientId(pId);
+
+    return response.fold(
+      (failure) {
+        logger.d({"getTriageReports ": failure});
+        throw failure;
+      },
+      (triageAssessment) {
+        return triageAssessment
+            .map((e) => AssessmentReportMapper.toEntity(e))
+            .toList();
+      },
+    );
+  },
+);
+
+var getAssementDetailsReport =
+    FutureProvider.family((ref, assessmentCode) async {});
+
+var assessmentsAndTestProvider = ChangeNotifierProvider(
+  (ref) => AssessmentsAndTestProvider(ref),
+);
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
-  List<Map<String, dynamic>> data = [
-    {
-      'name': 'Raghavi Pandey',
-      'image': 'assets/images/connection_dp_one.png',
-      'about': 'Me,22 years',
-      'checkupType': "Routine Checkup",
-      'reminderMessage': "Post OPS Care",
-      "appointmentType": "IVR",
-      "MessageText":
-          "Cataract Surgery completed. Recommended to continue post operative care follow-ups.",
-    },
-    {
-      'name': 'Raghavi Pandey',
-      'image': 'assets/images/connection_dp_one.png',
-      'about': 'Me,22 years',
-      'checkupType': "Urgent Checkup",
-      'reminderMessage': "3rd Reminder Sent",
-      "appointmentType": "APP",
-      "MessageText":
-          "Hi Raghavi, this is a gentle reminder to visit an eye specialist to prevent eye problems in future.",
-    },
-    {
-      'name': 'Chunkey Pandey',
-      'image': 'assets/images/connection_dp_two.png',
-      'about': 'Father,65 years',
-      'checkupType': "Routine Checkup",
-      'reminderMessage': "Visit Vision Center",
-      "appointmentType": "IVR",
-      "MessageText":
-          "Patient consistently identifies the orientation of most “E” letters but struggles with a few.",
-    },
-  ];
+  Ref ref;
+  late TriageResultUserEntity _selectedUser;
 
-  List<Map<String, dynamic>> stateData = [];
-  int selectedOption = 1;
-  String selectedName = people[0]['name'];
-  set setSelectedName(String value) {
-    selectedName = value;
-    logger.d('\n\n$selectedName\n\n');
-    notifyListeners();
+  AssessmentsAndTestProvider(this.ref) {
+    getUsers();
   }
 
-  set setSelectedOption(int value) {
-    selectedOption = value;
-    notifyListeners();
-    logger.d('\n\n$selectedOption\n\n');
+  List<TriageResultUserEntity> getUsers() {
+    PatientResponseModel? patient =
+        ref.read(getPatientProfileProvider).asData?.value;
+
+    List<TriageResultUserEntity> users = [];
+
+    users.add(TriageResultUserEntity(
+      name: patient?.profile?.patient?.name! ?? "",
+      image: patient?.profile?.patient?.profilePhoto! ?? "",
+      id: 9627849171,
+    ));
+
+    _selectedUser = users[0];
+
+    patient?.profile?.patient?.relatedParty
+        ?.forEach((RelatedPartyModel element) {
+      users.add(TriageResultUserEntity(
+        name: element.name!,
+        image: element.profilePicture!,
+        id: element.patientId!,
+      ));
+    });
+
+    logger.d({
+      "users": users,
+    });
+
+    return users;
   }
 
-  get getStateData => stateData;
+  TriageResultUserEntity get selectedUser => _selectedUser;
 
-  setstate() {
-    if (selectedOption == 1) {
-      stateData = data;
-    } else if (selectedOption == 2) {
-      stateData =
-          data.where((element) => element['name'] == selectedName).toList();
-    }
-    logger.d('Function k andar ka\n\n$stateData\n\n');
+  set setSelectedUser(String? value) {
+    _selectedUser = getUsers().firstWhere((element) => element.name == value);
+    notifyListeners();
   }
 }
