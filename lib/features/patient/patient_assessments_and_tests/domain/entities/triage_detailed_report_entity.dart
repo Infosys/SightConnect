@@ -20,7 +20,7 @@ class TriageResultUserEntity extends Equatable {
 }
 
 class TriageResultBriefCardEntiry extends Equatable {
-  final String triageResultID;
+  final int triageResultID;
   final String priority;
   final String reportTag;
   final String patientName;

@@ -35,7 +35,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: AppSize.width(context) * 0.01,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColor.orange,
                 ),
                 child: Text(

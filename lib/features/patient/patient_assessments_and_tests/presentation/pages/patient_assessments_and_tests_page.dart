@@ -128,15 +128,22 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                   data: (data) {
                     return Expanded(
                       child: AssessmentCards(
-                        data: data!,
+                        data: data,
                       ),
                     );
                   },
                   error: (error, _) {
-                    return Text("No Data Found");
+                    return const Text(
+                      "No Data Found",
+                    );
                   },
                   loading: () {
-                    return CircularProgressIndicator();
+                    return const Center(
+                      child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator()),
+                    );
                   },
                 );
               },

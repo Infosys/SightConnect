@@ -20,6 +20,7 @@ class AssessmentCards extends ConsumerWidget {
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
+        var currentData = data[index];
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -36,11 +37,11 @@ class AssessmentCards extends ConsumerWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColor.orange,
                       ),
                       child: Text(
-                        " currentData['checkupType']",
+                        currentData.priority,
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -56,7 +57,7 @@ class AssessmentCards extends ConsumerWidget {
                         color: AppColor.green.withOpacity(0.4),
                       ),
                       child: Text(
-                        " currentData['reminderMessage']",
+                        currentData.reportTag,
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -70,13 +71,13 @@ class AssessmentCards extends ConsumerWidget {
                 Row(
                   children: [
                     Image.asset(
-                      "currentData['image']",
+                      currentData.patientImage,
                       height: 25,
                       width: 25,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      "currentData['name']",
+                      currentData.patientName,
                       style: applyRobotoFont(
                         fontSize: 14,
                       ),

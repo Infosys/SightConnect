@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
@@ -7,35 +7,25 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var getEyeTriageReport = FutureProvider.family((ref, int patientId) async {
-  List<TriageResultBriefCardEntiry> data = [];
-  var response = await ref
-      .watch(triageReportRepositoryProvider)
-      .getAllTriageReportsByPatientId(patientId);
-  return response.fold((failure) {
-    logger.d({
-      "getTriageReports ": failure,
-    });
-    throw failure;
-  }, (triageAssessment) {
-    triageAssessment.forEach((TriageDetailedReportModel element) {
-      data.add(const TriageResultBriefCardEntiry(
-        triageResultID: 'element.triageResultID!',
-        priority: 'element.priority!',
-        reportTag: 'element.reportTag!',
-        patientName: 'element.patientName!',
-        patientImage: 'element.patientImage!',
-        triageResultType: 'element.triageResultType!',
-        triageResultSource: 'element.triageResultSource!',
-        assessmentID: 'element.assessmentID!',
-        triageResultStartDate: 'element.triageResultStartDate!',
-        triageResultDescription: 'element.triageResultDescription!',
-        isUpdateEnabled: false,
-      ));
-    });
-    return data;
-  });
-});
+var getEyeTriageReport = FutureProvider.family(
+  (ref, int pId) async {
+    var response = await ref
+        .watch(triageReportRepositoryProvider)
+        .getAllTriageReportsByPatientId(pId);
+
+    return response.fold(
+      (failure) {
+        logger.d({"getTriageReports ": failure});
+        throw failure;
+      },
+      (triageAssessment) {
+        return triageAssessment
+            .map((e) => AssessmentReportMapper.toEntity(e))
+            .toList();
+      },
+    );
+  },
+);
 
 var getAssementDetailsReport =
     FutureProvider.family((ref, assessmentCode) async {});
