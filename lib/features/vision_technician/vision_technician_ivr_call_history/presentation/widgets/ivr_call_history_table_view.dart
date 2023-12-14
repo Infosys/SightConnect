@@ -2,7 +2,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,10 +15,10 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> tableHeading =
-        ref.watch(ivrCallHistorySearchProvider).tableHeading;
+        ref.watch(ivrCallHistorySearchHelperProvider).tableHeading;
 
     List<IvrCallHistoryModel> ivrCallHistoryDetails =
-        ref.watch(ivrCallHistorySearchProvider).ivrCallHistoryDetails;
+        ref.watch(ivrCallHistorySearchHelperProvider).ivrCallHistoryDetails;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

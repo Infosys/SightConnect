@@ -2,12 +2,12 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ivrCallHistorySearchProvider =
-    ChangeNotifierProvider<IvrCallHistorySearchNotifier>((ref) {
-  return IvrCallHistorySearchNotifier();
+final ivrCallHistorySearchHelperProvider =
+    ChangeNotifierProvider<IvrCallHistorySearchHelperNotifier>((ref) {
+  return IvrCallHistorySearchHelperNotifier();
 });
 
-class IvrCallHistorySearchNotifier extends ChangeNotifier {
+class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
   var tablefilter = [
     {"type": "All", "checked": true},
     {"type": "Completed", "checked": true},
