@@ -18,9 +18,7 @@ var getEyeTriageReport = FutureProvider((ref) async {
     });
     throw failure;
   }, (triageAssessment) {
-    triageAssessment.forEach((element) {
-
-    });
+    triageAssessment.forEach((element) {});
     return data;
   });
 });
@@ -34,14 +32,11 @@ var assessmentsAndTestProvider = ChangeNotifierProvider(
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
   Ref ref;
-  TriageResultUserEntity _selectedUser = TriageResultUserEntity();
-
+  late TriageResultUserEntity _selectedUser;
 
   AssessmentsAndTestProvider(this.ref) {
     getUsers();
   }
-
-
 
   List<TriageResultUserEntity> getUsers() {
     PatientResponseModel? patient =
@@ -75,7 +70,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   TriageResultUserEntity get selectedUser => _selectedUser;
 
-  set selectedUser(TriageResultUserEntity value) {
+  set setSelectedUser(TriageResultUserEntity value) {
     _selectedUser = value;
     notifyListeners();
   }

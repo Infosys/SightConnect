@@ -78,7 +78,9 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         value: model.selectedUser.name,
-                        onChanged: (newValue) {},
+                        onChanged: (newValue) {
+                          model.setSelectedUser(newValue);
+                        },
                         icon: const Icon(
                           CupertinoIcons.chevron_down,
                           color: AppColor.black,
