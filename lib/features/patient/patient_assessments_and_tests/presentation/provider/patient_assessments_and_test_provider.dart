@@ -6,9 +6,8 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var getEyeTriageReport = FutureProvider((ref) async {
-  const int patientId = 9627849171;
-  List<Map<String, String>> data = [];
+var getEyeTriageReport = FutureProvider.family((ref, int patientId) async {
+  List<TriageResultBriefCardEntiry> data = [];
   var response = await ref
       .watch(triageReportRepositoryProvider)
       .getAllTriageReportsByPatientId(patientId);
@@ -18,9 +17,23 @@ var getEyeTriageReport = FutureProvider((ref) async {
     });
     throw failure;
   }, (triageAssessment) {
-    triageAssessment.forEach((element) {});
-    return data;
+    triageAssessment.forEach((element) {
+      data.add(TriageResultBriefCardEntiry(
+        triageResultID: 'element.triageResultID!',
+        priority: 'element.priority!',
+        reportTag: 'element.reportTag!',
+        patientName: 'element.patientName!',
+        patientImage: 'element.patientImage!',
+        triageResultType: 'element.triageResultType!',
+        triageResultSource: 'element.triageResultSource!',
+        assessmentID: 'element.assessmentID!',
+        triageResultStartDate: 'element.triageResultStartDate!',
+        triageResultDescription: 'element.triageResultDescription!',
+        isUpdateEnabled: false,
+      ));
+    });
   });
+  return data;
 });
 
 var getAssementDetailsReport =
@@ -70,12 +83,8 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   TriageResultUserEntity get selectedUser => _selectedUser;
 
-
-
-  set setSelectedUser(String value) {
+  set setSelectedUser(String? value) {
     _selectedUser = getUsers().firstWhere((element) => element.name == value);
     notifyListeners();
   }
-
-
 }

@@ -79,7 +79,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                       child: DropdownButton<String>(
                         value: model.selectedUser.name,
                         onChanged: (newValue) {
-                          model.setSelectedUser(newValue!);
+                          model.setSelectedUser = newValue;
                         },
                         icon: const Icon(
                           CupertinoIcons.chevron_down,
@@ -122,11 +122,13 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
             const SizedBox(height: AppSize.kmheight),
             Consumer(
               builder: (context, ref, child) {
-                return ref.watch(getEyeTriageReport).when(
+                return ref
+                    .watch(getEyeTriageReport(model.selectedUser.id))
+                    .when(
                   data: (data) {
                     return Expanded(
                       child: AssessmentCards(
-                        data: data,
+                        data: data!,
                       ),
                     );
                   },
