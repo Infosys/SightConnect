@@ -75,17 +75,17 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
       ),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            padding: EdgeInsets.all(AppSize.kmpadding),
             child: Column(
               children: [
-                const BasicDetails(),
-                const SizedBox(height: AppSize.klheight),
-                const VTRegisterEyeCareDetails(),
-                const SizedBox(height: AppSize.klheight),
-                const VTRegisterAddressDetails(),
-                const SizedBox(height: AppSize.klheight),
+                BasicDetails(),
+                SizedBox(height: AppSize.klheight),
+                VTRegisterEyeCareDetails(),
+                SizedBox(height: AppSize.klheight),
+                VTRegisterAddressDetails(),
+                SizedBox(height: AppSize.klheight),
               ],
             ),
           ),
