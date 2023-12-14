@@ -18,6 +18,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
   XFile? _imageFile;
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
+  final _middleNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _dobController = TextEditingController();
   final _abhaidController = TextEditingController();
@@ -44,6 +45,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
   TextEditingController get name => _nameController;
   TextEditingController get lastName => _lastNameController;
+  TextEditingController get middleName => _middleNameController;
   TextEditingController get age => _ageController;
   TextEditingController get dob => _dobController;
   TextEditingController get abhaid => _abhaidController;
@@ -108,7 +110,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
     PatientModel patient = PatientModel(
       id: 1201,
-      name: _nameController.text + _lastNameController.text,
+      name: _nameController.text + + _lastNameController.text,
       age: int.parse(_ageController.text),
       dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),
       monthOfBirth: dateFormat.parse(_dobController.text).month.toString(),
@@ -116,6 +118,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
       abhaId: _abhaidController.text,
       mobile: _mobileNumberController.text,
       email: _emailController.text,
+
       address: [
       AddressModel(
         id: 1,
