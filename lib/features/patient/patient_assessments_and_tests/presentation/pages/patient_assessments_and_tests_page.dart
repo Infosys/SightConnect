@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/fake_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -86,7 +85,31 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                         iconSize: 18,
                         elevation: 0,
                         dropdownColor: AppColor.white,
-                        items: [],
+                        items: model
+                            .getUsers()
+                            .map((TriageResultUserEntity person) {
+                          return DropdownMenuItem<String>(
+                            enabled: true,
+                            value: person.name,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  person.image,
+                                  width: 25,
+                                  height: 25,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  person.name,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),

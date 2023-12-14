@@ -19,15 +19,7 @@ var getEyeTriageReport = FutureProvider((ref) async {
     throw failure;
   }, (triageAssessment) {
     triageAssessment.forEach((element) {
-      data.add({
-        "priority": element.carePlans!.first.activities!.first
-            .plannedActivityReference!.serviceRequest!.priority!
-            .toString(),
-        "name": "Raghavi Pandey",
-        "date": element.encounterPeriod!.start!.toString(),
-        "status": element.status!.toString(),
-        "remarks": element.remarks!.toString(),
-      });
+
     });
     return data;
   });
@@ -46,19 +38,31 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
     getUsers();
   }
 
-  List<TriageResultUserEntity> getUsers()  {
-    PatientResponseModel? response =
-         ref.read(getPatientProfileProvider).asData?.value;
+  List<TriageResultUserEntity> getUsers() {
+    PatientResponseModel? patient =
+        ref.read(getPatientProfileProvider).asData?.value;
 
     List<TriageResultUserEntity> users = [];
-    response?.profile?.relatedParty?.forEach((element) {
+
+    users.add(TriageResultUserEntity(
+      name: patient?.profile?.patient?.name! ?? "",
+      image: patient?.profile?.patient?.profilePhoto! ?? "",
+      id: 9627849171,
+    ));
+
+    patient?.profile?.patient?.relatedParty
+        ?.forEach((RelatedPartyModel element) {
       users.add(TriageResultUserEntity(
         name: element.name!,
-        patientId: element.patientId!,
-        profilePicture: element.profilePicture!,
+        image: element.profilePicture!,
+        id: element.patientId!,
       ));
     });
-    
+
+    logger.d({
+      "users": users,
+    });
+
     return users;
   }
 }

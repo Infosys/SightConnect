@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class TriageResultUserEntity extends Equatable {
   final String name;
   final String image;
-  final String id;
+  final int id;
 
   const TriageResultUserEntity({
     required this.name,
