@@ -110,7 +110,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
     PatientModel patient = PatientModel(
       id: 1201,
-      name: _nameController.text + + _lastNameController.text,
+      name: _nameController.text + _middleNameController.text + _lastNameController.text,
       age: int.parse(_ageController.text),
       dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),
       monthOfBirth: dateFormat.parse(_dobController.text).month.toString(),
