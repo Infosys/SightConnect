@@ -109,6 +109,7 @@ flutter:
     - assets/services/
     - assets/new_assessment.json
     - assets/profile.json
+    - assets/miniapp/miniapp.zip
   
   #   - images/a_dot_ham.jpeg
 

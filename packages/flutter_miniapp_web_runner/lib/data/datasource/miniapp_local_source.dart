@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
 abstract class MiniAppLocalSource {
-  Future<String> extractMiniappFromPath(String path);
+  Future<String> saveMiniApp(String path);
 }
 
 class MiniAppLocalSourceImpl extends MiniAppLocalSource {
@@ -13,7 +13,7 @@ class MiniAppLocalSourceImpl extends MiniAppLocalSource {
   MiniAppLocalSourceImpl(this._logger);
 
   @override
-  Future<String> extractMiniappFromPath(String path) async {
+  Future<String> saveMiniApp(String path) async {
     final directory = await getTemporaryDirectory();
     final zipFile = File(path);
     final miniAppId = zipFile.parent.parent.path.split('/').last;

@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var miniAppRepositoryProvider = Provider(
   (ref) => MiniAppRepositoryImpl(
-    ref.watch(miniAppRemoteSourceProvider),
-    ref.read(miniAppLocalSourceProvider),
+    ref.watch(miniAppLocalSourceProvider),
   ),
 );

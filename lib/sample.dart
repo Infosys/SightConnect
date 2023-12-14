@@ -7,6 +7,29 @@ class SamplePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const MiniAppGridView();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sample'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => MiniAppDisplayPage(
+                  miniapp: MiniApp(
+                    id: "1",
+                    name: "MiniApp",
+                    displayName: "MiniApp",
+                    sourceurl: "assets/miniapp/miniapp.zip",
+                  ),
+                ),
+              ),
+            );
+          },
+          child: const Text("Load"),
+        ),
+      ),
+    );
   }
 }

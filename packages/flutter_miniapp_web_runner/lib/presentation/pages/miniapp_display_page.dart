@@ -1,20 +1,28 @@
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_archive/flutter_archive.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_miniapp_web_runner/core/global_provider.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
+import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
 import 'package:flutter_miniapp_web_runner/presentation/provider/miniapp_display_provider.dart';
+import 'package:flutter_miniapp_web_runner/presentation/server/miniapp_server.dart';
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
-  const MiniAppDisplayPage({this.miniApp, super.key});
-
-  final MiniApp? miniApp;
+  const MiniAppDisplayPage({
+    this.miniapp,
+    this.isPermissionRequired = false,
+    super.key,
+  });
+  final MiniApp? miniapp;
+  final bool isPermissionRequired;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -23,72 +31,135 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
 
 class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
   late InAppWebViewController _webViewController;
-  late Logger _logger;
-  final List<Permission> permissions = [
-    Permission.accessMediaLocation,
-    Permission.camera
-  ];
+  bool? isMiniAppLoaded;
+  int port = 8081;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        log(widget.miniApp.toString());
-        _logger = ref.read(loggerProvider);
-        ref.read(miniAppDisplayProvider).startMiniApp(widget.miniApp);
-
-        // var nav = Navigator.of(context);
-        // var scaffoldMessenger = ScaffoldMessenger.of(context);
-        // bool isGranted = await requestPermissions();
-        // if (isGranted) {
-        //   ref.read(miniAppDisplayProvider).startMiniApp(widget.miniApp);
-        // } else {
-        //   nav.pop();
-        //   scaffoldMessenger.showSnackBar(
-        //     const SnackBar(
-        //       content: Text("Permission denied"),
-        //     ),
-        //   );
-        // }
+        await _loadMiniApp();
       },
     );
   }
 
-  Future<bool> requestPermissions() async {
-    Map<Permission, PermissionStatus> statuses = await permissions.request();
-    bool isGranted = true;
-    statuses.forEach((key, value) {
-      if (value != PermissionStatus.granted) {
-        isGranted = false;
-      }
+  _loadMiniApp() async {
+    var scaffoldMessenger = ScaffoldMessenger.of(context);
+    if (widget.miniapp == null) {
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text("MiniApp not available"),
+        ),
+      );
+      return;
+    }
+    setState(() {
+      isMiniAppLoaded = false;
     });
-    return isGranted;
+
+    try {
+      var id = widget.miniapp!.id;
+      var version = "1";
+      var path = widget.miniapp!.sourceurl;
+      final zipPath = await _storeFileToLocalFromAsset(path, version, id);
+      log("Zip path: $zipPath");
+      final extractedPath = await _extractFile(zipPath, version, id);
+      log("Extracted path: $extractedPath");
+      final miniAppServer = ref.read(localServerProvider);
+      await miniAppServer.startServer(extractedPath, port);
+      setState(() {
+        isMiniAppLoaded = true;
+      });
+    } catch (e) {
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text("Error loading MiniApp"),
+        ),
+      );
+      setState(() {
+        isMiniAppLoaded = null;
+      });
+      return;
+    }
+  }
+
+  Future<String> _extractFile(
+    String zipFilePath,
+    String version,
+    String id,
+  ) async {
+    final zipFile = File(zipFilePath);
+    final tempDir = await getTemporaryDirectory();
+    final destinationDir = Directory('${tempDir.path}/$id/$version');
+
+    try {
+      ZipFile.extractToDirectory(
+        zipFile: zipFile,
+        destinationDir: destinationDir,
+      );
+      return '${tempDir.path}/$id/$version';
+    } catch (e) {
+      log("Error during extraction: ${e.toString()}");
+      throw Exception("Error during extraction: ${e.toString()}");
+    }
+  }
+
+  Future<String> _storeFileToLocalFromAsset(
+    String assetZipFilePath,
+    String version,
+    String id,
+  ) {
+    try {
+      return rootBundle.load(assetZipFilePath).then(
+        (data) async {
+          final bytes = data.buffer.asUint8List(
+            data.offsetInBytes,
+            data.lengthInBytes,
+          );
+          final tempDir = await getTemporaryDirectory();
+          final zipFile = File('${tempDir.path}/$id/$version.zip');
+          await zipFile.create(recursive: true);
+          await zipFile.writeAsBytes(bytes);
+          return zipFile.path;
+        },
+      );
+    } catch (e) {
+      log("Error during store file: ${e.toString()}");
+      throw Exception("Error during store file: ${e.toString()}");
+    }
+  }
+
+  Future<void> closeMiniApp() async {
+    var navigator = Navigator.of(context);
+    await ref.read(localServerProvider).closeServer(port);
+    setState(() {});
+    navigator.pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    var model = ref.watch(miniAppDisplayProvider);
-    if (model.miniApp == null) {
+    if (isMiniAppLoaded == null) {
       return Scaffold(
         appBar: WebViewAppBar(
           onBack: () {
-            Navigator.of(context).pop();
+            closeMiniApp();
           },
         ),
         body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
-    } else if (!model.isMiniAppLoaded) {
+    } else if (!isMiniAppLoaded!) {
       return Scaffold(
         appBar: WebViewAppBar(
           onBack: () {
-            model.closeMiniApp();
+            closeMiniApp();
           },
         ),
         body: Center(
           child: Text(
-            "Downloading ${model.progress}%",
+            "Downloading...",
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
@@ -96,19 +167,19 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
     } else {
       return PopScope(
         onPopInvoked: (value) {
-          model.closeMiniApp();
+          closeMiniApp();
         },
         child: SafeArea(
           child: Scaffold(
             appBar: WebViewAppBar(
-              title: widget.miniApp?.name,
+              title: widget.miniapp!.displayName,
               onBack: () {
-                model.closeMiniApp();
+                closeMiniApp();
               },
             ),
             body: InAppWebView(
               initialUrlRequest: URLRequest(
-                url: Uri.parse('http://0.0.0.0:${model.port}'),
+                url: Uri.parse("http://127.0.0.1:$port/"),
               ),
               initialOptions: InAppWebViewGroupOptions(
                 ios: IOSInAppWebViewOptions(
@@ -122,15 +193,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage> {
               ),
               onWebViewCreated: (controller) {
                 _webViewController = controller;
-              },
-              androidShouldInterceptRequest: (controller, request) async {
-                Uri uri = request.url;
-                _logger.d({
-                  'message': 'Request intercepted',
-                  'url': uri.toString(),
-                });
-
-                return WebResourceResponse(data: Uint8List(0));
               },
             ),
           ),

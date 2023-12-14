@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/core/global_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:shelf/shelf.dart';
-import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:shelf/shelf.dart' as shelf;
+import 'package:shelf/shelf_io.dart' as sh;
+import 'package:shelf_static/shelf_static.dart';
 
 var localServerProvider = Provider<MiniAppServer>(
   (ref) => MiniAppServer(ref.read(loggerProvider)),
@@ -13,26 +16,19 @@ class MiniAppServer {
   MiniAppServer(this._logger);
 
   Future<int> startServer(String path, int port) async {
-    var handler =
-        const Pipeline().addMiddleware(logRequests()).addHandler(_echoRequest);
-    var server = await shelf_io.serve(handler, 'localhost', port);
-    server.autoCompress = true;
-    _logger.d({
-      'message': 'Serving at http://${server.address.host}:${server.port}',
-      'path': path,
-    });
-    return server.port;
-  }
+    var pipeline = const shelf.Pipeline();
+    final handler = pipeline
+        .addHandler(createStaticHandler(path, defaultDocument: 'index.html'));
 
-  Response _echoRequest(Request request) {
-    return Response.ok('Request for "${request.url}"');
+    return await sh
+        .serve(handler, '0.0.0.0', port, shared: true)
+        .then((server) {
+      debugPrint('Serving at http://${server.address.host}:${server.port}');
+      return server.port;
+    });
   }
 
   Future<int> closeServer(int port) async {
-    var server = await shelf_io.serve((Request request) {
-      return Response.ok('Request for "${request.url}"');
-    }, 'localhost', port);
-    await server.close();
-    return server.port;
+    return 0;
   }
 }
