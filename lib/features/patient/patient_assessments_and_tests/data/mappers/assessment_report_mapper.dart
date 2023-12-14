@@ -9,13 +9,13 @@ class AssessmentReportMapper {
           .plannedActivityReference!.serviceRequest!.priority!,
       reportTag: 'Post Op Care',
       patientName: 'Raghavi Mishra',
-      patientImage: 'element.patientImage!',
-      triageResultType: 'element.triageResultType!',
-      triageResultSource: 'element.triageResultSource!',
-      assessmentID: 'element.assessmentID!',
-      triageResultStartDate: 'element.triageResultStartDate!',
-      triageResultDescription: 'element.triageResultDescription!',
-      isUpdateEnabled: false,
+      patientImage: '/apc.png',
+      triageResultType: 'Eye Assesment',
+      triageResultSource: model.source!,
+      assessmentID: model.assessmentCode!,
+      triageResultStartDate: model.userStartDate!,
+      triageResultDescription: model.diagnosticReportDescription!,
+      isUpdateEnabled: model.updateEndTime!.isAfter(DateTime.now()),
     );
   }
 }

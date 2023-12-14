@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
+import 'package:eye_care_for_all/main.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class AssessmentCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+   
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
@@ -41,7 +43,7 @@ class AssessmentCards extends ConsumerWidget {
                         color: AppColor.orange,
                       ),
                       child: Text(
-                        currentData.priority,
+                        currentData.priority.toString(),
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,

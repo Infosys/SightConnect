@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 
 class TriageResultUserEntity extends Equatable {
   final String name;
@@ -21,14 +23,14 @@ class TriageResultUserEntity extends Equatable {
 
 class TriageResultBriefCardEntiry extends Equatable {
   final int triageResultID;
-  final String priority;
+  final RequestPriority priority;
   final String reportTag;
   final String patientName;
   final String patientImage;
   final String triageResultType;
-  final String triageResultSource;
-  final String assessmentID;
-  final String triageResultStartDate;
+  final Source triageResultSource;
+  final int assessmentID;
+  final DateTime triageResultStartDate;
   final String triageResultDescription;
   final bool isUpdateEnabled;
 

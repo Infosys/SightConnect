@@ -46,6 +46,9 @@ mixin _$TriageDetailedReportModel {
   List<Response>? get responses => throw _privateConstructorUsedError;
   List<Observation>? get observations => throw _privateConstructorUsedError;
   List<Media>? get media => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get updateEndTime => throw _privateConstructorUsedError;
+  String? get diagnosticReportDescription => throw _privateConstructorUsedError;
   List<CarePlan>? get carePlans => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -83,6 +86,8 @@ abstract class $TriageDetailedReportModelCopyWith<$Res> {
       List<Response>? responses,
       List<Observation>? observations,
       List<Media>? media,
+      @TimestampConverter() DateTime? updateEndTime,
+      String? diagnosticReportDescription,
       List<CarePlan>? carePlans});
 
   $EncounterPeriodCopyWith<$Res>? get encounterPeriod;
@@ -124,6 +129,8 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
     Object? responses = freezed,
     Object? observations = freezed,
     Object? media = freezed,
+    Object? updateEndTime = freezed,
+    Object? diagnosticReportDescription = freezed,
     Object? carePlans = freezed,
   }) {
     return _then(_value.copyWith(
@@ -215,6 +222,14 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
               as List<Media>?,
+      updateEndTime: freezed == updateEndTime
+          ? _value.updateEndTime
+          : updateEndTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      diagnosticReportDescription: freezed == diagnosticReportDescription
+          ? _value.diagnosticReportDescription
+          : diagnosticReportDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
       carePlans: freezed == carePlans
           ? _value.carePlans
           : carePlans // ignore: cast_nullable_to_non_nullable
@@ -267,6 +282,8 @@ abstract class _$$_TriageDetailedReportModelCopyWith<$Res>
       List<Response>? responses,
       List<Observation>? observations,
       List<Media>? media,
+      @TimestampConverter() DateTime? updateEndTime,
+      String? diagnosticReportDescription,
       List<CarePlan>? carePlans});
 
   @override
@@ -308,6 +325,8 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
     Object? responses = freezed,
     Object? observations = freezed,
     Object? media = freezed,
+    Object? updateEndTime = freezed,
+    Object? diagnosticReportDescription = freezed,
     Object? carePlans = freezed,
   }) {
     return _then(_$_TriageDetailedReportModel(
@@ -399,6 +418,14 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
           ? _value._media
           : media // ignore: cast_nullable_to_non_nullable
               as List<Media>?,
+      updateEndTime: freezed == updateEndTime
+          ? _value.updateEndTime
+          : updateEndTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      diagnosticReportDescription: freezed == diagnosticReportDescription
+          ? _value.diagnosticReportDescription
+          : diagnosticReportDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
       carePlans: freezed == carePlans
           ? _value._carePlans
           : carePlans // ignore: cast_nullable_to_non_nullable
@@ -433,6 +460,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
       final List<Response>? responses,
       final List<Observation>? observations,
       final List<Media>? media,
+      @TimestampConverter() this.updateEndTime,
+      this.diagnosticReportDescription,
       final List<CarePlan>? carePlans})
       : _incompleteTests = incompleteTests,
         _responses = responses,
@@ -521,6 +550,11 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
     return EqualUnmodifiableListView(value);
   }
 
+  @override
+  @TimestampConverter()
+  final DateTime? updateEndTime;
+  @override
+  final String? diagnosticReportDescription;
   final List<CarePlan>? _carePlans;
   @override
   List<CarePlan>? get carePlans {
@@ -533,7 +567,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
 
   @override
   String toString() {
-    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, category: $category, code: $code, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, carePlans: $carePlans)';
+    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, category: $category, code: $code, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, carePlans: $carePlans)';
   }
 
   @override
@@ -579,6 +613,12 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
             const DeepCollectionEquality()
                 .equals(other._observations, _observations) &&
             const DeepCollectionEquality().equals(other._media, _media) &&
+            (identical(other.updateEndTime, updateEndTime) ||
+                other.updateEndTime == updateEndTime) &&
+            (identical(other.diagnosticReportDescription,
+                    diagnosticReportDescription) ||
+                other.diagnosticReportDescription ==
+                    diagnosticReportDescription) &&
             const DeepCollectionEquality()
                 .equals(other._carePlans, _carePlans));
   }
@@ -609,6 +649,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
         const DeepCollectionEquality().hash(_responses),
         const DeepCollectionEquality().hash(_observations),
         const DeepCollectionEquality().hash(_media),
+        updateEndTime,
+        diagnosticReportDescription,
         const DeepCollectionEquality().hash(_carePlans)
       ]);
 
@@ -651,6 +693,8 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
       final List<Response>? responses,
       final List<Observation>? observations,
       final List<Media>? media,
+      @TimestampConverter() final DateTime? updateEndTime,
+      final String? diagnosticReportDescription,
       final List<CarePlan>? carePlans}) = _$_TriageDetailedReportModel;
 
   factory _TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =
@@ -702,6 +746,11 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   List<Observation>? get observations;
   @override
   List<Media>? get media;
+  @override
+  @TimestampConverter()
+  DateTime? get updateEndTime;
+  @override
+  String? get diagnosticReportDescription;
   @override
   List<CarePlan>? get carePlans;
   @override
