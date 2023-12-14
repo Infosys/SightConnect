@@ -349,6 +349,222 @@
                     "compare": null,
                     "absolute": null
                 }
+            },
+            {
+                "id": 1151,
+                "linkId": "string",
+                "prefix": "string",
+                "text": "This is second question?",
+                "type": "Group",
+                "enableBehavior": "ALL",
+                "required": true,
+                "repeats": false,
+                "readOnly": false,
+                "maxlength": 100000,
+                "disabledDisplay": "PROTECTED",
+                "answerConstraint": "OptionsOnly",
+                "answerValueSet": null,
+                "initial": {
+                    "id": 1052,
+                    "answerBoolean": null,
+                    "answerDecimal": null,
+                    "answerInteger": null,
+                    "answerDate": null,
+                    "answerDateTime": null,
+                    "answerTime": null,
+                    "answerString": "No",
+                    "answerItemWeight": {
+                        "id": 1951,
+                        "value": 1.0,
+                        "answerId": 1052,
+                        "questionResponseWeight": {
+                            "id": 1901,
+                            "quesId": 1151,
+                            "isRange": false,
+                            "isCompare": false,
+                            "isAbsolute": true
+                        }
+                    }
+                },
+                "questionnaire": {
+                    "id": 1101,
+                    "name": null,
+                    "title": null,
+                    "status": null,
+                    "experimental": null,
+                    "date": null,
+                    "description": null,
+                    "jurisdiction": null,
+                    "publisher": null,
+                    "purpose": null,
+                    "code": null,
+                    "version": null,
+                    "approvalDate": null,
+                    "lastReviewDate": null,
+                    "creationDate": null,
+                    "lastModifiedDate": null,
+                    "publisherCode": null,
+                    "publisherType": null,
+                    "questionnaire": null
+                },
+                "questionnaireItem": null,
+                "actionOn": [
+                    {
+                        "id": 1201,
+                        "operator": "EQUALS",
+                        "actionType": "EXIT_ALL_QUESTIONNAIRE",
+                        "answer": {
+                            "id": 1051,
+                            "answerBoolean": null,
+                            "answerDecimal": null,
+                            "answerInteger": null,
+                            "answerDate": null,
+                            "answerDateTime": null,
+                            "answerTime": null,
+                            "answerString": "No",
+                            "answerItemWeight": {
+                                "id": 1952,
+                                "value": 0.0,
+                                "answerId": 1051,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
+                        },
+                        "questionnaireItem": {
+                            "id": 1151,
+                            "linkId": null,
+                            "prefix": null,
+                            "quesText": null,
+                            "type": null,
+                            "enableBehavior": null,
+                            "isRequired": null,
+                            "repeats": null,
+                            "isReadOnly": null,
+                            "quesMaxlength": null,
+                            "disabledDisplay": null,
+                            "answerConstraint": null,
+                            "answerValueSet": null,
+                            "initial": null,
+                            "questionnaire": null,
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
+                        }
+                    }
+                ],
+                "answerOption": [
+                    {
+                        "id": 1251,
+                        "intialSelected": true,
+                        "answer": {
+                            "id": 1052,
+                            "answerBoolean": null,
+                            "answerDecimal": null,
+                            "answerInteger": null,
+                            "answerDate": null,
+                            "answerDateTime": null,
+                            "answerTime": null,
+                            "answerString": "Yes",
+                            "answerItemWeight": {
+                                "id": 1951,
+                                "value": 1.0,
+                                "answerId": 1052,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
+                        },
+                        "questionnaireItem": {
+                            "id": 1151,
+                            "linkId": null,
+                            "prefix": null,
+                            "quesText": null,
+                            "type": null,
+                            "enableBehavior": null,
+                            "isRequired": null,
+                            "repeats": null,
+                            "isReadOnly": null,
+                            "quesMaxlength": null,
+                            "disabledDisplay": null,
+                            "answerConstraint": null,
+                            "answerValueSet": null,
+                            "initial": null,
+                            "questionnaire": null,
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
+                        }
+                    },
+                    {
+                        "id": 1252,
+                        "intialSelected": false,
+                        "answer": {
+                            "id": 1051,
+                            "answerBoolean": null,
+                            "answerDecimal": null,
+                            "answerInteger": null,
+                            "answerDate": null,
+                            "answerDateTime": null,
+                            "answerTime": null,
+                            "answerString": "No",
+                            "answerItemWeight": {
+                                "id": 1952,
+                                "value": 0.0,
+                                "answerId": 1051,
+                                "questionResponseWeight": {
+                                    "id": 1901,
+                                    "quesId": 1151,
+                                    "isRange": false,
+                                    "isCompare": false,
+                                    "isAbsolute": true
+                                }
+                            }
+                        },
+                        "questionnaireItem": {
+                            "id": 1151,
+                            "linkId": null,
+                            "prefix": null,
+                            "quesText": null,
+                            "type": null,
+                            "enableBehavior": null,
+                            "isRequired": null,
+                            "repeats": null,
+                            "isReadOnly": null,
+                            "quesMaxlength": null,
+                            "disabledDisplay": null,
+                            "answerConstraint": null,
+                            "answerValueSet": null,
+                            "initial": null,
+                            "questionnaire": null,
+                            "questionnaireItem": null,
+                            "questionResponseWeight": null,
+                            "readOnly": null,
+                            "required": null
+                        }
+                    }
+                ],
+                "enableWhen": [],
+                "answerItemWeight": null,
+                "questionResponseWeight": {
+                    "id": 1901,
+                    "quesId": 1151,
+                    "answerRangeWeight": [],
+                    "answerComparisonWeight": [],
+                    "range": null,
+                    "compare": null,
+                    "absolute": null
+                }
             }
           
         ],

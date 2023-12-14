@@ -16,15 +16,15 @@ class AppEnv {
 
   static String get baseUrl {
     return switch (env) {
-      Env.DEV => 'http://localhost:8085',
-      Env.PROD => 'http://localhost:8085',
+      Env.DEV => 'http://10.0.2.2:8077',
+      Env.PROD => 'http://10.0.2.2:8077',
     };
   }
 
   static String get baseUrl2 {
     return switch (env) {
-      Env.DEV => 'http://localhost:8075/orchestration',
-      Env.PROD => 'http://localhost:8075/orchestration',
+      Env.DEV => 'http://10.0.2.2:8085/orchestration',
+      Env.PROD => 'http://10.0.2.2:8085/orchestration',
     };
   }
 

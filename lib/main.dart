@@ -17,9 +17,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferenceService.init();
   IOSDeviceInfoService.init();
-  AppEnv.setupEnv(Env.PROD);
+  AppEnv.setupEnv(Env.DEV);
   if (!AppEnv.isDev) {
-    AppLogger.init();
+    await AppLogger.init();
   }
 
   HttpOverrides.global = MyHttpOverrides();

@@ -7,7 +7,7 @@ class AppLogger {
   static const String nameSpace = 'ns1';
   static const String appId = 'com.infosys.eyecareforall';
   static late final SnowplowTracker tracker;
-  static void init() async {
+  static Future<void> init() async {
     tracker = await Snowplow.createTracker(
       namespace: nameSpace,
       endpoint: const String.fromEnvironment(

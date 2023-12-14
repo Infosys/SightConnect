@@ -37,7 +37,7 @@ class TriageResultProvider extends ChangeNotifier {
   Map<String, dynamic> getOverallTriageResult() {
     getCompleteTriageResultList();
     double totalUrgency =
-        _questionnaireScore! + _visionAcuityScore! + _eyeScanScore!;
+        (_questionnaireScore ?? 0.0 )+ (_visionAcuityScore ?? 0.0) +( _eyeScanScore ?? 0.0);
     logger.d("this is total urgency $totalUrgency");
     logger.d(
         "these are questionnaire, vision acuity and eye scan scores from the overall method call $_questionnaireScore, $_visionAcuityScore, $_eyeScanScore");
@@ -62,7 +62,7 @@ class TriageResultProvider extends ChangeNotifier {
     var score = 0.0;
     if (_model.score != null && _model.score!.isNotEmpty) {}
 
-    return _setPropertiesByUrgency(_questionnaireScore!.toDouble());
+    return _setPropertiesByUrgency(_questionnaireScore?.toDouble() ?? 0.0);
   }
 
   Map<String, dynamic> _getAcuityResult() {
@@ -70,13 +70,13 @@ class TriageResultProvider extends ChangeNotifier {
 
     logger.d(
         "this is vision acuity score from inside method call $_visionAcuityScore");
-    return _setPropertiesByUrgency(_visionAcuityScore!.toDouble());
+    return _setPropertiesByUrgency(_visionAcuityScore?.toDouble() ?? 0.0);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
     var score = 0.0;
     logger.d("this is eye scan score from inside method call $_eyeScanScore");
-    return _setPropertiesByUrgency(_eyeScanScore!.toDouble());
+    return _setPropertiesByUrgency(_eyeScanScore?.toDouble() ?? 0.0);
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(double urgency) {
