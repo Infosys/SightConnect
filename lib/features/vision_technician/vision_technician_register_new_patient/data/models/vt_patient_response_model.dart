@@ -1,13 +1,12 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'enums/gender.dart';
-import 'enums/identifier_type.dart';
-import 'enums/relationship.dart';
-import 'enums/status.dart';
+import 'enums/vt_register_new_patient_enums.dart';
 
-part 'profile_model.freezed.dart';
-part 'profile_model.g.dart';
+
+
+part 'vt_patient_response_model.freezed.dart';
+part 'vt_patient_response_model.g.dart';
 
 @freezed
 class ProfileModel with _$ProfileModel {

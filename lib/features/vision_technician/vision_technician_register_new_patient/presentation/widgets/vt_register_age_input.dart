@@ -21,7 +21,7 @@ class VTRegisterAgeInput extends StatelessWidget {
                 title: "Age",
                 keyboardType: TextInputType.name,
                 controller: ref
-                    .read(registerNewPatientProvider)
+                    .read(registerNewPatientHelperProvider)
                     .basicDetailsTextEditingControllers["ageController"]!,
               ),
             ),
@@ -32,7 +32,7 @@ class VTRegisterAgeInput extends StatelessWidget {
               child: VTRegisterDateInput(
                 title: "Date of Birth",
                 controller: ref
-                        .read(registerNewPatientProvider)
+                        .read(registerNewPatientHelperProvider)
                         .basicDetailsTextEditingControllers[
                     "dateOfBirthController"]!,
               ),

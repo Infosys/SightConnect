@@ -14,7 +14,7 @@ class VTRegisterDropdownInput extends ConsumerWidget {
     return DropdownButton(
       
       isExpanded: true,
-      value: ref.watch(registerNewPatientProvider).stateDropDownValue,
+      value: ref.watch(registerNewPatientHelperProvider).stateDropDownValue,
       items: listOfOptions.map((String items) {
         return DropdownMenuItem(
           value: items,
@@ -22,7 +22,7 @@ class VTRegisterDropdownInput extends ConsumerWidget {
         );
       }).toList(),
       onChanged: (value) {
-        ref.read(registerNewPatientProvider.notifier).setStateDropDown(value);
+        ref.read(registerNewPatientHelperProvider.notifier).setStateDropDown(value);
       },
     );
   }

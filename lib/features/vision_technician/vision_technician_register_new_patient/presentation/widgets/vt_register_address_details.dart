@@ -13,7 +13,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> listOfStates =
-        ref.watch(registerNewPatientProvider).listOfStates;
+        ref.watch(registerNewPatientHelperProvider).listOfStates;
     return Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "Door Number",
                                 keyboardType: TextInputType.name,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "doorNoController"]!,
                               ),
@@ -65,7 +65,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "Street",
                                 keyboardType: TextInputType.name,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "streetController"]!,
                               ),
@@ -79,7 +79,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "District",
                                 keyboardType: TextInputType.name,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "districtController"]!,
                               ),
@@ -92,7 +92,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "City",
                                 keyboardType: TextInputType.name,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "cityController"]!,
                               ),
@@ -114,7 +114,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "Landmark",
                                 keyboardType: TextInputType.name,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "landMarkController"]!,
                               ),
@@ -127,7 +127,7 @@ class VTRegisterAddressDetails extends ConsumerWidget {
                                 title: "Pincode",
                                 keyboardType: TextInputType.number,
                                 controller: ref
-                                        .read(registerNewPatientProvider)
+                                        .read(registerNewPatientHelperProvider)
                                         .addressDetailsTextEditingControllers[
                                     "pinCodeController"]!,
                               ),

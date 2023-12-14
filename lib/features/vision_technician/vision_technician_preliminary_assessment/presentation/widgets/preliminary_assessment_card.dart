@@ -13,7 +13,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     VTPatientModel patient =
-        ref.read(registerNewPatientProvider).patientDetails!;
+        ref.read(registerNewPatientHelperProvider).patientDetails!;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(

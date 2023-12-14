@@ -32,7 +32,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
             ),
           ),
           onPressed: () {
-            ref.read(registerNewPatientProvider.notifier).saveAndProceed();
+            ref.read(registerNewPatientHelperProvider.notifier).saveAndProceed();
             /*  if (_formKey.currentState!.validate()) { */
             
             // ref.read(registerNewPatientProvider).saveAndProceed();

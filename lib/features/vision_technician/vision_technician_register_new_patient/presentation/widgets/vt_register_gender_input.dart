@@ -11,7 +11,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String gender = ref.watch(registerNewPatientProvider).genderValue;
+    String gender = ref.watch(registerNewPatientHelperProvider).genderValue;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
@@ -39,7 +39,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
               groupValue: gender,
               onChanged: (value) {
                 ref
-                    .read(registerNewPatientProvider.notifier)
+                    .read(registerNewPatientHelperProvider.notifier)
                     .setGenderValue(value.toString());
               },
             ),
@@ -59,7 +59,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
               groupValue: gender,
               onChanged: (value) {
                 ref
-                    .read(registerNewPatientProvider.notifier)
+                    .read(registerNewPatientHelperProvider.notifier)
                     .setGenderValue(value.toString());
               },
             ),
@@ -79,7 +79,7 @@ class VTRegisterGenderInput extends ConsumerWidget {
               groupValue: gender,
               onChanged: (value) {
                 ref
-                    .read(registerNewPatientProvider.notifier)
+                    .read(registerNewPatientHelperProvider.notifier)
                     .setGenderValue(value.toString());
               },
             ),

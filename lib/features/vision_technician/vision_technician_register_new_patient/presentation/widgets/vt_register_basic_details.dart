@@ -54,7 +54,7 @@ class BasicDetails extends StatelessWidget {
                                   title: 'First Name',
                                   keyboardType: TextInputType.name,
                                   controller: ref
-                                          .read(registerNewPatientProvider)
+                                          .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "firstNameController"]!)),
                           SizedBox(
@@ -65,7 +65,7 @@ class BasicDetails extends StatelessWidget {
                                   title: 'Middle Name',
                                   keyboardType: TextInputType.name,
                                   controller: ref
-                                          .read(registerNewPatientProvider)
+                                          .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "middleNameController"]!)),
                           SizedBox(
@@ -76,7 +76,7 @@ class BasicDetails extends StatelessWidget {
                                   title: 'Last Name',
                                   keyboardType: TextInputType.name,
                                   controller: ref
-                                          .read(registerNewPatientProvider)
+                                          .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "lastNameController"]!)),
                           SizedBox(
@@ -157,7 +157,7 @@ class BasicDetails extends StatelessWidget {
                               title: 'ABHA ID (Optional)',
                               keyboardType: TextInputType.name,
                               controller: ref
-                                      .read(registerNewPatientProvider)
+                                      .read(registerNewPatientHelperProvider)
                                       .basicDetailsTextEditingControllers[
                                   "abhaIdController"]!),
                         ],
@@ -170,7 +170,7 @@ class BasicDetails extends StatelessWidget {
                                   title: "Mobile Number",
                                   keyboardType: TextInputType.number,
                                   controller: ref
-                                          .read(registerNewPatientProvider)
+                                          .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "mobileNumberController"]!)),
                           const SizedBox(
@@ -181,7 +181,7 @@ class BasicDetails extends StatelessWidget {
                                   title: 'Email (Optional)',
                                   keyboardType: TextInputType.emailAddress,
                                   controller: ref
-                                          .read(registerNewPatientProvider)
+                                          .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "emailIdController"]!)),
                         ],
