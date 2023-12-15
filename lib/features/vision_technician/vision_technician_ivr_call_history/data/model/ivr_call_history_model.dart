@@ -1,29 +1,20 @@
-class IvrCallHistoryModel
-{
-  String patientId;
-  String name;
-  String duration;
-  String day;
-  String time;
-  String status;
-  String calltype;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  IvrCallHistoryModel({
-    required this.patientId,
-    required this.name,
-    required this.duration,
-    required this.day,
-    required this.time,
-    required this.status,
-    required this.calltype,
-  });
+part 'ivr_call_history_model.freezed.dart';
 
-  @override
-  String toString() {
-    // TODO: implement toString
-    return 'IvrCallHistoryModel(patientId: $patientId, name: $name, duration: $duration, day: $day, time: $time, status: $status, calltype: $calltype)';
-  }
+part 'ivr_call_history_model.g.dart';
 
+@freezed
+class IvrCallHistoryModel with _$IvrCallHistoryModel {
+  const factory IvrCallHistoryModel({
+    required String patientId,
+    required String name,
+    int? duration,
+    required DateTime logDate,
+    required String status,
+    required String calltype,
+  }) = _IvrCallHistoryModel;
 
-  
+  factory IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =>
+      _$IvrCallHistoryModelFromJson(json);
 }

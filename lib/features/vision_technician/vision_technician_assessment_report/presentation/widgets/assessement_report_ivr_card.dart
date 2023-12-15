@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 // import 'dart:js';
@@ -11,11 +12,13 @@ class AssessmentReportIvrCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-          color: AppColor.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppSize.kmradius - 5),
-          )),
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        boxShadow: applyLightShadow(),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppSize.kmradius - 5),
+        ),
+      ),
       padding: const EdgeInsets.all(AppSize.klpadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +27,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-              )),
+              ),),
           const SizedBox(height: AppSize.ksheight),
           Wrap(spacing: AppSize.kmwidth * 5, children: [
             Column(
@@ -40,7 +43,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
-                    )),
+                    ),),
               ],
             ),
             Column(
@@ -97,7 +100,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                 ),
               ],
             ),
-          ]),
+          ],),
         ],
       ),
     );
