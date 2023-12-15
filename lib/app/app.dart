@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/app_logger.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/sample.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -19,10 +20,10 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     final mediaQueryData = MediaQuery.of(context);
 
     return Millimeters.fromView(
@@ -48,9 +49,9 @@ class MyApp extends ConsumerWidget {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
+          // home: const SamplePage(),
           routes: AppRouter.routes,
           initialRoute: SplashPage.routeName,
-
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(
           //         data: (value) {

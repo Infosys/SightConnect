@@ -5,6 +5,7 @@
     android:label="Eye Care For All"
     android:name="${applicationName}"
     android:allowBackup="false" 
+  
     android:icon="@mipmap/launcher_icon">
         <activity
         android:name=".MainActivity"
