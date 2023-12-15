@@ -109,6 +109,17 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                             ),
                             DataColumn(
                               label: Text(
+                                "Buttons",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
                                 "Category",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -212,6 +223,15 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
+      ),
+    ),
+    DataCell(
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children:[
+          // button
+          
+        ],
       ),
     ),
     DataCell(

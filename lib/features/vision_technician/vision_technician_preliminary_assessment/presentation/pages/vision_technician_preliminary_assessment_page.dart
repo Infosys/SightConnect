@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_da
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vision_technician_home_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
@@ -27,6 +28,12 @@ class VisionTechnicianPreliminaryAssessmentPage extends ConsumerStatefulWidget {
 class _VisionTechnicianPreliminaryAssessmentPageState
     extends ConsumerState<VisionTechnicianPreliminaryAssessmentPage> {
   final _formKey = GlobalKey<FormState>();
+  int isSelectedOption = 1;
+  void updateVisibility( int isVisible) {
+    setState(() {
+      isSelectedOption = isVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +94,23 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                 const SizedBox(height: AppSize.klheight),
                 const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
-                PreliminaryAssessmentQuestions(),
-                const SizedBox(height: AppSize.klheight),
-                PreliminaryAssessmentVisionCenter(),
-                const SizedBox(height: AppSize.klheight),
+                PreliminaryAssessmentIvrCall(
+                  onVisibilityChanged: updateVisibility,
+                  selectedOption:isSelectedOption,
+                ),
+
+                Visibility(
+                  visible: true,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: AppSize.klheight),
+                      PreliminaryAssessmentQuestions(),
+                      const SizedBox(height: AppSize.klheight),
+                      PreliminaryAssessmentVisionCenter(),
+                      const SizedBox(height: AppSize.klheight),
+                    ],
+                  ),
+                )
 
                 // showToastMessage(
                 //   "Done! Assessment with ID EA 010101 has been created for Sumanta.",
