@@ -1,7 +1,5 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/data/source/fake_data_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/data/source/local/fake_data_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/eye_camps_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

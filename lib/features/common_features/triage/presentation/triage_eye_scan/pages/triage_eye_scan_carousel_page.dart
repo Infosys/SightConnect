@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/User_details_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eyes_capture_triage_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
@@ -29,7 +29,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text(
-          "Steps to do the retinal scanning",
+          "Steps to do the scan ",
         ),
       ),
       body: Column(
@@ -112,7 +112,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
                     MaterialPageRoute(
                       fullscreenDialog: true,
                       builder: (context) =>
-                          EyeCaptureTriagePage(cameras: cameras),
+                          TriageEyeCapturingPage(cameras: cameras),
                     ),
                   );
                 }

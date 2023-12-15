@@ -1,0 +1,3 @@
+enum Jurisdiction {
+  ALL, INDIA
+}

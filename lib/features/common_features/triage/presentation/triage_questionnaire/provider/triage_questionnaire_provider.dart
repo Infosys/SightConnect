@@ -1,22 +1,29 @@
-import 'dart:math';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var triageQuestionnaireProvider = ChangeNotifierProvider(
-  (ref) => TriageQuestionnaireProvider(),
+import '../../../domain/models/triage_response_model.dart';
+
+var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => TriageQuestionnaireProvider(
+    ref.watch(triageLocalSourceProvider),
+  ),
 );
 
 class TriageQuestionnaireProvider extends ChangeNotifier {
-  late List<QuestionnaireSection> _questionnaireSections;
+  late List<QuestionnaireItemFHIRModel> _questionnaireSections;
   late String _questionnaireRemarks;
-  late final Map<int, bool> _selectedOptions;
+  late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-  int _currentQuestionnairePageIndex = 0;
-  List<String> allRemarks = ['', '', ''];
 
-  TriageQuestionnaireProvider()
+  List<String> allRemarks = ['', '', ''];
+  TriageLocalSource triageLocalSource;
+  TextEditingController textEditingController = TextEditingController();
+
+  TriageQuestionnaireProvider(this.triageLocalSource)
       : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
@@ -24,30 +31,29 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   List<String> get allRemarksList => allRemarks;
   String get questionnaireRemarks => _questionnaireRemarks;
-  Map<int, bool> get selectedOptions => _selectedOptions;
-  List<QuestionnaireSection> get questionnaireSections =>
+  Map<int, int> get selectedOptions => _selectedOptions;
+  List<QuestionnaireItemFHIRModel> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
 
-  void setQuestionnaireRemarks(String remarks, currentPageIndex) {
-    _questionnaireRemarks = _questionnaireRemarks + remarks;
-    allRemarks.insert(currentPageIndex, remarks);
+  set questionnaireRemarks(String value) {
+    _questionnaireRemarks = value;
     notifyListeners();
   }
 
-  void getQuestionnaire(List<QuestionnaireSection> data) async {
+  void getQuestionnaire(List<QuestionnaireItemFHIRModel> data) async {
     _questionnaireSections = data;
   }
 
-  // void setQuestionnaireRemarks(String remarks) {
-  //   _questionnaireRemarks = remarks;
-  //   allRemarks.add(remarks);
-  //   notifyListeners();
-  // }
-
-  void addQuestionnaireAnswer(int questionCode, bool answer) {
-    _selectedOptions[questionCode] = answer;
+  void addQuestionnaireAnswer(int questionCode, bool answer, int score) {
+    _selectedOptions[questionCode] = score;
     notifyListeners();
+    logger.f({
+      "Added Options: $_selectedOptions",
+      "Answer: $answer",
+      "Score: $score",
+    });
+
     logger.d("Added Options: $_selectedOptions");
   }
 
@@ -64,59 +70,45 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   }
 
   void saveQuestionaireResponse() {
-    _questionnaireResponse.add(_selectedOptions);
-
-    calculateQuestionnaireUrgency(_selectedOptions);
-    addQuestionnaireToReportPageList(_selectedOptions);
-    _currentQuestionnairePageIndex++;
+    Map<int, bool> selectedOptionsList = {};
+    _selectedOptions.forEach((key, value) {
+      selectedOptionsList[key] = true;
+    });
+    _questionnaireResponse.add(selectedOptionsList);
+    addtoFinalResponse(_selectedOptions);
     logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
     notifyListeners();
   }
 
-  int _triageQuestionnaireUrgency = 1;
-
   List<Map<String, dynamic>> questionnaireForReportPage = [];
 
-  void addQuestionnaireToReportPageList(selectedOptions) {
-    List<int> selectedOptionsID = selectedOptions.keys.toList();
-    List<Questionnaire> currentQuestionnaireSections =
-        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
+  final List<PostQuestionResponseModel> _questionResponseList = [];
 
-    for (var question in currentQuestionnaireSections) {
-      List<String> currentQuestionStatement = [];
-      for (var question in question.questions!) {
-        if (selectedOptionsID.contains(question.code)) {
-          currentQuestionStatement.add(
-            question.statement!,
-          );
-        }
-      }
-      questionnaireForReportPage.add({
-        "question": question.description,
-        "answer": currentQuestionStatement,
-      });
-    }
+  void addtoFinalResponse(selectedOptions) {
+    selectedOptions.forEach((key, score) {
+      _questionResponseList.add(PostQuestionResponseModel(
+        linkId: key,
+        score: 1,
+        answer: [
+          PostAnswerModel(
+            value: "YES",
+            score: double.parse(score.toString()),
+          )
+        ],
+      ));
+    });
   }
 
-  void calculateQuestionnaireUrgency(Map<int, bool> selectedOptions) {
-    List<int> selectedOptionsID = selectedOptions.keys.toList();
-    List<Questionnaire> currentQuestionnaireSections =
-        questionnaireSections[_currentQuestionnairePageIndex].questionnaire!;
-
-    for (var question in currentQuestionnaireSections) {
-      for (var question in question.questions!) {
-        if (selectedOptionsID.contains(question.code)) {
-          _triageQuestionnaireUrgency =
-              max(_triageQuestionnaireUrgency, question.weight!);
-        }
-      }
-    }
-    logger.d(
-        "Questionnaire Urgency After ${_currentQuestionnairePageIndex + 1} Question: $_triageQuestionnaireUrgency");
+  getQuestionaireResponse() {
+    return _questionResponseList;
   }
 
-  int getTriageQuestionnaireUrgency() {
-    return _triageQuestionnaireUrgency;
+  Future<void> saveQuestionaireResponseToDB() async {
+    logger.f("Saving Questionnaire Response to DB");
+    await triageLocalSource.saveTriageQuestionnaireLocally(
+      triageQuestionnaireResponse: getQuestionaireResponse(),
+    );
+    notifyListeners();
   }
 }

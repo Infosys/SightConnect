@@ -1,0 +1,50 @@
+{
+    "patientId": 99000066,
+    "encounterId":null,
+    "serviceType":"OPTOMETRY", 
+    "organizationCode": 88000004,
+    "performer":[{ 
+      "role":"VISION_TECHNICIAN",   
+      "identifier":99000002
+    }],
+    "assessmentCode": 10000001,
+    "assessmentVersion":"1.0",
+    "issued":"2023-10-12T14:11:33.000Z",
+    "userStartDate":"2023-10-12T14:11:33.000Z",
+    "source":"PATIENT_APP",   
+    "sourceVersion": "1.0", 
+    "incompleteSection":[{
+        "testName":"QUESTIONNAIRE"
+    }],
+    "cummulativeScore":10.0,   
+    "score":
+    
+    [{"QUESTIONNAIRE":8.0},{"OBSERVATION":1.0},{"IMAGING":1.5}],
+    "imagingSelection": [
+      {
+        "identifier": 1,
+        "endpoint": "/c/newimage.jpg",
+        "baseUrl":"http//www.abc.com",
+        "score":0
+      }
+    ],
+    "observations": [
+      {
+        "identifier": 1002,
+        "value": "9.1",
+        "score": 2.0
+      }
+    ],
+    "questionResponse": [
+      {
+        "linkId": 2001,
+        "score": 1.0,
+        "answers":[ 
+          {
+          "value":"YES",
+          "score":1.0
+          }
+        ]
+      }
+    ]
+  }

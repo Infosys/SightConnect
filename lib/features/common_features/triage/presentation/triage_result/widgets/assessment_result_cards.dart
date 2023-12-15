@@ -1,22 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/triage_result_provider.dart';
-
-class AssessmentResultCards extends ConsumerWidget {
-  const AssessmentResultCards({super.key});
-
+class AssessmentResultCards extends StatelessWidget {
+  const AssessmentResultCards({
+    required this.triageResult,
+    super.key,
+  });
+  final List<Map<String, dynamic>> triageResult;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(triageResultProvider);
-
+  Widget build(BuildContext context) {
+    if (triageResult.isEmpty) {
+      return const SizedBox();
+    }
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: resultData.resultState.length,
+      itemCount: 3,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 1,
@@ -24,7 +25,7 @@ class AssessmentResultCards extends ConsumerWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        resultData.setColors(index);
+        final resultData = triageResult[index];
         return Container(
           padding: EdgeInsets.only(
             left: AppSize.width(context) * 0.03,
@@ -32,7 +33,7 @@ class AssessmentResultCards extends ConsumerWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: resultData.backColor,
+            color: resultData['backColor'],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -43,11 +44,11 @@ class AssessmentResultCards extends ConsumerWidget {
                 height: 20,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: resultData.checkColor,
+                  color: resultData['checkColor'] ?? "",
                 ),
                 child: Center(
                   child: Icon(
-                    resultData.icon,
+                    resultData['icon'] ?? "",
                     color: Colors.white,
                     size: 15,
                   ),
@@ -57,17 +58,25 @@ class AssessmentResultCards extends ConsumerWidget {
                 height: 8,
               ),
               Text(
-                resultData.resultState[index]['type']!,
-                style:
-                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w600),
+                index == 0
+                    ? 'Assessment\nQuestions'
+                    : index == 1
+                        ? 'Acuity\nTest'
+                        : 'Eye\nScan',
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(
                 height: 8,
               ),
               Text(
-                resultData.resultState[index]['state']!,
-                style:
-                    applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
+                resultData['state'] ?? "",
+                style: applyRobotoFont(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
               )
             ],
           ),

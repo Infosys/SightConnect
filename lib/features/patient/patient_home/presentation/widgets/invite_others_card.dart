@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class InviteCard extends StatelessWidget {
   const InviteCard({super.key});
@@ -55,7 +56,11 @@ class InviteCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Share.share(
+                        'check out my website https://example.com',
+                        subject: 'Look what I made!');
+                  },
                   child: const Text(
                     "Share Now",
                     style: TextStyle(

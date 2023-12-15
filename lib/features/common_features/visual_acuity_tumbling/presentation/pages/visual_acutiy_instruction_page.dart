@@ -3,13 +3,13 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/visual_acuity_tumling_instruction_carousel.dart';
 
@@ -23,7 +23,7 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppbar(
-        title: Text(AppLocalizations.of(context)!.visualAcuityCarouselTitle),
+        title: Text(context.loc!.visualAcuityCarouselTitle),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -110,8 +110,8 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               },
               child: Text(
                 activeIndex.value == 3
-                    ? AppLocalizations.of(context)!.startTestText
-                    : AppLocalizations.of(context)!.skipButton,
+                    ? context.loc!.startTestText
+                    : context.loc!.skipButton,
                 style: applyRobotoFont(
                   fontWeight: FontWeight.w500,
                   color: activeIndex.value == 4

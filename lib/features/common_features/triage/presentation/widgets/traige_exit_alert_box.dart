@@ -21,7 +21,7 @@ class TriageExitAlertBox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
-      actionsPadding: EdgeInsets.zero,
+      // actionsPadding: EdgeInsets.zero,
       title: const Icon(
         Icons.warning_amber_outlined,
         color: AppColor.orange,
@@ -45,6 +45,7 @@ class TriageExitAlertBox extends ConsumerWidget {
                 TextButton(
                   onPressed: () {
                     ref.read(triageProvider).resetTriage();
+
                     Navigator.popUntil(context, (route) => route.isFirst);
                     onYesPressed?.call();
                   },
@@ -64,17 +65,20 @@ class TriageExitAlertBox extends ConsumerWidget {
       actions: [
         Container(
           decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
             boxShadow: [
               BoxShadow(
                 color: AppColor.black.withOpacity(0.04),
-                spreadRadius: 2,
-                blurRadius: 3,
+                blurRadius: 4,
                 offset: const Offset(0, -3),
               ),
             ],
             color: AppColor.white,
           ),
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
           child: const BrandingWidgetH(),
         ),
       ],

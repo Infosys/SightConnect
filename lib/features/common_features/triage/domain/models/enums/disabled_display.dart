@@ -1,0 +1,3 @@
+enum DisabledDisplay {
+  PROTECTED, HIDDEN
+}

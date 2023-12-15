@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 
+import '../../../../../core/constants/app_icon.dart';
+
 var mappers = {
   "Buy Spectacles": AppImages.buySpectacles,
   "Reminders": AppImages.reminders,
@@ -17,4 +19,6 @@ var mappers = {
   "Doctors Nearby": AppImages.doctorNearBy,
   "Hospitals Nearby": AppImages.hospitalNearBy,
   "Appointment Booking": AppImages.calendarCheck,
+  "Eye Assessment": AppIcon.triage,
+  "Visual Acuity Test": AppIcon.acuityTest,
 };

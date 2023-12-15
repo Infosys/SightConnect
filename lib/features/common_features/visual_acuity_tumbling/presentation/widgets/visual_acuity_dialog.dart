@@ -3,8 +3,11 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -51,14 +54,16 @@ class VisualAcuityDialog {
                   builder:
                       (BuildContext context, WidgetRef ref, Widget? child) {
                     return TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         ref
                             .read(
                                 visualAcuityTumblingTestDialogProvider.notifier)
                             .state = true;
-
+                        ref.read(triageStepperProvider).goToNextStep();
                         if (!ref.read(globalProvider).hideTumblingElement) {
-                          ref.read(triageStepperProvider).goToNextStep();
+                          await ref
+                              .read(tumblingTestProvider)
+                              .saveVisionAcuityResponseToDB();
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -87,6 +92,10 @@ class VisualAcuityDialog {
       actions: [
         Container(
           decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
             boxShadow: [
               BoxShadow(
                 color: AppColor.black.withOpacity(0.04),
@@ -126,13 +135,7 @@ class VisualAcuityDialog {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      eye == Eye.left
-                          ? AppLocalizations.of(context)!
-                              .visualAcuityLeftEyeHeader
-                          : (eye == Eye.right
-                              ? AppLocalizations.of(context)!
-                                  .visualAcuityRightEyeHeader
-                              : "Both Eyes"),
+                      _mapEyeTitle(context, eye),
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -143,14 +146,7 @@ class VisualAcuityDialog {
                       height: AppSize.kmheight,
                     ),
                     Text(
-                      eye == Eye.left
-                          ? AppLocalizations.of(context)!
-                              .visualAcuityLeftEyeInstructions
-                          : eye == Eye.right
-                              ? AppLocalizations.of(context)!
-                                  .visualAcuityRightEyeInstructions
-                              : AppLocalizations.of(context)!
-                                  .visualAcuityBothEyeInstructions,
+                      _mapEyeInstruction(context, eye),
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -162,25 +158,24 @@ class VisualAcuityDialog {
                     ),
                     Center(
                       child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColor.primary.withOpacity(0.12),
-                                offset: const Offset(0, 2),
-                                blurRadius: 20,
-                                spreadRadius: 20,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColor.primary.withOpacity(0.12),
+                              offset: const Offset(0, 2),
+                              blurRadius: 20,
+                              spreadRadius: 20,
+                            ),
+                          ],
+                        ),
+                        height: AppSize.height(context) * 0.5,
+                        width: AppSize.width(context) * 0.7,
+                        child: _mapEyeInstructionImage(context, eye).isEmpty
+                            ? const SizedBox()
+                            : Image.asset(
+                                _mapEyeInstructionImage(context, eye),
                               ),
-                            ],
-                          ),
-                          height: AppSize.height(context) * 0.5,
-                          width: AppSize.width(context) * 0.7,
-                          child: eye == Eye.left
-                              ? Image.asset("assets/images/Test1LeftEye.png")
-                              : eye == Eye.right
-                                  ? Image.asset(
-                                      "assets/images/Test1RightEye.png")
-                                  : Image.asset(
-                                      "assets/images/Test1BothEye.png")),
+                      ),
                     ),
                     const Spacer(),
                     Row(
@@ -204,5 +199,45 @@ class VisualAcuityDialog {
         ),
       ),
     );
+  }
+
+  static String _mapEyeInstruction(BuildContext context, Eye currentEye) {
+    switch (currentEye) {
+      case Eye.left:
+        return context.loc!.visualAcuityLeftEyeInstructions;
+      case Eye.right:
+        return context.loc!.visualAcuityRightEyeInstructions;
+      case Eye.both:
+        return context.loc!.visualAcuityBothEyeInstructions;
+      default:
+        return "";
+    }
+  }
+
+  static String _mapEyeTitle(BuildContext context, Eye currentEye) {
+    switch (currentEye) {
+      case Eye.left:
+        return context.loc!.leftEyeString;
+      case Eye.right:
+        return context.loc!.rightEyeString;
+      case Eye.both:
+        // return context.loc!.bothEyeString;
+        return "Both Eyes";
+      default:
+        return "";
+    }
+  }
+
+  static String _mapEyeInstructionImage(BuildContext context, Eye currentEye) {
+    switch (currentEye) {
+      case Eye.left:
+        return "assets/images/Test1LeftEye.png";
+      case Eye.right:
+        return "assets/images/Test1RightEye.png";
+      case Eye.both:
+        return "assets/images/Test1BothEye.png";
+      default:
+        return "";
+    }
   }
 }

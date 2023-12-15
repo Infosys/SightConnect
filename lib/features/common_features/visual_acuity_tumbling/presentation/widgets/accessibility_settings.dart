@@ -2,12 +2,12 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:screen_brightness/screen_brightness.dart';
+
+import '../providers/accessibility_provider.dart';
 
 void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
   showDialog(
@@ -42,24 +42,28 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                     const SizedBox(height: AppSize.kmheight),
                     const _AutoContrastWidget(),
                     const SizedBox(height: AppSize.kmheight),
+                    const _BlurThreshold(),
+                    const SizedBox(height: AppSize.kmheight),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
                           onPressed: () {
+                            setState(() {});
+
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save Changes'),
                         ),
                         TextButton(
                           onPressed: () {
-                            
+                            ref.read(accessibilityProvider).reset();
                             Navigator.of(context).pop();
                           },
                           child: const Text('Reset to Default'),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -71,12 +75,12 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
   );
 }
 
-class _AutoBrightnessWidget extends HookWidget {
+class _AutoBrightnessWidget extends HookConsumerWidget {
   const _AutoBrightnessWidget();
 
   @override
-  Widget build(BuildContext context) {
-    var brightness = useState<double>(0.8);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(accessibilityProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,13 +105,12 @@ class _AutoBrightnessWidget extends HookWidget {
               Flexible(
                 child: Slider(
                   min: 0.0,
-                  max: 1.0,
+                  max: 100.0,
                   divisions: 10,
-                  value: brightness.value,
-                  label: '${brightness.value.round()}',
+                  value: model.brightness,
+                  label: '${model.brightness.round()}',
                   onChanged: (double value) async {
-                    brightness.value = value;
-                    await _setBrightness(value);
+                    model.setBrightness(value);
                   },
                 ),
               ),
@@ -121,23 +124,61 @@ class _AutoBrightnessWidget extends HookWidget {
       ],
     );
   }
+}
 
-  Future<double> _currentBrightness() async {
-    try {
-      return await ScreenBrightness().current;
-    } catch (e) {
-      logger.d(e.toString());
-      throw 'Failed to get current brightness';
-    }
-  }
+class _BlurThreshold extends HookConsumerWidget {
+  const _BlurThreshold();
 
-  Future<void> _setBrightness(double brightness) async {
-    try {
-      await ScreenBrightness().setScreenBrightness(brightness);
-    } catch (e) {
-      logger.d(e.toString());
-      throw 'Failed to set brightness';
-    }
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(accessibilityProvider);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          "Blur-Threshold",
+          style: applyFiraSansFont(),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColor.lightGrey.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(AppSize.kmradius),
+          ),
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/brightnesslow.png",
+                width: 30,
+              ),
+              Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  return Flexible(
+                    child: Slider(
+                      min: 0.0,
+                      max: 100.0,
+                      divisions: 10,
+                      value: model.threshold,
+                      label: '${model.threshold.round()}',
+                      onChanged: (double value) async {
+                        model.setThreshold(value);
+                        model.setServerThreshold(value.toInt());
+                      },
+                    ),
+                  );
+                },
+              ),
+              Image.asset(
+                "assets/images/autobrightness.png",
+                width: 30,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -169,7 +210,7 @@ class _AutoFontSizeWidget extends HookWidget {
               children: [
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
                 Consumer(
@@ -193,7 +234,7 @@ class _AutoFontSizeWidget extends HookWidget {
                 ),
                 Text(
                   "T",
-                  textScaleFactor: scaleFactor.value,
+                  textScaler: TextScaler.linear(scaleFactor.value),
                   style: applyRobotoFont(),
                 ),
               ],
@@ -203,7 +244,7 @@ class _AutoFontSizeWidget extends HookWidget {
         const SizedBox(height: AppSize.kmheight),
         Text(
           "Turning off auto-brightness or auto-contrast may affect test performance and accuracy. These parameters have been preset for optimal levels. However, you may change these parameters to suit your visual comfort levels.",
-          textScaleFactor: scaleFactor.value,
+          textScaler: TextScaler.linear(scaleFactor.value),
           style: applyRobotoFont(),
         ),
       ],

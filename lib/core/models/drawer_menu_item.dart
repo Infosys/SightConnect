@@ -19,18 +19,18 @@ class DrawerMenuItems {
     title: "My Profile",
     icon: AppImages.profieImage,
   );
-  static const DrawerMenuItem appointments = DrawerMenuItem(
-    title: "Appointments",
-    icon: AppIcon.drawerAppoinments,
-  );
+  // static const DrawerMenuItem appointments = DrawerMenuItem(
+  //   title: "Appointments",
+  //   icon: AppIcon.drawerAppoinments,
+  // );
   static const DrawerMenuItem prescriptions = DrawerMenuItem(
     title: "Assessments and Tests",
     icon: AppIcon.drawerAssessmentsAndTest,
   );
-  static const DrawerMenuItem accessibilities = DrawerMenuItem(
-    title: "Accessibility Settings",
-    icon: AppIcon.drawerAssessibility,
-  );
+  // static const DrawerMenuItem accessibilities = DrawerMenuItem(
+  //   title: "Accessibility Settings",
+  //   icon: AppIcon.drawerAssessibility,
+  // );
   static const DrawerMenuItem about = DrawerMenuItem(
     title: "About Us",
     icon: AppIcon.drawerAboutUs,
@@ -50,9 +50,9 @@ class DrawerMenuItems {
   static const List<DrawerMenuItem> all = [
     home,
     profile,
-    appointments,
+    // appointments,
     prescriptions,
-    accessibilities,
+    // accessibilities,
     about,
     termOfUse,
     privacyPolicy,

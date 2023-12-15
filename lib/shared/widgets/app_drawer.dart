@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
@@ -133,7 +133,10 @@ class AppDrawer extends StatelessWidget {
                                         height: 40,
                                         width: 40,
                                         transform: Matrix4.translationValues(
-                                            -10, 0, 0),
+                                          -10,
+                                          0,
+                                          0,
+                                        ),
                                         child: Image.asset(
                                           item.value.icon,
                                           alignment: Alignment.centerLeft,

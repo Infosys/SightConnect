@@ -1,33 +1,26 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/triage_result_provider.dart';
-
-class ResultPageTopCard extends ConsumerWidget {
-  const ResultPageTopCard({super.key});
+class ResultPageTopCard extends StatelessWidget {
+  const ResultPageTopCard({
+    super.key,
+    required this.triageResult,
+    required this.name,
+    required this.id,
+    required this.patientImage,
+  });
+  final Map<String, dynamic> triageResult;
+  final String name;
+  final String id;
+  final String patientImage;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var resultData = ref.watch(triageResultProvider);
-    resultData.setTopColors();
-    String issueInfo = resultData.highestPriority == 'Major'
-        ? 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.'
-        : resultData.highestPriority == 'Minor'
-            ? 'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.'
-            : 'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.';
+  Widget build(BuildContext context) {
+    DateTime todayDate = DateTime.now();
 
-    String issueLabelText = resultData.highestPriority == 'Major'
-        ? 'Urgent Consult'
-        : resultData.highestPriority == 'Minor'
-            ? 'Early Consult'
-            : 'Routine Consult';
-    logger.d(
-        '${resultData.highestPriority} wqeqlmdaldsmlasdlsadlsakdlsa\n${resultData.topCardColor}');
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -54,7 +47,7 @@ class ResultPageTopCard extends ConsumerWidget {
                   SizedBox(
                     width: AppSize.width(context) * 0.29,
                     child: Text(
-                      "Raghavi Pandey",
+                      name,
                       style: applyRobotoFont(
                           fontSize: 14, fontWeight: FontWeight.w600),
                       softWrap: true,
@@ -62,7 +55,7 @@ class ResultPageTopCard extends ConsumerWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "AID: EA 010101",
+                    "AID: $id",
                     softWrap: true,
                     style: applyRobotoFont(
                         fontSize: 11, fontWeight: FontWeight.w600),
@@ -77,7 +70,7 @@ class ResultPageTopCard extends ConsumerWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: resultData.topCardColor.withOpacity(0.2),
+                  color: triageResult['color'].withOpacity(0.2),
                   offset: const Offset(0, 2),
                   blurRadius: 20,
                   spreadRadius: 20,
@@ -87,11 +80,11 @@ class ResultPageTopCard extends ConsumerWidget {
               color: AppColor.white,
               border: Border.symmetric(
                 horizontal: BorderSide(
-                  color: resultData.topCardColor,
+                  color: triageResult['color'],
                   width: 2,
                 ),
                 vertical: BorderSide(
-                  color: resultData.topCardColor,
+                  color: triageResult['color'],
                   width: 1,
                 ),
               ),
@@ -109,10 +102,10 @@ class ResultPageTopCard extends ConsumerWidget {
                           horizontal: AppSize.width(context) * 0.01,
                         ),
                         decoration: BoxDecoration(
-                          color: resultData.topCardColor,
+                          color: triageResult['color'],
                         ),
                         child: Text(
-                          issueLabelText,
+                          triageResult['labelText'] ?? "",
                           style: applyRobotoFont(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -120,7 +113,7 @@ class ResultPageTopCard extends ConsumerWidget {
                         )),
                     const Spacer(),
                     Text(
-                      "19 Sep 2023",
+                      todayDate.formateDate,
                       style: applyRobotoFont(
                           fontSize: 12, fontWeight: FontWeight.w400),
                     ),
@@ -130,7 +123,7 @@ class ResultPageTopCard extends ConsumerWidget {
                   height: 15,
                 ),
                 Text(
-                  issueInfo,
+                  triageResult['issueInfo'],
                   textAlign: TextAlign.left,
                   softWrap: true,
                   style: applyRobotoFont(
@@ -160,11 +153,13 @@ class ResultPageTopCard extends ConsumerWidget {
                   width: 4,
                 ),
               ),
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 40,
-                backgroundImage: AssetImage(
-                  AppImages.raghavi,
-                ),
+                backgroundImage: patientImage.isEmpty
+                    ? null
+                    : AssetImage(
+                        patientImage,
+                      ),
               ),
             ),
           )

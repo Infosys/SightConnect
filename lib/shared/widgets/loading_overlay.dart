@@ -11,17 +11,20 @@ class LoadingOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        child,
-        if (isLoading)
-          Container(
-            color: Colors.black.withOpacity(0.5),
-            child: const Center(
-              child: CircularProgressIndicator(),
+    return IgnorePointer(
+      ignoring: isLoading,
+      child: Stack(
+        children: [
+          child,
+          if (isLoading)
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

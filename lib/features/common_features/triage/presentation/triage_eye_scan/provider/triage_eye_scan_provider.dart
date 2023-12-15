@@ -1,19 +1,31 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-enum TriageEye { RIGHT_EYE, LEFT_EYE }
+import 'package:uuid/uuid.dart';
 
 class TriageEyeScanProvider with ChangeNotifier {
-  TriageEye _currentEye = TriageEye.RIGHT_EYE;
+  final SaveTriageEyeScanLocallyUseCase _saveTriageEyeScanLocallyUseCase;
+  TriageEyeType _currentEye;
+  final String _patientID;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
+  XFile? _bothEyeImage;
 
-  XFile? get leftEyeImage => _leftEyeImage;
-  XFile? get rightEyeImage => _rightEyeImage;
-  TriageEye get currentEye => _currentEye;
+  TriageEyeScanProvider(
+    this._saveTriageEyeScanLocallyUseCase,
+    this._currentEye,
+    this._patientID,
+  );
+
+  TriageEyeType get currentEye => _currentEye;
+  XFile get leftEyeImage => _leftEyeImage!;
+  XFile get rightEyeImage => _rightEyeImage!;
+  XFile get bothEyeImage => _bothEyeImage!;
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
@@ -25,22 +37,78 @@ class TriageEyeScanProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setCurrentEye(TriageEye eye) {
+  void setBothEyeImage(XFile image) {
+    _bothEyeImage = image;
+    notifyListeners();
+  }
+
+  void setCurrentEye(TriageEyeType eye) {
     _currentEye = eye;
     notifyListeners();
   }
 
-  void printImage() {
-    logger.d([
-      _leftEyeImage!.path,
-      _rightEyeImage!.path,
-    ]);
+  Future<void> saveTriageEyeScanResponseToDB() async {
+    final response = await _saveTriageEyeScanLocallyUseCase.call(
+      SaveTriageEyeScanLocallyParam(
+        postImagingSelectionModel: getTriageEyeScanResponse(),
+      ),
+    );
+    response.fold(
+      (failure) {
+        logger.d({
+          "Failure": failure,
+        });
+      },
+      (_) {
+        logger.d({
+          "saveTriageEyeScanResponseToDB": "Success",
+        });
+      },
+    );
   }
 
   int getTriageEyeScanUrgency() {
     return 1;
   }
+
+  /// set triage eye scan response based on the TriageAssessment model
+  List<PostImagingSelectionModel> getTriageEyeScanResponse() {
+    XFile XleftEyeImage = _leftEyeImage!;
+    XFile XrightEyeImage = _rightEyeImage!;
+
+    List<PostImagingSelectionModel> mediaCaptureList = [];
+    mediaCaptureList.add(PostImagingSelectionModel(
+      identifier: 70000001,
+      endpoint: getUniqueFileName(XleftEyeImage.name),
+      baseUrl: XleftEyeImage.mimeType,
+      score: 1,
+    ));
+    mediaCaptureList.add(PostImagingSelectionModel(
+      identifier: 70000002,
+      endpoint: getUniqueFileName(XrightEyeImage.name),
+      baseUrl: XrightEyeImage.mimeType,
+      score: 1,
+    ));
+
+    return mediaCaptureList;
+  }
+
+  String generateUniqueKey() {
+    String uuid = const Uuid().v4();
+    String key = "WA${uuid.substring(0, 6)}";
+    return key;
+  }
+
+  String getUniqueFileName(String fileName) {
+    String uniqueKey = generateUniqueKey();
+    return "${_patientID}_$fileName-$uniqueKey";
+  }
 }
 
-var triageEyeScanProvider =
-    ChangeNotifierProvider((ref) => TriageEyeScanProvider());
+var triageEyeScanProvider = ChangeNotifierProvider(
+  (ref) => TriageEyeScanProvider(
+    ref.watch(saveTriageEyeScanLocallyUseCase),
+    TriageEyeType.RIGHT,
+    "99000001",
+  ),
+);
