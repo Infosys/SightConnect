@@ -4,13 +4,19 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/main.dart';
 
 class AssessmentDetailedReportMapper {
   static TriageReportAndAssementPageEntity toEntity(
     TriageResultUserEntity profileEntity,
     TriageDetailedReportModel triageDetailedReport,
-    DiagnosticReportTemplateFHIRModel triageAssessment,
+    List<QuestionnaireItemFHIRModel> triageAssessment,
   ) {
+    logger.d({
+      'profileEntity': profileEntity,
+      'triageDetailedReport': triageDetailedReport,
+      'triageAssessment': triageAssessment,
+    });
     return TriageReportAndAssementPageEntity(
       name: profileEntity.name,
       triageResultID: 0,
@@ -28,10 +34,10 @@ class AssessmentDetailedReportMapper {
       appointementDateTime: DateTime.now(),
       questionResponseBreifEntity: const [
         QuestionResponseBreifEntity(
-          question: 'Dr. Avendra Singh',
+          question: '1. Are you facing sudden loss of vision',
           questionId: 123,
           responseId: 123,
-          response: 'Dr. Avendra Singh',
+          response: 'No',
         )
       ],
       visualAcuityBreifEntity: const [
@@ -39,19 +45,19 @@ class AssessmentDetailedReportMapper {
           observationId: 1,
           observationValue: 1,
           observationValueIdentifier: 1,
-          bodySite: '',
+          bodySite: 'Left Eye',
         ),
         ObservationBreifEntity(
           observationId: 1,
           observationValue: 1,
           observationValueIdentifier: 1,
-          bodySite: '',
+          bodySite: 'Right Eye',
         ),
         ObservationBreifEntity(
           observationId: 1,
           observationValue: 1,
           observationValueIdentifier: 1,
-          bodySite: '',
+          bodySite: 'Both Eye',
         )
       ],
       imageBreifEntity: const [

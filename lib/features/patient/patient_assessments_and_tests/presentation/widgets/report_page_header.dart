@@ -1,11 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportPageHeader extends StatelessWidget {
- const ReportPageHeader({
+  const ReportPageHeader({
     Key? key,
     required this.index,
     required this.triageReportAndAssementPage,
@@ -117,60 +118,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '${triageReportAndAssementPage.triageResultStartDate}}',
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: AppSize.klelevation + 5,
-              ),
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Cataract Surgeon',
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        '${triageReportAndAssementPage.doctorName} (${triageReportAndAssementPage.doctorId})',
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Date & Time',
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        '${triageReportAndAssementPage.appointementDateTime}}',
+                        '${triageReportAndAssementPage.triageResultStartDate.formateDate}',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

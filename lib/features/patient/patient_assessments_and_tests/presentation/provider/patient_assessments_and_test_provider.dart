@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_detailed_report_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
@@ -77,7 +78,12 @@ var getAssementDetailsReport = FutureProvider.family((
 ) async {
   TriageResultUserEntity profileEntity =
       ref.watch(assessmentsAndTestProvider).selectedUser;
-  var triageAssessment = ref.read(getTriageProvider).asData?.value;
+  List<QuestionnaireItemFHIRModel>? triageAssessment = ref
+      .read(getTriageProvider)
+      .asData
+      ?.value
+      .questionnaire!
+      .questionnaireItem;
 
   TriageDetailedReportModel triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData!.value;
@@ -92,7 +98,7 @@ var getAssementDetailsReport = FutureProvider.family((
       AssessmentDetailedReportMapper.toEntity(
     profileEntity,
     triageDetailedReport,
-    triageAssessment!,
+    triageAssessment ?? [],
   );
 
   logger.d({

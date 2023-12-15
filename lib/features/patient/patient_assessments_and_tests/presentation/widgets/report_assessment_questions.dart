@@ -3,13 +3,17 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportAssessmentQuestions extends StatelessWidget {
-  const ReportAssessmentQuestions({super.key,required this.questionResponseBreifModel});
+  const ReportAssessmentQuestions(
+      {super.key, required this.questionResponseBreifModel});
   final List<QuestionResponseBreifEntity> questionResponseBreifModel;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,6 +23,17 @@ class ReportAssessmentQuestions extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w800,
               color: Colors.black,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "--",
+            style: applyRobotoFont(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Colors.black.withOpacity(0.8),
             ),
           ),
           const SizedBox(
