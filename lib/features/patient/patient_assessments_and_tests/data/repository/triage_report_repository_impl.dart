@@ -2,21 +2,20 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/triage_report_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/remote_triage_report_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageReportRepositoryProvider = Provider<TriageReportRepository>(
   (ref) => TriageReportRepositoryImpl(
-    ref.watch(triagReportSourceProvider),
+    ref.watch(remoteTriageReportSourceProvider),
     ref.watch(connectivityProvider),
   ),
 );
 
 class TriageReportRepositoryImpl implements TriageReportRepository {
-  final TriageReportSource triageReportSource;
+  final RemoteTriageReportSource triageReportSource;
   NetworkInfo networkInfo;
 
   TriageReportRepositoryImpl(
@@ -26,43 +25,44 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
 
   @override
   Future<Either<Failure, List<TriageDetailedReportModel>>>
-      getAllTriageReportsByPatientId(int patientId) async {
+      getAllTriageReportsByPatientId(
+    int patientId,
+  ) async {
     if (await networkInfo.isConnected()) {
       try {
-        logger
-            .d({"message": "Internet is connected Getting triage from remote"});
         final remoteResponse =
             await triageReportSource.getTriageReportsByPatientId(patientId);
-        logger.d({"remoteResponse for triage reports ": remoteResponse});
+
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      } catch (e) {
+        return Left(UnknowFailure(errorMessage: e.toString()));
       }
     } else {
-      logger.d(
-          {"message": "Internet is not connected Getting triage from local"});
-      return Left(CacheFailure(errorMessage: 'No internet connectivity'));
+      return Left(ServerFailure(errorMessage: 'No internet connectivity'));
     }
   }
 
   @override
   Future<Either<Failure, TriageDetailedReportModel>> getTriageReportByReportId(
-      int reportId) async {
+    int reportId,
+  ) async {
     if (await networkInfo.isConnected()) {
       try {
-        logger
-            .d({"message": "Internet is connected Getting Report from remote"});
         final remoteResponse =
             await triageReportSource.getTriageReportByReportId(reportId);
-        logger.d({"remoteResponse for triage reports ": remoteResponse});
+
         return Right(remoteResponse);
-      } on ServerException {
-        return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      } on ServerException catch (e) {
+        return Left(
+          UnknowFailure(
+            errorMessage: e.toString(),
+          ),
+        );
       }
     } else {
-      logger.d(
-          {"message": "Internet is not connected Getting triage from local"});
-      return Left(CacheFailure(errorMessage: 'No internet connectivity'));
+      return Left(ServerFailure(errorMessage: 'No internet connectivity'));
     }
   }
 }

@@ -8,15 +8,14 @@ import 'package:flutter/material.dart';
 class ReportPageHeader extends StatelessWidget {
   const ReportPageHeader({
     Key? key,
-    required this.index,
     required this.triageReportAndAssementPage,
   }) : super(key: key);
 
-  final int index;
-  final TriageReportAndAssementPageEntity triageReportAndAssementPage;
+  final TriageReportDetailedEntity triageReportAndAssementPage;
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
@@ -40,7 +39,7 @@ class ReportPageHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage(
-                  "assets/images/doctor.png",
+                  triageReportAndAssementPage.patientImage,
                 ),
               ),
             ),
@@ -51,7 +50,7 @@ class ReportPageHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  triageReportAndAssementPage.name,
+                  triageReportAndAssementPage.patientName,
                   style: applyFiraSansFont(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -95,7 +94,7 @@ class ReportPageHeader extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        '${triageReportAndAssementPage.assessmentID}',
+                        triageReportAndAssementPage.assessmentID,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -118,7 +117,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '${triageReportAndAssementPage.triageResultStartDate.formateDate}',
+                        triageReportAndAssementPage.reportDate,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

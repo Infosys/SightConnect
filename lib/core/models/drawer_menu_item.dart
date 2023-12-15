@@ -17,7 +17,7 @@ class DrawerMenuItems {
   );
   static const DrawerMenuItem profile = DrawerMenuItem(
     title: "My Profile",
-    icon: AppImages.profieImage,
+    icon: AppIcon.navProfile,
   );
   // static const DrawerMenuItem appointments = DrawerMenuItem(
   //   title: "Appointments",

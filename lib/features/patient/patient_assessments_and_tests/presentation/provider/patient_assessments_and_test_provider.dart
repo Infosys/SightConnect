@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/triage_result_local_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/local_triage_report_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
@@ -18,9 +18,9 @@ var isResultOfflineMode = true;
 var getEyeTriageReport = FutureProvider.family(
   (ref, int pId) async {
     if (isResultOfflineMode) {
-      List<TriageResultBriefCardEntiry> triageAssessment = [];
+      List<TriageReportBriefEntity> triageAssessment = [];
 
-      for (var element in TriageResultLocalsource.local_triage_result) {
+      for (var element in LocalTriageReportSource.local_triage_result) {
         triageAssessment.add(
           AssessmentReportMapper.toEntity(
             TriageDetailedReportModel.fromJson(element),
@@ -52,7 +52,7 @@ var getTriageDetailedEyeReport = FutureProvider.family(
   (ref, int reportID) async {
     if (isResultOfflineMode) {
       return TriageDetailedReportModel.fromJson(
-        TriageResultLocalsource.local_triage_result[0],
+        LocalTriageReportSource.local_triage_result[0],
       );
     } else {
       var response = await ref
@@ -72,21 +72,13 @@ var getTriageDetailedEyeReport = FutureProvider.family(
   },
 );
 
-var getAssementDetailsReport = FutureProvider.family((
-  ref,
-  int reportID,
-) async {
-  TriageResultUserEntity profileEntity =
-      ref.watch(assessmentsAndTestProvider).selectedUser;
-  List<QuestionnaireItemFHIRModel>? triageAssessment = ref
-      .read(getTriageProvider)
-      .asData
-      ?.value
-      .questionnaire!
-      .questionnaireItem;
+var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
+  final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
+  DiagnosticReportTemplateFHIRModel? triageAssessment =
+      ref.read(getTriageProvider).asData?.value;
 
-  TriageDetailedReportModel triageDetailedReport =
-      ref.watch(getTriageDetailedEyeReport(reportID)).asData!.value;
+  TriageDetailedReportModel? triageDetailedReport =
+      ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
   logger.d({
     "profile": profileEntity,
@@ -94,18 +86,13 @@ var getAssementDetailsReport = FutureProvider.family((
     "triageAssessment": triageAssessment,
   });
 
-  TriageReportAndAssementPageEntity data =
-      AssessmentDetailedReportMapper.toEntity(
+  final response = AssessmentDetailedReportMapper.toEntity(
     profileEntity,
-    triageDetailedReport,
-    triageAssessment ?? [],
+    triageDetailedReport!,
+    triageAssessment!,
   );
 
-  logger.d({
-    "data": data,
-  });
-
-  return data;
+  return response;
 });
 
 var assessmentsAndTestProvider = ChangeNotifierProvider(
@@ -114,19 +101,19 @@ var assessmentsAndTestProvider = ChangeNotifierProvider(
 
 class AssessmentsAndTestProvider extends ChangeNotifier {
   Ref ref;
-  late TriageResultUserEntity _selectedUser;
+  late TriageReportUserEntity _selectedUser;
 
   AssessmentsAndTestProvider(this.ref) {
     getUsers();
   }
 
-  List<TriageResultUserEntity> getUsers() {
+  List<TriageReportUserEntity> getUsers() {
     PatientResponseModel? patient =
         ref.read(getPatientProfileProvider).asData?.value;
 
-    List<TriageResultUserEntity> users = [];
+    List<TriageReportUserEntity> users = [];
 
-    users.add(TriageResultUserEntity(
+    users.add(TriageReportUserEntity(
       name: patient?.profile?.patient?.name! ?? "",
       image: patient?.profile?.patient?.profilePhoto! ?? "",
       id: 9627849171,
@@ -136,7 +123,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
     patient?.profile?.patient?.relatedParty
         ?.forEach((RelatedPartyModel element) {
-      users.add(TriageResultUserEntity(
+      users.add(TriageReportUserEntity(
         name: element.name!,
         image: element.profilePicture!,
         id: element.patientId!,
@@ -150,7 +137,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
     return users;
   }
 
-  TriageResultUserEntity get selectedUser => _selectedUser;
+  TriageReportUserEntity get selectedUser => _selectedUser;
 
   set setSelectedUser(String? value) {
     _selectedUser = getUsers().firstWhere((element) => element.name == value);

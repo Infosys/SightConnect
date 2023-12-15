@@ -15,3 +15,8 @@ class CacheFailure extends Failure {
   CacheFailure({required String errorMessage})
       : super(errorMessage: errorMessage);
 }
+
+class UnknowFailure extends Failure {
+  UnknowFailure({required String errorMessage})
+      : super(errorMessage: errorMessage);
+}

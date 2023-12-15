@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentCards extends ConsumerWidget {
-  final List<TriageResultBriefCardEntiry> data;
+  final List<TriageReportBriefEntity> data;
   const AssessmentCards({
     required this.data,
     super.key,
@@ -139,7 +139,7 @@ class AssessmentCards extends ConsumerWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PatientAssessmentReportPage(
-                              currentData.triageResultID,
+                              diagnosticReportId: currentData.triageResultID,
                             ),
                           ),
                         );
@@ -174,13 +174,11 @@ class AssessmentCards extends ConsumerWidget {
                     InkWell(
                       onTap: () {
                         showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const BlurDialogBox(
-                                actions: [],
-                                content: UpdateTriageAlertBox(),
-                              );
-                            });
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const UpdateTriageAlertBox();
+                          },
+                        );
                       },
                       child: Text(
                         'Update',
@@ -202,7 +200,7 @@ class AssessmentCards extends ConsumerWidget {
   }
 }
 
-getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";

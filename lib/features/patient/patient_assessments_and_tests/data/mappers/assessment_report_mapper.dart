@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 
 class AssessmentReportMapper {
-  static TriageResultBriefCardEntiry toEntity(TriageDetailedReportModel model) {
-    return TriageResultBriefCardEntiry(
+  static TriageReportBriefEntity toEntity(TriageDetailedReportModel model) {
+    return TriageReportBriefEntity(
       triageResultID: model.diagnosticReportId!,
       priority: model.carePlans!.first.activities!.first
           .plannedActivityReference!.serviceRequest!.priority!,

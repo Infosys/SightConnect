@@ -91,7 +91,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                         dropdownColor: AppColor.white,
                         items: model
                             .getUsers()
-                            .map((TriageResultUserEntity person) {
+                            .map((TriageReportUserEntity person) {
                           return DropdownMenuItem<String>(
                             enabled: true,
                             value: person.name,
@@ -134,18 +134,15 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     );
                   },
                   error: (error, _) {
-                    logger.d({"error": error});
-                    
-                    return const Text(
-                      "No Data Found",
-                    );
+                    return const Text("No Data Found");
                   },
                   loading: () {
                     return const Center(
                       child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: CircularProgressIndicator()),
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   },
                 );

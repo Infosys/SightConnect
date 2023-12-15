@@ -1,9 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_recommendation.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
@@ -16,19 +17,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
   final int diagnosticReportId;
-  const PatientAssessmentReportPage(
-    this.diagnosticReportId, {
+  const PatientAssessmentReportPage({
+    required this.diagnosticReportId,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref
-        .watch(getAssementDetailsReport(
-      diagnosticReportId,
-    ))
-        .when(
-      data: (TriageReportAndAssementPageEntity assessmentDetailsReport) {
+    return ref.watch(getAssementDetailsReport(diagnosticReportId)).when(
+      data: (TriageReportDetailedEntity assessmentDetailsReport) {
         return Scaffold(
           appBar: CustomAppbar(
             title: Row(
@@ -36,47 +33,57 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                 const Text("Eye Assessment"),
                 const Spacer(),
                 Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.width(context) * 0.01,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSize.width(context) * 0.01,
+                  ),
+                  decoration: const BoxDecoration(color: AppColor.orange),
+                  child: Text(
+                    getRequestPriorityText(assessmentDetailsReport.priority),
+                    style: applyRobotoFont(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: AppColor.white,
                     ),
-                    decoration: const BoxDecoration(
-                      color: AppColor.orange,
-                    ),
-                    child: Text(
-                      getRequestPriorityText(assessmentDetailsReport.priority),
-                      style: applyRobotoFont(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: AppColor.white),
-                    )),
+                  ),
+                ),
               ],
             ),
           ),
           body: SingleChildScrollView(
-              child: Padding(
-            padding: const EdgeInsets.all(12),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              ReportPageHeader(
-                index: 0,
-                triageReportAndAssementPage: assessmentDetailsReport,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ReportPageHeader(
+                    triageReportAndAssementPage: assessmentDetailsReport,
+                  ),
+                  const AssessmentOverallResultCard(
+                    triageResult: {},
+                    name: "name",
+                    id: "id",
+                    patientImage: AppImages.aboutUs,
+                  ),
+                  ReportAssessmentQuestions(
+                    questionResponseBreifModel:
+                        assessmentDetailsReport.questionResponseBriefEntity,
+                  ),
+                  TumblingEReportCard(
+                    tumblingEData:
+                        assessmentDetailsReport.visualAcuityBreifEntity,
+                  ),
+                  EyeScanTabView(
+                    eyeScanData: assessmentDetailsReport.imageBriefEntity,
+                  ),
+                  // const AssessmentRecommendation(),
+                  // SizedBox(
+                  //   height: AppSize.height(context) * 0.03,
+                  // ),
+                  const BrandingWidgetH(),
+                ],
               ),
-              ReportAssessmentQuestions(
-                  questionResponseBreifModel:
-                      assessmentDetailsReport.questionResponseBreifEntity),
-              TumblingEReportCard(
-                tumblingEData: assessmentDetailsReport.visualAcuityBreifEntity,
-              ),
-              EyeScanTabView(
-                eyeScanData: assessmentDetailsReport.imageBreifEntity,
-              ),
-              // const AssessmentRecommendation(),
-              // SizedBox(
-              //   height: AppSize.height(context) * 0.03,
-              // ),
-              const BrandingWidgetH(),
-            ]),
-          )),
+            ),
+          ),
         );
       },
       loading: () {
@@ -93,7 +100,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";
@@ -104,7 +111,7 @@ getRequestPriorityText(RequestPriority priority) {
     case RequestPriority.STAT:
       return "STAT";
     default:
-      return "Default";
+      return "";
   }
 }
 
@@ -118,5 +125,7 @@ Color getRequestPriorityColor(RequestPriority priority) {
       return AppColor.orange;
     case RequestPriority.STAT:
       return AppColor.red;
+    default:
+      return AppColor.grey;
   }
 }

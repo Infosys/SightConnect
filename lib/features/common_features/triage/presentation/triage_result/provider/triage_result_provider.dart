@@ -1,10 +1,8 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
@@ -14,10 +12,7 @@ var triageResultProvider = ChangeNotifierProvider.autoDispose
   (ref, result) {
     final patient = ref.watch(getPatientProfileProvider).asData?.value.profile;
 
-    return TriageResultProvider(
-      result,
-      patient,
-    );
+    return TriageResultProvider(result, patient);
   },
 );
 

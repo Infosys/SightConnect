@@ -1,82 +1,47 @@
-import 'package:equatable/equatable.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 
-class TriageReportAndAssementPageEntity extends Equatable {
-  final String name;
-  final int triageResultID;
-  final RequestPriority priority;
-  final String reportTag;
-  final String triageResultType;
-  final Source triageResultSource;
-  final int assessmentID;
-  final DateTime triageResultStartDate;
-  final String triageResultDescription;
-  final String doctorName;
-  final String doctorId;
-  final String doctorTitle;
+class TriageReportDetailedEntity {
   final String patientId;
-  final DateTime appointementDateTime;
-  final List<QuestionResponseBreifEntity> questionResponseBreifEntity;
-  final List<ObservationBreifEntity> visualAcuityBreifEntity;
-  final List<ImageBreifEntity> imageBreifEntity;
+  final String patientName;
+  final String patientImage;
+  final String assessmentID;
+  final RequestPriority priority;
+  final String reportDate;
 
-  const TriageReportAndAssementPageEntity({
-    required this.name,
-    required this.triageResultID,
-    required this.priority,
-    required this.reportTag,
-    required this.triageResultType,
-    required this.triageResultSource,
-    required this.assessmentID,
-    required this.triageResultStartDate,
-    required this.triageResultDescription,
-    required this.doctorName,
-    required this.doctorId,
-    required this.doctorTitle,
+  final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
+  final List<ObservationBriefEntity> visualAcuityBreifEntity;
+  final List<ImageBriefEntity> imageBriefEntity;
+
+  TriageReportDetailedEntity({
     required this.patientId,
-    required this.appointementDateTime,
-    required this.questionResponseBreifEntity,
+    required this.patientName,
+    required this.patientImage,
+    required this.assessmentID,
+    required this.priority,
+    required this.reportDate,
+    required this.questionResponseBriefEntity,
     required this.visualAcuityBreifEntity,
-    required this.imageBreifEntity,
+    required this.imageBriefEntity,
   });
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [
-        triageResultID,
-        priority,
-        reportTag,
-        triageResultType,
-        triageResultSource,
-        assessmentID,
-        triageResultStartDate,
-        triageResultDescription,
-        questionResponseBreifEntity,
-        visualAcuityBreifEntity,
-        imageBreifEntity,
-      ];
 }
 
-class QuestionResponseBreifEntity {
+class QuestionResponseBriefEntity {
   final String question;
-  final int questionId;
+
   final String response;
-  final int responseId;
-  const QuestionResponseBreifEntity({
+
+  const QuestionResponseBriefEntity({
     required this.question,
-    required this.questionId,
     required this.response,
-    required this.responseId,
   });
 }
 
-class ObservationBreifEntity {
+class ObservationBriefEntity {
   final int observationValue;
   final int observationId;
   final int observationValueIdentifier;
   final String bodySite;
-  const ObservationBreifEntity({
+  const ObservationBriefEntity({
     required this.observationValue,
     required this.observationId,
     required this.observationValueIdentifier,
@@ -84,12 +49,12 @@ class ObservationBreifEntity {
   });
 }
 
-class ImageBreifEntity {
+class ImageBriefEntity {
   final String imageUrl;
   final int imageId;
   final int imageIdentifier;
   final String bodySite;
-  const ImageBreifEntity({
+  const ImageBriefEntity({
     required this.imageUrl,
     required this.imageId,
     required this.imageIdentifier,

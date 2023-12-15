@@ -1,4 +1,4 @@
-class TriageResultLocalsource {
+class LocalTriageReportSource {
   static var local_triage_result = [
     {
       "encounterId": 33300000001,

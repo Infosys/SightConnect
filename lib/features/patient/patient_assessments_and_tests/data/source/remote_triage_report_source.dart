@@ -2,42 +2,41 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var triagReportSourceProvider = Provider<TriageReportSource>(
-  (ref) => TriageReportSourceImpl(
+var remoteTriageReportSourceProvider = Provider<RemoteTriageReportSource>(
+  (ref) => RemoteTriageReportSourceImpl(
     ref.watch(dioProvider),
   ),
 );
 
-abstract class TriageReportSource {
+abstract class RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
-      int patientId);
+    int patientId,
+  );
 
   Future<TriageDetailedReportModel> getTriageReportByReportId(int reportId);
 }
 
-class TriageReportSourceImpl implements TriageReportSource {
+class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   Dio dio;
-  TriageReportSourceImpl(this.dio);
+  RemoteTriageReportSourceImpl(this.dio);
 
   @override
   Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
       int patientId) async {
-    var endpoint =
+    final endpoint =
         "/services/triage/api/triage/triage-report?patient-id=$patientId";
-    logger.d({
-      "api url to get all triages reports by patient id": endpoint,
-    });
 
-    var response = await dio.get(endpoint);
+    final response = await dio.get(endpoint);
 
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       List<TriageDetailedReportModel> triageReports = [];
-      response.data.forEach((element) {
-        triageReports.add(TriageDetailedReportModel.fromJson(element));
-      });
+      response.data.forEach(
+        (element) {
+          triageReports.add(TriageDetailedReportModel.fromJson(element));
+        },
+      );
       return triageReports;
     } else {
       throw ServerException();
@@ -47,12 +46,9 @@ class TriageReportSourceImpl implements TriageReportSource {
   @override
   Future<TriageDetailedReportModel> getTriageReportByReportId(
       int reportId) async {
-    var endpoint = "/services/triage/api/$reportId/triage-report/details";
-    logger.d({
-      "api url to get triages reports by report id": endpoint,
-    });
+    final endpoint = "/services/triage/api/$reportId/triage-report/details";
 
-    var response = await dio.get(endpoint);
+    final response = await dio.get(endpoint);
 
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       TriageDetailedReportModel triageReport =

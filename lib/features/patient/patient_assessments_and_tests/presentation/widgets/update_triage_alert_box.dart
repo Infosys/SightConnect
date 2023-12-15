@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_card_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,23 +13,23 @@ class UpdateTriageAlertBox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientAssessmentCardProvider);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Select Steps to Redo'),
-            InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Icon(Icons.close))
-          ],
-        ),
-        Column(children: [
+    return BlurDialogBox(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('Select Steps to Redo'),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const Icon(Icons.close),
+          )
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           UpdateTriageAlertBoxListOptoion(
             title: 'Eye Assessment Questions',
             subtitle: 'Completed',
@@ -62,26 +63,27 @@ class UpdateTriageAlertBox extends ConsumerWidget {
               model.setEyeScanned = value;
             },
           ),
-        ]),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Start'),
-            ),
-            const SizedBox(width: AppSize.kmwidth),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-          ],
-        ),
-      ],
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Start'),
+              ),
+              const SizedBox(width: AppSize.kmwidth),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ],
+      ),
+      actions: const [],
     );
   }
 }
@@ -141,10 +143,12 @@ class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
           )
         ],
       ),
-      subtitle: Text(subtitle,
-          style: TextStyle(
-            color: subtitlecolor,
-          )),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(
+          color: subtitlecolor,
+        ),
+      ),
       value: isSelected,
       onChanged: (value) {
         onPressed(value!);
