@@ -17,6 +17,8 @@ import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../widgets/preliminary_assessment_recommendation.dart';
+
 class VisionTechnicianPreliminaryAssessmentPage extends ConsumerStatefulWidget {
   const VisionTechnicianPreliminaryAssessmentPage({super.key});
 
@@ -29,10 +31,16 @@ class _VisionTechnicianPreliminaryAssessmentPageState
     extends ConsumerState<VisionTechnicianPreliminaryAssessmentPage> {
   final _formKey = GlobalKey<FormState>();
   int isSelectedOption = 1;
-  void updateVisibility( int isVisible) {
-    setState(() {
-      isSelectedOption = isVisible;
-    });
+  bool isWidgetVisible = true;
+  void updateVisibility(int selectedOption) {
+    setState(
+      () {
+        isSelectedOption = selectedOption;
+        isWidgetVisible = (selectedOption == 1) ? true : false;
+        debugPrint("$isWidgetVisible");
+        debugPrint("$isSelectedOption");
+      },
+    );
   }
 
   @override
@@ -95,16 +103,17 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                 const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
                 PreliminaryAssessmentIvrCall(
-                  onVisibilityChanged: updateVisibility,
-                  selectedOption:isSelectedOption,
+                  isSelectedOption: isSelectedOption,
+                  onSelectedOptionChanged: updateVisibility,
                 ),
-
                 Visibility(
-                  visible: true,
+                  visible: isWidgetVisible,
                   child: Column(
                     children: [
                       const SizedBox(height: AppSize.klheight),
                       PreliminaryAssessmentQuestions(),
+                      const SizedBox(height: AppSize.klheight),
+                      const PreliminaryAssessmentRecommendation(),
                       const SizedBox(height: AppSize.klheight),
                       PreliminaryAssessmentVisionCenter(),
                       const SizedBox(height: AppSize.klheight),
