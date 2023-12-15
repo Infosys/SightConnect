@@ -22,9 +22,8 @@ IvrCallHistoryModel _$IvrCallHistoryModelFromJson(Map<String, dynamic> json) {
 mixin _$IvrCallHistoryModel {
   String get patientId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get duration => throw _privateConstructorUsedError;
-  String get day => throw _privateConstructorUsedError;
-  String get time => throw _privateConstructorUsedError;
+  int? get duration => throw _privateConstructorUsedError;
+  DateTime get logDate => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get calltype => throw _privateConstructorUsedError;
 
@@ -43,9 +42,8 @@ abstract class $IvrCallHistoryModelCopyWith<$Res> {
   $Res call(
       {String patientId,
       String name,
-      String duration,
-      String day,
-      String time,
+      int? duration,
+      DateTime logDate,
       String status,
       String calltype});
 }
@@ -65,9 +63,8 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
   $Res call({
     Object? patientId = null,
     Object? name = null,
-    Object? duration = null,
-    Object? day = null,
-    Object? time = null,
+    Object? duration = freezed,
+    Object? logDate = null,
     Object? status = null,
     Object? calltype = null,
   }) {
@@ -80,18 +77,14 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: null == duration
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as String,
-      day: null == day
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as String,
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
+      logDate: null == logDate
+          ? _value.logDate
+          : logDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -115,9 +108,8 @@ abstract class _$$_IvrCallHistoryModelCopyWith<$Res>
   $Res call(
       {String patientId,
       String name,
-      String duration,
-      String day,
-      String time,
+      int? duration,
+      DateTime logDate,
       String status,
       String calltype});
 }
@@ -135,9 +127,8 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
   $Res call({
     Object? patientId = null,
     Object? name = null,
-    Object? duration = null,
-    Object? day = null,
-    Object? time = null,
+    Object? duration = freezed,
+    Object? logDate = null,
     Object? status = null,
     Object? calltype = null,
   }) {
@@ -150,18 +141,14 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: null == duration
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as String,
-      day: null == day
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as String,
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
+      logDate: null == logDate
+          ? _value.logDate
+          : logDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -180,9 +167,8 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   const _$_IvrCallHistoryModel(
       {required this.patientId,
       required this.name,
-      required this.duration,
-      required this.day,
-      required this.time,
+      this.duration,
+      required this.logDate,
       required this.status,
       required this.calltype});
 
@@ -194,11 +180,9 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   @override
   final String name;
   @override
-  final String duration;
+  final int? duration;
   @override
-  final String day;
-  @override
-  final String time;
+  final DateTime logDate;
   @override
   final String status;
   @override
@@ -206,7 +190,7 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
 
   @override
   String toString() {
-    return 'IvrCallHistoryModel(patientId: $patientId, name: $name, duration: $duration, day: $day, time: $time, status: $status, calltype: $calltype)';
+    return 'IvrCallHistoryModel(patientId: $patientId, name: $name, duration: $duration, logDate: $logDate, status: $status, calltype: $calltype)';
   }
 
   @override
@@ -219,8 +203,7 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
-            (identical(other.day, day) || other.day == day) &&
-            (identical(other.time, time) || other.time == time) &&
+            (identical(other.logDate, logDate) || other.logDate == logDate) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.calltype, calltype) ||
                 other.calltype == calltype));
@@ -229,7 +212,7 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, patientId, name, duration, day, time, status, calltype);
+      runtimeType, patientId, name, duration, logDate, status, calltype);
 
   @JsonKey(ignore: true)
   @override
@@ -250,9 +233,8 @@ abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
   const factory _IvrCallHistoryModel(
       {required final String patientId,
       required final String name,
-      required final String duration,
-      required final String day,
-      required final String time,
+      final int? duration,
+      required final DateTime logDate,
       required final String status,
       required final String calltype}) = _$_IvrCallHistoryModel;
 
@@ -264,11 +246,9 @@ abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
   @override
   String get name;
   @override
-  String get duration;
+  int? get duration;
   @override
-  String get day;
-  @override
-  String get time;
+  DateTime get logDate;
   @override
   String get status;
   @override

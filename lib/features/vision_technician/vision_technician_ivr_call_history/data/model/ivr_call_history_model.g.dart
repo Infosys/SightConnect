@@ -11,9 +11,8 @@ _$_IvrCallHistoryModel _$$_IvrCallHistoryModelFromJson(
     _$_IvrCallHistoryModel(
       patientId: json['patientId'] as String,
       name: json['name'] as String,
-      duration: json['duration'] as String,
-      day: json['day'] as String,
-      time: json['time'] as String,
+      duration: json['duration'] as int?,
+      logDate: DateTime.parse(json['logDate'] as String),
       status: json['status'] as String,
       calltype: json['calltype'] as String,
     );
@@ -24,8 +23,7 @@ Map<String, dynamic> _$$_IvrCallHistoryModelToJson(
       'patientId': instance.patientId,
       'name': instance.name,
       'duration': instance.duration,
-      'day': instance.day,
-      'time': instance.time,
+      'logDate': instance.logDate.toIso8601String(),
       'status': instance.status,
       'calltype': instance.calltype,
     };

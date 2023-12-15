@@ -9,9 +9,8 @@ class IvrCallHistoryModel with _$IvrCallHistoryModel {
   const factory IvrCallHistoryModel({
     required String patientId,
     required String name,
-    required String duration,
-    required String day,
-    required String time,
+    int? duration,
+    required DateTime logDate,
     required String status,
     required String calltype,
   }) = _IvrCallHistoryModel;
