@@ -17,7 +17,7 @@ class MyConnectionsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getPatientProfileProvider).when(
+    return ref.watch(getPatientProfileProvider(1202)).when(
       data: (patient) {
         final connectionsList = patient.profile?.patient?.relatedParty;
         return _content(context, connectionsList ?? []);

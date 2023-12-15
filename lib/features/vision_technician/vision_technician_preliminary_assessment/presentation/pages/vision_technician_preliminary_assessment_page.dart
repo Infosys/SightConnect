@@ -17,10 +17,14 @@ import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
 import '../widgets/preliminary_assessment_recommendation.dart';
 
 class VisionTechnicianPreliminaryAssessmentPage extends ConsumerStatefulWidget {
-  const VisionTechnicianPreliminaryAssessmentPage({super.key});
+  const VisionTechnicianPreliminaryAssessmentPage(
+      {super.key, required this.patientId});
+
+  final int? patientId;
 
   @override
   ConsumerState<VisionTechnicianPreliminaryAssessmentPage> createState() =>
@@ -46,7 +50,8 @@ class _VisionTechnicianPreliminaryAssessmentPageState
   @override
   Widget build(BuildContext context) {
     // VTPatientModel patient = ref.read(registerNewPatientProvider).patient;
-
+    int id = widget.patientId ?? 0;
+    logger.d("patient id is $id");
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       bottomNavigationBar: Padding(
@@ -98,7 +103,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const PreliminaryAssessmentCard(),
+                PreliminaryAssessmentCard(patientId: id),
                 const SizedBox(height: AppSize.klheight),
                 const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
@@ -111,7 +116,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                   child: Column(
                     children: [
                       const SizedBox(height: AppSize.klheight),
-                      PreliminaryAssessmentQuestions(),
+                      // PreliminaryAssessmentQuestions(),
                       const SizedBox(height: AppSize.klheight),
                       const PreliminaryAssessmentRecommendation(),
                       const SizedBox(height: AppSize.klheight),

@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../main.dart';
+import '../../domain/repositories/vt_vision_center_repository_impl.dart';
 
 var preliminaryAssessmentHelperProvider =
     ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
-        (ref) => PreliminaryAssessmentHelperNotifier());
+        (ref) => PreliminaryAssessmentHelperNotifier(ref));
 
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
+  Ref ref;
+  PreliminaryAssessmentHelperNotifier(this.ref);
+
   var eyeIssueType = [
     PreliminaryAssessmentModel(
         type: "Loss of Vision", checked: false, name: "Eye Issue Type"),
@@ -220,8 +224,12 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  VisionCenterModel getCheckedVisionCenter() {
-    VisionCenterModel visionCenterModel =  VisionCenterModel(type: '', checked: null, completeAddress: '', phoneno: '', time: '');
+  Future<VisionCenterModel> getCheckedVisionCenter() async {
+    var response = await ref
+        .read(vtVisionCenterRepositoryProvider)
+        .getVisionCenterList(pincode: "470002");
+    VisionCenterModel visionCenterModel = VisionCenterModel(
+        type: '', checked: null, completeAddress: '', phoneno: '', time: '');
     for (VisionCenterModel element in visionCenters) {
       if (element.checked == true) {
         visionCenterModel = element;

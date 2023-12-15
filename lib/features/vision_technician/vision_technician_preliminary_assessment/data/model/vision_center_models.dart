@@ -1,3 +1,7 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'vision_center_models.freezed.dart';
+part 'vision_center_models.g.dart';
+
 @freezed
 class FacilityModel with _$FacilityModel {
   const factory FacilityModel({
@@ -10,7 +14,7 @@ class FacilityModel with _$FacilityModel {
     String? osid, // Optional
   }) = _FacilityModel;
 
-  factory FacilityModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityModelFromJson(json);
 
 }
@@ -22,7 +26,7 @@ class TenantModel with _$TenantModel {
      String? name,
   }) = _TenantModel;
 
-  factory TenantModel.fromJson(Map<String?, dynamic> json) =>
+  factory TenantModel.fromJson(Map<String, dynamic> json) =>
       _$TenantModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -49,7 +53,7 @@ class FacilityInformationModel with _$FacilityInformationModel {
     List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware, // Nullable List
   }) = _FacilityInformationModel;
 
-  factory FacilityInformationModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityInformationModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityInformationModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -72,7 +76,7 @@ class FacilityAddressDetailsModel with _$FacilityAddressDetailsModel {
     String? pincode,
   }) = _FacilityAddressDetailsModel;
 
-  factory FacilityAddressDetailsModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityAddressDetailsModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityAddressDetailsModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -89,7 +93,7 @@ class FacilityContactInformationModel with _$FacilityContactInformationModel {
     String? osid,
   }) = _FacilityContactInformationModel;
 
-  factory FacilityContactInformationModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityContactInformationModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityContactInformationModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -103,7 +107,7 @@ class FacilityUploadsModel with _$FacilityUploadsModel {
     String? osid, // Optional
   }) = _FacilityUploadsModel;
 
-  factory FacilityUploadsModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityUploadsModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityUploadsModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -117,7 +121,7 @@ class UploadModel with _$UploadModel {
     String? osid,
   }) = _UploadModel;
 
-  factory UploadModel.fromJson(Map<String?, dynamic> json) =>
+  factory UploadModel.fromJson(Map<String, dynamic> json) =>
       _$UploadModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -131,7 +135,7 @@ class FacilityAddressProofModel with _$FacilityAddressProofModel {
     String? osid,
   }) = _FacilityAddressProofModel;
 
-  factory FacilityAddressProofModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityAddressProofModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityAddressProofModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -145,7 +149,7 @@ class AddressProofAttachmentModel with _$AddressProofAttachmentModel {
     String? osid,
   }) = _AddressProofAttachmentModel;
 
-  factory AddressProofAttachmentModel.fromJson(Map<String?, dynamic> json) =>
+  factory AddressProofAttachmentModel.fromJson(Map<String, dynamic> json) =>
       _$AddressProofAttachmentModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -160,7 +164,7 @@ class FacilityTimingModel with _$FacilityTimingModel {
     String? osid,
   }) = _FacilityTimingModel;
 
-  factory FacilityTimingModel.fromJson(Map<String?, dynamic> json) =>
+  factory FacilityTimingModel.fromJson(Map<String, dynamic> json) =>
       _$FacilityTimingModelFromJson(json);
 
   // ... Factories and methods (if any)
@@ -170,12 +174,12 @@ class FacilityTimingModel with _$FacilityTimingModel {
 @freezed
 class AbdmCompliantSoftwareModel with _$AbdmCompliantSoftwareModel {
   const factory AbdmCompliantSoftwareModel({
-    List<String?> existingSoftwares,
+    List<String>? existingSoftwares,
     String? anyOther,
     String? osid,
   }) = _AbdmCompliantSoftwareModel;
 
-  factory AbdmCompliantSoftwareModel.fromJson(Map<String?, dynamic> json) =>
+  factory AbdmCompliantSoftwareModel.fromJson(Map<String, dynamic> json) =>
       _$AbdmCompliantSoftwareModelFromJson(json);
 
   // ... Factories and methods (if any)

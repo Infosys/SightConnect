@@ -12,7 +12,7 @@ import '../../../../../../main.dart';
 var triageResultProvider = ChangeNotifierProvider.autoDispose
     .family<TriageResultProvider, TriageResponseModel>(
   (ref, result) {
-    final patient = ref.watch(getPatientProfileProvider).asData?.value.profile;
+    final patient = ref.watch(getPatientProfileProvider(1202)).asData?.value.profile;
 
     return TriageResultProvider(
       result,

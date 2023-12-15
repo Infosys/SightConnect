@@ -144,7 +144,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const VisionTechnicianAssessmentTimeline(),
+                                        const VisionTechnicianAssessmentTimeline(
+                                            patientId: 1202),
                                   ),
                                 );
                               },
@@ -165,7 +166,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateListTileSearchResults(VTPatientSearchDto data) {
+List<DataCell> generateListTileSearchResults(VTPatientSearchDto data, context) {
   return [
     DataCell(
       Column(
@@ -224,7 +225,7 @@ List<DataCell> generateListTileSearchResults(VTPatientSearchDto data) {
     ),
     DataCell(
       Text(
-        data.status,
+        data.status.toString(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
@@ -241,7 +242,8 @@ List<DataCell> generateListTileSearchResults(VTPatientSearchDto data) {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const VisionTechnicianPreliminaryAssessmentPage(),
+                      const VisionTechnicianPreliminaryAssessmentPage(
+                          patientId: 1202),
                 ),
               );
             },
@@ -258,11 +260,11 @@ List<DataCell> generateListTileSearchResults(VTPatientSearchDto data) {
         ),
         decoration: BoxDecoration(
           color:
-              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+              data.category!.contains("Early") ? AppColor.orange : AppColor.red,
           borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
         child: Text(
-          data.category,
+          data.category.toString(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(

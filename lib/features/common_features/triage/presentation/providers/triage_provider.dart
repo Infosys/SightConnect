@@ -17,8 +17,6 @@ import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../domain/models/triage_assessment_model.dart';
-
 var getTriageProvider = FutureProvider.autoDispose<DiagnosticReportTemplateFHIRModel>(
   (ref) async {
     var response = await ref.read(triageRepositoryProvider).getTriage();

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
@@ -10,7 +11,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'dart:js';
 
 class GeneralInformation extends ConsumerWidget {
-  const GeneralInformation({super.key});
+  const GeneralInformation({super.key, required this.model});
+
+  final ProfileModel model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,6 +21,22 @@ class GeneralInformation extends ConsumerWidget {
     //     ref.watch(visionTechnicianSearchProvider).patientDetails;
 
     // if (patient == null) return const SizedBox();
+    var dateYear = DateTime.now().year;
+
+    int giveAge() {
+      var age = int.parse(model?.patient?.yearOfBirth ?? "");
+      return (dateYear - age).toInt();
+    }
+
+    String genderString = model!.patient!.gender.toString().split('.').last;
+    final address = _formateAddress(
+      line: model.patient?.address?.first.line ?? "",
+      ward: model.patient?.address?.first.ward ?? "",
+      district: model.patient?.address?.first.district ?? "",
+      state: model.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model.patient?.profilePhoto ?? "";
 
     return Container(
       decoration: const BoxDecoration(
@@ -50,14 +69,14 @@ class GeneralInformation extends ConsumerWidget {
                   children: [
                     Text(
                       "Date of Birth",
-                         overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
                     ),
                     Text(
                       "Address",
-                         overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -72,22 +91,21 @@ class GeneralInformation extends ConsumerWidget {
                       children: [
                         Row(
                           children: [
-                            if (patient.dateOfBirth.isNotEmpty)
-                              Text(
-                                patient.dateOfBirth,
-                                   overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                                style: applyRobotoFont(
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.grey,
-                                  fontSize: 14,
-                                ),
+                            Text(
+                              "${model.patient?.dayOfBirth.toString() ?? ""}+${model.patient?.monthOfBirth.toString() ?? ""}+${model.patient?.yearOfBirth.toString() ?? ""}",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey,
+                                fontSize: 14,
                               ),
-                            if (patient.age.isNotEmpty)
+                            ),
+                          
                               Text(
-                                "(${patient.age})",
-                                   overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                                giveAge().toString() ?? "",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: applyRobotoFont(
                                   fontWeight: FontWeight.w400,
                                   color: AppColor.grey,
@@ -97,7 +115,7 @@ class GeneralInformation extends ConsumerWidget {
                           ],
                         ),
                         Text(
-                          "${patient.address.doorNumber} ${patient.address.city}, ${patient.address.district}, ${patient.address.state}",
+                          address ?? "",
                           style: applyRobotoFont(
                             fontWeight: FontWeight.w400,
                             color: AppColor.grey,
@@ -118,9 +136,13 @@ class GeneralInformation extends ConsumerWidget {
                       "Gender",
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(width: Responsive.isMobile(context)?AppSize.kswidth:AppSize.klwidth,),
-                        Text(
-                      patient.gender,
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.kswidth
+                          : AppSize.klwidth,
+                    ),
+                    Text(
+                      genderString ?? "",
                       style: applyRobotoFont(
                         fontWeight: FontWeight.w400,
                         color: AppColor.grey,
@@ -130,7 +152,6 @@ class GeneralInformation extends ConsumerWidget {
                   ],
                 ),
               ),
-             
             ],
           ),
           const SizedBox(
@@ -140,4 +161,13 @@ class GeneralInformation extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

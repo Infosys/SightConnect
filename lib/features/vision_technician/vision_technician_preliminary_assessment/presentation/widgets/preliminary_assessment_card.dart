@@ -1,40 +1,38 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
-import '../../../vision_technician_register_new_patient/data/models/enums/vt_register_new_patient_enums.dart';
-import '../../../vision_technician_register_new_patient/data/models/vt_patient_response_model.dart';
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
-  const PreliminaryAssessmentCard({super.key});
+  const PreliminaryAssessmentCard({super.key, required this.patientId});
+
+  final int? patientId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
-    var dateYear = DateTime.now().year;
+    var model = ref.watch(getPatientProfileProvider(patientId)).asData?.value.profile;
+    // var dateYear = DateTime.now().year;
     
-    int giveAge() {
-      var age = int.parse(model?.patient?.yearOfBirth ?? "");
-      return (dateYear - age).toInt();
-    }
+    // int giveAge() {
+    //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
+    //   return (dateYear - age).toInt();
+    // }
 
-    String genderString = model!.patient!.gender.toString().split('.').last;
+    String genderString = model?.patient?.gender.toString().split('.').last??"";
     final address = _formateAddress(
-      line: model.patient?.address?.first.line ?? "",
-      ward: model.patient?.address?.first.ward ?? "",
-      district: model.patient?.address?.first.district ?? "",
-      state: model.patient?.address?.first.state ?? "",
+      line: model?.patient?.address?.first.line ?? "",
+      ward: model?.patient?.address?.first.ward ?? "",
+      district: model?.patient?.address?.first.district ?? "",
+      state: model?.patient?.address?.first.state ?? "",
     );
 
-    String profileImage = model.patient?.profilePhoto ?? "";
+    String profileImage = model?.patient?.profilePhoto ?? "";
 
     return Container(
       width: double.infinity,
@@ -65,12 +63,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    model.patient?.name ?? "",
+                    model?.patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    model.patient?.abhaNumber.toString() ?? "",
+                    model?.patient?.abhaNumber.toString() ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -93,7 +91,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    giveAge().toString() ?? "",
+                    "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,

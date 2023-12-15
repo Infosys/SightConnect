@@ -5,8 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
 
 final getPatientProfileProvider =
-    FutureProvider<PatientResponseModel>((ref) async {
-  const patientId = 1202;
+    FutureProvider.family<PatientResponseModel, int?>((ref, patientId) async {
+      int? id = patientId;
+   if(patientId == null) {
+     id = 1202;
+   }
   if (AppEnv.isDev) {
     return PatientResponseModel.fromJson({
       "intent": "PROFILE_SHARE",
@@ -96,7 +99,7 @@ final getPatientProfileProvider =
     });
   } else {
     final authRepo = ref.watch(patientAuthenticationRepositoryProvider);
-    final response = await authRepo.getPatientProfile(patientId);
+    final response = await authRepo.getPatientProfile(id??1202);
 
     return response.fold((error) {
       throw error;

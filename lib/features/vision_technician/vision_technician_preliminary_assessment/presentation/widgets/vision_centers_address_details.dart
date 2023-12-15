@@ -11,7 +11,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VisionCenterModel visionCenter= ref.watch(preliminaryAssessmentHelperProvider.notifier).getCheckedVisionCenter();
+    
     // VisionCenterModel visionCenter = ref
     //     .watch(preliminaryAssessmentHelperProvider.notifier)
     //     .getCheckedVisionCenter();

@@ -20,20 +20,20 @@ VTPatientSearchDto _$VTPatientSearchDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VTPatientSearchDto {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get mobile => throw _privateConstructorUsedError;
-  String get yearOfBirth => throw _privateConstructorUsedError;
-  String get monthOfBirth => throw _privateConstructorUsedError;
-  String get dayOfBirth => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError;
-  String get districtName => throw _privateConstructorUsedError;
-  String get townName => throw _privateConstructorUsedError;
-  String get pincode => throw _privateConstructorUsedError;
-  int get encounterId => throw _privateConstructorUsedError;
-  String get encounterStartDate => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get mobile => throw _privateConstructorUsedError;
+  String? get yearOfBirth => throw _privateConstructorUsedError;
+  String? get monthOfBirth => throw _privateConstructorUsedError;
+  String? get dayOfBirth => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  String? get districtName => throw _privateConstructorUsedError;
+  String? get townName => throw _privateConstructorUsedError;
+  String? get pincode => throw _privateConstructorUsedError;
+  int? get encounterId => throw _privateConstructorUsedError;
+  String? get encounterStartDate => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,20 +48,20 @@ abstract class $VTPatientSearchDtoCopyWith<$Res> {
       _$VTPatientSearchDtoCopyWithImpl<$Res, VTPatientSearchDto>;
   @useResult
   $Res call(
-      {int id,
-      String name,
-      String mobile,
-      String yearOfBirth,
-      String monthOfBirth,
-      String dayOfBirth,
-      String gender,
-      String districtName,
-      String townName,
-      String pincode,
-      int encounterId,
-      String encounterStartDate,
-      String status,
-      String category});
+      {int? id,
+      String? name,
+      String? mobile,
+      String? yearOfBirth,
+      String? monthOfBirth,
+      String? dayOfBirth,
+      String? gender,
+      String? districtName,
+      String? townName,
+      String? pincode,
+      int? encounterId,
+      String? encounterStartDate,
+      String? status,
+      String? category});
 }
 
 /// @nodoc
@@ -77,78 +77,78 @@ class _$VTPatientSearchDtoCopyWithImpl<$Res, $Val extends VTPatientSearchDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? mobile = null,
-    Object? yearOfBirth = null,
-    Object? monthOfBirth = null,
-    Object? dayOfBirth = null,
-    Object? gender = null,
-    Object? districtName = null,
-    Object? townName = null,
-    Object? pincode = null,
-    Object? encounterId = null,
-    Object? encounterStartDate = null,
-    Object? status = null,
-    Object? category = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? mobile = freezed,
+    Object? yearOfBirth = freezed,
+    Object? monthOfBirth = freezed,
+    Object? dayOfBirth = freezed,
+    Object? gender = freezed,
+    Object? districtName = freezed,
+    Object? townName = freezed,
+    Object? pincode = freezed,
+    Object? encounterId = freezed,
+    Object? encounterStartDate = freezed,
+    Object? status = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      mobile: null == mobile
+              as String?,
+      mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as String,
-      yearOfBirth: null == yearOfBirth
+              as String?,
+      yearOfBirth: freezed == yearOfBirth
           ? _value.yearOfBirth
           : yearOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      monthOfBirth: null == monthOfBirth
+              as String?,
+      monthOfBirth: freezed == monthOfBirth
           ? _value.monthOfBirth
           : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      dayOfBirth: null == dayOfBirth
+              as String?,
+      dayOfBirth: freezed == dayOfBirth
           ? _value.dayOfBirth
           : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
+              as String?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      districtName: null == districtName
+              as String?,
+      districtName: freezed == districtName
           ? _value.districtName
           : districtName // ignore: cast_nullable_to_non_nullable
-              as String,
-      townName: null == townName
+              as String?,
+      townName: freezed == townName
           ? _value.townName
           : townName // ignore: cast_nullable_to_non_nullable
-              as String,
-      pincode: null == pincode
+              as String?,
+      pincode: freezed == pincode
           ? _value.pincode
           : pincode // ignore: cast_nullable_to_non_nullable
-              as String,
-      encounterId: null == encounterId
+              as String?,
+      encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
-              as int,
-      encounterStartDate: null == encounterStartDate
+              as int?,
+      encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
+              as String?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -162,20 +162,20 @@ abstract class _$$_VTPatientSearchDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String name,
-      String mobile,
-      String yearOfBirth,
-      String monthOfBirth,
-      String dayOfBirth,
-      String gender,
-      String districtName,
-      String townName,
-      String pincode,
-      int encounterId,
-      String encounterStartDate,
-      String status,
-      String category});
+      {int? id,
+      String? name,
+      String? mobile,
+      String? yearOfBirth,
+      String? monthOfBirth,
+      String? dayOfBirth,
+      String? gender,
+      String? districtName,
+      String? townName,
+      String? pincode,
+      int? encounterId,
+      String? encounterStartDate,
+      String? status,
+      String? category});
 }
 
 /// @nodoc
@@ -189,78 +189,78 @@ class __$$_VTPatientSearchDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? mobile = null,
-    Object? yearOfBirth = null,
-    Object? monthOfBirth = null,
-    Object? dayOfBirth = null,
-    Object? gender = null,
-    Object? districtName = null,
-    Object? townName = null,
-    Object? pincode = null,
-    Object? encounterId = null,
-    Object? encounterStartDate = null,
-    Object? status = null,
-    Object? category = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? mobile = freezed,
+    Object? yearOfBirth = freezed,
+    Object? monthOfBirth = freezed,
+    Object? dayOfBirth = freezed,
+    Object? gender = freezed,
+    Object? districtName = freezed,
+    Object? townName = freezed,
+    Object? pincode = freezed,
+    Object? encounterId = freezed,
+    Object? encounterStartDate = freezed,
+    Object? status = freezed,
+    Object? category = freezed,
   }) {
     return _then(_$_VTPatientSearchDto(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      mobile: null == mobile
+              as String?,
+      mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as String,
-      yearOfBirth: null == yearOfBirth
+              as String?,
+      yearOfBirth: freezed == yearOfBirth
           ? _value.yearOfBirth
           : yearOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      monthOfBirth: null == monthOfBirth
+              as String?,
+      monthOfBirth: freezed == monthOfBirth
           ? _value.monthOfBirth
           : monthOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      dayOfBirth: null == dayOfBirth
+              as String?,
+      dayOfBirth: freezed == dayOfBirth
           ? _value.dayOfBirth
           : dayOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
+              as String?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      districtName: null == districtName
+              as String?,
+      districtName: freezed == districtName
           ? _value.districtName
           : districtName // ignore: cast_nullable_to_non_nullable
-              as String,
-      townName: null == townName
+              as String?,
+      townName: freezed == townName
           ? _value.townName
           : townName // ignore: cast_nullable_to_non_nullable
-              as String,
-      pincode: null == pincode
+              as String?,
+      pincode: freezed == pincode
           ? _value.pincode
           : pincode // ignore: cast_nullable_to_non_nullable
-              as String,
-      encounterId: null == encounterId
+              as String?,
+      encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
-              as int,
-      encounterStartDate: null == encounterStartDate
+              as int?,
+      encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
+              as String?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -269,52 +269,52 @@ class __$$_VTPatientSearchDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VTPatientSearchDto implements _VTPatientSearchDto {
   const _$_VTPatientSearchDto(
-      {required this.id,
-      required this.name,
-      required this.mobile,
-      required this.yearOfBirth,
-      required this.monthOfBirth,
-      required this.dayOfBirth,
-      required this.gender,
-      required this.districtName,
-      required this.townName,
-      required this.pincode,
-      required this.encounterId,
-      required this.encounterStartDate,
-      required this.status,
-      required this.category});
+      {this.id,
+      this.name,
+      this.mobile,
+      this.yearOfBirth,
+      this.monthOfBirth,
+      this.dayOfBirth,
+      this.gender,
+      this.districtName,
+      this.townName,
+      this.pincode,
+      this.encounterId,
+      this.encounterStartDate,
+      this.status,
+      this.category});
 
   factory _$_VTPatientSearchDto.fromJson(Map<String, dynamic> json) =>
       _$$_VTPatientSearchDtoFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String mobile;
+  final String? mobile;
   @override
-  final String yearOfBirth;
+  final String? yearOfBirth;
   @override
-  final String monthOfBirth;
+  final String? monthOfBirth;
   @override
-  final String dayOfBirth;
+  final String? dayOfBirth;
   @override
-  final String gender;
+  final String? gender;
   @override
-  final String districtName;
+  final String? districtName;
   @override
-  final String townName;
+  final String? townName;
   @override
-  final String pincode;
+  final String? pincode;
   @override
-  final int encounterId;
+  final int? encounterId;
   @override
-  final String encounterStartDate;
+  final String? encounterStartDate;
   @override
-  final String status;
+  final String? status;
   @override
-  final String category;
+  final String? category;
 
   @override
   String toString() {
@@ -386,52 +386,52 @@ class _$_VTPatientSearchDto implements _VTPatientSearchDto {
 
 abstract class _VTPatientSearchDto implements VTPatientSearchDto {
   const factory _VTPatientSearchDto(
-      {required final int id,
-      required final String name,
-      required final String mobile,
-      required final String yearOfBirth,
-      required final String monthOfBirth,
-      required final String dayOfBirth,
-      required final String gender,
-      required final String districtName,
-      required final String townName,
-      required final String pincode,
-      required final int encounterId,
-      required final String encounterStartDate,
-      required final String status,
-      required final String category}) = _$_VTPatientSearchDto;
+      {final int? id,
+      final String? name,
+      final String? mobile,
+      final String? yearOfBirth,
+      final String? monthOfBirth,
+      final String? dayOfBirth,
+      final String? gender,
+      final String? districtName,
+      final String? townName,
+      final String? pincode,
+      final int? encounterId,
+      final String? encounterStartDate,
+      final String? status,
+      final String? category}) = _$_VTPatientSearchDto;
 
   factory _VTPatientSearchDto.fromJson(Map<String, dynamic> json) =
       _$_VTPatientSearchDto.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get mobile;
+  String? get mobile;
   @override
-  String get yearOfBirth;
+  String? get yearOfBirth;
   @override
-  String get monthOfBirth;
+  String? get monthOfBirth;
   @override
-  String get dayOfBirth;
+  String? get dayOfBirth;
   @override
-  String get gender;
+  String? get gender;
   @override
-  String get districtName;
+  String? get districtName;
   @override
-  String get townName;
+  String? get townName;
   @override
-  String get pincode;
+  String? get pincode;
   @override
-  int get encounterId;
+  int? get encounterId;
   @override
-  String get encounterStartDate;
+  String? get encounterStartDate;
   @override
-  String get status;
+  String? get status;
   @override
-  String get category;
+  String? get category;
   @override
   @JsonKey(ignore: true)
   _$$_VTPatientSearchDtoCopyWith<_$_VTPatientSearchDto> get copyWith =>

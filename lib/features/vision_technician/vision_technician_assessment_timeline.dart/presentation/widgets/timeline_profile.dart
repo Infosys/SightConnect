@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -11,16 +12,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'dart:js';
 
 class TimelineProfile extends ConsumerWidget {
-  const TimelineProfile({super.key});
-
+  const TimelineProfile({super.key, required this.model});
+  final ProfileModel model;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel? patient =
-        ref.watch(visionTechnicianSearchProvider).patientDetails;
     // VTPatientModel? patient =
     //     ref.watch(registerNewPatientProvider).patientDetails;
 
-    if (patient == null) return SizedBox();
+    // if (patient == null) return SizedBox();
+
+       var dateYear = DateTime.now().year;
+    
+    int giveAge() {
+      var age = int.parse(model?.patient?.yearOfBirth ?? "");
+      return (dateYear - age).toInt();
+    }
+
+    String genderString = model!.patient!.gender.toString().split('.').last;
+    final address = _formateAddress(
+      line: model.patient?.address?.first.line ?? "",
+      ward: model.patient?.address?.first.ward ?? "",
+      district: model.patient?.address?.first.district ?? "",
+      state: model.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model.patient?.profilePhoto ?? "";
 
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
@@ -44,7 +60,7 @@ class TimelineProfile extends ConsumerWidget {
               const SizedBox(width: AppSize.kswidth),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(
-                  "${patient.firstName} ${patient.lastName}",
+                  "${model.patient?.name}",
                   // softWrap: true,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -55,7 +71,7 @@ class TimelineProfile extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "PID: OP ${patient.patientId}",
+                  "PID: OP ${model.patient?.abhaNumber}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
@@ -87,7 +103,7 @@ class TimelineProfile extends ConsumerWidget {
                         width: AppSize.ksheight,
                       ),
                       Text(
-                        patient.mobileNo,
+                        model.patient?.phoneNumber ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
@@ -97,17 +113,16 @@ class TimelineProfile extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: AppSize.klwidth * 3),
-                   
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            "View Family",
-                            style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.white),
-                          ),
-                        )
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          "View Family",
+                          style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.white),
+                        ),
+                      )
                     ],
                   ),
                   Row(
@@ -128,7 +143,7 @@ class TimelineProfile extends ConsumerWidget {
                         width: AppSize.kswidth,
                       ),
                       Text(
-                        patient.email,
+                        model.patient?.email ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
@@ -147,4 +162,13 @@ class TimelineProfile extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

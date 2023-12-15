@@ -44,7 +44,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
             showToastMessage("Patient details saved!", context, 0);
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return const VisionTechnicianPreliminaryAssessmentPage();
+                return const VisionTechnicianPreliminaryAssessmentPage(patientId: 1202,);
               },
             ));
             // ref.read(visionTechnicianDashboardProvider).changeIndex(0);
