@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
@@ -14,9 +13,11 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+var isResultOfflineMode = false;
+
 var getEyeTriageReport = FutureProvider.family(
   (ref, int pId) async {
-    if (AppEnv.isDev) {
+    if (isResultOfflineMode) {
       List<TriageResultBriefCardEntiry> triageAssessment = [];
 
       for (var element in TriageResultLocalsource.local_triage_result) {
@@ -47,15 +48,41 @@ var getEyeTriageReport = FutureProvider.family(
   },
 );
 
-var getAssementDetailsReport =
-    FutureProvider.family((ref, assessmentResponseEntiry) async {
+var getTriageDetailedEyeReport = FutureProvider.family(
+  (ref, int reportID) async {
+    if (isResultOfflineMode) {
+      return TriageDetailedReportModel.fromJson(
+        TriageResultLocalsource.local_triage_result[0],
+      );
+    } else {
+      var response = await ref
+          .watch(triageReportRepositoryProvider)
+          .getTriageReportByReportId(reportID);
+
+      return response.fold(
+        (failure) {
+          logger.d({"getTriageReports ": failure});
+          throw failure;
+        },
+        (triageAssessment) {
+          return triageAssessment;
+        },
+      );
+    }
+  },
+);
+
+var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
   TriageResultUserEntity profileEntity =
       ref.watch(assessmentsAndTestProvider).selectedUser;
   var triageAssessment = ref.read(getTriageProvider).asData?.value;
 
+  TriageDetailedReportModel triageDetyailedReport =
+      ref.watch(getTriageDetailedEyeReport(reportID)).asData!.value;
+
   logger.d({
     "profile": profileEntity,
-    "assessmentResponse": assessmentResponseEntiry,
+    "assessmentResponse": triageDetyailedReport,
     "triageAssessment": triageAssessment,
   });
 

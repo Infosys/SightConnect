@@ -17,16 +17,17 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
   final TriageDetailedReportModel triageDetailedReportModel;
-  const PatientAssessmentReportPage(  this.triageDetailedReportModel,{
+  const PatientAssessmentReportPage(
+    this.triageDetailedReportModel, {
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    TriageReportAndAssementPageEntity? triageReportAndAssementPageDetails;
     var model = ref.watch(getAssementDetailsReport(
-      triageDetailedReportModel.assessmentCode,
+      triageDetailedReportModel.diagnosticReportId ?? 0,
     ));
-     TriageReportAndAssementPageEntity triageReportAndAssementPageDetails;
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
@@ -41,11 +42,13 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   color: AppColor.orange,
                 ),
                 child: Text(
-                  getRequestPriorityText(triageReportAndAssementPageDetails.priority),
+                  getRequestPriorityText(
+                      triageReportAndAssementPageDetails!.priority),
                   style: applyRobotoFont(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color:getRequestPriorityColor(triageReportAndAssementPageDetails.priority)),
+                      color: getRequestPriorityColor(
+                          triageReportAndAssementPageDetails.priority)),
                 )),
           ],
         ),
@@ -58,9 +61,16 @@ class PatientAssessmentReportPage extends ConsumerWidget {
             index: 0,
             triageReportAndAssementPage: triageReportAndAssementPageDetails,
           ),
-          const ReportAssessmentQuestions(questionResponseBreifModel: triageReportAndAssementPageDetails.questionResponseBreifModel),
-          const TumblingEReportCard(tumblingEData:triageReportAndAssementPageDetails.visualAcuityBreifModel ,),
-          const EyeScanTabView(eyeScanData: triageReportAndAssementPageDetails.imageBreifModel,),
+          ReportAssessmentQuestions(
+              questionResponseBreifModel: triageReportAndAssementPageDetails
+                  .questionResponseBreifEntity),
+          TumblingEReportCard(
+            tumblingEData:
+                triageReportAndAssementPageDetails.visualAcuityBreifEntity,
+          ),
+          EyeScanTabView(
+            eyeScanData: triageReportAndAssementPageDetails.imageBreifEntity,
+          ),
           const AssessmentRecommendation(),
           SizedBox(
             height: AppSize.height(context) * 0.03,
@@ -72,8 +82,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-getRequestPriorityText(RequestPriority priority){
-  switch(priority){
+getRequestPriorityText(RequestPriority priority) {
+  switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";
     case RequestPriority.ROUTINE:
@@ -83,11 +93,10 @@ getRequestPriorityText(RequestPriority priority){
     case RequestPriority.STAT:
       return "STAT";
   }
-  
 }
- 
-Color getRequestPriorityColor(RequestPriority priority ){
-  switch(priority){
+
+Color getRequestPriorityColor(RequestPriority priority) {
+  switch (priority) {
     case RequestPriority.URGENT:
       return AppColor.red;
     case RequestPriority.ROUTINE:
@@ -97,5 +106,4 @@ Color getRequestPriorityColor(RequestPriority priority ){
     case RequestPriority.STAT:
       return AppColor.red;
   }
-
 }

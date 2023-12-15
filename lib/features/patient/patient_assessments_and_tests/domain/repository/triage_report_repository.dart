@@ -5,4 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 abstract class TriageReportRepository {
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getAllTriageReportsByPatientId(int patientId);
+
+  Future<Either<Failure, TriageDetailedReportModel>> getTriageReportByReportId(
+      int reportId);
 }

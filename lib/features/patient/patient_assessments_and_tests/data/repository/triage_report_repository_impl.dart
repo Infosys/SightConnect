@@ -33,7 +33,28 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
             .d({"message": "Internet is connected Getting triage from remote"});
         final remoteResponse =
             await triageReportSource.getTriageReportsByPatientId(patientId);
-            logger.d({"remoteResponse for triage reports ": remoteResponse});
+        logger.d({"remoteResponse for triage reports ": remoteResponse});
+        return Right(remoteResponse);
+      } on ServerException {
+        return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      }
+    } else {
+      logger.d(
+          {"message": "Internet is not connected Getting triage from local"});
+      return Left(CacheFailure(errorMessage: 'No internet connectivity'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TriageDetailedReportModel>> getTriageReportByReportId(
+      int reportId) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        logger
+            .d({"message": "Internet is connected Getting Report from remote"});
+        final remoteResponse =
+            await triageReportSource.getTriageReportByReportId(reportId);
+        logger.d({"remoteResponse for triage reports ": remoteResponse});
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
