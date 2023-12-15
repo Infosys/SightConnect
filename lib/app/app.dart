@@ -16,10 +16,10 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     final mediaQueryData = MediaQuery.of(context);
 
     return Millimeters.fromView(
@@ -43,9 +43,9 @@ class MyApp extends ConsumerWidget {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
-          home: const SamplePage(),
-          // routes: AppRouter.routes,
-          // initialRoute: SplashPage.routeName,
+          // home: const SamplePage(),
+          routes: AppRouter.routes,
+          initialRoute: SplashPage.routeName,
           // onUnknownRoute: AppRouter.onUnknownRoute,
           // builder: (context, child) {
           //   return ref.watch(internetProvider).when(

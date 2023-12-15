@@ -19,7 +19,7 @@ class MiniAppServer {
         .addHandler(createStaticHandler(path, defaultDocument: 'index.html'));
 
     return await sh
-        .serve(handler, '0.0.0.0', port, shared: true)
+        .serve(handler, '127.0.0.1', port, shared: true)
         .then((server) {
       _logger.d('Serving at http://${server.address.host}:${server.port}');
       return server.port;

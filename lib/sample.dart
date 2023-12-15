@@ -21,8 +21,8 @@ class SamplePage extends ConsumerWidget {
                   miniapp: MiniApp(
                     id: "1",
                     version: "1",
-                    name: "MiniApp",
-                    displayName: "MiniApp",
+                    name: "Register Patient",
+                    displayName: "Register Patient",
                     sourceurl: "assets/miniapps/vt_register_patient.zip",
                   ),
                 ),
