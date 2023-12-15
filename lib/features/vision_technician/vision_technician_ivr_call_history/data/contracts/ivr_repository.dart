@@ -2,4 +2,5 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 
 abstract class IvrRepository {
   Future<List<IvrCallHistoryModel>> getIvrCallHistory({required String mobile});
+  Future makeIvrCall({required String patientMobile});
 }

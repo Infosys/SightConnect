@@ -6,6 +6,8 @@ import '../model/ivr_call_history_model.dart';
 
 abstract class IvrRemoteSource {
   Future<List<IvrCallHistoryModel>> getIvrCallHistory({required String mobile});
+
+  Future makeIvrCall({required String patientMobile});
 }
 
 var ivrRemoteSource = Provider(
@@ -21,14 +23,21 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
 
   @override
   Future<List<IvrCallHistoryModel>> getIvrCallHistory(
-      {required String mobile}) {
+      {required String mobile}) async {
     String url = "/api/users/calls/$mobile";
-    return _dio.get(url).then((value) {
+    return await _dio.get(url).then((value) {
       List<IvrCallHistoryModel> list = [];
       value.data.forEach((element) {
         list.add(IvrCallHistoryModel.fromJson(element));
       });
       return list;
     });
+  }
+
+  @override
+  Future makeIvrCall({required String patientMobile}) async {
+    String url = "/api/call/outbound?platformId=1051";
+    return await _dio
+        .post(url, data: {"destination": patientMobile, "flowId": 9581});
   }
 }
