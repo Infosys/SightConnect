@@ -14,10 +14,10 @@ class GeneralInformation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel? patient =
-        ref.watch(visionTechnicianSearchProvider).patientDetails;
+    // VTPatientModel? patient =
+    //     ref.watch(visionTechnicianSearchProvider).patientDetails;
 
-    if (patient == null) return const SizedBox();
+    // if (patient == null) return const SizedBox();
 
     return Container(
       decoration: const BoxDecoration(

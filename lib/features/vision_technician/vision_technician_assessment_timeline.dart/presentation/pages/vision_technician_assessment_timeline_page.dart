@@ -23,14 +23,13 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel? patient =
-        ref.watch(visionTechnicianSearchProvider).patientDetails;
-    bool closed =
-        ref.watch(visionTechnicianSearchProvider).patientDetails!.closed;
+    // VTPatientModel? patient =
+        // ref.watch(visionTechnicianSearchProvider).patientDetails;
+    bool closed = true;
 
     // print("value is ${patient.firstName}");
 
-    if (patient == null) return SizedBox();
+    // if (patient == null) return SizedBox();
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
@@ -74,7 +73,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
         leadingWidth: 70,
         centerTitle: false,
         title: Text(
-            '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
+         "", 
+            // '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -28,6 +28,13 @@ class AppEnv {
     };
   }
 
+  static String get baseUrl3 {
+    return switch (env) {
+      Env.DEV => 'http://localhost:8085',
+      Env.PROD => 'http://localhost:8085',
+    };
+  }
+
   static String get baseKeycloakUrl {
     return switch (env) {
       Env.DEV => 'http://localhost:8080/realms/test',

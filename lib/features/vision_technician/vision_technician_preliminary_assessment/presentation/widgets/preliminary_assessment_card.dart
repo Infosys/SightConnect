@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../../../vision_technician_register_new_patient/data/models/enums/vt_register_new_patient_enums.dart';
+import '../../../vision_technician_register_new_patient/data/models/vt_patient_response_model.dart';
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
@@ -18,11 +20,22 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
     var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
     var dateYear = DateTime.now().year;
-    // int giveAge() {
-    //   // var age = model?.patient?.yearOfBirth.;
-    //   return (dateYear - age!).toInt();
-    // }
-  
+    
+    int giveAge() {
+      var age = int.parse(model?.patient?.yearOfBirth ?? "");
+      return (dateYear - age).toInt();
+    }
+
+    String genderString = model!.patient!.gender.toString().split('.').last;
+    final address = _formateAddress(
+      line: model.patient?.address?.first.line ?? "",
+      ward: model.patient?.address?.first.ward ?? "",
+      district: model.patient?.address?.first.district ?? "",
+      state: model.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model.patient?.profilePhoto ?? "";
+
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -39,18 +52,25 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
           Wrap(
             direction: Axis.horizontal,
             children: [
-              const CircleAvatar(radius: AppSize.klradius),
+              CircleAvatar(
+                radius: AppSize.klradius,
+                // child: Imag,
+                child: Image.network(
+                  profileImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
               const SizedBox(width: AppSize.kswidth),
               Wrap(
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    model?.patient?.name ?? "",
+                    model.patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    model?.patient?.abhaNumber.toString() ?? "",
+                    model.patient?.abhaNumber.toString() ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -73,7 +93,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "",
+                    giveAge().toString() ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -91,7 +111,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "",
+                    genderString ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -100,7 +120,6 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                 ],
               ),
-             
             ]),
             Wrap(
               direction: Axis.vertical,
@@ -111,7 +130,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "",
+                  address ?? "",
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -125,4 +144,13 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

@@ -17,17 +17,18 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel? patient =
-        ref.watch(visionTechnicianSearchProvider).patientDetails;
+    // VTPatientModel? patient =
+    //     ref.watch(visionTechnicianSearchProvider).patientDetails;
 
-    if (patient == null) return const SizedBox();
+    // if (patient == null) return const SizedBox();
 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
         // backgroundColor: AppColor.primary,
         title: Text(
-          '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}',
+          "",
+          // '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(),
@@ -64,8 +65,8 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
           Expanded(
             child: TextButton(
               onPressed: () {
-                ref.read(visionTechnicianSearchProvider).closeAssessment();
-                ref.read(assessmentTimelineProvider).addToTimeline(patient);
+                // ref.read(visionTechnicianSearchProvider).closeAssessment();
+                // ref.read(assessmentTimelineProvider).addToTimeline(patient);
 
                 Navigator.pop(context);
               },
