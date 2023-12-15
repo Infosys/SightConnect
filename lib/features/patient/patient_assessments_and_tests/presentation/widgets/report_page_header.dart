@@ -1,12 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportPageHeader extends StatelessWidget {
-  const ReportPageHeader({super.key, required this.index});
+ const ReportPageHeader({
+    Key? key,
+    required this.index,
+    required this.triageReportAndAssementPage,
+  }) : super(key: key);
 
   final int index;
+  final TriageReportAndAssementPage triageReportAndAssementPage;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,7 +50,7 @@ class ReportPageHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "ABC",
+                  triageReportAndAssementPage.name,
                   style: applyFiraSansFont(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -54,7 +60,7 @@ class ReportPageHeader extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'PID: OP 4567890',
+                  'PID: OP ${triageReportAndAssementPage.patientId}',
                   style: applyFiraSansFont(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
@@ -88,7 +94,7 @@ class ReportPageHeader extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        'EA 010101',
+                        '${triageReportAndAssementPage.assessmentID}',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -111,7 +117,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '19 Sep 2023, 10:30 AM',
+                        '${triageReportAndAssementPage.triageResultStartDate}}',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -141,7 +147,7 @@ class ReportPageHeader extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        'Dr. Sam D (ID314299)',
+                        '${triageReportAndAssementPage.doctorName} (${triageReportAndAssementPage.doctorId})',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -164,7 +170,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '26 Sep 2023, 3:10 PM',
+                        '${triageReportAndAssementPage.appointementDateTime}}',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

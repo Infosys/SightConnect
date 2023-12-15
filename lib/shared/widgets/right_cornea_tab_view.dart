@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RightCorneaTabView extends ConsumerWidget {
-  const RightCorneaTabView({super.key});
+  
+   const RightCorneaTabView({super.key});
+  
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final XFile? imageFile = ref.watch(triageEyeScanProvider).rightEyeImage;

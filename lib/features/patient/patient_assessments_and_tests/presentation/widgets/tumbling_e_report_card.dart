@@ -1,18 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class TumblingEReportCard extends StatelessWidget {
-  const TumblingEReportCard({super.key});
-
+  const TumblingEReportCard({super.key,required this.tumblingEData});
+ final List<ObservationBreifModel> tumblingEData ;
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> tumblingEData = [
-      {"eye": "Left Eye", "value": "1.0", "color": AppColor.green},
-      {"eye": "Right Eye", "value": "0.8", "color": AppColor.orange},
-      {"eye": "Both Eyes", "value": "1.0", "color": AppColor.green},
-    ];
+   
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -69,17 +66,17 @@ class TumblingEReportCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          tumblingEData[index]["eye"],
+                          tumblingEData[index].bodySite,
                           style: applyRobotoFont(
                               fontSize: 12, fontWeight: FontWeight.w400),
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          tumblingEData[index]["value"],
+                          tumblingEData[index].observationValue.toString(),
                           style: applyRobotoFont(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: tumblingEData[index]["color"]),
+                              color: getColorBasedOnObservationValue(tumblingEData[index].observationValue)),
                           textAlign: TextAlign.left,
                         )
                       ],
@@ -92,5 +89,18 @@ class TumblingEReportCard extends StatelessWidget {
         ],
       ),
     );
+  }
+  
+}
+
+Color getColorBasedOnObservationValue(int value){
+  if(value <1){
+    return AppColor.orange;
+  }else if(value == 1){
+    return AppColor.green;
+  }else if(value > 1){
+    return AppColor.red;
+  }else{
+    return AppColor.red;
   }
 }

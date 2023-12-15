@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_recommendation.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
@@ -15,9 +17,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
   final TriageDetailedReportModel triageDetailedReportModel;
-  const PatientAssessmentReportPage({
+  const PatientAssessmentReportPage(  this.triageDetailedReportModel,{
     super.key,
-    required this.triageDetailedReportModel,
   });
 
   @override
@@ -25,6 +26,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
     var model = ref.watch(getAssementDetailsReport(
       triageDetailedReportModel.assessmentCode,
     ));
+     TriageReportAndAssementPage triageReportAndAssementPageDetails;
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
@@ -39,11 +41,11 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   color: AppColor.orange,
                 ),
                 child: Text(
-                  "currentData['checkupType']",
+                  getRequestPriorityText(triageReportAndAssementPageDetails.priority),
                   style: applyRobotoFont(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: AppColor.white),
+                      color:getRequestPriorityColor(triageReportAndAssementPageDetails.priority)),
                 )),
           ],
         ),
@@ -54,10 +56,11 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ReportPageHeader(
             index: 0,
+            triageReportAndAssementPage: triageReportAndAssementPageDetails,
           ),
-          const ReportAssessmentQuestions(),
-          const TumblingEReportCard(),
-          const EyeScanTabView(),
+          const ReportAssessmentQuestions(questionResponseBreifModel: triageReportAndAssementPageDetails.questionResponseBreifModel),
+          const TumblingEReportCard(tumblingEData:triageReportAndAssementPageDetails.visualAcuityBreifModel ,),
+          const EyeScanTabView(eyeScanData: triageReportAndAssementPageDetails.imageBreifModel,),
           const AssessmentRecommendation(),
           SizedBox(
             height: AppSize.height(context) * 0.03,
@@ -67,4 +70,32 @@ class PatientAssessmentReportPage extends ConsumerWidget {
       )),
     );
   }
+}
+
+getRequestPriorityText(RequestPriority priority){
+  switch(priority){
+    case RequestPriority.URGENT:
+      return "Urgent Consult";
+    case RequestPriority.ROUTINE:
+      return "Routine Checkup";
+    case RequestPriority.ASAP:
+      return "ASAP";
+    case RequestPriority.STAT:
+      return "STAT";
+  }
+  
+}
+ 
+Color getRequestPriorityColor(RequestPriority priority ){
+  switch(priority){
+    case RequestPriority.URGENT:
+      return AppColor.red;
+    case RequestPriority.ROUTINE:
+      return AppColor.green;
+    case RequestPriority.ASAP:
+      return AppColor.orange;
+    case RequestPriority.STAT:
+      return AppColor.red;
+  }
+
 }

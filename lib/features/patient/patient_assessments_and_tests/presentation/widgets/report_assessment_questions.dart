@@ -1,30 +1,13 @@
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportAssessmentQuestions extends StatelessWidget {
-  const ReportAssessmentQuestions({super.key});
+  const ReportAssessmentQuestions({super.key,required this.questionResponseBreifModel});
+  final List<QuestionResponseBreifModel> questionResponseBreifModel;
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> data = [
-      {"question": "Are you facing sudden loss of vision?", "answer": "No"},
-      {
-        "question":
-            "Do you have pain or discomfort while viewing bright light?",
-        "answer": "Yes"
-      },
-      {
-        "question":
-            "Do you see wavy lines or irregular shapes when viewing straight images?",
-        "answer": "No"
-      },
-      {"question": "Do you see two images of a viewed object?", "answer": "No"},
-      {
-        "question": "Do you see halos or colored rings around lights?",
-        "answer": "Yes"
-      }
-    ];
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Column(
@@ -42,16 +25,16 @@ class ReportAssessmentQuestions extends StatelessWidget {
             height: 10,
           ),
           ListView.builder(
-            itemCount: data.length,
+            itemCount: questionResponseBreifModel.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              var currentData = data[index];
+              var responseModel = questionResponseBreifModel[index];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    currentData['question'],
+                    responseModel.question,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -71,7 +54,7 @@ class ReportAssessmentQuestions extends StatelessWidget {
                               height: 1.5),
                         ),
                         Text(
-                          currentData['answer'],
+                          responseModel.response,
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w800,
