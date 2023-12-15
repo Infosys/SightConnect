@@ -68,7 +68,7 @@ class _PreliminaryAssessmentRecommendationState
           ListTile(
             title: const Text('Visit Tertiary Center'),
             leading: Radio(
-              value: 2,
+              value: 3,
               groupValue: _selectedOption,
               onChanged: (value) {
                 setState(
@@ -82,7 +82,7 @@ class _PreliminaryAssessmentRecommendationState
           ListTile(
             title: const Text('Visit Center of Excellence'),
             leading: Radio(
-              value: 2,
+              value: 4,
               groupValue: _selectedOption,
               onChanged: (value) {
                 setState(
