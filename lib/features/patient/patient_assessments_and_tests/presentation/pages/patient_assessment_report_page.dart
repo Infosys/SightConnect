@@ -26,7 +26,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
     var model = ref.watch(getAssementDetailsReport(
       triageDetailedReportModel.assessmentCode,
     ));
-     TriageReportAndAssementPage triageReportAndAssementPageDetails;
+     TriageReportAndAssementPageEntity triageReportAndAssementPageDetails;
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(

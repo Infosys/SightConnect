@@ -145,7 +145,7 @@ class AssessmentCards extends ConsumerWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const PatientAssessmentReportPage(
-                              triageDetailedReportModel:
+                    
                                   TriageDetailedReportModel(),
                             ),
                           ),

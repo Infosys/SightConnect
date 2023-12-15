@@ -12,7 +12,7 @@ class ReportPageHeader extends StatelessWidget {
   }) : super(key: key);
 
   final int index;
-  final TriageReportAndAssementPage triageReportAndAssementPage;
+  final TriageReportAndAssementPageEntity triageReportAndAssementPage;
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ReportAssessmentQuestions extends StatelessWidget {
   const ReportAssessmentQuestions({super.key,required this.questionResponseBreifModel});
-  final List<QuestionResponseBreifModel> questionResponseBreifModel;
+  final List<QuestionResponseBreifEntity> questionResponseBreifModel;
 
   @override
   Widget build(BuildContext context) {

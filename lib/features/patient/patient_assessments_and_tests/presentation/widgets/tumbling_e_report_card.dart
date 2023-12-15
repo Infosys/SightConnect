@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class TumblingEReportCard extends StatelessWidget {
   const TumblingEReportCard({super.key,required this.tumblingEData});
- final List<ObservationBreifModel> tumblingEData ;
+ final List<ObservationBreifEntity> tumblingEData ;
   @override
   Widget build(BuildContext context) {
    
