@@ -26,10 +26,10 @@ var authDioProvider = Provider(
   ),
 );
 
-var onboardingDioProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      baseUrl: "http://10.110.36.226:8075/validation-ms",
-    ),
-  ),
-);
+// var onboardingDioProvider = Provider(
+//   (ref) => Dio(
+//     BaseOptions(
+//       baseUrl: "http://10.110.36.226:8075/validation-ms",
+//     ),
+//   ),
+// );

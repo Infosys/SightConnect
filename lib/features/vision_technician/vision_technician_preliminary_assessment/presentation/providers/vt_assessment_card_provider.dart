@@ -15,7 +15,7 @@ class AssessmentCardProvider extends ChangeNotifier{
   AssessmentCardProvider(this._dio);
   
     Future<PatientResponseModel> getPatientProfile(int patientId) async {
- var endpoint = await rootBundle.loadString("assets/triage_assessment.json");
+    var endpoint = await rootBundle.loadString("assets/triage_assessment.json");
     try {
       final response = await _dio.get(endpoint);
       return PatientResponseModel.fromJson(response.data);

@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
@@ -14,6 +16,13 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
+    var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
+    var dateYear = DateTime.now().year;
+    // int giveAge() {
+    //   // var age = model?.patient?.yearOfBirth.;
+    //   return (dateYear - age!).toInt();
+    // }
+  
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -36,12 +45,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "",
+                    model?.patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "OP ",
+                    model?.patient?.abhaNumber.toString() ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,

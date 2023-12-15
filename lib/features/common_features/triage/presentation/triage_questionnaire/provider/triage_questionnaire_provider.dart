@@ -19,6 +19,8 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final Map<int, int> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
 
+
+
   List<String> allRemarks = ['', '', ''];
   TriageLocalSource triageLocalSource;
   TextEditingController textEditingController = TextEditingController();
