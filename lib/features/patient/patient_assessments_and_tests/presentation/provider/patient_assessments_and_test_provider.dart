@@ -1,19 +1,18 @@
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_detailed_report_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/triage_result_local_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var isResultOfflineMode = false;
+var isResultOfflineMode = true;
 
 var getEyeTriageReport = FutureProvider.family(
   (ref, int pId) async {
@@ -72,43 +71,35 @@ var getTriageDetailedEyeReport = FutureProvider.family(
   },
 );
 
-var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
+var getAssementDetailsReport = FutureProvider.family((
+  ref,
+  int reportID,
+) async {
   TriageResultUserEntity profileEntity =
       ref.watch(assessmentsAndTestProvider).selectedUser;
   var triageAssessment = ref.read(getTriageProvider).asData?.value;
 
-  TriageDetailedReportModel triageDetyailedReport =
+  TriageDetailedReportModel triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData!.value;
 
   logger.d({
     "profile": profileEntity,
-    "assessmentResponse": triageDetyailedReport,
+    "assessmentResponse": triageDetailedReport,
     "triageAssessment": triageAssessment,
   });
 
-  TriageReportAndAssementPageEntity data = TriageReportAndAssementPageEntity(
-    name: '',
-    triageResultID: 0,
-    priority: RequestPriority.ASAP,
-    reportTag: '',
-    triageResultType: '',
-    triageResultSource: Source.IN_PERSION,
-    assessmentID: 0,
-    triageResultStartDate: DateTime.now(),
-    triageResultDescription: '',
-    doctorName: '',
-    doctorId: '',
-    doctorTitle: '',
-    patientId: '',
-    appointementDateTime: DateTime.now(),
-    questionResponseBreifEntity: [],
-    visualAcuityBreifEntity: [],
-    imageBreifEntity: [],
+  TriageReportAndAssementPageEntity data =
+      AssessmentDetailedReportMapper.toEntity(
+    profileEntity,
+    triageDetailedReport,
+    triageAssessment!,
   );
 
   logger.d({
     "data": data,
   });
+
+  return data;
 });
 
 var assessmentsAndTestProvider = ChangeNotifierProvider(

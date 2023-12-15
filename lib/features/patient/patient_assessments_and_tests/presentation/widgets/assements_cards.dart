@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
@@ -40,7 +39,7 @@ class AssessmentCards extends ConsumerWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(4),
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         color: getRequestPriorityColor(currentData.priority),
                       ),
                       child: Text(
@@ -71,7 +70,6 @@ class AssessmentCards extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-               
                 Row(
                   children: [
                     Column(
@@ -111,9 +109,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          
-                          currentData.triageResultStartDate.formateDate
-        ,
+                          currentData.triageResultStartDate.formateDate,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -137,16 +133,13 @@ class AssessmentCards extends ConsumerWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                
                   children: [
-                    
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const PatientAssessmentReportPage(
-                    
-                                  TriageDetailedReportModel(),
+                            builder: (context) => PatientAssessmentReportPage(
+                              currentData.triageResultID,
                             ),
                           ),
                         );
@@ -160,7 +153,6 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -210,8 +202,8 @@ class AssessmentCards extends ConsumerWidget {
   }
 }
 
-getRequestPriorityText(RequestPriority priority){
-  switch(priority){
+getRequestPriorityText(RequestPriority priority) {
+  switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";
     case RequestPriority.ROUTINE:
@@ -221,11 +213,10 @@ getRequestPriorityText(RequestPriority priority){
     case RequestPriority.STAT:
       return "STAT";
   }
-  
 }
- 
-Color getRequestPriorityColor(RequestPriority priority ){
-  switch(priority){
+
+Color getRequestPriorityColor(RequestPriority priority) {
+  switch (priority) {
     case RequestPriority.URGENT:
       return AppColor.red;
     case RequestPriority.ROUTINE:
@@ -235,5 +226,4 @@ Color getRequestPriorityColor(RequestPriority priority ){
     case RequestPriority.STAT:
       return AppColor.red;
   }
-
 }
