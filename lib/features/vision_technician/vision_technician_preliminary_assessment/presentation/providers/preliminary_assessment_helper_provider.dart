@@ -228,5 +228,14 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
       }
     }
     return visionCenterModel;
+    // VisionCenterModel visionCenter = VisionCenterModel(
+    //     type: "", checked: false, completeAddress: "", phoneno: "", time: "");
+    // for (int i = 0; i < visionCenters.length; i++) {
+    //   if (visionCenters[i].checked == true) {
+    //     visionCenter = visionCenters[i];
+    //     break;
+    //   }
+    // }
+    // return visionCenter;
   }
 }

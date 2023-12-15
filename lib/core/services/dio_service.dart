@@ -41,3 +41,15 @@ var vtDioProvider = Provider(
 //     ),
 //   ),
 // );
+var dioExotelProvider = Provider(
+  (ref) => Dio(BaseOptions(
+      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/exotel")),
+);
+
+var dioProfileProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(
+      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/profile",
+    ),
+  ),
+);

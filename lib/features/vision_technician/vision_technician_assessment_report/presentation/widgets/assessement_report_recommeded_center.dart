@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,11 +12,6 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var recommendedCenter = ref
-        .watch(preliminaryAssessmentHelperProvider)
-        .visionCenters
-        .where((element) => element.checked == true)
-        .toList()[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,12 +24,14 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
         ),
         const SizedBox(height: AppSize.klheight),
         Container(
-           width: AppSize.width(context),
-          decoration: const BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(AppSize.kmradius - 5),
-              )),
+          width: AppSize.width(context),
+          decoration: BoxDecoration(
+            color: AppColor.white,
+            boxShadow: applyLightShadow(),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppSize.kmradius - 5),
+            ),
+          ),
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: RecommendationPhoneNumber(
             children: [
@@ -42,10 +40,11 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.location_on_outlined, color: AppColor.grey),
-             SizedBox(
-                    width:AppSize.width(context)/2 ,
+                  SizedBox(
+                    width: AppSize.width(context) / 2,
                     child: Text(
-                      recommendedCenter.completeAddress?? "",
+                      "14, Nagar Khana Hanuman Temple Road, Begum Bazar Chatri, Gowsala Nagar, Chudi Bazaar, Hyderabad, Telangana 500012" ??
+                          "",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4,
                       style: applyRobotoFont(
@@ -65,7 +64,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                     children: [
                       Icon(Icons.phone_outlined, color: AppColor.grey),
                       Text(
-                        recommendedCenter.phoneno??"",
+                        "99634 78759" ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
@@ -87,9 +86,9 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                         ),
                       ),
                       SizedBox(
-                          width:AppSize.width(context)/4,
+                        width: AppSize.width(context) / 4,
                         child: Text(
-                          recommendedCenter.time??"",
+                          "Monday - Friday, 10:00 AM to 5:00 PM" ?? "",
                           // softWrap: true,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,

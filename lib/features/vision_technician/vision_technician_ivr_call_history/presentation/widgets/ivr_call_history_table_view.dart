@@ -4,10 +4,12 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class IvrCallHistoryTableView extends HookConsumerWidget {
   const IvrCallHistoryTableView({super.key});
@@ -105,7 +107,7 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
             color: data.calltype == "in" ? AppColor.green : AppColor.red,
           ),
           Text(
-            data.duration,
+            "${data.duration!/60} min",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -115,7 +117,7 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     ),
     DataCell(
       Text(
-        data.day,
+        DateFormat('dd/MM/yy').format(data.logDate.toLocal()),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -123,7 +125,7 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
     ),
     DataCell(
       Text(
-        data.time,
+        DateFormat('hh:mm').format(data.logDate.toLocal()),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),

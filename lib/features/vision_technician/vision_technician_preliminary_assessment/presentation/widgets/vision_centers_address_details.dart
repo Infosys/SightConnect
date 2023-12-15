@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionCenterAddressDetails extends ConsumerWidget {
-  VisionCenterAddressDetails( {super.key});
-
+ const VisionCenterAddressDetails({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     VisionCenterModel visionCenter= ref.watch(preliminaryAssessmentHelperProvider.notifier).getCheckedVisionCenter();
+    // VisionCenterModel visionCenter = ref
+    //     .watch(preliminaryAssessmentHelperProvider.notifier)
+    //     .getCheckedVisionCenter();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

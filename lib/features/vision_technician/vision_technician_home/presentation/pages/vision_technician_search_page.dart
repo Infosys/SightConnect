@@ -12,6 +12,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+
 class VisionTechnicianSearchPage extends ConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
 
@@ -109,6 +111,17 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                             ),
                             DataColumn(
                               label: Text(
+                                "Buttons",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
                                 "Category",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -135,7 +148,10 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              cells: generateListTileSearchResults(list[index]),
+                              cells: generateListTileSearchResults(
+                                list[index],
+                                context,
+                              ),
                             ),
                           ),
                         ),
@@ -212,6 +228,26 @@ List<DataCell> generateListTileSearchResults(VTPatientSearchDto data) {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
+      ),
+    ),
+    DataCell(
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // button
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisionTechnicianPreliminaryAssessmentPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.edit),
+          )
+        ],
       ),
     ),
     DataCell(

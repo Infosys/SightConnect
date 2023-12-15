@@ -42,7 +42,7 @@ class AssessmentReportProfile extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: AppColor.white,
-                    ))
+                    ),),
               ],
             ),
             Row(
@@ -53,7 +53,7 @@ class AssessmentReportProfile extends StatelessWidget {
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: AppColor.white.withOpacity(0.7),
-                    )),
+                    ),),
                 Text(
                   "19 Sep 2023, 10:30 AM",
                   style: applyRobotoFont(
@@ -64,7 +64,7 @@ class AssessmentReportProfile extends StatelessWidget {
                 ),
               ],
             ),
-          ]),
-        ));
+          ],),
+        ),);
   }
 }
