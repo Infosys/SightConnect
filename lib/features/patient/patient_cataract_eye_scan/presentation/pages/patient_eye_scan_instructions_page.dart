@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../data/local/User_details_model.dart';
+import '../../data/local/user_details_model.dart';
 import 'patient_eyes_capture_page.dart';
 
 class PatientEyeScanInstructionsPage extends HookConsumerWidget {

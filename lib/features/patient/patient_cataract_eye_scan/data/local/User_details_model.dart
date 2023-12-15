@@ -1,12 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'User_details_model.freezed.dart';
-part 'User_details_model.g.dart';
+part 'user_details_model.freezed.dart';
+part 'user_details_model.g.dart';
 
 @freezed
 class UserDetails with _$UserDetails {
- 
-
   factory UserDetails({
     String? patientId,
     String? patientName,
@@ -28,5 +26,3 @@ class UserDetails with _$UserDetails {
   factory UserDetails.fromJson(Map<String, dynamic> json) =>
       _$UserDetailsFromJson(json);
 }
-
-

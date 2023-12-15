@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 
 class DrawerMenuItem {
   final String title;

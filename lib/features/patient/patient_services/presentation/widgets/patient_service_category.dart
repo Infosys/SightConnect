@@ -97,7 +97,10 @@ class PatientServiceCategory extends ConsumerWidget {
                                   height:
                                       Responsive.isMobile(context) ? 24 : 32,
                                   width: Responsive.isMobile(context) ? 24 : 32,
-                                  color: AppColor.primary,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColor.primary,
+                                    BlendMode.srcIn,
+                                  ),
                                   fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),

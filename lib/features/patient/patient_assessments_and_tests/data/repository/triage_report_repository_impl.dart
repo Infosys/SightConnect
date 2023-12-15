@@ -37,7 +37,7 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
       } catch (e) {
-        return Left(UnknowFailure(errorMessage: e.toString()));
+        return Left(UnknownFailure(errorMessage: e.toString()));
       }
     } else {
       return Left(ServerFailure(errorMessage: 'No internet connectivity'));
@@ -56,7 +56,7 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
         return Right(remoteResponse);
       } on ServerException catch (e) {
         return Left(
-          UnknowFailure(
+          UnknownFailure(
             errorMessage: e.toString(),
           ),
         );

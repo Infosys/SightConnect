@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:snowplow_tracker/snowplow_tracker.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();

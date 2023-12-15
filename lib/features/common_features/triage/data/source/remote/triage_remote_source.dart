@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -52,22 +51,22 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     required TriageResponseModel triage,
   }) async {
     var endpoint = "/api/triage-report";
-    logger.d({
-      "API saveTriage": triage.toJson(),
-    });
-
-    var response = await dio.post(
-      endpoint,
-      data: triage.toJson(),
-    );
-    if (response.statusCode != null) {
-      if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        return TriageResponseModel.fromJson(response.data);
+    try {
+      var response = await dio.post(
+        endpoint,
+        data: triage.toJson(),
+      );
+      if (response.statusCode != null) {
+        if (response.statusCode! >= 200 && response.statusCode! < 210) {
+          return TriageResponseModel.fromJson(response.data);
+        } else {
+          throw ServerException();
+        }
       } else {
         throw ServerException();
       }
-    } else {
-      throw ServerException();
+    } catch (e) {
+      throw UnknownException();
     }
   }
 }

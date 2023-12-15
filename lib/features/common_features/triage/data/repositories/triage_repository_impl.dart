@@ -34,15 +34,16 @@ class TriageRepositoryImpl implements TriageRepository {
   Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> getTriage() async {
     if (await networkInfo.isConnected()) {
       try {
-        logger
-            .d({"message": "Internet is connected Getting triage from remote"});
+        logger.d("Internet is connected Getting triage from remote");
         final remoteResponse = await remoteDataSource.getTriage();
-
         // localDataSource.saveTriage(triage: remoteResponse);
 
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      } on UnknownException {
+        return Left(
+            UnknownFailure(errorMessage: 'This is a unknown exception'));
       }
     } else {
       try {
@@ -51,7 +52,9 @@ class TriageRepositoryImpl implements TriageRepository {
 
         final localResponse = await localDataSource.getTriage();
         return Right(localResponse);
-      } catch (e) {
+      } on CacheException {
+        return Left(CacheFailure(errorMessage: 'No local data found'));
+      } on UnknownException {
         return Left(CacheFailure(errorMessage: 'No local data found'));
       }
     }
@@ -62,32 +65,35 @@ class TriageRepositoryImpl implements TriageRepository {
       {required TriageResponseModel triage}) async {
     if (await networkInfo.isConnected()) {
       try {
-        // logger.d({"message": "Internet is connected Saving triage to remote"});
-        // final remoteResponse =
-        //     await remoteDataSource.saveTriage(triage: triage);
-        // localDataSource.deleteTriage();
-        logger.d({"message": "ServerException Saving triage to local"});
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
-        return Right(localResponse);
+        logger.d("Internet is connected Saving triage to remote");
+        final remoteResponse = await remoteDataSource.saveTriage(
+          triage: triage,
+        );
+        localDataSource.deleteTriage();
 
-        // return Right(remoteResponse);
+        return Right(remoteResponse);
       } on ServerException {
-        // logger.d({"message": "ServerException Saving triage to local"});
-        // final localResponse =
-        //     await localDataSource.saveTriageResponse(triageResponse: triage);
-        // return Right(localResponse);
+        await localDataSource.saveTriageResponse(
+          triageResponse: triage,
+        );
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      } on UnknownException {
+        await localDataSource.saveTriageResponse(
+          triageResponse: triage,
+        );
+        return Left(
+            UnknownFailure(errorMessage: 'This is a unknown exception'));
       }
     } else {
       try {
-        logger
-            .d({"message": "Internet is not connected Saving triage to local"});
-
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+        logger.d("Internet is not connected Saving triage to local");
+        final localResponse = await localDataSource.saveTriageResponse(
+          triageResponse: triage,
+        );
         return Right(localResponse);
       } on CacheException {
+        return Left(CacheFailure(errorMessage: 'No local data found'));
+      } on UnknownException {
         return Left(CacheFailure(errorMessage: 'No local data found'));
       }
     }

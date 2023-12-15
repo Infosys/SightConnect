@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-var patientEditProfileProvider = ChangeNotifierProvider.autoDispose(
-    (ref) => PatientEditProfileProvider(ref.watch(patientAuthenticationRepositoryProvider)));
+var patientEditProfileProvider = ChangeNotifierProvider.autoDispose((ref) =>
+    PatientEditProfileProvider(
+        ref.watch(patientAuthenticationRepositoryProvider)));
 
 class PatientEditProfileProvider extends ChangeNotifier {
+  final PatientAuthenticationRepository _patientAuthenticationRepository;
 
-  PatientAuthenticationRepository _patientAuthenticationRepository;
-  
   PatientEditProfileProvider(this._patientAuthenticationRepository);
 
   XFile? _imageFile;
@@ -103,49 +103,38 @@ class PatientEditProfileProvider extends ChangeNotifier {
   // set setPincode(String value) => _pincodeController.text = value;
 
   Future<void> updatePatientDetails() async {
-
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
 
     PatientModel patient = PatientModel(
-      id: 1201,
-      name: _nameController.text + _lastNameController.text,
-      age: int.parse(_ageController.text),
-      dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),
-      monthOfBirth: dateFormat.parse(_dobController.text).month.toString(),
-      yearOfBirth: dateFormat.parse(_dobController.text).year.toString(),
-      abhaId: _abhaidController.text,
-      mobile: _mobileNumberController.text,
-      email: _emailController.text,
-      address: [
-      AddressModel(
-        id: 1,
-        line: doorNo.text,
-        ward: street.text,
-        subDistrict: subDistrict.text,
-        district: district.text,
-        village: city.text,
-        state: state.text,
-        pinCode: pincode.text
-        )
-      ]
-
-    );
+        id: 1201,
+        name: _nameController.text + _lastNameController.text,
+        age: int.parse(_ageController.text),
+        dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),
+        monthOfBirth: dateFormat.parse(_dobController.text).month.toString(),
+        yearOfBirth: dateFormat.parse(_dobController.text).year.toString(),
+        abhaId: _abhaidController.text,
+        mobile: _mobileNumberController.text,
+        email: _emailController.text,
+        address: [
+          AddressModel(
+              id: 1,
+              line: doorNo.text,
+              ward: street.text,
+              subDistrict: subDistrict.text,
+              district: district.text,
+              village: city.text,
+              state: state.text,
+              pinCode: pincode.text)
+        ]);
     _isLoading = true;
     notifyListeners();
     try {
-
       await _patientAuthenticationRepository.updatePatientProfile(patient);
-
-    }
-    catch(e){
+    } catch (e) {
       rethrow;
-    }
-    finally{
+    } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
-
-
-
 }

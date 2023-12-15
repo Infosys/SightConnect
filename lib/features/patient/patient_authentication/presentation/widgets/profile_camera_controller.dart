@@ -38,7 +38,10 @@ class PatientProfileCameraControllers extends HookConsumerWidget {
                   ),
                   child: SvgPicture.asset(
                     AppIcon.cam_info,
-                    color: AppColor.white,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -51,7 +54,10 @@ class PatientProfileCameraControllers extends HookConsumerWidget {
                   ),
                   child: SvgPicture.asset(
                     AppIcon.cam_capture,
-                    color: AppColor.white,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -65,7 +71,10 @@ class PatientProfileCameraControllers extends HookConsumerWidget {
                   ),
                   child: SvgPicture.asset(
                     AppIcon.swap_camera,
-                    color: AppColor.white,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),

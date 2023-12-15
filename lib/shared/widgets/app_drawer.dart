@@ -126,7 +126,10 @@ class AppDrawer extends StatelessWidget {
                                         width: 20,
                                         child: SvgPicture.asset(
                                           item.value.icon,
-                                          color: AppColor.white,
+                                          colorFilter: const ColorFilter.mode(
+                                            AppColor.white,
+                                            BlendMode.srcIn,
+                                          ),
                                         ),
                                       )
                                     : Container(
@@ -156,7 +159,10 @@ class AppDrawer extends StatelessWidget {
                         ListTile(
                           leading: SvgPicture.asset(
                             AppIcon.drawerSignOut,
-                            color: AppColor.white,
+                            colorFilter: const ColorFilter.mode(
+                              AppColor.white,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           title: Text(
                             "Sign Out",

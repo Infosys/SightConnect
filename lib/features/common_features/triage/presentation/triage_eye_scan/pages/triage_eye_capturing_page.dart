@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
@@ -340,7 +339,6 @@ class _PatientTriageEyeCapturingPageState
                     response.fold((failure) {
                       Fluttertoast.showToast(msg: failure.toString());
                     }, (result) {
-                      log(result.toString());
                       ref.read(triageStepperProvider).goToNextStep();
                       navigator.pop();
                       navigator.push(

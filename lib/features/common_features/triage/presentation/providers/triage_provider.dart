@@ -17,10 +17,10 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/models/triage_assessment_model.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
 
-var getTriageProvider = FutureProvider.autoDispose<DiagnosticReportTemplateFHIRModel>(
+var getTriageProvider =
+    FutureProvider.autoDispose<DiagnosticReportTemplateFHIRModel>(
   (ref) async {
     var response = await ref.read(getTriageUseCase).call(GetTriageParam());
     return response.fold((failure) {
@@ -138,16 +138,15 @@ var resetProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageReset(ref),
 );
 
-class TriageReset extends ChangeNotifier{
+class TriageReset extends ChangeNotifier {
   final Ref ref;
   TriageReset(this.ref);
 
-   void reset(){
-      ref.invalidate(triageQuestionnaireProvider);
+  void reset() {
+    ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
     notifyListeners();
-    }
-
+  }
 }

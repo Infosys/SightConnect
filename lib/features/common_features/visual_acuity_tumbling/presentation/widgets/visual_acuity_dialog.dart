@@ -54,6 +54,7 @@ class VisualAcuityDialog {
                       (BuildContext context, WidgetRef ref, Widget? child) {
                     return TextButton(
                       onPressed: () async {
+                        var navigator = Navigator.of(context);
                         ref
                             .read(
                                 visualAcuityTumblingTestDialogProvider.notifier)
@@ -63,8 +64,8 @@ class VisualAcuityDialog {
                           await ref
                               .read(tumblingTestProvider)
                               .saveVisionAcuityResponseToDB();
-                          Navigator.of(context).pop();
-                          Navigator.of(context).push(
+                          navigator.pop();
+                          navigator.push(
                             MaterialPageRoute(
                               builder: (context) => const TriageEyeScanPage(),
                               fullscreenDialog: true,

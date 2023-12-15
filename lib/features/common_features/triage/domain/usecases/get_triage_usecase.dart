@@ -6,8 +6,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../models/triage_assessment_model.dart';
-
 var getTriageUseCase = Provider(
   (ref) => GetTriageUseCase(
     ref.watch(triageRepositoryProvider),

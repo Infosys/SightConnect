@@ -76,11 +76,12 @@ class AppointmentFullDateModel {
   bool? isScheduled;
   bool? isBreak;
 
-  AppointmentFullDateModel(
-      {this.time,
-      this.timeZone,
-      this.startTime,
-      this.endTime,
-      this.isScheduled,
-      this.isBreak = false});
+  AppointmentFullDateModel({
+    this.time,
+    this.timeZone,
+    this.startTime,
+    this.endTime,
+    this.isScheduled,
+    this.isBreak = false,
+  });
 }
