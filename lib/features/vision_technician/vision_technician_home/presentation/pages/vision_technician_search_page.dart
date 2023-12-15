@@ -12,6 +12,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+
 class VisionTechnicianSearchPage extends ConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
 
@@ -146,7 +148,10 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              cells: generateListTileSearchResults(list[index]),
+                              cells: generateListTileSearchResults(
+                                list[index],
+                                context,
+                              ),
                             ),
                           ),
                         ),
@@ -160,7 +165,10 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateListTileSearchResults(VTPatientModel data) {
+List<DataCell> generateListTileSearchResults(
+  VTPatientModel data,
+  BuildContext context,
+) {
   return [
     DataCell(
       Column(
@@ -228,9 +236,20 @@ List<DataCell> generateListTileSearchResults(VTPatientModel data) {
     DataCell(
       Row(
         mainAxisSize: MainAxisSize.min,
-        children:[
+        children: [
           // button
-          
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisionTechnicianPreliminaryAssessmentPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.edit),
+          )
         ],
       ),
     ),
