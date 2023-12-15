@@ -1,8 +1,8 @@
-import 'package:dartz/dartz_streaming.dart';
 import 'package:equatable/equatable.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 
-class TriageReportAndAssementPage extends Equatable {
+class TriageReportAndAssementPageEntity extends Equatable {
   final String name;
   final int triageResultID;
   final RequestPriority priority;
@@ -17,11 +17,11 @@ class TriageReportAndAssementPage extends Equatable {
   final String doctorTitle;
   final String patientId;
   final DateTime appointementDateTime;
-  final List<QuestionResponseBreifModel> questionResponseBreifModel;
-  final List<ObservationBreifModel> visualAcuityBreifModel;
-  final List<ImageBreifModel> imageBreifModel;
+  final List<QuestionResponseBreifEntity> questionResponseBreifEntity;
+  final List<ObservationBreifEntity> visualAcuityBreifEntity;
+  final List<ImageBreifEntity> imageBreifEntity;
 
-  const TriageReportAndAssementPage({
+  const TriageReportAndAssementPageEntity({
     required this.name,
     required this.triageResultID,
     required this.priority,
@@ -36,9 +36,9 @@ class TriageReportAndAssementPage extends Equatable {
     required this.doctorTitle,
     required this.patientId,
     required this.appointementDateTime,
-    required this.questionResponseBreifModel,
-    required this.visualAcuityBreifModel,
-    required this.imageBreifModel,
+    required this.questionResponseBreifEntity,
+    required this.visualAcuityBreifEntity,
+    required this.imageBreifEntity,
   });
 
   @override
@@ -52,18 +52,18 @@ class TriageReportAndAssementPage extends Equatable {
         assessmentID,
         triageResultStartDate,
         triageResultDescription,
-        questionResponseBreifModel,
-        visualAcuityBreifModel,
-        imageBreifModel,
+        questionResponseBreifEntity,
+        visualAcuityBreifEntity,
+        imageBreifEntity,
       ];
 }
 
-class QuestionResponseBreifModel {
+class QuestionResponseBreifEntity {
   final String question;
   final int questionId;
   final String response;
   final int responseId;
-  const QuestionResponseBreifModel({
+  const QuestionResponseBreifEntity({
     required this.question,
     required this.questionId,
     required this.response,
@@ -71,12 +71,12 @@ class QuestionResponseBreifModel {
   });
 }
 
-class ObservationBreifModel {
+class ObservationBreifEntity {
   final int observationValue;
   final int observationId;
   final int observationValueIdentifier;
   final String bodySite;
-  const ObservationBreifModel({
+  const ObservationBreifEntity({
     required this.observationValue,
     required this.observationId,
     required this.observationValueIdentifier,
@@ -84,12 +84,12 @@ class ObservationBreifModel {
   });
 }
 
-class ImageBreifModel {
+class ImageBreifEntity {
   final String imageUrl;
   final int imageId;
   final int imageIdentifier;
   final String bodySite;
-  const ImageBreifModel({
+  const ImageBreifEntity({
     required this.imageUrl,
     required this.imageId,
     required this.imageIdentifier,
