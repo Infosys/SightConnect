@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../data/source/local/fake_data_source.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
 import '../widgets/patient_profile_patient_info.dart';
@@ -15,8 +14,6 @@ import 'patient_edit_profile_page.dart';
 
 class PatientProfilePage extends ConsumerWidget {
   const PatientProfilePage({super.key});
-
-  static const String routeName = '/patient-profile';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,8 +36,11 @@ class PatientProfilePage extends ConsumerWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const PatientEditProfilePage()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PatientEditProfilePage(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.edit_outlined,
@@ -55,8 +55,8 @@ class PatientProfilePage extends ConsumerWidget {
           return _content(context, patient);
         },
         error: (error, trace) {
-          return Center(
-            child: Text(error.toString()),
+          return const Center(
+            child: Text("Something went wrong"),
           );
         },
         loading: () {
@@ -131,18 +131,6 @@ class PatientProfilePage extends ConsumerWidget {
                       keyText: "Date of Birth",
                       valueText: dob,
                     ),
-                    PatientInfoCard(
-                      keyText: "Blood Group",
-                      valueText: profile["blood_group"]!,
-                    ),
-                    PatientInfoCard(
-                      keyText: "Height",
-                      valueText: profile["height"]!,
-                    ),
-                    PatientInfoCard(
-                      keyText: "Weight",
-                      valueText: profile["weight"]!,
-                    ),
                   ],
                 ),
               ),
@@ -170,13 +158,17 @@ class PatientProfilePage extends ConsumerWidget {
     required String mon,
     required String year,
   }) {
-    final dob = DateTime(
-      int.parse(year),
-      int.parse(mon),
-      int.parse(day),
-    );
-    final age = DateTime.now().difference(dob).inDays ~/ 365;
-    return "$day/$mon/$year ($age years)";
+    try {
+      final dob = DateTime(
+        int.parse(year),
+        int.parse(mon),
+        int.parse(day),
+      );
+      final age = DateTime.now().difference(dob).inDays ~/ 365;
+      return "$day/$mon/$year ($age years)";
+    } catch (e) {
+      return "";
+    }
   }
 
   String _formateAddress({

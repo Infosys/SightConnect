@@ -86,6 +86,20 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
               initialUrlRequest: URLRequest(
                 url: Uri.parse("http://127.0.0.1:$port/"),
               ),
+              onLoadError: (controller, url, code, message) async {
+                logger.d("Error: $message");
+                setState(() {
+                  isMiniAppLoaded = null;
+                  progressMessage = "Something went wrong";
+                });
+              },
+              onLoadHttpError: (controller, url, code, message) {
+                logger.d("Error: $message");
+                setState(() {
+                  isMiniAppLoaded = null;
+                  progressMessage = "Something went wrong";
+                });
+              },
               initialOptions: InAppWebViewGroupOptions(
                 ios: IOSInAppWebViewOptions(
                   useOnNavigationResponse: true,

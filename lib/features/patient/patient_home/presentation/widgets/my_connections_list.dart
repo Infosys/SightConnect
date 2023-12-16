@@ -2,13 +2,14 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 
 class MyConnectionsList extends ConsumerWidget {
   const MyConnectionsList({
@@ -23,8 +24,8 @@ class MyConnectionsList extends ConsumerWidget {
         return _content(context, connectionsList ?? []);
       },
       error: (error, trace) {
-        return Center(
-          child: Text(error.toString()),
+        return const Center(
+          child: Text("Something went wrong"),
         );
       },
       loading: () {
@@ -54,26 +55,27 @@ class MyConnectionsList extends ConsumerWidget {
               ),
             ),
             const Spacer(),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PatientProfilePage(),
-                  ),
-                );
-              },
-              child: Text(
-                "See All",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.blue,
-                ),
-              ),
-            )
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const PatientProfilePage(),
+            //       ),
+            //     );
+            //   },
+            //   child: Text(
+            //     "See All",
+            //     style: applyRobotoFont(
+            //       fontSize: 14,
+            //       fontWeight: FontWeight.w500,
+            //       color: AppColor.blue,
+            //     ),
+            //   ),
+            // )
           ],
         ),
+        const SizedBox(height: AppSize.ksheight),
         connectionsList.isEmpty
             ? const Center(
                 child: Text("No Members Added"),
@@ -90,8 +92,8 @@ class MyConnectionsList extends ConsumerWidget {
                             .entries
                             .map(
                               (e) => MyConnectionsCard(
-                                image:
-                                    e.value.profilePicture ?? AppImages.raghavi,
+                                image: e.value.profilePicture ??
+                                    AppImages.profieImage,
                                 name: e.value.name ?? "",
                                 index: e.key,
                               ),
@@ -112,13 +114,28 @@ class MyConnectionsList extends ConsumerWidget {
                           child: InkWell(
                             customBorder: const CircleBorder(),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const TriageAddMemberPage(),
-                                ),
-                              );
+                              try {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MiniAppDisplayPage(
+                                      miniapp: MiniApp(
+                                        id: "1",
+                                        version: "1",
+                                        name: "Register Patient",
+                                        displayName: "Register Patient",
+                                        sourceurl:
+                                            "assets/miniapps/vt_register_patient.zip",
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } catch (e) {
+                                logger.d({"error": e});
+                                Fluttertoast.showToast(
+                                  msg: "Service not available",
+                                );
+                              }
                             },
                             child: Container(
                               width: 40.0,
@@ -144,9 +161,7 @@ class MyConnectionsList extends ConsumerWidget {
                         SizedBox(height: AppSize.height(context) * 0.029),
                         Text(
                           "Add",
-                          style: applyFiraSansFont(
-                            fontSize: 14,
-                          ),
+                          style: applyFiraSansFont(fontSize: 14),
                         ),
                       ],
                     ),

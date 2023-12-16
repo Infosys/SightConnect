@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/source/local/fake_data_source.dart';
-
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key, required this.patient});
+  const ProfileHeader({
+    super.key,
+    required this.patient,
+  });
   final PatientResponseModel patient;
 
   @override
@@ -37,17 +38,20 @@ class ProfileHeader extends StatelessWidget {
           ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(130),
-              child: Image.asset(
-                patient.profile!.patient!.profilePhoto ??
-                    "assets/images/user.png",
-                fit: BoxFit.cover,
-              ),
+              child: patient.profile?.patient?.profilePhoto != null
+                  ? Image.asset(
+                      patient.profile!.patient!.profilePhoto!,
+                      fit: BoxFit.cover,
+                    )
+                  : const CircleAvatar(
+                      backgroundColor: AppColor.lightGrey,
+                    ),
             ),
             title: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
-                patient.profile!.patient!.name ?? "",
+                patient.profile?.patient?.name ?? "",
                 style: applyFiraSansFont(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
@@ -58,7 +62,7 @@ class ProfileHeader extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Text(
-                profile["id"] ?? "",
+                "${patient.profile?.patient?.parentPatientId ?? ""}",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -71,17 +75,16 @@ class ProfileHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.ksheight),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   child: InkWell(
-                    onTap: () {
-                      Uri phoneno = Uri.parse("tel:${profile["mobile"]}");
-                      canLaunchUrl(number) {
-                        launchUrl(number);
+                    onTap: () async {
+                      final mobile = patient.profile?.patient?.phoneNumber;
+                      if (mobile != null) {
+                        Uri phoneno = Uri.parse("tel:$mobile");
+                        await launchUrl(phoneno);
                       }
-
-                      canLaunchUrl(phoneno);
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -99,10 +102,10 @@ class ProfileHeader extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          width: AppSize.ksheight / 2,
+                          width: AppSize.ksheight,
                         ),
                         Text(
-                          patient.profile!.patient!.phoneNumber ?? "",
+                          patient.profile?.patient?.phoneNumber ?? "",
                           softWrap: true,
                           style: applyRobotoFont(
                             fontSize: 14,
@@ -114,15 +117,16 @@ class ProfileHeader extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(width: AppSize.kmwidth),
                 Flexible(
                   child: InkWell(
-                    onTap: () {
-                      Uri email = Uri.parse("mailto:${profile["email"]}");
-                      canLaunchUrl(email) {
-                        launchUrl(email);
-                      }
+                    onTap: () async {
+                      final mail = patient.profile?.patient?.email;
+                      if (mail != null) {
+                        Uri email = Uri.parse("mailto:$mail");
 
-                      canLaunchUrl(email);
+                        await launchUrl(email);
+                      }
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -139,10 +143,10 @@ class ProfileHeader extends StatelessWidget {
                             size: 16,
                           ),
                         ),
-                        const SizedBox(width: AppSize.ksheight / 2),
+                        const SizedBox(width: AppSize.ksheight),
                         Flexible(
                           child: Text(
-                            patient.profile!.patient!.email ?? "",
+                            patient.profile?.patient?.email ?? "",
                             softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 14,

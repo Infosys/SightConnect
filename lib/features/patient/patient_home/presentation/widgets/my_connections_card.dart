@@ -9,8 +9,7 @@ class MyConnectionsCard extends HookWidget {
     required this.name,
     required this.index,
   }) : super(key: key);
-  // final Map<String, dynamic> doctor;
-  // final int index;
+
   final String image;
   final String name;
   final int index;
@@ -29,8 +28,7 @@ class MyConnectionsCard extends HookWidget {
             onTap: () {
               isSelected.value = !isSelected.value;
             },
-            child:  Container(
-              
+            child: Container(
               width: AppSize.width(context) * 0.15,
               height: AppSize.width(context) * 0.15,
               decoration: BoxDecoration(
