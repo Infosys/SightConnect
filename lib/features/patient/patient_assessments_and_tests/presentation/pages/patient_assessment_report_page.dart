@@ -26,6 +26,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     return ref.watch(getAssementDetailsReport(diagnosticReportId)).when(
       data: (TriageReportDetailedEntity assessmentDetailsReport) {
         return Scaffold(
@@ -96,7 +97,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         );
       },
       error: (error, stack) {
-        logger.d(error.toString());
+        logger.d("eroor "+error.toString());
+        logger.d("stack " +stack.toString());
         return const Scaffold(
           body: Center(
             child: Text("The full report is not available at the moment."),

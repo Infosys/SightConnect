@@ -73,13 +73,18 @@ var getTriageDetailedEyeReport = FutureProvider.family(
 );
 
 var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
+  logger.d({
+    "reportID": reportID,
+  });
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
-  DiagnosticReportTemplateFHIRModel? triageAssessment =
+  DiagnosticReportTemplateFHIRModel? triageAssessment = 
       ref.read(getTriageProvider).asData?.value;
 
-  TriageDetailedReportModel? triageDetailedReport =
+  TriageDetailedReportModel? triageDetailedReport = 
       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
+  logger.d("abc" + triageDetailedReport.toString());
+logger.d("abc" + triageAssessment.toString());
   logger.d({
     "profile": profileEntity,
     "assessmentResponse": triageDetailedReport,
@@ -91,7 +96,9 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
     triageDetailedReport!,
     triageAssessment!,
   );
-
+logger.d({
+    "response": response,
+  });
   return response;
 });
 
