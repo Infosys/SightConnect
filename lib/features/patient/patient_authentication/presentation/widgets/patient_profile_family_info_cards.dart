@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
   const PatientFamilyDetails({
@@ -72,18 +74,13 @@ class PatientFamilyDetails extends StatelessWidget {
                           color: AppColor.green,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.chevron_right),
-                      ),
+                      const Icon(Icons.chevron_right)
                     ],
                   ),
                 ),
               )
               .toList(),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -91,12 +88,28 @@ class PatientFamilyDetails extends StatelessWidget {
               InkWell(
                 customBorder: const CircleBorder(),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TriageAddMemberPage(),
-                    ),
-                  );
+                  try {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MiniAppDisplayPage(
+                          miniapp: MiniApp(
+                            id: "1",
+                            version: "1",
+                            name: "Register Patient",
+                            displayName: "Register Patient",
+                            sourceurl:
+                                "assets/miniapps/vt_register_patient.zip",
+                          ),
+                        ),
+                      ),
+                    );
+                  } catch (e) {
+                    logger.d({"error": e});
+                    Fluttertoast.showToast(
+                      msg: "Service not available",
+                    );
+                  }
                 },
                 child: Container(
                   width: 42.0,

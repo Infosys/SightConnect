@@ -101,9 +101,7 @@ class ProfileHeader extends StatelessWidget {
                             size: 16,
                           ),
                         ),
-                        const SizedBox(
-                          width: AppSize.ksheight,
-                        ),
+                        const SizedBox(width: AppSize.ksheight),
                         Text(
                           patient.profile?.patient?.phoneNumber ?? "",
                           softWrap: true,
@@ -117,7 +115,7 @@ class ProfileHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSize.kmwidth),
+                const SizedBox(width: AppSize.kswidth),
                 Flexible(
                   child: InkWell(
                     onTap: () async {

@@ -56,7 +56,7 @@ class PatientProfilePage extends ConsumerWidget {
         },
         error: (error, trace) {
           return const Center(
-            child: Text("Something went wrong"),
+            child: Text("Profile is not available at the moment"),
           );
         },
         loading: () {
