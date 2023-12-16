@@ -33,6 +33,7 @@ class PreliminaryAssessmentIvrCall extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(AppSize.klpadding),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

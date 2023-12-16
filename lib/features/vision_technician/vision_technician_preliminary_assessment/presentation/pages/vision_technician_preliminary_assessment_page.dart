@@ -66,7 +66,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
               1,
             );
             ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            Navigator.pop(context);
+            // Navigator.pop(context);
             // Navigator.pop(context);
           },
           style: ButtonStyle(
@@ -89,10 +89,16 @@ class _VisionTechnicianPreliminaryAssessmentPageState
           ),
         ),
       ),
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
         title: Text('Preliminary Assessment'),
+        leadingIcon: IconButton(
+          onPressed: () {
+            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -111,20 +117,17 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                   isSelectedOption: isSelectedOption,
                   onSelectedOptionChanged: updateVisibility,
                 ),
-                Visibility(
-                  visible: isWidgetVisible,
-                  child: Column(
+                if (isWidgetVisible) PreliminaryAssessmentQuestions(),
+                if (isWidgetVisible)
+                  const Column(
                     children: [
-                      const SizedBox(height: AppSize.klheight),
-                      // PreliminaryAssessmentQuestions(),
-                      const SizedBox(height: AppSize.klheight),
-                      const PreliminaryAssessmentRecommendation(),
-                      const SizedBox(height: AppSize.klheight),
+                      SizedBox(height: AppSize.klheight),
+                      PreliminaryAssessmentRecommendation(),
+                      SizedBox(height: AppSize.klheight),
                       PreliminaryAssessmentVisionCenter(),
-                      const SizedBox(height: AppSize.klheight),
+                      SizedBox(height: AppSize.klheight),
                     ],
-                  ),
-                )
+                  )
 
                 // showToastMessage(
                 //   "Done! Assessment with ID EA 010101 has been created for Sumanta.",
