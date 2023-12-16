@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
@@ -21,7 +22,12 @@ import '../widgets/visual_acuity_dialog.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";
-  const VisualAcuityInstructionalVideoPage({super.key});
+  const VisualAcuityInstructionalVideoPage({
+    this.mode = TriageMode.POST,
+    super.key,
+  });
+
+  final TriageMode mode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -121,7 +127,9 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 if (context.mounted) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const VisualAcuityInitiatePage(),
+                      builder: (context) => VisualAcuityInitiatePage(
+                        mode: mode,
+                      ),
                     ),
                   );
                 }

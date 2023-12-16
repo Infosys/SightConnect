@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/accessibility_settings.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/acuity_distance_tile.dart';
@@ -19,8 +20,8 @@ import '../widgets/visual_acuity_tumbling_overlay.dart';
 
 class VisualAcuityInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
-  const VisualAcuityInitiatePage({super.key});
-
+  const VisualAcuityInitiatePage({this.mode = TriageMode.POST, super.key});
+  final TriageMode mode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -120,8 +121,8 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
             ignoring: pointerState,
-            child: const Padding(
-              padding: EdgeInsets.only(
+            child: Padding(
+              padding: const EdgeInsets.only(
                 left: AppSize.klpadding,
                 right: AppSize.klpadding,
                 bottom: AppSize.klpadding,
@@ -130,16 +131,18 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TopReadingCard(),
-                  SizedBox(height: AppSize.klpadding),
-                  AcuityDistanceTile(
+                  const TopReadingCard(),
+                  const SizedBox(height: AppSize.klpadding),
+                  const AcuityDistanceTile(
                     distanceInCms: 40,
                   ),
                   Expanded(
                     child: BottomInputTab(
                       tabs: [
-                        SwipeGestureCard(),
-                        VoiceAssistCard(),
+                        SwipeGestureCard(
+                          mode: mode,
+                        ),
+                        const VoiceAssistCard(),
                       ],
                     ),
                   ),

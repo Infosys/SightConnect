@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -12,7 +13,12 @@ import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
-  const SwipeGestureCard({super.key});
+  const SwipeGestureCard({
+    this.mode = TriageMode.POST,
+    super.key,
+  });
+
+  final TriageMode mode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,7 +53,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return VisualAcuityDialog.showSuccessTemp(context);
+              return VisualAcuityDialog.showSuccessTemp(context, mode);
             });
         // next.setIsTestCompleted = true;
       }

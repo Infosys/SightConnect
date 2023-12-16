@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/usecases/usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,11 +17,11 @@ var updateTriageUseCase = Provider(
 );
 
 class UpdateTriageUseCase
-    implements UseCase<TriageAssessmentModel, UpdateTriageParam> {
+    implements UseCase<TriageResponseModel, UpdateTriageParam> {
   final TriageRepository _repository;
   UpdateTriageUseCase(this._repository);
   @override
-  Future<Either<Failure, TriageAssessmentModel>> call(
+  Future<Either<Failure, TriageResponseModel>> call(
     UpdateTriageParam params,
   ) async {
     final response = await _repository.updateTriage(triage: params.triage);
@@ -28,6 +30,6 @@ class UpdateTriageUseCase
 }
 
 class UpdateTriageParam {
-  final TriageAssessmentModel triage;
+  final TriageUpdateModel triage;
   UpdateTriageParam({required this.triage});
 }

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/repositories/triage_repository.dart';
@@ -245,16 +246,15 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageAssessmentModel>> updateTriage({
-    required TriageAssessmentModel triage,
+  Future<Either<Failure, TriageResponseModel>> updateTriage({
+    required TriageUpdateModel triage,
   }) async {
-    logger.d({"message": "Updating triage to local"});
-
     try {
-      final localResponse = await localDataSource.updateTriage(triage: triage);
-      return Right(localResponse);
+      final remoteResponse =
+          await remoteDataSource.updateTriage(triage: triage);
+      return Right(remoteResponse);
     } catch (e) {
-      return Left(CacheFailure(errorMessage: e.toString()));
+      return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
 }

@@ -114,6 +114,7 @@ flutter:
     - assets/services/
     - assets/new_assessment.json
     - assets/profile.json
+    - assets/triage_update_response.json
     - assets/triage_assessment.json
     - assets/miniapps/vt_register_patient.zip
   

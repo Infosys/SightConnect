@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,6 +13,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  });
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -72,6 +77,21 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       }
     } catch (e) {
       throw UnknownException();
+    }
+  }
+
+  @override
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  }) async {
+    // final response = await dio.patch("", data: triage.toJson());
+    var response =
+        await rootBundle.loadString("assets/triage_update_response.json");
+    if (response.isNotEmpty) {
+      Map<String, dynamic> data = jsonDecode(response);
+      return TriageUpdateMapper.toResponseModel(data);
+    } else {
+      throw ServerException();
     }
   }
 }
