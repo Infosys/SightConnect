@@ -61,11 +61,12 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   ReportPageHeader(
                     triageReportAndAssementPage: assessmentDetailsReport,
                   ),
-                  const AssessmentOverallResultCard(
+                   AssessmentOverallResultCard(
                     triageResult: {},
                     name: "name",
                     id: "id",
                     patientImage: AppImages.aboutUs,
+                    triageResultEntities: assessmentDetailsReport,
                   ),
                   ReportAssessmentQuestions(
                     questionResponseBreifModel:
@@ -74,6 +75,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   TumblingEReportCard(
                     tumblingEData:
                         assessmentDetailsReport.visualAcuityBreifEntity,
+                      observationDescription: assessmentDetailsReport.observationResultDescription,
+                    
                   ),
                   EyeScanTabView(
                     eyeScanData: assessmentDetailsReport.imageBriefEntity,

@@ -28,6 +28,10 @@ class LocalTriageReportSource {
       "sourceVersion": "1.0",
       "performerId": 9627849171,
       "performerRole": "PATIENT",
+      "diagnosticReportDescription" : "It's advisable to arrange an early visit to an eye specialist for a thorough evaluation and personalized treatment.",
+  "questionResultDescription" : "You might need to see an eye specialist.",
+  "observationResultDescription" : "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
+  "mediaResultDescription" : null,
       "incompleteTests": [
         {"id": 1101, "testName": "QUESTIONNAIRE"}
       ],

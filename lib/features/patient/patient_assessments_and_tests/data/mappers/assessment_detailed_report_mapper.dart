@@ -19,6 +19,10 @@ class AssessmentDetailedReportMapper {
       "triageAssessment": triageAssessment,
     });
     return TriageReportDetailedEntity(
+      triageResultDescription: triageDetailedReport.diagnosticReportDescription ?? "NA",
+      questionResultDescription: triageDetailedReport.questionResultDescription ?? "NA",
+      observationResultDescription: triageDetailedReport.observationResultDescription ?? "NA",
+      mediaResultDescription: triageDetailedReport.mediaResultDescription ?? "NA",
       patientId: "${profileEntity.id}",
       patientName: profileEntity.name,
       patientImage: profileEntity.image,

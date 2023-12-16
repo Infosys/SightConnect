@@ -7,12 +7,20 @@ class TriageReportDetailedEntity {
   final String assessmentID;
   final RequestPriority priority;
   final String reportDate;
+  final String triageResultDescription;
+  final String questionResultDescription;
+  final String observationResultDescription;
+  final String mediaResultDescription;
 
   final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
   final List<ObservationBriefEntity> visualAcuityBreifEntity;
   final List<ImageBriefEntity> imageBriefEntity;
 
-  TriageReportDetailedEntity({
+  TriageReportDetailedEntity({ 
+    required this.triageResultDescription,
+  required  this.questionResultDescription,
+  required  this.observationResultDescription, 
+  required this.mediaResultDescription,
     required this.patientId,
     required this.patientName,
     required this.patientImage,

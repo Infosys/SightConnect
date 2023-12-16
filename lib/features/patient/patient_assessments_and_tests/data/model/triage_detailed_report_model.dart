@@ -49,7 +49,9 @@ class TriageDetailedReportModel with _$TriageDetailedReportModel {
      List<Media> ? media,
      @TimestampConverter() DateTime? updateEndTime,
      String ? diagnosticReportDescription,
-
+    String ? questionResultDescription,
+    String ? observationResultDescription,
+    String ? mediaResultDescription,
      List<CarePlan> ? carePlans
 
 

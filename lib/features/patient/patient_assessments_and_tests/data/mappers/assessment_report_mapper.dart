@@ -4,6 +4,9 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 class AssessmentReportMapper {
   static TriageReportBriefEntity toEntity(TriageDetailedReportModel model) {
     return TriageReportBriefEntity(
+      questionResultDescription: model.questionResultDescription ?? "NA",
+      observationResultDescription: model.observationResultDescription ?? "NA",
+      mediaResultDescription: model.mediaResultDescription ?? "NA",
       triageResultID: model.diagnosticReportId!,
       priority: model.carePlans!.first.activities!.first
           .plannedActivityReference!.serviceRequest!.priority!,

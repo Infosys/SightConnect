@@ -51,6 +51,10 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
           const TimestampConverter().fromJson(json['updateEndTime'] as String?),
       diagnosticReportDescription:
           json['diagnosticReportDescription'] as String?,
+      questionResultDescription: json['questionResultDescription'] as String?,
+      observationResultDescription:
+          json['observationResultDescription'] as String?,
+      mediaResultDescription: json['mediaResultDescription'] as String?,
       carePlans: (json['carePlans'] as List<dynamic>?)
           ?.map((e) => CarePlan.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -85,6 +89,9 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'updateEndTime':
           const TimestampConverter().toJson(instance.updateEndTime),
       'diagnosticReportDescription': instance.diagnosticReportDescription,
+      'questionResultDescription': instance.questionResultDescription,
+      'observationResultDescription': instance.observationResultDescription,
+      'mediaResultDescription': instance.mediaResultDescription,
       'carePlans': instance.carePlans,
     };
 
