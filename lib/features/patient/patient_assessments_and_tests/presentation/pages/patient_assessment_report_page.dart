@@ -87,13 +87,17 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         );
       },
       loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
       error: (error, stack) {
-        return const Center(
-          child: Text("Error"),
+        return const Scaffold(
+          body: Center(
+            child: Text("The full report is not available at the moment."),
+          ),
         );
       },
     );
