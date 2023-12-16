@@ -88,15 +88,37 @@ class LocalTriageReportSource {
       ],
       "media": [
         {
-          "id": 1151,
-          "performer": null,
-          "issued": null,
-          "identifier": 1,
-          "baseUrl": "http//www.abc.com",
-          "endpoint": "/c/newimage.jpg",
-          "bodySite": null,
-          "score": 0.0,
-          "fileId": null
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1751,
+            "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
+            "endpoint": "Limbus-close-up-1024x555.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1752,
+            "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
+            "endpoint": "Limbus-close-up-1024x555.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1753,
+          "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
+            "endpoint": "Limbus-close-up-1024x555.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
         }
       ],
       "carePlans": [
@@ -272,15 +294,37 @@ class LocalTriageReportSource {
       ],
       "media": [
         {
-          "id": 2451,
-          "performer": null,
-          "issued": null,
-          "identifier": 1303,
-          "baseUrl": "http//www.abc.com",
-          "endpoint": "/c/newimage.jpg",
-          "bodySite": null,
-          "score": 0.0,
-          "fileId": null
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1751,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1752,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1753,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
         }
       ],
       "carePlans": [
@@ -456,15 +500,37 @@ class LocalTriageReportSource {
       ],
       "media": [
         {
-          "id": 1751,
-          "performer": null,
-          "issued": null,
-          "identifier": 1,
-          "baseUrl": "http//www.abc.com",
-          "endpoint": "/c/newimage.jpg",
-          "bodySite": null,
-          "score": 0.0,
-          "fileId": null
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1751,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1752,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1753,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
         }
       ],
       "carePlans": [

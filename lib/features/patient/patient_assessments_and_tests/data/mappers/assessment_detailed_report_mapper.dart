@@ -38,8 +38,46 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      imageBriefEntity: [],
+      imageBriefEntity: _getimageBreifEntity(triageAssessment, triageDetailedReport)
     );
+  }
+
+  static List<ImageBriefEntity> _getimageBreifEntity( DiagnosticReportTemplateFHIRModel triageAssessment,
+    TriageDetailedReportModel triageDetailedReport){
+    final List<ImageBriefEntity> imageBriefEntity = [];
+    Map<int,String> imageMap = {};
+   List<ImagingSelectionTemplateFHIRModel> ?imagingSelectionTemplateFHIRModels= triageAssessment.study?.imagingSelectionTemplate;
+   for( ImagingSelectionTemplateFHIRModel relatedImageFHIRModel in imagingSelectionTemplateFHIRModels!){
+      imageMap[relatedImageFHIRModel.id!] = relatedImageFHIRModel.name?? "";
+   }
+   for(Media imagingStudyModel in triageDetailedReport.media!){
+      if(imageMap.containsKey(imagingStudyModel.identifier)){
+        imageBriefEntity.add(
+          ImageBriefEntity(
+            imageId: imagingStudyModel.id ?? 0,
+            imageIdentifier: imagingStudyModel.identifier ?? 0,
+            imageUrl: "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}",
+            bodySite: imageMap[imagingStudyModel.identifier].toString(),
+          ),
+        );
+      }
+   }
+
+      return imageBriefEntity;
+
+  }
+  static BodySite calculateBodySite(String bodySite){
+    switch(bodySite){
+      case "LEFT_EYE":
+        return BodySite.LEFT_EYE;
+      case "RIGHT_EYE":
+        return BodySite.RIGHT_EYE;
+      case "BOTH_EYES":
+        return BodySite.BOTH_EYES;
+      default:
+        return BodySite.BOTH_EYES;
+    }
+
   }
 
   static List<ObservationBriefEntity> _getObservationBriefEntity(

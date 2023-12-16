@@ -53,14 +53,14 @@ class EyeScanTabView extends StatelessWidget {
             SizedBox(
               height: lerpDouble(
                   AppSize.height(context), AppSize.width(context), 1.05),
-              child: const TabBarView(
+              child:  TabBarView(
                 viewportFraction: 1,
                 children: [
                   RightCorneaTabView(
-                    rightEyeImage: [],
+                    rightEyeImage: [getRightEyeImageUrl( eyeScanData)],
                   ),
                   LeftCorneaTabView(
-                    leftEyeImage: [],
+                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData)],
                   ),
                 ],
               ),
@@ -70,4 +70,25 @@ class EyeScanTabView extends StatelessWidget {
       ),
     );
   }
+}
+
+String getLeftEyeImageUrl(List<ImageBriefEntity> imageBriefEntity){
+    for(ImageBriefEntity imageBrief in imageBriefEntity){
+      if(imageBrief.bodySite == "LEFT_EYE"){
+        return imageBrief.imageUrl;
+      }
+    }
+    return "";
+}
+
+
+
+String getRightEyeImageUrl(List<ImageBriefEntity> imageBriefEntity){
+   for(ImageBriefEntity imageBrief in imageBriefEntity){
+      if(imageBrief.bodySite == "RIGHT_EYE"){
+        return imageBrief.imageUrl;
+      }
+    }
+    return "";
+
 }
