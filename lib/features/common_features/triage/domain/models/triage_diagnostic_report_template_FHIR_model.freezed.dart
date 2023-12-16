@@ -1177,7 +1177,7 @@ mixin _$ObservationDefinitionFHIRModel {
   ObservationCode? get code => throw _privateConstructorUsedError;
   ObservationMethod? get method => throw _privateConstructorUsedError;
   Jurisdiction? get jurisdiction => throw _privateConstructorUsedError;
-  ObservationDefinitionModel? get observationDefinition =>
+  List<ObservationDefinitionModel>? get observationDefinition =>
       throw _privateConstructorUsedError;
   List<DataComponentFHIRModel>? get dataComponent =>
       throw _privateConstructorUsedError;
@@ -1210,13 +1210,11 @@ abstract class $ObservationDefinitionFHIRModelCopyWith<$Res> {
       ObservationCode? code,
       ObservationMethod? method,
       Jurisdiction? jurisdiction,
-      ObservationDefinitionModel? observationDefinition,
+      List<ObservationDefinitionModel>? observationDefinition,
       List<DataComponentFHIRModel>? dataComponent,
       List<RelatedImageFHIRModel>? relatedImage,
       List<QualifiedValueModel>? qualifiedValue,
       List<LanguageBasedTextModel>? languageBasedText});
-
-  $ObservationDefinitionModelCopyWith<$Res>? get observationDefinition;
 }
 
 /// @nodoc
@@ -1278,7 +1276,7 @@ class _$ObservationDefinitionFHIRModelCopyWithImpl<$Res,
       observationDefinition: freezed == observationDefinition
           ? _value.observationDefinition
           : observationDefinition // ignore: cast_nullable_to_non_nullable
-              as ObservationDefinitionModel?,
+              as List<ObservationDefinitionModel>?,
       dataComponent: freezed == dataComponent
           ? _value.dataComponent
           : dataComponent // ignore: cast_nullable_to_non_nullable
@@ -1296,19 +1294,6 @@ class _$ObservationDefinitionFHIRModelCopyWithImpl<$Res,
           : languageBasedText // ignore: cast_nullable_to_non_nullable
               as List<LanguageBasedTextModel>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ObservationDefinitionModelCopyWith<$Res>? get observationDefinition {
-    if (_value.observationDefinition == null) {
-      return null;
-    }
-
-    return $ObservationDefinitionModelCopyWith<$Res>(
-        _value.observationDefinition!, (value) {
-      return _then(_value.copyWith(observationDefinition: value) as $Val);
-    });
   }
 }
 
@@ -1329,14 +1314,11 @@ abstract class _$$_ObservationDefinitionFHIRModelCopyWith<$Res>
       ObservationCode? code,
       ObservationMethod? method,
       Jurisdiction? jurisdiction,
-      ObservationDefinitionModel? observationDefinition,
+      List<ObservationDefinitionModel>? observationDefinition,
       List<DataComponentFHIRModel>? dataComponent,
       List<RelatedImageFHIRModel>? relatedImage,
       List<QualifiedValueModel>? qualifiedValue,
       List<LanguageBasedTextModel>? languageBasedText});
-
-  @override
-  $ObservationDefinitionModelCopyWith<$Res>? get observationDefinition;
 }
 
 /// @nodoc
@@ -1395,9 +1377,9 @@ class __$$_ObservationDefinitionFHIRModelCopyWithImpl<$Res>
           : jurisdiction // ignore: cast_nullable_to_non_nullable
               as Jurisdiction?,
       observationDefinition: freezed == observationDefinition
-          ? _value.observationDefinition
+          ? _value._observationDefinition
           : observationDefinition // ignore: cast_nullable_to_non_nullable
-              as ObservationDefinitionModel?,
+              as List<ObservationDefinitionModel>?,
       dataComponent: freezed == dataComponent
           ? _value._dataComponent
           : dataComponent // ignore: cast_nullable_to_non_nullable
@@ -1430,12 +1412,13 @@ class _$_ObservationDefinitionFHIRModel
       this.code,
       this.method,
       this.jurisdiction,
-      this.observationDefinition,
+      final List<ObservationDefinitionModel>? observationDefinition,
       final List<DataComponentFHIRModel>? dataComponent,
       final List<RelatedImageFHIRModel>? relatedImage,
       final List<QualifiedValueModel>? qualifiedValue,
       final List<LanguageBasedTextModel>? languageBasedText})
-      : _dataComponent = dataComponent,
+      : _observationDefinition = observationDefinition,
+        _dataComponent = dataComponent,
         _relatedImage = relatedImage,
         _qualifiedValue = qualifiedValue,
         _languageBasedText = languageBasedText;
@@ -1458,8 +1441,17 @@ class _$_ObservationDefinitionFHIRModel
   final ObservationMethod? method;
   @override
   final Jurisdiction? jurisdiction;
+  final List<ObservationDefinitionModel>? _observationDefinition;
   @override
-  final ObservationDefinitionModel? observationDefinition;
+  List<ObservationDefinitionModel>? get observationDefinition {
+    final value = _observationDefinition;
+    if (value == null) return null;
+    if (_observationDefinition is EqualUnmodifiableListView)
+      return _observationDefinition;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<DataComponentFHIRModel>? _dataComponent;
   @override
   List<DataComponentFHIRModel>? get dataComponent {
@@ -1521,8 +1513,8 @@ class _$_ObservationDefinitionFHIRModel
             (identical(other.method, method) || other.method == method) &&
             (identical(other.jurisdiction, jurisdiction) ||
                 other.jurisdiction == jurisdiction) &&
-            (identical(other.observationDefinition, observationDefinition) ||
-                other.observationDefinition == observationDefinition) &&
+            const DeepCollectionEquality()
+                .equals(other._observationDefinition, _observationDefinition) &&
             const DeepCollectionEquality()
                 .equals(other._dataComponent, _dataComponent) &&
             const DeepCollectionEquality()
@@ -1544,7 +1536,7 @@ class _$_ObservationDefinitionFHIRModel
       code,
       method,
       jurisdiction,
-      observationDefinition,
+      const DeepCollectionEquality().hash(_observationDefinition),
       const DeepCollectionEquality().hash(_dataComponent),
       const DeepCollectionEquality().hash(_relatedImage),
       const DeepCollectionEquality().hash(_qualifiedValue),
@@ -1575,7 +1567,7 @@ abstract class _ObservationDefinitionFHIRModel
           final ObservationCode? code,
           final ObservationMethod? method,
           final Jurisdiction? jurisdiction,
-          final ObservationDefinitionModel? observationDefinition,
+          final List<ObservationDefinitionModel>? observationDefinition,
           final List<DataComponentFHIRModel>? dataComponent,
           final List<RelatedImageFHIRModel>? relatedImage,
           final List<QualifiedValueModel>? qualifiedValue,
@@ -1600,7 +1592,7 @@ abstract class _ObservationDefinitionFHIRModel
   @override
   Jurisdiction? get jurisdiction;
   @override
-  ObservationDefinitionModel? get observationDefinition;
+  List<ObservationDefinitionModel>? get observationDefinition;
   @override
   List<DataComponentFHIRModel>? get dataComponent;
   @override

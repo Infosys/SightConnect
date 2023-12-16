@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
@@ -33,30 +34,30 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
   ) {
     final List<ObservationBriefEntity> observationBriefEntity = [];
-    Map<int, Map<String, dynamic>> observationMap = {};
-    // for (var observation in triageAssessment.observation!) {
-    //   observationMap[observation.id!] = {
-    //     "observation": observation.code!.text,
-    //   };
-    // }
-    // for (var response in triageDetailedReport.responses!) {
-    //   if (observationMap.containsKey(response.linkId)) {
-    //     observationMap[response.linkId]!["response"] =
-    //         response.answers!.first.value;
-    //   }
-    // }
-   for(int i=0;i<3;i++) {
-        observationBriefEntity.add(
+    Map<int, String> observationMap = {};
+    if (triageAssessment.observations!.id !=null) {
+      int id = triageAssessment.observations!.id!;
+      BodySite bodySite = triageAssessment.observations!.bodySite!;
+      observationMap[id] = bodySite.toString();
+    }
+    for(ObservationDefinitionModel observation in triageAssessment.observations!.observationDefinition!){
+      int id = observation.id!;
+      BodySite bodySite = observation.bodySite!;
+      observationMap[id] = bodySite.toString();
+    }
+    for ( Observation observation in triageDetailedReport.observations!) {
+      if (observationMap.containsKey(observation.identifier)) {
+         observationBriefEntity.add(
           ObservationBriefEntity(
-            observationValue: 1,
-            observationId: 1,
-            observationValueIdentifier: 1,
-            bodySite: "Left Eye"),
+            observationValue: double.parse(observation.value!),
+            observationId: observation.id!,
+            observationValueIdentifier: observation.identifier!,
+            bodySite: observationMap[observation.identifier]!,),
         );
      
-    
-    
-   }
+      }
+    }
+   
    return observationBriefEntity;
   }
 

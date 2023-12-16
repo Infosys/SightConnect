@@ -168,10 +168,10 @@ _$_ObservationDefinitionFHIRModel _$$_ObservationDefinitionFHIRModelFromJson(
       method: $enumDecodeNullable(_$ObservationMethodEnumMap, json['method']),
       jurisdiction:
           $enumDecodeNullable(_$JurisdictionEnumMap, json['jurisdiction']),
-      observationDefinition: json['observationDefinition'] == null
-          ? null
-          : ObservationDefinitionModel.fromJson(
-              json['observationDefinition'] as Map<String, dynamic>),
+      observationDefinition: (json['observationDefinition'] as List<dynamic>?)
+          ?.map((e) =>
+              ObservationDefinitionModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       dataComponent: (json['dataComponent'] as List<dynamic>?)
           ?.map(
               (e) => DataComponentFHIRModel.fromJson(e as Map<String, dynamic>))

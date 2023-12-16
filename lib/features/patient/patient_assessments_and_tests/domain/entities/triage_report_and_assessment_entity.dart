@@ -37,7 +37,7 @@ class QuestionResponseBriefEntity {
 }
 
 class ObservationBriefEntity {
-  final int observationValue;
+  final double observationValue;
   final int observationId;
   final int observationValueIdentifier;
   final String bodySite;

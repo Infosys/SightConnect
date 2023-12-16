@@ -106,7 +106,7 @@ class ObservationDefinitionFHIRModel with _$ObservationDefinitionFHIRModel {
     ObservationCode? code,
     ObservationMethod? method,
     Jurisdiction? jurisdiction,
-    ObservationDefinitionModel? observationDefinition,
+    List<ObservationDefinitionModel>? observationDefinition,
     List<DataComponentFHIRModel>? dataComponent,
     List<RelatedImageFHIRModel>? relatedImage,
     List<QualifiedValueModel>? qualifiedValue,
