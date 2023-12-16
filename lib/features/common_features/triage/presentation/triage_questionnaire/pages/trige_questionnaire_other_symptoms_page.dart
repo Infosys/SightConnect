@@ -123,7 +123,6 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 3,
                     child: ElevatedButton(
                       onPressed: () {
                         ref

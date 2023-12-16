@@ -8,7 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelplineCard extends StatelessWidget {
-  const HelplineCard({super.key});
+  const HelplineCard({super.key, required this.helpLine});
+
+  final String helpLine;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,11 @@ class HelplineCard extends StatelessWidget {
                     style: applyRobotoFont(fontSize: 14),
                   ),
                 ),
-                subtitle: const Padding(
-                  padding: EdgeInsets.only(bottom: 4.0),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
                   child: Text(
-                    "1800 1800 1800",
-                    style: TextStyle(
+                    helpLine,
+                    style: const TextStyle(
                       fontSize: 14,
                       color: AppColor.black,
                       fontWeight: FontWeight.bold,
@@ -61,13 +63,9 @@ class HelplineCard extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: () {
-              Uri phoneno = Uri.parse("tel:1800 1800 1800");
-              canLaunchUrl(number) {
-                launchUrl(number);
-              }
-
-              canLaunchUrl(phoneno);
+            onTap: () async {
+              Uri phoneno = Uri.parse("tel:$helpLine");
+              await launchUrl(phoneno);
             },
             child: Container(
               decoration: BoxDecoration(

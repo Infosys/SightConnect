@@ -13,11 +13,11 @@ import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
-    this.miniapp,
+    required this.miniapp,
     this.isPermissionRequired = false,
     super.key,
   });
-  final MiniApp? miniapp;
+  final MiniApp miniapp;
   final bool isPermissionRequired;
 
   @override
@@ -29,7 +29,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     with WidgetsBindingObserver {
   late InAppWebViewController webViewController;
   Logger logger = Logger();
-  bool? isMiniAppLoaded = false;
+  bool isMiniAppLoaded = false;
   int port = 8081;
   String progressMessage = "";
   @override
@@ -57,88 +57,78 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
 
   @override
   Widget build(BuildContext context) {
-    if (widget.miniapp == null || isMiniAppLoaded == false) {
-      return Scaffold(
-        appBar: WebViewAppBar(
-          onBack: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      return RefreshIndicator(
-        onRefresh: () async {
-          await _loadMiniApp();
-        },
-        child: PopScope(
-          onPopInvoked: (value) async {},
-          child: Scaffold(
+    return !isMiniAppLoaded
+        ? Scaffold(
             appBar: WebViewAppBar(
-              title: widget.miniapp!.displayName,
               onBack: () {
                 Navigator.of(context).pop();
               },
             ),
-            body: InAppWebView(
-              initialUrlRequest: URLRequest(
-                url: Uri.parse("http://127.0.0.1:$port/"),
-              ),
-              onLoadError: (controller, url, code, message) async {
-                logger.e("Error: $message");
-                setState(() {
-                  isMiniAppLoaded = null;
-                  progressMessage = "Something went wrong";
-                });
-              },
-              onLoadHttpError: (controller, url, code, message) {
-                logger.e("Error: $message");
-                setState(() {
-                  isMiniAppLoaded = null;
-                  progressMessage = "Something went wrong";
-                });
-              },
-              initialOptions: InAppWebViewGroupOptions(
-                ios: IOSInAppWebViewOptions(
-                  useOnNavigationResponse: true,
-                  allowsInlineMediaPlayback: true,
-                ),
-                android: AndroidInAppWebViewOptions(
-                  useHybridComposition: true,
-                  useShouldInterceptRequest: true,
-                ),
-              ),
-              onWebViewCreated: (controller) {
-                webViewController = controller;
-              },
+            body: const Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ),
-      );
-    }
+          )
+        : RefreshIndicator(
+            onRefresh: () async {
+              await _loadMiniApp();
+            },
+            child: PopScope(
+              onPopInvoked: (value) async {},
+              child: Scaffold(
+                appBar: WebViewAppBar(
+                  title: widget.miniapp.displayName,
+                  onBack: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                body: InAppWebView(
+                  initialUrlRequest: URLRequest(
+                    url: Uri.parse("http://127.0.0.1:$port/"),
+                  ),
+                  onLoadError: (controller, url, code, message) async {
+                    logger.e("Error: $message");
+                    setState(() {
+                      progressMessage = "Something went wrong";
+                    });
+                  },
+                  onLoadHttpError: (controller, url, code, message) {
+                    logger.e("Error: $message");
+                    setState(() {
+                      progressMessage = "Something went wrong";
+                    });
+                  },
+                  initialOptions: InAppWebViewGroupOptions(
+                    ios: IOSInAppWebViewOptions(
+                      useOnNavigationResponse: true,
+                      allowsInlineMediaPlayback: true,
+                    ),
+                    android: AndroidInAppWebViewOptions(
+                      useHybridComposition: true,
+                      useShouldInterceptRequest: true,
+                    ),
+                  ),
+                  onWebViewCreated: (controller) {
+                    webViewController = controller;
+                  },
+                ),
+              ),
+            ),
+          );
   }
 
   Future<void> _loadMiniApp() async {
-    setState(() {
-      isMiniAppLoaded = false;
-      progressMessage = "Loading MiniApp";
-    });
+    setState(
+      () {
+        isMiniAppLoaded = false;
+        progressMessage = "Loading MiniApp";
+      },
+    );
     final scaffoldMessenger = ScaffoldMessenger.of(context);
-    if (widget.miniapp == null) {
-      scaffoldMessenger.showSnackBar(
-        const SnackBar(
-          content: Text("MiniApp not available"),
-        ),
-      );
-      return;
-    }
 
     try {
-      var id = widget.miniapp!.id;
-      var version = widget.miniapp!.version;
-      var path = widget.miniapp!.sourceurl;
+      var id = widget.miniapp.id;
+      var version = widget.miniapp.version;
+      var path = widget.miniapp.sourceurl;
       final zipPath = await _storeFileToLocalFromAsset(path, version, id);
       setState(() {
         progressMessage = "Extracting MiniApp";
@@ -159,7 +149,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
         ),
       );
       setState(() {
-        isMiniAppLoaded = null;
         progressMessage = "Something went wrong";
       });
       return;
