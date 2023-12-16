@@ -138,14 +138,6 @@ class TriageResultPage extends ConsumerWidget {
                         color: Colors.black,
                       ),
                     ),
-                    const Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColor.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: AppSize.kmheight),

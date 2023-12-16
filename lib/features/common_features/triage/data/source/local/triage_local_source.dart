@@ -12,7 +12,7 @@ abstract class TriageLocalSource {
     required TriageAssessmentModel triage,
   });
   Future<void> saveTriage({
-    required TriageAssessmentModel triage,
+    required DiagnosticReportTemplateFHIRModel triage,
   });
   Future<void> deleteTriage();
 
@@ -54,7 +54,8 @@ class TriageLocalSourceImpl implements TriageLocalSource {
     });
     final response = await triageDBHelper.getTriageAssessment();
     if (response.isNotEmpty) {
-      final triageAssessment = DiagnosticReportTemplateFHIRModel.fromJson(response);
+      final triageAssessment =
+          DiagnosticReportTemplateFHIRModel.fromJson(response);
       return triageAssessment;
     } else {
       throw Exception("No Triage Assessment Found");
@@ -73,7 +74,8 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<void> saveTriage({required TriageAssessmentModel triage}) async {
+  Future<void> saveTriage(
+      {required DiagnosticReportTemplateFHIRModel triage}) async {
     logger.d({
       "saveTriage": json.encode(triage),
     });
@@ -83,6 +85,9 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   @override
   Future<TriageResponseModel> saveTriageResponse(
       {required TriageResponseModel triageResponse}) async {
+    logger.d({
+      "saveTriageResponse": json.encode(triageResponse),
+    });
     await triageDBHelper.insertTriageResponse(triageResponse: triageResponse);
     await triageDBHelper.deleteAllTriageSteps();
     return triageResponse;

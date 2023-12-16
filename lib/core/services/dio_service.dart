@@ -6,6 +6,8 @@ var dioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
       baseUrl: AppEnv.baseUrl,
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 5),
     ),
   ),
 );
