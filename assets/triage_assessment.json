@@ -59,7 +59,7 @@
     "description": "1801",
     "category": "Exam",
     "code": "Eye",
-    "bodySite": "BOTH_EYE",
+    "bodySite": "BOTH_EYES",
     "method": "Eye",
     "jurisdiction": "ALL",
     "observationDefinition": [

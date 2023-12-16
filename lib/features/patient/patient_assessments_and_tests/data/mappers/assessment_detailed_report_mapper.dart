@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 class AssessmentDetailedReportMapper {
@@ -12,6 +13,11 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
+    logger.f({
+      "profileEntity": profileEntity,
+      "triageDetailedReport": triageDetailedReport,
+      "triageAssessment": triageAssessment,
+    });
     return TriageReportDetailedEntity(
       patientId: "${profileEntity.id}",
       patientName: profileEntity.name,
@@ -24,40 +30,46 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      visualAcuityBreifEntity: [],
+      visualAcuityBreifEntity: _getObservationBriefEntity(
+        triageAssessment,
+        triageDetailedReport,
+      ),
       imageBriefEntity: [],
     );
   }
+
   static List<ObservationBriefEntity> _getObservationBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
     final List<ObservationBriefEntity> observationBriefEntity = [];
     Map<int, String> observationMap = {};
-    if (triageAssessment.observations?.id ==null) {
-      int id = triageAssessment.observations?.id??0;
-      BodySite bodySite = triageAssessment.observations?.bodySite??BodySite.RIGHT_EYE;
+    if (triageAssessment.observations?.id == null) {
+      int id = triageAssessment.observations?.id ?? 0;
+      BodySite bodySite =
+          triageAssessment.observations?.bodySite ?? BodySite.RIGHT_EYE;
       observationMap[id] = bodySite.toString();
     }
-    for(ObservationDefinitionModel observation in triageAssessment.observations!.observationDefinition!){
-      int id = observation?.id??0;
+    for (ObservationDefinitionModel observation
+        in triageAssessment.observations!.observationDefinition!) {
+      int id = observation?.id ?? 0;
       BodySite bodySite = observation.bodySite!;
       observationMap[id] = bodySite.toString();
     }
-    for ( Observation observation in triageDetailedReport.observations!) {
+    for (Observation observation in triageDetailedReport.observations!) {
       if (observationMap.containsKey(observation.identifier)) {
-         observationBriefEntity.add(
+        observationBriefEntity.add(
           ObservationBriefEntity(
             observationValue: double.parse(observation.value!),
-            observationId: observation.id??0,
-            observationValueIdentifier: observation.identifier??0,
-            bodySite: observationMap[observation.identifier].toString(),),
+            observationId: observation.id ?? 0,
+            observationValueIdentifier: observation.identifier ?? 0,
+            bodySite: observationMap[observation.identifier].toString(),
+          ),
         );
-     
       }
     }
-   
-   return observationBriefEntity;
+
+    return observationBriefEntity;
   }
 
   static List<QuestionResponseBriefEntity> _getQuestionsBriefEntity(
