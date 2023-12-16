@@ -56,7 +56,8 @@ final getPatientProfileProvider =
               "relation": "MOTHER",
               "parentPatientId": 1202,
               "name": "Raghavi Pandey",
-              "profilePicture": "assets/images/user.png",
+              "profilePicture":
+                  "https://vectorstate.com/stock-photo-preview/133191226/1000/ist_18592_03644.jpg",
               "age": 20,
               "regRef": "1-07b601cf-cc06-4ec1-95ca-d2d0dd16439b"
             },
@@ -65,7 +66,8 @@ final getPatientProfileProvider =
               "relation": "FATHER",
               "parentPatientId": 1202,
               "name": "Mangal Pandey",
-              "profilePicture": "assets/images/user.png",
+              "profilePicture":
+                  "https://vectorstate.com/stock-photo-preview/133191226/1000/ist_18592_03644.jpg",
               "age": 10,
               "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
             },

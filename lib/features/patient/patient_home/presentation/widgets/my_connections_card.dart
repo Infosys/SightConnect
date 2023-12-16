@@ -47,6 +47,9 @@ class MyConnectionsCard extends HookWidget {
                       errorWidget: (context, url, error) => const CircleAvatar(
                         backgroundColor: AppColor.lightGrey,
                       ),
+                      placeholder: (context, url) => const CircleAvatar(
+                        backgroundColor: AppColor.lightGrey,
+                      ),
                     )
                   : const CircleAvatar(
                       backgroundColor: AppColor.lightGrey,
