@@ -109,50 +109,54 @@ class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      contentPadding: const EdgeInsets.all(0),
-      controlAffinity: ListTileControlAffinity.leading,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            child: Text(
-              title,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.black,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: chipColor,
-            ),
-            child: Text(
-              chipText,
-              style: const TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w500,
-                color: AppColor.white,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      width: AppSize.width(context) * 0.88,
+      child: CheckboxListTile(
+        contentPadding: const EdgeInsets.all(0),
+        controlAffinity: ListTileControlAffinity.leading,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                title,
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.black,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-          )
-        ],
-      ),
-      subtitle: Text(
-        subtitle,
-        style: TextStyle(
-          color: subtitlecolor,
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: chipColor,
+              ),
+              child: Text(
+                chipText,
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.white,
+                ),
+              ),
+            )
+          ],
         ),
+        subtitle: Text(
+          subtitle,
+          style: TextStyle(
+            color: subtitlecolor,
+          ),
+        ),
+        value: isSelected,
+        onChanged: (value) {
+          onPressed(value!);
+        },
       ),
-      value: isSelected,
-      onChanged: (value) {
-        onPressed(value!);
-      },
     );
   }
 }
