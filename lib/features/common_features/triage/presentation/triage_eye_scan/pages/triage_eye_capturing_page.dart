@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -238,6 +239,8 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future<void> _takePicture(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    final scaffold = ScaffoldMessenger.of(context);
     try {
       final image = await _capturePicture(context);
       if (image == null) {
@@ -258,20 +261,31 @@ class _PatientTriageEyeCapturingPageState
         model.setCurrentEye(TriageEyeType.UNKNOWN);
 
         if (mounted) {
-          final navigator = Navigator.of(context);
-          final response = await _showTestCompletionDialog(context);
-          if (response) {
-            setState(() {
-              isLoading = true;
-            });
-            await ref
-                .read(triageEyeScanProvider)
-                .saveTriageEyeScanResponseToDB();
-            final response = await ref.read(triageProvider).saveTriage();
-            setState(() {
-              isLoading = false;
-            });
-            response.fold((failure) {
+          setState(() {
+            isLoading = true;
+          });
+          scaffold.showSnackBar(
+            SnackBar(
+              content: Text(
+                "Submitting you triage. Please wait...",
+                style: applyRobotoFont(
+                  color: AppColor.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              backgroundColor: AppColor.black,
+              duration: const Duration(seconds: 1),
+            ),
+          );
+          await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
+          final response = await ref.read(triageProvider).saveTriage();
+          setState(() {
+            isLoading = false;
+          });
+          scaffold.hideCurrentSnackBar();
+          response.fold(
+            (failure) {
               showDialog(
                 context: context,
                 builder: (context) => _showServerExceptionDialog(
@@ -279,7 +293,8 @@ class _PatientTriageEyeCapturingPageState
                   failure,
                 ),
               );
-            }, (result) {
+            },
+            (result) {
               ref.read(triageStepperProvider).goToNextStep();
               navigator.push(
                 MaterialPageRoute(
@@ -288,8 +303,8 @@ class _PatientTriageEyeCapturingPageState
                   ),
                 ),
               );
-            });
-          }
+            },
+          );
         }
       }
     } on CameraException {
@@ -356,11 +371,14 @@ class _PatientTriageEyeCapturingPageState
           ),
         ),
         actions: [
+          Visibility(
+            visible: isLoading,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
           TextButton(
-            onPressed: () async {
-              final navigator = Navigator.of(context);
-              navigator.pop(true);
-            },
+            onPressed: () async {},
             child: Text(
               "View Result",
               style: applyRobotoFont(
