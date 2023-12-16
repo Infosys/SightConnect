@@ -72,7 +72,11 @@ var recentService = [
     "text": "Visual Acuity Test",
     "color": AppColor.lavanderBlue
   },
-  {"icon": AppIcon.eyeScanner, "text": "Eye Scanner", "color": AppColor.bisque},
+  // {
+  //   "icon": AppIcon.eyeScanner,
+  //   "text": "Eye Scanner",
+  //   "color": AppColor.bisque,
+  // },
 ];
 
 List<Map<String, dynamic>> nearByVisionCenter = [

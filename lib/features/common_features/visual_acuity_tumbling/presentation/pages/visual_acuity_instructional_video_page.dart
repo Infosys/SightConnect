@@ -187,7 +187,9 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 8),
+                        horizontal: 14,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColor.white,
                         boxShadow: [

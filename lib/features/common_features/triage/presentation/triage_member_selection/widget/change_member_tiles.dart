@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/relationship.dart';
@@ -70,8 +71,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       person.profilePhoto != null
-                          ? Image.asset(
-                              person.profilePhoto!,
+                          ? CachedNetworkImage(
+                              imageUrl: person.profilePhoto!,
                               height: 40,
                               width: 40,
                             )
@@ -132,8 +133,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       person.profilePicture != null
-                          ? Image.asset(
-                              person.profilePicture!,
+                          ? CachedNetworkImage(
+                              imageUrl: person.profilePicture!,
                               height: 40,
                               width: 40,
                             )

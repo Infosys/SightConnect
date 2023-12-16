@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentOverallResultCard extends StatelessWidget {
-  
   const AssessmentOverallResultCard({
     super.key,
     required this.triageResult,
@@ -29,11 +28,13 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: getRequestPriorityColor(triageResultEntities.priority).withOpacity(0.7),
+          color: getRequestPriorityColor(triageResultEntities.priority)
+              .withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: getRequestPriorityColor(triageResultEntities.priority).withOpacity(0.2),
+            color: getRequestPriorityColor(triageResultEntities.priority)
+                .withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
             offset: const Offset(4, 4),
@@ -73,13 +74,11 @@ class AssessmentOverallResultCard extends StatelessWidget {
             ],
           ),
         ),
-        subtitle: Flexible(
-          child: Text(
-            triageResultEntities.questionResultDescription,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.darkGrey,
-            ),
+        subtitle: Text(
+          triageResultEntities.questionResultDescription,
+          style: applyRobotoFont(
+            fontSize: 14,
+            color: AppColor.darkGrey,
           ),
         ),
       ),
@@ -116,4 +115,3 @@ Color getRequestPriorityColor(RequestPriority priority) {
       return AppColor.grey;
   }
 }
-

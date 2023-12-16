@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
@@ -35,10 +36,16 @@ class ReportPageHeader extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: AssetImage(
-                  triageReportAndAssementPage.patientImage,
+              child: CachedNetworkImage(
+                imageUrl: triageReportAndAssementPage.patientImage,
+                height: 60,
+                width: 60,
+                fit: BoxFit.cover,
+                imageBuilder: (context, imageProvider) => CircleAvatar(
+                  backgroundImage: imageProvider,
+                ),
+                errorWidget: (context, url, error) => const CircleAvatar(
+                  backgroundColor: AppColor.lightGrey,
                 ),
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
@@ -37,30 +38,51 @@ class PatientFamilyDetails extends StatelessWidget {
                 (data) => ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
                   contentPadding: const EdgeInsets.all(0),
-                  leading: CircleAvatar(
-                    child: data.profilePicture != null
-                        ? Image.asset(
-                            data.profilePicture!,
-                          )
-                        : const SizedBox(),
-                  ),
-                  title: Text(
-                    data.name ?? "",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  subtitle: Text(
-                    data.parentPatientId != null
-                        ? data.relation.toString().split(".").last
-                        : "Self, ${data.age} years",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
-                    ),
+                  title: Row(
+                    children: [
+                      data.profilePicture != null
+                          ? CachedNetworkImage(
+                              imageUrl: data.profilePicture!,
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                backgroundImage: imageProvider,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const CircleAvatar(
+                                backgroundColor: AppColor.lightGrey,
+                              ),
+                            )
+                          : const CircleAvatar(),
+                      const SizedBox(
+                        width: AppSize.ksheight,
+                      ),
+                      Flexible(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data.name ?? "",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              data.parentPatientId != null
+                                  ? data.relation.toString().split(".").last
+                                  : "Self, ${data.age} years",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                   trailing: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

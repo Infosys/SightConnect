@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -145,10 +146,16 @@ class _MemberTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             profilePicture != null
-                ? Image.asset(
-                    profilePicture!,
+                ? CachedNetworkImage(
+                    imageUrl: profilePicture!,
                     height: 40,
                     width: 40,
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      backgroundImage: imageProvider,
+                    ),
+                    errorWidget: (context, url, error) => const CircleAvatar(
+                      backgroundColor: AppColor.lightGrey,
+                    ),
                   )
                 : const CircleAvatar(),
             const SizedBox(width: 20),

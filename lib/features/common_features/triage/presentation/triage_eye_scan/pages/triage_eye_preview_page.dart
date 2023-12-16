@@ -16,7 +16,6 @@ class TriageEyePreviewPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Positioned.fill(
-            // child: Image.asset(AppImages.aboutUs)
             child: Image.file(
               File(imageFile!.path),
               fit: BoxFit.cover,

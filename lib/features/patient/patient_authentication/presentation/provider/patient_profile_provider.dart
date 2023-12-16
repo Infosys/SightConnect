@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/app_environment.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
@@ -22,9 +21,10 @@ final getPatientProfileProvider =
           "patientID": "9627849171",
           "abhaNumber": null,
           "abhaAddress": null,
-          "name": "Raghavi Mishra",
+          "name": "Manish Pandey",
           "gender": "FEMALE",
-          "profilePhoto": AppImages.profieImage,
+          "profilePhoto":
+              "https://www.stryx.com/cdn/shop/articles/man-looking-attractive.jpg",
           "email": "RaghaviMishra@gmail.com",
           "dayOfBirth": "15",
           "monthOfBirth": "08",
@@ -69,25 +69,6 @@ final getPatientProfileProvider =
               "age": 10,
               "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
             },
-
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
           ],
           "identifiers": null,
           "medicalRecords": null

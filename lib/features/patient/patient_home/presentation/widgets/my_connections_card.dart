@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -10,7 +12,7 @@ class MyConnectionsCard extends HookWidget {
     required this.index,
   }) : super(key: key);
 
-  final String image;
+  final String? image;
   final String name;
   final int index;
 
@@ -31,19 +33,24 @@ class MyConnectionsCard extends HookWidget {
             child: Container(
               width: AppSize.width(context) * 0.15,
               height: AppSize.width(context) * 0.15,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: isSelected.value ? Colors.blue : Colors.transparent,
-                  width: 3.0,
-                ),
-                image: DecorationImage(
-                  opacity: isSelected.value ? 1 : 0.9,
-                  image: AssetImage(
-                    image,
-                  ),
-                ),
               ),
+              child: image != null
+                  ? CachedNetworkImage(
+                      imageUrl: image!,
+                      height: 45,
+                      width: 45,
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                      ),
+                      errorWidget: (context, url, error) => const CircleAvatar(
+                        backgroundColor: AppColor.lightGrey,
+                      ),
+                    )
+                  : const CircleAvatar(
+                      backgroundColor: AppColor.lightGrey,
+                    ),
             ),
           ),
           const SizedBox(height: AppSize.ksheight),

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -35,68 +36,50 @@ class PatientHomePageAppBar extends StatelessWidget
         ],
       ),
       actions: [
-        InkWell(
-          customBorder: const CircleBorder(),
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (ctx) => const MemberSelectionPopUp(),
-              barrierDismissible: false,
-              barrierColor: AppColor.blackOpacity,
-            );
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                height: 24,
-                width: 62,
-                padding: const EdgeInsets.all(4),
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: const Icon(
-                  CupertinoIcons.chevron_down,
-                  size: 16,
-                  color: Colors.white,
-                ),
-              ),
-              Consumer(
-                builder: (context, ref, child) {
-                  return ref.watch(getPatientProfileProvider).when(
-                    data: (patient) {
-                      final profilePhoto =
-                          patient.profile?.patient?.profilePhoto;
-                      return Positioned(
-                        right: -10,
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Theme.of(context).primaryColor,
-                          child: CircleAvatar(
-                            radius: 18,
-                            backgroundImage: profilePhoto == null
-                                ? const AssetImage('assets/images/user.png')
-                                : AssetImage(
-                                    patient.profile!.patient!.profilePhoto!,
-                                  ) as ImageProvider,
+        Consumer(
+          builder: (context, ref, child) {
+            return ref.watch(getPatientProfileProvider).when(
+              data: (patient) {
+                final profilePhoto = patient.profile?.patient?.profilePhoto;
+                return profilePhoto != null
+                    ? InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => const MemberSelectionPopUp(),
+                            barrierDismissible: false,
+                            barrierColor: AppColor.blackOpacity,
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColor.primary,
+                              width: 2,
+                            ),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: profilePhoto,
+                            height: 40,
+                            width: 40,
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              backgroundImage: imageProvider,
+                            ),
                           ),
                         ),
-                      );
-                    },
-                    loading: () {
-                      return const SizedBox();
-                    },
-                    error: (e, s) {
-                      return const SizedBox();
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
+                      )
+                    : const CircleAvatar();
+              },
+              loading: () {
+                return const CircleAvatar();
+              },
+              error: (e, s) {
+                return const CircleAvatar();
+              },
+            );
+          },
         ),
         const SizedBox(width: AppSize.kmwidth),
       ],

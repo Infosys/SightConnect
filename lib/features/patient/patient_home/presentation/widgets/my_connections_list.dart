@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -55,24 +56,24 @@ class MyConnectionsList extends ConsumerWidget {
               ),
             ),
             const Spacer(),
-            // TextButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => const PatientProfilePage(),
-            //       ),
-            //     );
-            //   },
-            //   child: Text(
-            //     "See All",
-            //     style: applyRobotoFont(
-            //       fontSize: 14,
-            //       fontWeight: FontWeight.w500,
-            //       color: AppColor.blue,
-            //     ),
-            //   ),
-            // )
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PatientProfilePage(),
+                  ),
+                );
+              },
+              child: Text(
+                "See All",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.blue,
+                ),
+              ),
+            )
           ],
         ),
         const SizedBox(height: AppSize.ksheight),
@@ -92,8 +93,7 @@ class MyConnectionsList extends ConsumerWidget {
                             .entries
                             .map(
                               (e) => MyConnectionsCard(
-                                image: e.value.profilePicture ??
-                                    AppImages.profieImage,
+                                image: e.value.profilePicture,
                                 name: e.value.name ?? "",
                                 index: e.key,
                               ),

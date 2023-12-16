@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
@@ -96,13 +97,28 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                             enabled: true,
                             value: person.name,
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Image.asset(
-                                  person.image,
-                                  width: 25,
-                                  height: 25,
-                                ),
-                                const SizedBox(width: 10),
+                                (person.image.isEmpty)
+                                    ? const CircleAvatar(
+                                        backgroundColor: AppColor.lightGrey,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: person.image,
+                                        height: 20,
+                                        width: 20,
+                                        fit: BoxFit.cover,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                CircleAvatar(
+                                          backgroundImage: imageProvider,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const CircleAvatar(
+                                          backgroundColor: AppColor.lightGrey,
+                                        ),
+                                      ),
+                                const SizedBox(width: 8),
                                 Text(
                                   person.name,
                                   style: applyRobotoFont(

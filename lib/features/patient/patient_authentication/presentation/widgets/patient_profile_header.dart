@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
@@ -36,27 +37,40 @@ class ProfileHeader extends StatelessWidget {
         children: [
           SizedBox(height: AppSize.height(context) * 0.11),
           ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(130),
-              child: patient.profile?.patient?.profilePhoto != null
-                  ? Image.asset(
-                      patient.profile!.patient!.profilePhoto!,
-                      fit: BoxFit.cover,
-                    )
-                  : const CircleAvatar(
-                      backgroundColor: AppColor.lightGrey,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                patient.profile?.patient?.profilePhoto != null
+                    ? CachedNetworkImage(
+                        imageUrl: patient.profile!.patient!.profilePhoto!,
+                        height: 60,
+                        width: 60,
+                        fit: BoxFit.cover,
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const CircleAvatar(
+                          backgroundColor: AppColor.lightGrey,
+                        ),
+                      )
+                    : const CircleAvatar(
+                        backgroundColor: AppColor.lightGrey,
+                      ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Flexible(
+                  child: Text(
+                    patient.profile?.patient?.name ?? "",
+                    style: applyFiraSansFont(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.white,
                     ),
-            ),
-            title: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              child: Text(
-                patient.profile?.patient?.name ?? "",
-                style: applyFiraSansFont(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400,
-                    color: AppColor.white),
-              ),
+                  ),
+                ),
+              ],
             ),
             subtitle: Padding(
               padding:
@@ -71,7 +85,6 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.ksheight),
             child: Row(
