@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -153,14 +154,20 @@ class ResultPageTopCard extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: patientImage.isEmpty
-                    ? null
-                    : AssetImage(
-                        patientImage,
+              child: patientImage.isEmpty
+                  ? const CircleAvatar(
+                      backgroundColor: AppColor.lightGrey,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: patientImage,
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        radius: 40,
+                        backgroundImage: imageProvider,
                       ),
-              ),
+                      errorWidget: (context, url, error) => const CircleAvatar(
+                        backgroundColor: AppColor.lightGrey,
+                      ),
+                    ),
             ),
           )
         ],

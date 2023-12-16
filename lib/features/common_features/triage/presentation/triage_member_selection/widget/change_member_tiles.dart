@@ -75,6 +75,14 @@ class ChangeMemberTiles extends HookConsumerWidget {
                               imageUrl: person.profilePhoto!,
                               height: 40,
                               width: 40,
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                backgroundImage: imageProvider,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const CircleAvatar(
+                                backgroundColor: AppColor.lightGrey,
+                              ),
                             )
                           : const CircleAvatar(),
                       const SizedBox(
