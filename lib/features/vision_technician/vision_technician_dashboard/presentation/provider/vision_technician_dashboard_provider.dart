@@ -19,7 +19,7 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
     const VisionTechnicianHomePage(),
     VisionTechnicianRegisterNewPatientPage(),
     // VisionTechnicianCloseAssessmentPage(),
-    const VisionTechnicianPreliminaryAssessmentPage(),
+    const VisionTechnicianPreliminaryAssessmentPage(patientId: 1202,),
     const VisionTechnicianMarkMyAvailabilityPage(),
     const VisionTechnicianIvrCallHistory(),
   ];

@@ -1,15 +1,14 @@
 import 'dart:ui';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/modals/member_selection.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/constants/app_color.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -41,7 +40,7 @@ class PatientHomePageAppBar extends StatelessWidget
           onTap: () {
             showDialog(
               context: context,
-              builder: (context) => const MemberSelectionPopUp(),
+              builder: (ctx) => const MemberSelectionPopUp(),
               barrierDismissible: false,
               barrierColor: AppColor.blackOpacity,
             );
@@ -65,16 +64,36 @@ class PatientHomePageAppBar extends StatelessWidget
                   color: Colors.white,
                 ),
               ),
-              Positioned(
-                right: 0,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: const CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage(AppImages.raghavi),
-                  ),
-                ),
+              Consumer(
+                builder: (context, ref, child) {
+                  return ref.watch(getPatientProfileProvider(1202)).when(
+                    data: (patient) {
+                      final profilePhoto =
+                          patient.profile?.patient?.profilePhoto;
+                      return Positioned(
+                        right: -10,
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundImage: profilePhoto == null
+                                ? const AssetImage('assets/images/user.png')
+                                : AssetImage(
+                                    patient.profile!.patient!.profilePhoto!,
+                                  ) as ImageProvider,
+                          ),
+                        ),
+                      );
+                    },
+                    loading: () {
+                      return const SizedBox();
+                    },
+                    error: (e, s) {
+                      return const SizedBox();
+                    },
+                  );
+                },
               ),
             ],
           ),

@@ -1,13 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../triage_questionnaire/pages/triage_questionnaire_page.dart';
 import '../widget/change_member_tiles.dart';
 
 class TriageMemberSelectionPage extends HookWidget {
@@ -29,7 +28,9 @@ class TriageMemberSelectionPage extends HookWidget {
               height: AppSize.height(context) * 0.19,
               fit: BoxFit.fill,
             ),
-            SizedBox(height: AppSize.height(context) * 0.02),
+            SizedBox(
+              height: AppSize.height(context) * 0.02,
+            ),
             Text(
               'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
               style: applyRobotoFont(fontSize: 14),
@@ -59,11 +60,13 @@ class TriageMemberSelectionPage extends HookWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                            text: '+ ',
-                            style: applyRobotoFont(
-                                fontSize: 21,
-                                color: AppColor.primary,
-                                fontWeight: FontWeight.w300)),
+                          text: '+ ',
+                          style: applyRobotoFont(
+                            fontSize: 21,
+                            color: AppColor.primary,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
                         TextSpan(
                           text: 'Add Member',
                           style: applyRobotoFont(
@@ -87,7 +90,7 @@ class TriageMemberSelectionPage extends HookWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const TriageQuestionnairePage(),
+                      builder: (context) => const TriagePage(),
                     ),
                   );
                 },

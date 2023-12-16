@@ -2,9 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var themeProvider = StateNotifierProvider<AppTheme, ThemeMode>((ref) {
@@ -38,14 +36,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColor.scaffold,
-      // pageTransitionsTheme: const PageTransitionsTheme(
-      //   builders: {
-      //     TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      //     TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      //   },
-      // ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-
       iconTheme: IconThemeData(
         color: AppColor.black,
         size: Responsive.isMobile(context) ? 24 : 32,
@@ -128,6 +119,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
 
   static ThemeData getDarkTheme(BuildContext context) {
     return ThemeData(
+      useMaterial3: false,
       primarySwatch: MaterialColor(
         const Color(0xff296DF6).value,
         const {

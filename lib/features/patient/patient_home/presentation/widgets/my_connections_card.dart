@@ -5,10 +5,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class MyConnectionsCard extends HookWidget {
   const MyConnectionsCard({
     Key? key,
-    required this.doctor,
+    required this.image,
+    required this.name,
     required this.index,
   }) : super(key: key);
-  final Map<String, dynamic> doctor;
+  // final Map<String, dynamic> doctor;
+  // final int index;
+  final String image;
+  final String name;
   final int index;
 
   @override
@@ -25,9 +29,10 @@ class MyConnectionsCard extends HookWidget {
             onTap: () {
               isSelected.value = !isSelected.value;
             },
-            child: Container(
-              width: 60.0,
-              height: 60.0,
+            child:  Container(
+              
+              width: AppSize.width(context) * 0.15,
+              height: AppSize.width(context) * 0.15,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
@@ -37,7 +42,7 @@ class MyConnectionsCard extends HookWidget {
                 image: DecorationImage(
                   opacity: isSelected.value ? 1 : 0.9,
                   image: AssetImage(
-                    doctor["image"],
+                    image,
                   ),
                 ),
               ),
@@ -45,7 +50,7 @@ class MyConnectionsCard extends HookWidget {
           ),
           const SizedBox(height: AppSize.ksheight),
           Text(
-            doctor["name"],
+            name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

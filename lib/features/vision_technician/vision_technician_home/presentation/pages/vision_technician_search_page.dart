@@ -1,8 +1,8 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_search_result_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
@@ -19,8 +19,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<VTPatientModel> list =
-        ref.watch(visionTechnicianSearchProvider).searchedPatientUserList;
+    List<VTPatientSearchDto> list =
+        ref.watch(visionTechnicianSearchProvider).patientSearchDto;
 
     return Scaffold(
       appBar: AppBar(
@@ -144,7 +144,8 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const VisionTechnicianAssessmentTimeline(),
+                                        const VisionTechnicianAssessmentTimeline(
+                                            patientId: 1202),
                                   ),
                                 );
                               },
@@ -165,10 +166,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateListTileSearchResults(
-  VTPatientModel data,
-  BuildContext context,
-) {
+List<DataCell> generateListTileSearchResults(VTPatientSearchDto data, context) {
   return [
     DataCell(
       Column(
@@ -176,13 +174,13 @@ List<DataCell> generateListTileSearchResults(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "${data.firstName} ${data.lastName}",
+            "${data.name}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.patientId,
+            data.id.toString(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -195,7 +193,7 @@ List<DataCell> generateListTileSearchResults(
     ),
     DataCell(
       Text(
-        data.mobileNo,
+        data.mobile.toString(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
@@ -207,13 +205,13 @@ List<DataCell> generateListTileSearchResults(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            data.assessmentId,
+            data.encounterId.toString(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.assessmentDate,
+            data.encounterStartDate.toString(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -227,7 +225,7 @@ List<DataCell> generateListTileSearchResults(
     ),
     DataCell(
       Text(
-        data.status,
+        data.status.toString(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
@@ -244,7 +242,8 @@ List<DataCell> generateListTileSearchResults(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const VisionTechnicianPreliminaryAssessmentPage(),
+                      const VisionTechnicianPreliminaryAssessmentPage(
+                          patientId: 1202),
                 ),
               );
             },
@@ -261,11 +260,11 @@ List<DataCell> generateListTileSearchResults(
         ),
         decoration: BoxDecoration(
           color:
-              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+              data.category!.contains("Early") ? AppColor.orange : AppColor.red,
           borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
         child: Text(
-          data.category,
+          data.category.toString(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(

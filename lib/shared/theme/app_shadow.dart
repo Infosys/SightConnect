@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
-applyLightShadow() {
+List<BoxShadow> applyLightShadow() {
   return [
     BoxShadow(
       color: AppColor.shadowColor.withOpacity(0.1),
@@ -11,7 +11,7 @@ applyLightShadow() {
   ];
 }
 
-applyMediumShadow() {
+List<BoxShadow> applyMediumShadow() {
   return [
     BoxShadow(
       color: AppColor.shadowColor.withOpacity(0.3),

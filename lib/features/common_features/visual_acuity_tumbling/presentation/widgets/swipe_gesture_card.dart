@@ -1,13 +1,14 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../data/models/tumbling_models.dart';
+import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
@@ -48,6 +49,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             builder: (context) {
               return VisualAcuityDialog.showSuccessTemp(context);
             });
+        // next.setIsTestCompleted = true;
       }
     });
 

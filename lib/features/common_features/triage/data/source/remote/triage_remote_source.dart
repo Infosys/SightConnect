@@ -2,15 +2,16 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_assessment.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
-  Future<TriageAssessment> getTriage();
-  Future<TriageResponse> saveTriage({required TriageResponse triage});
+  Future<DiagnosticReportTemplateFHIRModel> getTriage();
+  Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -18,19 +19,39 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
 
   @override
-  Future<TriageAssessment> getTriage() async {
-    var response = await rootBundle.loadString("assets/care_assessment.json");
+  Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
+    var endpoint = "/api/careQuestionnaireGenerator";
+    logger.d({
+      "API getTriageQuestionnaire": endpoint,
+    });
+    Map<String, dynamic> bodyData = {
+      "name": "LVPEI EyeCare Triage",
+      "organizationCode": "LVPEI",
+      "condition": "VISION",
+      "assessmentType": "TRIAGE",
+      "organ": "EYE"
+    };
+
+    // var response = await dio.get(endpoint, queryParameters: bodyData);
+    var response = await rootBundle.loadString("assets/triage_assessment.json");
+    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
+    // } else {
+    //   throw ServerException();
+    // }
     if (response.isNotEmpty) {
       var data = jsonDecode(response);
-      return TriageAssessment.fromJson(data["assessment"]);
+      return DiagnosticReportTemplateFHIRModel.fromJson(data);
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<TriageResponse> saveTriage({required TriageResponse triage}) async {
-    var endpoint = "/api/patient-responses";
+  Future<TriageResponseModel> saveTriage({
+    required TriageResponseModel triage,
+  }) async {
+    var endpoint = "/api/triage-report";
     logger.d({
       "API saveTriage": triage.toJson(),
     });
@@ -39,8 +60,12 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       endpoint,
       data: triage.toJson(),
     );
-    if (response.statusCode! >= 200 && response.statusCode! < 210) {
-      return TriageResponse.fromJson(response.data);
+    if (response.statusCode != null) {
+      if (response.statusCode! >= 200 && response.statusCode! < 210) {
+        return TriageResponseModel.fromJson(response.data);
+      } else {
+        throw ServerException();
+      }
     } else {
       throw ServerException();
     }
@@ -49,6 +74,6 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
 var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.watch(dioProvider),
   ),
 );

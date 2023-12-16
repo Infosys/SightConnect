@@ -11,11 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
-  PreliminaryAssessmentVisionCenter({super.key});
+  const PreliminaryAssessmentVisionCenter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     // VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
         padding: const EdgeInsets.all(AppSize.kmpadding - 2),
@@ -55,20 +54,20 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
               height: AppSize.klheight,
             ),
             Responsive.isMobile(context)
-                ? Column(
+                ? const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                         VisionCentersScrollBar(),
-                        const SizedBox(
+                        SizedBox(
                           height: AppSize.kmheight,
                         ),
                         VisionCenterAddressDetails(),
                       ])
-                : Row(
+                : const Row(
                     children: [
                       VisionCentersScrollBar(),
-                      const SizedBox(
+                      SizedBox(
                         width: AppSize.klwidth,
                       ),
                       VisionCenterAddressDetails(),
@@ -80,8 +79,9 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
             VTRegisterInput(
               title: "Remarks",
               keyboardType: TextInputType.multiline,
-              controller:
-                  ref.read(preliminaryAssessmentHelperProvider).remarksController,
+              controller: ref
+                  .read(preliminaryAssessmentHelperProvider)
+                  .remarksController,
             ),
           ],
         ));

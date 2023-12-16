@@ -1,7 +1,8 @@
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 
 var visionTechnicianEyeScanProvider = ChangeNotifierProvider(
   (ref) => VisionTechnicianEyeScanNotifier(),

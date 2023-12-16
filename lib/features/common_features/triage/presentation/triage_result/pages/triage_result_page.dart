@@ -1,25 +1,31 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_centre_details_cards.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
+import '../../../../visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+
 import '../widgets/result_page_bottom_cards.dart';
 
 class TriageResultPage extends ConsumerWidget {
-  const TriageResultPage({super.key});
-
+  const TriageResultPage({
+    required this.triageResult,
+    super.key,
+  });
+  final TriageResponseModel triageResult;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(triageResultProvider);
+    final model = ref.watch(triageResultProvider(triageResult));
 
     return WillPopScope(
       onWillPop: () async {
@@ -51,9 +57,16 @@ class TriageResultPage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: AppSize.kmheight),
-                const ResultPageTopCard(),
+                ResultPageTopCard(
+                  triageResult: model.getOverallTriageResult(),
+                  id: "${model.profile.patient?.abhaNumber ?? ""}",
+                  name: model.profile.patient?.name ?? "",
+                  patientImage: model.profile.patient?.profilePhoto ?? "",
+                ),
                 const SizedBox(height: AppSize.kmheight),
-                const AssessmentResultCards(),
+                AssessmentResultCards(
+                  triageResult: model.getCompleteTriageResultList(),
+                ),
                 const SizedBox(height: AppSize.kmheight),
                 InkWell(
                   onTap: () {

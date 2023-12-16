@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../core/constants/app_color.dart';
+
 class PatientServiceCategory extends ConsumerWidget {
   const PatientServiceCategory({
     Key? key,
@@ -95,6 +97,7 @@ class PatientServiceCategory extends ConsumerWidget {
                                   height:
                                       Responsive.isMobile(context) ? 24 : 32,
                                   width: Responsive.isMobile(context) ? 24 : 32,
+                                  color: AppColor.primary,
                                   fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),

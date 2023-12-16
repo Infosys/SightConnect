@@ -1,21 +1,31 @@
 import 'dart:math' as math;
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/tumbling_models.dart';
+import '../../domain/models/enums/tumbling_enums.dart';
+import '../../domain/models/tumbling_models.dart';
 import '../../data/source/local/tumbling_local_source.dart';
 
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
-var tumblingTestProvider = ChangeNotifierProvider(
-  (ref) => VisualAcuityTestProvider(ref.watch(tumlingLocalSource)),
+var tumblingTestProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => VisualAcuityTestProvider(
+    ref.watch(tumlingLocalSource),
+    ref.read(triageLocalSourceProvider),
+  ),
 );
 
 class VisualAcuityTestProvider with ChangeNotifier {
   final TumblingLocalSource _dataSource;
-  VisualAcuityTestProvider(this._dataSource) {
+  TriageLocalSource triageLocalSourceProvider;
+  VisualAcuityTestProvider(
+    this._dataSource,
+    this.triageLocalSourceProvider,
+  ) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -227,39 +237,14 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  int getTumblingTestUrgency() {
-    double leftEyeSight = calculateEyeSight(Eye.left);
-    double rightEyeSight = calculateEyeSight(Eye.right);
-    double bothEyeSight = calculateEyeSight(Eye.both);
-
-    int leftEyeUrgency = _calculateUrgencyHelper(leftEyeSight);
-    int rightEyeUrgency = _calculateUrgencyHelper(rightEyeSight);
-    int bothEyeUrgency = _calculateUrgencyHelper(bothEyeSight);
-
-    int urgency =
-        [leftEyeUrgency, rightEyeUrgency, bothEyeUrgency].reduce(math.max);
-
-    logger.i({
-      "leftEyeSight": leftEyeSight,
-      "leftEyeUrgency": leftEyeUrgency,
-      "rightEyeSight": rightEyeSight,
-      "rightEyeUrgency": rightEyeUrgency,
-      "bothEyeSight": bothEyeSight,
-      "bothEyeUrgency": bothEyeUrgency,
-      "FINAL URGENCY": urgency,
-    });
-
-    return urgency;
-  }
-
-  int _calculateUrgencyHelper(double value) {
+  double _calculateScore(double value) {
     logger.i("Tumbling Test Value: $value");
     if (value >= 1) {
-      return 3;
+      return 3.0;
     } else if (value >= 0.5) {
-      return 2;
+      return 2.0;
     } else {
-      return 1;
+      return 1.0;
     }
   }
 
@@ -269,5 +254,42 @@ class VisualAcuityTestProvider with ChangeNotifier {
       Eye.right => "Right Eye",
       Eye.both => "Both Eye",
     };
+  }
+
+  /// set patient vision acuity tumbling based on the TriageAssessment model
+  List<PostObservationsModel> getVisionAcuityTumblingResponse() {
+    double leftEyeSight = calculateEyeSight(Eye.left);
+    double rightEyeSight = calculateEyeSight(Eye.right);
+    double bothEyeSight = calculateEyeSight(Eye.both);
+
+    double leftEyeUrgency = _calculateScore(leftEyeSight);
+    double rightEyeUrgency = _calculateScore(rightEyeSight);
+    double bothEyeUrgency = _calculateScore(bothEyeSight);
+
+    List<PostObservationsModel> observationList = [
+      PostObservationsModel(
+        identifier: 50000001,
+        value: leftEyeSight.toString(),
+        score: leftEyeUrgency,
+      ),
+      PostObservationsModel(
+        identifier: 50000002,
+        value: rightEyeSight.toString(),
+        score: rightEyeUrgency,
+      ),
+      PostObservationsModel(
+        identifier: 50000003,
+        value: bothEyeSight.toString(),
+        score: bothEyeUrgency,
+      ),
+    ];
+
+    return observationList;
+  }
+
+  Future<void> saveVisionAcuityResponseToDB() async {
+    await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
+      triageVisualAcuity: getVisionAcuityTumblingResponse(),
+    );
   }
 }

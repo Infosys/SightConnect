@@ -3,7 +3,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/data/models/tumbling_models.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -18,14 +19,12 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoiceAssistCard extends HookConsumerWidget {
-  VoiceAssistCard({Key? key}) : super(key: key);
-
-  final SpeechToText speechToText = SpeechToText();
+  const VoiceAssistCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final SpeechToText speechToText = SpeechToText();
     final isListening = useState<bool>(false);
-
     var model = ref.watch(tumblingTestProvider);
 
     ref.listen(tumblingTestProvider, (previous, next) {
@@ -74,7 +73,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                     repeat: true,
                     repeatPauseDuration: const Duration(milliseconds: 100),
                     child: GestureDetector(
-                      onTapDown: ((details) async {
+                      onTapDown: (details) async {
                         if (!isListening.value) {
                           var available = await speechToText.initialize();
 
@@ -106,7 +105,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                             );
                           }
                         }
-                      }),
+                      },
                       onTapUp: ((details) {
                         isListening.value = false;
 

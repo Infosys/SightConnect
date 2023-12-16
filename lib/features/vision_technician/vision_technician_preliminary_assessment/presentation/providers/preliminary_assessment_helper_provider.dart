@@ -1,16 +1,21 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/preliminary_assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_models.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../main.dart';
+import '../../domain/repositories/vt_vision_center_repository_impl.dart';
 
 var preliminaryAssessmentHelperProvider =
     ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
-        (ref) => PreliminaryAssessmentHelperNotifier());
+        (ref) => PreliminaryAssessmentHelperNotifier(ref));
 
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
+  Ref ref;
+  PreliminaryAssessmentHelperNotifier(this.ref);
+
   var eyeIssueType = [
     PreliminaryAssessmentModel(
         type: "Loss of Vision", checked: false, name: "Eye Issue Type"),
@@ -27,13 +32,13 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   void details() {
     List<Map<String, dynamic>> list = [];
 
-    eyeIssueType.forEach((element) {
+    for (var element in eyeIssueType) {
       if (element.checked == true) {
         list.add({
           element.type: element.checked,
         });
       }
-    });
+    }
     logger.d("Issue type : $list");
   }
 
@@ -220,15 +225,30 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  VisionCenterModel getCheckedVisionCenter() {
-    VisionCenterModel visionCenter = VisionCenterModel(
-        type: "", checked: false, completeAddress: "", phoneno: "", time: "");
-    for (int i = 0; i < visionCenters.length; i++) {
-      if (visionCenters[i].checked == true) {
-        visionCenter = visionCenters[i];
-        break;
-      }
+  FacilityModel getCheckedVisionCenter(){
+    var response = ref.read(vtVisionCenterViewModelProvider).facilityList;
+    FacilityModel visionCenterModel = const FacilityModel(
+      facilityInformation: FacilityInformationModel(
+          facilityAddressDetails: FacilityAddressDetailsModel(
+              addressLine1: "sad", addressLine2: "dddd"),
+          facilityContactInformation: FacilityContactInformationModel(
+            facilityContactNumber: "kk",
+          ),
+          timingsOfFacility: [FacilityTimingModel(workingDays: "Sunday")]),
+    );
+    for (FacilityModel element in response) {
+      visionCenterModel = element;
     }
-    return visionCenter;
+      return visionCenterModel;
+      // VisionCenterModel visionCenter = VisionCenterModel(
+      //     type: "", checked: false, completeAddress: "", phoneno: "", time: "");
+      // for (int i = 0; i < visionCenters.length; i++) {
+      //   if (visionCenters[i].checked == true) {
+      //     visionCenter = visionCenters[i];
+      //     break;
+      //   }
+      // }
+      // return visionCenter;
+    }
   }
-}
+

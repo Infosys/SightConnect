@@ -17,10 +17,14 @@ import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
 import '../widgets/preliminary_assessment_recommendation.dart';
 
 class VisionTechnicianPreliminaryAssessmentPage extends ConsumerStatefulWidget {
-  const VisionTechnicianPreliminaryAssessmentPage({super.key});
+  const VisionTechnicianPreliminaryAssessmentPage(
+      {super.key, required this.patientId});
+
+  final int? patientId;
 
   @override
   ConsumerState<VisionTechnicianPreliminaryAssessmentPage> createState() =>
@@ -46,7 +50,8 @@ class _VisionTechnicianPreliminaryAssessmentPageState
   @override
   Widget build(BuildContext context) {
     // VTPatientModel patient = ref.read(registerNewPatientProvider).patient;
-
+    int id = widget.patientId ?? 0;
+    logger.d("patient id is $id");
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       bottomNavigationBar: Padding(
@@ -61,7 +66,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
               1,
             );
             ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            Navigator.pop(context);
+            // Navigator.pop(context);
             // Navigator.pop(context);
           },
           style: ButtonStyle(
@@ -84,10 +89,16 @@ class _VisionTechnicianPreliminaryAssessmentPageState
           ),
         ),
       ),
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
         title: Text('Preliminary Assessment'),
+        leadingIcon: IconButton(
+          onPressed: () {
+            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -98,7 +109,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const PreliminaryAssessmentCard(),
+                PreliminaryAssessmentCard(patientId: id),
                 const SizedBox(height: AppSize.klheight),
                 const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
@@ -106,20 +117,17 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                   isSelectedOption: isSelectedOption,
                   onSelectedOptionChanged: updateVisibility,
                 ),
-                Visibility(
-                  visible: isWidgetVisible,
-                  child: Column(
+                if (isWidgetVisible) PreliminaryAssessmentQuestions(),
+                if (isWidgetVisible)
+                  const Column(
                     children: [
-                      const SizedBox(height: AppSize.klheight),
-                      PreliminaryAssessmentQuestions(),
-                      const SizedBox(height: AppSize.klheight),
-                      const PreliminaryAssessmentRecommendation(),
-                      const SizedBox(height: AppSize.klheight),
+                      SizedBox(height: AppSize.klheight),
+                      PreliminaryAssessmentRecommendation(),
+                      SizedBox(height: AppSize.klheight),
                       PreliminaryAssessmentVisionCenter(),
-                      const SizedBox(height: AppSize.klheight),
+                      SizedBox(height: AppSize.klheight),
                     ],
-                  ),
-                )
+                  )
 
                 // showToastMessage(
                 //   "Done! Assessment with ID EA 010101 has been created for Sumanta.",

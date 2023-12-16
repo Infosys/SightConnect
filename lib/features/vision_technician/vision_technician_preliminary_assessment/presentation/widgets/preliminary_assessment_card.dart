@@ -1,19 +1,39 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
-  const PreliminaryAssessmentCard({super.key});
+  const PreliminaryAssessmentCard({super.key, required this.patientId});
+
+  final int? patientId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
+    var model = ref.watch(getPatientProfileProvider(patientId)).asData?.value.profile;
+    // var dateYear = DateTime.now().year;
+    
+    // int giveAge() {
+    //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
+    //   return (dateYear - age).toInt();
+    // }
+
+    String genderString = model?.patient?.gender.toString().split('.').last??"";
+    final address = _formateAddress(
+      line: model?.patient?.address?.first.line ?? "",
+      ward: model?.patient?.address?.first.ward ?? "",
+      district: model?.patient?.address?.first.district ?? "",
+      state: model?.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model?.patient?.profilePhoto ?? "";
+
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -30,18 +50,25 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
           Wrap(
             direction: Axis.horizontal,
             children: [
-              const CircleAvatar(radius: AppSize.klradius),
+              CircleAvatar(
+                radius: AppSize.klradius,
+                // child: Imag,
+                child: Image.network(
+                  profileImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
               const SizedBox(width: AppSize.kswidth),
               Wrap(
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "",
+                    model?.patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "OP ",
+                    model?.patient?.abhaNumber.toString() ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -82,7 +109,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "",
+                    genderString ?? "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -91,7 +118,6 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                 ],
               ),
-             
             ]),
             Wrap(
               direction: Axis.vertical,
@@ -102,7 +128,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "",
+                  address ?? "",
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -116,4 +142,13 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelplineCard extends StatelessWidget {
   const HelplineCard({super.key});
@@ -59,14 +60,24 @@ class HelplineCard extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Container(
-            decoration: BoxDecoration(
-              boxShadow: applyLightShadow(),
-            ),
-            child: CircleAvatar(
-              backgroundColor: AppColor.white,
-              child: SvgPicture.asset(
-                AppIcon.call,
+          InkWell(
+            onTap: () {
+              Uri phoneno = Uri.parse("tel:1800 1800 1800");
+              canLaunchUrl(number) {
+                launchUrl(number);
+              }
+
+              canLaunchUrl(phoneno);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: applyLightShadow(),
+              ),
+              child: CircleAvatar(
+                backgroundColor: AppColor.white,
+                child: SvgPicture.asset(
+                  AppIcon.call,
+                ),
               ),
             ),
           ),

@@ -13,24 +13,47 @@ import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+
 class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
   const VisionTechnicianAssessmentTimeline({
     super.key,
-    // required this.patient,
+    required this.patientId,
   });
+
+  final int? patientId;
+
+    
 
   // final VTPatientModel patient;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientModel? patient =
-        ref.watch(visionTechnicianSearchProvider).patientDetails;
-    bool closed =
-        ref.watch(visionTechnicianSearchProvider).patientDetails!.closed;
+    // VTPatientModel? patient =
+        // ref.watch(visionTechnicianSearchProvider).patientDetails;
+    bool closed = true;
+
+    var model = ref.watch(getPatientProfileProvider(patientId)).asData?.value.profile;
+    var dateYear = DateTime.now().year;
+    
+    int giveAge() {
+      var age = int.parse(model?.patient?.yearOfBirth ?? "");
+      return (dateYear - age).toInt();
+    }
+
+    String genderString = model!.patient!.gender.toString().split('.').last;
+    final address = _formateAddress(
+      line: model.patient?.address?.first.line ?? "",
+      ward: model.patient?.address?.first.ward ?? "",
+      district: model.patient?.address?.first.district ?? "",
+      state: model.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model.patient?.profilePhoto ?? "";
 
     // print("value is ${patient.firstName}");
 
-    if (patient == null) return SizedBox();
+    // if (patient == null) return SizedBox();
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
@@ -74,7 +97,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
         leadingWidth: 70,
         centerTitle: false,
         title: Text(
-            '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
+         "${model.patient?.name ?? ""} - OP ${model.patient?.abhaNumber.toString() ?? ""}", 
+            // '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -82,9 +107,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const TimelineProfile(),
+              TimelineProfile(model : model),
               const SizedBox(height: AppSize.ksheight),
-              const GeneralInformation(),
+               GeneralInformation(model : model),
               const SizedBox(
                 height: AppSize.ksheight,
               ),
@@ -98,4 +123,13 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

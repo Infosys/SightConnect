@@ -41,7 +41,7 @@ class SolutionTile extends HookConsumerWidget {
                 onChanged: (bool value) {
                   switchState.value = value;
                   dropDownState.value = value;
-                  model.addSolutions(title);
+                  // model.addSolutions(title);
                 },
               ),
               const SizedBox(width: AppSize.kswidth),
