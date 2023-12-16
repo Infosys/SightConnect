@@ -13,7 +13,7 @@ var dioProvider = Provider(
 var onboardingDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseUrl2,
+      baseUrl: AppEnv.orchestrationBaseUrl,
     ),
   ),
 );
@@ -21,7 +21,7 @@ var onboardingDioProvider = Provider(
 var authDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseKeycloakUrl,
+      baseUrl: AppEnv.keycloakBaseUrl,
     ),
   ),
 );
@@ -50,14 +50,11 @@ var vtDioVisionCenterProvider = Provider(
 //   ),
 // );
 var dioExotelProvider = Provider(
-  (ref) => Dio(BaseOptions(
-      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/exotel")),
+  (ref) => Dio(BaseOptions(baseUrl: AppEnv.exotelBaseUrl)),
 );
 
 var dioProfileProvider = Provider(
   (ref) => Dio(
-    BaseOptions(
-      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/profile",
-    ),
+    BaseOptions(baseUrl: AppEnv.profileBaseUrl),
   ),
 );

@@ -10,7 +10,7 @@ abstract class AvailabilityRemoteSource {
 
 var availabilityRemoteSource = Provider(
   (ref) => AvailabilityRemoteSourceImpl(
-    ref.read(dioProfileProvider),
+    ref.read(onboardingDioProvider),
   ),
 );
 

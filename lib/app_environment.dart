@@ -4,7 +4,9 @@ enum Env { DEV, PROD }
 
 class AppEnv {
   AppEnv._();
+
   static Env env = Env.DEV;
+
   static bool get isDev => env == Env.DEV;
 
   static void setupEnv(Env currentEnv) {
@@ -21,10 +23,12 @@ class AppEnv {
     };
   }
 
-  static String get baseUrl2 {
+  static String get orchestrationBaseUrl {
     return switch (env) {
-      Env.DEV => 'http://localhost:8075/orchestration',
-      Env.PROD => 'http://localhost:8075/orchestration',
+      Env.DEV =>
+        'http://eyecare4all-dev.infosysapps.com/services/orchestration',
+      Env.PROD =>
+        'http://eyecare4all-dev.infosysapps.com/services/orchestration',
     };
   }
 
@@ -35,10 +39,24 @@ class AppEnv {
     };
   }
 
-  static String get baseKeycloakUrl {
+  static String get keycloakBaseUrl {
     return switch (env) {
       Env.DEV => 'http://localhost:8080/realms/test',
       Env.PROD => 'http://localhost:8080/realms/test',
+    };
+  }
+
+  static String get exotelBaseUrl {
+    return switch (env) {
+      Env.DEV => 'https://eyecare4all-dev.infosysapps.com/services/exotel',
+      Env.PROD => 'https://eyecare4all-dev.infosysapps.com/services/exotel',
+    };
+  }
+
+  static String get profileBaseUrl {
+    return switch (env) {
+      Env.DEV => 'https://eyecare4all-dev.infosysapps.com/services/profile',
+      Env.PROD => 'https://eyecare4all-dev.infosysapps.com/services/profile',
     };
   }
 }
