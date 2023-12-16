@@ -58,7 +58,7 @@ class LocalTriageReportSource {
           "id": 1201,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1301,
           "interpretation": null,
           "value": "0.75",
           "score": 2.0
@@ -67,7 +67,16 @@ class LocalTriageReportSource {
           "id": 1202,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1302,
+          "interpretation": null,
+          "value": "1",
+          "score": 2.0
+        },
+        {
+          "id": 1202,
+          "performer": null,
+          "issued": null,
+          "identifier": 1303,
           "interpretation": null,
           "value": "1",
           "score": 2.0
@@ -232,7 +241,7 @@ class LocalTriageReportSource {
           "id": 2501,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1301,
           "interpretation": null,
           "value": "0.75",
           "score": 2.0
@@ -241,18 +250,28 @@ class LocalTriageReportSource {
           "id": 2502,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1302,
+          "interpretation": null,
+          "value": "1",
+          "score": 2.0
+        },
+        {
+          "id": 2502,
+          "performer": null,
+          "issued": null,
+          "identifier": 1303,
           "interpretation": null,
           "value": "1",
           "score": 2.0
         }
+
       ],
       "media": [
         {
           "id": 2451,
           "performer": null,
           "issued": null,
-          "identifier": 1,
+          "identifier": 1303,
           "baseUrl": "http//www.abc.com",
           "endpoint": "/c/newimage.jpg",
           "bodySite": null,
@@ -407,7 +426,7 @@ class LocalTriageReportSource {
           "id": 1801,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1301,
           "interpretation": null,
           "value": "0.75",
           "score": 2.0
@@ -416,7 +435,16 @@ class LocalTriageReportSource {
           "id": 1802,
           "performer": null,
           "issued": null,
-          "identifier": 1002,
+          "identifier": 1302,
+          "interpretation": null,
+          "value": "1",
+          "score": 2.0
+        },
+         {
+          "id": 1802,
+          "performer": null,
+          "issued": null,
+          "identifier": 1303,
           "interpretation": null,
           "value": "1",
           "score": 2.0

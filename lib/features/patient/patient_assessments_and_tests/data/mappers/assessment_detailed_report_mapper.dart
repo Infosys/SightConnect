@@ -24,8 +24,7 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      visualAcuityBreifEntity: _getObservationBriefEntity( triageAssessment,
-        triageDetailedReport,),
+      visualAcuityBreifEntity: [],
       imageBriefEntity: [],
     );
   }
@@ -35,13 +34,13 @@ class AssessmentDetailedReportMapper {
   ) {
     final List<ObservationBriefEntity> observationBriefEntity = [];
     Map<int, String> observationMap = {};
-    if (triageAssessment.observations!.id !=null) {
-      int id = triageAssessment.observations!.id!;
-      BodySite bodySite = triageAssessment.observations!.bodySite!;
+    if (triageAssessment.observations?.id ==null) {
+      int id = triageAssessment.observations?.id??0;
+      BodySite bodySite = triageAssessment.observations?.bodySite??BodySite.RIGHT_EYE;
       observationMap[id] = bodySite.toString();
     }
     for(ObservationDefinitionModel observation in triageAssessment.observations!.observationDefinition!){
-      int id = observation.id!;
+      int id = observation?.id??0;
       BodySite bodySite = observation.bodySite!;
       observationMap[id] = bodySite.toString();
     }
@@ -50,9 +49,9 @@ class AssessmentDetailedReportMapper {
          observationBriefEntity.add(
           ObservationBriefEntity(
             observationValue: double.parse(observation.value!),
-            observationId: observation.id!,
-            observationValueIdentifier: observation.identifier!,
-            bodySite: observationMap[observation.identifier]!,),
+            observationId: observation.id??0,
+            observationValueIdentifier: observation.identifier??0,
+            bodySite: observationMap[observation.identifier].toString(),),
         );
      
       }
