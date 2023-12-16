@@ -38,7 +38,7 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
       body:const SingleChildScrollView(
         child:  Padding(
           padding: EdgeInsets.all(AppSize.kmpadding),
-          child:  IvrCallHistoryTableView()),
+          child:  IvrCallHistoryTableView(),),
       ),
     );
   }

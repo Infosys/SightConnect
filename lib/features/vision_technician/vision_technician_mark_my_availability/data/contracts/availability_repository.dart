@@ -1,3 +1,3 @@
 abstract class AvailabilityRepository {
-  Future postMarkMyAvailability({required bool available});
+  Future<bool> postMarkMyAvailability({required bool available});
 }

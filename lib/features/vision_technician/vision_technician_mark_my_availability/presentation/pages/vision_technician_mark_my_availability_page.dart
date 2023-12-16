@@ -19,9 +19,10 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var status = useState(false);
-    var markMyAvailabilityList =
-        ref.watch(markMyAvailabilityHelperProvider).markMyAvailabilityList;
+    var watchRef = ref.watch(markMyAvailabilityHelperProvider);
+    var readRef = ref.read(markMyAvailabilityHelperProvider);
+    bool status = watchRef.markmyAvailableStatus;
+    var markMyAvailabilityList = watchRef.markMyAvailabilityList;
 
     return Scaffold(
       bottomNavigationBar: Padding(
@@ -42,12 +43,14 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: Text("Cancel",
-                    style: applyRobotoFont(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.blue,
-                    )),
+                child: Text(
+                  "Cancel",
+                  style: applyRobotoFont(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.blue,
+                  ),
+                ),
               ),
             ),
             const SizedBox(
@@ -105,10 +108,10 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
             ),
             Flexible(
               child: CupertinoSwitch(
-                value: status.value,
+                value: status,
                 activeColor: AppColor.blue,
                 onChanged: (bool value) {
-                  status.value = value;
+                  readRef.updateAvailability();
                 },
               ),
             ),
@@ -151,76 +154,77 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
           child: Column(
             children: [
               Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: AppColor.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(AppSize.kmradius - 5),
-                    ),
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(AppSize.kmradius - 5),
                   ),
-                  padding: const EdgeInsets.all(AppSize.klpadding),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Flexible(
-                            child: Container(
-                                height: AppSize.klheight * 2,
-                                padding:
-                                    const EdgeInsets.all(AppSize.kspadding),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColor.blue),
-                                  color: AppColor.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  "Oct 2023",
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )),
+                ),
+                padding: const EdgeInsets.all(AppSize.klpadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Flexible(
+                        child: Container(
+                            height: AppSize.klheight * 2,
+                            padding: const EdgeInsets.all(AppSize.kspadding),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColor.blue),
+                              color: AppColor.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              "Oct 2023",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),),
+                      ),
+                      const SizedBox(
+                        width: AppSize.klwidth,
+                      ),
+                      Flexible(
+                        child: Container(
+                          height: AppSize.klheight * 2,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColor.blue),
+                            color: AppColor.lightBlue,
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          const SizedBox(
-                            width: AppSize.klwidth,
-                          ),
-                          Flexible(
-                            child: Container(
-                                height: AppSize.klheight * 2,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColor.blue),
-                                  color: AppColor.lightBlue,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child:
-                                    const VtMarkMyAvailableDateRangePicker()),
-                          ),
-                        ]),
-                        const SizedBox(
-                          height: AppSize.klheight,
+                          child: const VtMarkMyAvailableDateRangePicker(),
                         ),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return VtMarkMyAvailableEachDayAvailability(
-                                dayAvailabilityindex: index);
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Column(
-                              children: [
-                                SizedBox(
-                                  height: AppSize.klheight,
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: AppColor.grey,
-                                )
-                              ],
-                            );
-                          },
-                          itemCount: markMyAvailabilityList.length,
-                        )
-                      ])),
+                      ),
+                    ]),
+                    const SizedBox(
+                      height: AppSize.klheight,
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return VtMarkMyAvailableEachDayAvailability(
+                            dayAvailabilityindex: index);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Column(
+                          children: [
+                            SizedBox(
+                              height: AppSize.klheight,
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: AppColor.grey,
+                            )
+                          ],
+                        );
+                      },
+                      itemCount: markMyAvailabilityList.length,
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class IvrCallHistoryTableView extends HookConsumerWidget {
+class IvrCallHistoryTableView extends ConsumerWidget {
   const IvrCallHistoryTableView({super.key});
 
   @override
@@ -21,6 +21,11 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
 
     List<IvrCallHistoryModel> ivrCallHistoryDetails =
         ref.watch(ivrCallHistorySearchHelperProvider).ivrCallHistoryDetails;
+    bool isLoading = ref.watch(ivrCallHistorySearchHelperProvider).isLoading;
+
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,11 +36,11 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
           height: AppSize.klheight,
         ),
         SizedBox(
-            width: AppSize.width(context),
+          width: AppSize.width(context),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
-             columnSpacing: AppSize.width(context)/10,
+              columnSpacing: AppSize.width(context) / 10,
               horizontalMargin: 12,
               decoration: BoxDecoration(
                 color: AppColor.white,
@@ -43,25 +48,26 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
                 boxShadow: applyLightShadow(),
               ),
               columns: List<DataColumn>.generate(
-                  tableHeading.length,
-                  (index) => DataColumn(
-                        label: Flexible(
-                          child: Text(
-                            tableHeading[index],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                            ),
-                          ),
-                        ),
-                      )),
+                tableHeading.length,
+                (index) => DataColumn(
+                  label: Flexible(
+                    child: Text(
+                      tableHeading[index],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               rows: List<DataRow>.generate(
                 ivrCallHistoryDetails.length,
                 (index) => DataRow(
                   cells: generateIvrCallHistoryListTile(
-                      ivrCallHistoryDetails[index]),
+                      ivrCallHistoryDetails[index], ref,),
                 ),
               ),
             ),
@@ -72,7 +78,7 @@ class IvrCallHistoryTableView extends HookConsumerWidget {
   }
 }
 
-List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
+List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data, WidgetRef ref) {
   return [
     DataCell(
       Text(
@@ -107,7 +113,7 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
             color: data.calltype == "in" ? AppColor.green : AppColor.red,
           ),
           Text(
-            "${data.duration!/60} min",
+            "${data.duration! / 60} min",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -165,11 +171,18 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data) {
         backgroundColor: data.status == "COMPLETED"
             ? const Color(0xffFAFAFA)
             : AppColor.lightBlue,
-        child: Icon(
-          Icons.phone,
-          color: data.status == "COMPLETED"
-              ? const Color(0xffBBBBBB)
-              : AppColor.blue,
+        child: IconButton(
+          onPressed: () {
+            ref.read(ivrCallHistorySearchHelperProvider).makeIvrCall(
+                  data.patientId,
+                );
+          },
+          icon: Icon(
+            Icons.phone,
+            color: data.status == "COMPLETED"
+                ? const Color(0xffBBBBBB)
+                : AppColor.blue,
+          ),
         ),
       ),
     ),

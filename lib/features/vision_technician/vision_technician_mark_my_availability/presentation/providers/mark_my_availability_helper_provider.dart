@@ -1,22 +1,29 @@
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/repositories/availability_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 var markMyAvailabilityHelperProvider =
-    ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>(
-        (ref) => MarkMyAvailabilityHelperNotifier());
+    ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>((ref) =>
+        MarkMyAvailabilityHelperNotifier(
+            availabilityRepository: ref.watch(availabilityRepository)));
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
-    String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
+  MarkMyAvailabilityHelperNotifier({required this.availabilityRepository});
+  AvailabilityRepository availabilityRepository;
+
+  String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
   var markMyAvailabilityList = [
     MarkMyAvailabilityModel(
-        day: "Monday",
-        time: [
-          ["9:00 AM", "10:00 AM", "1"]
-        ],
-        checked: true,),
+      day: "Monday",
+      time: [
+        ["9:00 AM", "10:00 AM", "1"]
+      ],
+      checked: true,
+    ),
     MarkMyAvailabilityModel(
         day: "Tuesday",
         time: [
@@ -61,9 +68,19 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
 
   var remarksController = TextEditingController();
-  bool markmyAvailableStatus=true;
-  void removeDayAvailability(int dayAvailabilityindex, int index) {
+  bool markmyAvailableStatus = true;
+  bool isLoading = false;
 
+  void updateAvailability() async {
+    isLoading = true;
+    notifyListeners();
+    markmyAvailableStatus = await availabilityRepository.postMarkMyAvailability(
+        available: !markmyAvailableStatus);
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void removeDayAvailability(int dayAvailabilityindex, int index) {
     (markMyAvailabilityList[dayAvailabilityindex].time).removeAt(index);
     notifyListeners();
   }
@@ -94,18 +111,16 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
     var difference = endTimeDropDown.difference(startTimeDropDown);
     var differenceInHours = difference.inHours;
 
-
-
     (markMyAvailabilityList[dayAvailabilityindex].time)[index][2] =
-     differenceInHours.toString()+":"+difference.inMinutes.remainder(60).toString();
+        differenceInHours.toString() +
+            ":" +
+            difference.inMinutes.remainder(60).toString();
 
     notifyListeners();
   }
 
-  void toggleMarkMyAvailableStatus(value)
-  {
-    markmyAvailableStatus=value;
+  void toggleMarkMyAvailableStatus(value) {
+    markmyAvailableStatus = value;
     notifyListeners();
   }
-
 }
