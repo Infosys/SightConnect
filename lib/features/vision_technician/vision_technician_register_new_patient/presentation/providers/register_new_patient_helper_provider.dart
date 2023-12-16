@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vision_technician_home_repository_impl.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -85,8 +85,8 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
 
   ///////////////////////////////////////////////////////////////////////////////////////
   
-  VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
-      VisionTechnicianHomeRepositoryImpl();
+  // VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
+  //     VisionTechnicianHomeRepositoryImpl();
   VTPatientModel? patientDetails;
 
   List<EyeCareDetailsQuestionModel> eyeCareDetailsQuestion = [
@@ -271,8 +271,7 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
   
 
   void submit() {
-    visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
+    // visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
 
-    print(visionTechnicianHomeRepositoryImpl.listOfPatients());
   }
 }

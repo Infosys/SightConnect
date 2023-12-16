@@ -2,7 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_home_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_view_model_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class VTPatientList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<VTPatientModel> listOfAssessments =
-        ref.watch(visionTechnicianHomeProvider.notifier).listOfAssessments;
+    final List<VTPatientDto> listOfAssessments =
+        ref.watch(vtHomeHelperProvider).listOfAssessments;
 
     return Center(
       child: Column(
@@ -104,7 +105,7 @@ class VTPatientList extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateListTile(VTPatientModel data) {
+List<DataCell> generateListTile(VTPatientDto data) {
   return [
     DataCell(
       Column(
@@ -112,13 +113,13 @@ List<DataCell> generateListTile(VTPatientModel data) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "${data.firstName} ${data.lastName}",
+            "${data.name}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.patientId,
+            data.id.toString(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -135,13 +136,13 @@ List<DataCell> generateListTile(VTPatientModel data) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            data.assessmentId,
+            "assessmentId",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14),
           ),
           Text(
-            data.assessmentDate,
+            "assessmentDate",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -155,7 +156,7 @@ List<DataCell> generateListTile(VTPatientModel data) {
     ),
     DataCell(
       Text(
-        data.status,
+        data.status!,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
@@ -163,13 +164,13 @@ List<DataCell> generateListTile(VTPatientModel data) {
     ),
     DataCell(
       Text(
-        data.category,
+        data.category!,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(
           fontSize: 14,
           color:
-              data.category.contains("Early") ? AppColor.orange : AppColor.red,
+              data.category!.toLowerCase().contains("early") ? AppColor.orange : AppColor.red,
         ),
       ),
     ),

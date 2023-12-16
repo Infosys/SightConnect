@@ -1,5 +1,33 @@
-
 import '../../../vision_technician_register_new_patient/data/models/vt_eyecare_details_question_model.dart';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'vt_patient_model.freezed.dart';
+part 'vt_patient_model.g.dart';
+
+@freezed
+class VTPatientDto with _$VTPatientDto {
+  const factory VTPatientDto({
+    int? id,
+    String? name,
+    String? mobile,
+    String? yearOfBirth,
+    String? monthOfBirth,
+    String? dayOfBirth,
+    String? gender,
+    String? districtName,
+    String? townName,
+    String? pincode,
+    int? encounterId,
+    String? encounterStartDate,
+    String? status,
+    String? category,
+  }) = _VTPatientDto;
+
+  factory VTPatientDto.fromJson(Map<String, dynamic> json) =>
+      _$VTPatientDtoFromJson(json);
+}
+
 
 class VTPatientModel {
   String firstName;

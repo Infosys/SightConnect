@@ -2,22 +2,25 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianHomePage extends StatelessWidget {
+class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
 
   static const routeName = '/vision-technician-home';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     bool isMobile = Responsive.isMobile(context);
+    var watchRef = ref.watch(vtHomeHelperProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -104,7 +107,10 @@ class VisionTechnicianHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const AssessmentCard(),
+            if(watchRef.isLoading)
+              const Center(child: CircularProgressIndicator()),
+            if(!watchRef.isLoading)
+            const AssessmentTable(),
           ],
         ),
       ),

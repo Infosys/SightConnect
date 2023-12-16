@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-class AssessmentCard extends StatelessWidget {
-  const AssessmentCard({super.key});
+class AssessmentTable extends StatelessWidget {
+  const AssessmentTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,13 @@ class AssessmentCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.klheight),
-          const Row(
-            children: [
-              CustomChip(title: "All"),
-              CustomChip(title: "Critical"),
-              CustomChip(title: "IVR Assessments"),
-            ],
-          ),
+          // const Row(
+          //   children: [
+          //     CustomChip(title: "All"),
+          //     CustomChip(title: "Critical"),
+          //     CustomChip(title: "IVR Assessments"),
+          //   ],
+          // ),
           const SizedBox(height: AppSize.kmheight),
           const VTPatientList(),
         ],
