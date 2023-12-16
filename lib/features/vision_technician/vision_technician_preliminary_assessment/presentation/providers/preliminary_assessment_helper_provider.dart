@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/preliminary_assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_models.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,13 +32,13 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   void details() {
     List<Map<String, dynamic>> list = [];
 
-    eyeIssueType.forEach((element) {
+    for (var element in eyeIssueType) {
       if (element.checked == true) {
         list.add({
           element.type: element.checked,
         });
       }
-    });
+    }
     logger.d("Issue type : $list");
   }
 
@@ -224,26 +225,30 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<VisionCenterModel> getCheckedVisionCenter() async {
-    var response = await ref
-        .read(vtVisionCenterRepositoryProvider)
-        .getVisionCenterList(pincode: "470002");
-    VisionCenterModel visionCenterModel = VisionCenterModel(
-        type: '', checked: null, completeAddress: '', phoneno: '', time: '');
-    for (VisionCenterModel element in visionCenters) {
-      if (element.checked == true) {
-        visionCenterModel = element;
-      }
+  FacilityModel getCheckedVisionCenter(){
+    var response = ref.read(vtVisionCenterViewModelProvider).facilityList;
+    FacilityModel visionCenterModel = const FacilityModel(
+      facilityInformation: FacilityInformationModel(
+          facilityAddressDetails: FacilityAddressDetailsModel(
+              addressLine1: "sad", addressLine2: "dddd"),
+          facilityContactInformation: FacilityContactInformationModel(
+            facilityContactNumber: "kk",
+          ),
+          timingsOfFacility: [FacilityTimingModel(workingDays: "Sunday")]),
+    );
+    for (FacilityModel element in response) {
+      visionCenterModel = element;
     }
-    return visionCenterModel;
-    // VisionCenterModel visionCenter = VisionCenterModel(
-    //     type: "", checked: false, completeAddress: "", phoneno: "", time: "");
-    // for (int i = 0; i < visionCenters.length; i++) {
-    //   if (visionCenters[i].checked == true) {
-    //     visionCenter = visionCenters[i];
-    //     break;
-    //   }
-    // }
-    // return visionCenter;
+      return visionCenterModel;
+      // VisionCenterModel visionCenter = VisionCenterModel(
+      //     type: "", checked: false, completeAddress: "", phoneno: "", time: "");
+      // for (int i = 0; i < visionCenters.length; i++) {
+      //   if (visionCenters[i].checked == true) {
+      //     visionCenter = visionCenters[i];
+      //     break;
+      //   }
+      // }
+      // return visionCenter;
+    }
   }
-}
+
