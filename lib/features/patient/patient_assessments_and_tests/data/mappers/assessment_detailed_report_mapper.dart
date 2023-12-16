@@ -44,17 +44,17 @@ class AssessmentDetailedReportMapper {
   ) {
     final List<ObservationBriefEntity> observationBriefEntity = [];
     Map<int, String> observationMap = {};
-    if (triageAssessment.observations?.id == null) {
+    if (triageAssessment.observations?.id != null) {
       int id = triageAssessment.observations?.id ?? 0;
       BodySite bodySite =
-          triageAssessment.observations?.bodySite ?? BodySite.RIGHT_EYE;
-      observationMap[id] = bodySite.toString();
+          triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
+      observationMap[id] = getBodySiteText(bodySite);
     }
     for (ObservationDefinitionModel observation
         in triageAssessment.observations!.observationDefinition!) {
       int id = observation?.id ?? 0;
       BodySite bodySite = observation.bodySite!;
-      observationMap[id] = bodySite.toString();
+      observationMap[id] = getBodySiteText(bodySite);
     }
     for (Observation observation in triageDetailedReport.observations!) {
       if (observationMap.containsKey(observation.identifier)) {
@@ -69,7 +69,20 @@ class AssessmentDetailedReportMapper {
       }
     }
 
+    
     return observationBriefEntity;
+  }
+  static String getBodySiteText(BodySite bodySite) {
+    switch (bodySite) {
+      case BodySite.LEFT_EYE:
+        return "Left Eye";
+      case BodySite.RIGHT_EYE:
+        return "Right Eye";
+      case BodySite.BOTH_EYES:
+        return "Both Eyes";
+      default:
+        return "";
+    }
   }
 
   static List<QuestionResponseBriefEntity> _getQuestionsBriefEntity(
