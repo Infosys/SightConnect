@@ -12,7 +12,7 @@
     "imagingSelectionTemplate": [
       {
         "id": 1751,
-        "name": "Optical coherence",
+        "name": "LEFT_EYE",
         "description": "1851",
         "type": "PHOTO",
         "maxSize": 20,
@@ -28,7 +28,23 @@
       },
       {
         "id": 1752,
-        "name": "Optical coherence",
+        "name": "RIGHT_EYE",
+        "description": "1851",
+        "type": "PHOTO",
+        "maxSize": 20,
+        "fileType": "JPEG",
+        "relatedImage": [
+          {
+            "id": 1652,
+            "imageTitle": "Left Eye retina",
+            "url": "http://infy.com/leftEyeRetina",
+            "fileType": "JPEG"
+          }
+        ]
+      },
+      {
+        "id": 1753,
+        "name": "BOTH_EYES",
         "description": "1851",
         "type": "PHOTO",
         "maxSize": 20,

@@ -1,5 +1,7 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class RightCorneaTabView extends ConsumerWidget {
   const RightCorneaTabView({
@@ -29,8 +31,8 @@ class RightCorneaTabView extends ConsumerWidget {
               mainAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
-              return Image.asset(
-                rightEyeImage[index],
+              return CachedNetworkImage(
+                imageUrl:rightEyeImage[index],
                 fit: BoxFit.cover,
               );
             },

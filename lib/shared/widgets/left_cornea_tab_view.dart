@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class LeftCorneaTabView extends ConsumerWidget {
   const LeftCorneaTabView({required this.leftEyeImage, super.key});
@@ -23,10 +24,10 @@ class LeftCorneaTabView extends ConsumerWidget {
             mainAxisSpacing: 10,
           ),
           itemBuilder: (context, index) {
-            return Image.asset(
-              leftEyeImage[index],
-              fit: BoxFit.cover,
-            );
+            return CachedNetworkImage(
+                imageUrl:leftEyeImage[index],
+                fit: BoxFit.cover,
+              );
           },
         ),
       ],

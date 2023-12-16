@@ -102,8 +102,8 @@
             "performer": null,
             "issued": null,
             "identifier": 1751,
-            "baseUrl": "http//www.abc.com",
-            "endpoint": "/c/newimage.jpg",
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
             "bodySite": null,
             "score": 0.0,
             "fileId": null
@@ -113,8 +113,19 @@
             "performer": null,
             "issued": null,
             "identifier": 1752,
-            "baseUrl": "http//www.abc.com",
-            "endpoint": "/c/newimage.jpg",
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2453,
+            "performer": null,
+            "issued": null,
+            "identifier": 1753,
+            "baseUrl": "https://en.wikipedia.org/wiki",
+            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
             "bodySite": null,
             "score": 0.0,
             "fileId": null
