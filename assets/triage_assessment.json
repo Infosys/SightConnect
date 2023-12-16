@@ -1,60 +1,70 @@
 {
-    "id": 10000001,
-    "name": "Eye Test",
-    "organizationCode": 1001,
-    "category": "EYE",
-    "bodySite": "BOTH_EYES",
-    "code": "EYE_TEST",
-    "version": "1.0",
-    "study": {
-        "id": 1551,
-        "description": "Optical coherence tomography",
-        "imagingSelectionTemplate": [
-            {
-                "id": 1751,
-                "name": "Optical coherence",
-                "description": "1851",
-                "type": "PHOTO",
-                "maxSize": 20,
-                "fileType": "JPEG",
-                "relatedImage": [
-                    {
-                        "id": 1651,
-                        "imageTitle": "Left Eye retina",
-                        "url": "http://infy.com/leftEyeRetina",
-                        "fileType": "JPEG"
-                    }
-                ]
-            },
-            {
-                "id": 1752,
-                "name": "Optical coherence",
-                "description": "1851",
-                "type": "PHOTO",
-                "maxSize": 20,
-                "fileType": "JPEG",
-                "relatedImage": [
-                    {
-                        "id": 1652,
-                        "imageTitle": "Left Eye retina",
-                        "url": "http://infy.com/leftEyeRetina",
-                        "fileType": "JPEG"
-                    }
-                ]
-            }
-        ],
-        "languageBasedText": [
-            {
-                "id": 1851,
-                "textId": null,
-                "langId": 1001,
-                "textValue": "Optical coherence",
-                "isDefault": false
-            }
+  "id": 10000001,
+  "name": "Eye Test",
+  "organizationCode": 1001,
+  "category": "EYE",
+  "bodySite": "BOTH_EYES",
+  "code": "EYE_TEST",
+  "version": "1.0",
+  "study": {
+    "id": 1551,
+    "description": "Optical coherence tomography",
+    "imagingSelectionTemplate": [
+      {
+        "id": 1751,
+        "name": "Optical coherence",
+        "description": "1851",
+        "type": "PHOTO",
+        "maxSize": 20,
+        "fileType": "JPEG",
+        "relatedImage": [
+          {
+            "id": 1651,
+            "imageTitle": "Left Eye retina",
+            "url": "http://infy.com/leftEyeRetina",
+            "fileType": "JPEG"
+          }
         ]
-    },
-    "observations": {
-        "id": 1301,
+      },
+      {
+        "id": 1752,
+        "name": "Optical coherence",
+        "description": "1851",
+        "type": "PHOTO",
+        "maxSize": 20,
+        "fileType": "JPEG",
+        "relatedImage": [
+          {
+            "id": 1652,
+            "imageTitle": "Left Eye retina",
+            "url": "http://infy.com/leftEyeRetina",
+            "fileType": "JPEG"
+          }
+        ]
+      }
+    ],
+    "languageBasedText": [
+      {
+        "id": 1851,
+        "textId": null,
+        "langId": 1001,
+        "textValue": "Optical coherence",
+        "isDefault": false
+      }
+    ]
+  },
+  "observations": {
+    "id": 1301,
+    "name": "Eye Observation",
+    "description": "1801",
+    "category": "Exam",
+    "code": "Eye",
+    "bodySite": "BOTH_EYES",
+    "method": "Eye",
+    "jurisdiction": "ALL",
+    "observationDefinition": [
+      {
+        "id": 1302,
         "name": "Eye Observation",
         "description": "1801",
         "category": "Exam",
@@ -64,281 +74,424 @@
         "jurisdiction": "ALL",
         "observationDefinition": null,
         "dataComponent": [
-            {
-                "id": 1351,
-                "permittedDataType": "Range",
-                "permittedUnit": "Number",
-                "qualifiedValue": [
-                    {
-                        "id": 1451,
-                        "isRange": true,
-                        "value": "3.0",
-                        "rangeCategory": "Absolute",
-                        "gender": "MALE",
-                        "range": {
-                            "id": 1401,
-                            "low": 1.1,
-                            "high": null
-                        },
-                        "observationDefinition": null,
-                        "dataComponent": {
-                            "id": 1351,
-                            "permittedDataType": null,
-                            "permittedUnit": null,
-                            "observationDefinition": null
-                        }
-                    },
-                    {
-                        "id": 1452,
-                        "isRange": true,
-                        "value": "2.0",
-                        "rangeCategory": "Absolute",
-                        "gender": "MALE",
-                        "range": {
-                            "id": 1402,
-                            "low": 0.5,
-                            "high": 1.0
-                        },
-                        "observationDefinition": null,
-                        "dataComponent": {
-                            "id": 1351,
-                            "permittedDataType": null,
-                            "permittedUnit": null,
-                            "observationDefinition": null
-                        }
-                    }
-                ]
-            }
+          {
+            "id": 1351,
+            "permittedDataType": "Range",
+            "permittedUnit": "Number",
+            "qualifiedValue": [
+              {
+                "id": 1451,
+                "isRange": true,
+                "value": "3.0",
+                "rangeCategory": "Absolute",
+                "gender": "MALE",
+                "range": {
+                  "id": 1401,
+                  "low": 1.1,
+                  "high": null
+                },
+                "observationDefinition": null,
+                "dataComponent": {
+                  "id": 1351,
+                  "permittedDataType": null,
+                  "permittedUnit": null,
+                  "observationDefinition": null
+                }
+              },
+              {
+                "id": 1452,
+                "isRange": true,
+                "value": "2.0",
+                "rangeCategory": "Absolute",
+                "gender": "MALE",
+                "range": {
+                  "id": 1402,
+                  "low": 0.5,
+                  "high": 1
+                },
+                "observationDefinition": null,
+                "dataComponent": {
+                  "id": 1351,
+                  "permittedDataType": null,
+                  "permittedUnit": null,
+                  "observationDefinition": null
+                }
+              }
+            ]
+          }
         ],
         "relatedImage": [
-            {
-                "id": 1501,
-                "imageTitle": "Left Eye LogMAR",
-                "url": "http://infy.com/leftEyeLogMAR",
-                "fileType": "JPEG"
-            }
+          {
+            "id": 1501,
+            "imageTitle": "Left Eye LogMAR",
+            "url": "http://infy.com/leftEyeLogMAR",
+            "fileType": "JPEG"
+          }
         ],
         "qualifiedValue": [],
         "languageBasedText": [
-            {
-                "id": 1801,
-                "textId": null,
-                "langId": 1001,
-                "textValue": "Left Eye LogMAR",
-                "isDefault": false
-            }
+          {
+            "id": 1801,
+            "textId": null,
+            "langId": 1001,
+            "textValue": "Left Eye LogMAR",
+            "isDefault": false
+          }
         ]
-    },
-    "questionnaire": {
-        "id": 1101,
-        "name": "Eye-1",
-        "title": "Eye questionnaire",
-        "status": "DRAFT",
-        "experimental": true,
-        "date": "2023-12-09T18:12:15.352+05:30",
-        "description": "Eye related Questionnaire",
+      },
+      {
+        "id": 1303,
+        "name": "Eye Observation",
+        "description": "1801",
+        "category": "Exam",
+        "code": "Eye",
+        "bodySite": "RIGHT_EYE",
+        "method": "Eye",
         "jurisdiction": "ALL",
-        "publisher": "Infosys EyeCare4All",
-        "purpose": "Experimental questinnaire",
-        "code": "Physical_findings_of_Eye_Narrative",
-        "version": "0.0.1",
-        "approvalDate": null,
-        "lastReviewDate": null,
-        "creationDate": "2023-12-09T18:12:15.352+05:30",
-        "lastModifiedDate": "2023-12-09T18:12:15.352+05:30",
-        "publisherCode": null,
-        "publisherType": "Experimental",
-        "questionnaire": null,
-        "questionnaireItem": [
-            {
-                "id": 2001,
-                "order": 2,
-                "linkId": "string",
-                "prefix": "string",
-                "text": "This will be my question text",
-                "type": "Choice",
-                "enableBehavior": "ALL",
-                "required": true,
-                "repeats": false,
-                "readOnly": false,
-                "maxlength": 100000,
-                "disabledDisplay": "PROTECTED",
-                "answerConstraint": "OptionsOnly",
-                "answerValueSet": null,
-                "initial": {
-                    "id": 1052,
-                    "answerBoolean": null,
-                    "answerDecimal": null,
-                    "answerInteger": null,
-                    "answerDate": null,
-                    "answerDateTime": null,
-                    "answerTime": null,
-                    "answerString": "1002",
-                    "answerItemWeight": {
-                        "id": 1951,
-                        "value": 1.0,
-                        "answerId": 1052,
-                        "questionResponseWeight": {
-                            "id": 1901,
-                            "quesId": 1151,
-                            "isRange": false,
-                            "isCompare": false,
-                            "isAbsolute": true
-                        }
-                    }
+        "observationDefinition": null,
+        "dataComponent": [
+          {
+            "id": 1351,
+            "permittedDataType": "Range",
+            "permittedUnit": "Number",
+            "qualifiedValue": [
+              {
+                "id": 1451,
+                "isRange": true,
+                "value": "3.0",
+                "rangeCategory": "Absolute",
+                "gender": "MALE",
+                "range": {
+                  "id": 1401,
+                  "low": 1.1,
+                  "high": null
                 },
-                "questionnaireItem": null,
-                "actionOn": [
-                    {
-                        "id": 1201,
-                        "operator": "EQUALS",
-                        "actionType": "EXIT_ALL_QUESTIONNAIRE",
-                        "answer": {
-                            "id": 1051,
-                            "answerBoolean": null,
-                            "answerDecimal": null,
-                            "answerInteger": null,
-                            "answerDate": null,
-                            "answerDateTime": null,
-                            "answerTime": null,
-                            "answerString": "1001",
-                            "answerItemWeight": {
-                                "id": 1952,
-                                "value": 0.0,
-                                "answerId": 1051,
-                                "questionResponseWeight": {
-                                    "id": 1901,
-                                    "quesId": 1151,
-                                    "isRange": false,
-                                    "isCompare": false,
-                                    "isAbsolute": true
-                                }
-                            }
-                        }
-                    }
-                ],
-                "answerOption": [
-                    {
-                        "id": 1251,
-                        "intialSelected": true,
-                        "answer": {
-                            "id": 1052,
-                            "answerBoolean": null,
-                            "answerDecimal": null,
-                            "answerInteger": null,
-                            "answerDate": null,
-                            "answerDateTime": null,
-                            "answerTime": null,
-                            "answerString": "1002",
-                            "answerItemWeight": {
-                                "id": 1951,
-                                "value": 1.0,
-                                "answerId": 1052,
-                                "questionResponseWeight": {
-                                    "id": 1901,
-                                    "quesId": 1151,
-                                    "isRange": false,
-                                    "isCompare": false,
-                                    "isAbsolute": true
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "id": 1252,
-                        "intialSelected": false,
-                        "answer": {
-                            "id": 1051,
-                            "answerBoolean": null,
-                            "answerDecimal": null,
-                            "answerInteger": null,
-                            "answerDate": null,
-                            "answerDateTime": null,
-                            "answerTime": null,
-                            "answerString": "1001",
-                            "answerItemWeight": {
-                                "id": 1952,
-                                "value": 0.0,
-                                "answerId": 1051,
-                                "questionResponseWeight": {
-                                    "id": 1901,
-                                    "quesId": 1151,
-                                    "isRange": false,
-                                    "isCompare": false,
-                                    "isAbsolute": true
-                                }
-                            }
-                        }
-                    }
-                ],
-                "enableWhen": [],
-                "answerItemWeight": null,
-                "questionResponseWeight": {
-                    "id": 1901,
-                    "quesId": 1151,
-                    "answerRangeWeight": [],
-                    "answerComparisonWeight": [],
-                    "range": null,
-                    "compare": null,
-                    "absolute": null
+                "observationDefinition": null,
+                "dataComponent": {
+                  "id": 1351,
+                  "permittedDataType": null,
+                  "permittedUnit": null,
+                  "observationDefinition": null
+                }
+              },
+              {
+                "id": 1452,
+                "isRange": true,
+                "value": "2.0",
+                "rangeCategory": "Absolute",
+                "gender": "MALE",
+                "range": {
+                  "id": 1402,
+                  "low": 0.5,
+                  "high": 1
                 },
-                "relatedImage": [
-                    {
-                        "id": 2051,
-                        "imageTitle": "Right Eye LogMAR",
-                        "url": "http://infy.com/leftEyeLogMAR",
-                        "fileType": "JPEG"
-                    }
-                ]
-            },
-            {
-                "id": 2002,
-                "order": 3,
-                "linkId": "string",
-                "prefix": "string",
-                "text": "Are you having any eye related issue?",
-                "type": "String",
-                "enableBehavior": "ALL",
-                "required": true,
-                "repeats": false,
-                "readOnly": true,
-                "maxlength": 100000,
-                "disabledDisplay": "PROTECTED",
-                "answerConstraint": "OptionsOrString",
-                "answerValueSet": null,
-                "initial": null,
-                "questionnaireItem": null,
-                "actionOn": [],
-                "answerOption": [],
-                "enableWhen": [],
-                "answerItemWeight": null,
-                "questionResponseWeight": null,
-                "relatedImage": [
-                    {
-                        "id": 2151,
-                        "imageTitle": "Both Eyes",
-                        "url": "http://infy.com/both_eyes",
-                        "fileType": "JPEG"
-                    }
-                ]
-            }
+                "observationDefinition": null,
+                "dataComponent": {
+                  "id": 1351,
+                  "permittedDataType": null,
+                  "permittedUnit": null,
+                  "observationDefinition": null
+                }
+              }
+            ]
+          }
         ],
+        "relatedImage": [
+          {
+            "id": 1501,
+            "imageTitle": "Left Eye LogMAR",
+            "url": "http://infy.com/leftEyeLogMAR",
+            "fileType": "JPEG"
+          }
+        ],
+        "qualifiedValue": [],
         "languageBasedText": [
-            {
-                "id": 1001,
-                "textId": null,
-                "langId": 1001,
-                "textValue": "Yes",
-                "isDefault": false
-            },
-            {
-                "id": 1002,
-                "textId": null,
-                "langId": 1001,
-                "textValue": "No",
-                "isDefault": true
-            }
+          {
+            "id": 1801,
+            "textId": null,
+            "langId": 1001,
+            "textValue": "Left Eye LogMAR",
+            "isDefault": false
+          }
         ]
-    },
-    "observationValueWeight": []
+      }
+    ],
+    "dataComponent": [
+      {
+        "id": 1351,
+        "permittedDataType": "Range",
+        "permittedUnit": "Number",
+        "qualifiedValue": [
+          {
+            "id": 1451,
+            "isRange": true,
+            "value": "3.0",
+            "rangeCategory": "Absolute",
+            "gender": "MALE",
+            "range": {
+              "id": 1401,
+              "low": 1.1,
+              "high": null
+            },
+            "observationDefinition": null,
+            "dataComponent": {
+              "id": 1351,
+              "permittedDataType": null,
+              "permittedUnit": null,
+              "observationDefinition": null
+            }
+          },
+          {
+            "id": 1452,
+            "isRange": true,
+            "value": "2.0",
+            "rangeCategory": "Absolute",
+            "gender": "MALE",
+            "range": {
+              "id": 1402,
+              "low": 0.5,
+              "high": 1
+            },
+            "observationDefinition": null,
+            "dataComponent": {
+              "id": 1351,
+              "permittedDataType": null,
+              "permittedUnit": null,
+              "observationDefinition": null
+            }
+          }
+        ]
+      }
+    ],
+    "relatedImage": [
+      {
+        "id": 1501,
+        "imageTitle": "Left Eye LogMAR",
+        "url": "http://infy.com/leftEyeLogMAR",
+        "fileType": "JPEG"
+      }
+    ],
+    "qualifiedValue": [],
+    "languageBasedText": [
+      {
+        "id": 1801,
+        "textId": null,
+        "langId": 1001,
+        "textValue": "Left Eye LogMAR",
+        "isDefault": false
+      }
+    ]
+  },
+  "questionnaire": {
+    "id": 1101,
+    "name": "Eye-1",
+    "title": "Eye questionnaire",
+    "status": "DRAFT",
+    "experimental": true,
+    "date": "2023-12-09T18:12:15.352+05:30",
+    "description": "Eye related Questionnaire",
+    "jurisdiction": "ALL",
+    "publisher": "Infosys EyeCare4All",
+    "purpose": "Experimental questinnaire",
+    "code": "Physical_findings_of_Eye_Narrative",
+    "version": "0.0.1",
+    "approvalDate": null,
+    "lastReviewDate": null,
+    "creationDate": "2023-12-09T18:12:15.352+05:30",
+    "lastModifiedDate": "2023-12-09T18:12:15.352+05:30",
+    "publisherCode": null,
+    "publisherType": "Experimental",
+    "questionnaire": null,
+    "questionnaireItem": [
+      {
+        "id": 2001,
+        "order": 2,
+        "linkId": "string",
+        "prefix": "string",
+        "text": "This will be my question text",
+        "type": "Choice",
+        "enableBehavior": "ALL",
+        "required": true,
+        "repeats": false,
+        "readOnly": false,
+        "maxlength": 100000,
+        "disabledDisplay": "PROTECTED",
+        "answerConstraint": "OptionsOnly",
+        "answerValueSet": null,
+        "initial": {
+          "id": 1052,
+          "answerBoolean": null,
+          "answerDecimal": null,
+          "answerInteger": null,
+          "answerDate": null,
+          "answerDateTime": null,
+          "answerTime": null,
+          "answerString": "1002",
+          "answerItemWeight": {
+            "id": 1951,
+            "value": 1,
+            "answerId": 1052,
+            "questionResponseWeight": {
+              "id": 1901,
+              "quesId": 1151,
+              "isRange": false,
+              "isCompare": false,
+              "isAbsolute": true
+            }
+          }
+        },
+        "questionnaireItem": null,
+        "actionOn": [
+          {
+            "id": 1201,
+            "operator": "EQUALS",
+            "actionType": "EXIT_ALL_QUESTIONNAIRE",
+            "answer": {
+              "id": 1051,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "1001",
+              "answerItemWeight": {
+                "id": 1952,
+                "value": 0,
+                "answerId": 1051,
+                "questionResponseWeight": {
+                  "id": 1901,
+                  "quesId": 1151,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          }
+        ],
+        "answerOption": [
+          {
+            "id": 1251,
+            "intialSelected": true,
+            "answer": {
+              "id": 1052,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "1002",
+              "answerItemWeight": {
+                "id": 1951,
+                "value": 1,
+                "answerId": 1052,
+                "questionResponseWeight": {
+                  "id": 1901,
+                  "quesId": 1151,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          },
+          {
+            "id": 1252,
+            "intialSelected": false,
+            "answer": {
+              "id": 1051,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "1001",
+              "answerItemWeight": {
+                "id": 1952,
+                "value": 0,
+                "answerId": 1051,
+                "questionResponseWeight": {
+                  "id": 1901,
+                  "quesId": 1151,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          }
+        ],
+        "enableWhen": [],
+        "answerItemWeight": null,
+        "questionResponseWeight": {
+          "id": 1901,
+          "quesId": 1151,
+          "answerRangeWeight": [],
+          "answerComparisonWeight": [],
+          "range": null,
+          "compare": null,
+          "absolute": null
+        },
+        "relatedImage": [
+          {
+            "id": 2051,
+            "imageTitle": "Right Eye LogMAR",
+            "url": "http://infy.com/leftEyeLogMAR",
+            "fileType": "JPEG"
+          }
+        ]
+      },
+      {
+        "id": 2002,
+        "order": 3,
+        "linkId": "string",
+        "prefix": "string",
+        "text": "Are you having any eye related issue?",
+        "type": "String",
+        "enableBehavior": "ALL",
+        "required": true,
+        "repeats": false,
+        "readOnly": true,
+        "maxlength": 100000,
+        "disabledDisplay": "PROTECTED",
+        "answerConstraint": "OptionsOrString",
+        "answerValueSet": null,
+        "initial": null,
+        "questionnaireItem": null,
+        "actionOn": [],
+        "answerOption": [],
+        "enableWhen": [],
+        "answerItemWeight": null,
+        "questionResponseWeight": null,
+        "relatedImage": [
+          {
+            "id": 2151,
+            "imageTitle": "Both Eyes",
+            "url": "http://infy.com/both_eyes",
+            "fileType": "JPEG"
+          }
+        ]
+      }
+    ],
+    "languageBasedText": [
+      {
+        "id": 1001,
+        "textId": null,
+        "langId": 1001,
+        "textValue": "Yes",
+        "isDefault": false
+      },
+      {
+        "id": 1002,
+        "textId": null,
+        "langId": 1001,
+        "textValue": "No",
+        "isDefault": true
+      }
+    ]
+  },
+  "observationValueWeight": []
 }

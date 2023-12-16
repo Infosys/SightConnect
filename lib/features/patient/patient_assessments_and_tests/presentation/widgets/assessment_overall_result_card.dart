@@ -1,15 +1,20 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentOverallResultCard extends StatelessWidget {
+  
   const AssessmentOverallResultCard({
     super.key,
     required this.triageResult,
     required this.name,
     required this.id,
     required this.patientImage,
+    required this.triageResultEntities,
   });
+  final TriageReportDetailedEntity triageResultEntities;
   final Map<String, dynamic> triageResult;
   final String name;
   final String id;
@@ -24,11 +29,11 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: AppColor.orange.withOpacity(0.7),
+          color: getRequestPriorityColor(triageResultEntities.priority).withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColor.orange.withOpacity(0.2),
+            color: getRequestPriorityColor(triageResultEntities.priority).withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
             offset: const Offset(4, 4),
@@ -47,11 +52,11 @@ class AssessmentOverallResultCard extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColor.orange,
+                  color: getRequestPriorityColor(triageResultEntities.priority),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  "Routine",
+                  getRequestPriorityText(triageResultEntities.priority),
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.white,
@@ -60,7 +65,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                "12/12/23",
+                triageResultEntities.reportDate,
                 style: applyRobotoFont(
                   fontSize: 12,
                 ),
@@ -70,7 +75,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
         ),
         subtitle: Flexible(
           child: Text(
-            "Sint incididunt est ut non. Veniam elit est exercitation sunt pariatur irure. Duis incididunt enim magna voluptate amet officia incididunt. ",
+            triageResultEntities.questionResultDescription,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.darkGrey,
@@ -81,3 +86,34 @@ class AssessmentOverallResultCard extends StatelessWidget {
     );
   }
 }
+
+String getRequestPriorityText(RequestPriority priority) {
+  switch (priority) {
+    case RequestPriority.URGENT:
+      return "Urgent Consult";
+    case RequestPriority.ROUTINE:
+      return "Routine Checkup";
+    case RequestPriority.ASAP:
+      return "ASAP";
+    case RequestPriority.STAT:
+      return "STAT";
+    default:
+      return "";
+  }
+}
+
+Color getRequestPriorityColor(RequestPriority priority) {
+  switch (priority) {
+    case RequestPriority.URGENT:
+      return AppColor.red;
+    case RequestPriority.ROUTINE:
+      return AppColor.green;
+    case RequestPriority.ASAP:
+      return AppColor.orange;
+    case RequestPriority.STAT:
+      return AppColor.red;
+    default:
+      return AppColor.grey;
+  }
+}
+

@@ -23,8 +23,15 @@ class TriageReportBriefEntity {
   final DateTime triageResultStartDate;
   final String triageResultDescription;
   final bool isUpdateEnabled;
+   
+  final String  questionResultDescription;
+    final String  observationResultDescription;
+    final String  mediaResultDescription;
 
   const TriageReportBriefEntity({
+    required this.questionResultDescription, 
+  required this.observationResultDescription, 
+   required this.mediaResultDescription, 
     required this.triageResultID,
     required this.priority,
     required this.reportTag,

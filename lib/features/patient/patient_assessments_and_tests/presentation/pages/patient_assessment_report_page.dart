@@ -8,12 +8,14 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 
 class PatientAssessmentReportPage extends ConsumerWidget {
   final int diagnosticReportId;
@@ -24,6 +26,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     return ref.watch(getAssementDetailsReport(diagnosticReportId)).when(
       data: (TriageReportDetailedEntity assessmentDetailsReport) {
         return Scaffold(
@@ -58,11 +61,12 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   ReportPageHeader(
                     triageReportAndAssementPage: assessmentDetailsReport,
                   ),
-                  const AssessmentOverallResultCard(
+                   AssessmentOverallResultCard(
                     triageResult: {},
                     name: "name",
                     id: "id",
                     patientImage: AppImages.aboutUs,
+                    triageResultEntities: assessmentDetailsReport,
                   ),
                   ReportAssessmentQuestions(
                     questionResponseBreifModel:
@@ -71,6 +75,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   TumblingEReportCard(
                     tumblingEData:
                         assessmentDetailsReport.visualAcuityBreifEntity,
+                      observationDescription: assessmentDetailsReport.observationResultDescription,
+                    
                   ),
                   EyeScanTabView(
                     eyeScanData: assessmentDetailsReport.imageBriefEntity,
@@ -94,6 +100,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         );
       },
       error: (error, stack) {
+        logger.d("eroor "+error.toString());
+        logger.d("stack " +stack.toString());
         return const Scaffold(
           body: Center(
             child: Text("The full report is not available at the moment."),

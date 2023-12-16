@@ -8,8 +8,10 @@ class TumblingEReportCard extends StatelessWidget {
   const TumblingEReportCard({
     super.key,
     required this.tumblingEData,
+    required this.observationDescription,
   });
   final List<ObservationBriefEntity> tumblingEData;
+  final String observationDescription;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +29,7 @@ class TumblingEReportCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "Patient consistently identifies the orientation of most “E” letters but struggles with a few.",
+            observationDescription,
             style: applyRobotoFont(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -114,7 +116,7 @@ class TumblingEReportCard extends StatelessWidget {
   }
 }
 
-Color getColorBasedOnObservationValue(int value) {
+Color getColorBasedOnObservationValue(double value) {
   if (value < 1) {
     return AppColor.orange;
   } else if (value == 1) {

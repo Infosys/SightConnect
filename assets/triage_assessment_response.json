@@ -26,6 +26,9 @@
     "sourceVersion": "1.0",
     "performerId": 9627849173,
     "performerRole": "PATIENT",
+  "questionResultDescription" : "You might need to see an eye specialist.",
+  "observationResultDescription" : "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
+  "mediaResultDescription" : null,
     "incompleteTests": [
         {
             "id": 2403,
@@ -66,19 +69,28 @@
     ],
     "observations": [
         {
-            "id": 2505,
+            "id": 1123,
             "performer": null,
             "issued": null,
-            "identifier": 1901,
+            "identifier": 1301,
             "interpretation": null,
             "value": "0.75",
             "score": 2.0
         },
         {
-            "id": 2051,
+            "id": 1124,
             "performer": null,
             "issued": null,
-            "identifier": 1002,
+            "identifier": 1302,
+            "interpretation": null,
+            "value": "1",
+            "score": 2.0
+        },
+         {
+            "id": 1125,
+            "performer": null,
+            "issued": null,
+            "identifier": 1303,
             "interpretation": null,
             "value": "1",
             "score": 2.0
