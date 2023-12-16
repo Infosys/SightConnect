@@ -56,6 +56,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         endpoint,
         data: triage.toJson(),
       );
+
+      logger.d({
+        "API saveTriage": endpoint,
+        "response": response.data,
+      });
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
           return TriageResponseModel.fromJson(response.data);

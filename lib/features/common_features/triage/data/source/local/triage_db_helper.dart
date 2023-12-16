@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -109,7 +110,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageAssessment(
-      {required TriageAssessmentModel triageAssessment}) async {
+      {required DiagnosticReportTemplateFHIRModel triageAssessment}) async {
     var dbClient = await database;
     await dbClient.insert(_triageAssessmentTableName, {
       _responseColumnName: json.encode(

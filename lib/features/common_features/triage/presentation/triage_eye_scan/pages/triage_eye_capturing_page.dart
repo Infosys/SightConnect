@@ -3,7 +3,9 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
@@ -256,7 +258,38 @@ class _PatientTriageEyeCapturingPageState
         model.setCurrentEye(TriageEyeType.UNKNOWN);
 
         if (mounted) {
-          _showTestCompletionDialog(context);
+          final navigator = Navigator.of(context);
+          final response = await _showTestCompletionDialog(context);
+          if (response) {
+            setState(() {
+              isLoading = true;
+            });
+            await ref
+                .read(triageEyeScanProvider)
+                .saveTriageEyeScanResponseToDB();
+            final response = await ref.read(triageProvider).saveTriage();
+            setState(() {
+              isLoading = false;
+            });
+            response.fold((failure) {
+              showDialog(
+                context: context,
+                builder: (context) => _showServerExceptionDialog(
+                  context,
+                  failure,
+                ),
+              );
+            }, (result) {
+              ref.read(triageStepperProvider).goToNextStep();
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) => TriageResultPage(
+                    triageResult: result,
+                  ),
+                ),
+              );
+            });
+          }
         }
       }
     } on CameraException {
@@ -323,44 +356,68 @@ class _PatientTriageEyeCapturingPageState
           ),
         ),
         actions: [
-          isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : TextButton(
-                  onPressed: () async {
-                    final navigator = Navigator.of(context);
-                    await ref
-                        .read(triageEyeScanProvider)
-                        .saveTriageEyeScanResponseToDB();
-                    final response =
-                        await ref.read(triageProvider).saveTriage();
-
-                    response.fold((failure) {
-                      Fluttertoast.showToast(msg: failure.toString());
-                    }, (result) {
-                      ref.read(triageStepperProvider).goToNextStep();
-                      navigator.pop();
-                      navigator.push(
-                        MaterialPageRoute(
-                          builder: (context) => TriageResultPage(
-                            triageResult: result,
-                          ),
-                        ),
-                      );
-                    });
-                  },
-                  child: Text(
-                    "View Result",
-                    style: applyRobotoFont(
-                      color: AppColor.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+          TextButton(
+            onPressed: () async {
+              final navigator = Navigator.of(context);
+              navigator.pop(true);
+            },
+            child: Text(
+              "View Result",
+              style: applyRobotoFont(
+                color: AppColor.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+}
+
+_showServerExceptionDialog(
+  BuildContext context,
+  Failure failure,
+) {
+  return BlurDialogBox(
+    title: Text(
+      "Triage Saved Locally",
+      style: applyRobotoFont(
+        color: AppColor.black,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+    content: Text(
+      failure.errorMessage,
+      style: applyRobotoFont(
+        color: AppColor.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TriageResultPage(
+                triageResult: failure.data as TriageResponseModel,
+              ),
+            ),
+          );
+        },
+        child: Text(
+          "Ok",
+          style: applyRobotoFont(
+            color: AppColor.black,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+    ],
+  );
 }
