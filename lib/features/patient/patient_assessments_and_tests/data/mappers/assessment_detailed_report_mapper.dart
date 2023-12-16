@@ -19,16 +19,48 @@ class AssessmentDetailedReportMapper {
       priority: RequestPriority.ROUTINE,
       reportDate: triageDetailedReport.issued?.formateDateWithTime ?? "",
       questionResponseBriefEntity:
-          AssessmentDetailedReportMapper._getObservationBriefEntity(
+          AssessmentDetailedReportMapper._getQuestionsBriefEntity(
         triageAssessment,
         triageDetailedReport,
       ),
-      visualAcuityBreifEntity: [],
+      visualAcuityBreifEntity: _getObservationBriefEntity( triageAssessment,
+        triageDetailedReport,),
       imageBriefEntity: [],
     );
   }
+  static List<ObservationBriefEntity> _getObservationBriefEntity(
+    DiagnosticReportTemplateFHIRModel triageAssessment,
+    TriageDetailedReportModel triageDetailedReport,
+  ) {
+    final List<ObservationBriefEntity> observationBriefEntity = [];
+    Map<int, Map<String, dynamic>> observationMap = {};
+    // for (var observation in triageAssessment.observation!) {
+    //   observationMap[observation.id!] = {
+    //     "observation": observation.code!.text,
+    //   };
+    // }
+    // for (var response in triageDetailedReport.responses!) {
+    //   if (observationMap.containsKey(response.linkId)) {
+    //     observationMap[response.linkId]!["response"] =
+    //         response.answers!.first.value;
+    //   }
+    // }
+   for(int i=0;i<3;i++) {
+        observationBriefEntity.add(
+          ObservationBriefEntity(
+            observationValue: 1,
+            observationId: 1,
+            observationValueIdentifier: 1,
+            bodySite: "Left Eye"),
+        );
+     
+    
+    
+   }
+   return observationBriefEntity;
+  }
 
-  static List<QuestionResponseBriefEntity> _getObservationBriefEntity(
+  static List<QuestionResponseBriefEntity> _getQuestionsBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
