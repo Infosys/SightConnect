@@ -7,6 +7,8 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/ivr_call_history_search_helper_provider.dart';
+
 class VisionTechnicianIvrCallHistory extends ConsumerWidget {
   const VisionTechnicianIvrCallHistory({super.key});
 
@@ -14,7 +16,6 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppbar(
-        // backgroundColor: Colors.red,
         leadingIcon: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
@@ -35,11 +36,27 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
           ],
         ),
       ),
-      body:const SingleChildScrollView(
-        child:  Padding(
-          padding: EdgeInsets.all(AppSize.kmpadding),
-          child:  IvrCallHistoryTableView(),),
-      ),
+      body: ref.watch(getIvrCallHistoryDetailsProvider).when(
+            data: (data) {
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  child: IvrCallHistoryTableView(
+                    ivrCallHistoryDetails: data,
+                  ),
+                ),
+              );
+              return null;
+            },
+            error: (e, s) {
+              return const Center(
+                child: Text("No Data available"),
+              );
+            },
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
     );
   }
 }

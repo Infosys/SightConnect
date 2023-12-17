@@ -2,20 +2,27 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/repositories/ivr_repository_impl.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+var getIvrCallHistoryDetailsProvider =
+    FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
+  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050890");
+});
 
 final ivrCallHistorySearchHelperProvider =
     ChangeNotifierProvider<IvrCallHistorySearchHelperNotifier>((ref) {
   return IvrCallHistorySearchHelperNotifier(
-      ivrRepositoryRef: ref.watch(ivrRepository));
+    ivrRepositoryRef: ref.watch(ivrRepository),
+  );
 });
 
 class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
   IvrRepository ivrRepositoryRef;
+  List<IvrCallHistoryModel> ivrCallHistoryDetails = [];
+  bool isLoading = false;
 
-  IvrCallHistorySearchHelperNotifier({required this.ivrRepositoryRef}) {
-    getIvrCallHistoryDetails();
-  }
+  IvrCallHistorySearchHelperNotifier({required this.ivrRepositoryRef});
 
   var tablefilter = [
     {"type": "All", "checked": true},
@@ -26,58 +33,15 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
     {"type": "Outgoing", "checked": true}
   ];
 
-  List<IvrCallHistoryModel> ivrCallHistoryDetails = [
-    IvrCallHistoryModel(
-      patientId: "OP 545678",
-      name: "Arun Das",
-      duration: 300,
-      logDate: DateTime.now(),
-      status: "COMPLETED",
-      calltype: "in",
-    ),
-    IvrCallHistoryModel(
-      patientId: "OP 545678",
-      name: "Arun Das",
-      duration: 300,
-      logDate: DateTime.now(),
-      status: "COMPLETED",
-      calltype: "out",
-    ),
-    IvrCallHistoryModel(
-      patientId: "OP 545678",
-      name: "Arun Das",
-      duration: 300,
-      logDate: DateTime.now(),
-      status: "COMPLETED",
-      calltype: "in",
-    ),
-    IvrCallHistoryModel(
-      patientId: "OP 545678",
-      name: "Arun Das",
-      duration: 300,
-      logDate: DateTime.now(),
-      status: "No Answer",
-      calltype: "out",
-    ),
-  ];
-
-  bool isLoading = false;
-
-  void getIvrCallHistoryDetails() async {
-    isLoading = true;
-    notifyListeners();
-    ivrCallHistoryDetails =
-        await ivrRepositoryRef.getIvrCallHistory(mobile: "8985050890");
-    isLoading = false;
-    notifyListeners();
-  }
-
-  void makeIvrCall(String patientMobile) async {
-    isLoading = true;
-    notifyListeners();
-    await ivrRepositoryRef.makeIvrCall(patientMobile: patientMobile);
-    isLoading = false;
-    notifyListeners();
+  Future<void> makeIvrCall(String patientMobile) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      await ivrRepositoryRef.makeIvrCall(patientMobile: patientMobile);
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 
   List<String> tableHeading = [

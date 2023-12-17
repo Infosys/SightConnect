@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/availability_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/services/dio_service.dart';
@@ -15,15 +16,21 @@ var availabilityRemoteSource = Provider(
 );
 
 class AvailabilityRemoteSourceImpl implements AvailabilityRemoteSource {
-  Dio _dio;
+  final Dio _dio;
 
   AvailabilityRemoteSourceImpl(this._dio);
 
   @override
-  Future<bool> markAvailability(
-      {required AvailabilityModel availability}) async {
+  Future<bool> markAvailability({
+    required AvailabilityModel availability,
+  }) async {
     String url = "/api/markAvailability";
-    var response = await _dio.post(url, data: availability.toJson());
-    return AvailabilityModel.fromJson(response.data).available;
+    try {
+      var response = await _dio.post(url, data: availability.toJson());
+      return AvailabilityModel.fromJson(response.data).available;
+    } catch (e) {
+      logger.d("markAvailability error: $e");
+      rethrow;
+    }
   }
 }

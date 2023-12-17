@@ -75,7 +75,7 @@ class _VisionTechnicianPreliminaryAssessmentPageState
               children: [
                 // const PreliminaryAssessmentCard(),
                 const SizedBox(height: AppSize.klheight),
-                const PreliminaryAssessmentIvrCard(),
+                // const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
                 PreliminaryAssessmentIvrCall(
                   selectedOption: selectedOption,

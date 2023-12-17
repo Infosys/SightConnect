@@ -1,40 +1,31 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class IvrCallHistoryTableView extends ConsumerWidget {
-  const IvrCallHistoryTableView({super.key});
-
+  const IvrCallHistoryTableView({
+    required this.ivrCallHistoryDetails,
+    super.key,
+  });
+  final List<IvrCallHistoryModel> ivrCallHistoryDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> tableHeading =
-        ref.watch(ivrCallHistorySearchHelperProvider).tableHeading;
-
-    List<IvrCallHistoryModel> ivrCallHistoryDetails =
-        ref.watch(ivrCallHistorySearchHelperProvider).ivrCallHistoryDetails;
-    bool isLoading = ref.watch(ivrCallHistorySearchHelperProvider).isLoading;
-
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
+    final tableHeading =
+        ref.read(ivrCallHistorySearchHelperProvider).tableHeading;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const IvrCallHistorySearchBarChips(),
-        const SizedBox(
-          height: AppSize.klheight,
-        ),
+        const SizedBox(height: AppSize.klheight),
         SizedBox(
           width: AppSize.width(context),
           child: SingleChildScrollView(
@@ -49,25 +40,29 @@ class IvrCallHistoryTableView extends ConsumerWidget {
               ),
               columns: List<DataColumn>.generate(
                 tableHeading.length,
-                (index) => DataColumn(
-                  label: Flexible(
-                    child: Text(
-                      tableHeading[index],
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyFiraSansFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
+                (index) {
+                  return DataColumn(
+                    label: Flexible(
+                      child: Text(
+                        tableHeading[index],
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: applyFiraSansFont(
+                          fontSize: 12,
+                          color: AppColor.grey,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               rows: List<DataRow>.generate(
                 ivrCallHistoryDetails.length,
                 (index) => DataRow(
                   cells: generateIvrCallHistoryListTile(
-                      ivrCallHistoryDetails[index], ref,),
+                    ivrCallHistoryDetails[index],
+                    ref,
+                  ),
                 ),
               ),
             ),
@@ -78,7 +73,10 @@ class IvrCallHistoryTableView extends ConsumerWidget {
   }
 }
 
-List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data, WidgetRef ref) {
+List<DataCell> generateIvrCallHistoryListTile(
+  IvrCallHistoryModel data,
+  WidgetRef ref,
+) {
   return [
     DataCell(
       Text(
@@ -167,24 +165,32 @@ List<DataCell> generateIvrCallHistoryListTile(IvrCallHistoryModel data, WidgetRe
       ),
     ),
     DataCell(
-      CircleAvatar(
-        backgroundColor: data.status == "COMPLETED"
-            ? const Color(0xffFAFAFA)
-            : AppColor.lightBlue,
-        child: IconButton(
-          onPressed: () {
-            ref.read(ivrCallHistorySearchHelperProvider).makeIvrCall(
-                  data.patientId,
-                );
-          },
-          icon: Icon(
-            Icons.phone,
-            color: data.status == "COMPLETED"
-                ? const Color(0xffBBBBBB)
-                : AppColor.blue,
-          ),
-        ),
-      ),
+      ref.watch(ivrCallHistorySearchHelperProvider).isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : CircleAvatar(
+              backgroundColor: data.status == "COMPLETED"
+                  ? const Color(0xffFAFAFA)
+                  : AppColor.lightBlue,
+              child: IconButton(
+                onPressed: () async {
+                  try {
+                    await ref
+                        .read(ivrCallHistorySearchHelperProvider)
+                        .makeIvrCall(data.patientId);
+                  } catch (e) {
+                    Fluttertoast.showToast(msg: "IVR call not available");
+                  }
+                },
+                icon: Icon(
+                  Icons.phone,
+                  color: data.status == "COMPLETED"
+                      ? const Color(0xffBBBBBB)
+                      : AppColor.blue,
+                ),
+              ),
+            ),
     ),
   ];
 }

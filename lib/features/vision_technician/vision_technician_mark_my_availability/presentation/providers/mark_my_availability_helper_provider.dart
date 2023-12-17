@@ -1,15 +1,19 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/repositories/availability_repository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
 
 var markMyAvailabilityHelperProvider =
-    ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>((ref) =>
-        MarkMyAvailabilityHelperNotifier(
-            availabilityRepository: ref.watch(availabilityRepository)));
+    ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>(
+  (ref) => MarkMyAvailabilityHelperNotifier(
+    availabilityRepository: ref.watch(availabilityRepository),
+  ),
+);
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   MarkMyAvailabilityHelperNotifier({required this.availabilityRepository});
@@ -68,16 +72,25 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
 
   var remarksController = TextEditingController();
-  bool markmyAvailableStatus = true;
+  bool markAvailability = true;
   bool isLoading = false;
 
-  void updateAvailability() async {
-    isLoading = true;
-    notifyListeners();
-    markmyAvailableStatus = await availabilityRepository.postMarkMyAvailability(
-        available: !markmyAvailableStatus);
-    isLoading = false;
-    notifyListeners();
+  Future<void> updateAvailability() async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      markAvailability = await availabilityRepository.postMarkMyAvailability(
+        available: !markAvailability,
+      );
+
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      logger.d("updateAvailability error: $e");
+      isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
   }
 
   void removeDayAvailability(int dayAvailabilityindex, int index) {
@@ -112,15 +125,13 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
     var differenceInHours = difference.inHours;
 
     (markMyAvailabilityList[dayAvailabilityindex].time)[index][2] =
-        differenceInHours.toString() +
-            ":" +
-            difference.inMinutes.remainder(60).toString();
+        "$differenceInHours:${difference.inMinutes.remainder(60)}";
 
     notifyListeners();
   }
 
   void toggleMarkMyAvailableStatus(value) {
-    markmyAvailableStatus = value;
+    markAvailability = value;
     notifyListeners();
   }
 }
