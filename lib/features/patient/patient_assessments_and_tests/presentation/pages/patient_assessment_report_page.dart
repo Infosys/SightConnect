@@ -61,7 +61,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                     triageReportAndAssementPage: assessmentDetailsReport,
                   ),
                   AssessmentOverallResultCard(
-                    triageResult: {},
+                    triageResult: const {},
                     name: "name",
                     id: "id",
                     patientImage: AppImages.aboutUs,
@@ -99,8 +99,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         );
       },
       error: (error, stack) {
-        logger.d("eroor " + error.toString());
-        logger.d("stack " + stack.toString());
+        logger.d("eroor $error");
+        logger.d("stack $stack");
         return const Scaffold(
           body: Center(
             child: Text("The full report is not available at the moment."),
@@ -111,7 +111,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority ? priority) {
+String getRequestPriorityText(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";

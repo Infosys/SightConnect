@@ -1,120 +1,110 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'triage_update_model.freezed.dart';
+part 'triage_update_model.g.dart';
 
-class TriageUpdateModel {
-  int? patientId;
-  int? diagnosticReportId;
-  int? organizationCode;
-  List<Performer>? performer;
-  int? assementCode;
-  String? assessmentVersion;
-  DateTime? issued;
-  Source? source;
-  String? sourceVersion;
-  List<IncompleteTestModel>? incompleteSection;
-  int? cummulativeScore;
-  Map<String, int>? score;
-  List<PatchImagingSelectionModel>? imagingSelection;
-  List<PatchObservationsModel>? observations;
-  List<PatchImagingSelectionModel>? questionResponse;
+@freezed
+class TriageUpdateModel with _$TriageUpdateModel {
+  const factory TriageUpdateModel({
+    int? patientId,
+    int? diagnosticReportId,
+    int? organizationCode,
+    List<Performer>? performer,
+    int? assementCode,
+    String? assessmentVersion,
+    DateTime? issued,
+    Source? source,
+    String? sourceVersion,
+    List<IncompleteTestModel>? incompleteSection,
+    int? cummulativeScore,
+    Map<String, int>? score,
+    List<PatchImagingSelectionModel>? imagingSelection,
+    List<PatchObservationsModel>? observations,
+    List<PatchQuestionResponseModel>? questionResponse,
+  }) = _TriageUpdateModel;
 
-  TriageUpdateModel({
-    this.patientId,
-    this.diagnosticReportId,
-    this.organizationCode,
-    this.performer,
-    this.assementCode,
-    this.assessmentVersion,
-    this.issued,
-    this.source,
-    this.sourceVersion,
-    this.incompleteSection,
-    this.cummulativeScore,
-    this.score,
-    this.imagingSelection,
-    this.observations,
-    this.questionResponse,
-  });
+  factory TriageUpdateModel.fromJson(Map<String, dynamic> json) =>
+      _$TriageUpdateModelFromJson(json);
 }
 
-class PatchQuestionResponseModel {
-  int? id;
-  Action? action;
-  int? linkId;
-  double? score;
-  List<PatchAnswerModel>? answers;
-  PatchQuestionResponseModel({
-    this.id,
-    this.action,
-    this.linkId,
-    this.score,
-    this.answers,
-  });
+@freezed
+class PatchQuestionResponseModel with _$PatchQuestionResponseModel {
+  const factory PatchQuestionResponseModel({
+    int? id,
+    Action? action,
+    int? linkId,
+    double? score,
+    List<PatchAnswerModel>? answers,
+  }) = _PatchQuestionResponseModel;
+
+  factory PatchQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$PatchQuestionResponseModelFromJson(json);
 }
 
-class PatchAnswerModel {
-  int? id;
-  Action? action;
-  String? value;
-  double? answerCode;
-  double? score;
-  PatchAnswerModel({
-    this.id,
-    this.action,
-    this.value,
-    this.answerCode,
-    this.score,
-  });
+@freezed
+class PatchAnswerModel with _$PatchAnswerModel {
+  const factory PatchAnswerModel({
+    int? id,
+    Action? action,
+    String? value,
+    double? answerCode,
+    double? score,
+  }) = _PatchAnswerModel;
+
+  factory PatchAnswerModel.fromJson(Map<String, dynamic> json) =>
+      _$PatchAnswerModelFromJson(json);
 }
 
-class Performer {
-  PerformerRole? role;
-  int? identifier;
-  Performer({
-    this.role,
-    this.identifier,
-  });
+@freezed
+class Performer with _$Performer {
+  const factory Performer({
+    PerformerRole? role,
+    int? identifier,
+  }) = _Performer;
+
+  factory Performer.fromJson(Map<String, dynamic> json) =>
+      _$PerformerFromJson(json);
 }
 
-class IncompleteTestModel {
-  TestType? testName;
-  IncompleteTestModel({
-    this.testName,
-  });
+@freezed
+class IncompleteTestModel with _$IncompleteTestModel {
+  const factory IncompleteTestModel({
+    TestType? testName,
+  }) = _IncompleteTestModel;
+
+  factory IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
+      _$IncompleteTestModelFromJson(json);
 }
 
-class PatchObservationsModel {
-  int? id;
-  int? identifier;
-  Action? action;
-  String? value;
-  double? score;
-  PatchObservationsModel({
-    this.id,
-    this.identifier,
-    this.action,
-    this.value,
-    this.score,
-  });
+@freezed
+class PatchObservationsModel with _$PatchObservationsModel {
+  const factory PatchObservationsModel({
+    int? id,
+    int? identifier,
+    Action? action,
+    String? value,
+    double? score,
+  }) = _PatchObservationsModel;
+
+  factory PatchObservationsModel.fromJson(Map<String, dynamic> json) =>
+      _$PatchObservationsModelFromJson(json);
 }
 
-class PatchImagingSelectionModel {
-  int? id;
-  int? identifier;
-  Action? action;
-  String? endpoint;
-  String? baseUrl;
-  double? score;
+@freezed
+class PatchImagingSelectionModel with _$PatchImagingSelectionModel {
+  const factory PatchImagingSelectionModel({
+    int? id,
+    int? identifier,
+    Action? action,
+    String? endpoint,
+    String? baseUrl,
+    double? score,
+  }) = _PatchImagingSelectionModel;
 
-  PatchImagingSelectionModel({
-    this.id,
-    this.identifier,
-    this.action,
-    this.endpoint,
-    this.baseUrl,
-    this.score,
-  });
+  factory PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
+      _$PatchImagingSelectionModelFromJson(json);
 }
 
 enum Action { ADD, REMOVE, UPDATE }

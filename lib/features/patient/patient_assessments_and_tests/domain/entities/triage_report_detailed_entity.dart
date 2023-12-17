@@ -8,43 +8,43 @@ class TriageReportDetailedEntity {
   final String patientImage;
   final String assessmentID;
   final String reportDate;
-   String ? triageResultDescription;
-   String ? questionResultDescription;
-   String ? observationResultDescription;
-   String ? mediaResultDescription;
-   RequestPriority ? overallpriority;
-   RequestPriority  ? quessionnairepriority;
-   RequestPriority ? observationpriority;
-   RequestPriority ? mediapriority;
-   List<IncompleteTest> ? icompleteTests;
+  String? triageResultDescription;
+  String? questionResultDescription;
+  String? observationResultDescription;
+  String? mediaResultDescription;
+  RequestPriority? overallpriority;
+  RequestPriority? quessionnairepriority;
+  RequestPriority? observationpriority;
+  RequestPriority? mediapriority;
+  List<IncompleteTestModel>? icompleteTests;
 
   final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
   final List<ObservationBriefEntity> visualAcuityBreifEntity;
   final List<ImageBriefEntity> imageBriefEntity;
-   Severity ? cumulativeSeverity;
-   Severity ?observationSeverity;
-   Severity ? mediaSeverity;
-   Severity ? questionResponseSeverity;
+  Severity? cumulativeSeverity;
+  Severity? observationSeverity;
+  Severity? mediaSeverity;
+  Severity? questionResponseSeverity;
 
   TriageReportDetailedEntity({
-     this.cumulativeSeverity, 
+    this.cumulativeSeverity,
     this.observationSeverity,
-     this.mediaSeverity,
-      this.questionResponseSeverity, 
-     this.triageResultDescription,
-     this.questionResultDescription,
-     this.observationResultDescription,
-     this.mediaResultDescription,
+    this.mediaSeverity,
+    this.questionResponseSeverity,
+    this.triageResultDescription,
+    this.questionResultDescription,
+    this.observationResultDescription,
+    this.mediaResultDescription,
     required this.patientId,
     required this.patientName,
     required this.patientImage,
     required this.assessmentID,
-     this.overallpriority,
-     this.quessionnairepriority,
-     this.observationpriority,
-     this.mediapriority,
+    this.overallpriority,
+    this.quessionnairepriority,
+    this.observationpriority,
+    this.mediapriority,
     required this.reportDate,
-     this.icompleteTests,
+    this.icompleteTests,
     required this.questionResponseBriefEntity,
     required this.visualAcuityBreifEntity,
     required this.imageBriefEntity,

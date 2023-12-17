@@ -41,7 +41,7 @@ mixin _$TriageDetailedReportModel {
   String? get sourceVersion => throw _privateConstructorUsedError;
   int? get performerId => throw _privateConstructorUsedError;
   PerformerRole? get performerRole => throw _privateConstructorUsedError;
-  List<IncompleteTest>? get incompleteTests =>
+  List<IncompleteTestModel>? get incompleteTests =>
       throw _privateConstructorUsedError;
   List<Response>? get responses => throw _privateConstructorUsedError;
   List<Observation>? get observations => throw _privateConstructorUsedError;
@@ -90,7 +90,7 @@ abstract class $TriageDetailedReportModelCopyWith<$Res> {
       String? sourceVersion,
       int? performerId,
       PerformerRole? performerRole,
-      List<IncompleteTest>? incompleteTests,
+      List<IncompleteTestModel>? incompleteTests,
       List<Response>? responses,
       List<Observation>? observations,
       List<Media>? media,
@@ -231,7 +231,7 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
       incompleteTests: freezed == incompleteTests
           ? _value.incompleteTests
           : incompleteTests // ignore: cast_nullable_to_non_nullable
-              as List<IncompleteTest>?,
+              as List<IncompleteTestModel>?,
       responses: freezed == responses
           ? _value.responses
           : responses // ignore: cast_nullable_to_non_nullable
@@ -328,7 +328,7 @@ abstract class _$$_TriageDetailedReportModelCopyWith<$Res>
       String? sourceVersion,
       int? performerId,
       PerformerRole? performerRole,
-      List<IncompleteTest>? incompleteTests,
+      List<IncompleteTestModel>? incompleteTests,
       List<Response>? responses,
       List<Observation>? observations,
       List<Media>? media,
@@ -469,7 +469,7 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
       incompleteTests: freezed == incompleteTests
           ? _value._incompleteTests
           : incompleteTests // ignore: cast_nullable_to_non_nullable
-              as List<IncompleteTest>?,
+              as List<IncompleteTestModel>?,
       responses: freezed == responses
           ? _value._responses
           : responses // ignore: cast_nullable_to_non_nullable
@@ -548,7 +548,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
       this.sourceVersion,
       this.performerId,
       this.performerRole,
-      final List<IncompleteTest>? incompleteTests,
+      final List<IncompleteTestModel>? incompleteTests,
       final List<Response>? responses,
       final List<Observation>? observations,
       final List<Media>? media,
@@ -609,9 +609,9 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   final int? performerId;
   @override
   final PerformerRole? performerRole;
-  final List<IncompleteTest>? _incompleteTests;
+  final List<IncompleteTestModel>? _incompleteTests;
   @override
-  List<IncompleteTest>? get incompleteTests {
+  List<IncompleteTestModel>? get incompleteTests {
     final value = _incompleteTests;
     if (value == null) return null;
     if (_incompleteTests is EqualUnmodifiableListView) return _incompleteTests;
@@ -825,7 +825,7 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
       final String? sourceVersion,
       final int? performerId,
       final PerformerRole? performerRole,
-      final List<IncompleteTest>? incompleteTests,
+      final List<IncompleteTestModel>? incompleteTests,
       final List<Response>? responses,
       final List<Observation>? observations,
       final List<Media>? media,
@@ -882,7 +882,7 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   @override
   PerformerRole? get performerRole;
   @override
-  List<IncompleteTest>? get incompleteTests;
+  List<IncompleteTestModel>? get incompleteTests;
   @override
   List<Response>? get responses;
   @override
@@ -1102,34 +1102,34 @@ abstract class _EncounterPeriod implements EncounterPeriod {
       throw _privateConstructorUsedError;
 }
 
-IncompleteTest _$IncompleteTestFromJson(Map<String, dynamic> json) {
-  return _IncompleteTest.fromJson(json);
+IncompleteTestModel _$IncompleteTestModelFromJson(Map<String, dynamic> json) {
+  return _IncompleteTestModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$IncompleteTest {
+mixin _$IncompleteTestModel {
   int get id => throw _privateConstructorUsedError;
   TestType get testName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $IncompleteTestCopyWith<IncompleteTest> get copyWith =>
+  $IncompleteTestModelCopyWith<IncompleteTestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $IncompleteTestCopyWith<$Res> {
-  factory $IncompleteTestCopyWith(
-          IncompleteTest value, $Res Function(IncompleteTest) then) =
-      _$IncompleteTestCopyWithImpl<$Res, IncompleteTest>;
+abstract class $IncompleteTestModelCopyWith<$Res> {
+  factory $IncompleteTestModelCopyWith(
+          IncompleteTestModel value, $Res Function(IncompleteTestModel) then) =
+      _$IncompleteTestModelCopyWithImpl<$Res, IncompleteTestModel>;
   @useResult
   $Res call({int id, TestType testName});
 }
 
 /// @nodoc
-class _$IncompleteTestCopyWithImpl<$Res, $Val extends IncompleteTest>
-    implements $IncompleteTestCopyWith<$Res> {
-  _$IncompleteTestCopyWithImpl(this._value, this._then);
+class _$IncompleteTestModelCopyWithImpl<$Res, $Val extends IncompleteTestModel>
+    implements $IncompleteTestModelCopyWith<$Res> {
+  _$IncompleteTestModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1156,22 +1156,22 @@ class _$IncompleteTestCopyWithImpl<$Res, $Val extends IncompleteTest>
 }
 
 /// @nodoc
-abstract class _$$_IncompleteTestCopyWith<$Res>
-    implements $IncompleteTestCopyWith<$Res> {
-  factory _$$_IncompleteTestCopyWith(
-          _$_IncompleteTest value, $Res Function(_$_IncompleteTest) then) =
-      __$$_IncompleteTestCopyWithImpl<$Res>;
+abstract class _$$_IncompleteTestModelCopyWith<$Res>
+    implements $IncompleteTestModelCopyWith<$Res> {
+  factory _$$_IncompleteTestModelCopyWith(_$_IncompleteTestModel value,
+          $Res Function(_$_IncompleteTestModel) then) =
+      __$$_IncompleteTestModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, TestType testName});
 }
 
 /// @nodoc
-class __$$_IncompleteTestCopyWithImpl<$Res>
-    extends _$IncompleteTestCopyWithImpl<$Res, _$_IncompleteTest>
-    implements _$$_IncompleteTestCopyWith<$Res> {
-  __$$_IncompleteTestCopyWithImpl(
-      _$_IncompleteTest _value, $Res Function(_$_IncompleteTest) _then)
+class __$$_IncompleteTestModelCopyWithImpl<$Res>
+    extends _$IncompleteTestModelCopyWithImpl<$Res, _$_IncompleteTestModel>
+    implements _$$_IncompleteTestModelCopyWith<$Res> {
+  __$$_IncompleteTestModelCopyWithImpl(_$_IncompleteTestModel _value,
+      $Res Function(_$_IncompleteTestModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1180,7 +1180,7 @@ class __$$_IncompleteTestCopyWithImpl<$Res>
     Object? id = null,
     Object? testName = null,
   }) {
-    return _then(_$_IncompleteTest(
+    return _then(_$_IncompleteTestModel(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1195,11 +1195,11 @@ class __$$_IncompleteTestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IncompleteTest implements _IncompleteTest {
-  const _$_IncompleteTest({required this.id, required this.testName});
+class _$_IncompleteTestModel implements _IncompleteTestModel {
+  const _$_IncompleteTestModel({required this.id, required this.testName});
 
-  factory _$_IncompleteTest.fromJson(Map<String, dynamic> json) =>
-      _$$_IncompleteTestFromJson(json);
+  factory _$_IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
+      _$$_IncompleteTestModelFromJson(json);
 
   @override
   final int id;
@@ -1208,14 +1208,14 @@ class _$_IncompleteTest implements _IncompleteTest {
 
   @override
   String toString() {
-    return 'IncompleteTest(id: $id, testName: $testName)';
+    return 'IncompleteTestModel(id: $id, testName: $testName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IncompleteTest &&
+            other is _$_IncompleteTestModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.testName, testName) ||
                 other.testName == testName));
@@ -1228,24 +1228,25 @@ class _$_IncompleteTest implements _IncompleteTest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IncompleteTestCopyWith<_$_IncompleteTest> get copyWith =>
-      __$$_IncompleteTestCopyWithImpl<_$_IncompleteTest>(this, _$identity);
+  _$$_IncompleteTestModelCopyWith<_$_IncompleteTestModel> get copyWith =>
+      __$$_IncompleteTestModelCopyWithImpl<_$_IncompleteTestModel>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IncompleteTestToJson(
+    return _$$_IncompleteTestModelToJson(
       this,
     );
   }
 }
 
-abstract class _IncompleteTest implements IncompleteTest {
-  const factory _IncompleteTest(
+abstract class _IncompleteTestModel implements IncompleteTestModel {
+  const factory _IncompleteTestModel(
       {required final int id,
-      required final TestType testName}) = _$_IncompleteTest;
+      required final TestType testName}) = _$_IncompleteTestModel;
 
-  factory _IncompleteTest.fromJson(Map<String, dynamic> json) =
-      _$_IncompleteTest.fromJson;
+  factory _IncompleteTestModel.fromJson(Map<String, dynamic> json) =
+      _$_IncompleteTestModel.fromJson;
 
   @override
   int get id;
@@ -1253,7 +1254,7 @@ abstract class _IncompleteTest implements IncompleteTest {
   TestType get testName;
   @override
   @JsonKey(ignore: true)
-  _$$_IncompleteTestCopyWith<_$_IncompleteTest> get copyWith =>
+  _$$_IncompleteTestModelCopyWith<_$_IncompleteTestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -59,10 +59,10 @@ class UpdateTriageAlertBox extends ConsumerWidget {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     UpdateTriageQuestionnairePage(
-                                        questionnaireSections: model
-                                            .triageAssessment
-                                            .questionnaire!
-                                            .questionnaireItem!),
+                                  questionnaireSections: model.triageAssessment
+                                      .questionnaire!.questionnaireItem!,
+                                  reportId: dignosticReportID,
+                                ),
                               ),
                             );
                             break;

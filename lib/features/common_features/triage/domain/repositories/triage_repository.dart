@@ -9,6 +9,7 @@ abstract class TriageRepository {
   Future<Either<Failure, TriageResponseModel>> saveTriage({
     required TriageResponseModel triage,
   });
+
   Future<Either<Failure, TriageResponseModel>> updateTriage({
     required TriageUpdateModel triage,
   });

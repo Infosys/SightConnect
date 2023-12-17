@@ -36,7 +36,7 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
       performerRole:
           $enumDecodeNullable(_$PerformerRoleEnumMap, json['performerRole']),
       incompleteTests: (json['incompleteTests'] as List<dynamic>?)
-          ?.map((e) => IncompleteTest.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       responses: (json['responses'] as List<dynamic>?)
           ?.map((e) => Response.fromJson(e as Map<String, dynamic>))
@@ -170,13 +170,15 @@ Map<String, dynamic> _$$_EncounterPeriodToJson(_$_EncounterPeriod instance) =>
       'end': const TimestampConverter().toJson(instance.end),
     };
 
-_$_IncompleteTest _$$_IncompleteTestFromJson(Map<String, dynamic> json) =>
-    _$_IncompleteTest(
+_$_IncompleteTestModel _$$_IncompleteTestModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_IncompleteTestModel(
       id: json['id'] as int,
       testName: $enumDecode(_$TestTypeEnumMap, json['testName']),
     );
 
-Map<String, dynamic> _$$_IncompleteTestToJson(_$_IncompleteTest instance) =>
+Map<String, dynamic> _$$_IncompleteTestModelToJson(
+        _$_IncompleteTestModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'testName': _$TestTypeEnumMap[instance.testName]!,
