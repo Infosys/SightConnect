@@ -12,19 +12,19 @@ import 'package:flutter/material.dart';
 // }
 
 class PreliminaryAssessmentIvrCall extends StatelessWidget {
-  final int isSelectedOption;
-  final Function(int) onSelectedOptionChanged;
+  final String selectedOption;
+  final Function(String) onSelectedOptionChanged;
 
   const PreliminaryAssessmentIvrCall({
     super.key,
-    required this.isSelectedOption,
+    required this.selectedOption,
     required this.onSelectedOptionChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: AppSize.width(context),
       decoration: const BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
@@ -44,22 +44,44 @@ class PreliminaryAssessmentIvrCall extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.ksheight),
-          ListTile(
-            title: const Text('Yes'),
-            leading: Radio(
-              value: 1,
-              groupValue: isSelectedOption,
-              onChanged: (value) => onSelectedOptionChanged(1),
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Radio(
+                value: "Yes",
+                groupValue: selectedOption,
+                onChanged: (value) => onSelectedOptionChanged("Yes"),
+              ),
+              const Text('Yes'),
+            ],
           ),
-          ListTile(
-            title: const Text('No'),
-            leading: Radio(
-              value: 2,
-              groupValue: isSelectedOption,
-              onChanged: (value) => onSelectedOptionChanged(2),
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Radio(
+                value: "No",
+                groupValue: selectedOption,
+                onChanged: (value) => onSelectedOptionChanged("No"),
+              ),
+              const Text('No'),
+            ],
           ),
+          // ListTile(
+          //   title: const Text('Yes'),
+          //   leading: Radio(
+          //     value: 1,
+          //     groupValue: isSelectedOption,
+          //     onChanged: (value) => onSelectedOptionChanged(1),
+          //   ),
+          // ),
+          // ListTile(
+          //   title: const Text('No'),
+          //   leading: Radio(
+          //     value: 2,
+          //     groupValue: isSelectedOption,
+          //     onChanged: (value) => onSelectedOptionChanged(2),
+          //   ),
+          // ),
         ],
       ),
     );

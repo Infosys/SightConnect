@@ -24,8 +24,21 @@ class EyeScanCard extends ConsumerWidget {
         ref.watch(visionTechnicianEyeScanProvider).bothEyeImage.path;
     bool allImagesCaptured =
         ref.watch(visionTechnicianEyeScanProvider).allImagesCaptured;
+
+    // return Container(
+    //   width: 400,
+    //   height: 100,
+    //   margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
+    //   padding: const EdgeInsets.all(AppSize.kmpadding),
+    //   decoration: BoxDecoration(
+    //     color: AppColor.white,
+    //     boxShadow: applyLightShadow(),
+    //     borderRadius: BorderRadius.circular(AppSize.kmradius),
+    //   ),
+    // );
+
     return Container(
-      width: AppSize.width(context),
+      width: AppSize.width(context) ,
       margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
@@ -35,6 +48,7 @@ class EyeScanCard extends ConsumerWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Eye Scan",
@@ -44,85 +58,85 @@ class EyeScanCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSize.kmheight),
-          if(!allImagesCaptured)
-          TextButton(
-            onPressed: () async {
-              var cameras = await availableCameras();
-              if (cameras.isEmpty) {
-                return;
-              }
-              if (context.mounted) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) =>
-                        VisionTechnicianEyeCapture(cameras: cameras),
+          if (!allImagesCaptured)
+            TextButton(
+              onPressed: () async {
+                var cameras = await availableCameras();
+                if (cameras.isEmpty) {
+                  return;
+                }
+                if (context.mounted) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) =>
+                          VisionTechnicianEyeCapture(cameras: cameras),
+                    ),
+                  );
+                }
+              },
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(
+                    horizontal: AppSize.kmpadding,
+                    vertical: AppSize.kspadding,
                   ),
-                );
-              }
-            },
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kspadding,
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+                    side: const BorderSide(color: AppColor.primary),
+                  ),
                 ),
               ),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.klradius * 2),
-                  side: const BorderSide(color: AppColor.primary),
-                ),
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  CupertinoIcons.camera_viewfinder,
-                  color: AppColor.primary,
-                ),
-                const SizedBox(width: AppSize.kswidth),
-                Text(
-                  "Take Picture",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    CupertinoIcons.camera_viewfinder,
                     color: AppColor.primary,
                   ),
-                )
+                  const SizedBox(width: AppSize.kswidth),
+                  Text(
+                    "Take Picture",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.primary,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          const SizedBox(height: AppSize.ksheight),
+          if (allImagesCaptured)
+            Row(
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 100,
+                  child: Image.file(
+                    File(leftEyeImagePath),
+                  ),
+                ),
+                const SizedBox(width: AppSize.kswidth),
+                SizedBox(
+                  width: 150,
+                  height: 100,
+                  child: Image.file(
+                    File(rightEyeImagePath),
+                  ),
+                ),
+                const SizedBox(width: AppSize.kswidth),
+                SizedBox(
+                  width: 250,
+                  height: 100,
+                  child: Image.file(
+                    File(bothEyeImagePath),
+                  ),
+                ),
               ],
             ),
-          ),
-          const SizedBox(height: AppSize.ksheight),
-          if(allImagesCaptured)
-          Row(
-            children: [
-              SizedBox(
-                width: 150,
-                height: 100,
-                child: Image.file(
-                  File(leftEyeImagePath),
-                ),
-              ),
-              const SizedBox(width: AppSize.kswidth),
-              SizedBox(
-                width: 150,
-                height: 100,
-                child: Image.file(
-                  File(rightEyeImagePath),
-                ),
-              ),
-              const SizedBox(width: AppSize.kswidth),
-              SizedBox(
-                width: 250,
-                height: 100,
-                child: Image.file(
-                  File(bothEyeImagePath),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );

@@ -1,15 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
@@ -34,15 +31,15 @@ class VisionTechnicianPreliminaryAssessmentPage extends ConsumerStatefulWidget {
 class _VisionTechnicianPreliminaryAssessmentPageState
     extends ConsumerState<VisionTechnicianPreliminaryAssessmentPage> {
   final _formKey = GlobalKey<FormState>();
-  int isSelectedOption = 1;
+  String selectedOption = "Yes";
   bool isWidgetVisible = true;
-  void updateVisibility(int selectedOption) {
+  void updateVisibility(String selectedOptionNew) {
     setState(
       () {
-        isSelectedOption = selectedOption;
-        isWidgetVisible = (selectedOption == 1) ? true : false;
-        debugPrint("$isWidgetVisible");
-        debugPrint("$isSelectedOption");
+        selectedOption = selectedOptionNew;
+        isWidgetVisible = (selectedOption == "Yes") ? true : false;
+        // debugPrint("$isWidgetVisible");
+        // debugPrint("$isSelectedOption");
       },
     );
   }
@@ -114,10 +111,11 @@ class _VisionTechnicianPreliminaryAssessmentPageState
                 const PreliminaryAssessmentIvrCard(),
                 const SizedBox(height: AppSize.klheight),
                 PreliminaryAssessmentIvrCall(
-                  isSelectedOption: isSelectedOption,
+                  selectedOption: selectedOption,
                   onSelectedOptionChanged: updateVisibility,
                 ),
                 if (isWidgetVisible) PreliminaryAssessmentQuestions(),
+                if (isWidgetVisible) EyeScanCard(),
                 if (isWidgetVisible)
                   const Column(
                     children: [
