@@ -114,7 +114,7 @@ class PatientRegistrationProvider extends ChangeNotifier {
             village: "Madhurawada",
             district: "Visakhapatnam",
             state: "Andhra Pradesh",
-            pinCode: _pincode,
+            pincode: _pincode,
             primary: true)
       ],
     );

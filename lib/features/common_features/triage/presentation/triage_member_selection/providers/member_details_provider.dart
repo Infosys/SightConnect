@@ -108,7 +108,7 @@ MemberDetailsProvider(this._ref);
             village: "Madhurawada",
             district: "Visakhapatnam",
             state: "Andhra Pradesh",
-            pinCode: _address,
+            pincode: _address,
             primary: true)
       ],
     );

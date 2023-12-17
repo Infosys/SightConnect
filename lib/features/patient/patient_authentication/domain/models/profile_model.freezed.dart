@@ -1228,7 +1228,7 @@ mixin _$MetaDataModel {
   String? get counterId => throw _privateConstructorUsedError;
   String? get hprId => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
-  String? get longitute => throw _privateConstructorUsedError;
+  String? get longitude => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1247,7 +1247,7 @@ abstract class $MetaDataModelCopyWith<$Res> {
       String? counterId,
       String? hprId,
       String? latitude,
-      String? longitute});
+      String? longitude});
 }
 
 /// @nodoc
@@ -1267,7 +1267,7 @@ class _$MetaDataModelCopyWithImpl<$Res, $Val extends MetaDataModel>
     Object? counterId = freezed,
     Object? hprId = freezed,
     Object? latitude = freezed,
-    Object? longitute = freezed,
+    Object? longitude = freezed,
   }) {
     return _then(_value.copyWith(
       hipId: freezed == hipId
@@ -1286,9 +1286,9 @@ class _$MetaDataModelCopyWithImpl<$Res, $Val extends MetaDataModel>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as String?,
-      longitute: freezed == longitute
-          ? _value.longitute
-          : longitute // ignore: cast_nullable_to_non_nullable
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -1307,7 +1307,7 @@ abstract class _$$_MetaDataModelCopyWith<$Res>
       String? counterId,
       String? hprId,
       String? latitude,
-      String? longitute});
+      String? longitude});
 }
 
 /// @nodoc
@@ -1325,7 +1325,7 @@ class __$$_MetaDataModelCopyWithImpl<$Res>
     Object? counterId = freezed,
     Object? hprId = freezed,
     Object? latitude = freezed,
-    Object? longitute = freezed,
+    Object? longitude = freezed,
   }) {
     return _then(_$_MetaDataModel(
       hipId: freezed == hipId
@@ -1344,9 +1344,9 @@ class __$$_MetaDataModelCopyWithImpl<$Res>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as String?,
-      longitute: freezed == longitute
-          ? _value.longitute
-          : longitute // ignore: cast_nullable_to_non_nullable
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1356,7 +1356,7 @@ class __$$_MetaDataModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MetaDataModel implements _MetaDataModel {
   const _$_MetaDataModel(
-      {this.hipId, this.counterId, this.hprId, this.latitude, this.longitute});
+      {this.hipId, this.counterId, this.hprId, this.latitude, this.longitude});
 
   factory _$_MetaDataModel.fromJson(Map<String, dynamic> json) =>
       _$$_MetaDataModelFromJson(json);
@@ -1370,11 +1370,11 @@ class _$_MetaDataModel implements _MetaDataModel {
   @override
   final String? latitude;
   @override
-  final String? longitute;
+  final String? longitude;
 
   @override
   String toString() {
-    return 'MetaDataModel(hipId: $hipId, counterId: $counterId, hprId: $hprId, latitude: $latitude, longitute: $longitute)';
+    return 'MetaDataModel(hipId: $hipId, counterId: $counterId, hprId: $hprId, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -1388,14 +1388,14 @@ class _$_MetaDataModel implements _MetaDataModel {
             (identical(other.hprId, hprId) || other.hprId == hprId) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
-            (identical(other.longitute, longitute) ||
-                other.longitute == longitute));
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, hipId, counterId, hprId, latitude, longitute);
+      Object.hash(runtimeType, hipId, counterId, hprId, latitude, longitude);
 
   @JsonKey(ignore: true)
   @override
@@ -1417,7 +1417,7 @@ abstract class _MetaDataModel implements MetaDataModel {
       final String? counterId,
       final String? hprId,
       final String? latitude,
-      final String? longitute}) = _$_MetaDataModel;
+      final String? longitude}) = _$_MetaDataModel;
 
   factory _MetaDataModel.fromJson(Map<String, dynamic> json) =
       _$_MetaDataModel.fromJson;
@@ -1431,7 +1431,7 @@ abstract class _MetaDataModel implements MetaDataModel {
   @override
   String? get latitude;
   @override
-  String? get longitute;
+  String? get longitude;
   @override
   @JsonKey(ignore: true)
   _$$_MetaDataModelCopyWith<_$_MetaDataModel> get copyWith =>
@@ -1939,6 +1939,8 @@ ExtendedPatientModel _$ExtendedPatientModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExtendedPatientModel {
+  int? get patientId => throw _privateConstructorUsedError;
+  String? get osid => throw _privateConstructorUsedError;
   int? get abhaNumber => throw _privateConstructorUsedError;
   String? get abhaAddress => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
@@ -1947,6 +1949,7 @@ mixin _$ExtendedPatientModel {
   String? get monthOfBirth => throw _privateConstructorUsedError;
   String? get yearOfBirth => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
+  int? get age => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get profilePhoto => throw _privateConstructorUsedError;
   int? get parentPatientId => throw _privateConstructorUsedError;
@@ -1970,7 +1973,9 @@ abstract class $ExtendedPatientModelCopyWith<$Res> {
       _$ExtendedPatientModelCopyWithImpl<$Res, ExtendedPatientModel>;
   @useResult
   $Res call(
-      {int? abhaNumber,
+      {int? patientId,
+      String? osid,
+      int? abhaNumber,
       String? abhaAddress,
       String? name,
       Gender? gender,
@@ -1978,6 +1983,7 @@ abstract class $ExtendedPatientModelCopyWith<$Res> {
       String? monthOfBirth,
       String? yearOfBirth,
       String? phoneNumber,
+      int? age,
       String? email,
       String? profilePhoto,
       int? parentPatientId,
@@ -2001,6 +2007,8 @@ class _$ExtendedPatientModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? patientId = freezed,
+    Object? osid = freezed,
     Object? abhaNumber = freezed,
     Object? abhaAddress = freezed,
     Object? name = freezed,
@@ -2009,6 +2017,7 @@ class _$ExtendedPatientModelCopyWithImpl<$Res,
     Object? monthOfBirth = freezed,
     Object? yearOfBirth = freezed,
     Object? phoneNumber = freezed,
+    Object? age = freezed,
     Object? email = freezed,
     Object? profilePhoto = freezed,
     Object? parentPatientId = freezed,
@@ -2018,6 +2027,14 @@ class _$ExtendedPatientModelCopyWithImpl<$Res,
     Object? medicalRecords = freezed,
   }) {
     return _then(_value.copyWith(
+      patientId: freezed == patientId
+          ? _value.patientId
+          : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      osid: freezed == osid
+          ? _value.osid
+          : osid // ignore: cast_nullable_to_non_nullable
+              as String?,
       abhaNumber: freezed == abhaNumber
           ? _value.abhaNumber
           : abhaNumber // ignore: cast_nullable_to_non_nullable
@@ -2050,6 +2067,10 @@ class _$ExtendedPatientModelCopyWithImpl<$Res,
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -2091,7 +2112,9 @@ abstract class _$$_ExtendedPatientModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? abhaNumber,
+      {int? patientId,
+      String? osid,
+      int? abhaNumber,
       String? abhaAddress,
       String? name,
       Gender? gender,
@@ -2099,6 +2122,7 @@ abstract class _$$_ExtendedPatientModelCopyWith<$Res>
       String? monthOfBirth,
       String? yearOfBirth,
       String? phoneNumber,
+      int? age,
       String? email,
       String? profilePhoto,
       int? parentPatientId,
@@ -2119,6 +2143,8 @@ class __$$_ExtendedPatientModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? patientId = freezed,
+    Object? osid = freezed,
     Object? abhaNumber = freezed,
     Object? abhaAddress = freezed,
     Object? name = freezed,
@@ -2127,6 +2153,7 @@ class __$$_ExtendedPatientModelCopyWithImpl<$Res>
     Object? monthOfBirth = freezed,
     Object? yearOfBirth = freezed,
     Object? phoneNumber = freezed,
+    Object? age = freezed,
     Object? email = freezed,
     Object? profilePhoto = freezed,
     Object? parentPatientId = freezed,
@@ -2136,6 +2163,14 @@ class __$$_ExtendedPatientModelCopyWithImpl<$Res>
     Object? medicalRecords = freezed,
   }) {
     return _then(_$_ExtendedPatientModel(
+      patientId: freezed == patientId
+          ? _value.patientId
+          : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      osid: freezed == osid
+          ? _value.osid
+          : osid // ignore: cast_nullable_to_non_nullable
+              as String?,
       abhaNumber: freezed == abhaNumber
           ? _value.abhaNumber
           : abhaNumber // ignore: cast_nullable_to_non_nullable
@@ -2168,6 +2203,10 @@ class __$$_ExtendedPatientModelCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -2204,7 +2243,9 @@ class __$$_ExtendedPatientModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ExtendedPatientModel implements _ExtendedPatientModel {
   const _$_ExtendedPatientModel(
-      {this.abhaNumber,
+      {this.patientId,
+      this.osid,
+      this.abhaNumber,
       this.abhaAddress,
       this.name,
       this.gender,
@@ -2212,6 +2253,7 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
       this.monthOfBirth,
       this.yearOfBirth,
       this.phoneNumber,
+      this.age,
       this.email,
       this.profilePhoto,
       this.parentPatientId,
@@ -2228,6 +2270,10 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
       _$$_ExtendedPatientModelFromJson(json);
 
   @override
+  final int? patientId;
+  @override
+  final String? osid;
+  @override
   final int? abhaNumber;
   @override
   final String? abhaAddress;
@@ -2243,6 +2289,8 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
   final String? yearOfBirth;
   @override
   final String? phoneNumber;
+  @override
+  final int? age;
   @override
   final String? email;
   @override
@@ -2291,7 +2339,7 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
 
   @override
   String toString() {
-    return 'ExtendedPatientModel(abhaNumber: $abhaNumber, abhaAddress: $abhaAddress, name: $name, gender: $gender, dayOfBirth: $dayOfBirth, monthOfBirth: $monthOfBirth, yearOfBirth: $yearOfBirth, phoneNumber: $phoneNumber, email: $email, profilePhoto: $profilePhoto, parentPatientId: $parentPatientId, address: $address, relatedParty: $relatedParty, identifiers: $identifiers, medicalRecords: $medicalRecords)';
+    return 'ExtendedPatientModel(patientId: $patientId, osid: $osid, abhaNumber: $abhaNumber, abhaAddress: $abhaAddress, name: $name, gender: $gender, dayOfBirth: $dayOfBirth, monthOfBirth: $monthOfBirth, yearOfBirth: $yearOfBirth, phoneNumber: $phoneNumber, age: $age, email: $email, profilePhoto: $profilePhoto, parentPatientId: $parentPatientId, address: $address, relatedParty: $relatedParty, identifiers: $identifiers, medicalRecords: $medicalRecords)';
   }
 
   @override
@@ -2299,6 +2347,9 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ExtendedPatientModel &&
+            (identical(other.patientId, patientId) ||
+                other.patientId == patientId) &&
+            (identical(other.osid, osid) || other.osid == osid) &&
             (identical(other.abhaNumber, abhaNumber) ||
                 other.abhaNumber == abhaNumber) &&
             (identical(other.abhaAddress, abhaAddress) ||
@@ -2313,6 +2364,7 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
                 other.yearOfBirth == yearOfBirth) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
+            (identical(other.age, age) || other.age == age) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.profilePhoto, profilePhoto) ||
                 other.profilePhoto == profilePhoto) &&
@@ -2331,6 +2383,8 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      patientId,
+      osid,
       abhaNumber,
       abhaAddress,
       name,
@@ -2339,6 +2393,7 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
       monthOfBirth,
       yearOfBirth,
       phoneNumber,
+      age,
       email,
       profilePhoto,
       parentPatientId,
@@ -2364,7 +2419,9 @@ class _$_ExtendedPatientModel implements _ExtendedPatientModel {
 
 abstract class _ExtendedPatientModel implements ExtendedPatientModel {
   const factory _ExtendedPatientModel(
-          {final int? abhaNumber,
+          {final int? patientId,
+          final String? osid,
+          final int? abhaNumber,
           final String? abhaAddress,
           final String? name,
           final Gender? gender,
@@ -2372,6 +2429,7 @@ abstract class _ExtendedPatientModel implements ExtendedPatientModel {
           final String? monthOfBirth,
           final String? yearOfBirth,
           final String? phoneNumber,
+          final int? age,
           final String? email,
           final String? profilePhoto,
           final int? parentPatientId,
@@ -2384,6 +2442,10 @@ abstract class _ExtendedPatientModel implements ExtendedPatientModel {
   factory _ExtendedPatientModel.fromJson(Map<String, dynamic> json) =
       _$_ExtendedPatientModel.fromJson;
 
+  @override
+  int? get patientId;
+  @override
+  String? get osid;
   @override
   int? get abhaNumber;
   @override
@@ -2400,6 +2462,8 @@ abstract class _ExtendedPatientModel implements ExtendedPatientModel {
   String? get yearOfBirth;
   @override
   String? get phoneNumber;
+  @override
+  int? get age;
   @override
   String? get email;
   @override
@@ -2434,7 +2498,7 @@ mixin _$AddressModel {
   String? get subDistrict => throw _privateConstructorUsedError;
   String? get district => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  String? get pinCode => throw _privateConstructorUsedError;
+  String? get pincode => throw _privateConstructorUsedError;
   String? get label => throw _privateConstructorUsedError;
   Status? get status => throw _privateConstructorUsedError;
   bool? get primary => throw _privateConstructorUsedError;
@@ -2461,7 +2525,7 @@ abstract class $AddressModelCopyWith<$Res> {
       String? subDistrict,
       String? district,
       String? state,
-      String? pinCode,
+      String? pincode,
       String? label,
       Status? status,
       bool? primary,
@@ -2489,7 +2553,7 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
     Object? subDistrict = freezed,
     Object? district = freezed,
     Object? state = freezed,
-    Object? pinCode = freezed,
+    Object? pincode = freezed,
     Object? label = freezed,
     Object? status = freezed,
     Object? primary = freezed,
@@ -2528,9 +2592,9 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinCode: freezed == pinCode
-          ? _value.pinCode
-          : pinCode // ignore: cast_nullable_to_non_nullable
+      pincode: freezed == pincode
+          ? _value.pincode
+          : pincode // ignore: cast_nullable_to_non_nullable
               as String?,
       label: freezed == label
           ? _value.label
@@ -2569,7 +2633,7 @@ abstract class _$$_AddressModelCopyWith<$Res>
       String? subDistrict,
       String? district,
       String? state,
-      String? pinCode,
+      String? pincode,
       String? label,
       Status? status,
       bool? primary,
@@ -2595,7 +2659,7 @@ class __$$_AddressModelCopyWithImpl<$Res>
     Object? subDistrict = freezed,
     Object? district = freezed,
     Object? state = freezed,
-    Object? pinCode = freezed,
+    Object? pincode = freezed,
     Object? label = freezed,
     Object? status = freezed,
     Object? primary = freezed,
@@ -2634,9 +2698,9 @@ class __$$_AddressModelCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      pinCode: freezed == pinCode
-          ? _value.pinCode
-          : pinCode // ignore: cast_nullable_to_non_nullable
+      pincode: freezed == pincode
+          ? _value.pincode
+          : pincode // ignore: cast_nullable_to_non_nullable
               as String?,
       label: freezed == label
           ? _value.label
@@ -2670,7 +2734,7 @@ class _$_AddressModel implements _AddressModel {
       this.subDistrict,
       this.district,
       this.state,
-      this.pinCode,
+      this.pincode,
       this.label,
       this.status,
       this.primary,
@@ -2696,7 +2760,7 @@ class _$_AddressModel implements _AddressModel {
   @override
   final String? state;
   @override
-  final String? pinCode;
+  final String? pincode;
   @override
   final String? label;
   @override
@@ -2708,7 +2772,7 @@ class _$_AddressModel implements _AddressModel {
 
   @override
   String toString() {
-    return 'AddressModel(id: $id, line: $line, ward: $ward, town: $town, village: $village, subDistrict: $subDistrict, district: $district, state: $state, pinCode: $pinCode, label: $label, status: $status, primary: $primary, deleted: $deleted)';
+    return 'AddressModel(id: $id, line: $line, ward: $ward, town: $town, village: $village, subDistrict: $subDistrict, district: $district, state: $state, pincode: $pincode, label: $label, status: $status, primary: $primary, deleted: $deleted)';
   }
 
   @override
@@ -2726,7 +2790,7 @@ class _$_AddressModel implements _AddressModel {
             (identical(other.district, district) ||
                 other.district == district) &&
             (identical(other.state, state) || other.state == state) &&
-            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
+            (identical(other.pincode, pincode) || other.pincode == pincode) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.primary, primary) || other.primary == primary) &&
@@ -2736,7 +2800,7 @@ class _$_AddressModel implements _AddressModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, line, ward, town, village,
-      subDistrict, district, state, pinCode, label, status, primary, deleted);
+      subDistrict, district, state, pincode, label, status, primary, deleted);
 
   @JsonKey(ignore: true)
   @override
@@ -2762,7 +2826,7 @@ abstract class _AddressModel implements AddressModel {
       final String? subDistrict,
       final String? district,
       final String? state,
-      final String? pinCode,
+      final String? pincode,
       final String? label,
       final Status? status,
       final bool? primary,
@@ -2788,7 +2852,7 @@ abstract class _AddressModel implements AddressModel {
   @override
   String? get state;
   @override
-  String? get pinCode;
+  String? get pincode;
   @override
   String? get label;
   @override
