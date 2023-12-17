@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
@@ -19,7 +21,6 @@ class UpdateTriageAlertBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     var navigator = Navigator.of(context);
     return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
       data: (data) {
@@ -56,25 +57,24 @@ class UpdateTriageAlertBox extends ConsumerWidget {
                           case TestType.QUESTIONNAIRE:
                             navigator.push(
                               MaterialPageRoute(
-                                builder: (context) => UpdateTriageQuestionnairePage(
-                                  questionnaireSections: model.triageAssessment
-                                      .questionnaire!.questionnaireItem!
-
-                                ),
+                                builder: (context) =>
+                                    UpdateTriageQuestionnairePage(
+                                        questionnaireSections: model
+                                            .triageAssessment
+                                            .questionnaire!
+                                            .questionnaireItem!),
                               ),
                             );
                             break;
                           case TestType.OBSERVATION:
-                            // ref.read(globalProvider).setHideTumblingElement =
-                            //     false;
-                            // navigator.push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         const VisualAcuityTumblingPage(
-
-                            //     ),
-                            //   ),
-                            // );
+                            ref.read(globalProvider).setVAMode =
+                                VisionAcuityMode.UPDATE;
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const VisualAcuityTumblingPage(),
+                              ),
+                            );
                             break;
                           case TestType.IMAGE:
                             // navigator.push(
