@@ -11,13 +11,14 @@ var authProvider = ChangeNotifierProvider(
 );
 
 class AuthPageProvider extends ChangeNotifier {
-  static const keycloakUri = 'http://localhost:8080/realms/test';
+  static const keycloakUri =
+      'https://eyecare4all-dev.infosysapps.com/auth/realms/care';
   static const scopes = ['profile'];
   late Client client;
   late Credential? credential;
   late UserInfo? userInfo;
   AuthPageProvider() {
-    // init();
+    init();
   }
 
   init() async {
@@ -32,8 +33,8 @@ class AuthPageProvider extends ChangeNotifier {
 
   Future<Client> getClient() async {
     var uri = Uri.parse(keycloakUri);
-    if (!kIsWeb && Platform.isAndroid) uri = uri.replace(host: '10.0.2.2');
-    var clientId = 'android-app';
+    // if (!kIsWeb && Platform.isAndroid) uri = uri.replace(host: '10.0.2.2');
+    var clientId = 'microservices';
     var issuer = await Issuer.discover(uri);
     return Client(issuer, clientId);
   }

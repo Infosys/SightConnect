@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/identifier_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/repositories/patient_authentication_repository.dart';
 
@@ -35,11 +36,14 @@ class PatientAuthenticationRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, PatientResponseModel>> getPatientProfile(
-      int patientId) async {
+  Future<Either<Failure, PatientResponseModel>> getPatientProfile(int patientId,
+      [IdentifierType? identifierType, String? value]) async {
     try {
-      final remoteResponse =
-          await _patientAuthRemoteSource.getPatientProfile(patientId);
+      final remoteResponse = await _patientAuthRemoteSource.getPatientProfile(
+        patientId,
+        identifierType,
+        value,
+      );
       return Right(remoteResponse);
     } catch (e) {
       return Left(
@@ -61,5 +65,4 @@ class PatientAuthenticationRepositoryImpl
       );
     }
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/identifier_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/models/profile_model.dart';
@@ -10,7 +11,11 @@ var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
 
 abstract class PatientAuthRemoteSource {
   Future<PatientModel> onboardPatient(PatientModel patientDTO);
-  Future<PatientResponseModel> getPatientProfile(int patientId);
+  Future<PatientResponseModel> getPatientProfile(
+    int patientId, [
+    IdentifierType? identifierType,
+    String? value,
+  ]);
   Future<PatientResponseModel> updatePatientProfile(PatientModel patientDTO);
 }
 
@@ -33,10 +38,18 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   }
 
   @override
-  Future<PatientResponseModel> getPatientProfile(int patientId) async {
-    var endpoint = '/api/patients/extended/$patientId';
+  Future<PatientResponseModel> getPatientProfile(int patientId,
+      [IdentifierType? identifierType, String? value]) async {
+    var endpoint = '/api/patients/extended';
     try {
-      final response = await _dio.get(endpoint);
+      final response = await _dio.get(
+        endpoint,
+        queryParameters: {
+          "patientId": "$patientId",
+          "identifierType": "$identifierType",
+          "value": value,
+        },
+      );
       return PatientResponseModel.fromJson(response.data);
     } catch (e) {
       rethrow;
@@ -56,5 +69,4 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       throw Exception("Failed to update patient");
     }
   }
-
 }
