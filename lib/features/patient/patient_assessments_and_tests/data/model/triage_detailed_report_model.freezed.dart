@@ -53,6 +53,10 @@ mixin _$TriageDetailedReportModel {
   String? get observationResultDescription =>
       throw _privateConstructorUsedError;
   String? get mediaResultDescription => throw _privateConstructorUsedError;
+  Severity? get cumulativeSeverity => throw _privateConstructorUsedError;
+  Severity? get observationSeverity => throw _privateConstructorUsedError;
+  Severity? get mediaSeverity => throw _privateConstructorUsedError;
+  Severity? get questionResponseSeverity => throw _privateConstructorUsedError;
   List<CarePlan>? get carePlans => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -95,6 +99,10 @@ abstract class $TriageDetailedReportModelCopyWith<$Res> {
       String? questionResultDescription,
       String? observationResultDescription,
       String? mediaResultDescription,
+      Severity? cumulativeSeverity,
+      Severity? observationSeverity,
+      Severity? mediaSeverity,
+      Severity? questionResponseSeverity,
       List<CarePlan>? carePlans});
 
   $EncounterPeriodCopyWith<$Res>? get encounterPeriod;
@@ -141,6 +149,10 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
     Object? questionResultDescription = freezed,
     Object? observationResultDescription = freezed,
     Object? mediaResultDescription = freezed,
+    Object? cumulativeSeverity = freezed,
+    Object? observationSeverity = freezed,
+    Object? mediaSeverity = freezed,
+    Object? questionResponseSeverity = freezed,
     Object? carePlans = freezed,
   }) {
     return _then(_value.copyWith(
@@ -252,6 +264,22 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
           ? _value.mediaResultDescription
           : mediaResultDescription // ignore: cast_nullable_to_non_nullable
               as String?,
+      cumulativeSeverity: freezed == cumulativeSeverity
+          ? _value.cumulativeSeverity
+          : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      observationSeverity: freezed == observationSeverity
+          ? _value.observationSeverity
+          : observationSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      mediaSeverity: freezed == mediaSeverity
+          ? _value.mediaSeverity
+          : mediaSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      questionResponseSeverity: freezed == questionResponseSeverity
+          ? _value.questionResponseSeverity
+          : questionResponseSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
       carePlans: freezed == carePlans
           ? _value.carePlans
           : carePlans // ignore: cast_nullable_to_non_nullable
@@ -309,6 +337,10 @@ abstract class _$$_TriageDetailedReportModelCopyWith<$Res>
       String? questionResultDescription,
       String? observationResultDescription,
       String? mediaResultDescription,
+      Severity? cumulativeSeverity,
+      Severity? observationSeverity,
+      Severity? mediaSeverity,
+      Severity? questionResponseSeverity,
       List<CarePlan>? carePlans});
 
   @override
@@ -355,6 +387,10 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
     Object? questionResultDescription = freezed,
     Object? observationResultDescription = freezed,
     Object? mediaResultDescription = freezed,
+    Object? cumulativeSeverity = freezed,
+    Object? observationSeverity = freezed,
+    Object? mediaSeverity = freezed,
+    Object? questionResponseSeverity = freezed,
     Object? carePlans = freezed,
   }) {
     return _then(_$_TriageDetailedReportModel(
@@ -466,6 +502,22 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
           ? _value.mediaResultDescription
           : mediaResultDescription // ignore: cast_nullable_to_non_nullable
               as String?,
+      cumulativeSeverity: freezed == cumulativeSeverity
+          ? _value.cumulativeSeverity
+          : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      observationSeverity: freezed == observationSeverity
+          ? _value.observationSeverity
+          : observationSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      mediaSeverity: freezed == mediaSeverity
+          ? _value.mediaSeverity
+          : mediaSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      questionResponseSeverity: freezed == questionResponseSeverity
+          ? _value.questionResponseSeverity
+          : questionResponseSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
       carePlans: freezed == carePlans
           ? _value._carePlans
           : carePlans // ignore: cast_nullable_to_non_nullable
@@ -505,6 +557,10 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
       this.questionResultDescription,
       this.observationResultDescription,
       this.mediaResultDescription,
+      this.cumulativeSeverity,
+      this.observationSeverity,
+      this.mediaSeverity,
+      this.questionResponseSeverity,
       final List<CarePlan>? carePlans})
       : _incompleteTests = incompleteTests,
         _responses = responses,
@@ -604,6 +660,14 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   final String? observationResultDescription;
   @override
   final String? mediaResultDescription;
+  @override
+  final Severity? cumulativeSeverity;
+  @override
+  final Severity? observationSeverity;
+  @override
+  final Severity? mediaSeverity;
+  @override
+  final Severity? questionResponseSeverity;
   final List<CarePlan>? _carePlans;
   @override
   List<CarePlan>? get carePlans {
@@ -616,7 +680,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
 
   @override
   String toString() {
-    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, category: $category, code: $code, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, carePlans: $carePlans)';
+    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, category: $category, code: $code, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, cumulativeSeverity: $cumulativeSeverity, observationSeverity: $observationSeverity, mediaSeverity: $mediaSeverity, questionResponseSeverity: $questionResponseSeverity, carePlans: $carePlans)';
   }
 
   @override
@@ -677,8 +741,15 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                     observationResultDescription) &&
             (identical(other.mediaResultDescription, mediaResultDescription) ||
                 other.mediaResultDescription == mediaResultDescription) &&
-            const DeepCollectionEquality()
-                .equals(other._carePlans, _carePlans));
+            (identical(other.cumulativeSeverity, cumulativeSeverity) ||
+                other.cumulativeSeverity == cumulativeSeverity) &&
+            (identical(other.observationSeverity, observationSeverity) ||
+                other.observationSeverity == observationSeverity) &&
+            (identical(other.mediaSeverity, mediaSeverity) ||
+                other.mediaSeverity == mediaSeverity) &&
+            (identical(other.questionResponseSeverity, questionResponseSeverity) ||
+                other.questionResponseSeverity == questionResponseSeverity) &&
+            const DeepCollectionEquality().equals(other._carePlans, _carePlans));
   }
 
   @JsonKey(ignore: true)
@@ -712,6 +783,10 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
         questionResultDescription,
         observationResultDescription,
         mediaResultDescription,
+        cumulativeSeverity,
+        observationSeverity,
+        mediaSeverity,
+        questionResponseSeverity,
         const DeepCollectionEquality().hash(_carePlans)
       ]);
 
@@ -759,6 +834,10 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
       final String? questionResultDescription,
       final String? observationResultDescription,
       final String? mediaResultDescription,
+      final Severity? cumulativeSeverity,
+      final Severity? observationSeverity,
+      final Severity? mediaSeverity,
+      final Severity? questionResponseSeverity,
       final List<CarePlan>? carePlans}) = _$_TriageDetailedReportModel;
 
   factory _TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =
@@ -821,6 +900,14 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   String? get observationResultDescription;
   @override
   String? get mediaResultDescription;
+  @override
+  Severity? get cumulativeSeverity;
+  @override
+  Severity? get observationSeverity;
+  @override
+  Severity? get mediaSeverity;
+  @override
+  Severity? get questionResponseSeverity;
   @override
   List<CarePlan>? get carePlans;
   @override

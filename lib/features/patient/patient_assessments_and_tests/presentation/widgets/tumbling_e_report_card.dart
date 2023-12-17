@@ -8,10 +8,10 @@ class TumblingEReportCard extends StatelessWidget {
   const TumblingEReportCard({
     super.key,
     required this.tumblingEData,
-    required this.observationDescription,
+     this.observationDescription,
   });
   final List<ObservationBriefEntity> tumblingEData;
-  final String observationDescription;
+  final String ? observationDescription;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +29,7 @@ class TumblingEReportCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            observationDescription,
+            observationDescription??"NA",
             style: applyRobotoFont(
               fontSize: 14,
               fontWeight: FontWeight.w400,

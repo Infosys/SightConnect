@@ -35,19 +35,21 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
           title: _getTestText(test),
           subtitle: 'Incomplete',
           subtitlecolor: Colors.red,
-          chipText: _getRequestPriorityText(RequestPriority.ROUTINE),
-          chipColor: _getRequestPriorityColor(RequestPriority.ROUTINE),
+          chipText: _getRequestPriorityText(null),
+          chipColor: _getRequestPriorityColor(null),
           onPressed: () {
             //Navigate to quessionaire
           },
         ));
       } else {
+        //check testname and get priority
+        RequestPriority ? priority= _getPrirityFromText(test, report);
         list.add(UpdateTriageReportAlertBoxEntity(
           title: _getTestText(test),
           subtitle: 'Completed',
           subtitlecolor: Colors.green,
-          chipText: _getRequestPriorityText(report.quessionnairepriority),
-          chipColor: _getRequestPriorityColor(report.quessionnairepriority),
+          chipText: _getRequestPriorityText(priority),
+          chipColor: _getRequestPriorityColor(priority),
           onPressed: () {
             //Navigate to quessionaire
           },
@@ -72,7 +74,7 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
     return false;
   }
 
-  String _getRequestPriorityText(RequestPriority priority) {
+  String _getRequestPriorityText(RequestPriority ? priority) {
     switch (priority) {
       case RequestPriority.URGENT:
         return "Urgent Consult";
@@ -83,11 +85,11 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
       case RequestPriority.STAT:
         return "STAT";
       default:
-        return "";
+        return "NA";
     }
   }
 
-  Color _getRequestPriorityColor(RequestPriority priority) {
+  Color _getRequestPriorityColor(RequestPriority ? priority) {
     switch (priority) {
       case RequestPriority.URGENT:
         return AppColor.red;
@@ -101,6 +103,20 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
         return AppColor.grey;
     }
   }
+   RequestPriority? _getPrirityFromText(TestType test, TriageReportDetailedEntity report) {
+    if(test == TestType.QUESTIONNAIRE){
+      return report.quessionnairepriority;
+    }
+    else if(test == TestType.OBSERVATION){
+      return report.observationpriority;
+    }
+    else if(test == TestType.IMAGE){
+      return report.mediapriority;
+    }
+  else{
+      return null;
+    }
+}
 
   String _getTestText(TestType test) {
     switch (test) {
@@ -115,6 +131,7 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
     }
   }
 }
+
 
 class UpdateTriageReportAlertBoxEntity {
   final String title;

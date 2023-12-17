@@ -76,7 +76,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          triageResultEntities.questionResultDescription,
+          triageResultEntities.questionResultDescription??"NA",
           style: applyRobotoFont(
             fontSize: 14,
             color: AppColor.darkGrey,
@@ -87,7 +87,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority ? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";
@@ -102,7 +102,7 @@ String getRequestPriorityText(RequestPriority priority) {
   }
 }
 
-Color getRequestPriorityColor(RequestPriority priority) {
+Color getRequestPriorityColor(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return AppColor.red;

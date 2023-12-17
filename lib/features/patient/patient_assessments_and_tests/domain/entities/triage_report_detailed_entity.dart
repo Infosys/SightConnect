@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 
 class TriageReportDetailedEntity {
   final String patientId;
@@ -7,35 +8,43 @@ class TriageReportDetailedEntity {
   final String patientImage;
   final String assessmentID;
   final String reportDate;
-  final String triageResultDescription;
-  final String questionResultDescription;
-  final String observationResultDescription;
-  final String mediaResultDescription;
-  final RequestPriority overallpriority;
-  final RequestPriority quessionnairepriority;
-  final RequestPriority observationpriority;
-  final RequestPriority mediapriority;
-  final List<IncompleteTest> icompleteTests;
+   String ? triageResultDescription;
+   String ? questionResultDescription;
+   String ? observationResultDescription;
+   String ? mediaResultDescription;
+   RequestPriority ? overallpriority;
+   RequestPriority  ? quessionnairepriority;
+   RequestPriority ? observationpriority;
+   RequestPriority ? mediapriority;
+   List<IncompleteTest> ? icompleteTests;
 
   final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
   final List<ObservationBriefEntity> visualAcuityBreifEntity;
   final List<ImageBriefEntity> imageBriefEntity;
+   Severity ? cumulativeSeverity;
+   Severity ?observationSeverity;
+   Severity ? mediaSeverity;
+   Severity ? questionResponseSeverity;
 
   TriageReportDetailedEntity({
-    required this.triageResultDescription,
-    required this.questionResultDescription,
-    required this.observationResultDescription,
-    required this.mediaResultDescription,
+     this.cumulativeSeverity, 
+    this.observationSeverity,
+     this.mediaSeverity,
+      this.questionResponseSeverity, 
+     this.triageResultDescription,
+     this.questionResultDescription,
+     this.observationResultDescription,
+     this.mediaResultDescription,
     required this.patientId,
     required this.patientName,
     required this.patientImage,
     required this.assessmentID,
-    required this.overallpriority,
-    required this.quessionnairepriority,
-    required this.observationpriority,
-    required this.mediapriority,
+     this.overallpriority,
+     this.quessionnairepriority,
+     this.observationpriority,
+     this.mediapriority,
     required this.reportDate,
-    required this.icompleteTests,
+     this.icompleteTests,
     required this.questionResponseBriefEntity,
     required this.visualAcuityBreifEntity,
     required this.imageBriefEntity,

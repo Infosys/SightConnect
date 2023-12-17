@@ -55,6 +55,14 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
       observationResultDescription:
           json['observationResultDescription'] as String?,
       mediaResultDescription: json['mediaResultDescription'] as String?,
+      cumulativeSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['cumulativeSeverity']),
+      observationSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['observationSeverity']),
+      mediaSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['mediaSeverity']),
+      questionResponseSeverity: $enumDecodeNullable(
+          _$SeverityEnumMap, json['questionResponseSeverity']),
       carePlans: (json['carePlans'] as List<dynamic>?)
           ?.map((e) => CarePlan.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -92,6 +100,11 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'questionResultDescription': instance.questionResultDescription,
       'observationResultDescription': instance.observationResultDescription,
       'mediaResultDescription': instance.mediaResultDescription,
+      'cumulativeSeverity': _$SeverityEnumMap[instance.cumulativeSeverity],
+      'observationSeverity': _$SeverityEnumMap[instance.observationSeverity],
+      'mediaSeverity': _$SeverityEnumMap[instance.mediaSeverity],
+      'questionResponseSeverity':
+          _$SeverityEnumMap[instance.questionResponseSeverity],
       'carePlans': instance.carePlans,
     };
 
@@ -135,6 +148,12 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.NURSE: 'NURSE',
   PerformerRole.SYSTEM: 'SYSTEM',
   PerformerRole.PATIENT: 'PATIENT',
+};
+
+const _$SeverityEnumMap = {
+  Severity.ABNORMAL: 'ABNORMAL',
+  Severity.HIGH: 'HIGH',
+  Severity.LOW: 'LOW',
 };
 
 _$_EncounterPeriod _$$_EncounterPeriodFromJson(Map<String, dynamic> json) =>
@@ -227,12 +246,6 @@ Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>
       'value': instance.value,
       'score': instance.score,
     };
-
-const _$SeverityEnumMap = {
-  Severity.ABNORMAL: 'ABNORMAL',
-  Severity.HIGH: 'HIGH',
-  Severity.LOW: 'LOW',
-};
 
 _$_Media _$$_MediaFromJson(Map<String, dynamic> json) => _$_Media(
       id: json['id'] as int,

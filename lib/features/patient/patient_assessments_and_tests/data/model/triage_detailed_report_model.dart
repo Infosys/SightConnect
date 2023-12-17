@@ -52,6 +52,10 @@ class TriageDetailedReportModel with _$TriageDetailedReportModel {
     String ? questionResultDescription,
     String ? observationResultDescription,
     String ? mediaResultDescription,
+    Severity ? cumulativeSeverity,
+    Severity ? observationSeverity,
+    Severity ? mediaSeverity,
+    Severity ? questionResponseSeverity,
      List<CarePlan> ? carePlans
 
 

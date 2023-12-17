@@ -111,7 +111,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority ? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";

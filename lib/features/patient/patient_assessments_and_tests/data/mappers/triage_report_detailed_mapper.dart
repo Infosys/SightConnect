@@ -18,6 +18,7 @@ class AssessmentDetailedReportMapper {
       "profileEntity": profileEntity,
       "triageDetailedReport": triageDetailedReport,
       "triageAssessment": triageAssessment,
+      "observationSeverity": triageDetailedReport.observationSeverity,
     });
     return TriageReportDetailedEntity(
       triageResultDescription:
@@ -48,11 +49,30 @@ class AssessmentDetailedReportMapper {
       ),
       overallpriority: triageDetailedReport.carePlans!.first.activities!.first
           .plannedActivityReference!.serviceRequest!.priority!,
-      quessionnairepriority: RequestPriority.ROUTINE,
-      observationpriority: RequestPriority.ROUTINE,
-      mediapriority: RequestPriority.ROUTINE,
-      icompleteTests: triageDetailedReport.incompleteTests!,
+      cumulativeSeverity: triageDetailedReport.cumulativeSeverity,
+      icompleteTests: triageDetailedReport.incompleteTests,
+      observationSeverity: triageDetailedReport.observationSeverity,
+      mediaSeverity: triageDetailedReport.mediaSeverity,
+      questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
+      quessionnairepriority:
+          getSevirityToPriority(triageDetailedReport.questionResponseSeverity),
+      observationpriority:
+          getSevirityToPriority(triageDetailedReport.observationSeverity),
+      mediapriority: getSevirityToPriority(triageDetailedReport.mediaSeverity),
     );
+  }
+
+  static RequestPriority ? getSevirityToPriority(Severity? severity) {
+    switch (severity) {
+      case Severity.HIGH:
+        return RequestPriority.URGENT;
+      case Severity.LOW:
+        return RequestPriority.ROUTINE;
+      case Severity.ABNORMAL:
+        return RequestPriority.ASAP;
+      default:
+        return null;
+    }
   }
 
   static List<ImageBriefEntity> _getimageBreifEntity(
