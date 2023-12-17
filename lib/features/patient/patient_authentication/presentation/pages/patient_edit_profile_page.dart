@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_edit_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -16,7 +17,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../widgets/camera_helper.dart';
 import '../widgets/profile_edit_form_helper.dart';
-
 
 class PatientEditProfilePage extends HookConsumerWidget {
   const PatientEditProfilePage({super.key});
@@ -35,8 +35,30 @@ class PatientEditProfilePage extends HookConsumerWidget {
         padding: const EdgeInsets.all(14.0),
         child: ElevatedButton(
           onPressed: () {
-            logger.d(" this is name form from vg : ${data.name.text}");
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const TriagePage()));
+            try {
+              //MAKE API CALL HERE
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text("Success"),
+                  content: const Text(
+                    "Patient profile has been successfully updated",
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                ),
+              );
+            } catch (e) {
+              Fluttertoast.showToast(
+                  msg: "Sorry, profile cannot be updated at this moment");
+            }
           },
           child: const Text(
             'Save & Proceed',
@@ -79,25 +101,7 @@ class PatientEditProfilePage extends HookConsumerWidget {
                             data.image == null
                                 ? InkWell(
                                     onTap: () async {
-                                      try {
-                                        var navigator = Navigator.of(context);
-                                        var cameras = await availableCameras();
-                                        if (cameras.isEmpty) {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "camera found ${cameras.length}");
-                                          return;
-                                        }
-                                        navigator.push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                CameraHelper(cameras: cameras, provider:  patientEditProfileProvider,),
-                                          ),
-                                        );
-                                      } catch (e) {
-                                        Fluttertoast.showToast(
-                                            msg: e.toString());
-                                      }
+                                      //Image Picker
                                     },
                                     child: const Icon(
                                       Icons.camera_alt_outlined,
@@ -123,16 +127,29 @@ class PatientEditProfilePage extends HookConsumerWidget {
                         ),
                       ),
                       customTextFieldRows(
-                          data.name, data.lastName, "First Name", "Last Name"),
+                        data.name,
+                        data.lastName,
+                        "First Name",
+                        "Last Name",
+                      ),
                       const SizedBox(height: AppSize.klheight),
                       customTextFieldRowsAgeDob(
-                          data.age, data.dob, "Age", "Date of Birth", context),
+                        data.age,
+                        data.dob,
+                        "Age",
+                        "Date of Birth",
+                        context,
+                      ),
                       const SizedBox(height: AppSize.klheight),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: Text("Gender",
-                            style: applyRobotoFont(
-                                fontSize: 14, fontWeight: FontWeight.w400)),
+                        child: Text(
+                          "Gender",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,

@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
 
 final getPatientProfileProvider =
-    FutureProvider<PatientResponseModel>((ref) async {
+    FutureProvider.autoDispose<PatientResponseModel>((ref) async {
   const patientId = 1202;
   if (AppEnv.isDev) {
     return PatientResponseModel.fromJson({
