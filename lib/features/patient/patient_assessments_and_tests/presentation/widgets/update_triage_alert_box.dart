@@ -1,9 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
@@ -57,18 +58,36 @@ class UpdateTriageAlertBox extends ConsumerWidget {
                       onPressed: () {
                         switch (e.testType) {
                           case TestType.QUESTIONNAIRE:
-                            navigator.push(MaterialPageRoute(
+                            navigator.push(
+                              MaterialPageRoute(
                                 builder: (context) => TriageQuestionnairePage(
-                                      questionnaireSections: model
-                                          .triageAssessment
-                                          .questionnaire!
-                                          .questionnaireItem!,
-                                      mode: TriageMode.UPDATE,
-                                    )));
+                                  questionnaireSections: model.triageAssessment
+                                      .questionnaire!.questionnaireItem!,
+                                  mode: TriageMode.UPDATE,
+                                ),
+                              ),
+                            );
                             break;
                           case TestType.OBSERVATION:
+                            ref.read(globalProvider).setHideTumblingElement =
+                                false;
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const VisualAcuityTumblingPage(
+                                  mode: TriageMode.UPDATE,
+                                ),
+                              ),
+                            );
                             break;
                           case TestType.IMAGE:
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) => const TriageEyeScanPage(
+                                  mode: TriageMode.UPDATE,
+                                ),
+                              ),
+                            );
                             break;
                         }
                       },
