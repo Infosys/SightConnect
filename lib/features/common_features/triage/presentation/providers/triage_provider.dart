@@ -65,7 +65,6 @@ class TriageProvider extends ChangeNotifier {
   );
 
   Future<Either<Failure, TriageResponseModel>> saveTriage() async {
-    ;
     List<PostImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())

@@ -20,119 +20,132 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
   PatientEditProfileProvider(this._patientAuthenticationRepository) {
     const patientId = 1202;
-  if (AppEnv.isDev) {
-    _patient = PatientResponseModel.fromJson({
-      "intent": "PROFILE_SHARE",
-      "metaData": {
-        "hipId": null,
-        "counterId": null,
-        "hprId": null,
-        "latitude": null,
-        "longitude": null
-      },
-      "profile": {
-        "patient": {
-          "patientID": "9627849171",
-          "abhaNumber": null,
-          "abhaAddress": null,
-          "name": "Raghavi Mishra",
-          "gender": "FEMALE",
-          "profilePhoto": AppImages.profieImage,
-          "email": "RaghaviMishra@gmail.com",
-          "dayOfBirth": "15",
-          "monthOfBirth": "08",
-          "yearOfBirth": "2006",
-          "phoneNumber": "8907685432",
-          "parentPatientId": null,
-          "address": [
-            {
-              "id": 1252,
-              "line": "Line 1",
-              "district": "Vishakapatnam",
-              "state": "Andhra Pradesh",
-              "pincode": "678543",
-              "label": null,
-              "isPrimary": true,
-              "isDeleted": null,
-              "status": null,
-              "ward": "Vishakapatnam",
-              "town": null,
-              "village": null,
-              "subDistrict": null,
-              "primary": true,
-              "deleted": null
-            }
-          ],
-          "relatedParty": [
-            {
-              "patientId": 1201,
-              "relation": "MOTHER",
-              "parentPatientId": 1202,
-              "name": "Raghavi Pandey",
-              "profilePicture": "assets/images/user.png",
-              "age": 20,
-              "regRef": "1-07b601cf-cc06-4ec1-95ca-d2d0dd16439b"
-            },
-            {
-              "patientId": 1203,
-              "relation": "FATHER",
-              "parentPatientId": 1202,
-              "name": "Mangal Pandey",
-              "profilePicture": "assets/images/user.png",
-              "age": 10,
-              "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            },
+    if (AppEnv.isDev) {
+      _patient = PatientResponseModel.fromJson({
+        "intent": "PROFILE_SHARE",
+        "metaData": {
+          "hipId": null,
+          "counterId": null,
+          "hprId": null,
+          "latitude": null,
+          "longitude": null
+        },
+        "profile": {
+          "patient": {
+            "patientID": "9627849171",
+            "abhaNumber": null,
+            "abhaAddress": null,
+            "name": "Raghavi Mishra",
+            "gender": "FEMALE",
+            "profilePhoto": AppImages.profieImage,
+            "email": "RaghaviMishra@gmail.com",
+            "dayOfBirth": "15",
+            "monthOfBirth": "08",
+            "yearOfBirth": "2006",
+            "phoneNumber": "8907685432",
+            "parentPatientId": null,
+            "address": [
+              {
+                "id": 1252,
+                "line": "Line 1",
+                "district": "Vishakapatnam",
+                "state": "Andhra Pradesh",
+                "pincode": "678543",
+                "label": null,
+                "isPrimary": true,
+                "isDeleted": null,
+                "status": null,
+                "ward": "Vishakapatnam",
+                "town": null,
+                "village": null,
+                "subDistrict": null,
+                "primary": true,
+                "deleted": null
+              }
+            ],
+            "relatedParty": [
+              {
+                "patientId": 1201,
+                "relation": "MOTHER",
+                "parentPatientId": 1202,
+                "name": "Raghavi Pandey",
+                "profilePicture": "assets/images/user.png",
+                "age": 20,
+                "regRef": "1-07b601cf-cc06-4ec1-95ca-d2d0dd16439b"
+              },
+              {
+                "patientId": 1203,
+                "relation": "FATHER",
+                "parentPatientId": 1202,
+                "name": "Mangal Pandey",
+                "profilePicture": "assets/images/user.png",
+                "age": 10,
+                "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              },
 
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-            // {
-            //   "patientId": 1203,
-            //   "relation": "FATHER",
-            //   "parentPatientId": 1202,
-            //   "name": "Mangal Pandey",
-            //   "profilePicture": "assets/images/user.png",
-            //   "age": 0,
-            //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
-            // },
-          ],
-          "identifiers": null,
-          "medicalRecords": null
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+              // {
+              //   "patientId": 1203,
+              //   "relation": "FATHER",
+              //   "parentPatientId": 1202,
+              //   "name": "Mangal Pandey",
+              //   "profilePicture": "assets/images/user.png",
+              //   "age": 0,
+              //   "regRef": "1-e640f259-3656-45cd-ac7c-73f9c5056ae5"
+              // },
+            ],
+            "identifiers": null,
+            "medicalRecords": null
+          }
         }
-      }
-    });
+      });
 
-    _nameController.text = _patient.profile?.patient?.name ?? "";
-    _mobileNumberController.text = _patient.profile?.patient?.phoneNumber ?? "";
-    _emailController.text = _patient.profile?.patient?.email ?? "";
-    _abhaidController.text = '${_patient.profile?.patient?.abhaNumber ?? ""}';
-    // _ageController.text = calculateAge("${_patient.profile?.patient?.yearOfBirth ?? ""}-${_patient.profile?.patient?.monthOfBirth ?? ""}-${_patient.profile?.patient?.dayOfBirth ?? ""}").toString();
-    _dobController.text = "${_patient.profile?.patient?.yearOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.dayOfBirth ?? ""}";
-    _doorNoController.text = _patient.profile?.patient?.address?.first.line ?? "";
-    _streetController.text = _patient.profile?.patient?.address?.first.ward ?? "";
-    _subDistrictController.text = _patient.profile?.patient?.address?.first.town ?? "";
-    _districtController.text = _patient.profile?.patient?.address?.first.district ?? "";
-    _cityController.text = _patient.profile?.patient?.address?.first.village ?? "";
-    _stateController.text = _patient.profile?.patient?.address?.first.state ?? "";
-    _pincodeController.text = _patient.profile?.patient?.address?.first.pincode ?? "";
-    _gender = _patient.profile?.patient?.gender.toString().split(".").last.capitalize() ?? "";
-
-
-  } else {
-    setProfileUpdateData();
-  }
+      _nameController.text = _patient.profile?.patient?.name ?? "";
+      _mobileNumberController.text =
+          _patient.profile?.patient?.phoneNumber ?? "";
+      _emailController.text = _patient.profile?.patient?.email ?? "";
+      _abhaidController.text = '${_patient.profile?.patient?.abhaNumber ?? ""}';
+      // _ageController.text = calculateAge("${_patient.profile?.patient?.yearOfBirth ?? ""}-${_patient.profile?.patient?.monthOfBirth ?? ""}-${_patient.profile?.patient?.dayOfBirth ?? ""}").toString();
+      _dobController.text =
+          "${_patient.profile?.patient?.yearOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.dayOfBirth ?? ""}";
+      _doorNoController.text =
+          _patient.profile?.patient?.address?.first.line ?? "";
+      _streetController.text =
+          _patient.profile?.patient?.address?.first.ward ?? "";
+      _subDistrictController.text =
+          _patient.profile?.patient?.address?.first.town ?? "";
+      _districtController.text =
+          _patient.profile?.patient?.address?.first.district ?? "";
+      _cityController.text =
+          _patient.profile?.patient?.address?.first.village ?? "";
+      _stateController.text =
+          _patient.profile?.patient?.address?.first.state ?? "";
+      _pincodeController.text =
+          _patient.profile?.patient?.address?.first.pincode ?? "";
+      _gender = _patient.profile?.patient?.gender
+              .toString()
+              .split(".")
+              .last
+              .capitalize() ??
+          "";
+    } else {
+      setProfileUpdateData();
+    }
   }
 
   XFile? _imageFile;
-  PatientResponseModel _patient = PatientResponseModel();
+  PatientResponseModel _patient = const PatientResponseModel();
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
+  final _middleNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _dobController = TextEditingController();
   final _abhaidController = TextEditingController();
@@ -157,12 +170,13 @@ class PatientEditProfileProvider extends ChangeNotifier {
   set setGender(String value) => _gender = value;
   String? get gender => _gender;
 
-  PatientResponseModel get patient => this._patient;
+  PatientResponseModel get patient => _patient;
 
-  set patient(PatientResponseModel value) => this._patient = value;
+  set patient(PatientResponseModel value) => _patient = value;
 
   TextEditingController get name => _nameController;
   TextEditingController get lastName => _lastNameController;
+  TextEditingController get middleName => _middleNameController;
   TextEditingController get age => _ageController;
   TextEditingController get dob => _dobController;
   TextEditingController get abhaid => _abhaidController;
@@ -234,8 +248,9 @@ class PatientEditProfileProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     var patientId = 1102;
-    final response = await _patientAuthenticationRepository.getPatientProfile(patientId);
-    
+    final response =
+        await _patientAuthenticationRepository.getPatientProfile(patientId);
+
     response.fold((error) {
       throw error;
     }, (result) {
@@ -245,17 +260,33 @@ class PatientEditProfileProvider extends ChangeNotifier {
     _nameController.text = _patient.profile?.patient?.name ?? "";
     _mobileNumberController.text = _patient.profile?.patient?.phoneNumber ?? "";
     _emailController.text = _patient.profile?.patient?.email ?? "";
-    _abhaidController.text = _patient.profile?.patient?.abhaNumber.toString() ?? "";
-    _ageController.text = calculateAge("${_patient.profile?.patient?.yearOfBirth ?? ""}-${_patient.profile?.patient?.monthOfBirth ?? ""}-${_patient.profile?.patient?.dayOfBirth ?? ""}").toString();
-    _dobController.text = "${_patient.profile?.patient?.dayOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.yearOfBirth ?? ""}";
-    _doorNoController.text = _patient.profile?.patient?.address?.first.line ?? "";
-    _streetController.text = _patient.profile?.patient?.address?.first.ward ?? "";
-    _subDistrictController.text = _patient.profile?.patient?.address?.first.town ?? "";
-    _districtController.text = _patient.profile?.patient?.address?.first.district ?? "";
-    _cityController.text = _patient.profile?.patient?.address?.first.village ?? "";
-    _stateController.text = _patient.profile?.patient?.address?.first.state ?? "";
-    _pincodeController.text = _patient.profile?.patient?.address?.first.pincode ?? "";
-    _gender = _patient.profile?.patient?.gender.toString().split(".").last.capitalize() ?? "";
+    _abhaidController.text =
+        _patient.profile?.patient?.abhaNumber.toString() ?? "";
+    _ageController.text = calculateAge(
+            "${_patient.profile?.patient?.yearOfBirth ?? ""}-${_patient.profile?.patient?.monthOfBirth ?? ""}-${_patient.profile?.patient?.dayOfBirth ?? ""}")
+        .toString();
+    _dobController.text =
+        "${_patient.profile?.patient?.dayOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.yearOfBirth ?? ""}";
+    _doorNoController.text =
+        _patient.profile?.patient?.address?.first.line ?? "";
+    _streetController.text =
+        _patient.profile?.patient?.address?.first.ward ?? "";
+    _subDistrictController.text =
+        _patient.profile?.patient?.address?.first.town ?? "";
+    _districtController.text =
+        _patient.profile?.patient?.address?.first.district ?? "";
+    _cityController.text =
+        _patient.profile?.patient?.address?.first.village ?? "";
+    _stateController.text =
+        _patient.profile?.patient?.address?.first.state ?? "";
+    _pincodeController.text =
+        _patient.profile?.patient?.address?.first.pincode ?? "";
+    _gender = _patient.profile?.patient?.gender
+            .toString()
+            .split(".")
+            .last
+            .capitalize() ??
+        "";
 
     _isLoading = false;
     notifyListeners();
@@ -265,50 +296,51 @@ class PatientEditProfileProvider extends ChangeNotifier {
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     AddressModel? primaryAddress;
     final address = _patient.profile?.patient?.address;
-    if(address != null) {
+    if (address != null) {
       primaryAddress = address.firstWhere((element) {
-        if(element.primary != null && element.primary == true) {
+        if (element.primary != null && element.primary == true) {
           return true;
         }
         return false;
       });
       print(primaryAddress);
     }
-    AddressModel? _address;
+    AddressModel? address0;
 
-    if(primaryAddress != null) {
-      _address = AddressModel(
-        id: primaryAddress.id,
-        line: doorNo.text,
-        ward: street.text,
-        town: primaryAddress.town,
-        subDistrict: subDistrict.text,
-        district: district.text,
-        village: city.text,
-        state: state.text,
-        pincode: pincode.text,
-        label: primaryAddress.label,
-        status: primaryAddress.status,
-        primary: primaryAddress.primary,
-        deleted: primaryAddress.deleted
-      );
+    if (primaryAddress != null) {
+      address0 = AddressModel(
+          id: primaryAddress.id,
+          line: doorNo.text,
+          ward: street.text,
+          town: primaryAddress.town,
+          subDistrict: subDistrict.text,
+          district: district.text,
+          village: city.text,
+          state: state.text,
+          pincode: pincode.text,
+          label: primaryAddress.label,
+          status: primaryAddress.status,
+          primary: primaryAddress.primary,
+          deleted: primaryAddress.deleted);
     }
 
-    List<AddressModel> _addressList = _patient.profile?.patient?.address ?? [];
-    
-    int primaryIndex = _addressList.indexWhere((element) => element.primary!);
+    List<AddressModel> addressList = _patient.profile?.patient?.address ?? [];
 
-    if(primaryIndex != -1) {
-      _addressList[primaryIndex] = _address ?? _addressList[primaryIndex];
+    int primaryIndex = addressList.indexWhere((element) => element.primary!);
+
+    if (primaryIndex != -1) {
+      addressList[primaryIndex] = address0 ?? addressList[primaryIndex];
     }
 
-    RelatedPartyModel? _relatedParty;
+    RelatedPartyModel? relatedParty;
 
     final relatedParties = _patient.profile?.patient?.relatedParty;
 
-    if(relatedParties != null) {
-      _relatedParty = relatedParties.firstWhere((element) {
-        if(element.relation != null && element.parentPatientId == _patient.profile?.patient?.parentPatientId) {
+    if (relatedParties != null) {
+      relatedParty = relatedParties.firstWhere((element) {
+        if (element.relation != null &&
+            element.parentPatientId ==
+                _patient.profile?.patient?.parentPatientId) {
           return true;
         }
         return false;
@@ -322,11 +354,15 @@ class PatientEditProfileProvider extends ChangeNotifier {
         hprID: _patient.metaData?.hprId,
         hipCode: _patient.metaData?.hipId,
         location: LocationModel(
-            latitude: _patient.metaData?.latitude,
-            longitude: _patient.metaData?.longitude,
+          latitude: _patient.metaData?.latitude,
+          longitude: _patient.metaData?.longitude,
         ),
         abhaAddress: _patient.profile?.patient?.abhaAddress,
-        gender: _gender == "Male" ? Gender.MALE : _gender == "Female" ? Gender.FEMALE : Gender.OTHER,
+        gender: _gender == "Male"
+            ? Gender.MALE
+            : _gender == "Female"
+                ? Gender.FEMALE
+                : Gender.OTHER,
         name: _nameController.text + _lastNameController.text,
         age: int.parse(_ageController.text),
         profilePhoto: _patient.profile?.patient?.profilePhoto,
@@ -334,11 +370,11 @@ class PatientEditProfileProvider extends ChangeNotifier {
         monthOfBirth: dateFormat.parse(_dobController.text).month.toString(),
         yearOfBirth: dateFormat.parse(_dobController.text).year.toString(),
         parentPatientId: _patient.profile?.patient?.parentPatientId.toString(),
-        relationship: _relatedParty?.relation,
+        relationship: relatedParty?.relation,
         abhaId: _abhaidController.text,
         mobile: _mobileNumberController.text,
         email: _emailController.text,
-        address: _addressList);
+        address: addressList);
     _isLoading = true;
     notifyListeners();
     try {

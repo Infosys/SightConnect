@@ -15,7 +15,7 @@ var dioProvider = Provider(
 var onboardingDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseUrl2,
+      baseUrl: AppEnv.orchestrationBaseUrl,
     ),
   ),
 );
@@ -23,7 +23,40 @@ var onboardingDioProvider = Provider(
 var authDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseKeycloakUrl,
+      baseUrl: AppEnv.keycloakBaseUrl,
     ),
+  ),
+);
+
+var vtDioProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(
+      baseUrl: AppEnv.baseUrl3,
+    ),
+  ),
+);
+
+var vtDioVisionCenterProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(
+      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/exotel",
+    ),
+  ),
+);
+
+// var onboardingDioProvider = Provider(
+//   (ref) => Dio(
+//     BaseOptions(
+//       baseUrl: "http://10.110.36.226:8075/validation-ms",
+//     ),
+//   ),
+// );
+var dioExotelProvider = Provider(
+  (ref) => Dio(BaseOptions(baseUrl: AppEnv.exotelBaseUrl)),
+);
+
+var dioProfileProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(baseUrl: AppEnv.profileBaseUrl),
   ),
 );

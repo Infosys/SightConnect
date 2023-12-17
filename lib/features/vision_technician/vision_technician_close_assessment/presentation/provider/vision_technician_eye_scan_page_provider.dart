@@ -1,0 +1,79 @@
+import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
+
+var visionTechnicianEyeScanProvider = ChangeNotifierProvider(
+  (ref) => VisionTechnicianEyeScanNotifier(),
+);
+
+class VisionTechnicianEyeScanNotifier extends ChangeNotifier {
+  int _currentStep = 0;
+
+  Eye _currentEye = Eye.left;
+  bool _isImageCaptured = false;
+  bool _allImagesCaptured = false;
+  String _imagePath = "";
+  XFile _leftEyeImage = XFile("");
+  XFile _rightEyeImage = XFile("");
+  XFile _bothEyeImage = XFile("");
+
+  int get currentStep => _currentStep;
+  bool get isImageCaptured => _isImageCaptured;
+  bool get allImagesCaptured => _allImagesCaptured;
+  String get imagePath => _imagePath;
+  Eye get currentEye => _currentEye;
+  XFile get leftEyeImage => _leftEyeImage;
+  XFile get rightEyeImage => _rightEyeImage;
+  XFile get bothEyeImage => _bothEyeImage;
+
+  void goToNextStep() {
+    _currentStep = _currentStep + 1;
+    if (_currentEye == Eye.left) {
+      _currentEye = Eye.right;
+    } else if (_currentEye == Eye.right) {
+      _currentEye = Eye.both;
+    }
+    _isImageCaptured = false;
+    _imagePath = "";
+
+    notifyListeners();
+  }
+
+  void markAllImagesCaptured() {
+    _allImagesCaptured = true;
+    notifyListeners();
+  }
+
+  void retakePicture() {
+    _isImageCaptured = false;
+    _imagePath = "";
+    notifyListeners();
+  }
+
+  void goToPreviousStep() {
+    _currentStep = _currentStep - 1;
+    if (_currentEye == Eye.both) {
+      _currentEye = Eye.right;
+    } else if (_currentEye == Eye.right) {
+      _currentEye = Eye.left;
+    }
+    _isImageCaptured = false;
+    _imagePath = "";
+    notifyListeners();
+  }
+
+  void saveImage(XFile image) {
+    _isImageCaptured = true;
+    _imagePath = image.path;
+    if (_currentEye == Eye.left) {
+      _leftEyeImage = image;
+    } else if (_currentEye == Eye.right) {
+      _rightEyeImage = image;
+    } else if (_currentEye == Eye.both) {
+      _bothEyeImage = image;
+    }
+    notifyListeners();
+  }
+}
