@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/features/patient/patient_authentication/data/re
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
 
-final getPatientProfileProvider =
+final getPatientProfileByIdProvider =
     FutureProvider<PatientResponseModel>((ref) async {
   const patientId = 1202;
   if (AppEnv.isDev) {
@@ -87,6 +87,16 @@ final getPatientProfileProvider =
       return result;
     });
   }
+});
+
+final getPatientCurrentProfileProvider =
+    FutureProvider<PatientResponseModel>((ref) {
+  const patientId = 1202;
+  return const PatientResponseModel(
+      profile: ProfileModel(
+          patient: ExtendedPatientModel(
+    parentPatientId: patientId,
+  )));
 });
 
 final updatePatientProfileProvider = FutureProvider((ref) async {

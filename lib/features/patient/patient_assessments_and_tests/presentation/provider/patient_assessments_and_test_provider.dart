@@ -117,7 +117,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   List<TriageReportUserEntity> getUsers() {
     PatientResponseModel? patient =
-        ref.read(getPatientProfileProvider).asData?.value;
+        ref.read(getPatientProfileByIdProvider).asData?.value;
 
     List<TriageReportUserEntity> users = [];
 

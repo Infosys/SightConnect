@@ -38,7 +38,7 @@ class PatientHomePageAppBar extends StatelessWidget
       actions: [
         Consumer(
           builder: (context, ref, child) {
-            return ref.watch(getPatientProfileProvider).when(
+            return ref.watch(getPatientProfileByIdProvider).when(
               data: (patient) {
                 final profilePhoto = patient.profile?.patient?.profilePhoto;
                 return profilePhoto != null

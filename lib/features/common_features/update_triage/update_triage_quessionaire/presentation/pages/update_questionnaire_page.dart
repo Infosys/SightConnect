@@ -155,9 +155,9 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         ),
                       ).then(
                         (value) async {
-                          model.updateTriage(reportId);
-
-                          Navigator.pop(context);
+                          var navigator = Navigator.of(context);
+                          await model.updateTriage(reportId);
+                          navigator.pop();
                         },
                       );
                     }
@@ -179,8 +179,9 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         ),
                       ).then(
                         (value) async {
-                          //ToDo: Patch API
-                          Navigator.pop(context);
+                          var navigator = Navigator.of(context);
+                          await model.updateTriage(reportId);
+                          navigator.pop();
                         },
                       );
                     }

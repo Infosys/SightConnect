@@ -22,7 +22,7 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(getPatientProfileProvider).when(
+    return ref.watch(getPatientProfileByIdProvider).when(
       data: (patient) {
         final connectionsList = patient.profile?.patient?.relatedParty;
         final currentProfile = patient.profile?.patient;
