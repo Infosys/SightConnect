@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/pages/update_triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
@@ -77,13 +78,13 @@ class UpdateTriageAlertBox extends ConsumerWidget {
                             );
                             break;
                           case TestType.IMAGE:
-                            // navigator.push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const TriageEyeScanPage(
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) => const UpdateTriageEyeScanPage(
 
-                            //     ),
-                            //   ),
-                            // );
+                                ),
+                              ),
+                            );
                             break;
                         }
                       },
