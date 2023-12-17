@@ -17,73 +17,75 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
-        padding: const EdgeInsets.all(AppSize.kmpadding - 2),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColor.lightGrey),
-          color: AppColor.white,
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
-          boxShadow: const [
-            BoxShadow(
-              color: AppColor.lightGrey, //New
-              blurRadius: AppSize.ksradius / 2,
-              spreadRadius: AppSize.ksradius / 8,
-            )
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            VTRegisterInput(
-              title: "Recommendations",
-              keyboardType: TextInputType.multiline,
-              controller: ref
-                  .read(preliminaryAssessmentHelperProvider)
-                  .recommendationController,
+      padding: const EdgeInsets.all(AppSize.kmpadding - 2),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColor.lightGrey),
+        color: AppColor.white,
+        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColor.lightGrey, //New
+            blurRadius: AppSize.ksradius / 2,
+            spreadRadius: AppSize.ksradius / 8,
+          )
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VTRegisterInput(
+            title: "Recommendations",
+            keyboardType: TextInputType.multiline,
+            controller: ref
+                .read(preliminaryAssessmentHelperProvider)
+                .recommendationController,
+          ),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          Text(
+            "Vision Center",
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
             ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            Text(
-              "Vision Center",
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(
-              height: AppSize.klheight,
-            ),
-            Responsive.isMobile(context)
-                ? const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        VisionCentersScrollBar(),
-                        SizedBox(
-                          height: AppSize.kmheight,
-                        ),
-                        VisionCenterAddressDetails(),
-                      ])
-                : const Row(
-                    children: [
-                      VisionCentersScrollBar(),
-                      SizedBox(
-                        width: AppSize.klwidth,
-                      ),
-                      VisionCenterAddressDetails(),
-                    ],
-                  ),
-            const SizedBox(
-              height: AppSize.klheight,
-            ),
-            VTRegisterInput(
-              title: "Remarks",
-              keyboardType: TextInputType.multiline,
-              controller: ref
-                  .read(preliminaryAssessmentHelperProvider)
-                  .remarksController,
-            ),
-          ],
-        ));
+          ),
+          const SizedBox(
+            height: AppSize.klheight,
+          ),
+          Responsive.isMobile(context)
+              ? const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    VisionCentersScrollBar(),
+                    SizedBox(
+                      height: AppSize.kmheight,
+                    ),
+                    VisionCenterAddressDetails(),
+                  ],
+                )
+              : const Row(
+                  children: [
+                    VisionCentersScrollBar(),
+                    SizedBox(
+                      width: AppSize.klwidth,
+                    ),
+                    VisionCenterAddressDetails(),
+                  ],
+                ),
+          const SizedBox(
+            height: AppSize.klheight,
+          ),
+          VTRegisterInput(
+            title: "Remarks",
+            keyboardType: TextInputType.multiline,
+            controller:
+                ref.read(preliminaryAssessmentHelperProvider).remarksController,
+          ),
+        ],
+      ),
+    );
   }
 }
