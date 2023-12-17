@@ -28,13 +28,13 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     logger.d({
       "API getTriageQuestionnaire": endpoint,
     });
-    Map<String, dynamic> bodyData = {
-      "name": "LVPEI EyeCare Triage",
-      "organizationCode": "LVPEI",
-      "condition": "VISION",
-      "assessmentType": "TRIAGE",
-      "organ": "EYE"
-    };
+    // Map<String, dynamic> bodyData = {
+    //   "name": "LVPEI EyeCare Triage",
+    //   "organizationCode": "LVPEI",
+    //   "condition": "VISION",
+    //   "assessmentType": "TRIAGE",
+    //   "organ": "EYE"
+    // };
 
     // var response = await dio.get(endpoint, queryParameters: bodyData);
     var response = await rootBundle.loadString("assets/triage_assessment.json");
