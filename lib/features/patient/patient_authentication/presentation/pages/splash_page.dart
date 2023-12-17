@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/pages/vision_technician_register_new_patient_page.dart.dart';
@@ -51,7 +52,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       // }
 
       if (mounted) {
-       /*  Navigator.pushAndRemoveUntil(
+        /*  Navigator.pushAndRemoveUntil(
            context,
            MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
            (route) => false,
@@ -62,12 +63,13 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         //       builder: (context) => const OptometritianDashboardPage()),
         //   (route) => false,
         // );
-          Navigator.pushAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>  VisionTechnicianDashboardPage()),
+            builder: (context) => const VisionTechnicianAssessmentTimeline(),
+          ),
           (route) => false,
-        );  
+        );
       }
 
       // Navigator.of(context).pushAndRemoveUntil(
