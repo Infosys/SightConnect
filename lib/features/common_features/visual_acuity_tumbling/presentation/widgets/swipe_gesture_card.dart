@@ -14,11 +14,8 @@ import '../providers/visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
   const SwipeGestureCard({
-    this.mode = TriageMode.POST,
     super.key,
   });
-
-  final TriageMode mode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +50,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return VisualAcuityDialog.showSuccessTemp(context, mode);
+              return VisualAcuityDialog.showSuccessTemp(context);
             });
         // next.setIsTestCompleted = true;
       }

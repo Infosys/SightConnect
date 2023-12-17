@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';

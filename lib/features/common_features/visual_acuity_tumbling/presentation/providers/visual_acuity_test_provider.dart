@@ -1,12 +1,9 @@
 import 'dart:math' as math;
-import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../domain/models/enums/tumbling_enums.dart';
 import '../../domain/models/tumbling_models.dart';
 import '../../data/source/local/tumbling_local_source.dart';
@@ -293,25 +290,5 @@ class VisualAcuityTestProvider with ChangeNotifier {
     await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
-  }
-
-  saveFinalResponse(WidgetRef ref, TriageMode mode) async {
-    final isConnected = await ref.read(connectivityProvider).isConnected();
-    if (isConnected) {
-      if (mode == TriageMode.POST) {
-        await saveVisionAcuityResponseToDB();
-        //GET REPORT BY DR ID
-        //PATCH API
-      } else if (mode == TriageMode.UPDATE) {
-        //GET REPORT BY DR ID
-        //PATCH API
-      }
-    } else {
-      if (mode == TriageMode.POST) {
-        await saveVisionAcuityResponseToDB();
-      } else if (mode == TriageMode.UPDATE) {
-        throw Exception("No internet connection");
-      }
-    }
   }
 }

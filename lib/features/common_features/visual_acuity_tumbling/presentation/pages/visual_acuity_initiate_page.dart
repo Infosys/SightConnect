@@ -20,8 +20,8 @@ import '../widgets/visual_acuity_tumbling_overlay.dart';
 
 class VisualAcuityInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
-  const VisualAcuityInitiatePage({this.mode = TriageMode.POST, super.key});
-  final TriageMode mode;
+  const VisualAcuityInitiatePage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -121,8 +121,8 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
             ignoring: pointerState,
-            child: Padding(
-              padding: const EdgeInsets.only(
+            child: const Padding(
+              padding: EdgeInsets.only(
                 left: AppSize.klpadding,
                 right: AppSize.klpadding,
                 bottom: AppSize.klpadding,
@@ -131,18 +131,16 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const TopReadingCard(),
-                  const SizedBox(height: AppSize.klpadding),
-                  const AcuityDistanceTile(
+                  TopReadingCard(),
+                  SizedBox(height: AppSize.klpadding),
+                  AcuityDistanceTile(
                     distanceInCms: 40,
                   ),
                   Expanded(
                     child: BottomInputTab(
                       tabs: [
-                        SwipeGestureCard(
-                          mode: mode,
-                        ),
-                        const VoiceAssistCard(),
+                        SwipeGestureCard(),
+                        VoiceAssistCard(),
                       ],
                     ),
                   ),

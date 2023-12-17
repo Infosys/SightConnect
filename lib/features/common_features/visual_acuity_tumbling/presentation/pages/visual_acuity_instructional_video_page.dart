@@ -23,11 +23,11 @@ import '../widgets/visual_acuity_dialog.dart';
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";
   const VisualAcuityInstructionalVideoPage({
-    this.mode = TriageMode.POST,
+
     super.key,
   });
 
-  final TriageMode mode;
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -128,7 +128,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => VisualAcuityInitiatePage(
-                        mode: mode,
+                      
                       ),
                     ),
                   );

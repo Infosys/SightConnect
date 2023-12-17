@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
@@ -28,11 +27,9 @@ import '../widgets/camera_controllers.dart';
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({
     required this.cameras,
-    this.mode = TriageMode.POST,
     super.key,
   });
   final List<CameraDescription> cameras;
-  final TriageMode mode;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -200,7 +197,7 @@ class _PatientTriageEyeCapturingPageState
                   right: 0,
                   bottom: 0,
                   child: EyeScanCameraControllers(
-                    onCapture: () => _takePicture(context, widget.mode),
+                    onCapture: () => _takePicture(context),
                     onFlash: () => _toggleFlash(),
                     onSwitchCamera: () => _toggleCamera(),
                   ),
@@ -240,7 +237,7 @@ class _PatientTriageEyeCapturingPageState
     return image;
   }
 
-  Future<void> _takePicture(BuildContext context, TriageMode mode) async {
+  Future<void> _takePicture(BuildContext context) async {
     final navigator = Navigator.of(context);
     final scaffold = ScaffoldMessenger.of(context);
     try {
@@ -280,8 +277,7 @@ class _PatientTriageEyeCapturingPageState
               duration: const Duration(seconds: 1),
             ),
           );
-          await _saveFinalResponse(ref, mode);
-
+          await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
           final response = await ref.read(triageProvider).saveTriage();
           setState(() {
             isLoading = false;
@@ -353,70 +349,92 @@ class _PatientTriageEyeCapturingPageState
     });
   }
 
-  _showServerExceptionDialog(
-    BuildContext context,
-    Failure failure,
-  ) {
-    return BlurDialogBox(
-      title: Text(
-        "Triage Saved Locally",
-        style: applyRobotoFont(
-          color: AppColor.black,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      content: Text(
-        failure.errorMessage,
-        style: applyRobotoFont(
-          color: AppColor.black,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => TriageResultPage(
-                  triageResult: failure.data as TriageResponseModel,
-                ),
-              ),
-            );
-          },
-          child: Text(
-            "Ok",
-            style: applyRobotoFont(
-              color: AppColor.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+  _showTestCompletionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => BlurDialogBox(
+        title: Text(
+          "Test Completed",
+          style: applyRobotoFont(
+            color: AppColor.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
           ),
         ),
-      ],
+        content: Text(
+          "You have completed the test. Please click on the button below to view the result.",
+          style: applyRobotoFont(
+            color: AppColor.black,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        actions: [
+          Visibility(
+            visible: isLoading,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {},
+            child: Text(
+              "View Result",
+              style: applyRobotoFont(
+                color: AppColor.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
 
-  ///TODO: Save the response to the DB and then call the API
-  _saveFinalResponse(WidgetRef ref, TriageMode mode) async {
-    final isConnected = await ref.read(connectivityProvider).isConnected();
-    if (isConnected) {
-      if (mode == TriageMode.POST) {
-        await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
-        //GET REPORT BY DR ID
-        //PATCH API
-      } else if (mode == TriageMode.UPDATE) {
-        //GET REPORT BY DR ID
-        //PATCH API
-      }
-    } else {
-      if (mode == TriageMode.POST) {
-        await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
-      } else if (mode == TriageMode.UPDATE) {
-        throw Exception("No internet connection");
-      }
-    }
-  }
+_showServerExceptionDialog(
+  BuildContext context,
+  Failure failure,
+) {
+  return BlurDialogBox(
+    title: Text(
+      "Triage Saved Locally",
+      style: applyRobotoFont(
+        color: AppColor.black,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+    content: Text(
+      failure.errorMessage,
+      style: applyRobotoFont(
+        color: AppColor.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TriageResultPage(
+                triageResult: failure.data as TriageResponseModel,
+              ),
+            ),
+          );
+        },
+        child: Text(
+          "Ok",
+          style: applyRobotoFont(
+            color: AppColor.black,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+    ],
+  );
 }

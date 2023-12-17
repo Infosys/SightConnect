@@ -1,10 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/trige_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
@@ -18,16 +15,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 import '../widgets/option_card.dart';
+
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
     required this.questionnaireSections,
-    this.mode = TriageMode.POST,
     super.key,
   });
-
-  final TriageMode mode;
   final List<QuestionnaireItemFHIRModel> questionnaireSections;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -197,7 +194,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           ),
                         ).then(
                           (value) async {
-                            await _saveFinalResponse(ref, model);
+                            await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           },
                         );
@@ -220,7 +217,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           ),
                         ).then(
                           (value) async {
-                            await _saveFinalResponse(ref, model);
+                            await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           },
                         );
@@ -250,26 +247,4 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     }
     return weightage;
   }
-
-  ///TODO: Save the response to the DB and then call the API
-  _saveFinalResponse(WidgetRef ref, TriageQuestionnaireProvider model) async {
-    final isConnected = await ref.read(connectivityProvider).isConnected();
-    if (isConnected) {
-      if (mode == TriageMode.POST) {
-        await model.saveQuestionaireResponseToDB();
-        await ref.read(triageProvider).saveTriage();
-      } else if (mode == TriageMode.UPDATE) {
-        //GET REPORT BY DR ID
-        //PATCH API
-      }
-    } else {
-      if (mode == TriageMode.POST) {
-        await model.saveQuestionaireResponseToDB();
-      } else if (mode == TriageMode.UPDATE) {
-        throw Exception("No internet connection");
-      }
-    }
-  }
-
-  _saveFinalResponseNavigation(BuildContext context, TriageMode mode) {}
 }

@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
@@ -21,10 +20,7 @@ import 'visual_acuity_tumbling_overlay.dart';
 class VisualAcuityDialog {
   VisualAcuityDialog._();
 
-  static BlurDialogBox showSuccessTemp(
-    BuildContext context, [
-    TriageMode mode = TriageMode.POST,
-  ]) {
+  static BlurDialogBox showSuccessTemp(BuildContext context) {
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
       actionsPadding: EdgeInsets.zero,
@@ -67,7 +63,7 @@ class VisualAcuityDialog {
                         if (!ref.read(globalProvider).hideTumblingElement) {
                           await ref
                               .read(tumblingTestProvider)
-                              .saveFinalResponse(ref, mode);
+                              .saveVisionAcuityResponseToDB();
                           navigator.pop();
                           navigator.push(
                             MaterialPageRoute(
@@ -84,7 +80,7 @@ class VisualAcuityDialog {
                           );
                         }
                       },
-                      child: Text(context.loc!.proceedButton),
+                      child: Text(AppLocalizations.of(context)!.proceedButton),
                     );
                   },
                 )
@@ -244,6 +240,4 @@ class VisualAcuityDialog {
         return "";
     }
   }
-
-  ///TODO: Save the response to the DB and then call the API
 }
