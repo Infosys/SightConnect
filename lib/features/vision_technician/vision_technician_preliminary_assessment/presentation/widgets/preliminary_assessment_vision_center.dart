@@ -34,16 +34,16 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          VTRegisterInput(
-            title: "Recommendations",
-            keyboardType: TextInputType.multiline,
-            controller: ref
-                .read(preliminaryAssessmentHelperProvider)
-                .recommendationController,
-          ),
-          const SizedBox(
-            height: AppSize.kmheight,
-          ),
+          // VTRegisterInput(
+          //   title: "Recommendations",
+          //   keyboardType: TextInputType.multiline,
+          //   controller: ref
+          //       .read(preliminaryAssessmentHelperProvider)
+          //       .recommendationController,
+          // ),
+          // const SizedBox(
+          //   height: AppSize.kmheight,
+          // ),
           Text(
             "Vision Center",
             style: applyFiraSansFont(
@@ -75,9 +75,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                     VisionCenterAddressDetails(),
                   ],
                 ),
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
+          const SizedBox(height: AppSize.klheight),
           VTRegisterInput(
             title: "Remarks",
             keyboardType: TextInputType.multiline,

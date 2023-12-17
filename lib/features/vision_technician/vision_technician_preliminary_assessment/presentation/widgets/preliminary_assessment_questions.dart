@@ -25,14 +25,16 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text(error.toString()),
+              const Center(
+                child: Text("Something went wrong"),
               ),
               const SizedBox(
                 height: AppSize.klheight,
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  ref.invalidate(getTriageProvider);
+                },
                 icon: const Icon(Icons.refresh_outlined),
                 label: const Text("Retry"),
               ),
@@ -84,6 +86,7 @@ class AssessmentQuestionCard extends StatelessWidget {
             ],
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

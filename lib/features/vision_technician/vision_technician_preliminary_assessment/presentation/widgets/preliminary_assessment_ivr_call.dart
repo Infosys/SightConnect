@@ -2,34 +2,32 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-// class PreliminaryAssessmentIvrCall extends StatefulWidget {
-//   PreliminaryAssessmentIvrCall({super.key});
-
-//   @override
-//   State<PreliminaryAssessmentIvrCall> createState() =>
-//       _PreliminaryAssessmentIvrCallState();
-// }
-
-class PreliminaryAssessmentIvrCall extends StatelessWidget {
-  final String selectedOption;
+class PreliminaryAssessmentIvrCall extends HookWidget {
   final Function(String) onSelectedOptionChanged;
+  final String intialValue;
 
   const PreliminaryAssessmentIvrCall({
     super.key,
-    required this.selectedOption,
     required this.onSelectedOptionChanged,
+    required this.intialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: AppSize.width(context),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
-        ),
+        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColor.lightGrey,
+            blurRadius: AppSize.ksradius / 2,
+            spreadRadius: AppSize.ksradius / 8,
+          )
+        ],
       ),
       padding: const EdgeInsets.all(AppSize.klpadding),
       child: Column(
@@ -49,8 +47,10 @@ class PreliminaryAssessmentIvrCall extends StatelessWidget {
             children: [
               Radio(
                 value: "Yes",
-                groupValue: selectedOption,
-                onChanged: (value) => onSelectedOptionChanged("Yes"),
+                groupValue: intialValue,
+                onChanged: (value) {
+                  onSelectedOptionChanged("Yes");
+                },
               ),
               const Text('Yes'),
             ],
@@ -60,28 +60,14 @@ class PreliminaryAssessmentIvrCall extends StatelessWidget {
             children: [
               Radio(
                 value: "No",
-                groupValue: selectedOption,
-                onChanged: (value) => onSelectedOptionChanged("No"),
+                groupValue: intialValue,
+                onChanged: (value) {
+                  onSelectedOptionChanged("No");
+                },
               ),
               const Text('No'),
             ],
           ),
-          // ListTile(
-          //   title: const Text('Yes'),
-          //   leading: Radio(
-          //     value: 1,
-          //     groupValue: isSelectedOption,
-          //     onChanged: (value) => onSelectedOptionChanged(1),
-          //   ),
-          // ),
-          // ListTile(
-          //   title: const Text('No'),
-          //   leading: Radio(
-          //     value: 2,
-          //     groupValue: isSelectedOption,
-          //     onChanged: (value) => onSelectedOptionChanged(2),
-          //   ),
-          // ),
         ],
       ),
     );

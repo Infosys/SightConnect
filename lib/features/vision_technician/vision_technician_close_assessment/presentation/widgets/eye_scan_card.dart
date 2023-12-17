@@ -27,7 +27,6 @@ class EyeScanCard extends ConsumerWidget {
 
     return Container(
       width: AppSize.width(context),
-      margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.white,
@@ -98,29 +97,45 @@ class EyeScanCard extends ConsumerWidget {
             ),
           const SizedBox(height: AppSize.ksheight),
           if (allImagesCaptured)
-            Row(
+            Wrap(
+              runSpacing: AppSize.klheight,
+              spacing: AppSize.klwidth,
               children: [
                 SizedBox(
                   width: 150,
-                  height: 100,
-                  child: Image.file(
-                    File(leftEyeImagePath),
+                  height: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    child: Image.file(
+                      File(leftEyeImagePath),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(width: AppSize.kswidth),
                 SizedBox(
                   width: 150,
-                  height: 100,
-                  child: Image.file(
-                    File(rightEyeImagePath),
+                  height: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    child: Image.file(
+                      File(rightEyeImagePath),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(width: AppSize.kswidth),
                 SizedBox(
-                  width: 250,
-                  height: 100,
-                  child: Image.file(
-                    File(bothEyeImagePath),
+                  width: 150,
+                  height: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    child: Image.file(
+                      File(
+                        bothEyeImagePath,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
