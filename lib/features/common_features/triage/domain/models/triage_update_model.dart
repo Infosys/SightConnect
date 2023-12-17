@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 
 class TriageUpdateModel {
   int? patientId;
@@ -117,5 +118,3 @@ class PatchImagingSelectionModel {
 }
 
 enum Action { ADD, REMOVE, UPDATE }
-
-enum TestType { QUESTIONNAIRE, OBSERVATION, IMAGE }

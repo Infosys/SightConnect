@@ -1,23 +1,27 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var traigeUpdateReportProvider = ChangeNotifierProvider.family(
     (ref, int dignosticReportID) =>
-        PatientAssessmentCardProvider(dignosticReportID));
+        PatientAssessmentCardProvider(dignosticReportID, ref));
 
 class PatientAssessmentCardProvider extends ChangeNotifier {
+  final DiagnosticReportTemplateFHIRModel _triageAssessment;
   final int dignosticReportID;
-  PatientAssessmentCardProvider(this.dignosticReportID) {
-    logger.d({
-      'dignosticReportID': dignosticReportID,
-    });
-  }
+  final Ref ref;
+
+  PatientAssessmentCardProvider(this.dignosticReportID, this.ref)
+      : _triageAssessment = ref.watch(getTriageProvider).asData!.value;
+
+  DiagnosticReportTemplateFHIRModel get triageAssessment => _triageAssessment;
 
   List<UpdateTriageReportAlertBoxEntity>
       getUpdateTriageReportAlertBoxEntityList(
@@ -32,25 +36,21 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
     for (TestType test in tests) {
       if (_isTestIncomplete(test, report.icompleteTests)) {
         list.add(UpdateTriageReportAlertBoxEntity(
+          testType: test,
           title: _getTestText(test),
           subtitle: 'Incomplete',
           subtitlecolor: Colors.red,
           chipText: _getRequestPriorityText(RequestPriority.ROUTINE),
           chipColor: _getRequestPriorityColor(RequestPriority.ROUTINE),
-          onPressed: () {
-            //Navigate to quessionaire
-          },
         ));
       } else {
         list.add(UpdateTriageReportAlertBoxEntity(
+          testType: test,
           title: _getTestText(test),
           subtitle: 'Completed',
           subtitlecolor: Colors.green,
           chipText: _getRequestPriorityText(report.quessionnairepriority),
           chipColor: _getRequestPriorityColor(report.quessionnairepriority),
-          onPressed: () {
-            //Navigate to quessionaire
-          },
         ));
       }
     }
@@ -117,35 +117,19 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
 }
 
 class UpdateTriageReportAlertBoxEntity {
+  final TestType testType;
   final String title;
   final String subtitle;
   final Color subtitlecolor;
   final String chipText;
   final Color chipColor;
-  final VoidCallback onPressed;
 
   UpdateTriageReportAlertBoxEntity({
+    required this.testType,
     required this.title,
     required this.subtitle,
     required this.subtitlecolor,
     required this.chipText,
     required this.chipColor,
-    required this.onPressed,
   });
-}
-
-class AssessmentReportMapper {
-  static UpdateTriageReportAlertBoxEntity toEntity(
-      TriageDetailedReportModel model) {
-    return UpdateTriageReportAlertBoxEntity(
-      title: model.diagnosticReportDescription ?? "NA",
-      subtitle: model.userStartDate!.toString(),
-      subtitlecolor: Colors.green,
-      chipText: 'Routine Checkup',
-      chipColor: Colors.green,
-      onPressed: () {
-        //Navigate to quessionaire
-      },
-    );
-  }
 }

@@ -1,5 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -17,53 +22,75 @@ class UpdateTriageAlertBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
-        data: (data) {
-      List<UpdateTriageReportAlertBoxEntity> alertBoxEntityList = ref
-          .read(traigeUpdateReportProvider(dignosticReportID))
-          .getUpdateTriageReportAlertBoxEntityList(data);
+    var navigator = Navigator.of(context);
 
-      return BlurDialogBox(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Select Steps to Redo'),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Icon(Icons.close),
-            )
-          ],
-        ),
-        content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: alertBoxEntityList
-                .map(
-                  (e) => UpdateTriageAlertBoxListOptoion(
-                    title: e.title,
-                    subtitle: e.subtitle,
-                    subtitlecolor: e.subtitlecolor,
-                    chipText: e.chipText,
-                    chipColor: e.chipColor,
-                    onPressed: e.onPressed,
-                  ),
-                )
-                .toList()),
-        actions: const [],
-      );
-    }, error: (error, stackTrace) {
-      logger.d({
-        "getTriageDetailedEyeReport": error,
-        "stackTrace": stackTrace,
-      });
-      return Text("${error.toString()}}");
-    }, loading: () {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    },);
+    return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
+      data: (data) {
+        var model = ref.read(traigeUpdateReportProvider(dignosticReportID));
+        List<UpdateTriageReportAlertBoxEntity> alertBoxEntityList =
+            model.getUpdateTriageReportAlertBoxEntityList(data);
+
+        return BlurDialogBox(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Select Steps to Redo'),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(Icons.close),
+              )
+            ],
+          ),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: alertBoxEntityList
+                  .map(
+                    (e) => UpdateTriageAlertBoxListOptoion(
+                      title: e.title,
+                      subtitle: e.subtitle,
+                      subtitlecolor: e.subtitlecolor,
+                      chipText: e.chipText,
+                      chipColor: e.chipColor,
+                      onPressed: () {
+                        switch (e.testType) {
+                          case TestType.QUESTIONNAIRE:
+                            navigator.push(MaterialPageRoute(
+                                builder: (context) => TriageQuestionnairePage(
+                                      questionnaireSections: model
+                                          .triageAssessment
+                                          .questionnaire!
+                                          .questionnaireItem!,
+                                      mode: TriageMode.UPDATE,
+                                    )));
+                            break;
+                          case TestType.OBSERVATION:
+                            break;
+                          case TestType.IMAGE:
+                            break;
+                        }
+                      },
+                    ),
+                  )
+                  .toList()),
+          actions: const [],
+        );
+      },
+      error: (error, stackTrace) {
+        logger.d({
+          "getTriageDetailedEyeReport": error,
+          "stackTrace": stackTrace,
+        });
+        return Text("${error.toString()}}");
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 }
 
