@@ -8,23 +8,24 @@ import '../../../../patient/patient_authentication/presentation/provider/patient
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
-  const PreliminaryAssessmentCard({super.key, required this.patientId});
-
-  final int? patientId;
+  const PreliminaryAssessmentCard({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(getPatientProfileProvider(patientId)).asData?.value.profile;
+    var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
     // var dateYear = DateTime.now().year;
-    
+
     // int giveAge() {
     //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
     //   return (dateYear - age).toInt();
     // }
 
-    String genderString = model?.patient?.gender.toString().split('.').last??"";
+    String genderString =
+        model?.patient?.gender.toString().split('.').last ?? "";
     final address = _formateAddress(
       line: model?.patient?.address?.first.line ?? "",
       ward: model?.patient?.address?.first.ward ?? "",

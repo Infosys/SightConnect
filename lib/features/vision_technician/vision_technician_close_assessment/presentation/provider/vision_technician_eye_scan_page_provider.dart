@@ -19,14 +19,14 @@ class VisionTechnicianEyeScanNotifier extends ChangeNotifier {
   XFile _rightEyeImage = XFile("");
   XFile _bothEyeImage = XFile("");
 
-  get currentStep => _currentStep;
-  get isImageCaptured => _isImageCaptured;
-  get allImagesCaptured => _allImagesCaptured;
-  get imagePath => _imagePath;
-  get currentEye => _currentEye;
-  get leftEyeImage => _leftEyeImage;
-  get rightEyeImage => _rightEyeImage;
-  get bothEyeImage => _bothEyeImage;
+  int get currentStep => _currentStep;
+  bool get isImageCaptured => _isImageCaptured;
+  bool get allImagesCaptured => _allImagesCaptured;
+  String get imagePath => _imagePath;
+  Eye get currentEye => _currentEye;
+  XFile get leftEyeImage => _leftEyeImage;
+  XFile get rightEyeImage => _rightEyeImage;
+  XFile get bothEyeImage => _bothEyeImage;
 
   void goToNextStep() {
     _currentStep = _currentStep + 1;
@@ -46,7 +46,7 @@ class VisionTechnicianEyeScanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void retakePicture(){
+  void retakePicture() {
     _isImageCaptured = false;
     _imagePath = "";
     notifyListeners();

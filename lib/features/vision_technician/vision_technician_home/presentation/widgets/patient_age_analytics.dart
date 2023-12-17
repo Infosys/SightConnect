@@ -18,9 +18,9 @@ class PatientAgeAnalytics extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isMobile = Responsive.isMobile(context);
 
-   var model = ref.watch(visionTechnicianAnalyticsProvider.notifier);
+    var model = ref.watch(visionTechnicianAnalyticsProvider.notifier);
 
-    Map<String, double> dataMapAge = model.dataMapAge; 
+    Map<String, double> dataMapAge = model.dataMapAge;
     Map<String, double> dataMale = model.dataMale;
     Map<String, double> dataFemale = model.dataFemale;
     Map<String, double> dataOthers = model.dataOthers;
@@ -68,7 +68,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
                           chartType: ChartType.ring,
                           ringStrokeWidth: isMobile ? 5 : 10,
                           centerWidget: Text(
-                            "32",
+                            "-",
                             style: applyFiraSansFont(
                               fontSize: isMobile ? 16 : 32,
                               fontWeight: FontWeight.w500,

@@ -6,7 +6,6 @@ var visionTechnicianAnalyticsProvider =
     ChangeNotifierProvider((ref) => VisionTechnicianAnalyticsNotifier());
 
 class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
-
   final Map<String, double> _dataMapAge = {
     "10 - 29 Yrs": 10,
     "30 - 39 Yrs": 6,
@@ -14,10 +13,9 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
     "60+ Yrs": 6,
   };
 
-  
-  final Map<String, double> _dataMale = {"Male": 15};
-  final Map<String, double> _dataFemale = {"Female": 35};
-  final Map<String, double> _dataOthers = {"Others": 12};
+  final Map<String, double> _dataMale = {"Male": 0};
+  final Map<String, double> _dataFemale = {"Female": 0};
+  final Map<String, double> _dataOthers = {"Others": 0};
 
   final List<double> _totalValuesGender = [32, 51, 36];
   final List<List<Color>> _colorsGender = [
@@ -34,16 +32,16 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
   ];
 
   final Map<String, double> _dataMapSymptom = {
-    "Refractive": 60,
-    "Cataract": 32,
-    "Glaucoma": 23,
-    "Conjunctivitis": 22,
-    "Diabetic\nRetinopathy": 77,
-    "Blepharitis": 10,
-    "Keratitis": 32,
+    "Refractive": 0,
+    "Cataract": 0,
+    "Glaucoma": 0,
+    "Conjunctivitis": 0,
+    "Diabetic\nRetinopathy": 0,
+    "Blepharitis": 0,
+    "Keratitis": 0,
   };
 
-  final int _totalSymptom = 224;
+  final int _totalSymptom = 0;
 
   final List<Color> _colorsSymptom = [
     AppColor.darkBlue,

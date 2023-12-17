@@ -1,24 +1,22 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_view_model_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as Math;
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VTPatientList extends ConsumerWidget {
-  const VTPatientList({super.key});
+  const VTPatientList({
+    required this.listOfAssessments,
+    super.key,
+  });
+
+  final List<VTPatientDto> listOfAssessments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<VTPatientDto> listOfAssessments =
-        ref.watch(vtHomeHelperProvider).listOfAssessments;
-
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,8 +167,9 @@ List<DataCell> generateListTile(VTPatientDto data) {
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(
           fontSize: 14,
-          color:
-              data.category!.toLowerCase().contains("early") ? AppColor.orange : AppColor.red,
+          color: data.category!.toLowerCase().contains("early")
+              ? AppColor.orange
+              : AppColor.red,
         ),
       ),
     ),

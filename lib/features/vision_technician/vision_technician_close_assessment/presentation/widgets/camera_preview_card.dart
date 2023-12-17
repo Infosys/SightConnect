@@ -12,8 +12,6 @@ class CameraPreviewCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: AppSize.width(context) * 0.8,
-      height: AppSize.width(context) * 0.9,
       decoration: BoxDecoration(
         color: AppColor.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(AppSize.klradius),
@@ -22,87 +20,93 @@ class CameraPreviewCard extends ConsumerWidget {
           width: 2,
         ),
       ),
-      child: Column(
-        // mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            width: AppSize.klwidth * 2,
-            height: AppSize.klheight * 2,
-            margin: const EdgeInsets.only(right: AppSize.klpadding),
-            decoration: BoxDecoration(
-              color: AppColor.white.withOpacity(0.5),
-              shape: BoxShape.circle,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSize.klradius),
+        child: Stack(
+          children: [
+            AspectRatio(
+              aspectRatio: controller.value.aspectRatio,
+              child: CameraPreview(controller),
             ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.flash_on),
-            ),
-          ),
-          SizedBox(
-            width: AppSize.width(context) * 0.8,
-            height: AppSize.width(context) * 0.5,
-            child: CameraPreview(controller),
-          ),
-          
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
+            Positioned(
+              top: AppSize.klpadding,
+              right: AppSize.klpadding,
+              child: Container(
                 width: AppSize.klwidth * 2,
                 height: AppSize.klheight * 2,
-                alignment: Alignment.center,
+                margin: const EdgeInsets.only(right: AppSize.klpadding),
                 decoration: BoxDecoration(
                   color: AppColor.white.withOpacity(0.5),
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(CupertinoIcons.photo),
+                  icon: const Icon(Icons.flash_on),
                 ),
               ),
-              InkWell(
-                onTap: () async {
-                  try {
-                    final XFile image = await controller.takePicture();
-                    // setState(() {
-                    //   imagePath = image.path;
-                    // });
-                    ref
-                        .read(visionTechnicianEyeScanProvider.notifier)
-                        .saveImage(image);
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                child: Container(
-                  width: AppSize.klwidth * 2,
-                  height: AppSize.klheight * 2,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    color: AppColor.white,
-                    shape: BoxShape.circle,
+            ),
+            Positioned(
+              bottom: AppSize.klpadding,
+              left: AppSize.width(context) / 4,
+              right: AppSize.width(context) / 4,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: AppSize.klwidth * 2,
+                    height: AppSize.klheight * 2,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColor.white.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(CupertinoIcons.photo),
+                    ),
                   ),
-                ),
+                  InkWell(
+                    onTap: () async {
+                      try {
+                        final XFile image = await controller.takePicture();
+                        // setState(() {
+                        //   imagePath = image.path;
+                        // });
+                        ref
+                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .saveImage(image);
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: Container(
+                      width: AppSize.klwidth * 2,
+                      height: AppSize.klheight * 2,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        color: AppColor.white,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: AppSize.klwidth * 2,
+                    height: AppSize.klheight * 2,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColor.white.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(CupertinoIcons.camera_rotate),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                width: AppSize.klwidth * 2,
-                height: AppSize.klheight * 2,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColor.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.camera_rotate),
-                ),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

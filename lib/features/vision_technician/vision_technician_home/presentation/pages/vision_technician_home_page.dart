@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
@@ -20,7 +21,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isMobile = Responsive.isMobile(context);
-    var watchRef = ref.watch(vtHomeHelperProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -45,13 +45,13 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         title: Row(
           children: [
             Text(
-              'Eye Care For All',
+              AppText.appName,
               style: applyFiraSansFont(
                 color: AppColor.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(width: AppSize.kswidth),
+            const SizedBox(width: AppSize.klwidth),
             isMobile ? const Spacer() : const SizedBox(),
             isMobile
                 ? IconButton(
@@ -64,7 +64,8 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.search, color: AppColor.white))
+                    icon: const Icon(Icons.search, color: AppColor.white),
+                  )
                 : const Expanded(
                     child: VTSearchBar(readOnly: true),
                   ),
@@ -72,16 +73,12 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         ),
         centerTitle: false,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications,
-              color: AppColor.white,
-            ),
-          ),
           const CircleAvatar(
-            backgroundColor: AppColor.white,
-          )
+            backgroundColor: AppColor.lightGrey,
+          ),
+          isMobile
+              ? const SizedBox(width: AppSize.kswidth)
+              : const SizedBox(width: AppSize.klwidth)
         ],
       ),
       body: SingleChildScrollView(
@@ -90,7 +87,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              // height: 300,
               child: Stack(
                 children: [
                   Container(
@@ -107,9 +103,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            if(watchRef.isLoading)
-              const Center(child: CircularProgressIndicator()),
-            if(!watchRef.isLoading)
             const AssessmentTable(),
           ],
         ),

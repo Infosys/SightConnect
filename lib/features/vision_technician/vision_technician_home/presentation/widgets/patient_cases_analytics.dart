@@ -18,8 +18,8 @@ class PatientCasesAnalytics extends StatelessWidget {
         children: [
           AnalyticsCard(
             title: "Total Cases",
-            firstValue: "60",
-            secondValue: "72",
+            firstValue: "-",
+            secondValue: "-",
             firstAnalyticsDescription: "IVR Calls",
             secondAnalyticsDescription: "Clinic Visits",
             firstValueColor: AppColor.black,
@@ -31,8 +31,8 @@ class PatientCasesAnalytics extends StatelessWidget {
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
             title: "Cases Closed",
-            firstValue: "14",
-            secondValue: "8",
+            firstValue: "-",
+            secondValue: "-",
             firstAnalyticsDescription: "Critical",
             secondAnalyticsDescription: "Regular",
             width: Responsive.isMobile(context)
@@ -42,8 +42,8 @@ class PatientCasesAnalytics extends StatelessWidget {
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
             title: "Avg. Closure Time",
-            firstValue: "1wk",
-            secondValue: "3d",
+            firstValue: "-",
+            secondValue: "-",
             firstAnalyticsDescription: "Critical",
             secondAnalyticsDescription: "Regular",
             width: Responsive.isMobile(context)

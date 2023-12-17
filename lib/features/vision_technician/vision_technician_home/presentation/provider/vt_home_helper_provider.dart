@@ -14,31 +14,18 @@ final vtHomeHelperProvider =
     vtHomeRepositoryRef: ref.watch(vtHomeRepository),
   );
 });
+var getAssessmentTableProvider = FutureProvider((ref) async {
+  return await ref.watch(vtHomeRepository).getListOfPatients();
+});
 
 class VTHomeHelperNotifier extends ChangeNotifier {
   VTHomeRepository vtHomeRepositoryRef;
-  VTHomeHelperNotifier({
-    required this.vtHomeRepositoryRef,
-  }) {
-    getListOfPatients();
-  }
-
-  List<VTPatientDto> _listOfAssessments =[];
+  VTHomeHelperNotifier({required this.vtHomeRepositoryRef});
 
   String filterValue = "All";
 
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool get isLoading => _isLoading;
-
-  void getListOfPatients() async {
-    _isLoading = true;
-    notifyListeners();
-    _listOfAssessments = await vtHomeRepositoryRef.getListOfPatients();
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  List<VTPatientDto> get listOfAssessments => _listOfAssessments;
 
   void updateListOfAssessments() {
     if (filterValue == "All") {

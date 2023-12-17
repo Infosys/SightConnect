@@ -4,12 +4,10 @@ import 'package:eye_care_for_all/features/patient/patient_authentication/data/re
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/profile_model.dart';
 
-final getPatientProfileProvider =
-    FutureProvider.family<PatientResponseModel, int?>((ref, patientId) async {
-      int? id = patientId;
-   if(patientId == null) {
-     id = 1202;
-   }
+final getPatientProfileProvider = FutureProvider((ref) async {
+  int patientId = 1202;
+  int? id = patientId;
+
   if (AppEnv.isDev) {
     return PatientResponseModel.fromJson({
       "intent": "PROFILE_SHARE",
@@ -99,7 +97,7 @@ final getPatientProfileProvider =
     });
   } else {
     final authRepo = ref.watch(patientAuthenticationRepositoryProvider);
-    final response = await authRepo.getPatientProfile(id??1202);
+    final response = await authRepo.getPatientProfile(patientId);
 
     return response.fold((error) {
       throw error;

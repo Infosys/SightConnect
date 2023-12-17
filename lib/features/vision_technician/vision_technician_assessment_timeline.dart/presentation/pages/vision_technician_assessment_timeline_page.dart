@@ -23,19 +23,17 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
   final int? patientId;
 
-    
-
   // final VTPatientModel patient;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel? patient =
-        // ref.watch(visionTechnicianSearchProvider).patientDetails;
+    // ref.watch(visionTechnicianSearchProvider).patientDetails;
     bool closed = true;
 
-    var model = ref.watch(getPatientProfileProvider(patientId)).asData?.value.profile;
+    var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
     var dateYear = DateTime.now().year;
-    
+
     int giveAge() {
       var age = int.parse(model?.patient?.yearOfBirth ?? "");
       return (dateYear - age).toInt();
@@ -97,9 +95,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
         leadingWidth: 70,
         centerTitle: false,
         title: Text(
-         "${model.patient?.name ?? ""} - OP ${model.patient?.abhaNumber.toString() ?? ""}", 
-            // '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
-      ),
+          "${model.patient?.name ?? ""} - OP ${model.patient?.abhaNumber.toString() ?? ""}",
+          // '${patient.firstName} ${patient.lastName} - OP ${patient.patientId}'),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -107,9 +105,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TimelineProfile(model : model),
+              TimelineProfile(model: model),
               const SizedBox(height: AppSize.ksheight),
-               GeneralInformation(model : model),
+              GeneralInformation(model: model),
               const SizedBox(
                 height: AppSize.ksheight,
               ),

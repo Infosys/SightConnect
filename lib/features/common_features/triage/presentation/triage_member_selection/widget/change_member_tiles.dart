@@ -19,7 +19,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
     var memberProvider = ref.watch(triageMemberProvider);
     final selectedValue = useState<int>(0);
 
-    return ref.watch(getPatientProfileProvider(1202)).when(
+    return ref.watch(getPatientProfileProvider).when(
           data: (patient) {
             final connectionsList = patient.profile?.patient?.relatedParty;
             final currentProfile = patient.profile?.patient;

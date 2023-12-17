@@ -34,9 +34,9 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
           onPressed: () {
             ref.read(registerNewPatientHelperProvider.notifier).printData();
             /*  if (_formKey.currentState!.validate()) { */
-            
+
             // ref.read(registerNewPatientProvider).saveAndProceed();
-            
+
             // print(_formKey.currentState?.save);
             // ref
             //     .read(registerNewPatientProvider)
@@ -44,18 +44,20 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
             showToastMessage("Patient details saved!", context, 0);
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return const VisionTechnicianPreliminaryAssessmentPage(patientId: 1202,);
+                return const VisionTechnicianPreliminaryAssessmentPage();
               },
             ));
             // ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            
+
             return;
             /* } */
           },
           child: Text(
             "Save & Proceed",
             style: applyRobotoFont(
-                fontSize: 14, color: AppColor.white, fontWeight: FontWeight.w500),
+                fontSize: 14,
+                color: AppColor.white,
+                fontWeight: FontWeight.w500),
           ),
         ),
       ),

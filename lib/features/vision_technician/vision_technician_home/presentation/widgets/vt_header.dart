@@ -27,6 +27,7 @@ class VTHeader extends HookWidget {
 
     return Column(
       children: [
+        const SizedBox(height: 16),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
           child: Row(
@@ -82,13 +83,13 @@ class VTHeader extends HookWidget {
           carouselController: controller,
           options: CarouselOptions(
             height: Responsive.isMobile(context) ? 130 : 180,
-            // aspectRatio: 1.3,
             viewportFraction: 1,
             onPageChanged: (index, reason) {
               current.value = index;
             },
           ),
         ),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: slides.asMap().entries.map((entry) {

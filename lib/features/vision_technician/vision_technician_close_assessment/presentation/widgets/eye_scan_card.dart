@@ -25,20 +25,8 @@ class EyeScanCard extends ConsumerWidget {
     bool allImagesCaptured =
         ref.watch(visionTechnicianEyeScanProvider).allImagesCaptured;
 
-    // return Container(
-    //   width: 400,
-    //   height: 100,
-    //   margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
-    //   padding: const EdgeInsets.all(AppSize.kmpadding),
-    //   decoration: BoxDecoration(
-    //     color: AppColor.white,
-    //     boxShadow: applyLightShadow(),
-    //     borderRadius: BorderRadius.circular(AppSize.kmradius),
-    //   ),
-    // );
-
     return Container(
-      width: AppSize.width(context) ,
+      width: AppSize.width(context),
       margin: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(

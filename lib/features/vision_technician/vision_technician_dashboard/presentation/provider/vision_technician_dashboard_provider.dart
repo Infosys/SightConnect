@@ -17,9 +17,8 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
 
   final List<Widget> _pages = [
     const VisionTechnicianHomePage(),
-    VisionTechnicianRegisterNewPatientPage(),
-    // VisionTechnicianCloseAssessmentPage(),
-    const VisionTechnicianPreliminaryAssessmentPage(patientId: 1202,),
+    const SizedBox(),
+    const VisionTechnicianPreliminaryAssessmentPage(),
     const VisionTechnicianMarkMyAvailabilityPage(),
     const VisionTechnicianIvrCallHistory(),
   ];

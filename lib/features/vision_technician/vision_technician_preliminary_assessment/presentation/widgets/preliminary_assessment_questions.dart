@@ -2,28 +2,21 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentQuestions extends HookConsumerWidget {
-  PreliminaryAssessmentQuestions({super.key});
-  var recommendationsController = TextEditingController();
+  const PreliminaryAssessmentQuestions({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(getTriageProvider).when(
       data: (data) {
-        // switch (currentStep) {
         return AssessmentQuestionCard(
           questionnaire: data.questionnaire?.questionnaireItem ?? [],
         );
-        // }
       },
       error: (error, stackTrace) {
         return Center(
@@ -39,9 +32,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
                 height: AppSize.klheight,
               ),
               TextButton.icon(
-                onPressed: () {
-                  // ref.invalidate(getTriageProvider);
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.refresh_outlined),
                 label: const Text("Retry"),
               ),
@@ -57,13 +48,14 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
         );
       },
     );
-
-    // return}
   }
 }
 
 class AssessmentQuestionCard extends StatelessWidget {
-  const AssessmentQuestionCard({super.key, required this.questionnaire});
+  const AssessmentQuestionCard({
+    super.key,
+    required this.questionnaire,
+  });
   final List<QuestionnaireItemFHIRModel> questionnaire;
   @override
   Widget build(BuildContext context) {
@@ -79,13 +71,13 @@ class AssessmentQuestionCard extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.kmpadding),
           decoration: BoxDecoration(
             color: AppColor.white,
             borderRadius: BorderRadius.circular(AppSize.kmradius),
             boxShadow: const [
               BoxShadow(
-                color: AppColor.lightGrey, //New
+                color: AppColor.lightGrey,
                 blurRadius: AppSize.ksradius / 2,
                 spreadRadius: AppSize.ksradius / 8,
               )
@@ -121,36 +113,6 @@ class AssessmentQuestionCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSize.klheight),
-        //  Container(
-        //    width: double.infinity,
-        //    padding: EdgeInsets.all(AppSize.kmpadding),
-        //    decoration: BoxDecoration(
-        //      color: AppColor.white,
-        //      borderRadius: BorderRadius.circular(AppSize.kmradius),
-        //      boxShadow: const [
-        //        BoxShadow(
-        //          color: AppColor.lightGrey, //New
-        //          blurRadius: AppSize.ksradius / 2,
-        //          spreadRadius: AppSize.ksradius / 8,
-        //        )
-        //      ],
-        //    ),
-        //    child: Wrap(
-        //      runSpacing: AppSize.klheight,
-        //      children: [
-        //        PreliminaryAssessmentFilterCheckBox(
-        //          itemName: "eyeIssueType",
-        //          name: "Eye Issue Type",
-        //          includeInputBox: 0,
-        //        ),
-        //        PreliminaryAssessmentFilterCheckBox(
-        //          itemName: "eyeSpecialistDeals",
-        //          name: "Refer To Eye Specailist Who Deals With",
-        //          includeInputBox: 0,
-        //        ),
-        //      ],
-        //    ),
-        //  ),
       ],
     );
   }

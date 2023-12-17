@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\flutter
-FLUTTER_APPLICATION_PATH=C:\Users\mayur.madhwani\Desktop\Flutter\EYE_CARE_FOR_ALL_INFOSYS
+FLUTTER_ROOT=/Users/abhishek.singh169/Documents/flutter
+FLUTTER_APPLICATION_PATH=/Users/abhishek.singh169/Documents/Flutter Workspace/eye_care_for_all
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0

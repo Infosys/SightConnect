@@ -242,8 +242,7 @@ List<DataCell> generateListTileSearchResults(VTPatientSearchDto data, context) {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const VisionTechnicianPreliminaryAssessmentPage(
-                          patientId: 1202),
+                      const VisionTechnicianPreliminaryAssessmentPage(),
                 ),
               );
             },

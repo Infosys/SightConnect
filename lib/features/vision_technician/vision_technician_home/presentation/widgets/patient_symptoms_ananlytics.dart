@@ -17,7 +17,7 @@ class PatientSymptomsAnalytics extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isMobile = Responsive.isMobile(context);
-    var model = ref.watch(visionTechnicianAnalyticsProvider.notifier);
+    var model = ref.watch(visionTechnicianAnalyticsProvider);
     Map<String, double> dataMapSymptom = model.dataMapSymptom;
     List<Color> colorsSymptom = model.colorsSymptom;
     int totalSymptom = model.totalSymptom;
