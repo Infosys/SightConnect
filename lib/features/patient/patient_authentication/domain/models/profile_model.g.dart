@@ -143,7 +143,7 @@ _$_MetaDataModel _$$_MetaDataModelFromJson(Map<String, dynamic> json) =>
       counterId: json['counterId'] as String?,
       hprId: json['hprId'] as String?,
       latitude: json['latitude'] as String?,
-      longitute: json['longitute'] as String?,
+      longitude: json['longitude'] as String?,
     );
 
 Map<String, dynamic> _$$_MetaDataModelToJson(_$_MetaDataModel instance) =>
@@ -152,7 +152,7 @@ Map<String, dynamic> _$$_MetaDataModelToJson(_$_MetaDataModel instance) =>
       'counterId': instance.counterId,
       'hprId': instance.hprId,
       'latitude': instance.latitude,
-      'longitute': instance.longitute,
+      'longitude': instance.longitude,
     };
 
 _$_MedicalRecordModel _$$_MedicalRecordModelFromJson(
@@ -209,6 +209,8 @@ const _$IdentifierTypeEnumMap = {
 _$_ExtendedPatientModel _$$_ExtendedPatientModelFromJson(
         Map<String, dynamic> json) =>
     _$_ExtendedPatientModel(
+      patientId: json['patientId'] as int?,
+      osid: json['osid'] as String?,
       abhaNumber: json['abhaNumber'] as int?,
       abhaAddress: json['abhaAddress'] as String?,
       name: json['name'] as String?,
@@ -217,6 +219,7 @@ _$_ExtendedPatientModel _$$_ExtendedPatientModelFromJson(
       monthOfBirth: json['monthOfBirth'] as String?,
       yearOfBirth: json['yearOfBirth'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
+      age: json['age'] as int?,
       email: json['email'] as String?,
       profilePhoto: json['profilePhoto'] as String?,
       parentPatientId: json['parentPatientId'] as int?,
@@ -237,6 +240,8 @@ _$_ExtendedPatientModel _$$_ExtendedPatientModelFromJson(
 Map<String, dynamic> _$$_ExtendedPatientModelToJson(
         _$_ExtendedPatientModel instance) =>
     <String, dynamic>{
+      'patientId': instance.patientId,
+      'osid': instance.osid,
       'abhaNumber': instance.abhaNumber,
       'abhaAddress': instance.abhaAddress,
       'name': instance.name,
@@ -245,6 +250,7 @@ Map<String, dynamic> _$$_ExtendedPatientModelToJson(
       'monthOfBirth': instance.monthOfBirth,
       'yearOfBirth': instance.yearOfBirth,
       'phoneNumber': instance.phoneNumber,
+      'age': instance.age,
       'email': instance.email,
       'profilePhoto': instance.profilePhoto,
       'parentPatientId': instance.parentPatientId,
@@ -264,7 +270,7 @@ _$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>
       subDistrict: json['subDistrict'] as String?,
       district: json['district'] as String?,
       state: json['state'] as String?,
-      pinCode: json['pinCode'] as String?,
+      pincode: json['pincode'] as String?,
       label: json['label'] as String?,
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
       primary: json['primary'] as bool?,
@@ -281,7 +287,7 @@ Map<String, dynamic> _$$_AddressModelToJson(_$_AddressModel instance) =>
       'subDistrict': instance.subDistrict,
       'district': instance.district,
       'state': instance.state,
-      'pinCode': instance.pinCode,
+      'pincode': instance.pincode,
       'label': instance.label,
       'status': _$StatusEnumMap[instance.status],
       'primary': instance.primary,

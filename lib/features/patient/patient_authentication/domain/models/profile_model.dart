@@ -99,7 +99,7 @@ class MetaDataModel with _$MetaDataModel {
     String? counterId,
     String? hprId,
     String? latitude,
-    String? longitute,
+    String? longitude,
   }) = _MetaDataModel;
 
   factory MetaDataModel.fromJson(Map<String, dynamic> json) =>
@@ -143,6 +143,8 @@ class IdentifierModel with _$IdentifierModel {
 @freezed
 class ExtendedPatientModel with _$ExtendedPatientModel {
   const factory ExtendedPatientModel({
+    int? patientId,
+    String? osid,
     int? abhaNumber,
     String? abhaAddress,
     String? name,
@@ -151,6 +153,7 @@ class ExtendedPatientModel with _$ExtendedPatientModel {
     String? monthOfBirth,
     String? yearOfBirth,
     String? phoneNumber,
+    int? age,
     String? email,
     String? profilePhoto,
     int? parentPatientId,
@@ -175,7 +178,7 @@ class AddressModel with _$AddressModel {
       String? subDistrict,
       String? district,
       String? state,
-      String? pinCode,
+      String? pincode,
       String? label,
       Status? status,
       bool? primary,
