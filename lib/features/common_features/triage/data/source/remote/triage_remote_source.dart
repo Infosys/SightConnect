@@ -84,19 +84,33 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<TriageResponseModel> updateTriage({
     required TriageUpdateModel triage,
   }) async {
-    // final id = triage.diagnosticReportId;
-    // final response = await dio.patch(
-    //   "services/triage/api/triage-report/$id",
-    //   data: triage.toJson(),
-    // );
+    final id = triage.diagnosticReportId;
 
-    var response =
-        await rootBundle.loadString("assets/triage_update_response.json");
-    if (response.isNotEmpty) {
-      Map<String, dynamic> data = jsonDecode(response);
-      return TriageUpdateMapper.toResponseModel(data);
-    } else {
-      throw ServerException();
+    // var response =
+    //     await rootBundle.loadString("assets/triage_update_response.json");
+    // if (response.isNotEmpty) {
+    //   Map<String, dynamic> data = jsonDecode(response);
+    //   return TriageUpdateMapper.toResponseModel(data);
+    // } else {
+    //   throw ServerException();
+    // }
+    try {
+      final response = await dio.patch(
+        "services/triage/api/triage-report/$id",
+        data: triage.toJson(),
+      );
+
+      if (response.statusCode != null) {
+        if (response.statusCode! >= 200 && response.statusCode! < 210) {
+          return TriageResponseModel.fromJson(response.data);
+        } else {
+          throw ServerException();
+        }
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw UnknownException();
     }
   }
 }
