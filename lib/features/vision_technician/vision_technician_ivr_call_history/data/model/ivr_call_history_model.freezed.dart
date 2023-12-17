@@ -20,12 +20,17 @@ IvrCallHistoryModel _$IvrCallHistoryModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$IvrCallHistoryModel {
+  @JsonKey(name: "callerIdentifier")
   String get patientId => throw _privateConstructorUsedError;
+  @JsonKey(name: "callerName")
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "callerNumber")
+  String get mobile => throw _privateConstructorUsedError;
   int? get duration => throw _privateConstructorUsedError;
   DateTime get logDate => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  String get calltype => throw _privateConstructorUsedError;
+  @JsonKey(name: "direction")
+  String get direction => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +45,13 @@ abstract class $IvrCallHistoryModelCopyWith<$Res> {
       _$IvrCallHistoryModelCopyWithImpl<$Res, IvrCallHistoryModel>;
   @useResult
   $Res call(
-      {String patientId,
-      String name,
+      {@JsonKey(name: "callerIdentifier") String patientId,
+      @JsonKey(name: "callerName") String name,
+      @JsonKey(name: "callerNumber") String mobile,
       int? duration,
       DateTime logDate,
       String status,
-      String calltype});
+      @JsonKey(name: "direction") String direction});
 }
 
 /// @nodoc
@@ -63,10 +69,11 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
   $Res call({
     Object? patientId = null,
     Object? name = null,
+    Object? mobile = null,
     Object? duration = freezed,
     Object? logDate = null,
     Object? status = null,
-    Object? calltype = null,
+    Object? direction = null,
   }) {
     return _then(_value.copyWith(
       patientId: null == patientId
@@ -76,6 +83,10 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobile: null == mobile
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
               as String,
       duration: freezed == duration
           ? _value.duration
@@ -89,9 +100,9 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      calltype: null == calltype
-          ? _value.calltype
-          : calltype // ignore: cast_nullable_to_non_nullable
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -106,12 +117,13 @@ abstract class _$$_IvrCallHistoryModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String patientId,
-      String name,
+      {@JsonKey(name: "callerIdentifier") String patientId,
+      @JsonKey(name: "callerName") String name,
+      @JsonKey(name: "callerNumber") String mobile,
       int? duration,
       DateTime logDate,
       String status,
-      String calltype});
+      @JsonKey(name: "direction") String direction});
 }
 
 /// @nodoc
@@ -127,10 +139,11 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
   $Res call({
     Object? patientId = null,
     Object? name = null,
+    Object? mobile = null,
     Object? duration = freezed,
     Object? logDate = null,
     Object? status = null,
-    Object? calltype = null,
+    Object? direction = null,
   }) {
     return _then(_$_IvrCallHistoryModel(
       patientId: null == patientId
@@ -140,6 +153,10 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobile: null == mobile
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
               as String,
       duration: freezed == duration
           ? _value.duration
@@ -153,9 +170,9 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      calltype: null == calltype
-          ? _value.calltype
-          : calltype // ignore: cast_nullable_to_non_nullable
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -165,20 +182,26 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   const _$_IvrCallHistoryModel(
-      {required this.patientId,
-      required this.name,
+      {@JsonKey(name: "callerIdentifier") required this.patientId,
+      @JsonKey(name: "callerName") required this.name,
+      @JsonKey(name: "callerNumber") required this.mobile,
       this.duration,
       required this.logDate,
       required this.status,
-      required this.calltype});
+      @JsonKey(name: "direction") required this.direction});
 
   factory _$_IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =>
       _$$_IvrCallHistoryModelFromJson(json);
 
   @override
+  @JsonKey(name: "callerIdentifier")
   final String patientId;
   @override
+  @JsonKey(name: "callerName")
   final String name;
+  @override
+  @JsonKey(name: "callerNumber")
+  final String mobile;
   @override
   final int? duration;
   @override
@@ -186,11 +209,12 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   @override
   final String status;
   @override
-  final String calltype;
+  @JsonKey(name: "direction")
+  final String direction;
 
   @override
   String toString() {
-    return 'IvrCallHistoryModel(patientId: $patientId, name: $name, duration: $duration, logDate: $logDate, status: $status, calltype: $calltype)';
+    return 'IvrCallHistoryModel(patientId: $patientId, name: $name, mobile: $mobile, duration: $duration, logDate: $logDate, status: $status, direction: $direction)';
   }
 
   @override
@@ -201,18 +225,19 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.mobile, mobile) || other.mobile == mobile) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.logDate, logDate) || other.logDate == logDate) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.calltype, calltype) ||
-                other.calltype == calltype));
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, patientId, name, duration, logDate, status, calltype);
+  int get hashCode => Object.hash(runtimeType, patientId, name, mobile,
+      duration, logDate, status, direction);
 
   @JsonKey(ignore: true)
   @override
@@ -231,20 +256,27 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
 
 abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
   const factory _IvrCallHistoryModel(
-      {required final String patientId,
-      required final String name,
-      final int? duration,
-      required final DateTime logDate,
-      required final String status,
-      required final String calltype}) = _$_IvrCallHistoryModel;
+          {@JsonKey(name: "callerIdentifier") required final String patientId,
+          @JsonKey(name: "callerName") required final String name,
+          @JsonKey(name: "callerNumber") required final String mobile,
+          final int? duration,
+          required final DateTime logDate,
+          required final String status,
+          @JsonKey(name: "direction") required final String direction}) =
+      _$_IvrCallHistoryModel;
 
   factory _IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =
       _$_IvrCallHistoryModel.fromJson;
 
   @override
+  @JsonKey(name: "callerIdentifier")
   String get patientId;
   @override
+  @JsonKey(name: "callerName")
   String get name;
+  @override
+  @JsonKey(name: "callerNumber")
+  String get mobile;
   @override
   int? get duration;
   @override
@@ -252,7 +284,8 @@ abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
   @override
   String get status;
   @override
-  String get calltype;
+  @JsonKey(name: "direction")
+  String get direction;
   @override
   @JsonKey(ignore: true)
   _$$_IvrCallHistoryModelCopyWith<_$_IvrCallHistoryModel> get copyWith =>

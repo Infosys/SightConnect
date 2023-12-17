@@ -34,14 +34,6 @@ var vtDioProvider = Provider(
   ),
 );
 
-var vtDioVisionCenterProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      baseUrl: "https://eyecare4all-dev.infosysapps.com/services/exotel",
-    ),
-  ),
-);
-
 // var onboardingDioProvider = Provider(
 //   (ref) => Dio(
 //     BaseOptions(
@@ -49,12 +41,20 @@ var vtDioVisionCenterProvider = Provider(
 //     ),
 //   ),
 // );
-var dioExotelProvider = Provider(
-  (ref) => Dio(BaseOptions(baseUrl: AppEnv.exotelBaseUrl)),
+var dioCallCenterProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(baseUrl: AppEnv.exotelBaseUrl),
+  ),
 );
 
 var dioProfileProvider = Provider(
   (ref) => Dio(
     BaseOptions(baseUrl: AppEnv.profileBaseUrl),
+  ),
+);
+
+var dioTriageProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(baseUrl: AppEnv.triageBaseUrl),
   ),
 );

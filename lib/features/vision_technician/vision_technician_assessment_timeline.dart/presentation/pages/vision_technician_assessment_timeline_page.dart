@@ -4,34 +4,23 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/general_information.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_profile.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../../../vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 
 class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
-  const VisionTechnicianAssessmentTimeline({
-    super.key,
-    required this.patientId,
-  });
-
-  final int? patientId;
-
-  // final VTPatientModel patient;
+  const VisionTechnicianAssessmentTimeline({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // VTPatientModel? patient =
-    // ref.watch(visionTechnicianSearchProvider).patientDetails;
     bool closed = true;
 
     var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
+    var patient = ref.watch(visionTechnicianSearchProvider).patientDetails!;
     var dateYear = DateTime.now().year;
 
     int giveAge() {
@@ -111,7 +100,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
               const SizedBox(
                 height: AppSize.ksheight,
               ),
-              AssessmentTimeline(),
+              AssessmentTimeline(
+                encounterId: patient.encounterId!,
+              ),
               const SizedBox(
                 height: AppSize.ksheight,
               ),

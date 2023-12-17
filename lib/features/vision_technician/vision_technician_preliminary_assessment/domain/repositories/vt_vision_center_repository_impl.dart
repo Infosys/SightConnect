@@ -13,7 +13,7 @@ abstract class VTVisionCenterRepository {
       {required String pincode});
 }
 var vtVisionCenterRepositoryProvider = Provider<VTVisionCenterRepository>((ref) {
-  return VTVisionCenterRepositoryImpl( ref.read(vtDioVisionCenterProvider));
+  return VTVisionCenterRepositoryImpl( ref.read(dioTriageProvider));
 });
 
 class VTVisionCenterRepositoryImpl implements VTVisionCenterRepository {

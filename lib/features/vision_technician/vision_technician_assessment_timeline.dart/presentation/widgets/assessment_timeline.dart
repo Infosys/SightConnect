@@ -5,9 +5,11 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentTimeline extends StatelessWidget {
-  AssessmentTimeline({super.key});
+  final int encounterId;
 
-  var timeLineDate = [
+  AssessmentTimeline({super.key, required this.encounterId});
+
+  final  timeLineDate = [
     {"content": "EA 010101 - 11 Apr 23", "active": "1"},
     {"content": "EA 010101 - 11 Apr 23", "active": "0"}
   ];
@@ -80,7 +82,7 @@ class AssessmentTimeline extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: AppSize.width(context)/5,
+                    width: AppSize.width(context) / 5,
                     child: Text(
                       "Timeline: EA 010101",
                       overflow: TextOverflow.ellipsis,
@@ -115,7 +117,7 @@ class AssessmentTimeline extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: AppSize.width(context)/5,
+                width: AppSize.width(context) / 5,
                 child: Text(
                   "Start Date: 11 Apr 2023, 10:20 AM",
                   style: applyRobotoFont(
@@ -123,8 +125,8 @@ class AssessmentTimeline extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
-                   overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
               const SizedBox(

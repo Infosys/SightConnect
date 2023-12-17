@@ -143,9 +143,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const VisionTechnicianAssessmentTimeline(
-                                      patientId: 1202,
-                                    ),
+                                        const VisionTechnicianAssessmentTimeline(),
                                   ),
                                 );
                               },

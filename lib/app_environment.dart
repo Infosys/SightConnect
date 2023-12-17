@@ -59,4 +59,11 @@ class AppEnv {
       Env.PROD => 'https://eyecare4all-dev.infosysapps.com/services/profile',
     };
   }
+
+  static String get triageBaseUrl {
+    return switch (env) {
+      Env.DEV => 'https://eyecare4all-dev.infosysapps.com/services/triage',
+      Env.PROD => 'https://eyecare4all-dev.infosysapps.com/services/triage',
+    };
+  }
 }

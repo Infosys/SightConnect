@@ -17,6 +17,7 @@ var markMyAvailabilityHelperProvider =
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   MarkMyAvailabilityHelperNotifier({required this.availabilityRepository});
+
   AvailabilityRepository availabilityRepository;
 
   String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
@@ -82,7 +83,6 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
       markAvailability = await availabilityRepository.postMarkMyAvailability(
         available: !markAvailability,
       );
-
       isLoading = false;
       notifyListeners();
     } catch (e) {
