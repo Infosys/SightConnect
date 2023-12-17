@@ -8,17 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VTSearchBar extends ConsumerWidget {
-  const VTSearchBar({super.key, required this.readOnly});
+  const VTSearchBar({
+    super.key,
+    required this.readOnly,
+    this.onSearched,
+  });
   final bool readOnly;
+
+  final Function(String)? onSearched;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
-        ref
-            .read(visionTechnicianSearchProvider.notifier)
-            .setSearchPatientList(data);
+        onSearched?.call(data);
       },
       onTap: () {
         if (readOnly) {

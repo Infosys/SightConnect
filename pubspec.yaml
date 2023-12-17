@@ -112,6 +112,7 @@ flutter:
     - assets/new_assessment.json
     - assets/profile.json
     - assets/triage_assessment.json
+    - assets/vt_patient.json
   
   #   - images/a_dot_ham.jpeg
 

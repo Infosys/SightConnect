@@ -113,4 +113,7 @@ class AppImages {
   static const String q12 = "assets/images/q12.png";
   static const String q13 = "assets/images/q13.png";
   static const String q14 = "assets/images/q14.png";
+
+  // vision technician
+  static const String searchEmpty = "assets/images/search_empty.png";
 }

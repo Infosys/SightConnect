@@ -13,7 +13,7 @@ class EmptyResultCard extends StatelessWidget {
         children: [
           SizedBox(
             width: AppSize.width(context) * 0.5,
-            child: Image.asset(AppImages.addPatient),
+            child: Image.asset(AppImages.searchEmpty),
           ),
           const SizedBox(height: AppSize.klheight),
           const Text(

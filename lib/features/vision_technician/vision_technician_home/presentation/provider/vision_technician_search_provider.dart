@@ -6,6 +6,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/models/vt_search_result_model.dart';
 import '../../domain/repositories/vt_search_repository_impl.dart';
 
+var vtSearchProvider = FutureProvider.autoDispose.family<List<VTPatientSearchDto>, String>((ref, query) {
+  return ref.watch(vtPatientSearchRepositoryProvider).getPatientProfile(query);
+});
+
 var visionTechnicianSearchProvider =
     ChangeNotifierProvider((ref) => VisionTechnicianSearchProvider(ref));
 
@@ -28,7 +32,7 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
   List<VTPatientModel> get searchedPatientUserList => _searchedPatientList;
   VTPatientSearchDto? get patientDetails => _patientDetails;
 
-  final List<VTPatientSearchDto> _patientSearchDto = [];
+  List<VTPatientSearchDto> _patientSearchDto = [];
   List<VTPatientSearchDto> get patientSearchDto => _patientSearchDto;
 
   // vtPatientSearchRepositoryProvider
@@ -41,9 +45,9 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
 
   void setSearchPatientList(String query) async {
     _patientSearchDto.clear();
-    _patientSearchDto.add(await ref
+    _patientSearchDto = await ref
         .read(vtPatientSearchRepositoryProvider)
-        .getPatientProfile(query));
+        .getPatientProfile(query);
     // _searchedPatientList =
     //     visionTechnicianHomeRepositoryImpl.searchUsers(query);
     notifyListeners();

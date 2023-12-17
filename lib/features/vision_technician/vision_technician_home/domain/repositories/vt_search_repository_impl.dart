@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_search_result_model.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/services/dio_service.dart';
@@ -9,33 +13,44 @@ abstract class VTPatientSearchRepository {
   // Future<VTPatientSearchDto> onboardPatient(
   //   VTPatientSearchDto vtPatientSearchDto,
   // );
-  Future<VTPatientSearchDto> getPatientProfile(
-      String data);
-
+  Future<List<VTPatientSearchDto>> getPatientProfile(String data);
 }
 
 var vtPatientSearchRepositoryProvider = Provider<VTPatientSearchRepository>(
-    (ref) => VTPatientSearchRepositoryImpl(
-      ref.watch(vtDioProvider)
-    ));
+    (ref) => VTPatientSearchRepositoryImpl(ref.watch(vtDioProvider)));
 
 class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
-
   final Dio _dio;
   VTPatientSearchRepositoryImpl(this._dio);
 
   @override
-  Future<VTPatientSearchDto> getPatientProfile(
-      String data )async {
-    var endpoint = '/patients/triage-reports/$data';
-    // var profile = await rootBundle.loadString("assets/triage_assessment.json");
-    try {
-      final response = await _dio.get(endpoint);
-      return VTPatientSearchDto.fromJson(response.data);
-    } catch (e) {
-      throw ServerFailure(errorMessage: 'No data found');
-      
+  Future<List<VTPatientSearchDto>> getPatientProfile(String query) async {
+    if (query.isEmpty) throw "List is empty";
+    var endpoint = '/patients/triage-reports/$query';
+    var response = await rootBundle.loadString("assets/vt_patient.json");
+    var data = jsonDecode(response);
+    var jsonList = data["patients"];
+    List<VTPatientSearchDto> list = [];
+    // print(jsonList);
+    for (int i = 0; i < jsonList.length; i++) {
+      VTPatientSearchDto patient = VTPatientSearchDto.fromJson(jsonList[i]);
+      // print(patient.name?.toLowerCase());
+
+      if (patient.name!.toLowerCase().contains(query) ||
+          patient.id!.toString().contains(query) ||
+          patient.mobile!.contains(query)) {
+        list.add(patient);
+      }
     }
+    // print(list);
+    return list;
+    // try {
+    //   final response = await _dio.get(endpoint);
+    //   return VTPatientSearchDto.fromJson(response.data);
+    // } catch (e) {
+    //   throw ServerFailure(errorMessage: 'No data found');
+
+    // }
   }
 
   // @override
@@ -51,6 +66,4 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
   //     throw Exception("Failed to onboard patient");
   //   }
   // }
-
-  
 }
