@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
@@ -171,20 +171,27 @@ class AssessmentCards extends ConsumerWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const UpdateTriageAlertBox();
-                          },
-                        );
-                      },
+                      onTap: currentData.isUpdateEnabled
+                          ? () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return UpdateTriageAlertBox(
+                                    dignosticReportID:
+                                        currentData.triageResultID,
+                                  );
+                                },
+                              );
+                            }
+                          : null,
                       child: Text(
                         'Update',
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.primary,
+                          color: currentData.isUpdateEnabled
+                              ? AppColor.primary
+                              : AppColor.grey,
                         ),
                       ),
                     ),

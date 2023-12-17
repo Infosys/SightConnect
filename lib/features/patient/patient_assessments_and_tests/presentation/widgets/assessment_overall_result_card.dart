@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +28,12 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: getRequestPriorityColor(triageResultEntities.priority)
+          color: getRequestPriorityColor(triageResultEntities.overallpriority)
               .withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: getRequestPriorityColor(triageResultEntities.priority)
+            color: getRequestPriorityColor(triageResultEntities.overallpriority)
                 .withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
@@ -53,11 +53,12 @@ class AssessmentOverallResultCard extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: getRequestPriorityColor(triageResultEntities.priority),
+                  color: getRequestPriorityColor(
+                      triageResultEntities.overallpriority),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  getRequestPriorityText(triageResultEntities.priority),
+                  getRequestPriorityText(triageResultEntities.overallpriority),
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.white,

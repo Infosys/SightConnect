@@ -272,7 +272,7 @@ class TriageDBHelper {
     var eyeScanRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageEyeScanTableName');
 
-    logger.f({
+    logger.d({
       'questionnaireRecords': questionnaireRecords,
       'visualAcuityRecords': visualAcuityRecords,
       'eyeScanRecords': eyeScanRecords,

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 
 class TriageReportDetailedEntity {
@@ -5,28 +6,36 @@ class TriageReportDetailedEntity {
   final String patientName;
   final String patientImage;
   final String assessmentID;
-  final RequestPriority priority;
   final String reportDate;
   final String triageResultDescription;
   final String questionResultDescription;
   final String observationResultDescription;
   final String mediaResultDescription;
+  final RequestPriority overallpriority;
+  final RequestPriority quessionnairepriority;
+  final RequestPriority observationpriority;
+  final RequestPriority mediapriority;
+  final List<IncompleteTest> icompleteTests;
 
   final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
   final List<ObservationBriefEntity> visualAcuityBreifEntity;
   final List<ImageBriefEntity> imageBriefEntity;
 
-  TriageReportDetailedEntity({ 
+  TriageReportDetailedEntity({
     required this.triageResultDescription,
-  required  this.questionResultDescription,
-  required  this.observationResultDescription, 
-  required this.mediaResultDescription,
+    required this.questionResultDescription,
+    required this.observationResultDescription,
+    required this.mediaResultDescription,
     required this.patientId,
     required this.patientName,
     required this.patientImage,
     required this.assessmentID,
-    required this.priority,
+    required this.overallpriority,
+    required this.quessionnairepriority,
+    required this.observationpriority,
+    required this.mediapriority,
     required this.reportDate,
+    required this.icompleteTests,
     required this.questionResponseBriefEntity,
     required this.visualAcuityBreifEntity,
     required this.imageBriefEntity,

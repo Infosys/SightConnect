@@ -28,10 +28,12 @@ class LocalTriageReportSource {
       "sourceVersion": "1.0",
       "performerId": 9627849171,
       "performerRole": "PATIENT",
-      "diagnosticReportDescription" : "It's advisable to arrange an early visit to an eye specialist for a thorough evaluation and personalized treatment.",
-  "questionResultDescription" : "You might need to see an eye specialist.",
-  "observationResultDescription" : "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
-  "mediaResultDescription" : null,
+      "diagnosticReportDescription":
+          "It's advisable to arrange an early visit to an eye specialist for a thorough evaluation and personalized treatment.",
+      "questionResultDescription": "You might need to see an eye specialist.",
+      "observationResultDescription":
+          "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
+      "mediaResultDescription": null,
       "incompleteTests": [
         {"id": 1101, "testName": "QUESTIONNAIRE"}
       ],
@@ -88,37 +90,37 @@ class LocalTriageReportSource {
       ],
       "media": [
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1751,
-            "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
-            "endpoint": "Limbus-close-up-1024x555.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
-        },
-        {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1752,
-            "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
-            "endpoint": "Limbus-close-up-1024x555.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
-        },
-        {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1753,
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1751,
           "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
-            "endpoint": "Limbus-close-up-1024x555.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "endpoint": "Limbus-close-up-1024x555.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
+        },
+        {
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1752,
+          "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
+          "endpoint": "Limbus-close-up-1024x555.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
+        },
+        {
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1753,
+          "baseUrl": "https://gene.vision/wp-content/uploads/2020/02/",
+          "endpoint": "Limbus-close-up-1024x555.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         }
       ],
       "carePlans": [
@@ -206,8 +208,7 @@ class LocalTriageReportSource {
           ]
         }
       ],
-      "updateEndTime": null,
-      "diagnosticReportDescription": null
+      "updateEndTime": "2025-12-07T19:41:33+05:30",
     },
     {
       "encounterId": 33300000001,
@@ -290,41 +291,40 @@ class LocalTriageReportSource {
           "value": "1",
           "score": 2.0
         }
-
       ],
       "media": [
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1751,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1751,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         },
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1752,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1752,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         },
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1753,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1753,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         }
       ],
       "carePlans": [
@@ -488,7 +488,7 @@ class LocalTriageReportSource {
           "value": "1",
           "score": 2.0
         },
-         {
+        {
           "id": 1802,
           "performer": null,
           "issued": null,
@@ -500,37 +500,37 @@ class LocalTriageReportSource {
       ],
       "media": [
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1751,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1751,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         },
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1752,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1752,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         },
         {
-            "id": 2453,
-            "performer": null,
-            "issued": null,
-            "identifier": 1753,
-            "baseUrl": "https://en.wikipedia.org/wiki",
-            "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
-            "bodySite": null,
-            "score": 0.0,
-            "fileId": null
+          "id": 2453,
+          "performer": null,
+          "issued": null,
+          "identifier": 1753,
+          "baseUrl": "https://en.wikipedia.org/wiki",
+          "endpoint": "/File:Human_eye_with_blood_vessels.jpg",
+          "bodySite": null,
+          "score": 0.0,
+          "fileId": null
         }
       ],
       "carePlans": [
@@ -618,7 +618,7 @@ class LocalTriageReportSource {
           ]
         }
       ],
-      "updateEndTime": "3925-04-05T06:21:33+05:30",
+      "updateEndTime": "1999-04-05T06:21:33+05:30",
       "diagnosticReportDescription":
           "You might need to see an eye specialist with specialisation in conditions of the eyelid"
     }
