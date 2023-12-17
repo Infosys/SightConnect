@@ -270,4 +270,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
       }
     }
   }
+
+  _saveFinalResponseNavigation(BuildContext context, TriageMode mode) {}
 }
