@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -18,6 +20,7 @@ class UpdateTriageAlertBox extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
+    var navigator = Navigator.of(context);
     return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
       data: (data) {
         var model = ref.read(traigeUpdateReportProvider(dignosticReportID));
@@ -49,40 +52,40 @@ class UpdateTriageAlertBox extends ConsumerWidget {
                       chipText: e.chipText,
                       chipColor: e.chipColor,
                       onPressed: () {
-                        // switch (e.testType) {
-                          // case TestType.QUESTIONNAIRE:
-                          //   navigator.push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) => TriageQuestionnairePage(
-                          //         questionnaireSections: model.triageAssessment
-                          //             .questionnaire!.questionnaireItem!
+                        switch (e.testType) {
+                          case TestType.QUESTIONNAIRE:
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) => UpdateTriageQuestionnairePage(
+                                  questionnaireSections: model.triageAssessment
+                                      .questionnaire!.questionnaireItem!
 
-                          //       ),
-                          //     ),
-                          //   );
-                          //   break;
-                          // case TestType.OBSERVATION:
-                          //   ref.read(globalProvider).setHideTumblingElement =
-                          //       false;
-                          //   navigator.push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) =>
-                          //           const VisualAcuityTumblingPage(
+                                ),
+                              ),
+                            );
+                            break;
+                          case TestType.OBSERVATION:
+                            // ref.read(globalProvider).setHideTumblingElement =
+                            //     false;
+                            // navigator.push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         const VisualAcuityTumblingPage(
 
-                          //       ),
-                          //     ),
-                          //   );
-                          //   break;
-                          // case TestType.IMAGE:
-                          //   navigator.push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) => const TriageEyeScanPage(
+                            //     ),
+                            //   ),
+                            // );
+                            break;
+                          case TestType.IMAGE:
+                            // navigator.push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => const TriageEyeScanPage(
 
-                          //       ),
-                          //     ),
-                          //   );
-                          //   break;
-                        // }
+                            //     ),
+                            //   ),
+                            // );
+                            break;
+                        }
                       },
                     ),
                   )
