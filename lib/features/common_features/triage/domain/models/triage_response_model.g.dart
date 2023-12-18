@@ -54,7 +54,7 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
       'encounterId': instance.encounterId,
       'serviceType': instance.serviceType,
       'organizationCode': instance.organizationCode,
-      'performer': instance.performer,
+      'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
       'issued': instance.issued?.toIso8601String(),
@@ -62,13 +62,16 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
           const TimestampConverter().toJson(instance.userStartDate),
       'source': _$SourceEnumMap[instance.source],
       'sourceVersion': instance.sourceVersion,
-      'incompleteSection': instance.incompleteSection,
+      'incompleteSection':
+          instance.incompleteSection?.map((e) => e.toJson()).toList(),
       'cummulativeScore': instance.cummulativeScore,
       'score':
           instance.score?.map((k, e) => MapEntry(_$TriageStepEnumMap[k]!, e)),
-      'imagingSelection': instance.imagingSelection,
-      'observations': instance.observations,
-      'questionResponse': instance.questionResponse,
+      'imagingSelection':
+          instance.imagingSelection?.map((e) => e.toJson()).toList(),
+      'observations': instance.observations?.map((e) => e.toJson()).toList(),
+      'questionResponse':
+          instance.questionResponse?.map((e) => e.toJson()).toList(),
     };
 
 const _$SourceEnumMap = {
@@ -101,7 +104,7 @@ Map<String, dynamic> _$$_PostQuestionResponseModelToJson(
     <String, dynamic>{
       'linkId': instance.linkId,
       'score': instance.score,
-      'answer': instance.answer,
+      'answer': instance.answer?.map((e) => e.toJson()).toList(),
     };
 
 _$_PostAnswerModel _$$_PostAnswerModelFromJson(Map<String, dynamic> json) =>

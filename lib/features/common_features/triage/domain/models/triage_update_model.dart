@@ -13,7 +13,7 @@ class TriageUpdateModel with _$TriageUpdateModel {
     int? diagnosticReportId,
     int? organizationCode,
     List<Performer>? performer,
-    int? assementCode,
+    int? assessmentCode,
     String? assessmentVersion,
     DateTime? issued,
     Source? source,

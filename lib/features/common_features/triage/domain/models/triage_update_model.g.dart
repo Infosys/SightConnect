@@ -14,7 +14,7 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
           .toList(),
-      assementCode: json['assementCode'] as int?,
+      assessmentCode: json['assessmentCode'] as int?,
       assessmentVersion: json['assessmentVersion'] as String?,
       issued: json['issued'] == null
           ? null
@@ -48,18 +48,21 @@ Map<String, dynamic> _$$_TriageUpdateModelToJson(
       'patientId': instance.patientId,
       'diagnosticReportId': instance.diagnosticReportId,
       'organizationCode': instance.organizationCode,
-      'performer': instance.performer,
-      'assementCode': instance.assementCode,
+      'performer': instance.performer?.map((e) => e.toJson()).toList(),
+      'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
       'issued': instance.issued?.toIso8601String(),
       'source': _$SourceEnumMap[instance.source],
       'sourceVersion': instance.sourceVersion,
-      'incompleteSection': instance.incompleteSection,
+      'incompleteSection':
+          instance.incompleteSection?.map((e) => e.toJson()).toList(),
       'cummulativeScore': instance.cummulativeScore,
       'score': instance.score,
-      'imagingSelection': instance.imagingSelection,
-      'observations': instance.observations,
-      'questionResponse': instance.questionResponse,
+      'imagingSelection':
+          instance.imagingSelection?.map((e) => e.toJson()).toList(),
+      'observations': instance.observations?.map((e) => e.toJson()).toList(),
+      'questionResponse':
+          instance.questionResponse?.map((e) => e.toJson()).toList(),
     };
 
 const _$SourceEnumMap = {
@@ -90,7 +93,7 @@ Map<String, dynamic> _$$_PatchQuestionResponseModelToJson(
       'action': _$ActionEnumMap[instance.action],
       'linkId': instance.linkId,
       'score': instance.score,
-      'answers': instance.answers,
+      'answers': instance.answers?.map((e) => e.toJson()).toList(),
     };
 
 const _$ActionEnumMap = {

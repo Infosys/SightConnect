@@ -28,8 +28,8 @@ var updateTriageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
     return UpdateTriageQuestionnaireProvider(
       ref.watch(triageRepositoryProvider),
       ref.watch(triageReportRepositoryProvider),
-      ref.watch(triageUrgencyRepositoryProvider),
-      111111,
+      ref.watch(triageUrgencyRepositoryProvider)
+      
     );
   },
 );
@@ -39,7 +39,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   final TriageRepository _triageRepository;
   final TriageUrgencyRepository _triageUrgencyRepository;
 
-  final int _patientId;
+  
   final TriageReportRepository _triageReportRepository;
 
   late String _questionnaireRemarks;
@@ -52,7 +52,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       this._triageRepository,
       this._triageReportRepository,
       this._triageUrgencyRepository,
-      this._patientId)
+      )
       : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
@@ -151,7 +151,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
           identifier:reportModel.subject,
         ),
       ],
-      assementCode: reportModel.assessmentCode,
+      assessmentCode: reportModel.assessmentCode,
       assessmentVersion: reportModel.assessmentVersion,
       issued: reportModel.issued,
       source: Source.PATIENT_APP,
@@ -163,14 +163,14 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         reportModel.responses,
         getQuestionaireResponse(),
       ),
+
     );
     try {
-      var res= await _triageRepository.updateTriage(triage: triage);
-    logger.f({"res update ",res});
-    return res;
+      return await _triageRepository.updateTriage(triage: triage);
+   
     } catch (e) {
-      logger.f({"res update ",e});
-      throw e;
+      
+      rethrow ;
     }
    
     

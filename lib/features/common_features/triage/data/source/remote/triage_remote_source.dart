@@ -96,13 +96,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     // }
     try {
       var endpoint="/services/triage/api/triage-report/$id";
-       logger.f("mahavir singh ");
-       
-       final data = jsonEncode(triage.toString());
-       print(data);
+      logger.f("reached here mahavir");
+      print(triage.toJson());
       final response = await dio.patch(
         endpoint,
-        data: triage.toString(),
+        data: triage.toJson(),
       );
       logger.f({"reched here": response});
 

@@ -24,7 +24,7 @@ mixin _$TriageUpdateModel {
   int? get diagnosticReportId => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
   List<Performer>? get performer => throw _privateConstructorUsedError;
-  int? get assementCode => throw _privateConstructorUsedError;
+  int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
   DateTime? get issued => throw _privateConstructorUsedError;
   Source? get source => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $TriageUpdateModelCopyWith<$Res> {
       int? diagnosticReportId,
       int? organizationCode,
       List<Performer>? performer,
-      int? assementCode,
+      int? assessmentCode,
       String? assessmentVersion,
       DateTime? issued,
       Source? source,
@@ -87,7 +87,7 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
     Object? diagnosticReportId = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
-    Object? assementCode = freezed,
+    Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
     Object? issued = freezed,
     Object? source = freezed,
@@ -116,9 +116,9 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
           ? _value.performer
           : performer // ignore: cast_nullable_to_non_nullable
               as List<Performer>?,
-      assementCode: freezed == assementCode
-          ? _value.assementCode
-          : assementCode // ignore: cast_nullable_to_non_nullable
+      assessmentCode: freezed == assessmentCode
+          ? _value.assessmentCode
+          : assessmentCode // ignore: cast_nullable_to_non_nullable
               as int?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
@@ -177,7 +177,7 @@ abstract class _$$_TriageUpdateModelCopyWith<$Res>
       int? diagnosticReportId,
       int? organizationCode,
       List<Performer>? performer,
-      int? assementCode,
+      int? assessmentCode,
       String? assessmentVersion,
       DateTime? issued,
       Source? source,
@@ -205,7 +205,7 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
     Object? diagnosticReportId = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
-    Object? assementCode = freezed,
+    Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
     Object? issued = freezed,
     Object? source = freezed,
@@ -234,9 +234,9 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
           ? _value._performer
           : performer // ignore: cast_nullable_to_non_nullable
               as List<Performer>?,
-      assementCode: freezed == assementCode
-          ? _value.assementCode
-          : assementCode // ignore: cast_nullable_to_non_nullable
+      assessmentCode: freezed == assessmentCode
+          ? _value.assessmentCode
+          : assessmentCode // ignore: cast_nullable_to_non_nullable
               as int?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
@@ -290,7 +290,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
       this.diagnosticReportId,
       this.organizationCode,
       final List<Performer>? performer,
-      this.assementCode,
+      this.assessmentCode,
       this.assessmentVersion,
       this.issued,
       this.source,
@@ -328,7 +328,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   }
 
   @override
-  final int? assementCode;
+  final int? assessmentCode;
   @override
   final String? assessmentVersion;
   @override
@@ -394,7 +394,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
 
   @override
   String toString() {
-    return 'TriageUpdateModel(patientId: $patientId, diagnosticReportId: $diagnosticReportId, organizationCode: $organizationCode, performer: $performer, assementCode: $assementCode, assessmentVersion: $assessmentVersion, issued: $issued, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageUpdateModel(patientId: $patientId, diagnosticReportId: $diagnosticReportId, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -410,8 +410,8 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
                 other.organizationCode == organizationCode) &&
             const DeepCollectionEquality()
                 .equals(other._performer, _performer) &&
-            (identical(other.assementCode, assementCode) ||
-                other.assementCode == assementCode) &&
+            (identical(other.assessmentCode, assessmentCode) ||
+                other.assessmentCode == assessmentCode) &&
             (identical(other.assessmentVersion, assessmentVersion) ||
                 other.assessmentVersion == assessmentVersion) &&
             (identical(other.issued, issued) || other.issued == issued) &&
@@ -439,7 +439,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
       diagnosticReportId,
       organizationCode,
       const DeepCollectionEquality().hash(_performer),
-      assementCode,
+      assessmentCode,
       assessmentVersion,
       issued,
       source,
@@ -472,7 +472,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
           final int? diagnosticReportId,
           final int? organizationCode,
           final List<Performer>? performer,
-          final int? assementCode,
+          final int? assessmentCode,
           final String? assessmentVersion,
           final DateTime? issued,
           final Source? source,
@@ -497,7 +497,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   @override
   List<Performer>? get performer;
   @override
-  int? get assementCode;
+  int? get assessmentCode;
   @override
   String? get assessmentVersion;
   @override

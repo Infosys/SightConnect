@@ -75,7 +75,7 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
       'encounterStatus': _$EncounterStatusEnumMap[instance.encounterStatus],
       'remarks': instance.remarks,
-      'encounterPeriod': instance.encounterPeriod,
+      'encounterPeriod': instance.encounterPeriod?.toJson(),
       'diagnosticReportId': instance.diagnosticReportId,
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
@@ -88,10 +88,11 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'performerId': instance.performerId,
       'subject': instance.subject,
       'performerRole': _$PerformerRoleEnumMap[instance.performerRole],
-      'incompleteTests': instance.incompleteTests,
-      'responses': instance.responses,
-      'observations': instance.observations,
-      'media': instance.media,
+      'incompleteTests':
+          instance.incompleteTests?.map((e) => e.toJson()).toList(),
+      'responses': instance.responses?.map((e) => e.toJson()).toList(),
+      'observations': instance.observations?.map((e) => e.toJson()).toList(),
+      'media': instance.media?.map((e) => e.toJson()).toList(),
       'updateEndTime':
           const TimestampConverter().toJson(instance.updateEndTime),
       'diagnosticReportDescription': instance.diagnosticReportDescription,
@@ -103,7 +104,7 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'mediaSeverity': _$SeverityEnumMap[instance.mediaSeverity],
       'questionResponseSeverity':
           _$SeverityEnumMap[instance.questionResponseSeverity],
-      'carePlans': instance.carePlans,
+      'carePlans': instance.carePlans?.map((e) => e.toJson()).toList(),
     };
 
 const _$ServiceTypeEnumMap = {
@@ -216,7 +217,7 @@ Map<String, dynamic> _$$_ResponseToJson(_$_Response instance) =>
       'id': instance.id,
       'linkId': instance.linkId,
       'score': instance.score,
-      'answers': instance.answers,
+      'answers': instance.answers?.map((e) => e.toJson()).toList(),
     };
 
 _$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
@@ -296,10 +297,10 @@ Map<String, dynamic> _$$_CarePlanToJson(_$_CarePlan instance) =>
       'subject': instance.subject,
       'created': const TimestampConverter().toJson(instance.created),
       'note': instance.note,
-      'period': instance.period,
-      'conditions': instance.conditions,
-      'activities': instance.activities,
-      'goals': instance.goals,
+      'period': instance.period?.toJson(),
+      'conditions': instance.conditions?.map((e) => e.toJson()).toList(),
+      'activities': instance.activities?.map((e) => e.toJson()).toList(),
+      'goals': instance.goals?.map((e) => e.toJson()).toList(),
     };
 
 const _$RequestStatusEnumMap = {
@@ -347,7 +348,7 @@ Map<String, dynamic> _$$_ActivityToJson(_$_Activity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'progress': instance.progress,
-      'plannedActivityReference': instance.plannedActivityReference,
+      'plannedActivityReference': instance.plannedActivityReference?.toJson(),
     };
 
 _$_PlannedActivityReference _$$_PlannedActivityReferenceFromJson(
@@ -370,8 +371,8 @@ Map<String, dynamic> _$$_PlannedActivityReferenceToJson(
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
-      'serviceRequest': instance.serviceRequest,
-      'communication': instance.communication,
+      'serviceRequest': instance.serviceRequest?.toJson(),
+      'communication': instance.communication?.toJson(),
     };
 
 _$_ServiceRequest _$$_ServiceRequestFromJson(Map<String, dynamic> json) =>
@@ -461,10 +462,10 @@ Map<String, dynamic> _$$_GoalToJson(_$_Goal instance) => <String, dynamic>{
       'achievementStatus': _$GoalAchievementEnumMap[instance.achievementStatus],
       'lifecycleStatus': _$GoalLifecycleStatusEnumMap[instance.lifecycleStatus],
       'category': _$GoalCategoryEnumMap[instance.category],
-      'outcome': instance.outcome,
+      'outcome': instance.outcome?.map((e) => e.toJson()).toList(),
       'startDate': const TimestampConverter().toJson(instance.startDate),
       'dueDate': const TimestampConverter().toJson(instance.dueDate),
-      'targets': instance.targets,
+      'targets': instance.targets?.map((e) => e.toJson()).toList(),
     };
 
 const _$GoalAchievementEnumMap = {
