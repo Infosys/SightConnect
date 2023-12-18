@@ -1,29 +1,26 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_show_marks_unavailable.dart';
+import 'package:eye_care_for_all/main.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/cupertino.dart';
 
-class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
+class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
   const VisionTechnicianMarkMyAvailabilityPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var watchRef = ref.watch(markMyAvailabilityHelperProvider);
-    var readRef = ref.read(markMyAvailabilityHelperProvider);
-    bool status = watchRef.markmyAvailableStatus;
-    var markMyAvailabilityList = watchRef.markMyAvailabilityList;
-
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -57,18 +54,8 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
               width: AppSize.klwidth,
             ),
             Expanded(
-              child: TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all<EdgeInsets>(
-                      const EdgeInsets.all(AppSize.kmpadding)),
-                  backgroundColor: MaterialStateProperty.all(AppColor.primary),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSize.klradius * 5),
-                    ),
-                  ),
-                ),
-                onPressed: () {},
+              child: ElevatedButton(
+                onPressed: null,
                 child: Text(
                   "Save",
                   style: applyRobotoFont(
@@ -85,11 +72,13 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
       appBar: CustomAppbar(
         titleSpacing: 0,
         centerTitle: false,
-        leadingIcon: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () {
-            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-          },
+        leadingIcon: Consumer(
+          builder: (context, ref, _) => IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new),
+            onPressed: () {
+              ref.read(visionTechnicianDashboardProvider).changeIndex(0);
+            },
+          ),
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,11 +96,26 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
               ),
             ),
             Flexible(
-              child: CupertinoSwitch(
-                value: status,
-                activeColor: AppColor.blue,
-                onChanged: (bool value) {
-                  readRef.updateAvailability();
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final model = ref.watch(markMyAvailabilityHelperProvider);
+                  return model.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : CupertinoSwitch(
+                          value: model.markAvailability,
+                          activeColor: AppColor.blue,
+                          onChanged: (bool value) async {
+                            try {
+                              await model.updateAvailability();
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                msg: "Something went wrong",
+                              );
+                            }
+                          },
+                        );
                 },
               ),
             ),
@@ -168,20 +172,21 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
                     Row(children: [
                       Flexible(
                         child: Container(
-                            height: AppSize.klheight * 2,
-                            padding: const EdgeInsets.all(AppSize.kspadding),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColor.blue),
-                              color: AppColor.white,
-                              borderRadius: BorderRadius.circular(10),
+                          height: AppSize.klheight * 2,
+                          padding: const EdgeInsets.all(AppSize.kspadding),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColor.blue),
+                            color: AppColor.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            "Oct 2023",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
                             ),
-                            child: Text(
-                              "Oct 2023",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),),
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         width: AppSize.klwidth,
@@ -201,26 +206,33 @@ class VisionTechnicianMarkMyAvailabilityPage extends HookConsumerWidget {
                     const SizedBox(
                       height: AppSize.klheight,
                     ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return VtMarkMyAvailableEachDayAvailability(
-                            dayAvailabilityindex: index);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Column(
-                          children: [
-                            SizedBox(
-                              height: AppSize.klheight,
-                            ),
-                            Divider(
-                              thickness: 1,
-                              color: AppColor.grey,
-                            )
-                          ],
+                    Consumer(
+                      builder: (context, ref, _) {
+                        final model =
+                            ref.watch(markMyAvailabilityHelperProvider);
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return VtMarkMyAvailableEachDayAvailability(
+                              dayAvailabilityindex: index,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Column(
+                              children: [
+                                SizedBox(
+                                  height: AppSize.klheight,
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  color: AppColor.grey,
+                                )
+                              ],
+                            );
+                          },
+                          itemCount: model.markMyAvailabilityList.length,
                         );
                       },
-                      itemCount: markMyAvailabilityList.length,
                     )
                   ],
                 ),

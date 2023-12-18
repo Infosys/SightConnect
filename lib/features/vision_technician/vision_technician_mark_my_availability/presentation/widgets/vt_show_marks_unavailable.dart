@@ -20,7 +20,7 @@ void showMarksUnAvaialbility(BuildContext context) {
     builder: (BuildContext context) {
       return Consumer(builder: (context, ref, child) {
         bool markmyAvailableStatus =
-            ref.watch(markMyAvailabilityHelperProvider).markmyAvailableStatus;
+            ref.watch(markMyAvailabilityHelperProvider).markAvailability;
         TextEditingController startDateController =
             ref.watch(markMyAvailabilityHelperProvider).startDateController;
         TextEditingController startTimeController =
@@ -86,7 +86,8 @@ void showMarksUnAvaialbility(BuildContext context) {
                               activeColor: AppColor.blue,
                               onChanged: (bool value) {
                                 ref
-                                    .watch(markMyAvailabilityHelperProvider.notifier)
+                                    .watch(markMyAvailabilityHelperProvider
+                                        .notifier)
                                     .toggleMarkMyAvailableStatus(value);
                               },
                             ),
@@ -172,7 +173,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                                     "end Time": endTimeController.text,
                                     "remarks": remarksController.text,
                                   };
-        
+
                                   Navigator.of(context).pop();
                                 }
                               },

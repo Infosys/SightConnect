@@ -131,17 +131,38 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                 color: AppColor.grey,
                               ),
                             ),
-                          ),
-                        ],
-                        rows: List<DataRow>.generate(
-                          list.length,
-                          (index) => DataRow(
-                            onSelectChanged: (value) {
-                              // print(list[index].toString());
-                              ref
-                                  .read(visionTechnicianSearchProvider)
-                                  .setPatientDetails(list[index]);
-                              Navigator.push(
+                            DataColumn(
+                              label: Text(
+                                "Category",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                          rows: List<DataRow>.generate(
+                            list.length,
+                            (index) => DataRow(
+                              onSelectChanged: (value) {
+                                // print(list[index].toString());
+                                ref
+                                    .read(visionTechnicianSearchProvider)
+                                    .setPatientDetails(list[index]);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisionTechnicianAssessmentTimeline(
+                                      patientId: 1202,
+                                    ),
+                                  ),
+                                );
+                              },
+                              cells: generateListTileSearchResults(
+                                list[index],
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
