@@ -359,10 +359,10 @@ class PatientEditProfileProvider extends ChangeNotifier {
         ),
         abhaAddress: _patient.profile?.patient?.abhaAddress,
         gender: _gender == "Male"
-            ? Gender.MALE
+            ? Gender.Male
             : _gender == "Female"
-                ? Gender.FEMALE
-                : Gender.OTHER,
+                ? Gender.Female
+                : Gender.Other,
         name: _nameController.text + _lastNameController.text,
         age: int.parse(_ageController.text),
         profilePhoto: _patient.profile?.patient?.profilePhoto,

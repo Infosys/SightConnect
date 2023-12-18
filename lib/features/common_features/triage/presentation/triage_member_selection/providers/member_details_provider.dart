@@ -13,10 +13,9 @@ var memberDetailsProvider = ChangeNotifierProvider(
 );
 
 class MemberDetailsProvider extends ChangeNotifier {
+  final Ref _ref;
 
-Ref _ref;
-
-MemberDetailsProvider(this._ref);
+  MemberDetailsProvider(this._ref);
 
   String _name = "";
   String _mobileNumber = "";
@@ -27,9 +26,7 @@ MemberDetailsProvider(this._ref);
 
   get isLoading => _isLoading;
 
- set isLoading( value) => _isLoading = value;
-
-
+  set isLoading(value) => _isLoading = value;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -91,10 +88,10 @@ MemberDetailsProvider(this._ref);
       monthOfBirth: _dob.split("/")[1],
       yearOfBirth: _dob.split("/")[2],
       gender: _gender == "Male"
-          ? Gender.MALE
+          ? Gender.Male
           : _gender == "Female"
-              ? Gender.FEMALE
-              : Gender.OTHER,
+              ? Gender.Female
+              : Gender.Other,
       profilePhoto: AppImages.raghavi,
       mobile: _mobileNumber,
       parentPatientId: "1202",

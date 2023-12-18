@@ -99,10 +99,10 @@ class PatientRegistrationProvider extends ChangeNotifier {
       monthOfBirth: DateFormat('MM').format(_dateOfBirth),
       yearOfBirth: DateFormat('yyyy').format(_dateOfBirth),
       gender: _gender == "MALE"
-          ? Gender.MALE
+          ? Gender.Male
           : _gender == "FEMALE"
-              ? Gender.FEMALE
-              : Gender.OTHER,
+              ? Gender.Female
+              : Gender.Other,
       profilePhoto: AppImages.raghavi,
       mobile: _mobileNumber,
       email: "${_name.replaceAll(" ", "")}@gmail.com",

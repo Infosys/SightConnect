@@ -129,12 +129,9 @@ Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
     };
 
 const _$GenderEnumMap = {
-  Gender.MALE: 'MALE',
-  Gender.FEMALE: 'FEMALE',
-  Gender.OTHER: 'OTHER',
-  Gender.M: 'M',
-  Gender.F: 'F',
-  Gender.O: 'O',
+  Gender.Male: 'Male',
+  Gender.Female: 'Female',
+  Gender.Other: 'Other',
 };
 
 _$_MetaDataModel _$$_MetaDataModelFromJson(Map<String, dynamic> json) =>

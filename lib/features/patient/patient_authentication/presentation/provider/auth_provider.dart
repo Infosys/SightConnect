@@ -12,7 +12,7 @@ var authProvider = ChangeNotifierProvider(
 
 class AuthPageProvider extends ChangeNotifier {
   static const keycloakUri =
-      'https://eyecare4all-dev.infosysapps.com/auth/realms/care';
+      'https://campaigns.infosysapps.com/auth2/realms/care';
   static const scopes = ['profile'];
   late Client client;
   late Credential? credential;
@@ -23,11 +23,15 @@ class AuthPageProvider extends ChangeNotifier {
 
   init() async {
     client = await getClient();
+
     credential = await authenticate(client, scopes: scopes);
     userInfo = await credential!.getUserInfo();
 
     var tokenResponse = await credential!.getTokenResponse();
+
     logger.d(tokenResponse.toJson());
+    logger.d(tokenResponse.accessToken);
+
     notifyListeners();
   }
 

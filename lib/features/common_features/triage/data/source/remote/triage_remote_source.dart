@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
@@ -16,34 +15,34 @@ abstract class TriageRemoteSource {
 class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
   TriageRemoteSourceImpl(this.dio);
-
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint = "/api/careQuestionnaireGenerator";
-    logger.d({
-      "API getTriageQuestionnaire": endpoint,
-    });
-    Map<String, dynamic> bodyData = {
-      "name": "LVPEI EyeCare Triage",
-      "organizationCode": "LVPEI",
-      "condition": "VISION",
-      "assessmentType": "TRIAGE",
-      "organ": "EYE"
-    };
+    var endpoint = "/api/diagnostic-report-templates/assessment/1351";
+    logger.d({"API getTriageQuestionnaire": endpoint});
+    // Map<String, dynamic> bodyData = {
+    //   "name": "LVPEI EyeCare Triage",
+    //   "organizationCode": "LVPEI",
+    //   "condition": "VISION",
+    //   "assessmentType": "TRIAGE",
+    //   "organ": "EYE"
+    // };
 
-    // var response = await dio.get(endpoint, queryParameters: bodyData);
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    // } else {
-    //   throw ServerException();
-    // }
-    if (response.isNotEmpty) {
-      var data = jsonDecode(response);
-      return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    var response = await dio.get(
+      endpoint,
+      // queryParameters: bodyData,
+    );
+    //var response = await rootBundle.loadString("assets/triage_assessment.json");
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
+    // if (response.isNotEmpty) {
+    //   var data = jsonDecode(response);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    // } else {
+    //   throw ServerException();
+    // }
   }
 
   @override
