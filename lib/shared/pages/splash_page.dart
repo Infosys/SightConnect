@@ -15,11 +15,6 @@ import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// try {
-//   ref.read(authProvider).init();
-// } catch (e) {
-//   logger.e(e);
-// }
 class SplashPage extends ConsumerStatefulWidget {
   static const String routeName = '/';
   const SplashPage({super.key});
@@ -44,25 +39,27 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   _showAuthPage() async {
     final cred = ref.read(authProvider).credential;
-    if (cred == null) {
+    if (cred != null) {
+      var navigator = Navigator.of(context);
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+        (route) => false,
+      );
+    } else {
       ref.read(authProvider).init();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    log("SplashPage build");
-    _showAuthPage();
-    ref.watch(authProvider);
-    ref.listen(authProvider, (previous, next) {
-      if (next.credential != null) {
-        var navigator = Navigator.of(context);
-        navigator.pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
-          (route) => false,
-        );
-      }
-    });
+    // final model = ref.watch(authProvider);
+    // if (model.credential != null) {
+    //   var navigator = Navigator.of(context);
+    //   navigator.pushAndRemoveUntil(
+    //     MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+    //     (route) => false,
+    //   );
+    // }
 
     return Scaffold(
       backgroundColor: AppColor.primary,

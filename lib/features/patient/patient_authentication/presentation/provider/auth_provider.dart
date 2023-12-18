@@ -26,6 +26,7 @@ class AuthPageProvider extends ChangeNotifier {
     try {
       Client client = await _getClient();
       credential = await _authenticate(client, scopes: scopes);
+
       notifyListeners();
     } catch (e) {
       logger.d(e);
@@ -39,6 +40,10 @@ class AuthPageProvider extends ChangeNotifier {
   Future<void> logout() async {
     final url = credential!.generateLogoutUrl();
     await launchUrl(url!);
+    if (Platform.isAndroid || Platform.isIOS) {
+      closeInAppWebView();
+    }
+    notifyListeners();
   }
 
   Future<Client> _getClient() async {
