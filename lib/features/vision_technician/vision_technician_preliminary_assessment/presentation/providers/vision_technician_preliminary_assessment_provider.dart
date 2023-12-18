@@ -1,23 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var preliminaryAssessmentProvider = Provider(
   (ref) => VTPreliminaryAssessmentProvider(
-    ref.watch(saveTriageUseCase),
-  ),
+      ref.watch(saveTriageUseCase), ref.watch(triageUrgencyRepositoryProvider)),
 );
 
 class VTPreliminaryAssessmentProvider extends ChangeNotifier {
   final int _patientId = 100101;
   final SaveTriageUseCase _saveTriageUseCase;
-  VTPreliminaryAssessmentProvider(this._saveTriageUseCase);
+  final TriageUrgencyRepository _triageUrgencyRepository;
+  VTPreliminaryAssessmentProvider(
+      this._saveTriageUseCase, this._triageUrgencyRepository);
 
   Future<Either<Failure, TriageResponseModel>> saveTriage() async {
     List<PostImagingSelectionModel> imageSelection = [];
