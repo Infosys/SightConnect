@@ -147,16 +147,12 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                             list.length,
                             (index) => DataRow(
                               onSelectChanged: (value) {
-                                // print(list[index].toString());
-                                ref
-                                    .read(visionTechnicianSearchProvider)
-                                    .setPatientDetails(list[index]);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const VisionTechnicianAssessmentTimeline(
-                                      patientId: 1202,
+                                        VisionTechnicianAssessmentTimeline(
+                                      patientSearchDto: list[index],
                                     ),
                                   ),
                                 );

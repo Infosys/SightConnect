@@ -17,7 +17,7 @@ class AvailabilityRepositoryImpl extends AvailabilityRepository {
   Future<bool> postMarkMyAvailability({required bool available}) async {
     return await availabilityRemoteSource.markAvailability(
       availability: AvailabilityModel(
-        userId: 1234,
+        userId: 1001,
         userType: "PRACTITIONER",
         mobile: "8985050890",
         available: available,

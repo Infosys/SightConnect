@@ -1,12 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/data/models/assessment_timeline_view_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import '../../domain/models/assessment_timeline_view_model.dart';
 
 class AssessmentTimelineView extends ConsumerWidget {
   AssessmentTimelineView({super.key});
@@ -57,7 +59,8 @@ class AssessmentTimelineView extends ConsumerWidget {
                 ),
               ),
               Text(
-                timeLineList[index].date,
+                DateFormat("dd MMM yyyy, hh:mm a")
+                    .format(timeLineList[index].date),
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.grey,
