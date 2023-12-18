@@ -30,6 +30,7 @@ var getEyeTriageReport = FutureProvider.family(
           ),
         );
       }
+      logger.f({"getEyeTriageReportOffline": triageAssessment});
       return triageAssessment;
     } else {
       var response = await ref

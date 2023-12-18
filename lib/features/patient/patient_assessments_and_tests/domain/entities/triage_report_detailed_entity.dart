@@ -5,9 +5,9 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 class TriageReportDetailedEntity {
   final String patientId;
   final String patientName;
-  final String patientImage;
-  final String assessmentID;
-  final String reportDate;
+   String ? patientImage;
+  final int assessmentID;
+   DateTime ? reportDate;
   String? triageResultDescription;
   String? questionResultDescription;
   String? observationResultDescription;
@@ -18,9 +18,9 @@ class TriageReportDetailedEntity {
   RequestPriority? mediapriority;
   List<IncompleteTestModel>? icompleteTests;
 
-  final List<QuestionResponseBriefEntity> questionResponseBriefEntity;
-  final List<ObservationBriefEntity> visualAcuityBreifEntity;
-  final List<ImageBriefEntity> imageBriefEntity;
+   List<QuestionResponseBriefEntity>? questionResponseBriefEntity;
+   List<ObservationBriefEntity> ?visualAcuityBreifEntity;
+   List<ImageBriefEntity> ?imageBriefEntity;
   Severity? cumulativeSeverity;
   Severity? observationSeverity;
   Severity? mediaSeverity;
@@ -37,17 +37,17 @@ class TriageReportDetailedEntity {
     this.mediaResultDescription,
     required this.patientId,
     required this.patientName,
-    required this.patientImage,
+     this.patientImage,
     required this.assessmentID,
     this.overallpriority,
     this.quessionnairepriority,
     this.observationpriority,
     this.mediapriority,
-    required this.reportDate,
+     this.reportDate,
     this.icompleteTests,
-    required this.questionResponseBriefEntity,
-    required this.visualAcuityBreifEntity,
-    required this.imageBriefEntity,
+     this.questionResponseBriefEntity,
+     this.visualAcuityBreifEntity,
+     this.imageBriefEntity,
   });
 }
 
@@ -66,12 +66,12 @@ class ObservationBriefEntity {
   final double observationValue;
   final int observationId;
   final int observationValueIdentifier;
-  final String bodySite;
-  const ObservationBriefEntity({
+   String ? bodySite;
+   ObservationBriefEntity({
     required this.observationValue,
     required this.observationId,
     required this.observationValueIdentifier,
-    required this.bodySite,
+     this.bodySite,
   });
 }
 

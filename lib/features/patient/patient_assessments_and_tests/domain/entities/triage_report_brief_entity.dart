@@ -14,32 +14,32 @@ class TriageReportUserEntity {
 }
 
 class TriageReportBriefEntity {
-  final int triageResultID;
-  final RequestPriority priority;
-  final String reportTag;
-  final String triageResultType;
-  final Source triageResultSource;
-  final int assessmentID;
-  final DateTime triageResultStartDate;
-  final String triageResultDescription;
-  final bool isUpdateEnabled;
+   int   triageResultID;
+   RequestPriority  ? priority;
+   String ? reportTag;
+   String ? triageResultType;
+   Source ? triageResultSource;
+   int ? assessmentID;
+   DateTime ? triageResultStartDate;
+   String ? triageResultDescription;
+   bool ? isUpdateEnabled;
    
-  final String  questionResultDescription;
-    final String  observationResultDescription;
-    final String  mediaResultDescription;
+   String ?  questionResultDescription;
+     String ? observationResultDescription;
+     String ? mediaResultDescription;
 
-  const TriageReportBriefEntity({
-    required this.questionResultDescription, 
-  required this.observationResultDescription, 
-   required this.mediaResultDescription, 
+   TriageReportBriefEntity({
+     this.questionResultDescription, 
+   this.observationResultDescription, 
+    this.mediaResultDescription, 
     required this.triageResultID,
-    required this.priority,
-    required this.reportTag,
-    required this.triageResultType,
-    required this.triageResultSource,
-    required this.assessmentID,
-    required this.triageResultStartDate,
-    required this.triageResultDescription,
-    required this.isUpdateEnabled,
+     this.priority,
+     this.reportTag,
+     this.triageResultType,
+     this.triageResultSource,
+     this.assessmentID,
+     this.triageResultStartDate,
+     this.triageResultDescription,
+     this.isUpdateEnabled,
   });
 }

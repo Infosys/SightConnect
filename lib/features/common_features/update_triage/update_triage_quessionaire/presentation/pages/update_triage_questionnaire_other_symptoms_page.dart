@@ -1,7 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
-  const UpdateTriageQuestionnaireOtherSymptomPage({super.key});
+  final int reportId;
+  const UpdateTriageQuestionnaireOtherSymptomPage(
+      {super.key, required this.reportId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -125,12 +129,21 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        logger.f("I am here");
                         ref
-                                .watch(updateTriageQuestionnaireProvider)
+                                .read(updateTriageQuestionnaireProvider)
                                 .questionnaireRemarks =
                             model.textEditingController.text;
-                        Navigator.pop(context);
+
+                        final res = await ref
+                            .read(updateTriageQuestionnaireProvider)
+                            .updateTriage(reportId);
+                        res.fold((l) => logger.d(l), (r) {
+                          logger.d(r);
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        });
                       },
                       child: const Text(
                         "Submit",

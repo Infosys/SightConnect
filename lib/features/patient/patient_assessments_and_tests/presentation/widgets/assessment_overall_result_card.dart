@@ -67,7 +67,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                triageResultEntities.reportDate,
+                triageResultEntities.reportDate.toString(),
                 style: applyRobotoFont(
                   fontSize: 12,
                 ),

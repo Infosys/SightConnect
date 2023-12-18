@@ -25,9 +25,9 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       cummulativeScore: json['cummulativeScore'] as int?,
-      score: (json['score'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as int),
-      ),
+      score: (json['score'] as List<dynamic>?)
+          ?.map((e) => Map<String, int>.from(e as Map))
+          .toList(),
       imagingSelection: (json['imagingSelection'] as List<dynamic>?)
           ?.map((e) =>
               PatchImagingSelectionModel.fromJson(e as Map<String, dynamic>))
@@ -104,7 +104,7 @@ _$_PatchAnswerModel _$$_PatchAnswerModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       value: json['value'] as String?,
-      answerCode: (json['answerCode'] as num?)?.toDouble(),
+      answerCode: json['answerCode'] as int?,
       score: (json['score'] as num?)?.toDouble(),
     );
 

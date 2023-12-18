@@ -3,11 +3,11 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportAssessmentQuestions extends StatelessWidget {
-  const ReportAssessmentQuestions({
+   ReportAssessmentQuestions({
     super.key,
-    required this.questionResponseBreifModel,
+     this.questionResponseBreifModel,
   });
-  final List<QuestionResponseBriefEntity> questionResponseBreifModel;
+   List<QuestionResponseBriefEntity> ?questionResponseBreifModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ReportAssessmentQuestions extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          questionResponseBreifModel.isEmpty
+        (  questionResponseBreifModel==null || questionResponseBreifModel!.isEmpty)
               ? const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Center(
@@ -43,11 +43,11 @@ class ReportAssessmentQuestions extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: questionResponseBreifModel.length,
+                  itemCount: questionResponseBreifModel!.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    var responseModel = questionResponseBreifModel[index];
+                    var responseModel = questionResponseBreifModel![index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

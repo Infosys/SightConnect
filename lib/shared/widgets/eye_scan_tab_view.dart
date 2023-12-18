@@ -8,11 +8,11 @@ import 'package:eye_care_for_all/shared/widgets/right_cornea_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class EyeScanTabView extends StatelessWidget {
-  const EyeScanTabView({
+   EyeScanTabView({
     super.key,
-    required this.eyeScanData,
+     this.eyeScanData,
   });
-  final List<ImageBriefEntity> eyeScanData;
+   List<ImageBriefEntity>  ?eyeScanData;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,10 @@ class EyeScanTabView extends StatelessWidget {
                 viewportFraction: 1,
                 children: [
                   RightCorneaTabView(
-                    rightEyeImage: [getRightEyeImageUrl(eyeScanData)],
+                    rightEyeImage: [getRightEyeImageUrl(eyeScanData!)],
                   ),
                   LeftCorneaTabView(
-                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData)],
+                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData!)],
                   ),
                 ],
               ),

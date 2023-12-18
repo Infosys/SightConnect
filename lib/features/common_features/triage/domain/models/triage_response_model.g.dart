@@ -18,7 +18,9 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
           .toList(),
       assessmentCode: json['assessmentCode'] as int?,
       assessmentVersion: json['assessmentVersion'] as String?,
-      issued: const TimestampConverter().fromJson(json['issued'] as String?),
+      issued: json['issued'] == null
+          ? null
+          : DateTime.parse(json['issued'] as String),
       userStartDate:
           const TimestampConverter().fromJson(json['userStartDate'] as String?),
       source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
@@ -55,7 +57,7 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
       'performer': instance.performer,
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
-      'issued': const TimestampConverter().toJson(instance.issued),
+      'issued': instance.issued?.toIso8601String(),
       'userStartDate':
           const TimestampConverter().toJson(instance.userStartDate),
       'source': _$SourceEnumMap[instance.source],
@@ -106,12 +108,14 @@ _$_PostAnswerModel _$$_PostAnswerModelFromJson(Map<String, dynamic> json) =>
     _$_PostAnswerModel(
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
+      answerCode: json['answerCode'] as int?,
     );
 
 Map<String, dynamic> _$$_PostAnswerModelToJson(_$_PostAnswerModel instance) =>
     <String, dynamic>{
       'value': instance.value,
       'score': instance.score,
+      'answerCode': instance.answerCode,
     };
 
 _$_PerformerModel _$$_PerformerModelFromJson(Map<String, dynamic> json) =>

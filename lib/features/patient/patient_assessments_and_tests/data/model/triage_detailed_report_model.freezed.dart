@@ -30,8 +30,6 @@ mixin _$TriageDetailedReportModel {
   int? get diagnosticReportId => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
-  String? get code => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get issued => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -40,6 +38,7 @@ mixin _$TriageDetailedReportModel {
   DiagnosticReportStatus? get status => throw _privateConstructorUsedError;
   String? get sourceVersion => throw _privateConstructorUsedError;
   int? get performerId => throw _privateConstructorUsedError;
+  int? get subject => throw _privateConstructorUsedError;
   PerformerRole? get performerRole => throw _privateConstructorUsedError;
   List<IncompleteTestModel>? get incompleteTests =>
       throw _privateConstructorUsedError;
@@ -81,14 +80,13 @@ abstract class $TriageDetailedReportModelCopyWith<$Res> {
       int? diagnosticReportId,
       int? assessmentCode,
       String? assessmentVersion,
-      String? category,
-      String? code,
       @TimestampConverter() DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       DiagnosticReportStatus? status,
       String? sourceVersion,
       int? performerId,
+      int? subject,
       PerformerRole? performerRole,
       List<IncompleteTestModel>? incompleteTests,
       List<Response>? responses,
@@ -131,14 +129,13 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
     Object? diagnosticReportId = freezed,
     Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
-    Object? category = freezed,
-    Object? code = freezed,
     Object? issued = freezed,
     Object? userStartDate = freezed,
     Object? source = freezed,
     Object? status = freezed,
     Object? sourceVersion = freezed,
     Object? performerId = freezed,
+    Object? subject = freezed,
     Object? performerRole = freezed,
     Object? incompleteTests = freezed,
     Object? responses = freezed,
@@ -192,14 +189,6 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
           ? _value.assessmentVersion
           : assessmentVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: freezed == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
       issued: freezed == issued
           ? _value.issued
           : issued // ignore: cast_nullable_to_non_nullable
@@ -223,6 +212,10 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
               as int?,
       performerRole: freezed == performerRole
           ? _value.performerRole
@@ -319,14 +312,13 @@ abstract class _$$_TriageDetailedReportModelCopyWith<$Res>
       int? diagnosticReportId,
       int? assessmentCode,
       String? assessmentVersion,
-      String? category,
-      String? code,
       @TimestampConverter() DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       DiagnosticReportStatus? status,
       String? sourceVersion,
       int? performerId,
+      int? subject,
       PerformerRole? performerRole,
       List<IncompleteTestModel>? incompleteTests,
       List<Response>? responses,
@@ -369,14 +361,13 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
     Object? diagnosticReportId = freezed,
     Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
-    Object? category = freezed,
-    Object? code = freezed,
     Object? issued = freezed,
     Object? userStartDate = freezed,
     Object? source = freezed,
     Object? status = freezed,
     Object? sourceVersion = freezed,
     Object? performerId = freezed,
+    Object? subject = freezed,
     Object? performerRole = freezed,
     Object? incompleteTests = freezed,
     Object? responses = freezed,
@@ -430,14 +421,6 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
           ? _value.assessmentVersion
           : assessmentVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: freezed == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
       issued: freezed == issued
           ? _value.issued
           : issued // ignore: cast_nullable_to_non_nullable
@@ -461,6 +444,10 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
               as int?,
       performerRole: freezed == performerRole
           ? _value.performerRole
@@ -539,14 +526,13 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
       this.diagnosticReportId,
       this.assessmentCode,
       this.assessmentVersion,
-      this.category,
-      this.code,
       @TimestampConverter() this.issued,
       @TimestampConverter() this.userStartDate,
       this.source,
       this.status,
       this.sourceVersion,
       this.performerId,
+      this.subject,
       this.performerRole,
       final List<IncompleteTestModel>? incompleteTests,
       final List<Response>? responses,
@@ -590,10 +576,6 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   @override
   final String? assessmentVersion;
   @override
-  final String? category;
-  @override
-  final String? code;
-  @override
   @TimestampConverter()
   final DateTime? issued;
   @override
@@ -607,6 +589,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   final String? sourceVersion;
   @override
   final int? performerId;
+  @override
+  final int? subject;
   @override
   final PerformerRole? performerRole;
   final List<IncompleteTestModel>? _incompleteTests;
@@ -680,7 +664,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
 
   @override
   String toString() {
-    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, category: $category, code: $code, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, cumulativeSeverity: $cumulativeSeverity, observationSeverity: $observationSeverity, mediaSeverity: $mediaSeverity, questionResponseSeverity: $questionResponseSeverity, carePlans: $carePlans)';
+    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, subject: $subject, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, cumulativeSeverity: $cumulativeSeverity, observationSeverity: $observationSeverity, mediaSeverity: $mediaSeverity, questionResponseSeverity: $questionResponseSeverity, carePlans: $carePlans)';
   }
 
   @override
@@ -705,9 +689,6 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 other.assessmentCode == assessmentCode) &&
             (identical(other.assessmentVersion, assessmentVersion) ||
                 other.assessmentVersion == assessmentVersion) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.code, code) || other.code == code) &&
             (identical(other.issued, issued) || other.issued == issued) &&
             (identical(other.userStartDate, userStartDate) ||
                 other.userStartDate == userStartDate) &&
@@ -717,6 +698,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 other.sourceVersion == sourceVersion) &&
             (identical(other.performerId, performerId) ||
                 other.performerId == performerId) &&
+            (identical(other.subject, subject) || other.subject == subject) &&
             (identical(other.performerRole, performerRole) ||
                 other.performerRole == performerRole) &&
             const DeepCollectionEquality()
@@ -749,7 +731,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 other.mediaSeverity == mediaSeverity) &&
             (identical(other.questionResponseSeverity, questionResponseSeverity) ||
                 other.questionResponseSeverity == questionResponseSeverity) &&
-            const DeepCollectionEquality().equals(other._carePlans, _carePlans));
+            const DeepCollectionEquality()
+                .equals(other._carePlans, _carePlans));
   }
 
   @JsonKey(ignore: true)
@@ -765,14 +748,13 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
         diagnosticReportId,
         assessmentCode,
         assessmentVersion,
-        category,
-        code,
         issued,
         userStartDate,
         source,
         status,
         sourceVersion,
         performerId,
+        subject,
         performerRole,
         const DeepCollectionEquality().hash(_incompleteTests),
         const DeepCollectionEquality().hash(_responses),
@@ -816,14 +798,13 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
       final int? diagnosticReportId,
       final int? assessmentCode,
       final String? assessmentVersion,
-      final String? category,
-      final String? code,
       @TimestampConverter() final DateTime? issued,
       @TimestampConverter() final DateTime? userStartDate,
       final Source? source,
       final DiagnosticReportStatus? status,
       final String? sourceVersion,
       final int? performerId,
+      final int? subject,
       final PerformerRole? performerRole,
       final List<IncompleteTestModel>? incompleteTests,
       final List<Response>? responses,
@@ -862,10 +843,6 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   @override
   String? get assessmentVersion;
   @override
-  String? get category;
-  @override
-  String? get code;
-  @override
   @TimestampConverter()
   DateTime? get issued;
   @override
@@ -879,6 +856,8 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   String? get sourceVersion;
   @override
   int? get performerId;
+  @override
+  int? get subject;
   @override
   PerformerRole? get performerRole;
   @override
@@ -1452,11 +1431,8 @@ Response _$ResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Response {
   int get id => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get authored => throw _privateConstructorUsedError;
   int get linkId => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
-  dynamic get author => throw _privateConstructorUsedError;
   List<Answer>? get answers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1470,13 +1446,7 @@ abstract class $ResponseCopyWith<$Res> {
   factory $ResponseCopyWith(Response value, $Res Function(Response) then) =
       _$ResponseCopyWithImpl<$Res, Response>;
   @useResult
-  $Res call(
-      {int id,
-      @TimestampConverter() DateTime? authored,
-      int linkId,
-      double score,
-      dynamic author,
-      List<Answer>? answers});
+  $Res call({int id, int linkId, double score, List<Answer>? answers});
 }
 
 /// @nodoc
@@ -1493,10 +1463,8 @@ class _$ResponseCopyWithImpl<$Res, $Val extends Response>
   @override
   $Res call({
     Object? id = null,
-    Object? authored = freezed,
     Object? linkId = null,
     Object? score = null,
-    Object? author = freezed,
     Object? answers = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1504,10 +1472,6 @@ class _$ResponseCopyWithImpl<$Res, $Val extends Response>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      authored: freezed == authored
-          ? _value.authored
-          : authored // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       linkId: null == linkId
           ? _value.linkId
           : linkId // ignore: cast_nullable_to_non_nullable
@@ -1516,10 +1480,6 @@ class _$ResponseCopyWithImpl<$Res, $Val extends Response>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      author: freezed == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       answers: freezed == answers
           ? _value.answers
           : answers // ignore: cast_nullable_to_non_nullable
@@ -1535,13 +1495,7 @@ abstract class _$$_ResponseCopyWith<$Res> implements $ResponseCopyWith<$Res> {
       __$$_ResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      @TimestampConverter() DateTime? authored,
-      int linkId,
-      double score,
-      dynamic author,
-      List<Answer>? answers});
+  $Res call({int id, int linkId, double score, List<Answer>? answers});
 }
 
 /// @nodoc
@@ -1556,10 +1510,8 @@ class __$$_ResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? authored = freezed,
     Object? linkId = null,
     Object? score = null,
-    Object? author = freezed,
     Object? answers = freezed,
   }) {
     return _then(_$_Response(
@@ -1567,10 +1519,6 @@ class __$$_ResponseCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      authored: freezed == authored
-          ? _value.authored
-          : authored // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       linkId: null == linkId
           ? _value.linkId
           : linkId // ignore: cast_nullable_to_non_nullable
@@ -1579,10 +1527,6 @@ class __$$_ResponseCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      author: freezed == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       answers: freezed == answers
           ? _value._answers
           : answers // ignore: cast_nullable_to_non_nullable
@@ -1596,10 +1540,8 @@ class __$$_ResponseCopyWithImpl<$Res>
 class _$_Response implements _Response {
   const _$_Response(
       {required this.id,
-      @TimestampConverter() this.authored,
       required this.linkId,
       required this.score,
-      this.author,
       final List<Answer>? answers})
       : _answers = answers;
 
@@ -1609,14 +1551,9 @@ class _$_Response implements _Response {
   @override
   final int id;
   @override
-  @TimestampConverter()
-  final DateTime? authored;
-  @override
   final int linkId;
   @override
   final double score;
-  @override
-  final dynamic author;
   final List<Answer>? _answers;
   @override
   List<Answer>? get answers {
@@ -1629,7 +1566,7 @@ class _$_Response implements _Response {
 
   @override
   String toString() {
-    return 'Response(id: $id, authored: $authored, linkId: $linkId, score: $score, author: $author, answers: $answers)';
+    return 'Response(id: $id, linkId: $linkId, score: $score, answers: $answers)';
   }
 
   @override
@@ -1638,23 +1575,14 @@ class _$_Response implements _Response {
         (other.runtimeType == runtimeType &&
             other is _$_Response &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.authored, authored) ||
-                other.authored == authored) &&
             (identical(other.linkId, linkId) || other.linkId == linkId) &&
             (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality().equals(other.author, author) &&
             const DeepCollectionEquality().equals(other._answers, _answers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      authored,
-      linkId,
-      score,
-      const DeepCollectionEquality().hash(author),
+  int get hashCode => Object.hash(runtimeType, id, linkId, score,
       const DeepCollectionEquality().hash(_answers));
 
   @JsonKey(ignore: true)
@@ -1674,10 +1602,8 @@ class _$_Response implements _Response {
 abstract class _Response implements Response {
   const factory _Response(
       {required final int id,
-      @TimestampConverter() final DateTime? authored,
       required final int linkId,
       required final double score,
-      final dynamic author,
       final List<Answer>? answers}) = _$_Response;
 
   factory _Response.fromJson(Map<String, dynamic> json) = _$_Response.fromJson;
@@ -1685,14 +1611,9 @@ abstract class _Response implements Response {
   @override
   int get id;
   @override
-  @TimestampConverter()
-  DateTime? get authored;
-  @override
   int get linkId;
   @override
   double get score;
-  @override
-  dynamic get author;
   @override
   List<Answer>? get answers;
   @override
@@ -1708,11 +1629,7 @@ Observation _$ObservationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Observation {
   int get id => throw _privateConstructorUsedError;
-  int? get performer => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get issued => throw _privateConstructorUsedError;
   int? get identifier => throw _privateConstructorUsedError;
-  Severity? get interpretation => throw _privateConstructorUsedError;
   String? get value => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
 
@@ -1728,14 +1645,7 @@ abstract class $ObservationCopyWith<$Res> {
           Observation value, $Res Function(Observation) then) =
       _$ObservationCopyWithImpl<$Res, Observation>;
   @useResult
-  $Res call(
-      {int id,
-      int? performer,
-      @TimestampConverter() DateTime? issued,
-      int? identifier,
-      Severity? interpretation,
-      String? value,
-      double? score});
+  $Res call({int id, int? identifier, String? value, double? score});
 }
 
 /// @nodoc
@@ -1752,10 +1662,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
   @override
   $Res call({
     Object? id = null,
-    Object? performer = freezed,
-    Object? issued = freezed,
     Object? identifier = freezed,
-    Object? interpretation = freezed,
     Object? value = freezed,
     Object? score = freezed,
   }) {
@@ -1764,22 +1671,10 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      performer: freezed == performer
-          ? _value.performer
-          : performer // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issued: freezed == issued
-          ? _value.issued
-          : issued // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
               as int?,
-      interpretation: freezed == interpretation
-          ? _value.interpretation
-          : interpretation // ignore: cast_nullable_to_non_nullable
-              as Severity?,
       value: freezed == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -1800,14 +1695,7 @@ abstract class _$$_ObservationCopyWith<$Res>
       __$$_ObservationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      int? performer,
-      @TimestampConverter() DateTime? issued,
-      int? identifier,
-      Severity? interpretation,
-      String? value,
-      double? score});
+  $Res call({int id, int? identifier, String? value, double? score});
 }
 
 /// @nodoc
@@ -1822,10 +1710,7 @@ class __$$_ObservationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? performer = freezed,
-    Object? issued = freezed,
     Object? identifier = freezed,
-    Object? interpretation = freezed,
     Object? value = freezed,
     Object? score = freezed,
   }) {
@@ -1834,22 +1719,10 @@ class __$$_ObservationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      performer: freezed == performer
-          ? _value.performer
-          : performer // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issued: freezed == issued
-          ? _value.issued
-          : issued // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
               as int?,
-      interpretation: freezed == interpretation
-          ? _value.interpretation
-          : interpretation // ignore: cast_nullable_to_non_nullable
-              as Severity?,
       value: freezed == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -1866,13 +1739,7 @@ class __$$_ObservationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Observation implements _Observation {
   const _$_Observation(
-      {required this.id,
-      this.performer,
-      @TimestampConverter() this.issued,
-      this.identifier,
-      this.interpretation,
-      this.value,
-      this.score});
+      {required this.id, this.identifier, this.value, this.score});
 
   factory _$_Observation.fromJson(Map<String, dynamic> json) =>
       _$$_ObservationFromJson(json);
@@ -1880,14 +1747,7 @@ class _$_Observation implements _Observation {
   @override
   final int id;
   @override
-  final int? performer;
-  @override
-  @TimestampConverter()
-  final DateTime? issued;
-  @override
   final int? identifier;
-  @override
-  final Severity? interpretation;
   @override
   final String? value;
   @override
@@ -1895,7 +1755,7 @@ class _$_Observation implements _Observation {
 
   @override
   String toString() {
-    return 'Observation(id: $id, performer: $performer, issued: $issued, identifier: $identifier, interpretation: $interpretation, value: $value, score: $score)';
+    return 'Observation(id: $id, identifier: $identifier, value: $value, score: $score)';
   }
 
   @override
@@ -1904,21 +1764,15 @@ class _$_Observation implements _Observation {
         (other.runtimeType == runtimeType &&
             other is _$_Observation &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.performer, performer) ||
-                other.performer == performer) &&
-            (identical(other.issued, issued) || other.issued == issued) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
-            (identical(other.interpretation, interpretation) ||
-                other.interpretation == interpretation) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.score, score) || other.score == score));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, performer, issued,
-      identifier, interpretation, value, score);
+  int get hashCode => Object.hash(runtimeType, id, identifier, value, score);
 
   @JsonKey(ignore: true)
   @override
@@ -1937,10 +1791,7 @@ class _$_Observation implements _Observation {
 abstract class _Observation implements Observation {
   const factory _Observation(
       {required final int id,
-      final int? performer,
-      @TimestampConverter() final DateTime? issued,
       final int? identifier,
-      final Severity? interpretation,
       final String? value,
       final double? score}) = _$_Observation;
 
@@ -1950,14 +1801,7 @@ abstract class _Observation implements Observation {
   @override
   int get id;
   @override
-  int? get performer;
-  @override
-  @TimestampConverter()
-  DateTime? get issued;
-  @override
   int? get identifier;
-  @override
-  Severity? get interpretation;
   @override
   String? get value;
   @override
@@ -1975,15 +1819,12 @@ Media _$MediaFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Media {
   int get id => throw _privateConstructorUsedError;
-  int? get performer => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get issued => throw _privateConstructorUsedError;
   int? get identifier => throw _privateConstructorUsedError;
   String? get baseUrl => throw _privateConstructorUsedError;
   String? get endpoint => throw _privateConstructorUsedError;
   BodySite? get bodySite => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
-  int? get fileId => throw _privateConstructorUsedError;
+  String? get fileId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1997,14 +1838,12 @@ abstract class $MediaCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int? performer,
-      @TimestampConverter() DateTime? issued,
       int? identifier,
       String? baseUrl,
       String? endpoint,
       BodySite? bodySite,
       double? score,
-      int? fileId});
+      String? fileId});
 }
 
 /// @nodoc
@@ -2021,8 +1860,6 @@ class _$MediaCopyWithImpl<$Res, $Val extends Media>
   @override
   $Res call({
     Object? id = null,
-    Object? performer = freezed,
-    Object? issued = freezed,
     Object? identifier = freezed,
     Object? baseUrl = freezed,
     Object? endpoint = freezed,
@@ -2035,14 +1872,6 @@ class _$MediaCopyWithImpl<$Res, $Val extends Media>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      performer: freezed == performer
-          ? _value.performer
-          : performer // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issued: freezed == issued
-          ? _value.issued
-          : issued // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -2066,7 +1895,7 @@ class _$MediaCopyWithImpl<$Res, $Val extends Media>
       fileId: freezed == fileId
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
     ) as $Val);
   }
 }
@@ -2079,14 +1908,12 @@ abstract class _$$_MediaCopyWith<$Res> implements $MediaCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int? performer,
-      @TimestampConverter() DateTime? issued,
       int? identifier,
       String? baseUrl,
       String? endpoint,
       BodySite? bodySite,
       double? score,
-      int? fileId});
+      String? fileId});
 }
 
 /// @nodoc
@@ -2099,8 +1926,6 @@ class __$$_MediaCopyWithImpl<$Res> extends _$MediaCopyWithImpl<$Res, _$_Media>
   @override
   $Res call({
     Object? id = null,
-    Object? performer = freezed,
-    Object? issued = freezed,
     Object? identifier = freezed,
     Object? baseUrl = freezed,
     Object? endpoint = freezed,
@@ -2113,14 +1938,6 @@ class __$$_MediaCopyWithImpl<$Res> extends _$MediaCopyWithImpl<$Res, _$_Media>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      performer: freezed == performer
-          ? _value.performer
-          : performer // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issued: freezed == issued
-          ? _value.issued
-          : issued // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -2144,7 +1961,7 @@ class __$$_MediaCopyWithImpl<$Res> extends _$MediaCopyWithImpl<$Res, _$_Media>
       fileId: freezed == fileId
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
     ));
   }
 }
@@ -2154,8 +1971,6 @@ class __$$_MediaCopyWithImpl<$Res> extends _$MediaCopyWithImpl<$Res, _$_Media>
 class _$_Media implements _Media {
   const _$_Media(
       {required this.id,
-      this.performer,
-      @TimestampConverter() this.issued,
       this.identifier,
       this.baseUrl,
       this.endpoint,
@@ -2169,11 +1984,6 @@ class _$_Media implements _Media {
   @override
   final int id;
   @override
-  final int? performer;
-  @override
-  @TimestampConverter()
-  final DateTime? issued;
-  @override
   final int? identifier;
   @override
   final String? baseUrl;
@@ -2184,11 +1994,11 @@ class _$_Media implements _Media {
   @override
   final double? score;
   @override
-  final int? fileId;
+  final String? fileId;
 
   @override
   String toString() {
-    return 'Media(id: $id, performer: $performer, issued: $issued, identifier: $identifier, baseUrl: $baseUrl, endpoint: $endpoint, bodySite: $bodySite, score: $score, fileId: $fileId)';
+    return 'Media(id: $id, identifier: $identifier, baseUrl: $baseUrl, endpoint: $endpoint, bodySite: $bodySite, score: $score, fileId: $fileId)';
   }
 
   @override
@@ -2197,9 +2007,6 @@ class _$_Media implements _Media {
         (other.runtimeType == runtimeType &&
             other is _$_Media &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.performer, performer) ||
-                other.performer == performer) &&
-            (identical(other.issued, issued) || other.issued == issued) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
@@ -2213,8 +2020,8 @@ class _$_Media implements _Media {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, performer, issued,
-      identifier, baseUrl, endpoint, bodySite, score, fileId);
+  int get hashCode => Object.hash(
+      runtimeType, id, identifier, baseUrl, endpoint, bodySite, score, fileId);
 
   @JsonKey(ignore: true)
   @override
@@ -2233,24 +2040,17 @@ class _$_Media implements _Media {
 abstract class _Media implements Media {
   const factory _Media(
       {required final int id,
-      final int? performer,
-      @TimestampConverter() final DateTime? issued,
       final int? identifier,
       final String? baseUrl,
       final String? endpoint,
       final BodySite? bodySite,
       final double? score,
-      final int? fileId}) = _$_Media;
+      final String? fileId}) = _$_Media;
 
   factory _Media.fromJson(Map<String, dynamic> json) = _$_Media.fromJson;
 
   @override
   int get id;
-  @override
-  int? get performer;
-  @override
-  @TimestampConverter()
-  DateTime? get issued;
   @override
   int? get identifier;
   @override
@@ -2262,7 +2062,7 @@ abstract class _Media implements Media {
   @override
   double? get score;
   @override
-  int? get fileId;
+  String? get fileId;
   @override
   @JsonKey(ignore: true)
   _$$_MediaCopyWith<_$_Media> get copyWith =>
@@ -2283,12 +2083,8 @@ mixin _$CarePlan {
   int? get subject => throw _privateConstructorUsedError; //patient id
   @TimestampConverter()
   DateTime? get created => throw _privateConstructorUsedError;
-  int? get careTeam => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   EncounterPeriod? get period => throw _privateConstructorUsedError;
-  dynamic get custodian => throw _privateConstructorUsedError;
-  dynamic get partOf => throw _privateConstructorUsedError;
-  dynamic get carePlan => throw _privateConstructorUsedError;
   List<Condition>? get conditions => throw _privateConstructorUsedError;
   List<Activity>? get activities => throw _privateConstructorUsedError;
   List<Goal>? get goals => throw _privateConstructorUsedError;
@@ -2312,12 +2108,8 @@ abstract class $CarePlanCopyWith<$Res> {
       String? description,
       int? subject,
       @TimestampConverter() DateTime? created,
-      int? careTeam,
       String? note,
       EncounterPeriod? period,
-      dynamic custodian,
-      dynamic partOf,
-      dynamic carePlan,
       List<Condition>? conditions,
       List<Activity>? activities,
       List<Goal>? goals});
@@ -2345,12 +2137,8 @@ class _$CarePlanCopyWithImpl<$Res, $Val extends CarePlan>
     Object? description = freezed,
     Object? subject = freezed,
     Object? created = freezed,
-    Object? careTeam = freezed,
     Object? note = freezed,
     Object? period = freezed,
-    Object? custodian = freezed,
-    Object? partOf = freezed,
-    Object? carePlan = freezed,
     Object? conditions = freezed,
     Object? activities = freezed,
     Object? goals = freezed,
@@ -2384,10 +2172,6 @@ class _$CarePlanCopyWithImpl<$Res, $Val extends CarePlan>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      careTeam: freezed == careTeam
-          ? _value.careTeam
-          : careTeam // ignore: cast_nullable_to_non_nullable
-              as int?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -2396,18 +2180,6 @@ class _$CarePlanCopyWithImpl<$Res, $Val extends CarePlan>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as EncounterPeriod?,
-      custodian: freezed == custodian
-          ? _value.custodian
-          : custodian // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      partOf: freezed == partOf
-          ? _value.partOf
-          : partOf // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      carePlan: freezed == carePlan
-          ? _value.carePlan
-          : carePlan // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       conditions: freezed == conditions
           ? _value.conditions
           : conditions // ignore: cast_nullable_to_non_nullable
@@ -2451,12 +2223,8 @@ abstract class _$$_CarePlanCopyWith<$Res> implements $CarePlanCopyWith<$Res> {
       String? description,
       int? subject,
       @TimestampConverter() DateTime? created,
-      int? careTeam,
       String? note,
       EncounterPeriod? period,
-      dynamic custodian,
-      dynamic partOf,
-      dynamic carePlan,
       List<Condition>? conditions,
       List<Activity>? activities,
       List<Goal>? goals});
@@ -2483,12 +2251,8 @@ class __$$_CarePlanCopyWithImpl<$Res>
     Object? description = freezed,
     Object? subject = freezed,
     Object? created = freezed,
-    Object? careTeam = freezed,
     Object? note = freezed,
     Object? period = freezed,
-    Object? custodian = freezed,
-    Object? partOf = freezed,
-    Object? carePlan = freezed,
     Object? conditions = freezed,
     Object? activities = freezed,
     Object? goals = freezed,
@@ -2522,10 +2286,6 @@ class __$$_CarePlanCopyWithImpl<$Res>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      careTeam: freezed == careTeam
-          ? _value.careTeam
-          : careTeam // ignore: cast_nullable_to_non_nullable
-              as int?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -2534,18 +2294,6 @@ class __$$_CarePlanCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as EncounterPeriod?,
-      custodian: freezed == custodian
-          ? _value.custodian
-          : custodian // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      partOf: freezed == partOf
-          ? _value.partOf
-          : partOf // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      carePlan: freezed == carePlan
-          ? _value.carePlan
-          : carePlan // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       conditions: freezed == conditions
           ? _value._conditions
           : conditions // ignore: cast_nullable_to_non_nullable
@@ -2573,12 +2321,8 @@ class _$_CarePlan implements _CarePlan {
       this.description,
       this.subject,
       @TimestampConverter() this.created,
-      this.careTeam,
       this.note,
       this.period,
-      this.custodian,
-      this.partOf,
-      this.carePlan,
       final List<Condition>? conditions,
       final List<Activity>? activities,
       final List<Goal>? goals})
@@ -2606,17 +2350,9 @@ class _$_CarePlan implements _CarePlan {
   @TimestampConverter()
   final DateTime? created;
   @override
-  final int? careTeam;
-  @override
   final String? note;
   @override
   final EncounterPeriod? period;
-  @override
-  final dynamic custodian;
-  @override
-  final dynamic partOf;
-  @override
-  final dynamic carePlan;
   final List<Condition>? _conditions;
   @override
   List<Condition>? get conditions {
@@ -2649,7 +2385,7 @@ class _$_CarePlan implements _CarePlan {
 
   @override
   String toString() {
-    return 'CarePlan(carePlanId: $carePlanId, carePlanStatus: $carePlanStatus, category: $category, title: $title, description: $description, subject: $subject, created: $created, careTeam: $careTeam, note: $note, period: $period, custodian: $custodian, partOf: $partOf, carePlan: $carePlan, conditions: $conditions, activities: $activities, goals: $goals)';
+    return 'CarePlan(carePlanId: $carePlanId, carePlanStatus: $carePlanStatus, category: $category, title: $title, description: $description, subject: $subject, created: $created, note: $note, period: $period, conditions: $conditions, activities: $activities, goals: $goals)';
   }
 
   @override
@@ -2668,13 +2404,8 @@ class _$_CarePlan implements _CarePlan {
                 other.description == description) &&
             (identical(other.subject, subject) || other.subject == subject) &&
             (identical(other.created, created) || other.created == created) &&
-            (identical(other.careTeam, careTeam) ||
-                other.careTeam == careTeam) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.period, period) || other.period == period) &&
-            const DeepCollectionEquality().equals(other.custodian, custodian) &&
-            const DeepCollectionEquality().equals(other.partOf, partOf) &&
-            const DeepCollectionEquality().equals(other.carePlan, carePlan) &&
             const DeepCollectionEquality()
                 .equals(other._conditions, _conditions) &&
             const DeepCollectionEquality()
@@ -2693,12 +2424,8 @@ class _$_CarePlan implements _CarePlan {
       description,
       subject,
       created,
-      careTeam,
       note,
       period,
-      const DeepCollectionEquality().hash(custodian),
-      const DeepCollectionEquality().hash(partOf),
-      const DeepCollectionEquality().hash(carePlan),
       const DeepCollectionEquality().hash(_conditions),
       const DeepCollectionEquality().hash(_activities),
       const DeepCollectionEquality().hash(_goals));
@@ -2726,12 +2453,8 @@ abstract class _CarePlan implements CarePlan {
       final String? description,
       final int? subject,
       @TimestampConverter() final DateTime? created,
-      final int? careTeam,
       final String? note,
       final EncounterPeriod? period,
-      final dynamic custodian,
-      final dynamic partOf,
-      final dynamic carePlan,
       final List<Condition>? conditions,
       final List<Activity>? activities,
       final List<Goal>? goals}) = _$_CarePlan;
@@ -2754,17 +2477,9 @@ abstract class _CarePlan implements CarePlan {
   @TimestampConverter()
   DateTime? get created;
   @override
-  int? get careTeam;
-  @override
   String? get note;
   @override
   EncounterPeriod? get period;
-  @override
-  dynamic get custodian;
-  @override
-  dynamic get partOf;
-  @override
-  dynamic get carePlan;
   @override
   List<Condition>? get conditions;
   @override
@@ -3007,7 +2722,7 @@ Activity _$ActivityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Activity {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get progress => throw _privateConstructorUsedError;
   PlannedActivityReference? get plannedActivityReference =>
       throw _privateConstructorUsedError;
@@ -3024,7 +2739,7 @@ abstract class $ActivityCopyWith<$Res> {
       _$ActivityCopyWithImpl<$Res, Activity>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? progress,
       PlannedActivityReference? plannedActivityReference});
 
@@ -3044,15 +2759,15 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? progress = freezed,
     Object? plannedActivityReference = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       progress: freezed == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
@@ -3086,7 +2801,7 @@ abstract class _$$_ActivityCopyWith<$Res> implements $ActivityCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? progress,
       PlannedActivityReference? plannedActivityReference});
 
@@ -3105,15 +2820,15 @@ class __$$_ActivityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? progress = freezed,
     Object? plannedActivityReference = freezed,
   }) {
     return _then(_$_Activity(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       progress: freezed == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
@@ -3129,14 +2844,13 @@ class __$$_ActivityCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Activity implements _Activity {
-  const _$_Activity(
-      {required this.id, this.progress, this.plannedActivityReference});
+  const _$_Activity({this.id, this.progress, this.plannedActivityReference});
 
   factory _$_Activity.fromJson(Map<String, dynamic> json) =>
       _$$_ActivityFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? progress;
   @override
@@ -3181,14 +2895,14 @@ class _$_Activity implements _Activity {
 
 abstract class _Activity implements Activity {
   const factory _Activity(
-      {required final int id,
+      {final int? id,
       final String? progress,
       final PlannedActivityReference? plannedActivityReference}) = _$_Activity;
 
   factory _Activity.fromJson(Map<String, dynamic> json) = _$_Activity.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String? get progress;
   @override
@@ -3206,7 +2920,7 @@ PlannedActivityReference _$PlannedActivityReferenceFromJson(
 
 /// @nodoc
 mixin _$PlannedActivityReference {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   ServiceRequest? get serviceRequest => throw _privateConstructorUsedError;
   Communication? get communication => throw _privateConstructorUsedError;
@@ -3224,7 +2938,7 @@ abstract class $PlannedActivityReferenceCopyWith<$Res> {
       _$PlannedActivityReferenceCopyWithImpl<$Res, PlannedActivityReference>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? type,
       ServiceRequest? serviceRequest,
       Communication? communication});
@@ -3247,16 +2961,16 @@ class _$PlannedActivityReferenceCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? type = freezed,
     Object? serviceRequest = freezed,
     Object? communication = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -3307,7 +3021,7 @@ abstract class _$$_PlannedActivityReferenceCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? type,
       ServiceRequest? serviceRequest,
       Communication? communication});
@@ -3330,16 +3044,16 @@ class __$$_PlannedActivityReferenceCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? type = freezed,
     Object? serviceRequest = freezed,
     Object? communication = freezed,
   }) {
     return _then(_$_PlannedActivityReference(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -3360,13 +3074,13 @@ class __$$_PlannedActivityReferenceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PlannedActivityReference implements _PlannedActivityReference {
   const _$_PlannedActivityReference(
-      {required this.id, this.type, this.serviceRequest, this.communication});
+      {this.id, this.type, this.serviceRequest, this.communication});
 
   factory _$_PlannedActivityReference.fromJson(Map<String, dynamic> json) =>
       _$$_PlannedActivityReferenceFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? type;
   @override
@@ -3414,7 +3128,7 @@ class _$_PlannedActivityReference implements _PlannedActivityReference {
 
 abstract class _PlannedActivityReference implements PlannedActivityReference {
   const factory _PlannedActivityReference(
-      {required final int id,
+      {final int? id,
       final String? type,
       final ServiceRequest? serviceRequest,
       final Communication? communication}) = _$_PlannedActivityReference;
@@ -3423,7 +3137,7 @@ abstract class _PlannedActivityReference implements PlannedActivityReference {
       _$_PlannedActivityReference.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String? get type;
   @override
@@ -3442,7 +3156,8 @@ ServiceRequest _$ServiceRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ServiceRequest {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  int? get identifier => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   String? get patientInstruction => throw _privateConstructorUsedError;
   BodySite? get bodySite => throw _privateConstructorUsedError;
@@ -3461,7 +3176,8 @@ abstract class $ServiceRequestCopyWith<$Res> {
       _$ServiceRequestCopyWithImpl<$Res, ServiceRequest>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
+      int? identifier,
       String? note,
       String? patientInstruction,
       BodySite? bodySite,
@@ -3481,17 +3197,22 @@ class _$ServiceRequestCopyWithImpl<$Res, $Val extends ServiceRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? identifier = freezed,
     Object? note = freezed,
     Object? patientInstruction = freezed,
     Object? bodySite = freezed,
     Object? priority = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      identifier: freezed == identifier
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as int?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -3521,7 +3242,8 @@ abstract class _$$_ServiceRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
+      int? identifier,
       String? note,
       String? patientInstruction,
       BodySite? bodySite,
@@ -3539,17 +3261,22 @@ class __$$_ServiceRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? identifier = freezed,
     Object? note = freezed,
     Object? patientInstruction = freezed,
     Object? bodySite = freezed,
     Object? priority = freezed,
   }) {
     return _then(_$_ServiceRequest(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      identifier: freezed == identifier
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as int?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -3574,7 +3301,8 @@ class __$$_ServiceRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ServiceRequest implements _ServiceRequest {
   const _$_ServiceRequest(
-      {required this.id,
+      {this.id,
+      this.identifier,
       this.note,
       this.patientInstruction,
       this.bodySite,
@@ -3584,7 +3312,9 @@ class _$_ServiceRequest implements _ServiceRequest {
       _$$_ServiceRequestFromJson(json);
 
   @override
-  final int id;
+  final int? id;
+  @override
+  final int? identifier;
   @override
   final String? note;
   @override
@@ -3596,7 +3326,7 @@ class _$_ServiceRequest implements _ServiceRequest {
 
   @override
   String toString() {
-    return 'ServiceRequest(id: $id, note: $note, patientInstruction: $patientInstruction, bodySite: $bodySite, priority: $priority)';
+    return 'ServiceRequest(id: $id, identifier: $identifier, note: $note, patientInstruction: $patientInstruction, bodySite: $bodySite, priority: $priority)';
   }
 
   @override
@@ -3605,6 +3335,8 @@ class _$_ServiceRequest implements _ServiceRequest {
         (other.runtimeType == runtimeType &&
             other is _$_ServiceRequest &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.identifier, identifier) ||
+                other.identifier == identifier) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.patientInstruction, patientInstruction) ||
                 other.patientInstruction == patientInstruction) &&
@@ -3616,8 +3348,8 @@ class _$_ServiceRequest implements _ServiceRequest {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, note, patientInstruction, bodySite, priority);
+  int get hashCode => Object.hash(runtimeType, id, identifier, note,
+      patientInstruction, bodySite, priority);
 
   @JsonKey(ignore: true)
   @override
@@ -3635,7 +3367,8 @@ class _$_ServiceRequest implements _ServiceRequest {
 
 abstract class _ServiceRequest implements ServiceRequest {
   const factory _ServiceRequest(
-      {required final int id,
+      {final int? id,
+      final int? identifier,
       final String? note,
       final String? patientInstruction,
       final BodySite? bodySite,
@@ -3645,7 +3378,9 @@ abstract class _ServiceRequest implements ServiceRequest {
       _$_ServiceRequest.fromJson;
 
   @override
-  int get id;
+  int? get id;
+  @override
+  int? get identifier;
   @override
   String? get note;
   @override
@@ -3666,7 +3401,7 @@ Communication _$CommunicationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Communication {
-  dynamic get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   dynamic get status => throw _privateConstructorUsedError;
   dynamic get statusReason => throw _privateConstructorUsedError;
   dynamic get category => throw _privateConstructorUsedError;
@@ -3692,7 +3427,7 @@ abstract class $CommunicationCopyWith<$Res> {
       _$CommunicationCopyWithImpl<$Res, Communication>;
   @useResult
   $Res call(
-      {dynamic id,
+      {int? id,
       dynamic status,
       dynamic statusReason,
       dynamic category,
@@ -3736,7 +3471,7 @@ class _$CommunicationCopyWithImpl<$Res, $Val extends Communication>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -3794,7 +3529,7 @@ abstract class _$$_CommunicationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic id,
+      {int? id,
       dynamic status,
       dynamic statusReason,
       dynamic category,
@@ -3836,7 +3571,7 @@ class __$$_CommunicationCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -3906,7 +3641,7 @@ class _$_Communication implements _Communication {
       _$$_CommunicationFromJson(json);
 
   @override
-  final dynamic id;
+  final int? id;
   @override
   final dynamic status;
   @override
@@ -3940,7 +3675,7 @@ class _$_Communication implements _Communication {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Communication &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.statusReason, statusReason) &&
@@ -3961,7 +3696,7 @@ class _$_Communication implements _Communication {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
+      id,
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(statusReason),
       const DeepCollectionEquality().hash(category),
@@ -3990,7 +3725,7 @@ class _$_Communication implements _Communication {
 
 abstract class _Communication implements Communication {
   const factory _Communication(
-      {final dynamic id,
+      {final int? id,
       final dynamic status,
       final dynamic statusReason,
       final dynamic category,
@@ -4007,7 +3742,7 @@ abstract class _Communication implements Communication {
       _$_Communication.fromJson;
 
   @override
-  dynamic get id;
+  int? get id;
   @override
   dynamic get status;
   @override
@@ -4042,7 +3777,7 @@ Goal _$GoalFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Goal {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get statusDate => throw _privateConstructorUsedError;
   String? get statusReason => throw _privateConstructorUsedError;
@@ -4050,7 +3785,7 @@ mixin _$Goal {
   GoalLifecycleStatus? get lifecycleStatus =>
       throw _privateConstructorUsedError;
   GoalCategory? get category => throw _privateConstructorUsedError;
-  GoalOutcome? get outcome => throw _privateConstructorUsedError;
+  List<GoalOutcomeModel>? get outcome => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get startDate => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -4068,13 +3803,13 @@ abstract class $GoalCopyWith<$Res> {
       _$GoalCopyWithImpl<$Res, Goal>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       @TimestampConverter() DateTime? statusDate,
       String? statusReason,
       GoalAchievement? achievementStatus,
       GoalLifecycleStatus? lifecycleStatus,
       GoalCategory? category,
-      GoalOutcome? outcome,
+      List<GoalOutcomeModel>? outcome,
       @TimestampConverter() DateTime? startDate,
       @TimestampConverter() DateTime? dueDate,
       List<Target>? targets});
@@ -4093,7 +3828,7 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? statusDate = freezed,
     Object? statusReason = freezed,
     Object? achievementStatus = freezed,
@@ -4105,10 +3840,10 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
     Object? targets = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       statusDate: freezed == statusDate
           ? _value.statusDate
           : statusDate // ignore: cast_nullable_to_non_nullable
@@ -4132,7 +3867,7 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
       outcome: freezed == outcome
           ? _value.outcome
           : outcome // ignore: cast_nullable_to_non_nullable
-              as GoalOutcome?,
+              as List<GoalOutcomeModel>?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -4156,13 +3891,13 @@ abstract class _$$_GoalCopyWith<$Res> implements $GoalCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       @TimestampConverter() DateTime? statusDate,
       String? statusReason,
       GoalAchievement? achievementStatus,
       GoalLifecycleStatus? lifecycleStatus,
       GoalCategory? category,
-      GoalOutcome? outcome,
+      List<GoalOutcomeModel>? outcome,
       @TimestampConverter() DateTime? startDate,
       @TimestampConverter() DateTime? dueDate,
       List<Target>? targets});
@@ -4177,7 +3912,7 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? statusDate = freezed,
     Object? statusReason = freezed,
     Object? achievementStatus = freezed,
@@ -4189,10 +3924,10 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
     Object? targets = freezed,
   }) {
     return _then(_$_Goal(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       statusDate: freezed == statusDate
           ? _value.statusDate
           : statusDate // ignore: cast_nullable_to_non_nullable
@@ -4214,9 +3949,9 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
           : category // ignore: cast_nullable_to_non_nullable
               as GoalCategory?,
       outcome: freezed == outcome
-          ? _value.outcome
+          ? _value._outcome
           : outcome // ignore: cast_nullable_to_non_nullable
-              as GoalOutcome?,
+              as List<GoalOutcomeModel>?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -4243,16 +3978,17 @@ class _$_Goal implements _Goal {
       this.achievementStatus,
       this.lifecycleStatus,
       this.category,
-      this.outcome,
+      final List<GoalOutcomeModel>? outcome,
       @TimestampConverter() this.startDate,
       @TimestampConverter() this.dueDate,
       final List<Target>? targets})
-      : _targets = targets;
+      : _outcome = outcome,
+        _targets = targets;
 
   factory _$_Goal.fromJson(Map<String, dynamic> json) => _$$_GoalFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   @TimestampConverter()
   final DateTime? statusDate;
@@ -4264,8 +4000,16 @@ class _$_Goal implements _Goal {
   final GoalLifecycleStatus? lifecycleStatus;
   @override
   final GoalCategory? category;
+  final List<GoalOutcomeModel>? _outcome;
   @override
-  final GoalOutcome? outcome;
+  List<GoalOutcomeModel>? get outcome {
+    final value = _outcome;
+    if (value == null) return null;
+    if (_outcome is EqualUnmodifiableListView) return _outcome;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @TimestampConverter()
   final DateTime? startDate;
@@ -4303,7 +4047,7 @@ class _$_Goal implements _Goal {
                 other.lifecycleStatus == lifecycleStatus) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            (identical(other.outcome, outcome) || other.outcome == outcome) &&
+            const DeepCollectionEquality().equals(other._outcome, _outcome) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
@@ -4320,7 +4064,7 @@ class _$_Goal implements _Goal {
       achievementStatus,
       lifecycleStatus,
       category,
-      outcome,
+      const DeepCollectionEquality().hash(_outcome),
       startDate,
       dueDate,
       const DeepCollectionEquality().hash(_targets));
@@ -4341,13 +4085,13 @@ class _$_Goal implements _Goal {
 
 abstract class _Goal implements Goal {
   const factory _Goal(
-      {required final int id,
+      {required final int? id,
       @TimestampConverter() final DateTime? statusDate,
       final String? statusReason,
       final GoalAchievement? achievementStatus,
       final GoalLifecycleStatus? lifecycleStatus,
       final GoalCategory? category,
-      final GoalOutcome? outcome,
+      final List<GoalOutcomeModel>? outcome,
       @TimestampConverter() final DateTime? startDate,
       @TimestampConverter() final DateTime? dueDate,
       final List<Target>? targets}) = _$_Goal;
@@ -4355,7 +4099,7 @@ abstract class _Goal implements Goal {
   factory _Goal.fromJson(Map<String, dynamic> json) = _$_Goal.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   @TimestampConverter()
   DateTime? get statusDate;
@@ -4368,7 +4112,7 @@ abstract class _Goal implements Goal {
   @override
   GoalCategory? get category;
   @override
-  GoalOutcome? get outcome;
+  List<GoalOutcomeModel>? get outcome;
   @override
   @TimestampConverter()
   DateTime? get startDate;
@@ -4380,6 +4124,160 @@ abstract class _Goal implements Goal {
   @override
   @JsonKey(ignore: true)
   _$$_GoalCopyWith<_$_Goal> get copyWith => throw _privateConstructorUsedError;
+}
+
+GoalOutcomeModel _$GoalOutcomeModelFromJson(Map<String, dynamic> json) {
+  return _GoalOutcomeModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GoalOutcomeModel {
+  int? get id => throw _privateConstructorUsedError;
+  GoalOutcome? get goalOutcome => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GoalOutcomeModelCopyWith<GoalOutcomeModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GoalOutcomeModelCopyWith<$Res> {
+  factory $GoalOutcomeModelCopyWith(
+          GoalOutcomeModel value, $Res Function(GoalOutcomeModel) then) =
+      _$GoalOutcomeModelCopyWithImpl<$Res, GoalOutcomeModel>;
+  @useResult
+  $Res call({int? id, GoalOutcome? goalOutcome});
+}
+
+/// @nodoc
+class _$GoalOutcomeModelCopyWithImpl<$Res, $Val extends GoalOutcomeModel>
+    implements $GoalOutcomeModelCopyWith<$Res> {
+  _$GoalOutcomeModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? goalOutcome = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      goalOutcome: freezed == goalOutcome
+          ? _value.goalOutcome
+          : goalOutcome // ignore: cast_nullable_to_non_nullable
+              as GoalOutcome?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_GoalOutcomeModelCopyWith<$Res>
+    implements $GoalOutcomeModelCopyWith<$Res> {
+  factory _$$_GoalOutcomeModelCopyWith(
+          _$_GoalOutcomeModel value, $Res Function(_$_GoalOutcomeModel) then) =
+      __$$_GoalOutcomeModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, GoalOutcome? goalOutcome});
+}
+
+/// @nodoc
+class __$$_GoalOutcomeModelCopyWithImpl<$Res>
+    extends _$GoalOutcomeModelCopyWithImpl<$Res, _$_GoalOutcomeModel>
+    implements _$$_GoalOutcomeModelCopyWith<$Res> {
+  __$$_GoalOutcomeModelCopyWithImpl(
+      _$_GoalOutcomeModel _value, $Res Function(_$_GoalOutcomeModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? goalOutcome = freezed,
+  }) {
+    return _then(_$_GoalOutcomeModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      goalOutcome: freezed == goalOutcome
+          ? _value.goalOutcome
+          : goalOutcome // ignore: cast_nullable_to_non_nullable
+              as GoalOutcome?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_GoalOutcomeModel implements _GoalOutcomeModel {
+  const _$_GoalOutcomeModel({this.id, this.goalOutcome});
+
+  factory _$_GoalOutcomeModel.fromJson(Map<String, dynamic> json) =>
+      _$$_GoalOutcomeModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final GoalOutcome? goalOutcome;
+
+  @override
+  String toString() {
+    return 'GoalOutcomeModel(id: $id, goalOutcome: $goalOutcome)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GoalOutcomeModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.goalOutcome, goalOutcome) ||
+                other.goalOutcome == goalOutcome));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, goalOutcome);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GoalOutcomeModelCopyWith<_$_GoalOutcomeModel> get copyWith =>
+      __$$_GoalOutcomeModelCopyWithImpl<_$_GoalOutcomeModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GoalOutcomeModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GoalOutcomeModel implements GoalOutcomeModel {
+  const factory _GoalOutcomeModel(
+      {final int? id, final GoalOutcome? goalOutcome}) = _$_GoalOutcomeModel;
+
+  factory _GoalOutcomeModel.fromJson(Map<String, dynamic> json) =
+      _$_GoalOutcomeModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  GoalOutcome? get goalOutcome;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GoalOutcomeModelCopyWith<_$_GoalOutcomeModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Target _$TargetFromJson(Map<String, dynamic> json) {

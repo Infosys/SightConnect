@@ -17,9 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
-  final int diagnosticReportId;
-  const PatientAssessmentReportPage({
-    required this.diagnosticReportId,
+   int  diagnosticReportId;
+   PatientAssessmentReportPage({
+    required  this.diagnosticReportId,
     super.key,
   });
 

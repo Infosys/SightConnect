@@ -251,8 +251,10 @@ class TriageRepositoryImpl implements TriageRepository {
     try {
       final remoteResponse =
           await remoteDataSource.updateTriage(triage: triage);
+     
       return Right(remoteResponse);
     } catch (e) {
+      logger.f({"error in repo impl":e});
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }

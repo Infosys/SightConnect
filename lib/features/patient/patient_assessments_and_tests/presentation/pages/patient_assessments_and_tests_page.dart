@@ -149,7 +149,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     );
                   },
                   error: (error, _) {
-                    return const Text("No Data Found");
+                    return  Text("No Data Found $error");
                   },
                   loading: () {
                     return const Center(

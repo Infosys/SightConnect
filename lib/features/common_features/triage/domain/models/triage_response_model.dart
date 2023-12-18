@@ -17,7 +17,7 @@ class TriageResponseModel with _$TriageResponseModel {
     List<PerformerModel>? performer,
     int? assessmentCode,
     String? assessmentVersion,
-    @TimestampConverter() DateTime? issued,
+     DateTime? issued,
     @TimestampConverter() DateTime? userStartDate,
     Source? source,
     String? sourceVersion,
@@ -51,6 +51,7 @@ class PostAnswerModel with _$PostAnswerModel {
   const factory PostAnswerModel({
     String? value,
     double? score,
+    int ? answerCode,
   }) = _PostAnswerModel;
 
   factory PostAnswerModel.fromJson(Map<String, dynamic> json) =>

@@ -33,14 +33,13 @@ class TriageDetailedReportModel with _$TriageDetailedReportModel {
       int? diagnosticReportId,
       int? assessmentCode,
       String? assessmentVersion,
-      String? category,
-      String? code,
       @TimestampConverter() DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       DiagnosticReportStatus? status,
       String? sourceVersion,
       int? performerId,
+      int ? subject,
       PerformerRole? performerRole,
       List<IncompleteTestModel>? incompleteTests,
       List<Response>? responses,
@@ -99,10 +98,9 @@ class Answer with _$Answer {
 class Response with _$Response {
   const factory Response({
     required int id,
-    @TimestampConverter() DateTime? authored,
     required int linkId,
     required double score,
-    dynamic author,
+   
     List<Answer>? answers,
   }) = _Response;
 
@@ -114,10 +112,9 @@ class Response with _$Response {
 class Observation with _$Observation {
   const factory Observation({
     required int id,
-    int? performer,
-    @TimestampConverter() DateTime? issued,
+
     int? identifier,
-    Severity? interpretation,
+
     String? value,
     double? score,
   }) = _Observation;
@@ -130,14 +127,13 @@ class Observation with _$Observation {
 class Media with _$Media {
   const factory Media({
     required int id,
-    int? performer,
-    @TimestampConverter() DateTime? issued,
+
     int? identifier,
     String? baseUrl,
     String? endpoint,
     BodySite? bodySite,
     double? score,
-    int? fileId,
+    String? fileId,
   }) = _Media;
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
@@ -153,12 +149,8 @@ class CarePlan with _$CarePlan {
     String? description,
     int? subject, //patient id
     @TimestampConverter() DateTime? created,
-    int? careTeam,
     String? note,
     EncounterPeriod? period,
-    dynamic custodian,
-    dynamic partOf,
-    dynamic carePlan,
     List<Condition>? conditions,
     List<Activity>? activities,
     List<Goal>? goals,
@@ -185,7 +177,7 @@ class Condition with _$Condition {
 @freezed
 class Activity with _$Activity {
   const factory Activity({
-    required int id,
+     int ? id,
     String? progress,
     PlannedActivityReference? plannedActivityReference,
   }) = _Activity;
@@ -197,7 +189,7 @@ class Activity with _$Activity {
 @freezed
 class PlannedActivityReference with _$PlannedActivityReference {
   const factory PlannedActivityReference({
-    required int id,
+     int ? id,
     String? type,
     ServiceRequest? serviceRequest,
     Communication? communication,
@@ -210,7 +202,8 @@ class PlannedActivityReference with _$PlannedActivityReference {
 @freezed
 class ServiceRequest with _$ServiceRequest {
   const factory ServiceRequest({
-    required int id,
+     int ? id,
+    int ? identifier,
     String? note,
     String? patientInstruction,
     BodySite? bodySite,
@@ -224,9 +217,9 @@ class ServiceRequest with _$ServiceRequest {
 @freezed
 class Communication with _$Communication {
   const factory Communication({
-    dynamic id,
-    dynamic status,
-    dynamic statusReason,
+    int ? id,
+    dynamic  status,
+    dynamic  statusReason,
     dynamic category,
     dynamic priority,
     dynamic doNotPerform,
@@ -245,19 +238,31 @@ class Communication with _$Communication {
 @freezed
 class Goal with _$Goal {
   const factory Goal({
-    required int id,
+    required int ? id,
     @TimestampConverter() DateTime? statusDate,
     String? statusReason,
     GoalAchievement? achievementStatus,
     GoalLifecycleStatus? lifecycleStatus,
     GoalCategory? category,
-    GoalOutcome? outcome,
+    List<GoalOutcomeModel>? outcome,
     @TimestampConverter() DateTime? startDate,
     @TimestampConverter() DateTime? dueDate,
     List<Target>? targets,
   }) = _Goal;
 
   factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
+}
+@freezed
+class GoalOutcomeModel with _$GoalOutcomeModel {
+  const factory GoalOutcomeModel({
+     int ?id,
+
+     GoalOutcome ? goalOutcome
+
+  }) = _GoalOutcomeModel;
+
+  factory GoalOutcomeModel.fromJson(Map<String, dynamic> json) =>
+      _$GoalOutcomeModelFromJson(json);
 }
 
 @freezed

@@ -19,7 +19,7 @@ class TriageUpdateModel with _$TriageUpdateModel {
     String? sourceVersion,
     List<IncompleteTestModel>? incompleteSection,
     int? cummulativeScore,
-    Map<String, int>? score,
+    List<Map<String, int> >? score,
     List<PatchImagingSelectionModel>? imagingSelection,
     List<PatchObservationsModel>? observations,
     List<PatchQuestionResponseModel>? questionResponse,
@@ -49,7 +49,7 @@ class PatchAnswerModel with _$PatchAnswerModel {
     int? id,
     Action? action,
     String? value,
-    double? answerCode,
+    int? answerCode,
     double? score,
   }) = _PatchAnswerModel;
 

@@ -37,7 +37,7 @@ class ReportPageHeader extends StatelessWidget {
                 ),
               ),
               child: CachedNetworkImage(
-                imageUrl: triageReportAndAssementPage.patientImage,
+                imageUrl: triageReportAndAssementPage.patientImage!,
                 height: 60,
                 width: 60,
                 fit: BoxFit.cover,
@@ -100,7 +100,7 @@ class ReportPageHeader extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        triageReportAndAssementPage.assessmentID,
+                        triageReportAndAssementPage.assessmentID.toString(),
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -123,7 +123,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        triageReportAndAssementPage.reportDate,
+                        triageReportAndAssementPage.reportDate.toString(),
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

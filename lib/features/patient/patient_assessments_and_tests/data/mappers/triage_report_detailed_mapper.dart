@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+
 
 class AssessmentDetailedReportMapper {
   static TriageReportDetailedEntity toEntity(
@@ -32,8 +32,8 @@ class AssessmentDetailedReportMapper {
       patientId: "${profileEntity.id}",
       patientName: profileEntity.name,
       patientImage: profileEntity.image,
-      assessmentID: "${triageDetailedReport.assessmentCode ?? ""}",
-      reportDate: triageDetailedReport.issued?.formateDateWithTime ?? "",
+      assessmentID: triageDetailedReport.assessmentCode!,
+      reportDate: triageDetailedReport.issued,
       questionResponseBriefEntity:
           AssessmentDetailedReportMapper._getQuestionsBriefEntity(
         triageAssessment,

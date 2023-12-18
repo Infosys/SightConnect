@@ -32,7 +32,7 @@ mixin _$TriageUpdateModel {
   List<IncompleteTestModel>? get incompleteSection =>
       throw _privateConstructorUsedError;
   int? get cummulativeScore => throw _privateConstructorUsedError;
-  Map<String, int>? get score => throw _privateConstructorUsedError;
+  List<Map<String, int>>? get score => throw _privateConstructorUsedError;
   List<PatchImagingSelectionModel>? get imagingSelection =>
       throw _privateConstructorUsedError;
   List<PatchObservationsModel>? get observations =>
@@ -64,7 +64,7 @@ abstract class $TriageUpdateModelCopyWith<$Res> {
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       int? cummulativeScore,
-      Map<String, int>? score,
+      List<Map<String, int>>? score,
       List<PatchImagingSelectionModel>? imagingSelection,
       List<PatchObservationsModel>? observations,
       List<PatchQuestionResponseModel>? questionResponse});
@@ -147,7 +147,7 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value.imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ abstract class _$$_TriageUpdateModelCopyWith<$Res>
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       int? cummulativeScore,
-      Map<String, int>? score,
+      List<Map<String, int>>? score,
       List<PatchImagingSelectionModel>? imagingSelection,
       List<PatchObservationsModel>? observations,
       List<PatchQuestionResponseModel>? questionResponse});
@@ -265,7 +265,7 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
       score: freezed == score
           ? _value._score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value._imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -297,7 +297,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
       this.cummulativeScore,
-      final Map<String, int>? score,
+      final List<Map<String, int>>? score,
       final List<PatchImagingSelectionModel>? imagingSelection,
       final List<PatchObservationsModel>? observations,
       final List<PatchQuestionResponseModel>? questionResponse})
@@ -350,14 +350,14 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
 
   @override
   final int? cummulativeScore;
-  final Map<String, int>? _score;
+  final List<Map<String, int>>? _score;
   @override
-  Map<String, int>? get score {
+  List<Map<String, int>>? get score {
     final value = _score;
     if (value == null) return null;
-    if (_score is EqualUnmodifiableMapView) return _score;
+    if (_score is EqualUnmodifiableListView) return _score;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<PatchImagingSelectionModel>? _imagingSelection;
@@ -479,7 +479,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
           final int? cummulativeScore,
-          final Map<String, int>? score,
+          final List<Map<String, int>>? score,
           final List<PatchImagingSelectionModel>? imagingSelection,
           final List<PatchObservationsModel>? observations,
           final List<PatchQuestionResponseModel>? questionResponse}) =
@@ -511,7 +511,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   @override
   int? get cummulativeScore;
   @override
-  Map<String, int>? get score;
+  List<Map<String, int>>? get score;
   @override
   List<PatchImagingSelectionModel>? get imagingSelection;
   @override
@@ -770,7 +770,7 @@ mixin _$PatchAnswerModel {
   int? get id => throw _privateConstructorUsedError;
   Action? get action => throw _privateConstructorUsedError;
   String? get value => throw _privateConstructorUsedError;
-  double? get answerCode => throw _privateConstructorUsedError;
+  int? get answerCode => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -786,11 +786,7 @@ abstract class $PatchAnswerModelCopyWith<$Res> {
       _$PatchAnswerModelCopyWithImpl<$Res, PatchAnswerModel>;
   @useResult
   $Res call(
-      {int? id,
-      Action? action,
-      String? value,
-      double? answerCode,
-      double? score});
+      {int? id, Action? action, String? value, int? answerCode, double? score});
 }
 
 /// @nodoc
@@ -828,7 +824,7 @@ class _$PatchAnswerModelCopyWithImpl<$Res, $Val extends PatchAnswerModel>
       answerCode: freezed == answerCode
           ? _value.answerCode
           : answerCode // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as int?,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -846,11 +842,7 @@ abstract class _$$_PatchAnswerModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      Action? action,
-      String? value,
-      double? answerCode,
-      double? score});
+      {int? id, Action? action, String? value, int? answerCode, double? score});
 }
 
 /// @nodoc
@@ -886,7 +878,7 @@ class __$$_PatchAnswerModelCopyWithImpl<$Res>
       answerCode: freezed == answerCode
           ? _value.answerCode
           : answerCode // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as int?,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -911,7 +903,7 @@ class _$_PatchAnswerModel implements _PatchAnswerModel {
   @override
   final String? value;
   @override
-  final double? answerCode;
+  final int? answerCode;
   @override
   final double? score;
 
@@ -957,7 +949,7 @@ abstract class _PatchAnswerModel implements PatchAnswerModel {
       {final int? id,
       final Action? action,
       final String? value,
-      final double? answerCode,
+      final int? answerCode,
       final double? score}) = _$_PatchAnswerModel;
 
   factory _PatchAnswerModel.fromJson(Map<String, dynamic> json) =
@@ -970,7 +962,7 @@ abstract class _PatchAnswerModel implements PatchAnswerModel {
   @override
   String? get value;
   @override
-  double? get answerCode;
+  int? get answerCode;
   @override
   double? get score;
   @override

@@ -140,14 +140,15 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     if (reportModel == null) {
       throw ServerException();
     }
+   
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
-      patientId: _patientId,
+      patientId: reportModel.subject,
       diagnosticReportId: reportModel.diagnosticReportId,
       organizationCode: reportModel.organizationCode,
       performer: [
         update_model.Performer(
           role: PerformerRole.PATIENT,
-          identifier: _patientId,
+          identifier:reportModel.subject,
         ),
       ],
       assementCode: reportModel.assessmentCode,
@@ -163,7 +164,16 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         getQuestionaireResponse(),
       ),
     );
-    return await _triageRepository.updateTriage(triage: triage);
+    try {
+      var res= await _triageRepository.updateTriage(triage: triage);
+    logger.f({"res update ",res});
+    return res;
+    } catch (e) {
+      logger.f({"res update ",e});
+      throw e;
+    }
+   
+    
   }
 
   Future<TriageDetailedReportModel?> getTriageReportByReportId(
@@ -195,7 +205,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
 
   List<update_model.PatchQuestionResponseModel> getQuestionaireResponseList(
     List<triage_detailed_model.Response>? response,
-    List<PostQuestionResponseModel> questionResponseList,
+    List<PostQuestionResponseModel> questionResponseListFromUI,
   ) {
     List<update_model.PatchQuestionResponseModel> questionResponseList = [];
     response?.forEach((element) {
@@ -206,7 +216,8 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         ),
       );
     });
-    for (var element in questionResponseList) {
+   
+    for (PostQuestionResponseModel element in questionResponseListFromUI) {
       questionResponseList.add(
         update_model.PatchQuestionResponseModel(
           action: Action.ADD,
@@ -214,9 +225,10 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
           score: element.score,
           answers: [
             update_model.PatchAnswerModel(
-              value: element.answers!.first.value,
-              score: element.answers!.first.score,
+              value: element.answer!.first.value,
+              score: element.answer!.first.score,
               action: Action.ADD,
+              answerCode: element.answer!.first.answerCode,
             )
           ],
         ),
@@ -226,15 +238,15 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     return questionResponseList;
   }
 
-  Map<String, int> getScore() {
+ List< Map<String, int>> getScore() {
     final qscore = _triageUrgencyRepository
         .questionnaireUrgency(getQuestionaireResponse());
 
-    return {
-      "QUESTIONNAIRE": qscore.toInt(),
-      "OBSERVATION": 0,
-      "IMAGE": 0,
-    };
+    return [
+     { "QUESTIONNAIRE": qscore.toInt()},
+     { "OBSERVATION": 0,},
+     { "IMAGE": 0}
+    ];
   }
 
   int getCummulativeScore() {

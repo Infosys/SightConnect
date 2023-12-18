@@ -10,18 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentCards extends ConsumerWidget {
-  final List<TriageReportBriefEntity> data;
+  final List<TriageReportBriefEntity> ? data;
   const AssessmentCards({
-    required this.data,
+     this.data,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView.builder(
-      itemCount: data.length,
+      itemCount:data==null ?0: data!.length,
       itemBuilder: (BuildContext context, int index) {
-        var currentData = data[index];
+        TriageReportBriefEntity currentData = data![index];
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -58,7 +58,7 @@ class AssessmentCards extends ConsumerWidget {
                         color: AppColor.green.withOpacity(0.4),
                       ),
                       child: Text(
-                        currentData.reportTag,
+                        currentData.reportTag??"NA",
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -75,7 +75,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          currentData.triageResultType,
+                          currentData.triageResultType??"NA",
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -85,7 +85,7 @@ class AssessmentCards extends ConsumerWidget {
                           height: 2,
                         ),
                         Text(
-                          currentData.reportTag,
+                          currentData.reportTag??"NA",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -108,7 +108,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          currentData.triageResultStartDate.formateDate,
+                          currentData.triageResultStartDate!.formateDate,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -121,7 +121,7 @@ class AssessmentCards extends ConsumerWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  currentData.triageResultDescription,
+                  currentData.triageResultDescription??"",
                   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -171,7 +171,7 @@ class AssessmentCards extends ConsumerWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: currentData.isUpdateEnabled
+                      onTap: currentData.isUpdateEnabled??false
                           ? () {
                               showDialog(
                                 context: context,
@@ -189,7 +189,7 @@ class AssessmentCards extends ConsumerWidget {
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: currentData.isUpdateEnabled
+                          color: currentData.isUpdateEnabled??false
                               ? AppColor.primary
                               : AppColor.grey,
                         ),
@@ -206,7 +206,7 @@ class AssessmentCards extends ConsumerWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority ? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";
@@ -216,10 +216,14 @@ String getRequestPriorityText(RequestPriority priority) {
       return "ASAP";
     case RequestPriority.STAT:
       return "STAT";
+    default: 
+      return "";
+
   }
+  
 }
 
-Color getRequestPriorityColor(RequestPriority priority) {
+Color getRequestPriorityColor(RequestPriority ? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return AppColor.red;
@@ -229,5 +233,7 @@ Color getRequestPriorityColor(RequestPriority priority) {
       return AppColor.orange;
     case RequestPriority.STAT:
       return AppColor.red;
+    default:
+      return AppColor.grey;
   }
 }

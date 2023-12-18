@@ -5,12 +5,12 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class TumblingEReportCard extends StatelessWidget {
-  const TumblingEReportCard({
+   TumblingEReportCard({
     super.key,
-    required this.tumblingEData,
+     this.tumblingEData,
      this.observationDescription,
   });
-  final List<ObservationBriefEntity> tumblingEData;
+   List<ObservationBriefEntity> ? tumblingEData;
   final String ? observationDescription;
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class TumblingEReportCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          tumblingEData.isEmpty
+          (tumblingEData==null ||  tumblingEData!.isEmpty)
               ? const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Center(
@@ -85,7 +85,7 @@ class TumblingEReportCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                tumblingEData[index].bodySite,
+                                tumblingEData![index].bodySite!,
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
@@ -93,12 +93,12 @@ class TumblingEReportCard extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                               Text(
-                                "${tumblingEData[index].observationValue}",
+                                "${tumblingEData![index].observationValue}",
                                 style: applyRobotoFont(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                   color: getColorBasedOnObservationValue(
-                                    tumblingEData[index].observationValue,
+                                    tumblingEData![index].observationValue,
                                   ),
                                 ),
                                 textAlign: TextAlign.left,
