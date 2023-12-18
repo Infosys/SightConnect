@@ -138,10 +138,22 @@ String _formateAge(
   String? mon,
   String? year,
 ) {
-  if (day == null || mon == null || year == null) return "";
-  final date = DateTime.parse("$year-$mon-$day");
-  final formatter = DateFormat("dd MMM yyyy");
-  return formatter.format(date);
+  try {
+    if (day != null && mon != null && year != null) {
+      final date = DateTime.parse("$year-$mon-$day");
+      final age = DateTime.now().difference(date).inDays ~/ 365;
+      return "$age years";
+    } else if (year != null) {
+      final currentYear = int.parse(year);
+      final age =
+          DateTime.now().difference(DateTime(currentYear)).inDays ~/ 365;
+      return "$age years";
+    } else {
+      return "";
+    }
+  } catch (e) {
+    return "";
+  }
 }
 
 String _formateAddress(

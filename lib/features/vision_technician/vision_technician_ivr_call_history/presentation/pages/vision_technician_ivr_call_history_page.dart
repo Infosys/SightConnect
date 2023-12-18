@@ -16,12 +16,6 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppbar(
-        leadingIcon: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () {
-            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-          },
-        ),
         title: Row(
           children: [
             Text(

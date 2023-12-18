@@ -53,16 +53,10 @@ class _VisionTechnicianPreliminaryAssessmentPageState
           ),
         ),
       ),
-      appBar: CustomAppbar(
+      appBar: const CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
-        title: const Text('Preliminary Assessment'),
-        leadingIcon: IconButton(
-          onPressed: () {
-            ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-          },
-          icon: const Icon(Icons.arrow_back_ios_new),
-        ),
+        title: Text('Preliminary Assessment'),
       ),
       body: Form(
         key: _formKey,

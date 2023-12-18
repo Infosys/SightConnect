@@ -66,7 +66,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const VisionTechnicianAssessmentTimeline(),
+            builder: (context) => const VisionTechnicianDashboardPage(),
           ),
           (route) => false,
         );

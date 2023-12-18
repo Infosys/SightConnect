@@ -26,6 +26,7 @@ class VTPatientList extends ConsumerWidget {
             child: DataTable(
               columnSpacing: AppSize.width(context) * 0.09,
               horizontalMargin: 12,
+              dataRowHeight: 60,
               decoration: BoxDecoration(
                 color: AppColor.white,
                 borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -82,18 +83,6 @@ class VTPatientList extends ConsumerWidget {
                 (index) => DataRow(
                   cells: generateListTile(listOfAssessments[index]),
                 ),
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Show More",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontWeight: FontWeight.w500,
-                color: AppColor.primary,
               ),
             ),
           ),
@@ -154,7 +143,7 @@ List<DataCell> generateListTile(VTPatientDto data) {
     ),
     DataCell(
       Text(
-        data.status!,
+        data.status ?? "",
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14),
@@ -162,7 +151,7 @@ List<DataCell> generateListTile(VTPatientDto data) {
     ),
     DataCell(
       Text(
-        data.category!,
+        data.category ?? "",
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(

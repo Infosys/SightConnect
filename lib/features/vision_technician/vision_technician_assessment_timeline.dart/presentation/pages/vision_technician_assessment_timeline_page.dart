@@ -69,7 +69,6 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TimelineProfile(model: patientSearchDto!),
               const SizedBox(height: AppSize.ksheight),

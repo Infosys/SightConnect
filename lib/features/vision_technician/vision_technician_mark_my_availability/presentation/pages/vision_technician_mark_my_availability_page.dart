@@ -72,14 +72,6 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
       appBar: CustomAppbar(
         titleSpacing: 0,
         centerTitle: false,
-        leadingIcon: Consumer(
-          builder: (context, ref, _) => IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new),
-            onPressed: () {
-              ref.read(visionTechnicianDashboardProvider).changeIndex(0);
-            },
-          ),
-        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

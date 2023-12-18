@@ -22,24 +22,25 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     var query = useState<String>("");
 
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: AppSize.klheight * 3,
-          title: VTSearchBar(
-            readOnly: false,
-            onSearched: (value) {
-              query.value = value;
-            },
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showVtSearchFilter(context);
-              },
-              icon: const Icon(Icons.filter_list),
-            ),
-          ],
+      appBar: AppBar(
+        toolbarHeight: AppSize.klheight * 3,
+        title: VTSearchBar(
+          readOnly: false,
+          onSearched: (value) {
+            query.value = value;
+          },
         ),
-        body: ref.watch(vtSearchProvider(query.value)).when(data: (list) {
+        actions: [
+          IconButton(
+            onPressed: () {
+              showVtSearchFilter(context);
+            },
+            icon: const Icon(Icons.filter_list),
+          ),
+        ],
+      ),
+      body: ref.watch(vtSearchProvider(query.value)).when(
+        data: (list) {
           return Align(
             alignment: Alignment.topCenter,
             child: SingleChildScrollView(
@@ -131,39 +132,19 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                 color: AppColor.grey,
                               ),
                             ),
-                            DataColumn(
-                              label: Text(
-                                "Category",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: applyFiraSansFont(
-                                  fontSize: 12,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                            ),
-                          ],
-                          rows: List<DataRow>.generate(
-                            list.length,
-                            (index) => DataRow(
-                              onSelectChanged: (value) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        VisionTechnicianAssessmentTimeline(
-                                      patientSearchDto: list[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              cells: generateListTileSearchResults(
-                                list[index],
+                          ),
+                        ],
+                        rows: List<DataRow>.generate(
+                          list.length,
+                          (index) => DataRow(
+                            onSelectChanged: (value) {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const VisionTechnicianAssessmentTimeline(
-                                          patientId: 1202),
+                                      VisionTechnicianAssessmentTimeline(
+                                    patientSearchDto: list[index],
+                                  ),
                                 ),
                               );
                             },
@@ -180,122 +161,128 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               ),
             ),
           );
-        }, loading: () {
+        },
+        error: (e, s) {
+          return const Center(child: EmptyResultCard());
+        },
+        loading: () {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        }, error: (e, s) {
-          return const Center(child: EmptyResultCard());
-        }));
+        },
+      ),
+    );
   }
-}
 
-List<DataCell> generateListTileSearchResults(VTPatientSearchDto data, context) {
-  return [
-    DataCell(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "${data.name}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
-          Text(
-            data.id.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 12,
-              color: AppColor.grey,
+  List<DataCell> generateListTileSearchResults(
+      VTPatientSearchDto data, context) {
+    return [
+      DataCell(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "${data.name}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(fontSize: 14),
             ),
-          ),
-        ],
-      ),
-    ),
-    DataCell(
-      Text(
-        data.mobile.toString(),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(fontSize: 14),
-      ),
-    ),
-    DataCell(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            data.encounterId.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
-          Text(
-            data.encounterStartDate.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: AppColor.grey,
+            Text(
+              data.id.toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
             ),
-          ),
-        ],
-      ),
-    ),
-    DataCell(
-      Text(
-        data.status.toString(),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(fontSize: 14),
-      ),
-    ),
-    DataCell(
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // button
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const VisionTechnicianPreliminaryAssessmentPage(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.edit),
-          )
-        ],
-      ),
-    ),
-    DataCell(
-      Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSize.kspadding / 1.5,
-          horizontal: AppSize.kspadding * 1.5,
+          ],
         ),
-        decoration: BoxDecoration(
-          color:
-              data.category!.contains("Early") ? AppColor.orange : AppColor.red,
-          borderRadius: BorderRadius.circular(AppSize.klradius),
-        ),
-        child: Text(
-          data.category.toString(),
+      ),
+      DataCell(
+        Text(
+          data.mobile.toString(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 14,
-            color: AppColor.white,
+          style: applyRobotoFont(fontSize: 14),
+        ),
+      ),
+      DataCell(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              data.encounterId.toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(fontSize: 14),
+            ),
+            Text(
+              data.encounterStartDate.toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: AppColor.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+      DataCell(
+        Text(
+          data.status.toString(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(fontSize: 14),
+        ),
+      ),
+      DataCell(
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // button
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const VisionTechnicianPreliminaryAssessmentPage(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.edit),
+            )
+          ],
+        ),
+      ),
+      DataCell(
+        Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSize.kspadding / 1.5,
+            horizontal: AppSize.kspadding * 1.5,
+          ),
+          decoration: BoxDecoration(
+            color: data.category!.contains("Early")
+                ? AppColor.orange
+                : AppColor.red,
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+          ),
+          child: Text(
+            data.category.toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.white,
+            ),
           ),
         ),
       ),
-    ),
-  ];
+    ];
+  }
 }
