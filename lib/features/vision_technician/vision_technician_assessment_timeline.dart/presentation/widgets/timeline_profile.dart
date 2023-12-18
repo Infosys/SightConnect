@@ -57,7 +57,7 @@ class TimelineProfile extends ConsumerWidget {
                   ),
                 ),
               ]),
-              const SizedBox(width: AppSize.klwidth),
+              SizedBox(width: AppSize.width(context) * 0.3),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
