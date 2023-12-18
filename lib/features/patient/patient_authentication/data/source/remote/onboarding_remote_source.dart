@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/models/profile_model.dart';
 
 var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
-  return PatientAuthRemoteSourceImpl(ref.read(onboardingDioProvider));
+  return PatientAuthRemoteSourceImpl(ref.read(dioProvider));
 });
 
 abstract class PatientAuthRemoteSource {
@@ -26,7 +26,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
 
   @override
   Future<PatientModel> onboardPatient(PatientModel patientDTO) async {
-    var endpoint = "/api/patients/onboard";
+    var endpoint = "orchestration/api/patients/onboard";
 
     var response = await _dio.post(endpoint, data: patientDTO.toJson());
 
@@ -40,7 +40,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> getPatientProfile(int patientId,
       [IdentifierType? identifierType, String? value]) async {
-    var endpoint = '/api/patients/extended';
+    var endpoint = 'orchestration/api/patients/extended';
     try {
       final response = await _dio.get(
         endpoint,
@@ -59,7 +59,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> updatePatientProfile(
       PatientModel patientDTO) async {
-    var endpoint = "/api/patients/${patientDTO.id}";
+    var endpoint = "orchestration/api/patients/${patientDTO.id}";
 
     var response = await _dio.put(endpoint, data: patientDTO.toJson());
 

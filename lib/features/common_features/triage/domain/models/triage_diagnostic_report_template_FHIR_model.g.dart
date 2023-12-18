@@ -347,12 +347,16 @@ const _$RangeCategoryEnumMap = {
 };
 
 const _$GenderEnumMap = {
+  Gender.Male: 'Male',
+  Gender.Female: 'Female',
+  Gender.Other: 'Other',
   Gender.MALE: 'MALE',
   Gender.FEMALE: 'FEMALE',
   Gender.OTHER: 'OTHER',
   Gender.M: 'M',
   Gender.F: 'F',
   Gender.O: 'O',
+  Gender.Unknown: 'Unknown',
 };
 
 _$_RangeModel _$$_RangeModelFromJson(Map<String, dynamic> json) =>
@@ -573,6 +577,10 @@ _$_QuestionnaireItemFHIRModel _$$_QuestionnaireItemFHIRModelFromJson(
           ?.map(
               (e) => AnswerItemWeightModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      relatedImage: (json['relatedImage'] as List<dynamic>?)
+          ?.map(
+              (e) => RelatedImageFHIRModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
@@ -598,6 +606,7 @@ Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
       'answerOption': instance.answerOption,
       'enableWhen': instance.enableWhen,
       'answerItemWeight': instance.answerItemWeight,
+      'relatedImage': instance.relatedImage,
     };
 
 const _$QuestionnaireTypeEnumMap = {

@@ -19,38 +19,38 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint = "/api/careQuestionnaireGenerator";
+    var endpoint = "assessments/api/diagnostic-report-templates/assessment/1351";
     logger.d({
       "API getTriageQuestionnaire": endpoint,
     });
-    Map<String, dynamic> bodyData = {
-      "name": "LVPEI EyeCare Triage",
-      "organizationCode": "LVPEI",
-      "condition": "VISION",
-      "assessmentType": "TRIAGE",
-      "organ": "EYE"
-    };
+    // Map<String, dynamic> bodyData = {
+    //   "name": "LVPEI EyeCare Triage",
+    //   "organizationCode": "LVPEI",
+    //   "condition": "VISION",
+    //   "assessmentType": "TRIAGE",
+    //   "organ": "EYE"
+    // };
 
-    // var response = await dio.get(endpoint, queryParameters: bodyData);
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    // } else {
-    //   throw ServerException();
-    // }
-    if (response.isNotEmpty) {
-      var data = jsonDecode(response);
-      return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    var response = await dio.get(endpoint);
+    // var response = await rootBundle.loadString("assets/triage_assessment.json");
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
+    // if (response.isNotEmpty) {
+    //   var data = jsonDecode(response);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    // } else {
+    //   throw ServerException();
+    // }
   }
 
   @override
   Future<TriageResponseModel> saveTriage({
     required TriageResponseModel triage,
   }) async {
-    var endpoint = "/api/triage-report";
+    var endpoint = "triage/api/triage-report";
     try {
       var response = await dio.post(
         endpoint,

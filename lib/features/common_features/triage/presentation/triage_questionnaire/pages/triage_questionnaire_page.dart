@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/trige_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
@@ -94,6 +95,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemCount: model.questionnaireSections.length,
               itemBuilder: (context, index) {
+                logger.d("${model.questionnaireSections.length}, is the length of the questions");
                 var question = model.questionnaireSections[index];
                 var isLastQuestion =
                     (model.questionnaireSections.length - 1 == index);
@@ -177,6 +179,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   return OptionCard(
                     question: question,
                     onNoButtonPressed: () {
+
                       model.addQuestionnaireAnswer(
                         question.id!,
                         false,
@@ -194,13 +197,22 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           ),
                         ).then(
                           (value) async {
+                            logger.d("This is log ");
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           },
                         );
                       }
+                      else {
+                        pageController.animateToPage(
+                          index + 1,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                      }
                     },
                     onYesButtonPressed: () {
+                      logger.d("This is log ");
                       model.addQuestionnaireAnswer(
                         question.id!,
                         true,
@@ -217,10 +229,19 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           ),
                         ).then(
                           (value) async {
+                            logger.d("This is log ");
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           },
                         );
+                      }
+                      else {
+                         pageController.animateToPage(
+                                      index + 1,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeIn,
+                                    );
                       }
                     },
                   );

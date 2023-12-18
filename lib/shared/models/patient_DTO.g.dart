@@ -62,6 +62,9 @@ const _$GenderEnumMap = {
   Gender.M: 'M',
   Gender.F: 'F',
   Gender.O: 'O',
+  Gender.Male: 'Male',
+  Gender.Female: 'Female',
+  Gender.Others: 'Others',
 };
 
 const _$RelationshipEnumMap = {
