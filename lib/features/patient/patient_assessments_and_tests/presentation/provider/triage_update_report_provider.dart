@@ -6,28 +6,27 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var traigeUpdateReportProvider = ChangeNotifierProvider.family(
-    (ref, int dignosticReportID) =>
-        PatientAssessmentCardProvider(dignosticReportID, ref));
+  (ref, int dignosticReportID) {
+    final triage = ref.watch(getTriageProvider).asData!.value;
+    return PatientAssessmentCardProvider(dignosticReportID, triage);
+  },
+);
 
 class PatientAssessmentCardProvider extends ChangeNotifier {
   final DiagnosticReportTemplateFHIRModel _triageAssessment;
   final int dignosticReportID;
-  final Ref ref;
 
-  PatientAssessmentCardProvider(this.dignosticReportID, this.ref)
-      : _triageAssessment = ref.watch(getTriageProvider).asData!.value;
+  PatientAssessmentCardProvider(this.dignosticReportID, this._triageAssessment);
 
   DiagnosticReportTemplateFHIRModel get triageAssessment => _triageAssessment;
 
   List<UpdateTriageReportAlertBoxEntity>
       getUpdateTriageReportAlertBoxEntityList(
           TriageDetailedReportModel report) {
-        
     List<UpdateTriageReportAlertBoxEntity> list = [];
     List<TestType> tests = [
       TestType.QUESTIONNAIRE,
@@ -118,7 +117,8 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
       return null;
     }
   }
-  RequestPriority ? getPriorityFromSeverity(Severity ? severity){
+
+  RequestPriority? getPriorityFromSeverity(Severity? severity) {
     switch (severity) {
       case Severity.ABNORMAL:
         return RequestPriority.ASAP;

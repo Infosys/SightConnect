@@ -26,7 +26,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
 
   @override
   Future<PatientModel> onboardPatient(PatientModel patientDTO) async {
-    var endpoint = "orchestration/api/patients/onboard";
+    const endpoint = "/services/orchestration/api/patients/onboard";
 
     var response = await _dio.post(endpoint, data: patientDTO.toJson());
 
@@ -40,7 +40,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> getPatientProfile(int patientId,
       [IdentifierType? identifierType, String? value]) async {
-    var endpoint = 'orchestration/api/patients/extended';
+    const endpoint = '/services/orchestration/api/patients/extended';
     try {
       final response = await _dio.get(
         endpoint,
@@ -59,7 +59,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> updatePatientProfile(
       PatientModel patientDTO) async {
-    var endpoint = "orchestration/api/patients/${patientDTO.id}";
+    final endpoint = "/services/orchestration/api/patients/${patientDTO.id}";
 
     var response = await _dio.put(endpoint, data: patientDTO.toJson());
 

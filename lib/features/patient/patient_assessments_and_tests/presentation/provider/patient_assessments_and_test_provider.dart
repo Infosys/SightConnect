@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/local_triage_report_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -55,10 +56,11 @@ var getEyeTriageReport = FutureProvider.family(
 var getTriageDetailedEyeReport = FutureProvider.family(
   (ref, int reportID) async {
     if (isResultOfflineMode) {
-     
-      return TriageDetailedReportModel.fromJson(
+      final data = TriageDetailedReportModel.fromJson(
         LocalTriageReportSource.local_triage_result[0],
       );
+
+      return data;
     } else {
       var response = await ref
           .watch(triageReportRepositoryProvider)
@@ -78,7 +80,6 @@ var getTriageDetailedEyeReport = FutureProvider.family(
 );
 
 var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
-
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
   DiagnosticReportTemplateFHIRModel? triageAssessment =
       ref.read(getTriageProvider).asData?.value;
@@ -91,17 +92,13 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
     "assessmentResponse": triageDetailedReport,
     "triageAssessment": triageAssessment,
   });
-  
-   if (triageDetailedReport==null){
-      throw ErrorDescription("Trige detailed report not found");
-  }
-  if (triageAssessment==null){
-      throw ErrorDescription("Assessment detail found");
+  if (triageAssessment == null) {
+    throw ErrorDescription("Assessment detail found");
   }
 
   final response = AssessmentDetailedReportMapper.toEntity(
     profileEntity,
-    triageDetailedReport,
+    triageDetailedReport!,
     triageAssessment,
   );
   logger.d({

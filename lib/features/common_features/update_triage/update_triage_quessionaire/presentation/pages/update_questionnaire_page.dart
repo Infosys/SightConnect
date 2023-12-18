@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_triage_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/widgets/update_option_card.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +151,9 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         MaterialPageRoute(
                           fullscreenDialog: true,
                           builder: (_) =>
-                               UpdateTriageQuestionnaireOtherSymptomPage(reportId: reportId,),
+                              UpdateTriageQuestionnaireOtherSymptomPage(
+                            reportId: reportId,
+                          ),
                         ),
                       );
                     }
@@ -170,7 +171,9 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         MaterialPageRoute(
                           fullscreenDialog: true,
                           builder: (_) =>
-                               UpdateTriageQuestionnaireOtherSymptomPage(reportId: reportId,),
+                              UpdateTriageQuestionnaireOtherSymptomPage(
+                            reportId: reportId,
+                          ),
                         ),
                       );
                     }

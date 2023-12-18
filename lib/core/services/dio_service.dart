@@ -9,11 +9,3 @@ var dioProvider = Provider(
     ),
   ),
 );
-
-var authDioProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      baseUrl: AppEnv.baseKeycloakUrl,
-    ),
-  ),
-);

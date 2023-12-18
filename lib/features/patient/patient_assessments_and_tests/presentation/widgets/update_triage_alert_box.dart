@@ -22,15 +22,13 @@ class UpdateTriageAlertBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var navigator = Navigator.of(context);
-     var model = ref.watch(traigeUpdateReportProvider(dignosticReportID));
+    var model = ref.watch(traigeUpdateReportProvider(dignosticReportID));
+
+    final navigator = Navigator.of(context);
+
     return ref.watch(getTriageDetailedEyeReport(dignosticReportID)).when(
       data: (data) {
-        logger.f({"getTriageDetailedEyeReport": data});
-       return Text("data $data");
-        List<UpdateTriageReportAlertBoxEntity> alertBoxEntityList =
-            model.getUpdateTriageReportAlertBoxEntityList(data);
-
+        final result = model.getUpdateTriageReportAlertBoxEntityList(data);
         return BlurDialogBox(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,54 +43,55 @@ class UpdateTriageAlertBox extends ConsumerWidget {
             ],
           ),
           content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: alertBoxEntityList
-                  .map(
-                    (e) => UpdateTriageAlertBoxListOptoion(
-                      title: e.title,
-                      subtitle: e.subtitle,
-                      subtitlecolor: e.subtitlecolor,
-                      chipText: e.chipText,
-                      chipColor: e.chipColor,
-                      onPressed: () {
-                        switch (e.testType) {
-                          case TestType.QUESTIONNAIRE:
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    UpdateTriageQuestionnairePage(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: result
+                .map(
+                  (e) => UpdateTriageAlertBoxListOptoion(
+                    title: e.title,
+                    subtitle: e.subtitle,
+                    subtitlecolor: e.subtitlecolor,
+                    chipText: e.chipText,
+                    chipColor: e.chipColor,
+                    onPressed: () {
+                      switch (e.testType) {
+                        case TestType.QUESTIONNAIRE:
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return UpdateTriageQuestionnairePage(
                                   questionnaireSections: model.triageAssessment
                                       .questionnaire!.questionnaireItem!,
                                   reportId: dignosticReportID,
-                                ),
-                              ),
-                            );
-                            break;
-                          case TestType.OBSERVATION:
-                            ref.read(globalProvider).setVAMode =
-                                VisionAcuityMode.UPDATE;
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const VisualAcuityTumblingPage(),
-                              ),
-                            );
-                            break;
-                          case TestType.IMAGE:
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) => const UpdateTriageEyeScanPage(
-
-                                ),
-                              ),
-                            );
-                            break;
-                        }
-                      },
-                    ),
-                  )
-                  .toList()),
+                                );
+                              },
+                            ),
+                          );
+                          break;
+                        case TestType.OBSERVATION:
+                          ref.read(globalProvider).setVAMode =
+                              VisionAcuityMode.UPDATE;
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisualAcuityTumblingPage(),
+                            ),
+                          );
+                          break;
+                        case TestType.IMAGE:
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const UpdateTriageEyeScanPage(),
+                            ),
+                          );
+                          break;
+                      }
+                    },
+                  ),
+                )
+                .toList(),
+          ),
           actions: const [],
         );
       },

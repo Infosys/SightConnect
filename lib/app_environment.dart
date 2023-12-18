@@ -16,17 +16,8 @@ class AppEnv {
 
   static String get baseUrl {
     return switch (env) {
-
       Env.DEV => 'http://10.0.2.2',
-      Env.PROD => 'http://eyecare4all-dev.infosysapps.com/services',
-
-    };
-  }
-
-  static String get baseKeycloakUrl {
-    return switch (env) {
-      Env.DEV => 'http://localhost:8080/realms/test',
-      Env.PROD => 'http://localhost:8080/realms/test',
+      Env.PROD => 'http://eyecare4all-dev.infosysapps.com',
     };
   }
 }
