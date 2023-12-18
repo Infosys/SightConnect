@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/test_name.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
@@ -19,8 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
 
-var getTriageProvider =
-    FutureProvider.autoDispose<DiagnosticReportTemplateFHIRModel>(
+var getTriageProvider = FutureProvider<DiagnosticReportTemplateFHIRModel>(
   (ref) async {
     var response = await ref.read(getTriageUseCase).call(GetTriageParam());
     return response.fold((failure) {
@@ -46,6 +46,7 @@ var triageProvider = ChangeNotifierProvider.autoDispose(
 
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
+
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
   final GetQuestionnaireResponseLocallyUseCase
@@ -65,29 +66,21 @@ class TriageProvider extends ChangeNotifier {
   );
 
   Future<Either<Failure, TriageResponseModel>> saveTriage() async {
-    ;
     List<PostImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())
-            .then(
-              (value) => value.fold((l) => [], (r) => r),
-            );
+            .then((value) => value.fold((l) => [], (r) => r));
 
     List<PostObservationsModel> observations =
         await _getVisionAcuityTumblingResponseLocallyUseCase
             .call(GetVisionAcuityTumblingResponseLocallyParam())
-            .then(
-              (value) => value.fold((l) => [], (r) => r),
-            );
+            .then((value) => value.fold((l) => [], (r) => r));
 
     List<PostQuestionResponseModel> questionResponse =
         await _getQuestionnaireResponseLocallyUseCase
-            .call(
-              GetQuestionnaireResponseLocallyParam(),
-            )
-            .then(
-              (value) => value.fold((l) => [], (r) => r),
-            );
+            .call(GetQuestionnaireResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
     final quessionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);
     final visualAcuityUrgency =
@@ -102,8 +95,7 @@ class TriageProvider extends ChangeNotifier {
 
     final triage = TriageResponseModel(
       patientId: _patientId,
-      //encounter id: is set by the backend
-      serviceType: 'OPTOMETRY',//change this to enum and keep it fixed
+      serviceType: 'OPTOMETRY',
       organizationCode: 231000,
       performer: [
         const PerformerModel(
@@ -111,8 +103,8 @@ class TriageProvider extends ChangeNotifier {
           identifier: 200102,
         )
       ],
-      assessmentCode: 30001,//from questionnaire MS
-      assessmentVersion: "v1",//questionnaire MS
+      assessmentCode: 30001, //from questionnaire MS
+      assessmentVersion: "v1", //questionnaire MS
       cummulativeScore: triageUrgency,
       score: {
         TriageStep.QUESTIONNAIRE: quessionnaireUrgency,
@@ -120,10 +112,17 @@ class TriageProvider extends ChangeNotifier {
         TriageStep.IMAGING: eyeScanUrgency,
       },
       issued: DateTime.now(),
-      userStartDate: DateTime.now(),//time at what the assessment has started considering all the cases like internet connection lost etc.
-      source: Source.PATIENT_APP,//Need to check once according to the role of the user
-      sourceVersion: "v1",//Confirm with deepthi either it is app version or something other
-      incompleteSection: [],//Need to check with avendra...
+      userStartDate: DateTime.now(),
+      source: Source.PATIENT_APP,
+      sourceVersion: "v1",
+      incompleteSection: [
+        const IncompleteTestModel(
+          testName: TestName.OBSERVATION,
+        ),
+        const IncompleteTestModel(
+          testName: TestName.IMAGING,
+        )
+      ],
       imagingSelection: imageSelection,
       observations: observations,
       questionResponse: questionResponse,

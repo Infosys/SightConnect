@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,6 +13,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  });
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -71,6 +76,45 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
+      throw UnknownException();
+    }
+  }
+
+  @override
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  }) async {
+    final id = triage.diagnosticReportId;
+
+    // var response =
+    //     await rootBundle.loadString("assets/triage_update_response.json");
+    // if (response.isNotEmpty) {
+    //   Map<String, dynamic> data = jsonDecode(response);
+    //   return TriageUpdateMapper.toResponseModel(data);
+    // } else {
+    //   throw ServerException();
+    // }
+    try {
+      var endpoint="/services/triage/api/triage-report/$id";
+      logger.f("reached here mahavir");
+      print(triage.toJson());
+      final response = await dio.patch(
+        endpoint,
+        data: triage.toJson(),
+      );
+      logger.f({"reched here": response});
+
+      if (response.statusCode != null) {
+        if (response.statusCode! >= 200 && response.statusCode! < 210) {
+          return TriageResponseModel.fromJson(response.data);
+        } else {
+          throw ServerException();
+        }
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      logger.f({"reched here error": e});
       throw UnknownException();
     }
   }

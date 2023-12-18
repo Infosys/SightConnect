@@ -1,4 +1,3 @@
-
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/body_site.dart';
@@ -24,46 +23,40 @@ part 'triage_detailed_report_model.g.dart';
 
 @freezed
 class TriageDetailedReportModel with _$TriageDetailedReportModel {
-  const factory TriageDetailedReportModel({
-    int ?encounterId,
-    int ?organizationCode,
-    ServiceType ?serviceType,
-    EncounterStatus ?encounterStatus, 
-     String? remarks,
-     EncounterPeriod ? encounterPeriod,
-     int ?diagnosticReportId,
-     int ?assessmentCode,
-     String ? assessmentVersion,
-     String ? category,
-     String? code,
-     @TimestampConverter() DateTime? issued,
-     @TimestampConverter() DateTime? userStartDate,
-     Source ? source, 
-     DiagnosticReportStatus ? status ,
-     String ? sourceVersion,
-     int ? performerId,
-     PerformerRole ? performerRole, 
-     List<IncompleteTest> ? incompleteTests,
-     List<Response> ? responses,
-     List<Observation> ? observations,
-     List<Media> ? media,
-     @TimestampConverter() DateTime? updateEndTime,
-     String ? diagnosticReportDescription,
-    String ? questionResultDescription,
-    String ? observationResultDescription,
-    String ? mediaResultDescription,
-     List<CarePlan> ? carePlans
-
-
-
-     
-  }) = _TriageDetailedReportModel;
+  const factory TriageDetailedReportModel(
+      {int? encounterId,
+      int? organizationCode,
+      ServiceType? serviceType,
+      EncounterStatus? encounterStatus,
+      String? remarks,
+      EncounterPeriod? encounterPeriod,
+      int? diagnosticReportId,
+      int? assessmentCode,
+      String? assessmentVersion,
+      @TimestampConverter() DateTime? issued,
+      @TimestampConverter() DateTime? userStartDate,
+      Source? source,
+      DiagnosticReportStatus? status,
+      String? sourceVersion,
+      int? performerId,
+      int ? subject,
+      PerformerRole? performerRole,
+      List<IncompleteTestModel>? incompleteTests,
+      List<Response>? responses,
+      List<Observation>? observations,
+      List<Media>? media,
+      @TimestampConverter() DateTime? updateEndTime,
+      String? diagnosticReportDescription,
+      String? questionResultDescription,
+      String? observationResultDescription,
+      String? mediaResultDescription,
+      Severity? cumulativeSeverity,
+      Severity? observationSeverity,
+      Severity? mediaSeverity,
+      Severity? questionResponseSeverity,
+      List<CarePlan>? carePlans}) = _TriageDetailedReportModel;
   factory TriageDetailedReportModel.fromJson(Map<String, dynamic> json) =>
       _$TriageDetailedReportModelFromJson(json);
-
-     
-  
-  
 }
 
 @freezed
@@ -79,14 +72,14 @@ class EncounterPeriod with _$EncounterPeriod {
 }
 
 @freezed
-class IncompleteTest with _$IncompleteTest {
-  const factory IncompleteTest({
+class IncompleteTestModel with _$IncompleteTestModel {
+  const factory IncompleteTestModel({
     required int id,
     required TestType testName,
-  }) = _IncompleteTest;
+  }) = _IncompleteTestModel;
 
-  factory IncompleteTest.fromJson(Map<String, dynamic> json) =>
-      _$IncompleteTestFromJson(json);
+  factory IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
+      _$IncompleteTestModelFromJson(json);
 }
 
 @freezed
@@ -94,7 +87,7 @@ class Answer with _$Answer {
   const factory Answer({
     required int id,
     required double score,
-    int ?  answerCode,
+    int? answerCode,
     required String value,
   }) = _Answer;
 
@@ -105,11 +98,10 @@ class Answer with _$Answer {
 class Response with _$Response {
   const factory Response({
     required int id,
-    @TimestampConverter() DateTime? authored,
     required int linkId,
     required double score,
-    dynamic author,
-     List<Answer> ?answers,
+   
+    List<Answer>? answers,
   }) = _Response;
 
   factory Response.fromJson(Map<String, dynamic> json) =>
@@ -120,12 +112,11 @@ class Response with _$Response {
 class Observation with _$Observation {
   const factory Observation({
     required int id,
-    int? performer,
-    @TimestampConverter() DateTime? issued,
-     int ?identifier,
-    Severity? interpretation,
-     String ?value,
-     double ?score,
+
+    int? identifier,
+
+    String? value,
+    double? score,
   }) = _Observation;
 
   factory Observation.fromJson(Map<String, dynamic> json) =>
@@ -136,14 +127,13 @@ class Observation with _$Observation {
 class Media with _$Media {
   const factory Media({
     required int id,
-    int? performer,
-    @TimestampConverter() DateTime? issued,
+
     int? identifier,
-     String ? baseUrl,
-     String ? endpoint,
+    String? baseUrl,
+    String? endpoint,
     BodySite? bodySite,
-     double ? score,
-    int ? fileId,
+    double? score,
+    String? fileId,
   }) = _Media;
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
@@ -152,22 +142,18 @@ class Media with _$Media {
 @freezed
 class CarePlan with _$CarePlan {
   const factory CarePlan({
-     required int carePlanId,
-     RequestStatus? carePlanStatus,
-     CarePlanCategory? category,
-    String ? title,
-    String ? description,
-     int ?subject,  //patient id
+    required int carePlanId,
+    RequestStatus? carePlanStatus,
+    CarePlanCategory? category,
+    String? title,
+    String? description,
+    int? subject, //patient id
     @TimestampConverter() DateTime? created,
-    int ? careTeam,
-    String ?  note,
-     EncounterPeriod ? period,
-    dynamic  custodian,
-    dynamic partOf,
-    dynamic carePlan,
-     List<Condition> ?conditions,
-     List<Activity> ?activities,
-     List<Goal> ?goals,
+    String? note,
+    EncounterPeriod? period,
+    List<Condition>? conditions,
+    List<Activity>? activities,
+    List<Goal>? goals,
   }) = _CarePlan;
 
   factory CarePlan.fromJson(Map<String, dynamic> json) =>
@@ -177,11 +163,11 @@ class CarePlan with _$CarePlan {
 @freezed
 class Condition with _$Condition {
   const factory Condition({
-    int ? id,
-     @TimestampConverter() DateTime? recordedDate,
+    int? id,
+    @TimestampConverter() DateTime? recordedDate,
     BodySite? bodySite,
-     String ? code,
-    String ? note,
+    String? code,
+    String? note,
   }) = _Condition;
 
   factory Condition.fromJson(Map<String, dynamic> json) =>
@@ -191,9 +177,9 @@ class Condition with _$Condition {
 @freezed
 class Activity with _$Activity {
   const factory Activity({
-    required int  id,
-    String ? progress,
-     PlannedActivityReference ? plannedActivityReference,
+     int ? id,
+    String? progress,
+    PlannedActivityReference? plannedActivityReference,
   }) = _Activity;
 
   factory Activity.fromJson(Map<String, dynamic> json) =>
@@ -203,10 +189,10 @@ class Activity with _$Activity {
 @freezed
 class PlannedActivityReference with _$PlannedActivityReference {
   const factory PlannedActivityReference({
-     required int  id,
-     String ? type,
-     ServiceRequest ? serviceRequest,
-     Communication ? communication,
+     int ? id,
+    String? type,
+    ServiceRequest? serviceRequest,
+    Communication? communication,
   }) = _PlannedActivityReference;
 
   factory PlannedActivityReference.fromJson(Map<String, dynamic> json) =>
@@ -216,11 +202,12 @@ class PlannedActivityReference with _$PlannedActivityReference {
 @freezed
 class ServiceRequest with _$ServiceRequest {
   const factory ServiceRequest({
-   required int id,
-    String ? note,
-     String ? patientInstruction,
+     int ? id,
+    int ? identifier,
+    String? note,
+    String? patientInstruction,
     BodySite? bodySite,
-     RequestPriority ? priority,
+    RequestPriority? priority,
   }) = _ServiceRequest;
 
   factory ServiceRequest.fromJson(Map<String, dynamic> json) =>
@@ -230,9 +217,9 @@ class ServiceRequest with _$ServiceRequest {
 @freezed
 class Communication with _$Communication {
   const factory Communication({
-    dynamic id,
-    dynamic status,
-    dynamic statusReason,
+    int ? id,
+    dynamic  status,
+    dynamic  statusReason,
     dynamic category,
     dynamic priority,
     dynamic doNotPerform,
@@ -251,29 +238,41 @@ class Communication with _$Communication {
 @freezed
 class Goal with _$Goal {
   const factory Goal({
-   required int id,
-   @TimestampConverter() DateTime? statusDate,
-     String ? statusReason,
-   GoalAchievement? achievementStatus,
+    required int ? id,
+    @TimestampConverter() DateTime? statusDate,
+    String? statusReason,
+    GoalAchievement? achievementStatus,
     GoalLifecycleStatus? lifecycleStatus,
-     GoalCategory ? category,
-    GoalOutcome ? outcome,
+    GoalCategory? category,
+    List<GoalOutcomeModel>? outcome,
     @TimestampConverter() DateTime? startDate,
-   @TimestampConverter() DateTime? dueDate,
-     List<Target> ?targets,
+    @TimestampConverter() DateTime? dueDate,
+    List<Target>? targets,
   }) = _Goal;
 
   factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
+}
+@freezed
+class GoalOutcomeModel with _$GoalOutcomeModel {
+  const factory GoalOutcomeModel({
+     int ?id,
+
+     GoalOutcome ? goalOutcome
+
+  }) = _GoalOutcomeModel;
+
+  factory GoalOutcomeModel.fromJson(Map<String, dynamic> json) =>
+      _$GoalOutcomeModelFromJson(json);
 }
 
 @freezed
 class Target with _$Target {
   const factory Target({
-    int ? id,
-    GoalMeasure ? measure,
+    int? id,
+    GoalMeasure? measure,
     String? detailString,
     int? detailQuantity,
-    String?  detailRange,
+    String? detailRange,
     GoalParameter? detailCodeableConcept,
     @TimestampConverter() DateTime? dueDate,
   }) = _Target;

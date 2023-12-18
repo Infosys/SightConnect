@@ -1,12 +1,11 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_detailed_report_mapper.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/local_triage_report_source.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -17,8 +16,12 @@ var isResultOfflineMode = true;
 
 var getEyeTriageReport = FutureProvider.family(
   (ref, int pId) async {
+    logger.d({"getEyeTriageReport": pId});
     if (isResultOfflineMode) {
       List<TriageReportBriefEntity> triageAssessment = [];
+      logger.d({
+        "Patient ID": pId,
+      });
 
       for (var element in LocalTriageReportSource.local_triage_result) {
         triageAssessment.add(
@@ -27,6 +30,7 @@ var getEyeTriageReport = FutureProvider.family(
           ),
         );
       }
+      logger.f({"getEyeTriageReportOffline": triageAssessment});
       return triageAssessment;
     } else {
       var response = await ref
@@ -77,14 +81,12 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
     "reportID": reportID,
   });
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
-  DiagnosticReportTemplateFHIRModel? triageAssessment = 
+  DiagnosticReportTemplateFHIRModel? triageAssessment =
       ref.read(getTriageProvider).asData?.value;
 
-  TriageDetailedReportModel? triageDetailedReport = 
+  TriageDetailedReportModel? triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
-  logger.d("abc" + triageDetailedReport.toString());
-logger.d("abc" + triageAssessment.toString());
   logger.d({
     "profile": profileEntity,
     "assessmentResponse": triageDetailedReport,
@@ -96,7 +98,7 @@ logger.d("abc" + triageAssessment.toString());
     triageDetailedReport!,
     triageAssessment!,
   );
-logger.d({
+  logger.d({
     "response": response,
   });
   return response;
@@ -116,7 +118,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   List<TriageReportUserEntity> getUsers() {
     PatientResponseModel? patient =
-        ref.read(getPatientProfileProvider).asData?.value;
+        ref.read(getPatientProfileByIdProvider).asData?.value;
 
     List<TriageReportUserEntity> users = [];
 
@@ -146,8 +148,11 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
 
   TriageReportUserEntity get selectedUser => _selectedUser;
 
+  /// TODO: This is not working
+
   set setSelectedUser(String? value) {
     _selectedUser = getUsers().firstWhere((element) => element.name == value);
+    ref.read(getEyeTriageReport(_selectedUser.id));
     notifyListeners();
   }
 }

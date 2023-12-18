@@ -47,7 +47,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
                   data.questionnaire?.questionnaireItem ?? [],
             );
           case 1:
-            ref.read(globalProvider).setHideTumblingElement = false;
+            ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
             return const VisualAcuityTumblingPage();
           case 2:
             return const TriageEyeScanPage();

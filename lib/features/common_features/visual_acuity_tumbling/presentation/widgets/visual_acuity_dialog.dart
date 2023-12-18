@@ -60,7 +60,7 @@ class VisualAcuityDialog {
                                 visualAcuityTumblingTestDialogProvider.notifier)
                             .state = true;
                         ref.read(triageStepperProvider).goToNextStep();
-                        if (!ref.read(globalProvider).hideTumblingElement) {
+                        if (ref.read(globalProvider).isTriageMode()) {
                           await ref
                               .read(tumblingTestProvider)
                               .saveVisionAcuityResponseToDB();
@@ -71,13 +71,17 @@ class VisualAcuityDialog {
                               fullscreenDialog: true,
                             ),
                           );
-                        } else {
+                        } else if (ref
+                            .read(globalProvider)
+                            .isStandaloneMode()) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
                                   const TumblingResultReportPage(),
                             ),
                           );
+                        } else {
+                          // TODO: Naviagt to next page
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.proceedButton),

@@ -12,7 +12,9 @@ import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 
 class SwipeGestureCard extends HookConsumerWidget {
-  const SwipeGestureCard({super.key});
+  const SwipeGestureCard({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

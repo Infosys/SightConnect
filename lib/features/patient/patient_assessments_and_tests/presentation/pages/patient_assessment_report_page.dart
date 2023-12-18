@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
@@ -16,17 +16,15 @@ import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 class PatientAssessmentReportPage extends ConsumerWidget {
-  final int diagnosticReportId;
-  const PatientAssessmentReportPage({
-    required this.diagnosticReportId,
+   int  diagnosticReportId;
+   PatientAssessmentReportPage({
+    required  this.diagnosticReportId,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     return ref.watch(getAssementDetailsReport(diagnosticReportId)).when(
       data: (TriageReportDetailedEntity assessmentDetailsReport) {
         return Scaffold(
@@ -41,7 +39,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   ),
                   decoration: const BoxDecoration(color: AppColor.orange),
                   child: Text(
-                    getRequestPriorityText(assessmentDetailsReport.priority),
+                    getRequestPriorityText(
+                        assessmentDetailsReport.overallpriority),
                     style: applyRobotoFont(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -61,8 +60,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   ReportPageHeader(
                     triageReportAndAssementPage: assessmentDetailsReport,
                   ),
-                   AssessmentOverallResultCard(
-                    triageResult: {},
+                  AssessmentOverallResultCard(
+                    triageResult: const {},
                     name: "name",
                     id: "id",
                     patientImage: AppImages.aboutUs,
@@ -75,8 +74,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                   TumblingEReportCard(
                     tumblingEData:
                         assessmentDetailsReport.visualAcuityBreifEntity,
-                      observationDescription: assessmentDetailsReport.observationResultDescription,
-                    
+                    observationDescription:
+                        assessmentDetailsReport.observationResultDescription,
                   ),
                   EyeScanTabView(
                     eyeScanData: assessmentDetailsReport.imageBriefEntity,
@@ -100,8 +99,8 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         );
       },
       error: (error, stack) {
-        logger.d("eroor "+error.toString());
-        logger.d("stack " +stack.toString());
+        logger.d("eroor $error");
+        logger.d("stack $stack");
         return const Scaffold(
           body: Center(
             child: Text("The full report is not available at the moment."),
@@ -112,7 +111,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority priority) {
+String getRequestPriorityText(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";

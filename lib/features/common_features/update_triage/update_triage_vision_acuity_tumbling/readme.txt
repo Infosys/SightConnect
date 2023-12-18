@@ -1,0 +1,1 @@
+/// Vision acuity is a stand alone feature and is used to update by enum in global triageProvider

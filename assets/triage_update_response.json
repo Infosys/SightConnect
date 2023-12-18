@@ -1,0 +1,151 @@
+{
+    "id": 33200000003,
+    "assessmentCode": 10000001,
+    "assessmentVersion": "1.0",
+    "category": null,
+    "code": null,
+    "issued": "2023-10-12T14:11:33Z",
+    "userStartDate": "2023-12-14T19:41:33+05:30",
+    "source": "PATIENT_APP",
+    "status": "FINAL",
+    "subject": 9627849173,
+    "observationSeverity": "ABNORMAL",
+    "questionResponseSeverity": "ABNORMAL",
+    "mediaSeverity": null,
+    "cumulativeSeverity": "ABNORMAL",
+    "sourceVersion": "1.0",
+    "isDeleted": false,
+    "performerId": 9627849171,
+    "performerRole": "PATIENT",
+    "incompleteTests": [],
+    "responses": [
+        {
+            "id": 2551,
+            "authored": null,
+            "linkId": 2001,
+            "score": 1.0,
+            "author": null,
+            "answers": [
+                {
+                    "id": 2601,
+                    "score": 1.0,
+                    "answerCode": null,
+                    "value": "YES"
+                }
+            ]
+        },
+        {
+            "id": 2552,
+            "authored": null,
+            "linkId": 2002,
+            "score": 1.0,
+            "author": null,
+            "answers": [
+                {
+                    "id": 2602,
+                    "score": 1.0,
+                    "answerCode": null,
+                    "value": "NO"
+                }
+            ]
+        },
+        {
+            "id": 2553,
+            "authored": null,
+            "linkId": 2001,
+            "score": 3.0,
+            "author": null,
+            "answers": [
+                {
+                    "id": 2603,
+                    "score": 1.0,
+                    "answerCode": null,
+                    "value": "YES"
+                },
+                {
+                    "id": 2604,
+                    "score": 3.0,
+                    "answerCode": null,
+                    "value": "NO"
+                }
+            ]
+        }
+    ],
+    "observations": [
+        {
+            "id": 2501,
+            "performer": null,
+            "issued": null,
+            "identifier": 1002,
+            "interpretation": null,
+            "value": "0.75",
+            "score": 2.0
+        },
+        {
+            "id": 2502,
+            "performer": null,
+            "issued": null,
+            "identifier": 1002,
+            "interpretation": null,
+            "value": "1",
+            "score": 2.0
+        },
+        {
+            "id": 2503,
+            "performer": null,
+            "issued": null,
+            "identifier": 1003,
+            "interpretation": null,
+            "value": "5.0",
+            "score": 17.0
+        }
+    ],
+    "media": [
+        {
+            "id": 2451,
+            "performer": null,
+            "issued": null,
+            "identifier": 1,
+            "baseUrl": "http//www.abc.com",
+            "endpoint": "/c/newimage.jpg",
+            "bodySite": null,
+            "score": 0.0,
+            "fileId": null
+        },
+        {
+            "id": 2452,
+            "performer": null,
+            "issued": null,
+            "identifier": 1,
+            "baseUrl": "http//www.abc.com",
+            "endpoint": "/c/newimage.jpg",
+            "bodySite": null,
+            "score": 13.0,
+            "fileId": 123
+        }
+    ],
+    "encounter": {
+        "id": 33300000001,
+        "uuid": "109bb016-88b8-4911-a115-64efbd10e66e",
+        "serviceProvider": 88000004,
+        "subject": 9627849173,
+        "serviceType": "OPTOMETRY",
+        "status": "IN_PROGRESS",
+        "isDeleted": false,
+        "remarks": null,
+        "performerReference": 1001,
+        "period": {
+            "id": 1051,
+            "start": "2023-12-14T19:41:33+05:30",
+            "end": null
+        },
+        "partOf": null,
+        "mrn": null
+    },
+    "updateEndTime": "2023-12-16T19:41:33+05:30",
+    "diagnosticReportDescription": "Seeking immediate attention from an eye specialist is crucial to address your condition effectively. Please schedule a consultation without delay",
+    "questionResultDescription": "You might need to see an eye specialist.",
+    "observationResultDescription": "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
+    "mediaResultDescription": null,
+    "deleted": false
+}

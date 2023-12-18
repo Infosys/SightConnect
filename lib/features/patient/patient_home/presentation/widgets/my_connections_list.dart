@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
@@ -19,7 +18,7 @@ class MyConnectionsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getPatientProfileProvider).when(
+    return ref.watch(getPatientProfileByIdProvider).when(
       data: (patient) {
         final connectionsList = patient.profile?.patient?.relatedParty;
         return _content(context, connectionsList ?? []);

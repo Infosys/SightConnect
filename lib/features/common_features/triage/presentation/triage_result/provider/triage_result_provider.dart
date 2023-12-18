@@ -10,7 +10,8 @@ import '../../../../../../core/constants/app_color.dart';
 var triageResultProvider = ChangeNotifierProvider.autoDispose
     .family<TriageResultProvider, TriageResponseModel>(
   (ref, result) {
-    final patient = ref.watch(getPatientProfileProvider).asData?.value.profile;
+    final patient =
+        ref.watch(getPatientProfileByIdProvider).asData?.value.profile;
 
     return TriageResultProvider(result, patient);
   },
