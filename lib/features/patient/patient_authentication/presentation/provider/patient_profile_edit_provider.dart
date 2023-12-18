@@ -108,7 +108,8 @@ class PatientEditProfileProvider extends ChangeNotifier {
       }
     });
 
-    _nameController.text = _patient.profile?.patient?.name ?? "";
+    _firstNameController.text = _patient.profile?.patient?.name ?? "";
+    _lastNameController.text = _patient.profile?.patient?.name ?? "";
     _mobileNumberController.text = _patient.profile?.patient?.phoneNumber ?? "";
     _emailController.text = _patient.profile?.patient?.email ?? "";
     _abhaidController.text = '${_patient.profile?.patient?.abhaNumber ?? ""}';
@@ -116,9 +117,9 @@ class PatientEditProfileProvider extends ChangeNotifier {
     _dobController.text = "${_patient.profile?.patient?.yearOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.dayOfBirth ?? ""}";
     _doorNoController.text = _patient.profile?.patient?.address?.first.line ?? "";
     _streetController.text = _patient.profile?.patient?.address?.first.ward ?? "";
-    _subDistrictController.text = _patient.profile?.patient?.address?.first.town ?? "";
+    _subDistrictController.text = _patient.profile?.patient?.address?.first.subDistrict ?? "";
     _districtController.text = _patient.profile?.patient?.address?.first.district ?? "";
-    _cityController.text = _patient.profile?.patient?.address?.first.village ?? "";
+    _cityController.text = _patient.profile?.patient?.address?.first.town ?? "";
     _stateController.text = _patient.profile?.patient?.address?.first.state ?? "";
     _pincodeController.text = _patient.profile?.patient?.address?.first.pincode ?? "";
     _gender = _patient.profile?.patient?.gender.toString().split(".").last.capitalize() ?? "";
@@ -131,7 +132,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
   XFile? _imageFile;
   PatientResponseModel _patient = PatientResponseModel();
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _dobController = TextEditingController();
@@ -148,20 +149,18 @@ class PatientEditProfileProvider extends ChangeNotifier {
   String? _gender;
   bool _isLoading = false;
 
-  XFile? get image => _imageFile;
-  set image(XFile? value) {
-    _imageFile = value;
-    notifyListeners();
-  }
+  XFile? get imageFile => _imageFile;
+
+  set imageFile(XFile? value) => _imageFile = value;
 
   set setGender(String value) => _gender = value;
   String? get gender => _gender;
 
-  PatientResponseModel get patient => this._patient;
+  PatientResponseModel get patient => _patient;
 
-  set patient(PatientResponseModel value) => this._patient = value;
+  set patient(PatientResponseModel value) => _patient = value;
 
-  TextEditingController get name => _nameController;
+  TextEditingController get firstName => _firstNameController;
   TextEditingController get lastName => _lastNameController;
   TextEditingController get age => _ageController;
   TextEditingController get dob => _dobController;
@@ -242,7 +241,8 @@ class PatientEditProfileProvider extends ChangeNotifier {
       _patient = result;
     });
 
-    _nameController.text = _patient.profile?.patient?.name ?? "";
+    _firstNameController.text = _patient.profile?.patient?.name ?? "";
+    _lastNameController.text = _patient.profile?.patient?.name ?? "";
     _mobileNumberController.text = _patient.profile?.patient?.phoneNumber ?? "";
     _emailController.text = _patient.profile?.patient?.email ?? "";
     _abhaidController.text = _patient.profile?.patient?.abhaNumber.toString() ?? "";
@@ -250,9 +250,9 @@ class PatientEditProfileProvider extends ChangeNotifier {
     _dobController.text = "${_patient.profile?.patient?.dayOfBirth ?? ""}/${_patient.profile?.patient?.monthOfBirth ?? ""}/${_patient.profile?.patient?.yearOfBirth ?? ""}";
     _doorNoController.text = _patient.profile?.patient?.address?.first.line ?? "";
     _streetController.text = _patient.profile?.patient?.address?.first.ward ?? "";
-    _subDistrictController.text = _patient.profile?.patient?.address?.first.town ?? "";
+    _subDistrictController.text = _patient.profile?.patient?.address?.first.district ?? "";
     _districtController.text = _patient.profile?.patient?.address?.first.district ?? "";
-    _cityController.text = _patient.profile?.patient?.address?.first.village ?? "";
+    _cityController.text = _patient.profile?.patient?.address?.first.town ?? "";
     _stateController.text = _patient.profile?.patient?.address?.first.state ?? "";
     _pincodeController.text = _patient.profile?.patient?.address?.first.pincode ?? "";
     _gender = _patient.profile?.patient?.gender.toString().split(".").last.capitalize() ?? "";
@@ -327,7 +327,8 @@ class PatientEditProfileProvider extends ChangeNotifier {
         ),
         abhaAddress: _patient.profile?.patient?.abhaAddress,
         gender: _gender == "Male" ? Gender.MALE : _gender == "Female" ? Gender.FEMALE : Gender.OTHER,
-        name: _nameController.text + _lastNameController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
         age: int.parse(_ageController.text),
         profilePhoto: _patient.profile?.patient?.profilePhoto,
         dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),

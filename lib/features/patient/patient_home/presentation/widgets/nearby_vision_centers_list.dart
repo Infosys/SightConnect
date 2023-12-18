@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var data = nearByVisionCenter;
+    // var data = nearByVisionCenter;
 
     return Container(
       decoration: BoxDecoration(
@@ -54,19 +55,19 @@ class NearbyVisionCentersList extends ConsumerWidget {
           ),
           ref.watch(nearByVisionCenterProvider).when(
                 data: (data) {
-                  return const SizedBox();
-                  // return SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: [
-                  //       ...data
-                  //           .map(
-                  //             (e) => NearbyVisionCentersCard(data: e),
-                  //           )
-                  //           .toList()
-                  //     ],
-                  //   ),
-                  // );
+                  // return const SizedBox();
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ...data
+                            .map(
+                              (e) => NearbyVisionCentersCard(data: e),
+                            )
+                            .toList()
+                      ],
+                    ),
+                  );
                 },
                 loading: () => const Center(
                   child: CircularProgressIndicator(),

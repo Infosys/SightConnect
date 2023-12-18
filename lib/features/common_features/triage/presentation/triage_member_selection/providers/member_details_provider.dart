@@ -86,7 +86,8 @@ MemberDetailsProvider(this._ref);
     _isLoading = true;
     notifyListeners();
     var patient = PatientModel(
-      name: _name,
+      firstName: _name.split(" ").first,
+      lastName: _name.split(" ").last,
       dayOfBirth: _dob.split("/")[0],
       monthOfBirth: _dob.split("/")[1],
       yearOfBirth: _dob.split("/")[2],

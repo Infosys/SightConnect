@@ -3,10 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_edit_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -14,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
-import '../widgets/camera_helper.dart';
 import '../widgets/profile_edit_form_helper.dart';
 
 class PatientEditProfilePage extends HookConsumerWidget {
@@ -37,6 +34,7 @@ class PatientEditProfilePage extends HookConsumerWidget {
           onPressed: () {
             try {
               //MAKE API CALL HERE
+              data.updatePatientDetails();
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -98,10 +96,13 @@ class PatientEditProfilePage extends HookConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            data.image == null
+                            data.imageFile == null
                                 ? InkWell(
                                     onTap: () async {
                                       //Image Picker
+                                      final ImagePicker picker = ImagePicker();
+                                      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                                      data.imageFile = image;
                                     },
                                     child: const Icon(
                                       Icons.camera_alt_outlined,
@@ -110,7 +111,7 @@ class PatientEditProfilePage extends HookConsumerWidget {
                                     ),
                                   )
                                 : Image.file(
-                                    File(data.image!.path),
+                                    File(data.imageFile!.path),
                                     fit: BoxFit.cover,
                                     height: 50,
                                     width: 50,
@@ -127,7 +128,7 @@ class PatientEditProfilePage extends HookConsumerWidget {
                         ),
                       ),
                       customTextFieldRows(
-                        data.name,
+                        data.firstName,
                         data.lastName,
                         "First Name",
                         "Last Name",

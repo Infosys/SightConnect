@@ -102,8 +102,8 @@ class TriageProvider extends ChangeNotifier {
 
     final triage = TriageResponseModel(
       patientId: _patientId,
-      encounterId: 100001,
-      serviceType: 'OPTOMETRY',
+      //encounter id: is set by the backend
+      serviceType: 'OPTOMETRY',//change this to enum and keep it fixed
       organizationCode: 231000,
       performer: [
         const PerformerModel(
@@ -111,8 +111,8 @@ class TriageProvider extends ChangeNotifier {
           identifier: 200102,
         )
       ],
-      assessmentCode: 30001,
-      assessmentVersion: "v1",
+      assessmentCode: 30001,//from questionnaire MS
+      assessmentVersion: "v1",//questionnaire MS
       cummulativeScore: triageUrgency,
       score: {
         TriageStep.QUESTIONNAIRE: quessionnaireUrgency,
@@ -120,10 +120,10 @@ class TriageProvider extends ChangeNotifier {
         TriageStep.IMAGING: eyeScanUrgency,
       },
       issued: DateTime.now(),
-      userStartDate: DateTime.now(),
-      source: Source.PATIENT_APP,
-      sourceVersion: "v1",
-      incompleteSection: [],
+      userStartDate: DateTime.now(),//time at what the assessment has started considering all the cases like internet connection lost etc.
+      source: Source.PATIENT_APP,//Need to check once according to the role of the user
+      sourceVersion: "v1",//Confirm with deepthi either it is app version or something other
+      incompleteSection: [],//Need to check with avendra...
       imagingSelection: imageSelection,
       observations: observations,
       questionResponse: questionResponse,
