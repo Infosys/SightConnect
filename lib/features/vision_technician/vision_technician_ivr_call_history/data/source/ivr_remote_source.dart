@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/ivr_call_history_model.dart';
+import '../../domain/model/ivr_call_history_model.dart';
 
 var ivrRemoteSource = Provider(
   (ref) => IvrRemoteSourceImpl(
@@ -26,9 +26,11 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
       {required String mobile, List<String>? callStatus}) async {
     String url = "/api/users/calls";
     Map<String, dynamic> queryParameters = {
-      "mobile": mobile,
-      "callStatus": callStatus
+      "mobile": mobile
     };
+    if(callStatus != null && callStatus.isNotEmpty){
+      queryParameters.addAll({"callStatus": callStatus});
+    }
     return await _dio.get(url, queryParameters: queryParameters).then((value) {
       List<IvrCallHistoryModel> list = [];
       value.data.forEach((element) {

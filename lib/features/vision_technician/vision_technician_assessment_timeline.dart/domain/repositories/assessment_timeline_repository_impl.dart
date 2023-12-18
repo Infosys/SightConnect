@@ -16,7 +16,7 @@ class AssessmentTimelineRepositoryImpl extends AssessmentTimelineRepository {
 
   @override
   Future<List<AssessmentTimelineViewModel>> getAssessmentTimeline(
-      String encounterId) async {
+      int encounterId) async {
     return await assessmentTimeLineSource.getAssessmentTimeLine(encounterId);
   }
 }

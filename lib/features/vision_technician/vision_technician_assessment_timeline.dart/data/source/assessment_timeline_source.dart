@@ -12,7 +12,7 @@ var assessmentTimeLineSource = Provider(
 
 abstract class AssessmentTimeLineSource {
   Future<List<AssessmentTimelineViewModel>> getAssessmentTimeLine(
-      String encounterId);
+      int encounterId);
 }
 
 class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
@@ -22,7 +22,7 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
 
   @override
   Future<List<AssessmentTimelineViewModel>> getAssessmentTimeLine(
-      String encounterId) async {
+      int encounterId) async {
     String url = "/api/triage/encounters/$encounterId/timeline";
     return await _dio.get(url).then((value) {
       List<AssessmentTimelineViewModel> list = [];

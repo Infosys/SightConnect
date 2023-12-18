@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,40 +10,40 @@ import 'package:intl/intl.dart';
 import '../../domain/models/assessment_timeline_view_model.dart';
 
 class AssessmentTimelineView extends ConsumerWidget {
-  AssessmentTimelineView({super.key});
+  const AssessmentTimelineView(this.timeLineList, {super.key});
+
+  final List<AssessmentTimelineViewModel> timeLineList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<AssessmentTimelineViewModel> timeLineList =
-        ref.watch(assessmentTimelineProvider).timeLineList;
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         return ListTile(
-          contentPadding: EdgeInsets.all(0),
-          leading: Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: timeLineList[index].type == "Success"
-                    ? AppColor.altGreen
-                    : AppColor.red,
-              ),
-            ),
-            child: timeLineList[index].type == "Success"
-                ? const Icon(
-                    Icons.check,
-                    color: AppColor.altGreen,
-                    size: 20,
-                  )
-                : const Icon(
-                    Icons.close,
-                    color: AppColor.red,
-                    size: 20,
-                  ),
-          ),
+          contentPadding: const EdgeInsets.all(0),
+          // leading: Container(
+          //   padding: const EdgeInsets.all(3),
+          //   decoration: BoxDecoration(
+          //     shape: BoxShape.circle,
+          //     border: Border.all(
+          //       color: timeLineList[index].type == "Success"
+          //           ? AppColor.altGreen
+          //           : AppColor.red,
+          //     ),
+          //   ),
+          //   child: timeLineList[index].type == "Success"
+          //       ? const Icon(
+          //           Icons.check,
+          //           color: AppColor.altGreen,
+          //           size: 20,
+          //         )
+          //       : const Icon(
+          //           Icons.close,
+          //           color: AppColor.red,
+          //           size: 20,
+          //         ),
+          // ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -160,41 +159,38 @@ Widget TimeWidgetRender(
           ],
         ),
       if (timeLine.assessmentId != "")
-        InkWell(
-          onTap: () {},
-          child: Row(
-            children: [
-              const Icon(
-                Icons.file_open,
-                size: 20,
+        Row(
+          children: [
+            const Icon(
+              Icons.file_open,
+              size: 20,
+            ),
+            const SizedBox(
+              width: AppSize.kswidth,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const VisionTechnicianAssessmentReportPage();
+                  },
+                ));
+              },
+              child: Text(
+                timeLine.assessmentId,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: applyRobotoFont(
+                    fontSize: 12,
+                    color: AppColor.blue,
+                    decoration: TextDecoration.combine(
+                      [
+                        TextDecoration.underline,
+                      ],
+                    )),
               ),
-              const SizedBox(
-                width: AppSize.kswidth,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return VisionTechnicianAssessmentReportPage();
-                    },
-                  ));
-                },
-                child: Text(
-                  timeLine.assessmentId,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.blue,
-                      decoration: TextDecoration.combine(
-                        [
-                          TextDecoration.underline,
-                        ],
-                      )),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
     ],
   );

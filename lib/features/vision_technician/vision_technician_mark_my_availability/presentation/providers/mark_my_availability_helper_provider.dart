@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/repositories/availability_repository_impl.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/models/mark_my_availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/repositories/availability_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
