@@ -18,7 +18,6 @@ class AssessmentDetailedReportMapper {
       "profileEntity": profileEntity,
       "triageDetailedReport": triageDetailedReport,
       "triageAssessment": triageAssessment,
-      "observationSeverity": triageDetailedReport.observationSeverity,
     });
     return TriageReportDetailedEntity(
       triageResultDescription:

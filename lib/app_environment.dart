@@ -17,7 +17,7 @@ class AppEnv {
   static String get baseUrl {
     return switch (env) {
 
-      Env.DEV => 'http://eyecare4all-dev.infosysapps.com/services',
+      Env.DEV => 'http://10.0.2.2',
       Env.PROD => 'http://eyecare4all-dev.infosysapps.com/services',
 
     };

@@ -77,9 +77,7 @@ var getTriageDetailedEyeReport = FutureProvider.family(
 );
 
 var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
-  logger.d({
-    "reportID": reportID,
-  });
+
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
   DiagnosticReportTemplateFHIRModel? triageAssessment =
       ref.read(getTriageProvider).asData?.value;
@@ -87,16 +85,23 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
   TriageDetailedReportModel? triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
-  logger.d({
+  logger.f({
     "profile": profileEntity,
     "assessmentResponse": triageDetailedReport,
     "triageAssessment": triageAssessment,
   });
+  
+   if (triageDetailedReport==null){
+      throw ErrorDescription("Trige detailed report not found");
+  }
+  if (triageAssessment==null){
+      throw ErrorDescription("Assessment detail found");
+  }
 
   final response = AssessmentDetailedReportMapper.toEntity(
     profileEntity,
-    triageDetailedReport!,
-    triageAssessment!,
+    triageDetailedReport,
+    triageAssessment,
   );
   logger.d({
     "response": response,

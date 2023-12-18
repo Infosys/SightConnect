@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var remoteTriageReportSourceProvider = Provider<RemoteTriageReportSource>(
@@ -25,11 +26,13 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   @override
   Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
       int patientId) async {
+        
     final endpoint =
         "/services/triage/api/triage/triage-report?patient-id=$patientId";
 
-    final response = await dio.get(endpoint);
-
+    try {
+       final response = await dio.get(endpoint);
+       logger.f({"response btao":response});
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       List<TriageDetailedReportModel> triageReports = [];
       response.data.forEach(
@@ -39,14 +42,22 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
       );
       return triageReports;
     } else {
+       logger.f({"response else":response});
       throw ServerException();
     }
+      
+    } catch (e) {
+      logger.f({"response erro":e});
+      rethrow;
+    }
+   
+    
   }
 
   @override
   Future<TriageDetailedReportModel> getTriageReportByReportId(
       int reportId) async {
-    final endpoint = "/services/triage/api/$reportId/triage-report/details";
+    final endpoint = "/services/triage/api/triage-report/$reportId/details";
 
     final response = await dio.get(endpoint);
 

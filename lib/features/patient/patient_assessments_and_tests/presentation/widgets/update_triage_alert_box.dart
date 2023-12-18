@@ -25,6 +25,7 @@ class UpdateTriageAlertBox extends ConsumerWidget {
     var navigator = Navigator.of(context);
     return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
       data: (data) {
+        
         var model = ref.read(traigeUpdateReportProvider(dignosticReportID));
         List<UpdateTriageReportAlertBoxEntity> alertBoxEntityList =
             model.getUpdateTriageReportAlertBoxEntityList(data);

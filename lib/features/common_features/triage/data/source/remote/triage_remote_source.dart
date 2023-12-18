@@ -102,7 +102,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         endpoint,
         data: triage.toJson(),
       );
-      logger.f({"reched here": response});
+      
 
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
