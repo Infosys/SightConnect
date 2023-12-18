@@ -102,7 +102,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
        print(data);
       final response = await dio.patch(
         endpoint,
-        data: data,
+        data: triage.toString(),
       );
       logger.f({"reched here": response});
 

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'triage_update_model.freezed.dart';
 part 'triage_update_model.g.dart';
 
+
 @freezed
 class TriageUpdateModel with _$TriageUpdateModel {
   const factory TriageUpdateModel({
@@ -29,6 +30,7 @@ class TriageUpdateModel with _$TriageUpdateModel {
       _$TriageUpdateModelFromJson(json);
 }
 
+
 @freezed
 class PatchQuestionResponseModel with _$PatchQuestionResponseModel {
   const factory PatchQuestionResponseModel({
@@ -41,6 +43,7 @@ class PatchQuestionResponseModel with _$PatchQuestionResponseModel {
 
   factory PatchQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
       _$PatchQuestionResponseModelFromJson(json);
+  
 }
 
 @freezed
@@ -56,6 +59,7 @@ class PatchAnswerModel with _$PatchAnswerModel {
   factory PatchAnswerModel.fromJson(Map<String, dynamic> json) =>
       _$PatchAnswerModelFromJson(json);
 }
+
 
 @freezed
 class Performer with _$Performer {
@@ -77,6 +81,7 @@ class IncompleteTestModel with _$IncompleteTestModel {
   factory IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
       _$IncompleteTestModelFromJson(json);
 }
+
 
 @freezed
 class PatchObservationsModel with _$PatchObservationsModel {
