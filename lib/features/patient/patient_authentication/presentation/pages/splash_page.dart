@@ -54,24 +54,24 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       // }
 
       if (mounted) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
-          (route) => false,
-        );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+        //   (route) => false,
+        // );
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
         //       builder: (context) => const OptometritianDashboardPage()),
         //   (route) => false,
         // );
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => const VisionTechnicianDashboardPage()),
-        //   (route) => false,
-        // );
-        //}
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const VisionTechnicianDashboardPage()),
+          (route) => false,
+        );
+        // }
 
         // Navigator.of(context).pushAndRemoveUntil(
         //   MaterialPageRoute(
