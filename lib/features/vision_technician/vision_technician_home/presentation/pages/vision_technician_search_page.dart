@@ -52,13 +52,15 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                 children: [
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: SizedBox(
+                    child: Padding(
+                      padding: EdgeInsets.all(AppSize.klpadding),
                       // width: AppSize.width(context),
                       // height: 300,
                       child: DataTable(
                         columnSpacing: AppSize.width(context) * 0.09,
-                        horizontalMargin: 12,
-                        // dataRowHeight: AppSize.klheight * 2.5,
+                        horizontalMargin: AppSize.klpadding,
+                        // data
+                        dataRowMinHeight: AppSize.klheight * 2,
                         // minWidth: 100,
                         showCheckboxColumn: false,
                         decoration: BoxDecoration(
