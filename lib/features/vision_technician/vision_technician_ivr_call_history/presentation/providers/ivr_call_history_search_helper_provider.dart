@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var getIvrCallHistoryDetailsProvider =
     FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
-  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050890");
+  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050009");
 });
 
 final ivrCallHistorySearchHelperProvider =

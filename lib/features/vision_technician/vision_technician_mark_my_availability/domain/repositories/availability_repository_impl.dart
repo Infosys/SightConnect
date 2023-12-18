@@ -18,7 +18,7 @@ class AvailabilityRepositoryImpl extends AvailabilityRepository {
       availability: AvailabilityModel(
         userId: 1001,
         userType: "PRACTITIONER",
-        mobile: "8985050890",
+        mobile: "8985050009",
         available: available,
       ),
     );

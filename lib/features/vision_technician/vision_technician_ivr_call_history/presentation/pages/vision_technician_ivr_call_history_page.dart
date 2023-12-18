@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_table_view.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -32,6 +31,11 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
       ),
       body: ref.watch(getIvrCallHistoryDetailsProvider).when(
             data: (data) {
+              if(data.isEmpty){
+                return const Center(
+                  child: Text("Call Log is Empty.. No Calls made yet!!"),
+                );
+              }
               SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(AppSize.kmpadding),

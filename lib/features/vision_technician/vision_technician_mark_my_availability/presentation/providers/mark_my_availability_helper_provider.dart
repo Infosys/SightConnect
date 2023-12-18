@@ -71,7 +71,7 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
 
   var remarksController = TextEditingController();
-  bool markAvailability = true;
+  bool markAvailability = false;
   bool isLoading = false;
 
   Future<void> updateAvailability() async {
