@@ -23,10 +23,11 @@ class UpdateTriageAlertBox extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var navigator = Navigator.of(context);
-    return ref.watch(getAssementDetailsReport(dignosticReportID)).when(
+     var model = ref.watch(traigeUpdateReportProvider(dignosticReportID));
+    return ref.watch(getTriageDetailedEyeReport(dignosticReportID)).when(
       data: (data) {
-        
-        var model = ref.read(traigeUpdateReportProvider(dignosticReportID));
+        logger.f({"getTriageDetailedEyeReport": data});
+       return Text("data $data");
         List<UpdateTriageReportAlertBoxEntity> alertBoxEntityList =
             model.getUpdateTriageReportAlertBoxEntityList(data);
 

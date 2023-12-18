@@ -2,10 +2,10 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/main.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,7 +26,7 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
 
   List<UpdateTriageReportAlertBoxEntity>
       getUpdateTriageReportAlertBoxEntityList(
-          TriageReportDetailedEntity report) {
+          TriageDetailedReportModel report) {
         
     List<UpdateTriageReportAlertBoxEntity> list = [];
     List<TestType> tests = [
@@ -36,7 +36,7 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
     ];
 
     for (TestType test in tests) {
-      if (_isTestIncomplete(test, report.icompleteTests)) {
+      if (_isTestIncomplete(test, report.incompleteTests)) {
         list.add(UpdateTriageReportAlertBoxEntity(
           testType: test,
           title: _getTestText(test),
@@ -107,15 +107,27 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
   }
 
   RequestPriority? _getPrirityFromText(
-      TestType test, TriageReportDetailedEntity report) {
+      TestType test, TriageDetailedReportModel report) {
     if (test == TestType.QUESTIONNAIRE) {
-      return report.quessionnairepriority;
+      return getPriorityFromSeverity(report.questionResponseSeverity);
     } else if (test == TestType.OBSERVATION) {
-      return report.observationpriority;
+      return getPriorityFromSeverity(report.observationSeverity);
     } else if (test == TestType.IMAGE) {
-      return report.mediapriority;
+      return getPriorityFromSeverity(report.mediaSeverity);
     } else {
       return null;
+    }
+  }
+  RequestPriority ? getPriorityFromSeverity(Severity ? severity){
+    switch (severity) {
+      case Severity.ABNORMAL:
+        return RequestPriority.ASAP;
+      case Severity.HIGH:
+        return RequestPriority.URGENT;
+      case Severity.LOW:
+        return RequestPriority.ROUTINE;
+      default:
+        return null;
     }
   }
 

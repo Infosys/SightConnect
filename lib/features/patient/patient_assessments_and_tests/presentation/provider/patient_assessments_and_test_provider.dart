@@ -55,6 +55,7 @@ var getEyeTriageReport = FutureProvider.family(
 var getTriageDetailedEyeReport = FutureProvider.family(
   (ref, int reportID) async {
     if (isResultOfflineMode) {
+     
       return TriageDetailedReportModel.fromJson(
         LocalTriageReportSource.local_triage_result[0],
       );
