@@ -1,32 +1,32 @@
 import 'package:eye_care_for_all/main.dart';
 
-enum Env { DEV, PROD }
+enum Env { DEV, STAG, PROD }
 
 class AppEnv {
   AppEnv._();
   static Env env = Env.DEV;
   static bool get isDev => env == Env.DEV;
+  static bool get isStag => env == Env.STAG;
+  static bool get isProd => env == Env.PROD;
 
   static void setupEnv(Env currentEnv) {
     env = currentEnv;
-    logger.d({
-      "env": env.toString(),
-    });
+    logger.d({"env": env.toString()});
   }
 
   static String get baseUrl {
     return switch (env) {
-
       Env.DEV => 'http://eyecare4all-dev.infosysapps.com/services',
+      Env.STAG => 'http://eyecare4all-dev.infosysapps.com/services',
       Env.PROD => 'http://eyecare4all-dev.infosysapps.com/services',
-
     };
   }
 
   static String get baseKeycloakUrl {
     return switch (env) {
-      Env.DEV => 'http://localhost:8080/realms/test',
-      Env.PROD => 'http://localhost:8080/realms/test',
+      Env.DEV => 'https://eyecare4all-dev.infosysapps.com',
+      Env.STAG => 'https://eyecare4all-dev.infosysapps.com',
+      Env.PROD => 'https://eyecare4all-dev.infosysapps.com',
     };
   }
 }

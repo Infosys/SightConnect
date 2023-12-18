@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
@@ -5,10 +7,15 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/auth_provider.dart';
+import 'package:eye_care_for_all/shared/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
@@ -156,20 +163,38 @@ class AppDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                        ListTile(
-                          leading: SvgPicture.asset(
-                            AppIcon.drawerSignOut,
-                            colorFilter: const ColorFilter.mode(
-                              AppColor.white,
-                              BlendMode.srcIn,
+                        Consumer(
+                          builder: (context, ref, _) => ListTile(
+                            onTap: () async {
+                              final navigator = Navigator.of(context);
+                              try {
+                                await ref.read(authProvider).logout();
+                                ref.invalidate(authProvider);
+
+                                navigator.pushNamedAndRemoveUntil(
+                                  SplashPage.routeName,
+                                  (route) => false,
+                                );
+                              } catch (e) {
+                                Fluttertoast.showToast(
+                                  msg: "Something went wrong",
+                                );
+                              }
+                            },
+                            leading: SvgPicture.asset(
+                              AppIcon.drawerSignOut,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.white,
+                                BlendMode.srcIn,
+                              ),
                             ),
-                          ),
-                          title: Text(
-                            "Sign Out",
-                            style: applyFiraSansFont(
-                              color: AppColor.white,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18,
+                            title: Text(
+                              "Sign Out",
+                              style: applyFiraSansFont(
+                                color: AppColor.white,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:openid_client/openid_client.dart';
+import 'package:openid_client/openid_client_io.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:openid_client/openid_client_io.dart' as io;
 
@@ -11,62 +11,71 @@ var authProvider = ChangeNotifierProvider(
 );
 
 class AuthPageProvider extends ChangeNotifier {
-  static const keycloakUri =
-      'https://eyecare4all-dev.infosysapps.com/auth/realms/care';
-  static const scopes = ['profile'];
-  late Client client;
-  late Credential? credential;
-  late UserInfo? userInfo;
+  // final String keycloakUri = '${AppEnv.baseKeycloakUrl}/auth/realms/care';
+  final String keycloakUri =
+      'https://campaigns.infosysapps.com/auth2/realms/care';
+  static const List<String> scopes = ['profile'];
+  static const String clientId = 'microservices';
+  static const int PORT = 4000;
+  Credential? credential;
   AuthPageProvider() {
     init();
   }
 
-  init() async {
-    client = await getClient();
-    credential = await authenticate(client, scopes: scopes);
-    userInfo = await credential!.getUserInfo();
-
-    var tokenResponse = await credential!.getTokenResponse();
-    logger.d(tokenResponse.toJson());
-    notifyListeners();
-  }
-
-  Future<Client> getClient() async {
-    var uri = Uri.parse(keycloakUri);
-    // if (!kIsWeb && Platform.isAndroid) uri = uri.replace(host: '10.0.2.2');
-    var clientId = 'microservices';
-    var issuer = await Issuer.discover(uri);
-    return Client(issuer, clientId);
-  }
-
-  Future<Credential> authenticate(
-    Client client, {
-    List<String> scopes = const [],
-  }) async {
-    // create an authenticator
-    var authenticator = io.Authenticator(
-      client,
-      scopes: scopes,
-      port: 4000,
-      urlLancher: urlLauncher,
-    );
-
-    // starts the authentication
-    var crendentials = await authenticator.authorize();
-
-    // close the webview when finished
-    if (Platform.isAndroid || Platform.isIOS) {
-      closeInAppWebView();
+  Future<void> init() async {
+    try {
+      Client client = await _getClient();
+      credential = await _authenticate(client, scopes: scopes);
+      notifyListeners();
+    } catch (e) {
+      logger.d(e);
+      credential = null;
+      notifyListeners();
     }
 
-    return crendentials;
+    logger.d("init called: $credential");
   }
 
-  Future<Credential?> getRedirectResult(
+  Future<void> logout() async {
+    final url = credential!.generateLogoutUrl();
+    await launchUrl(url!);
+  }
+
+  Future<Client> _getClient() async {
+    try {
+      Uri uri = Uri.parse(keycloakUri);
+      Issuer issuer = await Issuer.discover(uri);
+      return Client(issuer, clientId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Credential> _authenticate(
     Client client, {
     List<String> scopes = const [],
   }) async {
-    return null;
+    try {
+      // Creates an authenticator
+      Authenticator authenticator = io.Authenticator(
+        client,
+        scopes: scopes,
+        port: PORT,
+        urlLancher: urlLauncher,
+      );
+
+      // Starts the authentication
+      Credential crendentials = await authenticator.authorize();
+
+      // Close the webview when finished
+      if (Platform.isAndroid || Platform.isIOS) {
+        closeInAppWebView();
+      }
+
+      return crendentials;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   urlLauncher(String url) async {
