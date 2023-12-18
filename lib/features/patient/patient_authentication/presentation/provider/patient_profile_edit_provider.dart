@@ -108,7 +108,8 @@ class PatientEditProfileProvider extends ChangeNotifier {
         }
       });
 
-      _nameController.text = _patient.profile?.patient?.name ?? "";
+      _firstNameController.text = _patient.profile?.patient?.name ?? "";
+      _lastNameController.text = _patient.profile?.patient?.name ?? "";
       _mobileNumberController.text =
           _patient.profile?.patient?.phoneNumber ?? "";
       _emailController.text = _patient.profile?.patient?.email ?? "";
@@ -121,11 +122,11 @@ class PatientEditProfileProvider extends ChangeNotifier {
       _streetController.text =
           _patient.profile?.patient?.address?.first.ward ?? "";
       _subDistrictController.text =
-          _patient.profile?.patient?.address?.first.town ?? "";
+          _patient.profile?.patient?.address?.first.subDistrict ?? "";
       _districtController.text =
           _patient.profile?.patient?.address?.first.district ?? "";
       _cityController.text =
-          _patient.profile?.patient?.address?.first.village ?? "";
+          _patient.profile?.patient?.address?.first.town ?? "";
       _stateController.text =
           _patient.profile?.patient?.address?.first.state ?? "";
       _pincodeController.text =
@@ -143,7 +144,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
   XFile? _imageFile;
   PatientResponseModel _patient = const PatientResponseModel();
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _middleNameController = TextEditingController();
   final _ageController = TextEditingController();
@@ -161,11 +162,9 @@ class PatientEditProfileProvider extends ChangeNotifier {
   String? _gender;
   bool _isLoading = false;
 
-  XFile? get image => _imageFile;
-  set image(XFile? value) {
-    _imageFile = value;
-    notifyListeners();
-  }
+  XFile? get imageFile => _imageFile;
+
+  set imageFile(XFile? value) => _imageFile = value;
 
   set setGender(String value) => _gender = value;
   String? get gender => _gender;
@@ -174,7 +173,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
 
   set patient(PatientResponseModel value) => _patient = value;
 
-  TextEditingController get name => _nameController;
+  TextEditingController get firstName => _firstNameController;
   TextEditingController get lastName => _lastNameController;
   TextEditingController get middleName => _middleNameController;
   TextEditingController get age => _ageController;
@@ -257,7 +256,8 @@ class PatientEditProfileProvider extends ChangeNotifier {
       _patient = result;
     });
 
-    _nameController.text = _patient.profile?.patient?.name ?? "";
+    _firstNameController.text = _patient.profile?.patient?.name ?? "";
+    _lastNameController.text = _patient.profile?.patient?.name ?? "";
     _mobileNumberController.text = _patient.profile?.patient?.phoneNumber ?? "";
     _emailController.text = _patient.profile?.patient?.email ?? "";
     _abhaidController.text =
@@ -272,11 +272,10 @@ class PatientEditProfileProvider extends ChangeNotifier {
     _streetController.text =
         _patient.profile?.patient?.address?.first.ward ?? "";
     _subDistrictController.text =
-        _patient.profile?.patient?.address?.first.town ?? "";
+        _patient.profile?.patient?.address?.first.district ?? "";
     _districtController.text =
         _patient.profile?.patient?.address?.first.district ?? "";
-    _cityController.text =
-        _patient.profile?.patient?.address?.first.village ?? "";
+    _cityController.text = _patient.profile?.patient?.address?.first.town ?? "";
     _stateController.text =
         _patient.profile?.patient?.address?.first.state ?? "";
     _pincodeController.text =
@@ -359,11 +358,12 @@ class PatientEditProfileProvider extends ChangeNotifier {
         ),
         abhaAddress: _patient.profile?.patient?.abhaAddress,
         gender: _gender == "Male"
-            ? Gender.Male
+            ? Gender.MALE
             : _gender == "Female"
-                ? Gender.Female
-                : Gender.Other,
-        name: _nameController.text + _lastNameController.text,
+                ? Gender.FEMALE
+                : Gender.OTHER,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
         age: int.parse(_ageController.text),
         profilePhoto: _patient.profile?.patient?.profilePhoto,
         dayOfBirth: dateFormat.parse(_dobController.text).day.toString(),

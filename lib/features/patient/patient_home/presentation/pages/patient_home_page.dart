@@ -39,7 +39,7 @@ class PatientHomePage extends ConsumerWidget {
               const NearbyVisionCentersList(),
               const SizedBox(height: AppSize.kmheight),
               const HelplineCard(
-                helpLine: "1800 1800 1800",
+                helpLine: "1800 1211 00411",
               ),
               const SizedBox(height: AppSize.kmheight),
               InviteCard(

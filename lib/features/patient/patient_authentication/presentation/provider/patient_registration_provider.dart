@@ -94,7 +94,8 @@ class PatientRegistrationProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     var patient = PatientModel(
-      name: _name,
+      firstName: _name.split(" ").first,
+      lastName: _name.split(" ").last,
       dayOfBirth: DateFormat('dd').format(_dateOfBirth),
       monthOfBirth: DateFormat('MM').format(_dateOfBirth),
       yearOfBirth: DateFormat('yyyy').format(_dateOfBirth),

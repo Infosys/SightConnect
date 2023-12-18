@@ -656,7 +656,9 @@ mixin _$PatientModel {
   LocationModel? get location => throw _privateConstructorUsedError;
   String? get abhaId => throw _privateConstructorUsedError;
   String? get abhaAddress => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get middleName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   Gender? get gender => throw _privateConstructorUsedError;
   String? get mobile => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -690,7 +692,9 @@ abstract class $PatientModelCopyWith<$Res> {
       LocationModel? location,
       String? abhaId,
       String? abhaAddress,
-      String? name,
+      String? firstName,
+      String? middleName,
+      String? lastName,
       Gender? gender,
       String? mobile,
       String? email,
@@ -727,7 +731,9 @@ class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
     Object? location = freezed,
     Object? abhaId = freezed,
     Object? abhaAddress = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? middleName = freezed,
+    Object? lastName = freezed,
     Object? gender = freezed,
     Object? mobile = freezed,
     Object? email = freezed,
@@ -773,9 +779,17 @@ class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
           ? _value.abhaAddress
           : abhaAddress // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      middleName: freezed == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       gender: freezed == gender
           ? _value.gender
@@ -854,7 +868,9 @@ abstract class _$$_PatientModelCopyWith<$Res>
       LocationModel? location,
       String? abhaId,
       String? abhaAddress,
-      String? name,
+      String? firstName,
+      String? middleName,
+      String? lastName,
       Gender? gender,
       String? mobile,
       String? email,
@@ -890,7 +906,9 @@ class __$$_PatientModelCopyWithImpl<$Res>
     Object? location = freezed,
     Object? abhaId = freezed,
     Object? abhaAddress = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? middleName = freezed,
+    Object? lastName = freezed,
     Object? gender = freezed,
     Object? mobile = freezed,
     Object? email = freezed,
@@ -936,9 +954,17 @@ class __$$_PatientModelCopyWithImpl<$Res>
           ? _value.abhaAddress
           : abhaAddress // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      middleName: freezed == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       gender: freezed == gender
           ? _value.gender
@@ -1000,7 +1026,9 @@ class _$_PatientModel implements _PatientModel {
       this.location,
       this.abhaId,
       this.abhaAddress,
-      this.name,
+      this.firstName,
+      this.middleName,
+      this.lastName,
       this.gender,
       this.mobile,
       this.email,
@@ -1034,7 +1062,11 @@ class _$_PatientModel implements _PatientModel {
   @override
   final String? abhaAddress;
   @override
-  final String? name;
+  final String? firstName;
+  @override
+  final String? middleName;
+  @override
+  final String? lastName;
   @override
   final Gender? gender;
   @override
@@ -1067,7 +1099,7 @@ class _$_PatientModel implements _PatientModel {
 
   @override
   String toString() {
-    return 'PatientModel(id: $id, regRef: $regRef, counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, name: $name, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
+    return 'PatientModel(id: $id, regRef: $regRef, counterId: $counterId, hprID: $hprID, hipCode: $hipCode, location: $location, abhaId: $abhaId, abhaAddress: $abhaAddress, firstName: $firstName, middleName: $middleName, lastName: $lastName, gender: $gender, mobile: $mobile, email: $email, profilePhoto: $profilePhoto, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, age: $age, parentPatientId: $parentPatientId, relationship: $relationship, address: $address)';
   }
 
   @override
@@ -1086,7 +1118,12 @@ class _$_PatientModel implements _PatientModel {
             (identical(other.abhaId, abhaId) || other.abhaId == abhaId) &&
             (identical(other.abhaAddress, abhaAddress) ||
                 other.abhaAddress == abhaAddress) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.middleName, middleName) ||
+                other.middleName == middleName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
             (identical(other.email, email) || other.email == email) &&
@@ -1118,7 +1155,9 @@ class _$_PatientModel implements _PatientModel {
         location,
         abhaId,
         abhaAddress,
-        name,
+        firstName,
+        middleName,
+        lastName,
         gender,
         mobile,
         email,
@@ -1156,7 +1195,9 @@ abstract class _PatientModel implements PatientModel {
       final LocationModel? location,
       final String? abhaId,
       final String? abhaAddress,
-      final String? name,
+      final String? firstName,
+      final String? middleName,
+      final String? lastName,
       final Gender? gender,
       final String? mobile,
       final String? email,
@@ -1189,7 +1230,11 @@ abstract class _PatientModel implements PatientModel {
   @override
   String? get abhaAddress;
   @override
-  String? get name;
+  String? get firstName;
+  @override
+  String? get middleName;
+  @override
+  String? get lastName;
   @override
   Gender? get gender;
   @override

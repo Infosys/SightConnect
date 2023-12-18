@@ -77,6 +77,7 @@ dependencies:
   shared_preferences: ^2.2.2
   snowplow_tracker: ^0.5.0
   equatable: ^2.0.5
+  image_picker: ^1.0.5
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
@@ -119,6 +120,7 @@ flutter:
     - assets/profile.json
     - assets/triage_assessment.json
     - assets/miniapps/vt_register_patient.zip
+    - assets/vision_centers.json
   
   #   - images/a_dot_ham.jpeg
 
