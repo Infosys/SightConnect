@@ -136,6 +136,15 @@ const _$GenderEnumMap = {
   Gender.Male: 'Male',
   Gender.Female: 'Female',
   Gender.Other: 'Other',
+  Gender.MALE: 'MALE',
+  Gender.FEMALE: 'FEMALE',
+  Gender.OTHER: 'OTHER',
+  Gender.M: 'M',
+  Gender.F: 'F',
+  Gender.O: 'O',
+  Gender.male: 'male',
+  Gender.female: 'female',
+  Gender.other: 'other',
 };
 
 _$_MetaDataModel _$$_MetaDataModelFromJson(Map<String, dynamic> json) =>
