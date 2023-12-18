@@ -33,14 +33,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
           ),
           onPressed: () {
             ref.read(registerNewPatientHelperProvider.notifier).printData();
-            /*  if (_formKey.currentState!.validate()) { */
-
-            // ref.read(registerNewPatientProvider).saveAndProceed();
-
-            // print(_formKey.currentState?.save);
-            // ref
-            //     .read(registerNewPatientProvider)
-            //     .saveAndProceed();
+          
             showToastMessage("Patient details saved!", context, 0);
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {

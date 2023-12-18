@@ -6,12 +6,8 @@ import '../../../../../core/services/dio_service.dart';
 import '../../../../../core/services/failure.dart';
 
 abstract class VTPatientSearchRepository {
-  // Future<VTPatientSearchDto> onboardPatient(
-  //   VTPatientSearchDto vtPatientSearchDto,
-  // );
   Future<VTPatientSearchDto> getPatientProfile(
       String data);
-
 }
 
 var vtPatientSearchRepositoryProvider = Provider<VTPatientSearchRepository>(
@@ -29,6 +25,7 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
       String data )async {
     var endpoint = '/patients/triage-reports/$data';
     // var profile = await rootBundle.loadString("assets/triage_assessment.json");
+    
     try {
       final response = await _dio.get(endpoint);
       return VTPatientSearchDto.fromJson(response.data);
@@ -37,20 +34,4 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
       
     }
   }
-
-  // @override
-  // Future<VTPatientSearchDto> onboardPatient(
-  //     VTPatientSearchDto vtPatientSearchDto) async {
-  //   var endpoint = "/api/patients/onboard";
-
-  //   var response = await _dio.post(endpoint, data: vtPatientSearchDto.toJson());
-
-  //   if (response.statusCode! >= 200 && response.statusCode! < 210) {
-  //     return VTPatientSearchDto.fromJson(response.data);
-  //   } else {
-  //     throw Exception("Failed to onboard patient");
-  //   }
-  // }
-
-  
 }

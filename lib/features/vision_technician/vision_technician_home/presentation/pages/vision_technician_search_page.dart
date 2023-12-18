@@ -135,7 +135,7 @@ class VisionTechnicianSearchPage extends ConsumerWidget {
                             list.length,
                             (index) => DataRow(
                               onSelectChanged: (value) {
-                                // print(list[index].toString());
+                                
                                 ref
                                     .read(visionTechnicianSearchProvider)
                                     .setPatientDetails(list[index]);

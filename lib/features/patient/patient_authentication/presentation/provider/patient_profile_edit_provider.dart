@@ -11,6 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:openid_client/openid_client.dart';
 
+import '../../../../../main.dart';
+
 var patientEditProfileProvider = ChangeNotifierProvider.autoDispose((ref) =>
     PatientEditProfileProvider(
         ref.watch(patientAuthenticationRepositoryProvider)));
@@ -302,7 +304,7 @@ class PatientEditProfileProvider extends ChangeNotifier {
         }
         return false;
       });
-      print(primaryAddress);
+      logger.d(primaryAddress);
     }
     AddressModel? address0;
 

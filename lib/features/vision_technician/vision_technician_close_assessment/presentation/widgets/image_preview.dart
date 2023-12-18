@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -61,7 +63,9 @@ class ImagePreview extends ConsumerWidget {
               ),
             ),
             onPressed: () {
-              ref.watch(visionTechnicianEyeScanProvider.notifier).retakePicture();
+              ref
+                  .watch(visionTechnicianEyeScanProvider.notifier)
+                  .retakePicture();
             },
             child: Text(
               "Retake Picture",
@@ -76,11 +80,13 @@ class ImagePreview extends ConsumerWidget {
             children: [
               //Back
               TextButton(
-                onPressed: currentStep == 0 ? null : () {
-                  ref
-                      .read(visionTechnicianEyeScanProvider.notifier)
-                      .goToPreviousStep();
-                },
+                onPressed: currentStep == 0
+                    ? null
+                    : () {
+                        ref
+                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .goToPreviousStep();
+                      },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -105,14 +111,28 @@ class ImagePreview extends ConsumerWidget {
               //submit
               Expanded(
                 child: TextButton(
-                  onPressed: currentStep != 2
-                      ? null
-                      : () {
-                          ref
-                              .read(visionTechnicianEyeScanProvider.notifier)
-                              .markAllImagesCaptured();
-                          Navigator.pop(context);
-                        },
+                  onPressed: () {
+
+                    XFile left =
+                        ref.read(visionTechnicianEyeScanProvider).leftEyeImage;
+                    XFile right =
+                        ref.read(visionTechnicianEyeScanProvider).rightEyeImage;
+
+                    ref
+                        .read(visionTechnicianTriageProvider)
+                        .setEyeImage(left, right);
+                       
+
+                    currentStep != 2
+                        ? null
+                        : 
+                            ref
+                                .read(visionTechnicianEyeScanProvider.notifier)
+                                .markAllImagesCaptured();
+                            Navigator.pop(context);
+                          
+                    
+                  },
                   style: ButtonStyle(
                     backgroundColor: currentStep != 2
                         ? MaterialStateProperty.all<Color>(AppColor.lightGrey)
@@ -131,12 +151,14 @@ class ImagePreview extends ConsumerWidget {
               const SizedBox(width: AppSize.klwidth),
               //Next
               TextButton(
-                onPressed: currentStep == 2
+                onPressed: (){
+                currentStep == 2
                     ? null
-                    : () {
+                    : 
                         ref
                             .read(visionTechnicianEyeScanProvider.notifier)
                             .goToNextStep();
+
                       },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

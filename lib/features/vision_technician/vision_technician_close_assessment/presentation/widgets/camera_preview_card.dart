@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
+
 class CameraPreviewCard extends ConsumerWidget {
   const CameraPreviewCard({super.key, required this.controller});
   final CameraController controller;
@@ -76,7 +78,7 @@ class CameraPreviewCard extends ConsumerWidget {
                             .read(visionTechnicianEyeScanProvider.notifier)
                             .saveImage(image);
                       } catch (e) {
-                        print(e);
+                        logger.d(e);
                       }
                     },
                     child: Container(

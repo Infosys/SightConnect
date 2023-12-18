@@ -49,9 +49,6 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
     String profileImage = model.patient?.profilePhoto ?? "";
 
-    // print("value is ${patient.firstName}");
-
-    // if (patient == null) return SizedBox();
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,

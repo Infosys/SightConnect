@@ -76,12 +76,6 @@ class VTPatientModel {
     required this.address,
   });
 
-  // void printInfo() {
-  //   print("firstName: $firstName");
-  //   print("lastName: $lastName");
-  //   print(address!.street);
-  // }
-
   @override
   String toString() {
     // TODO: implement toString

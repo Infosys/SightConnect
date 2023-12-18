@@ -10,26 +10,44 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'vision_technician_triage_provider.dart';
+
 var preliminaryAssessmentProvider = Provider(
   (ref) => VTPreliminaryAssessmentProvider(
-      ref.watch(saveTriageUseCase), ref.watch(triageUrgencyRepositoryProvider)),
+    ref.watch(saveTriageUseCase),
+    ref.watch(triageUrgencyRepositoryProvider),
+    ref.watch(visionTechnicianTriageProvider),
+  ),
 );
 
 class VTPreliminaryAssessmentProvider extends ChangeNotifier {
   final int _patientId = 100101;
   final SaveTriageUseCase _saveTriageUseCase;
   final TriageUrgencyRepository _triageUrgencyRepository;
-  VTPreliminaryAssessmentProvider(
-      this._saveTriageUseCase, this._triageUrgencyRepository);
+  final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
+  VTPreliminaryAssessmentProvider(this._saveTriageUseCase,
+      this._triageUrgencyRepository, this._visionTechnicianTriageProvider);
 
   Future<Either<Failure, TriageResponseModel>> saveTriage() async {
-    List<PostImagingSelectionModel> imageSelection = [];
-    List<PostObservationsModel> observations = [];
-    List<PostQuestionResponseModel> questionResponse = [];
-    double cummulativeScore = 0.0;
-    double quessionnaireUrgency = 0.0;
-    double visualAcuityUrgency = 0.0;
-    double eyeScanUrgency = 0.0;
+    List<PostImagingSelectionModel> imageSelection =  _visionTechnicianTriageProvider.getTriageEyeScanResponse();
+    List<PostObservationsModel> observations = _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
+    List<PostQuestionResponseModel> questionResponse =
+        _visionTechnicianTriageProvider.getQuestionaireResponse();
+   
+    double quessionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
+      questionResponse,
+    );
+    double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
+      observations,
+    );
+    double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
+      imageSelection,
+    );
+     double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
+      quessionnaireUrgency,
+      visualAcuityUrgency,
+      eyeScanUrgency,
+    );
     int encounterId = 100001;
     int organizationCode = 231000;
     int assessmentCode = 30001;

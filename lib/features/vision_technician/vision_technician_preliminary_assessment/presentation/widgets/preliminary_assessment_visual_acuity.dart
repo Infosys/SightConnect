@@ -3,12 +3,19 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PreliminaryAssessmentVisualAcuity extends StatelessWidget {
+import '../providers/vision_technician_triage_provider.dart';
+
+class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
   const PreliminaryAssessmentVisualAcuity({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var rightEyeController = useTextEditingController();
+    var leftEyeController = useTextEditingController();
+    var bothEyeController = useTextEditingController();
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -42,6 +49,10 @@ class PreliminaryAssessmentVisualAcuity extends StatelessWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
+                  controller: rightEyeController,
+                  onChanged: (value) {
+                    ref.read(visionTechnicianTriageProvider).setRightEyeSight(double.parse(value));  
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -59,6 +70,10 @@ class PreliminaryAssessmentVisualAcuity extends StatelessWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
+                  controller: leftEyeController,
+                  onChanged: (value) {
+                    ref.read(visionTechnicianTriageProvider).setLeftEyeSight(double.parse(value));  
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -76,6 +91,14 @@ class PreliminaryAssessmentVisualAcuity extends StatelessWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
+                  controller: bothEyeController,
+                  onChanged: (value) {
+                    ref.read(visionTechnicianTriageProvider).setBothEyeSight(double.parse(value));  
+                  },
+                  onSubmitted: (value) {
+                    ref.read(visionTechnicianTriageProvider).getVisionAcuityTumblingResponse();
+                  
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
