@@ -36,19 +36,19 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   "organ": "EYE"
     // };
 
-    // var response = await dio.get(endpoint);
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    // } else {
-    //   throw ServerException();
-    // }
-    if (response.isNotEmpty) {
-      var data = jsonDecode(response);
-      return DiagnosticReportTemplateFHIRModel.fromJson(data);
+     var response = await dio.get(endpoint);
+    //var response = await rootBundle.loadString("assets/triage_assessment.json");
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
+    // if (response.isNotEmpty) {
+    //   var data = jsonDecode(response);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    // } else {
+    //   throw ServerException();
+    // }
   }
 
   @override
