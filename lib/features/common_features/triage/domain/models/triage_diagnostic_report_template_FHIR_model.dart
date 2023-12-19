@@ -289,6 +289,7 @@ class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
       List<AnswerOptionModel>? answerOption,
       List<EnableWhenModel>? enableWhen,
       List<AnswerItemWeightModel>? answerItemWeight,
+      List<RelatedImageFHIRModel>? relatedImage,
 
   }) = _QuestionnaireItemFHIRModel;
 

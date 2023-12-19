@@ -21,7 +21,9 @@ import '../widgets/visual_acuity_dialog.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";
-  const VisualAcuityInstructionalVideoPage({super.key});
+  const VisualAcuityInstructionalVideoPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,7 +41,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
         child: Scaffold(
           key: scaffoldKey,
           drawer: const TriageStepsDrawer(),
-          appBar: ref.watch(globalProvider).hideTumblingElement
+          appBar: !ref.watch(globalProvider).isTriageMode()
               ? CustomAppbar(
                   leadingIcon: IconButton(
                     splashRadius: 20,
@@ -121,7 +123,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 if (context.mounted) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const VisualAcuityInitiatePage(),
+                      builder: (context) => VisualAcuityInitiatePage(),
                     ),
                   );
                 }

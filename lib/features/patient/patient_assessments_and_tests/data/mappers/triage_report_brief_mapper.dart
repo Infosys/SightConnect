@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 
 class AssessmentReportMapper {
   static TriageReportBriefEntity toEntity(TriageDetailedReportModel model) {
@@ -12,7 +12,7 @@ class AssessmentReportMapper {
           .plannedActivityReference!.serviceRequest!.priority!,
       reportTag: 'Post Op Care',
       triageResultType: 'Eye Assesment',
-      triageResultSource: model.source!,
+      triageResultSource: model.source??null,
       assessmentID: model.assessmentCode!,
       triageResultStartDate: model.userStartDate!,
       triageResultDescription: model.diagnosticReportDescription ?? "NA",

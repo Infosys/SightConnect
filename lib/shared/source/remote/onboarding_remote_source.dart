@@ -3,11 +3,8 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/models/patient_DTO.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 var onboardingRemoteSourceProvider = Provider<OnboardingRemoteSource>((ref) {
-  return OnboardingRemoteSourceImpl(
-    ref.read(dioProvider)
-  );
+  return OnboardingRemoteSourceImpl(ref.read(dioProvider));
 });
 
 abstract class OnboardingRemoteSource {
@@ -15,14 +12,13 @@ abstract class OnboardingRemoteSource {
 }
 
 class OnboardingRemoteSourceImpl implements OnboardingRemoteSource {
-
-  Dio _dio;
+  final Dio _dio;
 
   OnboardingRemoteSourceImpl(this._dio);
 
   @override
   Future<PatientDTO> onboardPatient(PatientDTO patientDTO) async {
-    var endpoint = "/api/v1/patients/onboard";
+    var endpoint = "api/v1/patients/onboard";
 
     var response = await _dio.post(endpoint, data: patientDTO.toJson());
 

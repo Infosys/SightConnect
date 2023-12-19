@@ -1,18 +1,18 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/left_cornea_tab_view.dart';
 import 'package:eye_care_for_all/shared/widgets/right_cornea_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class EyeScanTabView extends StatelessWidget {
-  const EyeScanTabView({
+   EyeScanTabView({
     super.key,
-    required this.eyeScanData,
+     this.eyeScanData,
   });
-  final List<ImageBriefEntity> eyeScanData;
+   List<ImageBriefEntity>  ?eyeScanData;
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +53,14 @@ class EyeScanTabView extends StatelessWidget {
             SizedBox(
               height: lerpDouble(
                   AppSize.height(context), AppSize.width(context), 1.05),
-              child:  TabBarView(
+              child: TabBarView(
                 viewportFraction: 1,
                 children: [
                   RightCorneaTabView(
-                    rightEyeImage: [getRightEyeImageUrl( eyeScanData)],
+                    rightEyeImage: [getRightEyeImageUrl(eyeScanData!)],
                   ),
                   LeftCorneaTabView(
-                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData)],
+                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData!)],
                   ),
                 ],
               ),
@@ -72,23 +72,20 @@ class EyeScanTabView extends StatelessWidget {
   }
 }
 
-String getLeftEyeImageUrl(List<ImageBriefEntity> imageBriefEntity){
-    for(ImageBriefEntity imageBrief in imageBriefEntity){
-      if(imageBrief.bodySite == "LEFT_EYE"){
-        return imageBrief.imageUrl;
-      }
+String getLeftEyeImageUrl(List<ImageBriefEntity> imageBriefEntity) {
+  for (ImageBriefEntity imageBrief in imageBriefEntity) {
+    if (imageBrief.bodySite == "LEFT_EYE") {
+      return imageBrief.imageUrl;
     }
-    return "";
+  }
+  return "";
 }
 
-
-
-String getRightEyeImageUrl(List<ImageBriefEntity> imageBriefEntity){
-   for(ImageBriefEntity imageBrief in imageBriefEntity){
-      if(imageBrief.bodySite == "RIGHT_EYE"){
-        return imageBrief.imageUrl;
-      }
+String getRightEyeImageUrl(List<ImageBriefEntity> imageBriefEntity) {
+  for (ImageBriefEntity imageBrief in imageBriefEntity) {
+    if (imageBrief.bodySite == "RIGHT_EYE") {
+      return imageBrief.imageUrl;
     }
-    return "";
-
+  }
+  return "";
 }

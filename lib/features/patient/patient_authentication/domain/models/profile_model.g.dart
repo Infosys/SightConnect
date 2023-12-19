@@ -16,7 +16,7 @@ _$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
     <String, dynamic>{
-      'patient': instance.patient,
+      'patient': instance.patient?.toJson(),
     };
 
 _$_RelatedPartyModel _$$_RelatedPartyModelFromJson(Map<String, dynamic> json) =>
@@ -71,8 +71,8 @@ Map<String, dynamic> _$$_PatientResponseModelToJson(
         _$_PatientResponseModel instance) =>
     <String, dynamic>{
       'intent': instance.intent,
-      'metaData': instance.metaData,
-      'profile': instance.profile,
+      'metaData': instance.metaData?.toJson(),
+      'profile': instance.profile?.toJson(),
     };
 
 _$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
@@ -113,7 +113,7 @@ Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
       'counterId': instance.counterId,
       'hprID': instance.hprID,
       'hipCode': instance.hipCode,
-      'location': instance.location,
+      'location': instance.location?.toJson(),
       'abhaId': instance.abhaId,
       'abhaAddress': instance.abhaAddress,
       'firstName': instance.firstName,
@@ -129,7 +129,7 @@ Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
       'age': instance.age,
       'parentPatientId': instance.parentPatientId,
       'relationship': _$RelationshipEnumMap[instance.relationship],
-      'address': instance.address,
+      'address': instance.address?.map((e) => e.toJson()).toList(),
     };
 
 const _$GenderEnumMap = {
@@ -142,9 +142,7 @@ const _$GenderEnumMap = {
   Gender.M: 'M',
   Gender.F: 'F',
   Gender.O: 'O',
-  Gender.male: 'male',
-  Gender.female: 'female',
-  Gender.other: 'other',
+  Gender.Unknown: 'Unknown',
 };
 
 _$_MetaDataModel _$$_MetaDataModelFromJson(Map<String, dynamic> json) =>
@@ -264,10 +262,11 @@ Map<String, dynamic> _$$_ExtendedPatientModelToJson(
       'email': instance.email,
       'profilePhoto': instance.profilePhoto,
       'parentPatientId': instance.parentPatientId,
-      'address': instance.address,
-      'relatedParty': instance.relatedParty,
-      'identifiers': instance.identifiers,
-      'medicalRecords': instance.medicalRecords,
+      'address': instance.address?.map((e) => e.toJson()).toList(),
+      'relatedParty': instance.relatedParty?.map((e) => e.toJson()).toList(),
+      'identifiers': instance.identifiers?.map((e) => e.toJson()).toList(),
+      'medicalRecords':
+          instance.medicalRecords?.map((e) => e.toJson()).toList(),
     };
 
 _$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>

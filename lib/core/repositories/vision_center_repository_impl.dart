@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,17 +29,17 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
     try {
       var response = await rootBundle.loadString("assets/vision_centers.json");
       responseJson = jsonDecode(response);
-    }
-    catch(e) {
+    } catch (e) {
       throw ServerException();
     }
-    
+
     // if (response.statusCode! >= 200 && response.statusCode! < 210) {
     //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     // } else {
     //   throw ServerException();
     // }
-    return responseJson.map((json) => OrganizationResponseModel.fromJson(json)).toList();
-    
+    return responseJson
+        .map((json) => OrganizationResponseModel.fromJson(json))
+        .toList();
   }
 }

@@ -27,7 +27,6 @@ mixin _$TriageResponseModel {
   List<PerformerModel>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime? get issued => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get userStartDate => throw _privateConstructorUsedError;
@@ -64,7 +63,7 @@ abstract class $TriageResponseModelCopyWith<$Res> {
       List<PerformerModel>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      @TimestampConverter() DateTime? issued,
+      DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       String? sourceVersion,
@@ -196,7 +195,7 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
       List<PerformerModel>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      @TimestampConverter() DateTime? issued,
+      DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       String? sourceVersion,
@@ -321,7 +320,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
       final List<PerformerModel>? performer,
       this.assessmentCode,
       this.assessmentVersion,
-      @TimestampConverter() this.issued,
+      this.issued,
       @TimestampConverter() this.userStartDate,
       this.source,
       this.sourceVersion,
@@ -364,7 +363,6 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   @override
   final String? assessmentVersion;
   @override
-  @TimestampConverter()
   final DateTime? issued;
   @override
   @TimestampConverter()
@@ -517,7 +515,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
           final List<PerformerModel>? performer,
           final int? assessmentCode,
           final String? assessmentVersion,
-          @TimestampConverter() final DateTime? issued,
+          final DateTime? issued,
           @TimestampConverter() final DateTime? userStartDate,
           final Source? source,
           final String? sourceVersion,
@@ -547,7 +545,6 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   String? get assessmentVersion;
   @override
-  @TimestampConverter()
   DateTime? get issued;
   @override
   @TimestampConverter()
@@ -769,6 +766,7 @@ PostAnswerModel _$PostAnswerModelFromJson(Map<String, dynamic> json) {
 mixin _$PostAnswerModel {
   String? get value => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
+  int? get answerCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -782,7 +780,7 @@ abstract class $PostAnswerModelCopyWith<$Res> {
           PostAnswerModel value, $Res Function(PostAnswerModel) then) =
       _$PostAnswerModelCopyWithImpl<$Res, PostAnswerModel>;
   @useResult
-  $Res call({String? value, double? score});
+  $Res call({String? value, double? score, int? answerCode});
 }
 
 /// @nodoc
@@ -800,6 +798,7 @@ class _$PostAnswerModelCopyWithImpl<$Res, $Val extends PostAnswerModel>
   $Res call({
     Object? value = freezed,
     Object? score = freezed,
+    Object? answerCode = freezed,
   }) {
     return _then(_value.copyWith(
       value: freezed == value
@@ -810,6 +809,10 @@ class _$PostAnswerModelCopyWithImpl<$Res, $Val extends PostAnswerModel>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      answerCode: freezed == answerCode
+          ? _value.answerCode
+          : answerCode // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -822,7 +825,7 @@ abstract class _$$_PostAnswerModelCopyWith<$Res>
       __$$_PostAnswerModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? value, double? score});
+  $Res call({String? value, double? score, int? answerCode});
 }
 
 /// @nodoc
@@ -838,6 +841,7 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
   $Res call({
     Object? value = freezed,
     Object? score = freezed,
+    Object? answerCode = freezed,
   }) {
     return _then(_$_PostAnswerModel(
       value: freezed == value
@@ -848,6 +852,10 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      answerCode: freezed == answerCode
+          ? _value.answerCode
+          : answerCode // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -855,7 +863,7 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PostAnswerModel implements _PostAnswerModel {
-  const _$_PostAnswerModel({this.value, this.score});
+  const _$_PostAnswerModel({this.value, this.score, this.answerCode});
 
   factory _$_PostAnswerModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostAnswerModelFromJson(json);
@@ -864,10 +872,12 @@ class _$_PostAnswerModel implements _PostAnswerModel {
   final String? value;
   @override
   final double? score;
+  @override
+  final int? answerCode;
 
   @override
   String toString() {
-    return 'PostAnswerModel(value: $value, score: $score)';
+    return 'PostAnswerModel(value: $value, score: $score, answerCode: $answerCode)';
   }
 
   @override
@@ -876,12 +886,14 @@ class _$_PostAnswerModel implements _PostAnswerModel {
         (other.runtimeType == runtimeType &&
             other is _$_PostAnswerModel &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.answerCode, answerCode) ||
+                other.answerCode == answerCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, value, score);
+  int get hashCode => Object.hash(runtimeType, value, score, answerCode);
 
   @JsonKey(ignore: true)
   @override
@@ -898,8 +910,10 @@ class _$_PostAnswerModel implements _PostAnswerModel {
 }
 
 abstract class _PostAnswerModel implements PostAnswerModel {
-  const factory _PostAnswerModel({final String? value, final double? score}) =
-      _$_PostAnswerModel;
+  const factory _PostAnswerModel(
+      {final String? value,
+      final double? score,
+      final int? answerCode}) = _$_PostAnswerModel;
 
   factory _PostAnswerModel.fromJson(Map<String, dynamic> json) =
       _$_PostAnswerModel.fromJson;
@@ -908,6 +922,8 @@ abstract class _PostAnswerModel implements PostAnswerModel {
   String? get value;
   @override
   double? get score;
+  @override
+  int? get answerCode;
   @override
   @JsonKey(ignore: true)
   _$$_PostAnswerModelCopyWith<_$_PostAnswerModel> get copyWith =>

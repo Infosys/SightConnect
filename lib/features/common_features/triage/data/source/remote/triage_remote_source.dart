@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,6 +13,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  });
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -18,8 +23,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint = "/api/diagnostic-report-templates/assessment/1351";
-    logger.d({"API getTriageQuestionnaire": endpoint});
+    const endpoint =
+        "/services/assessments/api/diagnostic-report-templates/assessment/1351";
+    logger.d({
+      "API getTriageQuestionnaire": endpoint,
+    });
     // Map<String, dynamic> bodyData = {
     //   "name": "LVPEI EyeCare Triage",
     //   "organizationCode": "LVPEI",
@@ -32,11 +40,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   endpoint,
     //   // queryParameters: bodyData,
     // );
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     // } else {
-    //   throw ServerException();
     // }
     if (response.isNotEmpty) {
       var data = jsonDecode(response);
@@ -50,7 +54,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<TriageResponseModel> saveTriage({
     required TriageResponseModel triage,
   }) async {
-    var endpoint = "/api/triage-report";
+    const endpoint = "/services/triage/api/triage-report";
     try {
       var response = await dio.post(
         endpoint,
@@ -71,6 +75,44 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
+      throw UnknownException();
+    }
+  }
+
+  @override
+  Future<TriageResponseModel> updateTriage({
+    required TriageUpdateModel triage,
+  }) async {
+    final id = triage.diagnosticReportId;
+
+    // var response =
+    //     await rootBundle.loadString("assets/triage_update_response.json");
+    // if (response.isNotEmpty) {
+    //   Map<String, dynamic> data = jsonDecode(response);
+    //   return TriageUpdateMapper.toResponseModel(data);
+    // } else {
+    //   throw ServerException();
+    // }
+    try {
+      var endpoint = "/services/triage/api/triage-report/$id";
+
+      print(triage.toJson());
+      final response = await dio.patch(
+        endpoint,
+        data: triage.toJson(),
+      );
+
+      if (response.statusCode != null) {
+        if (response.statusCode! >= 200 && response.statusCode! < 210) {
+          return TriageResponseModel.fromJson(response.data);
+        } else {
+          throw ServerException();
+        }
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      logger.f({"reched here error": e});
       throw UnknownException();
     }
   }
