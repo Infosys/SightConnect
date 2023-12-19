@@ -20,9 +20,6 @@ var getEyeTriageReport = FutureProvider.family(
     logger.d({"getEyeTriageReport": pId});
     if (isResultOfflineMode) {
       List<TriageReportBriefEntity> triageAssessment = [];
-      logger.d({
-        "Patient ID": pId,
-      });
 
       for (var element in LocalTriageReportSource.local_triage_result) {
         triageAssessment.add(
@@ -57,7 +54,7 @@ var getTriageDetailedEyeReport = FutureProvider.family(
   (ref, int reportID) async {
     if (isResultOfflineMode) {
       final data = TriageDetailedReportModel.fromJson(
-        LocalTriageReportSource.local_triage_result[0],
+        LocalTriageReportSource.local_triage_result.first,
       );
 
       return data;
@@ -82,7 +79,7 @@ var getTriageDetailedEyeReport = FutureProvider.family(
 var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
   DiagnosticReportTemplateFHIRModel? triageAssessment =
-      ref.read(getTriageProvider).asData?.value;
+      ref.watch(getTriageProvider).asData?.value;
 
   TriageDetailedReportModel? triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;

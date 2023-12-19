@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_test_timeline_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -18,6 +17,21 @@ class AssessmentCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (data == null || data!.isEmpty) {
+      return SizedBox(
+        height: 200,
+        child: Center(
+          child: Text(
+            'No Data Found',
+            style: applyRobotoFont(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: AppColor.grey,
+            ),
+          ),
+        ),
+      );
+    }
     return ListView.builder(
       itemCount: data == null ? 0 : data!.length,
       itemBuilder: (BuildContext context, int index) {
@@ -131,10 +145,10 @@ class AssessmentCards extends ConsumerWidget {
                   height: 15,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    InkWell(
-                      onTap: () {
+                    TextButton(
+                      onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PatientAssessmentReportPage(
@@ -152,49 +166,62 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientTestTimelinePage(),
+
+                    const SizedBox(width: 24),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        onPressed: currentData.isUpdateEnabled ?? false
+                            ? () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return UpdateTriageAlertBox(
+                                      dignosticReportID:
+                                          currentData.triageResultID,
+                                    );
+                                  },
+                                );
+                              }
+                            : null,
+                        label: Text(
+                          'Update',
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: currentData.isUpdateEnabled ?? false
+                                ? AppColor.primary
+                                : AppColor.grey,
                           ),
-                        );
-                      },
-                      child: Text(
-                        'View Timeline',
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.primary,
                         ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: currentData.isUpdateEnabled ?? false
-                          ? () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return UpdateTriageAlertBox(
-                                    dignosticReportID:
-                                        currentData.triageResultID,
-                                  );
-                                },
-                              );
-                            }
-                          : null,
-                      child: Text(
-                        'Update',
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                        icon: Icon(
+                          Icons.edit,
+                          size: 16,
                           color: currentData.isUpdateEnabled ?? false
                               ? AppColor.primary
                               : AppColor.grey,
                         ),
                       ),
                     ),
+
+                    // InkWell(
+                    //   onTap: () {
+                    //     Navigator.of(context).push(
+                    //       MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             const PatientTestTimelinePage(),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Text(
+                    //     'View Timeline',
+                    //     style: applyRobotoFont(
+                    //       fontSize: 14,
+                    //       fontWeight: FontWeight.w500,
+                    //       color: AppColor.primary,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 )
               ],

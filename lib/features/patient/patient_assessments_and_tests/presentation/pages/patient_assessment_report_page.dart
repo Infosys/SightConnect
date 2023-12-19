@@ -17,9 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
-   int  diagnosticReportId;
-   PatientAssessmentReportPage({
-    required  this.diagnosticReportId,
+  final int diagnosticReportId;
+  const PatientAssessmentReportPage({
+    required this.diagnosticReportId,
     super.key,
   });
 
@@ -100,10 +100,22 @@ class PatientAssessmentReportPage extends ConsumerWidget {
       },
       error: (error, stack) {
         logger.d("eroor $error");
-        logger.d("stack $stack");
-        return const Scaffold(
+        logger.d("tracee $stack");
+        return Scaffold(
           body: Center(
-            child: Text("The full report is not available at the moment."),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text("The report is not available at the moment"),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                  label: const Text("Go Back"),
+                ),
+              ],
+            ),
           ),
         );
       },
