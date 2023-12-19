@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_triage_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/widgets/update_option_card.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 //from triage
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 
@@ -26,7 +26,15 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
     final scaffoldKey = useState(GlobalKey<ScaffoldState>());
     var model = ref.watch(updateTriageQuestionnaireProvider);
     model.selectedOptions.containsValue(true);
-    model.getQuestionnaire(questionnaireSections);
+    List<QuestionnaireItemFHIRModel> quessionaire = ref
+            .read(getTriageProvider)
+            .asData
+            ?.value
+            .questionnaire!
+            .questionnaireItem ??
+        [];
+    ;
+    model.getQuestionnaire(quessionaire);
     var pageController = usePageController();
 
     return Scaffold(
