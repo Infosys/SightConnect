@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
@@ -6,14 +8,13 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/local_triage_report_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var isResultOfflineMode = true;
+var isResultOfflineMode = false;
 
 var getEyeTriageReport = FutureProvider.family(
   (ref, int pId) async {
@@ -84,18 +85,27 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
   TriageDetailedReportModel? triageDetailedReport =
       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
-  logger.f({
-    "profile": profileEntity,
-    "assessmentResponse": triageDetailedReport,
-    "triageAssessment": triageAssessment,
-  });
   if (triageAssessment == null) {
-    throw ErrorDescription("Assessment detail found");
+    throw ErrorDescription(
+      "Assessment detail found",
+    );
   }
+
+  if (triageDetailedReport == null) {
+    throw ErrorDescription(
+      "Triage Detailed Report found",
+    );
+  }
+
+  logger.f({
+    "profile": json.decode(profileEntity.toJson()),
+    "assessmentResponse": triageDetailedReport.toJson(),
+    "triageAssessment": triageAssessment.toJson(),
+  });
 
   final response = AssessmentDetailedReportMapper.toEntity(
     profileEntity,
-    triageDetailedReport!,
+    triageDetailedReport,
     triageAssessment,
   );
   logger.d({
@@ -125,7 +135,7 @@ class AssessmentsAndTestProvider extends ChangeNotifier {
     users.add(TriageReportUserEntity(
       name: patient?.profile?.patient?.name! ?? "",
       image: patient?.profile?.patient?.profilePhoto! ?? "",
-      id: 9627849171,
+      id: 9627849173,
     ));
 
     _selectedUser = users[0];

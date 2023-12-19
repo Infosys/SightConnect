@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                triageResultEntities.reportDate.toString(),
+                triageResultEntities.reportDate!.formateDateWithTime,
                 style: applyRobotoFont(
                   fontSize: 12,
                 ),
@@ -76,7 +77,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          triageResultEntities.questionResultDescription??"NA",
+          triageResultEntities.questionResultDescription ?? "NA",
           style: applyRobotoFont(
             fontSize: 14,
             color: AppColor.darkGrey,
@@ -87,7 +88,7 @@ class AssessmentOverallResultCard extends StatelessWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority ? priority) {
+String getRequestPriorityText(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return "Urgent Consult";

@@ -7,18 +7,18 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/main.dart';
 
-
 class AssessmentDetailedReportMapper {
   static TriageReportDetailedEntity toEntity(
     TriageReportUserEntity profileEntity,
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
-    logger.d({
-      "profileEntity": profileEntity,
-      "triageDetailedReport": triageDetailedReport,
-      "triageAssessment": triageAssessment,
-    });
+    // logger.d({
+    //   "profileEntity": profileEntity,
+    //   "triageDetailedReport": triageDetailedReport,
+    //   "triageAssessment": triageAssessment,
+    // });
+
     return TriageReportDetailedEntity(
       triageResultDescription:
           triageDetailedReport.diagnosticReportDescription ?? "NA",
@@ -31,8 +31,8 @@ class AssessmentDetailedReportMapper {
       patientId: "${profileEntity.id}",
       patientName: profileEntity.name,
       patientImage: profileEntity.image,
-      assessmentID: triageDetailedReport.assessmentCode!,
-      reportDate: triageDetailedReport.issued,
+      assessmentID: triageDetailedReport.assessmentCode ?? 0,
+      reportDate: triageDetailedReport.issued ?? DateTime.now(),
       questionResponseBriefEntity:
           AssessmentDetailedReportMapper._getQuestionsBriefEntity(
         triageAssessment,
@@ -61,7 +61,7 @@ class AssessmentDetailedReportMapper {
     );
   }
 
-  static RequestPriority ? getSevirityToPriority(Severity? severity) {
+  static RequestPriority? getSevirityToPriority(Severity? severity) {
     switch (severity) {
       case Severity.HIGH:
         return RequestPriority.URGENT;
@@ -77,30 +77,39 @@ class AssessmentDetailedReportMapper {
   static List<ImageBriefEntity> _getimageBreifEntity(
       DiagnosticReportTemplateFHIRModel triageAssessment,
       TriageDetailedReportModel triageDetailedReport) {
-    final List<ImageBriefEntity> imageBriefEntity = [];
-    Map<int, String> imageMap = {};
-    List<ImagingSelectionTemplateFHIRModel>?
-        imagingSelectionTemplateFHIRModels =
-        triageAssessment.study?.imagingSelectionTemplate;
-    for (ImagingSelectionTemplateFHIRModel relatedImageFHIRModel
-        in imagingSelectionTemplateFHIRModels!) {
-      imageMap[relatedImageFHIRModel.id!] = relatedImageFHIRModel.name ?? "";
-    }
-    for (Media imagingStudyModel in triageDetailedReport.media!) {
-      if (imageMap.containsKey(imagingStudyModel.identifier)) {
-        imageBriefEntity.add(
-          ImageBriefEntity(
-            imageId: imagingStudyModel.id,
-            imageIdentifier: imagingStudyModel.identifier ?? 0,
-            imageUrl:
-                "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}",
-            bodySite: imageMap[imagingStudyModel.identifier].toString(),
-          ),
-        );
-      }
-    }
+    try {
+      final List<ImageBriefEntity> imageBriefEntity = [];
+      Map<int, String> imageMap = {};
+      List<ImagingSelectionTemplateFHIRModel>?
+          imagingSelectionTemplateFHIRModels =
+          triageAssessment.study?.imagingSelectionTemplate;
 
-    return imageBriefEntity;
+      
+      for (ImagingSelectionTemplateFHIRModel relatedImageFHIRModel
+          in imagingSelectionTemplateFHIRModels!) {
+        imageMap[relatedImageFHIRModel.id!] = relatedImageFHIRModel.name ?? "";
+      }
+      for (Media imagingStudyModel in triageDetailedReport.media!) {
+        if (imageMap.containsKey(imagingStudyModel.identifier)) {
+          imageBriefEntity.add(
+            ImageBriefEntity(
+              imageId: imagingStudyModel.id,
+              imageIdentifier: imagingStudyModel.identifier ?? 0,
+              imageUrl:
+                  "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}",
+              bodySite: imageMap[imagingStudyModel.identifier].toString(),
+            ),
+          );
+        }
+      }
+
+      return imageBriefEntity;
+    } catch (e) {
+      logger.d({
+        "Some Error Happend while Mapping ImageBriefEntity": e,
+      });
+      return [];
+    }
   }
 
   static BodySite calculateBodySite(String bodySite) {
@@ -120,34 +129,41 @@ class AssessmentDetailedReportMapper {
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
-    final List<ObservationBriefEntity> observationBriefEntity = [];
-    Map<int, String> observationMap = {};
-    if (triageAssessment.observations?.id != null) {
-      int id = triageAssessment.observations?.id ?? 0;
-      BodySite bodySite =
-          triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
-      observationMap[id] = getBodySiteText(bodySite);
-    }
-    for (ObservationDefinitionModel observation
-        in triageAssessment.observations!.observationDefinition!) {
-      int id = observation.id ?? 0;
-      BodySite bodySite = observation.bodySite!;
-      observationMap[id] = getBodySiteText(bodySite);
-    }
-    for (Observation observation in triageDetailedReport.observations!) {
-      if (observationMap.containsKey(observation.identifier)) {
-        observationBriefEntity.add(
-          ObservationBriefEntity(
-            observationValue: double.parse(observation.value!),
-            observationId: observation.id,
-            observationValueIdentifier: observation.identifier ?? 0,
-            bodySite: observationMap[observation.identifier].toString(),
-          ),
-        );
+    try {
+      final List<ObservationBriefEntity> observationBriefEntity = [];
+      Map<int, String> observationMap = {};
+      if (triageAssessment.observations?.id != null) {
+        int id = triageAssessment.observations?.id ?? 0;
+        BodySite bodySite =
+            triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
+        observationMap[id] = getBodySiteText(bodySite);
       }
-    }
+      for (ObservationDefinitionModel observation
+          in triageAssessment.observations!.observationDefinition!) {
+        int id = observation.id ?? 0;
+        BodySite bodySite = observation.bodySite!;
+        observationMap[id] = getBodySiteText(bodySite);
+      }
+      for (Observation observation in triageDetailedReport.observations!) {
+        if (observationMap.containsKey(observation.identifier)) {
+          observationBriefEntity.add(
+            ObservationBriefEntity(
+              observationValue: double.parse(observation.value!),
+              observationId: observation.id,
+              observationValueIdentifier: observation.identifier ?? 0,
+              bodySite: observationMap[observation.identifier].toString(),
+            ),
+          );
+        }
+      }
 
-    return observationBriefEntity;
+      return observationBriefEntity;
+    } catch (e) {
+      logger.d({
+        "Some Error Happend while Mapping ObservationBriefEntity": e,
+      });
+      return [];
+    }
   }
 
   static String getBodySiteText(BodySite bodySite) {
@@ -178,29 +194,36 @@ class AssessmentDetailedReportMapper {
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
-    final List<QuestionResponseBriefEntity> questionResponseBriefEntity = [];
-    Map<int, Map<String, dynamic>> questionResponseMap = {};
-    for (var question in triageAssessment.questionnaire!.questionnaireItem!) {
-      questionResponseMap[question.id!] = {
-        "question": question.text,
-      };
-    }
-    for (var response in triageDetailedReport.responses!) {
-      if (questionResponseMap.containsKey(response.linkId)) {
-        questionResponseMap[response.linkId]!["response"] =
-            response.answers!.first.value;
+    try {
+      final List<QuestionResponseBriefEntity> questionResponseBriefEntity = [];
+      Map<int, Map<String, dynamic>> questionResponseMap = {};
+      for (var question in triageAssessment.questionnaire!.questionnaireItem!) {
+        questionResponseMap[question.id!] = {
+          "question": question.text,
+        };
       }
+      for (var response in triageDetailedReport.responses!) {
+        if (questionResponseMap.containsKey(response.linkId)) {
+          questionResponseMap[response.linkId]!["response"] =
+              response.answers!.first.value;
+        }
+      }
+      questionResponseMap.forEach(
+        (key, value) {
+          questionResponseBriefEntity.add(
+            QuestionResponseBriefEntity(
+              question: value["question"],
+              response: value["response"],
+            ),
+          );
+        },
+      );
+      return questionResponseBriefEntity;
+    } catch (e) {
+      logger.d({
+        "Some Error Happend while Mapping QuestionResponseBriefEntity": e,
+      });
+      return [];
     }
-    questionResponseMap.forEach(
-      (key, value) {
-        questionResponseBriefEntity.add(
-          QuestionResponseBriefEntity(
-            question: value["question"],
-            response: value["response"],
-          ),
-        );
-      },
-    );
-    return questionResponseBriefEntity;
   }
 }

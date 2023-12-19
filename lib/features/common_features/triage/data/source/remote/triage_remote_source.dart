@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
@@ -24,7 +23,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    const endpoint =
+    var endpoint =
         "/services/assessments/api/diagnostic-report-templates/assessment/1351";
     logger.d({
       "API getTriageQuestionnaire": endpoint,

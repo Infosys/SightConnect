@@ -3,7 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class LeftCorneaTabView extends ConsumerWidget {
-  const LeftCorneaTabView({required this.leftEyeImage, super.key});
+  const LeftCorneaTabView({
+    required this.leftEyeImage,
+    super.key,
+  });
   final List<String> leftEyeImage;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,9 +28,9 @@ class LeftCorneaTabView extends ConsumerWidget {
           ),
           itemBuilder: (context, index) {
             return CachedNetworkImage(
-                imageUrl:leftEyeImage[index],
-                fit: BoxFit.cover,
-              );
+              imageUrl: leftEyeImage[index],
+              fit: BoxFit.cover,
+            );
           },
         ),
       ],
