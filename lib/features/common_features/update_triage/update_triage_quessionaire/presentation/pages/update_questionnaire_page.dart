@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_triage_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/widgets/update_option_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: model.questionnaireSections.length,
             itemBuilder: (context, index) {
+              logger.f("index $index");
               var question = model.questionnaireSections[index];
               var isLastQuestion =
                   (model.questionnaireSections.length - 1 == index);
@@ -164,6 +166,13 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         ),
                       );
                     }
+                    else{
+                       pageController.animateToPage(
+                          index + 1,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                    }
                   },
                   onYesButtonPressed: () {
                     model.addQuestionnaireAnswer(
@@ -183,6 +192,13 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                           ),
                         ),
                       );
+                    }
+                    else{
+                       pageController.animateToPage(
+                          index + 1,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
                     }
                   },
                 );
