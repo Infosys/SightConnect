@@ -1,9 +1,13 @@
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
+
 import '../../../vision_technician_register_new_patient/data/models/vt_eyecare_details_question_model.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vt_patient_model.freezed.dart';
 part 'vt_patient_model.g.dart';
+
 
 @freezed
 class VTPatientDto with _$VTPatientDto {
@@ -14,20 +18,21 @@ class VTPatientDto with _$VTPatientDto {
     String? yearOfBirth,
     String? monthOfBirth,
     String? dayOfBirth,
-    String? gender,
+    Gender? gender,
     String? districtName,
     String? townName,
     String? pincode,
     int? encounterId,
-    String? encounterStartDate,
+    @TimestampConverter() DateTime? encounterStartDate,
     String? status,
-    String? category,
+    SeverityCategory? category,
   }) = _VTPatientDto;
 
   factory VTPatientDto.fromJson(Map<String, dynamic> json) =>
       _$VTPatientDtoFromJson(json);
 }
 
+ 
 
 class VTPatientModel {
   String firstName;
@@ -35,9 +40,9 @@ class VTPatientModel {
   String lastName;
   String gender;
   String abhaId;
-  String email ;
-  String age ;
-  String dateOfBirth ;
+  String email;
+  String age;
+  String dateOfBirth;
   String patientId;
   String assessmentId;
   String assessmentDate;

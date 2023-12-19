@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -15,7 +15,9 @@ class IvrCallHistoryTableView extends ConsumerWidget {
     required this.ivrCallHistoryDetails,
     super.key,
   });
+
   final List<IvrCallHistoryModel> ivrCallHistoryDetails;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tableHeading =
@@ -108,7 +110,7 @@ List<DataCell> generateIvrCallHistoryListTile(
         children: [
           Icon(
             Icons.phone_callback_rounded,
-            color: data.calltype == "in" ? AppColor.green : AppColor.red,
+            color: data.direction == "in" ? AppColor.green : AppColor.red,
           ),
           Text(
             "${data.duration! / 60} min",
@@ -129,7 +131,7 @@ List<DataCell> generateIvrCallHistoryListTile(
     ),
     DataCell(
       Text(
-        DateFormat('hh:mm').format(data.logDate.toLocal()),
+        DateFormat('hh:mm a').format(data.logDate.toLocal()),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -174,15 +176,18 @@ List<DataCell> generateIvrCallHistoryListTile(
                   ? const Color(0xffFAFAFA)
                   : AppColor.lightBlue,
               child: IconButton(
-                onPressed: () async {
-                  try {
-                    await ref
-                        .read(ivrCallHistorySearchHelperProvider)
-                        .makeIvrCall(data.patientId);
-                  } catch (e) {
-                    Fluttertoast.showToast(msg: "IVR call not available");
-                  }
-                },
+                onPressed: data.status == "COMPLETED"
+                    ? null
+                    : () async {
+                        try {
+                          await ref
+                              .read(ivrCallHistorySearchHelperProvider)
+                              .makeIvrCall(data.mobile);
+                        } catch (e) {
+                          Fluttertoast.showToast(
+                              msg: "IVR call not available.. Try Again!!");
+                        }
+                      },
                 icon: Icon(
                   Icons.phone,
                   color: data.status == "COMPLETED"

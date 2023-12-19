@@ -31,6 +31,11 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
       ),
       body: ref.watch(getIvrCallHistoryDetailsProvider).when(
             data: (data) {
+              if(data.isEmpty){
+                return const Center(
+                  child: Text("Call Log is Empty.. No Calls made yet!!"),
+                );
+              }
               SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(AppSize.kmpadding),

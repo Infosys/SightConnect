@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/models/availability_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

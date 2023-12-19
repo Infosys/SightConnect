@@ -1,6 +1,4 @@
-import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/services/app_logger.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -33,8 +31,7 @@ class MyApp extends ConsumerWidget {
         child: MaterialApp(
           title: AppText.appName,
           locale: const Locale('en'),
-          navigatorObservers:
-              !AppEnv.isDev ? [AppLogger.tracker.getObserver()] : [],
+          
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

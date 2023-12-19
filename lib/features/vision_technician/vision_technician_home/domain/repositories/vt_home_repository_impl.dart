@@ -17,6 +17,7 @@ class VTHomeRepositoryImpl
       VTHomeRemoteSource remoteDataSource;
       VTHomeRepositoryImpl(this.remoteDataSource);
 
+      @override
       Future<List<VTPatientDto>> getListOfPatients() async{
         return await remoteDataSource.getListOfPatients();
       }

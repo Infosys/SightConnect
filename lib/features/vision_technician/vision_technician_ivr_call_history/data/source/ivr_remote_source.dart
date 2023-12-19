@@ -2,7 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/ivr_call_history_model.dart';
+import '../../domain/model/ivr_call_history_model.dart';
+
+var ivrRemoteSource = Provider(
+  (ref) => IvrRemoteSourceImpl(
+    ref.read(dioCallCenterProvider),
+  ),
+);
 
 abstract class IvrRemoteSource {
   Future<List<IvrCallHistoryModel>> getIvrCallHistory({required String mobile});
@@ -10,22 +16,22 @@ abstract class IvrRemoteSource {
   Future makeIvrCall({required String patientMobile});
 }
 
-var ivrRemoteSource = Provider(
-  (ref) => IvrRemoteSourceImpl(
-    ref.read(dioExotelProvider),
-  ),
-);
-
 class IvrRemoteSourceImpl implements IvrRemoteSource {
-  Dio _dio;
+  final Dio _dio;
 
   IvrRemoteSourceImpl(this._dio);
 
   @override
   Future<List<IvrCallHistoryModel>> getIvrCallHistory(
-      {required String mobile}) async {
-    String url = "/api/users/calls/$mobile";
-    return await _dio.get(url).then((value) {
+      {required String mobile, List<String>? callStatus}) async {
+    String url = "/api/users/calls";
+    Map<String, dynamic> queryParameters = {
+      "mobile": mobile
+    };
+    if(callStatus != null && callStatus.isNotEmpty){
+      queryParameters.addAll({"callStatus": callStatus});
+    }
+    return await _dio.get(url, queryParameters: queryParameters).then((value) {
       List<IvrCallHistoryModel> list = [];
       value.data.forEach((element) {
         list.add(IvrCallHistoryModel.fromJson(element));

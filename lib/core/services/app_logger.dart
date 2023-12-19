@@ -1,5 +1,3 @@
-import 'package:snowplow_tracker/events/event.dart';
-import 'package:snowplow_tracker/snowplow_tracker.dart';
 
 class AppLogger {
   AppLogger._();
@@ -34,11 +32,11 @@ class AppLogger {
     );
   }
 
-  static void log(Event event) {
-    tracker.track(event);
-//     await widget.tracker.track(SelfDescribing(
-//     schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
-//     data: {'targetUrl': 'http://0.0.0.0:9090'}
-// ));
-  }
+//   static void log(Event event) {
+//     tracker.track(event);
+// //     await widget.tracker.track(SelfDescribing(
+// //     schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
+// //     data: {'targetUrl': 'http://0.0.0.0:9090'}
+// // ));
+//   }
 }

@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/contracts/ivr_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/source/ivr_remote_source.dart';
 import '../model/ivr_call_history_model.dart';
-import '../source/ivr_remote_source.dart';
 
 var ivrRepository = Provider(
   (ref) => IvrRepositoryImpl(

@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/repositories/availability_repository_impl.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/models/mark_my_availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/repositories/availability_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,6 +15,7 @@ var markMyAvailabilityHelperProvider =
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   MarkMyAvailabilityHelperNotifier({required this.availabilityRepository});
+
   AvailabilityRepository availabilityRepository;
 
   String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
@@ -72,7 +71,7 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
 
   var remarksController = TextEditingController();
-  bool markAvailability = true;
+  bool markAvailability = false;
   bool isLoading = false;
 
   Future<void> updateAvailability() async {
@@ -82,7 +81,6 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
       markAvailability = await availabilityRepository.postMarkMyAvailability(
         available: !markAvailability,
       );
-
       isLoading = false;
       notifyListeners();
     } catch (e) {

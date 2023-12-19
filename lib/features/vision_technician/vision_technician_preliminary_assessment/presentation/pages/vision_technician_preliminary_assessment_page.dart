@@ -75,7 +75,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           ),
         ),
       ),
-      appBar: CustomAppbar(
+      appBar: const CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
         title: InkWell(
@@ -88,11 +88,29 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         .read(visionTechnicianResultProvider)
                         .triageResponseModel,
                   ),
-                ),
-              );
-            },
-            child: const Text('Preliminary Assessment')),
+        title: Text('Preliminary Assessment'),
       ),
+      // body: Form(
+      //   key: _formKey,
+      //   child: SingleChildScrollView(
+      //     child: Padding(
+      //       padding: const EdgeInsets.all(AppSize.kmpadding),
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         mainAxisAlignment: MainAxisAlignment.start,
+      //         children: [
+      //           // const PreliminaryAssessmentCard(),
+      //           const SizedBox(height: AppSize.klheight),
+      //           // const PreliminaryAssessmentIvrCard(),
+      //           const SizedBox(height: AppSize.klheight),
+      //           PreliminaryAssessmentIvrCall(
+      //             selectedOption: selectedOption,
+      //             onSelectedOptionChanged: updateVisibility,
+      //           ),
+      //         );
+      //       },
+      //       child: const Text('Preliminary Assessment')),
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),

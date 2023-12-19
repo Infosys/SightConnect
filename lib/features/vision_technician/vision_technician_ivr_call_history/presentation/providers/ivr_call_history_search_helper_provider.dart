@@ -1,13 +1,12 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/contracts/ivr_repository.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/model/ivr_call_history_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/repositories/ivr_repository_impl.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/model/ivr_call_history_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/repositories/ivr_repository_impl.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var getIvrCallHistoryDetailsProvider =
     FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
-  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050890");
+  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050009");
 });
 
 final ivrCallHistorySearchHelperProvider =

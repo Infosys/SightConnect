@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_patient_list.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -32,8 +31,10 @@ class AssessmentTable extends ConsumerWidget {
           //   ],
           // ),
           const SizedBox(height: AppSize.kmheight),
+
           ref.watch(getAssessmentTableProvider).when(
                 data: (data) {
+                  // print(data);
                   return VTPatientList(
                     listOfAssessments: data,
                   );
@@ -41,9 +42,12 @@ class AssessmentTable extends ConsumerWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                error: (error, stackTrace) => const Center(
-                  child: Text("No data available"),
-                ),
+                error: (error, stackTrace) {
+                  print("This is the error $error");
+                  return const Center(
+                    child: Text("No data available"),
+                  );
+                },
               ),
         ],
       ),

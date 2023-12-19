@@ -120,8 +120,12 @@ flutter:
     - assets/profile.json
     - assets/triage_update_response.json
     - assets/triage_assessment.json
+<<<<<<< HEAD
     - assets/miniapps/vt_register_patient.zip
     - assets/vision_centers.json
+=======
+    - assets/vt_patient.json
+>>>>>>> origin/VT_integration
   
   #   - images/a_dot_ham.jpeg
 
