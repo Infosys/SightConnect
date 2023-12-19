@@ -1,19 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/pages/update_triage_eye_scan_page.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -181,12 +175,23 @@ class AssessmentCards extends ConsumerWidget {
                       textDirection: TextDirection.rtl,
                       child: TextButton.icon(
                         onPressed: currentData.isUpdateEnabled ?? false
-                            ? () {
-                                _showUpdateDialog(
-                                  context,
+                            ? () async {
+                                final result = await _updateMethodCall(
                                   ref,
                                   currentData.triageResultID,
                                 );
+                                if (context.mounted) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return UpdateTriageAlertBox(
+                                        result: result,
+                                        diagnosticReportID:
+                                            currentData.triageResultID,
+                                      );
+                                    },
+                                  );
+                                }
                               }
                             : null,
                         label: Text(
@@ -236,6 +241,27 @@ class AssessmentCards extends ConsumerWidget {
       },
     );
   }
+
+  Future<List<UpdateTriageReportAlertBoxEntity>> _updateMethodCall(
+    WidgetRef ref,
+    int diagnosticReportId,
+  ) async {
+    try {
+      final res = await ref
+          .read(triageReportRepositoryProvider)
+          .getTriageReportByReportId(diagnosticReportId);
+
+      return res.fold((failure) {
+        return [];
+      }, (result) {
+        return ref
+            .read(traigeUpdateReportProvider(diagnosticReportId))
+            .getUpdateTriageReportAlertBoxEntityList(result);
+      });
+    } catch (e) {
+      return [];
+    }
+  }
 }
 
 String getRequestPriorityText(RequestPriority? priority) {
@@ -266,100 +292,6 @@ Color getRequestPriorityColor(RequestPriority? priority) {
     default:
       return AppColor.grey;
   }
-}
-
-_showUpdateDialog(BuildContext context, WidgetRef ref, int dignosticReportID) {
-  var model = ref.watch(traigeUpdateReportProvider(dignosticReportID));
-  final navigator = Navigator.of(context);
-  showDialog(
-    context: context,
-    builder: (_) {
-      return ref.watch(getTriageDetailedEyeReport(dignosticReportID)).when(
-        data: (data) {
-          final result = model.getUpdateTriageReportAlertBoxEntityList(data);
-          return BlurDialogBox(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Select Steps to Redo'),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Icon(Icons.close),
-                )
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: result
-                  .map(
-                    (e) => UpdateTriageAlertBoxListOptoion(
-                      title: e.title,
-                      subtitle: e.subtitle,
-                      subtitlecolor: e.subtitlecolor,
-                      chipText: e.chipText,
-                      chipColor: e.chipColor,
-                      onPressed: () {
-                        switch (e.testType) {
-                          case TestType.QUESTIONNAIRE:
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return UpdateTriageQuestionnairePage(
-                                    questionnaireSections: model
-                                        .triageAssessment
-                                        .questionnaire!
-                                        .questionnaireItem!,
-                                    reportId: dignosticReportID,
-                                  );
-                                },
-                              ),
-                            );
-                            break;
-                          case TestType.OBSERVATION:
-                            ref.read(globalProvider).setVAMode =
-                                VisionAcuityMode.UPDATE;
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const VisualAcuityTumblingPage(),
-                              ),
-                            );
-                            break;
-                          case TestType.IMAGE:
-                            navigator.push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const UpdateTriageEyeScanPage(),
-                              ),
-                            );
-                            break;
-                        }
-                      },
-                    ),
-                  )
-                  .toList(),
-            ),
-            actions: const [],
-          );
-        },
-        error: (error, stackTrace) {
-          logger.d({
-            "getTriageDetailedEyeReport": error,
-            "stackTrace": stackTrace,
-          });
-          return Text("${error.toString()}}");
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
-    },
-  );
 }
 
 class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
