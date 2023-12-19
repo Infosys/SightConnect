@@ -5,11 +5,13 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../domain/repositories/assessment_timeline_repository_impl.dart';
+
 var vtAssessmentTimelineProvider =
-    FutureProvider.autoDispose.family((ref, encounterId) {
-  // inject repo here
-  //call the method from repo
-  return null;
+    FutureProvider.autoDispose.family((ref, int encounterId) async {
+  return await ref
+      .watch(assessmentTimeLineRepository)
+      .getAssessmentTimeline(encounterId);
 });
 
 class AssessmentTimeline extends ConsumerWidget {
@@ -29,7 +31,7 @@ class AssessmentTimeline extends ConsumerWidget {
         child: Text("Timeline is not available for this patient"),
       );
     }
-    return ref.watch(vtAssessmentTimelineProvider(encounterId)).when(
+    return ref.watch(vtAssessmentTimelineProvider(encounterId!)).when(
           data: (data) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +83,7 @@ class AssessmentTimeline extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
-                              "2nd Reminder Sent",
+                              data[-1].title ?? "",
                               style: applyRobotoFont(
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400,
@@ -107,7 +109,7 @@ class AssessmentTimeline extends ConsumerWidget {
                       const SizedBox(height: AppSize.klheight),
                       const Divider(thickness: 1, color: AppColor.grey),
                       const SizedBox(height: AppSize.klheight),
-                      AssessmentTimelineView(),
+                      AssessmentTimelineView(data),
                     ],
                   ),
                 ),

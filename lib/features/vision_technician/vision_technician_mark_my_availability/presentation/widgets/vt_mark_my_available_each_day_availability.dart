@@ -1,11 +1,10 @@
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/models/mark_my_availability_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_row_day.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/models/mark_my_availability_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_row_day.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {

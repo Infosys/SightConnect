@@ -70,7 +70,7 @@ class GeneralInformation extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _formateAge(
+                          _formatDateWithAge(
                             model.dayOfBirth,
                             model.monthOfBirth,
                             model.yearOfBirth,
@@ -134,22 +134,19 @@ class GeneralInformation extends ConsumerWidget {
   }
 }
 
-String _formateAge(
+String _formatDateWithAge(
   String? day,
   String? mon,
   String? year,
 ) {
   try {
-    if (day != null && mon != null && year != null) {
-      final date = DateTime.parse("$year-$mon-$day");
+    day = day ?? "01";
+    mon = mon ?? "Jan";
+    if (year != null) {
+      final date = DateFormat("yyy-MMM-dd").parse("$year-$mon-$day");
       final age = DateTime.now().difference(date).inDays ~/ 365;
-      return "$age years";
-    } else if (year != null) {
-      final currentYear = int.parse(year);
-      final age =
-          DateTime.now().difference(DateTime(currentYear)).inDays ~/ 365;
-      return "$age years";
-    } else {
+      return "$day $mon $year ($age years)";
+    }else {
       return "";
     }
   } catch (e) {
