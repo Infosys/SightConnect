@@ -16,11 +16,10 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 
 class UpdateTriageQuestionnairePage extends HookConsumerWidget {
   const UpdateTriageQuestionnairePage({
-    required this.questionnaireSections,
     required this.reportId,
     super.key,
   });
-  final List<QuestionnaireItemFHIRModel> questionnaireSections;
+
   final int reportId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

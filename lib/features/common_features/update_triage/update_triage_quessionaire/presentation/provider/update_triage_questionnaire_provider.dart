@@ -28,8 +28,7 @@ var updateTriageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
     return UpdateTriageQuestionnaireProvider(
       ref.watch(triageRepositoryProvider),
       ref.watch(triageReportRepositoryProvider),
-      ref.watch(triageUrgencyRepositoryProvider)
-      
+      ref.watch(triageUrgencyRepositoryProvider),
     );
   },
 );
@@ -39,7 +38,6 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   final TriageRepository _triageRepository;
   final TriageUrgencyRepository _triageUrgencyRepository;
 
-  
   final TriageReportRepository _triageReportRepository;
 
   late String _questionnaireRemarks;
@@ -49,11 +47,10 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   TextEditingController textEditingController = TextEditingController();
 
   UpdateTriageQuestionnaireProvider(
-      this._triageRepository,
-      this._triageReportRepository,
-      this._triageUrgencyRepository,
-      )
-      : _questionnaireRemarks = '',
+    this._triageRepository,
+    this._triageReportRepository,
+    this._triageUrgencyRepository,
+  )   : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
         _questionnaireResponse = [];
@@ -140,7 +137,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     if (reportModel == null) {
       throw ServerException();
     }
-   
+
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
       patientId: reportModel.subject,
       diagnosticReportId: reportModel.diagnosticReportId,
@@ -148,7 +145,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       performer: [
         update_model.Performer(
           role: PerformerRole.PATIENT,
-          identifier:reportModel.subject,
+          identifier: reportModel.subject,
         ),
       ],
       assessmentCode: reportModel.assessmentCode,
@@ -163,17 +160,12 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         reportModel.responses,
         getQuestionaireResponse(),
       ),
-
     );
     try {
       return await _triageRepository.updateTriage(triage: triage);
-   
     } catch (e) {
-      
-      rethrow ;
+      rethrow;
     }
-   
-    
   }
 
   Future<TriageDetailedReportModel?> getTriageReportByReportId(
@@ -216,7 +208,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         ),
       );
     });
-   
+
     for (PostQuestionResponseModel element in questionResponseListFromUI) {
       questionResponseList.add(
         update_model.PatchQuestionResponseModel(
@@ -238,14 +230,16 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     return questionResponseList;
   }
 
- List< Map<String, int>> getScore() {
+  List<Map<String, int>> getScore() {
     final qscore = _triageUrgencyRepository
         .questionnaireUrgency(getQuestionaireResponse());
 
     return [
-     { "QUESTIONNAIRE": qscore.toInt()},
-     { "OBSERVATION": 0,},
-     { "IMAGE": 0}
+      {"QUESTIONNAIRE": qscore.toInt()},
+      {
+        "OBSERVATION": 0,
+      },
+      {"IMAGE": 0}
     ];
   }
 
