@@ -195,32 +195,33 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
   ) {
     try {
+     
+      
       final List<QuestionResponseBriefEntity> questionResponseBriefEntity = [];
-      Map<int, Map<String, dynamic>> questionResponseMap = {};
+      Map<int, String> questionResponseMap = {};
       for (var question in triageAssessment.questionnaire!.questionnaireItem!) {
-        questionResponseMap[question.id!] = {
-          "question": question.text,
-        };
+        questionResponseMap[question.id!] = question.text!;
+        
       }
+
+       logger.f({"question response map": questionResponseMap});
       for (var response in triageDetailedReport.responses!) {
         if (questionResponseMap.containsKey(response.linkId)) {
-          questionResponseMap[response.linkId]!["response"] =
-              response.answers!.first.value;
-        }
-      }
-      questionResponseMap.forEach(
-        (key, value) {
           questionResponseBriefEntity.add(
             QuestionResponseBriefEntity(
-              question: value["question"],
-              response: value["response"],
+              question: questionResponseMap[response.linkId]!,
+              response: response.answers!.first.value,
             ),
           );
-        },
-      );
+          
+        }
+      }
+      
       return questionResponseBriefEntity;
     } catch (e) {
+     
       logger.d({
+      
         "Some Error Happend while Mapping QuestionResponseBriefEntity": e,
       });
       return [];
