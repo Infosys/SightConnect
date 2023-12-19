@@ -1,49 +1,50 @@
 import 'dart:io';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:openid_client/openid_client_io.dart' as io;
 
-var authProvider = ChangeNotifierProvider(
-  (ref) => AuthPageProvider(),
-);
+final authProvider = ChangeNotifierProvider((ref) {
+  return InitializationPageProvider();
+});
 
-class AuthPageProvider extends ChangeNotifier {
+class InitializationPageProvider extends ChangeNotifier {
   // final String keycloakUri = '${AppEnv.baseKeycloakUrl}/auth/realms/care';
   final String keycloakUri =
       'https://campaigns.infosysapps.com/auth2/realms/care';
+  final String _redirectUrl = 'com.infosys.eyecareforall://';
   static const List<String> scopes = ['profile'];
   static const String clientId = 'microservices';
   static const int PORT = 4000;
   Credential? credential;
-  AuthPageProvider() {
-    init();
-  }
+
+  InitializationPageProvider();
 
   Future<void> init() async {
     try {
       Client client = await _getClient();
       credential = await _authenticate(client, scopes: scopes);
-
-      notifyListeners();
+      await save(credential!);
     } catch (e) {
-      logger.d(e);
-      credential = null;
-      notifyListeners();
+      rethrow;
     }
+  }
 
-    logger.d("init called: $credential");
+  Future<void> save(Credential credential) async {
+    final response = await credential.getTokenResponse();
+    await PersistentAuthStateService.authState.saveTokens(
+      accessToken: response.accessToken!,
+      refreshToken: response.refreshToken!,
+    );
+    notifyListeners();
   }
 
   Future<void> logout() async {
-    final url = credential!.generateLogoutUrl();
+    final url = credential?.generateLogoutUrl();
+    await PersistentAuthStateService.authState.logout();
     await launchUrl(url!);
-    if (Platform.isAndroid || Platform.isIOS) {
-      closeInAppWebView();
-    }
-    notifyListeners();
   }
 
   Future<Client> _getClient() async {
@@ -85,8 +86,12 @@ class AuthPageProvider extends ChangeNotifier {
 
   urlLauncher(String url) async {
     var uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
+    if (!await launchUrl(
+      uri,
+    )) {
       throw 'Could not launch $url';
     }
   }
+
+  getUserProfile() {}
 }
