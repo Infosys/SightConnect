@@ -8,6 +8,9 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../common_features/triage/domain/models/triage_response_model.dart';
+import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+
 class AssessmentTimelineView extends ConsumerWidget {
   AssessmentTimelineView({super.key});
 
@@ -15,6 +18,7 @@ class AssessmentTimelineView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<AssessmentTimelineViewModel> timeLineList =
         ref.watch(assessmentTimelineProvider).timeLineList;
+
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
@@ -80,7 +84,7 @@ class AssessmentTimelineView extends ConsumerWidget {
                             color: AppColor.grey,
                           ),
                         ),
-                        TimeWidgetRender(context, timeLineList[index], index)
+                        TimeWidgetRender(context, timeLineList[index], index, ref)
                       ],
                     )
                   : Row(
@@ -94,7 +98,7 @@ class AssessmentTimelineView extends ConsumerWidget {
                               color: AppColor.grey,
                             ),
                           ),
-                          TimeWidgetRender(context, timeLineList[index], index)
+                          TimeWidgetRender(context, timeLineList[index], index, ref)
                         ]),
               const SizedBox(
                 height: AppSize.kmheight,
@@ -133,7 +137,7 @@ class AssessmentTimelineView extends ConsumerWidget {
 }
 
 Widget TimeWidgetRender(
-    context, AssessmentTimelineViewModel timeLine, int index) {
+    context, AssessmentTimelineViewModel timeLine, int index, ref) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
@@ -172,7 +176,9 @@ Widget TimeWidgetRender(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return VisionTechnicianAssessmentReportPage();
+                      return VisionTechnicianAssessmentReportPage(
+                        triageResponseModel:  ref.watch(visionTechnicianResultProvider).triageResponseModel,
+                      );
                     },
                   ));
                 },

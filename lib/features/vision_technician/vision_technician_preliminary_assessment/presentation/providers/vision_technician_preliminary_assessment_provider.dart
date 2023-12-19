@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
 import 'vision_technician_triage_provider.dart';
 
 var preliminaryAssessmentProvider = Provider(
@@ -29,11 +30,15 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       this._triageUrgencyRepository, this._visionTechnicianTriageProvider);
 
   Future<Either<Failure, TriageResponseModel>> saveTriage() async {
-    List<PostImagingSelectionModel> imageSelection =  _visionTechnicianTriageProvider.getTriageEyeScanResponse();
-    List<PostObservationsModel> observations = _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
+    List<PostImagingSelectionModel> imageSelection =
+        _visionTechnicianTriageProvider.getTriageEyeScanResponse();
+    List<PostObservationsModel> observations =
+        _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
     List<PostQuestionResponseModel> questionResponse =
         _visionTechnicianTriageProvider.getQuestionaireResponse();
-   
+
+    logger.d("questionResponse: $questionResponse");
+
     double quessionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
       questionResponse,
     );
@@ -43,7 +48,7 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
     double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
       imageSelection,
     );
-     double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
+    double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
       quessionnaireUrgency,
       visualAcuityUrgency,
       eyeScanUrgency,

@@ -31,7 +31,7 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
       return VTPatientSearchDto.fromJson(response.data);
     } catch (e) {
       throw ServerFailure(errorMessage: 'No data found');
-      
+           
     }
   }
 }

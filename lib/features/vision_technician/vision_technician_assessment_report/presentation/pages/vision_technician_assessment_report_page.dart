@@ -11,11 +11,18 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianAssessmentReportPage extends StatelessWidget {
-  const VisionTechnicianAssessmentReportPage({super.key});
+import '../../../../common_features/triage/domain/models/triage_response_model.dart';
+import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import '../../../vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
+
+class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
+  const VisionTechnicianAssessmentReportPage(
+      {super.key, required this.triageResponseModel});
+
+  final TriageResponseModel? triageResponseModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: const CustomAppbar(
@@ -31,8 +38,8 @@ class VisionTechnicianAssessmentReportPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const AssessmentReportProfile(),
-              const SizedBox(height: AppSize.klheight),
-              const AssessmentReportIvrCard(),
+              // const SizedBox(height: AppSize.klheight),
+              // const AssessmentReportIvrCard(),
               const SizedBox(height: AppSize.klheight),
               const AssessmentReportDetails(),
               const SizedBox(height: AppSize.klheight),

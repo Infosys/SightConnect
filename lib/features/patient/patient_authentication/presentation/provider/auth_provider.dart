@@ -80,3 +80,4 @@ class AuthPageProvider extends ChangeNotifier {
     }
   }
 }
+
