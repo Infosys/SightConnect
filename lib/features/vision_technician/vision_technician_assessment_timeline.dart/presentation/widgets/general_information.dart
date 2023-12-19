@@ -1,11 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_search_result_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+
 
 class GeneralInformation extends ConsumerWidget {
   const GeneralInformation({
@@ -13,7 +14,7 @@ class GeneralInformation extends ConsumerWidget {
     required this.model,
   });
 
-  final VTPatientSearchDto model;
+  final VTPatientDto model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -114,7 +115,7 @@ class GeneralInformation extends ConsumerWidget {
                           : AppSize.klwidth,
                     ),
                     Text(
-                      model.gender ?? "",
+                      model.gender.toString() ?? "",
                       style: applyRobotoFont(
                         fontWeight: FontWeight.w400,
                         color: AppColor.grey,

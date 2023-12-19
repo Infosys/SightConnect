@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/general_information.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_profile.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_search_result_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
     this.patientSearchDto,
     super.key,
   });
-  final VTPatientSearchDto? patientSearchDto;
+  final VTPatientDto? patientSearchDto;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (patientSearchDto == null) {
@@ -76,7 +76,7 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
               const SizedBox(height: AppSize.ksheight),
               AssessmentTimeline(
                 encounterId: patientSearchDto!.encounterId,
-                enconterDate: patientSearchDto!.encounterStartDate,
+                enconterDate: patientSearchDto!.encounterStartDate.toString(),
               ),
               const SizedBox(height: AppSize.ksheight),
             ],

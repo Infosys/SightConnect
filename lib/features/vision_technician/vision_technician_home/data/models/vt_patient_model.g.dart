@@ -14,14 +14,17 @@ _$_VTPatientDto _$$_VTPatientDtoFromJson(Map<String, dynamic> json) =>
       yearOfBirth: json['yearOfBirth'] as String?,
       monthOfBirth: json['monthOfBirth'] as String?,
       dayOfBirth: json['dayOfBirth'] as String?,
-      gender: json['gender'] as String?,
+      gender: $enumDecodeNullable(_$GenderEnumMap, json['gender']),
       districtName: json['districtName'] as String?,
       townName: json['townName'] as String?,
       pincode: json['pincode'] as String?,
       encounterId: json['encounterId'] as int?,
-      encounterStartDate: json['encounterStartDate'] as String?,
+      encounterStartDate: json['encounterStartDate'] == null
+          ? null
+          : DateTime.parse(json['encounterStartDate'] as String),
       status: json['status'] as String?,
-      category: json['category'] as String?,
+      category:
+          $enumDecodeNullable(_$SeverityCategoryEnumMap, json['category']),
     );
 
 Map<String, dynamic> _$$_VTPatientDtoToJson(_$_VTPatientDto instance) =>
@@ -32,12 +35,24 @@ Map<String, dynamic> _$$_VTPatientDtoToJson(_$_VTPatientDto instance) =>
       'yearOfBirth': instance.yearOfBirth,
       'monthOfBirth': instance.monthOfBirth,
       'dayOfBirth': instance.dayOfBirth,
-      'gender': instance.gender,
+      'gender': _$GenderEnumMap[instance.gender],
       'districtName': instance.districtName,
       'townName': instance.townName,
       'pincode': instance.pincode,
       'encounterId': instance.encounterId,
-      'encounterStartDate': instance.encounterStartDate,
+      'encounterStartDate': instance.encounterStartDate?.toIso8601String(),
       'status': instance.status,
-      'category': instance.category,
+      'category': _$SeverityCategoryEnumMap[instance.category],
     };
+
+const _$GenderEnumMap = {
+  Gender.MALE: 'MALE',
+  Gender.FEMALE: 'FEMALE',
+  Gender.OTHERS: 'OTHERS',
+};
+
+const _$SeverityCategoryEnumMap = {
+  SeverityCategory.CRITICAL: 'CRITICAL',
+  SeverityCategory.EARLY: 'EARLY',
+  SeverityCategory.ROUTINE: 'ROUTINE',
+};

@@ -23,24 +23,28 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
 
   @override
   Future<List<VTPatientDto>> getListOfPatients() async {
-    var endPoint = '/patients/triage-reports';
+    
+    var endPoint =
+        'https://eyecare4all-dev.infosysapps.com/services/orchestration/api/patients/triage-reports/practitioners/2002';
+    
+    return _dio.get(endPoint).then((value) {
+      
+      List<VTPatientDto> list = [];
+      value.data.forEach((element) {
+        list.add(VTPatientDto.fromJson(element));
+      });
+      
+      return list;
+    });
 
-    // return _dio.get(endPoint).then((value) {
-    //   List<VTPatientDto> list = [];
-    //   value.data.forEach((element) {
-    //     list.add(VTPatientDto.fromJson(element));
-    //   });
-    //   return list;
-    // });
-
-    final response = await rootBundle.loadString("assets/vt_patient.json");
-    var data = jsonDecode(response);
-    List jsonList = data["patients"];
-    List<VTPatientDto> list = [];
-    for (int i = 0; i < jsonList.length; i++) {
-      list.add(VTPatientDto.fromJson(jsonList[i]));
-    }
-    // print(list);
-    return list;
+    // final response = await rootBundle.loadString("assets/vt_patient.json");
+    // var data = jsonDecode(response);
+    // List jsonList = data["patients"];
+    // List<VTPatientDto> list = [];
+    // for (int i = 0; i < jsonList.length; i++) {
+    //   list.add(VTPatientDto.fromJson(jsonList[i]));
+    // }
+    // // print(list);
+    // return list;
   }
 }

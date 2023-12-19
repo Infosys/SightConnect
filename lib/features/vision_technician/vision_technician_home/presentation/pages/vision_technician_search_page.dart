@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_search_result_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
@@ -177,7 +178,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
   }
 
   List<DataCell> generateListTileSearchResults(
-      VTPatientSearchDto data, context) {
+      VTPatientDto data, context) {
     return [
       DataCell(
         Column(
@@ -269,7 +270,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
             horizontal: AppSize.kspadding * 1.5,
           ),
           decoration: BoxDecoration(
-            color: data.category!.contains("Early")
+            color: data.category!.toString().toLowerCase().contains("early")
                 ? AppColor.orange
                 : AppColor.red,
             borderRadius: BorderRadius.circular(AppSize.klradius),

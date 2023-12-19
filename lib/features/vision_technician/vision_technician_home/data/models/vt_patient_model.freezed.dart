@@ -26,14 +26,14 @@ mixin _$VTPatientDto {
   String? get yearOfBirth => throw _privateConstructorUsedError;
   String? get monthOfBirth => throw _privateConstructorUsedError;
   String? get dayOfBirth => throw _privateConstructorUsedError;
-  String? get gender => throw _privateConstructorUsedError;
+  Gender? get gender => throw _privateConstructorUsedError;
   String? get districtName => throw _privateConstructorUsedError;
   String? get townName => throw _privateConstructorUsedError;
   String? get pincode => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
-  String? get encounterStartDate => throw _privateConstructorUsedError;
+  DateTime? get encounterStartDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
+  SeverityCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,14 +54,14 @@ abstract class $VTPatientDtoCopyWith<$Res> {
       String? yearOfBirth,
       String? monthOfBirth,
       String? dayOfBirth,
-      String? gender,
+      Gender? gender,
       String? districtName,
       String? townName,
       String? pincode,
       int? encounterId,
-      String? encounterStartDate,
+      DateTime? encounterStartDate,
       String? status,
-      String? category});
+      SeverityCategory? category});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Gender?,
       districtName: freezed == districtName
           ? _value.districtName
           : districtName // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
       encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as SeverityCategory?,
     ) as $Val);
   }
 }
@@ -168,14 +168,14 @@ abstract class _$$_VTPatientDtoCopyWith<$Res>
       String? yearOfBirth,
       String? monthOfBirth,
       String? dayOfBirth,
-      String? gender,
+      Gender? gender,
       String? districtName,
       String? townName,
       String? pincode,
       int? encounterId,
-      String? encounterStartDate,
+      DateTime? encounterStartDate,
       String? status,
-      String? category});
+      SeverityCategory? category});
 }
 
 /// @nodoc
@@ -232,7 +232,7 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Gender?,
       districtName: freezed == districtName
           ? _value.districtName
           : districtName // ignore: cast_nullable_to_non_nullable
@@ -252,7 +252,7 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
       encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -260,7 +260,7 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as SeverityCategory?,
     ));
   }
 }
@@ -300,7 +300,7 @@ class _$_VTPatientDto implements _VTPatientDto {
   @override
   final String? dayOfBirth;
   @override
-  final String? gender;
+  final Gender? gender;
   @override
   final String? districtName;
   @override
@@ -310,11 +310,11 @@ class _$_VTPatientDto implements _VTPatientDto {
   @override
   final int? encounterId;
   @override
-  final String? encounterStartDate;
+  final DateTime? encounterStartDate;
   @override
   final String? status;
   @override
-  final String? category;
+  final SeverityCategory? category;
 
   @override
   String toString() {
@@ -391,14 +391,14 @@ abstract class _VTPatientDto implements VTPatientDto {
       final String? yearOfBirth,
       final String? monthOfBirth,
       final String? dayOfBirth,
-      final String? gender,
+      final Gender? gender,
       final String? districtName,
       final String? townName,
       final String? pincode,
       final int? encounterId,
-      final String? encounterStartDate,
+      final DateTime? encounterStartDate,
       final String? status,
-      final String? category}) = _$_VTPatientDto;
+      final SeverityCategory? category}) = _$_VTPatientDto;
 
   factory _VTPatientDto.fromJson(Map<String, dynamic> json) =
       _$_VTPatientDto.fromJson;
@@ -416,7 +416,7 @@ abstract class _VTPatientDto implements VTPatientDto {
   @override
   String? get dayOfBirth;
   @override
-  String? get gender;
+  Gender? get gender;
   @override
   String? get districtName;
   @override
@@ -426,11 +426,11 @@ abstract class _VTPatientDto implements VTPatientDto {
   @override
   int? get encounterId;
   @override
-  String? get encounterStartDate;
+  DateTime? get encounterStartDate;
   @override
   String? get status;
   @override
-  String? get category;
+  SeverityCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$$_VTPatientDtoCopyWith<_$_VTPatientDto> get copyWith =>

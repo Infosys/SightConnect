@@ -29,7 +29,7 @@ var authDioProvider = Provider(
 var vtDioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseUrl3,
+      
     ),
   ),
 );

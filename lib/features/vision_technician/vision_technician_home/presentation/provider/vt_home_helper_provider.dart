@@ -3,9 +3,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// var visionTechnicianHomeProvider =
-//     ChangeNotifierProvider((ref) => VisionTechnicianHomeNotifier());
-
 final vtHomeHelperProvider =
     ChangeNotifierProvider<VTHomeHelperNotifier>((ref) {
   return VTHomeHelperNotifier(
@@ -28,8 +25,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
   void updateListOfAssessments() {
     if (filterValue == "All") {
-      // _listOfAssessments =
-      //     VisionTechnicianLocalSourceImpl().getListOfPatients();
+      
     }
 
     notifyListeners();

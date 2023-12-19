@@ -1,11 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class VTPatientList extends StatelessWidget {
   const VTPatientList({
@@ -201,7 +200,7 @@ class _DataSource extends DataTableSource {
                 style: applyRobotoFont(fontSize: 14),
               ),
               Text(
-                "assessmentDate",
+                data.encounterStartDate.toString(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -223,12 +222,12 @@ class _DataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            data.category ?? "",
+            data.category.toString() ?? "",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 14,
-              color: data.category!.toLowerCase().contains("early")
+              color: data.category!.toString().toLowerCase().contains("early")
                   ? AppColor.orange
                   : AppColor.red,
             ),
@@ -248,75 +247,82 @@ class _DataSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-List<DataCell> generateListTile(VTPatientDto data) {
-  return [
-    DataCell(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "${data.name}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
-          Text(
-            data.id.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ],
-      ),
-    ),
-    DataCell(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "assessmentId",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
-          Text(
-            "assessmentDate",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: AppColor.grey,
-            ),
-          ),
-        ],
-      ),
-    ),
-    DataCell(
-      Text(
-        data.status ?? "",
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(fontSize: 14),
-      ),
-    ),
-    DataCell(
-      Text(
-        data.category ?? "",
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(
-          fontSize: 14,
-          color: data.category!.toLowerCase().contains("early")
-              ? AppColor.orange
-              : AppColor.red,
-        ),
-      ),
-    ),
-  ];
+String _formatDate(String originalDate) {
+  // final originalDate = "2023-12-16T12:30:24.591Z";
+  final parsedDate = DateTime.parse(originalDate).toLocal();
+  final formattedDate = DateFormat.yMMMMd().add_jms().format(parsedDate);
+  return formattedDate.toString();
 }
+
+// List<DataCell> generateListTile(VTPatientDto data) {
+//   return [
+//     DataCell(
+//       Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Text(
+//             "${data.name}",
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: applyRobotoFont(fontSize: 14),
+//           ),
+//           Text(
+//             data.id.toString(),
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: applyRobotoFont(
+//               fontSize: 12,
+//               color: AppColor.grey,
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//     DataCell(
+//       Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Text(
+//             "assessmentId",
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: applyRobotoFont(fontSize: 14),
+//           ),
+//           Text(
+//             "assessmentDate",
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: applyRobotoFont(
+//               fontSize: 12,
+//               fontWeight: FontWeight.w400,
+//               color: AppColor.grey,
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//     DataCell(
+//       Text(
+//         data.status ?? "",
+//         maxLines: 1,
+//         overflow: TextOverflow.ellipsis,
+//         style: applyRobotoFont(fontSize: 14),
+//       ),
+//     ),
+//     DataCell(
+//       Text(
+//         data.category ?? "",
+//         maxLines: 1,
+//         overflow: TextOverflow.ellipsis,
+//         style: applyRobotoFont(
+//           fontSize: 14,
+//           color: data.category!.toLowerCase().contains("early")
+//               ? AppColor.orange
+//               : AppColor.red,
+//         ),
+//       ),
+//     ),
+//   ];
+// }
