@@ -120,7 +120,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
             score: 1,
             answer: [
               PostAnswerModel(
-                value: "YES",
+                value: "Yes",
                 score: double.parse(score.toString()),
               )
             ],

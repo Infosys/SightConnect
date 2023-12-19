@@ -97,12 +97,13 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     try {
       var endpoint = "/services/triage/api/triage-report/$id";
 
-      print(triage.toJson());
+      logger.f({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(
         endpoint,
-        data: triage.toJson(),
+        data: triage.toJson()
+        
       );
-
+    
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
           return TriageResponseModel.fromJson(response.data);
@@ -110,10 +111,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
           throw ServerException();
         }
       } else {
+          
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"reched here error": e});
+      logger.f({"reched here error1": e});
       throw UnknownException();
     }
   }
