@@ -13,14 +13,11 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-
-  AppEnv.setupEnv(Env.DEV);
-
-  await PersistentAuthStateService.intializeAuth();
+  await PersistentAuthStateService.intializeAuth(false);
   await SharedPreferenceService.init();
 
   IOSDeviceInfoService.init();
-
+  AppEnv.setupEnv(Env.DEV);
   if (AppEnv.isProd) {
     await AppLogger.init();
   }

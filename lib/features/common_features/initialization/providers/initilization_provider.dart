@@ -1,26 +1,32 @@
+import 'dart:developer';
 import 'dart:io';
+import 'package:eye_care_for_all/app_environment.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:openid_client/openid_client_io.dart' as io;
 
-final authProvider = ChangeNotifierProvider((ref) {
-  return InitializationPageProvider();
+final initializationProvider = ChangeNotifierProvider((ref) {
+  return InitializationPageProvider(ref);
 });
 
 class InitializationPageProvider extends ChangeNotifier {
   // final String keycloakUri = '${AppEnv.baseKeycloakUrl}/auth/realms/care';
   final String keycloakUri =
       'https://campaigns.infosysapps.com/auth2/realms/care';
-  final String _redirectUrl = 'com.infosys.eyecareforall://';
   static const List<String> scopes = ['profile'];
   static const String clientId = 'microservices';
   static const int PORT = 4000;
+  final Ref _ref;
   Credential? credential;
 
-  InitializationPageProvider();
+  InitializationPageProvider(this._ref);
 
   Future<void> init() async {
     try {
@@ -33,18 +39,33 @@ class InitializationPageProvider extends ChangeNotifier {
   }
 
   Future<void> save(Credential credential) async {
-    final response = await credential.getTokenResponse();
-    await PersistentAuthStateService.authState.saveTokens(
-      accessToken: response.accessToken!,
-      refreshToken: response.refreshToken!,
-    );
+    await PersistentAuthStateService.authState.saveCredential(credential);
     notifyListeners();
   }
 
+  Future<UserInfo> getKeycloakProfile() async {
+    final cred = await PersistentAuthStateService.authState.getCredentials();
+    if (cred == null) return Future.error("No credentials found");
+    final profile = await cred.getUserInfo();
+    return profile;
+  }
+
   Future<void> logout() async {
-    final url = credential?.generateLogoutUrl();
-    await PersistentAuthStateService.authState.logout();
-    await launchUrl(url!);
+    final cred = await PersistentAuthStateService.authState.getCredentials();
+    if (cred == null) return;
+    if (cred.generateLogoutUrl() == null) return;
+    final isConnected = await _ref.read(connectivityProvider).isConnected();
+    if (isConnected) {
+      try {
+        await PersistentAuthStateService.authState.logout();
+        final logoutUrl = cred.generateLogoutUrl();
+        await launchUrl(logoutUrl!);
+      } catch (e) {
+        rethrow;
+      }
+    } else {
+      throw ServerFailure(errorMessage: "Cannot logout without internet");
+    }
   }
 
   Future<Client> _getClient() async {
@@ -92,6 +113,4 @@ class InitializationPageProvider extends ChangeNotifier {
       throw 'Could not launch $url';
     }
   }
-
-  getUserProfile() {}
 }

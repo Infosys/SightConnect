@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/app_logger.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -50,10 +49,18 @@ class MyApp extends ConsumerWidget {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          initialRoute: InitializationPage.routeName,
+          initialRoute: LandingPage.routeName,
           navigatorKey: AppRouter.navigatorKey,
         ),
       ),
     );
+  }
+
+  Future<bool> isSecureDevice() async {
+    // var jailbroken = await FlutterJailbreakDetection.jailbroken;
+    // if (jailbroken) {
+    //   return false;
+    // }
+    return true;
   }
 }

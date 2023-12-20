@@ -146,6 +146,6 @@
     "diagnosticReportDescription": "Seeking immediate attention from an eye specialist is crucial to address your condition effectively. Please schedule a consultation without delay",
     "questionResultDescription": "You might need to see an eye specialist.",
     "observationResultDescription": "On preliminary testing, your vision appears very low and we would suggest you seek an urgent consultation with an eye specialist in your area",
-    "mediaResultDescription": null,
+   "mediaResultDescription": null, 
     "deleted": false
 }

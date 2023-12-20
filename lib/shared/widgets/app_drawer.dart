@@ -2,7 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_page_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
@@ -165,17 +166,17 @@ class AppDrawer extends StatelessWidget {
                             onTap: () async {
                               final navigator = Navigator.of(context);
                               ref
-                                  .read(authProvider)
+                                  .read(initializationProvider)
                                   .logout()
                                   .then((value) async {
                                 navigator.pushNamedAndRemoveUntil(
-                                  InitializationPage.routeName,
+                                  LandingPage.routeName,
                                   (route) => false,
                                 );
-                                ref.invalidate(authProvider);
+                                ref.invalidate(initializationProvider);
                               }).catchError((e) {
                                 Fluttertoast.showToast(
-                                  msg: "Something went wrong!",
+                                  msg: e.toString(),
                                 );
                               });
                             },
