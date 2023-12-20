@@ -68,7 +68,9 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
               var question = model.questionnaireSections[index];
               var isLastQuestion =
                   (model.questionnaireSections.length - 1 == index);
-              double weightage = _getWeightage(question.answerOption ?? []);
+             (double,int) record= _getWeightage(question.answerOption ?? []);
+              double weightage=record.$1;
+              int answerCode=record.$2;
 
               if (index == 0) {
                 return Center(
@@ -151,10 +153,13 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                       question.id!,
                       false,
                       weightage.toInt(),
+                      answerCode,
                     );
-                    model.saveQuestionaireResponse();
+                  
 
                     if (isLastQuestion) {
+                      //TODO: other symptom not storing 
+                        model.saveQuestionaireResponse();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -175,13 +180,16 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                     }
                   },
                   onYesButtonPressed: () {
-                    model.addQuestionnaireAnswer(
+                     model.addQuestionnaireAnswer(
                       question.id!,
                       true,
                       weightage.toInt(),
+                      answerCode,
                     );
-                    model.saveQuestionaireResponse();
+                  
                     if (isLastQuestion) {
+                      //TODO: other symptom not storing 
+                        model.saveQuestionaireResponse();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -210,18 +218,23 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
     );
   }
 
-  double _getWeightage(List<AnswerOptionModel> answerOption) {
-    var weightage = 0.0;
+ (double,int) _getWeightage(List<AnswerOptionModel> answerOption) {
+    double weightage = 0.0;
+    int answerCode=0;
     for (var answer in answerOption) {
       var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
       if (answerString == "yes") {
         weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+        answerCode=answer.answer?.id??0;
       } else if (answerString == "no") {
         weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+        answerCode=answer.answer?.id??0;
       } else {
         weightage = 0;
+        answerCode=0;
       }
     }
-    return weightage;
+    return (weightage,answerCode);
   }
+  
 }

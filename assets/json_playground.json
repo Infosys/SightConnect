@@ -1445,6 +1445,214 @@
             "fileType": "JPEG"
           }
         ]
+      },
+      {
+        "id": 8401,
+        "order": 13,
+        "linkId": "1.0",
+        "prefix": "string",
+        "text": "Do you have white spots on the black part of your eye?",
+        "type": "Choice",
+        "enableBehavior": "ANY",
+        "required": true,
+        "repeats": false,
+        "readOnly": false,
+        "maxlength": 100000,
+        "disabledDisplay": "PROTECTED",
+        "answerConstraint": "OptionsOnly",
+        "answerValueSet": null,
+        "initial": null,
+        "questionnaireItem": null,
+        "actionOn": [],
+        "answerOption": [
+          {
+            "id": 8601,
+            "intialSelected": false,
+            "answer": {
+              "id": 8451,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "No",
+              "answerItemWeight": {
+                "id": 8551,
+                "value": 0,
+                "answerId": 8451,
+                "questionResponseWeight": {
+                  "id": 8501,
+                  "quesId": 8401,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          },
+          {
+            "id": 8602,
+            "intialSelected": false,
+            "answer": {
+              "id": 8452,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "Yes",
+              "answerItemWeight": {
+                "id": 8552,
+                "value": 1,
+                "answerId": 8452,
+                "questionResponseWeight": {
+                  "id": 8501,
+                  "quesId": 8401,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          }
+        ],
+        "enableWhen": [],
+        "answerItemWeight": null,
+        "questionResponseWeight": {
+          "id": 8501,
+          "quesId": 8401,
+          "answerRangeWeight": [],
+          "answerComparisonWeight": [],
+          "range": null,
+          "compare": null,
+          "absolute": null
+        },
+        "relatedImage": [
+          {
+            "id": 8651,
+            "imageTitle": "white spots on the black part",
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
+            "fileType": "JPEG"
+          }
+        ]
+      },
+      {
+        "id": 8402,
+        "order": 14,
+        "linkId": "1.0",
+        "prefix": "string",
+        "text": "Do you have irritation in eyes with itching burning or pain?",
+        "type": "Choice",
+        "enableBehavior": "ANY",
+        "required": true,
+        "repeats": false,
+        "readOnly": false,
+        "maxlength": 100000,
+        "disabledDisplay": "PROTECTED",
+        "answerConstraint": "OptionsOnly",
+        "answerValueSet": null,
+        "initial": null,
+        "questionnaireItem": null,
+        "actionOn": [],
+        "answerOption": [
+          {
+            "id": 8603,
+            "intialSelected": false,
+            "answer": {
+              "id": 8454,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "No",
+              "answerItemWeight": {
+                "id": 8553,
+                "value": 0,
+                "answerId": 8454,
+                "questionResponseWeight": {
+                  "id": 8502,
+                  "quesId": 8402,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          },
+          {
+            "id": 8604,
+            "intialSelected": false,
+            "answer": {
+              "id": 8453,
+              "answerBoolean": null,
+              "answerDecimal": null,
+              "answerInteger": null,
+              "answerDate": null,
+              "answerDateTime": null,
+              "answerTime": null,
+              "answerString": "Yes",
+              "answerItemWeight": {
+                "id": 8554,
+                "value": 1,
+                "answerId": 8453,
+                "questionResponseWeight": {
+                  "id": 8502,
+                  "quesId": 8402,
+                  "isRange": false,
+                  "isCompare": false,
+                  "isAbsolute": true
+                }
+              }
+            }
+          }
+        ],
+        "enableWhen": [],
+        "answerItemWeight": null,
+        "questionResponseWeight": {
+          "id": 8502,
+          "quesId": 8402,
+          "answerRangeWeight": [],
+          "answerComparisonWeight": [],
+          "range": null,
+          "compare": null,
+          "absolute": null
+        },
+        "relatedImage": [
+          {
+            "id": 8652,
+            "imageTitle": "irritation in eyes",
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
+            "fileType": "JPEG"
+          }
+        ]
+      },
+      {
+        "id": 8403,
+        "order": 14,
+        "linkId": "1.0",
+        "prefix": "string",
+        "text": "Did particles of dust, wood, glass, metal or an insect get into your eye?",
+        "type": "Choice",
+        "enableBehavior": "ANY",
+        "required": true,
+        "repeats": false,
+        "readOnly": false,
+        "maxlength": 100000,
+        "disabledDisplay": "PROTECTED",
+        "answerConstraint": "OptionsOnly",
+        "answerValueSet": null,
+        "initial": null,
+        "questionnaireItem": null,
+        "actionOn": [],
+        "answerOption": [],
+        "enableWhen": [],
+        "answerItemWeight": null,
+        "questionResponseWeight": null,
+        "relatedImage": []
       }
     ],
     "languageBasedText": []
