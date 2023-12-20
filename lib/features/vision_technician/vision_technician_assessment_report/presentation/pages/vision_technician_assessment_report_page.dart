@@ -1,10 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_details.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_ivr_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_recommeded_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_profile.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -15,19 +13,18 @@ import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 import '../../../../patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import '../../../../patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
-import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
-import '../../../vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 
 class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
   const VisionTechnicianAssessmentReportPage(
       {super.key, required this.triageResponseModel});
 
   final TriageResponseModel? triageResponseModel;
-
+//9627849160
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getAssementDetailsReport(1)).when(
+    return ref.watch(getAssementDetailsReport(9627849180)).when(
       data: (TriageReportDetailedEntity assessmentDetailsReport) {
+        logger.d("assessmentDetailsReport from the APPPPPPPPP $assessmentDetailsReport");
      return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: const CustomAppbar(

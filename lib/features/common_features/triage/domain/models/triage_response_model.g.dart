@@ -10,6 +10,7 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_TriageResponseModel(
       patientId: json['patientId'] as int?,
+      id: json['id'] as int?,
       encounterId: json['encounterId'] as int?,
       serviceType: json['serviceType'] as String?,
       organizationCode: json['organizationCode'] as int?,
@@ -51,6 +52,7 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
         _$_TriageResponseModel instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
+      'id': instance.id,
       'encounterId': instance.encounterId,
       'serviceType': instance.serviceType,
       'organizationCode': instance.organizationCode,

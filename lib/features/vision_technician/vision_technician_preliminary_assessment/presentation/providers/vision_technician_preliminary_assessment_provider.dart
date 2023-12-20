@@ -59,6 +59,7 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
 
     final triage = TriageResponseModel(
       patientId: _patientId,
+      id: null,
       encounterId: encounterId,
       serviceType: 'OPTOMETRY',
       organizationCode: organizationCode,

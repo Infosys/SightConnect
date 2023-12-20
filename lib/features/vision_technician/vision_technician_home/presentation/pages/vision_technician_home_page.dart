@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
@@ -11,6 +12,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
@@ -24,20 +27,31 @@ class VisionTechnicianHomePage extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: Container(
-          margin: const EdgeInsets.only(
-            top: AppSize.kspadding,
-            left: AppSize.kmpadding,
-          ),
-          padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColor.white,
-          ),
-          child: SvgPicture.asset(
-            AppIcon.logo,
-            height: 10,
-            width: 10,
+        leading: InkWell(
+          onTap: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const VisionTechnicianAssessmentReportPage(triageResponseModel: TriageResponseModel(),),
+              ),
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: AppSize.kspadding,
+              left: AppSize.kmpadding,
+            ),
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColor.white,
+            ),
+            child: SvgPicture.asset(
+              AppIcon.logo,
+              height: 10,
+              width: 10,
+            ),
           ),
         ),
         backgroundColor: AppColor.primary,

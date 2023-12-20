@@ -11,6 +11,7 @@ part 'triage_response_model.g.dart';
 class TriageResponseModel with _$TriageResponseModel {
   const factory TriageResponseModel({
     int? patientId,
+    int? id,
     int? encounterId,
     String? serviceType,
     int? organizationCode,

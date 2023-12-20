@@ -23,7 +23,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint = "/api/diagnostic-report-templates/assessment/1351";
+    var endpoint = "/services/assess/api/diagnostic-report-templates/assessment/1351";
     logger.d({"API getTriageQuestionnaire": endpoint});
     // Map<String, dynamic> bodyData = {
     //   "name": "LVPEI EyeCare Triage",

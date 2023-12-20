@@ -17,9 +17,9 @@ Future<void> main() async {
   await SharedPreferenceService.init();
   IOSDeviceInfoService.init();
   AppEnv.setupEnv(Env.PROD);
-  if (!AppEnv.isDev) {
-    await AppLogger.init();
-  }
+  // if (!AppEnv.isDev) {
+  //   await AppLogger.init();
+  // }
 
   HttpOverrides.global = MyHttpOverrides();
 

@@ -57,6 +57,6 @@ var dioProfileProvider = Provider(
 
 var dioTriageProvider = Provider(
   (ref) => Dio(
-    BaseOptions(baseUrl: AppEnv.triageBaseUrl),
+    BaseOptions(baseUrl: AppEnv.baseUrl),
   ),
 );

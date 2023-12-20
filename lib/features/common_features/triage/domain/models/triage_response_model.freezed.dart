@@ -21,6 +21,7 @@ TriageResponseModel _$TriageResponseModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TriageResponseModel {
   int? get patientId => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
   String? get serviceType => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $TriageResponseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? patientId,
+      int? id,
       int? encounterId,
       String? serviceType,
       int? organizationCode,
@@ -89,6 +91,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
   @override
   $Res call({
     Object? patientId = freezed,
+    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -110,6 +113,10 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
@@ -189,6 +196,7 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
   @useResult
   $Res call(
       {int? patientId,
+      int? id,
       int? encounterId,
       String? serviceType,
       int? organizationCode,
@@ -219,6 +227,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? patientId = freezed,
+    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -240,6 +249,10 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
@@ -314,6 +327,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
 class _$_TriageResponseModel implements _TriageResponseModel {
   const _$_TriageResponseModel(
       {this.patientId,
+      this.id,
       this.encounterId,
       this.serviceType,
       this.organizationCode,
@@ -342,6 +356,8 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   final int? patientId;
+  @override
+  final int? id;
   @override
   final int? encounterId;
   @override
@@ -428,7 +444,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   String toString() {
-    return 'TriageResponseModel(patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageResponseModel(patientId: $patientId, id: $id, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -438,6 +454,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
             other is _$_TriageResponseModel &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.serviceType, serviceType) ||
@@ -474,6 +491,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   int get hashCode => Object.hash(
       runtimeType,
       patientId,
+      id,
       encounterId,
       serviceType,
       organizationCode,
@@ -509,6 +527,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 abstract class _TriageResponseModel implements TriageResponseModel {
   const factory _TriageResponseModel(
           {final int? patientId,
+          final int? id,
           final int? encounterId,
           final String? serviceType,
           final int? organizationCode,
@@ -532,6 +551,8 @@ abstract class _TriageResponseModel implements TriageResponseModel {
 
   @override
   int? get patientId;
+  @override
+  int? get id;
   @override
   int? get encounterId;
   @override
