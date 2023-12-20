@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UpdateTriageTextTypeQuestion extends ConsumerWidget {
   final VoidCallback onCancle;
-  final Null Function(String value) onSubmitted;
+  final Function(String value) onSubmitted;
   final QuestionnaireItemFHIRModel question;
   const UpdateTriageTextTypeQuestion({
     super.key,

@@ -29,7 +29,6 @@ var updateTriageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
       ref.watch(triageRepositoryProvider),
       ref.watch(triageReportRepositoryProvider),
       ref.watch(triageUrgencyRepositoryProvider),
-      
     );
   },
 );
@@ -42,6 +41,8 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   final TriageReportRepository _triageReportRepository;
 
   late String _questionnaireRemarks;
+  List<QuestionnaireItemFHIRModel> questionnaireItems = [];
+  bool _isLoading = false;
   late final Map<int, Map> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
   final List<PostQuestionResponseModel> _questionResponseList = [];
@@ -54,9 +55,12 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   )   : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
-        _questionnaireResponse = [];
+        _questionnaireResponse = [] {
+    getQuestionnaire();
+  }
 
   String get questionnaireRemarks => _questionnaireRemarks;
+  bool get isLoading => _isLoading;
   Map<int, dynamic> get selectedOptions => _selectedOptions;
   List<QuestionnaireItemFHIRModel> get questionnaireSections =>
       _questionnaireSections;
@@ -67,8 +71,26 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getQuestionnaire(List<QuestionnaireItemFHIRModel> data) async {
-    _questionnaireSections = data;
+  Future<void> getQuestionnaire() async {
+    _isLoading = true;
+    notifyListeners();
+    final resposne = await _triageRepository.getTriage();
+    resposne.fold(
+      (failure) {
+        logger.d({
+          "Error": failure,
+          "provider": "UpdateTriageQuestionnaireProvider"
+        });
+        _isLoading = false;
+        notifyListeners();
+      },
+      (result) {
+        _questionnaireSections = result.questionnaire?.questionnaireItem ?? [];
+        _isLoading = false;
+        notifyListeners();
+      },
+    );
+    notifyListeners();
   }
 
   void addQuestionnaireAnswer(
@@ -86,35 +108,6 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       "Score: $score",
     });
   }
-
-  // void removeQuestionnaireAnswer(int questionCode) {
-  //   _selectedOptions.remove(questionCode);
-  //   notifyListeners();
-  //   logger.d({
-  //     "Removed Options: $_selectedOptions",
-  //   });
-  // }
-
-  // void removeAllQuestionnaireAnswer() {
-  //   _selectedOptions.clear();
-  //   notifyListeners();
-  //   logger.d({
-  //     "Removed All Options: $_selectedOptions",
-  //   });
-  // }
-
-  // void saveQuestionaireResponse() {
-
-  //   // Map<int, bool> selectedOptionsList = {};
-  //   // _selectedOptions.forEach((key, value) {
-  //   //   selectedOptionsList[key] = true;
-  //   // });
-  //   // _questionnaireResponse.add(selectedOptionsList);
-  //   // addtoFinalResponse(_selectedOptions);
-  //   // logger.d("Questionnaire Response: $_selectedOptions");
-  //   // _selectedOptions.clear();
-
-  // }
 
   void saveQuestionaireResponse() {
     try {
