@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/pages/update_triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
@@ -65,6 +66,8 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
                     case TestType.OBSERVATION:
                       ref.read(globalProvider).setVAMode =
                           VisionAcuityMode.UPDATE;
+                      ref.read(tumblingTestProvider).setDiagnosticReportId =
+                          diagnosticReportID;
                       navigator.push(
                         MaterialPageRoute(
                           builder: (context) =>

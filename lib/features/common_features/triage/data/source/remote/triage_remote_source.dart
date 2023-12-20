@@ -115,7 +115,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"reched here error1": e});
+     
       throw UnknownException();
     }
   }

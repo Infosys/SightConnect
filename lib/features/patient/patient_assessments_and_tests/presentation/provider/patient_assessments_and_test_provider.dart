@@ -97,11 +97,7 @@ var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
     );
   }
 
-  logger.f({
-    "profile": json.decode(profileEntity.toJson()),
-    "assessmentResponse": triageDetailedReport.toJson(),
-    "triageAssessment": triageAssessment.toJson(),
-  });
+ 
 
   final response = AssessmentDetailedReportMapper.toEntity(
     profileEntity,

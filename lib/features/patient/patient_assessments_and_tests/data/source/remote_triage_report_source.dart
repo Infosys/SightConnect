@@ -29,11 +29,11 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     final endpoint =
         "/services/triage/api/triage/triage-report?patient-id=$patientId";
 
-    logger.f({"endpoint": endpoint});
+   
 
     try {
       final response = await dio.get(endpoint);
-      logger.f({"response btao": response});
+      
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<TriageDetailedReportModel> triageReports = [];
         response.data.forEach(
@@ -43,11 +43,11 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
         );
         return triageReports;
       } else {
-        logger.f({"response else": response});
+       
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"response erro": e});
+     
       rethrow;
     }
   }

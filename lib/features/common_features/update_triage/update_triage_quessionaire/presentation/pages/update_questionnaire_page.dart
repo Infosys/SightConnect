@@ -32,7 +32,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
           .read(updateTriageQuestionnaireProvider)
           .updateTriage(reportId);
 
-      logger.f("Update Response: $response");
+     
 
       response.fold((l) {
         scaffold.showSnackBar(
@@ -90,7 +90,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: model.questionnaireSections.length,
             itemBuilder: (context, index) {
-              logger.f("index $index");
+              
               var question = model.questionnaireSections[index];
               var isLastQuestion =
                   (model.questionnaireSections.length - 1 == index);
