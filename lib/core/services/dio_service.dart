@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var dioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
-      baseUrl: AppEnv.baseUrl3,
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
+      baseUrl: AppEnv.baseUrl,
+      // connectTimeout: const Duration(seconds: 5),
+      // receiveTimeout: const Duration(seconds: 5),
     ),
   ),
 );
