@@ -36,9 +36,10 @@ Map<String, dynamic> _$$_OrganizationResponseModelToJson(
       'trackingId': instance.trackingId,
       'facilityid': instance.facilityid,
       'facilityType': _$FacilityTypeEnumMap[instance.facilityType],
-      'tenant': instance.tenant,
-      'facilityInformation': instance.facilityInformation,
-      'facilityAdditionalInformation': instance.facilityAdditionalInformation,
+      'tenant': instance.tenant?.toJson(),
+      'facilityInformation': instance.facilityInformation?.toJson(),
+      'facilityAdditionalInformation':
+          instance.facilityAdditionalInformation?.toJson(),
       'osid': instance.osid,
     };
 
@@ -104,18 +105,22 @@ Map<String, dynamic> _$$_FacilityInformationModelToJson(
       'ownershipCode': instance.ownershipCode,
       'ownershipSubTypeCode': instance.ownershipSubTypeCode,
       'ownershipSubTypeCode2': instance.ownershipSubTypeCode2,
-      'facilityAddressDetails': instance.facilityAddressDetails,
-      'facilityContactInformation': instance.facilityContactInformation,
+      'facilityAddressDetails': instance.facilityAddressDetails?.toJson(),
+      'facilityContactInformation':
+          instance.facilityContactInformation?.toJson(),
       'systemOfMedicineCode': instance.systemOfMedicineCode,
       'facilityTypeCode': instance.facilityTypeCode,
       'facilitySubType': instance.facilitySubType,
       'specialityTypeCode': instance.specialityTypeCode,
       'typeOfServiceCode': instance.typeOfServiceCode,
       'facilityOperationalStatus': instance.facilityOperationalStatus,
-      'facilityUploads': instance.facilityUploads,
-      'facilityAddressProof': instance.facilityAddressProof,
-      'facilityTimings': instance.facilityTimings,
-      'abdmCompliantSoftware': instance.abdmCompliantSoftware,
+      'facilityUploads': instance.facilityUploads?.toJson(),
+      'facilityAddressProof':
+          instance.facilityAddressProof?.map((e) => e.toJson()).toList(),
+      'facilityTimings':
+          instance.facilityTimings?.map((e) => e.toJson()).toList(),
+      'abdmCompliantSoftware':
+          instance.abdmCompliantSoftware?.map((e) => e.toJson()).toList(),
     };
 
 _$_FacilityAddressModel _$$_FacilityAddressModelFromJson(
@@ -191,8 +196,8 @@ _$_FacilityUploadModel _$$_FacilityUploadModelFromJson(
 Map<String, dynamic> _$$_FacilityUploadModelToJson(
         _$_FacilityUploadModel instance) =>
     <String, dynamic>{
-      'facilityBoardPhoto': instance.facilityBoardPhoto,
-      'facilityBuildingPhoto': instance.facilityBuildingPhoto,
+      'facilityBoardPhoto': instance.facilityBoardPhoto?.toJson(),
+      'facilityBuildingPhoto': instance.facilityBuildingPhoto?.toJson(),
       'osid': instance.osid,
     };
 
@@ -211,7 +216,7 @@ Map<String, dynamic> _$$_FacilityAddressProofModelToJson(
         _$_FacilityAddressProofModel instance) =>
     <String, dynamic>{
       'addressProofType': instance.addressProofType,
-      'addressProofAttachment': instance.addressProofAttachment,
+      'addressProofAttachment': instance.addressProofAttachment?.toJson(),
       'osid': instance.osid,
     };
 
@@ -263,7 +268,7 @@ Map<String, dynamic> _$$_FacilityAdditionalInformationModelToJson(
         _$_FacilityAdditionalInformationModel instance) =>
     <String, dynamic>{
       'trackingId': instance.trackingId,
-      'generalInformation': instance.generalInformation,
+      'generalInformation': instance.generalInformation?.toJson(),
     };
 
 _$_GeneralInformationModel _$$_GeneralInformationModelFromJson(

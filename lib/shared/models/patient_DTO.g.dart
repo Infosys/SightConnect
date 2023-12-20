@@ -38,7 +38,7 @@ Map<String, dynamic> _$$_PatientDTOToJson(_$_PatientDTO instance) =>
       'counterId': instance.counterId,
       'hprID': instance.hprID,
       'hipCode': instance.hipCode,
-      'location': instance.location,
+      'location': instance.location?.toJson(),
       'abhaId': instance.abhaId,
       'abhaAddress': instance.abhaAddress,
       'name': instance.name,
@@ -52,7 +52,7 @@ Map<String, dynamic> _$$_PatientDTOToJson(_$_PatientDTO instance) =>
       'age': instance.age,
       'parentPatientId': instance.parentPatientId,
       'relationship': _$RelationshipEnumMap[instance.relationship],
-      'address': instance.address,
+      'address': instance.address?.map((e) => e.toJson()).toList(),
     };
 
 const _$GenderEnumMap = {

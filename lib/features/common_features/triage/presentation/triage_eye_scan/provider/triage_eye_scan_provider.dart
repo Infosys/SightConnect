@@ -81,17 +81,19 @@ class TriageEyeScanProvider with ChangeNotifier {
     XFile XrightEyeImage = _rightEyeImage!;
 
     List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(PostImagingSelectionModel(
+    mediaCaptureList.add(PostImagingSelectionModel(//TODO: change Identifier and file id 
       identifier: 70000001,
       endpoint: getUniqueFileName(XleftEyeImage.name),
       baseUrl: XleftEyeImage.mimeType,
       score: 0,
+      fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88" //TODO: change file id
     ));
-    mediaCaptureList.add(PostImagingSelectionModel( //TODO: change Identifier 
+    mediaCaptureList.add(PostImagingSelectionModel( //TODO: change Identifier and file id 
       identifier: 70000002,
       endpoint: getUniqueFileName(XrightEyeImage.name),
       baseUrl: XrightEyeImage.mimeType,
       score: 0,
+      fileId:"1703051833013-dd457171-c898-4327-9d8d-5728e1664b88" 
     ));
 
     return mediaCaptureList;

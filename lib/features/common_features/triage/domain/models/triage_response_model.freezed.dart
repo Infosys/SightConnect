@@ -1250,6 +1250,7 @@ mixin _$PostImagingSelectionModel {
   String? get endpoint => throw _privateConstructorUsedError;
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
+  String? get fileId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1264,7 +1265,11 @@ abstract class $PostImagingSelectionModelCopyWith<$Res> {
       _$PostImagingSelectionModelCopyWithImpl<$Res, PostImagingSelectionModel>;
   @useResult
   $Res call(
-      {int? identifier, String? endpoint, String? baseUrl, double? score});
+      {int? identifier,
+      String? endpoint,
+      String? baseUrl,
+      double? score,
+      String? fileId});
 }
 
 /// @nodoc
@@ -1285,6 +1290,7 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
   }) {
     return _then(_value.copyWith(
       identifier: freezed == identifier
@@ -1303,6 +1309,10 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1317,7 +1327,11 @@ abstract class _$$_PostImagingSelectionModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? identifier, String? endpoint, String? baseUrl, double? score});
+      {int? identifier,
+      String? endpoint,
+      String? baseUrl,
+      double? score,
+      String? fileId});
 }
 
 /// @nodoc
@@ -1337,6 +1351,7 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
   }) {
     return _then(_$_PostImagingSelectionModel(
       identifier: freezed == identifier
@@ -1355,6 +1370,10 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1363,7 +1382,7 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   const _$_PostImagingSelectionModel(
-      {this.identifier, this.endpoint, this.baseUrl, this.score});
+      {this.identifier, this.endpoint, this.baseUrl, this.score, this.fileId});
 
   factory _$_PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostImagingSelectionModelFromJson(json);
@@ -1376,10 +1395,12 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   final String? baseUrl;
   @override
   final double? score;
+  @override
+  final String? fileId;
 
   @override
   String toString() {
-    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score)';
+    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId)';
   }
 
   @override
@@ -1392,13 +1413,14 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
             (identical(other.endpoint, endpoint) ||
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.fileId, fileId) || other.fileId == fileId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, identifier, endpoint, baseUrl, score);
+      Object.hash(runtimeType, identifier, endpoint, baseUrl, score, fileId);
 
   @JsonKey(ignore: true)
   @override
@@ -1420,7 +1442,8 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
       {final int? identifier,
       final String? endpoint,
       final String? baseUrl,
-      final double? score}) = _$_PostImagingSelectionModel;
+      final double? score,
+      final String? fileId}) = _$_PostImagingSelectionModel;
 
   factory _PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =
       _$_PostImagingSelectionModel.fromJson;
@@ -1433,6 +1456,8 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
   String? get baseUrl;
   @override
   double? get score;
+  @override
+  String? get fileId;
   @override
   @JsonKey(ignore: true)
   _$$_PostImagingSelectionModelCopyWith<_$_PostImagingSelectionModel>

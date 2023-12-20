@@ -87,6 +87,7 @@ class PostImagingSelectionModel with _$PostImagingSelectionModel {
     String? endpoint,
     String? baseUrl,
     double? score,
+    String ? fileId
   }) = _PostImagingSelectionModel;
 
   factory PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
