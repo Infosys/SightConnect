@@ -1,18 +1,25 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/main.dart';
+
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
-  final int reportId;
-  const UpdateTriageQuestionnaireOtherSymptomPage(
-      {super.key, required this.reportId});
+class UpdateTriageTextTypeQuestion extends ConsumerWidget {
+  final VoidCallback onCancle;
+  final Null Function(String value) onSubmitted;
+  final QuestionnaireItemFHIRModel question;
+  const UpdateTriageTextTypeQuestion({
+    super.key,
+    required this.question,
+    required this.onCancle,
+    required this.onSubmitted,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +58,7 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                       horizontal: AppSize.kmpadding,
                     ),
                     child: Text(
-                      "Do you have any other symptoms?",
+                      question.text ?? '',
                       style: applyFiraSansFont(
                         fontSize: 18,
                       ),
@@ -84,7 +91,7 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                             color: AppColor.primary,
                           ),
                         ),
-                        labelText: "Enter your symptoms here",
+                        labelText: "Enter here",
                         labelStyle: applyRobotoFont(
                           fontSize: 14,
                           color: AppColor.grey,
@@ -128,21 +135,8 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () async {
-                        
-                        ref
-                                .read(updateTriageQuestionnaireProvider)
-                                .questionnaireRemarks =
-                            model.textEditingController.text;
-
-                        final res = await ref
-                            .read(updateTriageQuestionnaireProvider)
-                            .updateTriage(reportId);
-                        res.fold((l) => logger.d(l), (r) {
-                          logger.d(r);
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        });
+                      onPressed: () {
+                        onSubmitted(model.textEditingController.text);
                       },
                       child: const Text(
                         "Submit",
@@ -174,8 +168,7 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                             actions: [
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
+                                  onCancle();
                                 },
                                 child: const Text("Yes"),
                               ),

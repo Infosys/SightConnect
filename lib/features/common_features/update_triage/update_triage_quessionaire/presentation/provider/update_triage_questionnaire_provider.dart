@@ -41,7 +41,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   final TriageReportRepository _triageReportRepository;
 
   late String _questionnaireRemarks;
-  late final Map<int, dynamic> _selectedOptions;
+  late final Map<int, Map> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
   final List<PostQuestionResponseModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
@@ -70,13 +70,14 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     _questionnaireSections = data;
   }
 
-  void addQuestionnaireAnswer(int questionCode, String answer, int score,int answerCode) {
+  void addQuestionnaireAnswer(
+      int questionCode, String answer, int score, int answerCode) {
     _selectedOptions[questionCode] = {
-      "answer":answer,
+      "answer": answer,
       "score": score,
       "answerCode": answerCode,
     };
-     
+
     notifyListeners();
     logger.d({
       "Added Options: $_selectedOptions",
@@ -102,7 +103,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   // }
 
   // void saveQuestionaireResponse() {
- 
+
   //   // Map<int, bool> selectedOptionsList = {};
   //   // _selectedOptions.forEach((key, value) {
   //   //   selectedOptionsList[key] = true;
@@ -111,29 +112,39 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   //   // addtoFinalResponse(_selectedOptions);
   //   // logger.d("Questionnaire Response: $_selectedOptions");
   //   // _selectedOptions.clear();
-   
+
   // }
 
   void saveQuestionaireResponse() {
-    _selectedOptions.forEach(
-      (questionCode, result) {
-        _questionResponseList.add(
-          PostQuestionResponseModel(
-            linkId: questionCode,
-            score:  double.parse(result["score"]),  //For your usecase our answer is yes not type so this score is same as answer score 
-            answer: [ //TODO: add answercode here 
-              PostAnswerModel(
-                value: result["answer"],
-                score: double.parse(result["score"]),
-                answerCode: result["answerCode"]
-                 
-                
-              )
-            ],
-          ),
-        );
-      },
-    );
+    try {
+      _selectedOptions.forEach(
+        (questionCode, result) {
+          logger.f({
+            "Question Response List": _questionResponseList,
+            "questionCode": questionCode,
+            "value": result["answer"],
+            "score": result["score"].toDouble(),
+            "answerCode": result["score"].toDouble(),
+          });
+          _questionResponseList.add(
+            PostQuestionResponseModel(
+              linkId: questionCode,
+              score: result["score"]
+                  .toDouble(), //For our use case answer can be yes or no so overall score will be same as answer score
+              answer: [
+                PostAnswerModel(
+                  value: result["answer"],
+                  score: result["score"].toDouble(),
+                  answerCode: result["answerCode"],
+                )
+              ],
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      logger.e(e);
+    }
   }
 
   List<PostQuestionResponseModel> getQuestionaireResponse() {
@@ -170,6 +181,8 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
         getQuestionaireResponse(),
       ),
     );
+
+    logger.v({"Triage Update Model": triage});
     try {
       return await _triageRepository.updateTriage(triage: triage);
     } catch (e) {
