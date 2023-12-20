@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
@@ -23,8 +22,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint = "/services/assess/api/diagnostic-report-templates/assessment/1351";
-    logger.d({"API getTriageQuestionnaire": endpoint});
+    var endpoint =
+        "/services/assessments/api/diagnostic-report-templates/assessment/1351";
+    logger.d({
+      "API getTriageQuestionnaire": endpoint,
+    });
     // Map<String, dynamic> bodyData = {
     //   "name": "LVPEI EyeCare Triage",
     //   "organizationCode": "LVPEI",
@@ -33,23 +35,19 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   "organ": "EYE"
     // };
 
-    // var response = await dio.get(
-    //   endpoint,
-    //   // queryParameters: bodyData,
-    // );
-    // var response = await dio.get(endpoint);
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    // } else {
-    //   throw ServerException();
-    // }
-    if (response.isNotEmpty) {
-      var data = jsonDecode(response);
-      return DiagnosticReportTemplateFHIRModel.fromJson(data);
+     var response = await dio.get(endpoint);
+    //var response = await rootBundle.loadString("assets/triage_assessment.json");
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
+    // if (response.isNotEmpty) {
+    //   var data = jsonDecode(response);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    // } else {
+    //   throw ServerException();
+    // }
   }
 
   @override
@@ -98,12 +96,13 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     try {
       var endpoint = "/services/triage/api/triage-report/$id";
 
-      print(triage.toJson());
+      logger.f({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(
         endpoint,
-        data: triage.toJson(),
+        data: triage.toJson()
+        
       );
-
+    
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
           return TriageResponseModel.fromJson(response.data);
@@ -111,10 +110,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
           throw ServerException();
         }
       } else {
+          
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"reched here error": e});
+      logger.f({"reched here error1": e});
       throw UnknownException();
     }
   }

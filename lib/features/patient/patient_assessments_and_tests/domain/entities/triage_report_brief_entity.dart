@@ -11,35 +11,39 @@ class TriageReportUserEntity {
     required this.image,
     required this.id,
   });
+
+  String toJson() {
+    return '{"name": "$name", "image": "$image", "id": $id}';
+  }
 }
 
 class TriageReportBriefEntity {
-   int   triageResultID;
-   RequestPriority  ? priority;
-   String ? reportTag;
-   String ? triageResultType;
-   Source ? triageResultSource;
-   int ? assessmentID;
-   DateTime ? triageResultStartDate;
-   String ? triageResultDescription;
-   bool ? isUpdateEnabled;
-   
-   String ?  questionResultDescription;
-     String ? observationResultDescription;
-     String ? mediaResultDescription;
+  int triageResultID;
+  RequestPriority? priority;
+  String? reportTag;
+  String? triageResultType;
+  Source? triageResultSource;
+  int? assessmentID;
+  DateTime? triageResultStartDate;
+  String? triageResultDescription;
+  bool? isUpdateEnabled;
 
-   TriageReportBriefEntity({
-     this.questionResultDescription, 
-   this.observationResultDescription, 
-    this.mediaResultDescription, 
+  String? questionResultDescription;
+  String? observationResultDescription;
+  String? mediaResultDescription;
+
+  TriageReportBriefEntity({
+    this.questionResultDescription,
+    this.observationResultDescription,
+    this.mediaResultDescription,
     required this.triageResultID,
-     this.priority,
-     this.reportTag,
-     this.triageResultType,
-     this.triageResultSource,
-     this.assessmentID,
-     this.triageResultStartDate,
-     this.triageResultDescription,
-     this.isUpdateEnabled,
+    this.priority,
+    this.reportTag,
+    this.triageResultType,
+    this.triageResultSource,
+    this.assessmentID,
+    this.triageResultStartDate,
+    this.triageResultDescription,
+    this.isUpdateEnabled,
   });
 }

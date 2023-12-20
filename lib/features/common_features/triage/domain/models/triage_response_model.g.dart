@@ -172,6 +172,7 @@ _$_PostImagingSelectionModel _$$_PostImagingSelectionModelFromJson(
       endpoint: json['endpoint'] as String?,
       baseUrl: json['baseUrl'] as String?,
       score: (json['score'] as num?)?.toDouble(),
+      fileId: json['fileId'] as String?,
     );
 
 Map<String, dynamic> _$$_PostImagingSelectionModelToJson(
@@ -181,6 +182,7 @@ Map<String, dynamic> _$$_PostImagingSelectionModelToJson(
       'endpoint': instance.endpoint,
       'baseUrl': instance.baseUrl,
       'score': instance.score,
+      'fileId': instance.fileId,
     };
 
 _$_PostObservationsModel _$$_PostObservationsModelFromJson(

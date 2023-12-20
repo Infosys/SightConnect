@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -130,7 +129,7 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        logger.f("I am here");
+                        
                         ref
                                 .read(updateTriageQuestionnaireProvider)
                                 .questionnaireRemarks =

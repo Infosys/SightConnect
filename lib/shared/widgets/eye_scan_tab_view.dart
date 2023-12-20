@@ -8,11 +8,11 @@ import 'package:eye_care_for_all/shared/widgets/right_cornea_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class EyeScanTabView extends StatelessWidget {
-   EyeScanTabView({
+  const EyeScanTabView({
     super.key,
-     this.eyeScanData,
+    this.eyeScanData,
   });
-   List<ImageBriefEntity>  ?eyeScanData;
+  final List<ImageBriefEntity>? eyeScanData;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,10 @@ class EyeScanTabView extends StatelessWidget {
                 viewportFraction: 1,
                 children: [
                   RightCorneaTabView(
-                    rightEyeImage: [getRightEyeImageUrl(eyeScanData!)],
+                    rightEyeImage: getRightEyeImageUrl(eyeScanData),
                   ),
                   LeftCorneaTabView(
-                    leftEyeImage: [getLeftEyeImageUrl(eyeScanData!)],
+                    leftEyeImage: getLeftEyeImageUrl(eyeScanData),
                   ),
                 ],
               ),
@@ -72,20 +72,28 @@ class EyeScanTabView extends StatelessWidget {
   }
 }
 
-String getLeftEyeImageUrl(List<ImageBriefEntity> imageBriefEntity) {
+List<String> getLeftEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
+  if (imageBriefEntity == null) return [];
+
+  List<String> leftEyeImageUrl = [];
+
   for (ImageBriefEntity imageBrief in imageBriefEntity) {
     if (imageBrief.bodySite == "LEFT_EYE") {
-      return imageBrief.imageUrl;
+      leftEyeImageUrl.add(imageBrief.imageUrl);
     }
   }
-  return "";
+  return leftEyeImageUrl;
 }
 
-String getRightEyeImageUrl(List<ImageBriefEntity> imageBriefEntity) {
+List<String> getRightEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
+  if (imageBriefEntity == null) return [];
+
+  List<String> rightEyeImageUrl = [];
+
   for (ImageBriefEntity imageBrief in imageBriefEntity) {
     if (imageBrief.bodySite == "RIGHT_EYE") {
-      return imageBrief.imageUrl;
+      rightEyeImageUrl.add(imageBrief.imageUrl);
     }
   }
-  return "";
+  return rightEyeImageUrl;
 }

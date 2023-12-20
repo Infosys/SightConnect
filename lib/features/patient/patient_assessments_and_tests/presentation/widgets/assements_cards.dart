@@ -1,7 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -172,16 +175,23 @@ class AssessmentCards extends ConsumerWidget {
                       textDirection: TextDirection.rtl,
                       child: TextButton.icon(
                         onPressed: currentData.isUpdateEnabled ?? false
-                            ? () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return UpdateTriageAlertBox(
-                                      dignosticReportID:
-                                          currentData.triageResultID,
-                                    );
-                                  },
+                            ? () async {
+                                final result = await _updateMethodCall(
+                                  ref,
+                                  currentData.triageResultID,
                                 );
+                                if (context.mounted) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return UpdateTriageAlertBox(
+                                        result: result,
+                                        diagnosticReportID:
+                                            currentData.triageResultID,
+                                      );
+                                    },
+                                  );
+                                }
                               }
                             : null,
                         label: Text(
@@ -231,6 +241,27 @@ class AssessmentCards extends ConsumerWidget {
       },
     );
   }
+
+  Future<List<UpdateTriageReportAlertBoxEntity>> _updateMethodCall(
+    WidgetRef ref,
+    int diagnosticReportId,
+  ) async {
+    try {
+      final res = await ref
+          .read(triageReportRepositoryProvider)
+          .getTriageReportByReportId(diagnosticReportId);
+
+      return res.fold((failure) {
+        return [];
+      }, (result) {
+        return ref
+            .read(traigeUpdateReportProvider(diagnosticReportId))
+            .getUpdateTriageReportAlertBoxEntityList(result);
+      });
+    } catch (e) {
+      return [];
+    }
+  }
 }
 
 String getRequestPriorityText(RequestPriority? priority) {
@@ -260,5 +291,72 @@ Color getRequestPriorityColor(RequestPriority? priority) {
       return AppColor.red;
     default:
       return AppColor.grey;
+  }
+}
+
+class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final Color subtitlecolor;
+  final String chipText;
+  final Color chipColor;
+  final Function() onPressed;
+
+  const UpdateTriageAlertBoxListOptoion({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.subtitlecolor,
+    required this.chipText,
+    required this.chipColor,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.all(0),
+      onTap: onPressed,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text(
+              title,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(
+            width: AppSize.kmwidth,
+          ),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: chipColor,
+            ),
+            child: Text(
+              chipText,
+              style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+                color: AppColor.white,
+              ),
+            ),
+          )
+        ],
+      ),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(
+          color: subtitlecolor,
+        ),
+      ),
+    );
   }
 }

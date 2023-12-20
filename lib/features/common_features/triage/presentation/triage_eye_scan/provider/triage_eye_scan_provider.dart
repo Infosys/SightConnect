@@ -1,4 +1,6 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/providers/global_user_provider.dart';
+import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
@@ -10,7 +12,8 @@ import 'package:uuid/uuid.dart';
 class TriageEyeScanProvider with ChangeNotifier {
   final SaveTriageEyeScanLocallyUseCase _saveTriageEyeScanLocallyUseCase;
   TriageEyeType _currentEye;
-  final String _patientID;
+  final int _patientID;
+  final FileMsService _fileMsService ;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
@@ -18,6 +21,7 @@ class TriageEyeScanProvider with ChangeNotifier {
 
   TriageEyeScanProvider(
     this._saveTriageEyeScanLocallyUseCase,
+    this._fileMsService,
     this._currentEye,
     this._patientID,
   );
@@ -77,17 +81,19 @@ class TriageEyeScanProvider with ChangeNotifier {
     XFile XrightEyeImage = _rightEyeImage!;
 
     List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(PostImagingSelectionModel(
+    mediaCaptureList.add(PostImagingSelectionModel(//TODO: change Identifier and file id 
       identifier: 70000001,
       endpoint: getUniqueFileName(XleftEyeImage.name),
       baseUrl: XleftEyeImage.mimeType,
-      score: 1,
+      score: 0,
+      fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88" //TODO: change file id
     ));
-    mediaCaptureList.add(PostImagingSelectionModel(
+    mediaCaptureList.add(PostImagingSelectionModel( //TODO: change Identifier and file id 
       identifier: 70000002,
       endpoint: getUniqueFileName(XrightEyeImage.name),
       baseUrl: XrightEyeImage.mimeType,
-      score: 1,
+      score: 0,
+      fileId:"1703051833013-dd457171-c898-4327-9d8d-5728e1664b88" 
     ));
 
     return mediaCaptureList;
@@ -108,7 +114,8 @@ class TriageEyeScanProvider with ChangeNotifier {
 var triageEyeScanProvider = ChangeNotifierProvider(
   (ref) => TriageEyeScanProvider(
     ref.watch(saveTriageEyeScanLocallyUseCase),
+    ref.watch(fileMsServiceProvider),
     TriageEyeType.RIGHT,
-    "99000001",
+    ref.watch(globalUserProvider).userId,
   ),
 );

@@ -26,7 +26,8 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
 
   List<UpdateTriageReportAlertBoxEntity>
       getUpdateTriageReportAlertBoxEntityList(
-          TriageDetailedReportModel report) {
+    TriageDetailedReportModel report,
+  ) {
     List<UpdateTriageReportAlertBoxEntity> list = [];
     List<TestType> tests = [
       TestType.QUESTIONNAIRE,
@@ -57,7 +58,6 @@ class PatientAssessmentCardProvider extends ChangeNotifier {
         ));
       }
     }
-
     return list;
   }
 
