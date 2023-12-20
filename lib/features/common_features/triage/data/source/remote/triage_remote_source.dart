@@ -23,11 +23,8 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   TriageRemoteSourceImpl(this.dio);
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    const endpoint =
-        "/services/assessments/api/diagnostic-report-templates/assessment/1351";
-    logger.d({
-      "API getTriageQuestionnaire": endpoint,
-    });
+    var endpoint = "/api/diagnostic-report-templates/assessment/1351";
+    logger.d({"API getTriageQuestionnaire": endpoint});
     // Map<String, dynamic> bodyData = {
     //   "name": "LVPEI EyeCare Triage",
     //   "organizationCode": "LVPEI",
@@ -40,7 +37,12 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   endpoint,
     //   // queryParameters: bodyData,
     // );
+    // var response = await dio.get(endpoint);
+    var response = await rootBundle.loadString("assets/triage_assessment.json");
+    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     // } else {
+    //   throw ServerException();
     // }
     if (response.isNotEmpty) {
       var data = jsonDecode(response);

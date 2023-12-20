@@ -19,9 +19,8 @@ _$_VTPatientDto _$$_VTPatientDtoFromJson(Map<String, dynamic> json) =>
       townName: json['townName'] as String?,
       pincode: json['pincode'] as String?,
       encounterId: json['encounterId'] as int?,
-      encounterStartDate: json['encounterStartDate'] == null
-          ? null
-          : DateTime.parse(json['encounterStartDate'] as String),
+      encounterStartDate: const TimestampConverter()
+          .fromJson(json['encounterStartDate'] as String?),
       status: json['status'] as String?,
       category:
           $enumDecodeNullable(_$SeverityCategoryEnumMap, json['category']),
@@ -40,7 +39,8 @@ Map<String, dynamic> _$$_VTPatientDtoToJson(_$_VTPatientDto instance) =>
       'townName': instance.townName,
       'pincode': instance.pincode,
       'encounterId': instance.encounterId,
-      'encounterStartDate': instance.encounterStartDate?.toIso8601String(),
+      'encounterStartDate':
+          const TimestampConverter().toJson(instance.encounterStartDate),
       'status': instance.status,
       'category': _$SeverityCategoryEnumMap[instance.category],
     };

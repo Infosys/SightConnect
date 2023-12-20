@@ -31,6 +31,7 @@ mixin _$VTPatientDto {
   String? get townName => throw _privateConstructorUsedError;
   String? get pincode => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get encounterStartDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   SeverityCategory? get category => throw _privateConstructorUsedError;
@@ -59,7 +60,7 @@ abstract class $VTPatientDtoCopyWith<$Res> {
       String? townName,
       String? pincode,
       int? encounterId,
-      DateTime? encounterStartDate,
+      @TimestampConverter() DateTime? encounterStartDate,
       String? status,
       SeverityCategory? category});
 }
@@ -173,7 +174,7 @@ abstract class _$$_VTPatientDtoCopyWith<$Res>
       String? townName,
       String? pincode,
       int? encounterId,
-      DateTime? encounterStartDate,
+      @TimestampConverter() DateTime? encounterStartDate,
       String? status,
       SeverityCategory? category});
 }
@@ -280,7 +281,7 @@ class _$_VTPatientDto implements _VTPatientDto {
       this.townName,
       this.pincode,
       this.encounterId,
-      this.encounterStartDate,
+      @TimestampConverter() this.encounterStartDate,
       this.status,
       this.category});
 
@@ -310,6 +311,7 @@ class _$_VTPatientDto implements _VTPatientDto {
   @override
   final int? encounterId;
   @override
+  @TimestampConverter()
   final DateTime? encounterStartDate;
   @override
   final String? status;
@@ -396,7 +398,7 @@ abstract class _VTPatientDto implements VTPatientDto {
       final String? townName,
       final String? pincode,
       final int? encounterId,
-      final DateTime? encounterStartDate,
+      @TimestampConverter() final DateTime? encounterStartDate,
       final String? status,
       final SeverityCategory? category}) = _$_VTPatientDto;
 
@@ -426,6 +428,7 @@ abstract class _VTPatientDto implements VTPatientDto {
   @override
   int? get encounterId;
   @override
+  @TimestampConverter()
   DateTime? get encounterStartDate;
   @override
   String? get status;

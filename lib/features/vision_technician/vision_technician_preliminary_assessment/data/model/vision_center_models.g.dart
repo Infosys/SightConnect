@@ -28,8 +28,8 @@ Map<String, dynamic> _$$_FacilityModelToJson(_$_FacilityModel instance) =>
       'trackingId': instance.trackingId,
       'facilityId': instance.facilityId,
       'facilityType': instance.facilityType,
-      'tenant': instance.tenant,
-      'facilityInformation': instance.facilityInformation,
+      'tenant': instance.tenant?.toJson(),
+      'facilityInformation': instance.facilityInformation?.toJson(),
       'osid': instance.osid,
     };
 
@@ -90,18 +90,22 @@ Map<String, dynamic> _$$_FacilityInformationModelToJson(
       'ownershipCode': instance.ownershipCode,
       'ownershipSubTypeCode': instance.ownershipSubTypeCode,
       'ownershipSubTypeCode2': instance.ownershipSubTypeCode2,
-      'facilityAddressDetails': instance.facilityAddressDetails,
-      'facilityContactInformation': instance.facilityContactInformation,
+      'facilityAddressDetails': instance.facilityAddressDetails?.toJson(),
+      'facilityContactInformation':
+          instance.facilityContactInformation?.toJson(),
       'systemOfMedicineCode': instance.systemOfMedicineCode,
       'facilityTypeCode': instance.facilityTypeCode,
       'facilitySubType': instance.facilitySubType,
       'specialityTypeCode': instance.specialityTypeCode,
       'typeOfServiceCode': instance.typeOfServiceCode,
       'facilityOperationalStatus': instance.facilityOperationalStatus,
-      'facilityUploads': instance.facilityUploads,
-      'facilityAddressProof': instance.facilityAddressProof,
-      'timingsOfFacility': instance.timingsOfFacility,
-      'abdmCompliantSoftware': instance.abdmCompliantSoftware,
+      'facilityUploads': instance.facilityUploads?.toJson(),
+      'facilityAddressProof':
+          instance.facilityAddressProof?.map((e) => e.toJson()).toList(),
+      'timingsOfFacility':
+          instance.timingsOfFacility?.map((e) => e.toJson()).toList(),
+      'abdmCompliantSoftware':
+          instance.abdmCompliantSoftware?.map((e) => e.toJson()).toList(),
     };
 
 _$_FacilityAddressDetailsModel _$$_FacilityAddressDetailsModelFromJson(
@@ -177,8 +181,8 @@ _$_FacilityUploadsModel _$$_FacilityUploadsModelFromJson(
 Map<String, dynamic> _$$_FacilityUploadsModelToJson(
         _$_FacilityUploadsModel instance) =>
     <String, dynamic>{
-      'facilityBoardPhoto': instance.facilityBoardPhoto,
-      'facilityBuildingPhoto': instance.facilityBuildingPhoto,
+      'facilityBoardPhoto': instance.facilityBoardPhoto?.toJson(),
+      'facilityBuildingPhoto': instance.facilityBuildingPhoto?.toJson(),
       'osid': instance.osid,
     };
 
@@ -211,7 +215,7 @@ Map<String, dynamic> _$$_FacilityAddressProofModelToJson(
         _$_FacilityAddressProofModel instance) =>
     <String, dynamic>{
       'addressProofType': instance.addressProofType,
-      'addressProofAttachment': instance.addressProofAttachment,
+      'addressProofAttachment': instance.addressProofAttachment?.toJson(),
       'osid': instance.osid,
     };
 

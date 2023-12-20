@@ -615,6 +615,7 @@ Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
       'enableWhen': instance.enableWhen?.map((e) => e.toJson()).toList(),
       'answerItemWeight':
           instance.answerItemWeight?.map((e) => e.toJson()).toList(),
+      'relatedImage': instance.relatedImage?.map((e) => e.toJson()).toList(),
     };
 
 const _$QuestionnaireTypeEnumMap = {

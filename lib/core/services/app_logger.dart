@@ -1,4 +1,6 @@
 
+import 'package:snowplow_tracker/snowplow_tracker.dart';
+
 class AppLogger {
   AppLogger._();
   static const String baseUrl = 'http://10.0.2.2:9090';

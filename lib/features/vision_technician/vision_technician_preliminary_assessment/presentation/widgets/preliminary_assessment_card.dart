@@ -16,7 +16,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(getPatientProfileProvider).asData?.value.profile;
+    var model = ref.watch(getPatientCurrentProfileProvider).asData?.value.profile;
     // var dateYear = DateTime.now().year;
 
     // int giveAge() {

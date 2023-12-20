@@ -19,6 +19,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import '../providers/vision_technician_preliminary_assessment_provider.dart';
+import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../widgets/preliminary_assessment_care_plan.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
@@ -75,20 +77,24 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           ),
         ),
       ),
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
         title: InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VisionTechnicianAssessmentReportPage(
-                    triageResponseModel: ref
-                        .read(visionTechnicianResultProvider)
-                        .triageResponseModel,
-                  ),
-        title: Text('Preliminary Assessment'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VisionTechnicianAssessmentReportPage(
+                  triageResponseModel: ref
+                      .read(visionTechnicianResultProvider)
+                      .triageResponseModel,
+                ),
+              ),
+            );
+          },
+          child: const Text('Preliminary Assessment'),
+        ),
       ),
       // body: Form(
       //   key: _formKey,
@@ -116,7 +122,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             children: [
-              // const PreliminaryAssessmentCard(),
+              const PreliminaryAssessmentCard(),
 
               // const PreliminaryAssessmentIvrCard(),
               const SizedBox(height: AppSize.klheight),
@@ -141,6 +147,8 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                 ),
               // const PreliminaryAssessmentRecommendation(),
               const SizedBox(height: AppSize.klheight),
+              const PreliminaryAssessmentCarePlan(),
+              const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentVisionCenter(),
 
               const SizedBox(height: AppSize.klheight * 3),
@@ -150,4 +158,152 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
       ),
     );
   }
+}
+
+class PreliminaryAssessmentCard extends ConsumerWidget {
+  const PreliminaryAssessmentCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // VTPatientModel patient =
+    //     ref.read(registerNewPatientHelperProvider).patientDetails!;
+    var model =
+        ref.watch(getPatientCurrentProfileProvider).asData?.value.profile;
+    // var dateYear = DateTime.now().year;
+
+    // int giveAge() {
+    //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
+    //   return (dateYear - age).toInt();
+    // }
+
+    String genderString =
+        model?.patient?.gender.toString().split('.').last ?? "";
+    final address = _formateAddress(
+      line: model?.patient?.address?.first.line ?? "",
+      ward: model?.patient?.address?.first.ward ?? "",
+      district: model?.patient?.address?.first.district ?? "",
+      state: model?.patient?.address?.first.state ?? "",
+    );
+
+    String profileImage = model?.patient?.profilePhoto ?? "";
+
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: AppColor.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(AppSize.kmradius - 5),
+        ),
+      ),
+      padding: const EdgeInsets.all(AppSize.klpadding),
+      child: Wrap(
+        runSpacing: AppSize.ksheight,
+        direction: Axis.horizontal,
+        children: [
+          Wrap(
+            direction: Axis.horizontal,
+            children: [
+              CircleAvatar(
+                radius: AppSize.klradius,
+                // child: Imag,
+                child: Image.network(
+                  profileImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: AppSize.kswidth),
+              Wrap(
+                direction: Axis.vertical,
+                children: [
+                  Text(
+                    model?.patient?.name ?? "",
+                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    model?.patient?.abhaNumber.toString() ?? "",
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(width: AppSize.kswidth * 3),
+          Wrap(direction: Axis.vertical, spacing: AppSize.ksheight, children: [
+            Wrap(spacing: AppSize.kmwidth * 5, children: [
+              Wrap(
+                direction: Axis.vertical,
+                children: [
+                  Text(
+                    "Age",
+                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    "",
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              Wrap(
+                direction: Axis.vertical,
+                children: [
+                  Text(
+                    "Gender",
+                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    genderString ?? "",
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+            Wrap(
+              direction: Axis.vertical,
+              children: [
+                Text(
+                  "Address",
+                  style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: AppSize.ksheight),
+                Text(
+                  address ?? "",
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ]),
+        ],
+      ),
+    );
+  }
+}
+
+String _formateAddress({
+  required String line,
+  required String ward,
+  required String district,
+  required String state,
+}) {
+  return "$line, $ward, $district, $state";
 }

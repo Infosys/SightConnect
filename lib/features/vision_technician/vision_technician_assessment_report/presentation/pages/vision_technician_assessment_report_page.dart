@@ -11,7 +11,10 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/triage_response_model.dart';
+import '../../../../patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import '../../../../patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import '../../../vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 
@@ -23,7 +26,9 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return ref.watch(getAssementDetailsReport(1)).when(
+      data: (TriageReportDetailedEntity assessmentDetailsReport) {
+     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: const CustomAppbar(
         leadingWidth: 70,
@@ -41,7 +46,10 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
               // const SizedBox(height: AppSize.klheight),
               // const AssessmentReportIvrCard(),
               const SizedBox(height: AppSize.klheight),
-              const AssessmentReportDetails(),
+               AssessmentReportDetails(
+                questionResponseBreifModel:
+                        assessmentDetailsReport.questionResponseBriefEntity,
+              ),
               const SizedBox(height: AppSize.klheight),
               Container(
                 width: double.infinity,
@@ -108,6 +116,36 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
           ),
         ),
       ),
+    );
+      },
+            loading: () {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+      error: (error, stack) {
+        logger.d("eroor $error");
+        logger.d("tracee $stack");
+        return Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text("The report is not available at the moment"),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                  label: const Text("Go Back"),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

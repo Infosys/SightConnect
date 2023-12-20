@@ -85,7 +85,8 @@ class AssessmentTimelineView extends ConsumerWidget {
                             color: AppColor.grey,
                           ),
                         ),
-                        TimeWidgetRender(context, timeLineList[index], index, ref)
+                        TimeWidgetRender(
+                            context, timeLineList[index], index, ref)
                       ],
                     )
                   : Row(
@@ -99,7 +100,8 @@ class AssessmentTimelineView extends ConsumerWidget {
                               color: AppColor.grey,
                             ),
                           ),
-                          TimeWidgetRender(context, timeLineList[index], index, ref)
+                          TimeWidgetRender(
+                              context, timeLineList[index], index, ref)
                         ]),
               const SizedBox(
                 height: AppSize.kmheight,
@@ -171,11 +173,18 @@ Widget TimeWidgetRender(
             const SizedBox(
               width: AppSize.kswidth,
             ),
+            const SizedBox(
+              width: AppSize.kswidth,
+            ),
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const VisionTechnicianAssessmentReportPage();
+                    return VisionTechnicianAssessmentReportPage(
+                      triageResponseModel: ref
+                          .watch(visionTechnicianResultProvider)
+                          .triageResponseModel,
+                    );
                   },
                 ));
               },
@@ -192,40 +201,8 @@ Widget TimeWidgetRender(
                       ],
                     )),
               ),
-<<<<<<< HEAD
-              const SizedBox(
-                width: AppSize.kswidth,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return VisionTechnicianAssessmentReportPage(
-                        triageResponseModel:  ref.watch(visionTechnicianResultProvider).triageResponseModel,
-                      );
-                    },
-                  ));
-                },
-                child: Text(
-                  timeLine.assessmentId,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.blue,
-                      decoration: TextDecoration.combine(
-                        [
-                          TextDecoration.underline,
-                        ],
-                      )),
-                ),
-              ),
-            ],
-          ),
-=======
             ),
           ],
->>>>>>> origin/VT_integration
         ),
     ],
   );
