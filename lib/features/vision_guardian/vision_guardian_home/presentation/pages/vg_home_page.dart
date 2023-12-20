@@ -108,14 +108,14 @@ class VisionGuardianHomePage extends StatelessWidget {
                 VGCarousel()
               ],
             ),
-            SizedBox(
+/*             SizedBox(
               height: AppSize.height(context) * 0.04,
             ),
             const CriticalCasesCardList(),
             SizedBox(
               height: AppSize.height(context) * 0.02,
             ),
-            const FollowUpCasesCardList(),
+            const FollowUpCasesCardList(), */
             SizedBox(
               height: AppSize.height(context) * 0.02,
             ),

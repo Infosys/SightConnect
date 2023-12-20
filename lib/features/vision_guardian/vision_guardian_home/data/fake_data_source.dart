@@ -78,16 +78,16 @@ var vgServices = [
     "text": "New Patient",
     "color": AppColor.orangeCream,
   },
-  {
+/*   {
     "icon": AppIcon.eyeScanner,
     "textPrefix": "Register",
     "text": "Family",
     "color": AppColor.limeyellow,
-  },
+  }, */
   {
     "icon": AppIcon.eyeScanner,
-    "textPrefix": "My",
-    "text": "Availibility",
+    "textPrefix": "Eye",
+    "text": "Assessment",
     "color": AppColor.cyan,
   },
 ];
