@@ -32,6 +32,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _patientAssessmentUpdateDataProvider;
   List<TriageReportBriefEntity> _triageReportList = [];
   bool _isLoading = false;
+  bool _isUpdateLoading = false;
   PatientAssessmentAndTestProviderNew(this._getTriageUseCase, this._patient,
       this._triageReportRepository, this._patientAssessmentUpdateDataProvider) {
     getPatients();
@@ -40,11 +41,13 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
 
   TriageReportUserEntity? get selectedPatient => _selectedPatient;
   bool get isLoading => _isLoading;
+  bool get isUpdateLoading => _isUpdateLoading;
   List<TriageReportBriefEntity> get triageReportList => _triageReportList;
 
   void setPatient(TriageReportUserEntity patient) {
     _selectedPatient = patient;
     notifyListeners();
+    getTriageReportList();
   }
 
   List<TriageReportUserEntity> getPatients() {
@@ -56,14 +59,14 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         id: 9627849180,
       ));
       _selectedPatient = users.first;
-      // _patient?.profile?.patient?.relatedParty
-      //     ?.forEach((RelatedPartyModel family) {
-      //   users.add(TriageReportUserEntity(
-      //     name: family.name ?? "",
-      //     image: family.profilePicture ?? "",
-      //     id: family.patientId ?? 0,
-      //   ));
-      // });
+      _patient?.profile?.patient?.relatedParty
+          ?.forEach((RelatedPartyModel family) {
+        users.add(TriageReportUserEntity(
+          name: family.name ?? "",
+          image: family.profilePicture ?? "",
+          id: family.patientId ?? 0,
+        ));
+      });
     } catch (e) {
       logger.e({
         "getPatients": e.toString(),
@@ -114,7 +117,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   Future<TriageDetailedReportModel> _getTriageReport(
     int reportId,
   ) async {
-    _isLoading = true;
+    _isUpdateLoading = true;
     notifyListeners();
     var response =
         await _triageReportRepository.getTriageReportByReportId(reportId);
@@ -122,13 +125,13 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     return response.fold(
       (failure) {
         logger.d({"_getTriageReport ": failure});
-        _isLoading = false;
+        _isUpdateLoading = false;
         notifyListeners();
 
         throw failure;
       },
       (triageAssessment) {
-        _isLoading = false;
+        _isUpdateLoading = false;
         notifyListeners();
         return triageAssessment;
       },
@@ -174,16 +177,19 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     int diagnosticReportId,
   ) async {
     try {
-      _isLoading = true;
+      _isUpdateLoading = true;
       notifyListeners();
       final triageReport = await _getTriageReport(diagnosticReportId);
 
       final response = _patientAssessmentUpdateDataProvider
           .getUpdateTriageReportAlertBoxEntityList(triageReport);
+
+      _isUpdateLoading = false;
+      notifyListeners();
       return response;
     } catch (e) {
       logger.d("updateTriage: $e ");
-      _isLoading = true;
+      _isUpdateLoading = false;
       notifyListeners();
 
       Fluttertoast.showToast(msg: e.toString());
