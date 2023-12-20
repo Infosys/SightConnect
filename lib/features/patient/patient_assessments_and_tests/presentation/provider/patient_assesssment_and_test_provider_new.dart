@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -16,10 +17,10 @@ import '../../domain/entities/triage_report_brief_entity.dart';
 
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
-    ref.watch(getTriageUseCase),
-    ref.watch(getPatientProfileByIdProvider).asData?.value,
-    ref.watch(triageReportRepositoryProvider),
-  ),
+      ref.watch(getTriageUseCase),
+      ref.watch(getPatientProfileByIdProvider).asData?.value,
+      ref.watch(triageReportRepositoryProvider),
+      ref.watch(patientAssessmentUpdateDataProvider)),
 );
 
 class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
@@ -27,10 +28,12 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   final TriageReportRepository _triageReportRepository;
   final PatientResponseModel? _patient;
   TriageReportUserEntity? _selectedPatient;
+  final PatientAssessmentUpdateDataProvider
+      _patientAssessmentUpdateDataProvider;
   List<TriageReportBriefEntity> _triageReportList = [];
   bool _isLoading = false;
-  PatientAssessmentAndTestProviderNew(
-      this._getTriageUseCase, this._patient, this._triageReportRepository) {
+  PatientAssessmentAndTestProviderNew(this._getTriageUseCase, this._patient,
+      this._triageReportRepository, this._patientAssessmentUpdateDataProvider) {
     getPatients();
     getTriageReportList();
   }
@@ -164,6 +167,28 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       rethrow;
+    }
+  }
+
+  Future<List<UpdateTriageReportAlertBoxEntity>> updateTriage(
+    int diagnosticReportId,
+  ) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      final triageReport = await _getTriageReport(diagnosticReportId);
+
+      final response = _patientAssessmentUpdateDataProvider
+          .getUpdateTriageReportAlertBoxEntityList(triageReport);
+      return response;
+    } catch (e) {
+      logger.d("updateTriage: $e ");
+      _isLoading = true;
+      notifyListeners();
+
+      Fluttertoast.showToast(msg: e.toString());
+
+      return [];
     }
   }
 }
