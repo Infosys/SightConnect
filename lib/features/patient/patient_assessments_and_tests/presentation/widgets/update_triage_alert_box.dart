@@ -23,7 +23,18 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
     final navigator = Navigator.of(context);
 
     if (result.isEmpty) {
-      return const SizedBox();
+      return BlurDialogBox(
+        title: const Text(''),
+        content: const Text('Not Available at this moment'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              navigator.pop();
+            },
+            child: const Text('OK'),
+          )
+        ],
+      );
     }
 
     return BlurDialogBox(

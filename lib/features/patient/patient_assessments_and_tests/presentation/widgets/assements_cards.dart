@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -184,41 +185,45 @@ class AssessmentCards extends ConsumerWidget {
                     const SizedBox(width: 24),
                     Directionality(
                       textDirection: TextDirection.rtl,
-                      child: TextButton.icon(
-                        onPressed: currentData.isUpdateEnabled ?? false
-                            ? () async {
-                                final result = await ref
-                                    .read(patientAssessmentAndTestProvider)
-                                    .updateTriage(currentData.triageResultID);
-
-                                if (result.isEmpty) {
-                                  return;
-                                }
-                                if (context.mounted) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return UpdateTriageAlertBox(
-                                        result: result,
-                                        diagnosticReportID:
-                                            currentData.triageResultID,
-                                      );
-                                    },
-                                  );
-                                }
-                              }
-                            : null,
-                        label: ref
-                                .watch(patientAssessmentAndTestProvider)
-                                .isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : Text(
+                      child: ref
+                              .watch(patientAssessmentAndTestProvider)
+                              .isUpdateLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : TextButton.icon(
+                              onPressed: currentData.isUpdateEnabled ?? false
+                                  ? () async {
+                                      final result = await ref
+                                          .read(
+                                              patientAssessmentAndTestProvider)
+                                          .updateTriage(
+                                              currentData.triageResultID);
+                                      logger.f({result});
+                                      if (result.isEmpty) {
+                                        Fluttertoast.showToast(
+                                            msg: "No data found");
+                                        return;
+                                      }
+                                      if (context.mounted) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return UpdateTriageAlertBox(
+                                              result: result,
+                                              diagnosticReportID:
+                                                  currentData.triageResultID,
+                                            );
+                                          },
+                                        );
+                                      }
+                                    }
+                                  : null,
+                              label: Text(
                                 'Update',
                                 style: applyRobotoFont(
                                   fontSize: 14,
@@ -228,14 +233,14 @@ class AssessmentCards extends ConsumerWidget {
                                       : AppColor.grey,
                                 ),
                               ),
-                        icon: Icon(
-                          Icons.edit,
-                          size: 16,
-                          color: currentData.isUpdateEnabled ?? false
-                              ? AppColor.primary
-                              : AppColor.grey,
-                        ),
-                      ),
+                              icon: Icon(
+                                Icons.edit,
+                                size: 16,
+                                color: currentData.isUpdateEnabled ?? false
+                                    ? AppColor.primary
+                                    : AppColor.grey,
+                              ),
+                            ),
                     ),
 
                     // InkWell(
