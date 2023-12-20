@@ -295,17 +295,17 @@ class VisualAcuityTestProvider with ChangeNotifier {
     List<PostObservationsModel> observationList = [
       PostObservationsModel(
         identifier: 1751,
-        value: leftEyeSight.toString(),
+        value: leftEyeSight.toStringAsFixed(3),
         score: leftEyeUrgency,
       ),
       PostObservationsModel(
         identifier: 1752,
-        value: rightEyeSight.toString(),
+        value: rightEyeSight.toStringAsFixed(3),
         score: rightEyeUrgency,
       ),
       PostObservationsModel(
         identifier: 1753,
-        value: bothEyeSight.toString(),
+        value: bothEyeSight.toStringAsFixed(3),
         score: bothEyeUrgency,
       ),
     ];
@@ -328,21 +328,23 @@ class VisualAcuityTestProvider with ChangeNotifier {
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
   }
-int ? _diagnosticReportId;
-  int ? get diagnosticReportId => _diagnosticReportId;
+
+  int? _diagnosticReportId;
+  int? get diagnosticReportId => _diagnosticReportId;
 
   set setDiagnosticReportId(int value) {
     _diagnosticReportId = value;
   }
 
- Future<Either<Failure, TriageResponseModel>> updateVisualAcuityTumblingResponse() async {
-  logger.f({"drId":_diagnosticReportId});
+  Future<Either<Failure, TriageResponseModel>>
+      updateVisualAcuityTumblingResponse() async {
+    logger.f({"drId": _diagnosticReportId});
     final reportModel = await getTriageReportByReportId(diagnosticReportId!);
-    logger.f({"drId":reportModel});
+    logger.f({"drId": reportModel});
     if (reportModel == null) {
-      throw ServerFailure(errorMessage: "Could not fetch report of id $diagnosticReportId");
+      throw ServerFailure(
+          errorMessage: "Could not fetch report of id $diagnosticReportId");
     }
-   
 
     TriageUpdateModel triage = TriageUpdateModel(
       patientId: reportModel.subject,
@@ -363,17 +365,14 @@ int ? _diagnosticReportId;
       score: _getScore(),
       cummulativeScore: _getCummulativeScore(),
       observations: _getObservationsToBeUpdated(
-        reportModel.observations??[],
+        reportModel.observations ?? [],
         getVisionAcuityTumblingResponse(),
       ),
     );
 
-     
     try {
-
-      logger.f({"observationDTO":triage.observations});
-     return triageRepositoryProvider.updateTriage(triage: triage);
-     
+      logger.f({"observationDTO": triage.observations});
+      return triageRepositoryProvider.updateTriage(triage: triage);
     } catch (e) {
       rethrow;
     }
