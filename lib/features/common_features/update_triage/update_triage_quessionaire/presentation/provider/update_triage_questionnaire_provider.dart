@@ -70,9 +70,9 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     _questionnaireSections = data;
   }
 
-  void addQuestionnaireAnswer(int questionCode, bool answer, int score,int answerCode) {
+  void addQuestionnaireAnswer(int questionCode, String answer, int score,int answerCode) {
     _selectedOptions[questionCode] = {
-      "answer": answer?"Yes":"No",
+      "answer":answer,
       "score": score,
       "answerCode": answerCode,
     };

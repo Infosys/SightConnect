@@ -129,7 +129,7 @@ class UpdateTriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        logger.f("I am here");
+                        
                         ref
                                 .read(updateTriageQuestionnaireProvider)
                                 .questionnaireRemarks =

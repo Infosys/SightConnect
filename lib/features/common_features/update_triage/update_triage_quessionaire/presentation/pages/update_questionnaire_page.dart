@@ -151,7 +151,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                   onNoButtonPressed: () {
                     model.addQuestionnaireAnswer(
                       question.id!,
-                      false,
+                      "No",
                       weightage.toInt(),
                       answerCode,
                     );
@@ -180,9 +180,10 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                     }
                   },
                   onYesButtonPressed: () {
+
                      model.addQuestionnaireAnswer(
                       question.id!,
-                      true,
+                      "Yes",
                       weightage.toInt(),
                       answerCode,
                     );
@@ -219,6 +220,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
   }
 
  (double,int) _getWeightage(List<AnswerOptionModel> answerOption) {
+  
     double weightage = 0.0;
     int answerCode=0;
     for (var answer in answerOption) {
