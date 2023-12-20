@@ -77,7 +77,7 @@ var getTriageDetailedEyeReport = FutureProvider.family(
   },
 );
 
-var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
+var getAssementDetailsReport = FutureProvider.autoDispose.family((ref, int reportID) async {
   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
   DiagnosticReportTemplateFHIRModel? triageAssessment =
       ref.watch(getTriageProvider).asData?.value;

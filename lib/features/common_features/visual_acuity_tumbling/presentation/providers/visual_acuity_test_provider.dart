@@ -30,7 +30,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
-var tumblingTestProvider = ChangeNotifierProvider.autoDispose(
+var tumblingTestProvider = ChangeNotifierProvider(
   (ref) => VisualAcuityTestProvider(
     ref.watch(tumlingLocalSource),
     ref.read(triageLocalSourceProvider),
@@ -294,17 +294,17 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
     List<PostObservationsModel> observationList = [
       PostObservationsModel(
-        identifier: 50000001,
+        identifier: 1751,
         value: leftEyeSight.toString(),
         score: leftEyeUrgency,
       ),
       PostObservationsModel(
-        identifier: 50000002,
+        identifier: 1752,
         value: rightEyeSight.toString(),
         score: rightEyeUrgency,
       ),
       PostObservationsModel(
-        identifier: 50000003,
+        identifier: 1753,
         value: bothEyeSight.toString(),
         score: bothEyeUrgency,
       ),
@@ -337,7 +337,7 @@ int ? _diagnosticReportId;
 
  Future<Either<Failure, TriageResponseModel>> updateVisualAcuityTumblingResponse() async {
   logger.f({"drId":_diagnosticReportId});
-    final reportModel = await getTriageReportByReportId(diagnosticReportId??33200000017);
+    final reportModel = await getTriageReportByReportId(diagnosticReportId!);
     logger.f({"drId":reportModel});
     if (reportModel == null) {
       throw ServerFailure(errorMessage: "Could not fetch report of id $diagnosticReportId");
@@ -370,6 +370,8 @@ int ? _diagnosticReportId;
 
      
     try {
+
+      logger.f({"observationDTO":triage.observations});
      return triageRepositoryProvider.updateTriage(triage: triage);
      
     } catch (e) {
