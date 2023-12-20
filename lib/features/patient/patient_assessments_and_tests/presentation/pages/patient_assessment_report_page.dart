@@ -3,12 +3,10 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessments_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -17,108 +15,74 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientAssessmentReportPage extends ConsumerWidget {
-  final int diagnosticReportId;
   const PatientAssessmentReportPage({
-    required this.diagnosticReportId,
+    required this.assessmentDetailsReport,
     super.key,
   });
+  final TriageReportDetailedEntity assessmentDetailsReport;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getAssementDetailsReport(diagnosticReportId)).when(
-      data: (TriageReportDetailedEntity assessmentDetailsReport) {
-        return Scaffold(
-          appBar: CustomAppbar(
-            title: Row(
-              children: [
-                const Text("Eye Assessment"),
-                const Spacer(),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppSize.width(context) * 0.01,
-                  ),
-                  decoration: const BoxDecoration(color: AppColor.orange),
-                  child: Text(
-                    getRequestPriorityText(
-                        assessmentDetailsReport.overallpriority),
-                    style: applyRobotoFont(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.white,
-                    ),
-                  ),
+    return Scaffold(
+      appBar: CustomAppbar(
+        title: Row(
+          children: [
+            const Text("Eye Assessment"),
+            const Spacer(),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.width(context) * 0.01,
+              ),
+              decoration: const BoxDecoration(color: AppColor.orange),
+              child: Text(
+                getRequestPriorityText(assessmentDetailsReport.overallpriority),
+                style: applyRobotoFont(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: AppColor.white,
                 ),
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ReportPageHeader(
-                    triageReportAndAssementPage: assessmentDetailsReport,
-                  ),
-                  AssessmentOverallResultCard(
-                    triageResult: const {},
-                    name: "name",
-                    id: "id",
-                    patientImage: AppImages.aboutUs,
-                    triageResultEntities: assessmentDetailsReport,
-                  ),
-                  ReportAssessmentQuestions(
-                    questionResponseBreifModel:
-                        assessmentDetailsReport.questionResponseBriefEntity,
-                  ),
-                  TumblingEReportCard(
-                    tumblingEData:
-                        assessmentDetailsReport.visualAcuityBreifEntity,
-                    observationDescription:
-                        assessmentDetailsReport.observationResultDescription,
-                  ),
-                  EyeScanTabView(
-                    eyeScanData: assessmentDetailsReport.imageBriefEntity,
-                  ),
-                  // const AssessmentRecommendation(),
-                  // SizedBox(
-                  //   height: AppSize.height(context) * 0.03,
-                  // ),
-                  const BrandingWidgetH(),
-                ],
               ),
             ),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ReportPageHeader(
+                triageReportAndAssementPage: assessmentDetailsReport,
+              ),
+              AssessmentOverallResultCard(
+                triageResult: const {},
+                name: "name",
+                id: "id",
+                patientImage: AppImages.aboutUs,
+                triageResultEntities: assessmentDetailsReport,
+              ),
+              ReportAssessmentQuestions(
+                questionResponseBreifModel:
+                    assessmentDetailsReport.questionResponseBriefEntity,
+              ),
+              TumblingEReportCard(
+                tumblingEData: assessmentDetailsReport.visualAcuityBreifEntity,
+                observationDescription:
+                    assessmentDetailsReport.observationResultDescription,
+              ),
+              EyeScanTabView(
+                eyeScanData: assessmentDetailsReport.imageBriefEntity,
+              ),
+              // const AssessmentRecommendation(),
+              // SizedBox(
+              //   height: AppSize.height(context) * 0.03,
+              // ),
+              const BrandingWidgetH(),
+            ],
           ),
-        );
-      },
-      loading: () {
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
-      error: (error, stack) {
-        logger.d("eroor $error");
-        logger.d("tracee $stack");
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text("The report is not available at the moment"),
-                TextButton.icon(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text("Go Back"),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

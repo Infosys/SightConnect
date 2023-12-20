@@ -4,23 +4,25 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/triage_update_report_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentCards extends ConsumerWidget {
-  final List<TriageReportBriefEntity>? data;
+  final List<TriageReportBriefEntity> data;
   const AssessmentCards({
-    this.data,
+    required this.data,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (data == null || data!.isEmpty) {
+    if (data.isEmpty) {
       return SizedBox(
         height: 200,
         child: Center(
@@ -36,9 +38,9 @@ class AssessmentCards extends ConsumerWidget {
       );
     }
     return ListView.builder(
-      itemCount: data == null ? 0 : data!.length,
+      itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
-        TriageReportBriefEntity currentData = data![index];
+        TriageReportBriefEntity currentData = data[index];
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -125,7 +127,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          currentData.triageResultStartDate!.formateDate,
+                          currentData.triageResultStartDate?.formateDate ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -151,14 +153,23 @@ class AssessmentCards extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => PatientAssessmentReportPage(
-                              diagnosticReportId: currentData.triageResultID,
+                      onPressed: () async {
+                        try {
+                          final navigator = Navigator.of(context);
+                          final reports = await ref
+                              .read(patientAssessmentAndTestProvider)
+                              .getTriageDetailedReport(
+                                  currentData.triageResultID);
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) => PatientAssessmentReportPage(
+                                assessmentDetailsReport: reports,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } catch (e) {
+                          Fluttertoast.showToast(msg: "$e");
+                        }
                       },
                       child: Text(
                         'View Report',
