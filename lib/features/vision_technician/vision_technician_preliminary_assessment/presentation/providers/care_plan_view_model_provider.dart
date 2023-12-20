@@ -4,22 +4,75 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/model/care_plan_model.dart';
 
-var preliminaryAssessmentCarePlanProvider =
-    ChangeNotifierProvider((ref) => PreliminaryAssessmentCarePlanProvider(
+var carePlanViewModelProvider =
+    ChangeNotifierProvider((ref) => CarePlanViewModel(
           ref.read(carePlanProvider),
-    ));
+          ref,
+        ));
 
-class PreliminaryAssessmentCarePlanProvider extends ChangeNotifier {
-
+class CarePlanViewModel extends ChangeNotifier {
   final CarePlanProvider _carePlanProvider;
+  Ref ref;
 
-  PreliminaryAssessmentCarePlanProvider(
+  CarePlanViewModel(
     this._carePlanProvider,
+    this.ref,
   );
 
- final String _patientInstruction = _carePlanProvider.patientInstruction;
+  Future<CarePlanModel> saveCarePlan() async {
+    final String patientInstruction = _carePlanProvider.patientInstruction;
 
- 
+    final response = CarePlanModel(
+      //take data from json like id = 33200000002
+      reports: [
+        const ReportModel(id: 33200000002),
+      ],
+      encounterId: 33300000004,
+      organizationCode: 88000001,
+      performer: [
+        const PerformerModel(role: "VISION_TECHNICIAN", identifier: 9627849171),
+      ],
+      conditions: [
+        const ConditionModel(
+          recordedDate: "2023-10-12T14:11:33.000Z",
+          bodySite: "LEFT_EYE",
+          code: "EYE_TRIAGE",
+          note: "",
+        ),
+      ],
+      serviceRequest: [
+        ServiceRequestModel(
+          note: "",
+          patientInstruction: patientInstruction,
+          identifier: 1234,
+          bodySite: "LEFT_EYE",
+          priority: "URGENT",
+        ),
+      ],
+      note: "abc",
+      startDate: "2023-10-12T14:11:33.000Z",
+      goal: [
+        const GoalModel(
+          statusReason: "null",
+          achievementStatus: "IN_PROGRESS",
+          outcomes: [
+            GoalOutcomeModel(goalOutcome: "GLASSES_PRESCRIBED"),
+          ],
+          note: "abc",
+          startDate: "2023-10-12T14:11:33.000Z",
+          target: [
+            TargetModel(detailString: "TREATMENT_TO_BE_PROVIDED"),
+          ],
+        ),
+      ],
+    );
+
+    final vtCarePlanRemoteSource = ref.watch(vtCarePlanRemoteSourceProvider);
+
+    return await vtCarePlanRemoteSource.saveCarePlan(
+      carePlan: response,
+    );
+  }
 
   // {
   //   "reports": [{
@@ -61,49 +114,4 @@ class PreliminaryAssessmentCarePlanProvider extends ChangeNotifier {
   //     "target":[{"detailString":"TREATMENT_TO_BE_PROVIDED"}]
   //   }]
   // }
-
-  final response = CarePlanModel(
-    //take data from json like id = 33200000002
-    reports: [
-      const ReportModel(id: 33200000002),
-    ],
-    encounterId: 33300000004,
-    organizationCode: 88000001,
-    performer: [
-      const PerformerModel(role: "VISION_TECHNICIAN", identifier: 9627849171),
-    ],
-    conditions: [
-      const ConditionModel(
-        recordedDate: "2023-10-12T14:11:33.000Z",
-        bodySite: "LEFT_EYE",
-        code: "EYE_TRIAGE",
-        note: "",
-      ),
-    ],
-    serviceRequest: [
-      ServiceRequestModel(
-        note: "",
-        patientInstruction: _patientInstruction,
-        identifier: 1234,
-        bodySite: "LEFT_EYE",
-        priority: "URGENT",
-      ),
-    ],
-    note: "abc",
-    startDate: "2023-10-12T14:11:33.000Z",
-    goal: [
-      const GoalModel(
-        statusReason: "null",
-        achievementStatus: "IN_PROGRESS",
-        outcomes: [
-          GoalOutcomeModel(goalOutcome: "GLASSES_PRESCRIBED"),
-        ],
-        note: "abc",
-        startDate: "2023-10-12T14:11:33.000Z",
-        target: [
-          TargetModel(detailString: "TREATMENT_TO_BE_PROVIDED"),
-        ],
-      ),
-    ],
-  );
 }

@@ -10,8 +10,7 @@ abstract class VTCarePlanRemoteSource {
   Future<CarePlanModel> saveCarePlan({required CarePlanModel carePlan});
 }
 
-var vtCarePlanRemoteSourceProvider =
-    FutureProvider<VTCarePlanRemoteSource>((ref) {
+var vtCarePlanRemoteSourceProvider = Provider<VTCarePlanRemoteSource>((ref) {
   return VTCarePlanRemoteSourceImpl(
     ref.read(dioProvider),
   );
@@ -25,6 +24,7 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
   @override
   Future<CarePlanModel> saveCarePlan({required CarePlanModel carePlan}) async {
     final int encounterId = carePlan.encounterId!;
+    logger.d("carePlan: ${carePlan.toJson()}");
     try {
       var response = await dio.post('/careplan/$encounterId');
       if (response.statusCode != null) {

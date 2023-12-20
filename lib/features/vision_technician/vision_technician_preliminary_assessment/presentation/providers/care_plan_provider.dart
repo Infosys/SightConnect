@@ -13,13 +13,13 @@ class CarePlanProvider extends ChangeNotifier {
 
   void instructionMapper(String? instruction) {
     switch (instruction) {
-      case "Visit Primary Clinic":
+      case "Visit Primary Center":
         _patientInstruction = "VISIT_PRIMARY_CLINIC";
         break;
-      case "Visit Secondary Clinic":
+      case "Visit Secondary Center":
         _patientInstruction = "VISIT_SECONDARY_CLINIC";
         break;
-      case "Visit Tertiary Clinic":
+      case "Visit Tertiary Center":
         _patientInstruction = "VISIT_TERTIARY_CLINIC";
         break;
       case "Visit Center of Excellence":

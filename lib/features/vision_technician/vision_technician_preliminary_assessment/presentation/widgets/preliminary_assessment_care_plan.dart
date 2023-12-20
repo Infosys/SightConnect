@@ -1,14 +1,16 @@
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_view_model_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/care_plan_provider.dart';
 
 class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
   const PreliminaryAssessmentCarePlan({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {        
-
+  Widget build(BuildContext context, WidgetRef ref) {
+    var data = ref.watch(carePlanProvider);
     final options = [
       "Visit Primary Center",
       "Visit Secondary Center",
@@ -42,6 +44,8 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
                   groupValue: selectedOption.value,
                   onChanged: (value) {
                     selectedOption.value = value;
+                    data.setPatientInstruction(selectedOption.value!);
+                    ref.read(carePlanViewModelProvider).saveCarePlan();
                   },
                 );
               }).toList(),
