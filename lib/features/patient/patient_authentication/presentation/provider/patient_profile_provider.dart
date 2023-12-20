@@ -89,15 +89,18 @@ final getPatientProfileByIdProvider =
   }
 });
 
-final getPatientCurrentProfileProvider =
-    FutureProvider<PatientResponseModel>((ref) {
-  const patientId = 1202;
-  return const PatientResponseModel(
+final getPatientCurrentProfileProvider = FutureProvider<PatientResponseModel>(
+  (ref) {
+    const patientId = 1202;
+    return const PatientResponseModel(
       profile: ProfileModel(
-          patient: ExtendedPatientModel(
-    parentPatientId: patientId,
-  )));
-});
+        patient: ExtendedPatientModel(
+          parentPatientId: patientId,
+        ),
+      ),
+    );
+  },
+);
 
 final updatePatientProfileProvider = FutureProvider((ref) async {
   const patientId = 1202;

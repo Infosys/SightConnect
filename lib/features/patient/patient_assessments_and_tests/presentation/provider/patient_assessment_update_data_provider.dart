@@ -1,6 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
@@ -9,25 +7,16 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var traigeUpdateReportProvider = ChangeNotifierProvider.family(
-  (ref, int dignosticReportID) {
-    final triage = ref.watch(getTriageProvider).asData!.value;
-    return PatientAssessmentCardProvider(dignosticReportID, triage);
-  },
+var patientAssessmentUpdateDataProvider = Provider(
+  (ref) => PatientAssessmentUpdateDataProvider(),
 );
 
-class PatientAssessmentCardProvider extends ChangeNotifier {
-  final DiagnosticReportTemplateFHIRModel _triageAssessment;
-  final int dignosticReportID;
-
-  PatientAssessmentCardProvider(this.dignosticReportID, this._triageAssessment);
-
-  DiagnosticReportTemplateFHIRModel get triageAssessment => _triageAssessment;
+class PatientAssessmentUpdateDataProvider {
+  PatientAssessmentUpdateDataProvider();
 
   List<UpdateTriageReportAlertBoxEntity>
       getUpdateTriageReportAlertBoxEntityList(
-    TriageDetailedReportModel report,
-  ) {
+          TriageDetailedReportModel report) {
     List<UpdateTriageReportAlertBoxEntity> list = [];
     List<TestType> tests = [
       TestType.QUESTIONNAIRE,
@@ -161,4 +150,9 @@ class UpdateTriageReportAlertBoxEntity {
     required this.chipText,
     required this.chipColor,
   });
+
+  @override
+  String toString() {
+    return 'UpdateTriageReportAlertBoxEntity(testType: $testType, title: $title, subtitle: $subtitle, subtitlecolor: $subtitlecolor, chipText: $chipText, chipColor: $chipColor)';
+  }
 }

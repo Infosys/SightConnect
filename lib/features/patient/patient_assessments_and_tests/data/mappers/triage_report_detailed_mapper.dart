@@ -204,7 +204,7 @@ class AssessmentDetailedReportMapper {
         
       }
 
-       logger.f({"question response map": questionResponseMap});
+      
       for (var response in triageDetailedReport.responses!) {
         if (questionResponseMap.containsKey(response.linkId)) {
           questionResponseBriefEntity.add(

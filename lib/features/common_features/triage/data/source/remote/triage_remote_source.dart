@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -6,7 +5,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
@@ -35,7 +33,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   "organ": "EYE"
     // };
 
-     var response = await dio.get(endpoint);
+    var response = await dio.get(endpoint);
     //var response = await rootBundle.loadString("assets/triage_assessment.json");
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
@@ -97,12 +95,8 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       var endpoint = "/services/triage/api/triage-report/$id";
 
       logger.f({"API updateTriage": endpoint, "data": triage.toJson()});
-      final response = await dio.patch(
-        endpoint,
-        data: triage.toJson()
-        
-      );
-    
+      final response = await dio.patch(endpoint, data: triage.toJson());
+
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
           return TriageResponseModel.fromJson(response.data);
@@ -110,11 +104,9 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
           throw ServerException();
         }
       } else {
-          
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"reched here error1": e});
       throw UnknownException();
     }
   }
