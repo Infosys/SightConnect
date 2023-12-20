@@ -17,7 +17,7 @@ import '../../domain/entities/triage_report_brief_entity.dart';
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
     ref.watch(getTriageUseCase),
-    ref.watch(getPatientCurrentProfileProvider).asData?.value,
+    ref.watch(getPatientProfileByIdProvider).asData?.value,
     ref.watch(triageReportRepositoryProvider),
   ),
 );
@@ -48,19 +48,19 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     List<TriageReportUserEntity> users = [];
     try {
       users.add(TriageReportUserEntity(
-        name: _patient?.profile?.patient?.name! ?? "",
+        name: _patient?.profile?.patient?.name ?? "",
         image: _patient?.profile?.patient?.profilePhoto ?? "",
         id: 9627849180,
       ));
       _selectedPatient = users.first;
-      _patient?.profile?.patient?.relatedParty
-          ?.forEach((RelatedPartyModel family) {
-        users.add(TriageReportUserEntity(
-          name: family.name ?? "",
-          image: family.profilePicture ?? "",
-          id: family.patientId ?? 0,
-        ));
-      });
+      // _patient?.profile?.patient?.relatedParty
+      //     ?.forEach((RelatedPartyModel family) {
+      //   users.add(TriageReportUserEntity(
+      //     name: family.name ?? "",
+      //     image: family.profilePicture ?? "",
+      //     id: family.patientId ?? 0,
+      //   ));
+      // });
     } catch (e) {
       logger.e({
         "getPatients": e.toString(),
