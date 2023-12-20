@@ -12,13 +12,11 @@ var fileMsServiceProvider =
     Provider((ref) => FileMsService(ref.read(dioProvider)));
 
 class FileMsService {
-  Dio _dio;
+  final Dio _dio;
   FileMsService(this._dio);
   Future<String> _getImage(String fileId) async {
     try {
-      
       return "${AppEnv.baseUrl}/services/filems/api/file/download/$fileId";
-      
     } catch (e) {
       throw ServerFailure(errorMessage: "GetImage: $e");
     }
@@ -35,10 +33,10 @@ class FileMsService {
     });
     try {
       final response = await _dio.post(endpoint, data: data);
-         logger.d({"response": response });
+      logger.d({"response": response});
       if (response.statusCode == 200) {
         final result = jsonDecode(response.data);
-        logger.d({"uploadImage": result });
+        logger.d({"uploadImage": result});
         final fileId = result['id'];
         return await _getImage(fileId);
       } else {
@@ -49,9 +47,4 @@ class FileMsService {
       rethrow;
     }
   }
-} 
-
-
-
-
-
+}

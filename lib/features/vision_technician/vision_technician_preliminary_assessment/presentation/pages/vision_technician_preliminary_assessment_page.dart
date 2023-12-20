@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
@@ -78,17 +80,22 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         leadingWidth: 70,
         centerTitle: false,
         title: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VisionTechnicianAssessmentReportPage(
-                  triageResponseModel: ref
-                      .read(visionTechnicianResultProvider)
-                      .triageResponseModel,
-                ),
-              ),
-            );
+          onTap: () async {
+            final navigator = Navigator.of(context);
+            try {
+              final response = await ref
+                  .read(patientAssessmentAndTestProvider)
+                  .getTriageDetailedReport(33200000017);
+              navigator.push(MaterialPageRoute(
+                builder: (context) {
+                  return VisionTechnicianAssessmentReportPage(
+                    assessmentDetailsReport: response,
+                  );
+                },
+              ));
+            } catch (e) {
+              logger.d("$e");
+            }
           },
           child: const Text('Preliminary Assessment'),
         ),
@@ -261,7 +268,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    genderString ?? "",
+                    genderString,
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -280,7 +287,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  address ?? "",
+                  address,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,

@@ -2,11 +2,13 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +30,22 @@ class VisionTechnicianHomePage extends ConsumerWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: InkWell(
-          onTap: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const VisionTechnicianAssessmentReportPage(triageResponseModel: TriageResponseModel(),),
-              ),
-            );
+          onTap: () async {
+            final navigator = Navigator.of(context);
+            try {
+              final response = await ref
+                  .read(patientAssessmentAndTestProvider)
+                  .getTriageDetailedReport(33200000017);
+              navigator.push(MaterialPageRoute(
+                builder: (context) {
+                  return VisionTechnicianAssessmentReportPage(
+                    assessmentDetailsReport: response,
+                  );
+                },
+              ));
+            } catch (e) {
+              logger.d("$e");
+            }
           },
           child: Container(
             margin: const EdgeInsets.only(

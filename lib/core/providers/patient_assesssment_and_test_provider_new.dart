@@ -13,14 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../domain/entities/triage_report_brief_entity.dart';
+import '../../features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
-      ref.watch(getTriageUseCase),
-      ref.watch(getPatientProfileByIdProvider).asData?.value,
-      ref.watch(triageReportRepositoryProvider),
-      ref.watch(patientAssessmentUpdateDataProvider)),
+    ref.watch(getTriageUseCase),
+    ref.watch(getPatientProfileByIdProvider).asData?.value,
+    ref.watch(triageReportRepositoryProvider),
+    ref.watch(patientAssessmentUpdateDataProvider),
+  ),
 );
 
 class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
@@ -197,4 +198,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       return [];
     }
   }
+
+  getQuestionnairWithAnswer() {}
 }

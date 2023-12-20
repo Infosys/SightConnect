@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../domain/models/assessment_timeline_view_model.dart';
-
-import '../../../../common_features/triage/domain/models/triage_response_model.dart';
-import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 
 class AssessmentTimelineView extends ConsumerWidget {
   const AssessmentTimelineView(this.timeLineList, {super.key});
@@ -93,16 +92,17 @@ class AssessmentTimelineView extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                          Text(
-                            timeLineList[index].subtitle,
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                            ),
+                        Text(
+                          timeLineList[index].subtitle,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
                           ),
-                          TimeWidgetRender(
-                              context, timeLineList[index], index, ref)
-                        ]),
+                        ),
+                        TimeWidgetRender(
+                            context, timeLineList[index], index, ref)
+                      ],
+                    ),
               const SizedBox(
                 height: AppSize.kmheight,
               ),
@@ -139,8 +139,8 @@ class AssessmentTimelineView extends ConsumerWidget {
   }
 }
 
-Widget TimeWidgetRender(
-    context, AssessmentTimelineViewModel timeLine, int index, ref) {
+Widget TimeWidgetRender(BuildContext context,
+    AssessmentTimelineViewModel timeLine, int index, WidgetRef ref) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
@@ -177,29 +177,37 @@ Widget TimeWidgetRender(
               width: AppSize.kswidth,
             ),
             InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return VisionTechnicianAssessmentReportPage(
-                      triageResponseModel: ref
-                          .watch(visionTechnicianResultProvider)
-                          .triageResponseModel,
-                    );
-                  },
-                ));
+              onTap: () async {
+                try {
+                  final navigator = Navigator.of(context);
+                  final report = await ref
+                      .read(patientAssessmentAndTestProvider)
+                      .getTriageDetailedReport(33200000017);
+
+                  navigator.push(MaterialPageRoute(
+                    builder: (context) {
+                      return VisionTechnicianAssessmentReportPage(
+                        assessmentDetailsReport: report,
+                      );
+                    },
+                  ));
+                } catch (e) {
+                  logger.d("$e");
+                }
               },
               child: Text(
                 timeLine.assessmentId,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: applyRobotoFont(
-                    fontSize: 12,
-                    color: AppColor.blue,
-                    decoration: TextDecoration.combine(
-                      [
-                        TextDecoration.underline,
-                      ],
-                    )),
+                  fontSize: 12,
+                  color: AppColor.blue,
+                  decoration: TextDecoration.combine(
+                    [
+                      TextDecoration.underline,
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

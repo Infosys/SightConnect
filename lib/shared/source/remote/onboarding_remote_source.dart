@@ -18,7 +18,7 @@ class OnboardingRemoteSourceImpl implements OnboardingRemoteSource {
 
   @override
   Future<PatientDTO> onboardPatient(PatientDTO patientDTO) async {
-    var endpoint = "api/v1/patients/onboard";
+    var endpoint = "/service/orchestration/api/v1/patients/onboard";
 
     var response = await _dio.post(endpoint, data: patientDTO.toJson());
 

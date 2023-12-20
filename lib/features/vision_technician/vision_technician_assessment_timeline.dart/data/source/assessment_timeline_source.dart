@@ -6,7 +6,7 @@ import '../../domain/models/assessment_timeline_view_model.dart';
 
 var assessmentTimeLineSource = Provider(
   (ref) => AssessmentTimeLineSourceImpl(
-    ref.watch(dioTriageProvider),
+    ref.watch(dioProvider),
   ),
 );
 
@@ -25,12 +25,11 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
       int encounterId) async {
     String url = "/api/triage/encounters/$encounterId/timeline";
     return await _dio.get(url).then((value) {
-
-       return value.data
+      return value.data
           .map<AssessmentTimelineViewModel>(
               (e) => AssessmentTimelineViewModel.fromJson(e))
           .toList();
-          
+
       // List<AssessmentTimelineViewModel> list = [];
       // value.data.forEach((element) {
       //   list.add(AssessmentTimelineViewModel.fromJson(element));

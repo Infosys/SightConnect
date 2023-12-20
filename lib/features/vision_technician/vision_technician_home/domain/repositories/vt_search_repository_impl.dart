@@ -13,7 +13,10 @@ abstract class VTPatientSearchRepository {
 }
 
 var vtPatientSearchRepositoryProvider = Provider<VTPatientSearchRepository>(
-    (ref) => VTPatientSearchRepositoryImpl(ref.watch(vtDioProvider)));
+  (ref) => VTPatientSearchRepositoryImpl(
+    ref.watch(dioProvider),
+  ),
+);
 
 class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
   final Dio _dio;
@@ -23,10 +26,10 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
   Future<List<VTPatientDto>> getPatientProfile(String query) async {
     if (query.isEmpty) throw "List is empty";
 
-    var endPoint = 'https://eyecare4all-dev.infosysapps.com/services/orchestration/api/patients/triage-reports?searchParam1=$query';
+    var endPoint =
+        '/services/orchestration/api/patients/triage-reports?searchParam1=$query';
 
     return _dio.get(endPoint).then((value) {
-
       List<VTPatientDto> list = [];
       value.data.forEach((element) {
         list.add(VTPatientDto.fromJson(element));

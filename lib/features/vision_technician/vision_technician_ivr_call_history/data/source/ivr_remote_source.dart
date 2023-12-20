@@ -6,7 +6,7 @@ import '../../domain/model/ivr_call_history_model.dart';
 
 var ivrRemoteSource = Provider(
   (ref) => IvrRemoteSourceImpl(
-    ref.read(dioCallCenterProvider),
+    ref.read(dioProvider),
   ),
 );
 
@@ -25,10 +25,8 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
   Future<List<IvrCallHistoryModel>> getIvrCallHistory(
       {required String mobile, List<String>? callStatus}) async {
     String url = "/api/users/calls";
-    Map<String, dynamic> queryParameters = {
-      "mobile": mobile
-    };
-    if(callStatus != null && callStatus.isNotEmpty){
+    Map<String, dynamic> queryParameters = {"mobile": mobile};
+    if (callStatus != null && callStatus.isNotEmpty) {
       queryParameters.addAll({"callStatus": callStatus});
     }
     return await _dio.get(url, queryParameters: queryParameters).then((value) {

@@ -6,57 +6,6 @@ var dioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
       baseUrl: AppEnv.baseUrl,
-      // connectTimeout: const Duration(seconds: 5),
-      // receiveTimeout: const Duration(seconds: 5),
     ),
-  ),
-);
-
-var onboardingDioProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      baseUrl: AppEnv.orchestrationBaseUrl,
-    ),
-  ),
-);
-
-var authDioProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      baseUrl: AppEnv.keycloakBaseUrl,
-    ),
-  ),
-);
-
-var vtDioProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(
-      
-    ),
-  ),
-);
-
-// var onboardingDioProvider = Provider(
-//   (ref) => Dio(
-//     BaseOptions(
-//       baseUrl: "http://10.110.36.226:8075/validation-ms",
-//     ),
-//   ),
-// );
-var dioCallCenterProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(baseUrl: AppEnv.exotelBaseUrl),
-  ),
-);
-
-var dioProfileProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(baseUrl: AppEnv.profileBaseUrl),
-  ),
-);
-
-var dioTriageProvider = Provider(
-  (ref) => Dio(
-    BaseOptions(baseUrl: AppEnv.baseUrl),
   ),
 );

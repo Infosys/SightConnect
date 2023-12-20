@@ -18,7 +18,7 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
   VisionCenterRepositoryImpl(this.dio);
   @override
   Future<List<OrganizationResponseModel>> getVisionCenters() async {
-    var endpoint = "/api/careQuestionnaireGenerator";
+    var endpoint = "services/orchestartion/api/careQuestionnaireGenerator";
     logger.d({
       "API get vision centers": endpoint,
     });
