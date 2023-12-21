@@ -37,12 +37,12 @@ class CarePlanViewModel extends ChangeNotifier {
           recordedDate: "2023-10-12T14:11:33.000Z",
           bodySite: "LEFT_EYE",
           code: "EYE_TRIAGE",
-          note: "",
+          note: "sss",
         ),
       ],
       serviceRequest: [
         ServiceRequestModel(
-          note: "",
+          note: "ssss",
           patientInstruction: patientInstruction,
           identifier: 1234,
           bodySite: "LEFT_EYE",

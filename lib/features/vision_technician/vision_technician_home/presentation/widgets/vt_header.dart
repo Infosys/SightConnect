@@ -9,6 +9,8 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:eye_care_for_all/main.dart';
 
 class VTHeader extends HookWidget {
   const VTHeader({super.key});
@@ -32,12 +34,31 @@ class VTHeader extends HookWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Analytics',
-                style: applyFiraSansFont(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.white,
+              InkWell(
+                onTap: () async {
+                  try {
+                    // Replace '1600 Amphitheatre Parkway, Mountain View' with your actual address
+                    List<Location> locations = await locationFromAddress(
+                        '1600 Amphitheatre Parkway, Mountain View');
+                        
+                    if (locations.isNotEmpty) {
+                      Location location = locations.first;
+                      logger.d(
+                          'Latitude: ${location.latitude}, Longitude: ${location.longitude}');
+                    } else {
+                      logger.d('No location found for the provided address.');
+                    }
+                  } catch (e) {
+                    print('Error: $e');
+                  }
+                },
+                child: Text(
+                  'Analytics',
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.white,
+                  ),
                 ),
               ),
               TextButton(

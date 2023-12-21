@@ -25,9 +25,11 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
   Future<CarePlanModel> saveCarePlan({required CarePlanModel carePlan}) async {
     final int encounterId = carePlan.encounterId!;
     logger.d("carePlan: ${carePlan.toJson()}");
+    var endpoint = "/services/triage/api/triage-report/$encounterId";
     try {
-      var response = await dio.post('/careplan/$encounterId');
+      var response = await dio.post(endpoint, data: carePlan.toJson());
       if (response.statusCode != null) {
+        logger.d("response of CarePlan : ${response.data}");
         return CarePlanModel.fromJson(response.data);
       } else {
         throw ServerException();
