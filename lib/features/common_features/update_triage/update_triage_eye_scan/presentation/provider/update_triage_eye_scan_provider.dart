@@ -91,7 +91,8 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     return "${_patientID}_$fileName-$uniqueKey";
   }
 
-  updateEyeScanReport(int reportID) async {
+  Future<bool> updateEyeScanReport(int reportID) async {
+    return true;
     try {
       DiagnosticReportTemplateFHIRModel triageAssessment =
           await updateTriageProvider.getAssessmentDetail();
@@ -113,12 +114,15 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
       finalResponse.fold((l) {
         logger.d({"message": "Error in updating triage"});
+        return false;
       }, (r) {
         logger.d({"message": "Triage updated successfully"});
+        return true;
       });
     } catch (e) {
       rethrow;
     }
+    return false;
   }
 
   TriageUpdateModel _getTriageUpdateModel(
