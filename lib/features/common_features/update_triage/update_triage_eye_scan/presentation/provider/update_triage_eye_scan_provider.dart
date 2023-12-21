@@ -130,27 +130,9 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       throw ServerException();
     }
 
-    update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
-      patientId: reportModel.subject,
-      diagnosticReportId: reportModel.diagnosticReportId,
-      organizationCode: reportModel.organizationCode,
-      performer: [
-        update_model.Performer(
-          role: PerformerRole.PATIENT,
-          identifier: reportModel.subject,
-        ),
-      ],
-      assessmentCode: reportModel.assessmentCode,
-      assessmentVersion: reportModel.assessmentVersion,
-      issued: reportModel.issued,
-      source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
-      incompleteSection: getIncompleteTestList(reportModel.incompleteTests),
-      score: getScore(),
-      cummulativeScore: getCummulativeScore(),
-    );
+    update_model.TriageUpdateModel triage = update_model.TriageUpdateModel();
 
-    logger.v({"Triage Update Model": triage});
+    return triage;
   }
 }
 
