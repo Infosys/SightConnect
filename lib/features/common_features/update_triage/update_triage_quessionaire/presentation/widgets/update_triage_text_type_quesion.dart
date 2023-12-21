@@ -3,21 +3,17 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
-
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UpdateTriageTextTypeQuestion extends ConsumerWidget {
-  final VoidCallback onCancle;
   final Function(String value) onSubmitted;
   final QuestionnaireItemFHIRModel question;
   const UpdateTriageTextTypeQuestion({
     super.key,
     required this.question,
-    required this.onCancle,
     required this.onSubmitted,
   });
 
@@ -140,49 +136,6 @@ class UpdateTriageTextTypeQuestion extends ConsumerWidget {
                       },
                       child: const Text(
                         "Submit",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: AppSize.kmpadding,
-                  ),
-                  Expanded(
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColor.white, width: 0),
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => BlurDialogBox(
-                            content: Text(
-                              "Are you sure you want to cancel?",
-                              style: applyFiraSansFont(
-                                fontSize: 18,
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  onCancle();
-                                },
-                                child: const Text("Yes"),
-                              ),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("No")),
-                            ],
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "Cancel",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

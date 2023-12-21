@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -33,6 +36,7 @@ var updateTriageEyeScanProvider = ChangeNotifierProvider(
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
     ref.watch(triageRepositoryProvider),
+    ref.watch(fileMsServiceProvider),
   ),
 );
 
@@ -43,19 +47,20 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
   final TriageRepository _triageRepository;
+  final FileMsService _fileMsService;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
   XFile? _bothEyeImage;
 
   UpdateTriageEyeScanProvider(
-    this._currentEye,
-    this._patientID,
-    this.patientAssessmentAndTestProvider,
-    this._triageReportRepository,
-    this._triageUrgencyRepository,
-    this._triageRepository,
-  );
+      this._currentEye,
+      this._patientID,
+      this.patientAssessmentAndTestProvider,
+      this._triageReportRepository,
+      this._triageUrgencyRepository,
+      this._triageRepository,
+      this._fileMsService);
 
   TriageEyeType get currentEye => _currentEye;
   XFile get leftEyeImage => _leftEyeImage!;
@@ -64,16 +69,19 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
+    uploadImage(image);
     notifyListeners();
   }
 
   void setRightEyeImage(XFile image) {
     _rightEyeImage = image;
+    uploadImage(image);
     notifyListeners();
   }
 
   void setBothEyeImage(XFile image) {
     _bothEyeImage = image;
+    uploadImage(image);
     notifyListeners();
   }
 
@@ -87,19 +95,17 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     XFile XrightEyeImage = _rightEyeImage!;
     List<PostImagingSelectionModel> mediaCaptureList = [];
     mediaCaptureList.add(PostImagingSelectionModel(
-      identifier: 2151,
-      baseUrl: "https://eyecare4all-dev.infosysapps.com",
-      endpoint: "/abcd/filems/api/file/download",
-      score: 1,
-      fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"
-    ));
+        identifier: 2151,
+        baseUrl: "https://eyecare4all-dev.infosysapps.com",
+        endpoint: "/xyz/filems/api/file/download",
+        score: 1,
+        fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"));
     mediaCaptureList.add(PostImagingSelectionModel(
-      identifier: 2152,
-      baseUrl: "https://eyecare4all-dev.infosysapps.com",
-      endpoint: "/abcd/filems/api/file/download",
-      score: 1,
-      fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"
-    ));
+        identifier: 2152,
+        baseUrl: "https://eyecare4all-dev.infosysapps.com",
+        endpoint: "/xyz/filems/api/file/download",
+        score: 1,
+        fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"));
 
     return mediaCaptureList;
   }
@@ -255,5 +261,29 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       },
       {"IMAGE": eyeScanReport.toInt()}
     ];
+  }
+
+  String leftImageUrl = "";
+  String rightImageUrl = "";
+  String bothImageUrl = "";
+
+  void uploadImage(XFile image) async {
+    notifyListeners();
+
+    try {
+      final response = await _fileMsService.uploadImage(File(image.path));
+      logger.d({"response": response});
+      if (currentEye == TriageEyeType.LEFT) {
+        leftImageUrl = response;
+      } else if (currentEye == TriageEyeType.RIGHT) {
+        rightImageUrl = response;
+      } else {
+        bothImageUrl = response;
+      }
+
+      notifyListeners();
+    } catch (e) {
+      logger.d({"uploadImage Error": e});
+    }
   }
 }
