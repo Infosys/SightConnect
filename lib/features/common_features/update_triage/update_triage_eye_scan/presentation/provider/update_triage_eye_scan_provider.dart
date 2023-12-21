@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
@@ -110,6 +112,17 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     return mediaCaptureList;
   }
 
+  Map<String, int> getTriageImageIdentifier(
+      DiagnosticReportTemplateFHIRModel assessment) {
+    Map<String, int> imageIdentifier = {};
+    assessment.study?.imagingSelectionTemplate?.forEach((element) {
+      imageIdentifier[element.]=
+     
+    });
+
+    return imageIdentifier;
+  }
+
   String generateUniqueKey() {
     String uuid = const Uuid().v4();
     String key = "WA${uuid.substring(0, 6)}";
@@ -137,28 +150,32 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       if (triageReport == null) {
         throw ServerException();
       }
-
       DiagnosticReportTemplateFHIRModel triageAssessment =
           await patientAssessmentAndTestProvider.getAssessmentDetail();
-
       List<PostImagingSelectionModel> updatedResponseEyeScan =
           getTriageEyeScanResponse();
-
       TriageUpdateModel triageUpdateModel = _getTriageUpdateModel(
-          updatedResponseEyeScan, triageReport, triageAssessment);
-
-      var finalResponse =
-          await _triageRepository.updateTriage(triage: triageUpdateModel);
-      finalResponse.fold((l) {
-        logger.d({"message": "Error in updating triage"});
-        return false;
-      }, (r) {
-        logger.f({"message": "Triage updated successfully"});
-        return true;
-      });
-      return false;
+        updatedResponseEyeScan,
+        triageReport,
+        triageAssessment,
+      );
+      Either<Failure, TriageResponseModel> finalResponse =
+          await _triageRepository.updateTriage(
+        triage: triageUpdateModel,
+      );
+      return finalResponse.fold(
+        (l) {
+          logger.d({"message": "Error in updating triage"});
+          return false;
+        },
+        (r) {
+          logger.f({"message": "Triage updated successfully"});
+          return true;
+        },
+      );
     } catch (e) {
-      rethrow;
+      logger.d({"message": "Error in updating triage"});
+      return false;
     }
   }
 
