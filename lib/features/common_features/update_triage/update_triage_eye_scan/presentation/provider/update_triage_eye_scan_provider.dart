@@ -115,10 +115,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   Map<String, int> getTriageImageIdentifier(
       DiagnosticReportTemplateFHIRModel assessment) {
     Map<String, int> imageIdentifier = {};
-    assessment.study?.imagingSelectionTemplate?.forEach((element) {
-      imageIdentifier[element.]=
-     
-    });
+    assessment.study?.imagingSelectionTemplate?.forEach((element) {});
 
     return imageIdentifier;
   }
