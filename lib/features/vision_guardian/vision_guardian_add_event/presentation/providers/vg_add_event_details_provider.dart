@@ -1,14 +1,21 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 
 class AddEventDetailsNotifier extends ChangeNotifier {
   XFile? _image;
   XFile? get image => _image;
+  List<VisionGuardianEventModel> events=eventDetails;
   set image(XFile? value) {
     _image = value;
     notifyListeners();
   }
+
+
+
 
   final TextEditingController _eventTitle = TextEditingController();
   final TextEditingController _eventDescription = TextEditingController();

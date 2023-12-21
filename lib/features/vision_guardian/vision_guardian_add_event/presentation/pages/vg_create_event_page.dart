@@ -1,20 +1,24 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/pages/vg_member_details_form_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_icon.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../widgets/vg_event_heder_chips.dart';
 
-class VisionGuardianEventPage extends HookWidget {
+class VisionGuardianEventPage extends HookConsumerWidget {
   const VisionGuardianEventPage({super.key});
 
   final eventStatus = const [
@@ -24,7 +28,7 @@ class VisionGuardianEventPage extends HookWidget {
     'Completed',
   ];
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(-1);
     return Scaffold(
       appBar: CustomAppbar(
@@ -32,16 +36,24 @@ class VisionGuardianEventPage extends HookWidget {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              print("object");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VisionGuardianSearchEvent(),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.search,
               color: AppColor.grey,
             ),
           ),
-          IconButton(
+/*           IconButton(
             onPressed: () {},
             icon: SvgPicture.asset(AppIcon.filterIcon),
-          ),
+          ), */
         ],
         leadingIcon: InkWell(
           onTap: () {
@@ -102,26 +114,22 @@ class VisionGuardianEventPage extends HookWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            vgEventHeaderChips(isSelected, context, eventStatus),
-            const SizedBox(height: AppSize.klheight),
-            InkWell(onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VisionGuardianEventDetailsPage(),
-                ),
-              );
-            }, child: vgEventDataCards(context)),
-            const Spacer(),
-            const BrandingWidgetH(),
-          ],
-        ),
-      ),
+      body: Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              vgEventHeaderChips(isSelected, context, eventStatus),
+              const SizedBox(height: AppSize.klheight),
+              const VisionEventListDetails(),
+              const Spacer(),
+              const BrandingWidgetH(),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -26,7 +27,9 @@ class VisionGuardianEventDetailsPage extends HookWidget {
           centerTitle: false,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+             
+              },
               icon: const Icon(
                 Icons.search,
                 color: AppColor.grey,

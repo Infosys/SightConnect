@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
@@ -151,7 +152,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             SizedBox(
               height: AppSize.height(context) * 0.02,
             ),
-            vgEventDataCards(context),
+            VisionEventListDetails(),
             SizedBox(
               height: AppSize.height(context) * 0.2,
             ),
