@@ -324,10 +324,10 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       logger.d({"response": response});
       if (currentEye == TriageEyeType.LEFT) {
         leftImageUrl = response;
-        logger.f({"eyeTypeLeft":leftImageUrl});
+        logger.d({"eyeTypeLeft":leftImageUrl});
       } else if (currentEye == TriageEyeType.RIGHT) {
         rightImageUrl = response;
-        logger.f({"eyeTypeRight":rightImageUrl});
+        logger.d({"eyeTypeRight":rightImageUrl});
       } else {
         bothImageUrl = response;
       }
