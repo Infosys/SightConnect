@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages_old/pages/update_triage_eye_scan_page.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
