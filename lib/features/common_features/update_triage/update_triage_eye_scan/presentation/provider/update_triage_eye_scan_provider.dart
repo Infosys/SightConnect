@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
@@ -23,6 +24,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
@@ -93,21 +95,21 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   }
 
   List<PostImagingSelectionModel> getTriageEyeScanResponse() {
-    XFile XleftEyeImage = _leftEyeImage!;
-    XFile XrightEyeImage = _rightEyeImage!;
     List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(PostImagingSelectionModel(
-        identifier: 2151,
-        baseUrl: "https://eyecare4all-dev.infosysapps.com",
-        endpoint: "/xyz/filems/api/file/download",
-        score: 1,
-        fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"));
-    mediaCaptureList.add(PostImagingSelectionModel(
-        identifier: 2152,
-        baseUrl: "https://eyecare4all-dev.infosysapps.com",
-        endpoint: "/xyz/filems/api/file/download",
-        score: 1,
-        fileId: "1703051833013-dd457171-c898-4327-9d8d-5728e1664b88"));
+    mediaCaptureList.add(const PostImagingSelectionModel(
+      bodySite: BodySite.LEFT_EYE,
+      identifier: 0,
+      endpoint: "",
+      baseUrl: "",
+      score: 0
+    ));
+    mediaCaptureList.add(const PostImagingSelectionModel(
+      bodySite: BodySite.RIGHT_EYE,
+      identifier: 0,
+      endpoint: "",
+      baseUrl: "",
+      score: 0
+    ));
 
     return mediaCaptureList;
   }
@@ -115,7 +117,10 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   Map<String, int> getTriageImageIdentifier(
       DiagnosticReportTemplateFHIRModel assessment) {
     Map<String, int> imageIdentifier = {};
-    assessment.study?.imagingSelectionTemplate?.forEach((element) {});
+   
+    assessment.study?.imagingSelectionTemplate?.forEach((element) {
+      imageIdentifier[element.name!] = element.id!;
+    });
 
     return imageIdentifier;
   }
@@ -147,15 +152,22 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       if (triageReport == null) {
         throw ServerException();
       }
-      DiagnosticReportTemplateFHIRModel triageAssessment =
+      
+      DiagnosticReportTemplateFHIRModel triageAssessment=
           await patientAssessmentAndTestProvider.getAssessmentDetail();
+        
+      
       List<PostImagingSelectionModel> updatedResponseEyeScan =
           getTriageEyeScanResponse();
+         
+
       TriageUpdateModel triageUpdateModel = _getTriageUpdateModel(
         updatedResponseEyeScan,
         triageReport,
         triageAssessment,
       );
+      
+
       Either<Failure, TriageResponseModel> finalResponse =
           await _triageRepository.updateTriage(
         triage: triageUpdateModel,
@@ -171,7 +183,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
         },
       );
     } catch (e) {
-      logger.d({"message": "Error in updating triage"});
+      logger.f({"error in this step":e});
       return false;
     }
   }
@@ -201,6 +213,8 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       throw ServerException();
     }
 
+
+
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
       patientId: triageReport.subject,
       diagnosticReportId: triageReport.diagnosticReportId,
@@ -222,16 +236,21 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       imagingSelection: _getUpdatedImageList(
         triageReport.media,
         getTriageEyeScanResponse(),
+        triageAssessment,
       ),
     );
-
+    logger.f({"triageModel": triage});
     return triage;
   }
 
   List<update_model.PatchImagingSelectionModel>? _getUpdatedImageList(
     List<triage_detailed_model.Media>? existingImages,
     List<PostImagingSelectionModel> imagesFromUi,
+    DiagnosticReportTemplateFHIRModel triageAssessment,
+   
   ) {
+     Map<String,int> imageIdentifier=  getTriageImageIdentifier(triageAssessment);
+     logger.f({"imageIdentifier value":imageIdentifier});
     List<update_model.PatchImagingSelectionModel> updatedImageLists = [];
     existingImages?.forEach((element) {
       updatedImageLists.add(
@@ -242,21 +261,37 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       );
     });
 
-    for (PostImagingSelectionModel element in imagesFromUi) {
-      updatedImageLists.add(
-        update_model.PatchImagingSelectionModel(
+ logger.f({"imageIdentifier value":updatedImageLists});
+
+    Map<String,String> leftEyeMap=parseUrl(leftImageUrl);
+  Map<String,String> rightEyeMap=parseUrl(rightImageUrl);
+ 
+  logger.f({"imageIdentifier value":leftEyeMap});
+  logger.f({"imageIdentifier value":rightImageUrl});
+
+  //add left eye data 
+  update_model.PatchImagingSelectionModel(
           action: Action.ADD,
-          identifier: element.identifier,
-          score: element.score,
-          baseUrl: element.baseUrl,
-          endpoint: element.endpoint,
-          fileId: element.fileId,
-        ),
-      );
-    }
+          identifier: imageIdentifier[BodySite.LEFT_EYE],
+          score: 0,
+          baseUrl: leftEyeMap["baseUrl"],
+          endpoint: leftEyeMap["endPoint"],
+          fileId: leftEyeMap["fileId"],
+        );
+
+     //add Right eye data 
+  update_model.PatchImagingSelectionModel(
+          action: Action.ADD,
+          identifier: imageIdentifier[BodySite.RIGHT_EYE],
+          score: 0,
+          baseUrl: rightEyeMap["baseUrl"],
+          endpoint: rightEyeMap["endPoint"],
+          fileId: rightEyeMap["fileId"],
+        );
 
     return updatedImageLists;
   }
+  
 
   int _getCummulativeScore() {
     final eyescanScore =
@@ -267,7 +302,8 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   List<Map<String, int>> _getScore() {
     final eyeScanReport =
         _triageUrgencyRepository.eyeScanUrgency(getTriageEyeScanResponse());
-
+     
+  
     return [
       {"QUESTIONNAIRE": 0},
       {
@@ -300,4 +336,52 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       logger.d({"uploadImage Error": e});
     }
   }
+
+
+Map<String, String> parseUrl(String url) {
+  Fluttertoast.showToast(msg: url);
+  Map<String, String> mp={};
+  String baseUrl="";
+  String endpoint="";
+  String fileId="";
+  int slashcount=0;
+for(int i=0;i<url.length;i++){
+  if(url[i]=='/'){
+    slashcount++;
+  }
+  if(slashcount<3){
+    baseUrl+=url[i];
+  }
+  else{
+    endpoint+=url[i];
+  }
+
+  
+}
+
+for(int i=endpoint.length-1;i>=0;i--){
+  if(endpoint[i]=='/'){
+    break;
+  }
+ 
+  fileId+=endpoint[i];
+
+}
+fileId=reverseFileId(fileId);
+
+mp["baseUrl"]=baseUrl;
+mp["endPoint"]=endpoint;
+mp["fileId"]=fileId;
+
+  return mp;
+
+}
+String reverseFileId(String input) {
+  String reversed = '';
+  for (int i = input.length - 1; i >= 0; i--) {
+    reversed += input[i];
+  }
+  return reversed;
+}
+
 }

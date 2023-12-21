@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -88,7 +89,8 @@ class PostImagingSelectionModel with _$PostImagingSelectionModel {
     String? endpoint,
     String? baseUrl,
     double? score,
-    String ? fileId
+    String ? fileId,
+    BodySite? bodySite,
   }) = _PostImagingSelectionModel;
 
   factory PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
