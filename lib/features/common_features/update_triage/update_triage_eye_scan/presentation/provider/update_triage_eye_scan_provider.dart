@@ -1,13 +1,27 @@
 import 'package:camera/camera.dart';
+import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
+    as update_model;
 
 class UpdateTriageEyeScanProvider with ChangeNotifier {
   TriageEyeType _currentEye;
   final String _patientID;
+  PatientAssessmentAndTestProviderNew updateTriageProvider;
+  TriageRepository triageRepository;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
@@ -16,6 +30,8 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   UpdateTriageEyeScanProvider(
     this._currentEye,
     this._patientID,
+    this.updateTriageProvider,
+    this.triageRepository,
   );
 
   TriageEyeType get currentEye => _currentEye;
@@ -74,11 +90,75 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     String uniqueKey = generateUniqueKey();
     return "${_patientID}_$fileName-$uniqueKey";
   }
+
+  updateEyeScanReport(int reportID) async {
+    try {
+      DiagnosticReportTemplateFHIRModel triageAssessment =
+          await updateTriageProvider.getAssessmentDetail();
+
+      TriageReportDetailedEntity triageReport =
+          await updateTriageProvider.getTriageDetailedReport(reportID);
+
+      List<PostImagingSelectionModel> updatedResponseEyeScan =
+          getTriageEyeScanResponse();
+
+      TriageUpdateModel triageUpdateModel = _getTriageUpdateModel(
+        updatedResponseEyeScan,
+        triageReport,
+        triageRepository,
+      );
+
+      Either<Failure, TriageResponseModel> finalResponse =
+          await triageRepository.updateTriage(triage: triageUpdateModel);
+
+      finalResponse.fold((l) {
+        logger.d({"message": "Error in updating triage"});
+      }, (r) {
+        logger.d({"message": "Triage updated successfully"});
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  TriageUpdateModel _getTriageUpdateModel(
+    List<PostImagingSelectionModel>? triageEyeScanResponse,
+    TriageReportDetailedEntity triageReport,
+    TriageRepository triageRepository,
+  ) {
+    if (triageEyeScanResponse == null) {
+      throw ServerException();
+    }
+
+    update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
+      patientId: reportModel.subject,
+      diagnosticReportId: reportModel.diagnosticReportId,
+      organizationCode: reportModel.organizationCode,
+      performer: [
+        update_model.Performer(
+          role: PerformerRole.PATIENT,
+          identifier: reportModel.subject,
+        ),
+      ],
+      assessmentCode: reportModel.assessmentCode,
+      assessmentVersion: reportModel.assessmentVersion,
+      issued: reportModel.issued,
+      source: Source.PATIENT_APP,
+      sourceVersion: AppText.appVersion,
+      incompleteSection: getIncompleteTestList(reportModel.incompleteTests),
+      score: getScore(),
+      cummulativeScore: getCummulativeScore(),
+    );
+
+    logger.v({"Triage Update Model": triage});
+  }
 }
 
 var updateTriageEyeScanProvider = ChangeNotifierProvider(
   (ref) => UpdateTriageEyeScanProvider(
     TriageEyeType.RIGHT,
     "99000001",
+    ref.read(patientAssessmentAndTestProvider),
+    ref.read(triageRepositoryProvider),
   ),
 );

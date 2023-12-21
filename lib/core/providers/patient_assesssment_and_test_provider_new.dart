@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
@@ -197,6 +198,21 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
 
       return [];
     }
+  }
+
+  Future<DiagnosticReportTemplateFHIRModel> getAssessmentDetail() async {
+    notifyListeners();
+    final triageAssessmentResponse =
+        await _getTriageUseCase.call(GetTriageParam());
+    return triageAssessmentResponse.fold(
+      (failure) {
+        logger.d({"getEyeTriageDetailedReport ": failure});
+        throw failure;
+      },
+      (triageAssessment) {
+        return triageAssessment;
+      },
+    );
   }
 
   getQuestionnairWithAnswer() {}
