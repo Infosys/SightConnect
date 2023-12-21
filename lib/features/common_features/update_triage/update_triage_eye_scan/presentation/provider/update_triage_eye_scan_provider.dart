@@ -24,7 +24,6 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
@@ -73,19 +72,19 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
-    uploadImage(image);
+    uploadImage(image,TriageEyeType.LEFT);
     notifyListeners();
   }
 
   void setRightEyeImage(XFile image) {
     _rightEyeImage = image;
-    uploadImage(image);
+    uploadImage(image,TriageEyeType.RIGHT);
     notifyListeners();
   }
 
   void setBothEyeImage(XFile image) {
     _bothEyeImage = image;
-    uploadImage(image);
+    uploadImage(image,TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -250,7 +249,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
    
   ) {
      Map<String,int> imageIdentifier=  getTriageImageIdentifier(triageAssessment);
-     logger.f({"imageIdentifier value":imageIdentifier});
+   
     List<update_model.PatchImagingSelectionModel> updatedImageLists = [];
     existingImages?.forEach((element) {
       updatedImageLists.add(
@@ -261,34 +260,34 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       );
     });
 
- logger.f({"imageIdentifier value":updatedImageLists});
+
 
     Map<String,String> leftEyeMap=parseUrl(leftImageUrl);
   Map<String,String> rightEyeMap=parseUrl(rightImageUrl);
  
-  logger.f({"imageIdentifier value":leftEyeMap});
-  logger.f({"imageIdentifier value":rightImageUrl});
-
+ logger.f({"imageIdentifier":imageIdentifier});
+ logger.f({"imageIdentifier":imageIdentifier["LEFT_EYE"]});
   //add left eye data 
-  update_model.PatchImagingSelectionModel(
+   updatedImageLists.add(update_model.PatchImagingSelectionModel(
           action: Action.ADD,
-          identifier: imageIdentifier[BodySite.LEFT_EYE],
+          identifier: imageIdentifier["LEFT_EYE"],
           score: 0,
           baseUrl: leftEyeMap["baseUrl"],
           endpoint: leftEyeMap["endPoint"],
           fileId: leftEyeMap["fileId"],
-        );
+        ));
 
      //add Right eye data 
-  update_model.PatchImagingSelectionModel(
+ updatedImageLists.add( update_model.PatchImagingSelectionModel(
           action: Action.ADD,
-          identifier: imageIdentifier[BodySite.RIGHT_EYE],
+          identifier: imageIdentifier["RIGHT_EYE"],
           score: 0,
           baseUrl: rightEyeMap["baseUrl"],
           endpoint: rightEyeMap["endPoint"],
           fileId: rightEyeMap["fileId"],
-        );
+        ));
 
+  
     return updatedImageLists;
   }
   
@@ -312,21 +311,23 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       {"IMAGE": eyeScanReport.toInt()}
     ];
   }
-
+//TODO: right image url is hardcoded
   String leftImageUrl = "";
   String rightImageUrl = "";
   String bothImageUrl = "";
 
-  void uploadImage(XFile image) async {
-    notifyListeners();
+  void uploadImage(XFile image,TriageEyeType currentEye) async {
+  
 
     try {
       final response = await _fileMsService.uploadImage(File(image.path));
       logger.d({"response": response});
       if (currentEye == TriageEyeType.LEFT) {
         leftImageUrl = response;
+        logger.f({"eyeTypeLeft":leftImageUrl});
       } else if (currentEye == TriageEyeType.RIGHT) {
         rightImageUrl = response;
+        logger.f({"eyeTypeRight":rightImageUrl});
       } else {
         bothImageUrl = response;
       }
@@ -339,7 +340,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
 
 Map<String, String> parseUrl(String url) {
-  Fluttertoast.showToast(msg: url);
+
   Map<String, String> mp={};
   String baseUrl="";
   String endpoint="";

@@ -113,13 +113,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     try {
       _selectedOptions.forEach(
         (questionCode, result) {
-          logger.f({
-            "Question Response List": _questionResponseList,
-            "questionCode": questionCode,
-            "value": result["answer"],
-            "score": result["score"].toDouble(),
-            "answerCode": result["score"].toDouble(),
-          });
+          
           _questionResponseList.add(
             PostQuestionResponseModel(
               linkId: questionCode,
@@ -176,7 +170,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       ),
     );
 
-    logger.v({"Triage Update Model": triage});
+    // logger.v({"Triage Update Model": triage});
     try {
       return await _triageRepository.updateTriage(triage: triage);
     } catch (e) {

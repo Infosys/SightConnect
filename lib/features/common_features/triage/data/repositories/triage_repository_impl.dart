@@ -254,7 +254,8 @@ class TriageRepositoryImpl implements TriageRepository {
      
       return Right(remoteResponse);
     } catch (e) {
-     
+     logger.f({"error while saving triage ": e});
+    //  logger.f({"error while saving triage ": triage});
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
