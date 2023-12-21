@@ -16,6 +16,7 @@ class VgProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(
+        centerTitle: false,
         leadingIcon: IconButton(
           onPressed: () {},
           icon: Icon(Icons.arrow_back_ios_new_sharp),
@@ -40,7 +41,7 @@ class VgProfile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
-          child: Column(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Photo",

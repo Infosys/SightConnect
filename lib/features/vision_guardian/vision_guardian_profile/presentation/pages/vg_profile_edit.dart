@@ -17,6 +17,7 @@ class VgProfileEdit extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppbar(
+        centerTitle: false,
         title: Text(
           "Edit Profile",
           style: applyFiraSansFont(fontWeight: FontWeight.w500),

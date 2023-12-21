@@ -21,6 +21,7 @@ class VgOnboardingDetails extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppbar(
+        centerTitle: false,
         leadingIcon: const Icon(Icons.close),
         title: Text(
           'Onboarding',

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/provider/vg_organisation_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -230,6 +231,39 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
             ),
           ),
         ),
+        SizedBox(
+          height: AppSize.kmheight,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Save",
+                    style: applyRobotoFont(
+                        fontWeight: FontWeight.w500, color: AppColor.white),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: OutlinedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Cancel",
+                    style: applyRobotoFont(
+                        fontWeight: FontWeight.w500, color: AppColor.primary),
+                  ),
+                ),
+              ),
+            )
+          ],
+        )
       ]),
     );
   }
