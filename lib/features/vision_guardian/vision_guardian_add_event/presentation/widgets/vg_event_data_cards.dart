@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -6,7 +7,7 @@ import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/responsive/responsive.dart';
 import '../../../../../shared/theme/text_theme.dart';
 
-Widget vgEventDataCards(BuildContext context) { 
+Widget vgEventDataCards(BuildContext context,VisionGuardianEventModel data) { 
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -46,7 +47,7 @@ Widget vgEventDataCards(BuildContext context) {
                   child: Row(
                     children: [
                       Text(
-                        "Eye Camp Gachibowli",
+                        data.event_name!,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -59,12 +60,12 @@ Widget vgEventDataCards(BuildContext context) {
                           borderRadius: BorderRadius.circular(
                             AppSize.klradius,
                           ),
-                          color: AppColor.orange,
+                          color: data.status!="Completed"? AppColor.orange:AppColor.green,
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: AppSize.kspadding, vertical: 2),
                         child: Text(
-                          "Upcoming",
+                          data.status!,
                           style: applyRobotoFont(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
@@ -77,7 +78,7 @@ Widget vgEventDataCards(BuildContext context) {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "ID V678798",
+                  data.event_id!,
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -92,7 +93,7 @@ Widget vgEventDataCards(BuildContext context) {
                   child: Row(
                     children: [
                       Text(
-                        "17 Dec - 18 Dec 23",
+                        data.date!,
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -101,7 +102,7 @@ Widget vgEventDataCards(BuildContext context) {
                       ),
                       const Spacer(),
                       Text(
-                        "9 AM - 4 PM",
+                        data.time!,
                         style: applyRobotoFont(
                           fontSize: 12,
                           color: AppColor.grey,
@@ -114,7 +115,7 @@ Widget vgEventDataCards(BuildContext context) {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  "KV School, Gachibowli, Hyderabad",
+                  data.address!,
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

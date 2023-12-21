@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,6 +36,14 @@ class VisionGuardianServicesCard extends ConsumerWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianMemberPage(),
+                ),
+              );
+            } else if(data["text"]=="Assessment")
+            {
+              ref.read(globalProvider).setHideTumblingElement = true;
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const VisionGuardianEyeAssessmentPage(),
                 ),
               );
             }
