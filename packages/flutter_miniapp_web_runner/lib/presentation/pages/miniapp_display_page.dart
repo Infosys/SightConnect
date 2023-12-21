@@ -15,10 +15,12 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
     required this.miniapp,
     this.isPermissionRequired = false,
+    this.token = "Officia nulla commodo elit duis dolore .",
     super.key,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
+  final String token;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
