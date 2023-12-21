@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
@@ -12,7 +11,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 
 class VisionTechnicianSearchPage extends HookConsumerWidget {
@@ -54,15 +52,11 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
-                      padding: EdgeInsets.all(AppSize.klpadding),
-                      // width: AppSize.width(context),
-                      // height: 300,
+                      padding: const EdgeInsets.all(AppSize.klpadding),
                       child: DataTable(
                         columnSpacing: AppSize.width(context) * 0.09,
                         horizontalMargin: AppSize.klpadding,
-                        // data
                         dataRowMinHeight: AppSize.klheight * 2,
-                        // minWidth: 100,
                         showCheckboxColumn: false,
                         decoration: BoxDecoration(
                           color: AppColor.white,
@@ -177,8 +171,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     );
   }
 
-  List<DataCell> generateListTileSearchResults(
-      VTPatientDto data, context) {
+  List<DataCell> generateListTileSearchResults(VTPatientDto data, context) {
     return [
       DataCell(
         Column(

@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_eye_scan_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,13 +17,13 @@ class EyeScanCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String leftEyeImagePath =
-        ref.watch(visionTechnicianEyeScanProvider).leftEyeImage.path;
+        ref.watch(vtCloseAssessmentHelperProvider).leftEyeImage.path;
     String rightEyeImagePath =
-        ref.watch(visionTechnicianEyeScanProvider).rightEyeImage.path;
+        ref.watch(vtCloseAssessmentHelperProvider).rightEyeImage.path;
     String bothEyeImagePath =
-        ref.watch(visionTechnicianEyeScanProvider).bothEyeImage.path;
+        ref.watch(vtCloseAssessmentHelperProvider).bothEyeImage.path;
     bool allImagesCaptured =
-        ref.watch(visionTechnicianEyeScanProvider).allImagesCaptured;
+        ref.watch(vtCloseAssessmentHelperProvider).allImagesCaptured;
 
     return Container(
       width: AppSize.width(context),

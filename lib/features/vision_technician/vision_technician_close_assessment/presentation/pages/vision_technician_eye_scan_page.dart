@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/camera_preview_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/image_preview.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/vt_eye_scan_stepper.dart';
@@ -52,7 +52,7 @@ class _VisionTechnicianEyeCaptureState
   @override
   Widget build(BuildContext context) {
     bool isImageCaptured =
-        ref.watch(visionTechnicianEyeScanProvider).isImageCaptured;
+        ref.watch(vtCloseAssessmentHelperProvider).isImageCaptured;
     // int currentStep = ref.watch(visionTechnicianEyeScanProvider).currentStep;
 
     if (!_controller!.value.isInitialized) {

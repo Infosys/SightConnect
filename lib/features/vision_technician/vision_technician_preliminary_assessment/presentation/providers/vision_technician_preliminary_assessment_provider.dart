@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
@@ -15,7 +17,7 @@ import 'vision_technician_triage_provider.dart';
 
 var preliminaryAssessmentProvider = Provider(
   (ref) => VTPreliminaryAssessmentProvider(
-    ref.watch(saveTriageUseCase),
+    ref.watch(triageRemoteSource),
     ref.watch(triageUrgencyRepositoryProvider),
     ref.watch(visionTechnicianTriageProvider),
   ),
@@ -23,13 +25,14 @@ var preliminaryAssessmentProvider = Provider(
 
 class VTPreliminaryAssessmentProvider extends ChangeNotifier {
   final int _patientId = 100101;
-  final SaveTriageUseCase _saveTriageUseCase;
+  // final SaveTriageUseCase _saveTriageUseCase;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
-  VTPreliminaryAssessmentProvider(this._saveTriageUseCase,
+  final TriageRemoteSource _triageRemoteSource;
+  VTPreliminaryAssessmentProvider(this._triageRemoteSource,
       this._triageUrgencyRepository, this._visionTechnicianTriageProvider);
 
-  Future<Either<Failure, TriageResponseModel>> saveTriage() async {
+  Future<Either<Failure, TriageResponseDto>> saveTriage() async {
     List<PostImagingSelectionModel> imageSelection =
         _visionTechnicianTriageProvider.getTriageEyeScanResponse();
     List<PostObservationsModel> observations =
@@ -86,11 +89,13 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       observations: observations,
       questionResponse: questionResponse,
     );
-    Either<Failure, TriageResponseModel> response =
-        await _saveTriageUseCase.call(
-      SaveTriageParam(triageResponse: triage),
-    );
+    // Either<Failure, TriageResponseModel> response =
+    //     await _saveTriageUseCase.call(
+    //   SaveTriageParam(triageResponse: triage),
+    // );
 
-    return response;
+    TriageResponseDto response =  await _triageRemoteSource.saveTriageVT(triage);
+
+    return Right(response);
   }
 }

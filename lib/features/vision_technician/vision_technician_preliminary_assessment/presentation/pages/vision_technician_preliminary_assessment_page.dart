@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
@@ -15,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import '../providers/vision_technician_preliminary_assessment_provider.dart';
 import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
@@ -28,10 +28,10 @@ var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
 );
 
 class VisionTechnicianTriageResult extends ChangeNotifier {
-  TriageResponseModel? _triageResponseModel;
-  TriageResponseModel? get triageResponseModel => _triageResponseModel;
+  TriageResponseDto? _triageResponseModel;
+  TriageResponseDto? get triageResponseModel => _triageResponseModel;
 
-  void setTriageResponseModel(TriageResponseModel triageResponseModel) {
+  void setTriageResponseModel(TriageResponseDto triageResponseModel) {
     _triageResponseModel = triageResponseModel;
     notifyListeners();
   }

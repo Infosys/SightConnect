@@ -200,7 +200,7 @@ class _DataSource extends DataTableSource {
                 style: applyRobotoFont(fontSize: 14),
               ),
               Text(
-                data.encounterStartDate.toString(),
+                _formatDate(data.encounterStartDate.toString()),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -248,9 +248,9 @@ class _DataSource extends DataTableSource {
 }
 
 String _formatDate(String originalDate) {
-  // final originalDate = "2023-12-16T12:30:24.591Z";
-  final parsedDate = DateTime.parse(originalDate).toLocal();
-  final formattedDate = DateFormat.yMMMMd().add_jms().format(parsedDate);
+  DateTime date = DateTime.parse(originalDate);
+  DateFormat dateFormat = DateFormat("dd MMM yy");
+  String formattedDate = dateFormat.format(date);
   return formattedDate.toString();
 }
 
