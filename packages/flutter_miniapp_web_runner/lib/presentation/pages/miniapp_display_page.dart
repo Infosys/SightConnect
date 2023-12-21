@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
     required this.miniapp,
     this.isPermissionRequired = false,
-    this.token = "Officia nulla commodo elit duis dolore .",
+    this.token = "",
     super.key,
   });
   final MiniApp miniapp;
@@ -98,6 +99,15 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                     setState(() {
                       progressMessage = "Something went wrong";
                     });
+                  },
+                  androidShouldInterceptRequest: (controller, request) async {
+                    log("Request: ${request.url}");
+
+                    if (request.url.host == "eyecare4all-dev.infosysapps.com") {
+                      request.headers!["Authorization"] =
+                          "Bearer ${widget.token}";
+                    }
+                    return null;
                   },
                   initialOptions: InAppWebViewGroupOptions(
                     ios: IOSInAppWebViewOptions(

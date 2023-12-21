@@ -3,10 +3,8 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/auth_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
@@ -54,23 +52,23 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       // }
 
       if (mounted) {
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
-        //   (route) => false,
-        // );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const PatientDashboardPage()),
+          (route) => false,
+        );
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
         //       builder: (context) => const OptometritianDashboardPage()),
         //   (route) => false,
         // );
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const VisionTechnicianDashboardPage()),
-          (route) => false,
-        );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => const VisionTechnicianDashboardPage()),
+        //   (route) => false,
+        // );
         // }
 
         // Navigator.of(context).pushAndRemoveUntil(

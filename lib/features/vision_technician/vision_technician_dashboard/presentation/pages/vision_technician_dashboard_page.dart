@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
@@ -26,6 +27,8 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => MiniAppDisplayPage(
+                    token:
+                        PersistentAuthStateService.authState.accessToken ?? "",
                     miniapp: MiniApp(
                       id: "1",
                       version: "1",
