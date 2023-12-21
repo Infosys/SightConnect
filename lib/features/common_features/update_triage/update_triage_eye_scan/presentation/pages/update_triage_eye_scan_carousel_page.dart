@@ -16,9 +16,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
+  
+  final int diagnosticReportId;
   const UpdateTriageEyeScanCarouselPage({
     Key? key,
     this.userDetails,
+    required this.diagnosticReportId,
   }) : super(key: key);
   final UserDetails? userDetails;
 
@@ -112,7 +115,7 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                     MaterialPageRoute(
                       fullscreenDialog: true,
                       builder: (context) =>
-                          UpdateTriageEyeCapturingPage(cameras: cameras),
+                          UpdateTriageEyeCapturingPage(cameras: cameras,diagnosticReportId:diagnosticReportId ,),
                     ),
                   );
                 }

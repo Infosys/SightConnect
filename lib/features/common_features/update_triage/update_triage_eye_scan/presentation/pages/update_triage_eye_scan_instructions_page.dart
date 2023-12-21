@@ -13,7 +13,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateTriageEyeScanInstructions extends ConsumerWidget {
-  const UpdateTriageEyeScanInstructions({super.key});
+  final int diagnosticReportId;
+  const UpdateTriageEyeScanInstructions({super.key,required this.diagnosticReportId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,7 +78,7 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
-                          const UpdateTriageEyeScanCarouselPage(),
+                           UpdateTriageEyeScanCarouselPage(diagnosticReportId:diagnosticReportId ,),
                     ),
                   );
                 },
@@ -134,6 +135,7 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
                     MaterialPageRoute(
                       builder: (context) => UpdateTriageEyeCapturingPage(
                         cameras: cameras,
+                        diagnosticReportId: diagnosticReportId,
                       ),
                     ),
                   );

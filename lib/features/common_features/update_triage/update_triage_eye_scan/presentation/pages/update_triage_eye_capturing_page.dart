@@ -9,7 +9,6 @@ import 'package:eye_care_for_all/features/common_features/update_triage/update_t
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,9 +17,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
   const UpdateTriageEyeCapturingPage({
     required this.cameras,
+    required this.diagnosticReportId,
     super.key,
   });
   final List<CameraDescription> cameras;
+  final int diagnosticReportId;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -196,8 +197,8 @@ class _UpdateTriageEyeCapturingPageState
       } else if (model.currentEye == TriageEyeType.LEFT) {
         model.setLeftEyeImage(image);
 
-        ///TODO: Update the eye scan report
-        bool resposne = await model.updateEyeScanReport(12345678);
+        
+        bool resposne = await model.updateEyeScanReport(widget.diagnosticReportId);
         if (resposne) {
           navigator.pop();
           navigator.pop();

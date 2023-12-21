@@ -2,10 +2,11 @@ import 'package:eye_care_for_all/features/common_features/update_triage/update_t
 import 'package:flutter/material.dart';
 
 class UpdateTriageEyeScanPage extends StatelessWidget {
-  const UpdateTriageEyeScanPage({super.key});
+  const UpdateTriageEyeScanPage({super.key, required this.diagnosticReportId});
+  final int diagnosticReportId;
 
   @override
   Widget build(BuildContext context) {
-    return const UpdateTriageEyeScanInstructions();
+    return  UpdateTriageEyeScanInstructions(diagnosticReportId: diagnosticReportId,);
   }
 }

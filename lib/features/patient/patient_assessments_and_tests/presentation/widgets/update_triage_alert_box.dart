@@ -89,7 +89,7 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
                     case TestType.IMAGE:
                       navigator.pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => const UpdateTriageEyeScanPage(),
+                          builder: (context) =>  UpdateTriageEyeScanPage(diagnosticReportId: diagnosticReportID,),
                         ),
                       );
                       break;

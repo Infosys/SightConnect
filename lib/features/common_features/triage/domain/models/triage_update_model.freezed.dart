@@ -1489,6 +1489,7 @@ mixin _$PatchImagingSelectionModel {
   String? get endpoint => throw _privateConstructorUsedError;
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
+  String? get fileId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1509,7 +1510,8 @@ abstract class $PatchImagingSelectionModelCopyWith<$Res> {
       Action? action,
       String? endpoint,
       String? baseUrl,
-      double? score});
+      double? score,
+      String? fileId});
 }
 
 /// @nodoc
@@ -1532,6 +1534,7 @@ class _$PatchImagingSelectionModelCopyWithImpl<$Res,
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1558,6 +1561,10 @@ class _$PatchImagingSelectionModelCopyWithImpl<$Res,
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1577,7 +1584,8 @@ abstract class _$$_PatchImagingSelectionModelCopyWith<$Res>
       Action? action,
       String? endpoint,
       String? baseUrl,
-      double? score});
+      double? score,
+      String? fileId});
 }
 
 /// @nodoc
@@ -1599,6 +1607,7 @@ class __$$_PatchImagingSelectionModelCopyWithImpl<$Res>
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
   }) {
     return _then(_$_PatchImagingSelectionModel(
       id: freezed == id
@@ -1625,6 +1634,10 @@ class __$$_PatchImagingSelectionModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1638,7 +1651,8 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
       this.action,
       this.endpoint,
       this.baseUrl,
-      this.score});
+      this.score,
+      this.fileId});
 
   factory _$_PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_PatchImagingSelectionModelFromJson(json);
@@ -1655,10 +1669,12 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
   final String? baseUrl;
   @override
   final double? score;
+  @override
+  final String? fileId;
 
   @override
   String toString() {
-    return 'PatchImagingSelectionModel(id: $id, identifier: $identifier, action: $action, endpoint: $endpoint, baseUrl: $baseUrl, score: $score)';
+    return 'PatchImagingSelectionModel(id: $id, identifier: $identifier, action: $action, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId)';
   }
 
   @override
@@ -1673,13 +1689,14 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
             (identical(other.endpoint, endpoint) ||
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.fileId, fileId) || other.fileId == fileId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, identifier, action, endpoint, baseUrl, score);
+      runtimeType, id, identifier, action, endpoint, baseUrl, score, fileId);
 
   @JsonKey(ignore: true)
   @override
@@ -1704,7 +1721,8 @@ abstract class _PatchImagingSelectionModel
       final Action? action,
       final String? endpoint,
       final String? baseUrl,
-      final double? score}) = _$_PatchImagingSelectionModel;
+      final double? score,
+      final String? fileId}) = _$_PatchImagingSelectionModel;
 
   factory _PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =
       _$_PatchImagingSelectionModel.fromJson;
@@ -1721,6 +1739,8 @@ abstract class _PatchImagingSelectionModel
   String? get baseUrl;
   @override
   double? get score;
+  @override
+  String? get fileId;
   @override
   @JsonKey(ignore: true)
   _$$_PatchImagingSelectionModelCopyWith<_$_PatchImagingSelectionModel>
