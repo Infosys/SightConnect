@@ -71,21 +71,21 @@ class AssessmentCards extends ConsumerWidget {
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColor.green.withOpacity(0.4),
-                      ),
-                      child: Text(
-                        currentData.reportTag ?? "NA",
-                        style: applyRobotoFont(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.black,
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(4),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(20),
+                    //     color: AppColor.green.withOpacity(0.4),
+                    //   ),
+                    //   child: Text(
+                    //     currentData.reportTag ?? "NA",
+                    //     style: applyRobotoFont(
+                    //       fontSize: 11,
+                    //       fontWeight: FontWeight.w500,
+                    //       color: AppColor.black,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 10),

@@ -28,15 +28,18 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    return WillPopScope(
-        onWillPop: () async {
-          var result = await showDialog(
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (value) async {
+          if (value == true) {
+            return;
+          }
+          showDialog(
             context: context,
             builder: (context) => TriageExitAlertBox(
               content: AppLocalizations.of(context)!.visualAcuityExitDialog,
             ),
           );
-          return result ?? false;
         },
         child: Scaffold(
           key: scaffoldKey,
