@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_mobile_number.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,19 +33,22 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                     case 0:
                       break;
                     case 1:
-                     Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TriagePage(),
-                        )
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const TriagePage(),
+                      ));
                       break;
-                    case 2:               
+                    case 2:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PatientNotificationPage(),
+                        ),
+                      );
                       break;
                     case 3:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const PatientNotificationPage(),
+                          builder: (context) =>
+                              const VgOnboardingMobileNumber(),
                         ),
                       );
                       break;
