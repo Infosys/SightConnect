@@ -19,7 +19,7 @@ Future<void> main() async {
   IOSDeviceInfoService.init();
   AppEnv.setupEnv(Env.DEV);
   if (AppEnv.isProd) {
-    await AppLogger.init();
+    // await AppLogger.init();
   }
 
   runApp(

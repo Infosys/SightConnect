@@ -20,6 +20,7 @@ class AppEnv {
     return switch (env) {
       Env.DEV => 'http://eyecare4all-dev.infosysapps.com',
       Env.PROD => 'http://eyecare4all-dev.infosysapps.com',
+      _ => 'http://eyecare4all-dev.infosysapps.com',
     };
   }
 }

@@ -40,6 +40,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
+        logger.f("TOKEN : ${widget.token}");
         await _loadMiniApp();
       },
     );
@@ -101,9 +102,10 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                     });
                   },
                   androidShouldInterceptRequest: (controller, request) async {
-                    log("Request: ${request.url}");
+                    logger.d("Request: ${request.url}");
 
-                    if (request.url.host == "eyecare4all-dev.infosysapps.com") {
+                    final host = request.url.host.trim();
+                    if (host == "eyecare4all-dev.infosysapps.com") {
                       request.headers!["Authorization"] =
                           "Bearer ${widget.token}";
                     }

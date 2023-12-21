@@ -63,7 +63,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
       /// offline state
       /// no check here
       /// return true
-      return true;
+      return false;
     }
   }
 
