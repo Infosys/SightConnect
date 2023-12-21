@@ -1,4 +1,6 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/data/model/vg_eye_assessment_patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -6,6 +8,44 @@ var visionGuardianMemberDetailsProvider = ChangeNotifierProvider.autoDispose(
     (ref) => VisionGuardianMemberDetailsProvider());
 
 class VisionGuardianMemberDetailsProvider extends ChangeNotifier {
+
+  var casesCritical = [
+  VisionGuardianEyeAssessmentPatientModel(
+    name: "Raghav Pandey - PD 789996",
+    age: "28 yrs",
+    gender: "Male",
+    reportDate: "17 Dec 23",
+    reportTime: "11:00 AM",
+    assessmentId: "Assessment ID: AT 010111",
+    urgency: "Urgent Consult",
+    profession: "Eye Surgeon",
+    recommendation:
+        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+    image: AppImages.raghavi,
+    prefix: "PG",
+  ),
+  VisionGuardianEyeAssessmentPatientModel(
+    name: "Raghav Pandey - PD 789996",
+    age: "28 yrs",
+    gender: "Male",
+    reportDate: "17 Dec 23",
+    reportTime: "11:00 AM",
+    assessmentId: "Assessment ID: AT 010111",
+    urgency: "Routine Consult",
+    profession: "Eye Surgeon",
+    recommendation:
+        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+    image: AppImages.raghavi,
+    prefix: "PG",
+  )
+];
+
+var addMemberFilters = [
+   "All", 
+  "Early Consult",
+   "Urgent Consult",
+ "Routine Consult"
+];
   XFile? _imageFile;
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -46,6 +86,8 @@ class VisionGuardianMemberDetailsProvider extends ChangeNotifier {
   TextEditingController get city => _cityController;
   TextEditingController get state => _stateController;
   TextEditingController get pincode => _pincodeController;
+
+
 
   // set setName(String value) => _nameController.text = value;
 
