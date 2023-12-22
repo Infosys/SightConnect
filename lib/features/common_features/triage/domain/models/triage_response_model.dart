@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
@@ -11,9 +12,8 @@ part 'triage_response_model.g.dart';
 class TriageResponseModel with _$TriageResponseModel {
   const factory TriageResponseModel({
     int? patientId,
-    int? id,
     int? encounterId,
-    String? serviceType,
+    ServiceType? serviceType,
     int? organizationCode,
     List<PerformerModel>? performer,
     int? assessmentCode,
@@ -33,6 +33,7 @@ class TriageResponseModel with _$TriageResponseModel {
   factory TriageResponseModel.fromJson(Map<String, dynamic> json) =>
       _$TriageResponseModelFromJson(json);
 }
+
 /////////////////////////////////////////////////////////
 
 @freezed
@@ -40,7 +41,7 @@ class PostQuestionResponseModel with _$PostQuestionResponseModel {
   const factory PostQuestionResponseModel({
     int? linkId,
     double? score,
-    List<PostAnswerModel>? answer,
+    List<PostAnswerModel>? answers,
   }) = _PostQuestionResponseModel;
 
   factory PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =>

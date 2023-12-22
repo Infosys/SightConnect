@@ -1,6 +1,13 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/status.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_care_plan_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/model/care_plan_model.dart';
 
@@ -22,41 +29,41 @@ class CarePlanViewModel extends ChangeNotifier {
   Future<CarePlanModel> saveCarePlan() async {
     final String patientInstruction = _carePlanProvider.patientInstruction;
 
-    final response = CarePlanModel(
+    const response = CarePlanModel(
       //take data from json like id = 33200000002
       reports: [
-        const ReportModel(id: 33200000002),
+        ReportModel(id: 33200000071),
       ],
-      encounterId: 33300000004,
-      organizationCode: 88000001,
+      encounterId: 33300000033,
+      organizationCode: 1001,
       performer: [
-        const PerformerModel(role: "VISION_TECHNICIAN", identifier: 9627849171),
+         PerformerModel(role: Role.VISION_TECHNICIAN, identifier: 1601),
       ],
       conditions: [
-        const ConditionModel(
+        ConditionModel(
           recordedDate: "2023-10-12T14:11:33.000Z",
-          bodySite: "LEFT_EYE",
-          code: "EYE_TRIAGE",
-          note: "sss",
+          bodySite: BodySite.LEFT_EYE,
+          code: Code.EYE_TRIAGE,
+          note: "",
         ),
       ],
       serviceRequest: [
         ServiceRequestModel(
-          note: "ssss",
-          patientInstruction: patientInstruction,
+          note: "",
+          patientInstruction: PatientInstruction.VISIT_PRIMARY_CLINIC,
           identifier: 1234,
-          bodySite: "LEFT_EYE",
-          priority: "URGENT",
+          bodySite: BodySite.LEFT_EYE,
+          priority: TriageUrgency.ROUTINE,
         ),
       ],
       note: "abc",
       startDate: "2023-10-12T14:11:33.000Z",
       goal: [
-        const GoalModel(
+         GoalModel(
           statusReason: "null",
-          achievementStatus: "IN_PROGRESS",
+          achievementStatus: Status.IN_PROGRESS,
           outcomes: [
-            GoalOutcomeModel(goalOutcome: "GLASSES_PRESCRIBED"),
+            GoalOutcomeModel(goalOutcome: GoalOutCome.GLASSES_PRESCRIBED),
           ],
           note: "abc",
           startDate: "2023-10-12T14:11:33.000Z",

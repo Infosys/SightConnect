@@ -26,15 +26,20 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
   Future<List<VTPatientDto>> getPatientProfile(String query) async {
     if (query.isEmpty) throw "List is empty";
 
-    var endPoint =
-        '/services/orchestration/api/patients/triage-reports?searchParam1=$query';
+    var endPoint = '/services/orchestration/api/patients/triage-reports';
 
+    if (isNumeric(query)) {
+      endPoint += "?mobile=$query";
+    } else {
+      endPoint += "?name=$query";
+    }
+    
     return _dio.get(endPoint).then((value) {
       List<VTPatientDto> list = [];
+      
       value.data.forEach((element) {
         list.add(VTPatientDto.fromJson(element));
       });
-
       return list;
     });
 
@@ -55,4 +60,8 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
     // print(list);
     // return list;
   }
+}
+
+bool isNumeric(String str) {
+  return double.tryParse(str) != null;
 }

@@ -1,25 +1,24 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 
-class SolutionTile extends HookConsumerWidget {
-  const SolutionTile({
+class SolutionTileWithDropdown extends HookConsumerWidget {
+  const SolutionTileWithDropdown({
     super.key,
     required this.title,
   });
-
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var switchState = useState<bool>(false);
-    
-    var count = useState<int>(1);
+    var dropDownState = useState<bool>(false);
     var refRead = ref.read(vtCloseAssessmentHelperProvider);
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -38,6 +37,8 @@ class SolutionTile extends HookConsumerWidget {
                 activeColor: AppColor.primary,
                 onChanged: (bool value) {
                   switchState.value = value;
+                  dropDownState.value = value;
+
                   refRead.setSolution(title.toLowerCase());
                   // model.addSolutions(title);
                 },
@@ -53,7 +54,7 @@ class SolutionTile extends HookConsumerWidget {
               ),
             ],
           ),
-          // if (hasDropDown && dropDownState.value)
+          // if (dropDownState.value)
           //   Column(
           //     crossAxisAlignment: CrossAxisAlignment.start,
           //     children: [
@@ -163,5 +164,4 @@ class SolutionTile extends HookConsumerWidget {
       ),
     );
   }
-
 }

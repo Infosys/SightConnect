@@ -1,6 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/custom_step_vt.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,8 +11,8 @@ class VTEyeScanStepper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isImageCaptured =
-        ref.watch(visionTechnicianEyeScanProvider).isImageCaptured;
-    int currentStep = ref.watch(visionTechnicianEyeScanProvider).currentStep;
+        ref.watch(vtCloseAssessmentHelperProvider).isImageCaptured;
+    int currentStep = ref.watch(vtCloseAssessmentHelperProvider).currentStep;
 
     return EasyStepper(
       activeStep: currentStep,

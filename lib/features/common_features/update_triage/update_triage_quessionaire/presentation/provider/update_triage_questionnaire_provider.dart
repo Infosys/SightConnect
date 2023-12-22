@@ -125,7 +125,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
               linkId: questionCode,
               score: result["score"]
                   .toDouble(), //For our use case answer can be yes or no so overall score will be same as answer score
-              answer: [
+              answers: [
                 PostAnswerModel(
                   value: result["answer"],
                   score: result["score"].toDouble(),
@@ -233,10 +233,10 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
           score: element.score,
           answers: [
             update_model.PatchAnswerModel(
-              value: element.answer!.first.value,
-              score: element.answer!.first.score,
+              value: element.answers!.first.value,
+              score: element.answers!.first.score,
               action: Action.ADD,
-              answerCode: element.answer!.first.answerCode,
+              answerCode: element.answers!.first.answerCode,
             )
           ],
         ),

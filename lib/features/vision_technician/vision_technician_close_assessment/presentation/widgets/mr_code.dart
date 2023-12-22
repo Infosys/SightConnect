@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Recommendations extends ConsumerWidget {
-  const Recommendations({super.key});
+class MRCode extends ConsumerWidget {
+  const MRCode({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,15 +24,15 @@ class Recommendations extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recommendation(s)",
+            "MR Code",
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
             ),
           ),
           TextField(
-            controller: ref.watch(vtCloseAssessmentHelperProvider).recommendationsController,
+            controller: ref.watch(vtCloseAssessmentHelperProvider).mrCodeController,
             decoration: InputDecoration(
-              hintText: "Enter Recommendations Here",
+              hintText: "Enter MR Code Here",
               hintStyle: applyRobotoFont(fontSize: 14),
             ),
           )

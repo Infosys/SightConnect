@@ -1,3 +1,4 @@
 enum Status {
-  ACTIVE, INACTIVE
+  ACTIVE, INACTIVE,
+  IN_PROGRESS
 }

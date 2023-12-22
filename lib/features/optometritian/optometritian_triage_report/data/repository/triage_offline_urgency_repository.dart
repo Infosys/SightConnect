@@ -45,7 +45,7 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
       List<PostQuestionResponseModel> questionnaireResponse) {
     int questionnaireScore = 1;
     for (var questions in questionnaireResponse) {
-      for (var answer in questions.answer!) {
+      for (var answer in questions.answers!) {
         questionnaireScore = max(questionnaireScore, answer.score!.toInt());
       }
     }

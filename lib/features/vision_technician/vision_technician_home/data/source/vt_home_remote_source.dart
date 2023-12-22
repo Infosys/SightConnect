@@ -21,7 +21,7 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
   @override
   Future<List<VTPatientDto>> getListOfPatients() async {
     const endPoint =
-        '/services/orchestration/api/patients/triage-reports/practitioners/2002';
+        '/services/orchestration/api/patients/triage-reports/practitioners/2151';
 
     return _dio.get(endPoint).then((value) {
       List<VTPatientDto> list = [];

@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,8 +17,8 @@ class ImagePreview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String imagePath = ref.watch(visionTechnicianEyeScanProvider).imagePath;
-    int currentStep = ref.watch(visionTechnicianEyeScanProvider).currentStep;
+    String imagePath = ref.watch(vtCloseAssessmentHelperProvider).imagePath;
+    int currentStep = ref.watch(vtCloseAssessmentHelperProvider).currentStep;
     return Container(
       width: 536,
       height: 714,
@@ -64,7 +65,7 @@ class ImagePreview extends ConsumerWidget {
             ),
             onPressed: () {
               ref
-                  .watch(visionTechnicianEyeScanProvider.notifier)
+                  .watch(vtCloseAssessmentHelperProvider)
                   .retakePicture();
             },
             child: Text(
@@ -84,7 +85,7 @@ class ImagePreview extends ConsumerWidget {
                     ? null
                     : () {
                         ref
-                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .read(vtCloseAssessmentHelperProvider)
                             .goToPreviousStep();
                       },
                 child: Row(
@@ -114,10 +115,10 @@ class ImagePreview extends ConsumerWidget {
                   onPressed: () {
 
                     XFile left =
-                        ref.read(visionTechnicianEyeScanProvider).leftEyeImage;
+                        ref.read(vtCloseAssessmentHelperProvider).leftEyeImage;
                     XFile right =
-                        ref.read(visionTechnicianEyeScanProvider).rightEyeImage;
-
+                        ref.read(vtCloseAssessmentHelperProvider).rightEyeImage;
+                        
                     ref
                         .read(visionTechnicianTriageProvider)
                         .setEyeImage(left, right);
@@ -127,7 +128,7 @@ class ImagePreview extends ConsumerWidget {
                         ? null
                         : 
                             ref
-                                .read(visionTechnicianEyeScanProvider.notifier)
+                                .read(vtCloseAssessmentHelperProvider)
                                 .markAllImagesCaptured();
                             Navigator.pop(context);
                           
@@ -156,7 +157,7 @@ class ImagePreview extends ConsumerWidget {
                     ? null
                     : 
                         ref
-                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .read(vtCloseAssessmentHelperProvider)
                             .goToNextStep();
 
                       },
