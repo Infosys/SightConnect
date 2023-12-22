@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,14 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
     required this.miniapp,
     this.isPermissionRequired = false,
+    this.token = "",
     super.key,
+    this.onBack,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
+  final String token;
+  final VoidCallback? onBack;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -37,6 +42,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
+        logger.f("TOKEN : ${widget.token}");
         await _loadMiniApp();
       },
     );
@@ -72,45 +78,78 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
             onRefresh: () async {
               await _loadMiniApp();
             },
-            child: PopScope(
-              onPopInvoked: (value) async {},
-              child: Scaffold(
-                appBar: WebViewAppBar(
-                  title: widget.miniapp.displayName,
-                  onBack: () {
-                    Navigator.of(context).pop();
-                  },
+            child: Scaffold(
+              appBar: WebViewAppBar(
+                title: widget.miniapp.displayName,
+                onBack: () async {
+                  if (await webViewController.canGoBack()) {
+                    webViewController.goBack();
+                  } else {
+                    widget.onBack?.call();
+                  }
+                },
+              ),
+              body: InAppWebView(
+                initialUrlRequest: URLRequest(
+                  url: Uri.parse("http://127.0.0.1:$port/"),
                 ),
-                body: InAppWebView(
-                  initialUrlRequest: URLRequest(
-                    url: Uri.parse("http://127.0.0.1:$port/"),
+                onLoadError: (controller, url, code, message) async {
+                  logger.e("Error: $message");
+                  setState(() {
+                    progressMessage = "Something went wrong";
+                  });
+                },
+                onTitleChanged: (controller, title) {
+                  log("Title: $title");
+                },
+                onLoadHttpError: (controller, url, code, message) {
+                  logger.e("Error: $message");
+                  setState(() {
+                    progressMessage = "Something went wrong";
+                  });
+                },
+                onConsoleMessage: (controller, consoleMessage) {
+                  logger.d("Console: ${consoleMessage.message}");
+                },
+                androidShouldInterceptRequest: (controller, request) async {
+                  logger.d("Request: ${request.url}");
+                  final hash = request.url.fragment.trim();
+                  final host = request.url.host.trim();
+                  if (host == "eyecare4all-dev.infosysapps.com") {
+                    request.headers!["Authorization"] =
+                        "Bearer ${widget.token}";
+                  }
+                  if (hash == "failure") {
+                    Navigator.of(context).pop(true);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
+                  } else if (hash == "success") {
+                    Navigator.of(context).pop(false);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
+                  }
+
+                  return null;
+                },
+                shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  final hash = navigationAction.request.url?.fragment.trim();
+                  if (hash == "failure" || hash == "success") {
+                    return NavigationActionPolicy.CANCEL;
+                  } else {
+                    return NavigationActionPolicy.ALLOW;
+                  }
+                },
+                initialOptions: InAppWebViewGroupOptions(
+                  ios: IOSInAppWebViewOptions(
+                    useOnNavigationResponse: true,
+                    allowsInlineMediaPlayback: true,
                   ),
-                  onLoadError: (controller, url, code, message) async {
-                    logger.e("Error: $message");
-                    setState(() {
-                      progressMessage = "Something went wrong";
-                    });
-                  },
-                  onLoadHttpError: (controller, url, code, message) {
-                    logger.e("Error: $message");
-                    setState(() {
-                      progressMessage = "Something went wrong";
-                    });
-                  },
-                  initialOptions: InAppWebViewGroupOptions(
-                    ios: IOSInAppWebViewOptions(
-                      useOnNavigationResponse: true,
-                      allowsInlineMediaPlayback: true,
-                    ),
-                    android: AndroidInAppWebViewOptions(
-                      useHybridComposition: true,
-                      useShouldInterceptRequest: true,
-                    ),
+                  android: AndroidInAppWebViewOptions(
+                    useHybridComposition: true,
+                    useShouldInterceptRequest: true,
                   ),
-                  onWebViewCreated: (controller) {
-                    webViewController = controller;
-                  },
                 ),
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                },
               ),
             ),
           );

@@ -4010,6 +4010,8 @@ mixin _$QuestionnaireItemFHIRModel {
   List<EnableWhenModel>? get enableWhen => throw _privateConstructorUsedError;
   List<AnswerItemWeightModel>? get answerItemWeight =>
       throw _privateConstructorUsedError;
+  List<RelatedImageFHIRModel>? get relatedImage =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -4044,7 +4046,8 @@ abstract class $QuestionnaireItemFHIRModelCopyWith<$Res> {
       List<ActionOnModel>? actionOn,
       List<AnswerOptionModel>? answerOption,
       List<EnableWhenModel>? enableWhen,
-      List<AnswerItemWeightModel>? answerItemWeight});
+      List<AnswerItemWeightModel>? answerItemWeight,
+      List<RelatedImageFHIRModel>? relatedImage});
 
   $AnswerValueSetModelCopyWith<$Res>? get ansewrValueSet;
   $AnswerModelCopyWith<$Res>? get initial;
@@ -4086,6 +4089,7 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
     Object? answerOption = freezed,
     Object? enableWhen = freezed,
     Object? answerItemWeight = freezed,
+    Object? relatedImage = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -4168,6 +4172,10 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
           ? _value.answerItemWeight
           : answerItemWeight // ignore: cast_nullable_to_non_nullable
               as List<AnswerItemWeightModel>?,
+      relatedImage: freezed == relatedImage
+          ? _value.relatedImage
+          : relatedImage // ignore: cast_nullable_to_non_nullable
+              as List<RelatedImageFHIRModel>?,
     ) as $Val);
   }
 
@@ -4250,7 +4258,8 @@ abstract class _$$_QuestionnaireItemFHIRModelCopyWith<$Res>
       List<ActionOnModel>? actionOn,
       List<AnswerOptionModel>? answerOption,
       List<EnableWhenModel>? enableWhen,
-      List<AnswerItemWeightModel>? answerItemWeight});
+      List<AnswerItemWeightModel>? answerItemWeight,
+      List<RelatedImageFHIRModel>? relatedImage});
 
   @override
   $AnswerValueSetModelCopyWith<$Res>? get ansewrValueSet;
@@ -4295,6 +4304,7 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
     Object? answerOption = freezed,
     Object? enableWhen = freezed,
     Object? answerItemWeight = freezed,
+    Object? relatedImage = freezed,
   }) {
     return _then(_$_QuestionnaireItemFHIRModel(
       id: freezed == id
@@ -4377,6 +4387,10 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
           ? _value._answerItemWeight
           : answerItemWeight // ignore: cast_nullable_to_non_nullable
               as List<AnswerItemWeightModel>?,
+      relatedImage: freezed == relatedImage
+          ? _value._relatedImage
+          : relatedImage // ignore: cast_nullable_to_non_nullable
+              as List<RelatedImageFHIRModel>?,
     ));
   }
 }
@@ -4404,11 +4418,13 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
       final List<ActionOnModel>? actionOn,
       final List<AnswerOptionModel>? answerOption,
       final List<EnableWhenModel>? enableWhen,
-      final List<AnswerItemWeightModel>? answerItemWeight})
+      final List<AnswerItemWeightModel>? answerItemWeight,
+      final List<RelatedImageFHIRModel>? relatedImage})
       : _actionOn = actionOn,
         _answerOption = answerOption,
         _enableWhen = enableWhen,
-        _answerItemWeight = answerItemWeight;
+        _answerItemWeight = answerItemWeight,
+        _relatedImage = relatedImage;
 
   factory _$_QuestionnaireItemFHIRModel.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionnaireItemFHIRModelFromJson(json);
@@ -4486,9 +4502,19 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<RelatedImageFHIRModel>? _relatedImage;
+  @override
+  List<RelatedImageFHIRModel>? get relatedImage {
+    final value = _relatedImage;
+    if (value == null) return null;
+    if (_relatedImage is EqualUnmodifiableListView) return _relatedImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight)';
+    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight, relatedImage: $relatedImage)';
   }
 
   @override
@@ -4527,7 +4553,9 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
             const DeepCollectionEquality()
                 .equals(other._enableWhen, _enableWhen) &&
             const DeepCollectionEquality()
-                .equals(other._answerItemWeight, _answerItemWeight));
+                .equals(other._answerItemWeight, _answerItemWeight) &&
+            const DeepCollectionEquality()
+                .equals(other._relatedImage, _relatedImage));
   }
 
   @JsonKey(ignore: true)
@@ -4553,7 +4581,8 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
         const DeepCollectionEquality().hash(_actionOn),
         const DeepCollectionEquality().hash(_answerOption),
         const DeepCollectionEquality().hash(_enableWhen),
-        const DeepCollectionEquality().hash(_answerItemWeight)
+        const DeepCollectionEquality().hash(_answerItemWeight),
+        const DeepCollectionEquality().hash(_relatedImage)
       ]);
 
   @JsonKey(ignore: true)
@@ -4593,7 +4622,8 @@ abstract class _QuestionnaireItemFHIRModel
           final List<ActionOnModel>? actionOn,
           final List<AnswerOptionModel>? answerOption,
           final List<EnableWhenModel>? enableWhen,
-          final List<AnswerItemWeightModel>? answerItemWeight}) =
+          final List<AnswerItemWeightModel>? answerItemWeight,
+          final List<RelatedImageFHIRModel>? relatedImage}) =
       _$_QuestionnaireItemFHIRModel;
 
   factory _QuestionnaireItemFHIRModel.fromJson(Map<String, dynamic> json) =
@@ -4639,6 +4669,8 @@ abstract class _QuestionnaireItemFHIRModel
   List<EnableWhenModel>? get enableWhen;
   @override
   List<AnswerItemWeightModel>? get answerItemWeight;
+  @override
+  List<RelatedImageFHIRModel>? get relatedImage;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionnaireItemFHIRModelCopyWith<_$_QuestionnaireItemFHIRModel>

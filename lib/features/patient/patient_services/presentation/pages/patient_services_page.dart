@@ -15,7 +15,6 @@ class PatientServicesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Map<String, List<String>> services = {
       "Patient Care": [
-        "Eye Scan",
         "Visual Acuity Test",
         "Eye Assessment",
       ],

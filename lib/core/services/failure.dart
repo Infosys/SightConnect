@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 
 abstract class Failure {
   final String errorMessage;
@@ -29,7 +29,6 @@ class UnknownFailure extends Failure {
 
 class TriageFailure extends Failure {
   TriageFailure(
-      {required String errorMessage,
-      required TriageResponseModel triageResponse})
+      {required String errorMessage, required TriagePostModel triageResponse})
       : super(errorMessage: errorMessage, data: triageResponse);
 }

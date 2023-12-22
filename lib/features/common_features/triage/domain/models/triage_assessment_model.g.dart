@@ -42,12 +42,18 @@ Map<String, dynamic> _$$_TriageAssessmentModelToJson(
       'condition': _$ConditionEnumMap[instance.condition],
       'assessmentType': _$AssessmentTypeEnumMap[instance.assessmentType],
       'organ': _$OrganEnumMap[instance.organ],
-      'questionnaireSectionsResponseDTOList':
-          instance.questionnaireSectionsResponseDTOList,
-      'mediaListSectionResponseDTOList':
-          instance.mediaListSectionResponseDTOList,
-      'observationSetSectionResponseDTOList':
-          instance.observationSetSectionResponseDTOList,
+      'questionnaireSectionsResponseDTOList': instance
+          .questionnaireSectionsResponseDTOList
+          ?.map((e) => e.toJson())
+          .toList(),
+      'mediaListSectionResponseDTOList': instance
+          .mediaListSectionResponseDTOList
+          ?.map((e) => e.toJson())
+          .toList(),
+      'observationSetSectionResponseDTOList': instance
+          .observationSetSectionResponseDTOList
+          ?.map((e) => e.toJson())
+          .toList(),
     };
 
 const _$ConditionEnumMap = {
@@ -85,8 +91,10 @@ Map<String, dynamic> _$$_QuestionnaireSectionsResponseModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'supersection': instance.supersection,
-      'questionnaireResponseDTOList': instance.questionnaireResponseDTOList,
+      'supersection': instance.supersection?.toJson(),
+      'questionnaireResponseDTOList': instance.questionnaireResponseDTOList
+          ?.map((e) => e.toJson())
+          .toList(),
     };
 
 _$_QuestionnaireSectionModel _$$_QuestionnaireSectionModelFromJson(
@@ -111,8 +119,8 @@ Map<String, dynamic> _$$_QuestionnaireSectionModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'questionnaire': instance.questionnaire,
-      'assessment': instance.assessment,
+      'questionnaire': instance.questionnaire?.toJson(),
+      'assessment': instance.assessment?.toJson(),
     };
 
 _$_AssessmentModel _$$_AssessmentModelFromJson(Map<String, dynamic> json) =>
@@ -228,7 +236,8 @@ Map<String, dynamic> _$$_QuestionnaireResponseModelToJson(
           const TimestampConverter().toJson(instance.lastModifiedDate),
       'publisherCode': instance.publisherCode,
       'publisherType': instance.publisherType,
-      'questionResponseDTO': instance.questionResponseDTO,
+      'questionResponseDTO':
+          instance.questionResponseDTO?.map((e) => e.toJson()).toList(),
     };
 
 _$_QuestionResponseModel _$$_QuestionResponseModelFromJson(
@@ -267,7 +276,8 @@ Map<String, dynamic> _$$_QuestionResponseModelToJson(
       'prefix': instance.prefix,
       'weight': instance.weight,
       'image': instance.image,
-      'actionOnResponseDTO': instance.actionOnResponseDTO,
+      'actionOnResponseDTO':
+          instance.actionOnResponseDTO?.map((e) => e.toJson()).toList(),
       'readOnly': instance.readOnly,
       'required': instance.required,
     };
@@ -350,8 +360,9 @@ Map<String, dynamic> _$$_MediaListSectionResponseModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'supersection': instance.supersection,
-      'mediaListResponseDTOList': instance.mediaListResponseDTOList,
+      'supersection': instance.supersection?.toJson(),
+      'mediaListResponseDTOList':
+          instance.mediaListResponseDTOList?.map((e) => e.toJson()).toList(),
     };
 
 _$_MediaListResponseModel _$$_MediaListResponseModelFromJson(
@@ -376,7 +387,8 @@ Map<String, dynamic> _$$_MediaListResponseModelToJson(
       'version': instance.version,
       'description': instance.description,
       'creationDate': const TimestampConverter().toJson(instance.creationDate),
-      'mediaResponseDTOList': instance.mediaResponseDTOList,
+      'mediaResponseDTOList':
+          instance.mediaResponseDTOList?.map((e) => e.toJson()).toList(),
     };
 
 _$_MediaResponseModel _$$_MediaResponseModelFromJson(
@@ -430,8 +442,10 @@ Map<String, dynamic> _$$_ObservationSetSectionResponseModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'observationSetResponseDTOList': instance.observationSetResponseDTOList,
-      'supersection': instance.supersection,
+      'observationSetResponseDTOList': instance.observationSetResponseDTOList
+          ?.map((e) => e.toJson())
+          .toList(),
+      'supersection': instance.supersection?.toJson(),
     };
 
 _$_ObservationSetResponseModel _$$_ObservationSetResponseModelFromJson(
@@ -462,8 +476,9 @@ Map<String, dynamic> _$$_ObservationSetResponseModelToJson(
       'version': instance.version,
       'description': instance.description,
       'creationDate': const TimestampConverter().toJson(instance.creationDate),
-      'observationResponseDTO': instance.observationResponseDTO,
-      'observationResponseDTOList': instance.observationResponseDTOList,
+      'observationResponseDTO': instance.observationResponseDTO?.toJson(),
+      'observationResponseDTOList':
+          instance.observationResponseDTOList?.map((e) => e.toJson()).toList(),
     };
 
 _$_ObservationResponseModel _$$_ObservationResponseModelFromJson(
@@ -522,8 +537,8 @@ Map<String, dynamic> _$$_ObservationSetSectionModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'observationSet': instance.observationSet,
-      'assessment': instance.assessment,
+      'observationSet': instance.observationSet?.toJson(),
+      'assessment': instance.assessment?.toJson(),
     };
 
 _$_ObservationSetModel _$$_ObservationSetModelFromJson(
@@ -568,8 +583,8 @@ Map<String, dynamic> _$$_MediaListSectionModelToJson(
       'id': instance.id,
       'index': instance.index,
       'description': instance.description,
-      'mediaList': instance.mediaList,
-      'assessment': instance.assessment,
+      'mediaList': instance.mediaList?.toJson(),
+      'assessment': instance.assessment?.toJson(),
     };
 
 _$_MediaListModel _$$_MediaListModelFromJson(Map<String, dynamic> json) =>

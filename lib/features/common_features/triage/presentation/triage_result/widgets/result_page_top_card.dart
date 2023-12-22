@@ -3,20 +3,21 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ResultPageTopCard extends StatelessWidget {
   const ResultPageTopCard({
     super.key,
-    required this.triageResult,
-    required this.name,
-    required this.id,
-    required this.patientImage,
+    this.triageResult,
+    this.name,
+    this.id,
+    this.patientImage,
   });
-  final Map<String, dynamic> triageResult;
-  final String name;
-  final String id;
-  final String patientImage;
+  final Map<String, dynamic>? triageResult;
+  final String? name;
+  final int? id;
+  final String? patientImage;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class ResultPageTopCard extends StatelessWidget {
                   SizedBox(
                     width: AppSize.width(context) * 0.29,
                     child: Text(
-                      name,
+                      name ?? "",
                       style: applyRobotoFont(
                           fontSize: 14, fontWeight: FontWeight.w600),
                       softWrap: true,
@@ -56,7 +57,7 @@ class ResultPageTopCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "AID: $id",
+                    "AID: ${id ?? ""}",
                     softWrap: true,
                     style: applyRobotoFont(
                         fontSize: 11, fontWeight: FontWeight.w600),
@@ -65,74 +66,77 @@ class ResultPageTopCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 50),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: triageResult['color'].withOpacity(0.2),
-                  offset: const Offset(0, 2),
-                  blurRadius: 20,
-                  spreadRadius: 20,
-                ),
-              ],
-              borderRadius: BorderRadius.circular(10),
-              color: AppColor.white,
-              border: Border.symmetric(
-                horizontal: BorderSide(
-                  color: triageResult['color'],
-                  width: 2,
-                ),
-                vertical: BorderSide(
-                  color: triageResult['color'],
-                  width: 1,
+          Visibility(
+            visible: triageResult != null,
+            child: Container(
+              margin: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: triageResult!['color'].withOpacity(0.2),
+                    offset: const Offset(0, 2),
+                    blurRadius: 20,
+                    spreadRadius: 20,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: AppColor.white,
+                border: Border.symmetric(
+                  horizontal: BorderSide(
+                    color: triageResult!['color'],
+                    width: 2,
+                  ),
+                  vertical: BorderSide(
+                    color: triageResult!['color'],
+                    width: 1,
+                  ),
                 ),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppSize.width(context) * 0.01,
-                        ),
-                        decoration: BoxDecoration(
-                          color: triageResult['color'],
-                        ),
-                        child: Text(
-                          triageResult['labelText'] ?? "",
-                          style: applyRobotoFont(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: AppColor.white),
-                        )),
-                    const Spacer(),
-                    Text(
-                      todayDate.formateDate,
-                      style: applyRobotoFont(
-                          fontSize: 12, fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  triageResult['issueInfo'],
-                  textAlign: TextAlign.left,
-                  softWrap: true,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSize.width(context) * 0.01,
+                          ),
+                          decoration: BoxDecoration(
+                            color: triageResult!['color'],
+                          ),
+                          child: Text(
+                            triageResult!['labelText'] ?? "",
+                            style: applyRobotoFont(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.white),
+                          )),
+                      const Spacer(),
+                      Text(
+                        todayDate.formateDate,
+                        style: applyRobotoFont(
+                            fontSize: 12, fontWeight: FontWeight.w400),
+                      ),
+                    ],
                   ),
-                )
-              ],
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    triageResult!['issueInfo'],
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
@@ -154,19 +158,14 @@ class ResultPageTopCard extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: patientImage.isEmpty
+              child: patientImage == null
                   ? const CircleAvatar(
                       backgroundColor: AppColor.lightGrey,
+                      radius: 40,
                     )
-                  : CachedNetworkImage(
-                      imageUrl: patientImage,
-                      imageBuilder: (context, imageProvider) => CircleAvatar(
-                        radius: 40,
-                        backgroundImage: imageProvider,
-                      ),
-                      errorWidget: (context, url, error) => const CircleAvatar(
-                        backgroundColor: AppColor.lightGrey,
-                      ),
+                  : AppNetworkImage(
+                      imageUrl: patientImage!,
+                      radius: 40,
                     ),
             ),
           )

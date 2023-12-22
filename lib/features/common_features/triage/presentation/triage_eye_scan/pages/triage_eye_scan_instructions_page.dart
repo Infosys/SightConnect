@@ -35,7 +35,6 @@ class TriageEyeScanInstructions extends ConsumerWidget {
             content: AppLocalizations.of(context)!.eyeScanExitDialog,
           ),
         );
-      
       },
       child: Scaffold(
         key: scaffoldKey,
@@ -180,8 +179,9 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                     }
                     navigator.push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            TriageEyeCapturingPage(cameras: cameras),
+                        builder: (context) => TriageEyeCapturingPage(
+                          cameras: cameras,
+                        ),
                       ),
                     );
                   } catch (e) {

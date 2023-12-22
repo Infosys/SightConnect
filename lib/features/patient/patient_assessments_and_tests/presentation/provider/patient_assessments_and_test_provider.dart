@@ -1,153 +1,153 @@
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_detailed_report_mapper.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/assessment_report_mapper.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/local_triage_report_source.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_detailed_report_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_and_assessment_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
-import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+// import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
+// import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
+// import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+// import 'package:eye_care_for_all/main.dart';
+// import 'package:flutter/material.dart';
+// import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var isResultOfflineMode = true;
+// var isResultOfflineMode = false;
 
-var getEyeTriageReport = FutureProvider.family(
-  (ref, int pId) async {
-    if (isResultOfflineMode) {
-      List<TriageReportBriefEntity> triageAssessment = [];
+// var getEyeTriageReport = FutureProvider.family(
+//   (ref, int pId) async {
+//     logger.d({"getEyeTriageReport": pId});
+//     if (isResultOfflineMode) {
+//       List<TriageReportBriefEntity> triageAssessment = [];
 
-      for (var element in LocalTriageReportSource.local_triage_result) {
-        triageAssessment.add(
-          AssessmentReportMapper.toEntity(
-            TriageDetailedReportModel.fromJson(element),
-          ),
-        );
-      }
-      return triageAssessment;
-    } else {
-      var response = await ref
-          .watch(triageReportRepositoryProvider)
-          .getAllTriageReportsByPatientId(pId);
+//       for (var element in LocalTriageReportSource.local_triage_result) {
+//         triageAssessment.add(
+//           AssessmentReportMapper.toEntity(
+//             TriageDetailedReportModel.fromJson(element),
+//           ),
+//         );
+//       }
+//       logger.f({"getEyeTriageReportOffline": triageAssessment});
+//       return triageAssessment;
+//     } else {
+//       var response = await ref
+//           .watch(triageReportRepositoryProvider)
+//           .getAllTriageReportsByPatientId(pId);
 
-      return response.fold(
-        (failure) {
-          logger.d({"getTriageReports ": failure});
-          throw failure;
-        },
-        (triageAssessment) {
-          return triageAssessment
-              .map((e) => AssessmentReportMapper.toEntity(e))
-              .toList();
-        },
-      );
-    }
-  },
-);
+//       return response.fold(
+//         (failure) {
+//           logger.d({"getTriageReports ": failure});
+//           throw failure;
+//         },
+//         (triageAssessment) {
+//           return triageAssessment
+//               .map((e) => AssessmentReportMapper.toEntity(e))
+//               .toList();
+//         },
+//       );
+//     }
+//   },
+// );
 
-var getTriageDetailedEyeReport = FutureProvider.family(
-  (ref, int reportID) async {
-    if (isResultOfflineMode) {
-      return TriageDetailedReportModel.fromJson(
-        LocalTriageReportSource.local_triage_result[0],
-      );
-    } else {
-      var response = await ref
-          .watch(triageReportRepositoryProvider)
-          .getTriageReportByReportId(reportID);
+// var getTriageDetailedEyeReport = FutureProvider.family(
+//   (ref, int reportID) async {
+//     if (isResultOfflineMode) {
+//       final data = TriageDetailedReportModel.fromJson(
+//         LocalTriageReportSource.local_triage_result.first,
+//       );
 
-      return response.fold(
-        (failure) {
-          logger.d({"getTriageReports ": failure});
-          throw failure;
-        },
-        (triageAssessment) {
-          return triageAssessment;
-        },
-      );
-    }
-  },
-);
+//       return data;
+//     } else {
+//       var response = await ref
+//           .watch(triageReportRepositoryProvider)
+//           .getTriageReportByReportId(reportID);
 
-var getAssementDetailsReport = FutureProvider.family((ref, int reportID) async {
-  logger.d({
-    "reportID": reportID,
-  });
-  final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
-  DiagnosticReportTemplateFHIRModel? triageAssessment = 
-      ref.read(getTriageProvider).asData?.value;
+//       return response.fold(
+//         (failure) {
+//           logger.d({"getTriageReports ": failure});
+//           throw failure;
+//         },
+//         (triageAssessment) {
+//           return triageAssessment;
+//         },
+//       );
+//     }
+//   },
+// );
 
-  TriageDetailedReportModel? triageDetailedReport = 
-      ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
+// var getAssementDetailsReport = FutureProvider.autoDispose.family((ref, int reportID) async {
+//   final profileEntity = ref.watch(assessmentsAndTestProvider).selectedUser;
+//   DiagnosticReportTemplateFHIRModel? triageAssessment =
+//       ref.watch(getTriageProvider).asData?.value;
 
-  logger.d("abc" + triageDetailedReport.toString());
-logger.d("abc" + triageAssessment.toString());
-  logger.d({
-    "profile": profileEntity,
-    "assessmentResponse": triageDetailedReport,
-    "triageAssessment": triageAssessment,
-  });
+//   TriageDetailedReportModel? triageDetailedReport =
+//       ref.watch(getTriageDetailedEyeReport(reportID)).asData?.value;
 
-  final response = AssessmentDetailedReportMapper.toEntity(
-    profileEntity,
-    triageDetailedReport!,
-    triageAssessment!,
-  );
-logger.d({
-    "response": response,
-  });
-  return response;
-});
+//   if (triageAssessment == null) {
+//     throw ErrorDescription(
+//       "Assessment detail found",
+//     );
+//   }
 
-var assessmentsAndTestProvider = ChangeNotifierProvider(
-  (ref) => AssessmentsAndTestProvider(ref),
-);
+//   if (triageDetailedReport == null) {
+//     throw ErrorDescription(
+//       "Triage Detailed Report found",
+//     );
+//   }
 
-class AssessmentsAndTestProvider extends ChangeNotifier {
-  Ref ref;
-  late TriageReportUserEntity _selectedUser;
+//   final response = AssessmentDetailedReportMapper.toEntity(
+//     profileEntity,
+//     triageDetailedReport,
+//     triageAssessment,
+//   );
+//   logger.d({
+//     "response": response,
+//   });
+//   return response;
+// });
 
-  AssessmentsAndTestProvider(this.ref) {
-    getUsers();
-  }
+// var assessmentsAndTestProvider = ChangeNotifierProvider(
+//   (ref) => AssessmentsAndTestProvider(ref),
+// );
 
-  List<TriageReportUserEntity> getUsers() {
-    PatientResponseModel? patient =
-        ref.read(getPatientProfileProvider).asData?.value;
+// class AssessmentsAndTestProvider extends ChangeNotifier {
+//   Ref ref;
+//   late TriageReportUserEntity _selectedUser;
 
-    List<TriageReportUserEntity> users = [];
+//   AssessmentsAndTestProvider(this.ref) {
+//     getUsers();
+//   }
 
-    users.add(TriageReportUserEntity(
-      name: patient?.profile?.patient?.name! ?? "",
-      image: patient?.profile?.patient?.profilePhoto! ?? "",
-      id: 9627849171,
-    ));
+//   List<TriageReportUserEntity> getUsers() {
+//     PatientResponseModel? patient =
+//         ref.read(getPatientProfileByIdProvider).asData?.value;
 
-    _selectedUser = users[0];
+//     List<TriageReportUserEntity> users = [];
 
-    patient?.profile?.patient?.relatedParty
-        ?.forEach((RelatedPartyModel element) {
-      users.add(TriageReportUserEntity(
-        name: element.name!,
-        image: element.profilePicture!,
-        id: element.patientId!,
-      ));
-    });
+//     users.add(TriageReportUserEntity(
+//       name: patient?.profile?.patient?.name! ?? "",
+//       image: patient?.profile?.patient?.profilePhoto! ?? "",
+//       id: 9627849183,
+//     ));
 
-    logger.d({
-      "users": users,
-    });
+//     _selectedUser = users[0];
 
-    return users;
-  }
+//     patient?.profile?.patient?.relatedParty
+//         ?.forEach((RelatedPartyModel element) {
+//       users.add(TriageReportUserEntity(
+//         name: element.name!,
+//         image: element.profilePicture!,
+//         id: element.patientId!,
+//       ));
+//     });
 
-  TriageReportUserEntity get selectedUser => _selectedUser;
+//     logger.d({
+//       "users": users,
+//     });
 
-  set setSelectedUser(String? value) {
-    _selectedUser = getUsers().firstWhere((element) => element.name == value);
-    notifyListeners();
-  }
-}
+//     return users;
+//   }
+
+//   TriageReportUserEntity get selectedUser => _selectedUser;
+
+//   /// TODO: This is not working
+
+//   set setSelectedUser(String? value) {
+//     _selectedUser = getUsers().firstWhere((element) => element.name == value);
+//     ref.read(getEyeTriageReport(_selectedUser.id));
+//     notifyListeners();
+//   }
+// }

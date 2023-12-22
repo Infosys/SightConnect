@@ -21,13 +21,13 @@ TriageResponseModel _$TriageResponseModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TriageResponseModel {
   int? get patientId => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
   String? get serviceType => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
   List<PerformerModel>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime? get issued => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get userStartDate => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$TriageResponseModel {
   List<IncompleteTestModel>? get incompleteSection =>
       throw _privateConstructorUsedError;
   double? get cummulativeScore => throw _privateConstructorUsedError;
-  Map<TriageStep, double>? get score => throw _privateConstructorUsedError;
+  List<Map<String, int>>? get score => throw _privateConstructorUsedError;
   List<PostImagingSelectionModel>? get imagingSelection =>
       throw _privateConstructorUsedError;
   List<PostObservationsModel>? get observations =>
@@ -58,19 +58,20 @@ abstract class $TriageResponseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? patientId,
+      int? id,
       int? encounterId,
       String? serviceType,
       int? organizationCode,
       List<PerformerModel>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      @TimestampConverter() DateTime? issued,
+      DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      Map<TriageStep, double>? score,
+      List<Map<String, int>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -90,6 +91,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
   @override
   $Res call({
     Object? patientId = freezed,
+    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -111,6 +113,10 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
@@ -163,7 +169,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<TriageStep, double>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value.imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -190,19 +196,20 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
   @useResult
   $Res call(
       {int? patientId,
+      int? id,
       int? encounterId,
       String? serviceType,
       int? organizationCode,
       List<PerformerModel>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      @TimestampConverter() DateTime? issued,
+      DateTime? issued,
       @TimestampConverter() DateTime? userStartDate,
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      Map<TriageStep, double>? score,
+      List<Map<String, int>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -220,6 +227,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? patientId = freezed,
+    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -241,6 +249,10 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
@@ -293,7 +305,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       score: freezed == score
           ? _value._score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<TriageStep, double>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value._imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -315,19 +327,20 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
 class _$_TriageResponseModel implements _TriageResponseModel {
   const _$_TriageResponseModel(
       {this.patientId,
+      this.id,
       this.encounterId,
       this.serviceType,
       this.organizationCode,
       final List<PerformerModel>? performer,
       this.assessmentCode,
       this.assessmentVersion,
-      @TimestampConverter() this.issued,
+      this.issued,
       @TimestampConverter() this.userStartDate,
       this.source,
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
       this.cummulativeScore,
-      final Map<TriageStep, double>? score,
+      final List<Map<String, int>>? score,
       final List<PostImagingSelectionModel>? imagingSelection,
       final List<PostObservationsModel>? observations,
       final List<PostQuestionResponseModel>? questionResponse})
@@ -343,6 +356,8 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   final int? patientId;
+  @override
+  final int? id;
   @override
   final int? encounterId;
   @override
@@ -364,7 +379,6 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   @override
   final String? assessmentVersion;
   @override
-  @TimestampConverter()
   final DateTime? issued;
   @override
   @TimestampConverter()
@@ -386,14 +400,14 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   final double? cummulativeScore;
-  final Map<TriageStep, double>? _score;
+  final List<Map<String, int>>? _score;
   @override
-  Map<TriageStep, double>? get score {
+  List<Map<String, int>>? get score {
     final value = _score;
     if (value == null) return null;
-    if (_score is EqualUnmodifiableMapView) return _score;
+    if (_score is EqualUnmodifiableListView) return _score;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<PostImagingSelectionModel>? _imagingSelection;
@@ -430,7 +444,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   String toString() {
-    return 'TriageResponseModel(patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageResponseModel(patientId: $patientId, id: $id, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -440,6 +454,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
             other is _$_TriageResponseModel &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.serviceType, serviceType) ||
@@ -476,6 +491,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   int get hashCode => Object.hash(
       runtimeType,
       patientId,
+      id,
       encounterId,
       serviceType,
       organizationCode,
@@ -511,19 +527,20 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 abstract class _TriageResponseModel implements TriageResponseModel {
   const factory _TriageResponseModel(
           {final int? patientId,
+          final int? id,
           final int? encounterId,
           final String? serviceType,
           final int? organizationCode,
           final List<PerformerModel>? performer,
           final int? assessmentCode,
           final String? assessmentVersion,
-          @TimestampConverter() final DateTime? issued,
+          final DateTime? issued,
           @TimestampConverter() final DateTime? userStartDate,
           final Source? source,
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
           final double? cummulativeScore,
-          final Map<TriageStep, double>? score,
+          final List<Map<String, int>>? score,
           final List<PostImagingSelectionModel>? imagingSelection,
           final List<PostObservationsModel>? observations,
           final List<PostQuestionResponseModel>? questionResponse}) =
@@ -534,6 +551,8 @@ abstract class _TriageResponseModel implements TriageResponseModel {
 
   @override
   int? get patientId;
+  @override
+  int? get id;
   @override
   int? get encounterId;
   @override
@@ -547,7 +566,6 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   String? get assessmentVersion;
   @override
-  @TimestampConverter()
   DateTime? get issued;
   @override
   @TimestampConverter()
@@ -561,7 +579,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   double? get cummulativeScore;
   @override
-  Map<TriageStep, double>? get score;
+  List<Map<String, int>>? get score;
   @override
   List<PostImagingSelectionModel>? get imagingSelection;
   @override
@@ -769,6 +787,7 @@ PostAnswerModel _$PostAnswerModelFromJson(Map<String, dynamic> json) {
 mixin _$PostAnswerModel {
   String? get value => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
+  int? get answerCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -782,7 +801,7 @@ abstract class $PostAnswerModelCopyWith<$Res> {
           PostAnswerModel value, $Res Function(PostAnswerModel) then) =
       _$PostAnswerModelCopyWithImpl<$Res, PostAnswerModel>;
   @useResult
-  $Res call({String? value, double? score});
+  $Res call({String? value, double? score, int? answerCode});
 }
 
 /// @nodoc
@@ -800,6 +819,7 @@ class _$PostAnswerModelCopyWithImpl<$Res, $Val extends PostAnswerModel>
   $Res call({
     Object? value = freezed,
     Object? score = freezed,
+    Object? answerCode = freezed,
   }) {
     return _then(_value.copyWith(
       value: freezed == value
@@ -810,6 +830,10 @@ class _$PostAnswerModelCopyWithImpl<$Res, $Val extends PostAnswerModel>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      answerCode: freezed == answerCode
+          ? _value.answerCode
+          : answerCode // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -822,7 +846,7 @@ abstract class _$$_PostAnswerModelCopyWith<$Res>
       __$$_PostAnswerModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? value, double? score});
+  $Res call({String? value, double? score, int? answerCode});
 }
 
 /// @nodoc
@@ -838,6 +862,7 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
   $Res call({
     Object? value = freezed,
     Object? score = freezed,
+    Object? answerCode = freezed,
   }) {
     return _then(_$_PostAnswerModel(
       value: freezed == value
@@ -848,6 +873,10 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      answerCode: freezed == answerCode
+          ? _value.answerCode
+          : answerCode // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -855,7 +884,7 @@ class __$$_PostAnswerModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PostAnswerModel implements _PostAnswerModel {
-  const _$_PostAnswerModel({this.value, this.score});
+  const _$_PostAnswerModel({this.value, this.score, this.answerCode});
 
   factory _$_PostAnswerModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostAnswerModelFromJson(json);
@@ -864,10 +893,12 @@ class _$_PostAnswerModel implements _PostAnswerModel {
   final String? value;
   @override
   final double? score;
+  @override
+  final int? answerCode;
 
   @override
   String toString() {
-    return 'PostAnswerModel(value: $value, score: $score)';
+    return 'PostAnswerModel(value: $value, score: $score, answerCode: $answerCode)';
   }
 
   @override
@@ -876,12 +907,14 @@ class _$_PostAnswerModel implements _PostAnswerModel {
         (other.runtimeType == runtimeType &&
             other is _$_PostAnswerModel &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.answerCode, answerCode) ||
+                other.answerCode == answerCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, value, score);
+  int get hashCode => Object.hash(runtimeType, value, score, answerCode);
 
   @JsonKey(ignore: true)
   @override
@@ -898,8 +931,10 @@ class _$_PostAnswerModel implements _PostAnswerModel {
 }
 
 abstract class _PostAnswerModel implements PostAnswerModel {
-  const factory _PostAnswerModel({final String? value, final double? score}) =
-      _$_PostAnswerModel;
+  const factory _PostAnswerModel(
+      {final String? value,
+      final double? score,
+      final int? answerCode}) = _$_PostAnswerModel;
 
   factory _PostAnswerModel.fromJson(Map<String, dynamic> json) =
       _$_PostAnswerModel.fromJson;
@@ -908,6 +943,8 @@ abstract class _PostAnswerModel implements PostAnswerModel {
   String? get value;
   @override
   double? get score;
+  @override
+  int? get answerCode;
   @override
   @JsonKey(ignore: true)
   _$$_PostAnswerModelCopyWith<_$_PostAnswerModel> get copyWith =>
@@ -1234,6 +1271,8 @@ mixin _$PostImagingSelectionModel {
   String? get endpoint => throw _privateConstructorUsedError;
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
+  String? get fileId => throw _privateConstructorUsedError;
+  BodySite? get bodySite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1248,7 +1287,12 @@ abstract class $PostImagingSelectionModelCopyWith<$Res> {
       _$PostImagingSelectionModelCopyWithImpl<$Res, PostImagingSelectionModel>;
   @useResult
   $Res call(
-      {int? identifier, String? endpoint, String? baseUrl, double? score});
+      {int? identifier,
+      String? endpoint,
+      String? baseUrl,
+      double? score,
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -1269,6 +1313,8 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_value.copyWith(
       identifier: freezed == identifier
@@ -1287,6 +1333,14 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ) as $Val);
   }
 }
@@ -1301,7 +1355,12 @@ abstract class _$$_PostImagingSelectionModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? identifier, String? endpoint, String? baseUrl, double? score});
+      {int? identifier,
+      String? endpoint,
+      String? baseUrl,
+      double? score,
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -1321,6 +1380,8 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
     Object? endpoint = freezed,
     Object? baseUrl = freezed,
     Object? score = freezed,
+    Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_$_PostImagingSelectionModel(
       identifier: freezed == identifier
@@ -1339,6 +1400,14 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ));
   }
 }
@@ -1347,7 +1416,12 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   const _$_PostImagingSelectionModel(
-      {this.identifier, this.endpoint, this.baseUrl, this.score});
+      {this.identifier,
+      this.endpoint,
+      this.baseUrl,
+      this.score,
+      this.fileId,
+      this.bodySite});
 
   factory _$_PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostImagingSelectionModelFromJson(json);
@@ -1360,10 +1434,14 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   final String? baseUrl;
   @override
   final double? score;
+  @override
+  final String? fileId;
+  @override
+  final BodySite? bodySite;
 
   @override
   String toString() {
-    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score)';
+    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId, bodySite: $bodySite)';
   }
 
   @override
@@ -1376,13 +1454,16 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
             (identical(other.endpoint, endpoint) ||
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.fileId, fileId) || other.fileId == fileId) &&
+            (identical(other.bodySite, bodySite) ||
+                other.bodySite == bodySite));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, identifier, endpoint, baseUrl, score);
+  int get hashCode => Object.hash(
+      runtimeType, identifier, endpoint, baseUrl, score, fileId, bodySite);
 
   @JsonKey(ignore: true)
   @override
@@ -1404,7 +1485,9 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
       {final int? identifier,
       final String? endpoint,
       final String? baseUrl,
-      final double? score}) = _$_PostImagingSelectionModel;
+      final double? score,
+      final String? fileId,
+      final BodySite? bodySite}) = _$_PostImagingSelectionModel;
 
   factory _PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =
       _$_PostImagingSelectionModel.fromJson;
@@ -1417,6 +1500,10 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
   String? get baseUrl;
   @override
   double? get score;
+  @override
+  String? get fileId;
+  @override
+  BodySite? get bodySite;
   @override
   @JsonKey(ignore: true)
   _$$_PostImagingSelectionModelCopyWith<_$_PostImagingSelectionModel>

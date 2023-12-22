@@ -19,29 +19,31 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/range_category.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/test_code.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/gender.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/gender.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'triage_diagnostic_report_template_FHIR_model.freezed.dart';
 part 'triage_diagnostic_report_template_FHIR_model.g.dart';
 
 @freezed
-class DiagnosticReportTemplateFHIRModel with _$DiagnosticReportTemplateFHIRModel {
-  const factory DiagnosticReportTemplateFHIRModel({
-    int? id,
-    String? name,
-    int? organizationCode,
-    Category? category,
-    BodySite? bodySite,
-    TestCode? code,
-    String? version,
-    ImagingStudyFHIRModel? study,
-    ObservationDefinitionFHIRModel? observations,
-    QuestionnaireFHIRModel? questionnaire,
-    List<ObservationValueWeightModel>? observationValueWeight
-  }) = _DiagnosticReportTemplateFHIRModel;
+class DiagnosticReportTemplateFHIRModel
+    with _$DiagnosticReportTemplateFHIRModel {
+  const factory DiagnosticReportTemplateFHIRModel(
+          {int? id,
+          String? name,
+          int? organizationCode,
+          Category? category,
+          BodySite? bodySite,
+          TestCode? code,
+          String? version,
+          ImagingStudyFHIRModel? study,
+          ObservationDefinitionFHIRModel? observations,
+          QuestionnaireFHIRModel? questionnaire,
+          List<ObservationValueWeightModel>? observationValueWeight}) =
+      _DiagnosticReportTemplateFHIRModel;
 
-  factory DiagnosticReportTemplateFHIRModel.fromJson(Map<String, dynamic> json) =>
+  factory DiagnosticReportTemplateFHIRModel.fromJson(
+          Map<String, dynamic> json) =>
       _$DiagnosticReportTemplateFHIRModelFromJson(json);
 }
 
@@ -63,38 +65,38 @@ class ImagingStudyFHIRModel with _$ImagingStudyFHIRModel {
 // ----------------------------------------------------------------------------------------
 
 @freezed
-class ImagingSelectionTemplateFHIRModel with _$ImagingSelectionTemplateFHIRModel {
-  const factory ImagingSelectionTemplateFHIRModel({
-    int? id,
-    String? name,
-    String? description,
-    MediaType? type,
-    int? maxSize,
-    FileType? fileType,
-    List<RelatedImageFHIRModel>? relatedImage
-  }) = _ImagingSelectionTemplateFHIRModel;
+class ImagingSelectionTemplateFHIRModel
+    with _$ImagingSelectionTemplateFHIRModel {
+  const factory ImagingSelectionTemplateFHIRModel(
+          {int? id,
+          String? name,
+          String? description,
+          MediaType? type,
+          int? maxSize,
+          FileType? fileType,
+          List<RelatedImageFHIRModel>? relatedImage}) =
+      _ImagingSelectionTemplateFHIRModel;
 
-  factory ImagingSelectionTemplateFHIRModel.fromJson(Map<String, dynamic> json) =>
+  factory ImagingSelectionTemplateFHIRModel.fromJson(
+          Map<String, dynamic> json) =>
       _$ImagingSelectionTemplateFHIRModelFromJson(json);
 }
 
 // ----------------------------------------------------------------------------------------
 
 @freezed
-class RelatedImageFHIRModel with _$RelatedImageFHIRModel{
-  const factory RelatedImageFHIRModel({
-    int? id,
-    String? imageTitle,
-    String? url,
-    FileType? filetype
-  }) = _RelatedImageFHIRModel;
+class RelatedImageFHIRModel with _$RelatedImageFHIRModel {
+  const factory RelatedImageFHIRModel(
+      {int? id,
+      String? imageTitle,
+      String? url,
+      FileType? filetype}) = _RelatedImageFHIRModel;
 
   factory RelatedImageFHIRModel.fromJson(Map<String, dynamic> json) =>
       _$RelatedImageFHIRModelFromJson(json);
 }
 
 // ---------------------------------------------------------------------------------------------
-
 
 @freezed
 class ObservationDefinitionFHIRModel with _$ObservationDefinitionFHIRModel {
@@ -111,7 +113,6 @@ class ObservationDefinitionFHIRModel with _$ObservationDefinitionFHIRModel {
     List<RelatedImageFHIRModel>? relatedImage,
     List<QualifiedValueModel>? qualifiedValue,
     List<LanguageBasedTextModel>? languageBasedText,
-    
   }) = _ObservationDefinitionFHIRModel;
 
   factory ObservationDefinitionFHIRModel.fromJson(Map<String, dynamic> json) =>
@@ -131,7 +132,6 @@ class ObservationDefinitionModel with _$ObservationDefinitionModel {
     BodySite? bodySite,
     ObservationMethod? method,
     Jurisdiction? jurisdiction,
-
   }) = _ObservationDefinitionModel;
 
   factory ObservationDefinitionModel.fromJson(Map<String, dynamic> json) =>
@@ -158,14 +158,14 @@ class DataComponentFHIRModel with _$DataComponentFHIRModel {
 @freezed
 class QualifiedValueModel with _$QualifiedValueModel {
   const factory QualifiedValueModel({
-      int? id,
-      bool? isRange,
-      String? value,
-      RangeCategory? rangeCategory,
-      Gender? gender,
-      RangeModel? range,
-      ObservationDefinitionModel? observationDefinition,
-      DataComponentModel? dataComponent,
+    int? id,
+    bool? isRange,
+    String? value,
+    RangeCategory? rangeCategory,
+    Gender? gender,
+    RangeModel? range,
+    ObservationDefinitionModel? observationDefinition,
+    DataComponentModel? dataComponent,
   }) = _QualifiedValueModel;
 
   factory QualifiedValueModel.fromJson(Map<String, dynamic> json) =>
@@ -176,11 +176,7 @@ class QualifiedValueModel with _$QualifiedValueModel {
 
 @freezed
 class RangeModel with _$RangeModel {
-  const factory RangeModel({
-      int? id,
-      double? low,
-      double? high
-  }) = _RangeModel;
+  const factory RangeModel({int? id, double? low, double? high}) = _RangeModel;
 
   factory RangeModel.fromJson(Map<String, dynamic> json) =>
       _$RangeModelFromJson(json);
@@ -234,7 +230,6 @@ class QuestionnaireFHIRModel with _$QuestionnaireFHIRModel {
 
 // -------------------------------------------------------------------------------------
 
-
 @freezed
 class QuestionnaireModel with _$QuestionnaireModel {
   const factory QuestionnaireModel({
@@ -264,32 +259,30 @@ class QuestionnaireModel with _$QuestionnaireModel {
 
 // --------------------------------------------------------------------------------------------------------
 
-
 @freezed
 class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
   const factory QuestionnaireItemFHIRModel({
-
-      int? id,
-      String? linkId,
-      String? prefix,
-      String? text,
-      QuestionnaireType? type,
-      EnableBehaviour? enableBehaviour,
-      bool? required,
-      bool? repeats,
-      bool? readOnly,
-      int? maxlength,
-      DisabledDisplay? disabledDisplay,
-      AnswerConstraint? answerConstraint,
-      AnswerValueSetModel? ansewrValueSet,
-      AnswerModel? initial,
-      QuestionnaireModel? questionnaire,
-      QuestionnaireItemModel? questionnaireItem,
-      List<ActionOnModel>? actionOn,
-      List<AnswerOptionModel>? answerOption,
-      List<EnableWhenModel>? enableWhen,
-      List<AnswerItemWeightModel>? answerItemWeight,
-
+    int? id,
+    String? linkId,
+    String? prefix,
+    String? text,
+    QuestionnaireType? type,
+    EnableBehaviour? enableBehaviour,
+    bool? required,
+    bool? repeats,
+    bool? readOnly,
+    int? maxlength,
+    DisabledDisplay? disabledDisplay,
+    AnswerConstraint? answerConstraint,
+    AnswerValueSetModel? ansewrValueSet,
+    AnswerModel? initial,
+    QuestionnaireModel? questionnaire,
+    QuestionnaireItemModel? questionnaireItem,
+    List<ActionOnModel>? actionOn,
+    List<AnswerOptionModel>? answerOption,
+    List<EnableWhenModel>? enableWhen,
+    List<AnswerItemWeightModel>? answerItemWeight,
+    List<RelatedImageFHIRModel>? relatedImage,
   }) = _QuestionnaireItemFHIRModel;
 
   factory QuestionnaireItemFHIRModel.fromJson(Map<String, dynamic> json) =>
@@ -301,12 +294,10 @@ class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
 @freezed
 class AnswerOptionModel with _$AnswerOptionModel {
   const factory AnswerOptionModel({
-
-      int? id,
-      bool? initialSelected,
-      AnswerModel? answer,
-      QuestionnaireItemModel? questionnaireItem,
-      
+    int? id,
+    bool? initialSelected,
+    AnswerModel? answer,
+    QuestionnaireItemModel? questionnaireItem,
   }) = _AnswerOptionModel;
 
   factory AnswerOptionModel.fromJson(Map<String, dynamic> json) =>
@@ -317,13 +308,8 @@ class AnswerOptionModel with _$AnswerOptionModel {
 
 @freezed
 class AnswerValueSetModel with _$AnswerValueSetModel {
-  const factory AnswerValueSetModel({
-
-      int? id,
-      int? valueId,
-      String? value
-      
-  }) = _AnswerValueSetModel;
+  const factory AnswerValueSetModel({int? id, int? valueId, String? value}) =
+      _AnswerValueSetModel;
 
   factory AnswerValueSetModel.fromJson(Map<String, dynamic> json) =>
       _$AnswerValueSetModelFromJson(json);
@@ -334,16 +320,14 @@ class AnswerValueSetModel with _$AnswerValueSetModel {
 @freezed
 class AnswerModel with _$AnswerModel {
   const factory AnswerModel({
-
-      int? id,
-      bool? answerBoolean,
-      double? answerDecimal,
-      int? answerInteger,
-      @TimestampConverter() DateTime? answerDateTime,
-      @TimestampConverter() DateTime? answerTime,
-      String? answerString,
-      AnswerItemWeightModel? answerItemWeight,
-
+    int? id,
+    bool? answerBoolean,
+    double? answerDecimal,
+    int? answerInteger,
+    @TimestampConverter() DateTime? answerDateTime,
+    @TimestampConverter() DateTime? answerTime,
+    String? answerString,
+    AnswerItemWeightModel? answerItemWeight,
   }) = _AnswerModel;
 
   factory AnswerModel.fromJson(Map<String, dynamic> json) =>
@@ -354,14 +338,12 @@ class AnswerModel with _$AnswerModel {
 
 @freezed
 class AnswerItemWeightModel with _$AnswerItemWeightModel {
-  const factory AnswerItemWeightModel({
-
-      int? id,
-      double? value,
-      int? answerId,
-      QuestionResponseWeightModel? questionResponseWeight
-
-  }) = _AnswerItemWeightModel;
+  const factory AnswerItemWeightModel(
+          {int? id,
+          double? value,
+          int? answerId,
+          QuestionResponseWeightModel? questionResponseWeight}) =
+      _AnswerItemWeightModel;
 
   factory AnswerItemWeightModel.fromJson(Map<String, dynamic> json) =>
       _$AnswerItemWeightModelFromJson(json);
@@ -371,15 +353,12 @@ class AnswerItemWeightModel with _$AnswerItemWeightModel {
 
 @freezed
 class QuestionResponseWeightModel with _$QuestionResponseWeightModel {
-  const factory QuestionResponseWeightModel({
-
-      int? id,
+  const factory QuestionResponseWeightModel(
+      {int? id,
       int? quesId,
       bool? isRange,
       bool? isCompare,
-      bool? isAbsolute
-
-  }) = _QuestionResponseWeightModel;
+      bool? isAbsolute}) = _QuestionResponseWeightModel;
 
   factory QuestionResponseWeightModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionResponseWeightModelFromJson(json);
@@ -389,9 +368,8 @@ class QuestionResponseWeightModel with _$QuestionResponseWeightModel {
 
 @freezed
 class QuestionnaireItemModel with _$QuestionnaireItemModel {
-  const factory QuestionnaireItemModel({
-
-      int? id,
+  const factory QuestionnaireItemModel(
+      {int? id,
       String? linkId,
       String? prefix,
       String? text,
@@ -405,9 +383,7 @@ class QuestionnaireItemModel with _$QuestionnaireItemModel {
       AnswerConstraint? answerConstraint,
       AnswerValueSetModel? ansewrValueSet,
       AnswerModel? initial,
-      QuestionnaireModel? questionnaire
-      
-  }) = _QuestionnaireItemModel;
+      QuestionnaireModel? questionnaire}) = _QuestionnaireItemModel;
 
   factory QuestionnaireItemModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionnaireItemModelFromJson(json);
@@ -418,13 +394,11 @@ class QuestionnaireItemModel with _$QuestionnaireItemModel {
 @freezed
 class ActionOnModel with _$ActionOnModel {
   const factory ActionOnModel({
-
-      int? id,
-      Operator? operator,
-      ActionType? actionType,
-      AnswerModel? answer,
-      QuestionnaireItemModel? questionnaireItem,
-      
+    int? id,
+    Operator? operator,
+    ActionType? actionType,
+    AnswerModel? answer,
+    QuestionnaireItemModel? questionnaireItem,
   }) = _ActionOnModel;
 
   factory ActionOnModel.fromJson(Map<String, dynamic> json) =>
@@ -436,13 +410,11 @@ class ActionOnModel with _$ActionOnModel {
 @freezed
 class EnableWhenModel with _$EnableWhenModel {
   const factory EnableWhenModel({
-
-      int? id,
-      String? question,
-      Operator? operator,
-      AnswerModel? answer,
-      QuestionnaireItemModel? questionnaireItem,
-      
+    int? id,
+    String? question,
+    Operator? operator,
+    AnswerModel? answer,
+    QuestionnaireItemModel? questionnaireItem,
   }) = _EnableWhenModel;
 
   factory EnableWhenModel.fromJson(Map<String, dynamic> json) =>
@@ -453,15 +425,12 @@ class EnableWhenModel with _$EnableWhenModel {
 
 @freezed
 class LanguageBasedTextModel with _$LanguageBasedTextModel {
-  const factory LanguageBasedTextModel({
-
-      int? id,
+  const factory LanguageBasedTextModel(
+      {int? id,
       String? textId,
       int? langId,
       String? textValue,
-      bool? isDefault
-      
-  }) = _LanguageBasedTextModel;
+      bool? isDefault}) = _LanguageBasedTextModel;
 
   factory LanguageBasedTextModel.fromJson(Map<String, dynamic> json) =>
       _$LanguageBasedTextModelFromJson(json);
@@ -471,14 +440,11 @@ class LanguageBasedTextModel with _$LanguageBasedTextModel {
 
 @freezed
 class ObservationValueWeightModel with _$ObservationValueWeightModel {
-  const factory ObservationValueWeightModel({
-
-      int? id,
+  const factory ObservationValueWeightModel(
+      {int? id,
       int? observationId,
       int? organizationId,
-      double? value
-      
-  }) = _ObservationValueWeightModel;
+      double? value}) = _ObservationValueWeightModel;
 
   factory ObservationValueWeightModel.fromJson(Map<String, dynamic> json) =>
       _$ObservationValueWeightModelFromJson(json);

@@ -23,8 +23,6 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
       diagnosticReportId: json['diagnosticReportId'] as int?,
       assessmentCode: json['assessmentCode'] as int?,
       assessmentVersion: json['assessmentVersion'] as String?,
-      category: json['category'] as String?,
-      code: json['code'] as String?,
       issued: const TimestampConverter().fromJson(json['issued'] as String?),
       userStartDate:
           const TimestampConverter().fromJson(json['userStartDate'] as String?),
@@ -33,10 +31,11 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
           $enumDecodeNullable(_$DiagnosticReportStatusEnumMap, json['status']),
       sourceVersion: json['sourceVersion'] as String?,
       performerId: json['performerId'] as int?,
+      subject: json['subject'] as int?,
       performerRole:
           $enumDecodeNullable(_$PerformerRoleEnumMap, json['performerRole']),
       incompleteTests: (json['incompleteTests'] as List<dynamic>?)
-          ?.map((e) => IncompleteTest.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       responses: (json['responses'] as List<dynamic>?)
           ?.map((e) => Response.fromJson(e as Map<String, dynamic>))
@@ -55,6 +54,14 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
       observationResultDescription:
           json['observationResultDescription'] as String?,
       mediaResultDescription: json['mediaResultDescription'] as String?,
+      cumulativeSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['cumulativeSeverity']),
+      observationSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['observationSeverity']),
+      mediaSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['mediaSeverity']),
+      questionResponseSeverity: $enumDecodeNullable(
+          _$SeverityEnumMap, json['questionResponseSeverity']),
       carePlans: (json['carePlans'] as List<dynamic>?)
           ?.map((e) => CarePlan.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -68,12 +75,10 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
       'encounterStatus': _$EncounterStatusEnumMap[instance.encounterStatus],
       'remarks': instance.remarks,
-      'encounterPeriod': instance.encounterPeriod,
+      'encounterPeriod': instance.encounterPeriod?.toJson(),
       'diagnosticReportId': instance.diagnosticReportId,
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
-      'category': instance.category,
-      'code': instance.code,
       'issued': const TimestampConverter().toJson(instance.issued),
       'userStartDate':
           const TimestampConverter().toJson(instance.userStartDate),
@@ -81,18 +86,25 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
       'status': _$DiagnosticReportStatusEnumMap[instance.status],
       'sourceVersion': instance.sourceVersion,
       'performerId': instance.performerId,
+      'subject': instance.subject,
       'performerRole': _$PerformerRoleEnumMap[instance.performerRole],
-      'incompleteTests': instance.incompleteTests,
-      'responses': instance.responses,
-      'observations': instance.observations,
-      'media': instance.media,
+      'incompleteTests':
+          instance.incompleteTests?.map((e) => e.toJson()).toList(),
+      'responses': instance.responses?.map((e) => e.toJson()).toList(),
+      'observations': instance.observations?.map((e) => e.toJson()).toList(),
+      'media': instance.media?.map((e) => e.toJson()).toList(),
       'updateEndTime':
           const TimestampConverter().toJson(instance.updateEndTime),
       'diagnosticReportDescription': instance.diagnosticReportDescription,
       'questionResultDescription': instance.questionResultDescription,
       'observationResultDescription': instance.observationResultDescription,
       'mediaResultDescription': instance.mediaResultDescription,
-      'carePlans': instance.carePlans,
+      'cumulativeSeverity': _$SeverityEnumMap[instance.cumulativeSeverity],
+      'observationSeverity': _$SeverityEnumMap[instance.observationSeverity],
+      'mediaSeverity': _$SeverityEnumMap[instance.mediaSeverity],
+      'questionResponseSeverity':
+          _$SeverityEnumMap[instance.questionResponseSeverity],
+      'carePlans': instance.carePlans?.map((e) => e.toJson()).toList(),
     };
 
 const _$ServiceTypeEnumMap = {
@@ -137,6 +149,12 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.PATIENT: 'PATIENT',
 };
 
+const _$SeverityEnumMap = {
+  Severity.ABNORMAL: 'ABNORMAL',
+  Severity.HIGH: 'HIGH',
+  Severity.LOW: 'LOW',
+};
+
 _$_EncounterPeriod _$$_EncounterPeriodFromJson(Map<String, dynamic> json) =>
     _$_EncounterPeriod(
       id: json['id'] as int,
@@ -151,13 +169,15 @@ Map<String, dynamic> _$$_EncounterPeriodToJson(_$_EncounterPeriod instance) =>
       'end': const TimestampConverter().toJson(instance.end),
     };
 
-_$_IncompleteTest _$$_IncompleteTestFromJson(Map<String, dynamic> json) =>
-    _$_IncompleteTest(
+_$_IncompleteTestModel _$$_IncompleteTestModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_IncompleteTestModel(
       id: json['id'] as int,
       testName: $enumDecode(_$TestTypeEnumMap, json['testName']),
     );
 
-Map<String, dynamic> _$$_IncompleteTestToJson(_$_IncompleteTest instance) =>
+Map<String, dynamic> _$$_IncompleteTestModelToJson(
+        _$_IncompleteTestModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'testName': _$TestTypeEnumMap[instance.testName]!,
@@ -185,11 +205,8 @@ Map<String, dynamic> _$$_AnswerToJson(_$_Answer instance) => <String, dynamic>{
 
 _$_Response _$$_ResponseFromJson(Map<String, dynamic> json) => _$_Response(
       id: json['id'] as int,
-      authored:
-          const TimestampConverter().fromJson(json['authored'] as String?),
       linkId: json['linkId'] as int,
       score: (json['score'] as num).toDouble(),
-      author: json['author'],
       answers: (json['answers'] as List<dynamic>?)
           ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -198,21 +215,15 @@ _$_Response _$$_ResponseFromJson(Map<String, dynamic> json) => _$_Response(
 Map<String, dynamic> _$$_ResponseToJson(_$_Response instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'authored': const TimestampConverter().toJson(instance.authored),
       'linkId': instance.linkId,
       'score': instance.score,
-      'author': instance.author,
-      'answers': instance.answers,
+      'answers': instance.answers?.map((e) => e.toJson()).toList(),
     };
 
 _$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
     _$_Observation(
       id: json['id'] as int,
-      performer: json['performer'] as int?,
-      issued: const TimestampConverter().fromJson(json['issued'] as String?),
       identifier: json['identifier'] as int?,
-      interpretation:
-          $enumDecodeNullable(_$SeverityEnumMap, json['interpretation']),
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
     );
@@ -220,36 +231,23 @@ _$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'performer': instance.performer,
-      'issued': const TimestampConverter().toJson(instance.issued),
       'identifier': instance.identifier,
-      'interpretation': _$SeverityEnumMap[instance.interpretation],
       'value': instance.value,
       'score': instance.score,
     };
 
-const _$SeverityEnumMap = {
-  Severity.ABNORMAL: 'ABNORMAL',
-  Severity.HIGH: 'HIGH',
-  Severity.LOW: 'LOW',
-};
-
 _$_Media _$$_MediaFromJson(Map<String, dynamic> json) => _$_Media(
       id: json['id'] as int,
-      performer: json['performer'] as int?,
-      issued: const TimestampConverter().fromJson(json['issued'] as String?),
       identifier: json['identifier'] as int?,
       baseUrl: json['baseUrl'] as String?,
       endpoint: json['endpoint'] as String?,
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
       score: (json['score'] as num?)?.toDouble(),
-      fileId: json['fileId'] as int?,
+      fileId: json['fileId'] as String?,
     );
 
 Map<String, dynamic> _$$_MediaToJson(_$_Media instance) => <String, dynamic>{
       'id': instance.id,
-      'performer': instance.performer,
-      'issued': const TimestampConverter().toJson(instance.issued),
       'identifier': instance.identifier,
       'baseUrl': instance.baseUrl,
       'endpoint': instance.endpoint,
@@ -274,14 +272,10 @@ _$_CarePlan _$$_CarePlanFromJson(Map<String, dynamic> json) => _$_CarePlan(
       description: json['description'] as String?,
       subject: json['subject'] as int?,
       created: const TimestampConverter().fromJson(json['created'] as String?),
-      careTeam: json['careTeam'] as int?,
       note: json['note'] as String?,
       period: json['period'] == null
           ? null
           : EncounterPeriod.fromJson(json['period'] as Map<String, dynamic>),
-      custodian: json['custodian'],
-      partOf: json['partOf'],
-      carePlan: json['carePlan'],
       conditions: (json['conditions'] as List<dynamic>?)
           ?.map((e) => Condition.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -302,15 +296,11 @@ Map<String, dynamic> _$$_CarePlanToJson(_$_CarePlan instance) =>
       'description': instance.description,
       'subject': instance.subject,
       'created': const TimestampConverter().toJson(instance.created),
-      'careTeam': instance.careTeam,
       'note': instance.note,
-      'period': instance.period,
-      'custodian': instance.custodian,
-      'partOf': instance.partOf,
-      'carePlan': instance.carePlan,
-      'conditions': instance.conditions,
-      'activities': instance.activities,
-      'goals': instance.goals,
+      'period': instance.period?.toJson(),
+      'conditions': instance.conditions?.map((e) => e.toJson()).toList(),
+      'activities': instance.activities?.map((e) => e.toJson()).toList(),
+      'goals': instance.goals?.map((e) => e.toJson()).toList(),
     };
 
 const _$RequestStatusEnumMap = {
@@ -346,7 +336,7 @@ Map<String, dynamic> _$$_ConditionToJson(_$_Condition instance) =>
     };
 
 _$_Activity _$$_ActivityFromJson(Map<String, dynamic> json) => _$_Activity(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       progress: json['progress'] as String?,
       plannedActivityReference: json['plannedActivityReference'] == null
           ? null
@@ -358,13 +348,13 @@ Map<String, dynamic> _$$_ActivityToJson(_$_Activity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'progress': instance.progress,
-      'plannedActivityReference': instance.plannedActivityReference,
+      'plannedActivityReference': instance.plannedActivityReference?.toJson(),
     };
 
 _$_PlannedActivityReference _$$_PlannedActivityReferenceFromJson(
         Map<String, dynamic> json) =>
     _$_PlannedActivityReference(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       type: json['type'] as String?,
       serviceRequest: json['serviceRequest'] == null
           ? null
@@ -381,13 +371,14 @@ Map<String, dynamic> _$$_PlannedActivityReferenceToJson(
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
-      'serviceRequest': instance.serviceRequest,
-      'communication': instance.communication,
+      'serviceRequest': instance.serviceRequest?.toJson(),
+      'communication': instance.communication?.toJson(),
     };
 
 _$_ServiceRequest _$$_ServiceRequestFromJson(Map<String, dynamic> json) =>
     _$_ServiceRequest(
-      id: json['id'] as int,
+      id: json['id'] as int?,
+      identifier: json['identifier'] as int?,
       note: json['note'] as String?,
       patientInstruction: json['patientInstruction'] as String?,
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
@@ -397,6 +388,7 @@ _$_ServiceRequest _$$_ServiceRequestFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ServiceRequestToJson(_$_ServiceRequest instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'identifier': instance.identifier,
       'note': instance.note,
       'patientInstruction': instance.patientInstruction,
       'bodySite': _$BodySiteEnumMap[instance.bodySite],
@@ -412,7 +404,7 @@ const _$RequestPriorityEnumMap = {
 
 _$_Communication _$$_CommunicationFromJson(Map<String, dynamic> json) =>
     _$_Communication(
-      id: json['id'],
+      id: json['id'] as int?,
       status: json['status'],
       statusReason: json['statusReason'],
       category: json['category'],
@@ -443,7 +435,7 @@ Map<String, dynamic> _$$_CommunicationToJson(_$_Communication instance) =>
     };
 
 _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       statusDate:
           const TimestampConverter().fromJson(json['statusDate'] as String?),
       statusReason: json['statusReason'] as String?,
@@ -452,7 +444,9 @@ _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
       lifecycleStatus: $enumDecodeNullable(
           _$GoalLifecycleStatusEnumMap, json['lifecycleStatus']),
       category: $enumDecodeNullable(_$GoalCategoryEnumMap, json['category']),
-      outcome: $enumDecodeNullable(_$GoalOutcomeEnumMap, json['outcome']),
+      outcome: (json['outcome'] as List<dynamic>?)
+          ?.map((e) => GoalOutcomeModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       startDate:
           const TimestampConverter().fromJson(json['startDate'] as String?),
       dueDate: const TimestampConverter().fromJson(json['dueDate'] as String?),
@@ -468,10 +462,10 @@ Map<String, dynamic> _$$_GoalToJson(_$_Goal instance) => <String, dynamic>{
       'achievementStatus': _$GoalAchievementEnumMap[instance.achievementStatus],
       'lifecycleStatus': _$GoalLifecycleStatusEnumMap[instance.lifecycleStatus],
       'category': _$GoalCategoryEnumMap[instance.category],
-      'outcome': _$GoalOutcomeEnumMap[instance.outcome],
+      'outcome': instance.outcome?.map((e) => e.toJson()).toList(),
       'startDate': const TimestampConverter().toJson(instance.startDate),
       'dueDate': const TimestampConverter().toJson(instance.dueDate),
-      'targets': instance.targets,
+      'targets': instance.targets?.map((e) => e.toJson()).toList(),
     };
 
 const _$GoalAchievementEnumMap = {
@@ -501,6 +495,19 @@ const _$GoalLifecycleStatusEnumMap = {
 const _$GoalCategoryEnumMap = {
   GoalCategory.TREATMENT: 'TREATMENT',
 };
+
+_$_GoalOutcomeModel _$$_GoalOutcomeModelFromJson(Map<String, dynamic> json) =>
+    _$_GoalOutcomeModel(
+      id: json['id'] as int?,
+      goalOutcome:
+          $enumDecodeNullable(_$GoalOutcomeEnumMap, json['goalOutcome']),
+    );
+
+Map<String, dynamic> _$$_GoalOutcomeModelToJson(_$_GoalOutcomeModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'goalOutcome': _$GoalOutcomeEnumMap[instance.goalOutcome],
+    };
 
 const _$GoalOutcomeEnumMap = {
   GoalOutcome.GLASSES_PRESCRIBED: 'GLASSES_PRESCRIBED',

@@ -1,16 +1,19 @@
+import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/services/file_ms_service.dart';
+import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 class TriageEyeScanProvider with ChangeNotifier {
   final SaveTriageEyeScanLocallyUseCase _saveTriageEyeScanLocallyUseCase;
   TriageEyeType _currentEye;
-  final String _patientID;
+  final FileMsService _fileMsService;
+  final NetworkInfo _networkInfo;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
@@ -18,8 +21,9 @@ class TriageEyeScanProvider with ChangeNotifier {
 
   TriageEyeScanProvider(
     this._saveTriageEyeScanLocallyUseCase,
+    this._fileMsService,
     this._currentEye,
-    this._patientID,
+    this._networkInfo,
   );
 
   TriageEyeType get currentEye => _currentEye;
@@ -29,16 +33,19 @@ class TriageEyeScanProvider with ChangeNotifier {
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
+    uploadImage(image, TriageEyeType.LEFT);
     notifyListeners();
   }
 
   void setRightEyeImage(XFile image) {
     _rightEyeImage = image;
+    uploadImage(image, TriageEyeType.RIGHT);
     notifyListeners();
   }
 
   void setBothEyeImage(XFile image) {
     _bothEyeImage = image;
+    uploadImage(image, TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -50,7 +57,7 @@ class TriageEyeScanProvider with ChangeNotifier {
   Future<void> saveTriageEyeScanResponseToDB() async {
     final response = await _saveTriageEyeScanLocallyUseCase.call(
       SaveTriageEyeScanLocallyParam(
-        postImagingSelectionModel: getTriageEyeScanResponse(),
+        postImagingSelectionModel: await getTriageEyeScanResponse(),
       ),
     );
     response.fold(
@@ -71,44 +78,119 @@ class TriageEyeScanProvider with ChangeNotifier {
     return 1;
   }
 
-  /// set triage eye scan response based on the TriageAssessment model
-  List<PostImagingSelectionModel> getTriageEyeScanResponse() {
-    XFile XleftEyeImage = _leftEyeImage!;
-    XFile XrightEyeImage = _rightEyeImage!;
+  Future<List<PostTriageImagingSelectionModel>>
+      getTriageEyeScanResponse() async {
+    List<PostTriageImagingSelectionModel> mediaCaptureList = [];
 
-    List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(PostImagingSelectionModel(
-      identifier: 70000001,
-      endpoint: getUniqueFileName(XleftEyeImage.name),
-      baseUrl: XleftEyeImage.mimeType,
-      score: 1,
-    ));
-    mediaCaptureList.add(PostImagingSelectionModel(
-      identifier: 70000002,
-      endpoint: getUniqueFileName(XrightEyeImage.name),
-      baseUrl: XrightEyeImage.mimeType,
-      score: 1,
-    ));
-
-    return mediaCaptureList;
+    if (await _networkInfo.isConnected()) {
+      Map<String, String> leftEyeData = parseUrl(leftImageUrl);
+      Map<String, String> rightEyeData = parseUrl(rightImageUrl);
+      mediaCaptureList.add(
+        PostTriageImagingSelectionModel(
+            identifier: 70000001,
+            endpoint: leftEyeData["endPoint"],
+            baseUrl: leftEyeData["baseUrl"],
+            score: 0,
+            fileId: rightEyeData["fileId"]),
+      );
+      mediaCaptureList.add(
+        PostTriageImagingSelectionModel(
+          identifier: 70000002,
+          endpoint: rightEyeData["endPoint"],
+          baseUrl: rightEyeData["baseUrl"],
+          score: 0,
+          fileId: rightEyeData["fileId"],
+        ),
+      );
+      logger.d({"getTriageEyeScanResponse": mediaCaptureList});
+      return mediaCaptureList;
+    } else {
+      //TODO:: handle no internet image
+      logger.d({"getTriageEyeScanResponse": "No Internet"});
+      return mediaCaptureList;
+    }
   }
 
-  String generateUniqueKey() {
-    String uuid = const Uuid().v4();
-    String key = "WA${uuid.substring(0, 6)}";
-    return key;
+  String leftImageUrl = "";
+  String rightImageUrl = "";
+  String bothImageUrl = "";
+
+  void uploadImage(XFile image, TriageEyeType currentEye) async {
+    logger.f({
+      "uploadImage": "called",
+      "image": image.name,
+      "currentEye": currentEye,
+    });
+    if (await _networkInfo.isConnected()) {
+      try {
+        final response = await _fileMsService.uploadImage(File(image.path));
+        logger.d({"response": response});
+        if (currentEye == TriageEyeType.LEFT) {
+          leftImageUrl = response;
+          logger.d({"eyeTypeLeft": leftImageUrl});
+        } else if (currentEye == TriageEyeType.RIGHT) {
+          rightImageUrl = response;
+          logger.d({"eyeTypeRight": rightImageUrl});
+        } else {
+          bothImageUrl = response;
+        }
+
+        notifyListeners();
+      } catch (e) {
+        logger.d({"uploadImage Error": e});
+      }
+    } else {
+      logger.d({"upload Image": "No Internet"});
+      return;
+    }
   }
 
-  String getUniqueFileName(String fileName) {
-    String uniqueKey = generateUniqueKey();
-    return "${_patientID}_$fileName-$uniqueKey";
+  Map<String, String> parseUrl(String url) {
+    Map<String, String> mp = {};
+    String baseUrl = "";
+    String endpoint = "";
+    String fileId = "";
+    int slashcount = 0;
+    for (int i = 0; i < url.length; i++) {
+      if (url[i] == '/') {
+        slashcount++;
+      }
+      if (slashcount < 3) {
+        baseUrl += url[i];
+      } else {
+        endpoint += url[i];
+      }
+    }
+
+    for (int i = endpoint.length - 1; i >= 0; i--) {
+      if (endpoint[i] == '/') {
+        break;
+      }
+
+      fileId += endpoint[i];
+    }
+    fileId = reverseFileId(fileId);
+
+    mp["baseUrl"] = baseUrl;
+    mp["endPoint"] = endpoint;
+    mp["fileId"] = fileId;
+
+    return mp;
+  }
+
+  String reverseFileId(String input) {
+    String reversed = '';
+    for (int i = input.length - 1; i >= 0; i--) {
+      reversed += input[i];
+    }
+    return reversed;
   }
 }
 
 var triageEyeScanProvider = ChangeNotifierProvider(
   (ref) => TriageEyeScanProvider(
-    ref.watch(saveTriageEyeScanLocallyUseCase),
-    TriageEyeType.RIGHT,
-    "99000001",
-  ),
+      ref.watch(saveTriageEyeScanLocallyUseCase),
+      ref.watch(fileMsServiceProvider),
+      TriageEyeType.RIGHT,
+      ref.watch(connectivityProvider)),
 );

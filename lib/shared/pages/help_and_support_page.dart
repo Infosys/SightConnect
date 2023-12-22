@@ -84,7 +84,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      '1800 1800 1800',
+                      '1800 1211 00411',
                       style: applyFiraSansFont(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,

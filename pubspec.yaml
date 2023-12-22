@@ -33,7 +33,6 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_secure_storage: ^8.0.0
   dio: ^5.3.2
-  easy_stepper: ^0.8.1
   flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.3.8
   google_fonts: any
@@ -70,15 +69,21 @@ dependencies:
   fluttertoast: ^8.2.2
   device_info_plus: ^9.1.0
   flutter_jailbreak_detection: ^1.10.0
+  file_picker: ^5.5.0
+  easy_stepper: ^0.8.3
+  pie_chart: ^5.4.0
+  data_table_2: ^2.5.9
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
   snowplow_tracker: ^0.5.0
   equatable: ^2.0.5
+  image_picker: ^1.0.5
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
   superapp_scanner:
     path: packages/superapp_scanner/
+
 
 
 flutter_launcher_icons:
@@ -114,8 +119,11 @@ flutter:
     - assets/services/
     - assets/new_assessment.json
     - assets/profile.json
+    - assets/triage_update_response.json
     - assets/triage_assessment.json
     - assets/miniapps/vt_register_patient.zip
+    - assets/vision_centers.json
+    - assets/vt_patient.json
   
   #   - images/a_dot_ham.jpeg
 

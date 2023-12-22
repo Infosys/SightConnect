@@ -14,26 +14,27 @@ class WebViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
-      automaticallyImplyLeading: false,
+      leading: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
+          size: 20,
+        ),
+        onPressed: onBack,
+      ),
       toolbarHeight: 45,
       leadingWidth: 25,
       titleSpacing: 0,
-      leading: IconButton(
-        onPressed: onBack,
-        padding: const EdgeInsets.all(0),
-        icon: const Icon(
-          Icons.keyboard_double_arrow_left,
-          size: 20,
-          color: Colors.white,
+      title: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Text(
+          title ?? "",
+          style: const TextStyle(fontSize: 14, color: Colors.white),
         ),
-      ),
-      title: Text(
-        title ?? "",
-        style: const TextStyle(fontSize: 14, color: Colors.white),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(45);
+  Size get preferredSize => const Size.fromHeight(50);
 }

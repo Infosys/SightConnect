@@ -28,25 +28,29 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     final endpoint =
         "/services/triage/api/triage/triage-report?patient-id=$patientId";
 
-    final response = await dio.get(endpoint);
+    try {
+      final response = await dio.get(endpoint);
 
-    if (response.statusCode! >= 200 && response.statusCode! < 210) {
-      List<TriageDetailedReportModel> triageReports = [];
-      response.data.forEach(
-        (element) {
-          triageReports.add(TriageDetailedReportModel.fromJson(element));
-        },
-      );
-      return triageReports;
-    } else {
-      throw ServerException();
+      if (response.statusCode! >= 200 && response.statusCode! < 210) {
+        List<TriageDetailedReportModel> triageReports = [];
+        response.data.forEach(
+          (element) {
+            triageReports.add(TriageDetailedReportModel.fromJson(element));
+          },
+        );
+        return triageReports;
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 
   @override
   Future<TriageDetailedReportModel> getTriageReportByReportId(
       int reportId) async {
-    final endpoint = "/services/triage/api/$reportId/triage-report/details";
+    final endpoint = "/services/triage/api/triage-report/$reportId/details";
 
     final response = await dio.get(endpoint);
 

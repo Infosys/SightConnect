@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_questionnaire_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../domain/models/triage_response_model.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageQuestionnaireProvider(
@@ -16,9 +16,9 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   final SaveTriageQuestionnaireLocallyUseCase
       _saveTriageQuestionnaireLocallyUseCase;
   late String _questionnaireRemarks;
-  late final Map<int, int> _selectedOptions;
+  late final Map<int, Map> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-  final List<PostQuestionResponseModel> _questionResponseList = [];
+  final List<PostTriageQuestionModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
 
   TriageQuestionnaireProvider(this._saveTriageQuestionnaireLocallyUseCase)
@@ -28,7 +28,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
         _questionnaireResponse = [];
 
   String get questionnaireRemarks => _questionnaireRemarks;
-  Map<int, int> get selectedOptions => _selectedOptions;
+  Map<int, Map> get selectedOptions => _selectedOptions;
   List<QuestionnaireItemFHIRModel> get questionnaireSections =>
       _questionnaireSections;
   List<Map<int, bool>> get finalquestionnaireResponse => _questionnaireResponse;
@@ -42,8 +42,14 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     _questionnaireSections = data;
   }
 
-  void addQuestionnaireAnswer(int questionCode, bool answer, int score) {
-    _selectedOptions[questionCode] = score;
+  void addQuestionnaireAnswer(
+      int questionCode, String answer, int score, int answerCode) {
+    _selectedOptions[questionCode] = {
+      "answer": answer,
+      "score": score,
+      "answerCode": answerCode,
+    };
+
     notifyListeners();
     logger.d({
       "Added Options: $_selectedOptions",
@@ -69,42 +75,68 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   }
 
   void saveQuestionaireResponse() {
-    Map<int, bool> selectedOptionsList = {};
-    _selectedOptions.forEach((key, value) {
-      selectedOptionsList[key] = true;
-    });
-    _questionnaireResponse.add(selectedOptionsList);
-    addtoFinalResponse(_selectedOptions);
-    logger.d("Questionnaire Response: $_selectedOptions");
-    _selectedOptions.clear();
-    notifyListeners();
+    try {
+      _selectedOptions.forEach(
+        (questionCode, result) {
+          _questionResponseList.add(
+            PostTriageQuestionModel(
+              linkId: questionCode,
+              score: result["score"]
+                  .toDouble(), //For our use case answer can be yes or no so overall score will be same as answer score
+              answers: [
+                PostTriageAnswerModel(
+                  value: result["answer"],
+                  score: result["score"].toDouble(),
+                  answerCode: result["answerCode"],
+                )
+              ],
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      logger.e(e);
+    }
   }
 
-  void addtoFinalResponse(selectedOptions) {
-    selectedOptions.forEach(
-      (key, score) {
-        _questionResponseList.add(
-          PostQuestionResponseModel(
-            linkId: key,
-            score: 1,
-            answer: [
-              PostAnswerModel(
-                value: "YES",
-                score: double.parse(score.toString()),
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // void saveQuestionaireResponse() {
+  //   Map<int, bool> selectedOptionsList = {};
+  //   _selectedOptions.forEach((key, value) {
+  //     selectedOptionsList[key] = true;
+  //   });
+  //   _questionnaireResponse.add(selectedOptionsList);
+  //   addtoFinalResponse(_selectedOptions);
+  //   logger.d("Questionnaire Response: $_selectedOptions");
+  //   _selectedOptions.clear();
+  //   notifyListeners();
+  // }
 
-  List<PostQuestionResponseModel> getQuestionaireResponse() {
+  // void addtoFinalResponse(selectedOptions) {
+  //   selectedOptions.forEach(
+  //     (key, score) {
+  //       _questionResponseList.add(
+  //         PostTriageQuestionModel(
+  //           linkId: key,
+  //           score: 1,
+  //           answer: [
+  //             PostAnswerModel(
+  //               value: "Yes",
+  //               score: double.parse(score.toString()),
+  //             )
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  List<PostTriageQuestionModel> getQuestionaireResponse() {
     return _questionResponseList;
   }
 
   Future<void> saveQuestionaireResponseToDB() async {
     final response = getQuestionaireResponse();
+    logger.f({"Questionnaire Response to local db": response});
     await _saveTriageQuestionnaireLocallyUseCase.call(
       SaveTriageQuestionnaireLocallyParam(
         triageQuestionnaireResponse: response,

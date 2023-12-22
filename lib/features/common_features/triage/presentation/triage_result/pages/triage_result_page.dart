@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
@@ -21,17 +21,19 @@ class TriageResultPage extends ConsumerWidget {
     required this.triageResult,
     super.key,
   });
-  final TriageResponseModel triageResult;
+  final TriagePostModel triageResult;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageResultProvider(triageResult));
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) async {
+        if (value) {
+          return;
+        }
         ref.read(resetProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
-
-        return true;
       },
       child: Scaffold(
         appBar: CustomAppbar(
@@ -57,9 +59,9 @@ class TriageResultPage extends ConsumerWidget {
               children: [
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
-                  id: "${model.profile.patient?.abhaNumber ?? ""}",
-                  name: model.profile.patient?.name ?? "",
-                  patientImage: model.profile.patient?.profilePhoto ?? "",
+                  id: model.profile.patient?.abhaNumber,
+                  name: model.profile.patient?.name,
+                  patientImage: model.profile.patient?.profilePhoto,
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(

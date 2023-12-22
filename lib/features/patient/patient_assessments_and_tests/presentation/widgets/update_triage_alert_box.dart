@@ -1,17 +1,41 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_card_provider.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_scan_page.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UpdateTriageAlertBox extends ConsumerWidget {
-  const UpdateTriageAlertBox({super.key});
-
+class UpdateTriageAlertBox extends HookConsumerWidget {
+  const UpdateTriageAlertBox({
+    required this.result,
+    required this.diagnosticReportID,
+    super.key,
+  });
+  final List<UpdateTriageReportAlertBoxEntity> result;
+  final int diagnosticReportID;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(patientAssessmentCardProvider);
+    final navigator = Navigator.of(context);
+
+    if (result.isEmpty) {
+      return BlurDialogBox(
+        title: const Text(''),
+        content: const Text('Not Available at this moment'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              navigator.pop();
+            },
+            child: const Text('OK'),
+          )
+        ],
+      );
+    }
 
     return BlurDialogBox(
       title: Row(
@@ -29,134 +53,55 @@ class UpdateTriageAlertBox extends ConsumerWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          UpdateTriageAlertBoxListOptoion(
-            title: 'Eye Assessment Questions',
-            subtitle: 'Completed',
-            subtitlecolor: AppColor.green,
-            chipText: 'Routine Checkup',
-            chipColor: AppColor.green,
-            isSelected: model.isQuestionnaireSelected,
-            onPressed: (value) {
-              model.setQuestionnaireSelected = value;
-            },
-          ),
-          UpdateTriageAlertBoxListOptoion(
-            title: 'Visual Acuity Test',
-            subtitle: 'Partially Completed',
-            subtitlecolor: AppColor.grey,
-            chipText: 'N/A',
-            chipColor: AppColor.grey,
-            isSelected: model.isVisualAcuitySelected,
-            onPressed: (value) {
-              model.setVisualAcuitySelected = value;
-            },
-          ),
-          UpdateTriageAlertBoxListOptoion(
-            title: 'Eye Scan',
-            subtitle: 'Pending',
-            subtitlecolor: AppColor.orange,
-            chipText: 'Urgent Consult',
-            chipColor: AppColor.red,
-            isSelected: model.isEyeScanned,
-            onPressed: (value) {
-              model.setEyeScanned = value;
-            },
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              ElevatedButton(
+        children: result
+            .map(
+              (e) => UpdateTriageAlertBoxListOptoion(
+                title: e.title,
+                subtitle: e.subtitle,
+                subtitlecolor: e.subtitlecolor,
+                chipText: e.chipText,
+                chipColor: e.chipColor,
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  switch (e.testType) {
+                    case TestType.QUESTIONNAIRE:
+                      navigator.pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return UpdateTriageQuestionnairePage(
+                              reportId: diagnosticReportID,
+                            );
+                          },
+                        ),
+                      );
+                      break;
+                    case TestType.OBSERVATION:
+                      ref.read(globalProvider).setVAMode =
+                          VisionAcuityMode.UPDATE;
+                      ref.read(tumblingTestProvider).setDiagnosticReportId =
+                          diagnosticReportID;
+                      navigator.pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const VisualAcuityTumblingPage(),
+                        ),
+                      );
+                      break;
+                    case TestType.IMAGE:
+                      navigator.pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => UpdateTriageEyeScanPage(
+                            diagnosticReportId: diagnosticReportID,
+                          ),
+                        ),
+                      );
+                      break;
+                  }
                 },
-                child: const Text('Start'),
-              ),
-              const SizedBox(width: AppSize.kmwidth),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cancel'),
-              ),
-            ],
-          ),
-        ],
-      ),
-      actions: const [],
-    );
-  }
-}
-
-class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final Color subtitlecolor;
-  final String chipText;
-  final Color chipColor;
-  final Function(bool) onPressed;
-  final bool isSelected;
-  const UpdateTriageAlertBoxListOptoion({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.subtitlecolor,
-    required this.chipText,
-    required this.chipColor,
-    required this.onPressed,
-    required this.isSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      width: AppSize.width(context) * 0.88,
-      child: CheckboxListTile(
-        contentPadding: const EdgeInsets.all(0),
-        controlAffinity: ListTileControlAffinity.leading,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Text(
-                title,
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.black,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: chipColor,
-              ),
-              child: Text(
-                chipText,
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.white,
-                ),
               ),
             )
-          ],
-        ),
-        subtitle: Text(
-          subtitle,
-          style: TextStyle(
-            color: subtitlecolor,
-          ),
-        ),
-        value: isSelected,
-        onChanged: (value) {
-          onPressed(value!);
-        },
+            .toList(),
       ),
+      actions: const [],
     );
   }
 }

@@ -1,0 +1,328 @@
+[
+    {
+        "organizationProfileId": 0,
+        "trackingId": "string",
+        "facilityId": "string",
+        "facilityType": "PRIMARY",
+        "tenant": {
+          "id": 0,
+          "name": "string"
+        },
+        "facilityInformation": {
+          "facilityName": "LV Prasad Eye Institute",
+          "ownershipCode": "string",
+          "ownershipSubTypeCode": "string",
+          "ownershipSubTypeCode2": "string",
+          "facilityAddressDetails": {
+            "country": "India",
+            "stateLGDCode": "string",
+            "districtLGDCode": "string",
+            "subDistrictLGDCode": "string",
+            "facilityRegion": "Hyderabad",
+            "villageCityTownLGDCode": "string",
+            "addressLine1": "Banjara Hills, Road No: 1",
+            "addressLine2": "string",
+            "latitude": "string",
+            "longitude": "string",
+            "osid": "string",
+            "pincode": "500072"
+          },
+          "facilityContactInformation": {
+            "facilityContactNumber": "9283746501",
+            "facilityEmailId": "string",
+            "facilityLandlineNumber": "string",
+            "facilityStdCode": "string",
+            "websiteLink": "string",
+            "osid": "string"
+          },
+          "systemOfMedicineCode": "string",
+          "facilityTypeCode": "string",
+          "facilitySubType": "string",
+          "specialityTypeCode": "string",
+          "typeOfServiceCode": "string",
+          "facilityOperationalStatus": "string",
+          "facilityUploads": {
+            "facilityBoardPhoto": {
+              "name": "string",
+              "value": "string",
+              "osid": "string"
+            },
+            "facilityBuildingPhoto": {
+              "name": "string",
+              "value": "string",
+              "osid": "string"
+            },
+            "osid": "string"
+          },
+          "facilityAddressProof": [
+            {
+              "addressProofType": "string",
+              "addressProofAttachment": {
+                "name": "string",
+                "value": "string",
+                "osid": "string"
+              },
+              "osid": "string"
+            }
+          ],
+          "timingsOfFacility": [
+            {
+              "workingDays": "string",
+              "openingHours": "string",
+              "osid": "string"
+            }
+          ],
+          "abdmCompliantSoftware": [
+            {
+              "existingSoftwares": [
+                "string"
+              ],
+              "anyOther": "string",
+              "osid": "string"
+            }
+          ]
+        },
+        "facilityAdditionalInformation": {
+          "trackingId": "string",
+          "generalInformation": {
+            "hasDialysisCenter": "true",
+            "hasPharmacy": "true",
+            "hasBloodBank": "true",
+            "hasCathLab": "true",
+            "hasDiagnosticLab": "true",
+            "hasImagingCenter": "true",
+            "servicesByImagingCenter": [
+              {
+                "service": "string",
+                "count": 0
+              }
+            ]
+          },
+          "linkedProgramIds": {
+            "nhrrId": "string",
+            "nin": "string",
+            "abpmjayId": "string",
+            "rohiniId": "string",
+            "echsId": "string",
+            "cghsId": "string",
+            "ceaRegistration": "string",
+            "stateInsuranceSchemeId": "string"
+          }
+        },
+        "facilityDetailedInformation": {
+          "trackingId": "string",
+          "specialities": [
+            {
+              "systemOfMedicineCode": "string",
+              "isSpecializationAvailable": "string",
+              "specialities": [
+                "string"
+              ]
+            }
+          ],
+          "medicalInfrastructure": {
+            "countHDUBedsWithFunctionalVentilators": 0,
+            "countIPDBedsWithoutOxygen": 0,
+            "countIPDBedsWithOxygen": 0,
+            "countICUBedsWithVentilators": 0,
+            "countICUBedsWithoutVentilators": 0,
+            "countHDUBedsWithVentilators": 0,
+            "countHDUBedsWithoutVentilators": 0,
+            "totalNumberOfVentilators": 0,
+            "countDayCareBedsWithoutOxygen": 0,
+            "countDayCareBedsWithOxygen": 0,
+            "countDentalChairs": 0,
+            "totalNumberOfBeds": 0
+          },
+          "pharmacyDetails": {
+            "isJanAushadhiKendra": "string",
+            "janAushadhiKendraId": "string",
+            "drugLicenseNumber": "string",
+            "pharmacyGstinNumber": "string",
+            "pharmacistRegistrationNumber": "string"
+          },
+          "bloodBankDetails": {
+            "isFacilityRegisteredInERaktkosh": "string",
+            "geteRaktoshId": "string",
+            "bloodBankLicenseNumber": "string",
+            "bloodStorageCenters": "string",
+            "storageCentersCount": 0,
+            "bloodCollectedPerAnnum": "string",
+            "bloodRequiredPerAnnum": "string"
+          },
+          "imagingServices": [
+            {
+              "service": "string",
+              "count": 0
+            }
+          ],
+          "diagnosticServices": [
+            "string"
+          ]
+        },
+        "osid": "string"
+      },
+      {
+        "organizationProfileId": 0,
+        "trackingId": "string",
+        "facilityId": "string",
+        "facilityType": "PRIMARY",
+        "tenant": {
+          "id": 0,
+          "name": "string"
+        },
+        "facilityInformation": {
+          "facilityName": "LV Prasad Hospital",
+          "ownershipCode": "string",
+          "ownershipSubTypeCode": "string",
+          "ownershipSubTypeCode2": "string",
+          "facilityAddressDetails": {
+            "country": "string",
+            "stateLGDCode": "string",
+            "districtLGDCode": "string",
+            "subDistrictLGDCode": "string",
+            "facilityRegion": "string",
+            "villageCityTownLGDCode": "string",
+            "addressLine1": "Panjagutta cross roads",
+            "addressLine2": "Beside kalaniketan",
+            "latitude": "string",
+            "longitude": "string",
+            "osid": "string",
+            "pincode": "590874"
+          },
+          "facilityContactInformation": {
+            "facilityContactNumber": "9087654321",
+            "facilityEmailId": "string",
+            "facilityLandlineNumber": "string",
+            "facilityStdCode": "string",
+            "websiteLink": "string",
+            "osid": "string"
+          },
+          "systemOfMedicineCode": "string",
+          "facilityTypeCode": "string",
+          "facilitySubType": "string",
+          "specialityTypeCode": "string",
+          "typeOfServiceCode": "string",
+          "facilityOperationalStatus": "string",
+          "facilityUploads": {
+            "facilityBoardPhoto": {
+              "name": "string",
+              "value": "string",
+              "osid": "string"
+            },
+            "facilityBuildingPhoto": {
+              "name": "string",
+              "value": "string",
+              "osid": "string"
+            },
+            "osid": "string"
+          },
+          "facilityAddressProof": [
+            {
+              "addressProofType": "string",
+              "addressProofAttachment": {
+                "name": "string",
+                "value": "string",
+                "osid": "string"
+              },
+              "osid": "string"
+            }
+          ],
+          "timingsOfFacility": [
+            {
+              "workingDays": "string",
+              "openingHours": "string",
+              "osid": "string"
+            }
+          ],
+          "abdmCompliantSoftware": [
+            {
+              "existingSoftwares": [
+                "string"
+              ],
+              "anyOther": "string",
+              "osid": "string"
+            }
+          ]
+        },
+        "facilityAdditionalInformation": {
+          "trackingId": "string",
+          "generalInformation": {
+            "hasDialysisCenter": "true",
+            "hasPharmacy": "true",
+            "hasBloodBank": "true",
+            "hasCathLab": "true",
+            "hasDiagnosticLab": "string",
+            "hasImagingCenter": "string",
+            "servicesByImagingCenter": [
+              {
+                "service": "string",
+                "count": 0
+              }
+            ]
+          },
+          "linkedProgramIds": {
+            "nhrrId": "string",
+            "nin": "string",
+            "abpmjayId": "string",
+            "rohiniId": "string",
+            "echsId": "string",
+            "cghsId": "string",
+            "ceaRegistration": "string",
+            "stateInsuranceSchemeId": "string"
+          }
+        },
+        "facilityDetailedInformation": {
+          "trackingId": "string",
+          "specialities": [
+            {
+              "systemOfMedicineCode": "string",
+              "isSpecializationAvailable": "string",
+              "specialities": [
+                "string"
+              ]
+            }
+          ],
+          "medicalInfrastructure": {
+            "countHDUBedsWithFunctionalVentilators": 0,
+            "countIPDBedsWithoutOxygen": 0,
+            "countIPDBedsWithOxygen": 0,
+            "countICUBedsWithVentilators": 0,
+            "countICUBedsWithoutVentilators": 0,
+            "countHDUBedsWithVentilators": 0,
+            "countHDUBedsWithoutVentilators": 0,
+            "totalNumberOfVentilators": 0,
+            "countDayCareBedsWithoutOxygen": 0,
+            "countDayCareBedsWithOxygen": 0,
+            "countDentalChairs": 0,
+            "totalNumberOfBeds": 0
+          },
+          "pharmacyDetails": {
+            "isJanAushadhiKendra": "string",
+            "janAushadhiKendraId": "string",
+            "drugLicenseNumber": "string",
+            "pharmacyGstinNumber": "string",
+            "pharmacistRegistrationNumber": "string"
+          },
+          "bloodBankDetails": {
+            "isFacilityRegisteredInERaktkosh": "string",
+            "geteRaktoshId": "string",
+            "bloodBankLicenseNumber": "string",
+            "bloodStorageCenters": "string",
+            "storageCentersCount": 0,
+            "bloodCollectedPerAnnum": "string",
+            "bloodRequiredPerAnnum": "string"
+          },
+          "imagingServices": [
+            {
+              "service": "string",
+              "count": 0
+            }
+          ],
+          "diagnosticServices": [
+            "string"
+          ]
+        },
+        "osid": "string"
+      }
+]

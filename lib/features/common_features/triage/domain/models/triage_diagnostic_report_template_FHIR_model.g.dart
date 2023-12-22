@@ -45,10 +45,11 @@ Map<String, dynamic> _$$_DiagnosticReportTemplateFHIRModelToJson(
       'bodySite': _$BodySiteEnumMap[instance.bodySite],
       'code': _$TestCodeEnumMap[instance.code],
       'version': instance.version,
-      'study': instance.study,
-      'observations': instance.observations,
-      'questionnaire': instance.questionnaire,
-      'observationValueWeight': instance.observationValueWeight,
+      'study': instance.study?.toJson(),
+      'observations': instance.observations?.toJson(),
+      'questionnaire': instance.questionnaire?.toJson(),
+      'observationValueWeight':
+          instance.observationValueWeight?.map((e) => e.toJson()).toList(),
     };
 
 const _$CategoryEnumMap = {
@@ -88,8 +89,10 @@ Map<String, dynamic> _$$_ImagingStudyFHIRModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
-      'imagingSelectionTemplate': instance.imagingSelectionTemplate,
-      'languageBasedText': instance.languageBasedText,
+      'imagingSelectionTemplate':
+          instance.imagingSelectionTemplate?.map((e) => e.toJson()).toList(),
+      'languageBasedText':
+          instance.languageBasedText?.map((e) => e.toJson()).toList(),
     };
 
 _$_ImagingSelectionTemplateFHIRModel
@@ -116,7 +119,7 @@ Map<String, dynamic> _$$_ImagingSelectionTemplateFHIRModelToJson(
       'type': _$MediaTypeEnumMap[instance.type],
       'maxSize': instance.maxSize,
       'fileType': _$FileTypeEnumMap[instance.fileType],
-      'relatedImage': instance.relatedImage,
+      'relatedImage': instance.relatedImage?.map((e) => e.toJson()).toList(),
     };
 
 const _$MediaTypeEnumMap = {
@@ -199,11 +202,14 @@ Map<String, dynamic> _$$_ObservationDefinitionFHIRModelToJson(
       'code': _$ObservationCodeEnumMap[instance.code],
       'method': _$ObservationMethodEnumMap[instance.method],
       'jurisdiction': _$JurisdictionEnumMap[instance.jurisdiction],
-      'observationDefinition': instance.observationDefinition,
-      'dataComponent': instance.dataComponent,
-      'relatedImage': instance.relatedImage,
-      'qualifiedValue': instance.qualifiedValue,
-      'languageBasedText': instance.languageBasedText,
+      'observationDefinition':
+          instance.observationDefinition?.map((e) => e.toJson()).toList(),
+      'dataComponent': instance.dataComponent?.map((e) => e.toJson()).toList(),
+      'relatedImage': instance.relatedImage?.map((e) => e.toJson()).toList(),
+      'qualifiedValue':
+          instance.qualifiedValue?.map((e) => e.toJson()).toList(),
+      'languageBasedText':
+          instance.languageBasedText?.map((e) => e.toJson()).toList(),
     };
 
 const _$ObservationCategoryEnumMap = {
@@ -285,7 +291,8 @@ Map<String, dynamic> _$$_DataComponentFHIRModelToJson(
       'permittedDataType':
           _$PermittedDataTypeEnumMap[instance.permittedDataType],
       'permittedUnit': _$PermittedUnitEnumMap[instance.permittedUnit],
-      'qualifiedValue': instance.qualifiedValue,
+      'qualifiedValue':
+          instance.qualifiedValue?.map((e) => e.toJson()).toList(),
     };
 
 const _$PermittedDataTypeEnumMap = {
@@ -335,9 +342,9 @@ Map<String, dynamic> _$$_QualifiedValueModelToJson(
       'value': instance.value,
       'rangeCategory': _$RangeCategoryEnumMap[instance.rangeCategory],
       'gender': _$GenderEnumMap[instance.gender],
-      'range': instance.range,
-      'observationDefinition': instance.observationDefinition,
-      'dataComponent': instance.dataComponent,
+      'range': instance.range?.toJson(),
+      'observationDefinition': instance.observationDefinition?.toJson(),
+      'dataComponent': instance.dataComponent?.toJson(),
     };
 
 const _$RangeCategoryEnumMap = {
@@ -347,12 +354,16 @@ const _$RangeCategoryEnumMap = {
 };
 
 const _$GenderEnumMap = {
+  Gender.Male: 'Male',
+  Gender.Female: 'Female',
+  Gender.Other: 'Other',
   Gender.MALE: 'MALE',
   Gender.FEMALE: 'FEMALE',
   Gender.OTHER: 'OTHER',
   Gender.M: 'M',
   Gender.F: 'F',
   Gender.O: 'O',
+  Gender.Unknown: 'Unknown',
 };
 
 _$_RangeModel _$$_RangeModelFromJson(Map<String, dynamic> json) =>
@@ -390,7 +401,7 @@ Map<String, dynamic> _$$_DataComponentModelToJson(
       'permittedDataType':
           _$PermittedDataTypeEnumMap[instance.permittedDataType],
       'permittedUnit': _$PermittedUnitEnumMap[instance.permittedUnit],
-      'observationDefinition': instance.observationDefinition,
+      'observationDefinition': instance.observationDefinition?.toJson(),
     };
 
 _$_QuestionnaireFHIRModel _$$_QuestionnaireFHIRModelFromJson(
@@ -454,8 +465,9 @@ Map<String, dynamic> _$$_QuestionnaireFHIRModelToJson(
       'publisherCode':
           const TimestampConverter().toJson(instance.publisherCode),
       'publisherType': instance.publisherType,
-      'questionnaire': instance.questionnaire,
-      'questionnaireItem': instance.questionnaireItem,
+      'questionnaire': instance.questionnaire?.toJson(),
+      'questionnaireItem':
+          instance.questionnaireItem?.map((e) => e.toJson()).toList(),
     };
 
 const _$QuestionnaireStatusEnumMap = {
@@ -573,6 +585,10 @@ _$_QuestionnaireItemFHIRModel _$$_QuestionnaireItemFHIRModelFromJson(
           ?.map(
               (e) => AnswerItemWeightModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      relatedImage: (json['relatedImage'] as List<dynamic>?)
+          ?.map(
+              (e) => RelatedImageFHIRModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
@@ -590,14 +606,16 @@ Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
       'maxlength': instance.maxlength,
       'disabledDisplay': _$DisabledDisplayEnumMap[instance.disabledDisplay],
       'answerConstraint': _$AnswerConstraintEnumMap[instance.answerConstraint],
-      'ansewrValueSet': instance.ansewrValueSet,
-      'initial': instance.initial,
-      'questionnaire': instance.questionnaire,
-      'questionnaireItem': instance.questionnaireItem,
-      'actionOn': instance.actionOn,
-      'answerOption': instance.answerOption,
-      'enableWhen': instance.enableWhen,
-      'answerItemWeight': instance.answerItemWeight,
+      'ansewrValueSet': instance.ansewrValueSet?.toJson(),
+      'initial': instance.initial?.toJson(),
+      'questionnaire': instance.questionnaire?.toJson(),
+      'questionnaireItem': instance.questionnaireItem?.toJson(),
+      'actionOn': instance.actionOn?.map((e) => e.toJson()).toList(),
+      'answerOption': instance.answerOption?.map((e) => e.toJson()).toList(),
+      'enableWhen': instance.enableWhen?.map((e) => e.toJson()).toList(),
+      'answerItemWeight':
+          instance.answerItemWeight?.map((e) => e.toJson()).toList(),
+      'relatedImage': instance.relatedImage?.map((e) => e.toJson()).toList(),
     };
 
 const _$QuestionnaireTypeEnumMap = {
@@ -647,8 +665,8 @@ Map<String, dynamic> _$$_AnswerOptionModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'initialSelected': instance.initialSelected,
-      'answer': instance.answer,
-      'questionnaireItem': instance.questionnaireItem,
+      'answer': instance.answer?.toJson(),
+      'questionnaireItem': instance.questionnaireItem?.toJson(),
     };
 
 _$_AnswerValueSetModel _$$_AnswerValueSetModelFromJson(
@@ -694,7 +712,7 @@ Map<String, dynamic> _$$_AnswerModelToJson(_$_AnswerModel instance) =>
           const TimestampConverter().toJson(instance.answerDateTime),
       'answerTime': const TimestampConverter().toJson(instance.answerTime),
       'answerString': instance.answerString,
-      'answerItemWeight': instance.answerItemWeight,
+      'answerItemWeight': instance.answerItemWeight?.toJson(),
     };
 
 _$_AnswerItemWeightModel _$$_AnswerItemWeightModelFromJson(
@@ -715,7 +733,7 @@ Map<String, dynamic> _$$_AnswerItemWeightModelToJson(
       'id': instance.id,
       'value': instance.value,
       'answerId': instance.answerId,
-      'questionResponseWeight': instance.questionResponseWeight,
+      'questionResponseWeight': instance.questionResponseWeight?.toJson(),
     };
 
 _$_QuestionResponseWeightModel _$$_QuestionResponseWeightModelFromJson(
@@ -784,9 +802,9 @@ Map<String, dynamic> _$$_QuestionnaireItemModelToJson(
       'maxlength': instance.maxlength,
       'disabledDisplay': _$DisabledDisplayEnumMap[instance.disabledDisplay],
       'answerConstraint': _$AnswerConstraintEnumMap[instance.answerConstraint],
-      'ansewrValueSet': instance.ansewrValueSet,
-      'initial': instance.initial,
-      'questionnaire': instance.questionnaire,
+      'ansewrValueSet': instance.ansewrValueSet?.toJson(),
+      'initial': instance.initial?.toJson(),
+      'questionnaire': instance.questionnaire?.toJson(),
     };
 
 _$_ActionOnModel _$$_ActionOnModelFromJson(Map<String, dynamic> json) =>
@@ -808,8 +826,8 @@ Map<String, dynamic> _$$_ActionOnModelToJson(_$_ActionOnModel instance) =>
       'id': instance.id,
       'operator': _$OperatorEnumMap[instance.operator],
       'actionType': _$ActionTypeEnumMap[instance.actionType],
-      'answer': instance.answer,
-      'questionnaireItem': instance.questionnaireItem,
+      'answer': instance.answer?.toJson(),
+      'questionnaireItem': instance.questionnaireItem?.toJson(),
     };
 
 const _$OperatorEnumMap = {
@@ -847,8 +865,8 @@ Map<String, dynamic> _$$_EnableWhenModelToJson(_$_EnableWhenModel instance) =>
       'id': instance.id,
       'question': instance.question,
       'operator': _$OperatorEnumMap[instance.operator],
-      'answer': instance.answer,
-      'questionnaireItem': instance.questionnaireItem,
+      'answer': instance.answer?.toJson(),
+      'questionnaireItem': instance.questionnaireItem?.toJson(),
     };
 
 _$_LanguageBasedTextModel _$$_LanguageBasedTextModelFromJson(

@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_assessment_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/repositories/triage_repository.dart';
@@ -31,12 +31,14 @@ class TriageRepositoryImpl implements TriageRepository {
   );
 
   @override
-  Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> getTriage() async {
+  Future<Either<Failure, DiagnosticReportTemplateFHIRModel>>
+      getAssessment() async {
     if (await networkInfo.isConnected()) {
       try {
         logger.d("Internet is connected Getting triage from remote");
         final remoteResponse = await remoteDataSource.getTriage();
-        localDataSource.saveTriage(triage: remoteResponse);
+        localDataSource.deleteAssessment();
+        localDataSource.saveAssessment(triage: remoteResponse);
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));
@@ -47,7 +49,7 @@ class TriageRepositoryImpl implements TriageRepository {
     } else {
       try {
         logger.d("Internet is not connected Getting triage from local");
-        final localResponse = await localDataSource.getTriage();
+        final localResponse = await localDataSource.getAssessment();
         return Right(localResponse);
       } on CacheException {
         return Left(CacheFailure(errorMessage: 'No local data found'));
@@ -58,27 +60,27 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageResponseModel>> saveTriage(
-      {required TriageResponseModel triage}) async {
+  Future<Either<Failure, TriagePostModel>> saveTriageResponse(
+      {required TriagePostModel triageResponse}) async {
     if (await networkInfo.isConnected()) {
       try {
         logger.d("Internet is connected Saving triage to remote");
 
         final remoteResponse =
-            await remoteDataSource.saveTriage(triage: triage);
-        localDataSource.deleteTriage();
+            await remoteDataSource.saveTriage(triage: triageResponse);
+        localDataSource.deleteTriageResponse();
 
         return Right(remoteResponse);
       } on ServerException {
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+        final localResponse = await localDataSource.saveTriageResponse(
+            triageResponse: triageResponse);
         return Left(TriageFailure(
           errorMessage: 'This is a server exception',
           triageResponse: localResponse,
         ));
       } on UnknownException {
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+        final localResponse = await localDataSource.saveTriageResponse(
+            triageResponse: triageResponse);
         return Left(TriageFailure(
           errorMessage: 'This is a unknown exception',
           triageResponse: localResponse,
@@ -87,8 +89,9 @@ class TriageRepositoryImpl implements TriageRepository {
     } else {
       try {
         logger.d("Internet is not connected Saving triage to local");
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+
+        final localResponse = await localDataSource.saveTriageResponse(
+            triageResponse: triageResponse);
         return Right(localResponse);
       } on CacheException {
         return Left(CacheFailure(errorMessage: 'No local data found'));
@@ -109,11 +112,11 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteTriage() async {
+  Future<Either<Failure, void>> deleteAssessment() async {
     logger.d({"message": "Deleting triage from local"});
 
     try {
-      final localResponse = await localDataSource.deleteTriage();
+      final localResponse = await localDataSource.deleteAssessment();
       return Right(localResponse);
     } catch (e) {
       return Left(CacheFailure(errorMessage: e.toString()));
@@ -121,7 +124,7 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageResponseModel>> getTriageResponse() async {
+  Future<Either<Failure, TriagePostModel>> getTriageResponse() async {
     logger.d({"message": "Getting final triage response from local"});
 
     try {
@@ -133,7 +136,7 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostQuestionResponseModel>>>
+  Future<Either<Failure, List<PostTriageQuestionModel>>>
       getQuestionaireResponseLocally() async {
     logger.d({"message": "Getting questionaire response from local"});
 
@@ -146,7 +149,7 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostImagingSelectionModel>>>
+  Future<Either<Failure, List<PostTriageImagingSelectionModel>>>
       getTriageEyeScanResponseLocally() async {
     logger.d({"message": "Getting triage eye scan response from local"});
 
@@ -159,7 +162,7 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostObservationsModel>>>
+  Future<Either<Failure, List<PostTriageObservationsModel>>>
       getVisionAcuityTumblingResponseLocally() async {
     logger.d({"message": "Getting vision acuity tumbling response from local"});
 
@@ -185,23 +188,8 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageResponseModel>> saveTriageResponse({
-    required TriageResponseModel triageResponse,
-  }) async {
-    logger.d({"message": "Saving final triage response to local"});
-
-    try {
-      final localResponse = await localDataSource.saveTriageResponse(
-          triageResponse: triageResponse);
-      return Right(localResponse);
-    } catch (e) {
-      return Left(CacheFailure(errorMessage: e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, void>> saveTriageEyeScanLocally({
-    required List<PostImagingSelectionModel> triageEyeScan,
+    required List<PostTriageImagingSelectionModel> triageEyeScan,
   }) async {
     logger.d({"message": "Saving triage eye scan to local"});
 
@@ -216,7 +204,7 @@ class TriageRepositoryImpl implements TriageRepository {
 
   @override
   Future<Either<Failure, void>> saveTriageQuestionnaireLocally({
-    required List<PostQuestionResponseModel> triageQuestionnaireResponse,
+    required List<PostTriageQuestionModel> triageQuestionnaireResponse,
   }) async {
     logger.d({"message": "Saving triage questionnaire to local"});
     try {
@@ -231,7 +219,7 @@ class TriageRepositoryImpl implements TriageRepository {
 
   @override
   Future<Either<Failure, void>> saveTriageVisualAcuityLocally({
-    required List<PostObservationsModel> triageVisualAcuity,
+    required List<PostTriageObservationsModel> triageVisualAcuity,
   }) async {
     logger.d({"message": "Saving triage visual acuity to local"});
 
@@ -245,16 +233,31 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
-  Future<Either<Failure, TriageAssessmentModel>> updateTriage({
-    required TriageAssessmentModel triage,
-  }) async {
-    logger.d({"message": "Updating triage to local"});
+  Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> updateAssessment(
+      {required DiagnosticReportTemplateFHIRModel assessment}) {
+    // TODO: implement updateAssessment
+    throw UnimplementedError();
+  }
 
+  @override
+  Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> saveAssessment(
+      {required DiagnosticReportTemplateFHIRModel assessment}) {
+    // TODO: implement saveAssessment
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, TriagePostModel>> updateTriageResponse(
+      {required TriageUpdateModel triageResponse}) async {
     try {
-      final localResponse = await localDataSource.updateTriage(triage: triage);
-      return Right(localResponse);
+      final remoteResponse =
+          await remoteDataSource.updateTriage(triage: triageResponse);
+
+      return Right(remoteResponse);
     } catch (e) {
-      return Left(CacheFailure(errorMessage: e.toString()));
+      logger.f({"error while saving triage ": e});
+      //  logger.f({"error while saving triage ": triage});
+      return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
 }

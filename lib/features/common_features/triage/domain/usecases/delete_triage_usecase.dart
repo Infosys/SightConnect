@@ -16,7 +16,7 @@ class DeleteTriageUseCase implements UseCase<void, DeleteTriageParam> {
   DeleteTriageUseCase(this._repository);
   @override
   Future<Either<Failure, void>> call(DeleteTriageParam params) async {
-    final response = await _repository.deleteTriage();
+    final response = await _repository.deleteAssessment();
     return response;
   }
 }

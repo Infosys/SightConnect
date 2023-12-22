@@ -1,11 +1,14 @@
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_services/presentation/pages/patient_services_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
-import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
+import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianDashboardPage extends ConsumerWidget {
@@ -14,64 +17,84 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const VisionTechnicianHomePage(),
-          Visibility(
-            visible: ref.watch(patientDashboardProvider).isVisible,
-            child: Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: AppBottomNavBar(
-                onSelected: (index) {
-                  ref.read(patientDashboardProvider).currentIndex = index;
-                  switch (index) {
-                    case 0:
-                      break;
-                    case 1:
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return const PatientServicesPage();
-                        },
-                      );
-                      break;
-                    case 2:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const TriagePage(),
-                        ),
-                      );
-
-                      break;
-                    case 3:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const PatientNotificationPage(),
-                        ),
-                      );
-                      break;
-                    case 4:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AppDrawer(),
-                        ),
-                      );
-                      break;
-                    default:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AppDrawer(),
-                        ),
-                      );
-                  }
-                },
-                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
-              ),
+      body: const VisionTechnicianHomePage(),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PatientRegistrationMiniappPage(),
+                ),
+              );
+              break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisionTechnicianPreliminaryAssessmentPage(),
+                ),
+              );
+              break;
+            case 3:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisionTechnicianMarkMyAvailabilityPage(),
+                ),
+              );
+              break;
+            case 4:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VisionTechnicianIvrCallHistory(),
+                ),
+              );
+              break;
+          }
+        },
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: AppSize.kmheight * 2,
             ),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.person_add,
+              size: AppSize.kmheight * 2,
+            ),
+            label: 'Register Patient',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.perspective,
+              size: AppSize.kmheight * 2,
+            ),
+            label: 'Triage',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.person_add,
+              size: AppSize.kmheight * 2,
+            ),
+            label: 'Mark My Availability',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.phone,
+              size: AppSize.kmheight * 2,
+            ),
+            label: 'IVR Call History',
           ),
         ],
       ),

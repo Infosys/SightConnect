@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
@@ -39,7 +40,7 @@ class PatientHomePage extends ConsumerWidget {
               const NearbyVisionCentersList(),
               const SizedBox(height: AppSize.kmheight),
               const HelplineCard(
-                helpLine: "1800 1800 1800",
+                helpLine: AppText.tollFreeNumber,
               ),
               const SizedBox(height: AppSize.kmheight),
               InviteCard(

@@ -1,31 +1,57 @@
 import 'dart:math' as math;
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart'
+    hide Performer;
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import '../../../triage/domain/models/enums/performer_role.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
 import '../../domain/models/tumbling_models.dart';
 import '../../data/source/local/tumbling_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
+    as update_model;
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
+    as triage_detailed_model;
 
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
-var tumblingTestProvider = ChangeNotifierProvider.autoDispose(
+var tumblingTestProvider = ChangeNotifierProvider(
   (ref) => VisualAcuityTestProvider(
     ref.watch(tumlingLocalSource),
     ref.read(triageLocalSourceProvider),
+    ref.watch(triageRepositoryProvider),
+    ref.watch(triageReportRepositoryProvider),
+    ref.watch(triageUrgencyRepositoryProvider),
   ),
 );
 
 class VisualAcuityTestProvider with ChangeNotifier {
   final TumblingLocalSource _dataSource;
   TriageLocalSource triageLocalSourceProvider;
+  TriageRepository triageRepositoryProvider;
+  final TriageUrgencyRepository _triageUrgencyRepository;
+  final TriageReportRepository _triageReportRepository;
   VisualAcuityTestProvider(
-    this._dataSource,
-    this.triageLocalSourceProvider,
-  ) {
+      this._dataSource,
+      this.triageLocalSourceProvider,
+      this.triageRepositoryProvider,
+      this._triageReportRepository,
+      this._triageUrgencyRepository) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -257,7 +283,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
   }
 
   /// set patient vision acuity tumbling based on the TriageAssessment model
-  List<PostObservationsModel> getVisionAcuityTumblingResponse() {
+  List<PostTriageObservationsModel> getVisionAcuityTumblingResponse() {
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
@@ -266,20 +292,20 @@ class VisualAcuityTestProvider with ChangeNotifier {
     double rightEyeUrgency = _calculateScore(rightEyeSight);
     double bothEyeUrgency = _calculateScore(bothEyeSight);
 
-    List<PostObservationsModel> observationList = [
-      PostObservationsModel(
-        identifier: 50000001,
-        value: leftEyeSight.toString(),
+    List<PostTriageObservationsModel> observationList = [
+      PostTriageObservationsModel(
+        identifier: 1751,
+        value: leftEyeSight.toStringAsFixed(3),
         score: leftEyeUrgency,
       ),
-      PostObservationsModel(
-        identifier: 50000002,
-        value: rightEyeSight.toString(),
+      PostTriageObservationsModel(
+        identifier: 1752,
+        value: rightEyeSight.toStringAsFixed(3),
         score: rightEyeUrgency,
       ),
-      PostObservationsModel(
-        identifier: 50000003,
-        value: bothEyeSight.toString(),
+      PostTriageObservationsModel(
+        identifier: 1753,
+        value: bothEyeSight.toStringAsFixed(3),
         score: bothEyeUrgency,
       ),
     ];
@@ -287,9 +313,134 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return observationList;
   }
 
+  Future<TriageDetailedReportModel?> getTriageReportByReportId(
+      int reportId) async {
+    final response =
+        await _triageReportRepository.getTriageReportByReportId(reportId);
+    return response.fold(
+      (failure) => null,
+      (result) => result,
+    );
+  }
+
   Future<void> saveVisionAcuityResponseToDB() async {
+    var res = getVisionAcuityTumblingResponse();
+    logger.f({"saveVisionAcuityResponseToDB ": res});
     await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
+  }
+
+  int? _diagnosticReportId;
+  int? get diagnosticReportId => _diagnosticReportId;
+
+  set setDiagnosticReportId(int value) {
+    _diagnosticReportId = value;
+  }
+
+  Future<Either<Failure, TriagePostModel>>
+      updateVisualAcuityTumblingResponse() async {
+    final reportModel = await getTriageReportByReportId(diagnosticReportId!);
+
+    if (reportModel == null) {
+      throw ServerFailure(
+          errorMessage: "Could not fetch report of id $diagnosticReportId");
+    }
+
+    TriageUpdateModel triage = TriageUpdateModel(
+      patientId: reportModel.subject,
+      diagnosticReportId: reportModel.diagnosticReportId,
+      organizationCode: reportModel.organizationCode,
+      performer: [
+        Performer(
+          role: PerformerRole.PATIENT,
+          identifier: reportModel.subject,
+        ),
+      ],
+      assessmentCode: reportModel.assessmentCode,
+      assessmentVersion: reportModel.assessmentVersion,
+      issued: reportModel.issued,
+      source: Source.PATIENT_APP,
+      sourceVersion: AppText.appVersion,
+      incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
+      score: _getScore(),
+      cummulativeScore: _getCummulativeScore(),
+      observations: _getObservationsToBeUpdated(
+        reportModel.observations ?? [],
+        getVisionAcuityTumblingResponse(),
+      ),
+    );
+
+    try {
+      logger.f({"observationDTO": triage.observations});
+      return triageRepositoryProvider.updateTriageResponse(
+          triageResponse: triage);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  int _getCummulativeScore() {
+    final observationScore = _triageUrgencyRepository
+        .visualAcuityUrgency(getVisionAcuityTumblingResponse());
+    return observationScore.toInt();
+  }
+
+  List<Map<String, int>> _getScore() {
+    final observationScore = _triageUrgencyRepository
+        .visualAcuityUrgency(getVisionAcuityTumblingResponse());
+
+    return [
+      {"QUESTIONNAIRE": 0},
+      {
+        "OBSERVATION": observationScore.toInt(),
+      },
+      {"IMAGE": 0}
+    ];
+  }
+
+  List<update_model.IncompleteTestModel> _getIncompleteTestList(
+      List<triage_detailed_model.IncompleteTestModel>? incompleteTestList) {
+    List<update_model.IncompleteTestModel> incompleteTestModelList = [];
+
+    incompleteTestList?.forEach((element) {
+      if (element.testName != TestType.OBSERVATION) {
+        incompleteTestModelList.add(
+          update_model.IncompleteTestModel(
+            testName: element.testName,
+          ),
+        );
+      }
+    });
+
+    return incompleteTestModelList;
+  }
+
+  List<PatchObservationsModel>? _getObservationsToBeUpdated(
+      List<Observation> observations,
+      List<PostTriageObservationsModel> visionAcuityTumblingResponse) {
+    List<PatchObservationsModel> observationsToBeUpdated = [];
+    for (Observation observation in observations) {
+      PatchObservationsModel patchObservationsModel = PatchObservationsModel(
+        id: observation.id,
+        action: Action.REMOVE,
+        identifier: observation.identifier,
+        value: observation.value,
+        score: observation.score,
+      );
+      observationsToBeUpdated.add(patchObservationsModel);
+    }
+
+    for (PostTriageObservationsModel postTriageObservationsModel
+        in visionAcuityTumblingResponse) {
+      PatchObservationsModel patchObservationsModel = PatchObservationsModel(
+        action: Action.ADD,
+        identifier: postTriageObservationsModel.identifier,
+        value: postTriageObservationsModel.value,
+        score: postTriageObservationsModel.score,
+      );
+      observationsToBeUpdated.add(patchObservationsModel);
+    }
+    return observationsToBeUpdated;
   }
 }

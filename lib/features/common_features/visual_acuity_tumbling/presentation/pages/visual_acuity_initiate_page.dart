@@ -31,28 +31,36 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
         if (value) {
           return;
         }
-        showDialog(
-          context: context,
-          builder: (context) => TriageExitAlertBox(
-            content: AppLocalizations.of(context)!.eyeScanExitDialog,
-          ),
-        );
+        if (ref.read(globalProvider).isTriageMode()) {
+          showDialog(
+            context: context,
+            builder: (context) => TriageExitAlertBox(
+              content: AppLocalizations.of(context)!.visualAcuityExitDialog,
+            ),
+          );
+        } else {
+          Navigator.of(context).pop();
+        }
       },
       child: Scaffold(
         key: scaffoldKey,
         drawer: const TriageStepsDrawer(),
-        appBar: ref.watch(globalProvider).hideTumblingElement
+        appBar: !ref.watch(globalProvider).isTriageMode()
             ? CustomAppbar(
                 leadingIcon: IconButton(
                   splashRadius: 20,
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => TriageExitAlertBox(
-                        content: AppLocalizations.of(context)!
-                            .visualAcuityExitDialog,
-                      ),
-                    );
+                    if (ref.read(globalProvider).isTriageMode()) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => TriageExitAlertBox(
+                          content: AppLocalizations.of(context)!
+                              .visualAcuityExitDialog,
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                    }
                   },
                   icon: const Icon(Icons.arrow_back_ios),
                 ),

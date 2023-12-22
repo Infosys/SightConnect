@@ -1,23 +1,82 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/vision_center_model.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NearbyVisionCentersCard extends StatelessWidget {
   const NearbyVisionCentersCard({super.key, required this.data});
-  final Map<String, dynamic> data;
+  final OrganizationResponseModel data;
 
   @override
   Widget build(BuildContext context) {
+    String getLocation(FacilityAddressModel address) {
+      String location = "";
+      if (address.addressLine1 != null) {
+        location += address.addressLine1!;
+      }
+      if (address.addressLine2 != null) {
+        location += ", ${address.addressLine2!}";
+      }
+      if (address.facilityRegion != null) {
+        location += ", ${address.facilityRegion!}";
+      }
+      if (address.country != null) {
+        location += ", ${address.country!}";
+      }
+      if (address.pincode != null) {
+        location += ", ${address.pincode!}";
+      }
+      return location;
+    }
+
+    String getSpeciality(GeneralInformationModel specialities) {
+      String speciality = "";
+      if (specialities.hasBloodBank != null) {
+        if (specialities.hasBloodBank == "true") {
+          speciality += "Blood Bank";
+        }
+      }
+      if (specialities.hasCathLab != null) {
+        if (specialities.hasCathLab == "true") {
+          speciality += "| Cath Lab";
+        }
+      }
+      if (specialities.hasDiagnosticLab != null) {
+        if (specialities.hasDiagnosticLab == "true") {
+          speciality += "| Diagnostic Lab";
+        }
+      }
+      if (specialities.hasDialysisCenter != null) {
+        if (specialities.hasDialysisCenter == "true") {
+          speciality += "| Dialysis Center";
+        }
+      }
+      if (specialities.hasImagingCenter != null) {
+        if (specialities.hasImagingCenter == "true") {
+          speciality += "| Imaging Center";
+        }
+      }
+      if (specialities.hasPharmacy != null) {
+        if (specialities.hasPharmacy == "true") {
+          speciality += "| Pharmacy";
+        }
+      }
+      return speciality;
+    }
+
     return InkWell(
       onTap: () {},
       child: Container(
-        // width: Responsive.isMobile(context)
-        //     ? AppSize.width(context) * 0.96
-        //     : AppSize.width(context) * 0.35,
-        margin: const EdgeInsets.only(left: 16, right: 5),
+        width: Responsive.isMobile(context)
+            ? AppSize.width(context) * 0.87
+            : AppSize.width(context) * 0.35,
+        margin: const EdgeInsets.only(
+          left: 16,
+        ),
         padding: const EdgeInsets.only(
             left: AppSize.kmpadding,
             top: AppSize.kmpadding,
@@ -32,7 +91,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              data["name"],
+              data.facilityInformation?.facilityName ?? "",
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -44,20 +103,26 @@ class NearbyVisionCentersCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SvgPicture.asset(AppIcon.location,
-                    height: 16,
-                    colorFilter: const ColorFilter.mode(
-                      AppColor.primary,
-                      BlendMode.srcIn,
-                    )),
+                SvgPicture.asset(
+                  AppIcon.location,
+                  height: 16,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.primary,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 const SizedBox(
                   width: 8,
                 ),
-                Text(
-                  data["location"],
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: const Color(0xff333333),
+                Flexible(
+                  child: Text(
+                    getLocation(
+                        data.facilityInformation?.facilityAddressDetails ??
+                            const FacilityAddressModel()),
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: const Color(0xff333333),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -78,11 +143,15 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                Text(
-                  data["phone"],
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: const Color(0xff333333),
+                Flexible(
+                  child: Text(
+                    data.facilityInformation?.facilityContactInformation
+                            ?.facilityContactNumber ??
+                        "",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: const Color(0xff333333),
+                    ),
                   ),
                 ),
               ],
@@ -100,10 +169,11 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                SizedBox(
-                  width: AppSize.width(context) * 0.7,
+                Flexible(
                   child: Text(
-                    data["speciality"],
+                    getSpeciality(data.facilityAdditionalInformation
+                            ?.generalInformation ??
+                        const GeneralInformationModel()),
                     softWrap: true,
                     style: applyRobotoFont(
                       fontSize: 14,
