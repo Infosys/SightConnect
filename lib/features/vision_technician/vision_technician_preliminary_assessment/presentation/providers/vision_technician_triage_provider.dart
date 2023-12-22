@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../main.dart';
+import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 
 var visionTechnicianTriageProvider =
@@ -18,7 +19,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
   String _patientID = "100101";
   late final Map<int, int> _selectedOptions;
   Map<int, int> get selectedOptions => _selectedOptions;
-  final List<PostQuestionResponseModel> _questionResponseList = [];
+  final List<PostTriageQuestionModel> _questionResponseList = [];
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
   double? _leftEyeSight;
@@ -73,7 +74,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     });
   }
 
-  List<PostQuestionResponseModel> getQuestionaireResponse() {
+  List<PostTriageQuestionModel> getQuestionaireResponse() {
     return _questionResponseList;
   }
 
@@ -93,11 +94,11 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     selectedOptions.forEach(
       (key, score) {
         _questionResponseList.add(
-          PostQuestionResponseModel(
+          PostTriageQuestionModel(
             linkId: key,
             score: 1,
             answers: [
-              PostAnswerModel(
+              PostTriageAnswerModel(
                 value: "YES",
                 score: double.parse(score.toString()),
               )
@@ -110,18 +111,18 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
   //////////////////////////////////////////////////////////////////
 
-  List<PostImagingSelectionModel> getTriageEyeScanResponse() {
+  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse() {
     XFile XleftEyeImage = XFile(AppImages.cataractEyecare); // _leftEyeImage!;
     XFile XrightEyeImage = XFile(AppImages.cataractEyecare); // _rightEyeImage!;
 
-    List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(PostImagingSelectionModel(
+    List<PostTriageImagingSelectionModel> mediaCaptureList = [];
+    mediaCaptureList.add(PostTriageImagingSelectionModel(
       identifier: 70000001,
       endpoint: getUniqueFileName(XleftEyeImage.name),
       baseUrl: XleftEyeImage.mimeType,
       score: 1,
     ));
-    mediaCaptureList.add(PostImagingSelectionModel(
+    mediaCaptureList.add(PostTriageImagingSelectionModel(
       identifier: 70000002,
       endpoint: getUniqueFileName(XrightEyeImage.name),
       baseUrl: XrightEyeImage.mimeType,
@@ -157,23 +158,23 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     }
   }
 
-  List<PostObservationsModel> getVisionAcuityTumblingResponse() {
+  List<PostTriageObservationsModel> getVisionAcuityTumblingResponse() {
     double leftEyeUrgency = _calculateScore(_leftEyeSight!);
     double rightEyeUrgency = _calculateScore(_rightEyeSight!);
     double bothEyeUrgency = _calculateScore(_bothEyeSight!);
 
-    List<PostObservationsModel> observationList = [
-      PostObservationsModel(
+    List<PostTriageObservationsModel> observationList = [
+      PostTriageObservationsModel(
         identifier: 50000001,
         value: _leftEyeSight.toString(),
         score: leftEyeUrgency,
       ),
-      PostObservationsModel(
+      PostTriageObservationsModel(
         identifier: 50000002,
         value: _rightEyeSight.toString(),
         score: rightEyeUrgency,
       ),
-      PostObservationsModel(
+      PostTriageObservationsModel(
         identifier: 50000003,
         value: _bothEyeSight.toString(),
         score: bothEyeUrgency,

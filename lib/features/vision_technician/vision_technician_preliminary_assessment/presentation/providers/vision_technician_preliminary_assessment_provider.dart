@@ -1,151 +1,167 @@
 import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_questionnaire_response_locally_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_eye_scan_response_locally_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
-import 'package:flutter/foundation.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../main.dart';
-import 'vision_technician_triage_provider.dart';
+import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
 
-var preliminaryAssessmentProvider = Provider(
-  (ref) => VTPreliminaryAssessmentProvider(
-    ref.watch(triageRemoteSource),
-    ref.watch(triageUrgencyRepositoryProvider),
-    ref.watch(visionTechnicianTriageProvider),
-  ),
+var vtTriageProvider = ChangeNotifierProvider.autoDispose(
+  (ref) {
+    return VtTriageProvider(
+      ref.watch(saveTriageUseCase),
+      9627849182,
+      ref.watch(triageUrgencyRepositoryProvider),
+      ref.watch(triageLocalSourceProvider),
+      ref.watch(visionTechnicianTriageProvider),
+    );
+  },
 );
 
-class VTPreliminaryAssessmentProvider extends ChangeNotifier {
-  // final int _patientId = 100101;
-  // final SaveTriageUseCase _saveTriageUseCase;
+class VtTriageProvider extends ChangeNotifier {
+  final SaveTriageUseCase _saveTriageUseCase;
+
   final TriageUrgencyRepository _triageUrgencyRepository;
+  final int _patientId;
+  final TriageLocalSource _triageLocalSource;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
-  final TriageRemoteSource _triageRemoteSource;
-  VTPreliminaryAssessmentProvider(this._triageRemoteSource,
-      this._triageUrgencyRepository, this._visionTechnicianTriageProvider);
 
-  Future<Either<Failure, TriageResponseModel>> saveTriage() async {
-    List<PostImagingSelectionModel> imageSelection =
-        _visionTechnicianTriageProvider.getTriageEyeScanResponse();
-    List<PostObservationsModel> observations =
-        _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
-    List<PostQuestionResponseModel> questionResponse =
-        _visionTechnicianTriageProvider.getQuestionaireResponse();
+ VtTriageProvider(
+      this._saveTriageUseCase,
+      this._patientId,
+      this._triageUrgencyRepository,
+      this._triageLocalSource,
+      this._visionTechnicianTriageProvider);
 
-    logger.d("questionResponse: $questionResponse");
+ 
 
-    // double questionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
-    //   questionResponse,
-    // );
-    // double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
-    //   observations,
-    // );
-    // double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
-    //   imageSelection,
-    // );
-    //TODO: change models here
+  Future<Either<Failure, TriagePostModel>> saveTriage() async {
 
-    // double quessionnaireUrgency = 1;
-    // // _triageUrgencyRepository.questionnaireUrgency(
-    // //   questionResponse,
-    // // );
-    // double visualAcuityUrgency = 1;
-    // //  _triageUrgencyRepository.visualAcuityUrgency(
-    // //   observations,
-    // // );
-    // double eyeScanUrgency = 1;
-    // // _triageUrgencyRepository.eyeScanUrgency(
-    // //   imageSelection,
-    // // );
-    // double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
-    //   questionnaireUrgency,
-    //   visualAcuityUrgency,
-    //   eyeScanUrgency,
-    // );
-    // int encounterId = 100001;
-    // int organizationCode = 231000;
-    // int assessmentCode = 30001;
+     List<PostTriageImagingSelectionModel> imageSelection =
+      _visionTechnicianTriageProvider.getTriageEyeScanResponse();
 
-    final triage = TriageResponseModel(
-      patientId: 1511,
-      encounterId: null,
+  List<PostTriageObservationsModel> observations =
+      _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
+
+  List<PostTriageQuestionModel> questionResponse =
+      _visionTechnicianTriageProvider.getQuestionaireResponse();
+
+    final quessionnaireUrgency =
+        _triageUrgencyRepository.questionnaireUrgency(questionResponse);
+    final visualAcuityUrgency =
+        _triageUrgencyRepository.visualAcuityUrgency(observations);
+    final eyeScanUrgency =
+        _triageUrgencyRepository.eyeScanUrgency(imageSelection);
+    final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
+      quessionnaireUrgency,
+      visualAcuityUrgency,
+      eyeScanUrgency,
+    );
+    //inject assesment
+    DiagnosticReportTemplateFHIRModel assessment =
+        await _triageLocalSource.getAssessment();
+    TriagePostModel triagePostModel = TriagePostModel(
+      patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
-      organizationCode: 0,
+      organizationCode: assessment.organizationCode,
       performer: [
-        const PerformerModel(
-          role: PerformerRole.VISION_TECHNICIAN,
-          identifier: 1601,
+        Performer(
+          role: PerformerRole.PATIENT,
+          identifier: _patientId,
         )
       ],
-      assessmentCode: 1501,
-      assessmentVersion: "1.0",
-      // assessmentCode: assessmentCode,
-      // assessmentVersion: "v1",
-      // cummulativeScore: cummulativeScore,
+      assessmentCode: assessment.id, //from questionnaire MS
+      assessmentVersion: assessment.version, //questionnaire MS
+      cummulativeScore: triageUrgency.toInt(),
       score: [
-        {"QUESTIONNAIRE": 3},
-        {"OBSERVATION": 3},
-        {"IMAGING": 3},
+        {"QUESTIONNAIRE": 0},
+        {"OBSERVATION": 0},
+        {"IMAGE": 0}
       ],
-      issued: DateTime.now(),
       userStartDate: DateTime.now(),
-      source: Source.VT_APP,
-      sourceVersion: "1.0",
+      issued: DateTime.now(),
+
+      source: Source.PATIENT_APP,
+      sourceVersion: AppText.appVersion,
       incompleteSection: [],
-      cummulativeScore: 7,
-      // score: {
-      //   // TriageStep.QUESTIONNAIRE: 3,//questionnaireUrgency,
-      //   // TriageStep.OBSERVATION: 2,//visualAcuityUrgency,
-      //   // TriageStep.IMAGE: 2,//eyeScanUrgency,
-      // },
-      imagingSelection: [],
-      observations: [],
-      questionResponse: [
-        const PostQuestionResponseModel(linkId: 1451, score: 1, answers: [
-          PostAnswerModel(
-            value: "Yes",
-            // answerCode: 1552,
-            score: 1,
-          ),
-        ]),
-        const PostQuestionResponseModel(
-          linkId: 1452,
-          score: 1,
-          answers: [
-            PostAnswerModel(
-              value: "Yes",
-              // answerCode: 2352,
-              score: 1,
-            ),
-          ],
-        ),
-      ],
-      // );
-      // imagingSelection: imageSelection,
-      // observations: observations,
-      // questionResponse: questionResponse,
+      imagingSelection: imageSelection,
+      observations: observations,
+      questionResponse: questionResponse,
     );
-    //TODO: change dto here
 
-    Either<Failure, TriageResponseModel> response =
-        "success" as Either<Failure, TriageResponseModel>;
+    logger.f({"triage model to be saved": triagePostModel});
+
+    Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
+      SaveTriageParam(triagePostModel: triagePostModel),
+    );
+    logger.f({"triage model saved": response});
     return response;
-    //     await _saveTriageUseCase.call(
-    //   SaveTriageParam(triageResponse: triage),
-    // );
-
-    // TriageResponseDto response = await _triageRemoteSource.saveTriageVT(triage);
-
-    // return Right(response);
   }
+
+//   List<PostIncompleteTestModel> _getInclompleteSection(int currentStep) {
+//     List<PostIncompleteTestModel> incompleteSection = [];
+
+//     if (currentStep == 0) {
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.QUESTIONNAIRE,
+//       ));
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.OBSERVATION,
+//       ));
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.IMAGE,
+//       ));
+//     }
+//     if (currentStep == 1) {
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.OBSERVATION,
+//       ));
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.IMAGE,
+//       ));
+//     }
+//     if (currentStep == 2) {
+//       incompleteSection.add(const PostIncompleteTestModel(
+//         testName: TestType.IMAGE,
+//       ));
+//     }
+
+//     return incompleteSection;
+//   }
 }
 
-enum Score { QUESTIONNAIRE, OBSERVATION, IMAGE }
+var resetProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => TriageReset(ref),
+);
+
+class TriageReset extends ChangeNotifier {
+  final Ref ref;
+  TriageReset(this.ref);
+
+  void reset() {
+    ref.invalidate(triageQuestionnaireProvider);
+    ref.invalidate(triageEyeScanProvider);
+    ref.read(tumblingTestProvider).reset();
+    ref.read(triageStepperProvider).reset();
+    notifyListeners();
+  }
+}
