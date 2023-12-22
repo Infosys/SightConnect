@@ -89,6 +89,8 @@ class VisualAcuityDialog {
                               .updateVisualAcuityTumblingResponse();
                           navigator.pop();
                           navigator.pop();
+                          navigator.pop();
+                          navigator.pop();
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.proceedButton),
