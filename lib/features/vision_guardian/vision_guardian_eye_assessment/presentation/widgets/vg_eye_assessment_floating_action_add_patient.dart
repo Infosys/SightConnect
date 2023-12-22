@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class VisionGuardianFloatingAddPatientAction extends StatelessWidget {
+  const VisionGuardianFloatingAddPatientAction({super.key});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
