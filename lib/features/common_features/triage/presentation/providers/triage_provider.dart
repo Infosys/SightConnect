@@ -5,8 +5,6 @@ import 'package:eye_care_for_all/features/common_features/triage/data/repositori
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/test_name.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
@@ -45,7 +43,7 @@ var triageProvider = ChangeNotifierProvider.autoDispose(
       ref.watch(getTriageEyeScanResponseLocallyUseCase),
       ref.watch(getQuestionnaireResponseLocallyUseCase),
       ref.watch(getVisionAcuityTumblingResponseLocallyUseCase),
-      9627849180,
+      9627849182,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
       
@@ -116,8 +114,8 @@ class TriageProvider extends ChangeNotifier {
           identifier: _patientId,
         )
       ],
-      assessmentCode: 1334, //from questionnaire MS   //TODO: change to assessment.code
-      assessmentVersion:"1.0", //questionnaire MS//TODO:change asse version
+      assessmentCode: assessment.id, //from questionnaire MS   
+      assessmentVersion:assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
       score: [
         {"QUESTIONNAIRE": 0},
