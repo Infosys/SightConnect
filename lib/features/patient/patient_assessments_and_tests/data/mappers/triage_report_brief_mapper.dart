@@ -12,7 +12,7 @@ class AssessmentReportMapper {
           .plannedActivityReference!.serviceRequest!.priority!,
       reportTag: 'NA',
       triageResultType: 'Eye Assesment',
-      triageResultSource: model.source??null,
+      triageResultSource: model.source,
       assessmentID: model.assessmentCode!,
       triageResultStartDate: model.userStartDate!,
       triageResultDescription: model.diagnosticReportDescription ?? "NA",

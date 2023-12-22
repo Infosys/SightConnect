@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -19,7 +17,8 @@ final initializationProvider = ChangeNotifierProvider((ref) {
 });
 
 class InitializationPageProvider extends ChangeNotifier {
-  // final String keycloakUri = '${AppEnv.baseUrl}/auth/realms/care';
+  // final String keycloakUri =
+  //     'https://masterapp-dev.infosysapps.com/auth/realms/care/';
   final String keycloakUri =
       'https://campaigns.infosysapps.com/auth2/realms/care';
   static const List<String> scopes = ['profile'];
@@ -41,7 +40,13 @@ class InitializationPageProvider extends ChangeNotifier {
   }
 
   Future<void> save(Credential credential) async {
+    logger.f(credential.toJson());
     await PersistentAuthStateService.authState.saveCredential(credential);
+    final tokens = await credential.getTokenResponse();
+    await PersistentAuthStateService.authState.saveTokens(
+      accessToken: tokens.accessToken!,
+      refreshToken: tokens.refreshToken!,
+    );
     notifyListeners();
   }
 
@@ -103,6 +108,7 @@ class InitializationPageProvider extends ChangeNotifier {
         client,
         scopes: scopes,
         port: PORT,
+        // redirectUri: Uri.parse('http://localhost:$PORT'),
         urlLancher: urlLauncher,
       );
 

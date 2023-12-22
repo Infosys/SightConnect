@@ -1,14 +1,9 @@
-import 'dart:developer';
-
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
-import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,8 +19,9 @@ class _LandingPageState extends ConsumerState<LandingPage> {
   @override
   void initState() {
     super.initState();
+
     Future.delayed(
-      const Duration(milliseconds: 300),
+      Duration.zero,
       () async {
         final navigator = Navigator.of(context);
         final status = await _loginVerification();

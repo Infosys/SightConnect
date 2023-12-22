@@ -20,7 +20,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
-  static const String routeName = '/initialization-page';
+  static const String routeName = '/initialization';
   const InitializationPage({super.key});
 
   @override
@@ -31,20 +31,18 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(milliseconds: 300),
-      () async {
-        await profileVerification();
-      },
-    );
+    profileVerification();
   }
 
   Future<void> profileVerification() async {
     final status = await _checkUserAlreadyExist();
+    log("profileVerification: $status");
     if (status) {
       final role = PersistentAuthStateService.authState.role;
       if (role != null) {
         roleMapperNavigation(role, context);
+      } else {
+        log("role is null: $role");
       }
     } else {
       await _onRegister(context);
@@ -52,17 +50,18 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<bool> _checkUserAlreadyExist() async {
-    try {
-      final model = await ref.read(initializationProvider).getUserProfile();
-      if (model.profile?.patient?.email == null) {
-        return false;
-      } else {
-        return true;
-      }
-    } catch (e) {
-      logger.e(e);
-      return false;
-    }
+    // try {
+    //   final model = await ref.read(initializationProvider).getUserProfile();
+    //   if (model.profile?.patient?.email == null) {
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // } catch (e) {
+    //   logger.e(e);
+    //   return false;
+    // }
+    return true;
   }
 
   Future<void> _onRegister(BuildContext context) async {

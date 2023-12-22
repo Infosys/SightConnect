@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
@@ -14,6 +15,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           onBack: () {
             Navigator.of(context).pop(true);
           },
+          token: PersistentAuthStateService.authState.accessToken ?? "",
           miniapp: MiniApp(
             id: "1",
             version: "1",
