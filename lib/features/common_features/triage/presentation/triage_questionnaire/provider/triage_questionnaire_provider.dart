@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_questionnaire_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../domain/models/triage_response_model.dart';
 
 var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageQuestionnaireProvider(
@@ -16,9 +16,9 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   final SaveTriageQuestionnaireLocallyUseCase
       _saveTriageQuestionnaireLocallyUseCase;
   late String _questionnaireRemarks;
-   late final Map<int, Map> _selectedOptions;
+  late final Map<int, Map> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-  final List<PostQuestionResponseModel> _questionResponseList = [];
+  final List<PostTriageQuestionModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
 
   TriageQuestionnaireProvider(this._saveTriageQuestionnaireLocallyUseCase)
@@ -42,7 +42,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     _questionnaireSections = data;
   }
 
-   void addQuestionnaireAnswer(
+  void addQuestionnaireAnswer(
       int questionCode, String answer, int score, int answerCode) {
     _selectedOptions[questionCode] = {
       "answer": answer,
@@ -74,18 +74,17 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     });
   }
 
-   void saveQuestionaireResponse() {
+  void saveQuestionaireResponse() {
     try {
       _selectedOptions.forEach(
         (questionCode, result) {
-          
           _questionResponseList.add(
-            PostQuestionResponseModel(
+            PostTriageQuestionModel(
               linkId: questionCode,
               score: result["score"]
                   .toDouble(), //For our use case answer can be yes or no so overall score will be same as answer score
-              answer: [
-                PostAnswerModel(
+              answers: [
+                PostTriageAnswerModel(
                   value: result["answer"],
                   score: result["score"].toDouble(),
                   answerCode: result["answerCode"],
@@ -99,7 +98,6 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
       logger.e(e);
     }
   }
-
 
   // void saveQuestionaireResponse() {
   //   Map<int, bool> selectedOptionsList = {};
@@ -117,7 +115,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   //   selectedOptions.forEach(
   //     (key, score) {
   //       _questionResponseList.add(
-  //         PostQuestionResponseModel(
+  //         PostTriageQuestionModel(
   //           linkId: key,
   //           score: 1,
   //           answer: [
@@ -132,7 +130,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   //   );
   // }
 
-  List<PostQuestionResponseModel> getQuestionaireResponse() {
+  List<PostTriageQuestionModel> getQuestionaireResponse() {
     return _questionResponseList;
   }
 

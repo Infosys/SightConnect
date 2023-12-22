@@ -3,7 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -78,14 +78,15 @@ class TriageEyeScanProvider with ChangeNotifier {
     return 1;
   }
 
-  Future<List<PostImagingSelectionModel>> getTriageEyeScanResponse() async {
-    List<PostImagingSelectionModel> mediaCaptureList = [];
+  Future<List<PostTriageImagingSelectionModel>>
+      getTriageEyeScanResponse() async {
+    List<PostTriageImagingSelectionModel> mediaCaptureList = [];
 
     if (await _networkInfo.isConnected()) {
       Map<String, String> leftEyeData = parseUrl(leftImageUrl);
       Map<String, String> rightEyeData = parseUrl(rightImageUrl);
       mediaCaptureList.add(
-        PostImagingSelectionModel(
+        PostTriageImagingSelectionModel(
             identifier: 70000001,
             endpoint: leftEyeData["endPoint"],
             baseUrl: leftEyeData["baseUrl"],
@@ -93,7 +94,7 @@ class TriageEyeScanProvider with ChangeNotifier {
             fileId: rightEyeData["fileId"]),
       );
       mediaCaptureList.add(
-        PostImagingSelectionModel(
+        PostTriageImagingSelectionModel(
           identifier: 70000002,
           endpoint: rightEyeData["endPoint"],
           baseUrl: rightEyeData["baseUrl"],

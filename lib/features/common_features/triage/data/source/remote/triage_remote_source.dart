@@ -3,15 +3,14 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
-  Future<TriageResponseModel> saveTriage({required TriagePostModel triage});
-  Future<TriageResponseModel> updateTriage({
+  Future<TriagePostModel> saveTriage({required TriagePostModel triage});
+  Future<TriagePostModel> updateTriage({
     required TriageUpdateModel triage,
   });
 }
@@ -50,12 +49,12 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }
 
   @override
-  Future<TriageResponseModel> saveTriage({
-   required TriagePostModel triage,
+  Future<TriagePostModel> saveTriage({
+    required TriagePostModel triage,
   }) async {
     const endpoint = "/services/triage/api/triage-report";
     try {
-      logger.f({"triage model to be saved in remote source":triage.toJson()});
+      logger.f({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(
         endpoint,
         data: triage.toJson(),
@@ -67,7 +66,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       });
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriageResponseModel.fromJson(response.data);
+          return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
         }
@@ -80,7 +79,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }
 
   @override
-  Future<TriageResponseModel> updateTriage({
+  Future<TriagePostModel> updateTriage({
     required TriageUpdateModel triage,
   }) async {
     final id = triage.diagnosticReportId;
@@ -101,7 +100,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriageResponseModel.fromJson(response.data);
+          return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
         }

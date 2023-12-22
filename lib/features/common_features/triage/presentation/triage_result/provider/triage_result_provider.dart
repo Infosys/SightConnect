@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
 
 var triageResultProvider = ChangeNotifierProvider.autoDispose
-    .family<TriageResultProvider, TriageResponseModel>(
+    .family<TriageResultProvider, TriagePostModel>(
   (ref, result) {
     final patient =
         ref.watch(getPatientProfileByIdProvider).asData?.value.profile;
@@ -18,7 +17,7 @@ var triageResultProvider = ChangeNotifierProvider.autoDispose
 );
 
 class TriageResultProvider extends ChangeNotifier {
-  final TriageResponseModel _model;
+  final TriagePostModel _model;
   final ProfileModel? _profile;
 
   TriageResultProvider(this._model, this._profile);

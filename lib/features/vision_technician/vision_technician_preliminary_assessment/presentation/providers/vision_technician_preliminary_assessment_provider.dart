@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
@@ -39,15 +38,20 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
 
     logger.d("questionResponse: $questionResponse");
 
-    double quessionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
-      questionResponse,
-    );
-    double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
-      observations,
-    );
-    double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
-      imageSelection,
-    );
+    //TODO: change models here
+
+    double quessionnaireUrgency = 1;
+    // _triageUrgencyRepository.questionnaireUrgency(
+    //   questionResponse,
+    // );
+    double visualAcuityUrgency = 1;
+    //  _triageUrgencyRepository.visualAcuityUrgency(
+    //   observations,
+    // );
+    double eyeScanUrgency = 1;
+    // _triageUrgencyRepository.eyeScanUrgency(
+    //   imageSelection,
+    // );
     double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
       quessionnaireUrgency,
       visualAcuityUrgency,
@@ -72,7 +76,7 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       assessmentCode: assessmentCode,
       assessmentVersion: "v1",
       cummulativeScore: cummulativeScore,
-      score:[
+      score: [
         {"QUESTIONNAIRE": quessionnaireUrgency.toInt()},
         {"OBSERVATION": visualAcuityUrgency.toInt()},
         {"IMAGING": eyeScanUrgency.toInt()},
@@ -86,8 +90,9 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       observations: observations,
       questionResponse: questionResponse,
     );
-    //TODO: change dto here 
-    Either<Failure, TriageResponseModel> response ="success" as Either<Failure, TriageResponseModel> ;
+    //TODO: change dto here
+    Either<Failure, TriageResponseModel> response =
+        "success" as Either<Failure, TriageResponseModel>;
     //     await _saveTriageUseCase.call(
     //   SaveTriageParam(triageResponse: triage),
     // );

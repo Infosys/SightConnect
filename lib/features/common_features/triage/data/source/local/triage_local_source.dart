@@ -7,19 +7,22 @@ import 'triage_db_helper.dart';
 
 abstract class TriageLocalSource {
   /// these are for assessment ms
-  Future<DiagnosticReportTemplateFHIRModel> getTriage();
-  Future<DiagnosticReportTemplateFHIRModel> updateTriage({
+  Future<DiagnosticReportTemplateFHIRModel> getAssessment();
+  Future<DiagnosticReportTemplateFHIRModel> updateAssessment({
     required DiagnosticReportTemplateFHIRModel triage,
   });
-  Future<void> saveTriage({
+  Future<void> saveAssessment({
     required DiagnosticReportTemplateFHIRModel triage,
   });
-  Future<void> deleteTriage();
+  Future<void> deleteAssessment();
 
   Future<TriagePostModel> saveTriageResponse({
     required TriagePostModel triageResponse,
   });
   Future<TriagePostModel> getTriageResponse();
+
+  Future<void> deleteTriageResponse();
+
 
   Future<void> saveTriageQuestionnaireLocally({
     required List<PostTriageQuestionModel> triageQuestionnaireResponse,
@@ -43,13 +46,15 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   TriageLocalSourceImpl(this.triageDBHelper);
 
   @override
-  Future<void> deleteTriage() {
-    // TODO: implement deleteTriage
-    throw UnimplementedError();
+  Future<void> deleteAssessment() {
+    logger.d({
+      "deleteTriage": "Deleting Triage Locally",
+    });
+    return triageDBHelper.deleteTriageAssessment();
   }
 
   @override
-  Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
+  Future<DiagnosticReportTemplateFHIRModel> getAssessment() async {
     logger.d({
       "getTriage": "Getting Triage Locally",
     });
@@ -64,7 +69,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<void> saveTriage(
+  Future<void> saveAssessment(
       {required DiagnosticReportTemplateFHIRModel triage}) async {
     logger.d({
       "saveTriage": json.encode(triage),
@@ -73,7 +78,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<DiagnosticReportTemplateFHIRModel> updateTriage(
+  Future<DiagnosticReportTemplateFHIRModel> updateAssessment(
       {required DiagnosticReportTemplateFHIRModel triage}) {
     // TODO: implement updateTriage
     throw UnimplementedError();
@@ -170,6 +175,11 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   @override
   Future<int> getTriageCurrentStep() async {
     return await triageDBHelper.getTriageCurrentStep();
+  }
+  
+  @override
+  Future<void> deleteTriageResponse() {
+    return triageDBHelper.deleteTriageResponse();
   }
 }
 

@@ -1,5 +1,6 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
+
 import '../models/enums/triage_enums.dart';
-import '../models/triage_response_model.dart';
 
 abstract class TriageUrgencyRepository {
   double totalTriageUrgency(
@@ -8,14 +9,14 @@ abstract class TriageUrgencyRepository {
     double eyeScanUrgency,
   );
   double questionnaireUrgency(
-    List<PostQuestionResponseModel> questionnaireResponse,
+    List<PostTriageQuestionModel> questionnaireResponse,
   );
   double visualAcuityUrgency(
-    List<PostObservationsModel> visionAcuityResponse,
+    List<PostTriageObservationsModel> visionAcuityResponse,
   );
 
   double eyeScanUrgency(
-    List<PostImagingSelectionModel> eyeScanResponse,
+    List<PostTriageImagingSelectionModel> eyeScanResponse,
   );
   TriageUrgency mapScoreToUrgency(double score);
   double mapUrgencyToScore(TriageUrgency urgency);

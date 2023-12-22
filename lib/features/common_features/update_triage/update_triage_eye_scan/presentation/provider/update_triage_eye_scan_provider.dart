@@ -9,11 +9,10 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
@@ -93,20 +92,20 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<PostImagingSelectionModel> getTriageEyeScanResponse() {
-    List<PostImagingSelectionModel> mediaCaptureList = [];
-    mediaCaptureList.add(const PostImagingSelectionModel(
-        bodySite: BodySite.LEFT_EYE,
-        identifier: 0,
-        endpoint: "",
-        baseUrl: "",
-        score: 0));
-    mediaCaptureList.add(const PostImagingSelectionModel(
-        bodySite: BodySite.RIGHT_EYE,
-        identifier: 0,
-        endpoint: "",
-        baseUrl: "",
-        score: 0));
+  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse() {
+    List<PostTriageImagingSelectionModel> mediaCaptureList = [];
+    mediaCaptureList.add(const PostTriageImagingSelectionModel(
+      identifier: 0,
+      endpoint: "",
+      baseUrl: "",
+      score: 0,
+    ));
+    mediaCaptureList.add(const PostTriageImagingSelectionModel(
+      identifier: 0,
+      endpoint: "",
+      baseUrl: "",
+      score: 0,
+    ));
 
     return mediaCaptureList;
   }
@@ -153,7 +152,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       DiagnosticReportTemplateFHIRModel triageAssessment =
           await patientAssessmentAndTestProvider.getAssessmentDetail();
 
-      List<PostImagingSelectionModel> updatedResponseEyeScan =
+      List<PostTriageImagingSelectionModel> updatedResponseEyeScan =
           getTriageEyeScanResponse();
 
       TriageUpdateModel triageUpdateModel = _getTriageUpdateModel(
@@ -162,9 +161,9 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
         triageAssessment,
       );
 
-      Either<Failure, TriageResponseModel> finalResponse =
-          await _triageRepository.updateTriage(
-        triage: triageUpdateModel,
+      Either<Failure, TriagePostModel> finalResponse =
+          await _triageRepository.updateTriageResponse(
+        triageResponse: triageUpdateModel,
       );
       return finalResponse.fold(
         (l) {
@@ -200,7 +199,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   }
 
   TriageUpdateModel _getTriageUpdateModel(
-      List<PostImagingSelectionModel>? triageEyeScanResponse,
+      List<PostTriageImagingSelectionModel>? triageEyeScanResponse,
       TriageDetailedReportModel triageReport,
       DiagnosticReportTemplateFHIRModel triageAssessment) {
     if (triageEyeScanResponse == null) {
@@ -237,7 +236,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   List<update_model.PatchImagingSelectionModel>? _getUpdatedImageList(
     List<triage_detailed_model.Media>? existingImages,
-    List<PostImagingSelectionModel> imagesFromUi,
+    List<PostTriageImagingSelectionModel> imagesFromUi,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
     Map<String, int> imageIdentifier =

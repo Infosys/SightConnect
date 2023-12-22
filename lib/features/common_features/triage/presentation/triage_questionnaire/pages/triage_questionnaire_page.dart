@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -19,9 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 import '../widgets/option_card.dart';
-
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -97,15 +94,16 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemCount: model.questionnaireSections.length,
               itemBuilder: (context, index) {
-                logger.d("${model.questionnaireSections.length}, is the length of the questions");
+                logger.d(
+                    "${model.questionnaireSections.length}, is the length of the questions");
                 var question = model.questionnaireSections[index];
                 var isLastQuestion =
                     (model.questionnaireSections.length - 1 == index);
-                
+
                 (double, int) record =
-                        _getWeightage(question.answerOption ?? []);
-                    double weightage = record.$1;
-                    int answerCode = record.$2;
+                    _getWeightage(question.answerOption ?? []);
+                double weightage = record.$1;
+                int answerCode = record.$2;
 
                 if (index == 0) {
                   return Center(
@@ -181,88 +179,82 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       ),
                     ),
                   );
-                }else{ if(question.type==QuestionnaireType.Choice) {
-                  return OptionCard(
-                    question: question,
-                    onNoButtonPressed: ()  async{
-                            model.addQuestionnaireAnswer(
-                              question.id!,
-                              "No",
-                              weightage.toInt(),
-                              answerCode,
-                            );
-                      
-
-                      if (isLastQuestion) {
-                        model.saveQuestionaireResponse();
-                       
-                                await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                      }
-                      else {
-                        pageController.animateToPage(
-                          index + 1,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeIn,
+                } else {
+                  if (question.type == QuestionnaireType.Choice) {
+                    return OptionCard(
+                      question: question,
+                      onNoButtonPressed: () async {
+                        model.addQuestionnaireAnswer(
+                          question.id!,
+                          "No",
+                          weightage.toInt(),
+                          answerCode,
                         );
-                      }
-                    },
-                    onYesButtonPressed: () async {
-                       model.addQuestionnaireAnswer(
-                              question.id!,
-                              "Yes",
-                              weightage.toInt(),
-                              answerCode,
-                            );
-                      
-                      if (isLastQuestion) {
-                        model.saveQuestionaireResponse();
-                       
-                                await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                      }
-                      else {
-                         pageController.animateToPage(
-                                      index + 1,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.easeIn,
-                                    );
-                      }
-                    },
-                  );
-                }
-                else if (question.type == QuestionnaireType.String) {
-                        return TriageTextTypeQuestion(
-                          question: question,
-                          onSubmitted: (String value) async {
-                            if (value.isNotEmpty) {
-                              model.addQuestionnaireAnswer(
-                                question.id!,
-                                value,
-                                0,
-                                0,
-                              );
-                            }
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                                await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                              //TODO:save triage
 
-                            
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
+
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                      onYesButtonPressed: () async {
+                        model.addQuestionnaireAnswer(
+                          question.id!,
+                          "Yes",
+                          weightage.toInt(),
+                          answerCode,
                         );
-                      } else {
-                        return const Text("Question Not Supported Yet");
-                      }
+
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
+
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                    );
+                  } else if (question.type == QuestionnaireType.String) {
+                    return TriageTextTypeQuestion(
+                      question: question,
+                      onSubmitted: (String value) async {
+                        if (value.isNotEmpty) {
+                          model.addQuestionnaireAnswer(
+                            question.id!,
+                            value,
+                            0,
+                            0,
+                          );
+                        }
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                          //TODO:save triage
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    return const Text("Question Not Supported Yet");
+                  }
                 }
               },
             );

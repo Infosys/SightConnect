@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -18,7 +18,7 @@ import '../../features/patient/patient_assessments_and_tests/domain/entities/tri
 
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
-    ref.watch(getTriageUseCase),
+    ref.watch(getAssessmentUseCase),
     ref.watch(getPatientProfileByIdProvider).asData?.value,
     ref.watch(triageReportRepositoryProvider),
     ref.watch(patientAssessmentUpdateDataProvider),
