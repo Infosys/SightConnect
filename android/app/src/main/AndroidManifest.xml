@@ -29,7 +29,6 @@
         <data android:scheme="http" 
         android:host="com.infosys.eyecareforall"
         />
-        <!--   -->
          <data android:scheme="https" />
          </intent-filter>
       
