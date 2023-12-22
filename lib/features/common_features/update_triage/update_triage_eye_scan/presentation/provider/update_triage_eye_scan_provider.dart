@@ -72,19 +72,19 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   void setLeftEyeImage(XFile image) {
     _leftEyeImage = image;
-    uploadImage(image,TriageEyeType.LEFT);
+    uploadImage(image, TriageEyeType.LEFT);
     notifyListeners();
   }
 
   void setRightEyeImage(XFile image) {
     _rightEyeImage = image;
-    uploadImage(image,TriageEyeType.RIGHT);
+    uploadImage(image, TriageEyeType.RIGHT);
     notifyListeners();
   }
 
   void setBothEyeImage(XFile image) {
     _bothEyeImage = image;
-    uploadImage(image,TriageEyeType.BOTH);
+    uploadImage(image, TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -96,19 +96,17 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   List<PostImagingSelectionModel> getTriageEyeScanResponse() {
     List<PostImagingSelectionModel> mediaCaptureList = [];
     mediaCaptureList.add(const PostImagingSelectionModel(
-      bodySite: BodySite.LEFT_EYE,
-      identifier: 0,
-      endpoint: "",
-      baseUrl: "",
-      score: 0
-    ));
+        bodySite: BodySite.LEFT_EYE,
+        identifier: 0,
+        endpoint: "",
+        baseUrl: "",
+        score: 0));
     mediaCaptureList.add(const PostImagingSelectionModel(
-      bodySite: BodySite.RIGHT_EYE,
-      identifier: 0,
-      endpoint: "",
-      baseUrl: "",
-      score: 0
-    ));
+        bodySite: BodySite.RIGHT_EYE,
+        identifier: 0,
+        endpoint: "",
+        baseUrl: "",
+        score: 0));
 
     return mediaCaptureList;
   }
@@ -116,7 +114,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   Map<String, int> getTriageImageIdentifier(
       DiagnosticReportTemplateFHIRModel assessment) {
     Map<String, int> imageIdentifier = {};
-   
+
     assessment.study?.imagingSelectionTemplate?.forEach((element) {
       imageIdentifier[element.name!] = element.id!;
     });
@@ -151,21 +149,18 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       if (triageReport == null) {
         throw ServerException();
       }
-      
-      DiagnosticReportTemplateFHIRModel triageAssessment=
+
+      DiagnosticReportTemplateFHIRModel triageAssessment =
           await patientAssessmentAndTestProvider.getAssessmentDetail();
-        
-      
+
       List<PostImagingSelectionModel> updatedResponseEyeScan =
           getTriageEyeScanResponse();
-         
 
       TriageUpdateModel triageUpdateModel = _getTriageUpdateModel(
         updatedResponseEyeScan,
         triageReport,
         triageAssessment,
       );
-      
 
       Either<Failure, TriageResponseModel> finalResponse =
           await _triageRepository.updateTriage(
@@ -182,7 +177,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
         },
       );
     } catch (e) {
-      logger.f({"error in this step":e});
+      logger.f({"error in this step": e});
       return false;
     }
   }
@@ -211,8 +206,6 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     if (triageEyeScanResponse == null) {
       throw ServerException();
     }
-
-
 
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
       patientId: triageReport.subject,
@@ -246,10 +239,10 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     List<triage_detailed_model.Media>? existingImages,
     List<PostImagingSelectionModel> imagesFromUi,
     DiagnosticReportTemplateFHIRModel triageAssessment,
-   
   ) {
-     Map<String,int> imageIdentifier=  getTriageImageIdentifier(triageAssessment);
-   
+    Map<String, int> imageIdentifier =
+        getTriageImageIdentifier(triageAssessment);
+
     List<update_model.PatchImagingSelectionModel> updatedImageLists = [];
     existingImages?.forEach((element) {
       updatedImageLists.add(
@@ -260,37 +253,33 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       );
     });
 
+    Map<String, String> leftEyeMap = parseUrl(leftImageUrl);
+    Map<String, String> rightEyeMap = parseUrl(rightImageUrl);
 
+    logger.f({"imageIdentifier": imageIdentifier});
+    logger.f({"imageIdentifier": imageIdentifier["LEFT_EYE"]});
+    //add left eye data
+    updatedImageLists.add(update_model.PatchImagingSelectionModel(
+      action: Action.ADD,
+      identifier: imageIdentifier["LEFT_EYE"],
+      score: 0,
+      baseUrl: leftEyeMap["baseUrl"],
+      endpoint: leftEyeMap["endPoint"],
+      fileId: leftEyeMap["fileId"],
+    ));
 
-    Map<String,String> leftEyeMap=parseUrl(leftImageUrl);
-  Map<String,String> rightEyeMap=parseUrl(rightImageUrl);
- 
- logger.f({"imageIdentifier":imageIdentifier});
- logger.f({"imageIdentifier":imageIdentifier["LEFT_EYE"]});
-  //add left eye data 
-   updatedImageLists.add(update_model.PatchImagingSelectionModel(
-          action: Action.ADD,
-          identifier: imageIdentifier["LEFT_EYE"],
-          score: 0,
-          baseUrl: leftEyeMap["baseUrl"],
-          endpoint: leftEyeMap["endPoint"],
-          fileId: leftEyeMap["fileId"],
-        ));
+    //add Right eye data
+    updatedImageLists.add(update_model.PatchImagingSelectionModel(
+      action: Action.ADD,
+      identifier: imageIdentifier["RIGHT_EYE"],
+      score: 0,
+      baseUrl: rightEyeMap["baseUrl"],
+      endpoint: rightEyeMap["endPoint"],
+      fileId: rightEyeMap["fileId"],
+    ));
 
-     //add Right eye data 
- updatedImageLists.add( update_model.PatchImagingSelectionModel(
-          action: Action.ADD,
-          identifier: imageIdentifier["RIGHT_EYE"],
-          score: 0,
-          baseUrl: rightEyeMap["baseUrl"],
-          endpoint: rightEyeMap["endPoint"],
-          fileId: rightEyeMap["fileId"],
-        ));
-
-  
     return updatedImageLists;
   }
-  
 
   int _getCummulativeScore() {
     final eyescanScore =
@@ -301,8 +290,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   List<Map<String, int>> _getScore() {
     final eyeScanReport =
         _triageUrgencyRepository.eyeScanUrgency(getTriageEyeScanResponse());
-     
-  
+
     return [
       {"QUESTIONNAIRE": 0},
       {
@@ -311,23 +299,21 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       {"IMAGE": eyeScanReport.toInt()}
     ];
   }
-//TODO: right image url is hardcoded
+
   String leftImageUrl = "";
   String rightImageUrl = "";
   String bothImageUrl = "";
 
-  void uploadImage(XFile image,TriageEyeType currentEye) async {
-  
-
+  void uploadImage(XFile image, TriageEyeType currentEye) async {
     try {
       final response = await _fileMsService.uploadImage(File(image.path));
       logger.d({"response": response});
       if (currentEye == TriageEyeType.LEFT) {
         leftImageUrl = response;
-        logger.d({"eyeTypeLeft":leftImageUrl});
+        logger.d({"eyeTypeLeft": leftImageUrl});
       } else if (currentEye == TriageEyeType.RIGHT) {
         rightImageUrl = response;
-        logger.d({"eyeTypeRight":rightImageUrl});
+        logger.d({"eyeTypeRight": rightImageUrl});
       } else {
         bothImageUrl = response;
       }
@@ -338,51 +324,44 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     }
   }
 
+  Map<String, String> parseUrl(String url) {
+    Map<String, String> mp = {};
+    String baseUrl = "";
+    String endpoint = "";
+    String fileId = "";
+    int slashcount = 0;
+    for (int i = 0; i < url.length; i++) {
+      if (url[i] == '/') {
+        slashcount++;
+      }
+      if (slashcount < 3) {
+        baseUrl += url[i];
+      } else {
+        endpoint += url[i];
+      }
+    }
 
-Map<String, String> parseUrl(String url) {
+    for (int i = endpoint.length - 1; i >= 0; i--) {
+      if (endpoint[i] == '/') {
+        break;
+      }
 
-  Map<String, String> mp={};
-  String baseUrl="";
-  String endpoint="";
-  String fileId="";
-  int slashcount=0;
-for(int i=0;i<url.length;i++){
-  if(url[i]=='/'){
-    slashcount++;
+      fileId += endpoint[i];
+    }
+    fileId = reverseFileId(fileId);
+
+    mp["baseUrl"] = baseUrl;
+    mp["endPoint"] = endpoint;
+    mp["fileId"] = fileId;
+
+    return mp;
   }
-  if(slashcount<3){
-    baseUrl+=url[i];
+
+  String reverseFileId(String input) {
+    String reversed = '';
+    for (int i = input.length - 1; i >= 0; i--) {
+      reversed += input[i];
+    }
+    return reversed;
   }
-  else{
-    endpoint+=url[i];
-  }
-
-  
-}
-
-for(int i=endpoint.length-1;i>=0;i--){
-  if(endpoint[i]=='/'){
-    break;
-  }
- 
-  fileId+=endpoint[i];
-
-}
-fileId=reverseFileId(fileId);
-
-mp["baseUrl"]=baseUrl;
-mp["endPoint"]=endpoint;
-mp["fileId"]=fileId;
-
-  return mp;
-
-}
-String reverseFileId(String input) {
-  String reversed = '';
-  for (int i = input.length - 1; i >= 0; i--) {
-    reversed += input[i];
-  }
-  return reversed;
-}
-
 }
