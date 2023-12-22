@@ -8,7 +8,8 @@ var dioProvider = Provider(
   (ref) {
     return Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
-    )..interceptors.addAll([DioTokenInterceptor(ref)]);
+    );
+    // )..interceptors.addAll([DioTokenInterceptor(ref)]);
   },
 );
 

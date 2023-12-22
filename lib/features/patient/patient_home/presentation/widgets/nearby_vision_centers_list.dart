@@ -7,19 +7,21 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/source/local/fake_data_source.dart';
-
-var nearByVisionCenterProvider = FutureProvider((ref) {
-  return ref.watch(visionCenterRepositoryProvider).getVisionCenters();
-});
+var nearByVisionCenterProvider = FutureProvider(
+  (ref) {
+    const latitude = 0.0;
+    const longitude = 0.0;
+    return ref
+        .watch(visionCenterRepositoryProvider)
+        .getVisionCenters(latitude: latitude, longitude: longitude);
+  },
+);
 
 class NearbyVisionCentersList extends ConsumerWidget {
   const NearbyVisionCentersList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var data = nearByVisionCenter;
-
     return Container(
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),
@@ -40,22 +42,24 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 ),
               ),
               const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "See All",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.blue,
-                  ),
-                ),
-              ),
+              // TextButton(
+              //   onPressed: () {},
+              //   child: Text(
+              //     "See All",
+              //     style: applyRobotoFont(
+              //       fontSize: 14,
+              //       fontWeight: FontWeight.w500,
+              //       color: AppColor.blue,
+              //     ),
+              //   ),
+              // ),
             ],
+          ),
+          const SizedBox(
+            height: AppSize.kmheight,
           ),
           ref.watch(nearByVisionCenterProvider).when(
                 data: (data) {
-                  // return const SizedBox();
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

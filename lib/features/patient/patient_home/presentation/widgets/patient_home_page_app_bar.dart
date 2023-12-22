@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/providers/global_user_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/member_selection.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +37,7 @@ class PatientHomePageAppBar extends StatelessWidget
       actions: [
         Consumer(
           builder: (context, ref, child) {
-            final patient = ref.watch(globalUserProvider).activeUser;
-
+            final patient = ref.watch(globalPatientProvider).activeUser;
             if (patient == null) {
               return const CircleAvatar(
                 backgroundColor: AppColor.lightGrey,

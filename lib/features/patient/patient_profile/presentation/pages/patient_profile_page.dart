@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -17,6 +18,7 @@ class PatientProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(globalPatientProvider).activeUser;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -50,36 +52,34 @@ class PatientProfilePage extends ConsumerWidget {
           ],
         ),
       ),
-      body: ref.watch(getPatientProfileByIdProvider).when(
-        data: (patient) {
-          return _content(context, patient);
-        },
-        error: (error, trace) {
-          return const Center(
-            child: Text("Profile is not available at the moment"),
-          );
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
+      body: model == null
+          ? const Center(child: Text("Profile not available"))
+          : _content(context, model),
     );
   }
 
   Widget _content(BuildContext context, PatientResponseModel patient) {
-    final dob = _formateAge(
+    var dob = _formateAge(
       day: patient.profile?.patient?.dayOfBirth ?? "",
       mon: patient.profile?.patient?.monthOfBirth ?? "",
       year: patient.profile?.patient?.yearOfBirth ?? "",
     );
 
-    final address = _formateAddress(
-      line: patient.profile?.patient?.address?.first.line ?? "",
-      ward: patient.profile?.patient?.address?.first.ward ?? "",
-      district: patient.profile?.patient?.address?.first.district ?? "",
-      state: patient.profile?.patient?.address?.first.state ?? "",
+    var address = _formateAddress(
+      line: patient.profile?.patient?.address?.isEmpty ?? true
+          ? ""
+          : patient.profile?.patient?.address?.first.line,
+      ward: patient.profile?.patient?.address?.isEmpty ?? true
+          ? ""
+          : patient.profile?.patient?.address?.first.ward,
+      district: patient.profile?.patient?.address?.isEmpty ?? true
+          ? ""
+          : patient.profile?.patient?.address?.isEmpty ?? true
+              ? ""
+              : patient.profile?.patient?.address?.first.district,
+      state: patient.profile?.patient?.address?.isEmpty ?? true
+          ? ""
+          : patient.profile?.patient?.address?.first.state,
     );
     return SingleChildScrollView(
       child: Column(
@@ -103,7 +103,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      address,
+                      address ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -171,12 +171,17 @@ class PatientProfilePage extends ConsumerWidget {
     }
   }
 
-  String _formateAddress({
-    required String line,
-    required String ward,
-    required String district,
-    required String state,
+  String? _formateAddress({
+    String? line,
+    String? ward,
+    String? district,
+    String? state,
   }) {
-    return "$line, $ward, $district, $state";
+    try {
+      final result = "$line, $ward, $district, $state";
+      return result;
+    } catch (e) {
+      return "";
+    }
   }
 }

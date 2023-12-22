@@ -71,6 +71,10 @@ class AppDrawer extends StatelessWidget {
                                 splashColor: AppColor.blue,
                                 onTap: () {
                                   switch (item.key) {
+                                    case 0:
+                                      Navigator.of(context).pop();
+                                      break;
+
                                     case 1:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -78,7 +82,6 @@ class AppDrawer extends StatelessWidget {
                                               const PatientProfilePage(),
                                         ),
                                       );
-                                      break;
 
                                     case 2:
                                       Navigator.of(context).push(

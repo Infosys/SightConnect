@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,48 +41,44 @@ class ProfileHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 patient.profile?.patient?.profilePhoto != null
-                    ? CachedNetworkImage(
+                    ? AppNetworkImage(
+                        radius: 30,
                         imageUrl: patient.profile!.patient!.profilePhoto!,
-                        height: 60,
-                        width: 60,
-                        fit: BoxFit.cover,
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundImage: imageProvider,
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const CircleAvatar(
-                          backgroundColor: AppColor.lightGrey,
-                        ),
                       )
                     : const CircleAvatar(
                         backgroundColor: AppColor.lightGrey,
                       ),
-                const SizedBox(
-                  width: 16,
-                ),
+                const SizedBox(width: 16),
                 Flexible(
-                  child: Text(
-                    patient.profile?.patient?.name ?? "",
-                    style: applyFiraSansFont(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.white,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        patient.profile?.patient?.name ?? "",
+                        maxLines: 1,
+                        style: applyFiraSansFont(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.white,
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "${patient.profile?.patient?.parentPatientId ?? ""}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.white.withOpacity(0.7),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
-            subtitle: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              child: Text(
-                "${patient.profile?.patient?.parentPatientId ?? ""}",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.white.withOpacity(0.7),
-                ),
-              ),
             ),
           ),
           Container(

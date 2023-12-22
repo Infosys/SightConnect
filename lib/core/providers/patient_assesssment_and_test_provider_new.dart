@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
@@ -8,7 +9,6 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,7 +19,7 @@ import '../../features/patient/patient_assessments_and_tests/domain/entities/tri
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
     ref.watch(getAssessmentUseCase),
-    ref.watch(getPatientProfileByIdProvider).asData?.value,
+    ref.watch(globalPatientProvider).parentUser,
     ref.watch(triageReportRepositoryProvider),
     ref.watch(patientAssessmentUpdateDataProvider),
   ),
@@ -55,20 +55,27 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   List<TriageReportUserEntity> getPatients() {
     List<TriageReportUserEntity> users = [];
     try {
-      users.add(TriageReportUserEntity(
-        name: _patient?.profile?.patient?.name ?? "",
-        image: _patient?.profile?.patient?.profilePhoto ?? "",
-        id: 9627849183,
-      ));
-      _selectedPatient = users.first;
-      _patient?.profile?.patient?.relatedParty
-          ?.forEach((RelatedPartyModel family) {
+      if (_patient?.profile?.patient?.patientId != null) {
         users.add(TriageReportUserEntity(
-          name: family.name ?? "",
-          image: family.profilePicture ?? "",
-          id: family.patientId ?? 0,
+          name: _patient?.profile?.patient?.name ?? "",
+          image: _patient?.profile?.patient?.profilePhoto ?? "",
+          id: _patient!.profile!.patient!.patientId!,
         ));
-      });
+        _selectedPatient = users.first;
+
+        _patient?.profile?.patient?.relatedParty
+            ?.forEach((RelatedPartyModel family) {
+          if (family.patientId != null) {
+            users.add(
+              TriageReportUserEntity(
+                name: family.name ?? "",
+                image: family.profilePicture ?? "",
+                id: family.patientId!,
+              ),
+            );
+          }
+        });
+      }
     } catch (e) {
       logger.e({
         "getPatients": e.toString(),

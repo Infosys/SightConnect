@@ -26,12 +26,14 @@ class TriageResultPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageResultProvider(triageResult));
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) async {
+        if (value) {
+          return;
+        }
         ref.read(resetProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
-
-        return true;
       },
       child: Scaffold(
         appBar: CustomAppbar(
@@ -57,9 +59,9 @@ class TriageResultPage extends ConsumerWidget {
               children: [
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
-                  id: "${model.profile.patient?.abhaNumber ?? ""}",
-                  name: model.profile.patient?.name ?? "",
-                  patientImage: model.profile.patient?.profilePhoto ?? "",
+                  id: model.profile.patient?.abhaNumber,
+                  name: model.profile.patient?.name,
+                  patientImage: model.profile.patient?.profilePhoto,
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(

@@ -24,14 +24,21 @@ class _LandingPageState extends ConsumerState<LandingPage> {
     Future.delayed(
       Duration.zero,
       () async {
+        // final navigator = Navigator.of(context);
+        // final status = await _loginVerification();
+        // if (status) {
+        //   navigator.pushNamedAndRemoveUntil(
+        //     InitializationPage.routeName,
+        //     (route) => false,
+        //   );
+        // }
         final navigator = Navigator.of(context);
-        final status = await _loginVerification();
-        if (status) {
-          navigator.pushNamedAndRemoveUntil(
-            InitializationPage.routeName,
-            (route) => false,
-          );
-        }
+        navigator.pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const PatientDashboardPage(),
+          ),
+          (route) => false,
+        );
       },
     );
   }

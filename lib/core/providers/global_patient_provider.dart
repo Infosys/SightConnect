@@ -1,24 +1,26 @@
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/gender.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/relationship.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var globalUserProvider =
-    ChangeNotifierProvider((ref) => GlobalUserProvider(ref));
+var globalPatientProvider =
+    ChangeNotifierProvider((ref) => GlobalPatientProvider(ref));
 
-class GlobalUserProvider extends ChangeNotifier {
+class GlobalPatientProvider extends ChangeNotifier {
   final Ref _ref;
   PatientResponseModel? _parentUser;
   final bool _loading = false;
   final int userId = 9627849180;
   PatientResponseModel? _activeUser;
 
-  GlobalUserProvider(this._ref) {
+  GlobalPatientProvider(this._ref) {
     getUserProfile();
   }
 
   bool get loading => _loading;
   PatientResponseModel? get activeUser => _activeUser;
+  PatientResponseModel? get parentUser => _parentUser;
   List<RelatedPartyModel> get familyMembers =>
       _activeUser?.profile?.patient?.relatedParty ?? [];
 
@@ -35,7 +37,7 @@ class GlobalUserProvider extends ChangeNotifier {
 
   Future<void> getUserProfile() async {
     // _parentUser = await PersistentAuthStateService.authState.getUserProfile();
-    _activeUser = const PatientResponseModel(
+    const user = PatientResponseModel(
       profile: ProfileModel(
         patient: ExtendedPatientModel(
           patientId: 111,
@@ -56,17 +58,22 @@ class GlobalUserProvider extends ChangeNotifier {
           identifiers: [],
           osid: "",
           relatedParty: [
-            // RelatedPartyModel(
-            //   name: "Rohit Pandey",
-            //   age: 54,
-            //   patientId: 123,
-            //   parentPatientId: 1233,
-            //   profilePicture: "http://placekitten.com/200/300",
-            //   relation: Relationship.FATHER,
-            // ),
+            RelatedPartyModel(
+              name: "Rohit Pandey",
+              age: 54,
+              patientId: 123,
+              parentPatientId: 1233,
+              profilePicture: "http://placekitten.com/200/300",
+              relation: Relationship.FATHER,
+            ),
           ],
         ),
       ),
     );
+
+    setParentUser(user);
+    notifyListeners();
   }
+
+  Future<void> getUserProfileById() async {}
 }
