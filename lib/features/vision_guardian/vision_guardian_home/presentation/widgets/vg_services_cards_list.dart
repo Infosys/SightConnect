@@ -14,7 +14,7 @@ class VisionGuardianServicesCardList extends StatelessWidget {
     return SizedBox(
       width: Responsive.isMobile(context)
           ? AppSize.width(context) * 0.9
-          : AppSize.width(context) * 0.7,
+          : AppSize.width(context) * 0.95,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -29,7 +29,7 @@ class VGSlide2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: AppSize.kmpadding,
+        vertical: AppSize.kspadding,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
