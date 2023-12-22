@@ -17,25 +17,26 @@ abstract class TriageRepository {
   Future<Either<Failure, void>> deleteTriage();
   Future<Either<Failure, int>> getTriageCurrentStep();
 
-  Future<Either<Failure, TriageResponseModel>> saveTriageResponse({
-    required TriageResponseModel triageResponse,
+
+  Future<Either<Failure, TriagePostModel>> saveTriageResponse({
+    required TriagePostModel triageResponse,
   });
-  Future<Either<Failure, TriageResponseModel>> getTriageResponse();
+  Future<Either<Failure, TriagePostModel>> getTriageResponse();
 
   Future<Either<Failure, void>> saveTriageQuestionnaireLocally({
-    required List<PostQuestionResponseModel> triageQuestionnaireResponse,
+    required List<PostTriageQuestionModel> triageQuestionnaireResponse,
   });
   Future<Either<Failure, void>> saveTriageVisualAcuityLocally({
-    required List<PostObservationsModel> triageVisualAcuity,
+    required List<PostTriageObservationsModel> triageVisualAcuity,
   });
   Future<Either<Failure, void>> saveTriageEyeScanLocally({
-    required List<PostImagingSelectionModel> triageEyeScan,
+    required List<PostTriageImagingSelectionModel>  triageEyeScan,
   });
-  Future<Either<Failure, List<PostQuestionResponseModel>>>
+  Future<Either<Failure, List<PostTriageQuestionModel>>>
       getQuestionaireResponseLocally();
-  Future<Either<Failure, List<PostObservationsModel>>>
+  Future<Either<Failure, List<PostTriageObservationsModel>>>
       getVisionAcuityTumblingResponseLocally();
-  Future<Either<Failure, List<PostImagingSelectionModel>>>
+  Future<Either<Failure, List<PostTriageImagingSelectionModel> >>
       getTriageEyeScanResponseLocally();
   Future<Either<Failure, void>> resetTriage();
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -120,7 +121,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageResponse(
-      {required TriageResponseModel triageResponse}) async {
+      {required TriagePostModel triageResponse}) async {
     var dbClient = await database;
     await dbClient.insert(_triageResponseTableName, {
       _responseColumnName: json.encode(
@@ -131,7 +132,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageQuestionnaire(
-      {required List<PostQuestionResponseModel> triageQuestionnaire}) async {
+      {required List<PostTriageQuestionModel> triageQuestionnaire}) async {
     var dbClient = await database;
     await dbClient.insert(_triageQuestionnaireTableName, {
       _responseColumnName: json.encode(
@@ -142,7 +143,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageVisualAcuity(
-      {required List<PostObservationsModel> triageVisualAcuity}) async {
+      {required List<PostTriageObservationsModel> triageVisualAcuity}) async {
     var dbClient = await database;
     await dbClient.insert(_triageVisualAcuityTableName, {
       _responseColumnName: json.encode(
@@ -153,7 +154,7 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageEyeScan(
-      {required List<PostImagingSelectionModel> triageEyeScan}) async {
+      {required List<PostTriageImagingSelectionModel> triageEyeScan}) async {
     var dbClient = await database;
     await dbClient.insert(_triageEyeScanTableName, {
       _responseColumnName: json.encode(
@@ -163,40 +164,40 @@ class TriageDBHelper {
     });
   }
 
-  Future<List<PostQuestionResponseModel>> getTriageQuestionnaire() async {
+  Future<List<PostTriageQuestionModel>> getTriageQuestionnaire() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageQuestionnaireTableName,
         orderBy: "id DESC", limit: 1);
     if (response.isNotEmpty) {
       return (json.decode(response.first[_responseColumnName].toString())
               as List)
-          .map((e) => PostQuestionResponseModel.fromJson(e))
+          .map((e) => PostTriageQuestionModel.fromJson(e))
           .toList();
     }
     return [];
   }
 
-  Future<List<PostObservationsModel>> getTriageVisualAcuity() async {
+  Future<List<PostTriageObservationsModel>> getTriageVisualAcuity() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageVisualAcuityTableName,
         orderBy: "id DESC", limit: 1);
     if (response.isNotEmpty) {
       return (json.decode(response.first[_responseColumnName].toString())
               as List)
-          .map((e) => PostObservationsModel.fromJson(e))
+          .map((e) => PostTriageObservationsModel.fromJson(e))
           .toList();
     }
     return [];
   }
 
-  Future<List<PostImagingSelectionModel>> getTriageEyeScan() async {
+  Future<List<PostTriageImagingSelectionModel>> getTriageEyeScan() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageEyeScanTableName,
         orderBy: "id DESC", limit: 1);
     if (response.isNotEmpty) {
       return (json.decode(response.first[_responseColumnName].toString())
               as List)
-          .map((e) => PostImagingSelectionModel.fromJson(e))
+          .map((e) => PostTriageImagingSelectionModel.fromJson(e))
           .toList();
     }
     return [];
