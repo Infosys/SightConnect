@@ -41,7 +41,7 @@ var triageProvider = ChangeNotifierProvider.autoDispose(
       ref.watch(getTriageEyeScanResponseLocallyUseCase),
       ref.watch(getQuestionnaireResponseLocallyUseCase),
       ref.watch(getVisionAcuityTumblingResponseLocallyUseCase),
-      9627849182,
+      9627849183,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
     );
@@ -135,6 +135,8 @@ class TriageProvider extends ChangeNotifier {
       SaveTriageParam(triagePostModel: triagePostModel),
     );
     logger.f({"triage model saved": response});
+    _triageLocalSource.resetTriage();
+
     return response;
   }
 
