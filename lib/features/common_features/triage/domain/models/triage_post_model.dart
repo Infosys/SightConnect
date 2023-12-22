@@ -8,24 +8,24 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'triage_post_model.freezed.dart';
 part 'triage_post_model.g.dart';
 
-
 @freezed
 class TriagePostModel with _$TriagePostModel {
   const factory TriagePostModel({
+    int? id,
     int? patientId,
-    int ? encounterId,
-    ServiceType ? serviceType,
+    int? encounterId,
+    ServiceType? serviceType,
     int? organizationCode,
     List<Performer>? performer,
     int? assessmentCode,
     String? assessmentVersion,
-    @TimestampConverter() DateTime ?  issued,
-    @TimestampConverter() DateTime ? userStartDate,
+    @TimestampConverter() DateTime? issued,
+    @TimestampConverter() DateTime? userStartDate,
     Source? source,
     String? sourceVersion,
     List<PostIncompleteTestModel>? incompleteSection,
     int? cummulativeScore,
-    List<Map<String, double> >? score,
+    List<Map<String, double>>? score,
     List<PostTriageImagingSelectionModel>? imagingSelection,
     List<PostTriageObservationsModel>? observations,
     List<PostTriageQuestionModel>? questionResponse,
@@ -35,10 +35,10 @@ class TriagePostModel with _$TriagePostModel {
       _$TriagePostModelFromJson(json);
 }
 
-
 @freezed
 class PostTriageQuestionModel with _$PostTriageQuestionModel {
   const factory PostTriageQuestionModel({
+    int? id,
     int? linkId,
     double? score,
     List<PostTriageAnswerModel>? answers,
@@ -46,13 +46,13 @@ class PostTriageQuestionModel with _$PostTriageQuestionModel {
 
   factory PostTriageQuestionModel.fromJson(Map<String, dynamic> json) =>
       _$PostTriageQuestionModelFromJson(json);
-  
 }
 
 @freezed
 class PostTriageAnswerModel with _$PostTriageAnswerModel {
   const factory PostTriageAnswerModel({
     String? value,
+    int? id,
     int? answerCode,
     double? score,
   }) = _PostTriageAnswerModel;
@@ -61,10 +61,10 @@ class PostTriageAnswerModel with _$PostTriageAnswerModel {
       _$PostTriageAnswerModelFromJson(json);
 }
 
-
 @freezed
 class Performer with _$Performer {
   const factory Performer({
+    int? id,
     PerformerRole? role,
     int? identifier,
   }) = _Performer;
@@ -83,10 +83,10 @@ class PostIncompleteTestModel with _$PostIncompleteTestModel {
       _$PostIncompleteTestModelFromJson(json);
 }
 
-
 @freezed
 class PostTriageObservationsModel with _$PostTriageObservationsModel {
   const factory PostTriageObservationsModel({
+    int? id,
     int? identifier,
     String? value,
     double? score,
@@ -99,15 +99,14 @@ class PostTriageObservationsModel with _$PostTriageObservationsModel {
 @freezed
 class PostTriageImagingSelectionModel with _$PostTriageImagingSelectionModel {
   const factory PostTriageImagingSelectionModel({
+    int? id,
     int? identifier,
     String? endpoint,
     String? baseUrl,
     double? score,
-    String ? fileId
+    String? fileId,
   }) = _PostTriageImagingSelectionModel;
 
   factory PostTriageImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$PostTriageImagingSelectionModelFromJson(json);
 }
-
-

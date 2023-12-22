@@ -6,7 +6,6 @@ import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
 part 'triage_response_model.freezed.dart';
 part 'triage_response_model.g.dart';
-
 @freezed
 class TriageResponseModel with _$TriageResponseModel {
   const factory TriageResponseModel({
