@@ -13,7 +13,7 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-  await PersistentAuthStateService.intializeAuth(false);
+  await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
 
   IOSDeviceInfoService.init();

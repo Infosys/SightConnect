@@ -10,6 +10,18 @@ part 'profile_model.freezed.dart';
 part 'profile_model.g.dart';
 
 @freezed
+class PatientResponseModel with _$PatientResponseModel {
+  const factory PatientResponseModel({
+    String? intent,
+    MetaDataModel? metaData,
+    ProfileModel? profile,
+  }) = _PatientResponseModel;
+
+  factory PatientResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$PatientResponseModelFromJson(json);
+}
+
+@freezed
 class ProfileModel with _$ProfileModel {
   const factory ProfileModel({
     ExtendedPatientModel? patient,
@@ -49,18 +61,6 @@ class RelatedPartyModel with _$RelatedPartyModel {
 
   factory RelatedPartyModel.fromJson(Map<String, dynamic> json) =>
       _$RelatedPartyModelFromJson(json);
-}
-
-@freezed
-class PatientResponseModel with _$PatientResponseModel {
-  const factory PatientResponseModel({
-    String? intent,
-    MetaDataModel? metaData,
-    ProfileModel? profile,
-  }) = _PatientResponseModel;
-
-  factory PatientResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$PatientResponseModelFromJson(json);
 }
 
 @freezed

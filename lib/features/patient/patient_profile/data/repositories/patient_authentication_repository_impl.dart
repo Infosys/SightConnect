@@ -65,4 +65,18 @@ class PatientAuthenticationRepositoryImpl
       );
     }
   }
+
+  @override
+  Future<Either<Failure, PatientResponseModel>> getPatientProfileByPhone(
+      String phoneNumber) async {
+    try {
+      final remoteResponse =
+          await _patientAuthRemoteSource.getPatientProfileByPhone(phoneNumber);
+      return Right(remoteResponse);
+    } catch (e) {
+      return Left(
+        ServerFailure(errorMessage: 'This is a server exception'),
+      );
+    }
+  }
 }

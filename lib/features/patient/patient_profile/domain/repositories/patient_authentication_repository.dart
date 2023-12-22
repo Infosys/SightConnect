@@ -13,4 +13,7 @@ abstract class PatientAuthenticationRepository {
   Future<Either<Failure, PatientResponseModel>> updatePatientProfile(
     PatientModel patientDTO,
   );
+  Future<Either<Failure, PatientResponseModel>> getPatientProfileByPhone(
+    String phoneNumber,
+  );
 }

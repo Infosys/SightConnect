@@ -7,27 +7,22 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MiniAppDisplayPage(
-        miniapp: MiniApp(
-          id: "1",
-          version: "1",
-          name: "Register Patient",
-          displayName: "Register Patient",
-          sourceurl: "assets/miniapps/vt_register_patient.zip",
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: MiniAppDisplayPage(
+          onBack: () {
+            Navigator.of(context).pop(true);
+          },
+          miniapp: MiniApp(
+            id: "1",
+            version: "1",
+            name: "Register Patient",
+            displayName: "Register Patient",
+            sourceurl: "assets/miniapps/vt_register_patient.zip",
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-/// Provider  
-/// BLOC 
-/// Riverpod 
-/// GETX 
-/// MOBX
-
-
-  

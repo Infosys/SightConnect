@@ -17,6 +17,9 @@ abstract class PatientAuthRemoteSource {
     String? value,
   ]);
   Future<PatientResponseModel> updatePatientProfile(PatientModel patientDTO);
+  Future<PatientResponseModel> getPatientProfileByPhone(
+    String phoneNumber,
+  );
 }
 
 class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
@@ -67,6 +70,19 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       return PatientResponseModel.fromJson(response.data);
     } else {
       throw Exception("Failed to update patient");
+    }
+  }
+
+  @override
+  Future<PatientResponseModel> getPatientProfileByPhone(
+      String phoneNumber) async {
+    final endpoint =
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber";
+    try {
+      final response = await _dio.get(endpoint);
+      return PatientResponseModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
     }
   }
 }

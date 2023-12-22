@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
@@ -27,6 +29,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
       () async {
         final navigator = Navigator.of(context);
         final status = await _loginVerification();
+
         if (status) {
           navigator.pushNamedAndRemoveUntil(
             InitializationPage.routeName,

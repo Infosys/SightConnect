@@ -18,10 +18,12 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
     this.isPermissionRequired = false,
     this.token = "",
     super.key,
+    this.onBack,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
   final String token;
+  final VoidCallback? onBack;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -83,7 +85,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                   if (await webViewController.canGoBack()) {
                     webViewController.goBack();
                   } else {
-                    Navigator.of(context).pop();
+                    widget.onBack?.call();
                   }
                 },
               ),

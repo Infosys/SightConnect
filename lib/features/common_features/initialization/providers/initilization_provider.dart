@@ -4,6 +4,8 @@ import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +52,23 @@ class InitializationPageProvider extends ChangeNotifier {
     return profile;
   }
 
+  Future<PatientResponseModel> getUserProfile() async {
+    final phone = PersistentAuthStateService.authState.username;
+    if (phone == null) {
+      throw ServerFailure(errorMessage: "No phone number found");
+    }
+    final response = await _ref
+        .read(patientAuthenticationRepositoryProvider)
+        .getPatientProfileByPhone(phone);
+    return response.fold((failure) => throw failure, (result) => result);
+  }
+
   Future<void> logout() async {
     final cred = await PersistentAuthStateService.authState.getCredentials();
-    if (cred == null) return;
-    if (cred.generateLogoutUrl() == null) return;
+    if (cred == null) throw ServerFailure(errorMessage: "No credentials found");
+    if (cred.generateLogoutUrl() == null) {
+      throw ServerFailure(errorMessage: "No logout url found");
+    }
     final isConnected = await _ref.read(connectivityProvider).isConnected();
     if (isConnected) {
       try {
