@@ -1,8 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_user_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -18,22 +21,8 @@ class MyConnectionsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(getPatientProfileByIdProvider).when(
-      data: (patient) {
-        final connectionsList = patient.profile?.patient?.relatedParty;
-        return _content(context, connectionsList ?? []);
-      },
-      error: (error, trace) {
-        return const Center(
-          child: Text("Something went wrong"),
-        );
-      },
-      loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    final familyMembers = ref.watch(globalUserProvider).familyMembers;
+    return _content(context, familyMembers);
   }
 
   Widget _content(
@@ -77,8 +66,67 @@ class MyConnectionsList extends ConsumerWidget {
         ),
         const SizedBox(height: AppSize.ksheight),
         connectionsList.isEmpty
-            ? const Center(
-                child: Text("No Members Added"),
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSize.kmwidth + 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Transform.translate(
+                          offset: const Offset(0, 10),
+                          child: InkWell(
+                            customBorder: const CircleBorder(),
+                            onTap: () {
+                              try {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PatientRegistrationMiniappPage(),
+                                  ),
+                                );
+                              } catch (e) {
+                                logger.d({"error": e});
+                                Fluttertoast.showToast(
+                                  msg: "Service not available",
+                                );
+                              }
+                            },
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: AppColor.lightBlue,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  color: AppColor.blue,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: AppSize.height(context) * 0.029),
+                        Text(
+                          "Add",
+                          style: applyFiraSansFont(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               )
             : Row(
                 children: [
@@ -117,16 +165,8 @@ class MyConnectionsList extends ConsumerWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MiniAppDisplayPage(
-                                      miniapp: MiniApp(
-                                        id: "1",
-                                        version: "1",
-                                        name: "Register Patient",
-                                        displayName: "Register Patient",
-                                        sourceurl:
-                                            "assets/miniapps/vt_register_patient.zip",
-                                      ),
-                                    ),
+                                    builder: (context) =>
+                                        const PatientRegistrationMiniappPage(),
                                   ),
                                 );
                               } catch (e) {

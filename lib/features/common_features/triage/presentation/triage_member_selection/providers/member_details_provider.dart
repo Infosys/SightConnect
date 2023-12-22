@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/constants/app_images.dart';
-import '../../../../../patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
-import '../../../../../patient/patient_authentication/domain/models/enums/gender.dart';
-import '../../../../../patient/patient_authentication/domain/models/enums/relationship.dart';
-import '../../../../../patient/patient_authentication/domain/models/profile_model.dart';
+import '../../../../../patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
+import '../../../../../patient/patient_profile/domain/models/enums/gender.dart';
+import '../../../../../patient/patient_profile/domain/models/enums/relationship.dart';
+import '../../../../../patient/patient_profile/domain/models/profile_model.dart';
 
 var memberDetailsProvider = ChangeNotifierProvider(
   (ref) => MemberDetailsProvider(ref),

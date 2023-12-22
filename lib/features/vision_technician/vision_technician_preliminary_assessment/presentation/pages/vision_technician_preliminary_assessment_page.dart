@@ -18,7 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import '../providers/vision_technician_preliminary_assessment_provider.dart';
-import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../../../../patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(

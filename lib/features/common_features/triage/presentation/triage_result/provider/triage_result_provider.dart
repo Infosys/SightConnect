@@ -44,7 +44,7 @@ class TriageResultProvider extends ChangeNotifier {
 
   Map<String, dynamic> _getQuestionnaireResult() {
     double score = 0.0;
-    //TODO: set score here 
+    //TODO: set score here
     // if (_model.score != null && _model.score!.isNotEmpty) {
     //   score = _model.score![TriageStep.QUESTIONNAIRE] ?? 0.0;
     // }
@@ -54,7 +54,7 @@ class TriageResultProvider extends ChangeNotifier {
 
   Map<String, dynamic> _getAcuityResult() {
     var score = 0.0;
-    //TODO: set score here 
+    //TODO: set score here
     // if (_model.score != null && _model.score!.isNotEmpty) {
     //   score = _model.score["OBSERVATION"] ?? 0.0;
     // }
@@ -63,7 +63,7 @@ class TriageResultProvider extends ChangeNotifier {
 
   Map<String, dynamic> _getEyeScanResult() {
     var score = 0.0;
-    //TODO: set score here 
+    //TODO: set score here
     // if (_model.score != null && _model.score!.isNotEmpty) {
     //   score = _model.score![TriageStep.IMAGING] ?? 0.0;
     // }

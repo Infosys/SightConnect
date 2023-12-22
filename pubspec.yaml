@@ -85,6 +85,7 @@ dependencies:
     path: packages/superapp_scanner/
 
 
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

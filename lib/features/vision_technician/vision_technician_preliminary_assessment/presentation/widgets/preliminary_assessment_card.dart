@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../../../../patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 // import 'dart:js';
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
@@ -16,7 +16,8 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(getPatientCurrentProfileProvider).asData?.value.profile;
+    var model =
+        ref.watch(getPatientCurrentProfileProvider).asData?.value.profile;
     // var dateYear = DateTime.now().year;
 
     // int giveAge() {
