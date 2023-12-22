@@ -48,10 +48,10 @@ class VisionGuardianMemberPage extends HookConsumerWidget {
                 color: AppColor.grey,
               ),
             ),
-            IconButton(
+            /* IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(AppIcon.filterIcon),
-            ),
+            ), */
           ],
           leadingIcon: InkWell(
             onTap: () {
@@ -122,13 +122,20 @@ class VisionGuardianMemberPage extends HookConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(
-                          child: Container(
-                            height: AppSize.klheight * 2,
-                            decoration: BoxDecoration(
-                              color: AppColor.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                        Container(
+                         
+                      
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSize.width(context) * 0.01,
+                                           
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            border: Border.all(color: AppColor.grey),
+                            borderRadius:
+                                BorderRadius.circular(AppSize.klradius / 2),
+                          ),
+                          child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
                               value: filterValue.value,
                               items: addMemberFilters.map((String value) {
@@ -148,10 +155,18 @@ class VisionGuardianMemberPage extends HookConsumerWidget {
                         ),
                         Flexible(
                           child: Container(
-                            height: AppSize.klheight * 2,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: AppSize.kspadding / 2,
+                                vertical: AppSize.kspadding / 2),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.width(context) * 0.01,
+                   
+                            ),
                             decoration: BoxDecoration(
                               color: AppColor.white,
-                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColor.grey),
+                              borderRadius:
+                                  BorderRadius.circular(AppSize.klradius / 2),
                             ),
                             child: const VgAddMemberDateRangePicker(),
                           ),

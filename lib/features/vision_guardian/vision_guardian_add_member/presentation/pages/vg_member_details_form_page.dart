@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pa
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/camera_helper.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/vg_form_helper_widgets.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -35,7 +36,8 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
         child: ElevatedButton(
           onPressed: () {
             logger.d(" this is name form from vg : ${data.name.text}");
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const TriagePage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const TriagePage()));
           },
           child: const Text(
             'Save & Proceed',
@@ -52,8 +54,16 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Card(
-                elevation: 2,
+              Container(
+                padding: EdgeInsets.all(AppSize.kspadding),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  boxShadow: applyLightShadow(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSize.kmradius - 5),
+                  ),
+                ),
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   color: AppColor.white,
@@ -89,8 +99,11 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
                                         }
                                         navigator.push(
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                CameraHelper(cameras: cameras, provider: visionGuardianMemberDetailsProvider,),
+                                            builder: (context) => CameraHelper(
+                                              cameras: cameras,
+                                              provider:
+                                                  visionGuardianMemberDetailsProvider,
+                                            ),
                                           ),
                                         );
                                       } catch (e) {

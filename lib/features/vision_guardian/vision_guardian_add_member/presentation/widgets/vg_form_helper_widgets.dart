@@ -119,7 +119,7 @@ Widget customTextFieldDatePicker(
               dateController.text = dateTime.toString();
             },
             child: const Icon(
-              Icons.calendar_today_outlined,
+              Icons.calendar_month_outlined,
               color: Colors.grey,
             ),
           ),

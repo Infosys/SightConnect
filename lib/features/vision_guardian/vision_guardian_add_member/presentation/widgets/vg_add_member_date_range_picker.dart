@@ -15,7 +15,7 @@ class VgAddMemberDateRangePicker extends HookConsumerWidget {
       readOnly: true,
       controller: controller,
       decoration: InputDecoration(
-        
+        border: InputBorder.none,
         hintText: "",
         hintStyle: applyRobotoFont(
           fontSize: 14,

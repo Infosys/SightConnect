@@ -266,7 +266,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                               ),
                               const InkWell(
                                 child: Icon(
-                                  Icons.delete_outline,
+                                  Icons.delete,
                                   color: AppColor.red,
                                   size: 30,
                                 ),
@@ -308,7 +308,8 @@ class EventTeammatesTab extends HookConsumerWidget {
               addMember.value = !addMember.value;
             },
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Icon(
                   Icons.add_circle_outline,
