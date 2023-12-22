@@ -50,8 +50,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         child: ElevatedButton(
           onPressed: () async {
             ref.read(visionTechnicianTriageProvider).saveQuestionaireResponse();
-            var response =
-                await ref.read(vtTriageProvider).saveTriage();
+            var response = await ref.read(vtTriageProvider).saveTriage();
             response.fold(
               (failure) {
                 ScaffoldMessenger.of(context).showSnackBar(

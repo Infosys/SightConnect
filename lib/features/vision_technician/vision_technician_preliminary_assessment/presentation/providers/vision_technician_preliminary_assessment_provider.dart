@@ -85,7 +85,7 @@ class VtTriageProvider extends ChangeNotifier {
       organizationCode: assessment.organizationCode,
       performer: [
         Performer(
-          role: PerformerRole.PATIENT,
+          role: PerformerRole.VISION_TECHNICIAN,
           identifier: _patientId,
         )
       ],
@@ -100,7 +100,7 @@ class VtTriageProvider extends ChangeNotifier {
       userStartDate: DateTime.now(),
       issued: DateTime.now(),
 
-      source: Source.PATIENT_APP,
+      source: Source.VT_APP,
       sourceVersion: AppText.appVersion,
       incompleteSection: [],
       imagingSelection: imageSelection,

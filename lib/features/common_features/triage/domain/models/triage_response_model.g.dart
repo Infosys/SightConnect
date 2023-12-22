@@ -86,12 +86,6 @@ const _$SourceEnumMap = {
   Source.OTHERS: 'OTHERS',
 };
 
-const _$TriageStepEnumMap = {
-  TriageStep.QUESTIONNAIRE: 'QUESTIONNAIRE',
-  TriageStep.OBSERVATION: 'OBSERVATION',
-  TriageStep.IMAGE: 'IMAGE',
-};
-
 _$_PostQuestionResponseModel _$$_PostQuestionResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_PostQuestionResponseModel(
