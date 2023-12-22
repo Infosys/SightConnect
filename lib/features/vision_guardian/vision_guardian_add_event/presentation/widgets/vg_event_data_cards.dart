@@ -50,7 +50,7 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                 SizedBox(
                   width: Responsive.isMobile(context)
                       ? AppSize.width(context) * 0.60
-                      : AppSize.width(context) * 0.38,
+                      : AppSize.width(context) * 0.50,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -99,7 +99,7 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                 SizedBox(
                   width: Responsive.isMobile(context)
                       ? AppSize.width(context) * 0.60
-                      : AppSize.width(context) * 0.38,
+                      : AppSize.width(context) * 0.50,
                   child: Row(
                     children: [
                       Row(
