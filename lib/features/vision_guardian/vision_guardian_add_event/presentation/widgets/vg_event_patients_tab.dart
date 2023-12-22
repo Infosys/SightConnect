@@ -32,7 +32,7 @@ class EventPatientsTab extends StatelessWidget {
               padding: const EdgeInsets.all(AppSize.kspadding),
               width: Responsive.isMobile(context)
                   ? AppSize.width(context) * 0.9
-                  : AppSize.width(context) * 0.5,
+                  : AppSize.width(context) * 0.6,
               color: AppColor.white,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -54,7 +54,7 @@ class EventPatientsTab extends StatelessWidget {
                       SizedBox(
                         width: Responsive.isMobile(context)
                             ? AppSize.width(context) * 0.74
-                            : AppSize.width(context) * 0.38,
+                            : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
                             Text(
@@ -81,7 +81,7 @@ class EventPatientsTab extends StatelessWidget {
                       SizedBox(
                         width: Responsive.isMobile(context)
                             ? AppSize.width(context) * 0.74
-                            : AppSize.width(context) * 0.38,
+                            : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
                             Text(
@@ -109,7 +109,7 @@ class EventPatientsTab extends StatelessWidget {
                       SizedBox(
                         width: Responsive.isMobile(context)
                             ? AppSize.width(context) * 0.74
-                            : AppSize.width(context) * 0.38,
+                            : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
                             Text(
