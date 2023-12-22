@@ -57,7 +57,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              data.gender! + ', ' + data.age!,
+                              '${data.gender!}, ${data.age!}',
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,

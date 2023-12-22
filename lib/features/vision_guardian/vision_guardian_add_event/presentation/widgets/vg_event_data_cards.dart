@@ -10,7 +10,7 @@ import '../../../../../shared/theme/text_theme.dart';
 
 Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
   return Container(
-    padding: EdgeInsets.all(AppSize.kspadding),
+    padding:const EdgeInsets.all(AppSize.kspadding),
     width: double.infinity,
     decoration: BoxDecoration(
       color: AppColor.white,

@@ -23,7 +23,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
         appBar: AppBar(
           toolbarHeight: AppSize.klheight * 3,
           title: const VisionGuardianEventSearchBar(readOnly: false),
-          actions: [
+          actions:const [
           ],
         ),
         /*  floatingActionButton: VisionGuardianFloatingAddPatientAction() */

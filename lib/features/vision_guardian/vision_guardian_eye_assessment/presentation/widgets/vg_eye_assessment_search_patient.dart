@@ -30,7 +30,7 @@ class VisionGuardianEyeAssessmentSearchPatient extends ConsumerWidget {
             ),
           ],
         ),
-         floatingActionButton: VisionGuardianFloatingAddPatientAction()
+         floatingActionButton: const VisionGuardianFloatingAddPatientAction()
         ,
         body: searchResults.isEmpty
             ? const Center(child: Column(

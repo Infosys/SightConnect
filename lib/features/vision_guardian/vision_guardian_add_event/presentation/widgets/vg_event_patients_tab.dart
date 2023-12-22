@@ -17,7 +17,7 @@ class EventPatientsTab extends StatelessWidget {
       itemBuilder: (context, index) {
         var data = model[index];
         return  Container(
-    padding: EdgeInsets.all(AppSize.kspadding),
+    padding:const EdgeInsets.all(AppSize.kspadding),
     width: double.infinity,
     decoration: BoxDecoration(
       color: AppColor.white,

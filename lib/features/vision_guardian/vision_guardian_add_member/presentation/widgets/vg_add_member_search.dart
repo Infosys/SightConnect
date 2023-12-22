@@ -20,7 +20,7 @@ class VisionGuardianAddMemberSearch extends ConsumerWidget {
         appBar: AppBar(
           toolbarHeight: AppSize.klheight * 3,
           title: const VisionGuardianAddMemeberSearchBar(readOnly: false),
-          actions: [
+          actions: const [
           ],
         ),
         /*  floatingActionButton: VisionGuardianFloatingAddPatientAction() */
