@@ -108,7 +108,8 @@ class InitializationPageProvider extends ChangeNotifier {
         client,
         scopes: scopes,
         port: PORT,
-        // redirectUri: Uri.parse('http://localhost:$PORT'),
+        // redirectUri:
+        //     Uri.parse('https://www.geeksforgeeks.org/flutter-initstate/'),
         urlLancher: urlLauncher,
       );
 
