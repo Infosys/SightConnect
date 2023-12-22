@@ -1,10 +1,8 @@
-import 'dart:io';
-
-import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/camera_helper.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/vg_add_member_gender_details.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/vg_add_member_photo.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/vg_form_helper_widgets.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -12,8 +10,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/vg_member_details_provider.dart';
@@ -24,7 +20,6 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(visionGuardianMemberDetailsProvider);
-    var selectedValue = useState<int>(-1);
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: const CustomAppbar(
@@ -55,7 +50,7 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(AppSize.kspadding),
+                padding: const EdgeInsets.all(AppSize.kspadding),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColor.white,
@@ -79,138 +74,14 @@ class VisionGuardianMemberDetailsPage extends HookConsumerWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 40, left: 20, bottom: 40.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            data.image == null
-                                ? InkWell(
-                                    onTap: () async {
-                                      try {
-                                        var navigator = Navigator.of(context);
-                                        var cameras = await availableCameras();
-                                        if (cameras.isEmpty) {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "camera found ${cameras.length}");
-                                          return;
-                                        }
-                                        navigator.push(
-                                          MaterialPageRoute(
-                                            builder: (context) => CameraHelper(
-                                              cameras: cameras,
-                                              provider:
-                                                  visionGuardianMemberDetailsProvider,
-                                            ),
-                                          ),
-                                        );
-                                      } catch (e) {
-                                        Fluttertoast.showToast(
-                                            msg: e.toString());
-                                      }
-                                    },
-                                    child: const Icon(
-                                      Icons.camera_alt_outlined,
-                                      color: AppColor.grey,
-                                      size: 45,
-                                    ),
-                                  )
-                                : Image.file(
-                                    File(data.image!.path),
-                                    fit: BoxFit.cover,
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                            Text(
-                              "Click to add Patient’s profile photo",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      const VisionGuardianAddMemberPhoto(),
                       customTextFieldRows(
                           data.name, data.lastName, "First Name", "Last Name"),
                       const SizedBox(height: AppSize.klheight),
                       customTextFieldRowsAgeDob(
                           data.age, data.dob, "Age", "Date of Birth", context),
                       const SizedBox(height: AppSize.klheight),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text("Gender",
-                            style: applyRobotoFont(
-                                fontSize: 14, fontWeight: FontWeight.w400)),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: SizedBox(
-                              width: 100,
-                              child: RadioListTile<int>(
-                                visualDensity: VisualDensity.compact,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  "Male",
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                    color: AppColor.grey,
-                                  ),
-                                ),
-                                value: 1,
-                                groupValue: selectedValue.value,
-                                onChanged: (value) {
-                                  selectedValue.value = value!;
-                                  data.setGender = 'Male';
-                                },
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: RadioListTile<int>(
-                              visualDensity: VisualDensity.compact,
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(
-                                "Female",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                              value: 2,
-                              groupValue: selectedValue.value,
-                              onChanged: (value) {
-                                selectedValue.value = value!;
-                                data.setGender = 'Female';
-                              },
-                            ),
-                          ),
-                          Flexible(
-                            child: RadioListTile<int>(
-                              visualDensity: VisualDensity.compact,
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(
-                                "Other",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                              value: 3,
-                              groupValue: selectedValue.value,
-                              onChanged: (value) {
-                                selectedValue.value = value!;
-                                data.setGender = 'Other';
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      const VisionGuardianAddMemberGenderDetails(),
                       const SizedBox(height: AppSize.klheight),
                       customTextField(data.abhaid, "Abha ID(Optional)"),
                       const SizedBox(height: AppSize.klheight),

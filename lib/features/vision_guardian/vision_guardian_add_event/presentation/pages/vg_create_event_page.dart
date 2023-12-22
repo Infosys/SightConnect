@@ -10,11 +10,9 @@ import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
-import '../../../../../core/constants/app_icon.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../widgets/vg_event_heder_chips.dart';
 
@@ -41,7 +39,9 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const VisionGuardianSearchEvent(search: "event",),
+                  builder: (context) => const VisionGuardianSearchEvent(
+                    search: "event",
+                  ),
                 ),
               );
             },
