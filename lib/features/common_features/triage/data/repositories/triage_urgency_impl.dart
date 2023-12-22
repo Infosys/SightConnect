@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/repositories/triage_urgency_repository.dart';
@@ -13,7 +13,7 @@ var triageUrgencyRepositoryProvider = Provider<TriageUrgencyRepository>(
 class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   @override
   double questionnaireUrgency(
-      List<PostQuestionResponseModel> questionnaireResponse) {
+      List<PostTriageQuestionModel> questionnaireResponse) {
     double questionnaireScore = 1;
     for (var questions in questionnaireResponse) {
       for (var answer in questions.answers!) {
@@ -25,7 +25,8 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   }
 
   @override
-  double visualAcuityUrgency(List<PostObservationsModel> visionAcuityResponse) {
+  double visualAcuityUrgency(
+      List<PostTriageObservationsModel> visionAcuityResponse) {
     double visionAcuityScore = 1;
     for (var observation in visionAcuityResponse) {
       visionAcuityScore = max(visionAcuityScore, observation.score!);
@@ -34,7 +35,7 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   }
 
   @override
-  double eyeScanUrgency(List<PostImagingSelectionModel> eyeScanResponse) {
+  double eyeScanUrgency(List<PostTriageImagingSelectionModel> eyeScanResponse) {
     double eyeScanScore = 1;
     for (var observation in eyeScanResponse) {
       eyeScanScore = max(eyeScanScore, observation.score!);

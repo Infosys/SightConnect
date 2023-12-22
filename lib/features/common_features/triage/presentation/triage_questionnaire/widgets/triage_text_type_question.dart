@@ -1,22 +1,19 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UpdateTriageTextTypeQuestion extends ConsumerWidget {
+class TriageTextTypeQuestion extends ConsumerWidget {
   final Function(String value) onSubmitted;
   final QuestionnaireItemFHIRModel question;
-  const UpdateTriageTextTypeQuestion({
+  const TriageTextTypeQuestion({
     super.key,
     required this.question,
     required this.onSubmitted,
   });
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(updateTriageQuestionnaireProvider);

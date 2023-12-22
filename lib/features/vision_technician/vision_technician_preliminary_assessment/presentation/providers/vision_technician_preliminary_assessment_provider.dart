@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/common_features/triage/data/repositori
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
@@ -33,7 +32,7 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
   VTPreliminaryAssessmentProvider(this._triageRemoteSource,
       this._triageUrgencyRepository, this._visionTechnicianTriageProvider);
 
-  Future<Either<Failure, TriageResponseDto>> saveTriage() async {
+  Future<Either<Failure, TriageResponseModel>> saveTriage() async {
     List<PostImagingSelectionModel> imageSelection =
         _visionTechnicianTriageProvider.getTriageEyeScanResponse();
     List<PostObservationsModel> observations =
@@ -43,20 +42,34 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
 
     logger.d("questionResponse: $questionResponse");
 
-    double questionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
-      questionResponse,
-    );
-    double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
-      observations,
-    );
-    double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
-      imageSelection,
-    );
-    double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
-      questionnaireUrgency,
-      visualAcuityUrgency,
-      eyeScanUrgency,
-    );
+    // double questionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
+    //   questionResponse,
+    // );
+    // double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
+    //   observations,
+    // );
+    // double eyeScanUrgency = _triageUrgencyRepository.eyeScanUrgency(
+    //   imageSelection,
+    // );
+    //TODO: change models here
+
+    // double quessionnaireUrgency = 1;
+    // // _triageUrgencyRepository.questionnaireUrgency(
+    // //   questionResponse,
+    // // );
+    // double visualAcuityUrgency = 1;
+    // //  _triageUrgencyRepository.visualAcuityUrgency(
+    // //   observations,
+    // // );
+    // double eyeScanUrgency = 1;
+    // // _triageUrgencyRepository.eyeScanUrgency(
+    // //   imageSelection,
+    // // );
+    // double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
+    //   questionnaireUrgency,
+    //   visualAcuityUrgency,
+    //   eyeScanUrgency,
+    // );
     // int encounterId = 100001;
     // int organizationCode = 231000;
     // int assessmentCode = 30001;
@@ -74,49 +87,65 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       ],
       assessmentCode: 1501,
       assessmentVersion: "1.0",
+      // assessmentCode: assessmentCode,
+      // assessmentVersion: "v1",
+      // cummulativeScore: cummulativeScore,
+      score: [
+        {"QUESTIONNAIRE": 3},
+        {"OBSERVATION": 3},
+        {"IMAGING": 3},
+      ],
       issued: DateTime.now(),
       userStartDate: DateTime.now(),
       source: Source.VT_APP,
       sourceVersion: "1.0",
       incompleteSection: [],
       cummulativeScore: 7,
-      score: {
-        // TriageStep.QUESTIONNAIRE: 3,//questionnaireUrgency,
-        // TriageStep.OBSERVATION: 2,//visualAcuityUrgency,
-        // TriageStep.IMAGE: 2,//eyeScanUrgency,
-      },
+      // score: {
+      //   // TriageStep.QUESTIONNAIRE: 3,//questionnaireUrgency,
+      //   // TriageStep.OBSERVATION: 2,//visualAcuityUrgency,
+      //   // TriageStep.IMAGE: 2,//eyeScanUrgency,
+      // },
       imagingSelection: [],
       observations: [],
       questionResponse: [
-        // const PostQuestionResponseModel(linkId: 1451, score: 1, answers: [
-        //   PostAnswerModel(
-        //     value: "Yes",
-        //     // answerCode: 1552,
-        //     score: 1,
-        //   ),
-        // ]),
-        // const PostQuestionResponseModel(
-        //   linkId: 1452,
-        //   score: 1,
-        //   answers: [
-        //     PostAnswerModel(
-        //       value: "Yes",
-        //       // answerCode: 2352,
-        //       score: 1,
-        //     ),
-        //   ],
-        // ),
+        const PostQuestionResponseModel(linkId: 1451, score: 1, answers: [
+          PostAnswerModel(
+            value: "Yes",
+            // answerCode: 1552,
+            score: 1,
+          ),
+        ]),
+        const PostQuestionResponseModel(
+          linkId: 1452,
+          score: 1,
+          answers: [
+            PostAnswerModel(
+              value: "Yes",
+              // answerCode: 2352,
+              score: 1,
+            ),
+          ],
+        ),
       ],
+      // );
+      // imagingSelection: imageSelection,
+      // observations: observations,
+      // questionResponse: questionResponse,
     );
+    //TODO: change dto here
 
-    TriageResponseDto response = await _triageRemoteSource.saveTriageVT(triage);
+    Either<Failure, TriageResponseModel> response =
+        "success" as Either<Failure, TriageResponseModel>;
+    return response;
+    //     await _saveTriageUseCase.call(
+    //   SaveTriageParam(triageResponse: triage),
+    // );
 
-    return Right(response);
+    // TriageResponseDto response = await _triageRemoteSource.saveTriageVT(triage);
+
+    // return Right(response);
   }
 }
 
-enum Score{
-  QUESTIONNAIRE,
-  OBSERVATION,
-  IMAGE
-}
+enum Score { QUESTIONNAIRE, OBSERVATION, IMAGE }

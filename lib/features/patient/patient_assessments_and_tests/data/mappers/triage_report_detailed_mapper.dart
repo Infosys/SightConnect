@@ -46,8 +46,11 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      overallpriority: triageDetailedReport.carePlans!.first.activities!.first
-          .plannedActivityReference!.serviceRequest!.priority!,
+      overallpriority: (triageDetailedReport.carePlans == null ||
+              triageDetailedReport.carePlans!.isEmpty)
+          ? RequestPriority.ROUTINE
+          : triageDetailedReport.carePlans!.first.activities!.first
+              .plannedActivityReference!.serviceRequest!.priority!,
       cumulativeSeverity: triageDetailedReport.cumulativeSeverity,
       icompleteTests: triageDetailedReport.incompleteTests,
       observationSeverity: triageDetailedReport.observationSeverity,
@@ -84,7 +87,6 @@ class AssessmentDetailedReportMapper {
           imagingSelectionTemplateFHIRModels =
           triageAssessment.study?.imagingSelectionTemplate;
 
-      
       for (ImagingSelectionTemplateFHIRModel relatedImageFHIRModel
           in imagingSelectionTemplateFHIRModels!) {
         imageMap[relatedImageFHIRModel.id!] = relatedImageFHIRModel.name ?? "";
@@ -195,16 +197,12 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
   ) {
     try {
-     
-      
       final List<QuestionResponseBriefEntity> questionResponseBriefEntity = [];
       Map<int, String> questionResponseMap = {};
       for (var question in triageAssessment.questionnaire!.questionnaireItem!) {
         questionResponseMap[question.id!] = question.text!;
-        
       }
 
-      
       for (var response in triageDetailedReport.responses!) {
         if (questionResponseMap.containsKey(response.linkId)) {
           questionResponseBriefEntity.add(
@@ -213,15 +211,12 @@ class AssessmentDetailedReportMapper {
               response: response.answers!.first.value,
             ),
           );
-          
         }
       }
-      
+
       return questionResponseBriefEntity;
     } catch (e) {
-     
       logger.d({
-      
         "Some Error Happend while Mapping QuestionResponseBriefEntity": e,
       });
       return [];

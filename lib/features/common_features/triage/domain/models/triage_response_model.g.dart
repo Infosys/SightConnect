@@ -30,10 +30,9 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
           ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       cummulativeScore: (json['cummulativeScore'] as num?)?.toDouble(),
-      score: (json['score'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(
-            $enumDecode(_$TriageStepEnumMap, k), (e as num).toDouble()),
-      ),
+      score: (json['score'] as List<dynamic>?)
+          ?.map((e) => Map<String, int>.from(e as Map))
+          .toList(),
       imagingSelection: (json['imagingSelection'] as List<dynamic>?)
           ?.map((e) =>
               PostImagingSelectionModel.fromJson(e as Map<String, dynamic>))
@@ -66,8 +65,7 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
       'incompleteSection':
           instance.incompleteSection?.map((e) => e.toJson()).toList(),
       'cummulativeScore': instance.cummulativeScore,
-      'score':
-          instance.score?.map((k, e) => MapEntry(_$TriageStepEnumMap[k]!, e)),
+      'score': instance.score,
       'imagingSelection':
           instance.imagingSelection?.map((e) => e.toJson()).toList(),
       'observations': instance.observations?.map((e) => e.toJson()).toList(),
@@ -176,6 +174,7 @@ _$_PostImagingSelectionModel _$$_PostImagingSelectionModelFromJson(
       baseUrl: json['baseUrl'] as String?,
       score: (json['score'] as num?)?.toDouble(),
       fileId: json['fileId'] as String?,
+      bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
     );
 
 Map<String, dynamic> _$$_PostImagingSelectionModelToJson(
@@ -186,7 +185,14 @@ Map<String, dynamic> _$$_PostImagingSelectionModelToJson(
       'baseUrl': instance.baseUrl,
       'score': instance.score,
       'fileId': instance.fileId,
+      'bodySite': _$BodySiteEnumMap[instance.bodySite],
     };
+
+const _$BodySiteEnumMap = {
+  BodySite.LEFT_EYE: 'LEFT_EYE',
+  BodySite.RIGHT_EYE: 'RIGHT_EYE',
+  BodySite.BOTH_EYES: 'BOTH_EYES',
+};
 
 _$_PostObservationsModel _$$_PostObservationsModelFromJson(
         Map<String, dynamic> json) =>

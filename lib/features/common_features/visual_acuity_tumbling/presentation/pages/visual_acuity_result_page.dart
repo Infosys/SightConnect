@@ -30,11 +30,14 @@ class TumblingResultReportPage extends ConsumerWidget {
         ref.watch(tumblingTestProvider).calculateEyeSight(Eye.left);
     double rightEyeSight =
         ref.watch(tumblingTestProvider).calculateEyeSight(Eye.right);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) async {
+        if (value == true) {
+          return;
+        }
         ref.read(resetProvider).reset();
         Navigator.of(context).popUntil((route) => route.isFirst);
-        return false;
       },
       child: Scaffold(
         key: scaffoldKey,

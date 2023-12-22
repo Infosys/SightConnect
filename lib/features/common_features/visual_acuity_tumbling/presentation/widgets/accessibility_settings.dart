@@ -42,8 +42,8 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                     const SizedBox(height: AppSize.kmheight),
                     const _AutoContrastWidget(),
                     const SizedBox(height: AppSize.kmheight),
-                    const _BlurThreshold(),
-                    const SizedBox(height: AppSize.kmheight),
+                    // const _BlurThreshold(),
+                    // const SizedBox(height: AppSize.kmheight),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

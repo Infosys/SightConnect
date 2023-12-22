@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -31,14 +30,16 @@ class FileMsService {
       'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
       'specData': 'abc@gmail.com'
     });
+
     try {
       final response = await _dio.post(endpoint, data: data);
-      logger.d({"response": response});
+      logger.d({
+        "uploadImage": response.data,
+      });
       if (response.statusCode == 200) {
-        final result = jsonDecode(response.data);
-        logger.d({"uploadImage": result});
-        final fileId = result['id'];
-        return await _getImage(fileId);
+        final body = response.data;
+        final fileId = body['id'];
+        return _getImage(fileId);
       } else {
         throw ServerFailure(
             errorMessage: "UploadImage: ${response.statusMessage}");

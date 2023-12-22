@@ -1,4 +1,5 @@
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -17,7 +18,7 @@ import '../../features/patient/patient_assessments_and_tests/domain/entities/tri
 
 final patientAssessmentAndTestProvider = ChangeNotifierProvider(
   (ref) => PatientAssessmentAndTestProviderNew(
-    ref.watch(getTriageUseCase),
+    ref.watch(getAssessmentUseCase),
     ref.watch(getPatientProfileByIdProvider).asData?.value,
     ref.watch(triageReportRepositoryProvider),
     ref.watch(patientAssessmentUpdateDataProvider),
@@ -57,7 +58,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       users.add(TriageReportUserEntity(
         name: _patient?.profile?.patient?.name ?? "",
         image: _patient?.profile?.patient?.profilePhoto ?? "",
-        id: 9627849180,
+        id: 9627849182,
       ));
       _selectedPatient = users.first;
       _patient?.profile?.patient?.relatedParty
@@ -197,6 +198,21 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
 
       return [];
     }
+  }
+
+  Future<DiagnosticReportTemplateFHIRModel> getAssessmentDetail() async {
+    notifyListeners();
+    final triageAssessmentResponse =
+        await _getTriageUseCase.call(GetTriageParam());
+    return triageAssessmentResponse.fold(
+      (failure) {
+        logger.d({"getEyeTriageDetailedReport ": failure});
+        throw failure;
+      },
+      (triageAssessment) {
+        return triageAssessment;
+      },
+    );
   }
 
   getQuestionnairWithAnswer() {}

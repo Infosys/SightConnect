@@ -3,9 +3,9 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/pages/update_triage_eye_preview_page.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/provider/update_triage_eye_scan_provider.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/widgets/update_camera_controllers.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_preview_page.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/provider/update_triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/widgets/update_camera_controllers.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,9 +17,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
   const UpdateTriageEyeCapturingPage({
     required this.cameras,
+    required this.diagnosticReportId,
     super.key,
   });
   final List<CameraDescription> cameras;
+  final int diagnosticReportId;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -175,6 +177,8 @@ class _UpdateTriageEyeCapturingPageState
   }
 
   Future<void> _takePicture(BuildContext context) async {
+    var navigator = Navigator.of(context);
+    BuildContext dialogContext = context;
     try {
       final image = await _capturePicture(context);
       if (image == null) {
@@ -192,6 +196,17 @@ class _UpdateTriageEyeCapturingPageState
         model.setCurrentEye(TriageEyeType.LEFT);
       } else if (model.currentEye == TriageEyeType.LEFT) {
         model.setLeftEyeImage(image);
+
+        
+        bool resposne = await model.updateEyeScanReport(widget.diagnosticReportId);
+        if (resposne) {
+          navigator.pop();
+          navigator.pop();
+          Fluttertoast.showToast(msg: "Eye scan report updated");
+        } else {
+          Fluttertoast.showToast(msg: "Something went wrong");
+        }
+
         model.setCurrentEye(TriageEyeType.UNKNOWN);
       }
     } on CameraException {

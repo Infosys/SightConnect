@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/pages/update_triage_eye_capturing_page.dart';
+import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/user_details_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
@@ -16,9 +16,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
+  
+  final int diagnosticReportId;
   const UpdateTriageEyeScanCarouselPage({
     Key? key,
     this.userDetails,
+    required this.diagnosticReportId,
   }) : super(key: key);
   final UserDetails? userDetails;
 
@@ -112,7 +115,7 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                     MaterialPageRoute(
                       fullscreenDialog: true,
                       builder: (context) =>
-                          UpdateTriageEyeCapturingPage(cameras: cameras),
+                          UpdateTriageEyeCapturingPage(cameras: cameras,diagnosticReportId:diagnosticReportId ,),
                     ),
                   );
                 }

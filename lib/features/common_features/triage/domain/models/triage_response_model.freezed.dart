@@ -35,7 +35,7 @@ mixin _$TriageResponseModel {
   List<IncompleteTestModel>? get incompleteSection =>
       throw _privateConstructorUsedError;
   double? get cummulativeScore => throw _privateConstructorUsedError;
-  Map<TriageStep, double>? get score => throw _privateConstructorUsedError;
+  List<Map<String, int>>? get score => throw _privateConstructorUsedError;
   List<PostImagingSelectionModel>? get imagingSelection =>
       throw _privateConstructorUsedError;
   List<PostObservationsModel>? get observations =>
@@ -69,7 +69,7 @@ abstract class $TriageResponseModelCopyWith<$Res> {
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      Map<TriageStep, double>? score,
+      List<Map<String, int>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -162,7 +162,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<TriageStep, double>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value.imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
       double? cummulativeScore,
-      Map<TriageStep, double>? score,
+      List<Map<String, int>>? score,
       List<PostImagingSelectionModel>? imagingSelection,
       List<PostObservationsModel>? observations,
       List<PostQuestionResponseModel>? questionResponse});
@@ -292,7 +292,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       score: freezed == score
           ? _value._score
           : score // ignore: cast_nullable_to_non_nullable
-              as Map<TriageStep, double>?,
+              as List<Map<String, int>>?,
       imagingSelection: freezed == imagingSelection
           ? _value._imagingSelection
           : imagingSelection // ignore: cast_nullable_to_non_nullable
@@ -326,7 +326,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
       this.cummulativeScore,
-      final Map<TriageStep, double>? score,
+      final List<Map<String, int>>? score,
       final List<PostImagingSelectionModel>? imagingSelection,
       final List<PostObservationsModel>? observations,
       final List<PostQuestionResponseModel>? questionResponse})
@@ -384,14 +384,14 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   final double? cummulativeScore;
-  final Map<TriageStep, double>? _score;
+  final List<Map<String, int>>? _score;
   @override
-  Map<TriageStep, double>? get score {
+  List<Map<String, int>>? get score {
     final value = _score;
     if (value == null) return null;
-    if (_score is EqualUnmodifiableMapView) return _score;
+    if (_score is EqualUnmodifiableListView) return _score;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<PostImagingSelectionModel>? _imagingSelection;
@@ -521,7 +521,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
           final double? cummulativeScore,
-          final Map<TriageStep, double>? score,
+          final List<Map<String, int>>? score,
           final List<PostImagingSelectionModel>? imagingSelection,
           final List<PostObservationsModel>? observations,
           final List<PostQuestionResponseModel>? questionResponse}) =
@@ -558,7 +558,7 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   double? get cummulativeScore;
   @override
-  Map<TriageStep, double>? get score;
+  List<Map<String, int>>? get score;
   @override
   List<PostImagingSelectionModel>? get imagingSelection;
   @override
@@ -1251,6 +1251,7 @@ mixin _$PostImagingSelectionModel {
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
   String? get fileId => throw _privateConstructorUsedError;
+  BodySite? get bodySite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1269,7 +1270,8 @@ abstract class $PostImagingSelectionModelCopyWith<$Res> {
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId});
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -1291,6 +1293,7 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_value.copyWith(
       identifier: freezed == identifier
@@ -1313,6 +1316,10 @@ class _$PostImagingSelectionModelCopyWithImpl<$Res,
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ) as $Val);
   }
 }
@@ -1331,7 +1338,8 @@ abstract class _$$_PostImagingSelectionModelCopyWith<$Res>
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId});
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -1352,6 +1360,7 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_$_PostImagingSelectionModel(
       identifier: freezed == identifier
@@ -1374,6 +1383,10 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ));
   }
 }
@@ -1382,7 +1395,12 @@ class __$$_PostImagingSelectionModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   const _$_PostImagingSelectionModel(
-      {this.identifier, this.endpoint, this.baseUrl, this.score, this.fileId});
+      {this.identifier,
+      this.endpoint,
+      this.baseUrl,
+      this.score,
+      this.fileId,
+      this.bodySite});
 
   factory _$_PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostImagingSelectionModelFromJson(json);
@@ -1397,10 +1415,12 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
   final double? score;
   @override
   final String? fileId;
+  @override
+  final BodySite? bodySite;
 
   @override
   String toString() {
-    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId)';
+    return 'PostImagingSelectionModel(identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId, bodySite: $bodySite)';
   }
 
   @override
@@ -1414,13 +1434,15 @@ class _$_PostImagingSelectionModel implements _PostImagingSelectionModel {
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
             (identical(other.score, score) || other.score == score) &&
-            (identical(other.fileId, fileId) || other.fileId == fileId));
+            (identical(other.fileId, fileId) || other.fileId == fileId) &&
+            (identical(other.bodySite, bodySite) ||
+                other.bodySite == bodySite));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, identifier, endpoint, baseUrl, score, fileId);
+  int get hashCode => Object.hash(
+      runtimeType, identifier, endpoint, baseUrl, score, fileId, bodySite);
 
   @JsonKey(ignore: true)
   @override
@@ -1443,7 +1465,8 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
       final String? endpoint,
       final String? baseUrl,
       final double? score,
-      final String? fileId}) = _$_PostImagingSelectionModel;
+      final String? fileId,
+      final BodySite? bodySite}) = _$_PostImagingSelectionModel;
 
   factory _PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =
       _$_PostImagingSelectionModel.fromJson;
@@ -1458,6 +1481,8 @@ abstract class _PostImagingSelectionModel implements PostImagingSelectionModel {
   double? get score;
   @override
   String? get fileId;
+  @override
+  BodySite? get bodySite;
   @override
   @JsonKey(ignore: true)
   _$$_PostImagingSelectionModelCopyWith<_$_PostImagingSelectionModel>

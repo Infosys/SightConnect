@@ -191,24 +191,14 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         return UpdateTriageTextTypeQuestion(
                           question: question,
                           onSubmitted: (String value) async {
-                            model.addQuestionnaireAnswer(
-                              question.id!,
-                              value,
-                              0,
-                              0,
-                            );
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                              await updateTriage(context, ref);
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
+                            if (value.isNotEmpty) {
+                              model.addQuestionnaireAnswer(
+                                question.id!,
+                                value,
+                                0,
+                                0,
                               );
                             }
-                          },
-                          onCancle: () async {
                             if (isLastQuestion) {
                               model.saveQuestionaireResponse();
                               await updateTriage(context, ref);

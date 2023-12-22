@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/data/repositori
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
     as update_model;
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
@@ -45,7 +45,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   bool _isLoading = false;
   late final Map<int, Map> _selectedOptions;
   late final List<Map<int, bool>> _questionnaireResponse;
-  final List<PostQuestionResponseModel> _questionResponseList = [];
+  final List<PostTriageQuestionModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
 
   UpdateTriageQuestionnaireProvider(
@@ -74,7 +74,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
   Future<void> getQuestionnaire() async {
     _isLoading = true;
     notifyListeners();
-    final resposne = await _triageRepository.getTriage();
+    final resposne = await _triageRepository.getAssessment();
     resposne.fold(
       (failure) {
         logger.d({
@@ -113,20 +113,13 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     try {
       _selectedOptions.forEach(
         (questionCode, result) {
-          logger.f({
-            "Question Response List": _questionResponseList,
-            "questionCode": questionCode,
-            "value": result["answer"],
-            "score": result["score"].toDouble(),
-            "answerCode": result["score"].toDouble(),
-          });
           _questionResponseList.add(
-            PostQuestionResponseModel(
+            PostTriageQuestionModel(
               linkId: questionCode,
               score: result["score"]
                   .toDouble(), //For our use case answer can be yes or no so overall score will be same as answer score
               answers: [
-                PostAnswerModel(
+                PostTriageAnswerModel(
                   value: result["answer"],
                   score: result["score"].toDouble(),
                   answerCode: result["answerCode"],
@@ -141,12 +134,11 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     }
   }
 
-  List<PostQuestionResponseModel> getQuestionaireResponse() {
+  List<PostTriageQuestionModel> getQuestionaireResponse() {
     return _questionResponseList;
   }
 
-  Future<Either<Failure, TriageResponseModel>> updateTriage(
-      int reportId) async {
+  Future<Either<Failure, TriagePostModel>> updateTriage(int reportId) async {
     final reportModel = await getTriageReportByReportId(reportId);
     if (reportModel == null) {
       throw ServerException();
@@ -176,9 +168,10 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       ),
     );
 
-    logger.v({"Triage Update Model": triage});
+    // logger.v({"Triage Update Model": triage});
     try {
-      return await _triageRepository.updateTriage(triage: triage);
+      return await _triageRepository.updateTriageResponse(
+          triageResponse: triage);
     } catch (e) {
       rethrow;
     }
@@ -213,7 +206,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
 
   List<update_model.PatchQuestionResponseModel> getQuestionaireResponseList(
     List<triage_detailed_model.Response>? response,
-    List<PostQuestionResponseModel> questionResponseListFromUI,
+    List<PostTriageQuestionModel> questionResponseListFromUI,
   ) {
     List<update_model.PatchQuestionResponseModel> questionResponseList = [];
     response?.forEach((element) {
@@ -225,7 +218,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       );
     });
 
-    for (PostQuestionResponseModel element in questionResponseListFromUI) {
+    for (PostTriageQuestionModel element in questionResponseListFromUI) {
       questionResponseList.add(
         update_model.PatchQuestionResponseModel(
           action: Action.ADD,
