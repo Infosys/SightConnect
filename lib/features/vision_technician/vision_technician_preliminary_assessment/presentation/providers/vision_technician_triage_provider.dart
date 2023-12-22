@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -74,7 +75,6 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
   List<PostQuestionResponseModel> getQuestionaireResponse() {
     return _questionResponseList;
-    
   }
 
   void saveQuestionaireResponse() {
@@ -96,7 +96,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
           PostQuestionResponseModel(
             linkId: key,
             score: 1,
-            answer: [
+            answers: [
               PostAnswerModel(
                 value: "YES",
                 score: double.parse(score.toString()),
@@ -111,8 +111,8 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
   //////////////////////////////////////////////////////////////////
 
   List<PostImagingSelectionModel> getTriageEyeScanResponse() {
-    XFile XleftEyeImage = _leftEyeImage!;
-    XFile XrightEyeImage = _rightEyeImage!;
+    XFile XleftEyeImage = XFile(AppImages.cataractEyecare); // _leftEyeImage!;
+    XFile XrightEyeImage = XFile(AppImages.cataractEyecare); // _rightEyeImage!;
 
     List<PostImagingSelectionModel> mediaCaptureList = [];
     mediaCaptureList.add(PostImagingSelectionModel(

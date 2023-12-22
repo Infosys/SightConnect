@@ -16,6 +16,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
@@ -95,7 +96,7 @@ class TriageProvider extends ChangeNotifier {
 
     final triage = TriageResponseModel(
       patientId: _patientId,
-      serviceType: 'OPTOMETRY',
+      serviceType: ServiceType.OPTOMETRY,
       organizationCode: 231000,
       performer: [
         const PerformerModel(
@@ -109,7 +110,7 @@ class TriageProvider extends ChangeNotifier {
       score: {
         TriageStep.QUESTIONNAIRE: quessionnaireUrgency,
         TriageStep.OBSERVATION: visualAcuityUrgency,
-        TriageStep.IMAGING: eyeScanUrgency,
+        TriageStep.IMAGE: eyeScanUrgency,
       },
       issued: DateTime.now(),
       userStartDate: DateTime.now(),

@@ -63,7 +63,7 @@ class TriageResultProvider extends ChangeNotifier {
   Map<String, dynamic> _getEyeScanResult() {
     var score = 0.0;
     if (_model.score != null && _model.score!.isNotEmpty) {
-      score = _model.score![TriageStep.IMAGING] ?? 0.0;
+      score = _model.score![TriageStep.IMAGE] ?? 0.0;
     }
     return _setPropertiesByUrgency(score.toDouble());
   }

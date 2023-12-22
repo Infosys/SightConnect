@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,7 +25,7 @@ var preliminaryAssessmentProvider = Provider(
 );
 
 class VTPreliminaryAssessmentProvider extends ChangeNotifier {
-  final int _patientId = 100101;
+  // final int _patientId = 100101;
   // final SaveTriageUseCase _saveTriageUseCase;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
@@ -42,7 +43,7 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
 
     logger.d("questionResponse: $questionResponse");
 
-    double quessionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
+    double questionnaireUrgency = _triageUrgencyRepository.questionnaireUrgency(
       questionResponse,
     );
     double visualAcuityUrgency = _triageUrgencyRepository.visualAcuityUrgency(
@@ -52,50 +53,70 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       imageSelection,
     );
     double cummulativeScore = _triageUrgencyRepository.totalTriageUrgency(
-      quessionnaireUrgency,
+      questionnaireUrgency,
       visualAcuityUrgency,
       eyeScanUrgency,
     );
-    int encounterId = 100001;
-    int organizationCode = 231000;
-    int assessmentCode = 30001;
+    // int encounterId = 100001;
+    // int organizationCode = 231000;
+    // int assessmentCode = 30001;
 
     final triage = TriageResponseModel(
-      patientId: _patientId,
-      id: null,
-      encounterId: encounterId,
-      serviceType: 'OPTOMETRY',
-      organizationCode: organizationCode,
+      patientId: 1511,
+      encounterId: null,
+      serviceType: ServiceType.OPTOMETRY,
+      organizationCode: 0,
       performer: [
         const PerformerModel(
           role: PerformerRole.VISION_TECHNICIAN,
-          identifier: 200102,
+          identifier: 1601,
         )
       ],
-      assessmentCode: assessmentCode,
-      assessmentVersion: "v1",
-      cummulativeScore: cummulativeScore,
-      score: {
-        TriageStep.QUESTIONNAIRE: quessionnaireUrgency,
-        TriageStep.OBSERVATION: visualAcuityUrgency,
-        TriageStep.IMAGING: eyeScanUrgency,
-      },
+      assessmentCode: 1501,
+      assessmentVersion: "1.0",
       issued: DateTime.now(),
       userStartDate: DateTime.now(),
       source: Source.VT_APP,
-      sourceVersion: "v1",
+      sourceVersion: "1.0",
       incompleteSection: [],
-      imagingSelection: imageSelection,
-      observations: observations,
-      questionResponse: questionResponse,
+      cummulativeScore: 7,
+      score: {
+        // TriageStep.QUESTIONNAIRE: 3,//questionnaireUrgency,
+        // TriageStep.OBSERVATION: 2,//visualAcuityUrgency,
+        // TriageStep.IMAGE: 2,//eyeScanUrgency,
+      },
+      imagingSelection: [],
+      observations: [],
+      questionResponse: [
+        // const PostQuestionResponseModel(linkId: 1451, score: 1, answers: [
+        //   PostAnswerModel(
+        //     value: "Yes",
+        //     // answerCode: 1552,
+        //     score: 1,
+        //   ),
+        // ]),
+        // const PostQuestionResponseModel(
+        //   linkId: 1452,
+        //   score: 1,
+        //   answers: [
+        //     PostAnswerModel(
+        //       value: "Yes",
+        //       // answerCode: 2352,
+        //       score: 1,
+        //     ),
+        //   ],
+        // ),
+      ],
     );
-    // Either<Failure, TriageResponseModel> response =
-    //     await _saveTriageUseCase.call(
-    //   SaveTriageParam(triageResponse: triage),
-    // );
 
-    TriageResponseDto response =  await _triageRemoteSource.saveTriageVT(triage);
+    TriageResponseDto response = await _triageRemoteSource.saveTriageVT(triage);
 
     return Right(response);
   }
+}
+
+enum Score{
+  QUESTIONNAIRE,
+  OBSERVATION,
+  IMAGE
 }

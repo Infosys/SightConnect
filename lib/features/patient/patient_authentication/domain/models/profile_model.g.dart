@@ -306,4 +306,5 @@ Map<String, dynamic> _$$_AddressModelToJson(_$_AddressModel instance) =>
 const _$StatusEnumMap = {
   Status.ACTIVE: 'ACTIVE',
   Status.INACTIVE: 'INACTIVE',
+  Status.IN_PROGRESS: 'IN_PROGRESS',
 };

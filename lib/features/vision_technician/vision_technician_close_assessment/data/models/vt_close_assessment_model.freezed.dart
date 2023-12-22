@@ -598,7 +598,7 @@ Outcome _$OutcomeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Outcome {
-  Action? get action => throw _privateConstructorUsedError;
+  ActionOutcome? get action => throw _privateConstructorUsedError;
   GoalOutCome? get goalOutcome => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -611,7 +611,7 @@ abstract class $OutcomeCopyWith<$Res> {
   factory $OutcomeCopyWith(Outcome value, $Res Function(Outcome) then) =
       _$OutcomeCopyWithImpl<$Res, Outcome>;
   @useResult
-  $Res call({Action? action, GoalOutCome? goalOutcome});
+  $Res call({ActionOutcome? action, GoalOutCome? goalOutcome});
 }
 
 /// @nodoc
@@ -634,7 +634,7 @@ class _$OutcomeCopyWithImpl<$Res, $Val extends Outcome>
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
-              as Action?,
+              as ActionOutcome?,
       goalOutcome: freezed == goalOutcome
           ? _value.goalOutcome
           : goalOutcome // ignore: cast_nullable_to_non_nullable
@@ -650,7 +650,7 @@ abstract class _$$_OutcomeCopyWith<$Res> implements $OutcomeCopyWith<$Res> {
       __$$_OutcomeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Action? action, GoalOutCome? goalOutcome});
+  $Res call({ActionOutcome? action, GoalOutCome? goalOutcome});
 }
 
 /// @nodoc
@@ -670,7 +670,7 @@ class __$$_OutcomeCopyWithImpl<$Res>
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
-              as Action?,
+              as ActionOutcome?,
       goalOutcome: freezed == goalOutcome
           ? _value.goalOutcome
           : goalOutcome // ignore: cast_nullable_to_non_nullable
@@ -688,7 +688,7 @@ class _$_Outcome implements _Outcome {
       _$$_OutcomeFromJson(json);
 
   @override
-  final Action? action;
+  final ActionOutcome? action;
   @override
   final GoalOutCome? goalOutcome;
 
@@ -727,12 +727,13 @@ class _$_Outcome implements _Outcome {
 
 abstract class _Outcome implements Outcome {
   const factory _Outcome(
-      {final Action? action, final GoalOutCome? goalOutcome}) = _$_Outcome;
+      {final ActionOutcome? action,
+      final GoalOutCome? goalOutcome}) = _$_Outcome;
 
   factory _Outcome.fromJson(Map<String, dynamic> json) = _$_Outcome.fromJson;
 
   @override
-  Action? get action;
+  ActionOutcome? get action;
   @override
   GoalOutCome? get goalOutcome;
   @override

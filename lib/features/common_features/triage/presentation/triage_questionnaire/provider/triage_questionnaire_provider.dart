@@ -87,7 +87,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
           PostQuestionResponseModel(
             linkId: key,
             score: 1,
-            answer: [
+            answers: [
               PostAnswerModel(
                 value: "Yes",
                 score: double.parse(score.toString()),

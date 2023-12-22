@@ -73,24 +73,39 @@ const _$RoleEnumMap = {
 };
 
 _$_Outcome _$$_OutcomeFromJson(Map<String, dynamic> json) => _$_Outcome(
-      action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
+      action: $enumDecodeNullable(_$ActionOutcomeEnumMap, json['action']),
       goalOutcome:
           $enumDecodeNullable(_$GoalOutComeEnumMap, json['goalOutcome']),
     );
 
 Map<String, dynamic> _$$_OutcomeToJson(_$_Outcome instance) =>
     <String, dynamic>{
-      'action': _$ActionEnumMap[instance.action],
+      'action': _$ActionOutcomeEnumMap[instance.action],
       'goalOutcome': _$GoalOutComeEnumMap[instance.goalOutcome],
     };
 
-const _$ActionEnumMap = {
-  Action.ADD: 'ADD',
+const _$ActionOutcomeEnumMap = {
+  ActionOutcome.ADD: 'ADD',
+  ActionOutcome.REMOVE: 'REMOVE',
+  ActionOutcome.UPDATE: 'UPDATE',
 };
 
 const _$GoalOutComeEnumMap = {
   GoalOutCome.GLASSES_PRESCRIBED: 'GLASSES_PRESCRIBED',
-  GoalOutCome.CATARACT_SURGERY_PRESCRIBED: 'CATARACT_SURGERY_PRESCRIBED',
-  GoalOutCome.EYE_DROPS_PRESCRIBED: 'EYE_DROPS_PRESCRIBED',
-  GoalOutCome.ORAL_MEDICATION_PRESCRIBED: 'ORAL_MEDICATION_PRESCRIBED',
+  GoalOutCome.OP_CONSULTATION: 'OP_CONSULTATION',
+  GoalOutCome.MEDICINE_PRESCRIBED: 'MEDICINE_PRESCRIBED',
+  GoalOutCome.UNDER_OBSERVATION: 'UNDER_OBSERVATION',
+  GoalOutCome.ADMITTED: 'ADMITTED',
+  GoalOutCome.SURGERY_RECOMMENDED: 'SURGERY_RECOMMENDED',
+  GoalOutCome.REFERRED_TO_SPECIALIST: 'REFERRED_TO_SPECIALIST',
+  GoalOutCome.PATIENT_DID_NOT_VISIT: 'PATIENT_DID_NOT_VISIT',
+  GoalOutCome.PATIENT_VISITED_OTHER_CLINIC: 'PATIENT_VISITED_OTHER_CLINIC',
+  GoalOutCome.PATIENT_NOT_INTERESTED_IN_TREATMENT:
+      'PATIENT_NOT_INTERESTED_IN_TREATMENT',
+  GoalOutCome.TREATMENT_PLAN_PRESCRIBED: 'TREATMENT_PLAN_PRESCRIBED',
+  GoalOutCome.VISION_THERAPY_RECOMMENDED: 'VISION_THERAPY_RECOMMENDED',
+  GoalOutCome.REFERRAL_FOR_DIAGNOSTIC_TESTING:
+      'REFERRAL_FOR_DIAGNOSTIC_TESTING',
+  GoalOutCome.LOW_VISION_REHABILITATION: 'LOW_VISION_REHABILITATION',
+  GoalOutCome.EDUCATION_AND_COUNSELING: 'EDUCATION_AND_COUNSELING',
 };

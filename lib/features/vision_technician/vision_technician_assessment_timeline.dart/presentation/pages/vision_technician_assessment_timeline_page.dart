@@ -12,13 +12,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
   const VisionTechnicianAssessmentTimeline({
-    this.patientSearchDto,
+    this.patientDetails,
     super.key,
   });
-  final VTPatientDto? patientSearchDto;
+  final VTPatientDto? patientDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (patientSearchDto == null) {
+    if (patientDetails == null) {
       return Scaffold(
         appBar: AppBar(),
         body: Center(
@@ -44,7 +44,9 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    const VisionTechnicianCloseAssessmentPage(),
+                    VisionTechnicianCloseAssessmentPage(
+                      patientDetails : patientDetails
+                    ),
               ),
             );
           },
@@ -62,7 +64,7 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
         leadingWidth: 70,
         centerTitle: false,
         title: Text(
-          "${patientSearchDto?.name ?? ""} - OP ${patientSearchDto?.id ?? ""}",
+          "${patientDetails?.name ?? ""} - OP ${patientDetails?.id ?? ""}",
         ),
       ),
       body: SingleChildScrollView(
@@ -70,13 +72,13 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             children: [
-              TimelineProfile(model: patientSearchDto!),
+              TimelineProfile(model: patientDetails!),
               const SizedBox(height: AppSize.ksheight),
-              GeneralInformation(model: patientSearchDto!),
+              GeneralInformation(model: patientDetails!),
               const SizedBox(height: AppSize.ksheight),
               AssessmentTimeline(
-                encounterId: patientSearchDto!.encounterId,
-                enconterDate: patientSearchDto!.encounterStartDate.toString(),
+                encounterId: patientDetails!.encounterId,
+                enconterDate: patientDetails!.encounterStartDate.toString(),
               ),
               const SizedBox(height: AppSize.ksheight),
             ],

@@ -6,6 +6,7 @@ var dioProvider = Provider(
   (ref) => Dio(
     BaseOptions(
       baseUrl: AppEnv.baseUrl,
+      followRedirects: true,
     ),
   ),
 );

@@ -21,9 +21,8 @@ TriageResponseModel _$TriageResponseModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TriageResponseModel {
   int? get patientId => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
-  String? get serviceType => throw _privateConstructorUsedError;
+  ServiceType? get serviceType => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
   List<PerformerModel>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
@@ -58,9 +57,8 @@ abstract class $TriageResponseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? patientId,
-      int? id,
       int? encounterId,
-      String? serviceType,
+      ServiceType? serviceType,
       int? organizationCode,
       List<PerformerModel>? performer,
       int? assessmentCode,
@@ -91,7 +89,6 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
   @override
   $Res call({
     Object? patientId = freezed,
-    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -114,10 +111,6 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
               as int?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -125,7 +118,7 @@ class _$TriageResponseModelCopyWithImpl<$Res, $Val extends TriageResponseModel>
       serviceType: freezed == serviceType
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ServiceType?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
@@ -196,9 +189,8 @@ abstract class _$$_TriageResponseModelCopyWith<$Res>
   @useResult
   $Res call(
       {int? patientId,
-      int? id,
       int? encounterId,
-      String? serviceType,
+      ServiceType? serviceType,
       int? organizationCode,
       List<PerformerModel>? performer,
       int? assessmentCode,
@@ -227,7 +219,6 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? patientId = freezed,
-    Object? id = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
     Object? organizationCode = freezed,
@@ -250,10 +241,6 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
               as int?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -261,7 +248,7 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
       serviceType: freezed == serviceType
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ServiceType?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
@@ -327,7 +314,6 @@ class __$$_TriageResponseModelCopyWithImpl<$Res>
 class _$_TriageResponseModel implements _TriageResponseModel {
   const _$_TriageResponseModel(
       {this.patientId,
-      this.id,
       this.encounterId,
       this.serviceType,
       this.organizationCode,
@@ -357,11 +343,9 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   @override
   final int? patientId;
   @override
-  final int? id;
-  @override
   final int? encounterId;
   @override
-  final String? serviceType;
+  final ServiceType? serviceType;
   @override
   final int? organizationCode;
   final List<PerformerModel>? _performer;
@@ -444,7 +428,7 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 
   @override
   String toString() {
-    return 'TriageResponseModel(patientId: $patientId, id: $id, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageResponseModel(patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -454,7 +438,6 @@ class _$_TriageResponseModel implements _TriageResponseModel {
             other is _$_TriageResponseModel &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.serviceType, serviceType) ||
@@ -491,7 +474,6 @@ class _$_TriageResponseModel implements _TriageResponseModel {
   int get hashCode => Object.hash(
       runtimeType,
       patientId,
-      id,
       encounterId,
       serviceType,
       organizationCode,
@@ -527,9 +509,8 @@ class _$_TriageResponseModel implements _TriageResponseModel {
 abstract class _TriageResponseModel implements TriageResponseModel {
   const factory _TriageResponseModel(
           {final int? patientId,
-          final int? id,
           final int? encounterId,
-          final String? serviceType,
+          final ServiceType? serviceType,
           final int? organizationCode,
           final List<PerformerModel>? performer,
           final int? assessmentCode,
@@ -552,11 +533,9 @@ abstract class _TriageResponseModel implements TriageResponseModel {
   @override
   int? get patientId;
   @override
-  int? get id;
-  @override
   int? get encounterId;
   @override
-  String? get serviceType;
+  ServiceType? get serviceType;
   @override
   int? get organizationCode;
   @override
@@ -601,7 +580,7 @@ PostQuestionResponseModel _$PostQuestionResponseModelFromJson(
 mixin _$PostQuestionResponseModel {
   int? get linkId => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
-  List<PostAnswerModel>? get answer => throw _privateConstructorUsedError;
+  List<PostAnswerModel>? get answers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -615,7 +594,7 @@ abstract class $PostQuestionResponseModelCopyWith<$Res> {
           $Res Function(PostQuestionResponseModel) then) =
       _$PostQuestionResponseModelCopyWithImpl<$Res, PostQuestionResponseModel>;
   @useResult
-  $Res call({int? linkId, double? score, List<PostAnswerModel>? answer});
+  $Res call({int? linkId, double? score, List<PostAnswerModel>? answers});
 }
 
 /// @nodoc
@@ -634,7 +613,7 @@ class _$PostQuestionResponseModelCopyWithImpl<$Res,
   $Res call({
     Object? linkId = freezed,
     Object? score = freezed,
-    Object? answer = freezed,
+    Object? answers = freezed,
   }) {
     return _then(_value.copyWith(
       linkId: freezed == linkId
@@ -645,9 +624,9 @@ class _$PostQuestionResponseModelCopyWithImpl<$Res,
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
-      answer: freezed == answer
-          ? _value.answer
-          : answer // ignore: cast_nullable_to_non_nullable
+      answers: freezed == answers
+          ? _value.answers
+          : answers // ignore: cast_nullable_to_non_nullable
               as List<PostAnswerModel>?,
     ) as $Val);
   }
@@ -662,7 +641,7 @@ abstract class _$$_PostQuestionResponseModelCopyWith<$Res>
       __$$_PostQuestionResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? linkId, double? score, List<PostAnswerModel>? answer});
+  $Res call({int? linkId, double? score, List<PostAnswerModel>? answers});
 }
 
 /// @nodoc
@@ -680,7 +659,7 @@ class __$$_PostQuestionResponseModelCopyWithImpl<$Res>
   $Res call({
     Object? linkId = freezed,
     Object? score = freezed,
-    Object? answer = freezed,
+    Object? answers = freezed,
   }) {
     return _then(_$_PostQuestionResponseModel(
       linkId: freezed == linkId
@@ -691,9 +670,9 @@ class __$$_PostQuestionResponseModelCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
-      answer: freezed == answer
-          ? _value._answer
-          : answer // ignore: cast_nullable_to_non_nullable
+      answers: freezed == answers
+          ? _value._answers
+          : answers // ignore: cast_nullable_to_non_nullable
               as List<PostAnswerModel>?,
     ));
   }
@@ -703,8 +682,8 @@ class __$$_PostQuestionResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PostQuestionResponseModel implements _PostQuestionResponseModel {
   const _$_PostQuestionResponseModel(
-      {this.linkId, this.score, final List<PostAnswerModel>? answer})
-      : _answer = answer;
+      {this.linkId, this.score, final List<PostAnswerModel>? answers})
+      : _answers = answers;
 
   factory _$_PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostQuestionResponseModelFromJson(json);
@@ -713,19 +692,19 @@ class _$_PostQuestionResponseModel implements _PostQuestionResponseModel {
   final int? linkId;
   @override
   final double? score;
-  final List<PostAnswerModel>? _answer;
+  final List<PostAnswerModel>? _answers;
   @override
-  List<PostAnswerModel>? get answer {
-    final value = _answer;
+  List<PostAnswerModel>? get answers {
+    final value = _answers;
     if (value == null) return null;
-    if (_answer is EqualUnmodifiableListView) return _answer;
+    if (_answers is EqualUnmodifiableListView) return _answers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'PostQuestionResponseModel(linkId: $linkId, score: $score, answer: $answer)';
+    return 'PostQuestionResponseModel(linkId: $linkId, score: $score, answers: $answers)';
   }
 
   @override
@@ -735,13 +714,13 @@ class _$_PostQuestionResponseModel implements _PostQuestionResponseModel {
             other is _$_PostQuestionResponseModel &&
             (identical(other.linkId, linkId) || other.linkId == linkId) &&
             (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality().equals(other._answer, _answer));
+            const DeepCollectionEquality().equals(other._answers, _answers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, linkId, score, const DeepCollectionEquality().hash(_answer));
+  int get hashCode => Object.hash(runtimeType, linkId, score,
+      const DeepCollectionEquality().hash(_answers));
 
   @JsonKey(ignore: true)
   @override
@@ -762,7 +741,7 @@ abstract class _PostQuestionResponseModel implements PostQuestionResponseModel {
   const factory _PostQuestionResponseModel(
       {final int? linkId,
       final double? score,
-      final List<PostAnswerModel>? answer}) = _$_PostQuestionResponseModel;
+      final List<PostAnswerModel>? answers}) = _$_PostQuestionResponseModel;
 
   factory _PostQuestionResponseModel.fromJson(Map<String, dynamic> json) =
       _$_PostQuestionResponseModel.fromJson;
@@ -772,7 +751,7 @@ abstract class _PostQuestionResponseModel implements PostQuestionResponseModel {
   @override
   double? get score;
   @override
-  List<PostAnswerModel>? get answer;
+  List<PostAnswerModel>? get answers;
   @override
   @JsonKey(ignore: true)
   _$$_PostQuestionResponseModelCopyWith<_$_PostQuestionResponseModel>

@@ -10,9 +10,9 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_TriageResponseModel(
       patientId: json['patientId'] as int?,
-      id: json['id'] as int?,
       encounterId: json['encounterId'] as int?,
-      serviceType: json['serviceType'] as String?,
+      serviceType:
+          $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
       organizationCode: json['organizationCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerModel.fromJson(e as Map<String, dynamic>))
@@ -52,9 +52,8 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
         _$_TriageResponseModel instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
-      'id': instance.id,
       'encounterId': instance.encounterId,
-      'serviceType': instance.serviceType,
+      'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
       'organizationCode': instance.organizationCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
@@ -76,6 +75,10 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
           instance.questionResponse?.map((e) => e.toJson()).toList(),
     };
 
+const _$ServiceTypeEnumMap = {
+  ServiceType.OPTOMETRY: 'OPTOMETRY',
+};
+
 const _$SourceEnumMap = {
   Source.PATIENT_APP: 'PATIENT_APP',
   Source.VT_APP: 'VT_APP',
@@ -88,7 +91,7 @@ const _$SourceEnumMap = {
 const _$TriageStepEnumMap = {
   TriageStep.QUESTIONNAIRE: 'QUESTIONNAIRE',
   TriageStep.OBSERVATION: 'OBSERVATION',
-  TriageStep.IMAGING: 'IMAGING',
+  TriageStep.IMAGE: 'IMAGE',
 };
 
 _$_PostQuestionResponseModel _$$_PostQuestionResponseModelFromJson(
@@ -96,7 +99,7 @@ _$_PostQuestionResponseModel _$$_PostQuestionResponseModelFromJson(
     _$_PostQuestionResponseModel(
       linkId: json['linkId'] as int?,
       score: (json['score'] as num?)?.toDouble(),
-      answer: (json['answer'] as List<dynamic>?)
+      answers: (json['answers'] as List<dynamic>?)
           ?.map((e) => PostAnswerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -106,7 +109,7 @@ Map<String, dynamic> _$$_PostQuestionResponseModelToJson(
     <String, dynamic>{
       'linkId': instance.linkId,
       'score': instance.score,
-      'answer': instance.answer?.map((e) => e.toJson()).toList(),
+      'answers': instance.answers?.map((e) => e.toJson()).toList(),
     };
 
 _$_PostAnswerModel _$$_PostAnswerModelFromJson(Map<String, dynamic> json) =>

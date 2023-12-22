@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,6 +23,9 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   bool _eyeDrops = false;
   bool _oralMedication = false;
   TextEditingController _recommendationsController = TextEditingController();
+  TextEditingController _mrCodeController = TextEditingController();
+  List _listOfEyeDrops = [];
+  List _listOfOralMedication = [];
 
   int get currentStep => _currentStep;
   bool get isImageCaptured => _isImageCaptured;
@@ -37,6 +41,7 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   bool get oralMedication => _oralMedication;
   TextEditingController get recommendationsController =>
       _recommendationsController;
+  TextEditingController get mrCodeController => _mrCodeController;
 
   void goToNextStep() {
     _currentStep = _currentStep + 1;
@@ -88,7 +93,6 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   }
 
   void setSolution(String solution) {
-    
     if (solution.contains('spectacles')) {
       _spectacles = !_spectacles;
     } else if (solution.contains("cataract")) {
@@ -100,7 +104,7 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     }
   }
 
-  void submit() {
+  void submit(VTPatientDto patientDetails) {
     
   }
 }

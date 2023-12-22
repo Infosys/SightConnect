@@ -41,7 +41,7 @@ class Performer with _$Performer {
 @freezed
 class Outcome with _$Outcome {
   const factory Outcome({
-    Action? action,
+    ActionOutcome? action,
     GoalOutCome? goalOutcome,
   }) = _Outcome;
 

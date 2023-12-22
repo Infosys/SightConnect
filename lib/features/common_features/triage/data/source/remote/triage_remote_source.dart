@@ -23,29 +23,45 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
   @override
   Future<TriageResponseDto> saveTriageVT(TriageResponseModel triage) async {
-    const endpoint = "/services/triage/api/triage-report";
-    try {
-      var response = await dio.post(
-        endpoint,
-        data: triage.toJson(),
-      );
+    const endPoint = "/services/triage/api/triage-report";
 
-      logger.d({
-        "API saveTriage": endpoint,
-        "response": response.data,
-      });
-      if (response.statusCode != null) {
-        if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriageResponseDto.fromJson(response.data);
-        } else {
-          throw ServerException();
-        }
-      } else {
-        throw ServerException();
+    try {
+      var response = await dio.post(endPoint, data: triage.toJson());
+      logger.d("this is the response ${response.data.toString()}");
+      return TriageResponseDto.fromJson(response.data);
+    } on DioError catch (e) {
+      logger.d("this is the error ${e.message}");
+      if (e.response != null) {
+        logger.d("Error response: ${e.response.toString()}");
       }
     } catch (e) {
-      throw UnknownException();
+      logger.d("Unknown error: ${e.toString()}");
     }
+
+    return TriageResponseDto();
+    // logger.d("This is triage \n ${triage.toJson()}");
+    // try {
+    //   var response = await dio.post(
+    //     endpoint,
+    //     data: triage.toJson(),
+    //   );
+
+    //   logger.d({
+    //     "API saveTriage": endpoint,
+    //     "response": response.data,
+    //   });
+    //   if (response.statusCode != null) {
+    //     if (response.statusCode! >= 200 && response.statusCode! < 210) {
+    //       return TriageResponseDto.fromJson(response.data);
+    //     } else {
+    //       throw ServerException();
+    //     }
+    //   } else {
+    //     throw ServerException();
+    //   }
+    // } catch (e) {
+    //   throw UnknownException();
+    // }
   }
 
   @override

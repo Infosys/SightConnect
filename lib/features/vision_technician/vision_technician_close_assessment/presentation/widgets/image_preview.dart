@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
@@ -117,7 +118,7 @@ class ImagePreview extends ConsumerWidget {
                         ref.read(vtCloseAssessmentHelperProvider).leftEyeImage;
                     XFile right =
                         ref.read(vtCloseAssessmentHelperProvider).rightEyeImage;
-
+                        
                     ref
                         .read(visionTechnicianTriageProvider)
                         .setEyeImage(left, right);
