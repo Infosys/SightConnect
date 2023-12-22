@@ -99,6 +99,9 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                     progressMessage = "Something went wrong";
                   });
                 },
+                onTitleChanged: (controller, title) {
+                  log("Title: $title");
+                },
                 onLoadHttpError: (controller, url, code, message) {
                   logger.e("Error: $message");
                   setState(() {
@@ -110,13 +113,27 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                 },
                 androidShouldInterceptRequest: (controller, request) async {
                   logger.d("Request: ${request.url}");
-
+                  final hash = request.url.fragment.trim();
                   final host = request.url.host.trim();
                   if (host == "eyecare4all-dev.infosysapps.com") {
                     request.headers!["Authorization"] =
                         "Bearer ${widget.token}";
                   }
-                  return null;
+                  if (hash == "failure") {
+                    Navigator.of(context).pop(true);
+                  } else if (hash == "success") {
+                    Navigator.of(context).pop(false);
+                  }
+
+                  return Future.value(WebResourceResponse(data: Uint8List(0)));
+                },
+                shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  final hash = navigationAction.request.url?.fragment.trim();
+                  if (hash == "failure" || hash == "success") {
+                    return NavigationActionPolicy.CANCEL;
+                  } else {
+                    return NavigationActionPolicy.ALLOW;
+                  }
                 },
                 initialOptions: InAppWebViewGroupOptions(
                   ios: IOSInAppWebViewOptions(

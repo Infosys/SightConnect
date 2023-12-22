@@ -75,7 +75,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         },
       ),
     );
-    if (status != null && context.mounted) {
+    if (status && context.mounted) {
       showDialog(
           context: context,
           builder: (context) {
@@ -92,6 +92,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
               ],
             );
           });
+    } else {
+      await profileVerification();
     }
   }
 
