@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:openid_client/openid_client.dart';
@@ -14,6 +15,7 @@ class PersistentAuthData {
   final String _roleKey = "role";
   final String _usernameKey = "username";
   final String _credentialKey = "credential";
+  final String _userProfile = "userProfile";
 
   String? accessToken;
   String? refreshToken;
@@ -50,6 +52,23 @@ class PersistentAuthData {
         credential.toJson(),
       ),
     );
+  }
+
+  Future<void> saveUserProfile(PatientResponseModel user) async {
+    await _storage.write(
+      key: _userProfile,
+      value: jsonEncode(
+        user.toJson(),
+      ),
+    );
+  }
+
+  Future<PatientResponseModel?> getUserProfile() async {
+    final String? userProfileJson = await _storage.read(key: _userProfile);
+    if (userProfileJson != null) {
+      return PatientResponseModel.fromJson(jsonDecode(userProfileJson));
+    }
+    return null;
   }
 
   Future<Credential?> getCredentials() async {
@@ -101,6 +120,7 @@ class PersistentAuthData {
     await _storage.delete(key: _roleKey);
     await _storage.delete(key: _usernameKey);
     await _storage.delete(key: _credentialKey);
+    await _storage.delete(key: _userProfile);
     accessToken = null;
     refreshToken = null;
     role = null;

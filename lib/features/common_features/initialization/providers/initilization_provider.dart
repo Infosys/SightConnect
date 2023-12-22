@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,14 +32,13 @@ class InitializationPageProvider extends ChangeNotifier {
     try {
       Client client = await _getClient();
       credential = await _authenticate(client, scopes: scopes);
-      await save(credential!);
+      await _saveCredential(credential!);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> save(Credential credential) async {
-    logger.f(credential.toJson());
+  Future<void> _saveCredential(Credential credential) async {
     await PersistentAuthStateService.authState.saveCredential(credential);
     final tokens = await credential.getTokenResponse();
     await PersistentAuthStateService.authState.saveTokens(
@@ -108,8 +106,6 @@ class InitializationPageProvider extends ChangeNotifier {
         client,
         scopes: scopes,
         port: PORT,
-        redirectUri:
-            Uri.parse('http://com.infosys.eyecareforall/initialization'),
         urlLancher: urlLauncher,
       );
 

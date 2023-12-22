@@ -121,11 +121,13 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                   }
                   if (hash == "failure") {
                     Navigator.of(context).pop(true);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
                   } else if (hash == "success") {
                     Navigator.of(context).pop(false);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
                   }
 
-                  return Future.value(WebResourceResponse(data: Uint8List(0)));
+                  return null;
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
                   final hash = navigationAction.request.url?.fragment.trim();

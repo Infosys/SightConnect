@@ -92,6 +92,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
             );
           });
     } else {
+      final model = await ref.read(initializationProvider).getUserProfile();
+      await PersistentAuthStateService.authState.saveUserProfile(model);
       await profileVerification();
     }
   }
@@ -171,9 +173,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         naviagator.pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const OptometritianDashboardPage(),
-            ), (route) {
-          return false;
-        });
+            ),
+            (route) => false);
         break;
 
       default:

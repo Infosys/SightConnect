@@ -14,7 +14,7 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-  initPlatformState();
+
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
 

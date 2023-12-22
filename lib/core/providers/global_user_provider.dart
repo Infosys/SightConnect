@@ -1,5 +1,4 @@
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/gender.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,7 +9,7 @@ var globalUserProvider =
 class GlobalUserProvider extends ChangeNotifier {
   final Ref _ref;
   PatientResponseModel? _parentUser;
-  bool _loading = false;
+  final bool _loading = false;
   final int userId = 9627849180;
   PatientResponseModel? _activeUser;
 
@@ -20,6 +19,8 @@ class GlobalUserProvider extends ChangeNotifier {
 
   bool get loading => _loading;
   PatientResponseModel? get activeUser => _activeUser;
+  List<RelatedPartyModel> get familyMembers =>
+      _activeUser?.profile?.patient?.relatedParty ?? [];
 
   void setParentUser(PatientResponseModel parentUser) {
     _parentUser = parentUser;
@@ -33,26 +34,39 @@ class GlobalUserProvider extends ChangeNotifier {
   }
 
   Future<void> getUserProfile() async {
-    _loading = true;
-    notifyListeners();
-    final phone = PersistentAuthStateService.authState.username;
-    if (phone == null) {
-      _parentUser = null;
-      _loading = false;
-      notifyListeners();
-      return;
-    }
-    final response = await _ref
-        .read(patientAuthenticationRepositoryProvider)
-        .getPatientProfileByPhone(phone);
-    return response.fold((failure) {
-      _parentUser = null;
-      _loading = false;
-      notifyListeners();
-    }, (result) {
-      _loading = false;
-      notifyListeners();
-      setParentUser(result);
-    });
+    // _parentUser = await PersistentAuthStateService.authState.getUserProfile();
+    _activeUser = const PatientResponseModel(
+      profile: ProfileModel(
+        patient: ExtendedPatientModel(
+          patientId: 111,
+          abhaAddress: "abhaAddress",
+          abhaNumber: 123,
+          address: [],
+          age: 30,
+          dayOfBirth: "08",
+          monthOfBirth: "08",
+          yearOfBirth: "23",
+          email: "email",
+          gender: Gender.MALE,
+          name: "Manish Pandey",
+          phoneNumber: "9627849180",
+          medicalRecords: [],
+          parentPatientId: 12345,
+          profilePhoto: "http://placekitten.com/200/300",
+          identifiers: [],
+          osid: "",
+          relatedParty: [
+            // RelatedPartyModel(
+            //   name: "Rohit Pandey",
+            //   age: 54,
+            //   patientId: 123,
+            //   parentPatientId: 1233,
+            //   profilePicture: "http://placekitten.com/200/300",
+            //   relation: Relationship.FATHER,
+            // ),
+          ],
+        ),
+      ),
+    );
   }
 }
