@@ -50,17 +50,17 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<bool> _checkUserAlreadyExist() async {
-    // try {
-    //   final model = await ref.read(initializationProvider).getUserProfile();
-    //   if (model.profile?.patient?.email == null) {
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // } catch (e) {
-    //   logger.e(e);
-    //   return false;
-    // }
+    try {
+      final model = await ref.read(initializationProvider).getUserProfile();
+      if (model.profile?.patient?.email == null) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
+      logger.e(e);
+      return false;
+    }
     return true;
   }
 

@@ -17,10 +17,10 @@ final initializationProvider = ChangeNotifierProvider((ref) {
 });
 
 class InitializationPageProvider extends ChangeNotifier {
-  // final String keycloakUri =
-  //     'https://masterapp-dev.infosysapps.com/auth/realms/care/';
   final String keycloakUri =
-      'https://campaigns.infosysapps.com/auth2/realms/care';
+      'https://masterapp-dev.infosysapps.com/auth/realms/care/';
+  // final String keycloakUri =
+  //     'https://campaigns.infosysapps.com/auth2/realms/care';
   static const List<String> scopes = ['profile'];
   static const String clientId = 'microservices';
   static const int PORT = 4000;

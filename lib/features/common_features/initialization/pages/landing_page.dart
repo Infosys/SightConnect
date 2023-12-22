@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LandingPage extends ConsumerStatefulWidget {
-  static const String routeName = '/landing-page';
+  static const String routeName = '/landing';
   const LandingPage({super.key});
 
   @override
