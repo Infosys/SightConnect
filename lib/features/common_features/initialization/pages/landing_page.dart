@@ -80,57 +80,20 @@ class _LandingPageState extends ConsumerState<LandingPage> {
     });
   }
 
-  Future<void> _onRegister() async {
-    final navigator = Navigator.of(context);
-    final model = ref.read(initializationProvider);
-    model.init().then((value) {
-      navigator.push(
-        MaterialPageRoute(
-          builder: (context) => MiniAppDisplayPage(
-            miniapp: MiniApp(
-              id: "1",
-              version: "1",
-              name: "Register Patient",
-              displayName: "Register Patient",
-              sourceurl: "assets/miniapps/vt_register_patient.zip",
-            ),
-          ),
-        ),
-      );
-    }).catchError(
-      (e) {
-        Fluttertoast.showToast(msg: "Cannot register at the moment: $e");
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  await _onSignIn();
-                },
-                child: const Text("Login"),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await _onRegister();
-                },
-                child: const Text("Register"),
-              ),
-            ],
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(AppSize.width(context) * 0.7, 50),
+            ),
+            onPressed: () async {
+              await _onSignIn();
+            },
+            child: const Text("Login"),
           ),
         ),
       ),

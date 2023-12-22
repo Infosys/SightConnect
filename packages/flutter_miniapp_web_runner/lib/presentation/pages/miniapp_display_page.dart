@@ -76,55 +76,59 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
             onRefresh: () async {
               await _loadMiniApp();
             },
-            child: PopScope(
-              onPopInvoked: (value) async {},
-              child: Scaffold(
-                appBar: WebViewAppBar(
-                  title: widget.miniapp.displayName,
-                  onBack: () {
+            child: Scaffold(
+              appBar: WebViewAppBar(
+                title: widget.miniapp.displayName,
+                onBack: () async {
+                  if (await webViewController.canGoBack()) {
+                    webViewController.goBack();
+                  } else {
                     Navigator.of(context).pop();
-                  },
+                  }
+                },
+              ),
+              body: InAppWebView(
+                initialUrlRequest: URLRequest(
+                  url: Uri.parse("http://127.0.0.1:$port/"),
                 ),
-                body: InAppWebView(
-                  initialUrlRequest: URLRequest(
-                    url: Uri.parse("http://127.0.0.1:$port/"),
-                  ),
-                  onLoadError: (controller, url, code, message) async {
-                    logger.e("Error: $message");
-                    setState(() {
-                      progressMessage = "Something went wrong";
-                    });
-                  },
-                  onLoadHttpError: (controller, url, code, message) {
-                    logger.e("Error: $message");
-                    setState(() {
-                      progressMessage = "Something went wrong";
-                    });
-                  },
-                  androidShouldInterceptRequest: (controller, request) async {
-                    logger.d("Request: ${request.url}");
+                onLoadError: (controller, url, code, message) async {
+                  logger.e("Error: $message");
+                  setState(() {
+                    progressMessage = "Something went wrong";
+                  });
+                },
+                onLoadHttpError: (controller, url, code, message) {
+                  logger.e("Error: $message");
+                  setState(() {
+                    progressMessage = "Something went wrong";
+                  });
+                },
+                onConsoleMessage: (controller, consoleMessage) {
+                  logger.d("Console: ${consoleMessage.message}");
+                },
+                androidShouldInterceptRequest: (controller, request) async {
+                  logger.d("Request: ${request.url}");
 
-                    final host = request.url.host.trim();
-                    if (host == "eyecare4all-dev.infosysapps.com") {
-                      request.headers!["Authorization"] =
-                          "Bearer ${widget.token}";
-                    }
-                    return null;
-                  },
-                  initialOptions: InAppWebViewGroupOptions(
-                    ios: IOSInAppWebViewOptions(
-                      useOnNavigationResponse: true,
-                      allowsInlineMediaPlayback: true,
-                    ),
-                    android: AndroidInAppWebViewOptions(
-                      useHybridComposition: true,
-                      useShouldInterceptRequest: true,
-                    ),
+                  final host = request.url.host.trim();
+                  if (host == "eyecare4all-dev.infosysapps.com") {
+                    request.headers!["Authorization"] =
+                        "Bearer ${widget.token}";
+                  }
+                  return null;
+                },
+                initialOptions: InAppWebViewGroupOptions(
+                  ios: IOSInAppWebViewOptions(
+                    useOnNavigationResponse: true,
+                    allowsInlineMediaPlayback: true,
                   ),
-                  onWebViewCreated: (controller) {
-                    webViewController = controller;
-                  },
+                  android: AndroidInAppWebViewOptions(
+                    useHybridComposition: true,
+                    useShouldInterceptRequest: true,
+                  ),
                 ),
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                },
               ),
             ),
           );

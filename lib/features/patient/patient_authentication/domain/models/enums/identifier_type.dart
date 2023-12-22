@@ -1,3 +1,0 @@
-enum IdentifierType {
-  EMAIL, MOBILE, ABHA_ADDRESS, ABHA_ID, HPR_ID, COUNTER_ID
-}

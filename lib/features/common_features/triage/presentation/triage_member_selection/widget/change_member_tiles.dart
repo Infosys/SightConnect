@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/relationship.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/relationship.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';

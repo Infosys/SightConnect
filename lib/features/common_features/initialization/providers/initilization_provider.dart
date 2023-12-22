@@ -17,7 +17,7 @@ final initializationProvider = ChangeNotifierProvider((ref) {
 });
 
 class InitializationPageProvider extends ChangeNotifier {
-  // final String keycloakUri = '${AppEnv.baseKeycloakUrl}/auth/realms/care';
+  // final String keycloakUri = '${AppEnv.baseUrl}/auth/realms/care';
   final String keycloakUri =
       'https://campaigns.infosysapps.com/auth2/realms/care';
   static const List<String> scopes = ['profile'];

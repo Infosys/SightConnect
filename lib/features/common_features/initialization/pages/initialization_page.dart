@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -15,7 +13,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -33,19 +30,31 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     Future.delayed(
       const Duration(milliseconds: 300),
       () async {
-        final navigator = Navigator.of(context);
-        final role = PersistentAuthStateService.authState.role;
-        if (role != null) {
-          roleMapperNavigation(role, context);
+        final status = await _checkUserAlreadyExist();
+        if (status) {
+          final role = PersistentAuthStateService.authState.role;
+          if (role != null) {
+            roleMapperNavigation(role, context);
+          }
         } else {
-          navigator.pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const LandingPage(),
-              ), (route) {
-            return false;
-          });
+          // await _onRegister(context);
         }
       },
+    );
+  }
+
+  Future<bool> _checkUserAlreadyExist() async {
+    //phone number from local storage
+    await Future.delayed(const Duration(seconds: 2));
+    return false;
+  }
+
+  Future<void> _onRegister(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => const PatientRegistrationMiniappPage(),
+      ),
     );
   }
 
