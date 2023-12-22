@@ -21,6 +21,8 @@ class VisionGuardianEventDetailsPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tabIndex=useState(0);
+
     return Scaffold(
         appBar: CustomAppbar(
           title: const Text('Eye Camp Gachibowli'),
@@ -28,7 +30,13 @@ class VisionGuardianEventDetailsPage extends HookWidget {
           actions: [
             IconButton(
               onPressed: () {
-             
+                 Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisionGuardianSearchEvent(search:"Patient"),
+                ),
+              );
               },
               icon: const Icon(
                 Icons.search,
@@ -50,7 +58,8 @@ class VisionGuardianEventDetailsPage extends HookWidget {
             ),
           ),
         ),
-        floatingActionButton: InkWell(
+        floatingActionButton:tabIndex.value==0?
+         InkWell(
           onTap: () {
             Navigator.push(
               context,
@@ -98,7 +107,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
               ),
             ),
           ),
-        ),
+        ):null,
         body: DefaultTabController(
           length: 3,
           child: Padding(
@@ -107,6 +116,10 @@ class VisionGuardianEventDetailsPage extends HookWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TabBar(
+                  onTap: (value) {
+                    print(value);
+                    tabIndex.value=value;
+                  },
                   dividerColor: AppColor.black,
                   unselectedLabelColor: AppColor.grey,
                   labelStyle: applyFiraSansFont(
@@ -124,13 +137,16 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                   height: 10,
                 ),
                 Flexible(
-                  child: TabBarView(viewportFraction: 1, children: [
-                    EventPatientsTab(
-                      model: casesCritical,
-                    ),
-                    const EventDetailsTab(),
-                    const EventTeammatesTab(),
-                  ]),
+                  child: TabBarView(
+                    viewportFraction: 1,
+                    children: [
+                      EventPatientsTab(
+                        model: casesCritical,
+                      ),
+                      const EventDetailsTab(),
+                      const EventTeammatesTab(),
+                    ],
+                  ),
                 ),
               ],
             ),

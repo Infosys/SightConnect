@@ -41,7 +41,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const VisionGuardianSearchEvent(),
+                  builder: (context) => const VisionGuardianSearchEvent(search: "event",),
                 ),
               );
             },

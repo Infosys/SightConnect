@@ -14,6 +14,7 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      
       children: [
         Text(
           name,
@@ -26,28 +27,25 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
         Consumer(
           builder: (context, ref, child) {
             return Wrap(
-              direction: Axis.horizontal,
+       
               children: [
                 for (int index = 0; index < items.length; index++) ...[
-                  SizedBox(
-                    width: AppSize.width(context) * 0.41,
-                    child: CheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      title: Text(
-                        items[index]["type"] as String,
-                        style: applyRobotoFont(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.grey),
-                      ),
-                      value: items[index]["checked"] as bool,
-                      onChanged: (bool? value) {
-                        ref
-                            .read(
-                                visionGuardianEyeAssessmentProvider.notifier)
-                            .toggleFilterBoxes(name, index);
-                      },
+                  CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text(
+                      items[index]["type"] as String,
+                      style: applyRobotoFont(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.grey),
                     ),
+                    value: items[index]["checked"] as bool,
+                    onChanged: (bool? value) {
+                      ref
+                          .read(
+                              visionGuardianEyeAssessmentProvider.notifier)
+                          .toggleFilterBoxes(name, index);
+                    },
                   )
                 ],
               ],

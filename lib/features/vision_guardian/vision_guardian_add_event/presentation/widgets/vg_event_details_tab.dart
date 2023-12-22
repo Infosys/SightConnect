@@ -12,7 +12,7 @@ class EventDetailsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(AppSize.kspadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -31,22 +31,46 @@ class EventDetailsTab extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "17 Dec - 18 Dec 23",
-                            style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              const Icon(
+                                Icons.calendar_month_outlined,
+                                color: AppColor.white,
+                                size: 15,
+                              ),
+                              const SizedBox(
+                                width: AppSize.kswidth - 5,
+                              ),
                               Text(
-                                "9AM - 4PM",
+                                "17 Dec - 18 Dec 23",
                                 style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.schedule_outlined,
+                                    color: AppColor.white,
+                                    size: 15,
+                                  ),
+                                  const SizedBox(
+                                    width: AppSize.kswidth - 5,
+                                  ),
+                                  Text(
+                                    "9AM - 4PM",
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white),
+                                  ),
+                                ],
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -73,185 +97,16 @@ class EventDetailsTab extends StatelessWidget {
                     )),
               ],
             ),
-            const SizedBox(
-              height: AppSize.klheight,
+              const SizedBox(
+              height: AppSize.kmheight,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("About",
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      )),
-                  const SizedBox(
-                    height: AppSize.kmheight,
-                  ),
-                  Text(
-                    "We are conducting a free eye checkup drive in Eye Camp in KV Gachibowli Area of Hyderabad where we will be conducting eye test for all people and easy …",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    softWrap: true,
-                  ),
-                  const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        child: Text(
-                          "View All",
-                          style: applyRobotoFont(
-                              color: AppColor.primary, fontSize: 14),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
-                  Row(children: [
-                    Text("Location",
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        )),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "View On Map",
-                        style: applyRobotoFont(
-                            color: AppColor.primary, fontSize: 14),
-                      ),
-                    )
-                  ]),
-                  const SizedBox(
-                    height: AppSize.kmheight,
-                  ),
-                  Text(
-                    "Address and Door Number",
-                    style: applyFiraSansFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.ksheight - 5,
-                  ),
-                  Text(
-                    "15 / 128, Dada Sahib Street",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.black,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Pincode",
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight - 5,
-                            ),
-                            Text(
-                              "508021",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.black,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight,
-                            ),
-                            Text(
-                              "Sub District Name",
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight - 5,
-                            ),
-                            Text(
-                              "Sector 51",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Village Name",
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight - 5,
-                            ),
-                            Text(
-                              "Ameerpet",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.black,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight,
-                            ),
-                            Text(
-                              "District Name",
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: AppSize.ksheight - 5,
-                            ),
-                            Text(
-                              "Gachibowli",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
-                ],
-              ),
+            addressDetails(),
+            const SizedBox(
+              height: AppSize.kmheight,
+            ),
+            locationDetails(),
+            const SizedBox(
+              height: AppSize.kmheight,
             ),
             Row(
               children: [
@@ -309,4 +164,198 @@ class EventDetailsTab extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget locationDetails() {
+  return Card(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppSize.ksradius),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(AppSize.kmpadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(children: [
+            Text("Location",
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                )),
+            const Spacer(),
+            InkWell(
+              onTap: () {},
+              child: Text(
+                "View On Map",
+                style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+              ),
+            )
+          ]),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          Text(
+            "Address and Door Number",
+            style: applyFiraSansFont(
+              fontSize: 12,
+              color: AppColor.grey,
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.ksheight - 5,
+          ),
+          Text(
+            "15 / 128, Dada Sahib Street",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Pincode",
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight - 5,
+                    ),
+                    Text(
+                      "508021",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                    Text(
+                      "Sub District Name",
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight - 5,
+                    ),
+                    Text(
+                      "Sector 51",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Village Name",
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight - 5,
+                    ),
+                    Text(
+                      "Ameerpet",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                    Text(
+                      "District Name",
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight - 5,
+                    ),
+                    Text(
+                      "Gachibowli",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget addressDetails() {
+  return Card(
+     shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppSize.ksradius),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(AppSize.kmpadding),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("About",
+              style: applyFiraSansFont(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              )),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          Text(
+            "We are conducting a free eye checkup drive in Eye Camp in KV Gachibowli Area of Hyderabad where we will be conducting eye test for all people and easy …",
+            style: applyRobotoFont(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            softWrap: true,
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                child: Text(
+                  "View All",
+                  style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+                ),
+              )
+            ],
+          ),
+          
+        ],
+      ),
+    ),
+  );
 }

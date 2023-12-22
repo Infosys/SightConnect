@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,20 +10,22 @@ class EventPatientsTab extends StatelessWidget {
   final List<Map<String, dynamic>> model;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: model.length,
       itemBuilder: (context, index) {
         var data = model[index];
-        return Card(
-          margin: const EdgeInsets.only(
-            bottom: 14,
-          ),
-          color: AppColor.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.ksradius),
-          ),
+        return  Container(
+    padding: EdgeInsets.all(AppSize.kspadding),
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: AppColor.white,
+      boxShadow: applyLightShadow(),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(AppSize.kmradius - 5),
+      ),
+    ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(AppSize.ksradius),
             child: Container(
@@ -137,7 +140,9 @@ class EventPatientsTab extends StatelessWidget {
             ),
           ),
         );
-      },
+      }, separatorBuilder: (BuildContext context, int index) { 
+        return const SizedBox(height: AppSize.ksheight,);
+       },
     );
   }
 }

@@ -29,7 +29,7 @@ class VisionGuardianEyeAssessmentResultCard extends StatelessWidget {
               constraints: BoxConstraints(
                 maxWidth: AppSize.width(context) * 0.7,
               ),
-              child: Text('There are no patients at present. Tap on “Add Patient',
+              child: Text('There are no patients at present. Tap on "Add Patient"',
                   textAlign: TextAlign.center,
                   softWrap: true,
                   style: applyRobotoFont(

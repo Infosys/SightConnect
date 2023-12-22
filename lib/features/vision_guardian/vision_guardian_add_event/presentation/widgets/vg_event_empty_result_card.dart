@@ -5,7 +5,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class VisionGuardianEventResultCard extends StatelessWidget {
-  const VisionGuardianEventResultCard({super.key});
+  const VisionGuardianEventResultCard({super.key,required this.search});
+  final String search;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class VisionGuardianEventResultCard extends StatelessWidget {
               constraints: BoxConstraints(
                 maxWidth: AppSize.width(context) * 0.7,
               ),
-              child: Text('There are no Events at present. Tap on “Add Event',
+              child: Text('There are no ${search} at present. Tap on “Add Event',
                   textAlign: TextAlign.center,
                   softWrap: true,
                   style: applyRobotoFont(

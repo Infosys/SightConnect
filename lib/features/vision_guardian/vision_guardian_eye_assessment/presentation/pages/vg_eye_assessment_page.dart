@@ -68,18 +68,9 @@ class VisionGuardianEyeAssessmentPage extends StatelessWidget {
                     children: [
                       const VisionGuardianEyeAssessmentSearchBarChips(),
                       const SizedBox(height: AppSize.klheight),
-                      InkWell(
-                          onTap: () {
-                            /*          Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VisionGuardianEventDetailsPage(),
-                  ),
-                ); */
-                          },
-                          child: VisionGuardianEyeAssessmentPatientsCard(
-                            model: casesCritical,
-                          )),
+                      VisionGuardianEyeAssessmentPatientsCard(
+                        model: casesCritical,
+                      ),
                       const Spacer(),
                       const BrandingWidgetH(),
                     ],
@@ -108,7 +99,7 @@ class VisionGuardianEyeAssessmentPage extends StatelessWidget {
                             maxWidth: AppSize.width(context) * 0.7,
                           ),
                           child: Text(
-                              'There are no patients at present. Tap on “Add Patient',
+                              'There are no patients at present. Tap on "Add Patient"',
                               textAlign: TextAlign.center,
                               softWrap: true,
                               style: applyRobotoFont(
