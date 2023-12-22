@@ -1,6 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_user_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
@@ -19,6 +27,9 @@ class TriageExitAlertBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var model =ref.watch(triageStepperProvider);
+   
+
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
       // actionsPadding: EdgeInsets.zero,
@@ -43,9 +54,11 @@ class TriageExitAlertBox extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     ref.read(resetProvider).reset();
-
+                    //TODO:save triage
+                    await _saveTriageModel(ref);
+                  
                     Navigator.popUntil(context, (route) => route.isFirst);
                     onYesPressed?.call();
                   },
@@ -53,7 +66,8 @@ class TriageExitAlertBox extends ConsumerWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                     Navigator.pop(context);
+                     logger.f({"currentStep":model.currentStep});
                   },
                   child: const Text('No'),
                 ),
@@ -84,4 +98,19 @@ class TriageExitAlertBox extends ConsumerWidget {
       ],
     );
   }
+
+   Future<bool> _saveTriageModel(WidgetRef ref) async{
+    try {
+     var res= await ref.watch(triageProvider).saveTriage(ref.read(triageStepperProvider).currentStep);
+     logger.f({"triagesave":res});
+     return res==null ? false : true;
+    } catch (e) {
+      logger.e(e);
+      return false;
+    }
+         
+        
+   }
+
+   
 }

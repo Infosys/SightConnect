@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
@@ -59,7 +60,7 @@ class TriageRepositoryImpl implements TriageRepository {
 
   @override
   Future<Either<Failure, TriageResponseModel>> saveTriage(
-      {required TriageResponseModel triage}) async {
+      {required TriagePostModel triage}) async {
     if (await networkInfo.isConnected()) {
       try {
         logger.d("Internet is connected Saving triage to remote");
@@ -70,15 +71,17 @@ class TriageRepositoryImpl implements TriageRepository {
 
         return Right(remoteResponse);
       } on ServerException {
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+        //TODO: save to local db instead of get triage response 
+        final localResponse = await localDataSource.getTriageResponse();
+            // await localDataSource.saveTriageResponse(triageResponse: triage);
         return Left(TriageFailure(
           errorMessage: 'This is a server exception',
           triageResponse: localResponse,
         ));
       } on UnknownException {
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+          //TODO: save to local db instead of get triage response 
+        final localResponse = await localDataSource.getTriageResponse();
+            // await localDataSource.saveTriageResponse(triageResponse: triage);
         return Left(TriageFailure(
           errorMessage: 'This is a unknown exception',
           triageResponse: localResponse,
@@ -87,8 +90,9 @@ class TriageRepositoryImpl implements TriageRepository {
     } else {
       try {
         logger.d("Internet is not connected Saving triage to local");
-        final localResponse =
-            await localDataSource.saveTriageResponse(triageResponse: triage);
+          //TODO: save to local db instead of get triage response 
+        final localResponse = await localDataSource.getTriageResponse();
+            // await localDataSource.saveTriageResponse(triageResponse: triage);
         return Right(localResponse);
       } on CacheException {
         return Left(CacheFailure(errorMessage: 'No local data found'));

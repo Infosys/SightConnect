@@ -323,6 +323,8 @@ class VisualAcuityTestProvider with ChangeNotifier {
   }
 
   Future<void> saveVisionAcuityResponseToDB() async {
+    var res=getVisionAcuityTumblingResponse();
+    logger.f({"saveVisionAcuityResponseToDB ": res});
     await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
@@ -337,9 +339,9 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
   Future<Either<Failure, TriageResponseModel>>
       updateVisualAcuityTumblingResponse() async {
-    logger.f({"drId": _diagnosticReportId});
+    
     final reportModel = await getTriageReportByReportId(diagnosticReportId!);
-    logger.f({"drId": reportModel});
+    
     if (reportModel == null) {
       throw ServerFailure(
           errorMessage: "Could not fetch report of id $diagnosticReportId");

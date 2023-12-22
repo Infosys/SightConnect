@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -9,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
-  Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
+  Future<TriageResponseModel> saveTriage({required TriagePostModel triage});
   Future<TriageResponseModel> updateTriage({
     required TriageUpdateModel triage,
   });
@@ -50,10 +51,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
   @override
   Future<TriageResponseModel> saveTriage({
-    required TriageResponseModel triage,
+   required TriagePostModel triage,
   }) async {
     const endpoint = "/services/triage/api/triage-report";
     try {
+      logger.f({"triage model to be saved in remote source":triage.toJson()});
       var response = await dio.post(
         endpoint,
         data: triage.toJson(),

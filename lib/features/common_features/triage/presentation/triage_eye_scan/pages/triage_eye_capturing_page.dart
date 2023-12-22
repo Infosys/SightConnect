@@ -278,7 +278,7 @@ class _PatientTriageEyeCapturingPageState
             ),
           );
           await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
-          final response = await ref.read(triageProvider).saveTriage();
+          final response = await ref.read(triageProvider).saveTriage(3);
           setState(() {
             isLoading = false;
           });

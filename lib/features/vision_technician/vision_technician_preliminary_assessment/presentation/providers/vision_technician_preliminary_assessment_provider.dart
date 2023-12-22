@@ -72,11 +72,11 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       assessmentCode: assessmentCode,
       assessmentVersion: "v1",
       cummulativeScore: cummulativeScore,
-      score: {
-        TriageStep.QUESTIONNAIRE: quessionnaireUrgency,
-        TriageStep.OBSERVATION: visualAcuityUrgency,
-        TriageStep.IMAGING: eyeScanUrgency,
-      },
+      score:[
+        {"QUESTIONNAIRE": quessionnaireUrgency.toInt()},
+        {"OBSERVATION": visualAcuityUrgency.toInt()},
+        {"IMAGING": eyeScanUrgency.toInt()},
+      ],
       issued: DateTime.now(),
       userStartDate: DateTime.now(),
       source: Source.VT_APP,
@@ -86,10 +86,11 @@ class VTPreliminaryAssessmentProvider extends ChangeNotifier {
       observations: observations,
       questionResponse: questionResponse,
     );
-    Either<Failure, TriageResponseModel> response =
-        await _saveTriageUseCase.call(
-      SaveTriageParam(triageResponse: triage),
-    );
+    //TODO: change dto here 
+    Either<Failure, TriageResponseModel> response ="success" as Either<Failure, TriageResponseModel> ;
+    //     await _saveTriageUseCase.call(
+    //   SaveTriageParam(triageResponse: triage),
+    // );
 
     return response;
   }
