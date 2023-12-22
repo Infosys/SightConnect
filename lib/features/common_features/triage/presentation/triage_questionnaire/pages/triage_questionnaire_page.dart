@@ -217,7 +217,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       
                       if (isLastQuestion) {
                         model.saveQuestionaireResponse();
-                        model.saveQuestionaireResponse();
+                       
                                 await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                       }
