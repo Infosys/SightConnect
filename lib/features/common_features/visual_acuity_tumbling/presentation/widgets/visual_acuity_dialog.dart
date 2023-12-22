@@ -11,7 +11,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -76,7 +75,7 @@ class VisualAcuityDialog {
                         } else if (ref
                             .read(globalProvider)
                             .isStandaloneMode()) {
-                              logger.f("Standalone Mode");
+                          logger.f("Standalone Mode");
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
@@ -85,9 +84,11 @@ class VisualAcuityDialog {
                           );
                         } else {
                           logger.f("Update Mode");
-                          ref.watch(tumblingTestProvider).updateVisualAcuityTumblingResponse();
-
-                          
+                          ref
+                              .watch(tumblingTestProvider)
+                              .updateVisualAcuityTumblingResponse();
+                          navigator.pop();
+                          navigator.pop();
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.proceedButton),
@@ -133,7 +134,14 @@ class VisualAcuityDialog {
           width: AppSize.width(context) * 1,
           height: AppSize.height(context) * 1,
           child: Scaffold(
-            appBar: CustomAppbar(
+            appBar: AppBar(
+              leading: IconButton(
+                splashRadius: 20,
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
               title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
             ),
             body: SizedBox(
