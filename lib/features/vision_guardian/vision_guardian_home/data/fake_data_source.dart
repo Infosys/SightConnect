@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_color.dart';
 import '../../../../core/constants/app_icon.dart';
@@ -67,13 +68,13 @@ var casesFollowUp = [
 
 var vgServices = [
   {
-    "icon": AppIcon.triage,
+    "icon": Icons.event_available,
     "textPrefix": "Create",
     "text": "Event",
     "color": AppColor.paleYellow,
   },
   {
-    "icon": AppIcon.acuityTest,
+    "icon": Icons.person_add_alt_outlined,
     "textPrefix": "Register",
     "text": "New Patient",
     "color": AppColor.orangeCream,
@@ -85,7 +86,7 @@ var vgServices = [
     "color": AppColor.limeyellow,
   }, */
   {
-    "icon": AppIcon.eyeScanner,
+    "icon": AppIcon.navTriage,
     "textPrefix": "Eye",
     "text": "Assessment",
     "color": AppColor.cyan,

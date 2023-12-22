@@ -1,7 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class VgProfileNameCard extends StatelessWidget {
   const VgProfileNameCard({super.key});
@@ -14,7 +16,19 @@ class VgProfileNameCard extends StatelessWidget {
         SizedBox(
           width: AppSize.width(context) * 0.3,
           height: 120,
-          child: Container(color: AppColor.primary),
+          child: Container(
+            padding: EdgeInsets.all(AppSize.kmpadding),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1, color: AppColor.darkGrey),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: SvgPicture.asset(
+              AppIcon.navProfile,
+              color: AppColor.lightGrey,
+            ),
+          ),
         ),
         Container(
           padding: const EdgeInsets.all(AppSize.kmpadding),

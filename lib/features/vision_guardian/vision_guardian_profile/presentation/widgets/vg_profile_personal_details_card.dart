@@ -66,7 +66,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 height: AppSize.ksheight,
               ),
               Wrap(
-                spacing: AppSize.width(context) / 7,
+                spacing: AppSize.width(context) / 4,
                 runSpacing: 8.0,
                 verticalDirection: VerticalDirection.down,
                 children: [
@@ -74,12 +74,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Educational Qualification",
+                          "Subdistrict",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Undergraduate",
+                          "Sector 51  ",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -88,12 +88,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Educational Qualification",
+                          "District",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Undergraduate",
+                          "Guntur",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -102,12 +102,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Educational Qualification",
+                          "City",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Undergraduate",
+                          "Hyderabad",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -116,12 +116,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Educational Qualification",
+                          "State",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Undergraduate",
+                          "Telangana",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -130,12 +130,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Educational Qualification",
+                          "Pincode",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Undergraduate",
+                          "500004",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),

@@ -30,22 +30,22 @@ class VgProfileWorkLocationCard extends StatelessWidget {
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Educational Qualification",
+                    "Village Code",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
-                    "Undergraduate",
+                    "VC 12345678",
                     style:
                         applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
                   ),
                 ]),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Educational Qualification",
+                    "Village",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
-                    "Undergraduate",
+                    "Kachibouli",
                     style:
                         applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
                   ),

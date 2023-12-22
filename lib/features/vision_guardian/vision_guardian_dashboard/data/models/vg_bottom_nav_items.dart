@@ -20,9 +20,10 @@ class VisionGuardianBottomNavItems {
     initialScale: 1,
     isSelected: true,
   );
-  static VisionGuardianBottomNavItem eye_assessment = VisionGuardianBottomNavItem(
+  static VisionGuardianBottomNavItem eye_assessment =
+      VisionGuardianBottomNavItem(
     name: "Eye Assessment",
-    svgImage: AppIcon.acuityTest,
+    svgImage: AppIcon.navTriage,
     initialScale: 1,
   );
   static VisionGuardianBottomNavItem notification = VisionGuardianBottomNavItem(

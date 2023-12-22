@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile_edit.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_name_card.dart';
@@ -18,7 +19,9 @@ class VgProfile extends StatelessWidget {
       appBar: CustomAppbar(
         centerTitle: false,
         leadingIcon: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           icon: Icon(Icons.arrow_back_ios_new_sharp),
         ),
         title: const Text(
@@ -34,14 +37,18 @@ class VgProfile extends StatelessWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.edit),
+            icon: const Icon(
+              Icons.edit_outlined,
+              color: AppColor.grey,
+            ),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Photo",

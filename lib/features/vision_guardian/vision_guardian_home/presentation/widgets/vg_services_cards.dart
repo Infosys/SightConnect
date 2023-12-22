@@ -27,8 +27,7 @@ class VisionGuardianServicesCard extends ConsumerWidget {
               ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const VisionGuardianEventPage(),
+                  builder: (context) => const VisionGuardianEventPage(),
                 ),
               );
             } else if (data["text"] == "New Patient") {
@@ -38,8 +37,7 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                   builder: (context) => const VisionGuardianMemberPage(),
                 ),
               );
-            } else if(data["text"]=="Assessment")
-            {
+            } else if (data["text"] == "Assessment") {
               ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -63,12 +61,14 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    data["icon"],
-                    height: AppSize.klpadding,
-                    width: AppSize.klpadding,
-                    color: AppColor.black,
-                  ),
+                  data["textPrefix"] == "Eye"
+                      ? SvgPicture.asset(
+                          data["icon"],
+                          height: AppSize.klpadding,
+                          width: AppSize.klpadding,
+                          color: AppColor.black,
+                        )
+                      : Icon(data["icon"]),
                   const SizedBox(
                     height: AppSize.ksheight,
                   ),

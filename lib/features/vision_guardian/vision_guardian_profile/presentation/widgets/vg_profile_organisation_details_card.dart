@@ -27,11 +27,11 @@ class VgProfileOrganisationDetailsCard extends StatelessWidget {
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "Educational Qualification",
+                "Escalating Manager",
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "Undergraduate",
+                "Raghuram Kumar",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
             ]),
@@ -43,22 +43,22 @@ class VgProfileOrganisationDetailsCard extends StatelessWidget {
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Educational Qualification",
+                    "Org ID",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
-                    "Undergraduate",
+                    "ORG 12345678",
                     style:
                         applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
                   ),
                 ]),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Educational Qualification",
+                    "Vision Center Code",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
-                    "Undergraduate",
+                    "VC 12345678",
                     style:
                         applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
                   ),

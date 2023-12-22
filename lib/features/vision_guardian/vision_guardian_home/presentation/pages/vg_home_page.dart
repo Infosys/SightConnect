@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
@@ -138,13 +140,22 @@ class VisionGuardianHomePage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  Text(
-                    'View All',
-                    style: applyFiraSansFont(
-                      fontSize: 14,
-                      color: AppColor.primary,
-                      fontWeight: FontWeight.w400,
+                  TextButton(
+                    child: Text(
+                      'View All',
+                      style: applyFiraSansFont(
+                        fontSize: 14,
+                        color: AppColor.primary,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const VisionGuardianEventPage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
