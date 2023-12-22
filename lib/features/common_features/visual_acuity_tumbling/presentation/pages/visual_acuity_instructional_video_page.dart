@@ -28,15 +28,22 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    return WillPopScope(
-        onWillPop: () async {
-          var result = await showDialog(
-            context: context,
-            builder: (context) => TriageExitAlertBox(
-              content: AppLocalizations.of(context)!.visualAcuityExitDialog,
-            ),
-          );
-          return result ?? false;
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (value) async {
+          if (value == true) {
+            return;
+          }
+          if (ref.read(globalProvider).isTriageMode()) {
+            showDialog(
+              context: context,
+              builder: (context) => TriageExitAlertBox(
+                content: AppLocalizations.of(context)!.visualAcuityExitDialog,
+              ),
+            );
+          } else {
+            Navigator.of(context).pop();
+          }
         },
         child: Scaffold(
           key: scaffoldKey,
@@ -46,13 +53,17 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   leadingIcon: IconButton(
                     splashRadius: 20,
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => TriageExitAlertBox(
-                          content: AppLocalizations.of(context)!
-                              .visualAcuityExitDialog,
-                        ),
-                      );
+                      if (ref.read(globalProvider).isTriageMode()) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => TriageExitAlertBox(
+                            content: AppLocalizations.of(context)!
+                                .visualAcuityExitDialog,
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).pop();
+                      }
                     },
                     icon: const Icon(Icons.arrow_back_ios),
                   ),
@@ -112,7 +123,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
             ),
             child: ElevatedButton(
               onPressed: () async {
-                await showDialog(
+                final status = await showDialog(
                   barrierDismissible: false,
                   context: context,
                   builder: (context) {
@@ -120,6 +131,9 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                         context, Eye.right);
                   },
                 );
+                if (status == true) {
+                  return;
+                }
                 if (context.mounted) {
                   Navigator.of(context).push(
                     MaterialPageRoute(

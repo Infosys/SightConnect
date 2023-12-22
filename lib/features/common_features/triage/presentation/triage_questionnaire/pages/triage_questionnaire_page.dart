@@ -1,10 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_other_symptoms_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,9 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 import '../widgets/option_card.dart';
-
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -95,11 +94,16 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemCount: model.questionnaireSections.length,
               itemBuilder: (context, index) {
-                logger.d("${model.questionnaireSections.length}, is the length of the questions");
+                logger.d(
+                    "${model.questionnaireSections.length}, is the length of the questions");
                 var question = model.questionnaireSections[index];
                 var isLastQuestion =
                     (model.questionnaireSections.length - 1 == index);
-                double weightage = _getWeightage(question.answerOption ?? []);
+
+                (double, int) record =
+                    _getWeightage(question.answerOption ?? []);
+                double weightage = record.$1;
+                int answerCode = record.$2;
 
                 if (index == 0) {
                   return Center(
@@ -176,75 +180,81 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                     ),
                   );
                 } else {
-                  return OptionCard(
-                    question: question,
-                    onNoButtonPressed: () {
+                  if (question.type == QuestionnaireType.Choice) {
+                    return OptionCard(
+                      question: question,
+                      onNoButtonPressed: () async {
+                        model.addQuestionnaireAnswer(
+                          question.id!,
+                          "No",
+                          weightage.toInt(),
+                          answerCode,
+                        );
 
-                      model.addQuestionnaireAnswer(
-                        question.id!,
-                        false,
-                        weightage.toInt(),
-                      );
-                      model.saveQuestionaireResponse();
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
 
-                      if (isLastQuestion) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            fullscreenDialog: true,
-                            builder: (_) =>
-                                const TriageQuestionnaireOtherSymptomPage(),
-                          ),
-                        ).then(
-                          (value) async {
-                            logger.d("This is log ");
-                            await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                          },
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                      onYesButtonPressed: () async {
+                        model.addQuestionnaireAnswer(
+                          question.id!,
+                          "Yes",
+                          weightage.toInt(),
+                          answerCode,
                         );
-                      }
-                      else {
-                        pageController.animateToPage(
-                          index + 1,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeIn,
-                        );
-                      }
-                    },
-                    onYesButtonPressed: () {
-                      logger.d("This is log ");
-                      model.addQuestionnaireAnswer(
-                        question.id!,
-                        true,
-                        weightage.toInt(),
-                      );
-                      model.saveQuestionaireResponse();
-                      if (isLastQuestion) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            fullscreenDialog: true,
-                            builder: (_) =>
-                                const TriageQuestionnaireOtherSymptomPage(),
-                          ),
-                        ).then(
-                          (value) async {
-                            logger.d("This is log ");
-                            await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                          },
-                        );
-                      }
-                      else {
-                         pageController.animateToPage(
-                                      index + 1,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.easeIn,
-                                    );
-                      }
-                    },
-                  );
+
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
+
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                    );
+                  } else if (question.type == QuestionnaireType.String) {
+                    return TriageTextTypeQuestion(
+                      question: question,
+                      onSubmitted: (String value) async {
+                        if (value.isNotEmpty) {
+                          model.addQuestionnaireAnswer(
+                            question.id!,
+                            value,
+                            0,
+                            0,
+                          );
+                        }
+                        if (isLastQuestion) {
+                          model.saveQuestionaireResponse();
+                          await model.saveQuestionaireResponseToDB();
+                          ref.read(triageStepperProvider).goToNextStep();
+                          //TODO:save triage
+                        } else {
+                          pageController.animateToPage(
+                            index + 1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    return const Text("Question Not Supported Yet");
+                  }
                 }
               },
             );
@@ -254,18 +264,45 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     );
   }
 
-  double _getWeightage(List<AnswerOptionModel> answerOption) {
-    var weightage = 0.0;
+  (double, int) _getWeightage(List<AnswerOptionModel> answerOption) {
+    double weightage = 0.0;
+    int answerCode = 0;
     for (var answer in answerOption) {
       var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
       if (answerString == "yes") {
         weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+        answerCode = answer.answer?.id ?? 0;
       } else if (answerString == "no") {
         weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+        answerCode = answer.answer?.id ?? 0;
       } else {
         weightage = 0;
+        answerCode = 0;
       }
     }
-    return weightage;
+    return (weightage, answerCode);
   }
+
+  //   Future<void> saveTriage(BuildContext context, WidgetRef ref) async {
+  //   final navigator = Navigator.of(context);
+
+  //   var response = await ref
+  //       .read(updateTriageQuestionnaireProvider)
+  //       .updateTriage(reportId);
+
+  //   response.fold((failure) {
+  //     context.scaffoldMessenger.showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Something went wrong"),
+  //       ),
+  //     );
+  //   }, (result) {
+  //     context.scaffoldMessenger.showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Triage Updated Successfully"),
+  //       ),
+  //     );
+  //   });
+  //   navigator.pop();
+  // }
 }

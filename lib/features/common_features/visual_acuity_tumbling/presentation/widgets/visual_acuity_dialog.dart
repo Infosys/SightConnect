@@ -6,11 +6,11 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -61,6 +61,7 @@ class VisualAcuityDialog {
                             .state = true;
                         ref.read(triageStepperProvider).goToNextStep();
                         if (ref.read(globalProvider).isTriageMode()) {
+                          logger.f("Triage Mode");
                           await ref
                               .read(tumblingTestProvider)
                               .saveVisionAcuityResponseToDB();
@@ -74,6 +75,7 @@ class VisualAcuityDialog {
                         } else if (ref
                             .read(globalProvider)
                             .isStandaloneMode()) {
+                          logger.f("Standalone Mode");
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
@@ -81,7 +83,14 @@ class VisualAcuityDialog {
                             ),
                           );
                         } else {
-                          // TODO: Naviagt to next page
+                          logger.f("Update Mode");
+                          ref
+                              .watch(tumblingTestProvider)
+                              .updateVisualAcuityTumblingResponse();
+                          navigator.pop();
+                          navigator.pop();
+                          navigator.pop();
+                          navigator.pop();
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.proceedButton),
@@ -127,7 +136,14 @@ class VisualAcuityDialog {
           width: AppSize.width(context) * 1,
           height: AppSize.height(context) * 1,
           child: Scaffold(
-            appBar: CustomAppbar(
+            appBar: AppBar(
+              leading: IconButton(
+                splashRadius: 20,
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
               title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
             ),
             body: SizedBox(

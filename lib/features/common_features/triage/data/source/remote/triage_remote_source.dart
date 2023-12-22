@@ -1,19 +1,16 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/mapper/triage_update_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
-  Future<TriageResponseModel> saveTriage({required TriageResponseModel triage});
-  Future<TriageResponseModel> updateTriage({
+  Future<TriagePostModel> saveTriage({required TriagePostModel triage});
+  Future<TriagePostModel> updateTriage({
     required TriageUpdateModel triage,
   });
 }
@@ -21,10 +18,9 @@ abstract class TriageRemoteSource {
 class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
   TriageRemoteSourceImpl(this.dio);
-
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    const endpoint =
+    var endpoint =
         "/services/assessments/api/diagnostic-report-templates/assessment/1351";
     logger.d({
       "API getTriageQuestionnaire": endpoint,
@@ -37,27 +33,28 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   "organ": "EYE"
     // };
 
-    // var response = await dio.get(endpoint);
-    var response = await rootBundle.loadString("assets/triage_assessment.json");
-    // if (response.statusCode! >= 200 && response.statusCode! < 210) {
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    // } else {
-    //   throw ServerException();
-    // }
-    if (response.isNotEmpty) {
-      var data = jsonDecode(response);
-      return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    var response = await dio.get(endpoint);
+    //var response = await rootBundle.loadString("assets/triage_assessment.json");
+    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
+    // if (response.isNotEmpty) {
+    //   var data = jsonDecode(response);
+    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
+    // } else {
+    //   throw ServerException();
+    // }
   }
 
   @override
-  Future<TriageResponseModel> saveTriage({
-    required TriageResponseModel triage,
+  Future<TriagePostModel> saveTriage({
+    required TriagePostModel triage,
   }) async {
     const endpoint = "/services/triage/api/triage-report";
     try {
+      logger.f({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(
         endpoint,
         data: triage.toJson(),
@@ -69,7 +66,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       });
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriageResponseModel.fromJson(response.data);
+          return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
         }
@@ -82,7 +79,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }
 
   @override
-  Future<TriageResponseModel> updateTriage({
+  Future<TriagePostModel> updateTriage({
     required TriageUpdateModel triage,
   }) async {
     final id = triage.diagnosticReportId;
@@ -98,15 +95,12 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     try {
       var endpoint = "/services/triage/api/triage-report/$id";
 
-      print(triage.toJson());
-      final response = await dio.patch(
-        endpoint,
-        data: triage.toJson(),
-      );
+      logger.f({"API updateTriage": endpoint, "data": triage.toJson()});
+      final response = await dio.patch(endpoint, data: triage.toJson());
 
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriageResponseModel.fromJson(response.data);
+          return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
         }
@@ -114,7 +108,6 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
-      logger.f({"reched here error": e});
       throw UnknownException();
     }
   }

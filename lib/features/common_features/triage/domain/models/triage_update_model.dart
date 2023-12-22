@@ -106,6 +106,7 @@ class PatchImagingSelectionModel with _$PatchImagingSelectionModel {
     String? endpoint,
     String? baseUrl,
     double? score,
+    String ? fileId
   }) = _PatchImagingSelectionModel;
 
   factory PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =>

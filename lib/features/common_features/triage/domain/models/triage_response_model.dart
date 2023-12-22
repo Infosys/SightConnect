@@ -1,29 +1,29 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_step.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'enums/performer_role.dart';
 import 'enums/test_name.dart';
 part 'triage_response_model.freezed.dart';
 part 'triage_response_model.g.dart';
-
 @freezed
 class TriageResponseModel with _$TriageResponseModel {
   const factory TriageResponseModel({
     int? patientId,
+    int? id,
     int? encounterId,
     String? serviceType,
     int? organizationCode,
     List<PerformerModel>? performer,
     int? assessmentCode,
     String? assessmentVersion,
-     DateTime? issued,
+    DateTime? issued,
     @TimestampConverter() DateTime? userStartDate,
     Source? source,
     String? sourceVersion,
     List<IncompleteTestModel>? incompleteSection,
     double? cummulativeScore,
-    Map<TriageStep, double>? score,
+    List<Map<String, int>>? score,
     List<PostImagingSelectionModel>? imagingSelection,
     List<PostObservationsModel>? observations,
     List<PostQuestionResponseModel>? questionResponse,
@@ -51,7 +51,7 @@ class PostAnswerModel with _$PostAnswerModel {
   const factory PostAnswerModel({
     String? value,
     double? score,
-    int ? answerCode,
+    int? answerCode,
   }) = _PostAnswerModel;
 
   factory PostAnswerModel.fromJson(Map<String, dynamic> json) =>
@@ -87,6 +87,8 @@ class PostImagingSelectionModel with _$PostImagingSelectionModel {
     String? endpoint,
     String? baseUrl,
     double? score,
+    String? fileId,
+    BodySite? bodySite,
   }) = _PostImagingSelectionModel;
 
   factory PostImagingSelectionModel.fromJson(Map<String, dynamic> json) =>

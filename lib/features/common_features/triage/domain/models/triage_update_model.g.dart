@@ -188,6 +188,7 @@ _$_PatchImagingSelectionModel _$$_PatchImagingSelectionModelFromJson(
       endpoint: json['endpoint'] as String?,
       baseUrl: json['baseUrl'] as String?,
       score: (json['score'] as num?)?.toDouble(),
+      fileId: json['fileId'] as String?,
     );
 
 Map<String, dynamic> _$$_PatchImagingSelectionModelToJson(
@@ -199,4 +200,5 @@ Map<String, dynamic> _$$_PatchImagingSelectionModelToJson(
       'endpoint': instance.endpoint,
       'baseUrl': instance.baseUrl,
       'score': instance.score,
+      'fileId': instance.fileId,
     };

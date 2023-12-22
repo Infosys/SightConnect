@@ -6,11 +6,11 @@ var triageMemberProvider = ChangeNotifierProvider<TriageMemberProvider>((ref) {
 });
 
 class TriageMemberProvider extends ChangeNotifier {
-  late dynamic testPatient;
+  int? testPatientId;
+  TriageMemberProvider();
 
-  setTestPerson(dynamic people, int index) {
-    testPatient = people;
-
+  setTestPersonId(int patientId) {
+    testPatientId = patientId;
     notifyListeners();
   }
 }

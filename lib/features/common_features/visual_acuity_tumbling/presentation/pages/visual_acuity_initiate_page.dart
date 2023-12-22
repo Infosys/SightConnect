@@ -28,6 +28,9 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
         if (ref.read(globalProvider).isTriageMode()) {
           showDialog(
             context: context,
@@ -47,13 +50,17 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 leadingIcon: IconButton(
                   splashRadius: 20,
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => TriageExitAlertBox(
-                        content: AppLocalizations.of(context)!
-                            .visualAcuityExitDialog,
-                      ),
-                    );
+                    if (ref.read(globalProvider).isTriageMode()) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => TriageExitAlertBox(
+                          content: AppLocalizations.of(context)!
+                              .visualAcuityExitDialog,
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                    }
                   },
                   icon: const Icon(Icons.arrow_back_ios),
                 ),

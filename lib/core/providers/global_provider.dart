@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var globalProvider = ChangeNotifierProvider((ref) => GlobalProvider());
 
+
 class GlobalProvider extends ChangeNotifier {
   VisionAcuityMode _vaMode = VisionAcuityMode.STANDALONE;
   double _globalInitialTextScaleFactor = 1.0;

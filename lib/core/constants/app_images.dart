@@ -17,7 +17,7 @@ class AppImages {
   static const String swipeUp = 'assets/images/swipe_up.svg';
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
-  static const String tumblingE = 'assets/images/tumbling_e.svg';
+  static const String tumblingE = 'assets/images/tumbling_E.svg';
 
   ///services
 
@@ -113,4 +113,7 @@ class AppImages {
   static const String q12 = "assets/images/q12.png";
   static const String q13 = "assets/images/q13.png";
   static const String q14 = "assets/images/q14.png";
+
+  // vision technician
+  static const String searchEmpty = "assets/images/search_empty.png";
 }

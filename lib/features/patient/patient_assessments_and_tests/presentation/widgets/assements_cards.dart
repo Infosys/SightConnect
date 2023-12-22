@@ -1,23 +1,29 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AssessmentCards extends ConsumerWidget {
-  final List<TriageReportBriefEntity>? data;
+  final List<TriageReportBriefEntity> data;
   const AssessmentCards({
-    this.data,
+    required this.data,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (data == null || data!.isEmpty) {
+    if (data.isEmpty) {
       return SizedBox(
         height: 200,
         child: Center(
@@ -33,9 +39,9 @@ class AssessmentCards extends ConsumerWidget {
       );
     }
     return ListView.builder(
-      itemCount: data == null ? 0 : data!.length,
+      itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
-        TriageReportBriefEntity currentData = data![index];
+        TriageReportBriefEntity currentData = data[index];
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -65,21 +71,21 @@ class AssessmentCards extends ConsumerWidget {
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColor.green.withOpacity(0.4),
-                      ),
-                      child: Text(
-                        currentData.reportTag ?? "NA",
-                        style: applyRobotoFont(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.black,
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(4),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(20),
+                    //     color: AppColor.green.withOpacity(0.4),
+                    //   ),
+                    //   child: Text(
+                    //     currentData.reportTag ?? "NA",
+                    //     style: applyRobotoFont(
+                    //       fontSize: 11,
+                    //       fontWeight: FontWeight.w500,
+                    //       color: AppColor.black,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -122,7 +128,7 @@ class AssessmentCards extends ConsumerWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          currentData.triageResultStartDate!.formateDate,
+                          currentData.triageResultStartDate?.formateDate ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -148,14 +154,23 @@ class AssessmentCards extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => PatientAssessmentReportPage(
-                              diagnosticReportId: currentData.triageResultID,
+                      onPressed: () async {
+                        try {
+                          final navigator = Navigator.of(context);
+                          final reports = await ref
+                              .read(patientAssessmentAndTestProvider)
+                              .getTriageDetailedReport(
+                                  currentData.triageResultID);
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) => PatientAssessmentReportPage(
+                                assessmentDetailsReport: reports,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } catch (e) {
+                          Fluttertoast.showToast(msg: "$e");
+                        }
                       },
                       child: Text(
                         'View Report',
@@ -170,38 +185,62 @@ class AssessmentCards extends ConsumerWidget {
                     const SizedBox(width: 24),
                     Directionality(
                       textDirection: TextDirection.rtl,
-                      child: TextButton.icon(
-                        onPressed: currentData.isUpdateEnabled ?? false
-                            ? () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return UpdateTriageAlertBox(
-                                      dignosticReportID:
-                                          currentData.triageResultID,
-                                    );
-                                  },
-                                );
-                              }
-                            : null,
-                        label: Text(
-                          'Update',
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: currentData.isUpdateEnabled ?? false
-                                ? AppColor.primary
-                                : AppColor.grey,
-                          ),
-                        ),
-                        icon: Icon(
-                          Icons.edit,
-                          size: 16,
-                          color: currentData.isUpdateEnabled ?? false
-                              ? AppColor.primary
-                              : AppColor.grey,
-                        ),
-                      ),
+                      child: ref
+                              .watch(patientAssessmentAndTestProvider)
+                              .isUpdateLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : TextButton.icon(
+                              onPressed: currentData.isUpdateEnabled ?? false
+                                  ? () async {
+                                      final result = await ref
+                                          .read(
+                                              patientAssessmentAndTestProvider)
+                                          .updateTriage(
+                                              currentData.triageResultID);
+                                      logger.f({result});
+                                      if (result.isEmpty) {
+                                        Fluttertoast.showToast(
+                                            msg: "No data found");
+                                        return;
+                                      }
+                                      if (context.mounted) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return UpdateTriageAlertBox(
+                                              result: result,
+                                              diagnosticReportID:
+                                                  currentData.triageResultID,
+                                            );
+                                          },
+                                        );
+                                      }
+                                    }
+                                  : null,
+                              label: Text(
+                                'Update',
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: currentData.isUpdateEnabled ?? false
+                                      ? AppColor.primary
+                                      : AppColor.grey,
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.edit,
+                                size: 16,
+                                color: currentData.isUpdateEnabled ?? false
+                                    ? AppColor.primary
+                                    : AppColor.grey,
+                              ),
+                            ),
                     ),
 
                     // InkWell(
@@ -260,5 +299,72 @@ Color getRequestPriorityColor(RequestPriority? priority) {
       return AppColor.red;
     default:
       return AppColor.grey;
+  }
+}
+
+class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final Color subtitlecolor;
+  final String chipText;
+  final Color chipColor;
+  final Function() onPressed;
+
+  const UpdateTriageAlertBoxListOptoion({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.subtitlecolor,
+    required this.chipText,
+    required this.chipColor,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.all(0),
+      onTap: onPressed,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text(
+              title,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(
+            width: AppSize.kmwidth,
+          ),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: chipColor,
+            ),
+            child: Text(
+              chipText,
+              style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+                color: AppColor.white,
+              ),
+            ),
+          )
+        ],
+      ),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(
+          color: subtitlecolor,
+        ),
+      ),
+    );
   }
 }

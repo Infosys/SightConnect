@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -123,7 +124,7 @@ class ReportPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        triageReportAndAssementPage.reportDate.toString(),
+                        triageReportAndAssementPage.reportDate!.formateDate,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/constants/app_images.dart';
-import '../../../../../patient/patient_authentication/data/repositories/patient_authentication_repository_impl.dart';
-import '../../../../../patient/patient_authentication/domain/models/enums/gender.dart';
-import '../../../../../patient/patient_authentication/domain/models/enums/relationship.dart';
-import '../../../../../patient/patient_authentication/domain/models/profile_model.dart';
+import '../../../../../patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
+import '../../../../../patient/patient_profile/domain/models/enums/gender.dart';
+import '../../../../../patient/patient_profile/domain/models/enums/relationship.dart';
+import '../../../../../patient/patient_profile/domain/models/profile_model.dart';
 
 var memberDetailsProvider = ChangeNotifierProvider(
   (ref) => MemberDetailsProvider(ref),
 );
 
 class MemberDetailsProvider extends ChangeNotifier {
+  final Ref _ref;
 
-Ref _ref;
-
-MemberDetailsProvider(this._ref);
+  MemberDetailsProvider(this._ref);
 
   String _name = "";
   String _mobileNumber = "";
@@ -27,9 +26,7 @@ MemberDetailsProvider(this._ref);
 
   get isLoading => _isLoading;
 
- set isLoading( value) => _isLoading = value;
-
-
+  set isLoading(value) => _isLoading = value;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -92,10 +89,10 @@ MemberDetailsProvider(this._ref);
       monthOfBirth: _dob.split("/")[1],
       yearOfBirth: _dob.split("/")[2],
       gender: _gender == "Male"
-          ? Gender.MALE
+          ? Gender.Male
           : _gender == "Female"
-              ? Gender.FEMALE
-              : Gender.OTHER,
+              ? Gender.Female
+              : Gender.Other,
       profilePhoto: AppImages.raghavi,
       mobile: _mobileNumber,
       parentPatientId: "1202",
