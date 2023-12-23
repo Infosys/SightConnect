@@ -49,6 +49,11 @@ mixin _$TriagePostModel {
   Severity? get questionResponseSeverity => throw _privateConstructorUsedError;
   Severity? get mediaSeverity => throw _privateConstructorUsedError;
   Severity? get cumulativeSeverity => throw _privateConstructorUsedError;
+  String? get diagnosticReportDescription => throw _privateConstructorUsedError;
+  String? get questionResultDescription => throw _privateConstructorUsedError;
+  String? get observationResultDescription =>
+      throw _privateConstructorUsedError;
+  String? get mediaResultDescription => throw _privateConstructorUsedError;
   EncounterModel? get encounter => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -87,6 +92,10 @@ abstract class $TriagePostModelCopyWith<$Res> {
       Severity? questionResponseSeverity,
       Severity? mediaSeverity,
       Severity? cumulativeSeverity,
+      String? diagnosticReportDescription,
+      String? questionResultDescription,
+      String? observationResultDescription,
+      String? mediaResultDescription,
       EncounterModel? encounter});
 
   $EncounterModelCopyWith<$Res>? get encounter;
@@ -128,6 +137,10 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
     Object? questionResponseSeverity = freezed,
     Object? mediaSeverity = freezed,
     Object? cumulativeSeverity = freezed,
+    Object? diagnosticReportDescription = freezed,
+    Object? questionResultDescription = freezed,
+    Object? observationResultDescription = freezed,
+    Object? mediaResultDescription = freezed,
     Object? encounter = freezed,
   }) {
     return _then(_value.copyWith(
@@ -223,6 +236,22 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
           ? _value.cumulativeSeverity
           : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
               as Severity?,
+      diagnosticReportDescription: freezed == diagnosticReportDescription
+          ? _value.diagnosticReportDescription
+          : diagnosticReportDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      questionResultDescription: freezed == questionResultDescription
+          ? _value.questionResultDescription
+          : questionResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationResultDescription: freezed == observationResultDescription
+          ? _value.observationResultDescription
+          : observationResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediaResultDescription: freezed == mediaResultDescription
+          ? _value.mediaResultDescription
+          : mediaResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
       encounter: freezed == encounter
           ? _value.encounter
           : encounter // ignore: cast_nullable_to_non_nullable
@@ -275,6 +304,10 @@ abstract class _$$_TriagePostModelCopyWith<$Res>
       Severity? questionResponseSeverity,
       Severity? mediaSeverity,
       Severity? cumulativeSeverity,
+      String? diagnosticReportDescription,
+      String? questionResultDescription,
+      String? observationResultDescription,
+      String? mediaResultDescription,
       EncounterModel? encounter});
 
   @override
@@ -315,6 +348,10 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
     Object? questionResponseSeverity = freezed,
     Object? mediaSeverity = freezed,
     Object? cumulativeSeverity = freezed,
+    Object? diagnosticReportDescription = freezed,
+    Object? questionResultDescription = freezed,
+    Object? observationResultDescription = freezed,
+    Object? mediaResultDescription = freezed,
     Object? encounter = freezed,
   }) {
     return _then(_$_TriagePostModel(
@@ -410,6 +447,22 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
           ? _value.cumulativeSeverity
           : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
               as Severity?,
+      diagnosticReportDescription: freezed == diagnosticReportDescription
+          ? _value.diagnosticReportDescription
+          : diagnosticReportDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      questionResultDescription: freezed == questionResultDescription
+          ? _value.questionResultDescription
+          : questionResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationResultDescription: freezed == observationResultDescription
+          ? _value.observationResultDescription
+          : observationResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediaResultDescription: freezed == mediaResultDescription
+          ? _value.mediaResultDescription
+          : mediaResultDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
       encounter: freezed == encounter
           ? _value.encounter
           : encounter // ignore: cast_nullable_to_non_nullable
@@ -445,6 +498,10 @@ class _$_TriagePostModel implements _TriagePostModel {
       this.questionResponseSeverity,
       this.mediaSeverity,
       this.cumulativeSeverity,
+      this.diagnosticReportDescription,
+      this.questionResultDescription,
+      this.observationResultDescription,
+      this.mediaResultDescription,
       this.encounter})
       : _performer = performer,
         _incompleteSection = incompleteSection,
@@ -556,11 +613,19 @@ class _$_TriagePostModel implements _TriagePostModel {
   @override
   final Severity? cumulativeSeverity;
   @override
+  final String? diagnosticReportDescription;
+  @override
+  final String? questionResultDescription;
+  @override
+  final String? observationResultDescription;
+  @override
+  final String? mediaResultDescription;
+  @override
   final EncounterModel? encounter;
 
   @override
   String toString() {
-    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, encounter: $encounter)';
+    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, encounter: $encounter)';
   }
 
   @override
@@ -610,6 +675,19 @@ class _$_TriagePostModel implements _TriagePostModel {
                 other.mediaSeverity == mediaSeverity) &&
             (identical(other.cumulativeSeverity, cumulativeSeverity) ||
                 other.cumulativeSeverity == cumulativeSeverity) &&
+            (identical(other.diagnosticReportDescription,
+                    diagnosticReportDescription) ||
+                other.diagnosticReportDescription ==
+                    diagnosticReportDescription) &&
+            (identical(other.questionResultDescription,
+                    questionResultDescription) ||
+                other.questionResultDescription == questionResultDescription) &&
+            (identical(other.observationResultDescription,
+                    observationResultDescription) ||
+                other.observationResultDescription ==
+                    observationResultDescription) &&
+            (identical(other.mediaResultDescription, mediaResultDescription) ||
+                other.mediaResultDescription == mediaResultDescription) &&
             (identical(other.encounter, encounter) ||
                 other.encounter == encounter));
   }
@@ -641,6 +719,10 @@ class _$_TriagePostModel implements _TriagePostModel {
         questionResponseSeverity,
         mediaSeverity,
         cumulativeSeverity,
+        diagnosticReportDescription,
+        questionResultDescription,
+        observationResultDescription,
+        mediaResultDescription,
         encounter
       ]);
 
@@ -683,6 +765,10 @@ abstract class _TriagePostModel implements TriagePostModel {
       final Severity? questionResponseSeverity,
       final Severity? mediaSeverity,
       final Severity? cumulativeSeverity,
+      final String? diagnosticReportDescription,
+      final String? questionResultDescription,
+      final String? observationResultDescription,
+      final String? mediaResultDescription,
       final EncounterModel? encounter}) = _$_TriagePostModel;
 
   factory _TriagePostModel.fromJson(Map<String, dynamic> json) =
@@ -736,6 +822,14 @@ abstract class _TriagePostModel implements TriagePostModel {
   Severity? get mediaSeverity;
   @override
   Severity? get cumulativeSeverity;
+  @override
+  String? get diagnosticReportDescription;
+  @override
+  String? get questionResultDescription;
+  @override
+  String? get observationResultDescription;
+  @override
+  String? get mediaResultDescription;
   @override
   EncounterModel? get encounter;
   @override

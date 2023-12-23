@@ -55,6 +55,12 @@ _$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$SeverityEnumMap, json['mediaSeverity']),
       cumulativeSeverity:
           $enumDecodeNullable(_$SeverityEnumMap, json['cumulativeSeverity']),
+      diagnosticReportDescription:
+          json['diagnosticReportDescription'] as String?,
+      questionResultDescription: json['questionResultDescription'] as String?,
+      observationResultDescription:
+          json['observationResultDescription'] as String?,
+      mediaResultDescription: json['mediaResultDescription'] as String?,
       encounter: json['encounter'] == null
           ? null
           : EncounterModel.fromJson(json['encounter'] as Map<String, dynamic>),
@@ -90,6 +96,10 @@ Map<String, dynamic> _$$_TriagePostModelToJson(_$_TriagePostModel instance) =>
           _$SeverityEnumMap[instance.questionResponseSeverity],
       'mediaSeverity': _$SeverityEnumMap[instance.mediaSeverity],
       'cumulativeSeverity': _$SeverityEnumMap[instance.cumulativeSeverity],
+      'diagnosticReportDescription': instance.diagnosticReportDescription,
+      'questionResultDescription': instance.questionResultDescription,
+      'observationResultDescription': instance.observationResultDescription,
+      'mediaResultDescription': instance.mediaResultDescription,
       'encounter': instance.encounter?.toJson(),
     };
 

@@ -27,14 +27,11 @@ class TriageResultProvider extends ChangeNotifier {
   ProfileModel get profile => _profile!;
 
   Map<String, dynamic> getOverallTriageResult() {
-    var totalUrgency = _model.cummulativeScore ?? 0.0;
-    if (totalUrgency > 5) {
-      return _setPropertiesByUrgency(3);
-    } else if (totalUrgency > 3) {
-      return _setPropertiesByUrgency(2);
-    } else {
-      return _setPropertiesByUrgency(1);
-    }
+    Severity ? os= _model.cumulativeSeverity;
+    double score  =_severityToScore(os);
+    
+      return _setPropertiesByUrgency(score,_model.diagnosticReportDescription);
+   
   }
 
   List<Map<String, dynamic>> getCompleteTriageResultList() {
@@ -51,7 +48,7 @@ class TriageResultProvider extends ChangeNotifier {
     score=_severityToScore(qs);
   
 
-    return _setPropertiesByUrgency(score.toDouble());
+    return _setPropertiesByUrgency(score.toDouble(),_model.questionResultDescription);
   }
 
   double _severityToScore(Severity ? sevirity){
@@ -76,7 +73,7 @@ class TriageResultProvider extends ChangeNotifier {
    Severity?  vs=_model.observationSeverity;
    score=_severityToScore(vs);
 
-    return _setPropertiesByUrgency(score);
+    return _setPropertiesByUrgency(score,_model.observationResultDescription);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
@@ -84,10 +81,10 @@ class TriageResultProvider extends ChangeNotifier {
     Severity ? ms=_model.mediaSeverity;
     score=_severityToScore(ms);
    
-    return _setPropertiesByUrgency(score.toDouble());
+    return _setPropertiesByUrgency(score.toDouble(),_model.mediaResultDescription);
   }
 
-  Map<String, dynamic> _setPropertiesByUrgency(double urgency) {
+  Map<String, dynamic> _setPropertiesByUrgency(double urgency,String ?  description) {
     if (urgency == 1) {
       return {
         'urgency': TriageUrgency.ROUTINE,
@@ -98,7 +95,7 @@ class TriageResultProvider extends ChangeNotifier {
         "labelText": "Routine Consult",
         "state": "Completed",
         "issueInfo":
-            'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.',
+            description??"",
       };
     } else if (urgency == 2) {
       return {
@@ -110,7 +107,7 @@ class TriageResultProvider extends ChangeNotifier {
         "labelText": "Routine Consult",
         "state": "Completed",
         "issueInfo":
-            'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
+           description??"",
       };
     } else if (urgency == 3) {
       return {
@@ -122,7 +119,7 @@ class TriageResultProvider extends ChangeNotifier {
         "labelText": "Urgent Consult",
         "state": "Completed",
         "issueInfo":
-            'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.',
+            description??"",
       };
     } else {
       return {
@@ -134,7 +131,7 @@ class TriageResultProvider extends ChangeNotifier {
         "labelText": "Routine Consult",
         "state": "Completed",
         "issueInfo":
-            'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.',
+            description??"",
       };
     }
   }

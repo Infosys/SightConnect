@@ -5,8 +5,8 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/eye_centre_details_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,8 @@ class TriageResultPage extends ConsumerWidget {
   final TriagePostModel triageResult;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(triageResultProvider(triageResult));
+    final model = ref.read(triageResultProvider(triageResult));
+   
 
     return PopScope(
       canPop: false,
@@ -59,9 +60,8 @@ class TriageResultPage extends ConsumerWidget {
               children: [
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
-                  id: triageResult.subject,  //TODO: erlier it was abha id but i think it should be patient id 
-                  name: "ABC SINGH",   //TODO: need  patient name from patient id 
-                  patientImage: null,   //TODO: need  patient image from patient id 
+                  id: triageResult.subject,  
+                     
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(
@@ -129,21 +129,9 @@ class TriageResultPage extends ConsumerWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Nearby Vision Centres",
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+                
                 const SizedBox(height: AppSize.kmheight),
-                const EyeCentreDetailsCards(),
+                const NearbyVisionCentersList(),
                 const SizedBox(height: AppSize.kmheight),
                 const ResultPageBottomCards(),
               ],

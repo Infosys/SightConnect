@@ -35,6 +35,10 @@ class TriagePostModel with _$TriagePostModel {
     Severity? questionResponseSeverity,
     Severity? mediaSeverity,
     Severity? cumulativeSeverity,
+    String? diagnosticReportDescription,
+    String? questionResultDescription,
+    String? observationResultDescription,
+    String? mediaResultDescription,
     EncounterModel? encounter,
   }) = _TriagePostModel;
 
