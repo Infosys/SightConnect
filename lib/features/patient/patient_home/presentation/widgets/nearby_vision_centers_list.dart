@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,11 +9,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var nearByVisionCenterProvider = FutureProvider(
   (ref) {
-    const latitude = 0.0;
-    const longitude = 0.0;
-    return ref
-        .watch(visionCenterRepositoryProvider)
-        .getVisionCenters(latitude: latitude, longitude: longitude);
+    final location = ref.watch(patientHomeProvider).data;
+    return ref.watch(visionCenterRepositoryProvider).getVisionCenters(
+        latitude: location?.latitude, longitude: location?.longitude);
   },
 );
 
@@ -59,6 +58,17 @@ class NearbyVisionCentersList extends ConsumerWidget {
           ),
           ref.watch(nearByVisionCenterProvider).when(
                 data: (data) {
+                  if (data.isEmpty) {
+                    return Center(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          ref.read(patientHomeProvider).init();
+                        },
+                        label: const Text("Location Access"),
+                        icon: const Icon(Icons.location_on),
+                      ),
+                    );
+                  }
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

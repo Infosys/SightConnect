@@ -14,7 +14,10 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
   VisionCenterRepositoryImpl(this.dio);
   @override
   Future<List<OrganizationResponseModel>> getVisionCenters(
-      {required double latitude, required double longitude}) async {
+      {double? latitude, double? longitude}) async {
+    if (latitude == null || longitude == null) {
+      return [];
+    }
     final endpoint =
         "/services/orchestration/api/organizations/search?latitude=$latitude&longitude=$longitude";
 

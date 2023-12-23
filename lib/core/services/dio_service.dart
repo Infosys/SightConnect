@@ -41,11 +41,20 @@ class DioTokenInterceptor extends Interceptor {
       } else {
         final credentials = PersistentAuthStateService.authState.credential;
 
-        final tokens = await credentials!.getTokenResponse();
-        await PersistentAuthStateService.authState
-            .updateAccessToken(accessToken: tokens.accessToken!);
-        await PersistentAuthStateService.authState
-            .updateRefreshToken(refreshToken: tokens.refreshToken!);
+        try {
+          final tokens = await credentials!.getTokenResponse();
+          credentials.updateToken(tokens.toJson());
+          await PersistentAuthStateService.authState
+              .updateAccessToken(accessToken: tokens.accessToken!);
+          await PersistentAuthStateService.authState
+              .updateRefreshToken(refreshToken: tokens.refreshToken!);
+        } catch (e) {
+          await _ref.read(initializationProvider).logout();
+          AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+            LandingPage.routeName,
+            (route) => false,
+          );
+        }
         logger.d("updated access token and refresh token");
       }
     }

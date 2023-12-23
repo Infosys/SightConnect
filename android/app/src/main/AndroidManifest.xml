@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+  />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
   <application
     android:label="Eye Care For All"
     android:name="${applicationName}"
@@ -30,11 +33,10 @@
              from others in case of conflicting scheme name -->
         <data android:scheme="sample" android:host="open.my.app" />
         <!-- <data android:scheme="sample" /> -->
-    </intent-filter>
-  
-      
+      </intent-filter>
 
-            <!-- Specifies an Android theme to apply to this Activity as soon as
+
+      <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
@@ -42,7 +44,7 @@
         android:name="io.flutter.embedding.android.NormalTheme"
         android:resource="@style/NormalTheme"
       />
-      
+
     </activity>
 
 

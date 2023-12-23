@@ -16,41 +16,39 @@ class TriageEyeScanProvider with ChangeNotifier {
   TriageEyeType _currentEye;
   final FileMsService _fileMsService;
   final NetworkInfo _networkInfo;
-  final TriageProvider _triageProvider;
+  final DiagnosticReportTemplateFHIRModel? _assessment;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
   XFile? _bothEyeImage;
 
   TriageEyeScanProvider(
-    this._saveTriageEyeScanLocallyUseCase,
-    this._fileMsService,
-    this._currentEye,
-    this._networkInfo,
-    this._triageProvider
-    
-  );
+      this._saveTriageEyeScanLocallyUseCase,
+      this._fileMsService,
+      this._currentEye,
+      this._networkInfo,
+      this._assessment);
 
   TriageEyeType get currentEye => _currentEye;
   XFile get leftEyeImage => _leftEyeImage!;
   XFile get rightEyeImage => _rightEyeImage!;
   XFile get bothEyeImage => _bothEyeImage!;
 
-  Future<void> setLeftEyeImage (XFile image) async {
+  Future<void> setLeftEyeImage(XFile image) async {
     _leftEyeImage = image;
-  await  uploadImage(image, TriageEyeType.LEFT);
+    await uploadImage(image, TriageEyeType.LEFT);
     notifyListeners();
   }
 
-Future<void> setRightEyeImage(XFile image) async {
+  Future<void> setRightEyeImage(XFile image) async {
     _rightEyeImage = image;
-   await uploadImage(image, TriageEyeType.RIGHT);
+    await uploadImage(image, TriageEyeType.RIGHT);
     notifyListeners();
   }
 
-Future<void> setBothEyeImage(XFile image) async {
+  Future<void> setBothEyeImage(XFile image) async {
     _bothEyeImage = image;
-   await  uploadImage(image, TriageEyeType.BOTH);
+    await uploadImage(image, TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -60,11 +58,12 @@ Future<void> setBothEyeImage(XFile image) async {
   }
 
   Future<void> saveTriageEyeScanResponseToDB() async {
-   logger.f({"Left eye image": leftImageUrl});
-   logger.f({"right eye image": rightImageUrl});
+    logger.f({"Left eye image": leftImageUrl});
+    logger.f({"right eye image": rightImageUrl});
     final response = await _saveTriageEyeScanLocallyUseCase.call(
       SaveTriageEyeScanLocallyParam(
-        postImagingSelectionModel:  getTriageEyeScanResponse(leftImageUrl,rightImageUrl),
+        postImagingSelectionModel:
+            getTriageEyeScanResponse(leftImageUrl, rightImageUrl),
       ),
     );
     response.fold(
@@ -85,36 +84,31 @@ Future<void> setBothEyeImage(XFile image) async {
     return 1;
   }
 
-  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse(String leftEyeImageUrl,String rightEyeImageUrl) {
+  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse(
+      String leftEyeImageUrl, String rightEyeImageUrl) {
     List<PostTriageImagingSelectionModel> mediaCaptureList = [];
 
+    DiagnosticReportTemplateFHIRModel? assessment = _assessment;
+    Map<String, int> imageIdentifier = getTriageImageIdentifier(assessment!);
 
-      DiagnosticReportTemplateFHIRModel? assessment = _triageProvider.assessment;
-      Map<String, int> imageIdentifier = getTriageImageIdentifier(assessment!);
+    Map<String, String> leftEyeData = parseUrl(leftEyeImageUrl);
+    Map<String, String> rightEyeData = parseUrl(rightEyeImageUrl);
 
-      Map<String, String> leftEyeData = parseUrl(leftEyeImageUrl);
-      Map<String, String> rightEyeData = parseUrl(rightEyeImageUrl);
-      
-      mediaCaptureList.add(PostTriageImagingSelectionModel(
+    mediaCaptureList.add(PostTriageImagingSelectionModel(
         identifier: imageIdentifier["LEFT_EYE"],
         fileId: leftEyeData["fileId"]!,
         endpoint: leftEyeData["endPoint"]!,
         baseUrl: leftEyeData["baseUrl"]!,
-        score: 0
-
-      ));
-      mediaCaptureList.add(PostTriageImagingSelectionModel(
-        identifier: imageIdentifier["RIGHT_EYE"],
-        fileId: rightEyeData["fileId"]!,
-        endpoint: rightEyeData["endPoint"]!,
-        baseUrl: rightEyeData["baseUrl"]!,
-        score: 0,
-      ));
-      logger.d({"getTriageEyeScanResponse": mediaCaptureList});
-      return mediaCaptureList;
-    
-      
-    
+        score: 0));
+    mediaCaptureList.add(PostTriageImagingSelectionModel(
+      identifier: imageIdentifier["RIGHT_EYE"],
+      fileId: rightEyeData["fileId"]!,
+      endpoint: rightEyeData["endPoint"]!,
+      baseUrl: rightEyeData["baseUrl"]!,
+      score: 0,
+    ));
+    logger.d({"getTriageEyeScanResponse": mediaCaptureList});
+    return mediaCaptureList;
   }
 
   Map<String, int> getTriageImageIdentifier(
@@ -207,9 +201,10 @@ Future<void> setBothEyeImage(XFile image) async {
 
 var triageEyeScanProvider = ChangeNotifierProvider(
   (ref) => TriageEyeScanProvider(
-      ref.watch(saveTriageEyeScanLocallyUseCase),
-      ref.watch(fileMsServiceProvider),
-      TriageEyeType.RIGHT,
-      ref.watch(connectivityProvider),
-      ref.watch(triageProvider)),
+    ref.watch(saveTriageEyeScanLocallyUseCase),
+    ref.watch(fileMsServiceProvider),
+    TriageEyeType.RIGHT,
+    ref.watch(connectivityProvider),
+    ref.watch(getTriageProvider).asData?.value,
+  ),
 );

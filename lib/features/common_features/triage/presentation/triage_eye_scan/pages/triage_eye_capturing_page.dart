@@ -20,6 +20,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/camera_controllers.dart';
@@ -41,6 +42,7 @@ class _PatientTriageEyeCapturingPageState
   late CameraController _controller;
   ResolutionPreset defaultResolution = ResolutionPreset.max;
   bool isLoading = false;
+  String _progressMessage = "Loading...";
 
   @override
   void initState() {
@@ -87,10 +89,23 @@ class _PatientTriageEyeCapturingPageState
     super.dispose();
   }
 
+  void setLoading([String message = "Loading..."]) {
+    setState(() {
+      isLoading = true;
+      _progressMessage = message;
+    });
+  }
+
+  void removeLoading() {
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
-    ref.watch(triageEyeScanProvider);
+    var model = ref.watch(triageEyeScanProvider);
 
     if (!_controller.value.isInitialized) {
       return const Scaffold(
@@ -186,20 +201,202 @@ class _PatientTriageEyeCapturingPageState
           ),
           body: LoadingOverlay(
             isLoading: isLoading,
+            progressMessage: _progressMessage,
             child: Stack(
               children: [
-                AspectRatio(
-                  aspectRatio: 1 / _controller.value.aspectRatio,
-                  child: CameraPreview(_controller),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: EyeScanCameraControllers(
-                    onCapture: () =>  _takePicture(context),
-                    onFlash: () => _toggleFlash(),
-                    onSwitchCamera: () => _toggleCamera(),
+                CameraPreview(_controller),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    padding: const EdgeInsets.all(24),
+                    color: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            await _toggleCamera();
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.kmpadding,
+                            ),
+                            child: Icon(
+                              Icons.flip_camera_ios,
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () async {
+                            final image = await _takePicture(context);
+                            logger.d("Image: $image");
+                            if (image == null) {
+                              Fluttertoast.showToast(msg: "Image Captured");
+                              return;
+                            }
+
+                            if (model.currentEye == TriageEyeType.RIGHT) {
+                              setLoading("Uploading Image");
+                              await model.setRightEyeImage(image);
+                              removeLoading();
+                              model.setCurrentEye(TriageEyeType.LEFT);
+                            } else if (model.currentEye == TriageEyeType.LEFT) {
+                              setLoading("Uploading Image");
+                              await model.setLeftEyeImage(image);
+                              removeLoading();
+
+                              await ref
+                                  .read(triageEyeScanProvider)
+                                  .saveTriageEyeScanResponseToDB();
+                              final response =
+                                  await ref.read(triageProvider).saveTriage(3);
+
+                              ///NOT WORKING FROM HERE
+
+                              response.fold(
+                                (failure) async {
+                                  logger.d({
+                                    "Failure while saving in local db ":
+                                        failure,
+                                  });
+
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text(
+                                            "Triage Saved Locally",
+                                            style: TextStyle(
+                                              color: AppColor.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          content: Text(
+                                            failure.errorMessage,
+                                            style: applyRobotoFont(
+                                              color: AppColor.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TriageResultPage(
+                                                      triageResult: failure.data
+                                                          as TriagePostModel,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                "Ok",
+                                                style: applyRobotoFont(
+                                                  color: AppColor.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                                (result) async {
+                                  logger.d({
+                                    "saveTriageEyeScanResponseToDB": "Success",
+                                  });
+
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text(
+                                            "Test Completed",
+                                            style: TextStyle(
+                                              color: AppColor.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          content: Text(
+                                            "You have completed the test. Please click on the button below to view the result.",
+                                            style: applyRobotoFont(
+                                              color: AppColor.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () async {
+                                                ref
+                                                    .read(triageStepperProvider)
+                                                    .goToNextStep();
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TriageResultPage(
+                                                      triageResult: result,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                "View Result",
+                                                style: applyRobotoFont(
+                                                  color: AppColor.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                              );
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(AppSize.kmpadding),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: AppColor.white,
+                                width: 2,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.camera_alt,
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        const Tooltip(
+                          message:
+                              "Please make sure that the flash is turned off and the brightness is set to 80%",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.kmpadding,
+                            ),
+                            child: Icon(
+                              Icons.info_outline,
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -210,7 +407,7 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  Future<bool> _validateImage(XFile? image) async {
+  Future<bool> _validateImage(XFile image) async {
     XFile? verifiedImage = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => TriageEyePreviewPage(imageFile: image),
@@ -227,89 +424,31 @@ class _PatientTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return null;
     }
-    setState(() {
-      isLoading = true;
-    });
+    setLoading();
     final image = await _controller.takePicture();
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
     return image;
   }
 
-  Future<void> _takePicture(BuildContext context) async {
-    final navigator = Navigator.of(context);
-    final scaffold = ScaffoldMessenger.of(context);
+  Future<XFile?> _takePicture(BuildContext context) async {
     try {
       final image = await _capturePicture(context);
       if (image == null) {
-        return;
+        return null;
       }
 
       final isVerfied = await _validateImage(image);
       if (!isVerfied) {
-        return;
+        return null;
       }
-      var model = ref.read(triageEyeScanProvider);
-
-      if (model.currentEye == TriageEyeType.RIGHT) {
-       await model.setRightEyeImage(image);
-        model.setCurrentEye(TriageEyeType.LEFT);
-      } else if (model.currentEye == TriageEyeType.LEFT) {
-      await  model.setLeftEyeImage(image);
-        model.setCurrentEye(TriageEyeType.UNKNOWN);
-
-        if (mounted) {
-          setState(() {
-            isLoading = true;
-          });
-          scaffold.showSnackBar(
-            SnackBar(
-              content: Text(
-                "Submitting you triage. Please wait...",
-                style: applyRobotoFont(
-                  color: AppColor.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              backgroundColor: AppColor.black,
-              duration: const Duration(seconds: 1),
-            ),
-          );
-          await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
-          final response = await ref.read(triageProvider).saveTriage(3);
-          setState(() {
-            isLoading = false;
-          });
-          scaffold.hideCurrentSnackBar();
-          response.fold(
-            (failure) {
-              showDialog(
-                context: context,
-                builder: (context) => _showServerExceptionDialog(
-                  context,
-                  failure,
-                ),
-              );
-            },
-            (result) {
-              ref.read(triageStepperProvider).goToNextStep();
-              navigator.push(
-                MaterialPageRoute(
-                  builder: (context) => TriageResultPage(
-                    triageResult: result,
-                  ),
-                ),
-              );
-            },
-          );
-        }
-      }
+      return image;
     } on CameraException {
       Fluttertoast.showToast(msg: "Camera not found");
+      return null;
     } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong");
+      logger.e("Camera exception: $e");
+      Fluttertoast.showToast(msg: "Camera exception");
+      return null;
     }
   }
 
@@ -317,18 +456,14 @@ class _PatientTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return;
     }
-    setState(() {
-      isLoading = true;
-    });
+    setLoading();
 
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _initializeCamera(CameraLensDirection.back);
     } else {
       _initializeCamera(CameraLensDirection.front);
     }
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
   }
 
   Future<void> _toggleFlash() async {
@@ -349,7 +484,7 @@ class _PatientTriageEyeCapturingPageState
     });
   }
 
-  _showTestCompletionDialog(BuildContext context) {
+  _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
     showDialog(
       context: context,
       builder: (context) => BlurDialogBox(
@@ -370,14 +505,17 @@ class _PatientTriageEyeCapturingPageState
           ),
         ),
         actions: [
-          Visibility(
-            visible: isLoading,
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
           TextButton(
-            onPressed: () async {},
+            onPressed: () async {
+              ref.read(triageStepperProvider).goToNextStep();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TriageResultPage(
+                    triageResult: result,
+                  ),
+                ),
+              );
+            },
             child: Text(
               "View Result",
               style: applyRobotoFont(
@@ -391,50 +529,50 @@ class _PatientTriageEyeCapturingPageState
       ),
     );
   }
-}
 
-_showServerExceptionDialog(
-  BuildContext context,
-  Failure failure,
-) {
-  return BlurDialogBox(
-    title: Text(
-      "Triage Saved Locally",
-      style: applyRobotoFont(
-        color: AppColor.black,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-    ),
-    content: Text(
-      failure.errorMessage,
-      style: applyRobotoFont(
-        color: AppColor.black,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
-    ),
-    actions: [
-      TextButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => TriageResultPage(
-                triageResult: failure.data as TriagePostModel,
+  _showServerExceptionDialog(BuildContext context, Failure failure) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return BlurDialogBox(
+            title: Text(
+              "Triage Saved Locally",
+              style: applyRobotoFont(
+                color: AppColor.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
             ),
+            content: Text(
+              failure.errorMessage,
+              style: applyRobotoFont(
+                color: AppColor.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => TriageResultPage(
+                        triageResult: failure.data as TriagePostModel,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Ok",
+                  style: applyRobotoFont(
+                    color: AppColor.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
           );
-        },
-        child: Text(
-          "Ok",
-          style: applyRobotoFont(
-            color: AppColor.black,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
-    ],
-  );
+        });
+  }
 }
