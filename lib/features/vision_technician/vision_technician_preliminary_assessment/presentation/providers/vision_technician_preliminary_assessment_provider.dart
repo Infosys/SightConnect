@@ -103,9 +103,9 @@ class VtTriageProvider extends ChangeNotifier {
       source: Source.VT_APP,
       sourceVersion: AppText.appVersion,
       incompleteSection: [],
-      imagingSelection: imageSelection,
-      observations: observations,
-      questionResponse: questionResponse,
+      imagingSelection: [],
+      observations: [],
+      questionResponse: [],
     );
 
     logger.f({"triage model to be saved": triagePostModel});
