@@ -2,9 +2,10 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../common_features/triage/domain/models/enums/status.dart';
 part 'care_plan_model.freezed.dart';
 part 'care_plan_model.g.dart';
 
@@ -108,4 +109,3 @@ class TargetModel with _$TargetModel {
   factory TargetModel.fromJson(Map<String, dynamic> json) =>
       _$TargetModelFromJson(json);
 }
-

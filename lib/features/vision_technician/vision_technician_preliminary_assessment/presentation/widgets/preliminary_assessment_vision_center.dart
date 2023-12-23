@@ -15,7 +15,6 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding - 2),
       decoration: BoxDecoration(
@@ -34,16 +33,6 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // VTRegisterInput(
-          //   title: "Recommendations",
-          //   keyboardType: TextInputType.multiline,
-          //   controller: ref
-          //       .read(preliminaryAssessmentHelperProvider)
-          //       .recommendationController,
-          // ),
-          // const SizedBox(
-          //   height: AppSize.kmheight,
-          // ),
           Text(
             "Vision Center",
             style: applyFiraSansFont(

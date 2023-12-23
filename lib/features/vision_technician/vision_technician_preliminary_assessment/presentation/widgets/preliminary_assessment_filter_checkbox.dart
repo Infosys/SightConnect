@@ -69,7 +69,7 @@ class _PreliminaryAssessmentFilterCheckBoxState
 class QuestionTile extends HookConsumerWidget {
   const QuestionTile({super.key, required this.text, required this.questions});
   final text;
- final AnswerOptionModel? questions;
+  final AnswerOptionModel? questions;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var checkBoxState = useState(false);
@@ -91,12 +91,15 @@ class QuestionTile extends HookConsumerWidget {
         value: checkBoxState.value,
         onChanged: (bool? value) {
           checkBoxState.value = value!;
-          if(checkBoxState.value==true){
+          if (checkBoxState.value == true) {
             answer = checkBoxState.value;
-          ref.read(visionTechnicianTriageProvider).addQuestionnaireAnswer(questionCode, answer, score);
-          }
-          else{
-            ref.read(visionTechnicianTriageProvider).removeQuestionnaireAnswer(questionCode);
+            ref
+                .read(visionTechnicianTriageProvider)
+                .addQuestionnaireAnswer(questionCode, answer, score);
+          } else {
+            ref
+                .read(visionTechnicianTriageProvider)
+                .removeQuestionnaireAnswer(questionCode);
           }
         },
       ),

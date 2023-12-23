@@ -155,8 +155,7 @@ Map<String, dynamic> _$$_GoalModelToJson(_$_GoalModel instance) =>
     };
 
 const _$StatusEnumMap = {
-  Status.ACTIVE: 'ACTIVE',
-  Status.INACTIVE: 'INACTIVE',
+  Status.REGISTERED: 'REGISTERED',
   Status.IN_PROGRESS: 'IN_PROGRESS',
 };
 

@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/status.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_care_plan_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_provider.dart';
@@ -37,7 +37,7 @@ class CarePlanViewModel extends ChangeNotifier {
       encounterId: 33300000033,
       organizationCode: 1001,
       performer: [
-         PerformerModel(role: Role.VISION_TECHNICIAN, identifier: 1601),
+        PerformerModel(role: Role.VISION_TECHNICIAN, identifier: 1601),
       ],
       conditions: [
         ConditionModel(
@@ -59,7 +59,7 @@ class CarePlanViewModel extends ChangeNotifier {
       note: "abc",
       startDate: "2023-10-12T14:11:33.000Z",
       goal: [
-         GoalModel(
+        GoalModel(
           statusReason: "null",
           achievementStatus: Status.IN_PROGRESS,
           outcomes: [

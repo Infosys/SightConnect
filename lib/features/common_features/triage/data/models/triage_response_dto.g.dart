@@ -116,8 +116,7 @@ const _$SourceEnumMap = {
 };
 
 const _$StatusEnumMap = {
-  Status.ACTIVE: 'ACTIVE',
-  Status.INACTIVE: 'INACTIVE',
+  Status.REGISTERED: 'REGISTERED',
   Status.IN_PROGRESS: 'IN_PROGRESS',
 };
 

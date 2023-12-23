@@ -4,11 +4,11 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/category.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/status.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/test_code.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'triage_response_dto.freezed.dart';
@@ -59,7 +59,8 @@ class IncompleteTest with _$IncompleteTest {
     TestType? testName,
   }) = _IncompleteTest;
 
-  factory IncompleteTest.fromJson(Map<String, dynamic> json) => _$IncompleteTestFromJson(json);
+  factory IncompleteTest.fromJson(Map<String, dynamic> json) =>
+      _$IncompleteTestFromJson(json);
 }
 
 @freezed
@@ -164,4 +165,3 @@ class Period with _$Period {
 
   factory Period.fromJson(Map<String, dynamic> json) => _$PeriodFromJson(json);
 }
-
