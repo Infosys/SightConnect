@@ -34,7 +34,6 @@ class AssessmentTable extends ConsumerWidget {
 
           ref.watch(getAssessmentTableProvider).when(
                 data: (data) {
-                  // print(data);
                   return VTPatientList(
                     listOfAssessments: data,
                   );

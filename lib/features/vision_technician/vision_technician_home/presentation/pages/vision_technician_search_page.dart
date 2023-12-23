@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 class VisionTechnicianSearchPage extends HookConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
@@ -135,7 +138,6 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           list.length,
                           (index) => DataRow(
                             onSelectChanged: (value) {
-                              print(list[index].toJson());
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -180,7 +182,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${data.name}",
+              "${data.name?.sentenceCase()}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(fontSize: 14),
@@ -199,7 +201,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
       ),
       DataCell(
         Text(
-          data.mobile.toString(),
+          data.mobile ?? "",
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(fontSize: 14),
@@ -211,13 +213,13 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              data.encounterId.toString(),
+              "${data.encounterId ?? ""}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(fontSize: 14),
             ),
             Text(
-              data.encounterStartDate.toString(),
+              data.encounterStartDate?.formateDateWithTime ?? "",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
@@ -231,7 +233,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
       ),
       DataCell(
         Text(
-          data.status.toString(),
+          data.status ?? "",
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(fontSize: 14),
@@ -258,19 +260,13 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
         ),
       ),
       DataCell(
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppSize.kspadding / 1.5,
-            horizontal: AppSize.kspadding * 1.5,
-          ),
-          decoration: BoxDecoration(
-            color: data.category!.toString().toLowerCase().contains("early")
-                ? AppColor.orange
-                : AppColor.red,
-            borderRadius: BorderRadius.circular(AppSize.klradius),
-          ),
-          child: Text(
-            data.category.toString(),
+        Chip(
+          backgroundColor:
+              data.category!.toString().toLowerCase().contains("early")
+                  ? AppColor.orange
+                  : AppColor.red,
+          label: Text(
+            data.category.toString().split(".").last,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
