@@ -81,11 +81,11 @@ class PatientAssessmentUpdateDataProvider {
 
   Color _getRequestPriorityColor(RequestPriority? priority) {
     switch (priority) {
-      case RequestPriority.URGENT:
+      case RequestPriority.ASAP:
         return AppColor.red;
       case RequestPriority.ROUTINE:
         return AppColor.green;
-      case RequestPriority.ASAP:
+      case RequestPriority.URGENT:
         return AppColor.orange;
       case RequestPriority.STAT:
         return AppColor.red;

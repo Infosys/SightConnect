@@ -59,9 +59,9 @@ class TriageResultPage extends ConsumerWidget {
               children: [
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
-                  id: model.profile.patient?.abhaNumber,
-                  name: model.profile.patient?.name,
-                  patientImage: model.profile.patient?.profilePhoto,
+                  id: triageResult.subject,  //TODO: erlier it was abha id but i think it should be patient id 
+                  name: "ABC SINGH",   //TODO: need  patient name from patient id 
+                  patientImage: null,   //TODO: need  patient image from patient id 
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(

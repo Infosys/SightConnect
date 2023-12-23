@@ -13,11 +13,7 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
-    // logger.d({
-    //   "profileEntity": profileEntity,
-    //   "triageDetailedReport": triageDetailedReport,
-    //   "triageAssessment": triageAssessment,
-    // });
+    
 
     return TriageReportDetailedEntity(
       triageResultDescription:
@@ -48,7 +44,7 @@ class AssessmentDetailedReportMapper {
       ),
       overallpriority: (triageDetailedReport.carePlans == null ||
               triageDetailedReport.carePlans!.isEmpty)
-          ? RequestPriority.ROUTINE
+          ? RequestPriority.PENDING
           : triageDetailedReport.carePlans!.first.activities!.first
               .plannedActivityReference!.serviceRequest!.priority!,
       cumulativeSeverity: triageDetailedReport.cumulativeSeverity,

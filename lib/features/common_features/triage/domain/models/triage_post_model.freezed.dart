@@ -44,6 +44,12 @@ mixin _$TriagePostModel {
       throw _privateConstructorUsedError;
   List<PostTriageQuestionModel>? get questionResponse =>
       throw _privateConstructorUsedError;
+  int? get subject => throw _privateConstructorUsedError;
+  Severity? get observationSeverity => throw _privateConstructorUsedError;
+  Severity? get questionResponseSeverity => throw _privateConstructorUsedError;
+  Severity? get mediaSeverity => throw _privateConstructorUsedError;
+  Severity? get cumulativeSeverity => throw _privateConstructorUsedError;
+  EncounterModel? get encounter => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -75,7 +81,15 @@ abstract class $TriagePostModelCopyWith<$Res> {
       List<Map<String, double>>? score,
       List<PostTriageImagingSelectionModel>? imagingSelection,
       List<PostTriageObservationsModel>? observations,
-      List<PostTriageQuestionModel>? questionResponse});
+      List<PostTriageQuestionModel>? questionResponse,
+      int? subject,
+      Severity? observationSeverity,
+      Severity? questionResponseSeverity,
+      Severity? mediaSeverity,
+      Severity? cumulativeSeverity,
+      EncounterModel? encounter});
+
+  $EncounterModelCopyWith<$Res>? get encounter;
 }
 
 /// @nodoc
@@ -109,6 +123,12 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
     Object? imagingSelection = freezed,
     Object? observations = freezed,
     Object? questionResponse = freezed,
+    Object? subject = freezed,
+    Object? observationSeverity = freezed,
+    Object? questionResponseSeverity = freezed,
+    Object? mediaSeverity = freezed,
+    Object? cumulativeSeverity = freezed,
+    Object? encounter = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -183,7 +203,43 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
           ? _value.questionResponse
           : questionResponse // ignore: cast_nullable_to_non_nullable
               as List<PostTriageQuestionModel>?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as int?,
+      observationSeverity: freezed == observationSeverity
+          ? _value.observationSeverity
+          : observationSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      questionResponseSeverity: freezed == questionResponseSeverity
+          ? _value.questionResponseSeverity
+          : questionResponseSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      mediaSeverity: freezed == mediaSeverity
+          ? _value.mediaSeverity
+          : mediaSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      cumulativeSeverity: freezed == cumulativeSeverity
+          ? _value.cumulativeSeverity
+          : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      encounter: freezed == encounter
+          ? _value.encounter
+          : encounter // ignore: cast_nullable_to_non_nullable
+              as EncounterModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EncounterModelCopyWith<$Res>? get encounter {
+    if (_value.encounter == null) {
+      return null;
+    }
+
+    return $EncounterModelCopyWith<$Res>(_value.encounter!, (value) {
+      return _then(_value.copyWith(encounter: value) as $Val);
+    });
   }
 }
 
@@ -213,7 +269,16 @@ abstract class _$$_TriagePostModelCopyWith<$Res>
       List<Map<String, double>>? score,
       List<PostTriageImagingSelectionModel>? imagingSelection,
       List<PostTriageObservationsModel>? observations,
-      List<PostTriageQuestionModel>? questionResponse});
+      List<PostTriageQuestionModel>? questionResponse,
+      int? subject,
+      Severity? observationSeverity,
+      Severity? questionResponseSeverity,
+      Severity? mediaSeverity,
+      Severity? cumulativeSeverity,
+      EncounterModel? encounter});
+
+  @override
+  $EncounterModelCopyWith<$Res>? get encounter;
 }
 
 /// @nodoc
@@ -245,6 +310,12 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
     Object? imagingSelection = freezed,
     Object? observations = freezed,
     Object? questionResponse = freezed,
+    Object? subject = freezed,
+    Object? observationSeverity = freezed,
+    Object? questionResponseSeverity = freezed,
+    Object? mediaSeverity = freezed,
+    Object? cumulativeSeverity = freezed,
+    Object? encounter = freezed,
   }) {
     return _then(_$_TriagePostModel(
       id: freezed == id
@@ -319,6 +390,30 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
           ? _value._questionResponse
           : questionResponse // ignore: cast_nullable_to_non_nullable
               as List<PostTriageQuestionModel>?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as int?,
+      observationSeverity: freezed == observationSeverity
+          ? _value.observationSeverity
+          : observationSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      questionResponseSeverity: freezed == questionResponseSeverity
+          ? _value.questionResponseSeverity
+          : questionResponseSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      mediaSeverity: freezed == mediaSeverity
+          ? _value.mediaSeverity
+          : mediaSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      cumulativeSeverity: freezed == cumulativeSeverity
+          ? _value.cumulativeSeverity
+          : cumulativeSeverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
+      encounter: freezed == encounter
+          ? _value.encounter
+          : encounter // ignore: cast_nullable_to_non_nullable
+              as EncounterModel?,
     ));
   }
 }
@@ -344,7 +439,13 @@ class _$_TriagePostModel implements _TriagePostModel {
       final List<Map<String, double>>? score,
       final List<PostTriageImagingSelectionModel>? imagingSelection,
       final List<PostTriageObservationsModel>? observations,
-      final List<PostTriageQuestionModel>? questionResponse})
+      final List<PostTriageQuestionModel>? questionResponse,
+      this.subject,
+      this.observationSeverity,
+      this.questionResponseSeverity,
+      this.mediaSeverity,
+      this.cumulativeSeverity,
+      this.encounter})
       : _performer = performer,
         _incompleteSection = incompleteSection,
         _score = score,
@@ -445,8 +546,21 @@ class _$_TriagePostModel implements _TriagePostModel {
   }
 
   @override
+  final int? subject;
+  @override
+  final Severity? observationSeverity;
+  @override
+  final Severity? questionResponseSeverity;
+  @override
+  final Severity? mediaSeverity;
+  @override
+  final Severity? cumulativeSeverity;
+  @override
+  final EncounterModel? encounter;
+
+  @override
   String toString() {
-    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, encounter: $encounter)';
   }
 
   @override
@@ -485,31 +599,50 @@ class _$_TriagePostModel implements _TriagePostModel {
             const DeepCollectionEquality()
                 .equals(other._observations, _observations) &&
             const DeepCollectionEquality()
-                .equals(other._questionResponse, _questionResponse));
+                .equals(other._questionResponse, _questionResponse) &&
+            (identical(other.subject, subject) || other.subject == subject) &&
+            (identical(other.observationSeverity, observationSeverity) ||
+                other.observationSeverity == observationSeverity) &&
+            (identical(
+                    other.questionResponseSeverity, questionResponseSeverity) ||
+                other.questionResponseSeverity == questionResponseSeverity) &&
+            (identical(other.mediaSeverity, mediaSeverity) ||
+                other.mediaSeverity == mediaSeverity) &&
+            (identical(other.cumulativeSeverity, cumulativeSeverity) ||
+                other.cumulativeSeverity == cumulativeSeverity) &&
+            (identical(other.encounter, encounter) ||
+                other.encounter == encounter));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      patientId,
-      encounterId,
-      serviceType,
-      organizationCode,
-      const DeepCollectionEquality().hash(_performer),
-      assessmentCode,
-      assessmentVersion,
-      issued,
-      userStartDate,
-      source,
-      sourceVersion,
-      const DeepCollectionEquality().hash(_incompleteSection),
-      cummulativeScore,
-      const DeepCollectionEquality().hash(_score),
-      const DeepCollectionEquality().hash(_imagingSelection),
-      const DeepCollectionEquality().hash(_observations),
-      const DeepCollectionEquality().hash(_questionResponse));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        patientId,
+        encounterId,
+        serviceType,
+        organizationCode,
+        const DeepCollectionEquality().hash(_performer),
+        assessmentCode,
+        assessmentVersion,
+        issued,
+        userStartDate,
+        source,
+        sourceVersion,
+        const DeepCollectionEquality().hash(_incompleteSection),
+        cummulativeScore,
+        const DeepCollectionEquality().hash(_score),
+        const DeepCollectionEquality().hash(_imagingSelection),
+        const DeepCollectionEquality().hash(_observations),
+        const DeepCollectionEquality().hash(_questionResponse),
+        subject,
+        observationSeverity,
+        questionResponseSeverity,
+        mediaSeverity,
+        cumulativeSeverity,
+        encounter
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -527,25 +660,30 @@ class _$_TriagePostModel implements _TriagePostModel {
 
 abstract class _TriagePostModel implements TriagePostModel {
   const factory _TriagePostModel(
-          {final int? id,
-          final int? patientId,
-          final int? encounterId,
-          final ServiceType? serviceType,
-          final int? organizationCode,
-          final List<Performer>? performer,
-          final int? assessmentCode,
-          final String? assessmentVersion,
-          @TimestampConverter() final DateTime? issued,
-          @TimestampConverter() final DateTime? userStartDate,
-          final Source? source,
-          final String? sourceVersion,
-          final List<PostIncompleteTestModel>? incompleteSection,
-          final int? cummulativeScore,
-          final List<Map<String, double>>? score,
-          final List<PostTriageImagingSelectionModel>? imagingSelection,
-          final List<PostTriageObservationsModel>? observations,
-          final List<PostTriageQuestionModel>? questionResponse}) =
-      _$_TriagePostModel;
+      {final int? id,
+      final int? patientId,
+      final int? encounterId,
+      final ServiceType? serviceType,
+      final int? organizationCode,
+      final List<Performer>? performer,
+      final int? assessmentCode,
+      final String? assessmentVersion,
+      @TimestampConverter() final DateTime? issued,
+      @TimestampConverter() final DateTime? userStartDate,
+      final Source? source,
+      final String? sourceVersion,
+      final List<PostIncompleteTestModel>? incompleteSection,
+      final int? cummulativeScore,
+      final List<Map<String, double>>? score,
+      final List<PostTriageImagingSelectionModel>? imagingSelection,
+      final List<PostTriageObservationsModel>? observations,
+      final List<PostTriageQuestionModel>? questionResponse,
+      final int? subject,
+      final Severity? observationSeverity,
+      final Severity? questionResponseSeverity,
+      final Severity? mediaSeverity,
+      final Severity? cumulativeSeverity,
+      final EncounterModel? encounter}) = _$_TriagePostModel;
 
   factory _TriagePostModel.fromJson(Map<String, dynamic> json) =
       _$_TriagePostModel.fromJson;
@@ -589,8 +727,156 @@ abstract class _TriagePostModel implements TriagePostModel {
   @override
   List<PostTriageQuestionModel>? get questionResponse;
   @override
+  int? get subject;
+  @override
+  Severity? get observationSeverity;
+  @override
+  Severity? get questionResponseSeverity;
+  @override
+  Severity? get mediaSeverity;
+  @override
+  Severity? get cumulativeSeverity;
+  @override
+  EncounterModel? get encounter;
+  @override
   @JsonKey(ignore: true)
   _$$_TriagePostModelCopyWith<_$_TriagePostModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+EncounterModel _$EncounterModelFromJson(Map<String, dynamic> json) {
+  return _EncounterModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$EncounterModel {
+  int? get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $EncounterModelCopyWith<EncounterModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EncounterModelCopyWith<$Res> {
+  factory $EncounterModelCopyWith(
+          EncounterModel value, $Res Function(EncounterModel) then) =
+      _$EncounterModelCopyWithImpl<$Res, EncounterModel>;
+  @useResult
+  $Res call({int? id});
+}
+
+/// @nodoc
+class _$EncounterModelCopyWithImpl<$Res, $Val extends EncounterModel>
+    implements $EncounterModelCopyWith<$Res> {
+  _$EncounterModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_EncounterModelCopyWith<$Res>
+    implements $EncounterModelCopyWith<$Res> {
+  factory _$$_EncounterModelCopyWith(
+          _$_EncounterModel value, $Res Function(_$_EncounterModel) then) =
+      __$$_EncounterModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id});
+}
+
+/// @nodoc
+class __$$_EncounterModelCopyWithImpl<$Res>
+    extends _$EncounterModelCopyWithImpl<$Res, _$_EncounterModel>
+    implements _$$_EncounterModelCopyWith<$Res> {
+  __$$_EncounterModelCopyWithImpl(
+      _$_EncounterModel _value, $Res Function(_$_EncounterModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$_EncounterModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_EncounterModel implements _EncounterModel {
+  const _$_EncounterModel({this.id});
+
+  factory _$_EncounterModel.fromJson(Map<String, dynamic> json) =>
+      _$$_EncounterModelFromJson(json);
+
+  @override
+  final int? id;
+
+  @override
+  String toString() {
+    return 'EncounterModel(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EncounterModel &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EncounterModelCopyWith<_$_EncounterModel> get copyWith =>
+      __$$_EncounterModelCopyWithImpl<_$_EncounterModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_EncounterModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _EncounterModel implements EncounterModel {
+  const factory _EncounterModel({final int? id}) = _$_EncounterModel;
+
+  factory _EncounterModel.fromJson(Map<String, dynamic> json) =
+      _$_EncounterModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EncounterModelCopyWith<_$_EncounterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

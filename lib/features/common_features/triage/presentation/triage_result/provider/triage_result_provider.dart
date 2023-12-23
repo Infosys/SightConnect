@@ -1,7 +1,7 @@
-import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 
@@ -47,31 +47,43 @@ class TriageResultProvider extends ChangeNotifier {
 
   Map<String, dynamic> _getQuestionnaireResult() {
     double score = 0.0;
-    //TODO: set score here
-    // if (_model.score != null && _model.score!.isNotEmpty) {
-    //   score = _model.score![TriageStep.QUESTIONNAIRE] ?? 0.0;
-    // }
-    
+    Severity? qs= _model.questionResponseSeverity;
+    score=_severityToScore(qs);
   
 
     return _setPropertiesByUrgency(score.toDouble());
   }
 
+  double _severityToScore(Severity ? sevirity){
+        if(sevirity==null){
+          return 0;
+        }
+        else if ( sevirity== Severity.ABNORMAL){
+          return 3;
+        }
+         else if ( sevirity== Severity.HIGH){
+          return 2;
+        }
+         else {
+          return 1;
+        }
+        
+
+  }
+
   Map<String, dynamic> _getAcuityResult() {
-    var score = 0.0;
-    //TODO: set score here
-    // if (_model.score != null && _model.score!.isNotEmpty) {
-    //   score = _model.score["OBSERVATION"] ?? 0.0;
-    // }
-    return _setPropertiesByUrgency(score.toDouble());
+    double score = 0.0;
+   Severity?  vs=_model.observationSeverity;
+   score=_severityToScore(vs);
+
+    return _setPropertiesByUrgency(score);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
-    var score = 0.0;
-    //TODO: set score here
-    // if (_model.score != null && _model.score!.isNotEmpty) {
-    //   score = _model.score![TriageStep.IMAGING] ?? 0.0;
-    // }
+    double score = 0.0;
+    Severity ? ms=_model.mediaSeverity;
+    score=_severityToScore(ms);
+   
     return _setPropertiesByUrgency(score.toDouble());
   }
 

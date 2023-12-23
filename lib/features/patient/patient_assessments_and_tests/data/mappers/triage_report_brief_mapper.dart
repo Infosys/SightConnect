@@ -11,7 +11,7 @@ class AssessmentReportMapper {
       mediaResultDescription: model.mediaResultDescription ?? "NA",
       triageResultID: model.diagnosticReportId!,
       priority: (model.carePlans == null || model.carePlans!.isEmpty)
-          ? RequestPriority.ROUTINE
+          ? RequestPriority.PENDING
           : model.carePlans!.first.activities!.first.plannedActivityReference!
               .serviceRequest!.priority,
       reportTag: 'NA',

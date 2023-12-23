@@ -400,6 +400,7 @@ const _$RequestPriorityEnumMap = {
   RequestPriority.URGENT: 'URGENT',
   RequestPriority.ASAP: 'ASAP',
   RequestPriority.STAT: 'STAT',
+  RequestPriority.PENDING: 'PENDING',
 };
 
 _$_Communication _$$_CommunicationFromJson(Map<String, dynamic> json) =>
