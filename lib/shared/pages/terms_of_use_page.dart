@@ -128,8 +128,6 @@ class TermsOfUsePage extends HookWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const BrandingWidgetH(),
             ],
           ),
         ),

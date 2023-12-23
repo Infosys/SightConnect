@@ -102,27 +102,7 @@ class VisualAcuityDialog {
           ],
         ),
       ),
-      actions: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColor.black.withOpacity(0.04),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: const Offset(0, -3),
-              ),
-            ],
-            color: AppColor.white,
-          ),
-          padding: const EdgeInsets.all(12.0),
-          child: const BrandingWidgetH(),
-        ),
-      ],
+      actions: const [],
     );
   }
 

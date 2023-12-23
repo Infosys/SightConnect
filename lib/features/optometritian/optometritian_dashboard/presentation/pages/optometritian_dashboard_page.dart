@@ -206,8 +206,6 @@ class OptometritianDashboardPage extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  const BrandingWidgetH(),
-                  const SizedBox(height: AppSize.kmheight),
                 ],
               ),
             ),

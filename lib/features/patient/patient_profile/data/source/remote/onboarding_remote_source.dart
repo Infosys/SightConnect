@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/identifier_type.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/models/profile_model.dart';
@@ -76,11 +79,18 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> getPatientProfileByPhone(
       String phoneNumber) async {
+    //check number contain +91 then remove it
+    if (phoneNumber.contains("+91")) {
+      phoneNumber = phoneNumber.substring(3);
+    }
+
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber";
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=All";
+
     try {
-      final response = await _dio.get(endpoint);
-      return PatientResponseModel.fromJson(response.data);
+      final response = await _dio.get<List<dynamic>>(endpoint);
+
+      return PatientResponseModel.fromJson(response.data!.first);
     } catch (e) {
       rethrow;
     }

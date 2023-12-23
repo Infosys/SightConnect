@@ -45,7 +45,6 @@ class AboutUsPage extends StatelessWidget {
               style: applyRobotoFont(fontWeight: FontWeight.w400, fontSize: 14),
             ),
             const Spacer(),
-            const BrandingWidgetH(),
           ],
         ),
       ),

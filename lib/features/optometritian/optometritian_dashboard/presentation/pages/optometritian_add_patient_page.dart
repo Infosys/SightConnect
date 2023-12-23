@@ -435,7 +435,6 @@ class OptometricianAddPatientPage extends HookWidget {
                         height: 20,
                       ),
                       TextFormField(
-                        
                         style: const TextStyle(
                           fontFamily: 'Roboto',
                         ),
@@ -509,7 +508,6 @@ class OptometricianAddPatientPage extends HookWidget {
               const SizedBox(
                 height: 20,
               ),
-              const BrandingWidgetH(),
             ],
           ),
         ),

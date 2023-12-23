@@ -3,8 +3,6 @@ import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,60 +19,46 @@ class _LandingPageState extends ConsumerState<LandingPage> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(
       Duration.zero,
       () async {
-        // final navigator = Navigator.of(context);
-        // final status = await _loginVerification();
-        // if (status) {
-        //   navigator.pushNamedAndRemoveUntil(
-        //     InitializationPage.routeName,
-        //     (route) => false,
-        //   );
-        // }
         final navigator = Navigator.of(context);
-        navigator.pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const VisionTechnicianDashboardPage(),
-          ),
-          (route) => false,
-        );
+        final status = await _loginVerification();
+        if (status) {
+          navigator.pushNamedAndRemoveUntil(
+            InitializationPage.routeName,
+            (route) => false,
+          );
+        }
       },
     );
   }
 
   Future<bool> _loginVerification() async {
-    final credential =
-        await PersistentAuthStateService.authState.getCredentials();
-    if (credential == null) return false;
-    final isInternetConnected =
-        await ref.read(connectivityProvider).isConnected();
-    if (!isInternetConnected) {
+    final isLoggedIn = PersistentAuthStateService.authState.isLoggedIn;
+    // final isInternetConnected =
+    //     await ref.read(connectivityProvider).isConnected();
+    // if (!isInternetConnected) {
+    //   return false;
+    // }
+    if (!isLoggedIn) {
       return false;
     }
-    try {
-      final tokens = await credential.getTokenResponse();
-      await PersistentAuthStateService.authState.saveTokens(
-        accessToken: tokens.accessToken!,
-        refreshToken: tokens.refreshToken!,
-      );
-      return true;
-    } catch (e) {
-      await PersistentAuthStateService.authState.logout();
-      Fluttertoast.showToast(msg: "You have been logged out");
-      return false;
-    }
+    return true;
   }
 
   Future<void> _onSignIn() async {
     final naviagator = Navigator.of(context);
     final model = ref.read(initializationProvider);
     model.init().then((value) {
-      naviagator.pushNamedAndRemoveUntil(
-        InitializationPage.routeName,
-        (route) => false,
-      );
+      if (PersistentAuthStateService.authState.isLoggedIn) {
+        naviagator.pushNamedAndRemoveUntil(
+          InitializationPage.routeName,
+          (route) => false,
+        );
+      } else {
+        Fluttertoast.showToast(msg: "Authentication Failed");
+      }
     }).catchError((e) {
       Fluttertoast.showToast(msg: "Authentication Failed $e");
     });

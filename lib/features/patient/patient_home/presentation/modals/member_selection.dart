@@ -24,8 +24,10 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
 
   @override
   Widget build(BuildContext context) {
-    final connectionsList = widget.patients.profile?.patient?.relatedParty;
+    final connectionsList =
+        widget.patients.profile?.patient?.relatedParty ?? [];
     final currentProfile = widget.patients.profile?.patient;
+
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
       insetPadding: const EdgeInsets.all(8),
@@ -47,13 +49,13 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ...List.generate(
-              1 + connectionsList!.length,
+              1 + connectionsList.length,
               (index) {
                 if (index == 0) {
                   return _MemberTile(
-                    name: currentProfile!.name ?? "",
+                    name: currentProfile?.name ?? "",
                     relationShip: "Me",
-                    profilePicture: currentProfile.profilePhoto,
+                    profilePicture: currentProfile?.profilePhoto,
                     age: 20,
                     index: 0,
                     selectedMemberIndex: selectedMemberIndex,

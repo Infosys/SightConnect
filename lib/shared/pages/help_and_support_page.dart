@@ -116,7 +116,6 @@ class HelpAndSupportPage extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const BrandingWidgetH(),
           ],
         ),
       ),

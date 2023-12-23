@@ -144,8 +144,6 @@ class PatientProfilePage extends ConsumerWidget {
               PatientFamilyDetails(
                 relations: patient.profile?.patient?.relatedParty ?? [],
               ),
-              const SizedBox(height: AppSize.kmheight),
-              const BrandingWidgetH(),
             ],
           ),
         ],
@@ -178,7 +176,8 @@ class PatientProfilePage extends ConsumerWidget {
     String? state,
   }) {
     try {
-      final result = "$line, $ward, $district, $state";
+      final result =
+          "${line ?? ""}, ${ward ?? ""}, ${district ?? ""}, ${state ?? ""}";
       return result;
     } catch (e) {
       return "";

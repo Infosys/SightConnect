@@ -172,10 +172,9 @@ class OptometritianReportPage extends ConsumerWidget {
                 data: [], urgency: TriageUrgency.ROUTINE),
             const OptometritianTumblingReportCard(
                 data: [], urgency: TriageUrgency.ROUTINE),
-             EyeScanTabView(
+            const EyeScanTabView(
               eyeScanData: [],
             ),
-            const BrandingWidgetH(),
           ]),
         )),
         bottomNavigationBar: Padding(

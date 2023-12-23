@@ -245,8 +245,6 @@ class PatientEditProfilePage extends HookConsumerWidget {
                 ),
               ),
               const SizedBox(height: AppSize.klheight * 2),
-              const BrandingWidgetH(),
-              const SizedBox(height: AppSize.kmheight),
             ],
           ),
         ),

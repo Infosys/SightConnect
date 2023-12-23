@@ -255,8 +255,6 @@ class PatientRegistrationPage extends ConsumerWidget {
                         ],
                       ),
                       const SizedBox(height: AppSize.ksheight),
-                      const BrandingWidgetH(),
-                      const SizedBox(height: AppSize.klheight),
                     ],
                   ),
                 )

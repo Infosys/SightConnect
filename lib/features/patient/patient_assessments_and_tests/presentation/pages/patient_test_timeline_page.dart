@@ -136,7 +136,6 @@ class PatientTestTimelinePage extends StatelessWidget {
                 },
               ),
             ),
-            const BrandingWidgetH(),
           ],
         ),
       ),

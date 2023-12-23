@@ -99,9 +99,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                     progressMessage = "Something went wrong";
                   });
                 },
-                onTitleChanged: (controller, title) {
-                  log("Title: $title");
-                },
                 onLoadHttpError: (controller, url, code, message) {
                   logger.e("Error: $message");
                   setState(() {

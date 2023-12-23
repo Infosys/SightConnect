@@ -204,7 +204,6 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                 ),
-                const BrandingWidgetV(),
               ],
             ),
           ],

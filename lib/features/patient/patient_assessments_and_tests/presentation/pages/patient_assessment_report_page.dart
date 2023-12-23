@@ -74,11 +74,6 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               EyeScanTabView(
                 eyeScanData: assessmentDetailsReport.imageBriefEntity,
               ),
-              // const AssessmentRecommendation(),
-              // SizedBox(
-              //   height: AppSize.height(context) * 0.03,
-              // ),
-              const BrandingWidgetH(),
             ],
           ),
         ),

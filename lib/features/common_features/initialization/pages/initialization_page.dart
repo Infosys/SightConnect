@@ -13,7 +13,6 @@ import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -35,46 +34,44 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> profileVerification() async {
-    final status = await _checkUserAlreadyExist();
-    log("profileVerification: $status");
-    if (status) {
-      final role = PersistentAuthStateService.authState.role;
-      if (role != null) {
-        roleMapperNavigation(role, context);
-      } else {
-        log("role is null: $role");
+    final isExistInDB = await _checkUserAlreadyExist();
+    log("profileVerification: $isExistInDB");
+    if (context.mounted && isExistInDB) {
+      try {
+        navigateBasedOnRole(context);
+      } catch (e) {
+        logger.e(e);
+        Navigator.of(context).pop();
       }
     } else {
-      await _onRegister(context);
+      await _registerUser(context);
     }
   }
 
   Future<bool> _checkUserAlreadyExist() async {
     try {
       final model = await ref.read(initializationProvider).getUserProfile();
-      if (model.profile?.patient?.email == null) {
+
+      if (model.profile?.patient?.patientId == null) {
         return false;
       } else {
         return true;
       }
     } catch (e) {
-      logger.e(e);
       return false;
     }
-    return true;
   }
 
-  Future<void> _onRegister(BuildContext context) async {
+  Future<void> _registerUser(BuildContext context) async {
     final navigator = Navigator.of(context);
-
-    final status = await navigator.push(
+    bool? status = await navigator.push(
       MaterialPageRoute(
         builder: (context) {
           return const PatientRegistrationMiniappPage();
         },
       ),
     );
-    if (status && context.mounted) {
+    if (context.mounted && (status == null || status)) {
       showDialog(
           context: context,
           builder: (context) {
@@ -92,8 +89,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
             );
           });
     } else {
-      final model = await ref.read(initializationProvider).getUserProfile();
-      await PersistentAuthStateService.authState.saveUserProfile(model);
       await profileVerification();
     }
   }
@@ -138,30 +133,25 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
                 ],
               ),
             ),
-            const Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: BrandingWidgetV(),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
 
-  void roleMapperNavigation(String role, BuildContext context) {
-    logger.i("role: $role");
+  Future<void> navigateBasedOnRole(BuildContext context) async {
     final naviagator = Navigator.of(context);
+    final role = PersistentAuthStateService.authState.role;
+    logger.i("role: $role");
+    if (role == null) {
+      throw Exception("Role is null");
+    }
     switch (role) {
       case "ROLE_PATIENT":
         naviagator.pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const PatientDashboardPage(),
-            ), (route) {
-          return false;
-        });
+                builder: (context) => const PatientDashboardPage()),
+            (route) => false);
         break;
 
       case "ROLE_VISION_GUARDIAN":
@@ -172,11 +162,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       case "ROLE_OPTOMETRIST":
         naviagator.pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const OptometritianDashboardPage(),
-            ),
+                builder: (context) => const OptometritianDashboardPage()),
             (route) => false);
         break;
-
       default:
         throw Exception("Invalid Role");
     }
