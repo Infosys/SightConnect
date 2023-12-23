@@ -3,8 +3,10 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,6 +16,7 @@ class TriageEyeScanProvider with ChangeNotifier {
   TriageEyeType _currentEye;
   final FileMsService _fileMsService;
   final NetworkInfo _networkInfo;
+  final TriageProvider _triageProvider;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
@@ -24,6 +27,8 @@ class TriageEyeScanProvider with ChangeNotifier {
     this._fileMsService,
     this._currentEye,
     this._networkInfo,
+    this._triageProvider
+    
   );
 
   TriageEyeType get currentEye => _currentEye;
@@ -55,15 +60,17 @@ class TriageEyeScanProvider with ChangeNotifier {
   }
 
   Future<void> saveTriageEyeScanResponseToDB() async {
+   logger.f({"Left eye image": leftImageUrl});
+   logger.f({"right eye image": rightImageUrl});
     final response = await _saveTriageEyeScanLocallyUseCase.call(
       SaveTriageEyeScanLocallyParam(
-        postImagingSelectionModel: await getTriageEyeScanResponse(),
+        postImagingSelectionModel:  getTriageEyeScanResponse(leftImageUrl,rightImageUrl),
       ),
     );
     response.fold(
       (failure) {
         logger.d({
-          "Failure": failure,
+          "Failure while saving in local db ": failure,
         });
       },
       (_) {
@@ -78,37 +85,47 @@ class TriageEyeScanProvider with ChangeNotifier {
     return 1;
   }
 
-  Future<List<PostTriageImagingSelectionModel>>
-      getTriageEyeScanResponse() async {
+  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse(String leftEyeImageUrl,String rightEyeImageUrl) {
     List<PostTriageImagingSelectionModel> mediaCaptureList = [];
 
-    if (await _networkInfo.isConnected()) {
-      Map<String, String> leftEyeData = parseUrl(leftImageUrl);
-      Map<String, String> rightEyeData = parseUrl(rightImageUrl);
-      mediaCaptureList.add(
-        PostTriageImagingSelectionModel(
-            identifier: 70000001,
-            endpoint: leftEyeData["endPoint"],
-            baseUrl: leftEyeData["baseUrl"],
-            score: 0,
-            fileId: rightEyeData["fileId"]),
-      );
-      mediaCaptureList.add(
-        PostTriageImagingSelectionModel(
-          identifier: 70000002,
-          endpoint: rightEyeData["endPoint"],
-          baseUrl: rightEyeData["baseUrl"],
-          score: 0,
-          fileId: rightEyeData["fileId"],
-        ),
-      );
+
+      DiagnosticReportTemplateFHIRModel? assessment = _triageProvider.assessment;
+      Map<String, int> imageIdentifier = getTriageImageIdentifier(assessment!);
+
+      Map<String, String> leftEyeData = parseUrl(leftEyeImageUrl);
+      Map<String, String> rightEyeData = parseUrl(rightEyeImageUrl);
+      
+      mediaCaptureList.add(PostTriageImagingSelectionModel(
+        identifier: imageIdentifier["LEFT_EYE"],
+        fileId: leftEyeData["fileId"]!,
+        endpoint: leftEyeData["endPoint"]!,
+        baseUrl: leftEyeData["baseUrl"]!,
+        score: 0
+
+      ));
+      mediaCaptureList.add(PostTriageImagingSelectionModel(
+        identifier: imageIdentifier["RIGHT_EYE"],
+        fileId: rightEyeData["fileId"]!,
+        endpoint: rightEyeData["endPoint"]!,
+        baseUrl: rightEyeData["baseUrl"]!,
+        score: 0,
+      ));
       logger.d({"getTriageEyeScanResponse": mediaCaptureList});
       return mediaCaptureList;
-    } else {
-      //TODO:: handle no internet image
-      logger.d({"getTriageEyeScanResponse": "No Internet"});
-      return mediaCaptureList;
-    }
+    
+      
+    
+  }
+
+  Map<String, int> getTriageImageIdentifier(
+      DiagnosticReportTemplateFHIRModel assessment) {
+    Map<String, int> imageIdentifier = {};
+
+    assessment.study?.imagingSelectionTemplate?.forEach((element) {
+      imageIdentifier[element.name!] = element.id!;
+    });
+
+    return imageIdentifier;
   }
 
   String leftImageUrl = "";
@@ -192,5 +209,6 @@ var triageEyeScanProvider = ChangeNotifierProvider(
       ref.watch(saveTriageEyeScanLocallyUseCase),
       ref.watch(fileMsServiceProvider),
       TriageEyeType.RIGHT,
-      ref.watch(connectivityProvider)),
+      ref.watch(connectivityProvider),
+      ref.watch(triageProvider)),
 );
