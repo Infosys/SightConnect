@@ -48,11 +48,12 @@ class TriageExitAlertBox extends ConsumerWidget {
               children: [
                 TextButton(
                   onPressed: () async {
+                    var naviagtor = Navigator.of(context);
+                    if (model.currentStep > 0) {
+                      await _saveTriageModel(ref);
+                    }
                     ref.read(resetProvider).reset();
-                    //TODO:save triage
-                    await _saveTriageModel(ref);
-
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    naviagtor.popUntil((route) => route.isFirst);
                     onYesPressed?.call();
                   },
                   child: const Text('Yes'),

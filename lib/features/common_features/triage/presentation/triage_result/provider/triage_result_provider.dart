@@ -1,7 +1,10 @@
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../core/constants/app_color.dart';
@@ -9,10 +12,10 @@ import '../../../../../../core/constants/app_color.dart';
 var triageResultProvider = ChangeNotifierProvider.autoDispose
     .family<TriageResultProvider, TriagePostModel>(
   (ref, result) {
-    final patient =
-        ref.watch(getPatientProfileByIdProvider).asData?.value.profile;
+    final id = ref.watch(triageMemberProvider).testPatientId;
+    final patient = ref.watch(getPatientProfileByIdProvider(id!)).asData?.value;
 
-    return TriageResultProvider(result, patient);
+    return TriageResultProvider(result, patient?.profile);
   },
 );
 

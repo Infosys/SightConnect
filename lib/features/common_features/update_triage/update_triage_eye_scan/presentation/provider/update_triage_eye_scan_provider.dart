@@ -186,7 +186,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     List<update_model.IncompleteTestModel> incompleteTestModelList = [];
 
     incompleteTestList?.forEach((element) {
-      if (element.testName != TestType.QUESTIONNAIRE) {
+      if (element.testName != TestType.IMAGE) {
         incompleteTestModelList.add(
           update_model.IncompleteTestModel(
             testName: element.testName,

@@ -1,25 +1,31 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/pages/splash_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     final mediaQueryData = MediaQuery.of(context);
 
     return Millimeters.fromView(
@@ -31,7 +37,6 @@ class MyApp extends ConsumerWidget {
         child: MaterialApp(
           title: AppText.appName,
           locale: const Locale('en'),
-          
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -44,24 +49,9 @@ class MyApp extends ConsumerWidget {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
-          // home: const SamplePage(),
           routes: AppRouter.routes,
-          initialRoute: SplashPage.routeName,
-          // builder: (context, child) {
-          //   return ref.watch(internetProvider).when(
-          //         data: (value) {
-          //           if (value == ConnectivityResult.none) {
-          //             return const InternetLostPage();
-          //           } else {
-          //             return child!;
-          //           }
-          //         },
-          //         loading: () => const InternetLostPage(),
-          //         error: (error, stackTrace) {
-          //           return const InternetLostPage();
-          //         },
-          //       );
-          // },
+          initialRoute: LandingPage.routeName,
+          navigatorKey: AppRouter.navigatorKey,
         ),
       ),
     );

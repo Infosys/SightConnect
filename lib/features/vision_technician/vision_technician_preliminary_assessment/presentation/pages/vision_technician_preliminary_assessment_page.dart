@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
@@ -19,7 +20,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import '../providers/vision_technician_preliminary_assessment_provider.dart';
-import '../../../../patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import '../../../../patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
@@ -173,8 +174,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model =
-        ref.watch(getPatientCurrentProfileProvider).asData?.value.profile;
+    var model = ref.watch(globalVTProvider).activeUser?.profile;
     // var dateYear = DateTime.now().year;
 
     // int giveAge() {

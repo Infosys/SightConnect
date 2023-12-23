@@ -116,6 +116,11 @@ class TriageEyeScanProvider with ChangeNotifier {
   String bothImageUrl = "";
 
   void uploadImage(XFile image, TriageEyeType currentEye) async {
+    logger.f({
+      "uploadImage": "called",
+      "image": image.name,
+      "currentEye": currentEye,
+    });
     if (await _networkInfo.isConnected()) {
       try {
         final response = await _fileMsService.uploadImage(File(image.path));

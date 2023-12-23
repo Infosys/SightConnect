@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/enums/relationship.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_authentication/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/relationship.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,29 +17,18 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(globalPatientProvider).activeUser;
+    final connectionsList = model?.profile?.patient?.relatedParty ?? [];
+    final currentProfile = model?.profile?.patient;
     var memberProvider = ref.watch(triageMemberProvider);
     final selectedValue = useState<int>(0);
 
-    return ref.watch(getPatientProfileByIdProvider).when(
-          data: (patient) {
-            final connectionsList = patient.profile?.patient?.relatedParty;
-            final currentProfile = patient.profile?.patient;
-            return _content(
-              connectionsList ?? [],
-              currentProfile!,
-              selectedValue,
-              memberProvider,
-            );
-          },
-          error: (error, stackTrace) {
-            return const Center(
-              child: Text('Something went wrong'),
-            );
-          },
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+    return _content(
+      connectionsList,
+      currentProfile!,
+      selectedValue,
+      memberProvider,
+    );
   }
 
   Widget _content(
@@ -71,12 +60,12 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       person.profilePhoto != null
-                          ? CachedNetworkImage(
+                          ? AppNetworkImage(
                               imageUrl: person.profilePhoto!,
-                              height: 40,
-                              width: 40,
                             )
-                          : const CircleAvatar(),
+                          : const CircleAvatar(
+                              backgroundColor: AppColor.lightGrey,
+                            ),
                       const SizedBox(
                         width: 20,
                       ),
@@ -110,7 +99,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   groupValue: selectedValue.value,
                   onChanged: (value) {
                     selectedValue.value = value!;
-                    memberProvider.setTestPerson(person, 0);
+                    memberProvider.setTestPersonId(person.patientId!);
                   },
                 ),
               ),
@@ -133,12 +122,12 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       person.profilePicture != null
-                          ? CachedNetworkImage(
+                          ? AppNetworkImage(
                               imageUrl: person.profilePicture!,
-                              height: 40,
-                              width: 40,
                             )
-                          : const CircleAvatar(),
+                          : const CircleAvatar(
+                              backgroundColor: AppColor.lightGrey,
+                            ),
                       const SizedBox(
                         width: 20,
                       ),
@@ -174,7 +163,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   groupValue: selectedValue.value,
                   onChanged: (value) {
                     selectedValue.value = value!;
-                    memberProvider.setTestPerson(person, index - 1);
+                    memberProvider.setTestPersonId(person.patientId!);
                   },
                 ),
               ),
