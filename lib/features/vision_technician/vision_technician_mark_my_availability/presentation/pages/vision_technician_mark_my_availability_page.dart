@@ -1,20 +1,13 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/provider/vision_technician_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
-import 'package:eye_care_for_all/main.dart';
-
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter/cupertino.dart';
 
 class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
   const VisionTechnicianMarkMyAvailabilityPage({super.key});
@@ -73,6 +66,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
       ),
       appBar: CustomAppbar(
         titleSpacing: 0,
+        preferredSizeHeight: 70,
         centerTitle: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,18 +91,44 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                       ? const Center(
                           child: CircularProgressIndicator(),
                         )
-                      : CupertinoSwitch(
-                          value: model.markAvailability,
-                          activeColor: AppColor.blue,
-                          onChanged: (bool value) async {
-                            try {
-                              await model.updateAvailability();
-                            } catch (e) {
-                              Fluttertoast.showToast(
-                                msg: "Something went wrong",
-                              );
-                            }
-                          },
+                      : Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: model.markAvailability
+                                  ? AppColor.blue
+                                  : AppColor.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.klradius * 5),
+                              ),
+                            ),
+                            onPressed: () async {
+                              try {
+                                await model.updateAvailability();
+                              } catch (e) {
+                                Fluttertoast.showToast(
+                                  msg: "Something went wrong",
+                                );
+                              }
+                            },
+                            icon: model.markAvailability
+                                ? const Icon(
+                                    Icons.check,
+                                    size: 20,
+                                    color: AppColor.white,
+                                  )
+                                : const Icon(
+                                    Icons.check,
+                                    size: 20,
+                                    color: AppColor.white,
+                                  ),
+                            label: Text(
+                              model.markAvailability
+                                  ? "Marked"
+                                  : "Mark my availabilty",
+                            ),
+                          ),
                         );
                 },
               ),

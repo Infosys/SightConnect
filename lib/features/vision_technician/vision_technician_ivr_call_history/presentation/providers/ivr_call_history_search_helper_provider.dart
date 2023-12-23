@@ -6,7 +6,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var getIvrCallHistoryDetailsProvider =
     FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
-  return await ref.watch(ivrRepository).getIvrCallHistory(mobile: "8985050009");
+  final filters =
+      ref.watch(ivrCallHistorySearchHelperProvider).getSelectedFilter();
+  return await ref.watch(ivrRepository).getIvrCallHistory(
+        mobile: "8985050009",
+        callStatus: filters,
+      );
 });
 
 final ivrCallHistorySearchHelperProvider =
@@ -24,12 +29,12 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
   IvrCallHistorySearchHelperNotifier({required this.ivrRepositoryRef});
 
   var tablefilter = [
-    {"type": "All", "checked": true},
+    {"type": "All", "checked": false},
     {"type": "Completed", "checked": true},
-    {"type": "Failed", "checked": true},
-    {"type": "No Answer", "checked": true},
-    {"type": "Incoming", "checked": true},
-    {"type": "Outgoing", "checked": true}
+    {"type": "Failed", "checked": false},
+    {"type": "No Answer", "checked": false},
+    {"type": "Incoming", "checked": false},
+    {"type": "Outgoing", "checked": false}
   ];
 
   Future<void> makeIvrCall(String patientMobile) async {
@@ -43,6 +48,20 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
     }
   }
 
+  List<String>? getSelectedFilter() {
+    if (tablefilter[0]["checked"] as bool) {
+      return null;
+    } else {
+      List<String> selectedFilter = [];
+      for (var element in tablefilter) {
+        if (element["checked"] as bool) {
+          selectedFilter.add((element["type"] as String).toUpperCase());
+        }
+      }
+      return selectedFilter;
+    }
+  }
+
   List<String> tableHeading = [
     "Patient ID",
     "Name",
@@ -53,7 +72,15 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
     ""
   ];
   void setTableFilter(index) {
-    tablefilter[index]["checked"] = !(tablefilter[index]["checked"] as bool);
+    if (index == 0) {
+      for (var element in tablefilter) {
+        element["checked"] = false;
+      }
+      tablefilter[index]["checked"] = true;
+    } else {
+      tablefilter[0]["checked"] = false;
+      tablefilter[index]["checked"] = !(tablefilter[index]["checked"] as bool);
+    }
     notifyListeners();
   }
 }

@@ -11,8 +11,10 @@ var ivrRemoteSource = Provider(
 );
 
 abstract class IvrRemoteSource {
-  Future<List<IvrCallHistoryModel>> getIvrCallHistory({required String mobile});
-
+  Future<List<IvrCallHistoryModel>> getIvrCallHistory({
+    required String mobile,
+    List<String>? callStatus,
+  });
   Future makeIvrCall({required String patientMobile});
 }
 
@@ -22,25 +24,24 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
   IvrRemoteSourceImpl(this._dio);
 
   @override
-  Future<List<IvrCallHistoryModel>> getIvrCallHistory(
-      {required String mobile, List<String>? callStatus}) async {
-    String url = "/api/users/calls";
+  Future<List<IvrCallHistoryModel>> getIvrCallHistory({
+    required String mobile,
+    List<String>? callStatus,
+  }) async {
+    const endpoint = "/services/exotel/api/users/calls";
     Map<String, dynamic> queryParameters = {"mobile": mobile};
     if (callStatus != null && callStatus.isNotEmpty) {
       queryParameters.addAll({"callStatus": callStatus});
     }
-    return await _dio.get(url, queryParameters: queryParameters).then((value) {
-      List<IvrCallHistoryModel> list = [];
-      value.data.forEach((element) {
-        list.add(IvrCallHistoryModel.fromJson(element));
-      });
-      return list;
-    });
+    final response = await _dio.get<List<dynamic>>(endpoint,
+        queryParameters: queryParameters);
+
+    return response.data!.map((e) => IvrCallHistoryModel.fromJson(e)).toList();
   }
 
   @override
   Future makeIvrCall({required String patientMobile}) async {
-    String url = "/api/call/outbound?platformId=1051";
+    String url = "/services/exotel/api/call/outbound?platformId=1051";
     return await _dio
         .post(url, data: {"destination": patientMobile, "flowId": 9581});
   }

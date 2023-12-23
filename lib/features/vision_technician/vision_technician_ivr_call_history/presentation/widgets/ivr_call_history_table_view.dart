@@ -3,20 +3,17 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class IvrCallHistoryTableView extends ConsumerWidget {
   const IvrCallHistoryTableView({
-    required this.ivrCallHistoryDetails,
     super.key,
   });
-
-  final List<IvrCallHistoryModel> ivrCallHistoryDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,48 +25,65 @@ class IvrCallHistoryTableView extends ConsumerWidget {
       children: [
         const IvrCallHistorySearchBarChips(),
         const SizedBox(height: AppSize.klheight),
-        SizedBox(
-          width: AppSize.width(context),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columnSpacing: AppSize.width(context) / 10,
-              horizontalMargin: 12,
-              decoration: BoxDecoration(
-                color: AppColor.white,
-                borderRadius: BorderRadius.circular(AppSize.ksradius),
-                boxShadow: applyLightShadow(),
-              ),
-              columns: List<DataColumn>.generate(
-                tableHeading.length,
-                (index) {
-                  return DataColumn(
-                    label: Flexible(
-                      child: Text(
-                        tableHeading[index],
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: applyFiraSansFont(
-                          fontSize: 12,
-                          color: AppColor.grey,
+        ref.watch(getIvrCallHistoryDetailsProvider).when(
+              data: (data) {
+                if (data.isEmpty) {
+                  return const Center(
+                    child: Text("Call Log is Empty.. No Calls made yet!!"),
+                  );
+                }
+                return SizedBox(
+                  width: AppSize.width(context),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: AppSize.width(context) / 10,
+                      horizontalMargin: 12,
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(AppSize.ksradius),
+                        boxShadow: applyLightShadow(),
+                      ),
+                      columns: List<DataColumn>.generate(
+                        tableHeading.length,
+                        (index) {
+                          return DataColumn(
+                            label: Flexible(
+                              child: Text(
+                                tableHeading[index],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyFiraSansFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      rows: List<DataRow>.generate(
+                        data.length,
+                        (index) => DataRow(
+                          cells: generateIvrCallHistoryListTile(
+                            data[index],
+                            ref,
+                          ),
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-              rows: List<DataRow>.generate(
-                ivrCallHistoryDetails.length,
-                (index) => DataRow(
-                  cells: generateIvrCallHistoryListTile(
-                    ivrCallHistoryDetails[index],
-                    ref,
                   ),
-                ),
+                );
+              },
+              error: (e, s) {
+                return const Center(
+                  child: Text("No Data available"),
+                );
+              },
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
               ),
             ),
-          ),
-        ),
       ],
     );
   }
@@ -94,7 +108,7 @@ List<DataCell> generateIvrCallHistoryListTile(
     ),
     DataCell(
       Text(
-        data.name,
+        data.name.sentenceCase(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(
@@ -112,8 +126,9 @@ List<DataCell> generateIvrCallHistoryListTile(
             Icons.phone_callback_rounded,
             color: data.direction == "in" ? AppColor.green : AppColor.red,
           ),
+          const SizedBox(width: AppSize.kspadding),
           Text(
-            "${data.duration! / 60} min",
+            "${data.duration ?? 0 / 60} min",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -123,7 +138,7 @@ List<DataCell> generateIvrCallHistoryListTile(
     ),
     DataCell(
       Text(
-        DateFormat('dd/MM/yy').format(data.logDate.toLocal()),
+        data.logDate.formateDate,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -131,7 +146,7 @@ List<DataCell> generateIvrCallHistoryListTile(
     ),
     DataCell(
       Text(
-        DateFormat('hh:mm a').format(data.logDate.toLocal()),
+        data.logDate.formateTime,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -141,7 +156,7 @@ List<DataCell> generateIvrCallHistoryListTile(
       Container(
         decoration: BoxDecoration(
             color: data.status == "COMPLETED"
-                ? AppColor.lightGreen
+                ? AppColor.lightGreen.withOpacity(0.5)
                 : (data.status == "FAILED")
                     ? AppColor.lightRed
                     : AppColor.lightOrange,
@@ -179,17 +194,20 @@ List<DataCell> generateIvrCallHistoryListTile(
                 onPressed: data.status == "COMPLETED"
                     ? null
                     : () async {
-                        try {
-                          await ref
-                              .read(ivrCallHistorySearchHelperProvider)
-                              .makeIvrCall(data.mobile);
-                        } catch (e) {
-                          Fluttertoast.showToast(
-                              msg: "IVR call not available.. Try Again!!");
+                        if (data.mobile != null) {
+                          try {
+                            await ref
+                                .read(ivrCallHistorySearchHelperProvider)
+                                .makeIvrCall(data.mobile!);
+                          } catch (e) {
+                            Fluttertoast.showToast(
+                                msg: "IVR call not available.. Try Again!!");
+                          }
                         }
                       },
                 icon: Icon(
                   Icons.phone,
+                  size: 22,
                   color: data.status == "COMPLETED"
                       ? const Color(0xffBBBBBB)
                       : AppColor.blue,

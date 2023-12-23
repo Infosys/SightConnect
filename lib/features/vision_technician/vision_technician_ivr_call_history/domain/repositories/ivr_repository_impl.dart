@@ -16,9 +16,14 @@ class IvrRepositoryImpl extends IvrRepository {
   IvrRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<List<IvrCallHistoryModel>> getIvrCallHistory(
-      {required String mobile}) async {
-    return await remoteDataSource.getIvrCallHistory(mobile: mobile);
+  Future<List<IvrCallHistoryModel>> getIvrCallHistory({
+    required String mobile,
+    List<String>? callStatus,
+  }) async {
+    return await remoteDataSource.getIvrCallHistory(
+      mobile: mobile,
+      callStatus: callStatus,
+    );
   }
 
   @override

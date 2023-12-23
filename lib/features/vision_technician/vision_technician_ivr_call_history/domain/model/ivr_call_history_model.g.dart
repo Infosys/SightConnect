@@ -11,7 +11,7 @@ _$_IvrCallHistoryModel _$$_IvrCallHistoryModelFromJson(
     _$_IvrCallHistoryModel(
       patientId: json['callerIdentifier'] as String,
       name: json['callerName'] as String,
-      mobile: json['callerNumber'] as String,
+      mobile: json['callerNumber'] as String?,
       duration: json['duration'] as int?,
       logDate: DateTime.parse(json['logDate'] as String),
       status: json['status'] as String,

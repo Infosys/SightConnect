@@ -16,6 +16,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.iconTheme = const IconThemeData(color: AppColor.black),
     this.actionsIconTheme = const IconThemeData(color: AppColor.black),
     this.backgroundColor = Colors.transparent,
+    this.preferredSizeHeight = 60,
   });
 
   final VoidCallback? onBackPress;
@@ -29,6 +30,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final IconThemeData actionsIconTheme;
   final Color backgroundColor;
   final bool automaticallyImplyLeading;
+  final double preferredSizeHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -59,5 +61,5 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => Size.fromHeight(preferredSizeHeight);
 }

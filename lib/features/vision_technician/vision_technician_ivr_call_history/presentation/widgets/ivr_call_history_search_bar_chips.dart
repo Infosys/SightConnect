@@ -25,7 +25,7 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
                   InkWell(
                     onTap: () {
                       ref
-                          .watch(ivrCallHistorySearchHelperProvider.notifier)
+                          .read(ivrCallHistorySearchHelperProvider)
                           .setTableFilter(index);
                     },
                     child: Container(
