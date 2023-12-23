@@ -7,17 +7,12 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_questionnaire_response_locally_usecase.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_eye_scan_response_locally_usecase.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -45,25 +40,22 @@ class VtTriageProvider extends ChangeNotifier {
   final TriageLocalSource _triageLocalSource;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
 
- VtTriageProvider(
+  VtTriageProvider(
       this._saveTriageUseCase,
       this._patientId,
       this._triageUrgencyRepository,
       this._triageLocalSource,
       this._visionTechnicianTriageProvider);
 
- 
-
   Future<Either<Failure, TriagePostModel>> saveTriage() async {
+    List<PostTriageImagingSelectionModel> imageSelection =
+        _visionTechnicianTriageProvider.getTriageEyeScanResponse();
 
-     List<PostTriageImagingSelectionModel> imageSelection =
-      _visionTechnicianTriageProvider.getTriageEyeScanResponse();
+    List<PostTriageObservationsModel> observations =
+        _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
 
-  List<PostTriageObservationsModel> observations =
-      _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
-
-  List<PostTriageQuestionModel> questionResponse =
-      _visionTechnicianTriageProvider.getQuestionaireResponse();
+    List<PostTriageQuestionModel> questionResponse =
+        _visionTechnicianTriageProvider.getQuestionaireResponse();
 
     final quessionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);

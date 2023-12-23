@@ -10,8 +10,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class PreliminaryAssessmentFilterCheckBox extends ConsumerStatefulWidget {
   final String? heading;
   final int includeInputBox;
-  List<AnswerOptionModel>? questions;
-  PreliminaryAssessmentFilterCheckBox({
+  final List<AnswerOptionModel>? questions;
+  const PreliminaryAssessmentFilterCheckBox({
     super.key,
     this.heading,
     required this.includeInputBox,

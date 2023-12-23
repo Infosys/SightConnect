@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:flutter/services.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,10 +30,10 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
     } else {
       endPoint += "?name=$query";
     }
-    
+
     return _dio.get(endPoint).then((value) {
       List<VTPatientDto> list = [];
-      
+
       value.data.forEach((element) {
         list.add(VTPatientDto.fromJson(element));
       });

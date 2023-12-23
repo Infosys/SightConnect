@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/services/exceptions.dart';
 import '../../../../../main.dart';
 import '../model/care_plan_model.dart';
 
@@ -26,8 +25,6 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
     final int reportId = carePlan.reports![0].id!;
     logger.d(": ${carePlan.toJson()}");
 
-    
-
     try {
       String endPoint =
           "/services/triage/api/triage-report/$reportId/care-plan";
@@ -44,8 +41,8 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
       logger.d("Unknown error: ${e.toString()}");
     }
 
-    return CarePlanModel();
-    
+    return const CarePlanModel();
+
     // try {
     //   String endPoint = "/services/triage/api/triage-report/$reportId/care-plan";
 

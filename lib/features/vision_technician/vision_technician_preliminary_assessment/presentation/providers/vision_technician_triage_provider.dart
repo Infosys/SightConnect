@@ -6,7 +6,6 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
-import '../../../../common_features/triage/domain/models/triage_response_model.dart';
 
 var visionTechnicianTriageProvider =
     ChangeNotifierProvider((ref) => VisionTechnicianTriageProvider());

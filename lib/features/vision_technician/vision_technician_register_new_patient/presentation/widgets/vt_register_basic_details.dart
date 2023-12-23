@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_gender_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/upload_photo_bottom_sheet.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -50,14 +49,15 @@ class BasicDetails extends StatelessWidget {
                       Row(
                         children: [
                           Flexible(
-                              child: VTRegisterInput(
-                                  title: 'First Name',
-                                  keyboardType: TextInputType.name,
-                                  controller: ref
-                                          .read(registerNewPatientHelperProvider)
-                                          .basicDetailsTextEditingControllers[
-                                      "firstNameController"]!),),
-                          SizedBox(
+                            child: VTRegisterInput(
+                                title: 'First Name',
+                                keyboardType: TextInputType.name,
+                                controller: ref
+                                        .read(registerNewPatientHelperProvider)
+                                        .basicDetailsTextEditingControllers[
+                                    "firstNameController"]!),
+                          ),
+                          const SizedBox(
                             width: AppSize.klwidth,
                           ),
                           Flexible(
@@ -68,7 +68,7 @@ class BasicDetails extends StatelessWidget {
                                           .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "middleNameController"]!)),
-                          SizedBox(
+                          const SizedBox(
                             width: AppSize.klwidth,
                           ),
                           Flexible(
@@ -79,7 +79,7 @@ class BasicDetails extends StatelessWidget {
                                           .read(registerNewPatientHelperProvider)
                                           .basicDetailsTextEditingControllers[
                                       "lastNameController"]!)),
-                          SizedBox(
+                          const SizedBox(
                             width: AppSize.klwidth,
                           ),
                           Column(

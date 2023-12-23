@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_triage_rep
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_report_questionnaire_card.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_triage_report/presentation/widgets/optometritian_tumbling_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';

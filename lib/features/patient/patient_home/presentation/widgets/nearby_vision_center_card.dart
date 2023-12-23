@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class NearbyVisionCentersCard extends StatelessWidget {
   const NearbyVisionCentersCard({super.key, required this.data});

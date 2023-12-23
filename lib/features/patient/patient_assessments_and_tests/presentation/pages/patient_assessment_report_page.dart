@@ -8,7 +8,6 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,9 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.width(context) * 0.01,
               ),
-              decoration:  BoxDecoration(color:getRequestPriorityColor(assessmentDetailsReport.overallpriority!)),
+              decoration: BoxDecoration(
+                  color: getRequestPriorityColor(
+                      assessmentDetailsReport.overallpriority!)),
               child: Text(
                 getRequestPriorityText(assessmentDetailsReport.overallpriority),
                 style: applyRobotoFont(
@@ -97,7 +98,7 @@ String getRequestPriorityText(RequestPriority? priority) {
   }
 }
 
-Color getRequestPriorityColor(RequestPriority  priority) {
+Color getRequestPriorityColor(RequestPriority priority) {
   switch (priority) {
     case RequestPriority.URGENT:
       return AppColor.orange;

@@ -3,11 +3,11 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class ReportAssessmentQuestions extends StatelessWidget {
-   ReportAssessmentQuestions({
+  const ReportAssessmentQuestions({
     super.key,
-     this.questionResponseBreifModel,
+    this.questionResponseBreifModel,
   });
-   List<QuestionResponseBriefEntity> ?questionResponseBreifModel;
+  final List<QuestionResponseBriefEntity>? questionResponseBreifModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,8 @@ class ReportAssessmentQuestions extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-        (  questionResponseBreifModel==null || questionResponseBreifModel!.isEmpty)
+          (questionResponseBreifModel == null ||
+                  questionResponseBreifModel!.isEmpty)
               ? const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Center(

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +16,14 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
     required this.miniapp,
     this.isPermissionRequired = false,
     this.token = "",
+    this.parentPatientID = "",
     super.key,
     this.onBack,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
   final String token;
+  final String parentPatientID;
   final VoidCallback? onBack;
 
   @override
@@ -91,7 +92,8 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
               ),
               body: InAppWebView(
                 initialUrlRequest: URLRequest(
-                  url: Uri.parse("http://127.0.0.1:$port/"),
+                  url: Uri.parse(
+                      "http://127.0.0.1:$port?id=${widget.parentPatientID}"),
                 ),
                 onLoadError: (controller, url, code, message) async {
                   logger.e("Error: $message");

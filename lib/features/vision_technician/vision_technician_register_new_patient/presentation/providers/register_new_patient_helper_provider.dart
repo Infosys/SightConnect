@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -76,7 +75,7 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
   TextEditingController get landMarkController => _landMarkController;
   TextEditingController get pinCodeController => _pinCodeController;
 
-  void printData(){
+  void printData() {
     logger.d("firstNameController: ${firstNameController.text}");
   }
 
@@ -84,7 +83,7 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
   String genderValue = "";
 
   ///////////////////////////////////////////////////////////////////////////////////////
-  
+
   // VisionTechnicianHomeRepositoryImpl visionTechnicianHomeRepositoryImpl =
   //     VisionTechnicianHomeRepositoryImpl();
   VTPatientModel? patientDetails;
@@ -137,7 +136,7 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
   String patientId = "";
   String assessmentId = "";
 
-   List<String> listOfStates = [
+  List<String> listOfStates = [
     "",
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -223,8 +222,8 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
       email: email,
       age: age,
       dateOfBirth: dateOfBirth,
-      patientId: patientId!,
-      assessmentId: assessmentId!,
+      patientId: patientId,
+      assessmentId: assessmentId,
       assessmentDate: date,
       status: "status",
       category: "category",
@@ -268,10 +267,7 @@ class RegisterNewPatientHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  
-
   void submit() {
     // visionTechnicianHomeRepositoryImpl.addPatient(patientDetails!);
-
   }
 }
