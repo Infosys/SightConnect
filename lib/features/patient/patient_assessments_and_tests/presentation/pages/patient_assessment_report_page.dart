@@ -33,7 +33,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.width(context) * 0.01,
               ),
-              decoration: const BoxDecoration(color: AppColor.orange),
+              decoration:  BoxDecoration(color:getRequestPriorityColor(assessmentDetailsReport.overallpriority!)),
               child: Text(
                 getRequestPriorityText(assessmentDetailsReport.overallpriority),
                 style: applyRobotoFont(
@@ -97,14 +97,14 @@ String getRequestPriorityText(RequestPriority? priority) {
   }
 }
 
-Color getRequestPriorityColor(RequestPriority priority) {
+Color getRequestPriorityColor(RequestPriority  priority) {
   switch (priority) {
     case RequestPriority.URGENT:
-      return AppColor.red;
+      return AppColor.orange;
     case RequestPriority.ROUTINE:
       return AppColor.green;
     case RequestPriority.ASAP:
-      return AppColor.orange;
+      return AppColor.red;
     case RequestPriority.STAT:
       return AppColor.red;
     default:

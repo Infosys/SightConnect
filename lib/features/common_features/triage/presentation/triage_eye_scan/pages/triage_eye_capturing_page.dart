@@ -197,7 +197,7 @@ class _PatientTriageEyeCapturingPageState
                   right: 0,
                   bottom: 0,
                   child: EyeScanCameraControllers(
-                    onCapture: () => _takePicture(context),
+                    onCapture: () =>  _takePicture(context),
                     onFlash: () => _toggleFlash(),
                     onSwitchCamera: () => _toggleCamera(),
                   ),
@@ -253,10 +253,10 @@ class _PatientTriageEyeCapturingPageState
       var model = ref.read(triageEyeScanProvider);
 
       if (model.currentEye == TriageEyeType.RIGHT) {
-        model.setRightEyeImage(image);
+       await model.setRightEyeImage(image);
         model.setCurrentEye(TriageEyeType.LEFT);
       } else if (model.currentEye == TriageEyeType.LEFT) {
-        model.setLeftEyeImage(image);
+      await  model.setLeftEyeImage(image);
         model.setCurrentEye(TriageEyeType.UNKNOWN);
 
         if (mounted) {

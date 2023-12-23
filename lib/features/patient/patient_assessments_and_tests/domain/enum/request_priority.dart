@@ -3,4 +3,5 @@ enum RequestPriority {
     URGENT,
     ASAP,
     STAT,
+    PENDING
 }

@@ -46,6 +46,24 @@ _$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               PostTriageQuestionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      subject: json['subject'] as int?,
+      observationSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['observationSeverity']),
+      questionResponseSeverity: $enumDecodeNullable(
+          _$SeverityEnumMap, json['questionResponseSeverity']),
+      mediaSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['mediaSeverity']),
+      cumulativeSeverity:
+          $enumDecodeNullable(_$SeverityEnumMap, json['cumulativeSeverity']),
+      diagnosticReportDescription:
+          json['diagnosticReportDescription'] as String?,
+      questionResultDescription: json['questionResultDescription'] as String?,
+      observationResultDescription:
+          json['observationResultDescription'] as String?,
+      mediaResultDescription: json['mediaResultDescription'] as String?,
+      encounter: json['encounter'] == null
+          ? null
+          : EncounterModel.fromJson(json['encounter'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_TriagePostModelToJson(_$_TriagePostModel instance) =>
@@ -72,6 +90,17 @@ Map<String, dynamic> _$$_TriagePostModelToJson(_$_TriagePostModel instance) =>
       'observations': instance.observations?.map((e) => e.toJson()).toList(),
       'questionResponse':
           instance.questionResponse?.map((e) => e.toJson()).toList(),
+      'subject': instance.subject,
+      'observationSeverity': _$SeverityEnumMap[instance.observationSeverity],
+      'questionResponseSeverity':
+          _$SeverityEnumMap[instance.questionResponseSeverity],
+      'mediaSeverity': _$SeverityEnumMap[instance.mediaSeverity],
+      'cumulativeSeverity': _$SeverityEnumMap[instance.cumulativeSeverity],
+      'diagnosticReportDescription': instance.diagnosticReportDescription,
+      'questionResultDescription': instance.questionResultDescription,
+      'observationResultDescription': instance.observationResultDescription,
+      'mediaResultDescription': instance.mediaResultDescription,
+      'encounter': instance.encounter?.toJson(),
     };
 
 const _$ServiceTypeEnumMap = {
@@ -86,6 +115,22 @@ const _$SourceEnumMap = {
   Source.IN_PERSION: 'IN_PERSION',
   Source.OTHERS: 'OTHERS',
 };
+
+const _$SeverityEnumMap = {
+  Severity.ABNORMAL: 'ABNORMAL',
+  Severity.HIGH: 'HIGH',
+  Severity.LOW: 'LOW',
+};
+
+_$_EncounterModel _$$_EncounterModelFromJson(Map<String, dynamic> json) =>
+    _$_EncounterModel(
+      id: json['id'] as int?,
+    );
+
+Map<String, dynamic> _$$_EncounterModelToJson(_$_EncounterModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
 
 _$_PostTriageQuestionModel _$$_PostTriageQuestionModelFromJson(
         Map<String, dynamic> json) =>

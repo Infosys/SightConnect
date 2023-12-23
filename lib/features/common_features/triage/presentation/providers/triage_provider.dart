@@ -20,7 +20,6 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/member_selection.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +36,7 @@ var getTriageProvider = FutureProvider<DiagnosticReportTemplateFHIRModel>(
   },
 );
 
-var triageProvider = ChangeNotifierProvider.autoDispose(
+var triageProvider = ChangeNotifierProvider(
   (ref) {
     return TriageProvider(
       ref.watch(saveTriageUseCase),
@@ -47,12 +46,14 @@ var triageProvider = ChangeNotifierProvider.autoDispose(
       ref.watch(triageMemberProvider).testPatientId!,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
+      ref.watch(getTriageProvider).asData?.value,
     );
   },
 );
 
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
+ DiagnosticReportTemplateFHIRModel? _assessment;
 
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
@@ -71,9 +72,15 @@ class TriageProvider extends ChangeNotifier {
       this._getVisionAcuityTumblingResponseLocallyUseCase,
       this._patientId,
       this._triageUrgencyRepository,
-      this._triageLocalSource);
+      this._triageLocalSource, 
+      this._assessment
+      );
+
+      DiagnosticReportTemplateFHIRModel? get assessment => _assessment;
+
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
+    logger.f("Hum yaha pahunch gye ");
     List<PostTriageImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())
@@ -116,10 +123,11 @@ class TriageProvider extends ChangeNotifier {
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
-      score: [
-        {"QUESTIONNAIRE": 0},
-        {"OBSERVATION": 0},
-        {"IMAGE": 0}
+      score: [ //from questionnaire MS
+        {"QUESTIONNAIRE": quessionnaireUrgency},
+        {"OBSERVATION": visualAcuityUrgency},
+        {"IMAGE": eyeScanUrgency}
+       
       ],
       userStartDate: DateTime.now(),
       issued: DateTime.now(),
@@ -134,13 +142,19 @@ class TriageProvider extends ChangeNotifier {
 
     logger.f({"triage model to be saved": triagePostModel});
 
-    Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
+    try{
+      Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
       SaveTriageParam(triagePostModel: triagePostModel),
     );
     logger.f({"triage model saved": response});
     _triageLocalSource.resetTriage();
 
     return response;
+
+    }
+    catch(e){
+     rethrow ;
+    }
   }
 
   List<PostIncompleteTestModel> _getInclompleteSection(int currentStep) {

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -29,10 +30,29 @@ class TriagePostModel with _$TriagePostModel {
     List<PostTriageImagingSelectionModel>? imagingSelection,
     List<PostTriageObservationsModel>? observations,
     List<PostTriageQuestionModel>? questionResponse,
+    int? subject,
+    Severity? observationSeverity,
+    Severity? questionResponseSeverity,
+    Severity? mediaSeverity,
+    Severity? cumulativeSeverity,
+    String? diagnosticReportDescription,
+    String? questionResultDescription,
+    String? observationResultDescription,
+    String? mediaResultDescription,
+    EncounterModel? encounter,
   }) = _TriagePostModel;
 
   factory TriagePostModel.fromJson(Map<String, dynamic> json) =>
       _$TriagePostModelFromJson(json);
+}
+
+@freezed
+class EncounterModel with _$EncounterModel {
+  const factory EncounterModel({
+    int? id,
+  }) = _EncounterModel;
+  factory EncounterModel.fromJson(Map<String, dynamic> json) =>
+      _$EncounterModelFromJson(json);
 }
 
 @freezed
