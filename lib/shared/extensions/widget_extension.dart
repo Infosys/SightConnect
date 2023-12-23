@@ -14,6 +14,8 @@ extension DateExtension on DateTime {
 
   String get formateTime => DateFormat('hh:mm a').format(this);
 
+  String get formatDateTimeMonthName => DateFormat("dd MMM yy").format(this);
+  
   String get formateDateWithTime =>
       DateFormat('dd/MM/yyyy hh:mm a').format(this);
 }

@@ -141,11 +141,14 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      VisionTechnicianAssessmentTimeline(
-                                    patientDetails: list[index],
-                                  ),
-                                ),
+                                    builder: (context) =>
+                                        VisionTechnicianPreliminaryAssessmentPage(
+                                          patientDetails: list[index],
+                                        )
+                                    //     VisionTechnicianAssessmentTimeline(
+                                    //   patientDetails: list[index],
+                                    // ),
+                                    ),
                               );
                             },
                             cells: generateListTileSearchResults(
@@ -219,7 +222,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               style: applyRobotoFont(fontSize: 14),
             ),
             Text(
-              data.encounterStartDate?.formateDateWithTime ?? "",
+              data.encounterStartDate?.formatDateTimeMonthName ?? "",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(

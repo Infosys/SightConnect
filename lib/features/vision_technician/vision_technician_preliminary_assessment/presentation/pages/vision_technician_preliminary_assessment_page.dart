@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
@@ -39,11 +40,33 @@ class VisionTechnicianTriageResult extends ChangeNotifier {
 }
 
 class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
-  const VisionTechnicianPreliminaryAssessmentPage({super.key});
+  const VisionTechnicianPreliminaryAssessmentPage({
+    super.key,
+    this.patientDetails,
+  });
+
+  final VTPatientDto? patientDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var selectedOption = useState("Yes");
+
+    if (patientDetails == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Text(
+            "No patient found",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.grey,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
