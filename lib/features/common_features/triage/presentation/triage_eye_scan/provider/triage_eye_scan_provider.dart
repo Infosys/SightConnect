@@ -36,21 +36,21 @@ class TriageEyeScanProvider with ChangeNotifier {
   XFile get rightEyeImage => _rightEyeImage!;
   XFile get bothEyeImage => _bothEyeImage!;
 
-  void setLeftEyeImage(XFile image) {
+  Future<void> setLeftEyeImage (XFile image) async {
     _leftEyeImage = image;
-    uploadImage(image, TriageEyeType.LEFT);
+  await  uploadImage(image, TriageEyeType.LEFT);
     notifyListeners();
   }
 
-  void setRightEyeImage(XFile image) {
+Future<void> setRightEyeImage(XFile image) async {
     _rightEyeImage = image;
-    uploadImage(image, TriageEyeType.RIGHT);
+   await uploadImage(image, TriageEyeType.RIGHT);
     notifyListeners();
   }
 
-  void setBothEyeImage(XFile image) {
+Future<void> setBothEyeImage(XFile image) async {
     _bothEyeImage = image;
-    uploadImage(image, TriageEyeType.BOTH);
+   await  uploadImage(image, TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -132,7 +132,7 @@ class TriageEyeScanProvider with ChangeNotifier {
   String rightImageUrl = "";
   String bothImageUrl = "";
 
-  void uploadImage(XFile image, TriageEyeType currentEye) async {
+  Future<void> uploadImage(XFile image, TriageEyeType currentEye) async {
     logger.f({
       "uploadImage": "called",
       "image": image.name,
@@ -149,6 +149,7 @@ class TriageEyeScanProvider with ChangeNotifier {
           rightImageUrl = response;
           logger.d({"eyeTypeRight": rightImageUrl});
         } else {
+          logger.d({"here in else case"});
           bothImageUrl = response;
         }
 

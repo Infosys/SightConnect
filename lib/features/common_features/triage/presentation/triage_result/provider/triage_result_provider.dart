@@ -51,6 +51,8 @@ class TriageResultProvider extends ChangeNotifier {
     // if (_model.score != null && _model.score!.isNotEmpty) {
     //   score = _model.score![TriageStep.QUESTIONNAIRE] ?? 0.0;
     // }
+    
+  
 
     return _setPropertiesByUrgency(score.toDouble());
   }

@@ -56,7 +56,7 @@ class ResultPageTopCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "AID: ${id ?? ""}",
+                    "AID:  ""}",
                     softWrap: true,
                     style: applyRobotoFont(
                         fontSize: 11, fontWeight: FontWeight.w600),
@@ -65,80 +65,80 @@ class ResultPageTopCard extends StatelessWidget {
               ),
             ),
           ),
-          Visibility(
-            visible: triageResult != null,
-            child: Container(
-              margin: const EdgeInsets.only(top: 50),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: triageResult!['color'].withOpacity(0.2),
-                    offset: const Offset(0, 2),
-                    blurRadius: 20,
-                    spreadRadius: 20,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(10),
-                color: AppColor.white,
-                border: Border.symmetric(
-                  horizontal: BorderSide(
-                    color: triageResult!['color'],
-                    width: 2,
-                  ),
-                  vertical: BorderSide(
-                    color: triageResult!['color'],
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSize.width(context) * 0.01,
-                          ),
-                          decoration: BoxDecoration(
-                            color: triageResult!['color'],
-                          ),
-                          child: Text(
-                            triageResult!['labelText'] ?? "",
-                            style: applyRobotoFont(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.white),
-                          )),
-                      const Spacer(),
-                      Text(
-                        todayDate.formateDate,
-                        style: applyRobotoFont(
-                            fontSize: 12, fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    triageResult!['issueInfo'],
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
+          // Visibility(
+          //   visible: triageResult != null,
+          //   child: Container(
+          //     margin: const EdgeInsets.only(top: 50),
+          //     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+          //     decoration: BoxDecoration(
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: triageResult!['color'].withOpacity(0.2),
+          //           offset: const Offset(0, 2),
+          //           blurRadius: 20,
+          //           spreadRadius: 20,
+          //         ),
+          //       ],
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: AppColor.white,
+          //       border: Border.symmetric(
+          //         horizontal: BorderSide(
+          //           color: triageResult!['color'],
+          //           width: 2,
+          //         ),
+          //         vertical: BorderSide(
+          //           color: triageResult!['color'],
+          //           width: 1,
+          //         ),
+          //       ),
+          //     ),
+          //     child: Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Row(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Container(
+          //                 padding: EdgeInsets.symmetric(
+          //                   horizontal: AppSize.width(context) * 0.01,
+          //                 ),
+          //                 decoration: BoxDecoration(
+          //                   color: triageResult!['color'],
+          //                 ),
+          //                 child: Text(
+          //                   triageResult!['labelText'] ?? "",
+          //                   style: applyRobotoFont(
+          //                       fontSize: 11,
+          //                       fontWeight: FontWeight.w600,
+          //                       color: AppColor.white),
+          //                 )),
+          //             const Spacer(),
+          //             Text(
+          //               todayDate.formateDate,
+          //               style: applyRobotoFont(
+          //                   fontSize: 12, fontWeight: FontWeight.w400),
+          //             ),
+          //           ],
+          //         ),
+          //         const SizedBox(
+          //           height: 15,
+          //         ),
+          //         Text(
+          //           triageResult!['issueInfo'],
+          //           textAlign: TextAlign.left,
+          //           softWrap: true,
+          //           style: applyRobotoFont(
+          //             fontSize: 14,
+          //             fontWeight: FontWeight.w400,
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+           Positioned(
             top: -15,
             child: Container(
               decoration: BoxDecoration(
