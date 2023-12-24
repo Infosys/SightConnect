@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
@@ -14,7 +13,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -34,9 +32,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> profileVerification() async {
-    final isExistInDB = await _checkUserAlreadyExist();
-    log("profileVerification: $isExistInDB");
-    if (context.mounted && isExistInDB) {
+    final isUserExist = await _checkUserAlreadyExist();
+    log("profileVerification: $isUserExist");
+    if (context.mounted && isUserExist) {
       try {
         navigateBasedOnRole(context);
       } catch (e) {
@@ -49,17 +47,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<bool> _checkUserAlreadyExist() async {
-    try {
-      final model = await ref.read(initializationProvider).getUserProfile();
-
-      if (model.profile?.patient?.patientId == null) {
-        return false;
-      } else {
-        return true;
-      }
-    } catch (e) {
-      return false;
-    }
+    return await ref.read(initializationProvider).checkUserAlreadyExist();
   }
 
   Future<void> _registerUser(BuildContext context) async {
@@ -95,6 +83,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
+    log(PersistentAuthStateService.authState.accessToken.toString());
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: Pulsar(
@@ -150,7 +139,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       case "ROLE_PATIENT":
         naviagator.pushAndRemoveUntil(
             MaterialPageRoute(
-                builder: (context) => const PatientDashboardPage()),
+              builder: (context) => const PatientDashboardPage(),
+            ),
             (route) => false);
         break;
 

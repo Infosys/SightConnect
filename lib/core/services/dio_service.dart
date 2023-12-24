@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -12,11 +12,9 @@ var dioProvider = Provider(
   (ref) {
     return Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
-    );
-
-    // ..interceptors.addAll([
-    //     DioTokenInterceptor(ref),
-    //   ]);
+    )..interceptors.addAll([
+        DioTokenInterceptor(ref),
+      ]);
   },
 );
 
@@ -32,38 +30,55 @@ class DioTokenInterceptor extends Interceptor {
     final isRefreshTokenExpired =
         PersistentAuthStateService.authState.hasRefreshTokenExpired();
 
+    logger.d({
+      "isAccessTokenExpired": isAccessTokenExpired,
+      "isRefreshTokenExpired": isRefreshTokenExpired,
+    });
+
     if (isAccessTokenExpired) {
       if (isRefreshTokenExpired) {
         await _ref.read(initializationProvider).logout();
         AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-          LandingPage.routeName,
+          LoginPage.routeName,
           (route) => false,
         );
         logger.e("Refresh token expired");
       } else {
-        final credentials = PersistentAuthStateService.authState.credential;
-
         try {
-          final tokens = await credentials!.getTokenResponse();
-          credentials.updateToken(tokens.toJson());
+          final refreshToken =
+              PersistentAuthStateService.authState.refreshToken;
+          final tokens = await _ref
+              .read(initializationProvider)
+              .refreshTokens(refreshToken: refreshToken!);
+
+          logger.d({
+            "newAccessToken": tokens!.accessToken,
+            "newRefreshToken": tokens.refreshToken,
+          });
+
           await PersistentAuthStateService.authState
-              .updateAccessToken(accessToken: tokens.accessToken!);
+              .updateAccessToken(accessToken: tokens.accessToken);
           await PersistentAuthStateService.authState
-              .updateRefreshToken(refreshToken: tokens.refreshToken!);
+              .updateRefreshToken(refreshToken: tokens.refreshToken);
         } catch (e) {
+          logger.e("Error while refreshing tokens $e");
           await _ref.read(initializationProvider).logout();
           AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-            LandingPage.routeName,
+            LoginPage.routeName,
             (route) => false,
           );
         }
         logger.d("updated access token and refresh token");
       }
     }
-    // options.headers.addAll({
-    //   'Authorization':
-    //       'Bearer ${PersistentAuthStateService.authState.accessToken}'
-    // });
+    if (options.uri.path.contains("/services/assessments")) {
+      return super.onRequest(options, handler);
+    }
+
+    options.headers.addAll({
+      'Authorization':
+          'Bearer ${PersistentAuthStateService.authState.accessToken}'
+    });
     return super.onRequest(options, handler);
   }
 
@@ -79,10 +94,18 @@ class DioTokenInterceptor extends Interceptor {
         timeInSecForIosWeb: 1,
       );
       AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-        LandingPage.routeName,
+        LoginPage.routeName,
         (route) => false,
       );
     }
     return super.onError(err, handler);
   }
 }
+
+var keycloakDioProvider = Provider(
+  (ref) {
+    return Dio(
+      BaseOptions(baseUrl: AppEnv.baseUrl),
+    );
+  },
+);

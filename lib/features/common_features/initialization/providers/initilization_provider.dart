@@ -1,136 +1,91 @@
-import 'dart:developer';
-import 'dart:io';
-import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/core/services/network_info.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/data/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:openid_client/openid_client_io.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:openid_client/openid_client_io.dart' as io;
 
-final initializationProvider = ChangeNotifierProvider((ref) {
-  return InitializationPageProvider(ref);
-});
+import '../../../patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 
-class InitializationPageProvider extends ChangeNotifier {
-  final String keycloakUri =
-      'https://eyecare4all-dev.infosysapps.com/auth/realms/care';
-  // final String keycloakUri =
-  //     'https://campaigns.infosysapps.com/auth2/realms/care';
-  static const List<String> scopes = ['profile'];
-  static const String clientId = 'microservices';
-  static const int PORT = 4000;
+var initializationProvider =
+    ChangeNotifierProvider((ref) => InitializationProvider(ref));
+
+class InitializationProvider extends ChangeNotifier {
   final Ref _ref;
-  Credential? credential;
+  InitializationProvider(this._ref);
 
-  InitializationPageProvider(this._ref);
-
-  Future<void> init() async {
-    try {
-      Client client = await _getClient();
-      credential = await _authenticate(client, scopes: scopes);
-      await _saveCredential(credential!);
-    } catch (e) {
-      logger.e(e);
-      rethrow;
-    }
-  }
-
-  //This method is storing credential, accessToken, refreshToken, role, username in local.
-  Future<void> _saveCredential(Credential credential) async {
-    logger.d("Saving credential: $credential");
-    await PersistentAuthStateService.authState.saveCredential(credential);
-    notifyListeners();
-  }
-
-  Future<PatientResponseModel> getUserProfile() async {
+  Future<bool> checkUserAlreadyExist() async {
     final phone = PersistentAuthStateService.authState.username;
     if (phone == null) {
-      throw ServerFailure(errorMessage: "No phone number found");
+      return false;
     }
     final response = await _ref
         .read(patientAuthenticationRepositoryProvider)
         .getPatientProfileByPhone(phone);
 
     return response.fold((failure) {
-      throw failure;
+      return false;
     }, (result) async {
-      await PersistentAuthStateService.authState
-          .saveUserProfileId(result.profile!.patient!.patientId.toString());
-      return result;
+      await PersistentAuthStateService.authState.saveUserProfileId(
+        result.profile!.patient!.patientId.toString(),
+      );
+      return true;
     });
   }
 
+  Future<PatientResponseModel> getUserProfile() async {
+    final id = PersistentAuthStateService.authState.userId;
+    if (id == null) {
+      throw Exception("No user id found");
+    }
+    final response = await _ref
+        .read(patientAuthenticationRepositoryProvider)
+        .getPatientProfile(int.parse(id));
+
+    return response.fold((failure) {
+      throw Exception("No user found");
+    }, (result) => result);
+  }
+
   Future<void> logout() async {
-    final cred = PersistentAuthStateService.authState.credential;
-    if (cred == null) throw ServerFailure(errorMessage: "No credentials found");
-    if (cred.generateLogoutUrl() == null) {
-      throw ServerFailure(errorMessage: "No logout url found");
-    }
-    final isConnected = await _ref.read(connectivityProvider).isConnected();
-    if (isConnected) {
-      try {
-        await PersistentAuthStateService.authState.logout();
-        final logoutUrl = cred.generateLogoutUrl();
-        await launchUrl(logoutUrl!);
-      } catch (e) {
-        rethrow;
-      }
-    } else {
-      throw ServerFailure(errorMessage: "No internet connection found");
-    }
+    await _ref.read(keycloakRepositoryProvider).signOut();
   }
 
-  Future<Client> _getClient() async {
-    try {
-      Uri uri = Uri.parse(keycloakUri);
-
-      Issuer issuer = await Issuer.discover(uri);
-      return Client(issuer, clientId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<Credential> _authenticate(
-    Client client, {
-    List<String> scopes = const [],
+  Future<KeycloakResponse?> refreshTokens({
+    required String refreshToken,
   }) async {
     try {
-      // Creates an authenticator
-      Authenticator authenticator = io.Authenticator(
-        client,
-        scopes: scopes,
-        port: PORT,
-        urlLancher: urlLauncher,
-      );
-
-      // Starts the authentication
-      Credential crendentials = await authenticator.authorize();
-
-      // Close the webview when finished
-      if (Platform.isAndroid || Platform.isIOS) {
-        closeInAppWebView();
-      }
-
-      return crendentials;
+      final response = await _ref
+          .read(keycloakRepositoryProvider)
+          .refreshTokens(refreshToken: refreshToken);
+      return response;
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 
-  urlLauncher(String url) async {
-    var uri = Uri.parse(url);
-    logger.f("URL$uri");
-    if (!await launchUrl(
-      uri,
-    )) {
-      throw 'Could not launch $url';
+  Future<void> signIn({
+    required String mobile,
+    required String otp,
+  }) async {
+    try {
+      await _ref
+          .read(keycloakRepositoryProvider)
+          .signIn(mobile: mobile, otp: otp);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<int> sendOtp({
+    required String mobile,
+  }) async {
+    try {
+      return await _ref
+          .read(keycloakRepositoryProvider)
+          .sendOtp(mobile: mobile);
+    } catch (e) {
+      return Future.error(e);
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
@@ -171,7 +171,7 @@ class AppDrawer extends StatelessWidget {
                                   .logout()
                                   .then((value) async {
                                 navigator.pushNamedAndRemoveUntil(
-                                  LandingPage.routeName,
+                                  LoginPage.routeName,
                                   (route) => false,
                                 );
                                 ref.invalidate(initializationProvider);
