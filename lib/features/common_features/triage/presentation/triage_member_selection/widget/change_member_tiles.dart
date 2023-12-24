@@ -23,6 +23,18 @@ class ChangeMemberTiles extends HookConsumerWidget {
     var memberProvider = ref.watch(triageMemberProvider);
     final selectedValue = useState<int>(-1);
 
+    if (model == null) {
+      return const Center(
+          child: Text(
+        "No Member Found",
+        style: TextStyle(
+          color: AppColor.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+      ));
+    }
+
     return _content(
       connectionsList,
       currentProfile!,

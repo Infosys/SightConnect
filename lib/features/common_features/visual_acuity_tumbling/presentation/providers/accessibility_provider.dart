@@ -9,8 +9,22 @@ var accessibilityProvider = ChangeNotifierProvider(
 
 class AccessibilityProvider extends ChangeNotifier {
   double _brightness = 80.0;
+  double _defaultBrightness = 0.0;
   double _threshold = 60.0;
   int _serverThreshold = 60;
+  AccessibilityProvider() {
+    _currentBrightness();
+  }
+
+  double get brightness => _brightness;
+  double get defaultBrightness => _defaultBrightness;
+  double get threshold => _threshold;
+  int get serverThreshold => _serverThreshold;
+
+  void _currentBrightness() async {
+    _defaultBrightness = await ScreenBrightness().current;
+    notifyListeners();
+  }
 
   void setThreshold(double threshold) {
     _threshold = threshold;
@@ -53,8 +67,4 @@ class AccessibilityProvider extends ChangeNotifier {
     resetBrightness(0.8);
     notifyListeners();
   }
-
-  double get brightness => _brightness;
-  double get threshold => _threshold;
-  int get serverThreshold => _serverThreshold;
 }

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
           routes: AppRouter.routes,
-          initialRoute: LandingPage.routeName,
+          initialRoute: LoginPage.routeName,
           navigatorKey: AppRouter.navigatorKey,
         ),
       ),

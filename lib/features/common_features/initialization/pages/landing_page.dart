@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,13 +24,18 @@ class _LandingPageState extends ConsumerState<LandingPage> {
       Duration.zero,
       () async {
         final navigator = Navigator.of(context);
-        final status = await _loginVerification();
-        if (status) {
-          navigator.pushNamedAndRemoveUntil(
-            InitializationPage.routeName,
-            (route) => false,
-          );
-        }
+        // final status = await _loginVerification();
+        // if (status) {
+        //   navigator.pushNamedAndRemoveUntil(
+        //     InitializationPage.routeName,
+        //     (route) => false,
+        //   );
+        // }
+        navigator.push(
+          MaterialPageRoute(
+            builder: (context) => const PatientDashboardPage(),
+          ),
+        );
       },
     );
   }

@@ -183,6 +183,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   if (question.type == QuestionnaireType.Choice) {
                     return OptionCard(
                       question: question,
+                      index: index,
+                      total: model.questionnaireSections.length,
                       onNoButtonPressed: () async {
                         model.addQuestionnaireAnswer(
                           question.id!,
