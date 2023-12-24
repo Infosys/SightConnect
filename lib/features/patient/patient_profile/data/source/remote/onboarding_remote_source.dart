@@ -44,14 +44,21 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   Future<PatientResponseModel> getPatientProfile(int patientId,
       [IdentifierType? identifierType, String? value]) async {
     const endpoint = '/services/orchestration/api/patients/extended';
+
+    Map<String, dynamic>? queryParameters = {
+      "patientId": "$patientId",
+    };
+    if (identifierType != null) {
+      queryParameters["identifierType"] = identifierType;
+    }
+    if (value != null) {
+      queryParameters["value"] = value;
+    }
+
     try {
       final response = await _dio.get(
         endpoint,
-        queryParameters: {
-          "patientId": "$patientId",
-          "identifierType": "$identifierType",
-          "value": value,
-        },
+        queryParameters: queryParameters,
       );
       return PatientResponseModel.fromJson(response.data);
     } catch (e) {

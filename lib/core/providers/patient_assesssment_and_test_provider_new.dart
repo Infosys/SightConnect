@@ -105,6 +105,10 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       (triageAssessment) {
         _isLoading = false;
         notifyListeners();
+
+        triageAssessment.sort((a, b) {
+          return b.issued!.compareTo(a.issued!);
+        });
         _triageReportList = _assessmentReportMapper(triageAssessment);
       },
     );

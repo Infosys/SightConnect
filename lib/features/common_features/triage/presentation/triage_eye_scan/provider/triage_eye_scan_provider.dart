@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
@@ -17,17 +18,20 @@ class TriageEyeScanProvider with ChangeNotifier {
   final FileMsService _fileMsService;
   final NetworkInfo _networkInfo;
   final DiagnosticReportTemplateFHIRModel? _assessment;
+  final TriageLocalSource _triageLocalSource;
 
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
   XFile? _bothEyeImage;
 
   TriageEyeScanProvider(
-      this._saveTriageEyeScanLocallyUseCase,
-      this._fileMsService,
-      this._currentEye,
-      this._networkInfo,
-      this._assessment);
+    this._saveTriageEyeScanLocallyUseCase,
+    this._fileMsService,
+    this._currentEye,
+    this._networkInfo,
+    this._assessment,
+    this._triageLocalSource,
+  );
 
   TriageEyeType get currentEye => _currentEye;
   XFile get leftEyeImage => _leftEyeImage!;
@@ -66,11 +70,13 @@ class TriageEyeScanProvider with ChangeNotifier {
             getTriageEyeScanResponse(leftImageUrl, rightImageUrl),
       ),
     );
+
     response.fold(
-      (failure) {
+      (failure) async {
         logger.d({
           "Failure while saving in local db ": failure,
         });
+        await _triageLocalSource.resetTriage();
       },
       (_) {
         logger.d({
@@ -201,10 +207,10 @@ class TriageEyeScanProvider with ChangeNotifier {
 
 var triageEyeScanProvider = ChangeNotifierProvider(
   (ref) => TriageEyeScanProvider(
-    ref.watch(saveTriageEyeScanLocallyUseCase),
-    ref.watch(fileMsServiceProvider),
-    TriageEyeType.RIGHT,
-    ref.watch(connectivityProvider),
-    ref.watch(getTriageProvider).asData?.value,
-  ),
+      ref.watch(saveTriageEyeScanLocallyUseCase),
+      ref.watch(fileMsServiceProvider),
+      TriageEyeType.RIGHT,
+      ref.watch(connectivityProvider),
+      ref.watch(getTriageProvider).asData?.value,
+      ref.watch(triageLocalSourceProvider)),
 );

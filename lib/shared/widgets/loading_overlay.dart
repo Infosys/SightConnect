@@ -22,20 +22,22 @@ class LoadingOverlay extends StatelessWidget {
             visible: isLoading,
             child: Align(
               alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    progressMessage,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ],
+              child: Container(
+                color: Colors.black.withOpacity(0.6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      progressMessage,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

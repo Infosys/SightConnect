@@ -13,7 +13,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/member_details_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -46,14 +45,12 @@ var triageProvider = ChangeNotifierProvider(
       ref.watch(triageMemberProvider).testPatientId!,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
-      ref.watch(getTriageProvider).asData?.value,
     );
   },
 );
 
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
- DiagnosticReportTemplateFHIRModel? _assessment;
 
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
@@ -66,21 +63,16 @@ class TriageProvider extends ChangeNotifier {
   final TriageLocalSource _triageLocalSource;
 
   TriageProvider(
-      this._saveTriageUseCase,
-      this._getTriageEyeScanResponseLocallyUseCase,
-      this._getQuestionnaireResponseLocallyUseCase,
-      this._getVisionAcuityTumblingResponseLocallyUseCase,
-      this._patientId,
-      this._triageUrgencyRepository,
-      this._triageLocalSource, 
-      this._assessment
-      );
-
-      DiagnosticReportTemplateFHIRModel? get assessment => _assessment;
-
+    this._saveTriageUseCase,
+    this._getTriageEyeScanResponseLocallyUseCase,
+    this._getQuestionnaireResponseLocallyUseCase,
+    this._getVisionAcuityTumblingResponseLocallyUseCase,
+    this._patientId,
+    this._triageUrgencyRepository,
+    this._triageLocalSource,
+  );
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
-    logger.f("Hum yaha pahunch gye ");
     List<PostTriageImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())
@@ -123,11 +115,11 @@ class TriageProvider extends ChangeNotifier {
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
-      score: [ //from questionnaire MS
+      score: [
+        //from questionnaire MS
         {"QUESTIONNAIRE": quessionnaireUrgency},
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
-       
       ],
       userStartDate: DateTime.now(),
       issued: DateTime.now(),
@@ -142,18 +134,16 @@ class TriageProvider extends ChangeNotifier {
 
     logger.f({"triage model to be saved": triagePostModel});
 
-    try{
+    try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
-      SaveTriageParam(triagePostModel: triagePostModel),
-    );
-    logger.f({"triage model saved": response});
-    _triageLocalSource.resetTriage();
+        SaveTriageParam(triagePostModel: triagePostModel),
+      );
+      logger.f({"triage model saved": response});
+      _triageLocalSource.resetTriage();
 
-    return response;
-
-    }
-    catch(e){
-     rethrow ;
+      return response;
+    } catch (e) {
+      rethrow;
     }
   }
 

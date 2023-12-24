@@ -253,8 +253,6 @@ class _PatientTriageEyeCapturingPageState
                               final response =
                                   await ref.read(triageProvider).saveTriage(3);
 
-                              ///NOT WORKING FROM HERE
-
                               response.fold(
                                 (failure) async {
                                   logger.d({
@@ -262,106 +260,14 @@ class _PatientTriageEyeCapturingPageState
                                         failure,
                                   });
 
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text(
-                                            "Triage Saved Locally",
-                                            style: TextStyle(
-                                              color: AppColor.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          content: Text(
-                                            failure.errorMessage,
-                                            style: applyRobotoFont(
-                                              color: AppColor.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TriageResultPage(
-                                                      triageResult: failure.data
-                                                          as TriagePostModel,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                "Ok",
-                                                style: applyRobotoFont(
-                                                  color: AppColor.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      });
+                                  _showServerExceptionDialog(context, failure);
                                 },
                                 (result) async {
                                   logger.d({
                                     "saveTriageEyeScanResponseToDB": "Success",
                                   });
 
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text(
-                                            "Test Completed",
-                                            style: TextStyle(
-                                              color: AppColor.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          content: Text(
-                                            "You have completed the test. Please click on the button below to view the result.",
-                                            style: applyRobotoFont(
-                                              color: AppColor.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () async {
-                                                ref
-                                                    .read(triageStepperProvider)
-                                                    .goToNextStep();
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TriageResultPage(
-                                                      triageResult: result,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                "View Result",
-                                                style: applyRobotoFont(
-                                                  color: AppColor.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      });
+                                  _showTestCompletionDialog(context, result);
                                 },
                               );
                             }

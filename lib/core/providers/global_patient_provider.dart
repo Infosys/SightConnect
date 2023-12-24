@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -74,5 +75,13 @@ class GlobalPatientProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getUserProfileById() async {}
+  Future<PatientResponseModel> getUserProfileById(int id) async {
+    final authRepo = _ref.read(patientAuthenticationRepositoryProvider);
+    final response = await authRepo.getPatientProfile(id);
+    return response.fold((error) {
+      throw error;
+    }, (result) {
+      return result;
+    });
+  }
 }

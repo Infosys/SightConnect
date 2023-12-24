@@ -93,7 +93,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          currentData.triageResultType ?? "NA",
+                          currentData.triageResultType ?? "",
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -103,7 +103,7 @@ class AssessmentCards extends ConsumerWidget {
                           height: 2,
                         ),
                         Text(
-                          currentData.reportTag ?? "NA",
+                          currentData.reportTag ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,

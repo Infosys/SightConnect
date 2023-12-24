@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart';
@@ -14,13 +15,17 @@ class PatientHomeProvider extends ChangeNotifier {
     init();
   }
 
-  init() async {
-    location = Location();
-    final permission = await location.requestPermission();
-    if (permission == PermissionStatus.granted) {
-      data = await location.getLocation();
+  Future<void> init() async {
+    try {
+      location = Location();
+      final permission = await location.requestPermission();
+      if (permission == PermissionStatus.granted) {
+        data = await location.getLocation();
+      }
+    } catch (e) {
+      logger.e(e);
+      data = null;
     }
-
     notifyListeners();
   }
 }

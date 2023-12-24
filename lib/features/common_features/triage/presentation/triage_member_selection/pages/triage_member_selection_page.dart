@@ -7,9 +7,11 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../providers/triage_member_provider.dart';
 import '../widget/change_member_tiles.dart';
 
-class TriageMemberSelectionPage extends HookWidget {
+class TriageMemberSelectionPage extends StatelessWidget {
   const TriageMemberSelectionPage({super.key});
 
   @override
@@ -84,18 +86,25 @@ class TriageMemberSelectionPage extends HookWidget {
             const SizedBox(height: AppSize.ksheight),
             const ChangeMemberTiles(),
             const SizedBox(height: AppSize.ksheight),
-            SizedBox(
-              width: AppSize.width(context) * 0.8,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TriagePage(),
-                    ),
-                  );
-                },
-                child: const Text('Proceed'),
-              ),
+            Consumer(
+              builder: (context, ref, child) {
+                final model = ref.watch(triageMemberProvider);
+                return SizedBox(
+                  width: AppSize.width(context) * 0.8,
+                  child: ElevatedButton(
+                    onPressed: model.testPatientId == null
+                        ? null
+                        : () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const TriagePage(),
+                              ),
+                            );
+                          },
+                    child: const Text('Proceed'),
+                  ),
+                );
+              },
             ),
           ],
         ),
