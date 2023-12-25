@@ -263,12 +263,12 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  double _calculateScore(double value) {
+  double _calculateScore(double value) { //TODO:Logic is mismatch between frontend and backend 
     logger.i("Tumbling Test Value: $value");
     if (value >= 1) {
-      return 3.0;
+      return 5.0;
     } else if (value >= 0.5) {
-      return 2.0;
+      return 3.0;
     } else {
       return 1.0;
     }
@@ -288,25 +288,25 @@ class VisualAcuityTestProvider with ChangeNotifier {
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
 
-    double leftEyeUrgency = _calculateScore(leftEyeSight);
-    double rightEyeUrgency = _calculateScore(rightEyeSight);
-    double bothEyeUrgency = _calculateScore(bothEyeSight);
+    double leftEyeScore = _calculateScore(leftEyeSight);
+    double rightEyeScore = _calculateScore(rightEyeSight);
+    double bothEyeScore = _calculateScore(bothEyeSight);
 
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(
         identifier: 1751,
         value: leftEyeSight.toStringAsFixed(3),
-        score: leftEyeUrgency,
+        score: leftEyeScore,
       ),
       PostTriageObservationsModel(
         identifier: 1752,
         value: rightEyeSight.toStringAsFixed(3),
-        score: rightEyeUrgency,
+        score: rightEyeScore,
       ),
       PostTriageObservationsModel(
         identifier: 1753,
         value: bothEyeSight.toStringAsFixed(3),
-        score: bothEyeUrgency,
+        score: bothEyeScore,
       ),
     ];
 

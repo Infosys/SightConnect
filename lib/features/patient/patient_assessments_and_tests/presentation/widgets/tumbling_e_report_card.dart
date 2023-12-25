@@ -29,7 +29,7 @@ class TumblingEReportCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            observationDescription ?? "NA",
+            observationDescription ?? "",
             style: applyRobotoFont(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -117,13 +117,12 @@ class TumblingEReportCard extends StatelessWidget {
 }
 
 Color getColorBasedOnObservationValue(double value) {
-  if (value < 1) {
-    return AppColor.orange;
-  } else if (value == 1) {
-    return AppColor.green;
-  } else if (value > 1) {
-    return AppColor.red;
-  } else {
-    return AppColor.red;
-  }
+  if (value >= 1) {
+      return AppColor.red;
+    } else if (value >= 0.5) {
+      return AppColor.orange;
+    } else {
+      return  AppColor.green;
+    }
+ 
 }

@@ -14,24 +14,46 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   @override
   double questionnaireUrgency(
       List<PostTriageQuestionModel> questionnaireResponse) {
-    double questionnaireScore = 1;
+    double questionnaireUrgency = 1;
+    int totalScore=0;
     for (var questions in questionnaireResponse) {
       for (var answer in questions.answers!) {
-        questionnaireScore = max(questionnaireScore, answer.score!);
+        //TODO: logic changeded
+       // questionnaireScore = max(questionnaireScore, answer.score!);
+        totalScore+=answer.score!.toInt();
       }
     }
-
-    return questionnaireScore;
+    if(totalScore>=5){
+      questionnaireUrgency=3;
+    }
+    else if(totalScore>=3){
+      questionnaireUrgency=2;
+    }
+    else{
+      questionnaireUrgency=1;
+    }
+    return questionnaireUrgency;
   }
 
   @override
   double visualAcuityUrgency(
       List<PostTriageObservationsModel> visionAcuityResponse) {
-    double visionAcuityScore = 1;
+    double visionAcuityScore = 0;
+    double visualAcuityUrgency=1;
+
     for (var observation in visionAcuityResponse) {
-      visionAcuityScore = max(visionAcuityScore, observation.score!);
+      visionAcuityScore +=  observation.score!;
     }
-    return visionAcuityScore;
+    if(visionAcuityScore>=5){
+      visualAcuityUrgency=3;
+    }
+    else if(visionAcuityScore>=3){
+      visualAcuityUrgency=2;
+    }
+    else{
+      visualAcuityUrgency=1;
+    }
+    return visualAcuityUrgency;
   }
 
   @override

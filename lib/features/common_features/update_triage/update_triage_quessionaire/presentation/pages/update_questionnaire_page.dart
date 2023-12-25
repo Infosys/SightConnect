@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/provider/update_triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/widgets/update_option_card.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/widgets/update_triage_text_type_quesion.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -61,10 +62,12 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                     var question = model.questionnaireSections[index];
                     var isLastQuestion =
                         (model.questionnaireSections.length - 1 == index);
-                    (double, int) record =
-                        _getWeightage(question.answerOption ?? []);
-                    double weightage = record.$1;
-                    int answerCode = record.$2;
+                    // (double, int) record =
+                    //     _getWeightage(question.answerOption ?? []);
+                    // double weightage = record.$1;
+                    // int answerCode = record.$2;
+
+                     Map<String,Map<String,int>> finalValueMap = _getWeightageAnswerCode(question.answerOption ?? []);
 
                     if (index == 0) {
                       return Center(
@@ -154,8 +157,8 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                             model.addQuestionnaireAnswer(
                               question.id!,
                               "No",
-                              weightage.toInt(),
-                              answerCode,
+                              _getAnswerWeightage(finalValueMap,"No").toInt(),
+                              _getAnswerCode(finalValueMap, "No"),
                             );
                             if (isLastQuestion) {
                               model.saveQuestionaireResponse();
@@ -171,8 +174,8 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                             model.addQuestionnaireAnswer(
                               question.id!,
                               "Yes",
-                              weightage.toInt(),
-                              answerCode,
+                             _getAnswerWeightage(finalValueMap,"Yes").toInt(),
+                              _getAnswerCode(finalValueMap, "Yes"),
                             );
 
                             if (isLastQuestion) {
@@ -245,22 +248,53 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
     navigator.pop();
   }
 
-  (double, int) _getWeightage(List<AnswerOptionModel> answerOption) {
-    double weightage = 0.0;
-    int answerCode = 0;
-    for (var answer in answerOption) {
-      var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
-      if (answerString == "yes") {
-        weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
-        answerCode = answer.answer?.id ?? 0;
-      } else if (answerString == "no") {
-        weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
-        answerCode = answer.answer?.id ?? 0;
-      } else {
-        weightage = 0;
-        answerCode = 0;
-      }
+  // (double, int) _getWeightage(List<AnswerOptionModel> answerOption) {
+  //   double weightage = 0.0;
+  //   int answerCode = 0;
+  //   for (var answer in answerOption) {
+  //     var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
+  //     if (answerString == "yes") {
+  //       weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+  //       answerCode = answer.answer?.id ?? 0;
+  //     } else if (answerString == "no") {
+  //       weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
+  //       answerCode = answer.answer?.id ?? 0;
+  //     } else {
+  //       weightage = 0;
+  //       answerCode = 0;
+  //     }
+  //   }
+  //   return (weightage, answerCode);
+  // }
+
+  
+  Map<String,Map<String,int>> _getWeightageAnswerCode(List<AnswerOptionModel> answerOption ){
+  
+     Map<String,Map<String,int>> finalValueMap={};
+   
+    
+    for(AnswerOptionModel answer in answerOption){
+       Map<String,int> valueMap ={};
+      String answerString = answer.answer?.answerString?.toLowerCase() ?? "";
+        int weightage=answer.answer?.answerItemWeight?.value?.toInt() ?? 0;
+        int  answerCode=answer.answer?.id ?? 0;
+      valueMap["weightage"] = weightage;
+      valueMap["answerCode"] = answerCode ;
+     
+      finalValueMap[answerString]=valueMap;
     }
-    return (weightage, answerCode);
+    
+    logger.f({"finalvalueMaparra":finalValueMap});
+    return finalValueMap;
+  }
+  
+  int _getAnswerWeightage(Map<String,Map<String,int>> finalValueMap, String answer){
+    String answerString=answer.toLowerCase();
+    int value= finalValueMap[answerString]?["weightage"]??0;
+    return value;
+  }
+  int _getAnswerCode(Map<String,Map<String,int>> finalValueMap, String answer){
+    String answerString=answer.toLowerCase();
+    return finalValueMap[answerString]?["answerCode"]??0;
   }
 }
