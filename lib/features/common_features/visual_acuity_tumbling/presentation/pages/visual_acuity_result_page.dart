@@ -233,12 +233,12 @@ class TumblingResultReportPage extends ConsumerWidget {
   }
 
   getColourScheme(value) {
-    if (value > 0.7) {
-      return AppColor.green;
-    } else if (value > 0.4) {
+    if (value >= 1) {
+      return AppColor.red;
+    } else if (value > 0.5) {
       return AppColor.orange;
     } else {
-      return AppColor.red;
+      return AppColor.green;
     }
   }
 
