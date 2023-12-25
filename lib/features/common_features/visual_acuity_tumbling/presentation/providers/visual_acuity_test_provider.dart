@@ -263,14 +263,14 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  double _calculateScore(double value) { //TODO:Logic is mismatch between frontend and backend 
+  double _calculateScore(double value) {  
     logger.i("Tumbling Test Value: $value");
     if (value >= 1) {
       return 5.0;
     } else if (value >= 0.5) {
       return 3.0;
     } else {
-      return 1.0;
+      return 0;
     }
   }
 
