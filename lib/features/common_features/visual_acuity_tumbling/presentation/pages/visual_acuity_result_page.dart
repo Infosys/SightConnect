@@ -255,10 +255,10 @@ class TumblingResultReportPage extends ConsumerWidget {
           minimum: 0,
           maximum: 99,
           ranges: <GaugeRange>[
-            GaugeRange(
+           GaugeRange(
               startValue: 0,
               endValue: 33,
-              color: const Color(0xFFFE2A25),
+              color: const Color(0xFF00AB47),
               sizeUnit: GaugeSizeUnit.factor,
               startWidth: 0.2,
               endWidth: 0.2,
@@ -271,14 +271,15 @@ class TumblingResultReportPage extends ConsumerWidget {
               endWidth: 0.2,
               sizeUnit: GaugeSizeUnit.factor,
             ),
-            GaugeRange(
+             GaugeRange(
               startValue: 66,
               endValue: 99,
-              color: const Color(0xFF00AB47),
+              color: const Color(0xFFFE2A25),
               sizeUnit: GaugeSizeUnit.factor,
               startWidth: 0.2,
               endWidth: 0.2,
             ),
+            
           ],
           pointers: <GaugePointer>[NeedlePointer(value: value * 100)],
         )
