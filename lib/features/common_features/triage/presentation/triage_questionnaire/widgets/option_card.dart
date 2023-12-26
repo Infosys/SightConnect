@@ -46,8 +46,24 @@ class OptionCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: question?.relatedImage?.first.url == null
-                        ? const SizedBox()
+                    child: (question?.relatedImage == null ||
+                            question?.relatedImage?.isEmpty == true ||
+                            question?.relatedImage?.first.url == null)
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                ("No Preview Available"),
+                                style: applyRobotoFont(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.white),
+                              ),
+                            ),
+                          )
                         : AppNetworkImage(
                             shapeCircle: false,
                             imageUrl: question!.relatedImage!.first.url!,
