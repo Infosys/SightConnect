@@ -45,7 +45,7 @@ class VtTriageProvider extends ChangeNotifier {
       this._patientId,
       this._triageUrgencyRepository,
       this._triageLocalSource,
-      this._visionTechnicianTriageProvider);
+      this._visionTechnicianTriageProvider,);
 
   Future<Either<Failure, TriagePostModel>> saveTriage() async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -72,11 +72,14 @@ class VtTriageProvider extends ChangeNotifier {
     DiagnosticReportTemplateFHIRModel assessment =
         await _triageLocalSource.getAssessment();
     TriagePostModel triagePostModel = TriagePostModel(
+      id: 0,
       patientId: _patientId,
+      encounterId:0,
       serviceType: ServiceType.OPTOMETRY,
       organizationCode: assessment.organizationCode,
       performer: [
         Performer(
+          id: 0,
           role: PerformerRole.VISION_TECHNICIAN,
           identifier: _patientId,
         )
@@ -91,7 +94,7 @@ class VtTriageProvider extends ChangeNotifier {
       ],
       userStartDate: DateTime.now(),
       issued: DateTime.now(),
-
+      subject: 0,
       source: Source.VT_APP,
       sourceVersion: AppText.appVersion,
       incompleteSection: [],
