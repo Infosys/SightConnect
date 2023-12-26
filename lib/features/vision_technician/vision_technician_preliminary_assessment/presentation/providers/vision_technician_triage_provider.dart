@@ -94,6 +94,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
       (key, score) {
         _questionResponseList.add(
           PostTriageQuestionModel(
+            id: 0,
             linkId: key,
             score: 1,
             answers: [
@@ -116,12 +117,14 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
     List<PostTriageImagingSelectionModel> mediaCaptureList = [];
     mediaCaptureList.add(PostTriageImagingSelectionModel(
+      id: 0,
       identifier: 70000001,
       endpoint: getUniqueFileName(XleftEyeImage.name),
       baseUrl: XleftEyeImage.mimeType,
       score: 1,
     ));
     mediaCaptureList.add(PostTriageImagingSelectionModel(
+      id: 0,
       identifier: 70000002,
       endpoint: getUniqueFileName(XrightEyeImage.name),
       baseUrl: XrightEyeImage.mimeType,
@@ -164,16 +167,19 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(
+        id:0,
         identifier: 50000001,
         value: _leftEyeSight.toString(),
         score: leftEyeUrgency,
       ),
       PostTriageObservationsModel(
+        id:0,
         identifier: 50000002,
         value: _rightEyeSight.toString(),
         score: rightEyeUrgency,
       ),
       PostTriageObservationsModel(
+        id:0,
         identifier: 50000003,
         value: _bothEyeSight.toString(),
         score: bothEyeUrgency,

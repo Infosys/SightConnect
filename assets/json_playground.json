@@ -1,25 +1,345 @@
 {
-       "id": null,
-       "regRef": null,
-       "counterId": null,
-       "hprId": null,
-       "hipCode": null,
-       "abhaId": null,
-       "abhaAddress": null,
-       "name": "Abhishek  Vashith",
-       "firstName": "Abhishek",
-       "lastName": "Vashith",
-       "middleName": null,
-       "gender": "MALE",
-       "mobile": "9111111111",
-       "email": null,
-       "emailVerified": false,
-       "profilePhoto": null,
-       "yearOfBirth": null,
-       "monthOfBirth": null,
-       "dayOfBirth": null,
-       "age": 34,
-       "parentPatientId": null,
-       "relationship": null,
-       "address": []
-     }
+   "triage model to be saved in remote source": {
+     "id": null,
+     "patientId": 123,
+     "encounterId": null,
+     "serviceType": "OPTOMETRY",
+     "organizationCode": 0,
+     "performer": [
+       {
+         "id": null,
+         "role": "PATIENT",
+         "identifier": 123
+       }
+     ],
+     "assessmentCode": 1351,
+     "assessmentVersion": "1.0",
+     "issued": "2023-12-24T06:44:13.241660Z",
+     "userStartDate": "2023-12-24T06:44:13.241659Z",
+     "source": "PATIENT_APP",
+     "sourceVersion": "1.0",
+     "incompleteSection": [],
+     "cummulativeScore": 5,
+     "score": [
+       {
+         "QUESTIONNAIRE": 1.0
+       },
+       {
+         "OBSERVATION": 3.0
+       },
+       {
+         "IMAGE": 1.0
+       }
+     ],
+     "imagingSelection": [
+       {
+         "id": null,
+         "identifier": 2001,
+         "endpoint": "/services/filems/api/file/download/1703400252898-6102e4a3-5c95-4447-a404-8338460768aa",
+         "baseUrl": "https://eyecare4all-dev.infosysapps.com",
+         "score": 0.0,
+         "fileId": "1703400252898-6102e4a3-5c95-4447-a404-8338460768aa"
+       },
+       {
+         "id": null,
+         "identifier": 2151,
+         "endpoint": "/services/filems/api/file/download/1703400250734-0fd23058-13a1-4b8c-afe1-6b3530a51ef9",
+         "baseUrl": "https://eyecare4all-dev.infosysapps.com",
+         "score": 0.0,
+         "fileId": "1703400250734-0fd23058-13a1-4b8c-afe1-6b3530a51ef9"
+       }
+     ],
+     "observations": [
+       {
+         "id": null,
+         "identifier": 1751,
+         "value": "1.000",
+         "score": 3.0
+       },
+       {
+         "id": null,
+         "identifier": 1752,
+         "value": "1.000",
+         "score": 3.0
+       },
+       {
+         "id": null,
+         "identifier": 1753,
+         "value": "1.000",
+         "score": 3.0
+       }
+     ],
+     "questionResponse": [
+       {
+         "id": null,
+         "linkId": 1451,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 1552,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 1452,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2352,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2501,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2353,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2502,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2355,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2651,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2701,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2652,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2703,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2653,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2705,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2654,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2707,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2655,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2709,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2656,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2711,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 2657,
+         "score": 0.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 2713,
+             "score": 0.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8401,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8452,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8402,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8453,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8403,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8457,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8404,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8458,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8405,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8459,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8701,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8460,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8702,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8953,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8703,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8954,
+             "score": 1.0
+           }
+         ]
+       },
+       {
+         "id": null,
+         "linkId": 8704,
+         "score": 1.0,
+         "answers": [
+           {
+             "value": "No",
+             "id": null,
+             "answerCode": 8955,
+             "score": 1.0
+           }
+         ]
+       }
+     ],
+     "subject": null,
+     "observationSeverity": null,
+     "questionResponseSeverity": null,
+     "mediaSeverity": null,
+     "cumulativeSeverity": null,
+     "diagnosticReportDescription": null,
+     "questionResultDescription": null,
+     "observationResultDescription": null,
+     "mediaResultDescription": null,
+     "encounter": null
+   }
+ }
