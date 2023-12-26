@@ -253,7 +253,7 @@ Future<String?> selectDate(BuildContext context) async {
     lastDate: DateTime(2100),
   );
   if (picked != null) {
-    return "${picked.day}/${picked.month}/${picked.year}";
+    return "${picked.year}-${picked.month}-${picked.day}";
   } else {
     return null;
   }

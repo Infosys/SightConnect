@@ -36,14 +36,14 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               print("object");
-              Navigator.push(
+            /*   Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianSearchEvent(
                     search: "event",
                   ),
                 ),
-              );
+              ); */
             },
             icon: const Icon(
               Icons.search,
@@ -118,15 +118,17 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              vgEventHeaderChips(isSelected, context, eventStatus),
-              const SizedBox(height: AppSize.klheight),
-              const VisionEventListDetails(),
-              const Spacer(),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                vgEventHeaderChips(isSelected, context, eventStatus),
+                const SizedBox(height: AppSize.klheight),
+                const VisionEventListDetails(),
+   
               const BrandingWidgetH(),
-            ],
+              ],
+            ),
           ),
         );
       }),

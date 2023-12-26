@@ -11,26 +11,43 @@ class VisionEventListDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<VisionGuardianEventModel> eventDetails =
-        ref.watch(addEventDetailsProvider).events;
-
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: eventDetails.length,
-      itemBuilder: (context, index) {
-       return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VisionGuardianEventDetailsPage(),
-                ),
-              );
-            },
-            child: vgEventDataCards(context, eventDetails[index]));
-      }, separatorBuilder: (BuildContext context, int index) { 
-        return const SizedBox(height: AppSize.ksheight,);
-       },
-    );
+    return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
+      if (eventDetails.isEmpty) {
+        return const Center(
+          child: Text("No Events are Available"),
+        );
+      }
+      return ListView.separated(
+        shrinkWrap: true,
+        itemCount: eventDetails.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const VisionGuardianEventDetailsPage(),
+                  ),
+                );
+              },
+              child: vgEventDataCards(context, eventDetails[index]));
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            height: AppSize.ksheight,
+          );
+        },
+      );
+    }, loading: () {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }, error: (error, stackTrace) {
+      print(error);
+      return const Center(
+        child: Text("No Data Available"),
+      );
+    });
   }
 }

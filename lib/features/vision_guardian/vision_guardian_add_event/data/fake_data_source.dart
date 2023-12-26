@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
-
+/* 
 List<VisionGuardianEventModel> eventDetails = [
   VisionGuardianEventModel(
       event_name: "Eye Camp Gachibowli",
@@ -16,3 +16,4 @@ List<VisionGuardianEventModel> eventDetails = [
       address: " KV School, Kondapur, Hyderabad",
       status: "Upcoming")
 ];
+ */

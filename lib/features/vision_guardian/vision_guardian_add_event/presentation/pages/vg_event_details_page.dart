@@ -28,13 +28,13 @@ class VisionGuardianEventDetailsPage extends HookWidget {
           actions: [
             IconButton(
               onPressed: () {
-                 Navigator.push(
+               /*   Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
                       const VisionGuardianSearchEvent(search:"Patient"),
                 ),
-              );
+              ); */
               },
               icon: const Icon(
                 Icons.search,

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -9,8 +10,17 @@ import '../../../../../shared/responsive/responsive.dart';
 import '../../../../../shared/theme/text_theme.dart';
 
 Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
+  DateFormat dateFormat = DateFormat("dd MMM");
+   DateFormat dateFormat2 = DateFormat("dd MMM yy");
+String startDateString = dateFormat.format(DateTime.parse(data.startDate!));
+String endDateString = dateFormat2.format(DateTime.parse(data.endDate!));
+
+String startTimeString = DateFormat('h a').format(DateTime.parse(data.startTime!));
+String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
+
+
   return Container(
-    padding:const EdgeInsets.all(AppSize.kspadding),
+    padding: const EdgeInsets.all(AppSize.kspadding),
     width: double.infinity,
     decoration: BoxDecoration(
       color: AppColor.white,
@@ -55,7 +65,8 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        data.event_name!,
+                        data.title!,
+                        softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -68,14 +79,15 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                           borderRadius: BorderRadius.circular(
                             AppSize.klradius,
                           ),
-                          color: data.status != "Completed"
+                          color: data.eventStatus != "Completed"
                               ? AppColor.orange
                               : AppColor.green,
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: AppSize.kspadding, vertical: 2),
                         child: Text(
-                          data.status!,
+                          data.eventStatus!,
+                             softWrap: true,
                           style: applyRobotoFont(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
@@ -88,7 +100,7 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  data.event_id!,
+                  data.id.toString(),   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -113,7 +125,9 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                             width: AppSize.kswidth - 5,
                           ),
                           Text(
-                            data.date!,
+                            
+                            '${startDateString}-${endDateString}',
+                               softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -134,7 +148,8 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                             width: AppSize.kswidth - 5,
                           ),
                           Text(
-                            data.time!,
+                            '${startTimeString}-${endTimeString}',
+                               softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 12,
                               color: AppColor.grey,
@@ -159,7 +174,8 @@ Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
                       width: AppSize.kswidth - 5,
                     ),
                     Text(
-                      data.address!,
+                      "${data.addresses![0].addressLine1!},${data.addresses![0].addressLine2!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
+                         softWrap: true,
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
