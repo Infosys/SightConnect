@@ -56,16 +56,17 @@ class InviteCard extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                TextButton(
-                  onPressed: onPressed,
-                  child: const Text(
-                    "Share Now",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
+                const SizedBox.shrink()
+                // TextButton(
+                //   onPressed: onPressed,
+                //   child: const Text(
+                //     "Share Now",
+                //     style: TextStyle(
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.w700,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

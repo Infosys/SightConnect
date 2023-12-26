@@ -227,4 +227,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   }
 
   getQuestionnairWithAnswer() {}
+
+  var currentTriageReportId = 0;
 }

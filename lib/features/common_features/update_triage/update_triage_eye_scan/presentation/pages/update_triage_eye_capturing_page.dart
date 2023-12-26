@@ -140,6 +140,7 @@ class _UpdateTriageEyeCapturingPageState
                   onCapture: () => _takePicture(context),
                   onFlash: () => _toggleFlash(),
                   onSwitchCamera: () => _toggleCamera(),
+                  currentEye: ref.watch(updateTriageEyeScanProvider).currentEye,
                 ),
               ),
             ],

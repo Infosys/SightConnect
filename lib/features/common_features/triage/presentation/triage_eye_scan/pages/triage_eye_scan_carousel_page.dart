@@ -27,11 +27,11 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text(
-          "Steps to do the scan ",
-        ),
-      ),
+      // appBar: const CustomAppbar(
+      //   title: Text(
+      //     "Steps to do the scan ",
+      //   ),
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -43,6 +43,9 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               },
               carouselController: carouselController.value,
             ),
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
@@ -85,13 +88,13 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight,
-          ),
+          // const SizedBox(
+          //   height: AppSize.ksheight,
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding + 6,
-              vertical: AppSize.kspadding + 2,
+              horizontal: AppSize.klpadding,
+              vertical: AppSize.kspadding,
             ),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -130,9 +133,9 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight * 2,
-          )
+          // const SizedBox(
+          //   height: AppSize.klheight * 2,
+          // )
         ],
       ),
     );
