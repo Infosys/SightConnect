@@ -1,3 +1,5 @@
+import 'dart:collection';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +18,18 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
     required this.miniapp,
     this.isPermissionRequired = false,
     this.token = "",
-    this.parentPatientID = "",
-    super.key,
+    this.parentPatientId,
     this.onBack,
+    this.mobile,
+    super.key,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
   final String token;
-  final String parentPatientID;
+
   final VoidCallback? onBack;
+  final String? mobile;
+  final String? parentPatientId;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -36,8 +41,34 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
   late InAppWebViewController webViewController;
   Logger logger = Logger();
   bool isMiniAppLoaded = false;
-  int port = 8081;
+  int port = 59542;
   String progressMessage = "";
+
+  String userScript = """
+var mobile;
+var parentPatientId;
+
+class Communication {
+  static isFlutterInAppWebViewReady = false;
+}
+window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
+  Communication.isFlutterInAppWebViewReady = true;
+  window.flutter_inappwebview.callHandler("getMobile").then(function (result) {
+    mobile = result.mobile;
+  });
+   window.flutter_inappwebview.callHandler("getParentPatientId").then(function (result) {
+    parentPatientId = result.parentPatientId;
+  });
+});
+
+function fetchMobile() {
+  return mobile;
+} 
+function fetchParentPatientId() {
+  return parentPatientId;
+}
+ """;
+
   @override
   void initState() {
     super.initState();
@@ -92,8 +123,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
               ),
               body: InAppWebView(
                 initialUrlRequest: URLRequest(
-                  url: Uri.parse(
-                      "http://127.0.0.1:$port?id=${widget.parentPatientID}"),
+                  url: Uri.parse("http://127.0.0.1:$port/"),
                 ),
                 onLoadError: (controller, url, code, message) async {
                   logger.e("Error: $message");
@@ -114,16 +144,18 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                   logger.d("Request: ${request.url}");
                   final hash = request.url.fragment.trim();
                   final host = request.url.host.trim();
-                  if (host == "eyecare4all-dev.infosysapps.com") {
-                    request.headers!["Authorization"] =
-                        "Bearer ${widget.token}";
-                  }
-                  if (hash == "failure") {
-                    Navigator.of(context).pop(true);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
-                  } else if (hash == "success") {
-                    Navigator.of(context).pop(false);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
+                  if (widget.token.isNotEmpty) {
+                    if (host == "eyecare4all-dev.infosysapps.com") {
+                      request.headers!["Authorization"] =
+                          "Bearer ${widget.token}";
+                    }
+                    if (hash == "failure") {
+                      Navigator.of(context).pop(true);
+                      Future.value(WebResourceResponse(data: Uint8List(0)));
+                    } else if (hash == "success") {
+                      Navigator.of(context).pop(false);
+                      Future.value(WebResourceResponse(data: Uint8List(0)));
+                    }
                   }
 
                   return null;
@@ -146,8 +178,34 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                     useShouldInterceptRequest: true,
                   ),
                 ),
+                initialUserScripts: UnmodifiableListView<UserScript>(
+                  [
+                    UserScript(
+                      source: userScript,
+                      injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+                    )
+                  ],
+                ),
                 onWebViewCreated: (controller) {
                   webViewController = controller;
+                  controller.addJavaScriptHandler(
+                      handlerName: 'getMobile',
+                      callback: (args) {
+                        return {'mobile': widget.mobile};
+                      });
+                  controller.addJavaScriptHandler(
+                      handlerName: 'getParentPatientId',
+                      callback: (args) {
+                        return {'parentPatientId': widget.parentPatientId};
+                      });
+                },
+                onLoadStop: (controller, uri) {
+                  // controller.addJavaScriptHandler(
+                  //     handlerName: 'handlerFooWithArgs',
+                  //     callback: (args) {
+                  //       print(args);
+                  //       // it will print: [1, true, [bar, 5], {foo: baz}, {bar: bar_value, baz: baz_value}]
+                  //     });
                 },
               ),
             ),

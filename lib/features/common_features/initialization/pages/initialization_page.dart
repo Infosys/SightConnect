@@ -39,6 +39,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> profileVerification() async {
     final navigator = Navigator.of(context);
     final isUserExist = await _checkUserAlreadyExist();
+    log("User Exist: $isUserExist");
 
     if (isUserExist && context.mounted) {
       final role = roleMapper(PersistentAuthStateService.authState.role);

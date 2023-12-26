@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -71,7 +73,7 @@ class DioTokenInterceptor extends Interceptor {
         logger.d("updated access token and refresh token");
       }
     }
-    if (options.uri.path.contains("/services/assessments")) {
+    if (options.uri.path.contains("/services/orchestration")) {
       return super.onRequest(options, handler);
     }
 
@@ -79,6 +81,8 @@ class DioTokenInterceptor extends Interceptor {
       'Authorization':
           'Bearer ${PersistentAuthStateService.authState.accessToken}'
     });
+
+    log(options.uri.toString(), name: "Dio Request");
     return super.onRequest(options, handler);
   }
 
