@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/data/keycloak_repository.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

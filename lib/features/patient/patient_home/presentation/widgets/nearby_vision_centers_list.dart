@@ -60,12 +60,15 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 data: (data) {
                   if (data.isEmpty) {
                     return Center(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          ref.read(patientHomeProvider).init();
-                        },
-                        label: const Text("Location Access"),
-                        icon: const Icon(Icons.location_on),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextButton.icon(
+                          onPressed: () {
+                            ref.read(patientHomeProvider).init();
+                          },
+                          label: const Text("Click to refresh"),
+                          icon: const Icon(Icons.location_on),
+                        ),
                       ),
                     );
                   }

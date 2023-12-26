@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/member_selection.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,6 +45,7 @@ class PatientHomePageAppBar extends StatelessWidget
               );
             }
             final profileUrl = patient.profile?.patient?.profilePhoto;
+            final name = patient.profile?.patient?.name;
             return InkWell(
               onTap: () {
                 showDialog(
@@ -56,17 +58,10 @@ class PatientHomePageAppBar extends StatelessWidget
                 );
               },
               child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColor.primary,
-                    width: 2,
-                  ),
-                ),
                 child: profileUrl != null
                     ? AppNetworkImage(imageUrl: profileUrl)
-                    : const CircleAvatar(
-                        backgroundColor: AppColor.lightGrey,
+                    : AppNameAvatar(
+                        name: name,
                       ),
               ),
             );

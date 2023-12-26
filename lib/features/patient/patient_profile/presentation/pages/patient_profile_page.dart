@@ -1,3 +1,4 @@
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
@@ -126,7 +127,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     PatientInfoCard(
-                      keyText: "Date of Birth",
+                      keyText: "Age",
                       valueText: dob,
                     ),
                   ],
@@ -155,13 +156,9 @@ class PatientProfilePage extends ConsumerWidget {
     required String year,
   }) {
     try {
-      final dob = DateTime(
-        int.parse(year),
-        int.parse(mon),
-        int.parse(day),
-      );
-      final age = DateTime.now().difference(dob).inDays ~/ 365;
-      return "$day/$mon/$year ($age years)";
+      var dob = DateTime.parse("$year-$mon-$day");
+      var age = DateTime.now().difference(dob).inDays ~/ 365;
+      return "$age years";
     } catch (e) {
       return "";
     }
@@ -174,9 +171,9 @@ class PatientProfilePage extends ConsumerWidget {
     String? state,
   }) {
     try {
-      final result =
-          "${line ?? ""}, ${ward ?? ""}, ${district ?? ""}, ${state ?? ""}";
-      return result;
+      return [line, ward, district, state]
+          .where((element) => element != null)
+          .join(", ");
     } catch (e) {
       return "";
     }

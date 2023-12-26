@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -75,8 +76,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           ? AppNetworkImage(
                               imageUrl: person.profilePhoto!,
                             )
-                          : const CircleAvatar(
-                              backgroundColor: AppColor.lightGrey,
+                          : AppNameAvatar(
+                              name: person.name,
                             ),
                       const SizedBox(
                         width: 20,

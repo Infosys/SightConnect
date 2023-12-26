@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/models/keycloak.dart';
 
 abstract class KeycloakRepository {
   Future<int> sendOtp({required String mobile});
