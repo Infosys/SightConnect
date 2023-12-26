@@ -55,6 +55,7 @@ class RelatedPartyModel with _$RelatedPartyModel {
       Relationship.AUNT => 'Aunt',
       Relationship.GRANDFATHER => 'Grandfather',
       Relationship.GRANDMOTHER => 'Grandmother',
+      Relationship.DAUGHTER => 'Daughter',
       Relationship.OTHER => 'Other',
     };
   }

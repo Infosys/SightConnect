@@ -14,10 +14,9 @@ var dioProvider = Provider(
   (ref) {
     return Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
-    );
-    // ..interceptors.addAll([
-    //     DioTokenInterceptor(ref),
-    //   ]);
+    )..interceptors.addAll([
+        DioTokenInterceptor(ref),
+      ]);
   },
 );
 
@@ -73,9 +72,6 @@ class DioTokenInterceptor extends Interceptor {
         }
         logger.d("updated access token and refresh token");
       }
-    }
-    if (options.uri.path.contains("/services/orchestration")) {
-      return super.onRequest(options, handler);
     }
     if (options.uri.path.contains("/services/orchestration")) {
       return super.onRequest(options, handler);

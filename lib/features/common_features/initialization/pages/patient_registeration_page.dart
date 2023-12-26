@@ -15,7 +15,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           onBack: () {
             Navigator.of(context).pop(true);
           },
-          token: "",
+          token: PersistentAuthStateService.authState.accessToken ?? "",
           parentPatientId: PersistentAuthStateService.authState.userId,
           mobile: PersistentAuthStateService.authState.username,
           miniapp: MiniApp(

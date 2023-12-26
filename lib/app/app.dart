@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -36,8 +37,6 @@ class _MyAppState extends ConsumerState<MyApp> {
         ? InitializationPage.routeName
         : LoginPage.routeName;
 
-    log("ISLOGGEDIN - ${PersistentAuthStateService.authState.isLoggedIn}");
-
     return Millimeters.fromView(
       child: MediaQuery(
         data: mediaQueryData.copyWith(
@@ -59,8 +58,10 @@ class _MyAppState extends ConsumerState<MyApp> {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
-          routes: AppRouter.routes,
-          initialRoute: initialRoute,
+          // routes: AppRouter.routes,
+          // initialRoute: initialRoute,
+
+          home: const PatientDashboardPage(),
           navigatorKey: AppRouter.navigatorKey,
         ),
       ),

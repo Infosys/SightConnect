@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/consent_form_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
@@ -20,6 +22,28 @@ class PatientDashboardPage extends ConsumerStatefulWidget {
 }
 
 class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!SharedPreferenceService.getConsentStatus) {
+        showConsentForm(context);
+      }
+    });
+  }
+
+  Future<void> showConsentForm(context) async {
+    final navigator = Navigator.of(context);
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) => const ConsentFormPage(),
+      ),
+    );
+    if (consentGiven != null && consentGiven) {
+      await SharedPreferenceService.setConsentStatus(consentGiven);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

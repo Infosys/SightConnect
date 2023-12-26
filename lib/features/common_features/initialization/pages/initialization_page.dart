@@ -1,17 +1,15 @@
-import 'dart:developer';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/consent_form_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -39,21 +37,13 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> profileVerification() async {
     final navigator = Navigator.of(context);
     final isUserExist = await _checkUserAlreadyExist();
-    log("User Exist: $isUserExist");
 
-    if (isUserExist && context.mounted) {
-      final role = roleMapper(PersistentAuthStateService.authState.role);
-
-      if (role != null) {
-        await navigateBasedOnRole(context, role);
+    if (context.mounted) {
+      if (isUserExist) {
+        await _handleExistingUser(navigator);
       } else {
-        await ref.read(initializationProvider).logout();
-        await navigator.pushNamedAndRemoveUntil(
-            LoginPage.routeName, (route) => false);
-        Fluttertoast.showToast(msg: "Please login again");
+        await _registerUser(navigator);
       }
-    } else {
-      await _registerUser(context);
     }
   }
 
@@ -61,52 +51,49 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     return await ref.read(initializationProvider).checkUserAlreadyExist();
   }
 
-  Future<void> _registerUser(BuildContext context) async {
-    final navigator = Navigator.of(context);
+  Future<void> _handleExistingUser(NavigatorState navigator) async {
+    final role = roleMapper(PersistentAuthStateService.authState.role);
+
+    if (role != null) {
+      await navigateBasedOnRole(context, role);
+    } else {
+      await ref.read(initializationProvider).logout();
+      await navigator.pushNamedAndRemoveUntil(
+          LoginPage.routeName, (route) => false);
+      Fluttertoast.showToast(msg: "Profile not found. Please login again.");
+    }
+  }
+
+  Future<void> _registerUser(NavigatorState navigator) async {
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) => const PatientRegistrationMiniappPage(),
       ),
     );
 
-    if (context.mounted && (status == null || status)) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Registration Required"),
-            content: const Text("Please register to continue"),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  await profileVerification();
-                },
-                child: const Text("Register"),
-              ),
-            ],
-          );
-        },
-      );
+    if (status == null || status) {
+      await _showRegistrationDialog();
     } else {
       await profileVerification();
     }
   }
 
-  Future<void> showConsentForm(BuildContext context) async {
-    final navigator = Navigator.of(context);
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) => const ConsentFormPage(),
-      ),
+  Future<void> _showRegistrationDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Registration Required"),
+          content: const Text("Please register to continue"),
+          actions: [
+            TextButton(
+              onPressed: profileVerification,
+              child: const Text("Register"),
+            ),
+          ],
+        );
+      },
     );
-
-    if (context.mounted && consentGiven == true) {
-      await profileVerification();
-    } else {
-      await navigator.pushNamedAndRemoveUntil(
-          LoginPage.routeName, (route) => false);
-      Fluttertoast.showToast(msg: "Consent not given. Please login again.");
-    }
   }
 
   @override
@@ -157,29 +144,22 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> navigateBasedOnRole(BuildContext context, Role role) async {
     final navigator = Navigator.of(context);
+    final rolePages = {
+      Role.ROLE_PATIENT: const PatientDashboardPage(),
+      Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
+      // Role.ROLE_VISION_GUARDIAN: const PatientDashboardPage(),
+      Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
+    };
 
-    switch (role) {
-      case Role.ROLE_PATIENT:
-        navigator.pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => const PatientDashboardPage(),
-            ),
-            (route) => false);
-        break;
-
-      case Role.ROLE_VISION_GUARDIAN:
-        break;
-
-      case Role.ROLE_VISION_TECHNICIAN:
-        break;
-      case Role.ROLE_OPTOMETRIST:
-        navigator.pushAndRemoveUntil(
-            MaterialPageRoute(
-                builder: (context) => const OptometritianDashboardPage()),
-            (route) => false);
-        break;
-      default:
-        throw Exception("Invalid Role");
+    if (rolePages.containsKey(role)) {
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => rolePages[role]!,
+        ),
+        (route) => false,
+      );
+    } else {
+      throw Exception("Invalid Role");
     }
   }
 }

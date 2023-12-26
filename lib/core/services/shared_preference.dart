@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceService {
   SharedPreferenceService._();
- 
+
   static late SharedPreferences _sharedPreferences;
 
   static Future<void> init() async {
@@ -15,11 +15,18 @@ class SharedPreferenceService {
       });
     }
   }
- 
+
+  static Future<void> setConsentStatus(bool value) async {
+    await _sharedPreferences.setBool("consentStatus", value);
+  }
+
+  static bool get getConsentStatus =>
+      _sharedPreferences.getBool("consentStatus") ?? false;
+
   static set storeTumblingOverInfo(bool value) {
     _sharedPreferences.setBool("tumblingOverInfo", value);
   }
- 
+
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 }
