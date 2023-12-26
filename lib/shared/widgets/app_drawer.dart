@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
 import '../../core/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
@@ -93,7 +94,7 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const AboutUsPage(),
+                                              const SuperAppScannerPage(),
                                         ),
                                       );
                                       break;
@@ -101,7 +102,7 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const TermsOfUsePage(),
+                                              const AboutUsPage(),
                                         ),
                                       );
                                       break;
@@ -109,11 +110,19 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PrivacyPolicyPage(),
+                                              const TermsOfUsePage(),
                                         ),
                                       );
                                       break;
                                     case 6:
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const PrivacyPolicyPage(),
+                                        ),
+                                      );
+                                      break;
+                                    case 7:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>

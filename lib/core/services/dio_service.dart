@@ -74,6 +74,9 @@ class DioTokenInterceptor extends Interceptor {
     if (options.uri.path.contains("/services/assessments")) {
       return super.onRequest(options, handler);
     }
+    if (options.uri.path.contains("/services/orchestration")) {
+      return super.onRequest(options, handler);
+    }
 
     options.headers.addAll({
       'Authorization':

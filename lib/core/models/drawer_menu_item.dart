@@ -26,6 +26,10 @@ class DrawerMenuItems {
     title: "Assessments and Tests",
     icon: AppIcon.drawerAssessmentsAndTest,
   );
+  static const DrawerMenuItem scanner = DrawerMenuItem(
+    title: "Scanner",
+    icon: AppIcon.eyeScanner,
+  );
   // static const DrawerMenuItem accessibilities = DrawerMenuItem(
   //   title: "Accessibility Settings",
   //   icon: AppIcon.drawerAssessibility,
@@ -51,6 +55,7 @@ class DrawerMenuItems {
     profile,
     // appointments,
     prescriptions,
+    scanner,
     // accessibilities,
     about,
     termOfUse,

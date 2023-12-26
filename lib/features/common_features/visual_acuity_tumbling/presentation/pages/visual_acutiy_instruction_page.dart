@@ -22,9 +22,9 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
     var activeIndex = useState<int>(0);
 
     return Scaffold(
-      appBar: CustomAppbar(
-        title: Text(context.loc!.visualAcuityCarouselTitle),
-      ),
+      // appBar: CustomAppbar(
+      //   title: Text(context.loc!.visualAcuityCarouselTitle),
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -84,7 +84,7 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.ksheight,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -121,9 +121,9 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight * 2,
-          )
+          // const SizedBox(
+          //   height: AppSize.klheight * 2,
+          // )
         ],
       ),
     );
