@@ -4,10 +4,10 @@ import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ResultPageTopCard extends ConsumerWidget {
   const ResultPageTopCard({
@@ -159,9 +159,10 @@ class ResultPageTopCard extends ConsumerWidget {
                       ?.value;
                   if (patientResponseModel?.profile?.patient?.profilePhoto ==
                       null) {
-                    return const CircleAvatar(
-                      backgroundColor: AppColor.lightGrey,
-                      radius: 40,
+                    return AppNameAvatar(
+                      radius: 38,
+                      fontSize: 22,
+                      name: patientResponseModel?.profile?.patient?.name,
                     );
                   } else {
                     return AppNetworkImage(
