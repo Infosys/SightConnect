@@ -4,12 +4,14 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/consent_form_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -36,15 +38,28 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> profileVerification() async {
-    final navigator = Navigator.of(context);
-    final isUserExist = await _checkUserAlreadyExist();
+    try {
+      final navigator = Navigator.of(context);
+      //TODO: CHECK EXCLUSIVE FOR NOT FOUND
+      final isUserExist = await _checkUserAlreadyExist();
 
-    if (context.mounted) {
-      if (isUserExist) {
-        await _handleExistingUser(navigator);
-      } else {
-        await _registerUser(navigator);
+      if (context.mounted) {
+        if (isUserExist) {
+          await _handleExistingUser(navigator);
+        } else {
+          final consentGiven = await showConsentForm(context);
+          if (consentGiven != null && consentGiven) {
+            await _registerUser(navigator);
+          } else {
+            await ref.read(initializationProvider).logout();
+            await navigator.pushNamedAndRemoveUntil(
+                LoginPage.routeName, (route) => false);
+            Fluttertoast.showToast(msg: "Please accept the consent form.");
+          }
+        }
       }
+    } catch (e) {
+      logger.e(e);
     }
   }
 
@@ -81,19 +96,35 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
+  Future<bool?> showConsentForm(context) async {
+    final role = roleMapper(PersistentAuthStateService.authState.role);
+    final navigator = Navigator.of(context);
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) => ConsentFormPage(
+          role: role!,
+        ),
+      ),
+    );
+    return consentGiven;
+  }
+
   Future<void> _showRegistrationDialog() async {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text("Registration Required"),
-          content: const Text("Please register to continue"),
-          actions: [
-            TextButton(
-              onPressed: profileVerification,
-              child: const Text("Register"),
-            ),
-          ],
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AlertDialog(
+            title: const Text("Registration Required"),
+            content: const Text("Please register to continue"),
+            actions: [
+              TextButton(
+                onPressed: profileVerification,
+                child: const Text("Register"),
+              ),
+            ],
+          ),
         );
       },
     );

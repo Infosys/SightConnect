@@ -25,23 +25,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!SharedPreferenceService.getConsentStatus) {
-        showConsentForm(context);
-      }
-    });
-  }
-
-  Future<void> showConsentForm(context) async {
-    final navigator = Navigator.of(context);
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) => const ConsentFormPage(),
-      ),
-    );
-    if (consentGiven != null && consentGiven) {
-      await SharedPreferenceService.setConsentStatus(consentGiven);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
