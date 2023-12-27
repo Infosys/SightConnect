@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,7 @@ class VisionGuardianEventSearchBar extends ConsumerWidget {
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
-     /*     ref
-            .read(visionGuardianEyeAssessmentProvider.notifier)
-            .setSearchPatientList(data);  */
+          ref.read(addEventDetailsProvider).setSearchEventList(data);
       },
       onTap: () {
         if (readOnly) {

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +16,16 @@ import '../widgets/vg_event_patients_tab.dart';
 import '../widgets/vg_event_teammates_tab.dart';
 
 class VisionGuardianEventDetailsPage extends HookWidget {
-  const VisionGuardianEventDetailsPage({super.key});
+   VisionGuardianEventDetailsPage({super.key,required this.eventDetails});
 
+  VisionGuardianEventModel eventDetails;
   @override
   Widget build(BuildContext context) {
     var tabIndex=useState(0);
 
     return Scaffold(
         appBar: CustomAppbar(
-          title: const Text('Eye Camp Gachibowli'),
+          title:  Text(eventDetails.title!),
           centerTitle: false,
           actions: [
             IconButton(
@@ -141,7 +143,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                       EventPatientsTab(
                         model: casesCritical,
                       ),
-                      const EventDetailsTab(),
+                       EventDetailsTab(eventDetails: eventDetails),
                       const EventTeammatesTab(),
                     ],
                   ),

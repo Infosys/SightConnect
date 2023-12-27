@@ -1,15 +1,33 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 
-class EventDetailsTab extends StatelessWidget {
-  const EventDetailsTab({super.key});
+class EventDetailsTab extends ConsumerWidget{
+  EventDetailsTab({super.key, required this.eventDetails});
+
+  VisionGuardianEventModel eventDetails;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    DateTime startDate = DateTime.parse(eventDetails.startDate!);
+    DateTime endDate = DateTime.parse(eventDetails.endDate!);
+    String startDateformattedDate = DateFormat('dd MMM').format(startDate);
+    String endDateformattedDate = DateFormat('dd MMM yyyy').format(endDate);
+
+ DateTime startTime = DateTime.parse(eventDetails.startTime!);
+  String startformattedTime = DateFormat('h a').format(startTime);
+
+ DateTime endTime = DateTime.parse(eventDetails.endTime!);
+  String endTimeformattedTime = DateFormat('h a').format(endTime);
+
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding),
@@ -42,7 +60,7 @@ class EventDetailsTab extends StatelessWidget {
                                 width: AppSize.kswidth - 5,
                               ),
                               Text(
-                                "17 Dec - 18 Dec 23",
+                                "${startDateformattedDate} - ${endDateformattedDate}",
                                 style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -64,7 +82,7 @@ class EventDetailsTab extends StatelessWidget {
                                     width: AppSize.kswidth - 5,
                                   ),
                                   Text(
-                                    "9AM - 4PM",
+                                    "${startformattedTime} - ${endTimeformattedTime}",
                                     style: applyRobotoFont(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
@@ -82,7 +100,7 @@ class EventDetailsTab extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: AppSize.kmpadding, vertical: 3),
                                 child: Text(
-                                  "Upcoming",
+                                  eventDetails.eventStatus!,
                                   style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -97,14 +115,14 @@ class EventDetailsTab extends StatelessWidget {
                     )),
               ],
             ),
-              const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            addressDetails(),
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            locationDetails(),
+            aboutDetails(eventDetails.description!),
+            const SizedBox(
+              height: AppSize.kmheight,
+            ),
+            locationDetails(eventDetails.addresses![0]),
             const SizedBox(
               height: AppSize.kmheight,
             ),
@@ -112,7 +130,9 @@ class EventDetailsTab extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                  
+                    },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
                         color: AppColor.primary,
@@ -138,7 +158,16 @@ class EventDetailsTab extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                          print("object");
+                      ref.read(addEventDetailsProvider).deleteEventDetails(
+                        eventId: eventDetails.id!.toString(),
+                      ).then((value)
+                      {
+                        print(value);
+                        Navigator.pop(context);
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.red,
                       shape: RoundedRectangleBorder(
@@ -166,7 +195,7 @@ class EventDetailsTab extends StatelessWidget {
   }
 }
 
-Widget locationDetails() {
+Widget locationDetails(VisionGuardianEventAddress addressDetails) {
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -205,7 +234,7 @@ Widget locationDetails() {
             height: AppSize.ksheight - 5,
           ),
           Text(
-            "15 / 128, Dada Sahib Street",
+            addressDetails.addressLine1!,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.black,
@@ -231,7 +260,7 @@ Widget locationDetails() {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      "508021",
+                      addressDetails.pinCode!,
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -251,7 +280,7 @@ Widget locationDetails() {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      "Sector 51",
+                      addressDetails.subDistrict!,
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -275,7 +304,7 @@ Widget locationDetails() {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      "Ameerpet",
+                      addressDetails.city!,
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -295,7 +324,7 @@ Widget locationDetails() {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      "Gachibowli",
+                      addressDetails.district!,
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -312,9 +341,9 @@ Widget locationDetails() {
   );
 }
 
-Widget addressDetails() {
+Widget aboutDetails(String description) {
   return Card(
-     shape: RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
     ),
     child: Padding(
@@ -332,7 +361,7 @@ Widget addressDetails() {
             height: AppSize.kmheight,
           ),
           Text(
-            "We are conducting a free eye checkup drive in Eye Camp in KV Gachibowli Area of Hyderabad where we will be conducting eye test for all people and easy …",
+            description,
             style: applyRobotoFont(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -353,7 +382,6 @@ Widget addressDetails() {
               )
             ],
           ),
-          
         ],
       ),
     ),

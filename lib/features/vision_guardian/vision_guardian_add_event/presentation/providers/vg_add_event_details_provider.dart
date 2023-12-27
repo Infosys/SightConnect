@@ -5,6 +5,13 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final addEventDetailsProvider =
+    ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
+  return AddEventDetailsNotifier(
+    vgAddEventRepository: ref.watch(vgAddEventRepository),
+  );
+});
+
 var getEventDetailsProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
   return await ref
@@ -15,10 +22,22 @@ var getEventDetailsProvider =
 class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
 
-  AddEventDetailsNotifier({required this.vgAddEventRepository});
+  AddEventDetailsNotifier({required this.vgAddEventRepository}) {
+
+  }
 
   var isLoading = false;
-
+  List<VisionGuardianEventModel> listOfEventDetails = [];
+  List<VisionGuardianEventModel> searchResults = [];
+  String eventStatusFilter = "";
+  String queryData = "";
+  var isSelected = -1;
+  var eventStatus = const [
+    'All',
+    'Ongoing',
+    'Upcoming',
+    'Completed',
+  ];
   XFile? _image;
   XFile? get image => _image;
   set image(XFile? value) {
@@ -46,14 +65,32 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   TextEditingController get pincode => _pincode;
   TextEditingController get city => _city;
 
+  Future<List<VisionGuardianEventModel>> getEventDetails() async {
+    print("caller event");
+    listOfEventDetails = await vgAddEventRepository.getVGEvents(actorIdentifier: "011067400874");
+    searchResults = listOfEventDetails;
+    print(listOfEventDetails);
+    return listOfEventDetails;
+  }
+
+  Future deleteEventDetails({required String eventId}) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      return await vgAddEventRepository.deleteVGEvents(eventId: eventId);
+    } catch (e) {
+      print(e);
+      isLoading = false;
+    }
+  }
+
   Future addEventDetails() async {
-    print(_startDate.text);
     try {
       isLoading = true;
       notifyListeners();
       var actors = {
         "role": "MEDICAL_DOCTOR",
-        "identifier": "011067400874",
+        "identifier": "11067400874",
         "isOwner": true
       };
 
@@ -97,17 +134,49 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       await vgAddEventRepository.postVGEvents(
           vgEventModel: vgEventModel, actor: actors);
+      await getEventDetails();
     } catch (e) {
       print(e);
       isLoading = false;
+
       notifyListeners();
     }
   }
-}
 
-final addEventDetailsProvider =
-    ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
-  return AddEventDetailsNotifier(
-    vgAddEventRepository: ref.watch(vgAddEventRepository),
-  );
-});
+  void setSearchEventList(String query) async {
+    List<VisionGuardianEventModel> resultList = [];
+
+    for (int i = 0; i < searchResults.length; i++) {
+      if (searchResults[i].title!.toLowerCase().contains(query.toLowerCase())) {
+        resultList.add(searchResults[i]);
+      } else if (searchResults[i]
+          .id!
+          .toString()
+          .contains(query.toLowerCase())) {
+        resultList.add(searchResults[i]);
+      } else if (searchResults[i]
+          .description!
+          .toLowerCase()
+          .contains(query.toLowerCase())) {
+        resultList.add(searchResults[i]);
+      }
+    }
+    listOfEventDetails = resultList;
+
+    notifyListeners();
+  }
+
+  void filterListEvents() {
+    print(isSelected);
+    print(eventStatus[isSelected]);
+    print(listOfEventDetails);
+    listOfEventDetails = searchResults
+        .where((element) =>
+            (isSelected == -1 || isSelected == 0) ||
+            element.eventStatus == eventStatus[isSelected])
+        .toList();
+    print(listOfEventDetails);
+    print("called");
+    notifyListeners();
+  }
+}

@@ -17,7 +17,7 @@ class VisionEventListDetails extends ConsumerWidget {
           child: Text("No Events are Available"),
         );
       }
-      return Container(
+      return SizedBox(
         height: AppSize.height(context) * .8,
         child: ListView.separated(
           shrinkWrap: true,
@@ -29,7 +29,7 @@ class VisionEventListDetails extends ConsumerWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          const VisionGuardianEventDetailsPage(),
+                           VisionGuardianEventDetailsPage(eventDetails:eventDetails[index]),
                     ),
                   );
                 },
