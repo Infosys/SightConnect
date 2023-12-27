@@ -17,27 +17,30 @@ class VisionEventListDetails extends ConsumerWidget {
           child: Text("No Events are Available"),
         );
       }
-      return ListView.separated(
-        shrinkWrap: true,
-        itemCount: eventDetails.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const VisionGuardianEventDetailsPage(),
-                  ),
-                );
-              },
-              child: vgEventDataCards(context, eventDetails[index]));
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            height: AppSize.ksheight,
-          );
-        },
+      return Container(
+        height: AppSize.height(context) * .8,
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: eventDetails.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const VisionGuardianEventDetailsPage(),
+                    ),
+                  );
+                },
+                child: vgEventDataCards(context, eventDetails[index]));
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: AppSize.ksheight,
+            );
+          },
+        ),
       );
     }, loading: () {
       return const Center(
