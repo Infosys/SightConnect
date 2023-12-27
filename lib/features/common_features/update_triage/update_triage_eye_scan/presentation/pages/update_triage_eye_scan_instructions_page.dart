@@ -14,7 +14,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateTriageEyeScanInstructions extends ConsumerWidget {
   final int diagnosticReportId;
-  const UpdateTriageEyeScanInstructions({super.key,required this.diagnosticReportId});
+  const UpdateTriageEyeScanInstructions(
+      {super.key, required this.diagnosticReportId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,128 +32,131 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.eyeScanDescription,
-                softWrap: true,
-                style: applyRobotoFont(
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              Text(
-                AppLocalizations.of(context)!.eyeScanHowToPerform,
-                style:
-                    applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              Container(
-                height: 200,
-                width: AppSize.width(context) * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
-                  color: AppColor.black,
-                  boxShadow: applyLightShadow(),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    AppImages.tumblingTestPlay,
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: Divider(),
-              ),
-              const SizedBox(height: AppSize.klheight),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                           UpdateTriageEyeScanCarouselPage(diagnosticReportId:diagnosticReportId ,),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColor.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.primary.withOpacity(0.1),
-                        blurRadius: 10,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.vibration, color: AppColor.blue),
-                      const SizedBox(width: AppSize.kswidth),
-                      Text(
-                        AppLocalizations.of(context)!.eyeScanViewStepsToPerform,
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.blue,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
-            child: ElevatedButton(
-              onPressed: () async {
-                try {
-                  var navigator = Navigator.of(context);
-                  var cameras = await availableCameras();
-                  if (cameras.isEmpty) {
-                    Fluttertoast.showToast(
-                        msg: "camera found ${cameras.length}");
-                    return;
-                  }
-                  navigator.push(
-                    MaterialPageRoute(
-                      builder: (context) => UpdateTriageEyeCapturingPage(
-                        cameras: cameras,
-                        diagnosticReportId: diagnosticReportId,
-                      ),
-                    ),
-                  );
-                } catch (e) {
-                  Fluttertoast.showToast(msg: e.toString());
-                }
-              },
-              child: Text(
-                AppLocalizations.of(context)!.startButton,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.eyeScanDescription,
+              softWrap: true,
+              style: applyRobotoFont(
+                fontSize: 14,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: AppSize.ksheight),
+            Text(
+              AppLocalizations.of(context)!.eyeScanHowToPerform,
+              style: applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            // const SizedBox(height: AppSize.kmheight),
+            // Container(
+            //   height: 200,
+            //   width: AppSize.width(context) * 0.9,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(AppSize.klradius),
+            //     color: AppColor.black,
+            //     boxShadow: applyLightShadow(),
+            //   ),
+            //   child: Center(
+            //     child: SvgPicture.asset(
+            //       AppImages.tumblingTestPlay,
+            //       height: 40,
+            //       width: 40,
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(height: AppSize.kmheight),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 12.0),
+            //   child: Divider(),
+            // ),
+            const SizedBox(height: AppSize.ksheight),
+            Expanded(
+              child: UpdateTriageEyeScanCarouselPage(
+                diagnosticReportId: diagnosticReportId,
+              ),
+            ),
+            // InkWell(
+            //   onTap: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (context) => UpdateTriageEyeScanCarouselPage(
+            //           diagnosticReportId: diagnosticReportId,
+            //         ),
+            //       ),
+            //     );
+            //   },
+            //   child: Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            //     decoration: BoxDecoration(
+            //       color: AppColor.white,
+            //       boxShadow: [
+            //         BoxShadow(
+            //           color: AppColor.primary.withOpacity(0.1),
+            //           blurRadius: 10,
+            //         ),
+            //       ],
+            //     ),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         const Icon(Icons.vibration, color: AppColor.blue),
+            //         const SizedBox(width: AppSize.kswidth),
+            //         Text(
+            //           AppLocalizations.of(context)!.eyeScanViewStepsToPerform,
+            //           style: applyRobotoFont(
+            //             fontSize: 14,
+            //             color: AppColor.blue,
+            //             fontWeight: FontWeight.w500,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
+      // bottomNavigationBar: Column(
+      //   mainAxisSize: MainAxisSize.min,
+      //   crossAxisAlignment: CrossAxisAlignment.stretch,
+      //   children: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(AppSize.kmpadding),
+      //       child: ElevatedButton(
+      //         onPressed: () async {
+      //           try {
+      //             var navigator = Navigator.of(context);
+      //             var cameras = await availableCameras();
+      //             if (cameras.isEmpty) {
+      //               Fluttertoast.showToast(
+      //                   msg: "camera found ${cameras.length}");
+      //               return;
+      //             }
+      //             navigator.push(
+      //               MaterialPageRoute(
+      //                 builder: (context) => UpdateTriageEyeCapturingPage(
+      //                   cameras: cameras,
+      //                   diagnosticReportId: diagnosticReportId,
+      //                 ),
+      //               ),
+      //             );
+      //           } catch (e) {
+      //             Fluttertoast.showToast(msg: e.toString());
+      //           }
+      //         },
+      //         child: Text(
+      //           AppLocalizations.of(context)!.startButton,
+      //           style: const TextStyle(
+      //             fontSize: 16,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

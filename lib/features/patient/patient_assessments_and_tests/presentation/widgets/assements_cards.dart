@@ -40,6 +40,7 @@ class AssessmentCards extends ConsumerWidget {
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         TriageReportBriefEntity currentData = data[index];
+
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -184,8 +185,12 @@ class AssessmentCards extends ConsumerWidget {
                     Directionality(
                       textDirection: TextDirection.rtl,
                       child: ref
-                              .watch(patientAssessmentAndTestProvider)
-                              .isUpdateLoading
+                                  .watch(patientAssessmentAndTestProvider)
+                                  .isUpdateLoading &&
+                              ref
+                                      .watch(patientAssessmentAndTestProvider)
+                                      .currentTriageReportId ==
+                                  currentData.triageResultID
                           ? const SizedBox(
                               height: 20,
                               width: 20,
@@ -196,6 +201,11 @@ class AssessmentCards extends ConsumerWidget {
                           : TextButton.icon(
                               onPressed: currentData.isUpdateEnabled ?? false
                                   ? () async {
+                                      ref
+                                              .read(
+                                                  patientAssessmentAndTestProvider)
+                                              .currentTriageReportId =
+                                          currentData.triageResultID;
                                       final result = await ref
                                           .read(
                                               patientAssessmentAndTestProvider)

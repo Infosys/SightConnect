@@ -14,14 +14,15 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
     this.onCapture,
     this.onSwitchCamera,
     this.onFlash,
+    required this.currentEye,
   });
   final VoidCallback? onCapture;
   final VoidCallback? onSwitchCamera;
   final VoidCallback? onFlash;
+  final TriageEyeType currentEye;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var current = ref.watch(triageEyeScanProvider);
     var isClosed = useState<bool>(false);
     return Column(
       children: [
@@ -40,7 +41,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    current.currentEye == TriageEyeType.RIGHT
+                    currentEye == TriageEyeType.RIGHT
                         ? "Capture Right Eye"
                         : "Capture Left Eye",
                     style: const TextStyle(color: AppColor.white),

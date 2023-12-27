@@ -16,7 +16,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
-  
+
   final int diagnosticReportId;
   const UpdateTriageEyeScanCarouselPage({
     Key? key,
@@ -30,11 +30,11 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text(
-          "Steps to do the scan ",
-        ),
-      ),
+      // appBar: const CustomAppbar(
+      //   title: Text(
+      //     "Steps to do the scan ",
+      //   ),
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -46,6 +46,9 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
               },
               carouselController: carouselController.value,
             ),
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
@@ -89,12 +92,12 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.ksheight,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding + 6,
-              vertical: AppSize.kspadding + 2,
+              horizontal: AppSize.klpadding,
+              vertical: AppSize.kspadding,
             ),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -114,8 +117,10 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       fullscreenDialog: true,
-                      builder: (context) =>
-                          UpdateTriageEyeCapturingPage(cameras: cameras,diagnosticReportId:diagnosticReportId ,),
+                      builder: (context) => UpdateTriageEyeCapturingPage(
+                        cameras: cameras,
+                        diagnosticReportId: diagnosticReportId,
+                      ),
                     ),
                   );
                 }
@@ -133,9 +138,9 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight * 2,
-          )
+          // const SizedBox(
+          //   height: AppSize.klheight * 2,
+          // )
         ],
       ),
     );
