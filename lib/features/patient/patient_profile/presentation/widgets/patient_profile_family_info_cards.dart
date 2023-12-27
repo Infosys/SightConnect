@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -117,7 +117,7 @@ class PatientFamilyDetails extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) =>
                             const PatientRegistrationMiniappPage(
-                          actionType: MiniAppActionType.UPDATE,
+                          actionType: MiniAppActionType.ADD_MEMBER,
                         ),
                       ),
                     );

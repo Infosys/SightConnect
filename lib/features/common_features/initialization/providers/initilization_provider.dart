@@ -1,8 +1,7 @@
+import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/data/keycloak_repository_impl.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/models/keycloak.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,7 +24,6 @@ class InitializationProvider extends ChangeNotifier {
         .getPatientProfileByPhone(phone);
 
     return response.fold((failure) {
-      logger.e(failure);
       return false;
     }, (result) async {
       await PersistentAuthStateService.authState.saveUserProfileId(

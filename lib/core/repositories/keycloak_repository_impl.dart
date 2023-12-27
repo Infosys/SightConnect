@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/repositories/keycloak_repository.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/data/keycloak_repository.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/models/keycloak.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,9 +23,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
         url,
-        options: Options(
-          contentType: "application/x-www-form-urlencoded",
-        ),
+        options: Options(contentType: "application/x-www-form-urlencoded"),
         data: {
           'grant_type': 'password',
           'phone_number': '+91$mobile',
@@ -41,16 +40,15 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
         refreshToken: data.refreshToken,
       );
       await PersistentAuthStateService.authState.saveIdToken(data.idToken);
-
       logger.d({
         "accessToken": PersistentAuthStateService.authState.accessToken,
         "refreshToken": PersistentAuthStateService.authState.refreshToken,
         "idToken": PersistentAuthStateService.authState.idToken,
         "url": url,
       });
-    } catch (e) {
-      logger.e("KeycloakRepositoryImpl.signIn $e");
-      throw ServerFailure(errorMessage: "Invalid OTP");
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      throw ServerFailure(errorMessage: "Error signing in : $e ");
     }
   }
 
@@ -72,9 +70,10 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
         },
       );
       return KeycloakResponse.fromJson(keycloakResponseMap.data!);
-    } catch (e) {
-      logger.e("KeycloakRepositoryImpl.refreshTokens $e");
-      throw ServerFailure(errorMessage: "Refresh token expired");
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+
+      throw ServerFailure(errorMessage: "Refresh token expired : $e");
     }
   }
 
@@ -93,9 +92,10 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       });
 
       return response.data!['expires_in'];
-    } catch (e) {
-      logger.e("KeycloakRepositoryImpl.sendOtp $e");
-      throw ServerFailure(errorMessage: "Invalid mobile number");
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+
+      throw ServerFailure(errorMessage: "Sending OTP failed : $e");
     }
   }
 
@@ -111,9 +111,9 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
         },
       );
       await PersistentAuthStateService.authState.logout();
-    } catch (e) {
-      logger.e("KeycloakRepositoryImpl.signOut $e");
-      throw ServerFailure(errorMessage: "Error signing out");
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      throw ServerFailure(errorMessage: "Error signing out : $e");
     }
   }
 }

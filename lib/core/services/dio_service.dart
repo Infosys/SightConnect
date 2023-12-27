@@ -19,6 +19,13 @@ var dioProvider = Provider(
       ]);
   },
 );
+var keycloakDioProvider = Provider(
+  (ref) {
+    return Dio(
+      BaseOptions(baseUrl: AppEnv.baseUrl),
+    );
+  },
+);
 
 class DioTokenInterceptor extends Interceptor {
   final Ref _ref;
@@ -105,11 +112,3 @@ class DioTokenInterceptor extends Interceptor {
     return super.onError(err, handler);
   }
 }
-
-var keycloakDioProvider = Provider(
-  (ref) {
-    return Dio(
-      BaseOptions(baseUrl: AppEnv.baseUrl),
-    );
-  },
-);

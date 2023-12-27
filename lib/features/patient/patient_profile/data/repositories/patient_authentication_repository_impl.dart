@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/repositories/patient_authentication_repository.dart';
 
 import 'package:eye_care_for_all/features/patient/patient_profile/data/source/remote/onboarding_remote_source.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var patientAuthenticationRepositoryProvider =
@@ -31,7 +30,7 @@ class PatientAuthenticationRepositoryImpl
       return Right(remoteResponse);
     } catch (e) {
       return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
+        ServerFailure(errorMessage: "$e"),
       );
     }
   }
@@ -47,9 +46,7 @@ class PatientAuthenticationRepositoryImpl
       );
       return Right(remoteResponse);
     } catch (e) {
-      return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
-      );
+      return Left(ServerFailure(errorMessage: "$e"));
     }
   }
 
@@ -61,9 +58,7 @@ class PatientAuthenticationRepositoryImpl
           await _patientAuthRemoteSource.updatePatientProfile(patientDTO);
       return Right(remoteResponse);
     } catch (e) {
-      return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
-      );
+      return Left(ServerFailure(errorMessage: "$e"));
     }
   }
 
@@ -75,9 +70,8 @@ class PatientAuthenticationRepositoryImpl
           await _patientAuthRemoteSource.getPatientProfileByPhone(phoneNumber);
       return Right(remoteResponse);
     } catch (e) {
-      logger.e(e);
       return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
+        ServerFailure(errorMessage: "$e"),
       );
     }
   }
