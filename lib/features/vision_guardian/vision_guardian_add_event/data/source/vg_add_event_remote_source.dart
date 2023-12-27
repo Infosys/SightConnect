@@ -53,7 +53,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["actors"] = [actor];
     print(vgeventjson);
     final response = await _dio.post(endpoint, data: vgeventjson);
-
+print(response);
     return response.data;
   }
 

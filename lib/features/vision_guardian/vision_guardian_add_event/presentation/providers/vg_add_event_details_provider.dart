@@ -14,17 +14,16 @@ final addEventDetailsProvider =
 
 var getEventDetailsProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
+      
   return await ref
       .watch(vgAddEventRepository)
-      .getVGEvents(actorIdentifier: "011067400874");
+      .getVGEvents(actorIdentifier: "11067400874");
 });
 
 class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
 
-  AddEventDetailsNotifier({required this.vgAddEventRepository}) {
-
-  }
+  AddEventDetailsNotifier({required this.vgAddEventRepository});
 
   var isLoading = false;
   List<VisionGuardianEventModel> listOfEventDetails = [];
@@ -64,14 +63,6 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   TextEditingController get venueName => _venueName;
   TextEditingController get pincode => _pincode;
   TextEditingController get city => _city;
-
-  Future<List<VisionGuardianEventModel>> getEventDetails() async {
-    print("caller event");
-    listOfEventDetails = await vgAddEventRepository.getVGEvents(actorIdentifier: "011067400874");
-    searchResults = listOfEventDetails;
-    print(listOfEventDetails);
-    return listOfEventDetails;
-  }
 
   Future deleteEventDetails({required String eventId}) async {
     try {
@@ -134,7 +125,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       await vgAddEventRepository.postVGEvents(
           vgEventModel: vgEventModel, actor: actors);
-      await getEventDetails();
+      
+    /*   await getEventDetailsProvider; */
     } catch (e) {
       print(e);
       isLoading = false;
