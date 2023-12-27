@@ -28,7 +28,7 @@ class DrawerMenuItems {
   );
   static const DrawerMenuItem scanner = DrawerMenuItem(
     title: "Scanner",
-    icon: AppIcon.eyeScanner,
+    icon: AppIcon.scanner,
   );
   // static const DrawerMenuItem accessibilities = DrawerMenuItem(
   //   title: "Accessibility Settings",
@@ -38,10 +38,10 @@ class DrawerMenuItems {
     title: "About Us",
     icon: AppIcon.drawerAboutUs,
   );
-  static const DrawerMenuItem termOfUse = DrawerMenuItem(
-    title: "Terms of Use",
-    icon: AppIcon.drawerTermOfUse,
-  );
+  // static const DrawerMenuItem termOfUse = DrawerMenuItem(
+  //   title: "Terms of Use",
+  //   icon: AppIcon.drawerTermOfUse,
+  // );
   static const DrawerMenuItem privacyPolicy = DrawerMenuItem(
     title: "Privacy Policy",
     icon: AppIcon.drawerPrivacyPolicy,
@@ -58,7 +58,7 @@ class DrawerMenuItems {
     scanner,
     // accessibilities,
     about,
-    termOfUse,
+    // termOfUse,
     privacyPolicy,
     help,
   ];

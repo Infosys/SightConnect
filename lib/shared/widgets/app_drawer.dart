@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
@@ -17,7 +18,7 @@ import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 import '../../core/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
 import '../pages/help_and_support_page.dart';
-import '../pages/privacy_policy_page.dart';
+import '../pages/patient_privacy_policy_page.dart';
 import '../pages/terms_of_use_page.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -106,11 +107,19 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
+                                    // case 5:
+                                    //   Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const TermsOfUsePage(),
+                                    //     ),
+                                    //   );
+                                    //   break;
                                     case 5:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const TermsOfUsePage(),
+                                              const PatientPrivacyPolicyPage(),
                                         ),
                                       );
                                       break;
@@ -118,15 +127,9 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PrivacyPolicyPage(),
-                                        ),
-                                      );
-                                      break;
-                                    case 7:
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HelpAndSupportPage(),
+                                              const HelpAndSupportPage(
+                                            helpLine: AppText.tollFreeNumber,
+                                          ),
                                         ),
                                       );
                                       break;
