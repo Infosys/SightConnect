@@ -58,10 +58,8 @@ class _MyAppState extends ConsumerState<MyApp> {
           theme: ref.watch(themeProvider) == ThemeMode.light
               ? AppTheme.getLightTheme(context)
               : AppTheme.getDarkTheme(context),
-          // routes: AppRouter.routes,
-          // initialRoute: initialRoute,
-
-          home: const PatientDashboardPage(),
+          routes: AppRouter.routes,
+          initialRoute: initialRoute,
           navigatorKey: AppRouter.navigatorKey,
         ),
       ),

@@ -13,6 +13,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_da
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -67,7 +68,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _registerUser(NavigatorState navigator) async {
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(),
+        builder: (context) => const PatientRegistrationMiniappPage(
+          actionType: MiniAppActionType.REGISTER,
+        ),
       ),
     );
 

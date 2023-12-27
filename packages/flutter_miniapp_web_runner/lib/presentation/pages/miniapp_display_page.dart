@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/server/miniapp_server.dart';
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,18 +21,15 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
     required this.miniapp,
     this.isPermissionRequired = true,
     this.token = "",
-    this.parentPatientId,
     this.onBack,
-    this.mobile,
+    this.injectionModel,
     super.key,
   });
   final MiniApp miniapp;
   final bool isPermissionRequired;
   final String token;
   final VoidCallback? onBack;
-  final String? mobile;
-  final String? parentPatientId;
-  final String? profileMiniAppModel;
+  final MiniAppInjectionModel? injectionModel;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -46,38 +45,24 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
   String progressMessage = "";
 
   String userScript = """
-var mobile;
-var parentPatientId;
-var miniappModel;
 
+var miniappModel;
 class Communication {
   static isFlutterInAppWebViewReady = false;
 }
 window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
   Communication.isFlutterInAppWebViewReady = true;
-  window.flutter_inappwebview.callHandler("getMobile").then(function (result) {
-    mobile = result.mobile;
-  });
-   window.flutter_inappwebview.callHandler("getParentPatientId").then(function (result) {
-    parentPatientId = result.parentPatientId;
-  });
-   window.flutter_inappwebview.callHandler("getPatientRegisterMiniAppModel").then(function (result) {
-    miniappModel = Json.stringify(result);
+  console.log("isFlutterInAppWebViewReady: " + Communication.isFlutterInAppWebViewReady);
+ window.flutter_inappwebview.callHandler("getPatientRegisterMiniAppModel").then(function (result) {
+ console.log(JSON.stringify(result));
+ miniappModel = JSON.stringify(result);
+  
   });
 });
 
-
-funtion fetchMiniAppModel() {
+function fetchInjectionData() {
   return miniappModel;
 }
-
-function fetchMobile() {
-  return mobile;
-} 
-function fetchParentPatientId() {
-  return parentPatientId;
-}
-
  """;
 
   @override
@@ -151,13 +136,13 @@ function fetchParentPatientId() {
                 },
               ),
               body: InAppWebView(
-                // initialUrlRequest: URLRequest(
-                //   url: Uri.parse("http://127.0.0.1:$port/"),
-                // ),
                 initialUrlRequest: URLRequest(
-                  url: Uri.parse(
-                      "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
+                  url: Uri.parse("http://127.0.0.1:$port/"),
                 ),
+                // initialUrlRequest: URLRequest(
+                //   url: Uri.parse(
+                //       "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
+                // ),
                 onLoadError: (controller, url, code, message) async {
                   logger.e("Error: $message");
                   setState(() {
@@ -231,20 +216,11 @@ function fetchParentPatientId() {
                 ),
                 onWebViewCreated: (controller) {
                   webViewController = controller;
-                  controller.addJavaScriptHandler(
-                      handlerName: 'getMobile',
-                      callback: (args) {
-                        return {'mobile': widget.mobile};
-                      });
-                  controller.addJavaScriptHandler(
-                      handlerName: 'getParentPatientId',
-                      callback: (args) {
-                        return {'parentPatientId': widget.parentPatientId};
-                      });
+
                   controller.addJavaScriptHandler(
                       handlerName: 'getPatientRegisterMiniAppModel',
                       callback: (args) {
-                        return widget.profileMiniAppModel;
+                        return widget.injectionModel?.toJson();
                       });
                 },
                 onLoadStop: (controller, uri) {

@@ -9,21 +9,21 @@ part of 'miniapp_injection_model.dart';
 _$MiniAppInjectionModelImpl _$$MiniAppInjectionModelImplFromJson(
         Map<String, dynamic> json) =>
     _$MiniAppInjectionModelImpl(
-      action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
-      parentPatientId: json['parentPatientId'] as int?,
+      action: $enumDecodeNullable(_$MiniAppActionTypeEnumMap, json['action']),
+      parentPatientId: json['parentPatientId'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
     );
 
 Map<String, dynamic> _$$MiniAppInjectionModelImplToJson(
         _$MiniAppInjectionModelImpl instance) =>
     <String, dynamic>{
-      'action': _$ActionEnumMap[instance.action],
+      'action': _$MiniAppActionTypeEnumMap[instance.action],
       'parentPatientId': instance.parentPatientId,
       'mobileNumber': instance.mobileNumber,
     };
 
-const _$ActionEnumMap = {
-  Action.REGISTER: 'REGISTER',
-  Action.UPDATE: 'UPDATE',
-  Action.ADD_MEMBER: 'ADD_MEMBER',
+const _$MiniAppActionTypeEnumMap = {
+  MiniAppActionType.REGISTER: 'REGISTER',
+  MiniAppActionType.UPDATE: 'UPDATE',
+  MiniAppActionType.ADD_MEMBER: 'ADD_MEMBER',
 };

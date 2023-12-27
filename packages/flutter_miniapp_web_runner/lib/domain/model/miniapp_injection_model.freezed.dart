@@ -21,8 +21,8 @@ MiniAppInjectionModel _$MiniAppInjectionModelFromJson(
 
 /// @nodoc
 mixin _$MiniAppInjectionModel {
-  Action? get action => throw _privateConstructorUsedError;
-  int? get parentPatientId => throw _privateConstructorUsedError;
+  MiniAppActionType? get action => throw _privateConstructorUsedError;
+  String? get parentPatientId => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,10 @@ abstract class $MiniAppInjectionModelCopyWith<$Res> {
           $Res Function(MiniAppInjectionModel) then) =
       _$MiniAppInjectionModelCopyWithImpl<$Res, MiniAppInjectionModel>;
   @useResult
-  $Res call({Action? action, int? parentPatientId, String? mobileNumber});
+  $Res call(
+      {MiniAppActionType? action,
+      String? parentPatientId,
+      String? mobileNumber});
 }
 
 /// @nodoc
@@ -62,11 +65,11 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
-              as Action?,
+              as MiniAppActionType?,
       parentPatientId: freezed == parentPatientId
           ? _value.parentPatientId
           : parentPatientId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -84,7 +87,10 @@ abstract class _$$MiniAppInjectionModelImplCopyWith<$Res>
       __$$MiniAppInjectionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Action? action, int? parentPatientId, String? mobileNumber});
+  $Res call(
+      {MiniAppActionType? action,
+      String? parentPatientId,
+      String? mobileNumber});
 }
 
 /// @nodoc
@@ -107,11 +113,11 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
-              as Action?,
+              as MiniAppActionType?,
       parentPatientId: freezed == parentPatientId
           ? _value.parentPatientId
           : parentPatientId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -130,9 +136,9 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       _$$MiniAppInjectionModelImplFromJson(json);
 
   @override
-  final Action? action;
+  final MiniAppActionType? action;
   @override
-  final int? parentPatientId;
+  final String? parentPatientId;
   @override
   final String? mobileNumber;
 
@@ -175,17 +181,17 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
 
 abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
   const factory _MiniAppInjectionModel(
-      {final Action? action,
-      final int? parentPatientId,
+      {final MiniAppActionType? action,
+      final String? parentPatientId,
       final String? mobileNumber}) = _$MiniAppInjectionModelImpl;
 
   factory _MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =
       _$MiniAppInjectionModelImpl.fromJson;
 
   @override
-  Action? get action;
+  MiniAppActionType? get action;
   @override
-  int? get parentPatientId;
+  String? get parentPatientId;
   @override
   String? get mobileNumber;
   @override

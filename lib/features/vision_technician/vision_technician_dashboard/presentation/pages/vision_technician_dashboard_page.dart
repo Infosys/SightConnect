@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ma
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianDashboardPage extends ConsumerWidget {
@@ -24,7 +25,9 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PatientRegistrationMiniappPage(),
+                  builder: (context) => const PatientRegistrationMiniappPage(
+                    actionType: MiniAppActionType.REGISTER,
+                  ),
                 ),
               );
               break;

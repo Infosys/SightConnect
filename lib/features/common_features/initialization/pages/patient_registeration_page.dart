@@ -1,10 +1,16 @@
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 
 class PatientRegistrationMiniappPage extends StatelessWidget {
-  const PatientRegistrationMiniappPage({super.key});
+  const PatientRegistrationMiniappPage({
+    required this.actionType,
+    super.key,
+  });
+
+  final MiniAppActionType actionType;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +22,11 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
             Navigator.of(context).pop(true);
           },
           token: PersistentAuthStateService.authState.accessToken ?? "",
-          parentPatientId: PersistentAuthStateService.authState.userId,
-          mobile: PersistentAuthStateService.authState.username,
+          injectionModel: MiniAppInjectionModel(
+            action: actionType,
+            mobileNumber: PersistentAuthStateService.authState.username,
+            parentPatientId: PersistentAuthStateService.authState.userId,
+          ),
           miniapp: MiniApp(
             id: "1",
             version: "1",

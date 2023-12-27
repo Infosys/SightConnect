@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
@@ -115,7 +116,9 @@ class PatientFamilyDetails extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const PatientRegistrationMiniappPage(),
+                            const PatientRegistrationMiniappPage(
+                          actionType: MiniAppActionType.UPDATE,
+                        ),
                       ),
                     );
                   } catch (e) {
