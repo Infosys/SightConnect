@@ -30,6 +30,7 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   final VoidCallback? onBack;
   final String? mobile;
   final String? parentPatientId;
+  final String? profileMiniAppModel;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -47,6 +48,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
   String userScript = """
 var mobile;
 var parentPatientId;
+var miniappModel;
 
 class Communication {
   static isFlutterInAppWebViewReady = false;
@@ -59,7 +61,15 @@ window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
    window.flutter_inappwebview.callHandler("getParentPatientId").then(function (result) {
     parentPatientId = result.parentPatientId;
   });
+   window.flutter_inappwebview.callHandler("getPatientRegisterMiniAppModel").then(function (result) {
+    miniappModel = Json.stringify(result);
+  });
 });
+
+
+funtion fetchMiniAppModel() {
+  return miniappModel;
+}
 
 function fetchMobile() {
   return mobile;
@@ -67,6 +77,7 @@ function fetchMobile() {
 function fetchParentPatientId() {
   return parentPatientId;
 }
+
  """;
 
   @override
@@ -197,6 +208,11 @@ function fetchParentPatientId() {
                       handlerName: 'getParentPatientId',
                       callback: (args) {
                         return {'parentPatientId': widget.parentPatientId};
+                      });
+                  controller.addJavaScriptHandler(
+                      handlerName: 'getPatientRegisterMiniAppModel',
+                      callback: (args) {
+                        return widget.profileMiniAppModel;
                       });
                 },
                 onLoadStop: (controller, uri) {

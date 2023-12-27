@@ -38,41 +38,41 @@ class GlobalPatientProvider extends ChangeNotifier {
   }
 
   Future<void> getUserProfile() async {
-    final user = await _ref.read(initializationProvider).getUserProfile();
+    // final user = await _ref.read(initializationProvider).getUserProfile();
 
-    // const user = PatientResponseModel(
-    //   profile: ProfileModel(
-    //     patient: ExtendedPatientModel(
-    //       patientId: 111,
-    //       abhaAddress: "abhaAddress",
-    //       abhaNumber: 123,
-    //       address: [],
-    //       age: 30,
-    //       dayOfBirth: "08",
-    //       monthOfBirth: "08",
-    //       yearOfBirth: "23",
-    //       email: "email",
-    //       gender: Gender.MALE,
-    //       name: "Manish Pandey",
-    //       phoneNumber: "9627849180",
-    //       medicalRecords: [],
-    //       parentPatientId: 12345,
-    //       profilePhoto: "http://placekitten.com/200/300",
-    //       identifiers: [],
-    //       osid: "",
-    //       relatedParty: [
-    //         RelatedPartyModel(
-    //           name: "Rohit Pandey",
-    //           age: 54,
-    //           patientId: 123,
-    //           parentPatientId: 1233,
-    //           profilePicture: "http://placekitten.com/200/300",
-    //           relation: Relationship.FATHER,
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+    const user = PatientResponseModel(
+      profile: ProfileModel(
+        patient: ExtendedPatientModel(
+          patientId: 111,
+          abhaAddress: "abhaAddress",
+          abhaNumber: 123,
+          address: [],
+          age: 30,
+          dayOfBirth: "08",
+          monthOfBirth: "08",
+          yearOfBirth: "23",
+          email: "email",
+          gender: Gender.MALE,
+          name: "Manish Pandey",
+          phoneNumber: "9627849180",
+          medicalRecords: [],
+          parentPatientId: 12345,
+          profilePhoto: "http://placekitten.com/200/300",
+          identifiers: [],
+          osid: "",
+          relatedParty: [
+            RelatedPartyModel(
+              name: "Rohit Pandey",
+              age: 54,
+              patientId: 123,
+              parentPatientId: 1233,
+              profilePicture: "http://placekitten.com/200/300",
+              relation: Relationship.FATHER,
+            ),
+          ],
+        ),
+      ),
+    );
 
     setParentUser(user);
     notifyListeners();
