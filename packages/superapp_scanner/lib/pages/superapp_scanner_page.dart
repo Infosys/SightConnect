@@ -37,12 +37,17 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
   }
 
   void _checkData(String? data) async {
-    if (data != null && data.trimLeft().startsWith("http")) {
-      launchInWebViewWithoutJavaScript(data);
-    } else if (data != null && data.trimLeft().contains("superapp")) {
-    } else if (data != null && data.trimLeft().contains("upi")) {
-      launchInWebViewWithoutJavaScript(data);
+    if (data != null) {
+      if (data.trimLeft().startsWith("http") ||
+          data.trimLeft().startsWith("https")) {
+        launchInWebViewWithoutJavaScript(data);
+      }
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid QR Code"),
+        ),
+      );
       Navigator.of(context).pop();
     }
   }

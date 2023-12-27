@@ -11,12 +11,13 @@ import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   const MiniAppDisplayPage({
     required this.miniapp,
-    this.isPermissionRequired = false,
+    this.isPermissionRequired = true,
     this.token = "",
     this.parentPatientId,
     this.onBack,
@@ -26,7 +27,6 @@ class MiniAppDisplayPage extends StatefulHookConsumerWidget {
   final MiniApp miniapp;
   final bool isPermissionRequired;
   final String token;
-
   final VoidCallback? onBack;
   final String? mobile;
   final String? parentPatientId;
@@ -75,6 +75,17 @@ function fetchParentPatientId() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         logger.f("TOKEN : ${widget.token}");
+        final navigator = Navigator.of(context);
+
+        if (widget.isPermissionRequired) {
+          final cameraStatus = await Permission.camera.request();
+          final microphoneStatus = await Permission.microphone.request();
+          if (cameraStatus.isDenied || microphoneStatus.isDenied) {
+            navigator.pop();
+            return;
+          }
+        }
+
         await _loadMiniApp();
       },
     );
@@ -91,6 +102,13 @@ function fetchParentPatientId() {
         }
       }
     }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
   }
 
   @override
@@ -122,8 +140,12 @@ function fetchParentPatientId() {
                 },
               ),
               body: InAppWebView(
+                // initialUrlRequest: URLRequest(
+                //   url: Uri.parse("http://127.0.0.1:$port/"),
+                // ),
                 initialUrlRequest: URLRequest(
-                  url: Uri.parse("http://127.0.0.1:$port/"),
+                  url: Uri.parse(
+                      "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
                 ),
                 onLoadError: (controller, url, code, message) async {
                   logger.e("Error: $message");
@@ -169,6 +191,9 @@ function fetchParentPatientId() {
                   }
                 },
                 initialOptions: InAppWebViewGroupOptions(
+                  crossPlatform: InAppWebViewOptions(
+                    mediaPlaybackRequiresUserGesture: false,
+                  ),
                   ios: IOSInAppWebViewOptions(
                     useOnNavigationResponse: true,
                     allowsInlineMediaPlayback: true,
@@ -178,6 +203,13 @@ function fetchParentPatientId() {
                     useShouldInterceptRequest: true,
                   ),
                 ),
+                androidOnPermissionRequest:
+                    (controller, origin, resources) async {
+                  return PermissionRequestResponse(
+                    resources: resources,
+                    action: PermissionRequestResponseAction.GRANT,
+                  );
+                },
                 initialUserScripts: UnmodifiableListView<UserScript>(
                   [
                     UserScript(

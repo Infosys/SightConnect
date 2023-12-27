@@ -67,21 +67,22 @@ class _$MiniAppsCopyWithImpl<$Res, $Val extends MiniApps>
 }
 
 /// @nodoc
-abstract class _$$_MiniAppsCopyWith<$Res> implements $MiniAppsCopyWith<$Res> {
-  factory _$$_MiniAppsCopyWith(
-          _$_MiniApps value, $Res Function(_$_MiniApps) then) =
-      __$$_MiniAppsCopyWithImpl<$Res>;
+abstract class _$$MiniAppsImplCopyWith<$Res>
+    implements $MiniAppsCopyWith<$Res> {
+  factory _$$MiniAppsImplCopyWith(
+          _$MiniAppsImpl value, $Res Function(_$MiniAppsImpl) then) =
+      __$$MiniAppsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<MiniApp> allMiniApps, String miniAppInSessionId});
 }
 
 /// @nodoc
-class __$$_MiniAppsCopyWithImpl<$Res>
-    extends _$MiniAppsCopyWithImpl<$Res, _$_MiniApps>
-    implements _$$_MiniAppsCopyWith<$Res> {
-  __$$_MiniAppsCopyWithImpl(
-      _$_MiniApps _value, $Res Function(_$_MiniApps) _then)
+class __$$MiniAppsImplCopyWithImpl<$Res>
+    extends _$MiniAppsCopyWithImpl<$Res, _$MiniAppsImpl>
+    implements _$$MiniAppsImplCopyWith<$Res> {
+  __$$MiniAppsImplCopyWithImpl(
+      _$MiniAppsImpl _value, $Res Function(_$MiniAppsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +91,7 @@ class __$$_MiniAppsCopyWithImpl<$Res>
     Object? allMiniApps = null,
     Object? miniAppInSessionId = null,
   }) {
-    return _then(_$_MiniApps(
+    return _then(_$MiniAppsImpl(
       allMiniApps: null == allMiniApps
           ? _value._allMiniApps
           : allMiniApps // ignore: cast_nullable_to_non_nullable
@@ -105,14 +106,14 @@ class __$$_MiniAppsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MiniApps implements _MiniApps {
-  _$_MiniApps(
+class _$MiniAppsImpl implements _MiniApps {
+  _$MiniAppsImpl(
       {final List<MiniApp> allMiniApps = const [],
       this.miniAppInSessionId = ""})
       : _allMiniApps = allMiniApps;
 
-  factory _$_MiniApps.fromJson(Map<String, dynamic> json) =>
-      _$$_MiniAppsFromJson(json);
+  factory _$MiniAppsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MiniAppsImplFromJson(json);
 
   final List<MiniApp> _allMiniApps;
   @override
@@ -136,7 +137,7 @@ class _$_MiniApps implements _MiniApps {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MiniApps &&
+            other is _$MiniAppsImpl &&
             const DeepCollectionEquality()
                 .equals(other._allMiniApps, _allMiniApps) &&
             (identical(other.miniAppInSessionId, miniAppInSessionId) ||
@@ -151,12 +152,12 @@ class _$_MiniApps implements _MiniApps {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MiniAppsCopyWith<_$_MiniApps> get copyWith =>
-      __$$_MiniAppsCopyWithImpl<_$_MiniApps>(this, _$identity);
+  _$$MiniAppsImplCopyWith<_$MiniAppsImpl> get copyWith =>
+      __$$MiniAppsImplCopyWithImpl<_$MiniAppsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MiniAppsToJson(
+    return _$$MiniAppsImplToJson(
       this,
     );
   }
@@ -165,9 +166,10 @@ class _$_MiniApps implements _MiniApps {
 abstract class _MiniApps implements MiniApps {
   factory _MiniApps(
       {final List<MiniApp> allMiniApps,
-      final String miniAppInSessionId}) = _$_MiniApps;
+      final String miniAppInSessionId}) = _$MiniAppsImpl;
 
-  factory _MiniApps.fromJson(Map<String, dynamic> json) = _$_MiniApps.fromJson;
+  factory _MiniApps.fromJson(Map<String, dynamic> json) =
+      _$MiniAppsImpl.fromJson;
 
   @override
   List<MiniApp> get allMiniApps;
@@ -175,7 +177,7 @@ abstract class _MiniApps implements MiniApps {
   String get miniAppInSessionId;
   @override
   @JsonKey(ignore: true)
-  _$$_MiniAppsCopyWith<_$_MiniApps> get copyWith =>
+  _$$MiniAppsImplCopyWith<_$MiniAppsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -303,10 +305,10 @@ class _$MiniAppCopyWithImpl<$Res, $Val extends MiniApp>
 }
 
 /// @nodoc
-abstract class _$$_MiniAppCopyWith<$Res> implements $MiniAppCopyWith<$Res> {
-  factory _$$_MiniAppCopyWith(
-          _$_MiniApp value, $Res Function(_$_MiniApp) then) =
-      __$$_MiniAppCopyWithImpl<$Res>;
+abstract class _$$MiniAppImplCopyWith<$Res> implements $MiniAppCopyWith<$Res> {
+  factory _$$MiniAppImplCopyWith(
+          _$MiniAppImpl value, $Res Function(_$MiniAppImpl) then) =
+      __$$MiniAppImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -325,10 +327,11 @@ abstract class _$$_MiniAppCopyWith<$Res> implements $MiniAppCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MiniAppCopyWithImpl<$Res>
-    extends _$MiniAppCopyWithImpl<$Res, _$_MiniApp>
-    implements _$$_MiniAppCopyWith<$Res> {
-  __$$_MiniAppCopyWithImpl(_$_MiniApp _value, $Res Function(_$_MiniApp) _then)
+class __$$MiniAppImplCopyWithImpl<$Res>
+    extends _$MiniAppCopyWithImpl<$Res, _$MiniAppImpl>
+    implements _$$MiniAppImplCopyWith<$Res> {
+  __$$MiniAppImplCopyWithImpl(
+      _$MiniAppImpl _value, $Res Function(_$MiniAppImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -347,7 +350,7 @@ class __$$_MiniAppCopyWithImpl<$Res>
     Object? tags = freezed,
     Object? sourceurl = freezed,
   }) {
-    return _then(_$_MiniApp(
+    return _then(_$MiniAppImpl(
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -402,8 +405,8 @@ class __$$_MiniAppCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MiniApp implements _MiniApp {
-  _$_MiniApp(
+class _$MiniAppImpl implements _MiniApp {
+  _$MiniAppImpl(
       {this.type,
       this.id,
       this.version,
@@ -417,8 +420,8 @@ class _$_MiniApp implements _MiniApp {
       this.tags,
       this.sourceurl});
 
-  factory _$_MiniApp.fromJson(Map<String, dynamic> json) =>
-      _$$_MiniAppFromJson(json);
+  factory _$MiniAppImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MiniAppImplFromJson(json);
 
   @override
   final dynamic type;
@@ -454,7 +457,7 @@ class _$_MiniApp implements _MiniApp {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MiniApp &&
+            other is _$MiniAppImpl &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.version, version) &&
@@ -492,12 +495,12 @@ class _$_MiniApp implements _MiniApp {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MiniAppCopyWith<_$_MiniApp> get copyWith =>
-      __$$_MiniAppCopyWithImpl<_$_MiniApp>(this, _$identity);
+  _$$MiniAppImplCopyWith<_$MiniAppImpl> get copyWith =>
+      __$$MiniAppImplCopyWithImpl<_$MiniAppImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MiniAppToJson(
+    return _$$MiniAppImplToJson(
       this,
     );
   }
@@ -516,9 +519,9 @@ abstract class _MiniApp implements MiniApp {
       final dynamic displayName,
       final dynamic redirectPage,
       final dynamic tags,
-      final dynamic sourceurl}) = _$_MiniApp;
+      final dynamic sourceurl}) = _$MiniAppImpl;
 
-  factory _MiniApp.fromJson(Map<String, dynamic> json) = _$_MiniApp.fromJson;
+  factory _MiniApp.fromJson(Map<String, dynamic> json) = _$MiniAppImpl.fromJson;
 
   @override
   dynamic get type;
@@ -546,6 +549,6 @@ abstract class _MiniApp implements MiniApp {
   dynamic get sourceurl;
   @override
   @JsonKey(ignore: true)
-  _$$_MiniAppCopyWith<_$_MiniApp> get copyWith =>
+  _$$MiniAppImplCopyWith<_$MiniAppImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
