@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:developer';
 
 import 'dart:io';
 import 'dart:math';
@@ -15,7 +14,6 @@ import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
@@ -50,7 +48,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        _loadMiniAppFuture = _loadMiniApp();
+        _loadMiniAppFuture = _startServerAndLoadMiniApp();
         logger.f("TOKEN : ${widget.token}");
       },
     );
@@ -209,6 +207,28 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
         },
       ),
     );
+  }
+
+  Future<void> _startServerAndLoadMiniApp() async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    try {
+      var id = widget.miniapp.id;
+      var version = widget.miniapp.version;
+      var path = widget.miniapp.sourceurl;
+      final miniAppPath = await getMiniAppPath(path, version, id);
+
+      final miniAppServer = ref.read(localServerProvider);
+
+      await miniAppServer.startServer(miniAppPath, port);
+      await _loadMiniApp();
+    } catch (e) {
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text("The miniapp is not available at the moment"),
+        ),
+      );
+    }
   }
 
   Future<void> _loadMiniApp() async {
