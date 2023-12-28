@@ -47,14 +47,22 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         if (isUserExist) {
           await _handleExistingUser(navigator);
         } else {
-          final consentGiven = await showConsentForm(context);
-          if (consentGiven != null && consentGiven) {
-            await _registerUser(navigator);
+          final selectedProfile = await showProfileSelectionDialog(context);
+          if (selectedProfile != null) {
+            final consentGiven = await showConsentForm(
+              context,
+              selectedProfile,
+            );
+            if (consentGiven != null && consentGiven) {
+              await _registerUser(navigator);
+            } else {
+              await ref.read(initializationProvider).logout();
+              await navigator.pushNamedAndRemoveUntil(
+                  LoginPage.routeName, (route) => false);
+              Fluttertoast.showToast(msg: "Please accept the consent form.");
+            }
           } else {
-            await ref.read(initializationProvider).logout();
-            await navigator.pushNamedAndRemoveUntil(
-                LoginPage.routeName, (route) => false);
-            Fluttertoast.showToast(msg: "Please accept the consent form.");
+            Fluttertoast.showToast(msg: "Please select a profile.");
           }
         }
       }
@@ -63,12 +71,43 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
+  Future<String?> showProfileSelectionDialog(BuildContext context) {
+    final roles = PersistentAuthStateService.authState.roles;
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select a profile'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: roles!
+                  .map(
+                    (role) => RadioListTile<String>(
+                      title: Text(role),
+                      value: role,
+                      groupValue: role,
+                      onChanged: (value) async {
+                        await PersistentAuthStateService.authState
+                            .setActiveRole(role);
+                        Navigator.of(context).pop(value);
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<bool> _checkUserAlreadyExist() async {
     return await ref.read(initializationProvider).checkUserAlreadyExist();
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator) async {
-    final role = roleMapper(PersistentAuthStateService.authState.role);
+    final role = roleMapper(PersistentAuthStateService.authState.activeRole);
 
     if (role != null) {
       await navigateBasedOnRole(context, role);
@@ -96,13 +135,14 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<bool?> showConsentForm(context) async {
-    final role = roleMapper(PersistentAuthStateService.authState.role);
+  Future<bool?> showConsentForm(context, String role) async {
+    final currentRole = roleMapper(role);
+
     final navigator = Navigator.of(context);
     bool? consentGiven = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) => ConsentFormPage(
-          role: role!,
+          role: currentRole!,
         ),
       ),
     );
