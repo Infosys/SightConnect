@@ -39,23 +39,6 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
       });
       return list;
     });
-
-    // var response = await rootBundle.loadString("assets/vt_patient.json");
-    // var data = jsonDecode(response);
-    // var jsonList = data["patients"];
-    // List<VTPatientDto> list = [];
-    // print(jsonList);
-    // for (int i = 0; i < jsonList.length; i++) {
-    //   VTPatientDto patient = VTPatientDto.fromJson(jsonList[i]);
-
-    //   if (patient.name!.toLowerCase().contains(query) ||
-    //       patient.id!.toString().contains(query) ||
-    //       patient.mobile!.contains(query)) {
-    //     list.add(patient);
-    //   }
-    // }
-    // print(list);
-    // return list;
   }
 }
 

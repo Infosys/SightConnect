@@ -87,6 +87,7 @@ class MyConnectionsList extends ConsumerWidget {
                                     builder: (context) =>
                                         const PatientRegistrationMiniappPage(
                                       actionType: MiniAppActionType.ADD_MEMBER,
+                                      displayName: "Add Member",
                                     ),
                                   ),
                                 );
@@ -168,6 +169,7 @@ class MyConnectionsList extends ConsumerWidget {
                                     builder: (context) =>
                                         const PatientRegistrationMiniappPage(
                                       actionType: MiniAppActionType.ADD_MEMBER,
+                                      displayName: "Add Member",
                                     ),
                                   ),
                                 );

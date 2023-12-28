@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/main.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'keycloak.freezed.dart';
@@ -37,6 +36,19 @@ Role? roleMapper(String? role) {
       return Role.ROLE_OPTOMETRIST;
     default:
       return null;
+  }
+}
+
+String roleToString(Role role) {
+  switch (role) {
+    case Role.ROLE_PATIENT:
+      return "ROLE_PATIENT";
+    case Role.ROLE_VISION_GUARDIAN:
+      return "ROLE_VISION_GUARDIAN";
+    case Role.ROLE_VISION_TECHNICIAN:
+      return "ROLE_VISION_TECHNICIAN";
+    case Role.ROLE_OPTOMETRIST:
+      return "ROLE_OPTOMETRIST";
   }
 }
 

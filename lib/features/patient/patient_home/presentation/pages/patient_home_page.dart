@@ -11,7 +11,6 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PatientHomePage extends ConsumerStatefulWidget {

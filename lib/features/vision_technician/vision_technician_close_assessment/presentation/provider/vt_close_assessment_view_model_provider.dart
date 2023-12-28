@@ -56,7 +56,7 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
 
     // String dateTime = DateTime().
 
-    CloseAssessmentDto _patientDetails = CloseAssessmentDto(
+    CloseAssessmentDto patientDetails0 = CloseAssessmentDto(
       encounterId: 33300000023, //from care plan response,
       diagnosticReportId: 33200000051, //from care plan response
       organizationCode: 1001, //from care plan response
@@ -68,15 +68,13 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
       goalAction: GoalAction.UPDATE,
       statusReason: "don't know",
       achievementStatus: AchievementStatus.ACHIEVED,
-      statusDate:DateTime.now(),
+      statusDate: DateTime.now(),
       outcomes: listOfOutcomes,
       note: vtCloseAssessmentHelperNotifier.recommendationsController.text,
       mrn: vtCloseAssessmentHelperNotifier.mrCodeController.text,
     );
 
-    print("close assessment");
-
-    vtCloseAssessmentRepository.submitCloseAssessmentInfo(_patientDetails);
+    vtCloseAssessmentRepository.submitCloseAssessmentInfo(patientDetails0);
     // _vtCloseAssessmentHelperNotifier.oralMedication;
   }
 

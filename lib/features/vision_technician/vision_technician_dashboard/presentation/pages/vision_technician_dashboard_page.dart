@@ -27,6 +27,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 MaterialPageRoute(
                   builder: (context) => const PatientRegistrationMiniappPage(
                     actionType: MiniAppActionType.REGISTER,
+                    displayName: "Register Patient",
                   ),
                 ),
               );

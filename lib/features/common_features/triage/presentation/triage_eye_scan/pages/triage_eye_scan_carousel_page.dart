@@ -2,36 +2,28 @@ import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/user_details_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../widgets/cataract_eye_scan_carousel.dart';
+
 class TriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
   const TriageEyeScanCarouselPage({
     Key? key,
-    this.userDetails,
   }) : super(key: key);
-  final UserDetails? userDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(
-      // appBar: const CustomAppbar(
-      //   title: Text(
-      //     "Steps to do the scan ",
-      //   ),
-      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,

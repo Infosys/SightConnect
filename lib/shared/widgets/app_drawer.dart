@@ -19,7 +19,6 @@ import '../../core/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
 import '../pages/help_and_support_page.dart';
 import '../pages/patient_privacy_policy_page.dart';
-import '../pages/terms_of_use_page.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

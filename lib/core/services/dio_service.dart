@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -14,10 +12,9 @@ var dioProvider = Provider(
   (ref) {
     return Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
-    );
-    // ..interceptors.addAll([
-    //     DioTokenInterceptor(ref),
-    //   ]);
+    )..interceptors.addAll([
+        DioTokenInterceptor(ref),
+      ]);
   },
 );
 var keycloakDioProvider = Provider(
@@ -90,7 +87,7 @@ class DioTokenInterceptor extends Interceptor {
           'Bearer ${PersistentAuthStateService.authState.accessToken}'
     });
 
-    log(options.uri.toString(), name: "Dio Request");
+    logger.d(options.uri.toString());
     return super.onRequest(options, handler);
   }
 

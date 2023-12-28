@@ -138,8 +138,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           ? AppNetworkImage(
                               imageUrl: person.profilePicture!,
                             )
-                          : const CircleAvatar(
-                              backgroundColor: AppColor.lightGrey,
+                          : AppNameAvatar(
+                              name: person.name,
                             ),
                       const SizedBox(
                         width: 20,

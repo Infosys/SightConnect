@@ -15,12 +15,8 @@ Future<void> main() async {
 
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
-
   IOSDeviceInfoService.init();
   AppEnv.setupEnv(Env.DEV);
-  if (AppEnv.isProd) {
-    // await AppLogger.init();
-  }
 
   runApp(
     const ProviderScope(

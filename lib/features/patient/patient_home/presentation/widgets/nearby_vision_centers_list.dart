@@ -66,7 +66,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
                           onPressed: () {
                             ref.read(patientHomeProvider).init();
                           },
-                          label: const Text("Click to refresh"),
+                          label: const Text("Try Again"),
                           icon: const Icon(Icons.location_on),
                         ),
                       ),

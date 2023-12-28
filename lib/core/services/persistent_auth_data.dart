@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -128,7 +128,7 @@ class PersistentAuthData {
     try {
       return JwtDecoder.isExpired(token);
     } catch (e) {
-      log(e.toString());
+      logger.d(e);
     }
     return true;
   }

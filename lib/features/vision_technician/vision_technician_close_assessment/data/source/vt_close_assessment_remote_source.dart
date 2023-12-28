@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
-// import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/models/vt_close_assessment_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,7 +15,7 @@ var vtCloseAssessmentRemoteSource =
 
 class VTCloseAssessmentRemoteSourceImpl
     implements VTCloseAssessmentRemoteSource {
-  Dio _dio;
+  final Dio _dio;
   VTCloseAssessmentRemoteSourceImpl(this._dio);
 
   @override
@@ -26,8 +23,8 @@ class VTCloseAssessmentRemoteSourceImpl
     String endPoint =
         '/services/triage/api/triage/${patientDetails.encounterId}/close';
 
-    log(endPoint);
-    log(patientDetails.toJson().toString());
+    logger.d(endPoint);
+    logger.d(patientDetails.toJson().toString());
 
     try {
       var response = await _dio.patch(endPoint, data: patientDetails.toJson());

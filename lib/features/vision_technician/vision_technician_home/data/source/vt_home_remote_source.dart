@@ -31,15 +31,5 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
 
       return list;
     });
-
-    // final response = await rootBundle.loadString("assets/vt_patient.json");
-    // var data = jsonDecode(response);
-    // List jsonList = data["patients"];
-    // List<VTPatientDto> list = [];
-    // for (int i = 0; i < jsonList.length; i++) {
-    //   list.add(VTPatientDto.fromJson(jsonList[i]));
-    // }
-    // // print(list);
-    // return list;
   }
 }

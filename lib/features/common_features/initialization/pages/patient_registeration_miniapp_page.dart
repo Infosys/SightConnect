@@ -8,9 +8,11 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   const PatientRegistrationMiniappPage({
     required this.actionType,
     super.key,
+    required this.displayName,
   });
 
   final MiniAppActionType actionType;
+  final String displayName;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           miniapp: MiniApp(
             id: "1",
             version: "1",
-            name: "Register Patient",
-            displayName: "Register Patient",
+            name: displayName,
+            displayName: displayName,
             sourceurl: "assets/miniapps/vt_register_patient.zip",
           ),
         ),

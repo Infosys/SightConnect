@@ -20,10 +20,8 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
-import '../widgets/camera_controllers.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({

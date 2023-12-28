@@ -11,7 +11,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
 import '../widgets/patient_profile_patient_info.dart';
-import 'patient_edit_profile_page.dart';
 
 class PatientProfilePage extends ConsumerWidget {
   const PatientProfilePage({super.key});
@@ -43,6 +42,7 @@ class PatientProfilePage extends ConsumerWidget {
                   MaterialPageRoute(
                     builder: (context) => const PatientRegistrationMiniappPage(
                       actionType: MiniAppActionType.UPDATE,
+                      displayName: "Update Profile",
                     ),
                   ),
                 );

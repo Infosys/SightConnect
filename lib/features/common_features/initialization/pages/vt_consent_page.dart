@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class VTConsentFormPage extends HookWidget {
