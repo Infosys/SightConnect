@@ -174,7 +174,7 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                       width: AppSize.kswidth - 5,
                     ),
                     Text(
-                      "${data.addresses![0].addressLine1!},${data.addresses![0].addressLine2!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
+                      "${data.addresses![0].addressLine1!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
                          softWrap: true,
                       style: applyRobotoFont(
                         fontSize: 12,

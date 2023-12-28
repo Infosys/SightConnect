@@ -11,13 +11,14 @@ class VisionEventListDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("data");
     return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
       if (eventDetails.isEmpty) {
         return const Center(
           child: Text("No Events are Available"),
         );
       }
-      return Container(
+      return SizedBox(
         height: AppSize.height(context) * .8,
         child: ListView.separated(
           shrinkWrap: true,
@@ -28,9 +29,11 @@ class VisionEventListDetails extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+                      
                       builder: (context) =>
-                          const VisionGuardianEventDetailsPage(),
+                           VisionGuardianEventDetailsPage(eventDetails:eventDetails[index]),
                     ),
+                    
                   );
                 },
                 child: vgEventDataCards(context, eventDetails[index]));

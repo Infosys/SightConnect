@@ -20,6 +20,11 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
   Future postVGEvents({required VisionGuardianEventModel vgEventModel,required Map<String,dynamic> actor}) async {
     return await remoteDataSource.postVGEvents(vgEventModel:vgEventModel,actor:actor);
   }
+
+    @override
+  Future deleteVGEvents({required String eventId}) async {
+    return await remoteDataSource.deleteVGEvents(eventId:eventId);
+  }
   
 
 }

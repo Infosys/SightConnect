@@ -16,6 +16,9 @@ abstract class VgAddEventRemoteSource {
     required VisionGuardianEventModel vgEventModel,
     required Map<String, dynamic> actor,
   });
+  Future deleteVGEvents({
+    required String eventId,
+  });
 }
 
 class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
@@ -32,10 +35,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       "actorIdentifier": actorIdentifier,
     };
     final response = await _dio.get(endpoint, queryParameters: queryParameters);
-    logger.d(response.data);
-    return response.data
-        .map<VisionGuardianEventModel>(
-            (eventData) => VisionGuardianEventModel.fromJson(eventData))
+    return (response.data as List)
+        .map((e) => VisionGuardianEventModel.fromJson(e))
         .toList();
   }
 
@@ -50,9 +51,18 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["images"] = [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
-    logger.d(vgeventjson);
+    print(vgeventjson);
     final response = await _dio.post(endpoint, data: vgeventjson);
-    logger.d(response.data);
+print(response);
     return response.data;
+  }
+
+  @override
+  Future deleteVGEvents({required String eventId}) async {
+    final endpoint = "/services/triage/api/campaign-events/$eventId";
+    print(endpoint);
+    final response = await _dio.delete(endpoint);
+    print(response);
+    return response;
   }
 }
