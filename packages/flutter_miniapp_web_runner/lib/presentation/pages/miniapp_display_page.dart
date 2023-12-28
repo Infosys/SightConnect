@@ -42,11 +42,9 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     with WidgetsBindingObserver {
   late InAppWebViewController webViewController;
   late Future<void> _loadMiniAppFuture = Future.value(null);
-
   Logger logger = Logger();
-  bool isMiniAppLoaded = false;
   int port = 59542;
-  String progressMessage = "";
+  bool isPermissionGranted = false;
 
   @override
   void initState() {
@@ -120,42 +118,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
             ),
           );
         } else {
-          // ask for permission
-          if (widget.isPermissionRequired) {
-            return Scaffold(
-              appBar: WebViewAppBar(
-                onBack: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'Please allow the following permissions to continue',
-                    ),
-                    ElevatedButton(
-                      child: const Text('Allow'),
-                      onPressed: () async {
-                        final status = await Permission.camera.request();
-                        if (status.isGranted) {
-                          setState(() {
-                            isMiniAppLoaded = true;
-                          });
-                        } else {
-                          setState(() {
-                            progressMessage =
-                                "Please allow the following permissions to continue";
-                          });
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
           return _buildWebView();
         }
       },
@@ -261,7 +223,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
       final miniAppPath = await getMiniAppPath(path, version, id);
 
       final miniAppServer = ref.read(localServerProvider);
-      port = getRandomPort();
+
       await miniAppServer.startServer(miniAppPath, port);
     } catch (e) {
       scaffoldMessenger.showSnackBar(
