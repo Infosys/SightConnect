@@ -19,6 +19,10 @@ abstract class VgAddEventRemoteSource {
   Future deleteVGEvents({
     required String eventId,
   });
+  Future postAddTeammate({
+    required String eventId,
+    required String actorIdentifier,
+  });
 }
 
 class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
@@ -53,7 +57,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["actors"] = [actor];
     print(vgeventjson);
     final response = await _dio.post(endpoint, data: vgeventjson);
-print(response);
+    print(response);
     return response.data;
   }
 
@@ -63,6 +67,30 @@ print(response);
     print(endpoint);
     final response = await _dio.delete(endpoint);
     print(response);
+    return response;
+  }
+
+  @override
+  Future postAddTeammate(
+      {required String eventId, required String actorIdentifier}) async {
+    const endpoint =
+        '/services/orchestration/api/practitioners/filter?officialMobile=1234567891';
+    final response = await _dio.get(endpoint).then((value)async {
+      var newResponse={
+  "role": "MEDICAL_DOCTOR",
+  "identifier": "7412115640728765726746033778035388965009724684348059769236735883896455075920807737461399997",
+  "isOwner": true
+};
+
+const endpoint = "services/triage/api/campaign-events/teamMates";
+Map<String, dynamic> queryParameters = {
+      "eventId": eventId,
+      "loginActorIdentifier":actorIdentifier
+    };
+
+final response=await _dio.post(endpoint,queryParameters: queryParameters);
+    });
+    logger.f(response.data + "jlaskdhnasuljdhasdilaksdjas");
     return response;
   }
 }

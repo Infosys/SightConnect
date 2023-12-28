@@ -12,4 +12,9 @@ abstract class VgAddEventRepository {
   Future deleteVGEvents({
     required String eventId,
   });
+
+  Future postAddTeammate({
+    required String eventId,
+    required String actorIdentifier,
+  });
 }

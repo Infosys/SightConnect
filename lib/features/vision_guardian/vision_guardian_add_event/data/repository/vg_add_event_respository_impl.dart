@@ -15,16 +15,24 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
       {required String actorIdentifier}) async {
     return await remoteDataSource.getVGEvents(actorIdentifier: actorIdentifier);
   }
-  
+
   @override
-  Future postVGEvents({required VisionGuardianEventModel vgEventModel,required Map<String,dynamic> actor}) async {
-    return await remoteDataSource.postVGEvents(vgEventModel:vgEventModel,actor:actor);
+  Future postVGEvents(
+      {required VisionGuardianEventModel vgEventModel,
+      required Map<String, dynamic> actor}) async {
+    return await remoteDataSource.postVGEvents(
+        vgEventModel: vgEventModel, actor: actor);
   }
 
-    @override
+  @override
   Future deleteVGEvents({required String eventId}) async {
-    return await remoteDataSource.deleteVGEvents(eventId:eventId);
+    return await remoteDataSource.deleteVGEvents(eventId: eventId);
   }
-  
 
+  @override
+  Future postAddTeammate(
+      {required String eventId, required String actorIdentifier}) async {
+    return await remoteDataSource.postAddTeammate(
+        eventId: eventId, actorIdentifier: actorIdentifier);
+  }
 }
