@@ -24,7 +24,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           token: PersistentAuthStateService.authState.accessToken ?? "",
           injectionModel: MiniAppInjectionModel(
             action: actionType,
-            mobileNumber: PersistentAuthStateService.authState.username,
+            mobileNumber: validateMobile(),
             parentPatientId: PersistentAuthStateService.authState.userId,
           ),
           miniapp: MiniApp(
@@ -37,5 +37,13 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String validateMobile() {
+    final mobile = PersistentAuthStateService.authState.username;
+    if (mobile == null) return "";
+    final mobileNumber = mobile.substring(3);
+
+    return mobileNumber;
   }
 }

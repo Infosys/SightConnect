@@ -44,7 +44,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
   late Future<void> _loadMiniAppFuture = Future.value(null);
   Logger logger = Logger();
   int port = 59542;
-  bool isPermissionGranted = false;
 
   @override
   void initState() {
@@ -73,7 +72,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-
     super.dispose();
   }
 
