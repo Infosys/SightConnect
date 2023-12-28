@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final addEventDetailsProvider =
     ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
+
   return AddEventDetailsNotifier(
     vgAddEventRepository: ref.watch(vgAddEventRepository),
   );
@@ -14,7 +15,12 @@ final addEventDetailsProvider =
 
 var getEventDetailsProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
-      
+  
+  var eventStatusFilter=ref.watch(addEventDetailsProvider).eventStatusFilterValue;
+  print(eventStatusFilter);
+  var isSelected=ref.watch(addEventDetailsProvider).isSelected;
+  print(isSelected);
+  print("getEventDetailsProvider");
   return await ref
       .watch(vgAddEventRepository)
       .getVGEvents(actorIdentifier: "11067400874");
@@ -63,6 +69,10 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   TextEditingController get venueName => _venueName;
   TextEditingController get pincode => _pincode;
   TextEditingController get city => _city;
+
+  get isSelectedValue => isSelected;
+  get eventStatusFilterValue => eventStatusFilter;
+
 
   Future deleteEventDetails({required String eventId}) async {
     try {
@@ -125,8 +135,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       await vgAddEventRepository.postVGEvents(
           vgEventModel: vgEventModel, actor: actors);
-      
-    /*   await getEventDetailsProvider; */
+
+      filterListEvents(-1, "All");
     } catch (e) {
       print(e);
       isLoading = false;
@@ -158,17 +168,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void filterListEvents() {
-    print(isSelected);
-    print(eventStatus[isSelected]);
-    print(listOfEventDetails);
-    listOfEventDetails = searchResults
-        .where((element) =>
-            (isSelected == -1 || isSelected == 0) ||
-            element.eventStatus == eventStatus[isSelected])
-        .toList();
-    print(listOfEventDetails);
-    print("called");
+  void filterListEvents(selectedIndex, selectedValue) {
+    isSelected = selectedIndex;
+    eventStatusFilter = selectedValue;
+    
+
     notifyListeners();
   }
+
 }
