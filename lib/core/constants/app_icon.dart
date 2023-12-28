@@ -11,6 +11,7 @@ class AppIcon {
   static const String navDrawer = 'assets/icons/burger_menu.svg';
   static const String navTriage = 'assets/icons/triage.svg';
   static const String hamburgerIcon = 'assets/icons/hamburger_icon.png';
+  static const String scanner = 'assets/icons/scanner.svg';
 
   //Patient Appointment Booking
   static const String patientAppointmentBookingCalander =
