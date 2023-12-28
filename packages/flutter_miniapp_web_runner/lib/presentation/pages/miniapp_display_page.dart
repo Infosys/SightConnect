@@ -55,16 +55,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
       (_) async {
         _loadMiniAppFuture = _loadMiniApp();
         logger.f("TOKEN : ${widget.token}");
-        final navigator = Navigator.of(context);
-
-        if (widget.isPermissionRequired) {
-          final cameraStatus = await Permission.camera.request();
-          final microphoneStatus = await Permission.microphone.request();
-          if (cameraStatus.isDenied || microphoneStatus.isDenied) {
-            navigator.pop();
-            return;
-          }
-        }
       },
     );
   }
@@ -130,6 +120,42 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
             ),
           );
         } else {
+          // ask for permission
+          if (widget.isPermissionRequired) {
+            return Scaffold(
+              appBar: WebViewAppBar(
+                onBack: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Please allow the following permissions to continue',
+                    ),
+                    ElevatedButton(
+                      child: const Text('Allow'),
+                      onPressed: () async {
+                        final status = await Permission.camera.request();
+                        if (status.isGranted) {
+                          setState(() {
+                            isMiniAppLoaded = true;
+                          });
+                        } else {
+                          setState(() {
+                            progressMessage =
+                                "Please allow the following permissions to continue";
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
           return _buildWebView();
         }
       },
@@ -150,15 +176,9 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
         ),
         onLoadError: (controller, url, code, message) async {
           logger.e("Error: $message");
-          setState(() {
-            progressMessage = "Something went wrong";
-          });
         },
         onLoadHttpError: (controller, url, code, message) {
           logger.e("Error: $message");
-          setState(() {
-            progressMessage = "Something went wrong";
-          });
         },
         onConsoleMessage: (controller, consoleMessage) {
           logger.d("Console: ${consoleMessage.message}");
@@ -227,7 +247,6 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
             },
           );
         },
-        onLoadStop: (controller, uri) {},
       ),
     );
   }
