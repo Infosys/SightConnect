@@ -112,6 +112,8 @@ class PersistentAuthData {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
     await _storage.delete(key: _rolesKey);
+    await _storage.delete(key: _activeRoleKey);
+
     await _storage.delete(key: _usernameKey);
     await _storage.delete(key: _userIdKey);
     await _storage.delete(key: _id_token);
@@ -122,6 +124,17 @@ class PersistentAuthData {
     username = null;
     userId = null;
     idToken = null;
+    activeRole = null;
+    logger.d("Logged out");
+    logger.d({
+      'accessTokenData': accessToken,
+      'refreshTokenData': refreshToken,
+      'roles': roles,
+      'username': username,
+      'userId': userId,
+      'idToken': idToken,
+      'activeRole': activeRole,
+    });
   }
 
   bool _hasTokenExpired(String token) {

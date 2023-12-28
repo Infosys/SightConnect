@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/gender.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/relationship.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
@@ -5,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var globalVTProvider = ChangeNotifierProvider((ref) => GlobalVTProvider(ref));
+var getPatientProfileProvider = FutureProvider((ref) async {
+  return await ref.read(initializationProvider).getUserProfile();
+});
 
 class GlobalVTProvider extends ChangeNotifier {
   final Ref _ref;

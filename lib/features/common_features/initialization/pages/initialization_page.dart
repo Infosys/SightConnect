@@ -132,20 +132,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator) async {
-    if (PersistentAuthStateService.authState.isLoggedIn) {
+    if (PersistentAuthStateService.authState.isLoggedIn &&
+        PersistentAuthStateService.authState.activeRole != null) {
       final role = roleMapper(PersistentAuthStateService.authState.activeRole);
-      if (role == null) {
-        await ref.read(initializationProvider).logout();
-        await navigator.pushNamedAndRemoveUntil(
-            LoginPage.routeName, (route) => false);
-        Fluttertoast.showToast(msg: "Profile not found. Please login again.");
-      } else {
-        await navigateBasedOnRole(navigator, role);
-      }
+      logger.i("Active Role: $role");
+      await navigateBasedOnRole(navigator, role!);
     } else {
       final selectedRole = await showProfileSelectionDialog(navigator);
       if (selectedRole != null) {
-        final role = selectedRole.toString().split('.').last;
+        final role = roleToString(selectedRole);
         await PersistentAuthStateService.authState.setActiveRole(role);
         await navigateBasedOnRole(navigator, selectedRole);
       } else {

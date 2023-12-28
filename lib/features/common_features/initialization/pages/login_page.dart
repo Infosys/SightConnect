@@ -219,7 +219,7 @@ class LoginPage extends HookConsumerWidget {
               ),
               const SizedBox(height: AppSize.kmheight),
               Text(
-                "Please enter the OTP we have sent to your mobile",
+                "Please enter the OTP sent to ${_formatMobile(mobileController.text)}",
                 style: applyRobotoFont(
                   fontSize: 14,
                 ),
@@ -330,6 +330,13 @@ class LoginPage extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  _formatMobile(String mobile) {
+    final maskedMobile = mobile.replaceAllMapped(
+        RegExp(r'(\d{2})(\d{4})(\d{4})'),
+        (match) => '${match[1]}******${match[3]}');
+    return maskedMobile;
   }
 }
 

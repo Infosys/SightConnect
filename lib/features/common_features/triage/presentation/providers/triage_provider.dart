@@ -121,8 +121,8 @@ class TriageProvider extends ChangeNotifier {
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
       ],
-      userStartDate: DateTime.now(),
-      issued: DateTime.now(),
+      userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)),
 
       source: Source.PATIENT_APP,
       sourceVersion: AppText.appVersion,

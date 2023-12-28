@@ -78,9 +78,6 @@ class DioTokenInterceptor extends Interceptor {
         logger.d("updated access token and refresh token");
       }
     }
-    if (options.uri.path.contains("/services/orchestration")) {
-      return super.onRequest(options, handler);
-    }
 
     options.headers.addAll({
       'Authorization':

@@ -117,13 +117,9 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/logo/
-    - assets/services/
-    - assets/new_assessment.json
-    - assets/profile.json
-    - assets/triage_update_response.json
-    - assets/triage_assessment.json
+   
     - assets/miniapps/vt_register_patient.zip
-    - assets/vision_centers.json
+   
     - assets/vt_patient.json
   
   #   - images/a_dot_ham.jpeg
