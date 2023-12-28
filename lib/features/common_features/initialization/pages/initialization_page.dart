@@ -1,22 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/consent_form_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/vt_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -40,30 +35,12 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> profileVerification() async {
     try {
       final navigator = Navigator.of(context);
-      //TODO: CHECK EXCLUSIVE FOR NOT FOUND
       final isUserExist = await _checkUserAlreadyExist();
-
       if (context.mounted) {
         if (isUserExist) {
           await _handleExistingUser(navigator);
         } else {
-          final selectedProfile = await showProfileSelectionDialog(context);
-          if (selectedProfile != null) {
-            final consentGiven = await showConsentForm(
-              context,
-              selectedProfile,
-            );
-            if (consentGiven != null && consentGiven) {
-              await _registerUser(navigator);
-            } else {
-              await ref.read(initializationProvider).logout();
-              await navigator.pushNamedAndRemoveUntil(
-                  LoginPage.routeName, (route) => false);
-              Fluttertoast.showToast(msg: "Please accept the consent form.");
-            }
-          } else {
-            Fluttertoast.showToast(msg: "Please select a profile.");
-          }
+          await _handleNewUser(navigator);
         }
       }
     } catch (e) {
@@ -71,30 +48,57 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<String?> showProfileSelectionDialog(BuildContext context) {
-    final roles = PersistentAuthStateService.authState.roles;
-    return showDialog<String>(
+  Future<void> _handleNewUser(NavigatorState navigator) async {
+    final selectedProfile = await showProfileSelectionDialog(navigator);
+    if (selectedProfile != null) {
+      final consentGiven = await showConsentForm(navigator, selectedProfile);
+      if (consentGiven != null && consentGiven) {
+        await _registerUser(navigator);
+      } else {
+        /// CONSENT NOT GIVEN
+        await ref.read(initializationProvider).logout();
+        await navigator.pushNamedAndRemoveUntil(
+            LoginPage.routeName, (route) => false);
+        Fluttertoast.showToast(msg: "Please accept the consent form.");
+      }
+    } else {
+      /// ROLE NOT FOUND
+      await ref.read(initializationProvider).logout();
+      await navigator.pushNamedAndRemoveUntil(
+          LoginPage.routeName, (route) => false);
+      Fluttertoast.showToast(msg: "Profile not found. Please login again.");
+    }
+  }
+
+  Future<Role?> showProfileSelectionDialog(NavigatorState navigator) {
+    final roles = [Role.ROLE_PATIENT, Role.ROLE_VISION_TECHNICIAN];
+    return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Select a profile'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: roles!
-                  .map(
-                    (role) => RadioListTile<String>(
-                      title: Text(role),
-                      value: role,
-                      groupValue: role,
-                      onChanged: (value) async {
-                        await PersistentAuthStateService.authState
-                            .setActiveRole(role);
-                        Navigator.of(context).pop(value);
-                      },
-                    ),
-                  )
-                  .toList(),
+        return ClipRRect(
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: const Text('Select a profile'),
+            content: SizedBox(
+              child: SingleChildScrollView(
+                child: ListBody(
+                  children: roles
+                      .map(
+                        (role) => RadioListTile(
+                          title: Text(role.toString().split('_').last),
+                          value: role,
+                          groupValue: null,
+                          onChanged: (value) {
+                            navigator.pop(value);
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
           ),
         );
@@ -135,15 +139,20 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<bool?> showConsentForm(context, String role) async {
-    final currentRole = roleMapper(role);
+  Future<bool?> showConsentForm(NavigatorState navigator, Role? role) async {
+    if (role == null) {
+      return null;
+    }
 
-    final navigator = Navigator.of(context);
     bool? consentGiven = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => ConsentFormPage(
-          role: currentRole!,
-        ),
+        builder: (context) {
+          if (role == Role.ROLE_PATIENT) {
+            return const PatientConsentFormPage();
+          } else {
+            return const VTConsentFormPage();
+          }
+        },
       ),
     );
     return consentGiven;
@@ -170,52 +179,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.primary,
-      body: Pulsar(
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              AppImages.splashBg,
-              fit: BoxFit.cover,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppSize.kmpadding),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.white,
-                    ),
-                    child: SvgPicture.asset(
-                      AppIcon.logo,
-                      height: 80,
-                      width: 80,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.kmheight),
-                  Text(
-                    AppText.appName,
-                    style: applyFiraSansFont(
-                      fontSize: 28,
-                      color: AppColor.white,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.klheight * 10),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Future<void> navigateBasedOnRole(BuildContext context, Role role) async {
     final navigator = Navigator.of(context);
     final rolePages = {
@@ -235,5 +198,55 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } else {
       throw Exception("Invalid Role");
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Pulsar(
+      child: Scaffold(
+        backgroundColor: AppColor.primary,
+        // body:
+
+        // Pulsar(
+        //   child: Stack(
+        //     children: [
+        //       SvgPicture.asset(
+        //         AppImages.splashBg,
+        //         fit: BoxFit.cover,
+        //       ),
+        //       Align(
+        //         alignment: Alignment.center,
+        //         child: Column(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: [
+        //             Container(
+        //               padding: const EdgeInsets.all(AppSize.kmpadding),
+        //               decoration: const BoxDecoration(
+        //                 shape: BoxShape.circle,
+        //                 color: AppColor.white,
+        //               ),
+        //               child: SvgPicture.asset(
+        //                 AppIcon.logo,
+        //                 height: 80,
+        //                 width: 80,
+        //               ),
+        //             ),
+        //             const SizedBox(height: AppSize.kmheight),
+        //             Text(
+        //               AppText.appName,
+        //               style: applyFiraSansFont(
+        //                 fontSize: 28,
+        //                 color: AppColor.white,
+        //               ),
+        //             ),
+        //             const SizedBox(height: AppSize.klheight * 10),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+      ),
+    );
   }
 }
