@@ -71,7 +71,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<Role?> showProfileSelectionDialog(NavigatorState navigator) {
-    final roles = [Role.ROLE_PATIENT, Role.ROLE_VISION_TECHNICIAN];
+    final currentRoles = PersistentAuthStateService.authState.roles;
+    if (currentRoles == null) {
+      return Future.value(null);
+    }
+    final roles = roleListMapper(currentRoles);
     return showDialog(
       context: context,
       barrierDismissible: false,

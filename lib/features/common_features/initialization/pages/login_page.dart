@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -305,6 +306,7 @@ class LoginPage extends HookConsumerWidget {
                       navigator.pushNamedAndRemoveUntil(
                           InitializationPage.routeName, (route) => false);
                     } catch (e) {
+                      logger.e(e);
                       Fluttertoast.showToast(msg: "Invalid OTP");
 
                       otpError.value = "Invalid OTP";

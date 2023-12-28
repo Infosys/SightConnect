@@ -17,7 +17,7 @@ class PersistentAuthData {
 
   String? accessToken;
   String? refreshToken;
-  List<String>? roles;
+  List<dynamic>? roles;
   String? activeRole;
   String? username;
   String? userId;
@@ -50,14 +50,16 @@ class PersistentAuthData {
     await _storage.write(key: _accessKey, value: accessToken);
     await _storage.write(key: _refreshKey, value: refreshToken);
     final decodedToken = JwtDecoder.decode(accessToken);
-    final roles = decodedToken['realm_access']['roles'] as List<String>;
+    final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
+
+    roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
 
     final username = decodedToken['preferred_username'];
     await _saveRolesAndUserName(roles, username);
   }
 
   Future<void> _saveRolesAndUserName(
-      List<String> roles, String username) async {
+      List<dynamic> roles, String username) async {
     this.roles = roles;
     this.username = username;
     await _storage.write(key: _rolesKey, value: jsonEncode(roles));

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'keycloak.freezed.dart';
@@ -37,4 +38,11 @@ Role? roleMapper(String? role) {
     default:
       return null;
   }
+}
+
+List<Role?> roleListMapper(List<dynamic> roles) {
+  final result = roles.map((e) => roleMapper(e)).toList();
+  // remove all nulls
+  result.removeWhere((element) => element == null);
+  return result;
 }

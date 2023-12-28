@@ -73,7 +73,7 @@ class InitializationProvider extends ChangeNotifier {
           .read(keycloakRepositoryProvider)
           .signIn(mobile: mobile, otp: otp);
     } catch (e) {
-      return Future.error(e);
+      rethrow;
     }
   }
 
