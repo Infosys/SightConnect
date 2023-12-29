@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/model/ivr_call_history_model.dart';
@@ -28,21 +30,44 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
     required String mobile,
     List<String>? callStatus,
   }) async {
-    const endpoint = "/services/exotel/api/users/calls";
-    Map<String, dynamic> queryParameters = {"mobile": mobile};
-    if (callStatus != null && callStatus.isNotEmpty) {
-      queryParameters.addAll({"callStatus": callStatus});
-    }
-    final response = await _dio.get<List<dynamic>>(endpoint,
-        queryParameters: queryParameters);
+    try {
+      const endpoint = "/services/exotel/api/users/calls";
+      Map<String, dynamic> queryParameters = {"mobile": mobile};
+      if (callStatus != null && callStatus.isNotEmpty) {
+        queryParameters.addAll({"callStatus": callStatus});
+      }
+      final response = await _dio.get<List<dynamic>>(endpoint,
+          queryParameters: queryParameters);
 
-    return response.data!.map((e) => IvrCallHistoryModel.fromJson(e)).toList();
+      return response.data!
+          .map((e) => IvrCallHistoryModel.fromJson(e))
+          .toList();
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
   }
 
   @override
   Future makeIvrCall({required String patientMobile}) async {
     String url = "/services/exotel/api/call/outbound?platformId=1051";
-    return await _dio
-        .post(url, data: {"destination": patientMobile, "flowId": 9581});
+    try {
+      return await _dio.post(
+        url,
+        data: {
+          "destination": patientMobile,
+          "flowId": 9581,
+        },
+      );
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
   }
 }

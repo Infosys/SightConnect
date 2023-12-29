@@ -78,6 +78,9 @@ class DioTokenInterceptor extends Interceptor {
         logger.d("updated access token and refresh token");
       }
     }
+    if (options.uri.path.contains("/services/exotel")) {
+      return super.onRequest(options, handler);
+    }
 
     options.headers.addAll({
       'Authorization':
