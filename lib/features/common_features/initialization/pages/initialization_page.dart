@@ -37,60 +37,48 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   void initState() {
     super.initState();
-    logger.i("InitializationPage: initState");
-    log(PersistentAuthStateService.authState.accessToken.toString());
-    profileVerification();
-  }
-
-  Future<void> profileVerification() async {
-    try {
-      final navigator = Navigator.of(context);
-      final isUserExist = await _checkUserAlreadyExist();
-
-      if (context.mounted) {
-        if (isUserExist) {
-          logger.i("User already exist");
-          await _handleExistingUser(navigator);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final navigator = Navigator.of(context);
+        final selectedProfile = await showProfileSelectionDialog(navigator);
+        logger.i("Selected Profile: $selectedProfile");
+        if (selectedProfile != null) {
+          final role = roleToString(selectedProfile);
+          await PersistentAuthStateService.authState.setActiveRole(role);
+          logger.i("Active Role: $role");
+          _profileVerification(selectedProfile);
         } else {
-          logger.i("User does not exist");
-          await _handleNewUser(navigator);
-        }
-      }
-    } catch (e) {
-      logger.e(e);
-    }
-  }
-
-  Future<void> _handleNewUser(NavigatorState navigator) async {
-    final selectedProfile = await showProfileSelectionDialog(navigator);
-    logger.i("Selected Profile: $selectedProfile");
-    if (selectedProfile != null) {
-      final role = roleToString(selectedProfile);
-      await PersistentAuthStateService.authState.setActiveRole(role);
-      logger.i("Active Role: $role");
-      if (selectedProfile == Role.ROLE_VISION_TECHNICIAN) {
-        final consentGiven = await showConsentForm(navigator, selectedProfile);
-        if (consentGiven != null && consentGiven) {
-          logger.i("Consent Given");
-          await navigateBasedOnRole(navigator, selectedProfile);
-        } else {
-          /// CONSENT NOT GIVEN
-          logger.i("Consent Not Given");
+          logger.i("Role Not Found");
           await ref.read(initializationProvider).logout();
           await navigator.pushNamedAndRemoveUntil(
               LoginPage.routeName, (route) => false);
-          Fluttertoast.showToast(msg: "Please accept the consent form.");
+          Fluttertoast.showToast(msg: "Profile not found. Please login again.");
         }
+      },
+    );
+  }
+
+  Future<void> _profileVerification(Role role) async {
+    final navigator = Navigator.of(context);
+    final userExist =
+        await ref.read(initializationProvider).checkUserAlreadyExist(role);
+    if (userExist) {
+      _handleExistingUser(navigator, role);
+    } else {
+      _handleNewUser(navigator, role);
+    }
+  }
+
+  Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
+    if (role == Role.ROLE_PATIENT) {
+      final consentGiven = await showConsentForm(navigator, role);
+      if (consentGiven != null && consentGiven) {
+        await _registerUser(navigator, role);
       } else {
-        await _registerUser(navigator);
+        await _invalidateAndLogout("Consent not given. Please login again.");
       }
     } else {
-      /// ROLE NOT FOUND
-      logger.i("Role Not Found");
-      await ref.read(initializationProvider).logout();
-      await navigator.pushNamedAndRemoveUntil(
-          LoginPage.routeName, (route) => false);
-      Fluttertoast.showToast(msg: "Profile not found. Please login again.");
+      // ALL OTHER ROLES
     }
   }
 
@@ -137,32 +125,21 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  Future<bool> _checkUserAlreadyExist() async {
-    return await ref.read(initializationProvider).checkUserAlreadyExist();
-  }
-
-  Future<void> _handleExistingUser(NavigatorState navigator) async {
-    if (PersistentAuthStateService.authState.isLoggedIn &&
-        PersistentAuthStateService.authState.activeRole != null) {
-      final role = roleMapper(PersistentAuthStateService.authState.activeRole);
-      logger.i("Active Role: $role");
-      await navigateBasedOnRole(navigator, role!);
-    } else {
-      final selectedRole = await showProfileSelectionDialog(navigator);
-      if (selectedRole != null) {
-        final role = roleToString(selectedRole);
-        await PersistentAuthStateService.authState.setActiveRole(role);
-        await navigateBasedOnRole(navigator, selectedRole);
+  Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
+    if (role == Role.ROLE_PATIENT) {
+      final patientId =
+          await PersistentAuthStateService.authState.userProfileId;
+      if (patientId == null) {
+        await _showRegistrationDialog();
       } else {
-        await ref.read(initializationProvider).logout();
-        await navigator.pushNamedAndRemoveUntil(
-            LoginPage.routeName, (route) => false);
-        Fluttertoast.showToast(msg: "Profile not found. Please login again.");
+        await navigateBasedOnRole(navigator, role);
       }
+    } else {
+      await navigateBasedOnRole(navigator, role);
     }
   }
 
-  Future<void> _registerUser(NavigatorState navigator) async {
+  Future<void> _registerUser(NavigatorState navigator, Role role) async {
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) => const PatientRegistrationMiniappPage(
@@ -173,9 +150,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
 
     if (status == null || status) {
+      // api failed or manual back press
       await _showRegistrationDialog();
     } else {
-      await profileVerification();
+      await _profileVerification(role);
     }
   }
 
@@ -240,6 +218,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } else {
       throw Exception("Invalid Role");
     }
+  }
+
+  Future<void> _invalidateAndLogout(
+      [String message = "you have been logged out"]) async {
+    final navigator = Navigator.of(context);
+    await ref.read(initializationProvider).logout();
+    await navigator.pushNamedAndRemoveUntil(
+        LoginPage.routeName, (route) => false);
+    Fluttertoast.showToast(msg: message);
   }
 
   @override

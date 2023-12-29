@@ -16,7 +16,7 @@ class InitializationProvider extends ChangeNotifier {
   final Ref _ref;
   InitializationProvider(this._ref);
 
-  Future<bool> checkUserAlreadyExist() async {
+  Future<bool> checkUserAlreadyExist(Role role) async {
     final phone = PersistentAuthStateService.authState.username;
     if (phone == null) {
       return false;
