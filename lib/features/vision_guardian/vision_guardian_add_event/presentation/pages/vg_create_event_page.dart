@@ -125,7 +125,6 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                 vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
                 const VisionEventListDetails(),
-                const BrandingWidgetH(),
               ],
             ),
           );

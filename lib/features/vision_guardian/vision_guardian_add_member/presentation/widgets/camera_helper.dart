@@ -3,11 +3,9 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_triage/presentation/pages/optometritian_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/provider/vg_member_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/widgets/vg_camera_controller.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -183,18 +181,18 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
         isLoading = false;
       });
       if (mounted) {
-        XFile? verifiedImage = await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => EyePreviewPage(imageFile: image),
-          ),
-        );
+        ////TODO: this page has been renamed
+        // XFile? verifiedImage = await Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => EyePreviewPage(imageFile: image),
+        //   ),
+        // );
 
-        if (verifiedImage != null) {
-          
-          ref.read(widget.provider).image = verifiedImage;
-        } else {
-          return;
-        }
+        // if (verifiedImage != null) {
+        //   ref.read(widget.provider).image = verifiedImage;
+        // } else {
+        //   return;
+        // }
       }
 
       // await ref.read(triageProvider).saveTriage();

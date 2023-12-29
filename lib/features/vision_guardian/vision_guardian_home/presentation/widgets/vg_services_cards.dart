@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,21 +26,30 @@ class VisionGuardianServicesCard extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             if (data["text"] == "Event") {
-              ref.read(globalProvider).setHideTumblingElement = true;
+              // ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianEventPage(),
                 ),
               );
             } else if (data["text"] == "New Patient") {
-              ref.read(globalProvider).setHideTumblingElement = false;
+              // ref.read(globalProvider).setHideTumblingElement = false;
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (context) => const VisionGuardianMemberPage(),
+              //   ),
+              // );
+
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const VisionGuardianMemberPage(),
+                  builder: (context) => const PatientRegistrationMiniappPage(
+                    actionType: MiniAppActionType.REGISTER,
+                    displayName: "Patient Registration",
+                  ),
                 ),
               );
             } else if (data["text"] == "Assessment") {
-              ref.read(globalProvider).setHideTumblingElement = true;
+              // ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianEyeAssessmentPage(),

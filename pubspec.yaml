@@ -86,7 +86,7 @@ dependencies:
     path: packages/superapp_scanner/
 
 
-  pie_chart: ^5.4.0
+
   flutter_verification_code: ^1.1.7
   another_stepper: ^1.2.2
 

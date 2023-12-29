@@ -145,7 +145,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                     ),
                   ],
                 ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -156,11 +156,11 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                   color: Colors.black.withOpacity(0.8),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: AppSize.ksheight,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),

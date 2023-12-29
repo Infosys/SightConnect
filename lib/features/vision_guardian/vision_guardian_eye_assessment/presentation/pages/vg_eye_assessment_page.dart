@@ -54,7 +54,7 @@ class VisionGuardianEyeAssessmentPage extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: VisionGuardianFloatingAddPatientAction(),
+      floatingActionButton: const VisionGuardianFloatingAddPatientAction(),
       body: Consumer(
         builder: (context, ref, child) {
           var casesCritical =
@@ -72,7 +72,6 @@ class VisionGuardianEyeAssessmentPage extends StatelessWidget {
                         model: casesCritical,
                       ),
                       const Spacer(),
-                      const BrandingWidgetH(),
                     ],
                   )
                 : Column(
@@ -110,7 +109,6 @@ class VisionGuardianEyeAssessmentPage extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      const BrandingWidgetH(),
                     ],
                   ),
           );

@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -17,7 +18,8 @@ import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
-  return await FlutterJailbreakDetection.jailbroken;
+  // return await FlutterJailbreakDetection.jailbroken;
+  return false;
 });
 
 class MyApp extends ConsumerWidget {
@@ -64,8 +66,9 @@ class MyApp extends ConsumerWidget {
               theme: ref.watch(themeProvider) == ThemeMode.light
                   ? AppTheme.getLightTheme(context)
                   : AppTheme.getDarkTheme(context),
-              routes: AppRouter.routes,
-              initialRoute: initialRoute,
+              // routes: AppRouter.routes,
+              // initialRoute: initialRoute,
+              home: const VisionGuardianDashboardPage(),
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
               //   return ref.watch(internetProvider).when(

@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
-import '../../../../patient/patient_assessments_and_tests/data/fake_data_source.dart';
 
 class TeammatesDataCards extends HookConsumerWidget {
   const TeammatesDataCards(
@@ -76,12 +75,12 @@ class TeammatesDataCards extends HookConsumerWidget {
                           Transform.translate(
                             offset: const Offset(0, 10),
                             child: InkWell(
-                              onTap: ()  {
-                                 ref
+                              onTap: () {
+                                ref
                                     .read(visionGuadianAddMemberProvider)
                                     .deleteMember(data[index]["id"].toString());
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.delete_outline,
                                 color: AppColor.red,
                                 size: 30,

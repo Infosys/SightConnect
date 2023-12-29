@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
@@ -30,7 +31,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context)/4,
+                  height: AppSize.height(context) / 4,
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSize.kmpadding),
                   color: AppColor.primary,
@@ -65,7 +66,7 @@ class VisionGuardianHomePage extends StatelessWidget {
                             width: AppSize.kmwidth,
                           ),
                           Text(
-                            'Eye Care For All',
+                            AppText.appName,
                             style: applyFiraSansFont(
                               color: AppColor.white,
                               fontWeight: FontWeight.w600,
@@ -98,7 +99,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context)/14,
+                  height: AppSize.height(context) / 14,
                   width: AppSize.width(context),
                   decoration: const BoxDecoration(
                     color: AppColor.primary,
@@ -108,7 +109,7 @@ class VisionGuardianHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                VGCarousel()
+                const VGCarousel()
               ],
             ),
 /*             SizedBox(
@@ -160,8 +161,7 @@ class VisionGuardianHomePage extends StatelessWidget {
                 ],
               ),
             ),
-     
-           const VisionEventListDetails(),
+            const VisionEventListDetails(),
             SizedBox(
               height: AppSize.height(context) * 0.2,
             ),

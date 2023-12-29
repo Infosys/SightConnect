@@ -32,15 +32,7 @@ class PatientHomePageAppBar extends StatelessWidget
         children: [
           SvgPicture.asset(AppIcon.logo),
           const SizedBox(width: AppSize.kmwidth),
-          InkWell(
-              onTap: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const OptometritianDashboardPage()),
-                    (route) => false);
-              },
-              child: const Text(AppText.appName)),
+          const Text(AppText.appName),
         ],
       ),
       actions: [

@@ -16,21 +16,21 @@ import '../widgets/vg_event_patients_tab.dart';
 import '../widgets/vg_event_teammates_tab.dart';
 
 class VisionGuardianEventDetailsPage extends HookWidget {
-   VisionGuardianEventDetailsPage({super.key,required this.eventDetails});
+  VisionGuardianEventDetailsPage({super.key, required this.eventDetails});
 
   VisionGuardianEventModel eventDetails;
   @override
   Widget build(BuildContext context) {
-    var tabIndex=useState(0);
+    var tabIndex = useState(0);
 
     return Scaffold(
         appBar: CustomAppbar(
-          title:  Text(eventDetails.title!),
+          title: Text(eventDetails.title!),
           centerTitle: false,
           actions: [
             IconButton(
               onPressed: () {
-               /*   Navigator.push(
+                /*   Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
@@ -45,7 +45,11 @@ class VisionGuardianEventDetailsPage extends HookWidget {
             ),
             IconButton(
               onPressed: () {},
-              icon: SvgPicture.asset(AppIcon.filterIcon),
+              // icon: SvgPicture.asset(AppIcon.filterIcon),
+              icon: const Icon(
+                Icons.filter_alt_outlined,
+                color: AppColor.grey,
+              ),
             ),
           ],
           leadingIcon: InkWell(
@@ -58,56 +62,58 @@ class VisionGuardianEventDetailsPage extends HookWidget {
             ),
           ),
         ),
-        floatingActionButton:tabIndex.value==0?
-         InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const VisionGuardianMemberDetailsPage(),
-              ),
-            );
-          },
-          child: Container(
-            width: AppSize.width(context) * 0.35,
-            height: AppSize.height(context) * 0.06,
-            padding: const EdgeInsets.only(bottom: AppSize.ksheight - 1),
-            margin: const EdgeInsets.only(bottom: AppSize.klheight),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColor.yellow,
-              boxShadow: const <BoxShadow>[
-                BoxShadow(
-                  color: AppColor.black,
-                  blurRadius: 10,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Center(
-              child: RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: '+ ',
-                        style: applyRobotoFont(
-                            fontSize: 21,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w300)),
-                    TextSpan(
-                      text: 'Add Member',
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+        floatingActionButton: tabIndex.value == 0
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const VisionGuardianMemberDetailsPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: AppSize.width(context) * 0.35,
+                  height: AppSize.height(context) * 0.06,
+                  padding: const EdgeInsets.only(bottom: AppSize.ksheight - 1),
+                  margin: const EdgeInsets.only(bottom: AppSize.klheight),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColor.yellow,
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
                         color: AppColor.black,
+                        blurRadius: 10,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: '+ ',
+                              style: applyRobotoFont(
+                                  fontSize: 21,
+                                  color: AppColor.black,
+                                  fontWeight: FontWeight.w300)),
+                          TextSpan(
+                            text: 'Add Member',
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.black,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ):null,
+              )
+            : null,
         body: DefaultTabController(
           length: 3,
           child: Padding(
@@ -118,7 +124,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                 TabBar(
                   onTap: (value) {
                     print(value);
-                    tabIndex.value=value;
+                    tabIndex.value = value;
                   },
                   dividerColor: AppColor.black,
                   unselectedLabelColor: AppColor.grey,
@@ -143,7 +149,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                       EventPatientsTab(
                         model: casesCritical,
                       ),
-                       EventDetailsTab(eventDetails: eventDetails),
+                      EventDetailsTab(eventDetails: eventDetails),
                       const EventTeammatesTab(),
                     ],
                   ),
