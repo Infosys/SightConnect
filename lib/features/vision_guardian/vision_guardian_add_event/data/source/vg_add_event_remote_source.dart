@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,6 +34,17 @@ abstract class VgAddEventRemoteSource {
     required String eventId,
     required String loginActorIdentifier,
     required String actorIdentifier,
+  });
+
+  Future getTriageReport({
+    required Map<String, dynamic> pageable,
+    required List<String> performerId,
+    required String eventId,
+    required List<String> drStatus,
+  });
+
+  Future postTriageReport({
+    required String eventId,
   });
 }
 
@@ -155,18 +167,58 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
     return response;
   }
-  
+
   @override
-  Future deleteTeamMate({required String eventId, required String loginActorIdentifier, required String actorIdentifier}) async {
+  Future deleteTeamMate(
+      {required String eventId,
+      required String loginActorIdentifier,
+      required String actorIdentifier}) async {
     const endpoint = "/services/triage/api/campaign-events/teamMates";
     Map<String, dynamic> queryParameters = {
       "eventId": eventId,
       "loginActorIdentifier": loginActorIdentifier,
       "actorIdentifier": actorIdentifier,
-      
     };
     print(queryParameters);
-    final response = await _dio.delete(endpoint, queryParameters: queryParameters);
+    final response =
+        await _dio.delete(endpoint, queryParameters: queryParameters);
     return response.statusCode;
+  }
+
+  @override
+  Future getTriageReport(
+      {required Map<String, dynamic> pageable,
+      required List<String> performerId,
+      required String eventId,
+      required List<String> drStatus}) async {
+    const endpoint = "/services/triage/api/campaign-events/triage-report";
+    Map<String, dynamic> queryParameters = {
+      "pageable": pageable,
+      "performer-id": performerId,
+      "event-id": eventId,
+      "dr-status": drStatus,
+    };
+
+    final response = await _dio
+        .get(endpoint, queryParameters: queryParameters)
+        .then((value) {
+      var response =
+          value.data; //list of triage reports for the particular events
+      for (int i = 0; i < response.length; i++) {
+        //call the api which gives the patient-details
+      }
+    });
+    return response;
+  }
+
+  @override
+  Future postTriageReport({required String eventId}) async {
+    const endpoint = "/services/triage/api/campaign-events/triage-report";
+
+    //we need triagepostmodel after completion of triage to map with event id
+    final response =
+        await _dio.post(endpoint, queryParameters: {eventId: eventId});
+
+    return response;
   }
 }

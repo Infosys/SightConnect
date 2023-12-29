@@ -1,8 +1,10 @@
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -69,7 +71,10 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          const VisionGuardianMemberDetailsPage(),
+                          const PatientRegistrationMiniappPage(
+                        actionType: MiniAppActionType.REGISTER,
+                        displayName: "Register Patient",
+                      ),
                     ),
                   );
                 },

@@ -27,4 +27,18 @@ abstract class VgAddEventRepository {
     required String loginActorIdentifier,
     required String actorIdentifier,
   });
+
+      Future getTriageReport({
+    required Map<String,dynamic> pageable ,
+    required List<String> performerId,
+    required String eventId,
+     required List<String> drStatus,
+  });
+
+  
+      Future postTriageReport({
+    required String eventId,
+  });
+
+  
 }

@@ -35,15 +35,40 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
     return await remoteDataSource.postAddTeammate(
         eventId: eventId, actorIdentifier: actorIdentifier);
   }
-  
+
   @override
-  Future getTeammates({required String eventId, required String actorIdentifier})async {
-       return await remoteDataSource.getTeammates(
+  Future getTeammates(
+      {required String eventId, required String actorIdentifier}) async {
+    return await remoteDataSource.getTeammates(
         eventId: eventId, actorIdentifier: actorIdentifier);
   }
-  
+
   @override
-  Future deleteTeamMate({required String eventId, required String loginActorIdentifier, required String actorIdentifier}) async {
-    await remoteDataSource.deleteTeamMate(eventId: eventId, loginActorIdentifier: loginActorIdentifier, actorIdentifier: actorIdentifier);
+  Future deleteTeamMate(
+      {required String eventId,
+      required String loginActorIdentifier,
+      required String actorIdentifier}) async {
+    await remoteDataSource.deleteTeamMate(
+        eventId: eventId,
+        loginActorIdentifier: loginActorIdentifier,
+        actorIdentifier: actorIdentifier);
+  }
+
+  @override
+  Future getTriageReport(
+      {required Map<String, dynamic> pageable,
+      required List<String> performerId,
+      required String eventId,
+      required List<String> drStatus}) async {
+    await remoteDataSource.getTriageReport(
+        pageable: pageable,
+        performerId: performerId,
+        eventId: eventId,
+        drStatus: drStatus);
+  }
+
+  @override
+  Future postTriageReport({required String eventId}) async {
+    await remoteDataSource.postTriageReport(eventId: eventId);
   }
 }
