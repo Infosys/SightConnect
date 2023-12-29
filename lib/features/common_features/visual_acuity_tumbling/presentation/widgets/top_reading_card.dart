@@ -30,7 +30,6 @@ class TopReadingCard extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSize.klradius),
-        boxShadow: applyMediumShadow(),
         color: AppColor.white,
       ),
       child: Container(
@@ -64,23 +63,50 @@ class TopReadingCard extends ConsumerWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Text(
-                currentLevel.snellerFraction,
-                style: applyFiraSansFont(
-                  color: AppColor.grey,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "40 cms",
+                    style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.green),
+                  ),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      var model = ref.watch(tumblingTestProvider);
+                      return Text(
+                        model.currentEye == Eye.left
+                            ? context.loc!.leftEyeString
+                            : (model.currentEye == Eye.right
+                                ? context.loc!.rightEyeString
+                                : "Both Eye"),
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                        ),
+                      );
+                    },
+                  ),
+                  Text(
+                    currentLevel.snellerFraction,
+                    style: applyFiraSansFont(
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: AppSize.ksheight),
-            Flexible(
-              child: LinearPercentIndicator(
-                padding: const EdgeInsets.all(2),
-                lineHeight: Responsive.isMobile(context) ? 8 : 14,
-                percent: (model.currentLevel! / model.maxLevel!).clamp(0, 1),
-                barRadius: const Radius.circular(AppSize.klradius),
-                progressColor: AppColor.green,
-              ),
-            ),
+            // Flexible(
+            //   child: LinearPercentIndicator(
+            //     padding: const EdgeInsets.all(2),
+            //     lineHeight: Responsive.isMobile(context) ? 8 : 14,
+            //     percent: (model.currentLevel! / model.maxLevel!).clamp(0, 1),
+            //     barRadius: const Radius.circular(AppSize.klradius),
+            //     progressColor: AppColor.green,
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -50,7 +50,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               padding: EdgeInsets.zero,
               itemCount: data.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 childAspectRatio: 1.4,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,
@@ -107,7 +107,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
           const SizedBox(
             height: AppSize.ksheight,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -118,11 +118,11 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                   color: Colors.black.withOpacity(0.8),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: AppSize.ksheight,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
@@ -144,7 +144,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          // const SizedBox(height: AppSize.ksheight),
         ],
       ),
     );

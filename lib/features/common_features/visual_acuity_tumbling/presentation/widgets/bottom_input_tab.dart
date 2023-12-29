@@ -30,15 +30,15 @@ class BottomInputTabState extends State<BottomInputTab>
         controller: _controller,
         children: widget.tabs,
       ),
-      bottomNavigationBar: ButtomNavigationBar(
-        onTap: (index) {
-          setState(() {
-            _index = index;
-            _controller!.index = _index ?? 0;
-          });
-        },
-        currentIndex: _index ?? 0,
-      ),
+      // bottomNavigationBar: ButtomNavigationBar(
+      //   onTap: (index) {
+      //     setState(() {
+      //       _index = index;
+      //       _controller!.index = _index ?? 0;
+      //     });
+      //   },
+      //   currentIndex: _index ?? 0,
+      // ),
     );
   }
 }
