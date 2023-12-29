@@ -17,22 +17,26 @@ class InitializationProvider extends ChangeNotifier {
   InitializationProvider(this._ref);
 
   Future<bool> checkUserAlreadyExist(Role role) async {
-    final phone = PersistentAuthStateService.authState.username;
-    if (phone == null) {
-      return false;
-    }
-    final response = await _ref
-        .read(patientAuthenticationRepositoryProvider)
-        .getPatientProfileByPhone(phone);
-
-    return response.fold((failure) {
-      return false;
-    }, (result) async {
-      await PersistentAuthStateService.authState.saveUserProfileId(
-        result.profile!.patient!.patientId.toString(),
-      );
+    if (role == Role.ROLE_VISION_TECHNICIAN) {
       return true;
-    });
+    } else {
+      final phone = PersistentAuthStateService.authState.username;
+      if (phone == null) {
+        return false;
+      }
+      final response = await _ref
+          .read(patientAuthenticationRepositoryProvider)
+          .getPatientProfileByPhone(phone);
+
+      return response.fold((failure) {
+        return false;
+      }, (result) async {
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          result.profile!.patient!.patientId.toString(),
+        );
+        return true;
+      });
+    }
   }
 
   Future<void> logout() async {

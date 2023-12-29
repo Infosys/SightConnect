@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -40,19 +38,27 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         final navigator = Navigator.of(context);
-        final selectedProfile = await showProfileSelectionDialog(navigator);
-        logger.i("Selected Profile: $selectedProfile");
-        if (selectedProfile != null) {
-          final role = roleToString(selectedProfile);
-          await PersistentAuthStateService.authState.setActiveRole(role);
-          logger.i("Active Role: $role");
-          _profileVerification(selectedProfile);
+        final role = PersistentAuthStateService.authState.activeRole;
+
+        if (role != null) {
+          logger.i("with role: $role");
+          _profileVerification(roleMapper(role)!);
         } else {
-          logger.i("Role Not Found");
-          await ref.read(initializationProvider).logout();
-          await navigator.pushNamedAndRemoveUntil(
-              LoginPage.routeName, (route) => false);
-          Fluttertoast.showToast(msg: "Profile not found. Please login again.");
+          final selectedProfile = await showProfileSelectionDialog(navigator);
+          logger.i("Selected Role: $selectedProfile");
+          if (selectedProfile != null) {
+            final role = roleToString(selectedProfile);
+            await PersistentAuthStateService.authState.setActiveRole(role);
+            logger.i("Active Role: $role");
+            _profileVerification(selectedProfile);
+          } else {
+            logger.i("Role Not Found");
+            await ref.read(initializationProvider).logout();
+            await navigator.pushNamedAndRemoveUntil(
+                LoginPage.routeName, (route) => false);
+            Fluttertoast.showToast(
+                msg: "Profile not found. Please login again.");
+          }
         }
       },
     );
@@ -71,7 +77,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
     if (role == Role.ROLE_PATIENT) {
-      final consentGiven = await showConsentForm(navigator, role);
+      final consentGiven = await _showConsentForm(navigator, role);
       if (consentGiven != null && consentGiven) {
         await _registerUser(navigator, role);
       } else {
@@ -80,6 +86,67 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } else {
       // ALL OTHER ROLES
     }
+  }
+
+  Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
+    navigateBasedOnRole(navigator, role);
+  }
+
+  Future<void> _registerUser(NavigatorState navigator, Role role) async {
+    final status = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) => const PatientRegistrationMiniappPage(
+          actionType: MiniAppActionType.REGISTER,
+          displayName: "Register Patient",
+        ),
+      ),
+    );
+
+    if (status == null || status) {
+      // api failed or manual back press
+      await _showRegistrationDialog(role);
+    } else {
+      await _profileVerification(role);
+    }
+  }
+
+  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) {
+          if (role == Role.ROLE_PATIENT) {
+            return const PatientConsentFormPage();
+          } else {
+            return const VTConsentFormPage();
+          }
+        },
+      ),
+    );
+    return consentGiven;
+  }
+
+  Future<void> _showRegistrationDialog(Role role) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AlertDialog(
+            title: const Text("Registration Required"),
+            content: const Text("Please register to continue"),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  _profileVerification(role);
+                },
+                child: const Text("Register"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Future<Role?> showProfileSelectionDialog(NavigatorState navigator) {
@@ -119,81 +186,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
                 ),
               ),
             ),
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    if (role == Role.ROLE_PATIENT) {
-      final patientId =
-          await PersistentAuthStateService.authState.userProfileId;
-      if (patientId == null) {
-        await _showRegistrationDialog();
-      } else {
-        await navigateBasedOnRole(navigator, role);
-      }
-    } else {
-      await navigateBasedOnRole(navigator, role);
-    }
-  }
-
-  Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    final status = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(
-          actionType: MiniAppActionType.REGISTER,
-          displayName: "Register Patient",
-        ),
-      ),
-    );
-
-    if (status == null || status) {
-      // api failed or manual back press
-      await _showRegistrationDialog();
-    } else {
-      await _profileVerification(role);
-    }
-  }
-
-  Future<bool?> showConsentForm(NavigatorState navigator, Role? role) async {
-    if (role == null) {
-      return null;
-    }
-
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) {
-          if (role == Role.ROLE_PATIENT) {
-            return const PatientConsentFormPage();
-          } else {
-            return const VTConsentFormPage();
-          }
-        },
-      ),
-    );
-    return consentGiven;
-  }
-
-  Future<void> _showRegistrationDialog() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AlertDialog(
-            title: const Text("Registration Required"),
-            content: const Text("Please register to continue"),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  profileVerification();
-                },
-                child: const Text("Register"),
-              ),
-            ],
           ),
         );
       },
