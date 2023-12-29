@@ -17,4 +17,14 @@ abstract class VgAddEventRepository {
     required String eventId,
     required String actorIdentifier,
   });
+
+    Future getTeammates({
+    required String eventId,
+    required String actorIdentifier,
+  });
+    Future deleteTeamMate({
+    required String eventId,
+    required String loginActorIdentifier,
+    required String actorIdentifier,
+  });
 }

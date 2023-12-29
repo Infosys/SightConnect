@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 
 var vgAddEventRemoteSource =
     Provider((ref) => VgAddEventRemoteSourceImpl(ref.read(dioProvider)));
@@ -21,6 +22,16 @@ abstract class VgAddEventRemoteSource {
   });
   Future postAddTeammate({
     required String eventId,
+    required String actorIdentifier,
+  });
+  Future getTeammates({
+    required String eventId,
+    required String actorIdentifier,
+  });
+
+  Future deleteTeamMate({
+    required String eventId,
+    required String loginActorIdentifier,
     required String actorIdentifier,
   });
 }
@@ -74,23 +85,88 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future postAddTeammate(
       {required String eventId, required String actorIdentifier}) async {
     const endpoint =
-        '/services/orchestration/api/practitioners/filter?officialMobile=1234567891';
-    final response = await _dio.get(endpoint).then((value)async {
-      var newResponse={
-  "role": "MEDICAL_DOCTOR",
-  "identifier": "7412115640728765726746033778035388965009724684348059769236735883896455075920807737461399997",
-  "isOwner": true
-};
+        '/services/orchestration/api/practitioners/filter?officialMobile=8888888741';
+    final response = await _dio.get(endpoint).then((patientresponse) async {
+      logger.f(patientresponse.data);
 
-const endpoint = "services/triage/api/campaign-events/teamMates";
-Map<String, dynamic> queryParameters = {
-      "eventId": eventId,
-      "loginActorIdentifier":actorIdentifier
-    };
+      var roleType = patientresponse.data[0]["practitionerType"];
+      if (roleType == "PROFESSIONAL") {
+        roleType = "MEDICAL_PRACTITIONER";
+      }
+      var newResponse = {
+        "role": "${roleType}",
+        "identifier": "${patientresponse.data[0]["id"]}",
+        "isOwner": false
+      };
 
-final response=await _dio.post(endpoint,queryParameters: queryParameters);
+      print(newResponse);
+
+      const endpoint = "/services/triage/api/campaign-events/teamMates";
+      Map<String, dynamic> queryParameters = {
+        "eventId": eventId,
+        "loginActorIdentifier": actorIdentifier
+      };
+      logger.d(queryParameters);
+      return await _dio
+          .post(endpoint, data: newResponse, queryParameters: queryParameters)
+          .then((value) {
+        print("esponse post");
+        print(value.data);
+        print("espone post");
+        return value;
+      }).catchError((error) {
+        print(error);
+        return error;
+      });
     });
-    logger.f(response.data + "jlaskdhnasuljdhasdilaksdjas");
+  }
+
+  @override
+  Future<List<dynamic>> getTeammates(
+      {required String eventId, required String actorIdentifier}) async {
+    const endpoint = "/services/triage/api/campaign-events/teamMates";
+    Map<String, dynamic> queryParameters = {
+      "eventId": eventId,
+      "loginActorIdentifier": actorIdentifier
+    };
+    final response = await _dio
+        .get(endpoint, queryParameters: queryParameters)
+        .then((value) async {
+      var responseTeamMates = value.data;
+      var listofTeamMates = [];
+      logger.d(responseTeamMates);
+
+      for (var i = 0; i < responseTeamMates.length; i++) {
+        /* Map<String, dynamic> queryParameters = {
+          "practitionerId": responseTeamMates[i]["identifier"],
+        }; */
+        Map<String, dynamic> queryParameters = {
+          "practitionerId": 1801,
+        };
+        var endpoint = "/services/orchestration/api/practitioners";
+        var teammatesDetails =
+            await _dio.get(endpoint, queryParameters: queryParameters);
+        listofTeamMates.add(teammatesDetails.data);
+      }
+      print(listofTeamMates[0]);
+      print("sdifjklsdjfl");
+      return listofTeamMates;
+    });
+
     return response;
+  }
+  
+  @override
+  Future deleteTeamMate({required String eventId, required String loginActorIdentifier, required String actorIdentifier}) async {
+    const endpoint = "/services/triage/api/campaign-events/teamMates";
+    Map<String, dynamic> queryParameters = {
+      "eventId": eventId,
+      "loginActorIdentifier": loginActorIdentifier,
+      "actorIdentifier": actorIdentifier,
+      
+    };
+    print(queryParameters);
+    final response = await _dio.delete(endpoint, queryParameters: queryParameters);
+    return response.statusCode;
   }
 }

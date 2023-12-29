@@ -4,10 +4,10 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 final addEventDetailsProvider =
     ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
-
   return AddEventDetailsNotifier(
     vgAddEventRepository: ref.watch(vgAddEventRepository),
   );
@@ -15,10 +15,10 @@ final addEventDetailsProvider =
 
 var getEventDetailsProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
-  
-  var eventStatusFilter=ref.watch(addEventDetailsProvider).eventStatusFilterValue;
+  var eventStatusFilter =
+      ref.watch(addEventDetailsProvider).eventStatusFilterValue;
   print(eventStatusFilter);
-  var isSelected=ref.watch(addEventDetailsProvider).isSelected;
+  var isSelected = ref.watch(addEventDetailsProvider).isSelected;
   print(isSelected);
   print("getEventDetailsProvider");
   return await ref
@@ -30,6 +30,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
 
   AddEventDetailsNotifier({required this.vgAddEventRepository});
+
+  String eventId = "";
 
   var isLoading = false;
   List<VisionGuardianEventModel> listOfEventDetails = [];
@@ -72,7 +74,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   get isSelectedValue => isSelected;
   get eventStatusFilterValue => eventStatusFilter;
+  get eventIdValue => eventId;
 
+  void setEventId(String id) {
+    eventId = id;
+    notifyListeners();
+  }
 
   Future deleteEventDetails({required String eventId}) async {
     try {
@@ -94,15 +101,22 @@ class AddEventDetailsNotifier extends ChangeNotifier {
         "identifier": "11067400874",
         "isOwner": true
       };
-
+      print(_startDate.text);
+      DateTime startDateFormat =
+          DateFormat("yyyy-MM-dd").parse(_startDate.text);
+      DateTime endDateFormat = DateFormat("yyyy-MM-dd").parse(_endDate.text);
+      print(endDateFormat);
+      var startFormat = "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
+var endFormat = "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
+      print(endFormat);
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,
           serviceProvider: 0,
           description: _eventDescription.text,
-          startDate: _startDate.text,
-          endDate: _endDate.text,
-          startTime: DateTime.now().toIso8601String() + "Z",
-          endTime: DateTime.now().toIso8601String() + "Z",
+          startDate: startFormat,
+          endDate: endFormat,
+          startTime: startDateFormat.toUtc().toIso8601String(),
+          endTime: endDateFormat.toUtc().toIso8601String(),
           maximumAttendeeCapacity: 0,
           sponsor: "r6B",
           images: [
@@ -171,9 +185,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   void filterListEvents(selectedIndex, selectedValue) {
     isSelected = selectedIndex;
     eventStatusFilter = selectedValue;
-    
 
     notifyListeners();
   }
-
 }

@@ -30,7 +30,7 @@ class VisionGuardianHomePage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: AppSize.height(context)/4.5,
+                  height: AppSize.height(context)/4,
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSize.kmpadding),
                   color: AppColor.primary,
@@ -160,10 +160,8 @@ class VisionGuardianHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: AppSize.height(context) * 0.02,
-            ),
-            VisionEventListDetails(),
+     
+           const VisionEventListDetails(),
             SizedBox(
               height: AppSize.height(context) * 0.2,
             ),

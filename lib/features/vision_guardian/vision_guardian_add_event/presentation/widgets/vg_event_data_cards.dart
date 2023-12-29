@@ -173,13 +173,17 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                     const SizedBox(
                       width: AppSize.kswidth - 5,
                     ),
-                    Text(
-                      "${data.addresses![0].addressLine1!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
-                         softWrap: true,
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.grey,
+                    SizedBox(
+                      width: AppSize.width(context) * 0.50,
+                      child: Text(
+                        "${data.addresses![0].addressLine1!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
+                           softWrap: true,
+                           
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.grey,
+                        ),
                       ),
                     ),
                   ],

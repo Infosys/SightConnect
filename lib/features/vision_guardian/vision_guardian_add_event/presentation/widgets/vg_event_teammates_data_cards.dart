@@ -1,19 +1,22 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../patient/patient_assessments_and_tests/data/fake_data_source.dart';
 
-class TeammatesDataCards extends HookWidget {
-  const TeammatesDataCards({super.key, required this.index, required this.data});
+class TeammatesDataCards extends HookConsumerWidget {
+  const TeammatesDataCards(
+      {super.key, required this.index, required this.data});
 
   final int index;
-  final List<dynamic> data;
+  final data;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var nameController = useTextEditingController();
     var mobileController = useTextEditingController();
     var isEdit = useState<bool>(true);
@@ -57,7 +60,8 @@ class TeammatesDataCards extends HookWidget {
                           Expanded(
                             child: Text(
                               nameController.value.text == ''
-                                  ? data[index]["name"]
+                                  ? data[index]["personalInformation"]
+                                      ["firstName"]
                                   : nameController.value.text,
                               style: applyFiraSansFont(
                                 fontSize: 14,
@@ -66,39 +70,17 @@ class TeammatesDataCards extends HookWidget {
                               ),
                             ),
                           ),
-                          isEdit.value
-                              ? Transform.translate(
-                                  offset: const Offset(0, 10),
-                                  child: InkWell(
-                                    onTap: () {
-                                      isEdit.value = !isEdit.value;
-                                    },
-                                    child: const Icon(
-                                      Icons.edit_outlined,
-                                      color: AppColor.grey,
-                                      size: 30,
-                                    ),
-                                  ),
-                                )
-                              : Transform.translate(
-                                  offset: const Offset(0, 10),
-                                  child: InkWell(
-                                    onTap: () {
-                                      isEdit.value = !isEdit.value;
-                                    },
-                                    child: const Icon(
-                                      Icons.check_circle_outline,
-                                      color: AppColor.grey,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ),
                           const SizedBox(
                             width: 10,
                           ),
                           Transform.translate(
                             offset: const Offset(0, 10),
-                            child: const InkWell(
+                            child: InkWell(
+                              onTap: ()  {
+                                 ref
+                                    .read(visionGuadianAddMemberProvider)
+                                    .deleteMember(data[index]["id"].toString());
+                              },
                               child: Icon(
                                 Icons.delete_outline,
                                 color: AppColor.red,
@@ -114,7 +96,7 @@ class TeammatesDataCards extends HookWidget {
                     ),
                     Text(
                       mobileController.value.text == ''
-                          ? data[index]["mobile"]
+                          ? data[index]["officialMobile"]
                           : mobileController.value.text,
                       style: applyRobotoFont(
                         fontSize: 12,

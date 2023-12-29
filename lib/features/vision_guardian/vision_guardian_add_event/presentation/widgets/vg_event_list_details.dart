@@ -26,6 +26,8 @@ class VisionEventListDetails extends ConsumerWidget {
           itemBuilder: (context, index) {
             return InkWell(
                 onTap: () {
+
+                  ref.read(addEventDetailsProvider).setEventId(eventDetails[index].id.toString());
                   Navigator.push(
                     context,
                     MaterialPageRoute(
