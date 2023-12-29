@@ -12,7 +12,6 @@ class PatientPrivacyPolicyPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedValue = useState<bool>(false);
     List<String> privacyPoints = [
       'To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you). ',
       'To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.',
@@ -25,6 +24,17 @@ class PatientPrivacyPolicyPage extends HookWidget {
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text("Privacy Policy"),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.all(16),
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ElevatedButton.icon(
+            onPressed: null,
+            icon: const Icon(Icons.check),
+            label: const Text("Privacy Policy Accepted"),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -206,51 +216,6 @@ class PatientPrivacyPolicyPage extends HookWidget {
                     applyRobotoFont(fontWeight: FontWeight.w500, fontSize: 16),
               ),
               const SizedBox(height: 20),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text.rich(
-              //     const TextSpan(
-              //         text: 'Lorem Ipsum is simply dummy text of the printing',
-              //         style: TextStyle(
-              //           decoration: TextDecoration.underline,
-              //         )),
-              //     style: applyRobotoFont(
-              //       fontSize: 14,
-              //       color: AppColor.blue,
-              //     ),
-              //   ),
-              // ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: Checkbox(
-                  value: selectedValue.value,
-                  onChanged: (value) {
-                    selectedValue.value = value!;
-                  },
-                ),
-                title: Text(
-                  'I agree to the terms and conditions',
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.grey,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: selectedValue.value ? () {} : null,
-                        child: const Text("I Agree"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

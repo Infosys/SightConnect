@@ -38,7 +38,7 @@ class PatientHomePageAppBar extends StatelessWidget
       actions: [
         Consumer(
           builder: (context, ref, child) {
-            final patient = ref.watch(globalPatientProvider).activeUser;
+            final patient = ref.watch(getPatientProfileProvider).asData?.value;
             if (patient == null) {
               return const CircleAvatar(
                 backgroundColor: AppColor.lightGrey,
@@ -46,6 +46,7 @@ class PatientHomePageAppBar extends StatelessWidget
             }
             final profileUrl = patient.profile?.patient?.profilePhoto;
             final name = patient.profile?.patient?.name;
+
             return InkWell(
               // onTap: () {
               //   showDialog(

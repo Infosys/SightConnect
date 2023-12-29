@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var globalVTProvider = ChangeNotifierProvider((ref) => GlobalVTProvider(ref));
-var getPatientProfileProvider = FutureProvider((ref) async {
-  return await ref.read(initializationProvider).getUserProfile();
-});
 
 class GlobalVTProvider extends ChangeNotifier {
   final Ref _ref;

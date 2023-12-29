@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,8 @@ class NearbyVisionCentersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.d(data.toJson());
+
     String getLocation(FacilityAddressModel address) {
       String location = "";
       if (address.addressLine1 != null) {
@@ -103,13 +108,9 @@ class NearbyVisionCentersCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SvgPicture.asset(
-                  AppIcon.location,
-                  height: 16,
-                  colorFilter: const ColorFilter.mode(
-                    AppColor.primary,
-                    BlendMode.srcIn,
-                  ),
+                const Icon(
+                  Icons.location_on_outlined,
+                  color: AppColor.primary,
                 ),
                 const SizedBox(
                   width: 8,
@@ -117,8 +118,9 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 Flexible(
                   child: Text(
                     getLocation(
-                        data.facilityInformation?.facilityAddressDetails ??
-                            const FacilityAddressModel()),
+                      data.facilityInformation?.facilityAddressDetails ??
+                          const FacilityAddressModel(),
+                    ),
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: const Color(0xff333333),
@@ -136,9 +138,9 @@ class NearbyVisionCentersCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SvgPicture.asset(
-                  AppIcon.call,
-                  height: 16,
+                const Icon(
+                  Icons.call_outlined,
+                  color: AppColor.primary,
                 ),
                 const SizedBox(
                   width: 8,
@@ -162,18 +164,18 @@ class NearbyVisionCentersCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SvgPicture.asset(
-                  AppIcon.location,
-                  height: 16,
+                const Icon(
+                  Icons.email_outlined,
+                  color: AppColor.primary,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Flexible(
                   child: Text(
-                    getSpeciality(data.facilityAdditionalInformation
-                            ?.generalInformation ??
-                        const GeneralInformationModel()),
+                    data.facilityInformation?.facilityContactInformation
+                            ?.facilityEmailId ??
+                        "",
                     softWrap: true,
                     style: applyRobotoFont(
                       fontSize: 14,

@@ -19,7 +19,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(globalPatientProvider).activeUser;
-    final connectionsList = model?.profile?.patient?.relatedParty ?? [];
+    final List<RelatedPartyModel> connectionsList =
+        model?.profile?.patient?.relatedParty ?? [];
     final currentProfile = model?.profile?.patient;
     var memberProvider = ref.watch(triageMemberProvider);
     final selectedValue = useState<int>(-1);

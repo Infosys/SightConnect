@@ -106,14 +106,7 @@ class AppDrawer extends StatelessWidget {
                                         ),
                                       );
                                       break;
-                                    // case 5:
-                                    //   Navigator.of(context).push(
-                                    //     MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           const TermsOfUsePage(),
-                                    //     ),
-                                    //   );
-                                    //   break;
+
                                     case 5:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(

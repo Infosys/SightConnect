@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
@@ -31,20 +33,6 @@ class InitializationProvider extends ChangeNotifier {
       );
       return true;
     });
-  }
-
-  Future<PatientResponseModel> getUserProfile() async {
-    final id = PersistentAuthStateService.authState.userId;
-    if (id == null) {
-      throw Exception("No user id found");
-    }
-    final response = await _ref
-        .read(patientAuthenticationRepositoryProvider)
-        .getPatientProfile(int.parse(id));
-
-    return response.fold((failure) {
-      throw Exception("No user found");
-    }, (result) => result);
   }
 
   Future<void> logout() async {

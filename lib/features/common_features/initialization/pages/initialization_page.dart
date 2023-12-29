@@ -93,6 +93,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       return Future.value(null);
     }
     final roles = roleListMapper(currentRoles);
+    if (roles.length == 1) {
+      return Future.value(roles.first);
+    }
     return showDialog(
       context: context,
       barrierDismissible: false,

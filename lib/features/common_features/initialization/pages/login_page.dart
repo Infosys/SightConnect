@@ -230,7 +230,9 @@ class LoginPage extends HookConsumerWidget {
                 numberOfFields: 6,
                 focusedBorderColor: AppColor.blue,
                 showFieldAsBox: true,
-                onCodeChanged: (String code) {},
+                onCodeChanged: (String code) {
+                  logger.i(code);
+                },
                 onSubmit: (String verificationCode) {
                   otp.value = verificationCode;
                 },

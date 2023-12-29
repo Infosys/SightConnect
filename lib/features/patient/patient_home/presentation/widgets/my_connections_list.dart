@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
@@ -20,14 +19,25 @@ class MyConnectionsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final familyMembers = ref.watch(globalPatientProvider).familyMembers;
-
-    return _content(context, familyMembers);
+    return ref.watch(getPatientProfileProvider).when(
+      data: (data) {
+        final familyMembers = data.profile?.patient?.relatedParty;
+        return _content(context, familyMembers);
+      },
+      error: (error, stackTrace) {
+        return _content(context, []);
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 
   Widget _content(
     BuildContext context,
-    List<RelatedPartyModel> connectionsList,
+    List<RelatedPartyModel>? connectionsList,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,7 +75,7 @@ class MyConnectionsList extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: AppSize.ksheight),
-        connectionsList.isEmpty
+        (connectionsList == null || connectionsList.isEmpty)
             ? Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppSize.kmwidth + 10),

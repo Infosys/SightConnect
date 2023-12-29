@@ -26,10 +26,10 @@ class AssessmentCards extends ConsumerWidget {
         height: 200,
         child: Center(
           child: Text(
-            'No Data Found',
+            'No Reports Found',
             style: applyRobotoFont(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
               color: AppColor.grey,
             ),
           ),

@@ -47,37 +47,6 @@ class TriageMemberSelectionPage extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                // InkWell(
-                //   onTap: () {
-                //     Navigator.of(context).push(
-                //       MaterialPageRoute(
-                //         builder: (context) => const TriageAddMemberPage(),
-                //       ),
-                //     );
-                //   },
-                //   child: RichText(
-                //     text: TextSpan(
-                //       children: <TextSpan>[
-                //         TextSpan(
-                //           text: '+ ',
-                //           style: applyRobotoFont(
-                //             fontSize: 21,
-                //             color: AppColor.primary,
-                //             fontWeight: FontWeight.w300,
-                //           ),
-                //         ),
-                //         TextSpan(
-                //           text: 'Add Member',
-                //           style: applyRobotoFont(
-                //             fontSize: 14,
-                //             fontWeight: FontWeight.w500,
-                //             color: AppColor.primary,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             const SizedBox(height: AppSize.ksheight),

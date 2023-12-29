@@ -16,10 +16,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 
-final patientAssessmentAndTestProvider = ChangeNotifierProvider(
+final patientAssessmentAndTestProvider = ChangeNotifierProvider.autoDispose(
   (ref) => PatientAssessmentAndTestProviderNew(
     ref.watch(getAssessmentUseCase),
-    ref.watch(globalPatientProvider).parentUser,
+    ref.watch(globalPatientProvider).activeUser,
     ref.watch(triageReportRepositoryProvider),
     ref.watch(patientAssessmentUpdateDataProvider),
   ),

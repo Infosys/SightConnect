@@ -17,7 +17,7 @@ class PatientProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(globalPatientProvider).activeUser;
+    final model = ref.watch(getPatientProfileProvider).asData?.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -106,7 +106,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      address ?? "",
+                      address ?? "-",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
