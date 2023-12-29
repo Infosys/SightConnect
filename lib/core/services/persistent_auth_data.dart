@@ -34,6 +34,15 @@ class PersistentAuthData {
     final rolesJson = await _storage.read(key: _rolesKey);
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
     activeRole = await _storage.read(key: _activeRoleKey);
+    logger.i({
+      'accessTokenData': accessToken,
+      'refreshTokenData': refreshToken,
+      'roles': roles,
+      'username': username,
+      'userId': userId,
+      'idToken': idToken,
+      'activeRole': activeRole,
+    });
   }
 
   Future<void> saveUserProfileId(String id) async {

@@ -1,13 +1,15 @@
 // https://eyecare4all-dev.infosysapps.com/services/orchestration/api/practitioners/filter?officialMobile=8888888741
 
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vtAuthenticationRepositoryProvider =
@@ -22,13 +24,23 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
 
   @override
   Future<Either<Failure, VtProfileModel>> getVtProfile() async {
-    const mobile = "";
-    const endpoint =
+    var mobile = PersistentAuthStateService.authState.username;
+
+    if (mobile == null) {
+      return Left(
+        ServerFailure(errorMessage: "Mobile number not found"),
+      );
+    }
+
+    if (mobile.startsWith("+91")) {
+      mobile = mobile.substring(3);
+    }
+    final endpoint =
         "/services/orchestration/api/practitioners/filter?officialMobile=$mobile";
     try {
       final response = await _dio.get(endpoint);
 
-      return Right(VtProfileModel.fromJson(response.data));
+      return Right(VtProfileModel.fromJson(response.data!.first));
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       return Left(

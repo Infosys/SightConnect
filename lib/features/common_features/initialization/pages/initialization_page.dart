@@ -68,18 +68,21 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       final role = roleToString(selectedProfile);
       await PersistentAuthStateService.authState.setActiveRole(role);
       logger.i("Active Role: $role");
-      final consentGiven = await showConsentForm(navigator, selectedProfile);
-
-      if (consentGiven != null && consentGiven) {
-        logger.i("Consent Given");
-        await _registerUser(navigator);
+      if (selectedProfile == Role.ROLE_VISION_TECHNICIAN) {
+        final consentGiven = await showConsentForm(navigator, selectedProfile);
+        if (consentGiven != null && consentGiven) {
+          logger.i("Consent Given");
+          await navigateBasedOnRole(navigator, selectedProfile);
+        } else {
+          /// CONSENT NOT GIVEN
+          logger.i("Consent Not Given");
+          await ref.read(initializationProvider).logout();
+          await navigator.pushNamedAndRemoveUntil(
+              LoginPage.routeName, (route) => false);
+          Fluttertoast.showToast(msg: "Please accept the consent form.");
+        }
       } else {
-        /// CONSENT NOT GIVEN
-        logger.i("Consent Not Given");
-        await ref.read(initializationProvider).logout();
-        await navigator.pushNamedAndRemoveUntil(
-            LoginPage.routeName, (route) => false);
-        Fluttertoast.showToast(msg: "Please accept the consent form.");
+        await _registerUser(navigator);
       }
     } else {
       /// ROLE NOT FOUND
