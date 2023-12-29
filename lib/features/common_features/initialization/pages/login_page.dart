@@ -19,6 +19,7 @@ class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    logger.i("Login Page: build");
     var mobileController = useTextEditingController();
     var focusNode = useFocusNode();
     var formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());

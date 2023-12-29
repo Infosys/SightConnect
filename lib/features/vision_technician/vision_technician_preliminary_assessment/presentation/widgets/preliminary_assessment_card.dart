@@ -14,7 +14,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(globalVTProvider).activeUser?.profile;
+    var model = ref.watch(globalVTProvider).user;
     // var dateYear = DateTime.now().year;
 
     // int giveAge() {
@@ -22,16 +22,20 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     //   return (dateYear - age).toInt();
     // }
 
-    String genderString =
-        model?.patient?.gender.toString().split('.').last ?? "";
-    final address = _formateAddress(
-      line: model?.patient?.address?.first.line ?? "",
-      ward: model?.patient?.address?.first.ward ?? "",
-      district: model?.patient?.address?.first.district ?? "",
-      state: model?.patient?.address?.first.state ?? "",
-    );
+    // String genderString =
+    //     model?.patient?.gender.toString().split('.').last ?? "";
+    // final address = _formateAddress(
+    //   line: model?.patient?.address?.first.line ?? "",
+    //   ward: model?.patient?.address?.first.ward ?? "",
+    //   district: model?.patient?.address?.first.district ?? "",
+    //   state: model?.patient?.address?.first.state ?? "",
+    // );
 
-    String profileImage = model?.patient?.profilePhoto ?? "";
+    // String profileImage = model?.patient?.profilePhoto ?? "";
+    String genderString = "MALE";
+    const address = "";
+
+    String profileImage = "";
 
     return Container(
       width: double.infinity,
@@ -62,12 +66,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    model?.patient?.name ?? "",
+                    "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    model?.patient?.abhaNumber.toString() ?? "",
+                    "",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,

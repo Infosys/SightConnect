@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
@@ -14,6 +16,31 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(getVTProfileProvider, (previous, next) {
+      if (next.hasError) {
+        ref.read(initializationProvider).logout();
+      }
+    });
+    return ref.watch(getVTProfileProvider).when(
+          data: (data) {
+            return _content(context, ref);
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          error: (error, stackTrace) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+        );
+  }
+
+  Widget _content(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: const VisionTechnicianHomePage(),
       bottomNavigationBar: BottomNavigationBar(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -35,6 +37,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   void initState() {
     super.initState();
+    logger.i("InitializationPage: initState");
+    log(PersistentAuthStateService.authState.accessToken.toString());
     profileVerification();
   }
 
