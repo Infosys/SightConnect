@@ -97,6 +97,8 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 }

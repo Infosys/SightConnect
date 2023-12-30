@@ -18,7 +18,7 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
     double? longitude,
   }) async {
     if (latitude == null || longitude == null) {
-      return [];
+      throw Exception("Latitude and longitude cannot be null");
     }
     final endpoint =
         "/services/orchestration/api/organizations/search?latitude=$latitude&longitude=$longitude";
@@ -31,7 +31,9 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
           .toList();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-      return [];
+      rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 }

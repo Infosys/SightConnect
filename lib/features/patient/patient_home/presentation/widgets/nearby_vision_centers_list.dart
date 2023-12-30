@@ -60,14 +60,11 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 data: (data) {
                   if (data.isEmpty) {
                     return Center(
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextButton.icon(
-                          onPressed: () {
-                            ref.read(patientHomeProvider).init();
-                          },
-                          label: const Text("Try Again"),
-                          icon: const Icon(Icons.location_on),
+                      child: Text(
+                        "No Vision Centers Found",
+                        style: applyFiraSansFont(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     );
@@ -88,9 +85,20 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                error: (error, stackTrace) => const Center(
-                  child: SizedBox(),
-                ),
+                error: (error, stackTrace) {
+                  return Center(
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          ref.read(patientHomeProvider).init();
+                        },
+                        label: const Text("Try Again"),
+                        icon: const Icon(Icons.location_on),
+                      ),
+                    ),
+                  );
+                },
               ),
         ],
       ),

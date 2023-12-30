@@ -23,15 +23,7 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
   VtAutheticationRepositoryImpl(this._dio);
 
   @override
-  Future<Either<Failure, VtProfileModel>> getVtProfile() async {
-    var mobile = PersistentAuthStateService.authState.username;
-
-    if (mobile == null) {
-      return Left(
-        ServerFailure(errorMessage: "Mobile number not found"),
-      );
-    }
-
+  Future<Either<Failure, VtProfileModel>> getVtProfile(String mobile) async {
     if (mobile.startsWith("+91")) {
       mobile = mobile.substring(3);
     }

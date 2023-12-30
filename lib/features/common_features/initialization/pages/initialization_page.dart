@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_da
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,10 +55,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           } else {
             logger.i("Role Not Found");
             await ref.read(initializationProvider).logout();
-            await navigator.pushNamedAndRemoveUntil(
-                LoginPage.routeName, (route) => false);
-            Fluttertoast.showToast(
-                msg: "Profile not found. Please login again.");
+            await _invalidateAndLogout("Role not found. Please login again.");
           }
         }
       },
@@ -83,8 +81,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       } else {
         await _invalidateAndLogout("Consent not given. Please login again.");
       }
+    } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+      await _invalidateAndLogout("You are not authorized to login.");
     } else {
-      // ALL OTHER ROLES
+      await _invalidateAndLogout("You are not authorized to login.");
     }
   }
 
@@ -129,21 +129,18 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AlertDialog(
-            title: const Text("Registration Required"),
-            content: const Text("Please register to continue"),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  _profileVerification(role);
-                },
-                child: const Text("Register"),
-              ),
-            ],
-          ),
+        return BlurDialogBox(
+          title: const Text("Registration Required"),
+          content: const Text("Please register to continue"),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                _profileVerification(role);
+              },
+              child: const Text("Register"),
+            ),
+          ],
         );
       },
     );
@@ -162,28 +159,24 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return ClipRRect(
-          child: AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            title: const Text('Select a profile'),
-            content: SizedBox(
-              child: SingleChildScrollView(
-                child: ListBody(
-                  children: roles
-                      .map(
-                        (role) => RadioListTile(
-                          title: Text(role.toString().split('_').last),
-                          value: role,
-                          groupValue: null,
-                          onChanged: (value) async {
-                            navigator.pop(value);
-                          },
-                        ),
-                      )
-                      .toList(),
-                ),
+        return BlurDialogBox(
+          actions: const [],
+          title: const Text('Select a profile'),
+          content: SizedBox(
+            child: SingleChildScrollView(
+              child: ListBody(
+                children: roles
+                    .map(
+                      (role) => RadioListTile(
+                        title: Text(role.toString().split('_').last),
+                        value: role,
+                        groupValue: null,
+                        onChanged: (value) async {
+                          navigator.pop(value);
+                        },
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),

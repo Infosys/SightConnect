@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,13 +18,24 @@ class InitializationProvider extends ChangeNotifier {
   InitializationProvider(this._ref);
 
   Future<bool> checkUserAlreadyExist(Role role) async {
+    final phone = PersistentAuthStateService.authState.username;
+    if (phone == null) {
+      return false;
+    }
+
     if (role == Role.ROLE_VISION_TECHNICIAN) {
-      return true;
-    } else {
-      final phone = PersistentAuthStateService.authState.username;
-      if (phone == null) {
+      final response = await _ref
+          .read(vtAuthenticationRepositoryProvider)
+          .getVtProfile(phone);
+      return response.fold((failure) {
         return false;
-      }
+      }, (result) async {
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          result.id.toString(),
+        );
+        return true;
+      });
+    } else if (role == Role.ROLE_PATIENT) {
       final response = await _ref
           .read(patientAuthenticationRepositoryProvider)
           .getPatientProfileByPhone(phone);
@@ -36,6 +48,8 @@ class InitializationProvider extends ChangeNotifier {
         );
         return true;
       });
+    } else {
+      return false;
     }
   }
 
