@@ -57,13 +57,13 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
             ),
           ),
         ),
-        const CircleAvatar(
-          backgroundColor: AppColor.white,
-          child: Icon(
-            Icons.calendar_month_rounded,
-            color: AppColor.grey,
-          ),
-        )
+        // const CircleAvatar(
+        //   backgroundColor: AppColor.white,
+        //   child: Icon(
+        //     Icons.calendar_month_rounded,
+        //     color: AppColor.grey,
+        //   ),
+        // )
       ],
     );
   }

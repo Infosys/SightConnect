@@ -58,12 +58,7 @@ class VTSearchBar extends ConsumerWidget {
           color: AppColor.grey,
           fontSize: 14,
         ),
-        // border: OutlineInputBorder(
-        //   borderSide: BorderSide.none,
-        //   borderRadius: BorderRadius.circular(AppSize.klradius * 3),
-        // ),
         border: OutlineInputBorder(
-          // borderSide: BorderSide.none,
           borderSide: const BorderSide(color: AppColor.primary),
           borderRadius: BorderRadius.circular(AppSize.klradius * 3),
         ),

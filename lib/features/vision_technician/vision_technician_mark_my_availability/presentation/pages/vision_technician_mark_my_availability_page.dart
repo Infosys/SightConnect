@@ -88,16 +88,21 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                 builder: (context, ref, _) {
                   final model = ref.watch(markMyAvailabilityHelperProvider);
                   return model.isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
+                      ? const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
                         )
                       : Padding(
                           padding: const EdgeInsets.all(0),
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: model.markAvailability
-                                  ? AppColor.blue
-                                  : AppColor.grey,
+                          child: TextButton.icon(
+                            style: TextButton.styleFrom(
+                              foregroundColor: model.markAvailability
+                                  ? AppColor.white
+                                  : AppColor.blue,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(AppSize.klradius * 5),
@@ -108,7 +113,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                                 await model.updateAvailability();
                               } catch (e) {
                                 Fluttertoast.showToast(
-                                  msg: "Something went wrong",
+                                  msg: "Something went wrong.. Try Again!!",
                                 );
                               }
                             },
@@ -121,7 +126,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                                 : const Icon(
                                     Icons.check,
                                     size: 20,
-                                    color: AppColor.white,
+                                    color: AppColor.blue,
                                   ),
                             label: Text(
                               model.markAvailability
@@ -226,6 +231,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends StatelessWidget {
                             ref.watch(markMyAvailabilityHelperProvider);
                         return ListView.separated(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             return VtMarkMyAvailableEachDayAvailability(
                               dayAvailabilityindex: index,

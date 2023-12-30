@@ -37,11 +37,17 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      columnSpacing: AppSize.width(context) / 10,
-                      horizontalMargin: 12,
+                      clipBehavior: Clip.antiAlias,
+                      headingRowColor: MaterialStateProperty.all(
+                        AppColor.scaffold,
+                      ),
+                      columnSpacing: AppSize.width(context) / 15,
+                      dataRowMinHeight: 50,
+                      dataRowMaxHeight: 80,
+                      horizontalMargin: 50,
                       decoration: BoxDecoration(
-                        color: AppColor.white,
                         borderRadius: BorderRadius.circular(AppSize.ksradius),
+                        color: AppColor.white,
                         boxShadow: applyLightShadow(),
                       ),
                       columns: List<DataColumn>.generate(
@@ -87,133 +93,147 @@ class IvrCallHistoryTableView extends ConsumerWidget {
       ],
     );
   }
-}
 
-List<DataCell> generateIvrCallHistoryListTile(
-  IvrCallHistoryModel data,
-  WidgetRef ref,
-) {
-  return [
-    DataCell(
-      Text(
-        data.patientId,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(
+  List<DataCell> generateIvrCallHistoryListTile(
+    IvrCallHistoryModel data,
+    WidgetRef ref,
+  ) {
+    return [
+      DataCell(
+        Text(
+          data.patientId,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: AppColor.blue,
-            decoration: TextDecoration.underline),
-      ),
-    ),
-    DataCell(
-      Text(
-        data.name.sentenceCase(),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
+          ),
         ),
       ),
-    ),
-    DataCell(
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.phone_callback_rounded,
-            color: data.direction == "in" ? AppColor.green : AppColor.red,
+      DataCell(
+        Text(
+          data.name.sentenceCase(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
           ),
-          const SizedBox(width: AppSize.kspadding),
-          Text(
-            "${data.duration ?? 0 / 60} min",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
-          ),
-        ],
+        ),
       ),
-    ),
-    DataCell(
-      Text(
-        data.logDate.formateDate,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+      DataCell(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.phone_callback_rounded,
+              color: data.direction == "in" ? AppColor.green : AppColor.red,
+            ),
+            const SizedBox(width: AppSize.kspadding),
+            Text(
+              "${data.duration ?? 0 / 60} min",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
+          ],
+        ),
       ),
-    ),
-    DataCell(
-      Text(
-        data.logDate.formateTime,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+      DataCell(
+        Text(
+          _formateDateToDay(data.logDate),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+        ),
       ),
-    ),
-    DataCell(
-      Container(
-        decoration: BoxDecoration(
-            color: data.status == "COMPLETED"
-                ? AppColor.lightGreen.withOpacity(0.5)
-                : (data.status == "FAILED")
-                    ? AppColor.lightRed
-                    : AppColor.lightOrange,
-            borderRadius:
-                const BorderRadius.all(Radius.circular(AppSize.kspadding))),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.kspadding),
-          child: Text(
-            data.status,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: data.status == "COMPLETED"
-                  ? AppColor.green
-                  : (data.status == "FAILED")
-                      ? AppColor.red
-                      : AppColor.orange,
+      DataCell(
+        Text(
+          data.logDate.formateTime,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
+        ),
+      ),
+      DataCell(
+        Container(
+          decoration: BoxDecoration(
+            color: _colorCodeStatus(data.status).withOpacity(0.2),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppSize.kspadding),
             ),
           ),
-        ),
-      ),
-    ),
-    DataCell(
-      ref.watch(ivrCallHistorySearchHelperProvider).isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : CircleAvatar(
-              backgroundColor: data.status == "COMPLETED"
-                  ? const Color(0xffFAFAFA)
-                  : AppColor.lightBlue,
-              child: IconButton(
-                onPressed: data.status == "COMPLETED"
-                    ? null
-                    : () async {
-                        if (data.mobile != null) {
-                          try {
-                            await ref
-                                .read(ivrCallHistorySearchHelperProvider)
-                                .makeIvrCall(data.mobile!);
-                          } catch (e) {
-                            Fluttertoast.showToast(
-                                msg: "IVR call not available.. Try Again!!");
-                          }
-                        }
-                      },
-                icon: Icon(
-                  Icons.phone,
-                  size: 22,
-                  color: data.status == "COMPLETED"
-                      ? const Color(0xffBBBBBB)
-                      : AppColor.blue,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSize.kspadding),
+            child: Text(
+              data.status,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+                color: _colorCodeStatus(data.status),
               ),
             ),
-    ),
-  ];
+          ),
+        ),
+      ),
+      DataCell(
+        ref.watch(ivrCallHistorySearchHelperProvider).isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : CircleAvatar(
+                backgroundColor: data.status == "COMPLETED"
+                    ? const Color(0xffFAFAFA)
+                    : AppColor.lightBlue,
+                child: IconButton(
+                  onPressed: data.status == "COMPLETED"
+                      ? null
+                      : () async {
+                          if (data.mobile != null) {
+                            try {
+                              await ref
+                                  .read(ivrCallHistorySearchHelperProvider)
+                                  .makeIvrCall(data.mobile!);
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: "IVR call not available.. Try Again!!");
+                            }
+                          }
+                        },
+                  icon: Icon(
+                    Icons.phone,
+                    size: 22,
+                    color: data.status == "COMPLETED"
+                        ? const Color(0xffBBBBBB)
+                        : AppColor.blue,
+                  ),
+                ),
+              ),
+      ),
+    ];
+  }
+
+  _formateDateToDay(DateTime date) {
+    if (date == DateTime.now()) {
+      return "TODAY";
+    } else if (date == DateTime.now().subtract(const Duration(days: 1))) {
+      return "YESTERDAY";
+    } else {
+      return date.formateDate;
+    }
+  }
+
+  _colorCodeStatus(String status) {
+    if (status == "COMPLETED") {
+      return AppColor.green;
+    } else if (status == "FAILED") {
+      return AppColor.red;
+    } else {
+      return AppColor.orange;
+    }
+  }
 }

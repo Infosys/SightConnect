@@ -56,6 +56,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                       child: DataTable(
                         columnSpacing: AppSize.width(context) * 0.09,
                         horizontalMargin: AppSize.klpadding,
+                        dataRowMaxHeight: AppSize.klheight * 3,
                         dataRowMinHeight: AppSize.klheight * 2,
                         showCheckboxColumn: false,
                         decoration: BoxDecoration(
