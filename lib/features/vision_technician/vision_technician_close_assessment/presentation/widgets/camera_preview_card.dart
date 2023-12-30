@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -75,7 +75,7 @@ class CameraPreviewCard extends ConsumerWidget {
                         //   imagePath = image.path;
                         // });
                         ref
-                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .read(vtCloseAssessmentHelperProvider)
                             .saveImage(image);
                       } catch (e) {
                         logger.d(e);

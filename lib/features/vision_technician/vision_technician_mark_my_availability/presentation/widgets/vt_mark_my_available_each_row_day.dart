@@ -8,14 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VtMarkMyAvailableEachRow extends ConsumerWidget {
-  VtMarkMyAvailableEachRow(
-      {super.key,
-      required this.dayAvailabilityindex,
-      required this.index,
-      required this.daydata});
-  int index;
-  MarkMyAvailabilityModel daydata;
-  int dayAvailabilityindex;
+  const VtMarkMyAvailableEachRow({
+    super.key,
+    required this.dayAvailabilityindex,
+    required this.index,
+    required this.daydata,
+  });
+  final int index;
+  final MarkMyAvailabilityModel daydata;
+  final int dayAvailabilityindex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +32,9 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
               dropDownNo: 0,
               disable: daydata.checked,
             ),
-            SizedBox(width: AppSize.kmwidth,),
+            const SizedBox(
+              width: AppSize.kmwidth,
+            ),
             VtMarkMyAvailableEachRowTimePicker(
               dayAvailabilityindex: dayAvailabilityindex,
               index: index,

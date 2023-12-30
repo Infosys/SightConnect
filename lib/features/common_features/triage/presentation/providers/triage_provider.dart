@@ -13,14 +13,12 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/member_details_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/member_selection.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +35,7 @@ var getTriageProvider = FutureProvider<DiagnosticReportTemplateFHIRModel>(
   },
 );
 
-var triageProvider = ChangeNotifierProvider.autoDispose(
+var triageProvider = ChangeNotifierProvider(
   (ref) {
     return TriageProvider(
       ref.watch(saveTriageUseCase),
@@ -65,13 +63,14 @@ class TriageProvider extends ChangeNotifier {
   final TriageLocalSource _triageLocalSource;
 
   TriageProvider(
-      this._saveTriageUseCase,
-      this._getTriageEyeScanResponseLocallyUseCase,
-      this._getQuestionnaireResponseLocallyUseCase,
-      this._getVisionAcuityTumblingResponseLocallyUseCase,
-      this._patientId,
-      this._triageUrgencyRepository,
-      this._triageLocalSource);
+    this._saveTriageUseCase,
+    this._getTriageEyeScanResponseLocallyUseCase,
+    this._getQuestionnaireResponseLocallyUseCase,
+    this._getVisionAcuityTumblingResponseLocallyUseCase,
+    this._patientId,
+    this._triageUrgencyRepository,
+    this._triageLocalSource,
+  );
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -117,12 +116,13 @@ class TriageProvider extends ChangeNotifier {
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
       score: [
-        {"QUESTIONNAIRE": 0},
-        {"OBSERVATION": 0},
-        {"IMAGE": 0}
+        //from questionnaire MS
+        {"QUESTIONNAIRE": quessionnaireUrgency},
+        {"OBSERVATION": visualAcuityUrgency},
+        {"IMAGE": eyeScanUrgency}
       ],
-      userStartDate: DateTime.now(),
-      issued: DateTime.now(),
+      userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)),
 
       source: Source.PATIENT_APP,
       sourceVersion: AppText.appVersion,
@@ -134,13 +134,17 @@ class TriageProvider extends ChangeNotifier {
 
     logger.f({"triage model to be saved": triagePostModel});
 
-    Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
-      SaveTriageParam(triagePostModel: triagePostModel),
-    );
-    logger.f({"triage model saved": response});
-    _triageLocalSource.resetTriage();
+    try {
+      Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
+        SaveTriageParam(triagePostModel: triagePostModel),
+      );
+      logger.f({"triage model saved": response});
+      _triageLocalSource.resetTriage();
 
-    return response;
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   List<PostIncompleteTestModel> _getInclompleteSection(int currentStep) {

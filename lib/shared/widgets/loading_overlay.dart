@@ -5,9 +5,11 @@ class LoadingOverlay extends StatelessWidget {
     super.key,
     this.isLoading = false,
     required this.child,
+    this.progressMessage = "Loading...",
   });
   final bool isLoading;
   final Widget child;
+  final String progressMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +18,29 @@ class LoadingOverlay extends StatelessWidget {
       child: Stack(
         children: [
           child,
-          if (isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.5),
-              child: const Center(
-                child: CircularProgressIndicator(),
+          Visibility(
+            visible: isLoading,
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                color: Colors.black.withOpacity(0.6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      progressMessage,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
+          ),
         ],
       ),
     );

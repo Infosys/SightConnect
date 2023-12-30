@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,29 +47,29 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                     const SizedBox(height: AppSize.kmheight),
                     Row(
                       children: [
-                        InkWell(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColor.primary,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Text(
-                                "All",
-                                style: applyRobotoFont(
-                                  color: AppColor.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        // InkWell(
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(
+                        //       horizontal: 12,
+                        //       vertical: 5,
+                        //     ),
+                        //     decoration: BoxDecoration(
+                        //       color: AppColor.primary,
+                        //       borderRadius: BorderRadius.circular(30),
+                        //     ),
+                        //     child: InkWell(
+                        //       onTap: () {},
+                        //       child: Text(
+                        //         "All",
+                        //         style: applyRobotoFont(
+                        //           color: AppColor.white,
+                        //           fontWeight: FontWeight.w400,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(
                           width: AppSize.kswidth,
                         ),
@@ -87,6 +89,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<TriageReportUserEntity>(
+                                padding: EdgeInsets.zero,
                                 value: model.selectedPatient,
                                 onChanged: (patient) {
                                   model.setPatient(patient!);
@@ -109,27 +112,13 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         (person.image.isEmpty)
-                                            ? const CircleAvatar(
-                                                backgroundColor:
-                                                    AppColor.lightGrey,
+                                            ? AppNameAvatar(
+                                                name: person.name,
+                                                radius: 12,
+                                                fontSize: 10,
                                               )
-                                            : CachedNetworkImage(
+                                            : AppNetworkImage(
                                                 imageUrl: person.image,
-                                                height: 20,
-                                                width: 20,
-                                                fit: BoxFit.cover,
-                                                imageBuilder:
-                                                    (context, imageProvider) =>
-                                                        CircleAvatar(
-                                                  backgroundImage:
-                                                      imageProvider,
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const CircleAvatar(
-                                                  backgroundColor:
-                                                      AppColor.lightGrey,
-                                                ),
                                               ),
                                         const SizedBox(width: 8),
                                         Text(

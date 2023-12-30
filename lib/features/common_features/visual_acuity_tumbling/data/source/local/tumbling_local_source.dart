@@ -468,6 +468,8 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
         question.questionStatus = QuestionStatus.unattempted;
       }
     }
+
+    mapLevelsToLevelNumber();
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/identifier_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
@@ -30,7 +31,7 @@ class PatientAuthenticationRepositoryImpl
       return Right(remoteResponse);
     } catch (e) {
       return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
+        ServerFailure(errorMessage: "$e"),
       );
     }
   }
@@ -46,9 +47,7 @@ class PatientAuthenticationRepositoryImpl
       );
       return Right(remoteResponse);
     } catch (e) {
-      return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
-      );
+      return Left(ServerFailure(errorMessage: "$e"));
     }
   }
 
@@ -60,9 +59,7 @@ class PatientAuthenticationRepositoryImpl
           await _patientAuthRemoteSource.updatePatientProfile(patientDTO);
       return Right(remoteResponse);
     } catch (e) {
-      return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
-      );
+      return Left(ServerFailure(errorMessage: "$e"));
     }
   }
 
@@ -73,9 +70,13 @@ class PatientAuthenticationRepositoryImpl
       final remoteResponse =
           await _patientAuthRemoteSource.getPatientProfileByPhone(phoneNumber);
       return Right(remoteResponse);
+    } on DioException catch (e) {
+      return Left(
+        ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+      );
     } catch (e) {
       return Left(
-        ServerFailure(errorMessage: 'This is a server exception'),
+        ServerFailure(errorMessage: "$e"),
       );
     }
   }

@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -9,11 +9,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var nearByVisionCenterProvider = FutureProvider(
   (ref) {
-    const latitude = 0.0;
-    const longitude = 0.0;
-    return ref
-        .watch(visionCenterRepositoryProvider)
-        .getVisionCenters(latitude: latitude, longitude: longitude);
+    final location = ref.watch(patientHomeProvider).data;
+    return ref.watch(visionCenterRepositoryProvider).getVisionCenters(
+        latitude: location?.latitude, longitude: location?.longitude);
   },
 );
 
@@ -60,6 +58,17 @@ class NearbyVisionCentersList extends ConsumerWidget {
           ),
           ref.watch(nearByVisionCenterProvider).when(
                 data: (data) {
+                  if (data.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "No Vision Centers Found",
+                        style: applyFiraSansFont(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    );
+                  }
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -76,9 +85,20 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                error: (error, stackTrace) => const Center(
-                  child: SizedBox(),
-                ),
+                error: (error, stackTrace) {
+                  return Center(
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          ref.read(patientHomeProvider).init();
+                        },
+                        label: const Text("Try Again"),
+                        icon: const Icon(Icons.location_on),
+                      ),
+                    ),
+                  );
+                },
               ),
         ],
       ),

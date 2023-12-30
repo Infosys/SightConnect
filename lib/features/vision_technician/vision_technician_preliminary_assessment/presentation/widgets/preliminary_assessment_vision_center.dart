@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_address_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_scroll_bar.dart';
@@ -15,7 +14,6 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // VisionCenterModel visionCenter=ref.watch(preliminaryAssessmentHelperProvider).getCheckedVisionCenter();
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding - 2),
       decoration: BoxDecoration(
@@ -34,16 +32,6 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // VTRegisterInput(
-          //   title: "Recommendations",
-          //   keyboardType: TextInputType.multiline,
-          //   controller: ref
-          //       .read(preliminaryAssessmentHelperProvider)
-          //       .recommendationController,
-          // ),
-          // const SizedBox(
-          //   height: AppSize.kmheight,
-          // ),
           Text(
             "Vision Center",
             style: applyFiraSansFont(

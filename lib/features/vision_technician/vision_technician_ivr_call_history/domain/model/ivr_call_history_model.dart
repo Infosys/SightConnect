@@ -9,11 +9,11 @@ class IvrCallHistoryModel with _$IvrCallHistoryModel {
   const factory IvrCallHistoryModel({
     @JsonKey(name: "callerIdentifier") required String patientId,
     @JsonKey(name: "callerName") required String name,
-    @JsonKey(name: "callerNumber") required String mobile,
+    @JsonKey(name: "callerNumber") String? mobile,
     int? duration,
     required DateTime logDate,
     required String status,
-    @JsonKey(name: "direction") required String direction,
+    required String direction,
   }) = _IvrCallHistoryModel;
 
   factory IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =>

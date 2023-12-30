@@ -1,8 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
@@ -10,16 +11,16 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../common_features/triage/domain/models/triage_response_model.dart';
+import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import '../providers/vision_technician_preliminary_assessment_provider.dart';
-import '../../../../patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
@@ -29,29 +30,50 @@ var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
 );
 
 class VisionTechnicianTriageResult extends ChangeNotifier {
-  TriageResponseModel? _triageResponseModel;
-  TriageResponseModel? get triageResponseModel => _triageResponseModel;
+  TriagePostModel? _triageResponseModel;
+  TriagePostModel? get triageResponseModel => _triageResponseModel;
 
-  void setTriageResponseModel(TriageResponseModel triageResponseModel) {
+  void setTriageResponseModel(TriagePostModel triageResponseModel) {
     _triageResponseModel = triageResponseModel;
     notifyListeners();
   }
 }
 
 class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
-  const VisionTechnicianPreliminaryAssessmentPage({super.key});
+  const VisionTechnicianPreliminaryAssessmentPage({
+    super.key,
+    this.patientDetails,
+  });
+
+  final VTPatientDto? patientDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var selectedOption = useState("Yes");
+
+    if (patientDetails == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Text(
+            "No patient found",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.grey,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: ElevatedButton(
           onPressed: () async {
             ref.read(visionTechnicianTriageProvider).saveQuestionaireResponse();
-            var response =
-                await ref.read(preliminaryAssessmentProvider).saveTriage();
+            var response = await ref.read(vtTriageProvider).saveTriage();
             response.fold(
               (failure) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -101,33 +123,14 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           child: const Text('Preliminary Assessment'),
         ),
       ),
-      // body: Form(
-      //   key: _formKey,
-      //   child: SingleChildScrollView(
-      //     child: Padding(
-      //       padding: const EdgeInsets.all(AppSize.kmpadding),
-      //       child: Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         mainAxisAlignment: MainAxisAlignment.start,
-      //         children: [
-      //           // const PreliminaryAssessmentCard(),
-      //           const SizedBox(height: AppSize.klheight),
-      //           // const PreliminaryAssessmentIvrCard(),
-      //           const SizedBox(height: AppSize.klheight),
-      //           PreliminaryAssessmentIvrCall(
-      //             selectedOption: selectedOption,
-      //             onSelectedOptionChanged: updateVisibility,
-      //           ),
-      //         );
-      //       },
-      //       child: const Text('Preliminary Assessment')),
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             children: [
-              const PreliminaryAssessmentCard(),
+              const PreliminaryAssessmentCard(
+                patient: null,
+              ),
 
               // const PreliminaryAssessmentIvrCard(),
               const SizedBox(height: AppSize.klheight),
@@ -167,32 +170,15 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
 
 class PreliminaryAssessmentCard extends ConsumerWidget {
   const PreliminaryAssessmentCard({
+    required this.patient,
     super.key,
   });
-
+  final PatientResponseModel? patient;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // VTPatientModel patient =
-    //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(globalVTProvider).activeUser?.profile;
-    // var dateYear = DateTime.now().year;
-
-    // int giveAge() {
-    //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
-    //   return (dateYear - age).toInt();
-    // }
-
-    String genderString =
-        model?.patient?.gender.toString().split('.').last ?? "";
-    final address = _formateAddress(
-      line: model?.patient?.address?.first.line ?? "",
-      ward: model?.patient?.address?.first.ward ?? "",
-      district: model?.patient?.address?.first.district ?? "",
-      state: model?.patient?.address?.first.state ?? "",
-    );
-
-    String profileImage = model?.patient?.profilePhoto ?? "";
-
+    if (patient == null) {
+      return Container();
+    }
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -209,25 +195,21 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
           Wrap(
             direction: Axis.horizontal,
             children: [
-              CircleAvatar(
-                radius: AppSize.klradius,
-                // child: Imag,
-                child: Image.network(
-                  profileImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              patient?.profile?.patient?.profilePhoto != null
+                  ? AppNetworkImage(
+                      imageUrl: patient!.profile!.patient!.profilePhoto!)
+                  : const CircleAvatar(),
               const SizedBox(width: AppSize.kswidth),
               Wrap(
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    model?.patient?.name ?? "",
+                    patient?.profile?.patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    model?.patient?.abhaNumber.toString() ?? "",
+                    "${patient?.profile?.patient?.abhaNumber ?? ""}",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -250,7 +232,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    "",
+                    " ${patient?.profile?.patient?.age ?? ""}",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -268,7 +250,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    genderString,
+                    "${patient?.profile?.patient?.gender ?? ""}",
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -287,7 +269,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  address,
+                  formatAddress(),
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -301,13 +283,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       ),
     );
   }
-}
 
-String _formateAddress({
-  required String line,
-  required String ward,
-  required String district,
-  required String state,
-}) {
-  return "$line, $ward, $district, $state";
+  String formatAddress() {
+    return "";
+  }
+
+  String formatAge() {
+    return "";
+  }
 }

@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,9 +21,9 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
     var activeIndex = useState<int>(0);
 
     return Scaffold(
-      appBar: CustomAppbar(
-        title: Text(context.loc!.visualAcuityCarouselTitle),
-      ),
+      // appBar: CustomAppbar(
+      //   title: Text(context.loc!.visualAcuityCarouselTitle),
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -84,7 +83,7 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.ksheight,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -121,9 +120,9 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight * 2,
-          )
+          // const SizedBox(
+          //   height: AppSize.klheight * 2,
+          // )
         ],
       ),
     );

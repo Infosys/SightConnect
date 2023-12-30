@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,6 @@ class VTRegisterDropdownInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DropdownButton(
-      
       isExpanded: true,
       value: ref.watch(registerNewPatientHelperProvider).stateDropDownValue,
       items: listOfOptions.map((String items) {
@@ -22,7 +20,9 @@ class VTRegisterDropdownInput extends ConsumerWidget {
         );
       }).toList(),
       onChanged: (value) {
-        ref.read(registerNewPatientHelperProvider.notifier).setStateDropDown(value);
+        ref
+            .read(registerNewPatientHelperProvider.notifier)
+            .setStateDropDown(value);
       },
     );
   }

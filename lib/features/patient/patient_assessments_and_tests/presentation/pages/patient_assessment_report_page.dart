@@ -8,7 +8,6 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,9 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.width(context) * 0.01,
               ),
-              decoration: const BoxDecoration(color: AppColor.orange),
+              decoration: BoxDecoration(
+                  color: getRequestPriorityColor(
+                      assessmentDetailsReport.overallpriority!)),
               child: Text(
                 getRequestPriorityText(assessmentDetailsReport.overallpriority),
                 style: applyRobotoFont(
@@ -74,11 +75,6 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               EyeScanTabView(
                 eyeScanData: assessmentDetailsReport.imageBriefEntity,
               ),
-              // const AssessmentRecommendation(),
-              // SizedBox(
-              //   height: AppSize.height(context) * 0.03,
-              // ),
-              const BrandingWidgetH(),
             ],
           ),
         ),
@@ -105,11 +101,11 @@ String getRequestPriorityText(RequestPriority? priority) {
 Color getRequestPriorityColor(RequestPriority priority) {
   switch (priority) {
     case RequestPriority.URGENT:
-      return AppColor.red;
+      return AppColor.orange;
     case RequestPriority.ROUTINE:
       return AppColor.green;
     case RequestPriority.ASAP:
-      return AppColor.orange;
+      return AppColor.red;
     case RequestPriority.STAT:
       return AppColor.red;
     default:

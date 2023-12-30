@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -36,8 +36,9 @@ class MyConnectionsCard extends HookWidget {
                     imageUrl: image!,
                     radius: 30,
                   )
-                : const CircleAvatar(
-                    backgroundColor: AppColor.lightGrey,
+                : AppNameAvatar(
+                    name: name,
+                    radius: 24,
                   ),
           ),
           const SizedBox(height: AppSize.ksheight),

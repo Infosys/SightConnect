@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/providers/register_new_patient_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_address_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_basic_details.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/presentation/widgets/vt_register_eye_care_details.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class VisionTechnicianRegisterNewPatientPage extends ConsumerWidget {
           ),
           onPressed: () {
             ref.read(registerNewPatientHelperProvider.notifier).printData();
-          
+
             showToastMessage("Patient details saved!", context, 0);
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {

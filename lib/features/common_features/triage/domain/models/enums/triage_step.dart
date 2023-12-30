@@ -1,5 +1,5 @@
 enum TriageStep {
   QUESTIONNAIRE,
   OBSERVATION,
-  IMAGING,
+  IMAGE,
 }

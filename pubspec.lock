@@ -33,14 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
-  asn1lib:
-    dependency: transitive
-    description:
-      name: asn1lib
-      sha256: "21afe4333076c02877d14f4a89df111e658a6d466cbfc802eb705eb91bd5adfd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.0"
   async:
     dependency: transitive
     description:
@@ -297,14 +289,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
-  crypto_keys:
-    dependency: transitive
-    description:
-      name: crypto_keys
-      sha256: acc19abf34623d990a0e8aec69463d74a824c31f137128f42e2810befc509ad0
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0+1"
   csslib:
     dependency: transitive
     description:
@@ -554,6 +538,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  flutter_otp_text_field:
+    dependency: "direct main"
+    description:
+      name: flutter_otp_text_field
+      sha256: c9164ba391071fb9783698256ddbb9efc960cfed056d843db164711c65b1b114
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -844,14 +836,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  jose:
-    dependency: transitive
-    description:
-      name: jose
-      sha256: "7955ec5d131960104e81fbf151abacb9d835c16c9e793ed394b2809f28b2198d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.4"
   js:
     dependency: transitive
     description:
@@ -892,6 +876,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  location:
+    dependency: "direct main"
+    description:
+      name: location
+      sha256: "06be54f682c9073cbfec3899eb9bc8ed90faa0e17735c9d9fa7fe426f5be1dd1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.3"
+  location_platform_interface:
+    dependency: transitive
+    description:
+      name: location_platform_interface
+      sha256: "8aa1d34eeecc979d7c9fe372931d84f6d2ebbd52226a54fe1620de6fdc0753b1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
+  location_web:
+    dependency: transitive
+    description:
+      name: location_web
+      sha256: ec484c66e8a4ff1ee5d044c203f4b6b71e3a0556a97b739a5bc9616de672412b
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.0"
   logger:
     dependency: "direct main"
     description:
@@ -972,14 +980,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  openid_client:
-    dependency: "direct main"
-    description:
-      name: openid_client
-      sha256: "514c0ba645b81029c28999831a70cb055dda1a3bc60be759a04d2556f60ec960"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.7"
   otp_text_field:
     dependency: "direct main"
     description:
@@ -1712,14 +1712,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  x509:
-    dependency: transitive
-    description:
-      name: x509
-      sha256: "6db77b0baecf54584f886607247e9dedd9fd63f1e2d0ee0a00b5bb353fd7885f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.3"
   xdg_directories:
     dependency: transitive
     description:

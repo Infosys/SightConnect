@@ -56,6 +56,7 @@ class InviteCard extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                const SizedBox.shrink(),
                 TextButton(
                   onPressed: onPressed,
                   child: const Text(

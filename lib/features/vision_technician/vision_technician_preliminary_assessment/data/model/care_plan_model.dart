@@ -1,4 +1,11 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../common_features/triage/domain/models/enums/status.dart';
 part 'care_plan_model.freezed.dart';
 part 'care_plan_model.g.dart';
 
@@ -33,7 +40,7 @@ class ReportModel with _$ReportModel {
 @freezed
 class PerformerModel with _$PerformerModel {
   const factory PerformerModel({
-    String? role,
+    Role? role,
     int? identifier,
   }) = _PerformerModel;
 
@@ -45,8 +52,8 @@ class PerformerModel with _$PerformerModel {
 class ConditionModel with _$ConditionModel {
   const factory ConditionModel({
     String? recordedDate,
-    String? bodySite,
-    String? code,
+    BodySite? bodySite,
+    Code? code,
     String? note,
   }) = _ConditionModel;
 
@@ -58,10 +65,10 @@ class ConditionModel with _$ConditionModel {
 class ServiceRequestModel with _$ServiceRequestModel {
   const factory ServiceRequestModel({
     String? note,
-    String? patientInstruction,
+    PatientInstruction? patientInstruction,
     int? identifier,
-    String? bodySite,
-    String? priority,
+    BodySite? bodySite,
+    TriageUrgency? priority,
   }) = _ServiceRequestModel;
 
   factory ServiceRequestModel.fromJson(Map<String, dynamic> json) =>
@@ -72,7 +79,7 @@ class ServiceRequestModel with _$ServiceRequestModel {
 class GoalModel with _$GoalModel {
   const factory GoalModel({
     String? statusReason,
-    String? achievementStatus,
+    Status? achievementStatus,
     List<GoalOutcomeModel>? outcomes,
     String? note,
     String? startDate,
@@ -86,7 +93,7 @@ class GoalModel with _$GoalModel {
 @freezed
 class GoalOutcomeModel with _$GoalOutcomeModel {
   const factory GoalOutcomeModel({
-    String? goalOutcome,
+    GoalOutCome? goalOutcome,
   }) = _GoalOutcomeModel;
 
   factory GoalOutcomeModel.fromJson(Map<String, dynamic> json) =>
@@ -102,4 +109,3 @@ class TargetModel with _$TargetModel {
   factory TargetModel.fromJson(Map<String, dynamic> json) =>
       _$TargetModelFromJson(json);
 }
-

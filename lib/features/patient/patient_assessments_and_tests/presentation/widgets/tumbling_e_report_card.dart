@@ -5,13 +5,13 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class TumblingEReportCard extends StatelessWidget {
-   TumblingEReportCard({
+  const TumblingEReportCard({
     super.key,
-     this.tumblingEData,
-     this.observationDescription,
+    this.tumblingEData,
+    this.observationDescription,
   });
-   List<ObservationBriefEntity> ? tumblingEData;
-  final String ? observationDescription;
+  final List<ObservationBriefEntity>? tumblingEData;
+  final String? observationDescription;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +29,7 @@ class TumblingEReportCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            observationDescription??"NA",
+            observationDescription ?? "",
             style: applyRobotoFont(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -37,7 +37,7 @@ class TumblingEReportCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          (tumblingEData==null ||  tumblingEData!.isEmpty)
+          (tumblingEData == null || tumblingEData!.isEmpty)
               ? const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Center(
@@ -117,13 +117,12 @@ class TumblingEReportCard extends StatelessWidget {
 }
 
 Color getColorBasedOnObservationValue(double value) {
-  if (value < 1) {
-    return AppColor.orange;
-  } else if (value == 1) {
-    return AppColor.green;
-  } else if (value > 1) {
-    return AppColor.red;
-  } else {
-    return AppColor.red;
-  }
+  if (value >= 1) {
+      return AppColor.red;
+    } else if (value >= 0.5) {
+      return AppColor.orange;
+    } else {
+      return  AppColor.green;
+    }
+ 
 }

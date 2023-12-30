@@ -34,7 +34,6 @@ class AssessmentTable extends ConsumerWidget {
 
           ref.watch(getAssessmentTableProvider).when(
                 data: (data) {
-                  // print(data);
                   return VTPatientList(
                     listOfAssessments: data,
                   );
@@ -43,7 +42,7 @@ class AssessmentTable extends ConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 error: (error, stackTrace) {
-                  print("This is the error $error");
+                  // logger.d("This is the error $error");
                   return const Center(
                     child: Text("No data available"),
                   );

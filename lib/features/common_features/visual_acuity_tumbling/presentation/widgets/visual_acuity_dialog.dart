@@ -10,7 +10,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -102,27 +101,7 @@ class VisualAcuityDialog {
           ],
         ),
       ),
-      actions: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColor.black.withOpacity(0.04),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: const Offset(0, -3),
-              ),
-            ],
-            color: AppColor.white,
-          ),
-          padding: const EdgeInsets.all(12.0),
-          child: const BrandingWidgetH(),
-        ),
-      ],
+      actions: const [],
     );
   }
 

@@ -1,24 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
 import '../widgets/patient_profile_patient_info.dart';
-import 'patient_edit_profile_page.dart';
 
 class PatientProfilePage extends ConsumerWidget {
   const PatientProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(globalPatientProvider).activeUser;
+    final model = ref.watch(getPatientProfileProvider).asData?.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -38,9 +37,13 @@ class PatientProfilePage extends ConsumerWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.of(context).push(
+                final navigator = Navigator.of(context);
+                navigator.push<bool?>(
                   MaterialPageRoute(
-                    builder: (context) => const PatientEditProfilePage(),
+                    builder: (context) => const PatientRegistrationMiniappPage(
+                      actionType: MiniAppActionType.UPDATE,
+                      displayName: "Update Profile",
+                    ),
                   ),
                 );
               },
@@ -103,7 +106,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      address ?? "",
+                      address ?? "-",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -128,7 +131,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     PatientInfoCard(
-                      keyText: "Date of Birth",
+                      keyText: "Age",
                       valueText: dob,
                     ),
                   ],
@@ -144,8 +147,6 @@ class PatientProfilePage extends ConsumerWidget {
               PatientFamilyDetails(
                 relations: patient.profile?.patient?.relatedParty ?? [],
               ),
-              const SizedBox(height: AppSize.kmheight),
-              const BrandingWidgetH(),
             ],
           ),
         ],
@@ -159,13 +160,9 @@ class PatientProfilePage extends ConsumerWidget {
     required String year,
   }) {
     try {
-      final dob = DateTime(
-        int.parse(year),
-        int.parse(mon),
-        int.parse(day),
-      );
-      final age = DateTime.now().difference(dob).inDays ~/ 365;
-      return "$day/$mon/$year ($age years)";
+      var dob = DateTime.parse("$year-$mon-$day");
+      var age = DateTime.now().difference(dob).inDays ~/ 365;
+      return "$age years";
     } catch (e) {
       return "";
     }
@@ -178,8 +175,9 @@ class PatientProfilePage extends ConsumerWidget {
     String? state,
   }) {
     try {
-      final result = "$line, $ward, $district, $state";
-      return result;
+      return [line, ward, district, state]
+          .where((element) => element != null)
+          .join(", ");
     } catch (e) {
       return "";
     }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
@@ -24,8 +22,10 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
 
   @override
   Widget build(BuildContext context) {
-    final connectionsList = widget.patients.profile?.patient?.relatedParty;
+    final connectionsList =
+        widget.patients.profile?.patient?.relatedParty ?? [];
     final currentProfile = widget.patients.profile?.patient;
+
     return BlurDialogBox(
       actionsPadding: const EdgeInsets.all(8),
       insetPadding: const EdgeInsets.all(8),
@@ -47,13 +47,13 @@ class _MemberSelectionPopUpState extends ConsumerState<MemberSelectionPopUp> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ...List.generate(
-              1 + connectionsList!.length,
+              1 + connectionsList.length,
               (index) {
                 if (index == 0) {
                   return _MemberTile(
-                    name: currentProfile!.name ?? "",
+                    name: currentProfile?.name ?? "",
                     relationShip: "Me",
-                    profilePicture: currentProfile.profilePhoto,
+                    profilePicture: currentProfile?.profilePhoto,
                     age: 20,
                     index: 0,
                     selectedMemberIndex: selectedMemberIndex,

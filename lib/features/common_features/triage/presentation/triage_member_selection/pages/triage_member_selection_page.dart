@@ -1,15 +1,14 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_add_member_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../providers/triage_member_provider.dart';
 import '../widget/change_member_tiles.dart';
 
-class TriageMemberSelectionPage extends HookWidget {
+class TriageMemberSelectionPage extends StatelessWidget {
   const TriageMemberSelectionPage({super.key});
 
   @override
@@ -48,54 +47,30 @@ class TriageMemberSelectionPage extends HookWidget {
                   ),
                 ),
                 const Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const TriageAddMemberPage(),
-                      ),
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '+ ',
-                          style: applyRobotoFont(
-                            fontSize: 21,
-                            color: AppColor.primary,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Add Member',
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
             const SizedBox(height: AppSize.ksheight),
             const ChangeMemberTiles(),
             const SizedBox(height: AppSize.ksheight),
-            SizedBox(
-              width: AppSize.width(context) * 0.8,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TriagePage(),
-                    ),
-                  );
-                },
-                child: const Text('Proceed'),
-              ),
+            Consumer(
+              builder: (context, ref, child) {
+                final model = ref.watch(triageMemberProvider);
+                return SizedBox(
+                  width: AppSize.width(context) * 0.8,
+                  child: ElevatedButton(
+                    onPressed: model.testPatientId == null
+                        ? null
+                        : () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const TriagePage(),
+                              ),
+                            );
+                          },
+                    child: const Text('Proceed'),
+                  ),
+                );
+              },
             ),
           ],
         ),

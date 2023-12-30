@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,7 +24,7 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
                   InkWell(
                     onTap: () {
                       ref
-                          .watch(ivrCallHistorySearchHelperProvider.notifier)
+                          .read(ivrCallHistorySearchHelperProvider)
                           .setTableFilter(index);
                     },
                     child: Container(
@@ -58,13 +57,13 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
             ),
           ),
         ),
-        const CircleAvatar(
-          backgroundColor: AppColor.white,
-          child: Icon(
-            Icons.calendar_month_rounded,
-            color: AppColor.grey,
-          ),
-        )
+        // const CircleAvatar(
+        //   backgroundColor: AppColor.white,
+        //   child: Icon(
+        //     Icons.calendar_month_rounded,
+        //     color: AppColor.grey,
+        //   ),
+        // )
       ],
     );
   }

@@ -517,7 +517,7 @@ PerformerModel _$PerformerModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PerformerModel {
-  String? get role => throw _privateConstructorUsedError;
+  Role? get role => throw _privateConstructorUsedError;
   int? get identifier => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -532,7 +532,7 @@ abstract class $PerformerModelCopyWith<$Res> {
           PerformerModel value, $Res Function(PerformerModel) then) =
       _$PerformerModelCopyWithImpl<$Res, PerformerModel>;
   @useResult
-  $Res call({String? role, int? identifier});
+  $Res call({Role? role, int? identifier});
 }
 
 /// @nodoc
@@ -555,7 +555,7 @@ class _$PerformerModelCopyWithImpl<$Res, $Val extends PerformerModel>
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Role?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -572,7 +572,7 @@ abstract class _$$_PerformerModelCopyWith<$Res>
       __$$_PerformerModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? role, int? identifier});
+  $Res call({Role? role, int? identifier});
 }
 
 /// @nodoc
@@ -593,7 +593,7 @@ class __$$_PerformerModelCopyWithImpl<$Res>
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Role?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -611,7 +611,7 @@ class _$_PerformerModel implements _PerformerModel {
       _$$_PerformerModelFromJson(json);
 
   @override
-  final String? role;
+  final Role? role;
   @override
   final int? identifier;
 
@@ -649,14 +649,14 @@ class _$_PerformerModel implements _PerformerModel {
 }
 
 abstract class _PerformerModel implements PerformerModel {
-  const factory _PerformerModel({final String? role, final int? identifier}) =
+  const factory _PerformerModel({final Role? role, final int? identifier}) =
       _$_PerformerModel;
 
   factory _PerformerModel.fromJson(Map<String, dynamic> json) =
       _$_PerformerModel.fromJson;
 
   @override
-  String? get role;
+  Role? get role;
   @override
   int? get identifier;
   @override
@@ -672,8 +672,8 @@ ConditionModel _$ConditionModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ConditionModel {
   String? get recordedDate => throw _privateConstructorUsedError;
-  String? get bodySite => throw _privateConstructorUsedError;
-  String? get code => throw _privateConstructorUsedError;
+  BodySite? get bodySite => throw _privateConstructorUsedError;
+  Code? get code => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -689,7 +689,7 @@ abstract class $ConditionModelCopyWith<$Res> {
       _$ConditionModelCopyWithImpl<$Res, ConditionModel>;
   @useResult
   $Res call(
-      {String? recordedDate, String? bodySite, String? code, String? note});
+      {String? recordedDate, BodySite? bodySite, Code? code, String? note});
 }
 
 /// @nodoc
@@ -718,11 +718,11 @@ class _$ConditionModelCopyWithImpl<$Res, $Val extends ConditionModel>
       bodySite: freezed == bodySite
           ? _value.bodySite
           : bodySite // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BodySite?,
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Code?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -740,7 +740,7 @@ abstract class _$$_ConditionModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? recordedDate, String? bodySite, String? code, String? note});
+      {String? recordedDate, BodySite? bodySite, Code? code, String? note});
 }
 
 /// @nodoc
@@ -767,11 +767,11 @@ class __$$_ConditionModelCopyWithImpl<$Res>
       bodySite: freezed == bodySite
           ? _value.bodySite
           : bodySite // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BodySite?,
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Code?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -792,9 +792,9 @@ class _$_ConditionModel implements _ConditionModel {
   @override
   final String? recordedDate;
   @override
-  final String? bodySite;
+  final BodySite? bodySite;
   @override
-  final String? code;
+  final Code? code;
   @override
   final String? note;
 
@@ -838,8 +838,8 @@ class _$_ConditionModel implements _ConditionModel {
 abstract class _ConditionModel implements ConditionModel {
   const factory _ConditionModel(
       {final String? recordedDate,
-      final String? bodySite,
-      final String? code,
+      final BodySite? bodySite,
+      final Code? code,
       final String? note}) = _$_ConditionModel;
 
   factory _ConditionModel.fromJson(Map<String, dynamic> json) =
@@ -848,9 +848,9 @@ abstract class _ConditionModel implements ConditionModel {
   @override
   String? get recordedDate;
   @override
-  String? get bodySite;
+  BodySite? get bodySite;
   @override
-  String? get code;
+  Code? get code;
   @override
   String? get note;
   @override
@@ -866,10 +866,11 @@ ServiceRequestModel _$ServiceRequestModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ServiceRequestModel {
   String? get note => throw _privateConstructorUsedError;
-  String? get patientInstruction => throw _privateConstructorUsedError;
+  PatientInstruction? get patientInstruction =>
+      throw _privateConstructorUsedError;
   int? get identifier => throw _privateConstructorUsedError;
-  String? get bodySite => throw _privateConstructorUsedError;
-  String? get priority => throw _privateConstructorUsedError;
+  BodySite? get bodySite => throw _privateConstructorUsedError;
+  TriageUrgency? get priority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -885,10 +886,10 @@ abstract class $ServiceRequestModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? note,
-      String? patientInstruction,
+      PatientInstruction? patientInstruction,
       int? identifier,
-      String? bodySite,
-      String? priority});
+      BodySite? bodySite,
+      TriageUrgency? priority});
 }
 
 /// @nodoc
@@ -918,7 +919,7 @@ class _$ServiceRequestModelCopyWithImpl<$Res, $Val extends ServiceRequestModel>
       patientInstruction: freezed == patientInstruction
           ? _value.patientInstruction
           : patientInstruction // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PatientInstruction?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -926,11 +927,11 @@ class _$ServiceRequestModelCopyWithImpl<$Res, $Val extends ServiceRequestModel>
       bodySite: freezed == bodySite
           ? _value.bodySite
           : bodySite // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BodySite?,
       priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as TriageUrgency?,
     ) as $Val);
   }
 }
@@ -945,10 +946,10 @@ abstract class _$$_ServiceRequestModelCopyWith<$Res>
   @useResult
   $Res call(
       {String? note,
-      String? patientInstruction,
+      PatientInstruction? patientInstruction,
       int? identifier,
-      String? bodySite,
-      String? priority});
+      BodySite? bodySite,
+      TriageUrgency? priority});
 }
 
 /// @nodoc
@@ -976,7 +977,7 @@ class __$$_ServiceRequestModelCopyWithImpl<$Res>
       patientInstruction: freezed == patientInstruction
           ? _value.patientInstruction
           : patientInstruction // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PatientInstruction?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -984,11 +985,11 @@ class __$$_ServiceRequestModelCopyWithImpl<$Res>
       bodySite: freezed == bodySite
           ? _value.bodySite
           : bodySite // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BodySite?,
       priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as TriageUrgency?,
     ));
   }
 }
@@ -1009,13 +1010,13 @@ class _$_ServiceRequestModel implements _ServiceRequestModel {
   @override
   final String? note;
   @override
-  final String? patientInstruction;
+  final PatientInstruction? patientInstruction;
   @override
   final int? identifier;
   @override
-  final String? bodySite;
+  final BodySite? bodySite;
   @override
-  final String? priority;
+  final TriageUrgency? priority;
 
   @override
   String toString() {
@@ -1061,10 +1062,10 @@ class _$_ServiceRequestModel implements _ServiceRequestModel {
 abstract class _ServiceRequestModel implements ServiceRequestModel {
   const factory _ServiceRequestModel(
       {final String? note,
-      final String? patientInstruction,
+      final PatientInstruction? patientInstruction,
       final int? identifier,
-      final String? bodySite,
-      final String? priority}) = _$_ServiceRequestModel;
+      final BodySite? bodySite,
+      final TriageUrgency? priority}) = _$_ServiceRequestModel;
 
   factory _ServiceRequestModel.fromJson(Map<String, dynamic> json) =
       _$_ServiceRequestModel.fromJson;
@@ -1072,13 +1073,13 @@ abstract class _ServiceRequestModel implements ServiceRequestModel {
   @override
   String? get note;
   @override
-  String? get patientInstruction;
+  PatientInstruction? get patientInstruction;
   @override
   int? get identifier;
   @override
-  String? get bodySite;
+  BodySite? get bodySite;
   @override
-  String? get priority;
+  TriageUrgency? get priority;
   @override
   @JsonKey(ignore: true)
   _$$_ServiceRequestModelCopyWith<_$_ServiceRequestModel> get copyWith =>
@@ -1092,7 +1093,7 @@ GoalModel _$GoalModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GoalModel {
   String? get statusReason => throw _privateConstructorUsedError;
-  String? get achievementStatus => throw _privateConstructorUsedError;
+  Status? get achievementStatus => throw _privateConstructorUsedError;
   List<GoalOutcomeModel>? get outcomes => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   String? get startDate => throw _privateConstructorUsedError;
@@ -1111,7 +1112,7 @@ abstract class $GoalModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? statusReason,
-      String? achievementStatus,
+      Status? achievementStatus,
       List<GoalOutcomeModel>? outcomes,
       String? note,
       String? startDate,
@@ -1146,7 +1147,7 @@ class _$GoalModelCopyWithImpl<$Res, $Val extends GoalModel>
       achievementStatus: freezed == achievementStatus
           ? _value.achievementStatus
           : achievementStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
       outcomes: freezed == outcomes
           ? _value.outcomes
           : outcomes // ignore: cast_nullable_to_non_nullable
@@ -1176,7 +1177,7 @@ abstract class _$$_GoalModelCopyWith<$Res> implements $GoalModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? statusReason,
-      String? achievementStatus,
+      Status? achievementStatus,
       List<GoalOutcomeModel>? outcomes,
       String? note,
       String? startDate,
@@ -1209,7 +1210,7 @@ class __$$_GoalModelCopyWithImpl<$Res>
       achievementStatus: freezed == achievementStatus
           ? _value.achievementStatus
           : achievementStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
       outcomes: freezed == outcomes
           ? _value._outcomes
           : outcomes // ignore: cast_nullable_to_non_nullable
@@ -1249,7 +1250,7 @@ class _$_GoalModel implements _GoalModel {
   @override
   final String? statusReason;
   @override
-  final String? achievementStatus;
+  final Status? achievementStatus;
   final List<GoalOutcomeModel>? _outcomes;
   @override
   List<GoalOutcomeModel>? get outcomes {
@@ -1323,7 +1324,7 @@ class _$_GoalModel implements _GoalModel {
 abstract class _GoalModel implements GoalModel {
   const factory _GoalModel(
       {final String? statusReason,
-      final String? achievementStatus,
+      final Status? achievementStatus,
       final List<GoalOutcomeModel>? outcomes,
       final String? note,
       final String? startDate,
@@ -1335,7 +1336,7 @@ abstract class _GoalModel implements GoalModel {
   @override
   String? get statusReason;
   @override
-  String? get achievementStatus;
+  Status? get achievementStatus;
   @override
   List<GoalOutcomeModel>? get outcomes;
   @override
@@ -1356,7 +1357,7 @@ GoalOutcomeModel _$GoalOutcomeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GoalOutcomeModel {
-  String? get goalOutcome => throw _privateConstructorUsedError;
+  GoalOutCome? get goalOutcome => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1370,7 +1371,7 @@ abstract class $GoalOutcomeModelCopyWith<$Res> {
           GoalOutcomeModel value, $Res Function(GoalOutcomeModel) then) =
       _$GoalOutcomeModelCopyWithImpl<$Res, GoalOutcomeModel>;
   @useResult
-  $Res call({String? goalOutcome});
+  $Res call({GoalOutCome? goalOutcome});
 }
 
 /// @nodoc
@@ -1392,7 +1393,7 @@ class _$GoalOutcomeModelCopyWithImpl<$Res, $Val extends GoalOutcomeModel>
       goalOutcome: freezed == goalOutcome
           ? _value.goalOutcome
           : goalOutcome // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as GoalOutCome?,
     ) as $Val);
   }
 }
@@ -1405,7 +1406,7 @@ abstract class _$$_GoalOutcomeModelCopyWith<$Res>
       __$$_GoalOutcomeModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? goalOutcome});
+  $Res call({GoalOutCome? goalOutcome});
 }
 
 /// @nodoc
@@ -1425,7 +1426,7 @@ class __$$_GoalOutcomeModelCopyWithImpl<$Res>
       goalOutcome: freezed == goalOutcome
           ? _value.goalOutcome
           : goalOutcome // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as GoalOutCome?,
     ));
   }
 }
@@ -1439,7 +1440,7 @@ class _$_GoalOutcomeModel implements _GoalOutcomeModel {
       _$$_GoalOutcomeModelFromJson(json);
 
   @override
-  final String? goalOutcome;
+  final GoalOutCome? goalOutcome;
 
   @override
   String toString() {
@@ -1474,14 +1475,14 @@ class _$_GoalOutcomeModel implements _GoalOutcomeModel {
 }
 
 abstract class _GoalOutcomeModel implements GoalOutcomeModel {
-  const factory _GoalOutcomeModel({final String? goalOutcome}) =
+  const factory _GoalOutcomeModel({final GoalOutCome? goalOutcome}) =
       _$_GoalOutcomeModel;
 
   factory _GoalOutcomeModel.fromJson(Map<String, dynamic> json) =
       _$_GoalOutcomeModel.fromJson;
 
   @override
-  String? get goalOutcome;
+  GoalOutCome? get goalOutcome;
   @override
   @JsonKey(ignore: true)
   _$$_GoalOutcomeModelCopyWith<_$_GoalOutcomeModel> get copyWith =>

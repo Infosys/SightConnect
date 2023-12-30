@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/vision_center_models.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +10,10 @@ class VisionCenterAddressDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    FacilityModel visionCenter = ref
-        .watch(preliminaryAssessmentHelperProvider.notifier)
-        .getCheckedVisionCenter();
+    final visionCenter =
+        ref.watch(preliminaryAssessmentHelperProvider).selectedVisionCenter;
+
+    if (visionCenter == null) return const SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +41,9 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                "${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine1}, ${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine2}",
+                visionCenter.facilityInformation?.facilityAddressDetails
+                        ?.addressLine1 ??
+                    "",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -65,8 +66,9 @@ class VisionCenterAddressDetails extends ConsumerWidget {
               width: AppSize.kswidth,
             ),
             Text(
-              visionCenter.facilityInformation?.facilityContactInformation?.facilityContactNumber
-                      ?? "",
+              visionCenter
+                      .facilityInformation?.facilityAddressDetails?.pincode ??
+                  "",
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -90,9 +92,9 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                 visionCenter.facilityInformation?.timingsOfFacility?.first
-                        .workingDays ?? ""
-                       ,
+                visionCenter.facilityInformation?.facilityAddressDetails
+                        ?.addressLine1 ??
+                    "",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

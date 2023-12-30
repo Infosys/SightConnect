@@ -29,12 +29,12 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: getRequestPriorityColor(triageResultEntities.overallpriority)
+          color: getRequestPriorityColor(triageResultEntities.quessionnairepriority)
               .withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: getRequestPriorityColor(triageResultEntities.overallpriority)
+            color: getRequestPriorityColor(triageResultEntities.quessionnairepriority)
                 .withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
@@ -55,11 +55,11 @@ class AssessmentOverallResultCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: getRequestPriorityColor(
-                      triageResultEntities.overallpriority),
+                      triageResultEntities.quessionnairepriority),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  getRequestPriorityText(triageResultEntities.overallpriority),
+                  getRequestPriorityText(triageResultEntities.quessionnairepriority),
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.white,
@@ -106,11 +106,11 @@ String getRequestPriorityText(RequestPriority? priority) {
 Color getRequestPriorityColor(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
-      return AppColor.red;
+      return AppColor.orange;
     case RequestPriority.ROUTINE:
       return AppColor.green;
     case RequestPriority.ASAP:
-      return AppColor.orange;
+      return AppColor.red;
     case RequestPriority.STAT:
       return AppColor.red;
     default:

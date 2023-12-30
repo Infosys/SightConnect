@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,14 +13,15 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
     this.onCapture,
     this.onSwitchCamera,
     this.onFlash,
+    required this.currentEye,
   });
   final VoidCallback? onCapture;
   final VoidCallback? onSwitchCamera;
   final VoidCallback? onFlash;
+  final TriageEyeType currentEye;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var current = ref.watch(triageEyeScanProvider);
     var isClosed = useState<bool>(false);
     return Column(
       children: [
@@ -40,7 +40,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    current.currentEye == TriageEyeType.RIGHT
+                    currentEye == TriageEyeType.RIGHT
                         ? "Capture Right Eye"
                         : "Capture Left Eye",
                     style: const TextStyle(color: AppColor.white),

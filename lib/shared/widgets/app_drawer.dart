@@ -2,24 +2,23 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_v.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
 import '../../core/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
 import '../pages/help_and_support_page.dart';
-import '../pages/privacy_policy_page.dart';
-import '../pages/terms_of_use_page.dart';
+import '../pages/patient_privacy_policy_page.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -95,7 +94,7 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const AboutUsPage(),
+                                              const SuperAppScannerPage(),
                                         ),
                                       );
                                       break;
@@ -103,15 +102,16 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const TermsOfUsePage(),
+                                              const AboutUsPage(),
                                         ),
                                       );
                                       break;
+
                                     case 5:
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PrivacyPolicyPage(),
+                                              const PatientPrivacyPolicyPage(),
                                         ),
                                       );
                                       break;
@@ -119,7 +119,9 @@ class AppDrawer extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const HelpAndSupportPage(),
+                                              const HelpAndSupportPage(
+                                            helpLine: AppText.tollFreeNumber,
+                                          ),
                                         ),
                                       );
                                       break;
@@ -173,7 +175,7 @@ class AppDrawer extends StatelessWidget {
                                   .logout()
                                   .then((value) async {
                                 navigator.pushNamedAndRemoveUntil(
-                                  LandingPage.routeName,
+                                  LoginPage.routeName,
                                   (route) => false,
                                 );
                                 ref.invalidate(initializationProvider);
@@ -204,7 +206,6 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                 ),
-                const BrandingWidgetV(),
               ],
             ),
           ],

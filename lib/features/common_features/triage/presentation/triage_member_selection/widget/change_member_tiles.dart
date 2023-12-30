@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,10 +19,23 @@ class ChangeMemberTiles extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(globalPatientProvider).activeUser;
-    final connectionsList = model?.profile?.patient?.relatedParty ?? [];
+    final List<RelatedPartyModel> connectionsList =
+        model?.profile?.patient?.relatedParty ?? [];
     final currentProfile = model?.profile?.patient;
     var memberProvider = ref.watch(triageMemberProvider);
-    final selectedValue = useState<int>(0);
+    final selectedValue = useState<int>(-1);
+
+    if (model == null) {
+      return const Center(
+          child: Text(
+        "No Member Found",
+        style: TextStyle(
+          color: AppColor.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+      ));
+    }
 
     return _content(
       connectionsList,
@@ -63,8 +77,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           ? AppNetworkImage(
                               imageUrl: person.profilePhoto!,
                             )
-                          : const CircleAvatar(
-                              backgroundColor: AppColor.lightGrey,
+                          : AppNameAvatar(
+                              name: person.name,
                             ),
                       const SizedBox(
                         width: 20,
@@ -125,8 +139,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           ? AppNetworkImage(
                               imageUrl: person.profilePicture!,
                             )
-                          : const CircleAvatar(
-                              backgroundColor: AppColor.lightGrey,
+                          : AppNameAvatar(
+                              name: person.name,
                             ),
                       const SizedBox(
                         width: 20,

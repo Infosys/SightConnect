@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vision_technician_eye_scan_page_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,8 +16,8 @@ class ImagePreview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String imagePath = ref.watch(visionTechnicianEyeScanProvider).imagePath;
-    int currentStep = ref.watch(visionTechnicianEyeScanProvider).currentStep;
+    String imagePath = ref.watch(vtCloseAssessmentHelperProvider).imagePath;
+    int currentStep = ref.watch(vtCloseAssessmentHelperProvider).currentStep;
     return Container(
       width: 536,
       height: 714,
@@ -63,9 +63,7 @@ class ImagePreview extends ConsumerWidget {
               ),
             ),
             onPressed: () {
-              ref
-                  .watch(visionTechnicianEyeScanProvider.notifier)
-                  .retakePicture();
+              ref.watch(vtCloseAssessmentHelperProvider).retakePicture();
             },
             child: Text(
               "Retake Picture",
@@ -84,7 +82,7 @@ class ImagePreview extends ConsumerWidget {
                     ? null
                     : () {
                         ref
-                            .read(visionTechnicianEyeScanProvider.notifier)
+                            .read(vtCloseAssessmentHelperProvider)
                             .goToPreviousStep();
                       },
                 child: Row(
@@ -112,26 +110,21 @@ class ImagePreview extends ConsumerWidget {
               Expanded(
                 child: TextButton(
                   onPressed: () {
-
                     XFile left =
-                        ref.read(visionTechnicianEyeScanProvider).leftEyeImage;
+                        ref.read(vtCloseAssessmentHelperProvider).leftEyeImage;
                     XFile right =
-                        ref.read(visionTechnicianEyeScanProvider).rightEyeImage;
+                        ref.read(vtCloseAssessmentHelperProvider).rightEyeImage;
 
                     ref
                         .read(visionTechnicianTriageProvider)
                         .setEyeImage(left, right);
-                       
 
                     currentStep != 2
                         ? null
-                        : 
-                            ref
-                                .read(visionTechnicianEyeScanProvider.notifier)
-                                .markAllImagesCaptured();
-                            Navigator.pop(context);
-                          
-                    
+                        : ref
+                            .read(vtCloseAssessmentHelperProvider)
+                            .markAllImagesCaptured();
+                    Navigator.pop(context);
                   },
                   style: ButtonStyle(
                     backgroundColor: currentStep != 2
@@ -151,15 +144,13 @@ class ImagePreview extends ConsumerWidget {
               const SizedBox(width: AppSize.klwidth),
               //Next
               TextButton(
-                onPressed: (){
-                currentStep == 2
-                    ? null
-                    : 
-                        ref
-                            .read(visionTechnicianEyeScanProvider.notifier)
-                            .goToNextStep();
-
-                      },
+                onPressed: () {
+                  currentStep == 2
+                      ? null
+                      : ref
+                          .read(vtCloseAssessmentHelperProvider)
+                          .goToNextStep();
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

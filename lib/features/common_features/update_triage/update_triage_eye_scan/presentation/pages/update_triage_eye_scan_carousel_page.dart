@@ -2,12 +2,10 @@ import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/cataract_eye_scan_carousel.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_capturing_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/user_details_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,25 +14,23 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
-  
+
   final int diagnosticReportId;
   const UpdateTriageEyeScanCarouselPage({
     Key? key,
-    this.userDetails,
     required this.diagnosticReportId,
   }) : super(key: key);
-  final UserDetails? userDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text(
-          "Steps to do the scan ",
-        ),
-      ),
+      // appBar: const CustomAppbar(
+      //   title: Text(
+      //     "Steps to do the scan ",
+      //   ),
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -46,6 +42,9 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
               },
               carouselController: carouselController.value,
             ),
+          ),
+          const SizedBox(
+            height: AppSize.ksheight,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
@@ -89,12 +88,12 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.ksheight,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding + 6,
-              vertical: AppSize.kspadding + 2,
+              horizontal: AppSize.klpadding,
+              vertical: AppSize.kspadding,
             ),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -114,8 +113,10 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       fullscreenDialog: true,
-                      builder: (context) =>
-                          UpdateTriageEyeCapturingPage(cameras: cameras,diagnosticReportId:diagnosticReportId ,),
+                      builder: (context) => UpdateTriageEyeCapturingPage(
+                        cameras: cameras,
+                        diagnosticReportId: diagnosticReportId,
+                      ),
                     ),
                   );
                 }
@@ -133,9 +134,6 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.klheight * 2,
-          )
         ],
       ),
     );

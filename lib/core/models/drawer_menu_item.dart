@@ -26,6 +26,10 @@ class DrawerMenuItems {
     title: "Assessments and Tests",
     icon: AppIcon.drawerAssessmentsAndTest,
   );
+  static const DrawerMenuItem scanner = DrawerMenuItem(
+    title: "Scanner",
+    icon: AppIcon.scanner,
+  );
   // static const DrawerMenuItem accessibilities = DrawerMenuItem(
   //   title: "Accessibility Settings",
   //   icon: AppIcon.drawerAssessibility,
@@ -34,10 +38,10 @@ class DrawerMenuItems {
     title: "About Us",
     icon: AppIcon.drawerAboutUs,
   );
-  static const DrawerMenuItem termOfUse = DrawerMenuItem(
-    title: "Terms of Use",
-    icon: AppIcon.drawerTermOfUse,
-  );
+  // static const DrawerMenuItem termOfUse = DrawerMenuItem(
+  //   title: "Terms of Use",
+  //   icon: AppIcon.drawerTermOfUse,
+  // );
   static const DrawerMenuItem privacyPolicy = DrawerMenuItem(
     title: "Privacy Policy",
     icon: AppIcon.drawerPrivacyPolicy,
@@ -51,9 +55,10 @@ class DrawerMenuItems {
     profile,
     // appointments,
     prescriptions,
+    scanner,
     // accessibilities,
     about,
-    termOfUse,
+    // termOfUse,
     privacyPolicy,
     help,
   ];

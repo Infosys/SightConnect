@@ -1,11 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -28,10 +26,10 @@ class AssessmentCards extends ConsumerWidget {
         height: 200,
         child: Center(
           child: Text(
-            'No Data Found',
+            'No Reports Found',
             style: applyRobotoFont(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
               color: AppColor.grey,
             ),
           ),
@@ -42,6 +40,7 @@ class AssessmentCards extends ConsumerWidget {
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         TriageReportBriefEntity currentData = data[index];
+
         return Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -95,7 +94,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          currentData.triageResultType ?? "NA",
+                          currentData.triageResultType ?? "",
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -105,7 +104,7 @@ class AssessmentCards extends ConsumerWidget {
                           height: 2,
                         ),
                         Text(
-                          currentData.reportTag ?? "NA",
+                          currentData.reportTag ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -186,8 +185,12 @@ class AssessmentCards extends ConsumerWidget {
                     Directionality(
                       textDirection: TextDirection.rtl,
                       child: ref
-                              .watch(patientAssessmentAndTestProvider)
-                              .isUpdateLoading
+                                  .watch(patientAssessmentAndTestProvider)
+                                  .isUpdateLoading &&
+                              ref
+                                      .watch(patientAssessmentAndTestProvider)
+                                      .currentTriageReportId ==
+                                  currentData.triageResultID
                           ? const SizedBox(
                               height: 20,
                               width: 20,
@@ -198,6 +201,11 @@ class AssessmentCards extends ConsumerWidget {
                           : TextButton.icon(
                               onPressed: currentData.isUpdateEnabled ?? false
                                   ? () async {
+                                      ref
+                                              .read(
+                                                  patientAssessmentAndTestProvider)
+                                              .currentTriageReportId =
+                                          currentData.triageResultID;
                                       final result = await ref
                                           .read(
                                               patientAssessmentAndTestProvider)
@@ -290,11 +298,11 @@ String getRequestPriorityText(RequestPriority? priority) {
 Color getRequestPriorityColor(RequestPriority? priority) {
   switch (priority) {
     case RequestPriority.URGENT:
-      return AppColor.red;
+      return AppColor.orange;
     case RequestPriority.ROUTINE:
       return AppColor.green;
     case RequestPriority.ASAP:
-      return AppColor.orange;
+      return AppColor.red;
     case RequestPriority.STAT:
       return AppColor.red;
     default:

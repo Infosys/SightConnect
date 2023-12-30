@@ -2,9 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:flutter_svg/svg.dart';
 
 class UpdateOptionCard extends StatelessWidget {
   const UpdateOptionCard({
@@ -36,7 +34,7 @@ class UpdateOptionCard extends StatelessWidget {
               height: AppSize.kmheight,
             ),
             AspectRatio(
-              aspectRatio: 0.75,
+              aspectRatio: 0.79,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

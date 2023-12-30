@@ -56,7 +56,6 @@ dependencies:
   jwt_decoder: ^2.0.1
   screen_brightness: ^0.2.2+1
   logger: ^2.0.2
-  openid_client: ^0.4.7
   change_app_package_name: ^1.1.0
   flutter_native_splash: ^2.3.2
   speech_to_text: ^6.3.0
@@ -78,6 +77,8 @@ dependencies:
   snowplow_tracker: ^0.5.0
   equatable: ^2.0.5
   image_picker: ^1.0.5
+  location: ^5.0.3
+  flutter_otp_text_field: ^1.1.1
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
@@ -116,13 +117,8 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/logo/
-    - assets/services/
-    - assets/new_assessment.json
-    - assets/profile.json
-    - assets/triage_update_response.json
-    - assets/triage_assessment.json
     - assets/miniapps/vt_register_patient.zip
-    - assets/vision_centers.json
+   
     - assets/vt_patient.json
   
   #   - images/a_dot_ham.jpeg

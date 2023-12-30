@@ -1,7 +1,7 @@
 class AppImages {
   AppImages._();
 
-  static const String logo = 'assets/images/logo.png';
+  static const String logo = 'assets/logo/logo.png';
   static const String drawerBg = "assets/images/drawer_bg.svg";
   static const String splashBg = "assets/images/splash_bg.svg";
 
@@ -17,7 +17,7 @@ class AppImages {
   static const String swipeUp = 'assets/images/swipe_up.svg';
   static const String swipeLeft = 'assets/images/swipe_left.svg';
   static const String swipeRight = 'assets/images/swipe_right.svg';
-  static const String tumblingE = 'assets/images/tumbling_E.svg';
+  static const String tumblingE = 'assets/images/tumbling_e.svg';
 
   ///services
 

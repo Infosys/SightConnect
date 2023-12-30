@@ -58,7 +58,7 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
       itemBuilder: (context, index, _) {
         return Container(
           decoration: BoxDecoration(
-            boxShadow: applyMediumShadow(),
+            boxShadow: applyLightShadow(),
           ),
           child: Stack(
             fit: StackFit.expand,

@@ -6,20 +6,20 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 class AssessmentReportMapper {
   static TriageReportBriefEntity toEntity(TriageDetailedReportModel model) {
     return TriageReportBriefEntity(
-      questionResultDescription: model.questionResultDescription ?? "NA",
-      observationResultDescription: model.observationResultDescription ?? "NA",
-      mediaResultDescription: model.mediaResultDescription ?? "NA",
+      questionResultDescription: model.questionResultDescription ?? "",
+      observationResultDescription: model.observationResultDescription ?? "",
+      mediaResultDescription: model.mediaResultDescription ?? "",
       triageResultID: model.diagnosticReportId!,
       priority: (model.carePlans == null || model.carePlans!.isEmpty)
-          ? RequestPriority.ROUTINE
+          ? RequestPriority.PENDING
           : model.carePlans!.first.activities!.first.plannedActivityReference!
               .serviceRequest!.priority,
-      reportTag: 'NA',
+      reportTag: '',
       triageResultType: 'Eye Assesment',
       triageResultSource: model.source,
       assessmentID: model.assessmentCode!,
       triageResultStartDate: model.userStartDate!,
-      triageResultDescription: model.diagnosticReportDescription ?? "NA",
+      triageResultDescription: model.diagnosticReportDescription ?? "",
       isUpdateEnabled: model.updateEndTime!.isAfter(DateTime.now()) &&
           model.status != DiagnosticReportStatus.CANCELLED,
     );

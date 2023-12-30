@@ -4,7 +4,7 @@ class Pulsar extends StatefulWidget {
   const Pulsar({
     required this.child,
     this.animationCurve = Curves.easeInOut,
-    this.lowOpacity = 0.5,
+    this.lowOpacity = 0.7,
     this.highOpacity = 1,
     this.pulsePeriod = const Duration(milliseconds: 800),
     Key? key,

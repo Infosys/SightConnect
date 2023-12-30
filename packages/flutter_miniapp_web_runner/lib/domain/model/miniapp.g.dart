@@ -6,7 +6,8 @@ part of 'miniapp.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MiniApps _$$_MiniAppsFromJson(Map<String, dynamic> json) => _$_MiniApps(
+_$MiniAppsImpl _$$MiniAppsImplFromJson(Map<String, dynamic> json) =>
+    _$MiniAppsImpl(
       allMiniApps: (json['allMiniApps'] as List<dynamic>?)
               ?.map((e) => MiniApp.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -14,13 +15,14 @@ _$_MiniApps _$$_MiniAppsFromJson(Map<String, dynamic> json) => _$_MiniApps(
       miniAppInSessionId: json['miniAppInSessionId'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$_MiniAppsToJson(_$_MiniApps instance) =>
+Map<String, dynamic> _$$MiniAppsImplToJson(_$MiniAppsImpl instance) =>
     <String, dynamic>{
       'allMiniApps': instance.allMiniApps,
       'miniAppInSessionId': instance.miniAppInSessionId,
     };
 
-_$_MiniApp _$$_MiniAppFromJson(Map<String, dynamic> json) => _$_MiniApp(
+_$MiniAppImpl _$$MiniAppImplFromJson(Map<String, dynamic> json) =>
+    _$MiniAppImpl(
       type: json['type'],
       id: json['id'],
       version: json['version'],
@@ -35,7 +37,7 @@ _$_MiniApp _$$_MiniAppFromJson(Map<String, dynamic> json) => _$_MiniApp(
       sourceurl: json['sourceurl'],
     );
 
-Map<String, dynamic> _$$_MiniAppToJson(_$_MiniApp instance) =>
+Map<String, dynamic> _$$MiniAppImplToJson(_$MiniAppImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'id': instance.id,

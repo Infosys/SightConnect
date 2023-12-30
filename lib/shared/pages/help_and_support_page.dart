@@ -2,13 +2,17 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpAndSupportPage extends StatelessWidget {
-  const HelpAndSupportPage({super.key});
+  final String helpLine;
+  const HelpAndSupportPage({
+    super.key,
+    required this.helpLine,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +32,26 @@ class HelpAndSupportPage extends StatelessWidget {
                 AppImages.helpAndSupport,
               ),
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Dummy text of the printing lorem',
-              softWrap: true,
-              textAlign: TextAlign.left,
-              style: applyRobotoFont(
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived remaining.',
-              softWrap: true,
-              style: applyRobotoFont(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
+            // Text(
+            //   'Dummy text of the printing lorem',
+            //   softWrap: true,
+            //   textAlign: TextAlign.left,
+            //   style: applyRobotoFont(
+            //     fontWeight: FontWeight.w600,
+            //     fontSize: 18,
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
+            // Text(
+            //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived remaining.',
+            //   softWrap: true,
+            //   style: applyRobotoFont(
+            //     fontWeight: FontWeight.w400,
+            //     fontSize: 14,
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -68,6 +72,10 @@ class HelpAndSupportPage extends StatelessWidget {
                     softWrap: true,
                   ),
                   ListTile(
+                    onTap: () async {
+                      Uri phoneno = Uri.parse("tel:$helpLine");
+                      await launchUrl(phoneno);
+                    },
                     contentPadding: EdgeInsets.zero,
                     leading: Container(
                       padding: const EdgeInsets.all(10),
@@ -116,7 +124,6 @@ class HelpAndSupportPage extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const BrandingWidgetH(),
           ],
         ),
       ),

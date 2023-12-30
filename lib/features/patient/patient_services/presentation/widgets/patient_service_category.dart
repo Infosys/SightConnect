@@ -1,6 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_appointment_booking/presentation/pages/patient_appointment_schedule_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_scan_instructions_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -50,39 +48,11 @@ class PatientServiceCategory extends ConsumerWidget {
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
-                      if (miniapp == "Eye Scan") {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientEyeScanInstructionsPage(),
-                          ),
-                        );
-                      }
-                      if (miniapp == "Appointment Booking") {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientAppointmentSchedulePage(),
-                          ),
-                        );
-                      }
-                      // if (miniapp == "Buy Spectacles") {
-                      //   var resultData = ref.read(resultStateProvider);
-                      //   resultData.setResultState(0, 'Completed', 'Normal');
-                      //   resultData.setResultState(1, 'Complete test', '');
-                      //   resultData.setResultState(2, 'Completed', 'Major');
+                      // if (miniapp == "Eye Scan") {
                       //   Navigator.of(context).push(
                       //     MaterialPageRoute(
                       //       builder: (context) =>
-                      //           const PatientAssessmentResultPage(),
-                      //     ),
-                      //   );
-                      // }
-                      // if (miniapp == "Reminders") {
-                      //   Navigator.of(context).push(
-                      //     MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           const PatientAssessmentResultPage(),
+                      //           const PatientEyeScanInstructionsPage(),
                       //     ),
                       //   );
                       // }

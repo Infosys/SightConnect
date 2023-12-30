@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/landing_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -8,7 +8,7 @@ class AppRouter {
 
   static Map<String, Widget Function(BuildContext)> routes = {
     InitializationPage.routeName: (context) => const InitializationPage(),
-    LandingPage.routeName: (context) => const LandingPage(),
+    LoginPage.routeName: (context) => const LoginPage(),
   };
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {

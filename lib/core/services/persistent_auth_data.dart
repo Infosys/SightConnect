@@ -1,33 +1,53 @@
 import 'dart:convert';
-
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:openid_client/openid_client.dart';
 
 class PersistentAuthData {
   final FlutterSecureStorage _storage;
 
   PersistentAuthData() : _storage = const FlutterSecureStorage();
-
   final String _accessKey = "accessToken";
   final String _refreshKey = "refreshToken";
-  final String _roleKey = "role";
+  final String _rolesKey = "role";
+  final String _activeRoleKey = "activeRole";
   final String _usernameKey = "username";
-  final String _credentialKey = "credential";
-  final String _userProfile = "userProfile";
+  final String _userIdKey = "userId";
+  final String _id_token = "id_token";
 
   String? accessToken;
   String? refreshToken;
-  String? role;
+  List<dynamic>? roles;
+  String? activeRole;
   String? username;
+  String? userId;
+  String? idToken;
+
   bool get isLoggedIn => accessToken != null && refreshToken != null;
 
   Future<void> initialize() async {
     accessToken = await _storage.read(key: _accessKey);
     refreshToken = await _storage.read(key: _refreshKey);
-    role = await _storage.read(key: _roleKey);
     username = await _storage.read(key: _usernameKey);
+    userId = await _storage.read(key: _userIdKey);
+    idToken = await _storage.read(key: _id_token);
+    final rolesJson = await _storage.read(key: _rolesKey);
+    roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
+    activeRole = await _storage.read(key: _activeRoleKey);
+    logger.i({
+      'accessTokenData': accessToken,
+      'refreshTokenData': refreshToken,
+      'roles': roles,
+      'username': username,
+      'userId': userId,
+      'idToken': idToken,
+      'activeRole': activeRole,
+    });
+  }
+
+  Future<void> saveUserProfileId(String id) async {
+    userId = id;
+    await _storage.write(key: _userIdKey, value: id);
   }
 
   Future<void> saveTokens({
@@ -38,56 +58,39 @@ class PersistentAuthData {
     this.refreshToken = refreshToken;
     await _storage.write(key: _accessKey, value: accessToken);
     await _storage.write(key: _refreshKey, value: refreshToken);
-    final String role =
-        (JwtDecoder.decode(accessToken)['realm_access']['roles'] as List).first;
-    final username = JwtDecoder.decode(accessToken)['preferred_username'];
+    final decodedToken = JwtDecoder.decode(accessToken);
+    final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
-    await saveRoleAndUserName(role, username);
+    roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
+
+    final username = decodedToken['preferred_username'];
+    await _saveRolesAndUserName(roles, username);
   }
 
-  Future<void> saveCredential(Credential credential) async {
-    await _storage.write(
-      key: _credentialKey,
-      value: jsonEncode(
-        credential.toJson(),
-      ),
-    );
+  Future<void> _saveRolesAndUserName(
+      List<dynamic> roles, String username) async {
+    this.roles = roles;
+    this.username = username;
+    await _storage.write(key: _rolesKey, value: jsonEncode(roles));
+    await _storage.write(key: _usernameKey, value: username);
   }
 
-  Future<void> saveUserProfile(PatientResponseModel user) async {
-    await _storage.write(
-      key: _userProfile,
-      value: jsonEncode(
-        user.toJson(),
-      ),
-    );
+  Future<void> setActiveRole(String role) async {
+    activeRole = role;
+    await _storage.write(key: _activeRoleKey, value: role);
   }
 
-  Future<PatientResponseModel?> getUserProfile() async {
-    final String? userProfileJson = await _storage.read(key: _userProfile);
-    if (userProfileJson != null) {
-      return PatientResponseModel.fromJson(jsonDecode(userProfileJson));
-    }
-    return null;
+  Future<void> getActiveRole() async {
+    activeRole = await _storage.read(key: _activeRoleKey);
   }
 
-  Future<Credential?> getCredentials() async {
-    final String? credentialJson = await _storage.read(key: _credentialKey);
-    if (credentialJson != null) {
-      return Credential.fromJson(jsonDecode(credentialJson));
-    }
-    return null;
+  Future<void> saveIdToken(String idToken) async {
+    this.idToken = idToken;
+    await _storage.write(key: _id_token, value: idToken);
   }
 
   Future<String?> getAccessToken() async {
     return await _storage.read(key: _accessKey);
-  }
-
-  Future<void> saveRoleAndUserName(String role, String username) async {
-    this.role = role;
-    this.username = username;
-    await _storage.write(key: _roleKey, value: role);
-    await _storage.write(key: _usernameKey, value: username);
   }
 
   bool hasAccessTokenExpired() {
@@ -117,18 +120,39 @@ class PersistentAuthData {
   Future<void> logout() async {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
-    await _storage.delete(key: _roleKey);
+    await _storage.delete(key: _rolesKey);
+    await _storage.delete(key: _activeRoleKey);
+
     await _storage.delete(key: _usernameKey);
-    await _storage.delete(key: _credentialKey);
-    await _storage.delete(key: _userProfile);
+    await _storage.delete(key: _userIdKey);
+    await _storage.delete(key: _id_token);
+
     accessToken = null;
     refreshToken = null;
-    role = null;
+    roles = null;
     username = null;
+    userId = null;
+    idToken = null;
+    activeRole = null;
+    logger.d("Logged out");
+    logger.d({
+      'accessTokenData': accessToken,
+      'refreshTokenData': refreshToken,
+      'roles': roles,
+      'username': username,
+      'userId': userId,
+      'idToken': idToken,
+      'activeRole': activeRole,
+    });
   }
 
   bool _hasTokenExpired(String token) {
-    return JwtDecoder.isExpired(token);
+    try {
+      return JwtDecoder.isExpired(token);
+    } catch (e) {
+      logger.d(e);
+    }
+    return true;
   }
 
   @override

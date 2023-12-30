@@ -32,12 +32,31 @@ class VTHeader extends HookWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Analytics',
-                style: applyFiraSansFont(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.white,
+              InkWell(
+                onTap: () async {
+                  // try {
+                  //   // Replace '1600 Amphitheatre Parkway, Mountain View' with your actual address
+                  //   List<Location> locations = await locationFromAddress(
+                  //       '1600 Amphitheatre Parkway, Mountain View');
+
+                  //   if (locations.isNotEmpty) {
+                  //     Location location = locations.first;
+                  //     logger.d(
+                  //         'Latitude: ${location.latitude}, Longitude: ${location.longitude}');
+                  //   } else {
+                  //     logger.d('No location found for the provided address.');
+                  //   }
+                  // } catch (e) {
+                  //   print('Error: $e');
+                  // }
+                },
+                child: Text(
+                  'Analytics',
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.white,
+                  ),
                 ),
               ),
               TextButton(

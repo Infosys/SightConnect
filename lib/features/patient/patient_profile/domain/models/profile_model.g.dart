@@ -73,6 +73,7 @@ const _$RelationshipEnumMap = {
   Relationship.GRANDFATHER: 'GRANDFATHER',
   Relationship.GRANDMOTHER: 'GRANDMOTHER',
   Relationship.OTHER: 'OTHER',
+  Relationship.DAUGHTER: 'DAUGHTER',
 };
 
 _$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
@@ -306,4 +307,5 @@ Map<String, dynamic> _$$_AddressModelToJson(_$_AddressModel instance) =>
 const _$StatusEnumMap = {
   Status.ACTIVE: 'ACTIVE',
   Status.INACTIVE: 'INACTIVE',
+  Status.IN_PROGRESS: 'IN_PROGRESS',
 };

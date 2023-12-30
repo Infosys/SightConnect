@@ -69,11 +69,13 @@ class TriageRepositoryImpl implements TriageRepository {
         final remoteResponse =
             await remoteDataSource.saveTriage(triage: triageResponse);
         localDataSource.deleteTriageResponse();
-
+        await localDataSource.resetTriage();
+        await localDataSource.deleteTriageResponse();
         return Right(remoteResponse);
       } on ServerException {
         final localResponse = await localDataSource.saveTriageResponse(
             triageResponse: triageResponse);
+         await localDataSource.resetTriage();
         return Left(TriageFailure(
           errorMessage: 'This is a server exception',
           triageResponse: localResponse,
@@ -81,6 +83,7 @@ class TriageRepositoryImpl implements TriageRepository {
       } on UnknownException {
         final localResponse = await localDataSource.saveTriageResponse(
             triageResponse: triageResponse);
+            await localDataSource.resetTriage();
         return Left(TriageFailure(
           errorMessage: 'This is a unknown exception',
           triageResponse: localResponse,
@@ -92,6 +95,7 @@ class TriageRepositoryImpl implements TriageRepository {
 
         final localResponse = await localDataSource.saveTriageResponse(
             triageResponse: triageResponse);
+            await localDataSource.resetTriage();
         return Right(localResponse);
       } on CacheException {
         return Left(CacheFailure(errorMessage: 'No local data found'));

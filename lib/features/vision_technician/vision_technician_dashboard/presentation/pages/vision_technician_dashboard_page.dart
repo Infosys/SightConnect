@@ -1,14 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_page.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
-import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianDashboardPage extends ConsumerWidget {
@@ -16,6 +18,34 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ref.listen(getVTProfileProvider, (previous, next) {
+    //   if (next.hasError) {
+    //     logger.i("Logged out from VisionTechnicianDashboardPage ");
+    //     ref.read(initializationProvider).logout().then((value) {
+    //       Navigator.pushNamedAndRemoveUntil(
+    //         context,
+    //         LoginPage.routeName,
+    //         (route) => false,
+    //       );
+    //     });
+    //   }
+    // });
+    return ref.watch(getVTProfileProvider).when(
+          data: (data) {
+            return _content(context, ref);
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          error: (error, stackTrace) {
+            return Scaffold(body: Text("Error $error"));
+          },
+        );
+  }
+
+  Widget _content(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: const VisionTechnicianHomePage(),
       bottomNavigationBar: BottomNavigationBar(
@@ -27,7 +57,10 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PatientRegistrationMiniappPage(),
+                  builder: (context) => const PatientRegistrationMiniappPage(
+                    actionType: MiniAppActionType.REGISTER,
+                    displayName: "Register Patient",
+                  ),
                 ),
               );
               break;

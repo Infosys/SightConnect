@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
+import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
@@ -42,18 +44,8 @@ class PatientFamilyDetails extends StatelessWidget {
                   title: Row(
                     children: [
                       data.profilePicture != null
-                          ? CachedNetworkImage(
-                              imageUrl: data.profilePicture!,
-                              imageBuilder: (context, imageProvider) =>
-                                  CircleAvatar(
-                                backgroundImage: imageProvider,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const CircleAvatar(
-                                backgroundColor: AppColor.lightGrey,
-                              ),
-                            )
-                          : const CircleAvatar(),
+                          ? AppNetworkImage(imageUrl: data.profilePicture!)
+                          : AppNameAvatar(name: data.name!),
                       const SizedBox(
                         width: AppSize.ksheight,
                       ),
@@ -85,21 +77,6 @@ class PatientFamilyDetails extends StatelessWidget {
                       )
                     ],
                   ),
-                  trailing: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Profile completion 100%",
-                        softWrap: true,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.green,
-                        ),
-                      ),
-                      const Icon(Icons.chevron_right)
-                    ],
-                  ),
                 ),
               )
               .toList(),
@@ -115,18 +92,10 @@ class PatientFamilyDetails extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MiniAppDisplayPage(
-                          token: PersistentAuthStateService
-                                  .authState.accessToken ??
-                              "",
-                          miniapp: MiniApp(
-                            id: "1",
-                            version: "1",
-                            name: "Register Patient",
-                            displayName: "Register Patient",
-                            sourceurl:
-                                "assets/miniapps/vt_register_patient.zip",
-                          ),
+                        builder: (context) =>
+                            const PatientRegistrationMiniappPage(
+                          actionType: MiniAppActionType.ADD_MEMBER,
+                          displayName: "Add Member",
                         ),
                       ),
                     );
