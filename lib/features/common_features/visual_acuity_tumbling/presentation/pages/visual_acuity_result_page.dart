@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,7 +45,7 @@ class TumblingResultReportPage extends ConsumerWidget {
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(
-              Icons.chevron_left_sharp,
+              CupertinoIcons.back,
               color: AppColor.black,
               size: 35,
             ),

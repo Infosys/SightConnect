@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
@@ -12,6 +10,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientDashboardPage extends ConsumerWidget {
@@ -25,12 +24,14 @@ class PatientDashboardPage extends ConsumerWidget {
     ref.listen(getPatientProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.i("Logged out from PatientDashboardPage ");
-        ref.read(initializationProvider).logout();
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          LoginPage.routeName,
-          (route) => false,
-        );
+        ref.read(initializationProvider).logout().then((value) {
+          Fluttertoast.showToast(msg: "You have been logged out");
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
+        });
       }
     });
     return ref.watch(getPatientProfileProvider).when(

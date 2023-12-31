@@ -207,11 +207,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _invalidateAndLogout(
       [String message = "you have been logged out"]) async {
+    Fluttertoast.showToast(msg: message);
     final navigator = Navigator.of(context);
     await ref.read(initializationProvider).logout();
     await navigator.pushNamedAndRemoveUntil(
         LoginPage.routeName, (route) => false);
-    Fluttertoast.showToast(msg: message);
   }
 
   @override

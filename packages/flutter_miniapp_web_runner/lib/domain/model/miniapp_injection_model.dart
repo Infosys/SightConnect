@@ -19,6 +19,3 @@ enum MiniAppActionType {
   UPDATE,
   ADD_MEMBER,
 }
-
-
-//generate model command with dart run build_runner build --delete-conflicting-outputs

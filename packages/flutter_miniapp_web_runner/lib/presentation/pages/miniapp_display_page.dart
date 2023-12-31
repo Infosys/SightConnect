@@ -220,8 +220,9 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
 
       final miniAppServer = ref.read(localServerProvider);
 
-      await miniAppServer.startServer(miniAppPath, port);
-      await _loadMiniApp();
+      return miniAppServer
+          .startServer(miniAppPath, port)
+          .then((_) => _loadMiniApp());
     } catch (e) {
       scaffoldMessenger.showSnackBar(
         const SnackBar(

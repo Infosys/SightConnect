@@ -76,9 +76,10 @@ class MyConnectionsList extends ConsumerWidget {
         ),
         const SizedBox(height: AppSize.ksheight),
         (connectionsList == null || connectionsList.isEmpty)
-            ? Padding(
+            ? Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmwidth + 10),
+                  horizontal: AppSize.kmwidth + 10,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -163,57 +164,55 @@ class MyConnectionsList extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: AppSize.kswidth + 2),
-                  Padding(
+                  Container(
                     padding: const EdgeInsets.only(right: 10.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Transform.translate(
-                          offset: const Offset(0, 10),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () {
-                              try {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PatientRegistrationMiniappPage(
-                                      actionType: MiniAppActionType.ADD_MEMBER,
-                                      displayName: "Add Member",
-                                    ),
+                        InkWell(
+                          customBorder: const CircleBorder(),
+                          onTap: () {
+                            try {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PatientRegistrationMiniappPage(
+                                    actionType: MiniAppActionType.ADD_MEMBER,
+                                    displayName: "Add Member",
                                   ),
-                                );
-                              } catch (e) {
-                                logger.d({"error": e});
-                                Fluttertoast.showToast(
-                                  msg: "Service not available",
-                                );
-                              }
-                            },
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                border: Border.all(
-                                  color: AppColor.lightBlue,
-                                  width: 1.0,
                                 ),
+                              );
+                            } catch (e) {
+                              logger.d({"error": e});
+                              Fluttertoast.showToast(
+                                msg: "Service not available",
+                              );
+                            }
+                          },
+                          child: Container(
+                            width: 45.0,
+                            height: 45.0,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              border: Border.all(
+                                color: AppColor.lightBlue,
+                                width: 1.0,
                               ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.add,
-                                  color: AppColor.blue,
-                                ),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.add,
+                                color: AppColor.blue,
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: AppSize.height(context) * 0.029),
+                        const SizedBox(height: AppSize.ksheight),
                         Text(
                           "Add",
                           style: applyFiraSansFont(fontSize: 14),

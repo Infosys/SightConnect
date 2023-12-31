@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-
 class GeneralInformation extends ConsumerWidget {
   const GeneralInformation({
     super.key,
@@ -116,7 +115,7 @@ class GeneralInformation extends ConsumerWidget {
                           : AppSize.klwidth,
                     ),
                     Text(
-                      model.gender.toString() ?? "",
+                      model.gender.toString(),
                       style: applyRobotoFont(
                         fontWeight: FontWeight.w400,
                         color: AppColor.grey,
@@ -147,7 +146,7 @@ String _formatDateWithAge(
       final date = DateFormat("yyy-MMM-dd").parse("$year-$mon-$day");
       final age = DateTime.now().difference(date).inDays ~/ 365;
       return "$day $mon $year ($age years)";
-    }else {
+    } else {
       return "";
     }
   } catch (e) {

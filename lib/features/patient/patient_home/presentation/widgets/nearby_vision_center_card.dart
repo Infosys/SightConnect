@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class NearbyVisionCentersCard extends StatelessWidget {
   const NearbyVisionCentersCard({super.key, required this.data});
@@ -36,41 +32,6 @@ class NearbyVisionCentersCard extends StatelessWidget {
         location += ", ${address.pincode!}";
       }
       return location;
-    }
-
-    String getSpeciality(GeneralInformationModel specialities) {
-      String speciality = "";
-      if (specialities.hasBloodBank != null) {
-        if (specialities.hasBloodBank == "true") {
-          speciality += "Blood Bank";
-        }
-      }
-      if (specialities.hasCathLab != null) {
-        if (specialities.hasCathLab == "true") {
-          speciality += "| Cath Lab";
-        }
-      }
-      if (specialities.hasDiagnosticLab != null) {
-        if (specialities.hasDiagnosticLab == "true") {
-          speciality += "| Diagnostic Lab";
-        }
-      }
-      if (specialities.hasDialysisCenter != null) {
-        if (specialities.hasDialysisCenter == "true") {
-          speciality += "| Dialysis Center";
-        }
-      }
-      if (specialities.hasImagingCenter != null) {
-        if (specialities.hasImagingCenter == "true") {
-          speciality += "| Imaging Center";
-        }
-      }
-      if (specialities.hasPharmacy != null) {
-        if (specialities.hasPharmacy == "true") {
-          speciality += "| Pharmacy";
-        }
-      }
-      return speciality;
     }
 
     return InkWell(

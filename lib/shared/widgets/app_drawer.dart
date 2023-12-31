@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -45,7 +46,7 @@ class AppDrawer extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   leading: const Icon(
-                    Icons.arrow_back_ios,
+                    CupertinoIcons.back,
                     color: AppColor.white,
                   ),
                   title: Text(

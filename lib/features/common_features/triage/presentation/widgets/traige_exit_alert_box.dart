@@ -73,15 +73,18 @@ class TriageExitAlertBox extends ConsumerWidget {
   }
 
   Future<bool> _saveTriageModel(WidgetRef ref) async {
-    try {
-      var res = await ref
-          .watch(triageProvider)
-          .saveTriage(ref.read(triageStepperProvider).currentStep);
-      logger.f({"triagesave": res});
-      return res == null ? false : true;
-    } catch (e) {
-      logger.e(e);
+    var res = await ref
+        .watch(triageProvider)
+        .saveTriage(ref.read(triageStepperProvider).currentStep);
+    logger.f({"triagesave": res});
+
+    res.fold((l) {
+      logger.f({"triagesave": l});
       return false;
-    }
+    }, (r) {
+      logger.f({"triagesave": r});
+      return true;
+    });
+    return false;
   }
 }

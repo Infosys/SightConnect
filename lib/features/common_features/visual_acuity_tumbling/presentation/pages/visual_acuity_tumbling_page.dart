@@ -6,6 +6,6 @@ class VisualAcuityTumblingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VisualAcuityInstructionalVideoPage();
+    return const VisualAcuityInstructionalVideoPage();
   }
 }

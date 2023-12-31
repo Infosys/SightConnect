@@ -36,19 +36,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   }
 
   @override
-  void dispose() {
-    Future.delayed(Duration.zero, () async {
-      try {
-        final brightness = ref.read(accessibilityProvider).defaultBrightness;
-        await ref.read(accessibilityProvider).setBrightness(brightness);
-      } catch (e) {
-        logger.d(e.toString());
-      }
-    });
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var currentStep = ref.watch(triageStepperProvider).currentStep;
 

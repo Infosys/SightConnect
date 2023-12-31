@@ -42,8 +42,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                   SizedBox(
                     width: AppSize.width(context) / 2,
                     child: Text(
-                      "14, Nagar Khana Hanuman Temple Road, Begum Bazar Chatri, Gowsala Nagar, Chudi Bazaar, Hyderabad, Telangana 500012" ??
-                          "",
+                      "14, Nagar Khana Hanuman Temple Road, Begum Bazar Chatri, Gowsala Nagar, Chudi Bazaar, Hyderabad, Telangana 500012",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4,
                       style: applyRobotoFont(
@@ -63,7 +62,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                     children: [
                       const Icon(Icons.phone_outlined, color: AppColor.grey),
                       Text(
-                        "99634 78759" ?? "",
+                        "99634 78759",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(

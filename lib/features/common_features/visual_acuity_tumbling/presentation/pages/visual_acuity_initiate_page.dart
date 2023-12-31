@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/voice_assist_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
@@ -62,7 +63,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                       Navigator.of(context).pop();
                     }
                   },
-                  icon: const Icon(Icons.arrow_back_ios),
+                  icon: const Icon(CupertinoIcons.back),
                 ),
                 titleSpacing: 0,
                 actions: [

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -21,7 +22,7 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
   bool isMiniApp = false;
   bool isUPI = false;
 
-  void _onQRViewCreated(QRViewController controller) {
+  void _onQRViewCreated(QRViewController controller, BuildContext context) {
     setState(() {
       this.controller = controller;
       controller.resumeCamera();
@@ -32,15 +33,20 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
         result = scanData;
       });
 
-      _checkData(result!.code); // check for the type of url
+      _checkData(result!.code, context);
     });
   }
 
-  void _checkData(String? data) async {
+  void _checkData(String? data, BuildContext context) async {
     if (data != null) {
-      if (data.trimLeft().startsWith("http") ||
-          data.trimLeft().startsWith("https")) {
+      if (data.trimLeft().startsWith("https")) {
         launchInWebViewWithoutJavaScript(data);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("QR Code Data: $data"),
+          ),
+        );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,7 +102,14 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
     var scanArea = MediaQuery.of(context).size.width / 1.8;
 
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(CupertinoIcons.back),
+        ),
         title: const Text("Scanner"),
       ),
       body: Stack(
@@ -106,7 +119,9 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
           QRView(
             formatsAllowed: const [],
             key: _qrKey,
-            onQRViewCreated: _onQRViewCreated,
+            onQRViewCreated: (controller) {
+              _onQRViewCreated(controller, context);
+            },
             overlay: QrScannerOverlayShape(
               borderColor: Theme.of(context).primaryColor,
               borderRadius: 10,

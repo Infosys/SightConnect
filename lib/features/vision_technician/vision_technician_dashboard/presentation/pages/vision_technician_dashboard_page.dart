@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianDashboardPage extends ConsumerWidget {
@@ -18,18 +19,19 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.listen(getVTProfileProvider, (previous, next) {
-    //   if (next.hasError) {
-    //     logger.i("Logged out from VisionTechnicianDashboardPage ");
-    //     ref.read(initializationProvider).logout().then((value) {
-    //       Navigator.pushNamedAndRemoveUntil(
-    //         context,
-    //         LoginPage.routeName,
-    //         (route) => false,
-    //       );
-    //     });
-    //   }
-    // });
+    ref.listen(getVTProfileProvider, (previous, next) {
+      if (next.hasError) {
+        logger.i("Logged out from VisionTechnicianDashboardPage ");
+        ref.read(initializationProvider).logout().then((value) {
+          Fluttertoast.showToast(msg: "You have been logged out");
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
+        });
+      }
+    });
     return ref.watch(getVTProfileProvider).when(
           data: (data) {
             return _content(context, ref);

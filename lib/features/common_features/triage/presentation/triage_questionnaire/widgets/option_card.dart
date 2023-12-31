@@ -84,7 +84,7 @@ class OptionCard extends StatelessWidget {
                               text: '${index + 1}',
                               style: const TextStyle(
                                 color: AppColor.white,
-                                fontSize: 18,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -92,7 +92,7 @@ class OptionCard extends StatelessWidget {
                               text: ' / ',
                               style: TextStyle(
                                 color: AppColor.white,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -118,6 +118,7 @@ class OptionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
+                customBorder: const CircleBorder(),
                 onTap: onNoButtonPressed,
                 child: Container(
                   padding: const EdgeInsets.all(AppSize.kspadding),
@@ -139,6 +140,7 @@ class OptionCard extends StatelessWidget {
               ),
               const SizedBox(width: 30),
               InkWell(
+                customBorder: const CircleBorder(),
                 onTap: onYesButtonPressed,
                 child: Container(
                   padding: const EdgeInsets.all(AppSize.kspadding),

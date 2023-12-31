@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -53,7 +54,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.of(context).pop();
               onBackPress?.call();
             },
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(CupertinoIcons.back),
           ),
       title: title,
       actions: actions,

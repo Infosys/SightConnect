@@ -56,6 +56,7 @@ class RecentServicesCardList extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: AppSize.ksheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

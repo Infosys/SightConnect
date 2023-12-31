@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -21,7 +20,7 @@ class MyConnectionsCard extends HookWidget {
   Widget build(BuildContext context) {
     var isSelected = useState<bool>(false);
     isSelected.value = index == 0 ? true : false;
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(left: AppSize.kmpadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -34,7 +33,7 @@ class MyConnectionsCard extends HookWidget {
             child: image != null
                 ? AppNetworkImage(
                     imageUrl: image!,
-                    radius: 30,
+                    radius: 24,
                   )
                 : AppNameAvatar(
                     name: name,

@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/wi
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -58,7 +59,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                         Navigator.of(context).pop();
                       }
                     },
-                    icon: const Icon(Icons.arrow_back_ios),
+                    icon: const Icon(CupertinoIcons.back),
                   ),
                   titleSpacing: 0,
                   centerTitle: false,

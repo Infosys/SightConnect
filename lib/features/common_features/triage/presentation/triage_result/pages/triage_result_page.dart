@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -25,7 +27,6 @@ class TriageResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.read(triageResultProvider(triageResult));
-   
 
     return PopScope(
       canPop: false,
@@ -34,6 +35,7 @@ class TriageResultPage extends ConsumerWidget {
           return;
         }
         ref.read(resetProvider).reset();
+        ref.read(accessibilityProvider).resetBrightness();
         Navigator.of(context).popUntil((route) => route.isFirst);
       },
       child: Scaffold(
@@ -41,6 +43,7 @@ class TriageResultPage extends ConsumerWidget {
           leadingIcon: InkWell(
             onTap: () {
               ref.read(resetProvider).reset();
+              ref.read(accessibilityProvider).resetBrightness();
               Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Icon(
@@ -60,8 +63,7 @@ class TriageResultPage extends ConsumerWidget {
               children: [
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
-                  id: triageResult.subject,  
-                     
+                  id: triageResult.subject,
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 AssessmentResultCards(
@@ -129,7 +131,6 @@ class TriageResultPage extends ConsumerWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                
                 const SizedBox(height: AppSize.kmheight),
                 const NearbyVisionCentersList(),
                 const SizedBox(height: AppSize.kmheight),
