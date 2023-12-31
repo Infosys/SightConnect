@@ -54,7 +54,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
             _profileVerification(selectedProfile);
           } else {
             logger.i("Role Not Found");
-            await ref.read(initializationProvider).logout();
             await _invalidateAndLogout("Role not found. Please login again.");
           }
         }
@@ -83,13 +82,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       }
     } else if (role == Role.ROLE_VISION_TECHNICIAN) {
       await _invalidateAndLogout("You are not authorized to login.");
-    } else {
+    } else if (role == Role.ROLE_VISION_GUARDIAN) {
+      await _invalidateAndLogout("You are not authorized to login.");
+    } else if (role == Role.ROLE_OPTOMETRIST) {
       await _invalidateAndLogout("You are not authorized to login.");
     }
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    navigateBasedOnRole(navigator, role);
+    await navigateBasedOnRole(navigator, role);
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
