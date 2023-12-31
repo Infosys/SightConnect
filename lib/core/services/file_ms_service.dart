@@ -24,6 +24,9 @@ class FileMsService {
   Future<String> uploadImage(File file) async {
     const endpoint =
         "/services/filems/api/file/semisync-upload?doc_type=PROFILE_PIC";
+
+    ///"/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC"
+    /// TODO: change url to below  - this will throw error if size of image exceeds 16MB
     final fileName = file.path.split('/').last;
 
     var data = FormData.fromMap({

@@ -9,3 +9,7 @@ flutter pub run flutter_native_splash:create --path=splash.yaml
 
 flutter run -d chrome --web-browser-flag "--disable-web-security"
 
+
+
+/// SWIP GESTURE CARD UPDATED 
+/// FILE MS URL UPDATES 
