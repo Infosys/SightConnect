@@ -133,16 +133,32 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                             ),
                                           ),
                                           TextButton(
-                                            onPressed: () {
+                                            onPressed: () async {
                                               if (index == 0) {
                                                 Navigator.of(context).pop();
                                               } else {
+
+                                                int groupSectionCount=0;
+                                          while(index< model.questionnaireSections.length && (groupSectionCount ==0 || model.questionnaireSections[index].type!=QuestionnaireType.Group)){
+
+                                            index++;
+                                            groupSectionCount++;
+                                          }
+                                          if(index==model.questionnaireSections.length){
+                                            model.saveQuestionaireResponse();
+                                             await updateTriage(context, ref);
+                                          }
+                                          else{
+                                            
+                                            
+                                            index--; 
                                                 pageController.animateToPage(
                                                   index + 1,
                                                   duration: const Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.easeIn,
                                                 );
+                                              }
                                               }
                                             },
                                             child: Text(

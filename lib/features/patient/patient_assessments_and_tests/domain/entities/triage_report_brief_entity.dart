@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 
 class TriageReportUserEntity {
@@ -69,7 +69,7 @@ class TriageReportUserEntity {
 
 class TriageReportBriefEntity {
   int triageResultID;
-  RequestPriority? priority;
+  Severity? overallSeverity;
   String? reportTag;
   String? triageResultType;
   Source? triageResultSource;
@@ -87,7 +87,7 @@ class TriageReportBriefEntity {
     this.observationResultDescription,
     this.mediaResultDescription,
     required this.triageResultID,
-    this.priority,
+    this.overallSeverity,
     this.reportTag,
     this.triageResultType,
     this.triageResultSource,

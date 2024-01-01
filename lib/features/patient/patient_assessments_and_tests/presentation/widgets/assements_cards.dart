@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
@@ -58,10 +58,10 @@ class AssessmentCards extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: getRequestPriorityColor(currentData.priority),
+                        color: getRequestSeverityColor(currentData.overallSeverity),
                       ),
                       child: Text(
-                        getRequestPriorityText(currentData.priority),
+                        getSeverityText(currentData.overallSeverity),
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -279,36 +279,35 @@ class AssessmentCards extends ConsumerWidget {
     );
   }
 }
-
-String getRequestPriorityText(RequestPriority? priority) {
-  switch (priority) {
-    case RequestPriority.URGENT:
+String getSeverityText(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
       return "Urgent Consult";
-    case RequestPriority.ROUTINE:
+    case Severity.LOW:
       return "Routine Checkup";
-    case RequestPriority.ASAP:
-      return "ASAP";
-    case RequestPriority.STAT:
-      return "STAT";
+    case Severity.HIGH:
+      return "Early Checkup";
     default:
       return "";
   }
 }
 
-Color getRequestPriorityColor(RequestPriority? priority) {
-  switch (priority) {
-    case RequestPriority.URGENT:
+Color getRequestSeverityColor(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
+      return AppColor.red;
+    case Severity.HIGH:
       return AppColor.orange;
-    case RequestPriority.ROUTINE:
+    case Severity.LOW:
       return AppColor.green;
-    case RequestPriority.ASAP:
-      return AppColor.red;
-    case RequestPriority.STAT:
-      return AppColor.red;
+   
     default:
       return AppColor.grey;
   }
 }
+
+
+
 
 class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
   final String title;

@@ -170,12 +170,29 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                           if (index == 0) {
                                             Navigator.of(context).pop();
                                           }
-                                          pageController.animateToPage(
+                                          int groupSectionCount=0;
+                                          while(index< model.questionnaireSections.length && (groupSectionCount ==0 || model.questionnaireSections[index].type!=QuestionnaireType.Group)){
+
+                                            index++;
+                                            groupSectionCount++;
+                                          }
+                                          if(index==model.questionnaireSections.length){
+                                            ref.read(triageStepperProvider).goToNextStep();
+                                          }
+                                          else{
+                                            
+                                            
+                                            index--; 
+                                             pageController.animateToPage(
                                             index + 1,
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             curve: Curves.easeIn,
                                           );
+
+                                          }
+
+                                         
                                         },
                                         child: Text(
                                           "No",

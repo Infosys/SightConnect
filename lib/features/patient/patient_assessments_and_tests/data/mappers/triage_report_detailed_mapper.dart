@@ -42,11 +42,6 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      overallpriority: (triageDetailedReport.carePlans == null ||
-              triageDetailedReport.carePlans!.isEmpty)
-          ? RequestPriority.PENDING
-          : triageDetailedReport.carePlans!.first.activities!.first
-              .plannedActivityReference!.serviceRequest!.priority!,
       cumulativeSeverity: triageDetailedReport.cumulativeSeverity,
       icompleteTests: triageDetailedReport.incompleteTests,
       observationSeverity: triageDetailedReport.observationSeverity,
@@ -56,18 +51,7 @@ class AssessmentDetailedReportMapper {
     );
   }
 
-  static RequestPriority? getSevirityToPriority(Severity? severity) {
-    switch (severity) {
-      case Severity.HIGH:
-        return RequestPriority.URGENT;
-      case Severity.LOW:
-        return RequestPriority.ROUTINE;
-      case Severity.ABNORMAL:
-        return RequestPriority.ASAP;
-      default:
-        return null;
-    }
-  }
+
 
   static List<ImageBriefEntity> _getimageBreifEntity(
       DiagnosticReportTemplateFHIRModel triageAssessment,
@@ -173,16 +157,7 @@ class AssessmentDetailedReportMapper {
     }
   }
 
-  RequestPriority _getRequestPriorityFromSeverity(Severity severity) {
-    switch (severity) {
-      case Severity.ABNORMAL:
-        return RequestPriority.ASAP;
-      case Severity.HIGH:
-        return RequestPriority.URGENT;
-      case Severity.LOW:
-        return RequestPriority.ROUTINE;
-    }
-  }
+ 
 
   static List<QuestionResponseBriefEntity> _getQuestionsBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,
