@@ -25,7 +25,6 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
     var activeIndex = useState<int>(0);
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
@@ -36,11 +35,9 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               carouselController: carouselController.value,
             ),
           ),
-          const SizedBox(
-            height: AppSize.ksheight,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+          const SizedBox(height: AppSize.klheight * 2),
+          SizedBox(
+            width: AppSize.width(context) * 0.9,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -80,54 +77,43 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ],
             ),
           ),
-          // const SizedBox(
-          //   height: AppSize.ksheight,
-          // ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding,
-              vertical: AppSize.kspadding,
-            ),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                fixedSize: const Size(0, 50),
-                side: const BorderSide(
-                  color: AppColor.primary,
-                ),
-                backgroundColor:
-                    activeIndex.value == 6 ? AppColor.primary : AppColor.white,
+          const SizedBox(height: AppSize.klheight),
+          TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size(AppSize.width(context) * 0.8, 50),
+              side: const BorderSide(
+                color: AppColor.primary,
               ),
-              onPressed: () async {
-                var cameras = await availableCameras();
-                if (cameras.isEmpty) {
-                  return;
-                }
-                if (context.mounted) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (context) =>
-                          TriageEyeCapturingPage(cameras: cameras),
-                    ),
-                  );
-                }
-              },
-              child: Text(
-                activeIndex.value == 6
-                    ? "Proceed to Scan"
-                    : "Skip & Proceed to Scan",
-                style: applyRobotoFont(
-                  fontWeight: FontWeight.w500,
-                  color: activeIndex.value == 6
-                      ? AppColor.white
-                      : AppColor.primary,
-                ),
+              backgroundColor:
+                  activeIndex.value == 6 ? AppColor.primary : AppColor.white,
+            ),
+            onPressed: () async {
+              var cameras = await availableCameras();
+              if (cameras.isEmpty) {
+                return;
+              }
+              if (context.mounted) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) =>
+                        TriageEyeCapturingPage(cameras: cameras),
+                  ),
+                );
+              }
+            },
+            child: Text(
+              activeIndex.value == 6
+                  ? "Proceed to Scan"
+                  : "Skip & Proceed to Scan",
+              style: applyRobotoFont(
+                fontWeight: FontWeight.w500,
+                color:
+                    activeIndex.value == 6 ? AppColor.white : AppColor.primary,
               ),
             ),
           ),
-          // const SizedBox(
-          //   height: AppSize.klheight * 2,
-          // )
+          const SizedBox(height: AppSize.klheight),
         ],
       ),
     );

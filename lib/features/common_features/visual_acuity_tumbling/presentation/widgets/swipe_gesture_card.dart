@@ -217,42 +217,36 @@ class SwipeGestureCard extends HookConsumerWidget {
         print(angleDegrees);
       },
       child: Container(
-        decoration: const BoxDecoration(
-          color: AppColor.white,
-        ),
-        padding: const EdgeInsets.only(top: 5),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(35)),
-            color: AppColor.scaffold,
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0.1), // Shadow color at the top
-                Colors.white.withOpacity(0.05),
-                Colors.transparent, // Shadow color with less opacity
-                AppColor.scaffold,
-                AppColor.scaffold, // Original color of the container
-              ],
-              stops: const [
-                0.0, // Shadow starts at the top of the container
-                0.1,
-                1, // Less opaque shadow starts at 20% of the container
-                1,
-                0.1, // Original color starts from 10% of the container
-              ],
-            ),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(35)),
+          color: AppColor.scaffold,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.black.withOpacity(0.1), // Shadow color at the top
+              Colors.white.withOpacity(0.05),
+              Colors.transparent, // Shadow color with less opacity
+              AppColor.scaffold,
+              AppColor.scaffold, // Original color of the container
+            ],
+            stops: const [
+              0.0, // Shadow starts at the top of the container
+              0.1,
+              1, // Less opaque shadow starts at 20% of the container
+              1,
+              0.1, // Original color starts from 10% of the container
+            ],
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(35)),
-            child: Center(
-              child: Text(
-                "Swipe in the direction of the symbol",
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.grey,
-                ),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(35)),
+          child: Center(
+            child: Text(
+              "Swipe in the direction of the symbol",
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.grey,
               ),
             ),
           ),

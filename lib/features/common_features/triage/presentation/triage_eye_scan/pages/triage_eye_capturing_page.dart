@@ -46,7 +46,7 @@ class _PatientTriageEyeCapturingPageState
   @override
   void initState() {
     super.initState();
-    _initializeCamera(CameraLensDirection.front);
+    _initializeCamera(CameraLensDirection.back);
   }
 
   _initializeCamera(CameraLensDirection lensDirection) async {
@@ -375,18 +375,13 @@ class _PatientTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return;
     }
-    setState(() {
-      isLoading = true;
-    });
-
+    setLoading();
     if (_controller.value.flashMode == FlashMode.off) {
       await _controller.setFlashMode(FlashMode.torch);
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {

@@ -306,7 +306,7 @@ Color getRequestPriorityColor(RequestPriority? priority) {
     case RequestPriority.STAT:
       return AppColor.red;
     default:
-      return AppColor.grey;
+      return Colors.transparent;
   }
 }
 
