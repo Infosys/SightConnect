@@ -25,7 +25,7 @@ jobs:
         run: flutter clean
 
       - name: Decode android/upload-keystore.jks
-        run: echo "${{ secrets.JKS_UPLOAD_SECRET }}" | base64 --decode > android/upload-keystore.jks
+        run: echo "${{ secrets.JKS_UPLOAD_SECRET }}" | base64 --decode > android/app/upload-keystore.jks
 
       - name: Decode android/key.properties
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
