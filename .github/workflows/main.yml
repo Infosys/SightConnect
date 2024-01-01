@@ -18,11 +18,11 @@ jobs:
         with:
           flutter-version: '3.16.5'
 
-      - name: Install Dart SDK
-        run: flutter pub get
-
       - name: Flutter clean
         run: flutter clean
+      
+      - name: Install Dependencies
+        run: flutter pub get
 
       - name: Decode android/upload-keystore.jks
         run: echo "${{ secrets.JKS_UPLOAD_SECRET }}" | base64 --decode > android/app/upload-keystore.jks
