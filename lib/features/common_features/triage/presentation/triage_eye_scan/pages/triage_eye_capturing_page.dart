@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -458,13 +459,17 @@ class _PatientTriageEyeCapturingPageState
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => TriageResultPage(
-                        triageResult: failure.data as TriagePostModel,
-                      ),
-                    ),
-                  );
+                  ref.read(resetProvider).reset();
+                  ref.read(accessibilityProvider).resetBrightness();
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  //this will naviagte to local page for future ref
+                  // Navigator.of(context).pushReplacement(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => TriageResultPage(
+                  //       triageResult: failure.data as TriagePostModel,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: Text(
                   "Ok",
