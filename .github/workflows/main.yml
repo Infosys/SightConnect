@@ -24,12 +24,32 @@ jobs:
       - name: Flutter clean
         run: flutter clean
 
+      - name: Decode android/neumodore_key.jks
+        run: echo "${{ secrets.JKS_UPLOAD_SECRET }}" | base64 --decode > android/upload-keystore.jks
+
+      - name: Decode android/key.properties
+        run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
+
       - name: Build Android APK
         run: flutter build apk --release
 
-      - name: Upload Artifact
+      - name: Build APPBUNDLE
+        run: flutter build appbundle --release
+
+      - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
           name: apk-output
           path: ./build/app/outputs/flutter-apk/app-release.apk
           retention-days: 10
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk-output
+          path: ./build/app/outputs/bundle/release/app-release.aab
+          retention-days: 10
+
+
+          
+          
