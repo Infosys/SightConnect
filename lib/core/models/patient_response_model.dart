@@ -141,6 +141,7 @@ enum FamilyRelationShip {
   MOTHER,
   SON,
   DAUGHTER,
+  BROTHER,
   SPOUSE,
   CHILD,
   SIBING,
