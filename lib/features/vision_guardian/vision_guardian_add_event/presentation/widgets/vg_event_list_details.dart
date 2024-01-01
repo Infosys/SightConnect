@@ -18,30 +18,33 @@ class VisionEventListDetails extends ConsumerWidget {
           child: Text("No Events are Available"),
         );
       }
-      return ListView.separated(
-        shrinkWrap: true,
-        itemCount: eventDetails.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-              onTap: () {
-                ref
-                    .read(addEventDetailsProvider)
-                    .setEventId(eventDetails[index].id.toString());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VisionGuardianEventDetailsPage(
-                        eventDetails: eventDetails[index]),
-                  ),
-                );
-              },
-              child: vgEventDataCards(context, eventDetails[index]));
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            height: AppSize.ksheight,
-          );
-        },
+      return SizedBox(
+        height: AppSize.height(context)*.8,
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: eventDetails.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+                onTap: () {
+                  ref
+                      .read(addEventDetailsProvider)
+                      .setEventId(eventDetails[index].id.toString());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VisionGuardianEventDetailsPage(
+                          eventDetails: eventDetails[index]),
+                    ),
+                  );
+                },
+                child: vgEventDataCards(context, eventDetails[index]));
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: AppSize.ksheight,
+            );
+          },
+        ),
       );
     }, loading: () {
       return const Center(

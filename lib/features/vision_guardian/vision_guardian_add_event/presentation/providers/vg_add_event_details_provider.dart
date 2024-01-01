@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/contracts/vg_add_event_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +26,15 @@ var getEventDetailsProvider =
   return await ref
       .watch(vgAddEventRepository)
       .getVGEvents(actorIdentifier: "11067400874");
+});
+
+var getPatientTriageReportsProvider =
+    FutureProvider.autoDispose<List<VisionGuardianPatientResponseModel>>(
+        (ref) async {
+  var eventId = ref.watch(addEventDetailsProvider).eventIdValue;
+  return await ref
+      .watch(vgAddEventRepository)
+      .getTriageReport(campaignEventId: eventId, performerId: ["11067400874"]);
 });
 
 class AddEventDetailsNotifier extends ChangeNotifier {
@@ -98,16 +109,19 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       notifyListeners();
       var actors = {
         "role": "MEDICAL_DOCTOR",
-        "identifier": "11067400874",
+        "identifier": " ",
         "isOwner": true
       };
       print(_startDate.text);
-      DateTime startDateFormat =
-          DateFormat("yyyy-MM-dd").parse(_startDate.text);
-      DateTime endDateFormat = DateFormat("yyyy-MM-dd").parse(_endDate.text);
+      DateTime startDateFormat = DateFormat("yyyy-MM-dd")
+          .parse(DateFormat('d MMM yyyy').parse(_startDate.text).toString());
+      DateTime endDateFormat = DateFormat("yyyy-MM-dd")
+          .parse(DateFormat('d MMM yyyy').parse(_endDate.text).toString());
       print(endDateFormat);
-      var startFormat = "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
-var endFormat = "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
+      var startFormat =
+          "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
+      var endFormat =
+          "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
       print(endFormat);
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,
@@ -187,5 +201,11 @@ var endFormat = "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(
     eventStatusFilter = selectedValue;
 
     notifyListeners();
+  }
+
+  void addPatientTriage() async {
+    var response =
+        await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
+    logger.f(response);
   }
 }

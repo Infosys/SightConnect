@@ -114,20 +114,22 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           ),
         ),
       ),
-      body: Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              vgEventHeaderChips(isSelected, context, eventStatus),
-              const SizedBox(height: AppSize.klheight),
-              const VisionEventListDetails(),
-            ],
-          ),
-        );
-      }),
+      body: SingleChildScrollView(
+        child: Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                vgEventHeaderChips(isSelected, context, eventStatus),
+                const SizedBox(height: AppSize.klheight),
+                const VisionEventListDetails(),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }

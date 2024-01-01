@@ -4,13 +4,19 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EventPatientsTab extends StatelessWidget {
-  const EventPatientsTab({Key? key, required this.model}) : super(key: key);
-  final List<Map<String, dynamic>> model;
+class EventPatientsTab extends ConsumerWidget {
+  const EventPatientsTab({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Text("data");
+  }
+}
+
+
+
+/*  ListView.separated(
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: model.length,
@@ -144,5 +150,5 @@ class EventPatientsTab extends StatelessWidget {
         return const SizedBox(height: AppSize.ksheight,);
        },
     );
-  }
-}
+  } */
+
