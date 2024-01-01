@@ -1,0 +1,35 @@
+name: Build EyeCare4All
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.5'
+
+      - name: Install Dart SDK
+        run: flutter pub get
+
+      - name: Flutter clean
+        run: flutter clean
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk-output
+          path: ./build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 10
