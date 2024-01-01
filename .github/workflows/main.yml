@@ -24,7 +24,7 @@ jobs:
       - name: Flutter clean
         run: flutter clean
 
-      - name: Decode android/neumodore_key.jks
+      - name: Decode android/upload-keystore.jks
         run: echo "${{ secrets.JKS_UPLOAD_SECRET }}" | base64 --decode > android/upload-keystore.jks
 
       - name: Decode android/key.properties
