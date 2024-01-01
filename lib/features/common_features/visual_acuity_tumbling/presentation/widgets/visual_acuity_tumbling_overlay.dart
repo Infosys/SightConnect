@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -206,6 +207,9 @@ class _TumblingCarousel extends HookConsumerWidget {
                     value: isCheckboxChecked.value,
                     onChanged: (value) {
                       isCheckboxChecked.value = value!;
+                      if(isCheckboxChecked.value==true){
+                        SharedPreferenceService.setDontShowVisualAcuityStatus(true);
+                      }
                     },
                   ),
                   Text(
