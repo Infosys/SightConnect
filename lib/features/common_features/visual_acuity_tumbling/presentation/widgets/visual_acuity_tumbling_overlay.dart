@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -45,7 +44,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
       children: [
         widget.child,
         Visibility(
-          visible: ref.watch(visualAcuityTumblingTestDialogProvider),
+          visible: !ref.watch(visualAcuityTumblingTestDialogProvider),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Align(
@@ -212,6 +211,9 @@ class _TumblingCarousel extends HookConsumerWidget {
                       isCheckboxChecked.value = value!;
                       if (value) {
                         await SharedPreferenceService
+                            .setDontShowVisualAcuityStatus(true);
+                      } else {
+                        await SharedPreferenceService
                             .setDontShowVisualAcuityStatus(false);
                       }
                     },
@@ -233,7 +235,7 @@ class _TumblingCarousel extends HookConsumerWidget {
                   onPressed: () {
                     ref
                         .read(visualAcuityTumblingTestDialogProvider.notifier)
-                        .state = false;
+                        .state = true;
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.primary,

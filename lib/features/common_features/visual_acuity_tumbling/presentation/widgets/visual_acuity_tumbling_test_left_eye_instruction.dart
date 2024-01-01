@@ -22,7 +22,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.loc!.visualAcuityLeftEyeHeader,
+              context.loc!.visualAcuityRightEyeHeader,
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -33,7 +33,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
               height: AppSize.kmheight,
             ),
             Text(
-              context.loc!.visualAcuityLeftEyeInstructions,
+              AppLocalizations.of(context)!.visualAcuityRightEyeInstructions,
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -58,7 +58,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                 height: AppSize.height(context) * 0.5,
                 width: AppSize.width(context) * 0.7,
                 child: Image.asset(
-                  "assets/images/Test1LeftEye.png",
+                  "assets/images/Test1RightEye.png",
                 ),
               ),
             ),

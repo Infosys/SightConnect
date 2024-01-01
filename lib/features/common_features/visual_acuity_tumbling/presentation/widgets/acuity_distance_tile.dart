@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 class AcuityDistanceTile extends StatelessWidget {
   const AcuityDistanceTile({super.key, required this.distanceInCms});

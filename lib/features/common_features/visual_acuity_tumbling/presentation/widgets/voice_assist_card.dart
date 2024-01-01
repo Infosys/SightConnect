@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -215,8 +216,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!
-                                .visualAcuityRightEyeHeader,
+                            context.loc!.visualAcuityLeftEyeHeader,
                             style: applyFiraSansFont(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -227,8 +227,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                             height: AppSize.kmheight,
                           ),
                           Text(
-                            AppLocalizations.of(context)!
-                                .visualAcuityRightEyeInstructions,
+                            context.loc!.visualAcuityLeftEyeInstructions,
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -240,20 +239,22 @@ class VoiceAssistCard extends HookConsumerWidget {
                           ),
                           Center(
                             child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColor.primary.withOpacity(0.12),
-                                      offset: const Offset(0, 2),
-                                      blurRadius: 20,
-                                      spreadRadius: 20,
-                                    ),
-                                  ],
-                                ),
-                                height: AppSize.height(context) * 0.5,
-                                width: AppSize.width(context) * 0.7,
-                                child: Image.asset(
-                                    "assets/images/Test1RightEye.png")),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColor.primary.withOpacity(0.12),
+                                    offset: const Offset(0, 2),
+                                    blurRadius: 20,
+                                    spreadRadius: 20,
+                                  ),
+                                ],
+                              ),
+                              height: AppSize.height(context) * 0.5,
+                              width: AppSize.width(context) * 0.7,
+                              child: Image.asset(
+                                "assets/images/Test1LeftEye.png",
+                              ),
+                            ),
                           ),
                           const Spacer(),
                           Row(

@@ -3,8 +3,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/main.dart';
 
 class AssessmentDetailedReportMapper {
@@ -13,8 +11,6 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
-    
-
     return TriageReportDetailedEntity(
       triageResultDescription:
           triageDetailedReport.diagnosticReportDescription ?? "NA",
@@ -47,11 +43,8 @@ class AssessmentDetailedReportMapper {
       observationSeverity: triageDetailedReport.observationSeverity,
       mediaSeverity: triageDetailedReport.mediaSeverity,
       questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
-      
     );
   }
-
-
 
   static List<ImageBriefEntity> _getimageBreifEntity(
       DiagnosticReportTemplateFHIRModel triageAssessment,
@@ -156,8 +149,6 @@ class AssessmentDetailedReportMapper {
         return "";
     }
   }
-
- 
 
   static List<QuestionResponseBriefEntity> _getQuestionsBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,

@@ -407,6 +407,10 @@ class _PatientTriageEyeCapturingPageState
         actions: [
           TextButton(
             onPressed: () async {
+              if (context.mounted) {
+                dispose();
+              }
+
               ref.read(triageStepperProvider).goToNextStep();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -454,6 +458,10 @@ class _PatientTriageEyeCapturingPageState
             actions: [
               TextButton(
                 onPressed: () {
+                  if (context.mounted) {
+                    dispose();
+                  }
+
                   ref.read(resetProvider).reset();
                   ref.read(accessibilityProvider).resetBrightness();
                   Navigator.of(context).popUntil((route) => route.isFirst);

@@ -73,7 +73,7 @@ class ProfileHeader extends StatelessWidget {
                       ),
                       Flexible(
                         child: Text(
-                          "${patient.profile?.patient?.parentPatientId ?? ""}",
+                          "PID : ${patient.profile?.patient?.patientId ?? ""}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(

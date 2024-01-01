@@ -88,10 +88,11 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       phoneNumber = phoneNumber.substring(3);
     }
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=All";
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=Primary";
 
     try {
       final response = await _dio.get<List<dynamic>>(endpoint);
+
       return PatientResponseModel.fromJson(response.data!.first);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);

@@ -47,7 +47,6 @@ class TumblingResultReportPage extends ConsumerWidget {
             child: const Icon(
               CupertinoIcons.back,
               color: AppColor.black,
-              size: 35,
             ),
           ),
         ),

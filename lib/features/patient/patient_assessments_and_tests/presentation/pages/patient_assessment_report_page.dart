@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
@@ -25,7 +22,6 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    log("PATIENT ID${assessmentDetailsReport.patientId}");
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
@@ -37,8 +33,9 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                 horizontal: AppSize.width(context) * 0.01,
               ),
               decoration: BoxDecoration(
-                  color: _getRequestSeverityColor(
-                      assessmentDetailsReport.cumulativeSeverity)),
+                color: _getRequestSeverityColor(
+                    assessmentDetailsReport.cumulativeSeverity),
+              ),
               child: Text(
                 _getSeverityText(assessmentDetailsReport.cumulativeSeverity),
                 style: applyRobotoFont(

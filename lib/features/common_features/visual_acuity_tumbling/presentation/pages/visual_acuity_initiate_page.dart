@@ -4,9 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/accessibility_settings.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/acuity_distance_tile.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/swipe_gesture_card.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/voice_assist_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../widgets/bottom_input_tab.dart';
 import '../widgets/top_reading_card.dart';
 import '../widgets/visual_acuity_tumbling_overlay.dart';
 
@@ -128,7 +125,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
               ),
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
-            ignoring: pointerState,
+            ignoring: !pointerState,
             child: const Padding(
               padding: EdgeInsets.only(
                 left: AppSize.klpadding,

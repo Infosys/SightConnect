@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
@@ -57,7 +55,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     notifyListeners();
 
     getTriageReportList();
-    log("Selected ID${_selectedPatient?.id}");
   }
 
   List<TriageReportUserEntity> getPatients() {
