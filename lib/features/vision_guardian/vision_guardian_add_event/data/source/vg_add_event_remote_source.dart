@@ -44,7 +44,7 @@ abstract class VgAddEventRemoteSource {
 
   Future getTriageReport({
     required int campaignEventId,
-    required List<String> performerId,
+    required List<int> performerId,
   });
 
   Future postTriageReport({
@@ -192,10 +192,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future getTriageReport({
     required int campaignEventId,
-    required List<String> performerId,
+    required List<int> performerId,
   }) async {
     const endpoint =
-        "/services/orchestration/api/patients/triage-reports/campaign-event";
+        "/services/orchestration/api/patients/triage-reports/campaign-events";
     Map<String, dynamic> queryParameters = {
       "campaignEventId": campaignEventId,
       "performer-id": performerId,
@@ -211,15 +211,13 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future postTriageReport({required String eventId}) async {
     const endpoint = "/services/triage/api/campaign-events/triage-report";
 
-    //we need triagepostmodel after completion of triage to map with event id
-    /* TriagePostModel triagePostModel =getTriageModelProvider.triagePostModel; */
-
- TriagePostModel triagePostModel = TriagePostModel(
-      patientId: 1401,
+    print(eventId);
+/*  TriagePostModel triagePostModel = TriagePostModel(
+      patientId: 1801,
       serviceType: ServiceType.OPTOMETRY,
       organizationCode: 1001,
       performer: [
-        Performer(
+        const Performer(
           role: PerformerRole.MEDICAL_DOCTOR,
           identifier: 11067400874,
         )
@@ -237,13 +235,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       issued: DateTime.now().subtract(const Duration(seconds: 2)),
 
       source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppText.appVersion
 
     );
-
-    TriagePostModel datatriage = TriagePostModel.fromJson(
-      {
-      "patientId": 1401,
+ */
+    var datatriage = {
+      "patientId": 2201,
       "encounterId": null,
       "serviceType": "OPTOMETRY",
       "organizationCode": 1001,
@@ -294,12 +291,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           ]
         }
       ]
-    }
-    );
-    
-    final response = await _dio
-        .post(endpoint, data: triagePostModel, queryParameters: {eventId: eventId});
+    };
 
-    return response;
+    var response = await _dio.post(endpoint,
+        data: datatriage, queryParameters: {"event-id": int.parse(eventId)});
+    print(response.data);
+    print(response.statusCode);
+    return response.statusCode;
   }
 }

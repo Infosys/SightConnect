@@ -68,7 +68,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
         ),
         floatingActionButton: tabIndex.value == 0
             ? InkWell(
-                onTap: () {
+                onTap: ()  {
 
                   ref.read(addEventDetailsProvider).addPatientTriage();
                 

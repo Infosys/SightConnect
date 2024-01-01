@@ -31,10 +31,11 @@ var getEventDetailsProvider =
 var getPatientTriageReportsProvider =
     FutureProvider.autoDispose<List<VisionGuardianPatientResponseModel>>(
         (ref) async {
-  var eventId = ref.watch(addEventDetailsProvider).eventIdValue;
+  var eventId = int.parse(ref.watch(addEventDetailsProvider).eventIdValue);
+  print(eventId);
   return await ref
       .watch(vgAddEventRepository)
-      .getTriageReport(campaignEventId: eventId, performerId: ["11067400874"]);
+      .getTriageReport(campaignEventId: eventId, performerId: [11067400874]);
 });
 
 class AddEventDetailsNotifier extends ChangeNotifier {
@@ -204,8 +205,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void addPatientTriage() async {
-    var response =
-        await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
-    logger.f(response);
+
+    print("object");
+   var response= await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
+   print(response);
   }
+
+
 }

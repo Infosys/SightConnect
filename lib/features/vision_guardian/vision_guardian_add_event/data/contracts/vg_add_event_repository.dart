@@ -30,7 +30,7 @@ abstract class VgAddEventRepository {
 
   Future getTriageReport({
     required int campaignEventId,
-    required List<String> performerId,
+    required List<int> performerId,
   });
 
   Future postTriageReport({
