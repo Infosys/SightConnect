@@ -17,8 +17,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../widgets/option_card.dart';
+
+var questionnaireIndexProvider = StateProvider.autoDispose<int>((ref) => 1);
 
 class TriageQuestionnairePage extends HookConsumerWidget {
   const TriageQuestionnairePage({
@@ -34,15 +35,18 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     model.getQuestionnaire(questionnaireSections);
     var pageController = usePageController();
 
-    return WillPopScope(
-      onWillPop: () async {
-        var result = await showDialog(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
+        showDialog(
           context: context,
           builder: (context) => TriageExitAlertBox(
             content: context.loc!.questionnaireExitDialog,
           ),
         );
-        return result ?? false;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -99,9 +103,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   var question = model.questionnaireSections[index];
                   var isLastQuestion =
                       (model.questionnaireSections.length - 1 == index);
-
-                  // (double, int) record =
-                  //     _getWeightage(question.answerOption ?? []);
 
                   Map<String, Map<String, int>> finalValueMap =
                       _getWeightageAnswerCode(question.answerOption ?? []);
@@ -170,29 +171,35 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                           if (index == 0) {
                                             Navigator.of(context).pop();
                                           }
-                                          int groupSectionCount=0;
-                                          while(index< model.questionnaireSections.length && (groupSectionCount ==0 || model.questionnaireSections[index].type!=QuestionnaireType.Group)){
-
+                                          int groupSectionCount = 0;
+                                          while (index <
+                                                  model.questionnaireSections
+                                                      .length &&
+                                              (groupSectionCount == 0 ||
+                                                  model
+                                                          .questionnaireSections[
+                                                              index]
+                                                          .type !=
+                                                      QuestionnaireType
+                                                          .Group)) {
                                             index++;
                                             groupSectionCount++;
                                           }
-                                          if(index==model.questionnaireSections.length){
-                                            ref.read(triageStepperProvider).goToNextStep();
+                                          if (index ==
+                                              model.questionnaireSections
+                                                  .length) {
+                                            ref
+                                                .read(triageStepperProvider)
+                                                .goToNextStep();
+                                          } else {
+                                            index--;
+                                            pageController.animateToPage(
+                                              index + 1,
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.easeIn,
+                                            );
                                           }
-                                          else{
-                                            
-                                            
-                                            index--; 
-                                             pageController.animateToPage(
-                                            index + 1,
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.easeIn,
-                                          );
-
-                                          }
-
-                                         
                                         },
                                         child: Text(
                                           "No",
@@ -212,9 +219,11 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   } else if (question.type == QuestionnaireType.Choice) {
                     return OptionCard(
                       question: question,
-                      index: index,
+                      index:
+                          ref.watch(questionnaireIndexProvider.notifier).state,
                       total: model.questionnaireSections.length,
                       onNoButtonPressed: () async {
+                        ref.read(questionnaireIndexProvider.notifier).state++;
                         model.addQuestionnaireAnswer(
                           question.id!,
                           "No",
@@ -236,6 +245,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                         }
                       },
                       onYesButtonPressed: () async {
+                        ref.read(questionnaireIndexProvider.notifier).state++;
+
                         model.addQuestionnaireAnswer(
                           question.id!,
                           "Yes",
