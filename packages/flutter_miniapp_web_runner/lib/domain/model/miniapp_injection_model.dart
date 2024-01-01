@@ -9,7 +9,7 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     MiniAppActionType? action,
     String? parentPatientId,
     String? mobileNumber,
-    MiniAppInjectionModelRole ? role,
+    MiniAppInjectionModelRole? role,
   }) = _MiniAppInjectionModel;
   factory MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =>
       _$MiniAppInjectionModelFromJson(json);
@@ -19,7 +19,7 @@ enum MiniAppInjectionModelRole {
   VISION_TECHNICIAN,
   PATIENT,
   OPTOMETRITIAN,
- VISION_GUARDIAN,
+  VISION_GUARDIAN,
   OTHER
 }
 
