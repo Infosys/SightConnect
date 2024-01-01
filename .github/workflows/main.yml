@@ -55,7 +55,7 @@ jobs:
         with:
           appName: stg-radar-mobility/eyecare4all
           token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Testers
+          group: Collaborators
           file: ./build/app/outputs/flutter-apk/app-release.apk
           notifyTesters: true
           debug: false
