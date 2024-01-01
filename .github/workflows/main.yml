@@ -50,6 +50,17 @@ jobs:
           path: ./build/app/outputs/bundle/release/app-release.aab
           retention-days: 10
 
+      - name: upload artifact to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: stg-radar-mobility/eyecare4all
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          group: Testers
+          file: ./build/app/outputs/flutter-apk/app-release.apk
+          notifyTesters: true
+          debug: false
+
+
 
           
           
