@@ -13,12 +13,14 @@ class OptionCard extends StatelessWidget {
     required this.onNoButtonPressed,
     required this.index,
     required this.total,
+    required this.totalGroupQuestion,
   });
   final QuestionnaireItemFHIRModel? question;
   final VoidCallback onYesButtonPressed;
   final VoidCallback onNoButtonPressed;
   final int index;
   final int total;
+  final int totalGroupQuestion;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -81,7 +83,7 @@ class OptionCard extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '${index + 1}',
+                              text: '$index',
                               style: const TextStyle(
                                 color: AppColor.white,
                                 fontSize: 14,
@@ -97,7 +99,7 @@ class OptionCard extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: '$total',
+                              text: '${total - totalGroupQuestion}',
                               style: const TextStyle(
                                 color: AppColor.white,
                                 fontSize: 14,

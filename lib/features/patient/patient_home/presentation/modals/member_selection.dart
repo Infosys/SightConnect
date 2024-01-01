@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

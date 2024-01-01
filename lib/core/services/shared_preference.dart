@@ -15,11 +15,13 @@ class SharedPreferenceService {
       });
     }
   }
+
   static Future<void> setDontShowVisualAcuityStatus(bool value) async {
     await _sharedPreferences.setBool("dontShowVisualAcuityStatus", value);
   }
+
   static bool get getDontShowVisualAcuityStatus =>
-   _sharedPreferences.getBool("dontShowVisualAcuityStatus") ?? false;
+      _sharedPreferences.getBool("dontShowVisualAcuityStatus") ?? true;
 
   static Future<void> setConsentStatus(bool value) async {
     await _sharedPreferences.setBool("consentStatus", value);

@@ -75,6 +75,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
 
   @override
   Widget build(BuildContext context) {
+    return _buildWebView();
     return FutureBuilder<void>(
       future: _loadMiniAppFuture,
       builder: (context, snapshot) {
@@ -130,7 +131,8 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
       ),
       body: InAppWebView(
         initialUrlRequest: URLRequest(
-          url: Uri.parse("http://127.0.0.1:$port/"),
+          url: Uri.parse(
+              "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
         ),
         onLoadError: (controller, url, code, message) async {
           logger.e("Error: $message");

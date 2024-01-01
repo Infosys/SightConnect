@@ -19,7 +19,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/range_category.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/test_code.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/gender.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'triage_diagnostic_report_template_FHIR_model.freezed.dart';
@@ -170,6 +169,17 @@ class QualifiedValueModel with _$QualifiedValueModel {
 
   factory QualifiedValueModel.fromJson(Map<String, dynamic> json) =>
       _$QualifiedValueModelFromJson(json);
+}
+
+enum Gender {
+  MALE,
+  FEMALE,
+  Male,
+  Female,
+  Other,
+  M,
+  F,
+  OTHER,
 }
 
 // ----------------------------------------------------------------------------------------------------------------

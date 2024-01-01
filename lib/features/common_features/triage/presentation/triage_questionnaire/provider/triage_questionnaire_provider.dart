@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_questionnaire_locally_usecase.dart';
@@ -38,8 +39,19 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int totalGroupQuestion() {
+    int total = 0;
+    for (var element in _questionnaireSections) {
+      if (element.type == QuestionnaireType.Group) {
+        total += 1;
+      }
+    }
+    return total;
+  }
+
   void getQuestionnaire(List<QuestionnaireItemFHIRModel> data) async {
     _questionnaireSections = data;
+    totalGroupQuestion();
   }
 
   void addQuestionnaireAnswer(

@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/identifier_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../domain/models/profile_model.dart';
 
 var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
   return PatientAuthRemoteSourceImpl(ref.read(dioProvider));
@@ -71,7 +69,8 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   Future<PatientResponseModel> updatePatientProfile(
     PatientModel patientDTO,
   ) async {
-    final endpoint = "/services/orchestration/api/patients/${patientDTO.id}";
+    final endpoint =
+        "/services/orchestration/api/patients/${patientDTO.patientId}";
     try {
       var response = await _dio.put(endpoint, data: patientDTO.toJson());
       return PatientResponseModel.fromJson(response.data);

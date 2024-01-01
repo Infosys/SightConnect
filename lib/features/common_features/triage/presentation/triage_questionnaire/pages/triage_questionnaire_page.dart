@@ -218,6 +218,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                     );
                   } else if (question.type == QuestionnaireType.Choice) {
                     return OptionCard(
+                      totalGroupQuestion: model.totalGroupQuestion(),
                       question: question,
                       index:
                           ref.watch(questionnaireIndexProvider.notifier).state,

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -21,7 +22,9 @@ enum _TumblingDirection {
   Right,
 }
 
-var visualAcuityTumblingTestDialogProvider = StateProvider<bool>((ref) => true);
+var visualAcuityTumblingTestDialogProvider = StateProvider<bool>((ref) {
+  return SharedPreferenceService.getDontShowVisualAcuityStatus;
+});
 
 class VisualAcuityTumblingOverlay extends ConsumerStatefulWidget {
   const VisualAcuityTumblingOverlay({
@@ -205,10 +208,11 @@ class _TumblingCarousel extends HookConsumerWidget {
                 children: [
                   Checkbox(
                     value: isCheckboxChecked.value,
-                    onChanged: (value) {
+                    onChanged: (value) async {
                       isCheckboxChecked.value = value!;
-                      if(isCheckboxChecked.value==true){
-                        SharedPreferenceService.setDontShowVisualAcuityStatus(true);
+                      if (value) {
+                        await SharedPreferenceService
+                            .setDontShowVisualAcuityStatus(false);
                       }
                     },
                   ),

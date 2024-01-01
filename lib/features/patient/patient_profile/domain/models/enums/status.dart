@@ -1,4 +1,0 @@
-enum Status {
-  ACTIVE, INACTIVE,
-  IN_PROGRESS
-}

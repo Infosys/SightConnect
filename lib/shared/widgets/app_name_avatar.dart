@@ -36,9 +36,9 @@ class AppNameAvatar extends StatelessWidget {
   String getNameInitials(String name) {
     final nameSplit = name.split(" ");
     if (nameSplit.length > 1) {
-      return nameSplit[0][0] + nameSplit[1][0];
+      return nameSplit[0][0].toUpperCase() + nameSplit[1][0].toUpperCase();
     } else {
-      return nameSplit[0][0];
+      return nameSplit[0][0].toUpperCase();
     }
   }
 }

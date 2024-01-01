@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -23,6 +25,7 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    log("PATIENT ID${assessmentDetailsReport.patientId}");
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
@@ -105,7 +108,7 @@ Color _getRequestSeverityColor(Severity? severity) {
       return AppColor.orange;
     case Severity.LOW:
       return AppColor.green;
-   
+
     default:
       return AppColor.grey;
   }
