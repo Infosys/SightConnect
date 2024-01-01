@@ -52,11 +52,7 @@ class AssessmentDetailedReportMapper {
       observationSeverity: triageDetailedReport.observationSeverity,
       mediaSeverity: triageDetailedReport.mediaSeverity,
       questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
-      quessionnairepriority:
-          getSevirityToPriority(triageDetailedReport.questionResponseSeverity),
-      observationpriority:
-          getSevirityToPriority(triageDetailedReport.observationSeverity),
-      mediapriority: getSevirityToPriority(triageDetailedReport.mediaSeverity),
+      
     );
   }
 
