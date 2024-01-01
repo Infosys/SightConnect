@@ -10,10 +10,7 @@ class AssessmentReportMapper {
       observationResultDescription: model.observationResultDescription ?? "",
       mediaResultDescription: model.mediaResultDescription ?? "",
       triageResultID: model.diagnosticReportId!,
-      priority: (model.carePlans == null || model.carePlans!.isEmpty)
-          ? RequestPriority.PENDING
-          : model.carePlans!.first.activities!.first.plannedActivityReference!
-              .serviceRequest!.priority,
+      overallSeverity: model.cumulativeSeverity,
       reportTag: '',
       triageResultType: 'Eye Assesment',
       triageResultSource: model.source,

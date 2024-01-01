@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -30,12 +29,12 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
+          color: _getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
               .withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
+            color: _getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
                 .withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
@@ -55,12 +54,12 @@ class AssessmentOverallResultCard extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: getRequestSeverityColor(
+                  color: _getRequestSeverityColor(
                       triageResultEntities.questionResponseSeverity),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  getSeverityText(triageResultEntities.questionResponseSeverity),
+                  _getSeverityText(triageResultEntities.questionResponseSeverity),
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.white,
@@ -89,20 +88,20 @@ class AssessmentOverallResultCard extends StatelessWidget {
   }
 }
 
-String getSeverityText(Severity? severity) {
+String _getSeverityText(Severity? severity) {
   switch (severity) {
     case Severity.ABNORMAL:
       return "Urgent Consult";
-    case Severity.HIGH:
-      return "Routine Checkup";
     case Severity.LOW:
+      return "Routine Checkup";
+    case Severity.HIGH:
       return "Early Checkup";
     default:
       return "";
   }
 }
 
-Color getRequestSeverityColor(Severity? severity) {
+Color _getRequestSeverityColor(Severity? severity) {
   switch (severity) {
     case Severity.ABNORMAL:
       return AppColor.red;
