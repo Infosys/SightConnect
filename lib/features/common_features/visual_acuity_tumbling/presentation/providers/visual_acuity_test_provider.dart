@@ -263,8 +263,8 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  double _calculateScore(double value) {  
-    logger.i("Tumbling Test Value: $value");
+  double _calculateScore(double value) {
+    logger.d("Tumbling Test Value: $value");
     if (value >= 1) {
       return 5.0;
     } else if (value >= 0.5) {
@@ -325,7 +325,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
   Future<void> saveVisionAcuityResponseToDB() async {
     var res = getVisionAcuityTumblingResponse();
-    logger.f({"saveVisionAcuityResponseToDB ": res});
+    logger.d({"saveVisionAcuityResponseToDB ": res});
     await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
@@ -372,7 +372,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
     );
 
     try {
-      logger.f({"observationDTO": triage.observations});
+      logger.d({"observationDTO": triage.observations});
       return triageRepositoryProvider.updateTriageResponse(
           triageResponse: triage);
     } catch (e) {

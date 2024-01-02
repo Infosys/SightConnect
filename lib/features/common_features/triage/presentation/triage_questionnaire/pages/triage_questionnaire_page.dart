@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/option_card.dart';
@@ -48,295 +49,298 @@ class TriageQuestionnairePage extends HookConsumerWidget {
           ),
         );
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        key: scaffoldKey.value,
-        drawer: const TriageStepsDrawer(),
-        appBar: CustomAppbar(
-          leadingWidth: 60,
-          titleSpacing: 0.0,
-          centerTitle: false,
-          leadingIcon: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              scaffoldKey.value.currentState!.openDrawer();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Image.asset(
-                AppIcon.hamburgerIcon,
+      child: TraceableWidget(
+        actionName: 'TriageQuestionnaire Page',
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          key: scaffoldKey.value,
+          drawer: const TriageStepsDrawer(),
+          appBar: CustomAppbar(
+            leadingWidth: 60,
+            titleSpacing: 0.0,
+            centerTitle: false,
+            leadingIcon: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () {
+                scaffoldKey.value.currentState!.openDrawer();
+              },
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Image.asset(
+                  AppIcon.hamburgerIcon,
+                ),
               ),
             ),
-          ),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(width: AppSize.kmwidth),
-              Text(
-                context.loc!.stepNumber("1", "3"),
-                style: applyRobotoFont(
-                  color: AppColor.primary,
-                  fontSize: 14,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(width: AppSize.kmwidth),
+                Text(
+                  context.loc!.stepNumber("1", "3"),
+                  style: applyRobotoFont(
+                    color: AppColor.primary,
+                    fontSize: 14,
+                  ),
                 ),
-              ),
-              const SizedBox(width: AppSize.kswidth),
-              Text(
-                AppLocalizations.of(context)!.questionnaireTitle,
-                style: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                const SizedBox(width: AppSize.kswidth),
+                Text(
+                  AppLocalizations.of(context)!.questionnaireTitle,
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        body: Consumer(
-          builder: (context, ref, _) {
-            return PageView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: pageController,
-                scrollDirection: Axis.horizontal,
-                itemCount: model.questionnaireSections.length,
-                itemBuilder: (context, index) {
-                  logger.d(
-                      "${model.questionnaireSections.length}, is the length of the questions");
-                  var question = model.questionnaireSections[index];
-                  var isLastQuestion =
-                      (model.questionnaireSections.length - 1 == index);
+          body: Consumer(
+            builder: (context, ref, _) {
+              return PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: pageController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: model.questionnaireSections.length,
+                  itemBuilder: (context, index) {
+                    logger.d(
+                        "${model.questionnaireSections.length}, is the length of the questions");
+                    var question = model.questionnaireSections[index];
+                    var isLastQuestion =
+                        (model.questionnaireSections.length - 1 == index);
 
-                  Map<String, Map<String, int>> finalValueMap =
-                      _getWeightageAnswerCode(question.answerOption ?? []);
+                    Map<String, Map<String, int>> finalValueMap =
+                        _getWeightageAnswerCode(question.answerOption ?? []);
 
-                  if (question.type == QuestionnaireType.Group) {
-                    return Center(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSize.kmradius),
-                        ),
-                        elevation: AppSize.kselevation,
-                        color: Colors.white,
-                        child: SizedBox(
-                          width: AppSize.width(context) * 0.8,
-                          child: Padding(
-                            padding: const EdgeInsets.all(AppSize.kmpadding),
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Assessment",
-                                        style: applyFiraSansFont(fontSize: 24),
-                                      ),
-                                      SvgPicture.asset(
-                                        AppIcon.question,
-                                        height: 32,
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: AppSize.ksheight,
-                                  ),
-                                  Text(
-                                    question.text ?? '',
-                                    style: applyRobotoFont(fontSize: 14),
-                                  ),
-                                  const SizedBox(
-                                    height: AppSize.ksheight,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          pageController.animateToPage(
-                                            index + 1,
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.easeIn,
-                                          );
-                                        },
-                                        child: Text(
-                                          "Yes",
-                                          style: applyRobotoFont(
-                                              fontSize: 14,
-                                              color: AppColor.primary),
+                    if (question.type == QuestionnaireType.Group) {
+                      return Center(
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(AppSize.kmradius),
+                          ),
+                          elevation: AppSize.kselevation,
+                          color: Colors.white,
+                          child: SizedBox(
+                            width: AppSize.width(context) * 0.8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(AppSize.kmpadding),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Assessment",
+                                          style:
+                                              applyFiraSansFont(fontSize: 24),
                                         ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          if (index == 0) {
-                                            Navigator.of(context).pop();
-                                          }
-                                          int groupSectionCount = 0;
-                                          while (index <
-                                                  model.questionnaireSections
-                                                      .length &&
-                                              (groupSectionCount == 0 ||
-                                                  model
-                                                          .questionnaireSections[
-                                                              index]
-                                                          .type !=
-                                                      QuestionnaireType
-                                                          .Group)) {
-                                            index++;
-                                            groupSectionCount++;
-                                          }
-                                          if (index ==
-                                              model.questionnaireSections
-                                                  .length) {
-                                            model.saveQuestionaireResponse();
-                                            await model
-                                                .saveQuestionaireResponseToDB();
-
-                                            ref
-                                                .read(triageStepperProvider)
-                                                .goToNextStep();
-                                          } else {
-                                            index--;
+                                        SvgPicture.asset(
+                                          AppIcon.question,
+                                          height: 32,
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: AppSize.ksheight,
+                                    ),
+                                    Text(
+                                      question.text ?? '',
+                                      style: applyRobotoFont(fontSize: 14),
+                                    ),
+                                    const SizedBox(
+                                      height: AppSize.ksheight,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
                                             pageController.animateToPage(
                                               index + 1,
                                               duration: const Duration(
                                                   milliseconds: 500),
                                               curve: Curves.easeIn,
                                             );
-                                          }
-                                        },
-                                        child: Text(
-                                          "No",
-                                          style: applyRobotoFont(
-                                            fontSize: 14,
-                                            color: AppColor.primary,
+                                          },
+                                          child: Text(
+                                            "Yes",
+                                            style: applyRobotoFont(
+                                                fontSize: 14,
+                                                color: AppColor.primary),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                ]),
-                          ),
-                        ),
-                      ),
-                    );
-                  } else if (question.type == QuestionnaireType.Choice) {
-                    return OptionCard(
-                      totalGroupQuestion: model.totalGroupQuestion(),
-                      question: question,
-                      index:
-                          ref.watch(questionnaireIndexProvider.notifier).state,
-                      total: model.questionnaireSections.length,
-                      onNoButtonPressed: () async {
-                        ref.read(questionnaireIndexProvider.notifier).state++;
-                        model.addQuestionnaireAnswer(
-                          question.id!,
-                          "No",
-                          _getAnswerWeightage(finalValueMap, "No").toInt(),
-                          _getAnswerCode(finalValueMap, "No"),
-                        );
-
-                        if (isLastQuestion) {
-                          model.saveQuestionaireResponse();
-
-                          await model.saveQuestionaireResponseToDB();
-                          ref.read(triageStepperProvider).goToNextStep();
-                        } else {
-                          pageController.animateToPage(
-                            index + 1,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        }
-                      },
-                      onYesButtonPressed: () async {
-                        ref.read(questionnaireIndexProvider.notifier).state++;
-
-                        model.addQuestionnaireAnswer(
-                          question.id!,
-                          "Yes",
-                          _getAnswerWeightage(finalValueMap, "Yes").toInt(),
-                          _getAnswerCode(finalValueMap, "Yes"),
-                        );
-
-                        if (isLastQuestion) {
-                          model.saveQuestionaireResponse();
-
-                          await model.saveQuestionaireResponseToDB();
-                          ref.read(triageStepperProvider).goToNextStep();
-                        } else {
-                          pageController.animateToPage(
-                            index + 1,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        }
-                      },
-                    );
-                  } else if (question.type == QuestionnaireType.String) {
-                    return TriageTextTypeQuestion(
-                      question: question,
-                      onSubmitted: (String value) async {
-                        if (value.isNotEmpty) {
-                          model.addQuestionnaireAnswer(
-                            question.id!,
-                            value,
-                            0,
-                            0,
-                          );
-                        }
-                        if (isLastQuestion) {
-                          model.saveQuestionaireResponse();
-                          await model.saveQuestionaireResponseToDB();
-                          ref.read(triageStepperProvider).goToNextStep();
-                          //TODO:save triage
-                        } else {
-                          pageController.animateToPage(
-                            index + 1,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        }
-                      },
-                    );
-                  } else {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text(
-                            "Question Not Supported Yet",
-                            style: applyRobotoFont(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                              color: AppColor.black,
+                                        TextButton(
+                                          onPressed: () {
+                                            if (index == 0) {
+                                              Navigator.of(context).pop();
+                                            }
+                                            int groupSectionCount = 0;
+                                            while (index <
+                                                    model.questionnaireSections
+                                                        .length &&
+                                                (groupSectionCount == 0 ||
+                                                    model
+                                                            .questionnaireSections[
+                                                                index]
+                                                            .type !=
+                                                        QuestionnaireType
+                                                            .Group)) {
+                                              index++;
+                                              groupSectionCount++;
+                                            }
+                                            if (index ==
+                                                model.questionnaireSections
+                                                    .length) {
+                                              ref
+                                                  .read(triageStepperProvider)
+                                                  .goToNextStep();
+                                            } else {
+                                              index--;
+                                              pageController.animateToPage(
+                                                index + 1,
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                curve: Curves.easeIn,
+                                              );
+                                            }
+                                          },
+                                          child: Text(
+                                            "No",
+                                            style: applyRobotoFont(
+                                              fontSize: 14,
+                                              color: AppColor.primary,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ]),
                             ),
                           ),
                         ),
-                        TextButton(
-                          onPressed: () async {
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                              await model.saveQuestionaireResponseToDB();
-                              ref.read(triageStepperProvider).goToNextStep();
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                          child: const Text(
-                            "skip",
+                      );
+                    } else if (question.type == QuestionnaireType.Choice) {
+                      return OptionCard(
+                        totalGroupQuestion: model.totalGroupQuestion(),
+                        question: question,
+                        index: ref
+                            .watch(questionnaireIndexProvider.notifier)
+                            .state,
+                        total: model.questionnaireSections.length,
+                        onNoButtonPressed: () async {
+                          ref.read(questionnaireIndexProvider.notifier).state++;
+                          model.addQuestionnaireAnswer(
+                            question.id!,
+                            "No",
+                            _getAnswerWeightage(finalValueMap, "No").toInt(),
+                            _getAnswerCode(finalValueMap, "No"),
+                          );
+
+                          if (isLastQuestion) {
+                            model.saveQuestionaireResponse();
+
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                          } else {
+                            pageController.animateToPage(
+                              index + 1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
+                          }
+                        },
+                        onYesButtonPressed: () async {
+                          ref.read(questionnaireIndexProvider.notifier).state++;
+
+                          model.addQuestionnaireAnswer(
+                            question.id!,
+                            "Yes",
+                            _getAnswerWeightage(finalValueMap, "Yes").toInt(),
+                            _getAnswerCode(finalValueMap, "Yes"),
+                          );
+
+                          if (isLastQuestion) {
+                            model.saveQuestionaireResponse();
+
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                          } else {
+                            pageController.animateToPage(
+                              index + 1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
+                          }
+                        },
+                      );
+                    } else if (question.type == QuestionnaireType.String) {
+                      return TriageTextTypeQuestion(
+                        question: question,
+                        onSubmitted: (String value) async {
+                          if (value.isNotEmpty) {
+                            model.addQuestionnaireAnswer(
+                              question.id!,
+                              value,
+                              0,
+                              0,
+                            );
+                          }
+                          if (isLastQuestion) {
+                            model.saveQuestionaireResponse();
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                            //TODO:save triage
+                          } else {
+                            pageController.animateToPage(
+                              index + 1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
+                          }
+                        },
+                      );
+                    } else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Text(
+                              "Question Not Supported Yet",
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                color: AppColor.black,
+                              ),
+                            ),
                           ),
-                        )
-                      ],
-                    );
-                  }
-                });
-          },
+                          TextButton(
+                            onPressed: () async {
+                              if (isLastQuestion) {
+                                model.saveQuestionaireResponse();
+                                await model.saveQuestionaireResponseToDB();
+                                ref.read(triageStepperProvider).goToNextStep();
+                              } else {
+                                pageController.animateToPage(
+                                  index + 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            },
+                            child: const Text(
+                              "skip",
+                            ),
+                          )
+                        ],
+                      );
+                    }
+                  });
+            },
+          ),
         ),
       ),
     );
@@ -376,7 +380,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
       finalValueMap[answerString] = valueMap;
     }
 
-    logger.f({"finalvalueMaparra": finalValueMap});
+    logger.d({"finalvalueMaparra": finalValueMap});
     return finalValueMap;
   }
 

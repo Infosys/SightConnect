@@ -315,7 +315,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
       finalValueMap[answerString] = valueMap;
     }
 
-    logger.f({"finalvalueMaparra": finalValueMap});
+    logger.d({"finalvalueMaparra": finalValueMap});
     return finalValueMap;
   }
 

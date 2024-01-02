@@ -142,14 +142,8 @@ enum FamilyRelationShip {
   SON,
   DAUGHTER,
   BROTHER,
-  SPOUSE,
-  CHILD,
-  SIBING,
-  UNCLE,
-  AUNT,
-  GRANDFATHER,
-  GRANDMOTHER,
-  OTHER,
+  SISTER,
+  OTHER
 }
 
 enum IdentifierType { ABHA_NUMBER, ABHA_ADDRESS, HPR_ID, COUNTER_ID, MR_CODE }

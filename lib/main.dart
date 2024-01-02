@@ -6,12 +6,14 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'core/services/app_logger.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+  AppEnv.setupEnv(Env.PROD);
   //   ByteData data =
   //     await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   // SecurityContext.defaultContext
@@ -20,8 +22,10 @@ Future<void> main() async {
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   IOSDeviceInfoService.init();
-  AppEnv.setupEnv(Env.DEV);
 
+  if (AppEnv.isProd) {
+    await AppLogger.init();
+  }
   runApp(
     const ProviderScope(
       child: MyApp(),

@@ -171,12 +171,12 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
           return false;
         },
         (r) {
-          logger.f({"message": "Triage updated successfully"});
+          logger.d({"message": "Triage updated successfully"});
           return true;
         },
       );
     } catch (e) {
-      logger.f({"error in this step": e});
+      logger.d({"error in this step": e});
       return false;
     }
   }
@@ -230,7 +230,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
         triageAssessment,
       ),
     );
-    logger.f({"triageModel": triage});
+    logger.d({"triageModel": triage});
     return triage;
   }
 
@@ -255,8 +255,8 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     Map<String, String> leftEyeMap = parseUrl(leftImageUrl);
     Map<String, String> rightEyeMap = parseUrl(rightImageUrl);
 
-    logger.f({"imageIdentifier": imageIdentifier});
-    logger.f({"imageIdentifier": imageIdentifier["LEFT_EYE"]});
+    logger.d({"imageIdentifier": imageIdentifier});
+    logger.d({"imageIdentifier": imageIdentifier["LEFT_EYE"]});
     //add left eye data
     updatedImageLists.add(update_model.PatchImagingSelectionModel(
       action: Action.ADD,

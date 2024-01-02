@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
  
   <!-- INAPPWEBVIEW PERMISSION-->
+
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -42,6 +44,20 @@
     <meta-data
       android:name="flutterEmbedding"
       android:value="2" />
+
+
+      <!-- provider is used to give access of file from inappwebview-->
+      <provider
+      android:name="com.pichillilorenzo.flutter_inappwebview_android.InAppWebViewFileProvider"
+      android:authorities="com.healthconnect.sightconnect.flutter_inappwebview_android.fileprovider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/provider_paths" />
+  </provider>
+
+
   </application>
   <queries>
     <!-- If your app checks for SMS support -->

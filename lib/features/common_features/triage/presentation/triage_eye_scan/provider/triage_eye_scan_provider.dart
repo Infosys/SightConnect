@@ -62,8 +62,8 @@ class TriageEyeScanProvider with ChangeNotifier {
   }
 
   Future<void> saveTriageEyeScanResponseToDB() async {
-    logger.f({"Left eye image": leftImageUrl});
-    logger.f({"right eye image": rightImageUrl});
+    logger.d({"Left eye image": leftImageUrl});
+    logger.d({"right eye image": rightImageUrl});
     final response = await _saveTriageEyeScanLocallyUseCase.call(
       SaveTriageEyeScanLocallyParam(
         postImagingSelectionModel:
@@ -133,7 +133,7 @@ class TriageEyeScanProvider with ChangeNotifier {
   String bothImageUrl = "";
 
   Future<void> uploadImage(XFile image, TriageEyeType currentEye) async {
-    logger.f({
+    logger.d({
       "uploadImage": "called",
       "image": image.name,
       "currentEye": currentEye,

@@ -18,7 +18,7 @@ analyzer:
 
 linter:
   rules:
-    avoid_print: false  
+    avoid_print: true 
     non_constant_identifier_names: false
     constant_identifier_names: false
     

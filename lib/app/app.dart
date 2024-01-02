@@ -13,12 +13,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../app_environment.dart';
+
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
-  return false;
-  // return await FlutterJailbreakDetection.jailbroken;
+  return await FlutterJailbreakDetection.jailbroken;
 });
 
 class MyApp extends ConsumerWidget {
@@ -40,7 +42,7 @@ class MyApp extends ConsumerWidget {
 
     return ref.watch(isJailBrokenProvider).maybeWhen(
       data: (data) {
-        logger.i("isJailBrokenProvider: $data");
+        logger.d("isJailBrokenProvider: $data");
         if (data) {
           return const SecurePage();
         }
@@ -59,6 +61,7 @@ class MyApp extends ConsumerWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
+              navigatorObservers: AppEnv.isProd ? [matomoObserver] : [],
               supportedLocales: const [Locale('en'), Locale('hi')],
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),
@@ -88,7 +91,7 @@ class MyApp extends ConsumerWidget {
         );
       },
       orElse: () {
-        logger.i("isJailBrokenProvider: orElse");
+        logger.d("isJailBrokenProvider: orElse");
         return const SecurePage();
       },
     );

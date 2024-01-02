@@ -20,7 +20,7 @@ class SaveTriageUseCase implements UseCase<TriagePostModel, SaveTriageParam> {
   Future<Either<Failure, TriagePostModel>> call(
     SaveTriageParam params,
   ) async {
-    logger.f({"Triage Param": params.triagePostModel});
+    logger.d({"Triage Param": params.triagePostModel});
     final response = await _repository.saveTriageResponse(
       triageResponse: params.triagePostModel,
     );

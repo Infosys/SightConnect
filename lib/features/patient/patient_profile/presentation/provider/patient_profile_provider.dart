@@ -12,7 +12,7 @@ final getPatientProfileByIdProvider =
     logger.e(error);
     throw error;
   }, (result) {
-    logger.f(result);
+    logger.d(result);
     return result;
   });
 });

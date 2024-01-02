@@ -59,7 +59,7 @@ class TriageExitAlertBox extends ConsumerWidget {
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    logger.f({"currentStep": model.currentStep});
+                    logger.d({"currentStep": model.currentStep});
                   },
                   child: const Text('No'),
                 ),
@@ -76,13 +76,13 @@ class TriageExitAlertBox extends ConsumerWidget {
     var res = await ref
         .watch(triageProvider)
         .saveTriage(ref.read(triageStepperProvider).currentStep);
-    logger.f({"triagesave": res});
+    logger.d({"triagesave": res});
 
     res.fold((l) {
-      logger.f({"triagesave": l});
+      logger.d({"triagesave": l});
       return false;
     }, (r) {
-      logger.f({"triagesave": r});
+      logger.d({"triagesave": r});
       return true;
     });
     return false;

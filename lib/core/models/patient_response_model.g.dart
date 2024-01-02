@@ -255,13 +255,7 @@ const _$FamilyRelationShipEnumMap = {
   FamilyRelationShip.SON: 'SON',
   FamilyRelationShip.DAUGHTER: 'DAUGHTER',
   FamilyRelationShip.BROTHER: 'BROTHER',
-  FamilyRelationShip.SPOUSE: 'SPOUSE',
-  FamilyRelationShip.CHILD: 'CHILD',
-  FamilyRelationShip.SIBING: 'SIBING',
-  FamilyRelationShip.UNCLE: 'UNCLE',
-  FamilyRelationShip.AUNT: 'AUNT',
-  FamilyRelationShip.GRANDFATHER: 'GRANDFATHER',
-  FamilyRelationShip.GRANDMOTHER: 'GRANDMOTHER',
+  FamilyRelationShip.SISTER: 'SISTER',
   FamilyRelationShip.OTHER: 'OTHER',
 };
 
