@@ -167,7 +167,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           if (index == 0) {
                                             Navigator.of(context).pop();
                                           }
@@ -188,6 +188,10 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                           if (index ==
                                               model.questionnaireSections
                                                   .length) {
+                                            model.saveQuestionaireResponse();
+                                            await model
+                                                .saveQuestionaireResponseToDB();
+
                                             ref
                                                 .read(triageStepperProvider)
                                                 .goToNextStep();
