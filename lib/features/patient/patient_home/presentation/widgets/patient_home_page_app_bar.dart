@@ -40,7 +40,7 @@ class PatientHomePageAppBar extends StatelessWidget
                   onTap: () async {
                     try {
                       logger.i("Dio Interceptor onERROR");
-                      final res = await model.get("https://pub.dev/");
+                      final res = await model.get("https://flutter.dev/");
                       logger.i(res.data);
                     } catch (e) {
                       logger.e(e);

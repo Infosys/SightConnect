@@ -11,21 +11,23 @@ import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var dioProvider = Provider(
-  (ref) {
-    final dio = Dio(BaseOptions(baseUrl: AppEnv.baseUrl));
-    dio.interceptors.addAll([
-      DioCertificateInterceptor(dio),
-      DioTokenInterceptor(ref, dio),
-    ]);
-    return dio;
-  },
-);
 var keycloakDioProvider = Provider(
   (ref) {
     return Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
     );
+  },
+);
+
+var dioProvider = Provider(
+  (ref) {
+    final dio = Dio(BaseOptions(baseUrl: AppEnv.baseUrl));
+    // ..httpClientAdapter = IOHttpClientAdapter();
+
+    dio.interceptors.addAll([
+      DioTokenInterceptor(ref, dio),
+    ]);
+    return dio;
   },
 );
 
@@ -116,37 +118,5 @@ class DioTokenInterceptor extends Interceptor {
 
       super.onError(err, handler);
     }
-  }
-}
-
-class DioCertificateInterceptor extends Interceptor {
-  Dio dio;
-  DioCertificateInterceptor(this.dio);
-  @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    logger.i("DioCertificateInterceptor onRequest");
-    SecurityContext context = SecurityContext();
-    var serverCertificate = await rootBundle.load('assets/server.pem');
-    context.setTrustedCertificatesBytes(serverCertificate.buffer.asUint8List());
-    dio.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        HttpClient client = HttpClient(context: context);
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) => true;
-
-        return client;
-      },
-    );
-    handler.next(options);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401) {
-      // performLogout();
-      super.onError(err, handler);
-    }
-    handler.next(err);
   }
 }
