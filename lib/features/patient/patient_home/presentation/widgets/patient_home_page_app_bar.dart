@@ -1,10 +1,13 @@
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +33,22 @@ class PatientHomePageAppBar extends StatelessWidget
       backgroundColor: Colors.white.withAlpha(350),
       title: Row(
         children: [
-          SvgPicture.asset(AppIcon.logo),
+          Consumer(
+            builder: (context, ref, child) {
+              final model = ref.watch(dioProvider);
+              return InkWell(
+                  onTap: () async {
+                    try {
+                      logger.i("Dio Interceptor onERROR");
+                      final res = await model.get("https://pub.dev/");
+                      logger.i(res.data);
+                    } catch (e) {
+                      logger.e(e);
+                    }
+                  },
+                  child: SvgPicture.asset(AppIcon.logo));
+            },
+          ),
           const SizedBox(width: AppSize.kmwidth),
           const Text(AppText.appName),
         ],

@@ -7,7 +7,6 @@ import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart'
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
@@ -81,10 +80,16 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
       body: Stack(
         children: [
           InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: Uri.parse(
-                  "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
+            initialSettings: InAppWebViewSettings(
+              mediaPlaybackRequiresUserGesture: false,
+              useHybridComposition: true,
+              allowsInlineMediaPlayback: true,
+              allowFileAccess: true,
+              allowUniversalAccessFromFileURLs: true,
             ),
+            initialUrlRequest: URLRequest(
+                url: WebUri.uri(Uri.parse(
+                    "https://eyecare4all-dev.infosysapps.com/patient-registration/"))),
             onLoadStart: (controller, url) {
               setState(() {
                 _isLoading = true;
@@ -95,16 +100,10 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                 _isLoading = false;
               });
             },
-            onLoadError: (controller, url, code, message) async {
-              logger.e("onLoadError: $message");
-            },
-            onLoadHttpError: (controller, url, code, message) {
-              logger.e("onLoadHttpError: $message");
-            },
             onConsoleMessage: (controller, consoleMessage) {
               logger.d("Console: ${consoleMessage.message}");
             },
-            androidShouldInterceptRequest: (controller, request) async {
+            shouldInterceptRequest: (controller, request) async {
               logger.d("androidShouldInterceptRequest: ${request.url}");
               final hash = request.url.fragment.trim();
               final host = request.url.host.trim();
@@ -131,24 +130,11 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                 return NavigationActionPolicy.ALLOW;
               }
             },
-            initialOptions: InAppWebViewGroupOptions(
-              crossPlatform: InAppWebViewOptions(
-                mediaPlaybackRequiresUserGesture: false,
-              ),
-              ios: IOSInAppWebViewOptions(
-                useOnNavigationResponse: true,
-                allowsInlineMediaPlayback: true,
-              ),
-              android: AndroidInAppWebViewOptions(
-                useHybridComposition: true,
-                useShouldInterceptRequest: true,
-              ),
-            ),
-            androidOnPermissionRequest: (controller, origin, resources) async {
-              return PermissionRequestResponse(
-                resources: resources,
-                action: PermissionRequestResponseAction.GRANT,
-              );
+            onPermissionRequest: (controller, request) {
+              return Future.value(PermissionResponse(
+                action: PermissionResponseAction.GRANT,
+                resources: request.resources,
+              ));
             },
             initialUserScripts: UnmodifiableListView<UserScript>(
               [

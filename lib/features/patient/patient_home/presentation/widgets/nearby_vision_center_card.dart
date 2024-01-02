@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +11,6 @@ class NearbyVisionCentersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d(data.toJson());
-
     String getLocation(FacilityAddressModel address) {
       String location = "";
       if (address.addressLine1 != null) {

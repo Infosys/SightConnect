@@ -27,6 +27,11 @@ class UnknownFailure extends Failure {
       : super(errorMessage: errorMessage);
 }
 
+class NotFoundFailure extends Failure {
+  NotFoundFailure({required String errorMessage})
+      : super(errorMessage: errorMessage);
+}
+
 class TriageFailure extends Failure {
   TriageFailure(
       {required String errorMessage, required TriagePostModel triageResponse})

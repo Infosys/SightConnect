@@ -15,6 +15,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 
+var updatequestionnaireIndexProvider =
+    StateProvider.autoDispose<int>((ref) => 1);
+
 class UpdateTriageQuestionnairePage extends HookConsumerWidget {
   const UpdateTriageQuestionnairePage({
     required this.reportId,

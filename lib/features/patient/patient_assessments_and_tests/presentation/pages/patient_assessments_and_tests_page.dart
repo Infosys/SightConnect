@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assements_cards.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -122,7 +123,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                                               ),
                                         const SizedBox(width: 8),
                                         Text(
-                                          person.name,
+                                          person.name.capitalize(),
                                           style: applyRobotoFont(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,

@@ -57,7 +57,7 @@ class ReportPageHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  triageReportAndAssementPage.patientName,
+                  triageReportAndAssementPage.patientName.capitalize(),
                   style: applyFiraSansFont(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,

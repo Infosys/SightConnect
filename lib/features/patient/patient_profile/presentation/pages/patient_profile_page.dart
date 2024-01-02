@@ -38,14 +38,17 @@ class PatientProfilePage extends ConsumerWidget {
             IconButton(
               onPressed: () {
                 final navigator = Navigator.of(context);
-                navigator.push<bool?>(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientRegistrationMiniappPage(
-                      actionType: MiniAppActionType.UPDATE,
-                      displayName: "Update Profile",
-                    ),
-                  ),
-                );
+                navigator
+                    .push<bool?>(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const PatientRegistrationMiniappPage(
+                          actionType: MiniAppActionType.UPDATE,
+                          displayName: "Update Profile",
+                        ),
+                      ),
+                    )
+                    .then((value) => ref.invalidate(getPatientProfileProvider));
               },
               icon: const Icon(
                 Icons.edit_outlined,
@@ -138,7 +141,7 @@ class PatientProfilePage extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "Street",
+                      keyText: "Line",
                       valueText: PatientHelper.street(
                         patient.profile?.patient?.address,
                       ),
