@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";
@@ -39,195 +40,198 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
             Navigator.of(context).pop();
           }
         },
-        child: Scaffold(
-          key: scaffoldKey,
-          drawer: const TriageStepsDrawer(),
-          appBar: !ref.watch(globalProvider).isTriageMode()
-              ? CustomAppbar(
-                  leadingIcon: IconButton(
-                    splashRadius: 20,
-                    onPressed: () {
-                      if (ref.read(globalProvider).isTriageMode()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => TriageExitAlertBox(
-                            content: AppLocalizations.of(context)!
-                                .visualAcuityExitDialog,
-                          ),
-                        );
-                      } else {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    icon: const Icon(CupertinoIcons.back),
-                  ),
-                  titleSpacing: 0,
-                  centerTitle: false,
-                  title: Text(
-                    AppLocalizations.of(context)!.visualAcuityTitle,
-                  ),
-                )
-              : CustomAppbar(
-                  leadingWidth: 60,
-                  titleSpacing: 0.0,
-                  centerTitle: false,
-                  leadingIcon: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                      child: Image.asset(
-                        AppIcon.hamburgerIcon,
+        child: TraceableWidget(
+          actionName: 'VisualAcuity Test Video Instructions Page',
+          child: Scaffold(
+            key: scaffoldKey,
+            drawer: const TriageStepsDrawer(),
+            appBar: !ref.watch(globalProvider).isTriageMode()
+                ? CustomAppbar(
+                    leadingIcon: IconButton(
+                      splashRadius: 20,
+                      onPressed: () {
+                        if (ref.read(globalProvider).isTriageMode()) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => TriageExitAlertBox(
+                              content: AppLocalizations.of(context)!
+                                  .visualAcuityExitDialog,
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      icon: const Icon(CupertinoIcons.back),
+                    ),
+                    titleSpacing: 0,
+                    centerTitle: false,
+                    title: Text(
+                      AppLocalizations.of(context)!.visualAcuityTitle,
+                    ),
+                  )
+                : CustomAppbar(
+                    leadingWidth: 60,
+                    titleSpacing: 0.0,
+                    centerTitle: false,
+                    leadingIcon: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: () {
+                        scaffoldKey.currentState!.openDrawer();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        child: Image.asset(
+                          AppIcon.hamburgerIcon,
+                        ),
                       ),
                     ),
-                  ),
-                  title: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(width: AppSize.kmwidth),
-                      Text(
-                        AppLocalizations.of(context)!.stepNumber('2', '3'),
-                        style: applyRobotoFont(
-                          color: AppColor.primary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                    title: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(width: AppSize.kmwidth),
+                        Text(
+                          AppLocalizations.of(context)!.stepNumber('2', '3'),
+                          style: applyRobotoFont(
+                            color: AppColor.primary,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: AppSize.kswidth),
-                      Text(
-                        AppLocalizations.of(context)!.visualAcuityTitle,
-                        style: applyFiraSansFont(
-                          color: AppColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                        const SizedBox(width: AppSize.kswidth),
+                        Text(
+                          AppLocalizations.of(context)!.visualAcuityTitle,
+                          style: applyFiraSansFont(
+                            color: AppColor.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-          // bottomNavigationBar: Padding(
-          //   padding: EdgeInsets.symmetric(
-          //     horizontal: AppSize.width(context) * 0.1,
-          //     vertical: AppSize.height(context) * 0.02,
-          //   ),
-          //   child: ElevatedButton(
-          //     onPressed: () async {
-          //       final status = await showDialog(
-          //         barrierDismissible: false,
-          //         context: context,
-          //         builder: (context) {
-          //           return VisualAcuityDialog.showEyeInstructionDialog(
-          //               context, Eye.right);
-          //         },
-          //       );
-          //       if (status == true) {
-          //         return;
-          //       }
-          //       if (context.mounted) {
-          //         Navigator.of(context).push(
-          //           MaterialPageRoute(
-          //             builder: (context) => VisualAcuityInitiatePage(),
-          //           ),
-          //         );
-          //       }
-          //     },
-          //     child: Text(
-          //       AppLocalizations.of(context)!.startButton,
-          //     ),
-          //   ),
-          // ),
-          body: Padding(
-            padding: Responsive.isMobile(context)
-                ? const EdgeInsets.all(AppSize.kmpadding)
-                : const EdgeInsets.all(AppSize.kmpadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.visualAcuityDescription,
-                  softWrap: true,
-                  style: applyRobotoFont(
-                    fontSize: 14,
+            // bottomNavigationBar: Padding(
+            //   padding: EdgeInsets.symmetric(
+            //     horizontal: AppSize.width(context) * 0.1,
+            //     vertical: AppSize.height(context) * 0.02,
+            //   ),
+            //   child: ElevatedButton(
+            //     onPressed: () async {
+            //       final status = await showDialog(
+            //         barrierDismissible: false,
+            //         context: context,
+            //         builder: (context) {
+            //           return VisualAcuityDialog.showEyeInstructionDialog(
+            //               context, Eye.right);
+            //         },
+            //       );
+            //       if (status == true) {
+            //         return;
+            //       }
+            //       if (context.mounted) {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (context) => VisualAcuityInitiatePage(),
+            //           ),
+            //         );
+            //       }
+            //     },
+            //     child: Text(
+            //       AppLocalizations.of(context)!.startButton,
+            //     ),
+            //   ),
+            // ),
+            body: Padding(
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(AppSize.kmpadding)
+                  : const EdgeInsets.all(AppSize.kmpadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.visualAcuityDescription,
+                    softWrap: true,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppSize.kmheight),
-                const Expanded(child: VisualAcuityInstructionPage())
-                // Text(
-                //   AppLocalizations.of(context)!.visualAcuityHowToPerform,
-                //   style: applyRobotoFont(
-                //       fontSize: 18, fontWeight: FontWeight.w600),
-                // ),
-                // const SizedBox(height: AppSize.kmheight),
-                // Container(
-                //   height: 200,
-                //   width: AppSize.width(context) * 0.9,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(AppSize.klradius),
-                //     boxShadow: applyLightShadow(),
-                //     color: AppColor.black,
-                //   ),
-                //   child: Center(
-                //     child: SvgPicture.asset(
-                //       AppImages.tumblingTestPlay,
-                //       height: 40,
-                //       width: 40,
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: AppSize.kmheight),
-                // const Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 12.0),
-                //   child: Divider(),
-                // ),
-                // const SizedBox(height: AppSize.kmheight),
-                // InkWell(
-                //   onTap: () {
-                //     Navigator.of(context).push(
-                //       MaterialPageRoute(
-                //         builder: (context) =>
-                //             const VisualAcuityInstructionPage(),
-                //         fullscreenDialog: true,
-                //       ),
-                //     );
-                //   },
-                //   child: Container(
-                //     padding: const EdgeInsets.symmetric(
-                //       horizontal: 14,
-                //       vertical: 8,
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColor.white,
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: AppColor.primary.withOpacity(0.1),
-                //           blurRadius: 10,
-                //         ),
-                //       ],
-                //     ),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.center,
-                //       children: [
-                //         const Icon(Icons.vibration, color: AppColor.blue),
-                //         const SizedBox(width: AppSize.kswidth),
-                //         Text(
-                //           AppLocalizations.of(context)!
-                //               .visualAcuityViewStepsToPerform,
-                //           style: applyRobotoFont(
-                //             fontSize: 14,
-                //             color: AppColor.blue,
-                //             fontWeight: FontWeight.w500,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-              ],
+                  const SizedBox(height: AppSize.kmheight),
+                  const Expanded(child: VisualAcuityInstructionPage())
+                  // Text(
+                  //   AppLocalizations.of(context)!.visualAcuityHowToPerform,
+                  //   style: applyRobotoFont(
+                  //       fontSize: 18, fontWeight: FontWeight.w600),
+                  // ),
+                  // const SizedBox(height: AppSize.kmheight),
+                  // Container(
+                  //   height: 200,
+                  //   width: AppSize.width(context) * 0.9,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(AppSize.klradius),
+                  //     boxShadow: applyLightShadow(),
+                  //     color: AppColor.black,
+                  //   ),
+                  //   child: Center(
+                  //     child: SvgPicture.asset(
+                  //       AppImages.tumblingTestPlay,
+                  //       height: 40,
+                  //       width: 40,
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: AppSize.kmheight),
+                  // const Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  //   child: Divider(),
+                  // ),
+                  // const SizedBox(height: AppSize.kmheight),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(
+                  //         builder: (context) =>
+                  //             const VisualAcuityInstructionPage(),
+                  //         fullscreenDialog: true,
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: 14,
+                  //       vertical: 8,
+                  //     ),
+                  //     decoration: BoxDecoration(
+                  //       color: AppColor.white,
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: AppColor.primary.withOpacity(0.1),
+                  //           blurRadius: 10,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         const Icon(Icons.vibration, color: AppColor.blue),
+                  //         const SizedBox(width: AppSize.kswidth),
+                  //         Text(
+                  //           AppLocalizations.of(context)!
+                  //               .visualAcuityViewStepsToPerform,
+                  //           style: applyRobotoFont(
+                  //             fontSize: 14,
+                  //             color: AppColor.blue,
+                  //             fontWeight: FontWeight.w500,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
           ),
         ));

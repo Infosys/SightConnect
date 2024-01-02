@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 import '../providers/triage_member_provider.dart';
 import '../widget/change_member_tiles.dart';
 
@@ -13,66 +14,69 @@ class TriageMemberSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text('Eye Assessment'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              'assets/images/eye_assessment.svg',
-              width: AppSize.width(context) * 0.4,
-              height: AppSize.height(context) * 0.19,
-              fit: BoxFit.fill,
-            ),
-            SizedBox(
-              height: AppSize.height(context) * 0.02,
-            ),
-            Text(
-              'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
-              style: applyRobotoFont(fontSize: 14),
-              softWrap: true,
-            ),
-            const SizedBox(height: AppSize.ksheight),
-            const Divider(thickness: 2),
-            Row(
-              children: [
-                Text(
-                  'Change Member',
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+    return TraceableWidget(
+      actionName: 'TriageMember Selection Page',
+      child: Scaffold(
+        appBar: const CustomAppbar(
+          title: Text('Eye Assessment'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                'assets/images/eye_assessment.svg',
+                width: AppSize.width(context) * 0.4,
+                height: AppSize.height(context) * 0.19,
+                fit: BoxFit.fill,
+              ),
+              SizedBox(
+                height: AppSize.height(context) * 0.02,
+              ),
+              Text(
+                'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
+                style: applyRobotoFont(fontSize: 14),
+                softWrap: true,
+              ),
+              const SizedBox(height: AppSize.ksheight),
+              const Divider(thickness: 2),
+              Row(
+                children: [
+                  Text(
+                    'Change Member',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const Spacer(),
-              ],
-            ),
-            const SizedBox(height: AppSize.ksheight),
-            const ChangeMemberTiles(),
-            const SizedBox(height: AppSize.ksheight),
-            Consumer(
-              builder: (context, ref, child) {
-                final model = ref.watch(triageMemberProvider);
-                return SizedBox(
-                  width: AppSize.width(context) * 0.8,
-                  child: ElevatedButton(
-                    onPressed: model.testPatientId == null
-                        ? null
-                        : () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const TriagePage(),
-                              ),
-                            );
-                          },
-                    child: const Text('Proceed'),
-                  ),
-                );
-              },
-            ),
-          ],
+                  const Spacer(),
+                ],
+              ),
+              const SizedBox(height: AppSize.ksheight),
+              const ChangeMemberTiles(),
+              const SizedBox(height: AppSize.ksheight),
+              Consumer(
+                builder: (context, ref, child) {
+                  final model = ref.watch(triageMemberProvider);
+                  return SizedBox(
+                    width: AppSize.width(context) * 0.8,
+                    child: ElevatedButton(
+                      onPressed: model.testPatientId == null
+                          ? null
+                          : () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const TriagePage(),
+                                ),
+                              );
+                            },
+                      child: const Text('Proceed'),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

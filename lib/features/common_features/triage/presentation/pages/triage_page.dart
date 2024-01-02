@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
 import '../../../visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 
@@ -32,6 +33,26 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         );
       }
     });
+    MatomoTracker.instance.trackEvent(
+      eventInfo: EventInfo(
+        category: 'Triage',
+        action: 'Triage Entered',
+        name: 'Triage Entered',
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+        MatomoTracker.instance.trackEvent(
+          eventInfo: EventInfo(
+            category: 'Triage',
+            action: 'Triage Exited',
+            name: 'Triage Exited',
+          ),
+        );
+
+    super.dispose();
   }
 
   @override
