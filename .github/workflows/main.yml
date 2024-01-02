@@ -31,17 +31,10 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
 
       - name: Build Android APK
-        run: flutter build apk --release
+        run: flutter build apk --release --build-number ${{ github.run_number }}
 
       - name: Build APPBUNDLE
-        run: flutter build appbundle --release
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: apk-output
-          path: ./build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 10
+        run: flutter build appbundle --release --build-number ${{ github.run_number }}
 
       - name: Upload AAB
         uses: actions/upload-artifact@v2
