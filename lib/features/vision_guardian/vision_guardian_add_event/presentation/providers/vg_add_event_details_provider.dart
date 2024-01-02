@@ -33,6 +33,7 @@ var getPatientTriageReportsProvider =
         (ref) async {
   var eventId = int.parse(ref.watch(addEventDetailsProvider).eventIdValue);
   print(eventId);
+  
   return await ref
       .watch(vgAddEventRepository)
       .getTriageReport(campaignEventId: eventId, performerId: [11067400874]);
@@ -110,7 +111,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       notifyListeners();
       var actors = {
         "role": "MEDICAL_DOCTOR",
-        "identifier": " ",
+        "identifier": "11067400874",
         "isOwner": true
       };
       print(_startDate.text);

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var teamListProvider = FutureProvider.autoDispose<dynamic>((ref) async {
   ref.watch(visionGuadianAddMemberProvider).add;
-  var eventId = ref.watch(addEventDetailsProvider).eventId;
+  var eventId = ref.read(addEventDetailsProvider).eventId;
   return await ref
       .watch(vgAddEventRemoteSource)
       .getTeammates(eventId: eventId, actorIdentifier: "11067400874");

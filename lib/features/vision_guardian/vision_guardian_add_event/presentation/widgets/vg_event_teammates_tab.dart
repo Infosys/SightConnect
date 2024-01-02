@@ -86,9 +86,9 @@ class EventTeammatesTab extends HookConsumerWidget {
                                     ref
                                         .read(visionGuadianAddMemberProvider)
                                         .addMemberData();
-                                    ref
+                                   /*  ref
                                         .read(visionGuadianAddMemberProvider)
-                                        .setAdd();
+                                        .setAdd(); */
                                     addMember.value = false;
                                   },
                                   child: const Icon(

@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,6 +16,16 @@ class EventPatientsTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(getPatientTriageReportsProvider).when(
       data: (triageReportDetails) {
+        if (triageReportDetails.length == 0) {
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              VisionGuardianEmptyResultCard(
+                type: "Patient",
+              ),
+            ],
+          );
+        }
         print(triageReportDetails);
         return ListView.separated(
           shrinkWrap: true,
@@ -100,7 +111,8 @@ class EventPatientsTab extends ConsumerWidget {
                                 ),
                                 const Spacer(),
                                 Text(
-                                   DateTime.parse(data.encounterStartDate!).toString(),
+                                  DateTime.parse(data.encounterStartDate!)
+                                      .toString(),
                                   style: applyRobotoFont(
                                     fontSize: 12,
                                     color: AppColor.grey,
@@ -160,8 +172,14 @@ class EventPatientsTab extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        print(error);
-        return Text(error.toString());
+        return const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            VisionGuardianEmptyResultCard(
+              type: "Patient",
+            ),
+          ],
+        );
       },
       loading: () {
         return const Center(
