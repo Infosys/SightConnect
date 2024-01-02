@@ -12,15 +12,32 @@ import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
-class PatientDashboardPage extends ConsumerWidget {
+class PatientDashboardPage extends ConsumerStatefulWidget {
   static const routeName = '/patient-dashboard';
   const PatientDashboardPage({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PatientDashboardPage> createState() =>
+      _PatientDashboardPageState();
+}
+
+class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
+  final Content _content = Content(name: 'Dashboard Page View');
+
+  @override
+  void initState() {
+    MatomoTracker.instance.trackContentImpression(
+      content: _content,
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen(getPatientProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.i("Logged out from PatientDashboardPage ");
@@ -76,6 +93,13 @@ class PatientDashboardPage extends ConsumerWidget {
                         backgroundColor: Colors.transparent,
                         context: context,
                         builder: (context) {
+                          MatomoTracker.instance.trackEvent(
+                            eventInfo: EventInfo(
+                              category: 'Main',
+                              action: 'Click',
+                              name: 'Patient services page click',
+                            ),
+                          );
                           return const PatientServicesPage();
                         },
                       );
@@ -83,8 +107,16 @@ class PatientDashboardPage extends ConsumerWidget {
                     case 2:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const TriageMemberSelectionPage(),
+                          builder: (context) {
+                            MatomoTracker.instance.trackEvent(
+                              eventInfo: EventInfo(
+                                category: 'Main',
+                                action: 'Click',
+                                name: 'Triage member selection page click',
+                              ),
+                            );
+                            return const TriageMemberSelectionPage();
+                          },
                         ),
                       );
 
@@ -92,21 +124,48 @@ class PatientDashboardPage extends ConsumerWidget {
                     case 3:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const PatientNotificationPage(),
+                          builder: (context) {
+                            MatomoTracker.instance.trackEvent(
+                              eventInfo: EventInfo(
+                                category: 'Main',
+                                action: 'Click',
+                                name: 'Patient Notification Page Click',
+                              ),
+                            );
+                            return const PatientNotificationPage();
+                          },
                         ),
                       );
                       break;
                     case 4:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const AppDrawer(),
+                          builder: (context) {
+                            MatomoTracker.instance.trackEvent(
+                              eventInfo: EventInfo(
+                                category: 'Main',
+                                action: 'Click',
+                                name: 'App Drawer Click',
+                              ),
+                            );
+                            return const AppDrawer();
+                          },
                         ),
                       );
                       break;
                     default:
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const AppDrawer(),
+                          builder: (context) {
+                            MatomoTracker.instance.trackEvent(
+                              eventInfo: EventInfo(
+                                category: 'Main',
+                                action: 'Click',
+                                name: 'App Drawer Click',
+                              ),
+                            );
+                            return const AppDrawer();
+                          },
                         ),
                       );
                   }
