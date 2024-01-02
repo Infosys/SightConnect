@@ -150,7 +150,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   double _calculateScore(double value) {
-    logger.i("Tumbling Test Value: $value");
+    logger.d("Tumbling Test Value: $value");
     if (value >= 1) {
       return 3.0;
     } else if (value >= 0.5) {
@@ -167,19 +167,19 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(
-        id:0,
+        id: 0,
         identifier: 50000001,
         value: _leftEyeSight.toString(),
         score: leftEyeUrgency,
       ),
       PostTriageObservationsModel(
-        id:0,
+        id: 0,
         identifier: 50000002,
         value: _rightEyeSight.toString(),
         score: rightEyeUrgency,
       ),
       PostTriageObservationsModel(
-        id:0,
+        id: 0,
         identifier: 50000003,
         value: _bothEyeSight.toString(),
         score: bothEyeUrgency,

@@ -263,8 +263,8 @@ class VisualAcuityTestProvider with ChangeNotifier {
     return _dataSource.lookUpLogMarTable(log);
   }
 
-  double _calculateScore(double value) {  
-    logger.i("Tumbling Test Value: $value");
+  double _calculateScore(double value) {
+    logger.d("Tumbling Test Value: $value");
     if (value >= 1) {
       return 5.0;
     } else if (value >= 0.5) {

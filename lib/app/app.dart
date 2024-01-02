@@ -42,7 +42,7 @@ class MyApp extends ConsumerWidget {
 
     return ref.watch(isJailBrokenProvider).maybeWhen(
       data: (data) {
-        logger.i("isJailBrokenProvider: $data");
+        logger.d("isJailBrokenProvider: $data");
         if (data) {
           return const SecurePage();
         }
@@ -91,7 +91,7 @@ class MyApp extends ConsumerWidget {
         );
       },
       orElse: () {
-        logger.i("isJailBrokenProvider: orElse");
+        logger.d("isJailBrokenProvider: orElse");
         return const SecurePage();
       },
     );

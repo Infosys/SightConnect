@@ -42,18 +42,18 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         final role = PersistentAuthStateService.authState.activeRole;
 
         if (role != null) {
-          logger.i("with role: $role");
+          logger.d("with role: $role");
           _profileVerification(roleMapper(role)!);
         } else {
           final selectedProfile = await showProfileSelectionDialog(navigator);
-          logger.i("Selected Role: $selectedProfile");
+          logger.d("Selected Role: $selectedProfile");
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
-            logger.i("Active Role: $role");
+            logger.d("Active Role: $role");
             _profileVerification(selectedProfile);
           } else {
-            logger.i("Role Not Found");
+            logger.d("Role Not Found");
             await _invalidateAndLogout("Role not found. Please login again.");
           }
         }
@@ -65,7 +65,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     final navigator = Navigator.of(context);
     final userExist =
         await ref.read(initializationProvider).checkUserAlreadyExist(role);
-    logger.i("User Exist: $userExist");
+    logger.d("User Exist: $userExist");
     if (userExist) {
       _handleExistingUser(navigator, role);
     } else {

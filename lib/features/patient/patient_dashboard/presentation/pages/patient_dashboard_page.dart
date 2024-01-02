@@ -40,7 +40,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   Widget build(BuildContext context) {
     ref.listen(getPatientProfileProvider, (previous, next) {
       if (next.hasError) {
-        logger.i("Logged out from PatientDashboardPage ");
+        logger.d("Logged out from PatientDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
           Fluttertoast.showToast(msg: "You have been logged out");
           Navigator.pushNamedAndRemoveUntil(

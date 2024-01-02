@@ -21,7 +21,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(getVTProfileProvider, (previous, next) {
       if (next.hasError) {
-        logger.i("Logged out from VisionTechnicianDashboardPage ");
+        logger.d("Logged out from VisionTechnicianDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
           Fluttertoast.showToast(msg: "You have been logged out");
           Navigator.pushNamedAndRemoveUntil(

@@ -20,7 +20,7 @@ class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logger.i("Login Page: build");
+    logger.d("Login Page: build");
     var mobileController = useTextEditingController();
     var focusNode = useFocusNode();
     var formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
@@ -192,8 +192,8 @@ class LoginPage extends HookConsumerWidget {
                               } catch (e) {
                                 scaffold.showSnackBar(
                                   const SnackBar(
-                                    content:
-                                        Text('Unable to send OTP to this number'),
+                                    content: Text(
+                                        'Unable to send OTP to this number'),
                                   ),
                                 );
                               }
@@ -236,7 +236,7 @@ class LoginPage extends HookConsumerWidget {
                   focusedBorderColor: AppColor.blue,
                   showFieldAsBox: true,
                   onCodeChanged: (String code) {
-                    logger.i(code);
+                    logger.d(code);
                   },
                   onSubmit: (String verificationCode) {
                     otp.value = verificationCode;
