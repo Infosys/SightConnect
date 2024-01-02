@@ -72,10 +72,12 @@ class PatientAuthenticationRepositoryImpl
     } on DioException catch (e) {
       if ("error.No Patient Found" == e.response!.data["message"]) {
         return Left(
-            NotFoundFailure(errorMessage: "${e.response!.data["message"]}"));
+          NotFoundFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
       } else {
         return Left(
-            ServerFailure(errorMessage: "${e.response!.data["message"]}"));
+          ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
       }
     } catch (e) {
       return Left(

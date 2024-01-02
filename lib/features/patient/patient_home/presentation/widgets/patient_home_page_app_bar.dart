@@ -33,22 +33,7 @@ class PatientHomePageAppBar extends StatelessWidget
       backgroundColor: Colors.white.withAlpha(350),
       title: Row(
         children: [
-          Consumer(
-            builder: (context, ref, child) {
-              final model = ref.watch(dioProvider);
-              return InkWell(
-                  onTap: () async {
-                    try {
-                      logger.i("Dio Interceptor onERROR");
-                      final res = await model.get("https://flutter.dev/");
-                      logger.i(res.data);
-                    } catch (e) {
-                      logger.e(e);
-                    }
-                  },
-                  child: SvgPicture.asset(AppIcon.logo));
-            },
-          ),
+          SvgPicture.asset(AppIcon.logo),
           const SizedBox(width: AppSize.kmwidth),
           const Text(AppText.appName),
         ],

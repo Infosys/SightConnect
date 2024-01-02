@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:eye_care_for_all/app_environment.dart';
@@ -22,10 +21,28 @@ var keycloakDioProvider = Provider(
 var dioProvider = Provider(
   (ref) {
     final dio = Dio(BaseOptions(baseUrl: AppEnv.baseUrl));
-    // ..httpClientAdapter = IOHttpClientAdapter();
 
     dio.interceptors.addAll([
       DioTokenInterceptor(ref, dio),
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          var serverCertificate = await rootBundle.load('assets/server.pem');
+          dio.httpClientAdapter = IOHttpClientAdapter(
+            createHttpClient: () {
+              SecurityContext context = SecurityContext();
+              context.setTrustedCertificatesBytes(
+                  serverCertificate.buffer.asUint8List());
+              HttpClient client = HttpClient(context: context);
+
+              return client;
+            },
+          );
+          handler.next(options);
+        },
+        onError: (DioException e, handler) {
+          handler.next(e);
+        },
+      )
     ]);
     return dio;
   },

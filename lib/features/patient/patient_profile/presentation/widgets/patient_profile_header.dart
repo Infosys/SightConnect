@@ -164,6 +164,8 @@ class ProfileHeader extends StatelessWidget {
                             child: Text(
                               patient.profile?.patient?.email ?? "",
                               softWrap: true,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: applyRobotoFont(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,

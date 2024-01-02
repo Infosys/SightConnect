@@ -177,7 +177,7 @@ class MyConnectionsList extends ConsumerWidget {
                       children: [
                         InkWell(
                           customBorder: const CircleBorder(),
-                          onTap: () {
+                          onTap: () async {
                             try {
                               Navigator.push(
                                 context,

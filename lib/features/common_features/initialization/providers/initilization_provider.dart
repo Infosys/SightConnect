@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
@@ -26,7 +27,10 @@ class InitializationProvider extends ChangeNotifier {
           .read(vtAuthenticationRepositoryProvider)
           .getVtProfile(phone);
       return response.fold((failure) {
-        return false;
+        if (failure is NotFoundFailure) {
+          return false;
+        }
+        throw failure;
       }, (result) async {
         await PersistentAuthStateService.authState.saveUserProfileId(
           result.id.toString(),
@@ -40,7 +44,10 @@ class InitializationProvider extends ChangeNotifier {
 
       return response.fold((failure) {
         logger.e("Patient Profile Not Found: $failure");
-        return false;
+        if (failure is NotFoundFailure) {
+          return false;
+        }
+        throw failure;
       }, (result) async {
         await PersistentAuthStateService.authState.saveUserProfileId(
           result.profile!.patient!.patientId.toString(),
@@ -48,8 +55,7 @@ class InitializationProvider extends ChangeNotifier {
         return true;
       });
     } else {
-      /// TODO: Add other roles
-      return false;
+      throw ServerFailure(errorMessage: "Invalid Role");
     }
   }
 

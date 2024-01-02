@@ -63,13 +63,19 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _profileVerification(Role role) async {
     final navigator = Navigator.of(context);
-    final userExist =
-        await ref.read(initializationProvider).checkUserAlreadyExist(role);
-    logger.d("User Exist: $userExist");
-    if (userExist) {
-      _handleExistingUser(navigator, role);
-    } else {
-      _handleNewUser(navigator, role);
+    try {
+      final userExist =
+          await ref.read(initializationProvider).checkUserAlreadyExist(role);
+      logger.d("User Exist: $userExist");
+      if (userExist) {
+        _handleExistingUser(navigator, role);
+      } else {
+        _handleNewUser(navigator, role);
+      }
+    } catch (e) {
+      logger.e("checkUserAlreadyExist: $e");
+      // In case of any other error, logout the user
+      await _invalidateAndLogout("Something went wrong. Please login again.");
     }
   }
 
@@ -91,6 +97,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
+    // check consent again
     await navigateBasedOnRole(navigator, role);
   }
 
@@ -108,6 +115,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       // api failed or manual back press
       await _showRegistrationDialog(role);
     } else {
+      // patient register successfully
       await _profileVerification(role);
     }
   }

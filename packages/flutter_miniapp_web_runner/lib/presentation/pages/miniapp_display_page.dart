@@ -112,7 +112,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
                   request.headers!["Authorization"] = "Bearer ${widget.token}";
                 }
                 if (hash == "failure") {
-                  Navigator.of(context).pop(true);
+                  // Navigator.of(context).pop(true);
                   Future.value(WebResourceResponse(data: Uint8List(0)));
                 } else if (hash == "success") {
                   Navigator.of(context).pop(false);
