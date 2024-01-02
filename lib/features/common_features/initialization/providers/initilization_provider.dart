@@ -27,14 +27,16 @@ class InitializationProvider extends ChangeNotifier {
           .read(vtAuthenticationRepositoryProvider)
           .getVtProfile(phone);
       return response.fold((failure) {
-        // if (failure is NotFoundFailure) {
-        //   return false;
-        // }
-        // throw failure;
-        return false;
+        throw failure;
       }, (result) async {
+        if (result.isEmpty) {
+          // if result is empty then user is not found
+          return false;
+        }
+
+        final profile = result.first;
         await PersistentAuthStateService.authState.saveUserProfileId(
-          result.id.toString(),
+          profile.id.toString(),
         );
         return true;
       });

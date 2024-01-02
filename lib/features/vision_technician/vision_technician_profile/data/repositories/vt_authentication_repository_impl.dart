@@ -21,26 +21,22 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
   VtAutheticationRepositoryImpl(this._dio);
 
   @override
-  Future<Either<Failure, VtProfileModel>> getVtProfile(String mobile) async {
+  Future<Either<Failure, List<VtProfileModel>>> getVtProfile(
+      String mobile) async {
     if (mobile.startsWith("+91")) {
       mobile = mobile.substring(3);
     }
     final endpoint =
         "/services/orchestration/api/practitioners/filter?officialMobile=$mobile";
     try {
-      final response = await _dio.get(endpoint);
+      final response = await _dio.get<List>(endpoint);
 
-      return Right(VtProfileModel.fromJson(response.data!.first));
+      return Right(
+          response.data!.map((e) => VtProfileModel.fromJson(e)).toList());
     } on DioException catch (e) {
-      if ("error.No Patient Found" == e.response!.data["message"]) {
-        return Left(
-          NotFoundFailure(errorMessage: "${e.response!.data["message"]}"),
-        );
-      } else {
-        return Left(
-          ServerFailure(errorMessage: "${e.response!.data["message"]}"),
-        );
-      }
+      return Left(
+        ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+      );
     } catch (e) {
       return Left(ServerFailure(errorMessage: e.toString()));
     }
