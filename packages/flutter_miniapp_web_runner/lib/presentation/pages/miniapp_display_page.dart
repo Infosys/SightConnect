@@ -7,6 +7,7 @@ import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart'
 import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../domain/model/miniapp.dart';
 
 class MiniAppDisplayPage extends StatefulHookConsumerWidget {
@@ -39,7 +40,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        logger.d("TOKEN : ${widget.token}");
+        logger.f("TOKEN : ${widget.token}");
       },
     );
   }
@@ -229,7 +230,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
 //     WidgetsBinding.instance.addPostFrameCallback(
 //       (_) async {
 //         _loadMiniAppFuture = _startServerAndLoadMiniApp();
-//         logger.d("TOKEN : ${widget.token}");
+//         logger.f("TOKEN : ${widget.token}");
 //       },
 //     );
 //   }

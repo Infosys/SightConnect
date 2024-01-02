@@ -13,7 +13,7 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-  AppEnv.setupEnv(Env.DEV);
+  AppEnv.setupEnv(Env.PROD);
   //   ByteData data =
   //     await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   // SecurityContext.defaultContext
