@@ -32,10 +32,15 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
 
       return Right(VtProfileModel.fromJson(response.data!.first));
     } on DioException catch (e) {
-      DioErrorHandler.handleDioError(e);
-      return Left(
-        ServerFailure(errorMessage: e.response?.data["message"] ?? e.message),
-      );
+      if ("error.No Patient Found" == e.response!.data["message"]) {
+        return Left(
+          NotFoundFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
+      } else {
+        return Left(
+          ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
+      }
     } catch (e) {
       return Left(ServerFailure(errorMessage: e.toString()));
     }

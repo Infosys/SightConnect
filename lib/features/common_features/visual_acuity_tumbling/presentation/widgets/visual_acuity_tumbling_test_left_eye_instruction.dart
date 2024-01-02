@@ -6,81 +6,85 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
 class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
   const VisualAcuityTumblingLeftEyeInstruction({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbar(
-        title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              context.loc!.visualAcuityRightEyeHeader,
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-              softWrap: true,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            Text(
-              AppLocalizations.of(context)!.visualAcuityRightEyeInstructions,
-              style: applyRobotoFont(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-              softWrap: true,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight + 2,
-            ),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColor.primary.withOpacity(0.12),
-                      offset: const Offset(0, 2),
-                      blurRadius: 20,
-                      spreadRadius: 20,
-                    ),
-                  ],
+    return TraceableWidget(
+      actionName: 'VisualAcuity Tumbling LeftEye Instruction Page',
+      child: Scaffold(
+        appBar: CustomAppbar(
+          title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                context.loc!.visualAcuityRightEyeHeader,
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
-                height: AppSize.height(context) * 0.5,
-                width: AppSize.width(context) * 0.7,
-                child: Image.asset(
-                  "assets/images/Test1RightEye.png",
-                ),
+                softWrap: true,
               ),
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const VisualAcuityInitiatePage(),
-                        ),
-                      );
-                    },
-                    child: Text(context.loc!.continueButton),
+              const SizedBox(
+                height: AppSize.kmheight,
+              ),
+              Text(
+                AppLocalizations.of(context)!.visualAcuityRightEyeInstructions,
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                softWrap: true,
+              ),
+              const SizedBox(
+                height: AppSize.kmheight + 2,
+              ),
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColor.primary.withOpacity(0.12),
+                        offset: const Offset(0, 2),
+                        blurRadius: 20,
+                        spreadRadius: 20,
+                      ),
+                    ],
+                  ),
+                  height: AppSize.height(context) * 0.5,
+                  width: AppSize.width(context) * 0.7,
+                  child: Image.asset(
+                    "assets/images/Test1RightEye.png",
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const VisualAcuityInitiatePage(),
+                          ),
+                        );
+                      },
+                      child: Text(context.loc!.continueButton),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

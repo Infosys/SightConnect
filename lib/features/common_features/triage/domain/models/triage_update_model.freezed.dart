@@ -26,6 +26,7 @@ mixin _$TriageUpdateModel {
   List<Performer>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get issued => throw _privateConstructorUsedError;
   Source? get source => throw _privateConstructorUsedError;
   String? get sourceVersion => throw _privateConstructorUsedError;
@@ -59,7 +60,7 @@ abstract class $TriageUpdateModelCopyWith<$Res> {
       List<Performer>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      DateTime? issued,
+      @TimestampConverter() DateTime? issued,
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
@@ -179,7 +180,7 @@ abstract class _$$_TriageUpdateModelCopyWith<$Res>
       List<Performer>? performer,
       int? assessmentCode,
       String? assessmentVersion,
-      DateTime? issued,
+      @TimestampConverter() DateTime? issued,
       Source? source,
       String? sourceVersion,
       List<IncompleteTestModel>? incompleteSection,
@@ -292,7 +293,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
       final List<Performer>? performer,
       this.assessmentCode,
       this.assessmentVersion,
-      this.issued,
+      @TimestampConverter() this.issued,
       this.source,
       this.sourceVersion,
       final List<IncompleteTestModel>? incompleteSection,
@@ -332,6 +333,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   @override
   final String? assessmentVersion;
   @override
+  @TimestampConverter()
   final DateTime? issued;
   @override
   final Source? source;
@@ -474,7 +476,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
           final List<Performer>? performer,
           final int? assessmentCode,
           final String? assessmentVersion,
-          final DateTime? issued,
+          @TimestampConverter() final DateTime? issued,
           final Source? source,
           final String? sourceVersion,
           final List<IncompleteTestModel>? incompleteSection,
@@ -501,6 +503,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   @override
   String? get assessmentVersion;
   @override
+  @TimestampConverter()
   DateTime? get issued;
   @override
   Source? get source;

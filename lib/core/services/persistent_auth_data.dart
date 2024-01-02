@@ -34,7 +34,7 @@ class PersistentAuthData {
     final rolesJson = await _storage.read(key: _rolesKey);
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
     activeRole = await _storage.read(key: _activeRoleKey);
-    logger.i({
+    logger.d({
       'accessTokenData': accessToken,
       'refreshTokenData': refreshToken,
       'roles': roles,

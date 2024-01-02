@@ -60,7 +60,7 @@ class VisualAcuityDialog {
                             .state = true;
                         ref.read(triageStepperProvider).goToNextStep();
                         if (ref.read(globalProvider).isTriageMode()) {
-                          logger.f("Triage Mode");
+                          logger.d("Triage Mode");
                           await ref
                               .read(tumblingTestProvider)
                               .saveVisionAcuityResponseToDB();
@@ -74,7 +74,7 @@ class VisualAcuityDialog {
                         } else if (ref
                             .read(globalProvider)
                             .isStandaloneMode()) {
-                          logger.f("Standalone Mode");
+                          logger.d("Standalone Mode");
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
@@ -82,7 +82,7 @@ class VisualAcuityDialog {
                             ),
                           );
                         } else {
-                          logger.f("Update Mode");
+                          logger.d("Update Mode");
                           ref
                               .watch(tumblingTestProvider)
                               .updateVisualAcuityTumblingResponse();

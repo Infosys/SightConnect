@@ -15,6 +15,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 
+var updatequestionnaireIndexProvider =
+    StateProvider.autoDispose<int>((ref) => 1);
+
 class UpdateTriageQuestionnairePage extends HookConsumerWidget {
   const UpdateTriageQuestionnairePage({
     required this.reportId,
@@ -119,7 +122,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                           TextButton(
                                             onPressed: () {
                                               pageController.animateToPage(
-                                                1,
+                                                index + 1,
                                                 duration: const Duration(
                                                     milliseconds: 500),
                                                 curve: Curves.easeIn,
@@ -137,28 +140,37 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                               if (index == 0) {
                                                 Navigator.of(context).pop();
                                               } else {
-
-                                                int groupSectionCount=0;
-                                          while(index< model.questionnaireSections.length && (groupSectionCount ==0 || model.questionnaireSections[index].type!=QuestionnaireType.Group)){
-
-                                            index++;
-                                            groupSectionCount++;
-                                          }
-                                          if(index==model.questionnaireSections.length){
-                                            model.saveQuestionaireResponse();
-                                             await updateTriage(context, ref);
-                                          }
-                                          else{
-                                            
-                                            
-                                            index--; 
-                                                pageController.animateToPage(
-                                                  index + 1,
-                                                  duration: const Duration(
-                                                      milliseconds: 500),
-                                                  curve: Curves.easeIn,
-                                                );
-                                              }
+                                                int groupSectionCount = 0;
+                                                while (index <
+                                                        model
+                                                            .questionnaireSections
+                                                            .length &&
+                                                    (groupSectionCount == 0 ||
+                                                        model
+                                                                .questionnaireSections[
+                                                                    index]
+                                                                .type !=
+                                                            QuestionnaireType
+                                                                .Group)) {
+                                                  index++;
+                                                  groupSectionCount++;
+                                                }
+                                                if (index ==
+                                                    model.questionnaireSections
+                                                        .length) {
+                                                  model
+                                                      .saveQuestionaireResponse();
+                                                  await updateTriage(
+                                                      context, ref);
+                                                } else {
+                                                  index--;
+                                                  pageController.animateToPage(
+                                                    index + 1,
+                                                    duration: const Duration(
+                                                        milliseconds: 500),
+                                                    curve: Curves.easeIn,
+                                                  );
+                                                }
                                               }
                                             },
                                             child: Text(
@@ -306,7 +318,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
       finalValueMap[answerString] = valueMap;
     }
 
-    logger.f({"finalvalueMaparra": finalValueMap});
+    logger.d({"finalvalueMaparra": finalValueMap});
     return finalValueMap;
   }
 

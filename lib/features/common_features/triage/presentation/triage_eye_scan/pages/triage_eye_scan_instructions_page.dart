@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 
@@ -31,70 +32,73 @@ class TriageEyeScanInstructions extends ConsumerWidget {
           ),
         );
       },
-      child: Scaffold(
-        key: scaffoldKey,
-        drawer: const TriageStepsDrawer(),
-        appBar: CustomAppbar(
-          leadingWidth: 60,
-          titleSpacing: 0.0,
-          centerTitle: false,
-          leadingIcon: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              scaffoldKey.currentState!.openDrawer();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Image.asset(
-                AppIcon.hamburgerIcon,
+      child: TraceableWidget(
+        actionName: 'TriageEyeScan Instructions Page',
+        child: Scaffold(
+          key: scaffoldKey,
+          drawer: const TriageStepsDrawer(),
+          appBar: CustomAppbar(
+            leadingWidth: 60,
+            titleSpacing: 0.0,
+            centerTitle: false,
+            leadingIcon: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Image.asset(
+                  AppIcon.hamburgerIcon,
+                ),
               ),
             ),
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(width: AppSize.kmwidth),
+                Text(
+                  AppLocalizations.of(context)!.stepNumber('3', '3'),
+                  style: applyRobotoFont(
+                    color: AppColor.primary,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(width: AppSize.kswidth),
+                Text(
+                  AppLocalizations.of(context)!.eyeScanTitle,
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
           ),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(width: AppSize.kmwidth),
-              Text(
-                AppLocalizations.of(context)!.stepNumber('3', '3'),
-                style: applyRobotoFont(
-                  color: AppColor.primary,
-                  fontSize: 14,
+          body: Padding(
+            padding: const EdgeInsets.all(AppSize.kspadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.eyeScanDescription,
+                  softWrap: true,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
                 ),
-              ),
-              const SizedBox(width: AppSize.kswidth),
-              Text(
-                AppLocalizations.of(context)!.eyeScanTitle,
-                style: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                const SizedBox(height: AppSize.ksheight),
+                Text(
+                  AppLocalizations.of(context)!.eyeScanHowToPerform,
+                  style:
+                      applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-              ),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(AppSize.kspadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.eyeScanDescription,
-                softWrap: true,
-                style: applyRobotoFont(
-                  fontSize: 14,
+                const SizedBox(height: AppSize.kmheight),
+                const Expanded(
+                  child: TriageEyeScanCarouselPage(),
                 ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-              Text(
-                AppLocalizations.of(context)!.eyeScanHowToPerform,
-                style:
-                    applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: AppSize.kmheight),
-              const Expanded(
-                child: TriageEyeScanCarouselPage(),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

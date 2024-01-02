@@ -148,7 +148,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
 
   Future<void> saveQuestionaireResponseToDB() async {
     final response = getQuestionaireResponse();
-    logger.f({"Questionnaire Response to local db": response});
+    logger.d({"Questionnaire Response to local db": response});
     await _saveTriageQuestionnaireLocallyUseCase.call(
       SaveTriageQuestionnaireLocallyParam(
         triageQuestionnaireResponse: response,

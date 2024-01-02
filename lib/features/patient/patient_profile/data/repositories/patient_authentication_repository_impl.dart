@@ -70,9 +70,15 @@ class PatientAuthenticationRepositoryImpl
           await _patientAuthRemoteSource.getPatientProfileByPhone(phoneNumber);
       return Right(remoteResponse);
     } on DioException catch (e) {
-      return Left(
-        ServerFailure(errorMessage: "${e.response!.data["message"]}"),
-      );
+      if ("error.No Patient Found" == e.response!.data["message"]) {
+        return Left(
+          NotFoundFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
+      } else {
+        return Left(
+          ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+        );
+      }
     } catch (e) {
       return Left(
         ServerFailure(errorMessage: "$e"),

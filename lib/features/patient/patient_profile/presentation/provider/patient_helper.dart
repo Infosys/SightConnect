@@ -7,7 +7,7 @@ class PatientHelper {
     if (address == null || address.isEmpty) {
       return "-";
     } else {
-      return address.last.pincode ?? "-";
+      return _getPrimaryAddress(address).pincode ?? "-";
     }
   }
 
@@ -15,7 +15,7 @@ class PatientHelper {
     if (address == null || address.isEmpty) {
       return "-";
     } else {
-      return address.first.state ?? "-";
+      return _getPrimaryAddress(address).state ?? "-";
     }
   }
 
@@ -23,7 +23,7 @@ class PatientHelper {
     if (address == null || address.isEmpty) {
       return "-";
     } else {
-      return address.last.district ?? "-";
+      return _getPrimaryAddress(address).district ?? "-";
     }
   }
 
@@ -31,7 +31,7 @@ class PatientHelper {
     if (address == null || address.isEmpty) {
       return "-";
     } else {
-      return address.last.town ?? "-";
+      return _getPrimaryAddress(address).town ?? "-";
     }
   }
 
@@ -39,7 +39,20 @@ class PatientHelper {
     if (address == null || address.isEmpty) {
       return "-";
     } else {
-      return address.last.line ?? "-";
+      return _getPrimaryAddress(address).line == null
+          ? "-"
+          : _getAddressFromLine(_getPrimaryAddress(address).line!);
     }
+  }
+
+  static AddressModel _getPrimaryAddress(List<AddressModel> address) {
+    return address.firstWhere((element) => element.isPrimary!);
+  }
+
+  static String _getAddressFromLine(String line) {
+    List<String> addressList = line.split(";");
+    List<String> filteredAddressList =
+        addressList.where((element) => element.isNotEmpty).toList();
+    return filteredAddressList.join(", ");
   }
 }

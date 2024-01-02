@@ -90,9 +90,6 @@ class SwipeGestureCard extends HookConsumerWidget {
             isUserResponseCorrect: false,
           ),
         );
-
-        print(dragDirection.value);
-        print(angleDegrees);
       },
       child: Container(
         decoration: BoxDecoration(

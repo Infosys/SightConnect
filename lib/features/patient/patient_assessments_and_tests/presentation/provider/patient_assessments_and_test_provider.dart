@@ -20,7 +20,7 @@
 //           ),
 //         );
 //       }
-//       logger.f({"getEyeTriageReportOffline": triageAssessment});
+//       logger.d({"getEyeTriageReportOffline": triageAssessment});
 //       return triageAssessment;
 //     } else {
 //       var response = await ref

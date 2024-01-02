@@ -98,7 +98,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }) async {
     const endpoint = "/services/triage/api/triage-report";
     try {
-      logger.f({"triage model to be saved in remote source": triage.toJson()});
+      logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(
         endpoint,
         data: triage.toJson(),
@@ -139,7 +139,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     try {
       var endpoint = "/services/triage/api/triage-report/$id";
 
-      logger.f({"API updateTriage": endpoint, "data": triage.toJson()});
+      logger.d({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(endpoint, data: triage.toJson());
 
       if (response.statusCode != null) {
@@ -152,6 +152,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
+      logger.d("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }

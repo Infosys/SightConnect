@@ -58,7 +58,7 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
     //     throw ServerException();
     //   }
     // } catch (e) {
-    //   logger.f({"reched here error": e});
+    //   logger.d({"reched here error": e});
     //   throw UnknownException();
     // }
   }

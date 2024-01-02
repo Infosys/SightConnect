@@ -36,7 +36,7 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
 
   void changeIndex(int index) {
     _currentIndex = index;
-    logger.i(_currentIndex);
+    logger.d(_currentIndex);
     notifyListeners();
   }
 }

@@ -21,7 +21,8 @@ class MyConnectionsCard extends HookWidget {
     var isSelected = useState<bool>(false);
     isSelected.value = index == 0 ? true : false;
     return Container(
-      width: 110,
+      width: 80,
+      // color: index.isEven ? Colors.red : Colors.blue,
       padding: const EdgeInsets.only(left: AppSize.kmpadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,

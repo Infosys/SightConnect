@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/main.dart';
 
-enum Env { DEV, STAG, PROD }
+enum Env { DEV, PROD }
 
 class AppEnv {
   AppEnv._();
@@ -8,7 +8,7 @@ class AppEnv {
   static Env env = Env.DEV;
 
   static bool get isDev => env == Env.DEV;
-  static bool get isStag => env == Env.STAG;
+
   static bool get isProd => env == Env.PROD;
 
   static void setupEnv(Env currentEnv) {
@@ -20,7 +20,6 @@ class AppEnv {
     return switch (env) {
       Env.DEV => 'https://eyecare4all-dev.infosysapps.com',
       Env.PROD => 'https://eyecare4all-dev.infosysapps.com',
-      _ => 'https://eyecare4all-dev.infosysapps.com',
     };
   }
 }
