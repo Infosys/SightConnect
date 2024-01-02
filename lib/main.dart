@@ -13,6 +13,7 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+  AppEnv.setupEnv(Env.DEV);
   //   ByteData data =
   //     await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   // SecurityContext.defaultContext
@@ -21,8 +22,8 @@ Future<void> main() async {
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   IOSDeviceInfoService.init();
-  AppEnv.setupEnv(Env.DEV);
-  if (AppEnv.isDev) {
+
+  if (AppEnv.isProd) {
     await AppLogger.init();
   }
   runApp(
