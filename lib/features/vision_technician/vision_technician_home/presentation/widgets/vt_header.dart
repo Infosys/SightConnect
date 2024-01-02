@@ -47,7 +47,7 @@ class VTHeader extends HookWidget {
                   //     logger.d('No location found for the provided address.');
                   //   }
                   // } catch (e) {
-                  //   print('Error: $e');
+
                   // }
                 },
                 child: Text(
