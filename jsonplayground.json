@@ -1,0 +1,343 @@
+ {
+    "id": null,
+    "patientId": 1703,
+    "encounterId": null,
+    "serviceType": "OPTOMETRY",
+    "organizationCode": 0,
+    "performer": [
+      {
+        "id": null,
+        "role": "PATIENT",
+        "identifier": 1703
+      }
+    ],
+    "assessmentCode": 1351,
+    "assessmentVersion": "1.0",
+    "issued": "2024-01-01T16:14:05.052659",
+    "userStartDate": "2024-01-01T16:14:05.052596",
+    "source": "PATIENT_APP",
+    "sourceVersion": "1.0",
+    "incompleteSection": [],
+    "cummulativeScore": 5,
+    "score": [
+      {
+        "QUESTIONNAIRE": 1.0
+      },
+      {
+        "OBSERVATION": 3.0
+      },
+      {
+        "IMAGE": 1.0
+      }
+    ],
+    "imagingSelection": [
+      {
+        "id": null,
+        "identifier": 2001,
+        "endpoint": "/services/filems/api/file/download/1704105845806-dc0b6122-9bc0-4bd0-843b-57d69214ec6a",
+        "baseUrl": "https://eyecare4all-dev.infosysapps.com",
+        "score": 0.0,
+        "fileId": "1704105845806-dc0b6122-9bc0-4bd0-843b-57d69214ec6a"
+      },
+      {
+        "id": null,
+        "identifier": 2151,
+        "endpoint": "/services/filems/api/file/download/1704105836552-2949ba70-9dee-4aa9-a0e1-be9a5b022209",
+        "baseUrl": "https://eyecare4all-dev.infosysapps.com",
+        "score": 0.0,
+        "fileId": "1704105836552-2949ba70-9dee-4aa9-a0e1-be9a5b022209"
+      }
+    ],
+    "observations": [
+      {
+        "id": null,
+        "identifier": 1751,
+        "value": "1.000",
+        "score": 5.0
+      },
+      {
+        "id": null,
+        "identifier": 1752,
+        "value": "1.000",
+        "score": 5.0
+      },
+      {
+        "id": null,
+        "identifier": 1753,
+        "value": "1.000",
+        "score": 5.0
+      }
+    ],
+    "questionResponse": [
+      {
+        "id": null,
+        "linkId": 1451,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 1551,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 1452,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2351,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2501,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2353,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2502,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2355,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2651,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2701,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2652,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2703,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2653,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2705,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2654,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2707,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2655,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2709,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2656,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2711,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 2657,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 2713,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8401,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8451,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8402,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8454,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8403,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8455,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8404,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8456,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8405,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8461,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8701,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8462,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8702,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8951,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8703,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8952,
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "id": null,
+        "linkId": 8704,
+        "score": 0.0,
+        "answers": [
+          {
+            "value": "No",
+            "id": null,
+            "answerCode": 8956,
+            "score": 0.0
+          }
+        ]
+      }
+    ],
+    "subject": null,
+    "observationSeverity": null,
+    "questionResponseSeverity": null,
+    "mediaSeverity": null,
+    "cumulativeSeverity": null,
+    "diagnosticReportDescription": null,
+    "questionResultDescription": null,
+    "observationResultDescription": null,
+    "mediaResultDescription": null,
+    "encounter": null
+  }

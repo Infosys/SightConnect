@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
@@ -8,7 +9,6 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,8 +35,12 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   List<TriageReportBriefEntity> _triageReportList = [];
   bool _isLoading = false;
   bool _isUpdateLoading = false;
-  PatientAssessmentAndTestProviderNew(this._getTriageUseCase, this._patient,
-      this._triageReportRepository, this._patientAssessmentUpdateDataProvider) {
+  PatientAssessmentAndTestProviderNew(
+    this._getTriageUseCase,
+    this._patient,
+    this._triageReportRepository,
+    this._patientAssessmentUpdateDataProvider,
+  ) {
     getPatients();
     getTriageReportList();
   }
@@ -49,6 +53,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   void setPatient(TriageReportUserEntity patient) {
     _selectedPatient = patient;
     notifyListeners();
+
     getTriageReportList();
   }
 
@@ -61,7 +66,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
           image: _patient?.profile?.patient?.profilePhoto ?? "",
           id: _patient!.profile!.patient!.patientId!,
         ));
-        _selectedPatient = users.first;
 
         _patient?.profile?.patient?.relatedParty
             ?.forEach((RelatedPartyModel family) {
@@ -83,6 +87,8 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       });
       return [];
     }
+
+    _selectedPatient ??= users.first;
 
     return users;
   }
@@ -157,7 +163,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      final selectedPatient = _selectedPatient;
+
       final triageAssessmentResponse =
           await _getTriageUseCase.call(GetTriageParam());
       final triageAssessment = triageAssessmentResponse.fold(
@@ -170,11 +176,12 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         },
       );
       final triageReport = await _getTriageReport(reportId);
+
       _isLoading = false;
       notifyListeners();
 
       return AssessmentDetailedReportMapper.toEntity(
-          selectedPatient!, triageReport, triageAssessment);
+          _selectedPatient!, triageReport, triageAssessment);
     } catch (e) {
       logger.e({
         "getTriageDetailedReport": e.toString(),

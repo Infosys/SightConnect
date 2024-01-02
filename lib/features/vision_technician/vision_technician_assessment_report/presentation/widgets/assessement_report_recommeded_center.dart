@@ -86,7 +86,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                       SizedBox(
                         width: AppSize.width(context) / 4,
                         child: Text(
-                          "Monday - Friday, 10:00 AM to 5:00 PM" ?? "",
+                          "Monday - Friday, 10:00 AM to 5:00 PM",
                           // softWrap: true,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,

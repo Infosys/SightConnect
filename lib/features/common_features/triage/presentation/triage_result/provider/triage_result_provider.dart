@@ -1,8 +1,8 @@
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 
 import 'package:flutter/material.dart';
@@ -27,11 +27,10 @@ class TriageResultProvider extends ChangeNotifier {
   ProfileModel get profile => _profile!;
 
   Map<String, dynamic> getOverallTriageResult() {
-    Severity ? os= _model.cumulativeSeverity;
-    double score  =_severityToScore(os);
-    
-      return _setPropertiesByUrgency(score,_model.diagnosticReportDescription);
-   
+    Severity? os = _model.cumulativeSeverity;
+    double score = _severityToScore(os);
+
+    return _setPropertiesByUrgency(score, _model.diagnosticReportDescription);
   }
 
   List<Map<String, dynamic>> getCompleteTriageResultList() {
@@ -44,47 +43,44 @@ class TriageResultProvider extends ChangeNotifier {
 
   Map<String, dynamic> _getQuestionnaireResult() {
     double score = 0.0;
-    Severity? qs= _model.questionResponseSeverity;
-    score=_severityToScore(qs);
-  
+    Severity? qs = _model.questionResponseSeverity;
+    score = _severityToScore(qs);
 
-    return _setPropertiesByUrgency(score.toDouble(),_model.questionResultDescription);
+    return _setPropertiesByUrgency(
+        score.toDouble(), _model.questionResultDescription);
   }
 
-  double _severityToScore(Severity ? sevirity){
-        if(sevirity==null){
-          return 0;
-        }
-        else if ( sevirity== Severity.ABNORMAL){
-          return 3;
-        }
-         else if ( sevirity== Severity.HIGH){
-          return 2;
-        }
-         else {
-          return 1;
-        }
-        
-
+  double _severityToScore(Severity? sevirity) {
+    if (sevirity == null) {
+      return 0;
+    } else if (sevirity == Severity.ABNORMAL) {
+      return 3;
+    } else if (sevirity == Severity.HIGH) {
+      return 2;
+    } else {
+      return 1;
+    }
   }
 
   Map<String, dynamic> _getAcuityResult() {
     double score = 0.0;
-   Severity?  vs=_model.observationSeverity;
-   score=_severityToScore(vs);
+    Severity? vs = _model.observationSeverity;
+    score = _severityToScore(vs);
 
-    return _setPropertiesByUrgency(score,_model.observationResultDescription);
+    return _setPropertiesByUrgency(score, _model.observationResultDescription);
   }
 
   Map<String, dynamic> _getEyeScanResult() {
     double score = 0.0;
-    Severity ? ms=_model.mediaSeverity;
-    score=_severityToScore(ms);
-   
-    return _setPropertiesByUrgency(score.toDouble(),_model.mediaResultDescription);
+    Severity? ms = _model.mediaSeverity;
+    score = _severityToScore(ms);
+
+    return _setPropertiesByUrgency(
+        score.toDouble(), _model.mediaResultDescription);
   }
 
-  Map<String, dynamic> _setPropertiesByUrgency(double urgency,String ?  description) {
+  Map<String, dynamic> _setPropertiesByUrgency(
+      double urgency, String? description) {
     if (urgency == 1) {
       return {
         'urgency': TriageUrgency.ROUTINE,
@@ -94,8 +90,7 @@ class TriageResultProvider extends ChangeNotifier {
         'checkColor': AppColor.green,
         "labelText": "Routine Consult",
         "state": "Completed",
-        "issueInfo":
-            description??"",
+        "issueInfo": description ?? "",
       };
     } else if (urgency == 2) {
       return {
@@ -106,8 +101,7 @@ class TriageResultProvider extends ChangeNotifier {
         'checkColor': AppColor.orange,
         "labelText": "Routine Consult",
         "state": "Completed",
-        "issueInfo":
-           description??"",
+        "issueInfo": description ?? "",
       };
     } else if (urgency == 3) {
       return {
@@ -118,8 +112,7 @@ class TriageResultProvider extends ChangeNotifier {
         'checkColor': AppColor.red,
         "labelText": "Urgent Consult",
         "state": "Completed",
-        "issueInfo":
-            description??"",
+        "issueInfo": description ?? "",
       };
     } else {
       return {
@@ -130,8 +123,7 @@ class TriageResultProvider extends ChangeNotifier {
         'checkColor': AppColor.green,
         "labelText": "Routine Consult",
         "state": "Completed",
-        "issueInfo":
-            description??"",
+        "issueInfo": description ?? "",
       };
     }
   }

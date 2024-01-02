@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -21,11 +21,12 @@ class MyConnectionsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(getPatientProfileProvider).when(
       data: (data) {
-        final familyMembers = data.profile?.patient?.relatedParty;
-        return _content(context, familyMembers);
+        final familyMembers =
+            data.profile?.patient?.relatedParty?.reversed.toList();
+        return _content(context, familyMembers, ref);
       },
       error: (error, stackTrace) {
-        return _content(context, []);
+        return _content(context, [], ref);
       },
       loading: () {
         return const Center(
@@ -38,6 +39,7 @@ class MyConnectionsList extends ConsumerWidget {
   Widget _content(
     BuildContext context,
     List<RelatedPartyModel>? connectionsList,
+    WidgetRef ref,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,7 +105,9 @@ class MyConnectionsList extends ConsumerWidget {
                                       displayName: "Add Member",
                                     ),
                                   ),
-                                );
+                                ).then((value) {
+                                  ref.invalidate(getPatientProfileProvider);
+                                });
                               } catch (e) {
                                 logger.d({"error": e});
                                 Fluttertoast.showToast(
@@ -184,7 +188,9 @@ class MyConnectionsList extends ConsumerWidget {
                                     displayName: "Add Member",
                                   ),
                                 ),
-                              );
+                              ).then((value) {
+                                ref.invalidate(getPatientProfileProvider);
+                              });
                             } catch (e) {
                               logger.d({"error": e});
                               Fluttertoast.showToast(

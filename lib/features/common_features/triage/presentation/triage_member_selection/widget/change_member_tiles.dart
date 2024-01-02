@@ -1,8 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/relationship.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -47,7 +46,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
   Widget _content(
     List<RelatedPartyModel> connectionsList,
-    ExtendedPatientModel currentProfile,
+    PatientModel currentProfile,
     ValueNotifier<int> selectedValue,
     TriageMemberProvider memberProvider,
   ) {
@@ -160,9 +159,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                             height: 5,
                           ),
                           Text(
-                            RelatedPartyModel.relationMapper(
-                              person.relation ?? Relationship.OTHER,
-                            ),
+                            person.relation.toString().split(".").last,
                             style: applyRobotoFont(
                               fontSize: 12,
                               color: AppColor.grey,

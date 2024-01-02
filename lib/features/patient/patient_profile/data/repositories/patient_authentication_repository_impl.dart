@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/identifier_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/domain/repositories/patient_authentication_repository.dart';
 
 import 'package:eye_care_for_all/features/patient/patient_profile/data/source/remote/onboarding_remote_source.dart';

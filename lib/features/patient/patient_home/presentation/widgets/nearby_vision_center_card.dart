@@ -43,13 +43,11 @@ class NearbyVisionCentersCard extends StatelessWidget {
         margin: const EdgeInsets.only(
           left: 16,
         ),
-        padding: const EdgeInsets.only(
-            left: AppSize.kmpadding,
-            top: AppSize.kmpadding,
-            bottom: AppSize.kmpadding,
-            right: AppSize.kmpadding),
+        padding: const EdgeInsets.all(
+          AppSize.kmpadding,
+        ),
         decoration: BoxDecoration(
-          color: AppColor.white,
+          color: AppColor.white.withOpacity(0.7),
           borderRadius: BorderRadius.circular(AppSize.ksradius),
         ),
         child: Column(

@@ -65,6 +65,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     final navigator = Navigator.of(context);
     final userExist =
         await ref.read(initializationProvider).checkUserAlreadyExist(role);
+    logger.i("User Exist: $userExist");
     if (userExist) {
       _handleExistingUser(navigator, role);
     } else {

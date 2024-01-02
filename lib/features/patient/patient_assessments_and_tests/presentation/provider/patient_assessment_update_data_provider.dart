@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 
@@ -31,19 +30,19 @@ class PatientAssessmentUpdateDataProvider {
           title: _getTestText(test),
           subtitle: 'Incomplete',
           subtitlecolor: Colors.red,
-          chipText: _getRequestPriorityText(null),
-          chipColor: _getRequestPriorityColor(null),
+          chipText: _getSeverityText(null),
+          chipColor: Colors.white,
         ));
       } else {
         //check testname and get priority
-        RequestPriority? priority = _getPrirityFromText(test, report);
+        Severity? severity = _getPrirityFromText(test, report);
         list.add(UpdateTriageReportAlertBoxEntity(
           testType: test,
           title: _getTestText(test),
           subtitle: 'Completed',
           subtitlecolor: Colors.green,
-          chipText: _getRequestPriorityText(priority),
-          chipColor: _getRequestPriorityColor(priority),
+          chipText: _getSeverityText(severity),
+          chipColor: _getRequestSeverityColor(severity),
         ));
       }
     }
@@ -64,61 +63,49 @@ class PatientAssessmentUpdateDataProvider {
     return false;
   }
 
-  String _getRequestPriorityText(RequestPriority? priority) {
-    switch (priority) {
-      case RequestPriority.URGENT:
-        return "Urgent Consult";
-      case RequestPriority.ROUTINE:
-        return "Routine Checkup";
-      case RequestPriority.ASAP:
-        return "ASAP";
-      case RequestPriority.STAT:
-        return "STAT";
-      default:
-        return "NA";
-    }
+String _getSeverityText(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
+      return "Urgent Consult";
+    case Severity.LOW:
+      return "Routine Checkup";
+    case Severity.HIGH:
+      return "Early Checkup";
+    default:
+      return "";
   }
+}
 
-  Color _getRequestPriorityColor(RequestPriority? priority) {
-    switch (priority) {
-      case RequestPriority.ASAP:
-        return AppColor.red;
-      case RequestPriority.ROUTINE:
-        return AppColor.green;
-      case RequestPriority.URGENT:
-        return AppColor.orange;
-      case RequestPriority.STAT:
-        return AppColor.red;
-      default:
-        return AppColor.grey;
-    }
+Color  _getRequestSeverityColor(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
+      return AppColor.red;
+    case Severity.HIGH:
+      return AppColor.orange;
+    case Severity.LOW:
+      return AppColor.green;
+   
+    default:
+      return AppColor.grey;
   }
+}
+  
 
-  RequestPriority? _getPrirityFromText(
+
+  Severity? _getPrirityFromText(
       TestType test, TriageDetailedReportModel report) {
     if (test == TestType.QUESTIONNAIRE) {
-      return getPriorityFromSeverity(report.questionResponseSeverity);
+      return report.questionResponseSeverity;
     } else if (test == TestType.OBSERVATION) {
-      return getPriorityFromSeverity(report.observationSeverity);
+      return report.observationSeverity;
     } else if (test == TestType.IMAGE) {
-      return getPriorityFromSeverity(report.mediaSeverity);
+      return report.observationSeverity;
     } else {
       return null;
     }
   }
 
-  RequestPriority? getPriorityFromSeverity(Severity? severity) {
-    switch (severity) {
-      case Severity.ABNORMAL:
-        return RequestPriority.ASAP;
-      case Severity.HIGH:
-        return RequestPriority.URGENT;
-      case Severity.LOW:
-        return RequestPriority.ROUTINE;
-      default:
-        return null;
-    }
-  }
+ 
 
   String _getTestText(TestType test) {
     switch (test) {

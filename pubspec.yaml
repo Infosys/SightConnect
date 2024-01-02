@@ -118,9 +118,9 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/logo/
-    - assets/miniapps/vt_register_patient.zip
+
    
-    - assets/vt_patient.json
+ 
   
   #   - images/a_dot_ham.jpeg
 

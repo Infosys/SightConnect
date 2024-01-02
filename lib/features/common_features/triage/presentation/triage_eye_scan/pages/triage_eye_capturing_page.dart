@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -45,7 +46,7 @@ class _PatientTriageEyeCapturingPageState
   @override
   void initState() {
     super.initState();
-    _initializeCamera(CameraLensDirection.front);
+    _initializeCamera(CameraLensDirection.back);
   }
 
   _initializeCamera(CameraLensDirection lensDirection) async {
@@ -374,18 +375,13 @@ class _PatientTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return;
     }
-    setState(() {
-      isLoading = true;
-    });
-
+    setLoading();
     if (_controller.value.flashMode == FlashMode.off) {
       await _controller.setFlashMode(FlashMode.torch);
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
@@ -411,6 +407,10 @@ class _PatientTriageEyeCapturingPageState
         actions: [
           TextButton(
             onPressed: () async {
+              if (context.mounted) {
+                dispose();
+              }
+
               ref.read(triageStepperProvider).goToNextStep();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -458,13 +458,21 @@ class _PatientTriageEyeCapturingPageState
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => TriageResultPage(
-                        triageResult: failure.data as TriagePostModel,
-                      ),
-                    ),
-                  );
+                  if (context.mounted) {
+                    dispose();
+                  }
+
+                  ref.read(resetProvider).reset();
+                  ref.read(accessibilityProvider).resetBrightness();
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  //this will naviagte to local page for future ref
+                  // Navigator.of(context).pushReplacement(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => TriageResultPage(
+                  //       triageResult: failure.data as TriagePostModel,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: Text(
                   "Ok",

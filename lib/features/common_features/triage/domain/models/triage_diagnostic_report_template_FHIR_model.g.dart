@@ -354,16 +354,14 @@ const _$RangeCategoryEnumMap = {
 };
 
 const _$GenderEnumMap = {
+  Gender.MALE: 'MALE',
+  Gender.FEMALE: 'FEMALE',
   Gender.Male: 'Male',
   Gender.Female: 'Female',
   Gender.Other: 'Other',
-  Gender.MALE: 'MALE',
-  Gender.FEMALE: 'FEMALE',
-  Gender.OTHER: 'OTHER',
   Gender.M: 'M',
   Gender.F: 'F',
-  Gender.O: 'O',
-  Gender.Unknown: 'Unknown',
+  Gender.OTHER: 'OTHER',
 };
 
 _$_RangeModel _$$_RangeModelFromJson(Map<String, dynamic> json) =>

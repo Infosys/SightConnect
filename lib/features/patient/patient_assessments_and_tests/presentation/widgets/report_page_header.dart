@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ReportPageHeader extends StatelessWidget {
@@ -37,18 +38,17 @@ class ReportPageHeader extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: CachedNetworkImage(
-                imageUrl: triageReportAndAssementPage.patientImage!,
-                height: 60,
-                width: 60,
-                fit: BoxFit.cover,
-                imageBuilder: (context, imageProvider) => CircleAvatar(
-                  backgroundImage: imageProvider,
-                ),
-                errorWidget: (context, url, error) => const CircleAvatar(
-                  backgroundColor: AppColor.lightGrey,
-                ),
-              ),
+              child: (triageReportAndAssementPage.patientImage == null ||
+                      triageReportAndAssementPage.patientImage!.isEmpty)
+                  ? AppNameAvatar(
+                      name: triageReportAndAssementPage.patientName,
+                      radius: 30,
+                      fontSize: 18,
+                    )
+                  : AppNetworkImage(
+                      radius: 30,
+                      imageUrl: triageReportAndAssementPage.patientImage!,
+                    ),
             ),
             const SizedBox(
               width: 10,

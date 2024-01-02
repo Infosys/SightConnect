@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/enums/identifier_type.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
 
 abstract class PatientAuthenticationRepository {
   Future<Either<Failure, PatientModel>> onboardPatient(PatientModel patientDTO);

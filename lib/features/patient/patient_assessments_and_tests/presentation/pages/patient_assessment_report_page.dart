@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
@@ -33,10 +33,11 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                 horizontal: AppSize.width(context) * 0.01,
               ),
               decoration: BoxDecoration(
-                  color: getRequestPriorityColor(
-                      assessmentDetailsReport.overallpriority!)),
+                color: _getRequestSeverityColor(
+                    assessmentDetailsReport.cumulativeSeverity),
+              ),
               child: Text(
-                getRequestPriorityText(assessmentDetailsReport.overallpriority),
+                _getSeverityText(assessmentDetailsReport.cumulativeSeverity),
                 style: applyRobotoFont(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -83,31 +84,28 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   }
 }
 
-String getRequestPriorityText(RequestPriority? priority) {
-  switch (priority) {
-    case RequestPriority.URGENT:
+String _getSeverityText(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
       return "Urgent Consult";
-    case RequestPriority.ROUTINE:
+    case Severity.LOW:
       return "Routine Checkup";
-    case RequestPriority.ASAP:
-      return "ASAP";
-    case RequestPriority.STAT:
-      return "STAT";
+    case Severity.HIGH:
+      return "Early Checkup";
     default:
       return "";
   }
 }
 
-Color getRequestPriorityColor(RequestPriority priority) {
-  switch (priority) {
-    case RequestPriority.URGENT:
+Color _getRequestSeverityColor(Severity? severity) {
+  switch (severity) {
+    case Severity.ABNORMAL:
+      return AppColor.red;
+    case Severity.HIGH:
       return AppColor.orange;
-    case RequestPriority.ROUTINE:
+    case Severity.LOW:
       return AppColor.green;
-    case RequestPriority.ASAP:
-      return AppColor.red;
-    case RequestPriority.STAT:
-      return AppColor.red;
+
     default:
       return AppColor.grey;
   }

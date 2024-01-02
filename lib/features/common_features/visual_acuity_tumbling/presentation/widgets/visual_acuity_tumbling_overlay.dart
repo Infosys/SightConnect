@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -20,7 +21,9 @@ enum _TumblingDirection {
   Right,
 }
 
-var visualAcuityTumblingTestDialogProvider = StateProvider<bool>((ref) => true);
+var visualAcuityTumblingTestDialogProvider = StateProvider<bool>((ref) {
+  return SharedPreferenceService.getDontShowVisualAcuityStatus;
+});
 
 class VisualAcuityTumblingOverlay extends ConsumerStatefulWidget {
   const VisualAcuityTumblingOverlay({
@@ -41,7 +44,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
       children: [
         widget.child,
         Visibility(
-          visible: ref.watch(visualAcuityTumblingTestDialogProvider),
+          visible: !ref.watch(visualAcuityTumblingTestDialogProvider),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Align(
@@ -204,8 +207,15 @@ class _TumblingCarousel extends HookConsumerWidget {
                 children: [
                   Checkbox(
                     value: isCheckboxChecked.value,
-                    onChanged: (value) {
+                    onChanged: (value) async {
                       isCheckboxChecked.value = value!;
+                      if (value) {
+                        await SharedPreferenceService
+                            .setDontShowVisualAcuityStatus(true);
+                      } else {
+                        await SharedPreferenceService
+                            .setDontShowVisualAcuityStatus(false);
+                      }
                     },
                   ),
                   Text(
@@ -225,7 +235,7 @@ class _TumblingCarousel extends HookConsumerWidget {
                   onPressed: () {
                     ref
                         .read(visualAcuityTumblingTestDialogProvider.notifier)
-                        .state = false;
+                        .state = true;
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.primary,

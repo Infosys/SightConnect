@@ -3,8 +3,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/request_priority.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/main.dart';
 
 class AssessmentDetailedReportMapper {
@@ -13,8 +11,6 @@ class AssessmentDetailedReportMapper {
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
-    
-
     return TriageReportDetailedEntity(
       triageResultDescription:
           triageDetailedReport.diagnosticReportDescription ?? "NA",
@@ -42,35 +38,12 @@ class AssessmentDetailedReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
-      overallpriority: (triageDetailedReport.carePlans == null ||
-              triageDetailedReport.carePlans!.isEmpty)
-          ? RequestPriority.PENDING
-          : triageDetailedReport.carePlans!.first.activities!.first
-              .plannedActivityReference!.serviceRequest!.priority!,
       cumulativeSeverity: triageDetailedReport.cumulativeSeverity,
       icompleteTests: triageDetailedReport.incompleteTests,
       observationSeverity: triageDetailedReport.observationSeverity,
       mediaSeverity: triageDetailedReport.mediaSeverity,
       questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
-      quessionnairepriority:
-          getSevirityToPriority(triageDetailedReport.questionResponseSeverity),
-      observationpriority:
-          getSevirityToPriority(triageDetailedReport.observationSeverity),
-      mediapriority: getSevirityToPriority(triageDetailedReport.mediaSeverity),
     );
-  }
-
-  static RequestPriority? getSevirityToPriority(Severity? severity) {
-    switch (severity) {
-      case Severity.HIGH:
-        return RequestPriority.URGENT;
-      case Severity.LOW:
-        return RequestPriority.ROUTINE;
-      case Severity.ABNORMAL:
-        return RequestPriority.ASAP;
-      default:
-        return null;
-    }
   }
 
   static List<ImageBriefEntity> _getimageBreifEntity(
@@ -174,17 +147,6 @@ class AssessmentDetailedReportMapper {
         return "Both Eyes";
       default:
         return "";
-    }
-  }
-
-  RequestPriority _getRequestPriorityFromSeverity(Severity severity) {
-    switch (severity) {
-      case Severity.ABNORMAL:
-        return RequestPriority.ASAP;
-      case Severity.HIGH:
-        return RequestPriority.URGENT;
-      case Severity.LOW:
-        return RequestPriority.ROUTINE;
     }
   }
 

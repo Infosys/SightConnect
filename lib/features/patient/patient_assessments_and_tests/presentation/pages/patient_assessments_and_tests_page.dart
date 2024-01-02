@@ -113,11 +113,12 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                                         (person.image.isEmpty)
                                             ? AppNameAvatar(
                                                 name: person.name,
-                                                radius: 12,
+                                                radius: 14,
                                                 fontSize: 10,
                                               )
                                             : AppNetworkImage(
                                                 imageUrl: person.image,
+                                                radius: 14,
                                               ),
                                         const SizedBox(width: 8),
                                         Text(

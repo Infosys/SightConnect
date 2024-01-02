@@ -1,8 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/domain/models/profile_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_helper.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,6 @@ class PatientProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(getPatientProfileProvider).asData?.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -55,9 +55,27 @@ class PatientProfilePage extends ConsumerWidget {
           ],
         ),
       ),
-      body: model == null
-          ? const Center(child: Text("Profile not available"))
-          : _content(context, model),
+      body: ref.watch(getPatientProfileProvider).when(
+        data: (data) {
+          return _content(context, data);
+        },
+        error: (e, s) {
+          return Center(
+            child: Text(
+              "Something went wrong",
+              style: applyFiraSansFont(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          );
+        },
+        loading: () {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 
@@ -68,22 +86,6 @@ class PatientProfilePage extends ConsumerWidget {
       year: patient.profile?.patient?.yearOfBirth ?? "",
     );
 
-    var address = _formateAddress(
-      line: patient.profile?.patient?.address?.isEmpty ?? true
-          ? ""
-          : patient.profile?.patient?.address?.first.line,
-      ward: patient.profile?.patient?.address?.isEmpty ?? true
-          ? ""
-          : patient.profile?.patient?.address?.first.ward,
-      district: patient.profile?.patient?.address?.isEmpty ?? true
-          ? ""
-          : patient.profile?.patient?.address?.isEmpty ?? true
-              ? ""
-              : patient.profile?.patient?.address?.first.district,
-      state: patient.profile?.patient?.address?.isEmpty ?? true
-          ? ""
-          : patient.profile?.patient?.address?.first.state,
-    );
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,29 +94,6 @@ class PatientProfilePage extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: AppSize.ksheight),
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Address",
-                      style: applyFiraSansFont(
-                          fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: AppSize.ksheight,
-                    ),
-                    Text(
-                      address ?? "-",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: AppSize.ksheight),
               ListTile(
                 title: Column(
@@ -137,13 +116,65 @@ class PatientProfilePage extends ConsumerWidget {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              const SizedBox(height: AppSize.ksheight),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
                 child: Divider(
                   thickness: 1,
-                  color: AppColor.black,
+                  color: AppColor.black.withOpacity(0.2),
                 ),
               ),
+              const SizedBox(height: AppSize.ksheight),
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Address",
+                      style: applyFiraSansFont(
+                          fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    PatientInfoCard(
+                      keyText: "Street",
+                      valueText: PatientHelper.street(
+                        patient.profile?.patient?.address,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    PatientInfoCard(
+                      keyText: "City",
+                      valueText: PatientHelper.city(
+                        patient.profile?.patient?.address,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    PatientInfoCard(
+                      keyText: "District",
+                      valueText: PatientHelper.district(
+                        patient.profile?.patient?.address,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    PatientInfoCard(
+                      keyText: "State",
+                      valueText: PatientHelper.state(
+                        patient.profile?.patient?.address,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.ksheight),
+                    PatientInfoCard(
+                      keyText: "Pincode",
+                      valueText: PatientHelper.pincode(
+                        patient.profile?.patient?.address,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSize.ksheight),
               PatientFamilyDetails(
                 relations: patient.profile?.patient?.relatedParty ?? [],
               ),
@@ -163,21 +194,6 @@ class PatientProfilePage extends ConsumerWidget {
       var dob = DateTime.parse("$year-$mon-$day");
       var age = DateTime.now().difference(dob).inDays ~/ 365;
       return "$age years";
-    } catch (e) {
-      return "";
-    }
-  }
-
-  String? _formateAddress({
-    String? line,
-    String? ward,
-    String? district,
-    String? state,
-  }) {
-    try {
-      return [line, ward, district, state]
-          .where((element) => element != null)
-          .join(", ");
     } catch (e) {
       return "";
     }

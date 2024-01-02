@@ -9,6 +9,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.actionType,
     super.key,
     required this.displayName,
+
   });
 
   final MiniAppActionType actionType;
@@ -28,6 +29,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
             action: actionType,
             mobileNumber: validateMobile(),
             parentPatientId: PersistentAuthStateService.authState.userId,
+            role: MiniAppInjectionModelRole.PATIENT
           ),
           miniapp: MiniApp(
             id: "1",

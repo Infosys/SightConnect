@@ -12,10 +12,6 @@ class TriageReportDetailedEntity {
   String? questionResultDescription;
   String? observationResultDescription;
   String? mediaResultDescription;
-  RequestPriority? overallpriority;
-  RequestPriority? quessionnairepriority;
-  RequestPriority? observationpriority;
-  RequestPriority? mediapriority;
   List<IncompleteTestModel>? icompleteTests;
 
    List<QuestionResponseBriefEntity>? questionResponseBriefEntity;
@@ -39,10 +35,6 @@ class TriageReportDetailedEntity {
     required this.patientName,
      this.patientImage,
     required this.assessmentID,
-    this.overallpriority,
-    this.quessionnairepriority,
-    this.observationpriority,
-    this.mediapriority,
      this.reportDate,
     this.icompleteTests,
      this.questionResponseBriefEntity,
