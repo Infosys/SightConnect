@@ -44,7 +44,7 @@
 //         triageResponse.observationSetSectionResponseDTOList ?? [];
 //     _eyeScanData = triageResponse.observationSetSectionResponseDTOList ?? [];
 
-//     logger.f({
+//     logger.d({
 //       "questionnaireData": _questionnaireData,
 //       "visionAcuityData": _visionAcuityData,
 //       "eyeScanData": _eyeScanData,
@@ -60,7 +60,7 @@
 //     _visionAcuityResponse = triageResponse.observations ?? [];
 //     _eyeScanResponse = triageResponse.imagingSelection ?? [];
 
-//     logger.f({
+//     logger.d({
 //       "questionnaireData": _questionnaireData,
 //       "visionAcuityData": _visionAcuityData,
 //       "eyeScanData": _eyeScanData,
@@ -77,7 +77,7 @@
 //       responseKeys.add(element.linkId!);
 //     }
 
-//     logger.f({
+//     logger.d({
 //       "responseKeys": responseKeys,
 //       "questionnaireData": _questionnaireData,
 //     });
@@ -99,7 +99,7 @@
 //       }
 //     }
 
-//     logger.f({
+//     logger.d({
 //       "questionnaireResult": data,
 //     });
 

@@ -325,7 +325,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
   Future<void> saveVisionAcuityResponseToDB() async {
     var res = getVisionAcuityTumblingResponse();
-    logger.f({"saveVisionAcuityResponseToDB ": res});
+    logger.d({"saveVisionAcuityResponseToDB ": res});
     await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
       triageVisualAcuity: getVisionAcuityTumblingResponse(),
     );
@@ -372,7 +372,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
     );
 
     try {
-      logger.f({"observationDTO": triage.observations});
+      logger.d({"observationDTO": triage.observations});
       return triageRepositoryProvider.updateTriageResponse(
           triageResponse: triage);
     } catch (e) {

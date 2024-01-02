@@ -65,7 +65,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 scaffoldKey.value.currentState!.openDrawer();
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Image.asset(
                   AppIcon.hamburgerIcon,
                 ),
@@ -114,7 +115,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       return Center(
                         child: Card(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppSize.kmradius),
+                            borderRadius:
+                                BorderRadius.circular(AppSize.kmradius),
                           ),
                           elevation: AppSize.kselevation,
                           color: Colors.white,
@@ -131,7 +133,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                       children: [
                                         Text(
                                           "Assessment",
-                                          style: applyFiraSansFont(fontSize: 24),
+                                          style:
+                                              applyFiraSansFont(fontSize: 24),
                                         ),
                                         SvgPicture.asset(
                                           AppIcon.question,
@@ -223,8 +226,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       return OptionCard(
                         totalGroupQuestion: model.totalGroupQuestion(),
                         question: question,
-                        index:
-                            ref.watch(questionnaireIndexProvider.notifier).state,
+                        index: ref
+                            .watch(questionnaireIndexProvider.notifier)
+                            .state,
                         total: model.questionnaireSections.length,
                         onNoButtonPressed: () async {
                           ref.read(questionnaireIndexProvider.notifier).state++;
@@ -376,7 +380,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
       finalValueMap[answerString] = valueMap;
     }
 
-    logger.f({"finalvalueMaparra": finalValueMap});
+    logger.d({"finalvalueMaparra": finalValueMap});
     return finalValueMap;
   }
 

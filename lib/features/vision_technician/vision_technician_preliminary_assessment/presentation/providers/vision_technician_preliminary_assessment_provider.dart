@@ -41,11 +41,12 @@ class VtTriageProvider extends ChangeNotifier {
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
 
   VtTriageProvider(
-      this._saveTriageUseCase,
-      this._patientId,
-      this._triageUrgencyRepository,
-      this._triageLocalSource,
-      this._visionTechnicianTriageProvider,);
+    this._saveTriageUseCase,
+    this._patientId,
+    this._triageUrgencyRepository,
+    this._triageLocalSource,
+    this._visionTechnicianTriageProvider,
+  );
 
   Future<Either<Failure, TriagePostModel>> saveTriage() async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -74,7 +75,7 @@ class VtTriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       id: 0,
       patientId: _patientId,
-      encounterId:0,
+      encounterId: 0,
       serviceType: ServiceType.OPTOMETRY,
       organizationCode: assessment.organizationCode,
       performer: [
@@ -103,12 +104,12 @@ class VtTriageProvider extends ChangeNotifier {
       questionResponse: [],
     );
 
-    logger.f({"triage model to be saved": triagePostModel});
+    logger.d({"triage model to be saved": triagePostModel});
 
     Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
       SaveTriageParam(triagePostModel: triagePostModel),
     );
-    logger.f({"triage model saved": response});
+    logger.d({"triage model saved": response});
     return response;
   }
 

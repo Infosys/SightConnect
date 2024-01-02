@@ -132,13 +132,13 @@ class TriageProvider extends ChangeNotifier {
       questionResponse: questionResponse,
     );
 
-    logger.f({"triage model to be saved": triagePostModel});
+    logger.d({"triage model to be saved": triagePostModel});
 
     try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
         SaveTriageParam(triagePostModel: triagePostModel),
       );
-      logger.f({"triage model saved": response});
+      logger.d({"triage model saved": response});
       _triageLocalSource.resetTriage();
 
       return response;

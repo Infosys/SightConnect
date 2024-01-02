@@ -39,7 +39,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        logger.f("TOKEN : ${widget.token}");
+        logger.d("TOKEN : ${widget.token}");
       },
     );
   }
@@ -229,7 +229,7 @@ class _MiniAppDisplayPageState extends ConsumerState<MiniAppDisplayPage>
 //     WidgetsBinding.instance.addPostFrameCallback(
 //       (_) async {
 //         _loadMiniAppFuture = _startServerAndLoadMiniApp();
-//         logger.f("TOKEN : ${widget.token}");
+//         logger.d("TOKEN : ${widget.token}");
 //       },
 //     );
 //   }

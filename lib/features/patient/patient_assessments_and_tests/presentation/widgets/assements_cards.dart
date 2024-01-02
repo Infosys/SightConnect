@@ -58,7 +58,8 @@ class AssessmentCards extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: getRequestSeverityColor(currentData.overallSeverity),
+                        color: getRequestSeverityColor(
+                            currentData.overallSeverity),
                       ),
                       child: Text(
                         getSeverityText(currentData.overallSeverity),
@@ -211,7 +212,7 @@ class AssessmentCards extends ConsumerWidget {
                                               patientAssessmentAndTestProvider)
                                           .updateTriage(
                                               currentData.triageResultID);
-                                      logger.f({result});
+                                      logger.d({result});
                                       if (result.isEmpty) {
                                         Fluttertoast.showToast(
                                             msg: "No data found");
@@ -279,6 +280,7 @@ class AssessmentCards extends ConsumerWidget {
     );
   }
 }
+
 String getSeverityText(Severity? severity) {
   switch (severity) {
     case Severity.ABNORMAL:
@@ -300,14 +302,11 @@ Color getRequestSeverityColor(Severity? severity) {
       return AppColor.orange;
     case Severity.LOW:
       return AppColor.green;
-   
+
     default:
       return Colors.transparent;
   }
 }
-
-
-
 
 class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
   final String title;
