@@ -152,6 +152,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
+      logger.d("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }

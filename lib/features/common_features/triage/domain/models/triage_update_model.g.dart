@@ -16,9 +16,7 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       assessmentCode: json['assessmentCode'] as int?,
       assessmentVersion: json['assessmentVersion'] as String?,
-      issued: json['issued'] == null
-          ? null
-          : DateTime.parse(json['issued'] as String),
+      issued: const TimestampConverter().fromJson(json['issued'] as String?),
       source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
       sourceVersion: json['sourceVersion'] as String?,
       incompleteSection: (json['incompleteSection'] as List<dynamic>?)
@@ -51,7 +49,7 @@ Map<String, dynamic> _$$_TriageUpdateModelToJson(
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,
-      'issued': instance.issued?.toIso8601String(),
+      'issued': const TimestampConverter().toJson(instance.issued),
       'source': _$SourceEnumMap[instance.source],
       'sourceVersion': instance.sourceVersion,
       'incompleteSection':

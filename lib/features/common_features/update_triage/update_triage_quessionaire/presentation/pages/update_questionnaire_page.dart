@@ -122,7 +122,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                           TextButton(
                                             onPressed: () {
                                               pageController.animateToPage(
-                                                1,
+                                                index + 1,
                                                 duration: const Duration(
                                                     milliseconds: 500),
                                                 curve: Curves.easeIn,

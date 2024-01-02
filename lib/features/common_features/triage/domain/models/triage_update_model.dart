@@ -1,10 +1,10 @@
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'triage_update_model.freezed.dart';
 part 'triage_update_model.g.dart';
-
 
 @freezed
 class TriageUpdateModel with _$TriageUpdateModel {
@@ -15,12 +15,12 @@ class TriageUpdateModel with _$TriageUpdateModel {
     List<Performer>? performer,
     int? assessmentCode,
     String? assessmentVersion,
-    DateTime? issued,
+    @TimestampConverter() DateTime? issued,
     Source? source,
     String? sourceVersion,
     List<IncompleteTestModel>? incompleteSection,
     int? cummulativeScore,
-    List<Map<String, int> >? score,
+    List<Map<String, int>>? score,
     List<PatchImagingSelectionModel>? imagingSelection,
     List<PatchObservationsModel>? observations,
     List<PatchQuestionResponseModel>? questionResponse,
@@ -29,7 +29,6 @@ class TriageUpdateModel with _$TriageUpdateModel {
   factory TriageUpdateModel.fromJson(Map<String, dynamic> json) =>
       _$TriageUpdateModelFromJson(json);
 }
-
 
 @freezed
 class PatchQuestionResponseModel with _$PatchQuestionResponseModel {
@@ -43,7 +42,6 @@ class PatchQuestionResponseModel with _$PatchQuestionResponseModel {
 
   factory PatchQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
       _$PatchQuestionResponseModelFromJson(json);
-  
 }
 
 @freezed
@@ -59,7 +57,6 @@ class PatchAnswerModel with _$PatchAnswerModel {
   factory PatchAnswerModel.fromJson(Map<String, dynamic> json) =>
       _$PatchAnswerModelFromJson(json);
 }
-
 
 @freezed
 class Performer with _$Performer {
@@ -82,7 +79,6 @@ class IncompleteTestModel with _$IncompleteTestModel {
       _$IncompleteTestModelFromJson(json);
 }
 
-
 @freezed
 class PatchObservationsModel with _$PatchObservationsModel {
   const factory PatchObservationsModel({
@@ -99,15 +95,14 @@ class PatchObservationsModel with _$PatchObservationsModel {
 
 @freezed
 class PatchImagingSelectionModel with _$PatchImagingSelectionModel {
-  const factory PatchImagingSelectionModel({
-    int? id,
-    int? identifier,
-    Action? action,
-    String? endpoint,
-    String? baseUrl,
-    double? score,
-    String ? fileId
-  }) = _PatchImagingSelectionModel;
+  const factory PatchImagingSelectionModel(
+      {int? id,
+      int? identifier,
+      Action? action,
+      String? endpoint,
+      String? baseUrl,
+      double? score,
+      String? fileId}) = _PatchImagingSelectionModel;
 
   factory PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
       _$PatchImagingSelectionModelFromJson(json);
