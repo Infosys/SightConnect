@@ -18,27 +18,22 @@ abstract class VgAddEventRepository {
     required String actorIdentifier,
   });
 
-    Future getTeammates({
+  Future getTeammates({
     required String eventId,
     required String actorIdentifier,
   });
-    Future deleteTeamMate({
+  Future deleteTeamMate({
     required String eventId,
     required String loginActorIdentifier,
     required String actorIdentifier,
   });
 
-      Future getTriageReport({
-    required Map<String,dynamic> pageable ,
-    required List<String> performerId,
-    required String eventId,
-     required List<String> drStatus,
+  Future getTriageReport({
+    required int campaignEventId,
+    required List<int> performerId,
   });
 
-  
-      Future postTriageReport({
+  Future postTriageReport({
     required String eventId,
   });
-
-  
 }

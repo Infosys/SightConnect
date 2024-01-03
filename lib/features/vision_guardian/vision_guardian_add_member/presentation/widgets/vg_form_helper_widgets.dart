@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Widget customTextField(
   TextEditingController controller,
@@ -253,7 +254,9 @@ Future<String?> selectDate(BuildContext context) async {
     lastDate: DateTime(2100),
   );
   if (picked != null) {
-    return "${picked.year}-${picked.month}-${picked.day}";
+   /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+   return DateFormat('d MMM yyyy').format(picked);
+   
   } else {
     return null;
   }
@@ -265,7 +268,7 @@ Future<String?> selectTime(BuildContext context) async {
     initialTime: TimeOfDay.now(),
   );
   if (picked != null) {
-    return "${picked.hour}:${picked.minute}${picked.period}";
+    return "${picked.hour}:${picked.minute} ${picked.period.name.toUpperCase()}";
   } else {
     return null;
   }

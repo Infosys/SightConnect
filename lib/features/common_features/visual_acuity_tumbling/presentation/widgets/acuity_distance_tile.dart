@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
+/* import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
@@ -64,3 +64,4 @@ class AcuityDistanceTile extends StatelessWidget {
     }
   }
 }
+ */
