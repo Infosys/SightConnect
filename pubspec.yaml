@@ -86,6 +86,7 @@ dependencies:
     path: packages/flutter_miniapp_web_runner/
   superapp_scanner:
     path: packages/superapp_scanner/
+  pinput: ^3.0.1
 
 
 

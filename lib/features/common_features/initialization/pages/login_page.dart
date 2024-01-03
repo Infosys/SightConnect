@@ -10,26 +10,42 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import 'package:pinput/pinput.dart';
 
 class LoginPage extends HookConsumerWidget {
   static const routeName = '/login';
   const LoginPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logger.d("Login Page: build");
     var mobileController = useTextEditingController();
     var focusNode = useFocusNode();
+    final otpFocusNode = useFocusNode();
     var formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
     var showOtp = useState<bool>(false);
-    var clearText = useState<bool>(false);
+
     var otp = useState<String>('');
     var isLoading = useState<bool>(false);
     var otpExpiry = useState<int>(0);
     var otpError = useState<String>("");
+    var pinController = useTextEditingController();
+
+    final defaultPinTheme = PinTheme(
+      width: 52,
+      height: 52,
+      textStyle: applyRobotoFont(
+        fontSize: 20,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: AppColor.primary,
+          width: 0.7,
+        ),
+      ),
+    );
 
     useEffect(() {
       if (otpExpiry.value != 0) {
@@ -45,7 +61,7 @@ class LoginPage extends HookConsumerWidget {
       return null;
     }, [otpExpiry.value]);
     return TraceableWidget(
-      actionName: 'Login Page', // optional
+      actionName: 'Login Page',
       path: '/login',
       child: Scaffold(
         appBar: PreferredSize(
@@ -92,8 +108,9 @@ class LoginPage extends HookConsumerWidget {
                 child: IconButton(
                   onPressed: () {
                     showOtp.value = false;
-                    clearText.value = true;
                     mobileController.clear();
+                    pinController.clear();
+                    otp.value = '';
                   },
                   icon: const Icon(Icons.close),
                 ),
@@ -187,13 +204,12 @@ class LoginPage extends HookConsumerWidget {
 
                                 isLoading.value = false;
                                 showOtp.value = true;
-                                otp.value = '';
-                                clearText.value = false;
                               } catch (e) {
                                 scaffold.showSnackBar(
                                   const SnackBar(
                                     content: Text(
-                                        'Unable to send OTP to this number'),
+                                      'Unable to send OTP to this number',
+                                    ),
                                   ),
                                 );
                               }
@@ -230,17 +246,43 @@ class LoginPage extends HookConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: AppSize.klheight),
-                OtpTextField(
-                  clearText: clearText.value,
-                  numberOfFields: 6,
-                  focusedBorderColor: AppColor.blue,
-                  showFieldAsBox: true,
-                  onCodeChanged: (String code) {
-                    logger.d(code);
+                Pinput(
+                  controller: pinController,
+                  length: 6,
+                  focusNode: otpFocusNode,
+                  androidSmsAutofillMethod:
+                      AndroidSmsAutofillMethod.smsUserConsentApi,
+                  listenForMultipleSmsOnAndroid: true,
+                  separatorBuilder: (index) => const SizedBox(width: 8),
+                  // onClipboardFound: (value) {
+                  //   debugPrint('onClipboardFound: $value');
+                  //   pinController.setText(value);
+                  // },
+                  enabled: true,
+                  showCursor: true,
+                  defaultPinTheme: defaultPinTheme,
+                  keyboardType: const TextInputType.numberWithOptions(),
+                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                  onCompleted: (pin) {
+                    logger.d(pin);
                   },
-                  onSubmit: (String verificationCode) {
-                    otp.value = verificationCode;
+                  onChanged: (value) {
+                    otp.value = value;
                   },
+                  closeKeyboardWhenCompleted: true,
+                  cursor: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 9),
+                        width: 22,
+                        height: 1,
+                      ),
+                    ],
+                  ),
+                  errorPinTheme: defaultPinTheme.copyBorderWith(
+                    border: Border.all(color: Colors.redAccent),
+                  ),
                 ),
                 const SizedBox(height: AppSize.klheight),
                 Row(
