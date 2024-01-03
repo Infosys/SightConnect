@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_icon.dart';
@@ -17,12 +19,12 @@ import '../widgets/vg_event_details_tab.dart';
 import '../widgets/vg_event_patients_tab.dart';
 import '../widgets/vg_event_teammates_tab.dart';
 
-class VisionGuardianEventDetailsPage extends HookWidget {
+class VisionGuardianEventDetailsPage extends HookConsumerWidget {
   VisionGuardianEventDetailsPage({super.key, required this.eventDetails});
 
   VisionGuardianEventModel eventDetails;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     var tabIndex = useState(0);
 
     return Scaffold(
@@ -66,8 +68,11 @@ class VisionGuardianEventDetailsPage extends HookWidget {
         ),
         floatingActionButton: tabIndex.value == 0
             ? InkWell(
-                onTap: () {
-                  Navigator.push(
+                onTap: ()  {
+
+                  ref.read(addEventDetailsProvider).addPatientTriage();
+                
+                 /*  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
@@ -76,7 +81,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                         displayName: "Register Patient",
                       ),
                     ),
-                  );
+                  ); */
                 },
                 child: Container(
                   width: AppSize.width(context) * 0.35,
@@ -151,9 +156,7 @@ class VisionGuardianEventDetailsPage extends HookWidget {
                   child: TabBarView(
                     viewportFraction: 1,
                     children: [
-                      EventPatientsTab(
-                        model: casesCritical,
-                      ),
+                      EventPatientsTab(),
                       EventDetailsTab(eventDetails: eventDetails),
                       const EventTeammatesTab(),
                     ],

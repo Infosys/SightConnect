@@ -140,9 +140,9 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 children: [
                   TopReadingCard(),
                   SizedBox(height: AppSize.klpadding),
-                  AcuityDistanceTile(
+          /*         AcuityDistanceTile(
                     distanceInCms: 40,
-                  ),
+                  ), */
                   Expanded(
                     child: BottomInputTab(
                       tabs: [

@@ -44,8 +44,8 @@ Map<String, dynamic> _$$_VisionGuardianEventModelToJson(
       'maximumAttendeeCapacity': instance.maximumAttendeeCapacity,
       'sponsor': instance.sponsor,
       'eventStatus': instance.eventStatus,
-      'images': instance.images,
-      'addresses': instance.addresses,
+      'images': instance.images?.map((e) => e.toJson()).toList(),
+      'addresses': instance.addresses?.map((e) => e.toJson()).toList(),
     };
 
 _$_VisionGuardianEventImage _$$_VisionGuardianEventImageFromJson(

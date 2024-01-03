@@ -122,7 +122,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // vgEventHeaderChips(isSelected, context, eventStatus),
+                vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
                 const VisionEventListDetails(),
               ],

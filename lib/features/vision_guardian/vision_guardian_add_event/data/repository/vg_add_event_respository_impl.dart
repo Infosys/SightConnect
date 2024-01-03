@@ -54,21 +54,15 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
         actorIdentifier: actorIdentifier);
   }
 
-  @override
-  Future getTriageReport(
-      {required Map<String, dynamic> pageable,
-      required List<String> performerId,
-      required String eventId,
-      required List<String> drStatus}) async {
-    await remoteDataSource.getTriageReport(
-        pageable: pageable,
-        performerId: performerId,
-        eventId: eventId,
-        drStatus: drStatus);
-  }
+
 
   @override
   Future postTriageReport({required String eventId}) async {
     await remoteDataSource.postTriageReport(eventId: eventId);
+  }
+  
+  @override
+  Future getTriageReport({required int campaignEventId, required List<int> performerId}) {
+    return remoteDataSource.getTriageReport(campaignEventId: campaignEventId, performerId: performerId);
   }
 }
