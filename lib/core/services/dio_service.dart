@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/services/interceptors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var keycloakDioProvider = Provider(
+/* var keycloakDioProvider = Provider(
   (ref) {
     final dio = Dio(
       BaseOptions(baseUrl: AppEnv.baseUrl),
@@ -13,16 +13,16 @@ var keycloakDioProvider = Provider(
     );
     return dio;
   },
-);
+); */
 
 var dioProvider = Provider(
   (ref) {
-    final dio = Dio(BaseOptions(baseUrl: AppEnv.baseUrl));
+    return Dio(
+      BaseOptions(baseUrl: AppEnv.baseUrl),
+    );
 
-    dio.interceptors.addAll([
-      DioTokenInterceptor(ref, dio),
-      DioCertificateInterceptor(dio),
-    ]);
-    return dio;
+    // ..interceptors.addAll([
+    //     DioTokenInterceptor(ref),
+    //   ]);
   },
 );

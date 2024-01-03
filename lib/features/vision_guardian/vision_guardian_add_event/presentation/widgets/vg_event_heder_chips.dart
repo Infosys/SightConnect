@@ -1,0 +1,65 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/constants/app_size.dart';
+import '../../../../../shared/theme/text_theme.dart';
+
+Widget vgEventHeaderChips(ValueNotifier<int> isSelected, BuildContext context,
+    List<String> eventStatus) {
+  return Consumer(
+    builder: (context, ref, child) {
+      return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: eventStatus.length,
+        itemBuilder: (BuildContext context, int index) {
+          var data = eventStatus[index];
+      
+          return InkWell(
+            onTap: () {
+              if (isSelected.value == index) {
+                isSelected.value = -1;
+              } else {
+                isSelected.value = index;
+              }
+              ref
+                  .read(addEventDetailsProvider)
+                  .filterListEvents(isSelected.value, data);
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: AppSize.kspadding),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: isSelected.value == index
+                      ? AppColor.blue
+                      : AppColor.grey,
+                ),
+                color: isSelected.value == index
+                    ? const Color(0xFFC9DAFD)
+                    : AppColor.white,
+                borderRadius: BorderRadius.circular(
+                  AppSize.ksradius,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  data,
+                  style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
+}

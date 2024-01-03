@@ -41,6 +41,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
         }
       },
       child: Scaffold(
+        backgroundColor: AppColor.white,
         key: scaffoldKey,
         drawer: const TriageStepsDrawer(),
         appBar: !ref.watch(globalProvider).isTriageMode()
@@ -128,11 +129,10 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
             ignoring: !pointerState,
             child: const Padding(
               padding: EdgeInsets.only(
-                left: AppSize.klpadding,
-                right: AppSize.klpadding,
-                bottom: AppSize.klpadding,
-                top: AppSize.kspadding,
-              ),
+                  // left: AppSize.klpadding,
+                  // right: AppSize.klpadding,
+
+                  ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
