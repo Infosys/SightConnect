@@ -68,17 +68,13 @@ class PatientAuthenticationRepositoryImpl
     try {
       final remoteResponse =
           await _patientAuthRemoteSource.getPatientProfileByPhone(phoneNumber);
-      return Right(remoteResponse);
-    } on DioException catch (e) {
-      if ("error.No Patient Found" == e.response!.data["message"]) {
+
+      if (remoteResponse.isEmpty) {
         return Left(
-          NotFoundFailure(errorMessage: "${e.response!.data["message"]}"),
-        );
-      } else {
-        return Left(
-          ServerFailure(errorMessage: "${e.response!.data["message"]}"),
+          NotFoundFailure(errorMessage: "No Patient Found"),
         );
       }
+      return Right(remoteResponse.first);
     } catch (e) {
       return Left(
         ServerFailure(errorMessage: "$e"),

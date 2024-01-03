@@ -50,6 +50,7 @@ class InitializationProvider extends ChangeNotifier {
         if (failure is NotFoundFailure) {
           return false;
         }
+
         throw failure;
       }, (result) async {
         await PersistentAuthStateService.authState.saveUserProfileId(

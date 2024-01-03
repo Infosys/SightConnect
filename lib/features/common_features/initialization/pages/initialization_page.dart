@@ -74,7 +74,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("checkUserAlreadyExist: $e");
       // In case of any other error, logout the user
-      await _invalidateAndLogout("Something went wrong. Please login again.");
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
