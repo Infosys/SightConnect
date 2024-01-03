@@ -16,7 +16,7 @@ abstract class PatientAuthRemoteSource {
     String? value,
   ]);
   Future<PatientResponseModel> updatePatientProfile(PatientModel patientDTO);
-  Future<PatientResponseModel> getPatientProfileByPhone(
+  Future<List<PatientResponseModel>> getPatientProfileByPhone(
     String phoneNumber,
   );
 }
@@ -81,7 +81,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   }
 
   @override
-  Future<PatientResponseModel> getPatientProfileByPhone(
+  Future<List<PatientResponseModel>> getPatientProfileByPhone(
     String phoneNumber,
   ) async {
     if (phoneNumber.contains("+91")) {
@@ -93,7 +93,9 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     try {
       final response = await _dio.get<List<dynamic>>(endpoint);
 
-      return PatientResponseModel.fromJson(response.data!.first);
+      return response.data!
+          .map((e) => PatientResponseModel.fromJson(e))
+          .toList();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;
