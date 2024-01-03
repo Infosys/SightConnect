@@ -93,10 +93,10 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     }
 
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.ALL.name}";
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.PRIMARY.name}";
 
     try {
-      final response = await _dio.get(endpoint);
+      final response = await _dio.get<List<dynamic>>(endpoint);
       log(response.data.toString());
 
       return response.data!
