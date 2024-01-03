@@ -73,8 +73,9 @@ class PatientAuthenticationRepositoryImpl
         return Left(
           NotFoundFailure(errorMessage: "No Patient Found"),
         );
+      } else {
+        return Right(remoteResponse.first);
       }
-      return Right(remoteResponse.first);
     } catch (e) {
       return Left(
         ServerFailure(errorMessage: "$e"),

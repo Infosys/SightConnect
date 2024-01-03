@@ -37,6 +37,7 @@ class DioTokenInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     logger.d("Dio Interceptor onERROR ${err.response?.statusCode}");
+    logger.d("Dio Interceptor onERROR_URL ${err.response?.realUri.path}");
     if (err.response?.statusCode == 401) {
       final isAccessTokenExpired =
           PersistentAuthStateService.authState.hasAccessTokenExpired();
