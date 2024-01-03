@@ -39,7 +39,7 @@ var dioProvider = Provider(
           );
           handler.next(options);
         },
-        onError: (DioException e, handler) {
+        onError: (DioException e, ErrorInterceptorHandler handler) {
           handler.next(e);
         },
       )

@@ -27,23 +27,21 @@ class _PatientRegistrationMiniappPageState
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      //requestPermission();
+      // requestPermission();
     });
   }
 
   Future<void> requestPermission() async {
     final permissions = [
+      Permission.accessMediaLocation,
       Permission.camera,
-      Permission.storage,
     ];
-    final statuses = await permissions.request();
-    if (statuses[Permission.camera] == PermissionStatus.denied ||
-        statuses[Permission.storage] == PermissionStatus.denied) {
-      // showPermissionDeniedAlert();
-      //ask for permission again
-      await requestPermission();
-    } else {
-      logger.i("Permission granted");
+    for (final permission in permissions) {
+      final status = await permission.request();
+      if (status.isDenied) {
+        showPermissionDeniedAlert();
+        return;
+      }
     }
   }
 
@@ -59,7 +57,7 @@ class _PatientRegistrationMiniappPageState
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
-              await requestPermission();
+              // await requestPermission();
             },
             child: const Text("Allow"),
           ),
@@ -79,10 +77,11 @@ class _PatientRegistrationMiniappPageState
           },
           token: PersistentAuthStateService.authState.accessToken ?? "",
           injectionModel: MiniAppInjectionModel(
-              action: widget.actionType,
-              mobileNumber: validateMobile(),
-              parentPatientId: PersistentAuthStateService.authState.userId,
-              role: MiniAppInjectionModelRole.PATIENT),
+            action: widget.actionType,
+            mobileNumber: validateMobile(),
+            parentPatientId: PersistentAuthStateService.authState.userId,
+            role: MiniAppInjectionModelRole.PATIENT,
+          ),
           miniapp: MiniApp(
             id: "1",
             version: "1",

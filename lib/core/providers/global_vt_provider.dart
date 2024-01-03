@@ -32,7 +32,8 @@ var getVTProfileProvider = FutureProvider.autoDispose((ref) async {
   return response.fold((error) {
     throw error;
   }, (result) {
-    ref.read(globalVTProvider).setUser(result);
-    return result;
+    final profile = result.first;
+    ref.read(globalVTProvider).setUser(profile);
+    return profile;
   });
 });

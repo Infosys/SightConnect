@@ -7,3 +7,4 @@ export 'package:flutter_miniapp_web_runner/data/repositories/miniapp_repository_
 export 'package:flutter_miniapp_web_runner/data/module.dart';
 export 'package:flutter_miniapp_web_runner/domain/repositories/miniapp_repository.dart';
 export 'package:flutter_miniapp_web_runner/domain/model/miniapp.dart';
+export 'package:flutter_inappwebview/flutter_inappwebview.dart';
