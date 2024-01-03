@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/enums/patient_type_enum.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
@@ -97,7 +95,6 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
 
     try {
       final response = await _dio.get<List<dynamic>>(endpoint);
-      log(response.data.toString());
 
       return response.data!
           .map((e) => PatientResponseModel.fromJson(e))

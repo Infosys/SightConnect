@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:eye_care_for_all/core/constants/app_text.dart';

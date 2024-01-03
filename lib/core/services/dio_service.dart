@@ -6,7 +6,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var keycloakDioProvider = Provider(
   (ref) {
     final dio = Dio(
-      BaseOptions(baseUrl: AppEnv.baseUrl),
+      BaseOptions(
+        baseUrl: AppEnv.baseUrl,
+        connectTimeout: const Duration(seconds: 10),
+      ),
     );
     dio.interceptors.addAll(
       [DioCertificateInterceptor(dio)],
@@ -17,7 +20,12 @@ var keycloakDioProvider = Provider(
 
 var dioProvider = Provider(
   (ref) {
-    final dio = Dio(BaseOptions(baseUrl: AppEnv.baseUrl));
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: AppEnv.baseUrl,
+        connectTimeout: const Duration(seconds: 10),
+      ),
+    );
 
     dio.interceptors.addAll([
       DioTokenInterceptor(ref, dio),
