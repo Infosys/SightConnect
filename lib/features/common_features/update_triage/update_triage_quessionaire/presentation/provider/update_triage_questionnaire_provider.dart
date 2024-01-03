@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
@@ -256,5 +257,15 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     final qscore = _triageUrgencyRepository
         .questionnaireUrgency(getQuestionaireResponse());
     return qscore.toInt();
+  }
+
+    int totalGroupQuestion() {
+    int total = 0;
+    for (var element in _questionnaireSections) {
+      if (element.type == QuestionnaireType.Group) {
+        total += 1;
+      }
+    }
+    return total;
   }
 }
