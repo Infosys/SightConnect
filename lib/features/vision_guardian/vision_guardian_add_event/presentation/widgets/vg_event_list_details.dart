@@ -18,31 +18,59 @@ class VisionEventListDetails extends ConsumerWidget {
           child: Text("No Events are Available"),
         );
       }
-      return ListView.separated(
-        shrinkWrap: true,
-        itemCount: eventDetails.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-              onTap: () {
-                ref
-                    .read(addEventDetailsProvider)
-                    .setEventId(eventDetails[index].id.toString());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VisionGuardianEventDetailsPage(
-                        eventDetails: eventDetails[index]),
-                  ),
-                );
-              },
-              child: vgEventDataCards(context, eventDetails[index]));
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            height: AppSize.ksheight,
-          );
-        },
+
+      Widget event(event) {
+        return InkWell(
+            onTap: () {
+              ref.read(addEventDetailsProvider).setEventId(event.id.toString());
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      VisionGuardianEventDetailsPage(eventDetails: event),
+                ),
+              );
+            },
+            child: vgEventDataCards(context, event));
+      }
+
+      List<Widget> events(eventDetails) {
+        print(eventDetails);
+        List<Widget> events = [];
+        for (int i = 0; i < eventDetails.length; i++) {
+          events.add(event(eventDetails[i]));
+        }
+        return events;
+      }
+
+      return Column(
+        children: events(eventDetails),
       );
+      // return ListView.separated(
+      //   shrinkWrap: true,
+      //   itemCount: eventDetails.length,
+      //   itemBuilder: (context, index) {
+      //     return InkWell(
+      //         onTap: () {
+      //           ref
+      //               .read(addEventDetailsProvider)
+      //               .setEventId(eventDetails[index].id.toString());
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //               builder: (context) => VisionGuardianEventDetailsPage(
+      //                   eventDetails: eventDetails[index]),
+      //             ),
+      //           );
+      //         },
+      //         child: vgEventDataCards(context, eventDetails[index]));
+      //   },
+      //   separatorBuilder: (BuildContext context, int index) {
+      //     return const SizedBox(
+      //       height: AppSize.ksheight,
+      //     );
+      //   },
+      // );
     }, loading: () {
       return const Center(
         child: CircularProgressIndicator(),
