@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_logger.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -14,6 +17,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:pinput/pinput.dart';
+import 'package:uuid/uuid.dart';
 
 class LoginPage extends HookConsumerWidget {
   static const routeName = '/login';
@@ -349,6 +353,13 @@ class LoginPage extends HookConsumerWidget {
 
                       await ref.read(initializationProvider).signIn(
                           mobile: mobileController.text, otp: otp.value);
+
+                      // Set visitor user id for matomo analytics
+                      var uuid = const Uuid();
+                      String userId = uuid.v1();
+                      AppLogger.setVisitorUserId(userId);
+                      /////////////////////////////////
+
                       navigator.pushNamedAndRemoveUntil(
                           InitializationPage.routeName, (route) => false);
                     } catch (e) {

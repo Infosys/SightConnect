@@ -8,7 +8,7 @@ var keycloakDioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: AppEnv.baseUrl,
-        connectTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 30),
       ),
     );
     dio.interceptors.addAll(
@@ -23,7 +23,7 @@ var dioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: AppEnv.baseUrl,
-        connectTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 30),
       ),
     );
 

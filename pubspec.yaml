@@ -74,6 +74,7 @@ dependencies:
   data_table_2: ^2.5.9
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
+  crypto: ^3.0.3
 
   
   matomo_tracker: ^4.1.1
