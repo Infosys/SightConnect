@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/models/enums/patient_type_enum.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -88,7 +89,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       phoneNumber = phoneNumber.substring(3);
     }
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=Primary";
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.PRIMARY}";
 
     try {
       final response = await _dio.get<List<dynamic>>(endpoint);
