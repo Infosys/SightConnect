@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -74,7 +76,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("checkUserAlreadyExist: $e");
       // In case of any other error, logout the user
-      await _invalidateAndLogout("Server Error. Please login again.");
+      //await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
@@ -225,6 +227,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
+    log("ACCESS_TOKEN: ${PersistentAuthStateService.authState.accessToken}");
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: Pulsar(

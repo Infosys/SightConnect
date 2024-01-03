@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/enums/patient_type_enum.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var patientAuthRemoteSourceProvider = Provider<PatientAuthRemoteSource>((ref) {
@@ -88,11 +91,13 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     if (phoneNumber.contains("+91")) {
       phoneNumber = phoneNumber.substring(3);
     }
+
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.PRIMARY}";
+        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.ALL.name}";
 
     try {
-      final response = await _dio.get<List<dynamic>>(endpoint);
+      final response = await _dio.get(endpoint);
+      log(response.data.toString());
 
       return response.data!
           .map((e) => PatientResponseModel.fromJson(e))
@@ -101,6 +106,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
       DioErrorHandler.handleDioError(e);
       rethrow;
     } catch (e) {
+      logger.e("HHAHAH: $e");
       rethrow;
     }
   }
