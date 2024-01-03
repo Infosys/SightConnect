@@ -190,8 +190,15 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                         );
                       } else if (question.type == QuestionnaireType.Choice) {
                         return UpdateOptionCard(
+                           totalGroupQuestion: model.totalGroupQuestion(),
+                           total: model.questionnaireSections.length,
+                           index:  ref
+                            .watch(updatequestionnaireIndexProvider.notifier)
+                            .state,
                           question: question,
                           onNoButtonPressed: () {
+                              ref.read(updatequestionnaireIndexProvider.notifier).state++;
+
                             model.addQuestionnaireAnswer(
                               question.id!,
                               "No",
@@ -209,6 +216,8 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                             }
                           },
                           onYesButtonPressed: () async {
+                             ref.read(updatequestionnaireIndexProvider.notifier).state++;
+
                             model.addQuestionnaireAnswer(
                               question.id!,
                               "Yes",
