@@ -20,7 +20,6 @@ import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/models/keycloak.dart';
 
