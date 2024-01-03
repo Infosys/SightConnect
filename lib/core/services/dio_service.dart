@@ -24,6 +24,9 @@ var dioProvider = Provider(
       BaseOptions(
         baseUrl: AppEnv.baseUrl,
         connectTimeout: const Duration(seconds: 30),
+        headers: {
+          "Accept-Language": "en",
+        },
       ),
     );
 
