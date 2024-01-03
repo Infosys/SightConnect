@@ -74,14 +74,14 @@ dependencies:
   data_table_2: ^2.5.9
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
-  crypto: ^3.0.3
+
 
   
   matomo_tracker: ^4.1.1
   equatable: ^2.0.5
   image_picker: ^1.0.5
   location: ^5.0.3
-  flutter_otp_text_field: ^1.1.1
+ 
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
