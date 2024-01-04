@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/p
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
@@ -41,6 +42,7 @@ class MyConnectionsList extends ConsumerWidget {
     List<RelatedPartyModel>? connectionsList,
     WidgetRef ref,
   ) {
+    final loc = context.loc!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -49,7 +51,7 @@ class MyConnectionsList extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
               child: Text(
-                "My Members",
+                loc.myConnectionsTitle,
                 style: applyFiraSansFont(
                   fontSize: 18,
                 ),
@@ -66,7 +68,7 @@ class MyConnectionsList extends ConsumerWidget {
                 );
               },
               child: Text(
-                "See All",
+                loc.seeAllButton,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -100,9 +102,9 @@ class MyConnectionsList extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const PatientRegistrationMiniappPage(
+                                        PatientRegistrationMiniappPage(
                                       actionType: MiniAppActionType.ADD_MEMBER,
-                                      displayName: "Add Member",
+                                      displayName: loc.myConnectionsAddMember,
                                     ),
                                   ),
                                 ).then((value) {
@@ -111,7 +113,7 @@ class MyConnectionsList extends ConsumerWidget {
                               } catch (e) {
                                 logger.d({"error": e});
                                 Fluttertoast.showToast(
-                                  msg: "Service not available",
+                                  msg: loc.myConnectionsServiceNotAvailable,
                                 );
                               }
                             },
@@ -138,7 +140,7 @@ class MyConnectionsList extends ConsumerWidget {
                         ),
                         SizedBox(height: AppSize.height(context) * 0.029),
                         Text(
-                          "Add",
+                          loc.myConnectionsAdd,
                           style: applyFiraSansFont(fontSize: 14),
                         ),
                       ],
@@ -183,9 +185,9 @@ class MyConnectionsList extends ConsumerWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const PatientRegistrationMiniappPage(
+                                      PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.ADD_MEMBER,
-                                    displayName: "Add Member",
+                                    displayName: loc.myConnectionsAddMember,
                                   ),
                                 ),
                               ).then((value) {
@@ -194,7 +196,7 @@ class MyConnectionsList extends ConsumerWidget {
                             } catch (e) {
                               logger.d({"error": e});
                               Fluttertoast.showToast(
-                                msg: "Service not available",
+                                msg: loc.myConnectionsServiceNotAvailable,
                               );
                             }
                           },
@@ -220,7 +222,7 @@ class MyConnectionsList extends ConsumerWidget {
                         ),
                         const SizedBox(height: AppSize.ksheight),
                         Text(
-                          "Add",
+                          loc.myConnectionsAdd,
                           style: applyFiraSansFont(fontSize: 14),
                         ),
                       ],

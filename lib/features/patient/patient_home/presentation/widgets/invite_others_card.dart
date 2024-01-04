@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class InviteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +20,7 @@ class InviteCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
           child: Text(
-            "Invite Others to Join",
+            loc.inviteCardTitle,
             style: applyFiraSansFont(
               fontSize: 18,
             ),
@@ -49,7 +51,7 @@ class InviteCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "As a delighted user, you could invite your family and friends to join and explore the benefits of the ${AppText.appName} app.",
+                  loc.inviteCardDescription(AppText.appName),
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
@@ -59,9 +61,9 @@ class InviteCard extends StatelessWidget {
                 const SizedBox.shrink(),
                 TextButton(
                   onPressed: onPressed,
-                  child: const Text(
-                    "Share Now",
-                    style: TextStyle(
+                  child: Text(
+                    loc.shareNowButton,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),

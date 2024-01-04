@@ -3,10 +3,12 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecentServicesCard extends ConsumerWidget {
   const RecentServicesCard({Key? key, required this.data}) : super(key: key);
@@ -20,7 +22,7 @@ class RecentServicesCard extends ConsumerWidget {
         width: 100,
         child: InkWell(
           onTap: () {
-            if (data["text"] == "Visual Acuity Test") {
+            if (data["id"] == "visual_acuity_test") {
               ref.read(globalProvider).setVAMode = VisionAcuityMode.STANDALONE;
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -28,7 +30,7 @@ class RecentServicesCard extends ConsumerWidget {
                       const VisualAcuityInstructionalVideoPage(),
                 ),
               );
-            } else if (data["text"] == "Eye Assessment") {
+            } else if (data["id"] == "eye_assessment") {
               ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -64,7 +66,7 @@ class RecentServicesCard extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: Text(
-                      data["text"],
+                      _resolveRecentServicesTitle(data["text"], context.loc!),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -83,4 +85,11 @@ class RecentServicesCard extends ConsumerWidget {
       ),
     );
   }
+
+  String _resolveRecentServicesTitle(String key, AppLocalizations loc) =>
+      {
+        "recentServicesEyeAssessment": loc.recentServicesEyeAssessment,
+        "recentServicesVisualAcuityTest": loc.recentServicesVisualAcuityTest
+      }[key] ??
+      "Recent Service";
 }

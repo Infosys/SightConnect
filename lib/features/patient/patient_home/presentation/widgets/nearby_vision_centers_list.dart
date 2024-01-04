@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Container(
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),
@@ -33,7 +35,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
                 child: Text(
-                  "Nearby Vision Centers",
+                  loc.nearbyVisionCentersTitle,
                   style: applyFiraSansFont(
                     fontSize: 18,
                   ),
@@ -61,7 +63,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
                   if (data.isEmpty) {
                     return Center(
                       child: Text(
-                        "No Vision Centers Found",
+                        loc.nearbyVisionCentersNotFound,
                         style: applyFiraSansFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -93,7 +95,7 @@ class NearbyVisionCentersList extends ConsumerWidget {
                         onPressed: () {
                           ref.read(patientHomeProvider).init();
                         },
-                        label: const Text("Try Again"),
+                        label: Text(loc.tryAgainButton),
                         icon: const Icon(Icons.location_on),
                       ),
                     ),

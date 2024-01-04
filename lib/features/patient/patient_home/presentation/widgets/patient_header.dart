@@ -47,6 +47,7 @@ class PatientHeader extends HookWidget {
               ),
               itemBuilder: (context, index, _) {
                 var data = carouselData[index];
+                // var data = getCarouselData(context.loc!)[index];
                 var textColor = index == 0 ? AppColor.black : AppColor.white;
                 var buttonColor =
                     index == 0 ? AppColor.primary : AppColor.white;

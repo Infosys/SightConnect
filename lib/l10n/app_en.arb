@@ -65,6 +65,10 @@
     "yesButton": "Yes",
     "noButton": "No",
 
+    "knowMoreButton": "Know More",
+    "seeAllButton": "See All",
+    "tryAgainButton": "Try Again",
+    "shareNowButton": "Share Now",
     
     "homeCarousal1Title": "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
     "homeCarousal1Description": "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
@@ -73,8 +77,32 @@
     "homeCarousal3Title": "Eye problems. There are many that you can't see",
     "homeCarousal3Description": "But a vision care expert can.\nGet eye problems identified\nand treated in time to avoid\ncomplications later",
 
-    "knowMoreButton": "Know More"
+    
+
+    "myConnectionsTitle": "My Members",
+    "myConnectionsAddMember": "Add Member",
+    "myConnectionsServiceNotAvailable": "Service not available",
+    "myConnectionsAdd": "Add",
 
 
+    "recentServicesTitle": "My Recent Services",
+    "recentServicesEyeAssessment": "Eye Assessment",
+    "recentServicesVisualAcuityTest": "Visual Acuity Test",
+
+    "nearbyVisionCentersTitle": "Nearby Vision Centers",
+    "nearbyVisionCentersNotFound": "No Vision Centers Found",
+
+    "helplineCardTollFreeNumber": "Toll Free Number",
+
+    "inviteCardTitle":"Invite Others to Join",
+    "inviteCardDescription": "As a delighted user, you could invite your family and friends to join and explore the benefits of the {appName} app.",
+    "@inviteCardDescription":{
+        "placeholders": {
+            "appName": {
+                "type": "String"
+            }
+        }
+    }
+    
   }
 
