@@ -66,6 +66,15 @@
     "noButton": "No",
 
     
-    "homeCarousal1Title": ""
+    "homeCarousal1Title": "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
+    "homeCarousal1Description": "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
+    "homeCarousal2Title": "7 eye problems not to miss out!",
+    "homeCarousal2Description": "\n7 eye problems to get tested for: \n \n• Redness of eye\n• Watering of eyes\n• White spots on eyes",
+    "homeCarousal3Title": "Eye problems. There are many that you can't see",
+    "homeCarousal3Description": "But a vision care expert can.\nGet eye problems identified\nand treated in time to avoid\ncomplications later",
+
+    "knowMoreButton": "Know More"
+
+
   }
 

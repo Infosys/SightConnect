@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../data/source/local/fake_data_source.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PatientHeader extends HookWidget {
   const PatientHeader({super.key});
@@ -65,7 +67,9 @@ class PatientHeader extends HookWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            data["title"],
+                            // _resolveCarousalTitle(index, context.loc!),
+                            _resolveCarousalTitleFromMap(
+                                data["title"], context.loc!),
                             style: applyFiraSansFont(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -79,7 +83,9 @@ class PatientHeader extends HookWidget {
                                   : AppSize.width(context) * 0.5,
                             ),
                             child: Text(
-                              data["description"],
+                              // _resolveCarousalDescription(index, context.loc!),
+                              _resolveCarousalDescriptionFromMap(
+                                  data["description"], context.loc!),
                               style: applyRobotoFont(
                                 fontSize: 14,
                                 color: textColor,
@@ -104,7 +110,7 @@ class PatientHeader extends HookWidget {
                               ),
                               onPressed: () {},
                               child: Text(
-                                "Know More",
+                                context.loc!.knowMoreButton,
                                 style: applyRobotoFont(
                                   color: buttonColor,
                                 ),
@@ -140,4 +146,29 @@ class PatientHeader extends HookWidget {
     );
   }
 
+  String _resolveCarousalTitle(int index, AppLocalizations loc) => [
+        loc.homeCarousal1Title,
+        loc.homeCarousal2Title,
+        loc.homeCarousal3Title
+      ][index];
+  String _resolveCarousalDescription(int index, AppLocalizations loc) => [
+        loc.homeCarousal1Description,
+        loc.homeCarousal2Description,
+        loc.homeCarousal3Description
+      ][index];
+
+  String _resolveCarousalTitleFromMap(String key, AppLocalizations loc) =>
+      {
+        "homeCarousal1Title": loc.homeCarousal1Title,
+        "homeCarousal2Title": loc.homeCarousal2Title,
+        "homeCarousal3Title": loc.homeCarousal3Title
+      }[key] ??
+      "Title";
+  String _resolveCarousalDescriptionFromMap(String key, AppLocalizations loc) =>
+      {
+        "homeCarousal1Description": loc.homeCarousal1Description,
+        "homeCarousal2Description": loc.homeCarousal2Description,
+        "homeCarousal3Description": loc.homeCarousal3Description
+      }[key] ??
+      "Description";
 }
