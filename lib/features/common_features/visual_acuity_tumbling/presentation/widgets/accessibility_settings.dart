@@ -221,8 +221,7 @@ class _AutoFontSizeWidget extends HookWidget {
                           value: scaleFactor.value,
                           onChanged: (double s) {
                             scaleFactor.value = s;
-                            ref.read(textScaleFactorProvider.notifier).state =
-                                s;
+                            // TODO: implement global textScaleFactor
                           },
                           divisions: 4,
                           min: 1,

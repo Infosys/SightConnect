@@ -63,14 +63,14 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                   icon: const Icon(CupertinoIcons.back),
                 ),
                 titleSpacing: 0,
-                actions: [
-                  IconButton(
-                    splashRadius: 20,
-                    onPressed: () {
-                      showAccessibilitySettings(context, ref);
-                    },
-                    icon: const Icon(Icons.settings),
-                  ),
+                actions: const [
+                  // IconButton(
+                  //   splashRadius: 20,
+                  //   onPressed: () {
+                  //     showAccessibilitySettings(context, ref);
+                  //   },
+                  //   icon: const Icon(Icons.settings),
+                  // ),
                 ],
                 centerTitle: false,
                 title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
@@ -78,14 +78,14 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
             : CustomAppbar(
                 leadingWidth: 60,
                 titleSpacing: 0.0,
-                actions: [
-                  IconButton(
-                    splashRadius: 20,
-                    onPressed: () {
-                      showAccessibilitySettings(context, ref);
-                    },
-                    icon: const Icon(Icons.settings),
-                  ),
+                actions: const [
+                  // IconButton(
+                  //   splashRadius: 20,
+                  //   onPressed: () {
+                  //     showAccessibilitySettings(context, ref);
+                  //   },
+                  //   icon: const Icon(Icons.settings),
+                  // ),
                 ],
                 centerTitle: false,
                 leadingIcon: InkWell(

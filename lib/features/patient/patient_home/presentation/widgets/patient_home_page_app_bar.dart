@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -123,6 +124,36 @@ class PatientHomePageAppBar extends StatelessWidget
             height: 30,
             width: 30,
           ),
+        ),
+        Consumer(
+          builder: (context, ref, _) {
+            final model = ref.watch(globalTextScaleFactorProvider);
+            return PopupMenuButton(
+              icon: const Icon(
+                Icons.accessibility_new_sharp,
+              ),
+              initialValue: model.scaleAlphabet,
+              onSelected: (value) {
+                model.setTextScaleFactor(value);
+              },
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem(
+                    value: "-A",
+                    child: Text('-A'),
+                  ),
+                  const PopupMenuItem(
+                    value: "A",
+                    child: Text('A'),
+                  ),
+                  const PopupMenuItem(
+                    value: "+A",
+                    child: Text('+A'),
+                  ),
+                ];
+              },
+            );
+          },
         ),
         Consumer(
           builder: (context, ref, child) {
