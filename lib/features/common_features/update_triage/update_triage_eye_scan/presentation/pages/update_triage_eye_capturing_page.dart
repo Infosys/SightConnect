@@ -38,7 +38,8 @@ class _UpdateTriageEyeCapturingPageState
   @override
   void initState() {
     super.initState();
-    _initializeCamera(CameraLensDirection.front);
+    WidgetsBinding.instance.addObserver(this);
+    _initializeCamera(CameraLensDirection.back);
   }
 
   _initializeCamera(CameraLensDirection lensDirection) async {
@@ -76,7 +77,10 @@ class _UpdateTriageEyeCapturingPageState
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _controller.dispose();
+
+    if (_controller.value.isInitialized) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
@@ -198,8 +202,8 @@ class _UpdateTriageEyeCapturingPageState
       } else if (model.currentEye == TriageEyeType.LEFT) {
         model.setLeftEyeImage(image);
 
-        
-        bool resposne = await model.updateEyeScanReport(widget.diagnosticReportId);
+        bool resposne =
+            await model.updateEyeScanReport(widget.diagnosticReportId);
         if (resposne) {
           navigator.pop();
           navigator.pop();

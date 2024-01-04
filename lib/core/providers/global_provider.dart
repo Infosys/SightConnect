@@ -37,7 +37,7 @@ class GlobalTextScaleFactor extends ChangeNotifier {
 
         break;
       case "-A":
-        _textScaleFactor = 0.5;
+        _textScaleFactor = 0.8;
         _scaleAlphabet = "-A";
 
         break;
