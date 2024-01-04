@@ -14,7 +14,7 @@ class RecentServicesCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data = recentService;
+    var data = getRecentServices(context.loc!);
     final loc = context.loc!;
     return SizedBox(
       width: Responsive.isMobile(context)
