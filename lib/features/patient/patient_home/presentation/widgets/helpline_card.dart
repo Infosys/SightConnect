@@ -45,7 +45,7 @@ class HelplineCard extends StatelessWidget {
                 title: Padding(
                   padding: const EdgeInsets.only(top: 2, bottom: 4.0),
                   child: Text(
-                    context.loc!.helplineCardTollFreeNumber,
+                    context.loc!.tollFreeNumber,
                     style: applyRobotoFont(fontSize: 14),
                   ),
                 ),

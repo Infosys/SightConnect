@@ -90,7 +90,7 @@
     "nearbyVisionCentersTitle": "Nearby Vision Centers",
     "nearbyVisionCentersNotFound": "No Vision Centers Found",
 
-    "helplineCardTollFreeNumber": "Toll Free Number",
+    "tollFreeNumber": "Toll Free Number",
 
     "inviteCardTitle":"Invite Others to Join",
     "inviteCardDescription": "As a delighted user, you could invite your family and friends to join and explore the benefits of the {appName} app.",
