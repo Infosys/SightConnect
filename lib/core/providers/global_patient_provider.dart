@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/cred.env.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,7 +30,7 @@ var getPatientProfileProvider = FutureProvider.autoDispose((ref) async {
 
   final response = await ref
       .read(patientAuthenticationRepositoryProvider)
-      .getPatientProfileByPhone(username);
+      .getPatientProfileByPhone(PHONE);
   return response.fold((error) {
     throw error;
   }, (result) {

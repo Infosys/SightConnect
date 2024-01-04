@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -54,7 +56,8 @@ class MyApp extends ConsumerWidget {
             ),
             child: MaterialApp(
               title: AppText.appName,
-              locale: const Locale('en'),
+              // locale: const Locale('en'),
+              locale: ref.watch(globalLanguageProvider).currentLocale,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -62,14 +65,20 @@ class MyApp extends ConsumerWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               navigatorObservers: AppEnv.isProd ? [matomoObserver] : [],
-              supportedLocales: const [Locale('en'), Locale('hi')],
+              // supportedLocales: const [
+              //   Locale('en'),
+              //   Locale('hi'),
+              //   Locale("te")
+              // ],
+              supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),
               theme: ref.watch(themeProvider) == ThemeMode.light
                   ? AppTheme.getLightTheme(context)
                   : AppTheme.getDarkTheme(context),
-              routes: AppRouter.routes,
-              initialRoute: initialRoute,
+              // routes: AppRouter.routes,
+              // initialRoute: initialRoute,
+              home: const PatientDashboardPage(),
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
               //   return ref.watch(internetProvider).when(

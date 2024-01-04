@@ -50,8 +50,8 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.klpadding),
                     child: AnimatedSmoothIndicator(
                       onDotClicked: (index) {},
                       activeIndex: activeIndex.value,

@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -36,93 +37,103 @@ class PatientHomePageAppBar extends StatelessWidget
         ],
       ),
       actions: [
-        IconButton(
-          onPressed: () {
-            showBottomSheet(
-              enableDrag: false,
-              context: context,
-              builder: (context) => BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 10,
-                  sigmaY: 10,
-                ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: AppColor.scaffold,
-                  ),
-                  height: AppSize.height(context) * 0.9,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Consumer(
+          builder: (context, ref, child) {
+            return IconButton(
+              onPressed: () {
+                showBottomSheet(
+                  enableDrag: false,
+                  context: context,
+                  builder: (context) => BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 10,
+                      sigmaY: 10,
+                    ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: AppColor.scaffold,
+                      ),
+                      height: AppSize.height(context) * 0.9,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            icon: const Icon(Icons.close),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: const Icon(Icons.close),
+                              ),
+                              const Text(
+                                'Select Language',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 50),
+                            ],
                           ),
-                          const Text(
-                            'Select Language',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: appLocales.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.5,
                             ),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  // Change language here
+                                  ref
+                                      .read(globalLanguageProvider)
+                                      .setCurrentLocale(
+                                          appLocales[index].locale);
+                                  Navigator.of(context).pop();
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        AppIcon.logo,
+                                        height: 50,
+                                        width: 50,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        appLocales[index].name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          const SizedBox(width: 50),
                         ],
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: 3,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1.5,
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColor.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    AppIcon.logo,
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'English',
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                );
+              },
+              icon: SvgPicture.asset(
+                "assets/icons/translate.svg",
+                height: 30,
+                width: 30,
               ),
             );
           },
-          icon: SvgPicture.asset(
-            "assets/icons/translate.svg",
-            height: 30,
-            width: 30,
-          ),
         ),
         Consumer(
           builder: (context, ref, child) {

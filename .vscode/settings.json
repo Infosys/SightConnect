@@ -1,4 +1,6 @@
-// {
+{
+  "cSpell.words": ["Fluttertoast", "Matomo"]
+} // {
 //        "files.exclude": {
 //         "**/user_details_model.dart": true,
 //             "**/*.freezed.dart": true,

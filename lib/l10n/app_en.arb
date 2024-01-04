@@ -63,6 +63,9 @@
     "nextButton": "Next",
     "proceedButton": "Proceed",
     "yesButton": "Yes",
-    "noButton": "No"
+    "noButton": "No",
+
+    
+    "homeCarousal1Title": ""
   }
 
