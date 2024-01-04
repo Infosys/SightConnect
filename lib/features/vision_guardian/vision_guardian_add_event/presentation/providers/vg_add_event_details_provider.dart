@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/vision_guardian_constants.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,23 +18,20 @@ final addEventDetailsProvider =
 
 var getEventDetailsProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
-  var eventStatusFilter =
-      ref.watch(addEventDetailsProvider).eventStatusFilterValue;
-  print(eventStatusFilter);
-  var isSelected = ref.watch(addEventDetailsProvider).isSelected;
-  print(isSelected);
-  print("getEventDetailsProvider");
+  ref.watch(addEventDetailsProvider).eventStatusFilterValue;
+  ref.watch(addEventDetailsProvider).isSelected;
+
   return await ref
       .watch(vgAddEventRepository)
-      .getVGEvents(actorIdentifier: "11067400874");
+      .getVGEvents(actorIdentifier: actorIdentifierValue);
 });
 
 var getPatientTriageReportsProvider =
     FutureProvider.autoDispose<List<VisionGuardianPatientResponseModel>>(
         (ref) async {
   var eventId = int.parse(ref.watch(addEventDetailsProvider).eventIdValue);
-  print(eventId);
-  
+  logger.d(eventId);
+
   return await ref
       .watch(vgAddEventRepository)
       .getTriageReport(campaignEventId: eventId, performerId: [11067400874]);
@@ -100,7 +98,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       notifyListeners();
       return await vgAddEventRepository.deleteVGEvents(eventId: eventId);
     } catch (e) {
-      print(e);
+      logger.d(e);
       isLoading = false;
     }
   }
@@ -108,23 +106,20 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   Future addEventDetails() async {
     try {
       isLoading = true;
-      notifyListeners();
-      var actors = {
-        "role": "MEDICAL_DOCTOR",
-        "identifier": "11067400874",
-        "isOwner": true
-      };
-      print(_startDate.text);
+      /* notifyListeners(); */
+      Map<String, dynamic> actors = actorsValue;
+
       DateTime startDateFormat = DateFormat("yyyy-MM-dd")
           .parse(DateFormat('d MMM yyyy').parse(_startDate.text).toString());
       DateTime endDateFormat = DateFormat("yyyy-MM-dd")
           .parse(DateFormat('d MMM yyyy').parse(_endDate.text).toString());
-      print(endDateFormat);
+
       var startFormat =
           "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
       var endFormat =
           "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
-      print(endFormat);
+
+
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,
           serviceProvider: 0,
@@ -168,7 +163,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       filterListEvents(-1, "All");
     } catch (e) {
-      print(e);
+
       isLoading = false;
 
       notifyListeners();
@@ -206,11 +201,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void addPatientTriage() async {
-
-    print("object");
-   var response= await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
-   print(response);
+    var response =
+        await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
+    logger.d(response);
   }
-
-
 }

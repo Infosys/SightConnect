@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/source/vg_add_event_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/vision_guardian_constants.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,7 +10,7 @@ var teamListProvider = FutureProvider.autoDispose<dynamic>((ref) async {
   var eventId = ref.read(addEventDetailsProvider).eventId;
   return await ref
       .watch(vgAddEventRemoteSource)
-      .getTeammates(eventId: eventId, actorIdentifier: "11067400874");
+      .getTeammates(eventId: eventId, actorIdentifier: actorIdentifierValue);
 });
 
 var visionGuadianAddMemberProvider = ChangeNotifierProvider((ref) =>
@@ -41,16 +43,14 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
   void addMemberData() async {
     var eventId = addEventDetailsProvider.eventIdValue;
 
-    print(eventId);
-    print("eventId");
-
     await remoteDataSource
-        .postAddTeammate(eventId: eventId, actorIdentifier: "11067400874")
+        .postAddTeammate(
+            eventId: eventId, actorIdentifier: actorIdentifierValue)
         .then((value) {
-      print("status");
-      print(value);
       setAdd();
-    }).catchError((error) => {print(error)});
+    }).catchError((error) {
+      logger.d(error);
+    });
     notifyListeners();
   }
 
@@ -59,13 +59,13 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     try {
       var statusCode = await remoteDataSource.deleteTeamMate(
           eventId: eventId,
-          loginActorIdentifier: "11067400874",
+          loginActorIdentifier: actorIdentifierValue,
           actorIdentifier: actorIdentifier);
 
-      print(statusCode);
+      logger.d(statusCode);
       setAdd();
     } catch (error) {
-      print(error);
+      logger.d(error);
     }
     notifyListeners();
   }
