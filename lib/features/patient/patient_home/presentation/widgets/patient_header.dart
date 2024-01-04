@@ -67,9 +67,7 @@ class PatientHeader extends HookWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            // _resolveCarousalTitle(index, context.loc!),
-                            _resolveCarousalTitleFromMap(
-                                data["title"], context.loc!),
+                            _resolveCarousalTitle(data["title"], context.loc!),
                             style: applyFiraSansFont(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -83,8 +81,7 @@ class PatientHeader extends HookWidget {
                                   : AppSize.width(context) * 0.5,
                             ),
                             child: Text(
-                              // _resolveCarousalDescription(index, context.loc!),
-                              _resolveCarousalDescriptionFromMap(
+                              _resolveCarousalDescription(
                                   data["description"], context.loc!),
                               style: applyRobotoFont(
                                 fontSize: 14,
@@ -146,25 +143,14 @@ class PatientHeader extends HookWidget {
     );
   }
 
-  String _resolveCarousalTitle(int index, AppLocalizations loc) => [
-        loc.homeCarousal1Title,
-        loc.homeCarousal2Title,
-        loc.homeCarousal3Title
-      ][index];
-  String _resolveCarousalDescription(int index, AppLocalizations loc) => [
-        loc.homeCarousal1Description,
-        loc.homeCarousal2Description,
-        loc.homeCarousal3Description
-      ][index];
-
-  String _resolveCarousalTitleFromMap(String key, AppLocalizations loc) =>
+  String _resolveCarousalTitle(String key, AppLocalizations loc) =>
       {
         "homeCarousal1Title": loc.homeCarousal1Title,
         "homeCarousal2Title": loc.homeCarousal2Title,
         "homeCarousal3Title": loc.homeCarousal3Title
       }[key] ??
       "Title";
-  String _resolveCarousalDescriptionFromMap(String key, AppLocalizations loc) =>
+  String _resolveCarousalDescription(String key, AppLocalizations loc) =>
       {
         "homeCarousal1Description": loc.homeCarousal1Description,
         "homeCarousal2Description": loc.homeCarousal2Description,
