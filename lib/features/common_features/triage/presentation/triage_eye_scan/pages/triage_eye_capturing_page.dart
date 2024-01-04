@@ -105,6 +105,7 @@ class _PatientTriageEyeCapturingPageState
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
     var model = ref.watch(triageEyeScanProvider);
+    final loc = context.loc!;
 
     if (!_controller.value.isInitialized) {
       return const Scaffold(
@@ -122,7 +123,7 @@ class _PatientTriageEyeCapturingPageState
           showDialog(
             context: context,
             builder: (context) => TriageExitAlertBox(
-              content: context.loc!.eyeScanExitDialog,
+              content: loc.eyeScanExitDialog,
             ),
           );
         },
@@ -160,7 +161,7 @@ class _PatientTriageEyeCapturingPageState
               children: [
                 const SizedBox(width: AppSize.kmwidth),
                 Text(
-                  context.loc!.stepNumber("3", "3"),
+                  loc.stepNumber("3", "3"),
                   style: applyRobotoFont(
                     color: AppColor.white,
                     fontSize: 14,
@@ -170,7 +171,7 @@ class _PatientTriageEyeCapturingPageState
                 const SizedBox(width: AppSize.kmwidth),
                 Flexible(
                   child: Text(
-                    context.loc!.eyeScanTitle,
+                    loc.eyeScanTitle,
                     style: applyRobotoFont(
                       color: AppColor.white,
                       fontSize: 16,
@@ -232,7 +233,8 @@ class _PatientTriageEyeCapturingPageState
                             final image = await _takePicture(context);
                             logger.d("Image: $image");
                             if (image == null) {
-                              Fluttertoast.showToast(msg: "Image Captured");
+                              Fluttertoast.showToast(
+                                  msg: loc.imageCapturedToastMessage);
                               return;
                             }
 
@@ -287,10 +289,9 @@ class _PatientTriageEyeCapturingPageState
                           ),
                         ),
                         const Spacer(),
-                        const Tooltip(
-                          message:
-                              "Please make sure that the flash is turned off and the brightness is set to 80%",
-                          child: Padding(
+                        Tooltip(
+                          message: loc.eyeAssessmentToolTip,
+                          child: const Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: AppSize.kmpadding,
                             ),
@@ -385,11 +386,12 @@ class _PatientTriageEyeCapturingPageState
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
+    final loc = context.loc!;
     showDialog(
       context: context,
       builder: (context) => BlurDialogBox(
         title: Text(
-          "Test Completed",
+          loc.eyeCaptureCompletionDialogHeading,
           style: applyRobotoFont(
             color: AppColor.black,
             fontSize: 16,
@@ -397,7 +399,7 @@ class _PatientTriageEyeCapturingPageState
           ),
         ),
         content: Text(
-          "You have completed the test. Please click on the button below to view the result.",
+          loc.eyeCaptureCompletionDialogBody,
           style: applyRobotoFont(
             color: AppColor.black,
             fontSize: 14,
@@ -421,7 +423,7 @@ class _PatientTriageEyeCapturingPageState
               );
             },
             child: Text(
-              "View Result",
+              loc.eyeCaptureCompletionDialogViewResult,
               style: applyRobotoFont(
                 color: AppColor.black,
                 fontSize: 14,
@@ -435,12 +437,13 @@ class _PatientTriageEyeCapturingPageState
   }
 
   _showServerExceptionDialog(BuildContext context, Failure failure) {
+    final loc = context.loc!;
     showDialog(
         context: context,
         builder: (context) {
           return BlurDialogBox(
             title: Text(
-              "Triage Saved Locally",
+              loc.eyeCaptureTriageSavedLocally,
               style: applyRobotoFont(
                 color: AppColor.black,
                 fontSize: 16,
@@ -475,7 +478,7 @@ class _PatientTriageEyeCapturingPageState
                   // );
                 },
                 child: Text(
-                  "Ok",
+                  loc.okButton,
                   style: applyRobotoFont(
                     color: AppColor.black,
                     fontSize: 14,

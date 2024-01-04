@@ -36,6 +36,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     model.getQuestionnaire(questionnaireSections);
     var pageController = usePageController();
 
+    final loc = context.loc!;
+
     return PopScope(
       canPop: false,
       onPopInvoked: (value) {
@@ -132,7 +134,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Assessment",
+                                          loc.eyeAssessmentPopUpHeading,
                                           style:
                                               applyFiraSansFont(fontSize: 24),
                                         ),
@@ -166,7 +168,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             );
                                           },
                                           child: Text(
-                                            "Yes",
+                                            loc.yesButton,
                                             style: applyRobotoFont(
                                                 fontSize: 14,
                                                 color: AppColor.primary),
@@ -211,7 +213,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             }
                                           },
                                           child: Text(
-                                            "No",
+                                            loc.noButton,
                                             style: applyRobotoFont(
                                               fontSize: 14,
                                               color: AppColor.primary,
@@ -295,7 +297,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             model.saveQuestionaireResponse();
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
-                            
                           } else {
                             pageController.animateToPage(
                               index + 1,
@@ -312,7 +313,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                         children: [
                           Center(
                             child: Text(
-                              "Question Not Supported Yet",
+                              loc.eyeAssessmentUnsupportedQuestion,
                               style: applyRobotoFont(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 20,
@@ -334,8 +335,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                 );
                               }
                             },
-                            child: const Text(
-                              "skip",
+                            child: Text(
+                              loc.skipButton,
                             ),
                           )
                         ],

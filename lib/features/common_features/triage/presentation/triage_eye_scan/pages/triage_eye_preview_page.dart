@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 class TriageEyePreviewPage extends StatelessWidget {
@@ -10,6 +11,7 @@ class TriageEyePreviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.black,
       body: Stack(
@@ -42,14 +44,14 @@ class TriageEyePreviewPage extends StatelessWidget {
                       backgroundColor: AppColor.red,
                     ),
                     icon: const Icon(Icons.cancel, size: 22),
-                    label: const Text("Discard"),
+                    label: Text(loc.discardButton),
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.of(context).pop(imageFile);
                     },
                     icon: const Icon(Icons.check_circle, size: 22),
-                    label: const Text("Confirm"),
+                    label: Text(loc.confirmButton),
                   ),
                 ],
               ),

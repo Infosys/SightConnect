@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_capturing_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
+    final loc = context.loc!;
     return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -104,8 +106,8 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
             },
             child: Text(
               activeIndex.value == 6
-                  ? "Proceed to Scan"
-                  : "Skip & Proceed to Scan",
+                  ? loc.proceedToScanButton
+                  : loc.skipAndProceedButton,
               style: applyRobotoFont(
                 fontWeight: FontWeight.w500,
                 color:

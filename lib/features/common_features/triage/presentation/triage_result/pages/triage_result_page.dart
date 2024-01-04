@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class TriageResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.read(triageResultProvider(triageResult));
+    final loc = context.loc!;
 
     return PopScope(
       canPop: false,
@@ -50,7 +52,7 @@ class TriageResultPage extends ConsumerWidget {
               color: AppColor.black,
             ),
           ),
-          title: const Text("Assessment Result"),
+          title: Text(loc.eyeAssessmentResults),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -108,7 +110,7 @@ class TriageResultPage extends ConsumerWidget {
                           width: AppSize.width(context) * 0.05,
                         ),
                         Text(
-                          "Eye Assessment Report",
+                          loc.assessmentReportButton,
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -122,7 +124,7 @@ class TriageResultPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.klheight),
                 Text(
-                  'Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.',
+                  loc.assessmentResultPageMoreDetailsText,
                   textAlign: TextAlign.left,
                   softWrap: true,
                   style: applyRobotoFont(

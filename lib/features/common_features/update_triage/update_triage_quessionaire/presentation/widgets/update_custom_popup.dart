@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,6 +18,7 @@ class UpdateCustomPopUp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return SizedBox(
       height: AppSize.height(context) * 0.7,
       child: Row(
@@ -38,7 +40,7 @@ class UpdateCustomPopUp extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Assessment",
+                        loc.eyeAssessmentPopUpHeading,
                         style: applyFiraSansFont(fontSize: 24),
                       ),
                       SvgPicture.asset(
@@ -51,7 +53,7 @@ class UpdateCustomPopUp extends ConsumerWidget {
                     height: AppSize.ksheight,
                   ),
                   Text(
-                    "Are you having any eyesight related problem?",
+                    loc.eyeAssessmentPopUpBody,
                     style: applyRobotoFont(fontSize: 14),
                   ),
                   const SizedBox(
@@ -65,7 +67,7 @@ class UpdateCustomPopUp extends ConsumerWidget {
                           onPageChanged!();
                         },
                         child: Text(
-                          "Yes",
+                          loc.yesButton,
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.primary),
                         ),
@@ -75,7 +77,7 @@ class UpdateCustomPopUp extends ConsumerWidget {
                           Navigator.pop(context);
                         },
                         child: Text(
-                          "No",
+                          loc.noButton,
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.primary),
                         ),

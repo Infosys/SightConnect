@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +19,23 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
   @override
   Widget build(BuildContext context) {
     var initialPage = useState<int>(0);
+    final loc = context.loc!;
     var slideShowData = [
       {
         "image": "assets/images/step1.png",
-        "text":
-            "Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result."
+        "text": loc.visualAcuityTestInstructionOne
       },
       {
         "image": "assets/images/step2.png",
-        "text":
-            "Make sure you are holding the device at the eye level. If you wear glasses or contact lenses, keep them on"
+        "text": loc.visualAcuityTestInstructionTwo
       },
       {
         "image": "assets/images/step3.png",
-        "text":
-            "Position yourself 40 cm from the screen. Distance will be shown in the test screen."
+        "text": loc.visualAcuityTestInstructionThree
       },
       {
         "image": "assets/images/step4.png",
-        "text":
-            "If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested."
+        "text": loc.visualAcuityTestInstructionFour
       },
     ];
     return CarouselSlider.builder(

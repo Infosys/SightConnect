@@ -8,7 +8,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
@@ -19,6 +18,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
+    final loc = context.loc!;
     return PopScope(
       canPop: false,
       onPopInvoked: (value) {
@@ -47,7 +47,8 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                 scaffoldKey.currentState!.openDrawer();
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Image.asset(
                   AppIcon.hamburgerIcon,
                 ),
@@ -58,7 +59,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
               children: [
                 const SizedBox(width: AppSize.kmwidth),
                 Text(
-                  AppLocalizations.of(context)!.stepNumber('3', '3'),
+                  loc.stepNumber('3', '3'),
                   style: applyRobotoFont(
                     color: AppColor.primary,
                     fontSize: 14,
@@ -66,7 +67,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                 ),
                 const SizedBox(width: AppSize.kswidth),
                 Text(
-                  AppLocalizations.of(context)!.eyeScanTitle,
+                  loc.eyeScanTitle,
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -81,7 +82,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.eyeScanDescription,
+                  loc.eyeScanDescription,
                   softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -89,9 +90,9 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  AppLocalizations.of(context)!.eyeScanHowToPerform,
-                  style:
-                      applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
+                  loc.eyeScanHowToPerform,
+                  style: applyRobotoFont(
+                      fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 const Expanded(

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,12 @@ class TriageMemberSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return TraceableWidget(
       actionName: 'TriageMember Selection Page',
       child: Scaffold(
-        appBar: const CustomAppbar(
-          title: Text('Eye Assessment'),
+        appBar: CustomAppbar(
+          title: Text(loc.eyeAssessmentTitle),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -34,7 +36,7 @@ class TriageMemberSelectionPage extends StatelessWidget {
                 height: AppSize.height(context) * 0.02,
               ),
               Text(
-                'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.',
+                loc.eyeAssessmentSubtitle,
                 style: applyRobotoFont(fontSize: 14),
                 softWrap: true,
               ),
@@ -43,7 +45,7 @@ class TriageMemberSelectionPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Change Member',
+                    loc.eyeAssessmentGetMemberLabel,
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -70,7 +72,7 @@ class TriageMemberSelectionPage extends StatelessWidget {
                                 ),
                               );
                             },
-                      child: const Text('Proceed'),
+                      child: Text(loc.proceedButton),
                     ),
                   );
                 },

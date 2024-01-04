@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -24,6 +25,7 @@ class TumblingResultReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
+    final loc = context.loc!;
 
     return PopScope(
       canPop: false,
@@ -38,7 +40,7 @@ class TumblingResultReportPage extends ConsumerWidget {
         key: scaffoldKey,
         backgroundColor: AppColor.scaffold,
         appBar: CustomAppbar(
-          title: const Text("Visual Acuity Test Results"),
+          title: Text(loc.visualAcuityTestResults),
           leadingIcon: InkWell(
             onTap: () {
               ref.read(resetProvider).reset();
@@ -115,17 +117,17 @@ class TumblingResultReportPage extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 buildCol(
-                                  'Left Eye',
+                                  loc.leftEyeString,
                                   leftEyeSight.toString(),
                                   getColourScheme(leftEyeSight),
                                 ),
                                 buildCol(
-                                  'Right Eye',
+                                  loc.rightEyeString,
                                   rightEyeSight.toString(),
                                   getColourScheme(rightEyeSight),
                                 ),
                                 buildCol(
-                                  'Both Eye',
+                                  loc.bothEyeString,
                                   bothEyeSight.toString(),
                                   getColourScheme(bothEyeSight),
                                 ),
@@ -140,7 +142,7 @@ class TumblingResultReportPage extends ConsumerWidget {
 
                 const SizedBox(height: AppSize.klheight),
                 Text(
-                  'Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.',
+                  loc.assessmentResultPageMoreDetailsText,
                   textAlign: TextAlign.left,
                   softWrap: true,
                   style: applyRobotoFont(

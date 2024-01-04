@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,13 +24,15 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () async {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final loc = context.loc!;
       try {
         await ref.read(accessibilityProvider).setBrightness(80.0);
-        Fluttertoast.showToast(msg: "Brightness set to 80%");
+        Fluttertoast.showToast(msg: loc.eyeAssessmentBrightnessLabel);
       } catch (e) {
         Fluttertoast.showToast(
-          msg: "Please set the brightness manually to 80%",
+          msg: loc.eyeAssessmentBrightnessError,
         );
       }
     });
@@ -44,13 +47,13 @@ class _TriagePageState extends ConsumerState<TriagePage> {
 
   @override
   void dispose() {
-        MatomoTracker.instance.trackEvent(
-          eventInfo: EventInfo(
-            category: 'Triage',
-            action: 'Triage Exited',
-            name: 'Triage Exited',
-          ),
-        );
+    MatomoTracker.instance.trackEvent(
+      eventInfo: EventInfo(
+        category: 'Triage',
+        action: 'Triage Exited',
+        name: 'Triage Exited',
+      ),
+    );
 
     super.dispose();
   }
@@ -58,6 +61,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   @override
   Widget build(BuildContext context) {
     var currentStep = ref.watch(triageStepperProvider).currentStep;
+    final loc = context.loc!;
 
     return ref.watch(getTriageProvider).when(
       data: (data) {
@@ -98,7 +102,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
                     ref.invalidate(getTriageProvider);
                   },
                   icon: const Icon(Icons.refresh_outlined),
-                  label: const Text("Retry"),
+                  label: Text(loc.retryButton),
                 ),
               ],
             ),

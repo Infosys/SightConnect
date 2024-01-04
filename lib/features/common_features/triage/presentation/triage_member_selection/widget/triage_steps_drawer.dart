@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +14,7 @@ class TriageStepsDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(triageStepperProvider);
+    final loc = context.loc!;
     return Drawer(
       width: AppSize.width(context),
       child: Container(
@@ -36,7 +38,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                   },
                   icon: const Icon(Icons.close),
                 ),
-                Text("Steps",
+                Text(loc.eyeAssessmentSteps,
                     style: applyFiraSansFont(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -160,17 +162,17 @@ class TriageStepsDrawer extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            "Step 1 - Eye Assessment Questions",
+                            loc.eyeAssessmentStepOne,
                             softWrap: true,
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           Text(
                             model.currentStep == 0
-                                ? "ongoing"
+                                ? loc.eyeAssessmentOngoing
                                 : model.currentStep > 0
-                                    ? "completed"
-                                    : "pending",
+                                    ? loc.eyeAssessmentCompleted
+                                    : loc.eyeAssessmentPending,
                             softWrap: true,
                             style: applyRobotoFont(
                                 fontSize: 12,
@@ -181,17 +183,17 @@ class TriageStepsDrawer extends ConsumerWidget {
                             height: AppSize.klheight * 3.5,
                           ),
                           Text(
-                            "Step 2 - Visual Acuity Test",
+                            loc.eyeAssessmentStepTwo,
                             softWrap: true,
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           Text(
                             model.currentStep == 1
-                                ? "ongoing"
+                                ? loc.eyeAssessmentOngoing
                                 : model.currentStep > 1
-                                    ? "completed"
-                                    : "pending",
+                                    ? loc.eyeAssessmentCompleted
+                                    : loc.eyeAssessmentPending,
                             softWrap: true,
                             style: applyRobotoFont(
                                 fontSize: 12,
@@ -202,16 +204,16 @@ class TriageStepsDrawer extends ConsumerWidget {
                             height: AppSize.klheight * 3.5,
                           ),
                           Text(
-                            "Step 3 - Eye Scan",
+                            loc.eyeAssessmentStepThree,
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           Text(
                             model.currentStep == 2
-                                ? "ongoing"
+                                ? loc.eyeAssessmentOngoing
                                 : model.currentStep > 2
-                                    ? "completed"
-                                    : "pending",
+                                    ? loc.eyeAssessmentCompleted
+                                    : loc.eyeAssessmentPending,
                             style: applyRobotoFont(
                                 fontSize: 12,
                                 color: AppColor.altGrey,
@@ -221,12 +223,12 @@ class TriageStepsDrawer extends ConsumerWidget {
                             height: AppSize.klheight * 3.4,
                           ),
                           Text(
-                            "Assessment Results",
+                            loc.eyeAssessmentResults,
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "Complete all steps to view results",
+                            loc.eyeAssessmentCompleteSteps,
                             style: applyRobotoFont(
                                 fontSize: 12,
                                 color: AppColor.altGrey,
@@ -250,9 +252,8 @@ class TriageStepsDrawer extends ConsumerWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => const TriageExitAlertBox(
-                        content:
-                            "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
+                      builder: (context) => TriageExitAlertBox(
+                        content: loc.questionnaireExitDialog,
                       ),
                     );
                   },
@@ -261,7 +262,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                       horizontal: AppSize.width(context) * 0.15,
                     ),
                     child: Text(
-                      "Exit",
+                      loc.exitButton,
                       style: applyRobotoFont(
                         fontWeight: FontWeight.w500,
                         color: AppColor.primary,

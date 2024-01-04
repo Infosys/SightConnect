@@ -64,11 +64,14 @@
     "proceedButton": "Proceed",
     "yesButton": "Yes",
     "noButton": "No",
+    "exitButton": "Exit",
+    "okButton":"Okay",
 
     "knowMoreButton": "Know More",
     "seeAllButton": "See All",
     "tryAgainButton": "Try Again",
     "shareNowButton": "Share Now",
+    "retryButton": "Retry",
     
     "homeCarousal1Title": "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
     "homeCarousal1Description": "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
@@ -145,11 +148,13 @@
     "assessmentAndTestsSubtitle": "Here is a quick view of the assessments done so far.",
     "assessmentAndTestsReportsNotFound": "No Reports Found",
 
+    "eyeAssessmentTitle": "Eye Assessment",
     "eyeAssessmentSubtitle": "Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.",
     "eyeAssessmentGetMemberLabel": "Change Member",
     "eyeAssessmentProceedButton": "Proceed",
     "eyeAssessmentBrightnessLabel": "Brightness set to 80%",
     "eyeAssessmentBrightnessError": "Please set the brightness manually to 80%",
+    "eyeAssessmentUnsupportedQuestion":"Question not supported yet",
     "eyeAssessmentPopUpHeading" : "Assessment",
     "eyeAssessmentPopUpBody" : "Are you having any eyesight related problem?",
     "eyeAssessmentPopUpYesButton": "Yes",
@@ -163,6 +168,18 @@
     "skipAndProceedButton": "Skip & Proceed to Scan",
     "proceedToScanButton" : "Proceed to Scan",
 
+    "eyeAssessmentSteps":"Steps",
+    "eyeAssessmentStepOne":"Step 1 - Eye Assessment Questions",
+    "eyeAssessmentStepTwo":"Step 2 - Eye Assessment Questions",
+    "eyeAssessmentStepThree":"Step 3 - Eye Assessment Questions",
+
+    "eyeAssessmentOngoing": "Ongoing",
+    "eyeAssessmentCompleted": "Completed",
+    "eyeAssessmentPending": "Pending",
+
+    "eyeAssessmentResults": "Assessment Results",
+    "eyeAssessmentCompleteSteps":"Complete all steps to view results",
+    "eyeAssessmentToolTip":"Please make sure that the flash is turned off and the brightness is set to 80%",
     "eyeScanInstructionOne": "Hold the camera placing the face properly on the frame.",
     "eyeScanInstructionTwo": "Take an image of the eyes using the back camera of your phone.",
     "eyeScanInstructionThree": "Make sure to be in a well-lit area with the flash on.",
@@ -180,7 +197,9 @@
     "eyeCaptureCompletionDialogHeading": "Test Completed",
     "eyeCaptureCompletionDialogBody": "You have completed the test. Please click on the button below to view the result.",
     "eyeCaptureCompletionDialogViewResult": "View Result",
+    "eyeCaptureTriageSavedLocally":"Triage Saved Locally",
 
+    "visualAcuityTestResults":"Visual Acuity Test Results",
 
     "assessmentResultPageMoreDetailsText": "Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.",
     "assessmentReportButton": "Eye Assessment Report",
