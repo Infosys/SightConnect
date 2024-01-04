@@ -17,7 +17,9 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppEnv.setupEnv(Env.PROD);
-
+  if (kDebugMode) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   IOSDeviceInfoService.init();
@@ -34,7 +36,13 @@ Future<void> main() async {
     ),
   );
 }
-
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (cert, String host, int port) => true;
+  }
+}
 // class MyHttpOverrides extends HttpOverrides {
 //   @override
 //   HttpClient createHttpClient(SecurityContext? context) {
