@@ -14,12 +14,10 @@ class VisionEventListDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     print("data");
     return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
-      if (eventDetails.length==0) {
+      if (eventDetails.length == 0) {
         return const Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            VisionGuardianEmptyResultCard(type:"Event")
-          ],
+          children: [VisionGuardianEmptyResultCard(type: "Event")],
         );
       }
 
@@ -43,6 +41,9 @@ class VisionEventListDetails extends ConsumerWidget {
         List<Widget> events = [];
         for (int i = 0; i < eventDetails.length; i++) {
           events.add(event(eventDetails[i]));
+          events.add(SizedBox(
+            height: AppSize.ksheight,
+          ));
         }
         return events;
       }
@@ -80,12 +81,10 @@ class VisionEventListDetails extends ConsumerWidget {
         child: CircularProgressIndicator(),
       );
     }, error: (error, stackTrace) {
-       return const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-           VisionGuardianEmptyResultCard(type:"Event")
-          ],
-        );
+      return const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [VisionGuardianEmptyResultCard(type: "Event")],
+      );
     });
   }
 }
