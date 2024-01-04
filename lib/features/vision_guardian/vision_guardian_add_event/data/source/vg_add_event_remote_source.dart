@@ -68,18 +68,25 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     Map<String, dynamic> queryParameters = {
       "actorIdentifier": actorIdentifier,
     };
+    print("object1");
     try {
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
 
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
+        print(response);
+        print("object");
+        print(response.data);
         return (response.data as List)
             .map((e) => VisionGuardianEventModel.fromJson(e))
             .toList();
       } else {
+        print("object error");
         throw ServerException();
       }
     } catch (error) {
+      print("object");
+      print(error);
       rethrow;
     }
   }

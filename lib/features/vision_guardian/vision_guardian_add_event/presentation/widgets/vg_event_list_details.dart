@@ -14,7 +14,7 @@ class VisionEventListDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     print("data");
     return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
-      if (eventDetails.isEmpty) {
+      if (eventDetails.length==0) {
         return const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
