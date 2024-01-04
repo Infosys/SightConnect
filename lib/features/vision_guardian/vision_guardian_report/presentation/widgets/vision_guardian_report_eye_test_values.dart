@@ -60,7 +60,7 @@ class VisionGuardianReportEyeTestValues extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        " tumblingEData",
+                       tumblingEData![index].bodySite!,
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -68,7 +68,7 @@ class VisionGuardianReportEyeTestValues extends StatelessWidget {
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                        "10",
+                        "${tumblingEData![index].observationValue}",
                         style: applyRobotoFont(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,

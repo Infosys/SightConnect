@@ -113,9 +113,7 @@ class VisionGuardianReportPage extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  border: Border.all(
-                    color: AppColor.yellow
-                  ),
+                  border: Border.all(color: AppColor.yellow),
                   borderRadius: BorderRadius.circular(
                     AppSize.ksradius,
                   ),
@@ -176,9 +174,9 @@ class VisionGuardianReportPage extends StatelessWidget {
                 questionResponseBreifModel:
                     assessmentDetailsReport.questionResponseBriefEntity,
               ),
-              /*    EyeScanTabView(
-                 eyeScanData: assessmentDetailsReport.imageBriefEntity,
-              ), */
+              EyeScanTabView(
+                eyeScanData: assessmentDetailsReport.imageBriefEntity,
+              ),
             ],
           ),
         ),

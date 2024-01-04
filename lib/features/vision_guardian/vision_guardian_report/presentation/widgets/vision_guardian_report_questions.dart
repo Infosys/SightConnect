@@ -58,12 +58,12 @@ class VisionGuardianReportQuestions extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
-                /*  var responseModel = questionResponseBreifModel![index]; */
+              var responseModel = questionResponseBreifModel![index];
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "responseModel.question",
+                      responseModel.question,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -83,7 +83,7 @@ class VisionGuardianReportQuestions extends StatelessWidget {
                                 height: 1.5),
                           ),
                           Text(
-                            " responseModel.response",
+                            responseModel.response,
                             style: applyRobotoFont(
                               fontSize: 16,
                               fontWeight: FontWeight.w800,

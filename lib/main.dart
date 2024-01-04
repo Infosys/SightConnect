@@ -15,6 +15,7 @@ import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   AppEnv.setupEnv(Env.PROD);
   if (kDebugMode) {
