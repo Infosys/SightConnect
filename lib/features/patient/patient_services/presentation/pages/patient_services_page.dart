@@ -95,12 +95,13 @@ class PatientServicesPage extends ConsumerWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child:
-                                SvgPicture.asset(BottomNavItems.drawer.svgImage,
-                                    colorFilter: const ColorFilter.mode(
-                                      AppColor.grey,
-                                      BlendMode.srcIn,
-                                    )),
+                            child: SvgPicture.asset(
+                              BottomNavItems.drawer.svgImage,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.grey,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
                         ],
                       ),

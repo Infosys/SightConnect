@@ -1,4 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -48,14 +51,25 @@ class PatientServiceCategory extends ConsumerWidget {
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
-                      // if (miniapp == "Eye Scan") {
-                      //   Navigator.of(context).push(
-                      //     MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           const PatientEyeScanInstructionsPage(),
-                      //     ),
-                      //   );
-                      // }
+                      if (miniapp == "Visual Acuity Test") {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.STANDALONE;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const VisualAcuityInstructionalVideoPage(),
+                          ),
+                        );
+                      } else if (miniapp == "Eye Assessment") {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.TRIAGE;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const TriageMemberSelectionPage(),
+                          ),
+                        );
+                      }
                     },
                     child: SizedBox(
                       width: Responsive.isMobile(context) ? 80 : 120,

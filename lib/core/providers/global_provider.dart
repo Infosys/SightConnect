@@ -3,17 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var globalProvider = ChangeNotifierProvider((ref) => GlobalProvider());
 
+enum VisionAcuityMode { STANDALONE, TRIAGE, UPDATE }
 
 class GlobalProvider extends ChangeNotifier {
   VisionAcuityMode _vaMode = VisionAcuityMode.STANDALONE;
-  double _globalInitialTextScaleFactor = 1.0;
 
-  double get globalInitialTextScaleFactor => _globalInitialTextScaleFactor;
   VisionAcuityMode get vaMode => _vaMode;
-
-  set setGlobalInitialTextScaleFactor(double data) {
-    _globalInitialTextScaleFactor = data;
-  }
 
   set setVAMode(VisionAcuityMode data) {
     _vaMode = data;
@@ -24,11 +19,38 @@ class GlobalProvider extends ChangeNotifier {
   bool isUpdateMode() => _vaMode == VisionAcuityMode.UPDATE;
 }
 
-var initialTextScaleFactor = 1.0;
-var textScaleFactorProvider = StateProvider.autoDispose<double>(
-  (ref) {
-    return initialTextScaleFactor;
-  },
-);
+var globalTextScaleFactorProvider =
+    ChangeNotifierProvider((ref) => GlobalTextScaleFactor());
 
-enum VisionAcuityMode { STANDALONE, TRIAGE, UPDATE }
+class GlobalTextScaleFactor extends ChangeNotifier {
+  double _textScaleFactor = 1.0;
+  String _scaleAlphabet = "A";
+
+  double get textScaleFactor => _textScaleFactor;
+  String get scaleAlphabet => _scaleAlphabet;
+
+  void setTextScaleFactor(String data) {
+    switch (data) {
+      case "A":
+        _textScaleFactor = 1.0;
+        _scaleAlphabet = "A";
+
+        break;
+      case "-A":
+        _textScaleFactor = 0.8;
+        _scaleAlphabet = "-A";
+
+        break;
+      case "+A":
+        _textScaleFactor = 1.2;
+        _scaleAlphabet = "+A";
+
+        break;
+      default:
+        _textScaleFactor = 1.0;
+        _scaleAlphabet = "A";
+        break;
+    }
+    notifyListeners();
+  }
+}

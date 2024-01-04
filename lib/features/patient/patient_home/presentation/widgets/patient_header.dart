@@ -66,10 +66,13 @@ class PatientHeader extends HookWidget {
                         children: [
                           Text(
                             data["title"],
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                             style: applyFiraSansFont(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: textColor),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: textColor,
+                            ),
                           ),
                           const SizedBox(height: AppSize.ksheight),
                           Container(
@@ -80,33 +83,33 @@ class PatientHeader extends HookWidget {
                             ),
                             child: Text(
                               data["description"],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
                               style: applyRobotoFont(
                                 fontSize: 14,
                                 color: textColor,
                                 height: 1.4,
                               ),
-                              softWrap: true,
-                              // maxLines: 4,
-                              // overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           const SizedBox(height: AppSize.kmheight),
-                          // const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 0.0),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                visualDensity:
-                                    const VisualDensity(vertical: -1),
-                                side: BorderSide(
-                                  color: buttonColor,
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 0.0),
+                              child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  visualDensity:
+                                      const VisualDensity(vertical: -1),
+                                  side: BorderSide(
+                                    color: buttonColor,
+                                  ),
                                 ),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                "Know More",
-                                style: applyRobotoFont(
-                                  color: buttonColor,
+                                onPressed: () {},
+                                child: Text(
+                                  "Know More",
+                                  style: applyRobotoFont(
+                                    color: buttonColor,
+                                  ),
                                 ),
                               ),
                             ),
@@ -139,5 +142,4 @@ class PatientHeader extends HookWidget {
       ),
     );
   }
-
 }

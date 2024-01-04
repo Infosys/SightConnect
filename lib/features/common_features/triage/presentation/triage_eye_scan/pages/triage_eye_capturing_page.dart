@@ -46,6 +46,7 @@ class _PatientTriageEyeCapturingPageState
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initializeCamera(CameraLensDirection.back);
   }
 
@@ -84,7 +85,9 @@ class _PatientTriageEyeCapturingPageState
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _controller.dispose();
+    if (_controller.value.isInitialized) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
@@ -259,7 +262,10 @@ class _PatientTriageEyeCapturingPageState
                                         failure,
                                   });
 
-                                  _showServerExceptionDialog(context, failure);
+                                  _showServerExceptionDialog(
+                                    context,
+                                    failure,
+                                  );
                                 },
                                 (result) async {
                                   logger.d({
@@ -407,8 +413,8 @@ class _PatientTriageEyeCapturingPageState
         actions: [
           TextButton(
             onPressed: () async {
-              if (context.mounted) {
-                dispose();
+              if (context.mounted && _controller.value.isInitialized) {
+                _controller.dispose();
               }
 
               ref.read(triageStepperProvider).goToNextStep();
@@ -458,8 +464,8 @@ class _PatientTriageEyeCapturingPageState
             actions: [
               TextButton(
                 onPressed: () {
-                  if (context.mounted) {
-                    dispose();
+                  if (context.mounted && _controller.value.isInitialized) {
+                    _controller.dispose();
                   }
 
                   ref.read(resetProvider).reset();
