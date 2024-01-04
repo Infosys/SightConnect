@@ -39,9 +39,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        AppLogger.setVisitorUserId(
-            PersistentAuthStateService.authState.username);
-
         final navigator = Navigator.of(context);
         final role = PersistentAuthStateService.authState.activeRole;
 
