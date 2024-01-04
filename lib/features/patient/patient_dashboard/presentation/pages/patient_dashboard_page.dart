@@ -61,10 +61,10 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
             ),
           ),
           error: (error, stackTrace) {
-            return const Scaffold(
+            return Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
-              ),
+                  child: Text(error.toString()) //CircularProgressIndicator(),
+                  ),
             );
           },
         );
