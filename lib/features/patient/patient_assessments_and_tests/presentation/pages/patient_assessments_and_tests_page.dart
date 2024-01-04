@@ -18,14 +18,15 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientAssessmentAndTestProvider);
+    final loc = context.loc!;
 
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(patientAssessmentAndTestProvider);
       },
       child: Scaffold(
-        appBar: const CustomAppbar(
-          title: Text("Assessments and Tests"),
+        appBar: CustomAppbar(
+          title: Text(loc.appDrawerAssessmentsAndTests),
         ),
         body: model.isLoading
             ? const Center(
@@ -37,7 +38,7 @@ class AssessmentsAndTestsPage extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Here is a quick view of the assessments done so far.",
+                      loc.assessmentAndTestsSubtitle,
                       style: applyRobotoFont(
                         color: Colors.black,
                         fontWeight: FontWeight.w400,
