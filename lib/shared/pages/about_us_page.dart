@@ -8,11 +8,12 @@ class AboutUsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> features = context.loc!.aboutUsFeaturesDescription.split("|");
+    final loc = context.loc!;
+    List<String> features = loc.aboutUsFeaturesDescription.split("|");
     return Scaffold(
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         title: Text(
-          "About Us",
+          loc.appDrawerAboutUs,
         ),
       ),
       body: Padding(
@@ -26,21 +27,14 @@ class AboutUsPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.',
-                softWrap: true,
-                style:
-                    applyRobotoFont(fontWeight: FontWeight.w400, fontSize: 14),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'At the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ',
+                loc.aboutUsDescription,
                 softWrap: true,
                 style:
                     applyRobotoFont(fontWeight: FontWeight.w400, fontSize: 14),
               ),
               const SizedBox(height: 20),
               Text(
-                'Features',
+                loc.aboutUsFeaturesTitle,
                 softWrap: true,
                 textAlign: TextAlign.left,
                 style:
@@ -82,7 +76,7 @@ class AboutUsPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                'The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!',
+                loc.aboutUsConclusion,
                 softWrap: true,
                 style:
                     applyRobotoFont(fontWeight: FontWeight.w400, fontSize: 14),

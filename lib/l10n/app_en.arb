@@ -112,8 +112,8 @@
     "appDrawerHelpAndSupport":"Help and Support",
     "appDrawerSignOut": "Sign Out",
     
-    "aboutUsSubtitlePartOne": "Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.",
-    "aboutUsSubtitlePartTwo": "At the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ",
+    
+    "aboutUsDescription": "Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\n\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ",
     "aboutUsFeaturesTitle": "Features",
     "aboutUsFeaturesDescription": "In-app Eye Testing: The app allows its users to self-assess their eyes by answering few questions and getting appropriate recommendations on the next steps and the doctor to be visited. Even friends and family of users can get benefitted too. |Appointment Booking: Users can book online teleconsultations and in-clinic visits with doctors to get their eyes diagnosed. |IVR Call Services: Our IVR call services are available in English and local languages and it caters to users with basic feature phones as well. Users can dial our eye care professionals to seek instant help during an emergency or for any eye related issues. They can also call to book appointments or seek any further clarifications. |Nearby Clinics: Users can locate the eye care clinics near to them. |Prescriptions and Reports: All prescriptions and reports of users can be accessed from one place without much hassle. |Eye Camps: Users can get information about nearby eye camps to get the eyes of their friends and family tested for free. |Reminders and Alerts: Users can receive timely alerts and reminders related to their upcoming appointments, medication, reports etc. |Sharing: Users can share this app and other useful information provided within the app with their friends and family members. ",
     "aboutUsConclusion": "The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!",
@@ -124,7 +124,7 @@
     "privacyPolicyPurposeOfProcessingTitle": "Purpose of Processing: We process the Personal Data provided by you for the below purposes such as:",
     "privacyPolicyPurposeOfProcessingDescription": "To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you).|To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.|For providing any eye health-related data (including reports etc.) as part of your health consultation and diagnosis and in order to contact you or your connections as part of health-related concerns.|For sharing of your eye health data with our authorized LVPEI ophthalmologists/ doctors for better diagnosis and further sharing the same with the Village Chief/ Mayor etc. (where applicable based on your GPS location) depending on the severity of the eye issue in case you are unable to reach out to/ inform the LVPEI doctors for treatment.|To provide the list of Eye clinics/ hospitals affiliated with LVPEI near you, for you to reach out to in case of any eye related problems.|For using the information such as Eye Image, symptoms related to the eye image, Age, Blood Group, Location without any identifiers to help train our machine learning or artificial intelligence models for the purpose of providing proper diagnosis in the future|For sending reminder, communication, campaign mailers, to create awareness for eye health.",
     "privacyPolicyDataRecipientsTitle": "Data Recipients/ Accessible to:",
-    "privacyPolicyDataRecipientsDescription": "The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnels such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.",
+    "privacyPolicyDataRecipientsDescription": "The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnel such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.",
     "privacyPolicyDataTransferTitle": "Data Transfer & Storage:",
     "privacyPolicyDataTransferDescription": "The personal data shared by you will get stored on our internal servers, our authorized service provider’s server in India.",
     "privacyPolicyDataSecurityTitle": "Data Security:",
@@ -136,7 +136,7 @@
     "privacyPolicyRightToWithdrawTitle": "Right to Withdrawal:",
     "privacyPolicyRightToWithdrawDescription": "Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to <LVPEI to provide generic mail ID for DSR>.",
     "privacyPolicyAcknowledgement": "By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.",
-    "privacyPolicyBottonAppBarLabel": "Privacy Policy Accepted",
+    "privacyPolicyBottomAppBarLabel": "Privacy Policy Accepted",
 
 
     "helpAndSupportReachTitle" : "Reach out to us",
@@ -147,7 +147,7 @@
     "eyeAssessmentSubtitle": "Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.",
     "eyeAssessmentGetMemberLabel": "Change Member",
     "eyeAssessmentProceedButton": "Proceed",
-    "eyeAssessmentBrighnessLabel": "Brightness set to 80%",
+    "eyeAssessmentBrightnessLabel": "Brightness set to 80%",
     "eyeAssessmentBrightnessError": "Please set the brightness manually to 80%",
     "eyeAssessmentPopUpHeading" : "Assessment",
     "eyeAssessmentPopUpBody" : "Are you having any eyesight related problem?",
@@ -176,8 +176,8 @@
     "confirmButton": "Confirm",
     "discardButton": "Discard",
     "imageCapturedToastMessage": "Image Captured",
-    "eyeCatureCompletionDialogHeading": "Test Completed",
-    "eyeCatureCompletionDialogBody": "You have completed the test. Please click on the button below to view the result.",
+    "eyeCaptureCompletionDialogHeading": "Test Completed",
+    "eyeCaptureCompletionDialogBody": "You have completed the test. Please click on the button below to view the result.",
     "eyeCaptureCompletionDialogViewResult": "View Result",
 
 
