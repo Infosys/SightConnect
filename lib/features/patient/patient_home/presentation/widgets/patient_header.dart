@@ -75,21 +75,20 @@ class PatientHeader extends HookWidget {
                             ),
                           ),
                           const SizedBox(height: AppSize.ksheight),
-                          Flexible(
-                            child: Container(
-                              constraints: BoxConstraints(
-                                maxWidth: Responsive.isMobile(context)
-                                    ? AppSize.width(context) * 0.6
-                                    : AppSize.width(context) * 0.5,
-                              ),
-                              child: Text(
-                                data["description"],
-                                overflow: TextOverflow.ellipsis,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: textColor,
-                                  height: 1.4,
-                                ),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: Responsive.isMobile(context)
+                                  ? AppSize.width(context) * 0.6
+                                  : AppSize.width(context) * 0.5,
+                            ),
+                            child: Text(
+                              data["description"],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: textColor,
+                                height: 1.4,
                               ),
                             ),
                           ),
