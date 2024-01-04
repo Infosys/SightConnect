@@ -118,7 +118,7 @@
     "aboutUsFeaturesDescription": "In-app Eye Testing: The app allows its users to self-assess their eyes by answering few questions and getting appropriate recommendations on the next steps and the doctor to be visited. Even friends and family of users can get benefitted too. |Appointment Booking: Users can book online teleconsultations and in-clinic visits with doctors to get their eyes diagnosed. |IVR Call Services: Our IVR call services are available in English and local languages and it caters to users with basic feature phones as well. Users can dial our eye care professionals to seek instant help during an emergency or for any eye related issues. They can also call to book appointments or seek any further clarifications. |Nearby Clinics: Users can locate the eye care clinics near to them. |Prescriptions and Reports: All prescriptions and reports of users can be accessed from one place without much hassle. |Eye Camps: Users can get information about nearby eye camps to get the eyes of their friends and family tested for free. |Reminders and Alerts: Users can receive timely alerts and reminders related to their upcoming appointments, medication, reports etc. |Sharing: Users can share this app and other useful information provided within the app with their friends and family members. ",
     "aboutUsConclusion": "The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!",
 
-    "privacyPolicySubtitle": "LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data-",
+    "privacyPolicyDescription": "LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.",
     "privacyPolicyPersonalDataTitle": "Personal data elements collected/processed:",
     "privacyPolicyPersonalDataDescription": "You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.",
     "privacyPolicyPurposeOfProcessingTitle": "Purpose of Processing: We process the Personal Data provided by you for the below purposes such as:",
@@ -182,7 +182,12 @@
 
 
     "assessmentResultPageMoreDetailsText": "Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.",
-    "assessmentReportButton": "Eye Assessment Report"
+    "assessmentReportButton": "Eye Assessment Report",
+
+    "notificationsTitle": "Notifications",
+    "notificationsNotAvailable": "No Notifications",
+
+    "servicesPatientCare": "Patient Care"
 
   }
 

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/patient_service_category.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 
 import 'package:flutter/material.dart';
@@ -13,10 +14,11 @@ class PatientServicesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     Map<String, List<String>> services = {
-      "Patient Care": [
-        "Visual Acuity Test",
-        "Eye Assessment",
+      loc.servicesPatientCare: [
+        loc.recentServicesVisualAcuityTest,
+        loc.recentServicesEyeAssessment,
       ],
     };
 
