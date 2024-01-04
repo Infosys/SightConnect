@@ -129,8 +129,11 @@ class PatientHomePageAppBar extends StatelessWidget
           builder: (context, ref, _) {
             final model = ref.watch(globalTextScaleFactorProvider);
             return PopupMenuButton(
-              icon: const Icon(
-                Icons.accessibility_new_sharp,
+              icon: SvgPicture.asset(
+                "assets/icons/accessability.svg",
+                fit: BoxFit.cover,
+                height: 50,
+                width: 55,
               ),
               initialValue: model.scaleAlphabet,
               onSelected: (value) {
