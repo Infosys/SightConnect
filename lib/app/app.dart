@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -19,8 +20,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../app_environment.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
-  // return await FlutterJailbreakDetection.jailbroken;
-  return false;
+  return await FlutterJailbreakDetection.jailbroken;
 });
 
 class MyApp extends ConsumerWidget {
@@ -72,7 +72,6 @@ class MyApp extends ConsumerWidget {
                   : AppTheme.getDarkTheme(context),
               routes: AppRouter.routes,
               initialRoute: initialRoute,
-
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
               //   return ref.watch(internetProvider).when(
