@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/v
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
@@ -200,7 +201,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     final rolePages = {
       Role.ROLE_PATIENT: const PatientDashboardPage(),
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
-      // Role.ROLE_VISION_GUARDIAN: const PatientDashboardPage(),
+      Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
     };
 

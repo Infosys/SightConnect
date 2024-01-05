@@ -1,30 +1,24 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_report/presentation/pages/vision_guardian_report_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
-import '../widgets/critical_cases_cards_list.dart';
 import '../widgets/vg_services_cards_list.dart';
 
-class VisionGuardianHomePage extends StatelessWidget {
+class VisionGuardianHomePage extends ConsumerWidget {
   const VisionGuardianHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
@@ -77,6 +71,25 @@ class VisionGuardianHomePage extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
+                                              IconButton(
+                        onPressed: () {
+                          final navigator = Navigator.of(context);
+                          ref
+                              .read(initializationProvider)
+                              .logout()
+                              .then((value) async {
+                            navigator.pushNamedAndRemoveUntil(
+                              LoginPage.routeName,
+                              (route) => false,
+                            );
+                            ref.invalidate(initializationProvider);
+                          }).catchError((e) {
+                            Fluttertoast.showToast(
+                              msg: e.toString(),
+                            );
+                          });
+                        },
+                        icon: const Icon(Icons.logout))
                         ],
                       ),
                       const SizedBox(height: AppSize.klheight * 1.5),
