@@ -29,10 +29,16 @@ class PatientFamilyDetails extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                loc.myConnectionsTitle,
-                style: applyFiraSansFont(
-                    fontSize: 18, fontWeight: FontWeight.w600),
+              Flexible(
+                child: Text(
+                  loc.myConnectionsTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -18,6 +20,7 @@ class PatientHeader extends HookWidget {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
     var initialPage = useState<int>(0);
+    final displayData = getCarouselData(context.loc!);
     return Container(
       margin: EdgeInsets.only(
         top: AppSize.height(context) * 0.11,
@@ -45,8 +48,8 @@ class PatientHeader extends HookWidget {
                 },
               ),
               itemBuilder: (context, index, _) {
-                // var data = carouselData[index];
-                var data = getCarouselData(context.loc!)[index];
+                var data = displayData[index];
+
                 var textColor = index == 0 ? AppColor.black : AppColor.white;
                 var buttonColor =
                     index == 0 ? AppColor.primary : AppColor.white;
@@ -106,12 +109,12 @@ class PatientHeader extends HookWidget {
                                     color: buttonColor,
                                   ),
                                 ),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                context.loc!.knowMoreButton,
-                                style: applyRobotoFont(
-                                  color: buttonColor,
+                                onPressed: () {},
+                                child: Text(
+                                  context.loc!.knowMoreButton,
+                                  style: applyRobotoFont(
+                                    color: buttonColor,
+                                  ),
                                 ),
                               ),
                             ),

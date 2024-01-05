@@ -24,35 +24,40 @@ class RecentServicesCardList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
                 child: Text(
                   loc.recentServicesTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: applyFiraSansFont(
                     fontSize: 18,
                   ),
                 ),
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return const PatientServicesPage();
-                    },
-                  );
-                },
-                child: Text(
-                  loc.seeAllButton,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.blue,
+              Flexible(
+                child: TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const PatientServicesPage();
+                      },
+                    );
+                  },
+                  child: Text(
+                    loc.seeAllButton,
+                    maxLines: 1,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.blue,
+                    ),
                   ),
                 ),
               ),

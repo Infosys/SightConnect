@@ -21,24 +21,6 @@ List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       },
     ];
 
-var doctor = [
-  {
-    "name": "Dr. Jagadish Rana",
-    "profession": "Eye Surgeon",
-    "recommendation":
-        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
-    'image': 'assets/images/dr_prashant_garg.png',
-    "prefix": "PG",
-  },
-  {
-    "name": "Dr. Jagadish Rana",
-    "profession": "Eye Surgeon",
-    "recommendation":
-        "Hey Raghavan, It's time to perform your Acuity Test.\nPerform Test Now",
-    'image': 'assets/images/dr_rajeev_r_pappuru.png',
-    "prefix": "RP",
-  },
-];
 List<Map<String, dynamic>> connectionList = [
   {
     'name': 'Raghavi',

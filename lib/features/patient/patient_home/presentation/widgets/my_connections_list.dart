@@ -47,6 +47,7 @@ class MyConnectionsList extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
@@ -57,22 +58,24 @@ class MyConnectionsList extends ConsumerWidget {
                 ),
               ),
             ),
-            const Spacer(),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PatientProfilePage(),
+            Flexible(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PatientProfilePage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  loc.seeAllButton,
+                  maxLines: 1,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.blue,
                   ),
-                );
-              },
-              child: Text(
-                loc.seeAllButton,
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.blue,
                 ),
               ),
             )

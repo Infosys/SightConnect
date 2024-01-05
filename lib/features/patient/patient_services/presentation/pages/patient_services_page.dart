@@ -70,11 +70,12 @@ class PatientServicesPage extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                                BottomNavItems.service.svgImage,
-                                colorFilter: const ColorFilter.mode(
-                                  AppColor.primary,
-                                  BlendMode.srcIn,
-                                )),
+                              BottomNavItems.service.svgImage,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.primary,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.all(8.0),

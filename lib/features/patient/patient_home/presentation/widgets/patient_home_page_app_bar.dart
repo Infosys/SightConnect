@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -115,20 +116,19 @@ class PatientHomePageAppBar extends StatelessWidget
                                     margin: const EdgeInsets.all(10),
                                     padding: const EdgeInsets.all(15),
                                     decoration: BoxDecoration(
-                                        color: COLORS[index % COLORS.length],
+                                        color: AppColor.white,
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                            color: isActiveLocale
-                                                ? Colors.green
-                                                : Colors.black38.withOpacity(0),
-                                            width: isActiveLocale ? 3 : 2),
-                                        boxShadow: [
+                                          color: isActiveLocale
+                                              ? Colors.green
+                                              : Colors.black38.withOpacity(0),
+                                          width: isActiveLocale ? 2 : 1,
+                                        ),
+                                        boxShadow: const [
                                           BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
+                                            color: Colors.black45,
                                             spreadRadius: 1,
                                             blurRadius: 2,
-                                            // offset: Offset(0, 3),
                                           )
                                         ]),
                                     child: Stack(
@@ -141,23 +141,20 @@ class PatientHomePageAppBar extends StatelessWidget
                                           children: [
                                             Text(
                                               appLocale.localeName,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge
-                                                  ?.copyWith(
-                                                      fontSize: 30,
-                                                      // fontWeight: FontWeight.bold,
-                                                      color: Colors.black
-                                                          .withOpacity(0.8)),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: applyRobotoFont(
+                                                fontSize: 16,
+                                              ),
                                             ),
                                             const SizedBox(height: 10),
                                             Text(
                                               appLocale.locale != "en"
                                                   ? appLocale.name
                                                   : "",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: applyRobotoFont(),
                                             ),
                                           ],
                                         ),
@@ -178,6 +175,7 @@ class PatientHomePageAppBar extends StatelessWidget
                               },
                             ),
                           ),
+                          const SizedBox(height: 100),
                         ],
                       ),
                     ),
