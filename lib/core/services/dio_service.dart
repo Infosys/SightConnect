@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/app_environment.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
@@ -34,10 +32,9 @@ var dioProvider = Provider(
       ),
     );
 
-    dio.interceptors.addAll([
-      DioTokenInterceptor(ref, dio),
-      DioCertificateInterceptor(dio),
-    ]);
+    dio.interceptors.addAll(
+      [DioTokenInterceptor(ref, dio), DioCertificateInterceptor(dio)],
+    );
     return dio;
   },
 );

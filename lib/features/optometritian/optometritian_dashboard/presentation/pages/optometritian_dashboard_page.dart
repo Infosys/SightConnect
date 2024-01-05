@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -57,11 +58,20 @@ class OptometritianDashboardPage extends ConsumerWidget {
                     const SizedBox(
                       width: AppSize.kmwidth,
                     ),
-                    Text(
-                      'ClinicalVal',
-                      style: applyFiraSansFont(
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w600,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PatientDashboardPage()),
+                            (route) => false);
+                      },
+                      child: Text(
+                        'ClinicalVal',
+                        style: applyFiraSansFont(
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     const Spacer(),

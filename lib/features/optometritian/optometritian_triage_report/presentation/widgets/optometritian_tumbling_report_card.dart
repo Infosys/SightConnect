@@ -50,7 +50,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               padding: EdgeInsets.zero,
               itemCount: data.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 childAspectRatio: 1.4,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,
@@ -144,7 +144,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          // const SizedBox(height: AppSize.ksheight),
         ],
       ),
     );

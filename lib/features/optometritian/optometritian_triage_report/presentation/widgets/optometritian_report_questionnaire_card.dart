@@ -56,48 +56,34 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                     height: 8,
                   ),
                   for (var i = 0; i < currentData['answer'].length; i++)
-                    if (currentData['answer'][i] != "None of these")
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 2),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "\u2022  ",
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "\u2022  ",
+                            style: applyRobotoFont(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black.withOpacity(0.7),
+                                height: 1.5),
+                          ),
+                          Flexible(
+                            child: Text(
+                              currentData['answer'][i],
+                              softWrap: true,
                               style: applyRobotoFont(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black.withOpacity(0.7),
-                                  height: 1.5),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
+                              ),
                             ),
-                            Flexible(
-                              child:
-                                  currentData['answer'][i] == "Other symptoms"
-                                      ? Text(
-                                          currentData['answer'][i] +
-                                              " - " +
-                                              remarksData[index],
-                                          softWrap: true,
-                                          style: applyRobotoFont(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.black,
-                                          ),
-                                        )
-                                      : Text(
-                                          currentData['answer'][i],
-                                          softWrap: true,
-                                          style: applyRobotoFont(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+                    ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Divider(
@@ -111,9 +97,54 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
               );
             },
           ),
-          const SizedBox(
-            height: AppSize.ksheight,
-          ),
+          remarksData.isEmpty
+              ? const SizedBox()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Other Symptoms",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black.withOpacity(0.8),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "\u2022  ",
+                          style: applyRobotoFont(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black.withOpacity(0.7),
+                              height: 1.5),
+                        ),
+                        Text(
+                          remarksData,
+                          softWrap: true,
+                          style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        thickness: 1.5,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.ksheight,
+                    ),
+                  ],
+                ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
