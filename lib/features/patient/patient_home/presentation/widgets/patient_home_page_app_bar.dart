@@ -193,29 +193,29 @@ class PatientHomePageAppBar extends StatelessWidget
         Consumer(
           builder: (context, ref, _) {
             final model = ref.watch(globalTextScaleFactorProvider);
-            return PopupMenuButton(
+            return PopupMenuButton<double>(
               icon: SvgPicture.asset(
                 "assets/icons/accessability.svg",
                 fit: BoxFit.cover,
                 height: 50,
                 width: 55,
               ),
-              initialValue: model.scaleAlphabet,
-              onSelected: (value) {
-                model.setTextScaleFactor(value);
+              initialValue: model.textScaleFactor,
+              onSelected: (value) async {
+                await model.setTextScaleFactor(value);
               },
               itemBuilder: (context) {
                 return [
                   const PopupMenuItem(
-                    value: "-A",
+                    value: 0.8,
                     child: Text('-A'),
                   ),
                   const PopupMenuItem(
-                    value: "A",
+                    value: 1,
                     child: Text('A'),
                   ),
                   const PopupMenuItem(
-                    value: "+A",
+                    value: 1.2,
                     child: Text('+A'),
                   ),
                 ];

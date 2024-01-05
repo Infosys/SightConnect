@@ -364,6 +364,7 @@ class LoginPage extends HookConsumerWidget {
                       Fluttertoast.showToast(msg: "Invalid OTP");
 
                       otpError.value = "Invalid OTP";
+                      pinController.clear();
                       Future.delayed(const Duration(seconds: 2), () {
                         otpError.value = "";
                       });
