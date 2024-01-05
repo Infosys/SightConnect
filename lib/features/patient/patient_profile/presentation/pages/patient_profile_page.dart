@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_helper.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class PatientProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -27,7 +29,7 @@ class PatientProfilePage extends ConsumerWidget {
             color: AppColor.white,
           ),
           title: Text(
-            "My Profile",
+            loc.appDrawerMyProfile,
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
               color: AppColor.white,
@@ -88,7 +90,7 @@ class PatientProfilePage extends ConsumerWidget {
       mon: patient.profile?.patient?.monthOfBirth ?? "",
       year: patient.profile?.patient?.yearOfBirth ?? "",
     );
-
+    final loc = context.loc!;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,7 +105,7 @@ class PatientProfilePage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "General Information",
+                      loc.myProfileGeneralInfo,
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -113,7 +115,7 @@ class PatientProfilePage extends ConsumerWidget {
                       height: AppSize.ksheight,
                     ),
                     PatientInfoCard(
-                      keyText: "Age",
+                      keyText: loc.myProfileAge,
                       valueText: dob,
                     ),
                   ],
@@ -135,41 +137,41 @@ class PatientProfilePage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Address",
+                      loc.myProfileAddress,
                       style: applyFiraSansFont(
                           fontSize: 18, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "Line",
+                      keyText: loc.myProfileLine,
                       valueText: PatientHelper.street(
                         patient.profile?.patient?.address,
                       ),
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "City",
+                      keyText: loc.myProfileCity,
                       valueText: PatientHelper.city(
                         patient.profile?.patient?.address,
                       ),
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "District",
+                      keyText: loc.myProfileDistrict,
                       valueText: PatientHelper.district(
                         patient.profile?.patient?.address,
                       ),
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "State",
+                      keyText: loc.myProfileState,
                       valueText: PatientHelper.state(
                         patient.profile?.patient?.address,
                       ),
                     ),
                     const SizedBox(height: AppSize.ksheight),
                     PatientInfoCard(
-                      keyText: "Pincode",
+                      keyText: loc.myProfilePinCode,
                       valueText: PatientHelper.pincode(
                         patient.profile?.patient?.address,
                       ),
