@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
@@ -7,9 +8,12 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/follow_up_cases_cards_list.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_report/presentation/pages/vision_guardian_report_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
@@ -141,20 +145,31 @@ class VisionGuardianHomePage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  TextButton(
-                    child: Text(
-                      'View All',
-                      style: applyFiraSansFont(
-                        fontSize: 14,
-                        color: AppColor.primary,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const VisionGuardianEventPage(),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      return TextButton(
+                        child: Text(
+                          'View All',
+                          style: applyFiraSansFont(
+                            fontSize: 14,
+                            color: AppColor.primary,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
+                        onPressed: () async {
+                          print("object");
+                          var reports = await ref
+                              .read(patientAssessmentAndTestProvider)
+                              .getTriageDetailedReport(33200000017);
+                          print(reports);
+                          /*  Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => VisionGuardianReportPage(
+                                  assessmentDetailsReport: reports,
+                                ),
+                              ),
+                            ); */
+                        },
                       );
                     },
                   ),
