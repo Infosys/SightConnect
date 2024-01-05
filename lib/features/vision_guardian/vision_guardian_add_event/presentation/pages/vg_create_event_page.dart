@@ -53,6 +53,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         ],
         leadingIcon: InkWell(
           onTap: () {
+            ref.read(addEventDetailsProvider).filterListEvents(0, "");
             Navigator.popUntil(context, (route) => route.isFirst);
           },
           child: const Icon(
