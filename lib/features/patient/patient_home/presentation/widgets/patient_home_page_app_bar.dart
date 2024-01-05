@@ -39,6 +39,8 @@ class PatientHomePageAppBar extends StatelessWidget
       actions: [
         Consumer(
           builder: (context, ref, child) {
+            final currentLocaleCode =
+                ref.watch(globalLanguageProvider).currentLocale.toString();
             return IconButton(
               onPressed: () {
                 showBottomSheet(
@@ -85,36 +87,76 @@ class PatientHomePageAppBar extends StatelessWidget
                               childAspectRatio: 1.5,
                             ),
                             itemBuilder: (context, index) {
+                              final appLocale = appLocales[index];
+
+                              bool isActiveLocale =
+                                  currentLocaleCode == appLocale.locale;
                               return InkWell(
                                 onTap: () {
-                                  // Change language here
                                   ref
                                       .read(globalLanguageProvider)
-                                      .setCurrentLocale(
-                                          appLocales[index].locale);
+                                      .setCurrentLocale(appLocale.locale);
                                   Navigator.of(context).pop();
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(
-                                    color: AppColor.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                      color: appLocale.color,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: isActiveLocale
+                                              ? Colors.green
+                                              : Colors.black38.withOpacity(0),
+                                          width: isActiveLocale ? 3 : 2),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          // offset: Offset(0, 3),
+                                        )
+                                      ]),
+                                  child: Stack(
                                     children: [
-                                      SvgPicture.asset(
-                                        AppIcon.logo,
-                                        height: 50,
-                                        width: 50,
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            appLocale.localeName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge
+                                                ?.copyWith(
+                                                    fontSize: 32,
+                                                    // fontWeight: FontWeight.bold,
+                                                    color: Colors.black
+                                                        .withOpacity(0.8)),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            appLocale.locale != "en"
+                                                ? appLocale.name
+                                                : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        appLocales[index].name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge,
-                                      ),
+                                      isActiveLocale
+                                          ? const Positioned(
+                                              bottom: 0,
+                                              right: 0,
+                                              child: Icon(
+                                                Icons.check_circle,
+                                                color: Colors.green,
+                                                size: 32,
+                                              ))
+                                          : Container()
                                     ],
                                   ),
                                 ),
