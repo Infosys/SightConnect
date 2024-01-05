@@ -105,8 +105,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
             InAppWebView(
               key: webViewKey,
               initialUrlRequest: URLRequest(
-                url: WebUri(
-                    "https://eyecare4all-dev.infosysapps.com/patient-registration/"),
+                url: WebUri(widget.miniapp.sourceurl),
               ),
               initialSettings: settings,
               pullToRefreshController: pullToRefreshController,
@@ -163,18 +162,18 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 logger.d("androidShouldInterceptRequest: ${request.url}");
                 final hash = request.url.fragment.trim();
                 final host = request.url.host.trim();
-                if (widget.token.isNotEmpty) {
-                  if (host == "eyecare4all-dev.infosysapps.com") {
-                    request.headers!["Authorization"] =
-                        "Bearer ${widget.token}";
-                  }
-                  if (hash == "failure") {
-                    // Navigator.of(context).pop(true);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
-                  } else if (hash == "success") {
-                    Navigator.of(context).pop(false);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
-                  }
+
+                if (widget.token.isNotEmpty &&
+                    host == "eyecare4all-dev.infosysapps.com") {
+                  request.headers!["Authorization"] = "Bearer ${widget.token}";
+                }
+                logger.d("hash: $hash");
+                if (hash == "failure") {
+                  // Navigator.of(context).pop(true);
+                  Future.value(WebResourceResponse(data: Uint8List(0)));
+                } else if (hash == "success") {
+                  Navigator.of(context).pop(true);
+                  Future.value(WebResourceResponse(data: Uint8List(0)));
                 }
 
                 return null;

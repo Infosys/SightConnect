@@ -33,6 +33,16 @@ class PatientConsentFormPage extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Privacy Policy",
+                      style: applyRobotoFont(
+                          fontWeight: FontWeight.w600, fontSize: 18),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 20),
                 Center(
                   child: SvgPicture.asset(

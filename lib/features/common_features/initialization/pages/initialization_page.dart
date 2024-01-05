@@ -39,9 +39,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        AppLogger.setVisitorUserId(
-            PersistentAuthStateService.authState.username);
-
         final navigator = Navigator.of(context);
         final role = PersistentAuthStateService.authState.activeRole;
 
@@ -115,7 +112,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       ),
     );
 
-    if (status == null || status) {
+    if (status == null || status == false) {
       // api failed or manual back press
       await _showRegistrationDialog(role);
     } else {

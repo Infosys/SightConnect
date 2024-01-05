@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/i
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
@@ -51,9 +52,14 @@ class MyApp extends ConsumerWidget {
         return Millimeters.fromView(
           child: MediaQuery(
             data: mediaQueryData.copyWith(
-              textScaler:
-                  TextScaler.linear(Responsive.isMobile(context) ? 1.0 : 1.3),
-            ),
+                textScaler: TextScaler.linear(
+              ref.watch(globalTextScaleFactorProvider).textScaleFactor,
+            )
+
+                //  TextScaler.linear(
+                //   Responsive.isMobile(context) ? 1.0 : 1.3,
+                // ),
+                ),
             child: MaterialApp(
               title: AppText.appName,
               // locale: const Locale('en'),
@@ -103,63 +109,6 @@ class MyApp extends ConsumerWidget {
         logger.d("isJailBrokenProvider: orElse");
         return const SecurePage();
       },
-    );
-  }
-}
-
-class SecurePage extends StatelessWidget {
-  const SecurePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.getLightTheme(context),
-      home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "It seems your device is jailbroken",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "For security reasons, access to this app is restricted on jailbroken devices.",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 40),
-                OutlinedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(200, 50),
-                  ),
-                  onPressed: () {
-                    exit(0);
-                  },
-                  child: const Text(
-                    "Exit App",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

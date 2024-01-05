@@ -207,10 +207,11 @@ class TriageEyeScanProvider with ChangeNotifier {
 
 var triageEyeScanProvider = ChangeNotifierProvider(
   (ref) => TriageEyeScanProvider(
-      ref.watch(saveTriageEyeScanLocallyUseCase),
-      ref.watch(fileMsServiceProvider),
-      TriageEyeType.RIGHT,
-      ref.watch(connectivityProvider),
-      ref.watch(getTriageProvider).asData?.value,
-      ref.watch(triageLocalSourceProvider)),
+    ref.watch(saveTriageEyeScanLocallyUseCase),
+    ref.watch(fileMsServiceProvider),
+    TriageEyeType.RIGHT,
+    ref.watch(connectivityProvider),
+    ref.watch(getTriageProvider).asData?.value,
+    ref.watch(triageLocalSourceProvider),
+  ),
 );
