@@ -358,6 +358,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       var response = await _dio.post(endpoint,
           data: datatriage, queryParameters: {"event-id": int.parse(eventId)});
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
+        print(response.statusCode);
         return response.statusCode;
       } else {
         throw ServerException();

@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
@@ -72,6 +73,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                 onTap: ()  {
 
                   ref.read(addEventDetailsProvider).addPatientTriage();
+                  showToastMessage("Added Succesfully",context,0);
                 
                  /*  Navigator.push(
                     context,

@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -179,8 +180,8 @@ class EventTeammatesTab extends HookConsumerWidget {
         child: CircularProgressIndicator(),
       );
     }, error: (error, stack) {
-      return Center(
-        child: Text(error.toString()),
+      return const Center(
+        child: VisionGuardianEmptyResultCard(type: "teamMates")
       );
     });
   }
