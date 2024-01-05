@@ -66,7 +66,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   }) async {
     const endpoint = "/services/triage/api/campaign-events";
     Map<String, dynamic> queryParameters = {
-      "actorIdentifier": actorIdentifier,
+      "actor-id": actorIdentifier,
     };
     print("object1");
     try {
@@ -120,6 +120,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future deleteVGEvents({required String eventId}) async {
     final endpoint = "/services/triage/api/campaign-events/$eventId";
     print(endpoint);
+    Map<String, dynamic> queryParameters = {
+      "login-actor-id": "11067400874",
+    };
     try {
       final response = await _dio.delete(endpoint);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
@@ -154,10 +157,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
       print(newResponse);
 
-      const endpoint = "/services/triage/api/campaign-events/teamMates";
+      const endpoint = "/services/triage/api/campaign-events/teammates";
       Map<String, dynamic> queryParameters = {
-        "eventId": eventId,
-        "loginActorIdentifier": actorIdentifier
+        "event-id": eventId,
+        "login-actor-id": actorIdentifier
       };
       logger.d(queryParameters);
       return await _dio
@@ -177,10 +180,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future<List<dynamic>> getTeammates(
       {required String eventId, required String actorIdentifier}) async {
-    const endpoint = "/services/triage/api/campaign-events/teamMates";
+    const endpoint = "/services/triage/api/campaign-events/teammates";
     Map<String, dynamic> queryParameters = {
-      "eventId": eventId,
-      "loginActorIdentifier": actorIdentifier
+      "event-id": eventId,
+      "login-actor-id": actorIdentifier
     };
     final response = await _dio
         .get(endpoint, queryParameters: queryParameters)
@@ -213,11 +216,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       {required String eventId,
       required String loginActorIdentifier,
       required String actorIdentifier}) async {
-    const endpoint = "/services/triage/api/campaign-events/teamMates";
+    const endpoint = "/services/triage/api/campaign-events/teammates";
     Map<String, dynamic> queryParameters = {
-      "eventId": eventId,
-      "loginActorIdentifier": loginActorIdentifier,
-      "actorIdentifier": actorIdentifier,
+      "event-id": eventId,
+      "login-actor-id": loginActorIdentifier,
+      "actor-id": actorIdentifier,
     };
     print(queryParameters);
 
@@ -253,10 +256,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       List<VisionGuardianPatientResponseModel> data = (response.data as List)
           .map((e) => VisionGuardianPatientResponseModel.fromJson(e))
           .toList();
-      
+
       return data;
     } catch (error) {
-       rethrow;
+      rethrow;
     }
   }
 
