@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,24 +10,23 @@ import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 
-class EventDetailsTab extends ConsumerWidget{
+class EventDetailsTab extends ConsumerWidget {
   EventDetailsTab({super.key, required this.eventDetails});
 
   VisionGuardianEventModel eventDetails;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     DateTime startDate = DateTime.parse(eventDetails.startDate!);
     DateTime endDate = DateTime.parse(eventDetails.endDate!);
     String startDateformattedDate = DateFormat('dd MMM').format(startDate);
     String endDateformattedDate = DateFormat('dd MMM yyyy').format(endDate);
 
- DateTime startTime = DateTime.parse(eventDetails.startTime!);
-  String startformattedTime = DateFormat('h a').format(startTime);
+    DateTime startTime = DateTime.parse(eventDetails.startTime!);
+    String startformattedTime = DateFormat('h a').format(startTime);
 
- DateTime endTime = DateTime.parse(eventDetails.endTime!);
-  String endTimeformattedTime = DateFormat('h a').format(endTime);
-
+    DateTime endTime = DateTime.parse(eventDetails.endTime!);
+    String endTimeformattedTime = DateFormat('h a').format(endTime);
 
     return SingleChildScrollView(
       child: Padding(
@@ -130,9 +130,7 @@ class EventDetailsTab extends ConsumerWidget{
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {
-                  
-                    },
+                    onPressed: () {},
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
                         color: AppColor.primary,
@@ -159,13 +157,17 @@ class EventDetailsTab extends ConsumerWidget{
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                          print("object");
-                      ref.read(addEventDetailsProvider).deleteEventDetails(
-                        eventId: eventDetails.id!.toString(),
-                      ).then((value)
-                      {
-                        print(value);
-                        Navigator.pop(context);
+                      print("object");
+                      logger.d(eventDetails.id!);
+                      ref
+                          .read(addEventDetailsProvider)
+                          .deleteEventDetails(
+                              eventId: eventDetails.id.toString())
+                          .then((statusCode) {
+                        if (statusCode >= 200 && statusCode < 210) {
+                          ref.read(addEventDetailsProvider).filterListEvents(0, "");
+                          Navigator.pop(context);
+                        }
                       });
                     },
                     style: ElevatedButton.styleFrom(

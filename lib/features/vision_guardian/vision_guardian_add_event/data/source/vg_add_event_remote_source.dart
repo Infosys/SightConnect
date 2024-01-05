@@ -127,11 +127,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     Map<String, dynamic> queryParameters = {
       "login-actor-id": "11067400874",
     };
+  
     try {
-      final response = await _dio.delete(endpoint);
+      final response = await _dio.delete(endpoint,queryParameters: queryParameters);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         print(response);
-        return response;
+        return response.statusCode;
       } else {
         throw ServerException();
       }

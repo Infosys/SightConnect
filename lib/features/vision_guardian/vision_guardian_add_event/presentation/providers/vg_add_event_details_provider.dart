@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/contracts/vg_add_event_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
@@ -96,15 +98,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future deleteEventDetails({required String eventId}) async {
-    try {
-      isLoading = true;
-      notifyListeners();
-      return await vgAddEventRepository.deleteVGEvents(eventId: eventId);
-    } catch (e) {
-      logger.d(e);
-      isLoading = false;
-    }
+  Future<int> deleteEventDetails({required String eventId}) async {
+    isLoading = true;
+    notifyListeners();
+    var statusCode =
+        await vgAddEventRepository.deleteVGEvents(eventId: eventId);
+    return statusCode;
   }
 
   Future addEventDetails() async {

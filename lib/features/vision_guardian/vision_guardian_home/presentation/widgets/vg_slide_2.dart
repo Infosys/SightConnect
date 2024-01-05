@@ -10,11 +10,11 @@ import 'package:pie_chart/pie_chart.dart';
 class VGSlide2 extends StatelessWidget {
   const VGSlide2({super.key});
   static Map<String, int> dataMapAge = {
-    "< 10 Yrs": 10,
-    "10 - 29 Yrs": 10,
-    "30 - 39 Yrs": 10,
-    "40 - 59 Yrs": 10,
-    "60+ Yrs": 10,
+    "< 10 Yrs": 0,
+    "10 - 29 Yrs": 0,
+    "30 - 39 Yrs": 0,
+    "40 - 59 Yrs": 0,
+    "60+ Yrs": 0,
   };
 
   static List<Color> colorList = [

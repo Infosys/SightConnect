@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 class VGSlide1 extends StatelessWidget {
   const VGSlide1({super.key});
 
-  static Map<String, double> dataMale = {"Male": 15};
-  static Map<String, double> dataFemale = {"Female": 35};
-  static Map<String, double> dataOthers = {"Others": 12};
-  static List<double> totalValues = [32, 51, 36];
+  static Map<String, double> dataMale = {"Male": 0};
+  static Map<String, double> dataFemale = {"Female": 0};
+  static Map<String, double> dataOthers = {"Others": 0};
+  static List<double> totalValues = [0, 0, 0];
   static List<List<Color>> genderColor = [
     [AppColor.primary],
     [AppColor.darkPink],
@@ -49,7 +49,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "50",
+                          "-",
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -69,7 +69,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "30",
+                          "-",
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -89,7 +89,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "20",
+                          "-",
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,

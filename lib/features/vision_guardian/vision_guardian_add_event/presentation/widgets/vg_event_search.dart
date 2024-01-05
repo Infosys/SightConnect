@@ -32,7 +32,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
           child: Center(
             child: (search == "event")
                 ? ((event.isEmpty)
-                    ?const VisionGuardianEmptyResultCard(
+                    ? const VisionGuardianEmptyResultCard(
                         type: "Event",
                       )
                     : const VisionEventListDetails(

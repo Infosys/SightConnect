@@ -9,15 +9,15 @@ import 'package:pie_chart/pie_chart.dart';
 class VGSlide3 extends StatelessWidget {
   const VGSlide3({super.key});
   static Map<String, double> data = {
-    "Refractive": 60,
-    "Cataract": 32,
-    "Glaucoma": 23,
-    "Keratitis": 32,
-    "Blepharitis": 10,
-    "Conjunctivitis": 22,
+    "Refractive": 0,
+    "Cataract": 0,
+    "Glaucoma": 0,
+    "Keratitis": 0,
+    "Blepharitis": 0,
+    "Conjunctivitis": 0,
   };
 
-  static int total = 224;
+  static int total = 0;
 
   static List<Color> colorList = [
     AppColor.darkBlue,

@@ -19,7 +19,16 @@ class VisionEventListDetails extends ConsumerWidget {
     if (eventType == "default") {
       return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
         if (eventDetails.length == 0) {
-          return VisionGuardianEmptyResultCard(type: "Event");
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                
+                VisionGuardianEmptyResultCard(type: "Event"),
+              ],
+            ),
+          );
         }
 
         Widget event(event) {
