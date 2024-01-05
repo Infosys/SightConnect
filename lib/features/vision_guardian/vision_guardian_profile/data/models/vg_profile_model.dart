@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vg_profile_model.freezed.dart';
@@ -21,10 +22,13 @@ class VgProfileModel with _$VgProfileModel {
     @JsonKey(name: "contactInformation") ContactInformation? contactInformation,
     @JsonKey(name: "registrationAcademic")
     RegistrationAcademic? registrationAcademic,
-    @JsonKey(name: "specialities") List<Speciality>? specialities,
     @JsonKey(name: "currentWorkDetails") CurrentWorkDetails? currentWorkDetails,
+    @JsonKey(name: "availableForTeleconsultation")
+    bool? availableForTeleconsultation,
+    @JsonKey(name: "practiceGrants") List<PracticeGrant>? practiceGrants,
     @JsonKey(name: "osid") String? osid,
   }) = _VgProfileModel;
+
   factory VgProfileModel.fromJson(Map<String, dynamic> json) =>
       _$VgProfileModelFromJson(json);
 }
@@ -72,23 +76,11 @@ class CurrentWorkDetails with _$CurrentWorkDetails {
     @JsonKey(name: "chooseWorkStatus") String? chooseWorkStatus,
     @JsonKey(name: "reasonForNotWorking") String? reasonForNotWorking,
     @JsonKey(name: "certificateAttachment") String? certificateAttachment,
-    @JsonKey(name: "facilityDeclarationData")
-    Speciality? facilityDeclarationData,
     @JsonKey(name: "osid") String? osid,
   }) = _CurrentWorkDetails;
 
   factory CurrentWorkDetails.fromJson(Map<String, dynamic> json) =>
       _$CurrentWorkDetailsFromJson(json);
-}
-
-@freezed
-class Speciality with _$Speciality {
-  const factory Speciality({
-    @JsonKey(name: "osid") String? osid,
-  }) = _Speciality;
-
-  factory Speciality.fromJson(Map<String, dynamic> json) =>
-      _$SpecialityFromJson(json);
 }
 
 @freezed
@@ -110,6 +102,45 @@ class PersonalInformation with _$PersonalInformation {
 }
 
 @freezed
+class PracticeGrant with _$PracticeGrant {
+  const factory PracticeGrant({
+    @TimestampConverter() DateTime? registrationDate,
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "grantType") String? grantType,
+    @JsonKey(name: "grantRole") String? grantRole,
+    @JsonKey(name: "department") String? department,
+    @JsonKey(name: "organization") Organization? organization,
+  }) = _PracticeGrant;
+
+  factory PracticeGrant.fromJson(Map<String, dynamic> json) =>
+      _$PracticeGrantFromJson(json);
+}
+
+@freezed
+class Organization with _$Organization {
+  const factory Organization({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "regRef") String? regRef,
+    @JsonKey(name: "facilityType") String? facilityType,
+    @JsonKey(name: "tenant") Tenant? tenant,
+    @JsonKey(name: "status") String? status,
+    @JsonKey(name: "governingOrganization") dynamic governingOrganization,
+  }) = _Organization;
+
+  factory Organization.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationFromJson(json);
+}
+
+@freezed
+class Tenant with _$Tenant {
+  const factory Tenant({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "name") String? name,
+  }) = _Tenant;
+  factory Tenant.fromJson(Map<String, dynamic> json) => _$TenantFromJson(json);
+}
+
+@freezed
 class RegistrationAcademic with _$RegistrationAcademic {
   const factory RegistrationAcademic({
     @JsonKey(name: "category") String? category,
@@ -117,7 +148,6 @@ class RegistrationAcademic with _$RegistrationAcademic {
     List<RegistrationDatum>? registrationData,
     @JsonKey(name: "osid") String? osid,
   }) = _RegistrationAcademic;
-
   factory RegistrationAcademic.fromJson(Map<String, dynamic> json) =>
       _$RegistrationAcademicFromJson(json);
 }
@@ -160,7 +190,6 @@ class Qualification with _$Qualification {
     String? proofOfNameChangeCertificate,
     @JsonKey(name: "osid") String? osid,
   }) = _Qualification;
-
   factory Qualification.fromJson(Map<String, dynamic> json) =>
       _$QualificationFromJson(json);
 }

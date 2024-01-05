@@ -48,11 +48,13 @@ mixin _$VgProfileModel {
   @JsonKey(name: "registrationAcademic")
   RegistrationAcademic? get registrationAcademic =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: "specialities")
-  List<Speciality>? get specialities => throw _privateConstructorUsedError;
   @JsonKey(name: "currentWorkDetails")
   CurrentWorkDetails? get currentWorkDetails =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: "availableForTeleconsultation")
+  bool? get availableForTeleconsultation => throw _privateConstructorUsedError;
+  @JsonKey(name: "practiceGrants")
+  List<PracticeGrant>? get practiceGrants => throw _privateConstructorUsedError;
   @JsonKey(name: "osid")
   String? get osid => throw _privateConstructorUsedError;
 
@@ -85,9 +87,11 @@ abstract class $VgProfileModelCopyWith<$Res> {
       ContactInformation? contactInformation,
       @JsonKey(name: "registrationAcademic")
       RegistrationAcademic? registrationAcademic,
-      @JsonKey(name: "specialities") List<Speciality>? specialities,
       @JsonKey(name: "currentWorkDetails")
       CurrentWorkDetails? currentWorkDetails,
+      @JsonKey(name: "availableForTeleconsultation")
+      bool? availableForTeleconsultation,
+      @JsonKey(name: "practiceGrants") List<PracticeGrant>? practiceGrants,
       @JsonKey(name: "osid") String? osid});
 
   $PersonalInformationCopyWith<$Res>? get personalInformation;
@@ -122,8 +126,9 @@ class _$VgProfileModelCopyWithImpl<$Res, $Val extends VgProfileModel>
     Object? communicationAddress = freezed,
     Object? contactInformation = freezed,
     Object? registrationAcademic = freezed,
-    Object? specialities = freezed,
     Object? currentWorkDetails = freezed,
+    Object? availableForTeleconsultation = freezed,
+    Object? practiceGrants = freezed,
     Object? osid = freezed,
   }) {
     return _then(_value.copyWith(
@@ -175,14 +180,18 @@ class _$VgProfileModelCopyWithImpl<$Res, $Val extends VgProfileModel>
           ? _value.registrationAcademic
           : registrationAcademic // ignore: cast_nullable_to_non_nullable
               as RegistrationAcademic?,
-      specialities: freezed == specialities
-          ? _value.specialities
-          : specialities // ignore: cast_nullable_to_non_nullable
-              as List<Speciality>?,
       currentWorkDetails: freezed == currentWorkDetails
           ? _value.currentWorkDetails
           : currentWorkDetails // ignore: cast_nullable_to_non_nullable
               as CurrentWorkDetails?,
+      availableForTeleconsultation: freezed == availableForTeleconsultation
+          ? _value.availableForTeleconsultation
+          : availableForTeleconsultation // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      practiceGrants: freezed == practiceGrants
+          ? _value.practiceGrants
+          : practiceGrants // ignore: cast_nullable_to_non_nullable
+              as List<PracticeGrant>?,
       osid: freezed == osid
           ? _value.osid
           : osid // ignore: cast_nullable_to_non_nullable
@@ -281,9 +290,11 @@ abstract class _$$_VgProfileModelCopyWith<$Res>
       ContactInformation? contactInformation,
       @JsonKey(name: "registrationAcademic")
       RegistrationAcademic? registrationAcademic,
-      @JsonKey(name: "specialities") List<Speciality>? specialities,
       @JsonKey(name: "currentWorkDetails")
       CurrentWorkDetails? currentWorkDetails,
+      @JsonKey(name: "availableForTeleconsultation")
+      bool? availableForTeleconsultation,
+      @JsonKey(name: "practiceGrants") List<PracticeGrant>? practiceGrants,
       @JsonKey(name: "osid") String? osid});
 
   @override
@@ -321,8 +332,9 @@ class __$$_VgProfileModelCopyWithImpl<$Res>
     Object? communicationAddress = freezed,
     Object? contactInformation = freezed,
     Object? registrationAcademic = freezed,
-    Object? specialities = freezed,
     Object? currentWorkDetails = freezed,
+    Object? availableForTeleconsultation = freezed,
+    Object? practiceGrants = freezed,
     Object? osid = freezed,
   }) {
     return _then(_$_VgProfileModel(
@@ -374,14 +386,18 @@ class __$$_VgProfileModelCopyWithImpl<$Res>
           ? _value.registrationAcademic
           : registrationAcademic // ignore: cast_nullable_to_non_nullable
               as RegistrationAcademic?,
-      specialities: freezed == specialities
-          ? _value._specialities
-          : specialities // ignore: cast_nullable_to_non_nullable
-              as List<Speciality>?,
       currentWorkDetails: freezed == currentWorkDetails
           ? _value.currentWorkDetails
           : currentWorkDetails // ignore: cast_nullable_to_non_nullable
               as CurrentWorkDetails?,
+      availableForTeleconsultation: freezed == availableForTeleconsultation
+          ? _value.availableForTeleconsultation
+          : availableForTeleconsultation // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      practiceGrants: freezed == practiceGrants
+          ? _value._practiceGrants
+          : practiceGrants // ignore: cast_nullable_to_non_nullable
+              as List<PracticeGrant>?,
       osid: freezed == osid
           ? _value.osid
           : osid // ignore: cast_nullable_to_non_nullable
@@ -406,10 +422,13 @@ class _$_VgProfileModel implements _VgProfileModel {
       @JsonKey(name: "communicationAddress") this.communicationAddress,
       @JsonKey(name: "contactInformation") this.contactInformation,
       @JsonKey(name: "registrationAcademic") this.registrationAcademic,
-      @JsonKey(name: "specialities") final List<Speciality>? specialities,
       @JsonKey(name: "currentWorkDetails") this.currentWorkDetails,
+      @JsonKey(name: "availableForTeleconsultation")
+      this.availableForTeleconsultation,
+      @JsonKey(name: "practiceGrants")
+      final List<PracticeGrant>? practiceGrants,
       @JsonKey(name: "osid") this.osid})
-      : _specialities = specialities;
+      : _practiceGrants = practiceGrants;
 
   factory _$_VgProfileModel.fromJson(Map<String, dynamic> json) =>
       _$$_VgProfileModelFromJson(json);
@@ -450,27 +469,30 @@ class _$_VgProfileModel implements _VgProfileModel {
   @override
   @JsonKey(name: "registrationAcademic")
   final RegistrationAcademic? registrationAcademic;
-  final List<Speciality>? _specialities;
   @override
-  @JsonKey(name: "specialities")
-  List<Speciality>? get specialities {
-    final value = _specialities;
+  @JsonKey(name: "currentWorkDetails")
+  final CurrentWorkDetails? currentWorkDetails;
+  @override
+  @JsonKey(name: "availableForTeleconsultation")
+  final bool? availableForTeleconsultation;
+  final List<PracticeGrant>? _practiceGrants;
+  @override
+  @JsonKey(name: "practiceGrants")
+  List<PracticeGrant>? get practiceGrants {
+    final value = _practiceGrants;
     if (value == null) return null;
-    if (_specialities is EqualUnmodifiableListView) return _specialities;
+    if (_practiceGrants is EqualUnmodifiableListView) return _practiceGrants;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  @override
-  @JsonKey(name: "currentWorkDetails")
-  final CurrentWorkDetails? currentWorkDetails;
   @override
   @JsonKey(name: "osid")
   final String? osid;
 
   @override
   String toString() {
-    return 'VgProfileModel(id: $id, profilePhoto: $profilePhoto, healthProfessionalType: $healthProfessionalType, practitionerType: $practitionerType, officialMobileCode: $officialMobileCode, officialMobile: $officialMobile, officialEmail: $officialEmail, visibleProfilePicture: $visibleProfilePicture, personalInformation: $personalInformation, communicationAddress: $communicationAddress, contactInformation: $contactInformation, registrationAcademic: $registrationAcademic, specialities: $specialities, currentWorkDetails: $currentWorkDetails, osid: $osid)';
+    return 'VgProfileModel(id: $id, profilePhoto: $profilePhoto, healthProfessionalType: $healthProfessionalType, practitionerType: $practitionerType, officialMobileCode: $officialMobileCode, officialMobile: $officialMobile, officialEmail: $officialEmail, visibleProfilePicture: $visibleProfilePicture, personalInformation: $personalInformation, communicationAddress: $communicationAddress, contactInformation: $contactInformation, registrationAcademic: $registrationAcademic, currentWorkDetails: $currentWorkDetails, availableForTeleconsultation: $availableForTeleconsultation, practiceGrants: $practiceGrants, osid: $osid)';
   }
 
   @override
@@ -501,10 +523,14 @@ class _$_VgProfileModel implements _VgProfileModel {
                 other.contactInformation == contactInformation) &&
             (identical(other.registrationAcademic, registrationAcademic) ||
                 other.registrationAcademic == registrationAcademic) &&
-            const DeepCollectionEquality()
-                .equals(other._specialities, _specialities) &&
             (identical(other.currentWorkDetails, currentWorkDetails) ||
                 other.currentWorkDetails == currentWorkDetails) &&
+            (identical(other.availableForTeleconsultation,
+                    availableForTeleconsultation) ||
+                other.availableForTeleconsultation ==
+                    availableForTeleconsultation) &&
+            const DeepCollectionEquality()
+                .equals(other._practiceGrants, _practiceGrants) &&
             (identical(other.osid, osid) || other.osid == osid));
   }
 
@@ -524,8 +550,9 @@ class _$_VgProfileModel implements _VgProfileModel {
       communicationAddress,
       contactInformation,
       registrationAcademic,
-      const DeepCollectionEquality().hash(_specialities),
       currentWorkDetails,
+      availableForTeleconsultation,
+      const DeepCollectionEquality().hash(_practiceGrants),
       osid);
 
   @JsonKey(ignore: true)
@@ -562,9 +589,12 @@ abstract class _VgProfileModel implements VgProfileModel {
       final ContactInformation? contactInformation,
       @JsonKey(name: "registrationAcademic")
       final RegistrationAcademic? registrationAcademic,
-      @JsonKey(name: "specialities") final List<Speciality>? specialities,
       @JsonKey(name: "currentWorkDetails")
       final CurrentWorkDetails? currentWorkDetails,
+      @JsonKey(name: "availableForTeleconsultation")
+      final bool? availableForTeleconsultation,
+      @JsonKey(name: "practiceGrants")
+      final List<PracticeGrant>? practiceGrants,
       @JsonKey(name: "osid") final String? osid}) = _$_VgProfileModel;
 
   factory _VgProfileModel.fromJson(Map<String, dynamic> json) =
@@ -607,11 +637,14 @@ abstract class _VgProfileModel implements VgProfileModel {
   @JsonKey(name: "registrationAcademic")
   RegistrationAcademic? get registrationAcademic;
   @override
-  @JsonKey(name: "specialities")
-  List<Speciality>? get specialities;
-  @override
   @JsonKey(name: "currentWorkDetails")
   CurrentWorkDetails? get currentWorkDetails;
+  @override
+  @JsonKey(name: "availableForTeleconsultation")
+  bool? get availableForTeleconsultation;
+  @override
+  @JsonKey(name: "practiceGrants")
+  List<PracticeGrant>? get practiceGrants;
   @override
   @JsonKey(name: "osid")
   String? get osid;
@@ -1279,8 +1312,6 @@ mixin _$CurrentWorkDetails {
   String? get reasonForNotWorking => throw _privateConstructorUsedError;
   @JsonKey(name: "certificateAttachment")
   String? get certificateAttachment => throw _privateConstructorUsedError;
-  @JsonKey(name: "facilityDeclarationData")
-  Speciality? get facilityDeclarationData => throw _privateConstructorUsedError;
   @JsonKey(name: "osid")
   String? get osid => throw _privateConstructorUsedError;
 
@@ -1302,11 +1333,7 @@ abstract class $CurrentWorkDetailsCopyWith<$Res> {
       @JsonKey(name: "chooseWorkStatus") String? chooseWorkStatus,
       @JsonKey(name: "reasonForNotWorking") String? reasonForNotWorking,
       @JsonKey(name: "certificateAttachment") String? certificateAttachment,
-      @JsonKey(name: "facilityDeclarationData")
-      Speciality? facilityDeclarationData,
       @JsonKey(name: "osid") String? osid});
-
-  $SpecialityCopyWith<$Res>? get facilityDeclarationData;
 }
 
 /// @nodoc
@@ -1327,7 +1354,6 @@ class _$CurrentWorkDetailsCopyWithImpl<$Res, $Val extends CurrentWorkDetails>
     Object? chooseWorkStatus = freezed,
     Object? reasonForNotWorking = freezed,
     Object? certificateAttachment = freezed,
-    Object? facilityDeclarationData = freezed,
     Object? osid = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1351,27 +1377,11 @@ class _$CurrentWorkDetailsCopyWithImpl<$Res, $Val extends CurrentWorkDetails>
           ? _value.certificateAttachment
           : certificateAttachment // ignore: cast_nullable_to_non_nullable
               as String?,
-      facilityDeclarationData: freezed == facilityDeclarationData
-          ? _value.facilityDeclarationData
-          : facilityDeclarationData // ignore: cast_nullable_to_non_nullable
-              as Speciality?,
       osid: freezed == osid
           ? _value.osid
           : osid // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SpecialityCopyWith<$Res>? get facilityDeclarationData {
-    if (_value.facilityDeclarationData == null) {
-      return null;
-    }
-
-    return $SpecialityCopyWith<$Res>(_value.facilityDeclarationData!, (value) {
-      return _then(_value.copyWith(facilityDeclarationData: value) as $Val);
-    });
   }
 }
 
@@ -1389,12 +1399,7 @@ abstract class _$$_CurrentWorkDetailsCopyWith<$Res>
       @JsonKey(name: "chooseWorkStatus") String? chooseWorkStatus,
       @JsonKey(name: "reasonForNotWorking") String? reasonForNotWorking,
       @JsonKey(name: "certificateAttachment") String? certificateAttachment,
-      @JsonKey(name: "facilityDeclarationData")
-      Speciality? facilityDeclarationData,
       @JsonKey(name: "osid") String? osid});
-
-  @override
-  $SpecialityCopyWith<$Res>? get facilityDeclarationData;
 }
 
 /// @nodoc
@@ -1413,7 +1418,6 @@ class __$$_CurrentWorkDetailsCopyWithImpl<$Res>
     Object? chooseWorkStatus = freezed,
     Object? reasonForNotWorking = freezed,
     Object? certificateAttachment = freezed,
-    Object? facilityDeclarationData = freezed,
     Object? osid = freezed,
   }) {
     return _then(_$_CurrentWorkDetails(
@@ -1437,10 +1441,6 @@ class __$$_CurrentWorkDetailsCopyWithImpl<$Res>
           ? _value.certificateAttachment
           : certificateAttachment // ignore: cast_nullable_to_non_nullable
               as String?,
-      facilityDeclarationData: freezed == facilityDeclarationData
-          ? _value.facilityDeclarationData
-          : facilityDeclarationData // ignore: cast_nullable_to_non_nullable
-              as Speciality?,
       osid: freezed == osid
           ? _value.osid
           : osid // ignore: cast_nullable_to_non_nullable
@@ -1458,7 +1458,6 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
       @JsonKey(name: "chooseWorkStatus") this.chooseWorkStatus,
       @JsonKey(name: "reasonForNotWorking") this.reasonForNotWorking,
       @JsonKey(name: "certificateAttachment") this.certificateAttachment,
-      @JsonKey(name: "facilityDeclarationData") this.facilityDeclarationData,
       @JsonKey(name: "osid") this.osid});
 
   factory _$_CurrentWorkDetails.fromJson(Map<String, dynamic> json) =>
@@ -1480,15 +1479,12 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
   @JsonKey(name: "certificateAttachment")
   final String? certificateAttachment;
   @override
-  @JsonKey(name: "facilityDeclarationData")
-  final Speciality? facilityDeclarationData;
-  @override
   @JsonKey(name: "osid")
   final String? osid;
 
   @override
   String toString() {
-    return 'CurrentWorkDetails(currentlyWorking: $currentlyWorking, purposeOfWork: $purposeOfWork, chooseWorkStatus: $chooseWorkStatus, reasonForNotWorking: $reasonForNotWorking, certificateAttachment: $certificateAttachment, facilityDeclarationData: $facilityDeclarationData, osid: $osid)';
+    return 'CurrentWorkDetails(currentlyWorking: $currentlyWorking, purposeOfWork: $purposeOfWork, chooseWorkStatus: $chooseWorkStatus, reasonForNotWorking: $reasonForNotWorking, certificateAttachment: $certificateAttachment, osid: $osid)';
   }
 
   @override
@@ -1506,23 +1502,13 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
                 other.reasonForNotWorking == reasonForNotWorking) &&
             (identical(other.certificateAttachment, certificateAttachment) ||
                 other.certificateAttachment == certificateAttachment) &&
-            (identical(
-                    other.facilityDeclarationData, facilityDeclarationData) ||
-                other.facilityDeclarationData == facilityDeclarationData) &&
             (identical(other.osid, osid) || other.osid == osid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentlyWorking,
-      purposeOfWork,
-      chooseWorkStatus,
-      reasonForNotWorking,
-      certificateAttachment,
-      facilityDeclarationData,
-      osid);
+  int get hashCode => Object.hash(runtimeType, currentlyWorking, purposeOfWork,
+      chooseWorkStatus, reasonForNotWorking, certificateAttachment, osid);
 
   @JsonKey(ignore: true)
   @override
@@ -1547,8 +1533,6 @@ abstract class _CurrentWorkDetails implements CurrentWorkDetails {
       @JsonKey(name: "reasonForNotWorking") final String? reasonForNotWorking,
       @JsonKey(name: "certificateAttachment")
       final String? certificateAttachment,
-      @JsonKey(name: "facilityDeclarationData")
-      final Speciality? facilityDeclarationData,
       @JsonKey(name: "osid") final String? osid}) = _$_CurrentWorkDetails;
 
   factory _CurrentWorkDetails.fromJson(Map<String, dynamic> json) =
@@ -1570,154 +1554,11 @@ abstract class _CurrentWorkDetails implements CurrentWorkDetails {
   @JsonKey(name: "certificateAttachment")
   String? get certificateAttachment;
   @override
-  @JsonKey(name: "facilityDeclarationData")
-  Speciality? get facilityDeclarationData;
-  @override
   @JsonKey(name: "osid")
   String? get osid;
   @override
   @JsonKey(ignore: true)
   _$$_CurrentWorkDetailsCopyWith<_$_CurrentWorkDetails> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Speciality _$SpecialityFromJson(Map<String, dynamic> json) {
-  return _Speciality.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Speciality {
-  @JsonKey(name: "osid")
-  String? get osid => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SpecialityCopyWith<Speciality> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SpecialityCopyWith<$Res> {
-  factory $SpecialityCopyWith(
-          Speciality value, $Res Function(Speciality) then) =
-      _$SpecialityCopyWithImpl<$Res, Speciality>;
-  @useResult
-  $Res call({@JsonKey(name: "osid") String? osid});
-}
-
-/// @nodoc
-class _$SpecialityCopyWithImpl<$Res, $Val extends Speciality>
-    implements $SpecialityCopyWith<$Res> {
-  _$SpecialityCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? osid = freezed,
-  }) {
-    return _then(_value.copyWith(
-      osid: freezed == osid
-          ? _value.osid
-          : osid // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_SpecialityCopyWith<$Res>
-    implements $SpecialityCopyWith<$Res> {
-  factory _$$_SpecialityCopyWith(
-          _$_Speciality value, $Res Function(_$_Speciality) then) =
-      __$$_SpecialityCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@JsonKey(name: "osid") String? osid});
-}
-
-/// @nodoc
-class __$$_SpecialityCopyWithImpl<$Res>
-    extends _$SpecialityCopyWithImpl<$Res, _$_Speciality>
-    implements _$$_SpecialityCopyWith<$Res> {
-  __$$_SpecialityCopyWithImpl(
-      _$_Speciality _value, $Res Function(_$_Speciality) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? osid = freezed,
-  }) {
-    return _then(_$_Speciality(
-      osid: freezed == osid
-          ? _value.osid
-          : osid // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Speciality implements _Speciality {
-  const _$_Speciality({@JsonKey(name: "osid") this.osid});
-
-  factory _$_Speciality.fromJson(Map<String, dynamic> json) =>
-      _$$_SpecialityFromJson(json);
-
-  @override
-  @JsonKey(name: "osid")
-  final String? osid;
-
-  @override
-  String toString() {
-    return 'Speciality(osid: $osid)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Speciality &&
-            (identical(other.osid, osid) || other.osid == osid));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, osid);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SpecialityCopyWith<_$_Speciality> get copyWith =>
-      __$$_SpecialityCopyWithImpl<_$_Speciality>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SpecialityToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Speciality implements Speciality {
-  const factory _Speciality({@JsonKey(name: "osid") final String? osid}) =
-      _$_Speciality;
-
-  factory _Speciality.fromJson(Map<String, dynamic> json) =
-      _$_Speciality.fromJson;
-
-  @override
-  @JsonKey(name: "osid")
-  String? get osid;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SpecialityCopyWith<_$_Speciality> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2054,6 +1895,724 @@ abstract class _PersonalInformation implements PersonalInformation {
   @override
   @JsonKey(ignore: true)
   _$$_PersonalInformationCopyWith<_$_PersonalInformation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PracticeGrant _$PracticeGrantFromJson(Map<String, dynamic> json) {
+  return _PracticeGrant.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PracticeGrant {
+  @TimestampConverter()
+  DateTime? get registrationDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "grantType")
+  String? get grantType => throw _privateConstructorUsedError;
+  @JsonKey(name: "grantRole")
+  String? get grantRole => throw _privateConstructorUsedError;
+  @JsonKey(name: "department")
+  String? get department => throw _privateConstructorUsedError;
+  @JsonKey(name: "organization")
+  Organization? get organization => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PracticeGrantCopyWith<PracticeGrant> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PracticeGrantCopyWith<$Res> {
+  factory $PracticeGrantCopyWith(
+          PracticeGrant value, $Res Function(PracticeGrant) then) =
+      _$PracticeGrantCopyWithImpl<$Res, PracticeGrant>;
+  @useResult
+  $Res call(
+      {@TimestampConverter() DateTime? registrationDate,
+      @JsonKey(name: "id") int? id,
+      @JsonKey(name: "grantType") String? grantType,
+      @JsonKey(name: "grantRole") String? grantRole,
+      @JsonKey(name: "department") String? department,
+      @JsonKey(name: "organization") Organization? organization});
+
+  $OrganizationCopyWith<$Res>? get organization;
+}
+
+/// @nodoc
+class _$PracticeGrantCopyWithImpl<$Res, $Val extends PracticeGrant>
+    implements $PracticeGrantCopyWith<$Res> {
+  _$PracticeGrantCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? registrationDate = freezed,
+    Object? id = freezed,
+    Object? grantType = freezed,
+    Object? grantRole = freezed,
+    Object? department = freezed,
+    Object? organization = freezed,
+  }) {
+    return _then(_value.copyWith(
+      registrationDate: freezed == registrationDate
+          ? _value.registrationDate
+          : registrationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      grantType: freezed == grantType
+          ? _value.grantType
+          : grantType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      grantRole: freezed == grantRole
+          ? _value.grantRole
+          : grantRole // ignore: cast_nullable_to_non_nullable
+              as String?,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organization: freezed == organization
+          ? _value.organization
+          : organization // ignore: cast_nullable_to_non_nullable
+              as Organization?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrganizationCopyWith<$Res>? get organization {
+    if (_value.organization == null) {
+      return null;
+    }
+
+    return $OrganizationCopyWith<$Res>(_value.organization!, (value) {
+      return _then(_value.copyWith(organization: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_PracticeGrantCopyWith<$Res>
+    implements $PracticeGrantCopyWith<$Res> {
+  factory _$$_PracticeGrantCopyWith(
+          _$_PracticeGrant value, $Res Function(_$_PracticeGrant) then) =
+      __$$_PracticeGrantCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@TimestampConverter() DateTime? registrationDate,
+      @JsonKey(name: "id") int? id,
+      @JsonKey(name: "grantType") String? grantType,
+      @JsonKey(name: "grantRole") String? grantRole,
+      @JsonKey(name: "department") String? department,
+      @JsonKey(name: "organization") Organization? organization});
+
+  @override
+  $OrganizationCopyWith<$Res>? get organization;
+}
+
+/// @nodoc
+class __$$_PracticeGrantCopyWithImpl<$Res>
+    extends _$PracticeGrantCopyWithImpl<$Res, _$_PracticeGrant>
+    implements _$$_PracticeGrantCopyWith<$Res> {
+  __$$_PracticeGrantCopyWithImpl(
+      _$_PracticeGrant _value, $Res Function(_$_PracticeGrant) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? registrationDate = freezed,
+    Object? id = freezed,
+    Object? grantType = freezed,
+    Object? grantRole = freezed,
+    Object? department = freezed,
+    Object? organization = freezed,
+  }) {
+    return _then(_$_PracticeGrant(
+      registrationDate: freezed == registrationDate
+          ? _value.registrationDate
+          : registrationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      grantType: freezed == grantType
+          ? _value.grantType
+          : grantType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      grantRole: freezed == grantRole
+          ? _value.grantRole
+          : grantRole // ignore: cast_nullable_to_non_nullable
+              as String?,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organization: freezed == organization
+          ? _value.organization
+          : organization // ignore: cast_nullable_to_non_nullable
+              as Organization?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PracticeGrant implements _PracticeGrant {
+  const _$_PracticeGrant(
+      {@TimestampConverter() this.registrationDate,
+      @JsonKey(name: "id") this.id,
+      @JsonKey(name: "grantType") this.grantType,
+      @JsonKey(name: "grantRole") this.grantRole,
+      @JsonKey(name: "department") this.department,
+      @JsonKey(name: "organization") this.organization});
+
+  factory _$_PracticeGrant.fromJson(Map<String, dynamic> json) =>
+      _$$_PracticeGrantFromJson(json);
+
+  @override
+  @TimestampConverter()
+  final DateTime? registrationDate;
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "grantType")
+  final String? grantType;
+  @override
+  @JsonKey(name: "grantRole")
+  final String? grantRole;
+  @override
+  @JsonKey(name: "department")
+  final String? department;
+  @override
+  @JsonKey(name: "organization")
+  final Organization? organization;
+
+  @override
+  String toString() {
+    return 'PracticeGrant(registrationDate: $registrationDate, id: $id, grantType: $grantType, grantRole: $grantRole, department: $department, organization: $organization)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PracticeGrant &&
+            (identical(other.registrationDate, registrationDate) ||
+                other.registrationDate == registrationDate) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.grantType, grantType) ||
+                other.grantType == grantType) &&
+            (identical(other.grantRole, grantRole) ||
+                other.grantRole == grantRole) &&
+            (identical(other.department, department) ||
+                other.department == department) &&
+            (identical(other.organization, organization) ||
+                other.organization == organization));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, registrationDate, id, grantType,
+      grantRole, department, organization);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PracticeGrantCopyWith<_$_PracticeGrant> get copyWith =>
+      __$$_PracticeGrantCopyWithImpl<_$_PracticeGrant>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PracticeGrantToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PracticeGrant implements PracticeGrant {
+  const factory _PracticeGrant(
+          {@TimestampConverter() final DateTime? registrationDate,
+          @JsonKey(name: "id") final int? id,
+          @JsonKey(name: "grantType") final String? grantType,
+          @JsonKey(name: "grantRole") final String? grantRole,
+          @JsonKey(name: "department") final String? department,
+          @JsonKey(name: "organization") final Organization? organization}) =
+      _$_PracticeGrant;
+
+  factory _PracticeGrant.fromJson(Map<String, dynamic> json) =
+      _$_PracticeGrant.fromJson;
+
+  @override
+  @TimestampConverter()
+  DateTime? get registrationDate;
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "grantType")
+  String? get grantType;
+  @override
+  @JsonKey(name: "grantRole")
+  String? get grantRole;
+  @override
+  @JsonKey(name: "department")
+  String? get department;
+  @override
+  @JsonKey(name: "organization")
+  Organization? get organization;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PracticeGrantCopyWith<_$_PracticeGrant> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Organization _$OrganizationFromJson(Map<String, dynamic> json) {
+  return _Organization.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Organization {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "regRef")
+  String? get regRef => throw _privateConstructorUsedError;
+  @JsonKey(name: "facilityType")
+  String? get facilityType => throw _privateConstructorUsedError;
+  @JsonKey(name: "tenant")
+  Tenant? get tenant => throw _privateConstructorUsedError;
+  @JsonKey(name: "status")
+  String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "governingOrganization")
+  dynamic get governingOrganization => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrganizationCopyWith<Organization> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrganizationCopyWith<$Res> {
+  factory $OrganizationCopyWith(
+          Organization value, $Res Function(Organization) then) =
+      _$OrganizationCopyWithImpl<$Res, Organization>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "regRef") String? regRef,
+      @JsonKey(name: "facilityType") String? facilityType,
+      @JsonKey(name: "tenant") Tenant? tenant,
+      @JsonKey(name: "status") String? status,
+      @JsonKey(name: "governingOrganization") dynamic governingOrganization});
+
+  $TenantCopyWith<$Res>? get tenant;
+}
+
+/// @nodoc
+class _$OrganizationCopyWithImpl<$Res, $Val extends Organization>
+    implements $OrganizationCopyWith<$Res> {
+  _$OrganizationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? regRef = freezed,
+    Object? facilityType = freezed,
+    Object? tenant = freezed,
+    Object? status = freezed,
+    Object? governingOrganization = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
+              as String?,
+      facilityType: freezed == facilityType
+          ? _value.facilityType
+          : facilityType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tenant: freezed == tenant
+          ? _value.tenant
+          : tenant // ignore: cast_nullable_to_non_nullable
+              as Tenant?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      governingOrganization: freezed == governingOrganization
+          ? _value.governingOrganization
+          : governingOrganization // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenantCopyWith<$Res>? get tenant {
+    if (_value.tenant == null) {
+      return null;
+    }
+
+    return $TenantCopyWith<$Res>(_value.tenant!, (value) {
+      return _then(_value.copyWith(tenant: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_OrganizationCopyWith<$Res>
+    implements $OrganizationCopyWith<$Res> {
+  factory _$$_OrganizationCopyWith(
+          _$_Organization value, $Res Function(_$_Organization) then) =
+      __$$_OrganizationCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "regRef") String? regRef,
+      @JsonKey(name: "facilityType") String? facilityType,
+      @JsonKey(name: "tenant") Tenant? tenant,
+      @JsonKey(name: "status") String? status,
+      @JsonKey(name: "governingOrganization") dynamic governingOrganization});
+
+  @override
+  $TenantCopyWith<$Res>? get tenant;
+}
+
+/// @nodoc
+class __$$_OrganizationCopyWithImpl<$Res>
+    extends _$OrganizationCopyWithImpl<$Res, _$_Organization>
+    implements _$$_OrganizationCopyWith<$Res> {
+  __$$_OrganizationCopyWithImpl(
+      _$_Organization _value, $Res Function(_$_Organization) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? regRef = freezed,
+    Object? facilityType = freezed,
+    Object? tenant = freezed,
+    Object? status = freezed,
+    Object? governingOrganization = freezed,
+  }) {
+    return _then(_$_Organization(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      regRef: freezed == regRef
+          ? _value.regRef
+          : regRef // ignore: cast_nullable_to_non_nullable
+              as String?,
+      facilityType: freezed == facilityType
+          ? _value.facilityType
+          : facilityType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tenant: freezed == tenant
+          ? _value.tenant
+          : tenant // ignore: cast_nullable_to_non_nullable
+              as Tenant?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      governingOrganization: freezed == governingOrganization
+          ? _value.governingOrganization
+          : governingOrganization // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Organization implements _Organization {
+  const _$_Organization(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "regRef") this.regRef,
+      @JsonKey(name: "facilityType") this.facilityType,
+      @JsonKey(name: "tenant") this.tenant,
+      @JsonKey(name: "status") this.status,
+      @JsonKey(name: "governingOrganization") this.governingOrganization});
+
+  factory _$_Organization.fromJson(Map<String, dynamic> json) =>
+      _$$_OrganizationFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "regRef")
+  final String? regRef;
+  @override
+  @JsonKey(name: "facilityType")
+  final String? facilityType;
+  @override
+  @JsonKey(name: "tenant")
+  final Tenant? tenant;
+  @override
+  @JsonKey(name: "status")
+  final String? status;
+  @override
+  @JsonKey(name: "governingOrganization")
+  final dynamic governingOrganization;
+
+  @override
+  String toString() {
+    return 'Organization(id: $id, regRef: $regRef, facilityType: $facilityType, tenant: $tenant, status: $status, governingOrganization: $governingOrganization)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Organization &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.regRef, regRef) || other.regRef == regRef) &&
+            (identical(other.facilityType, facilityType) ||
+                other.facilityType == facilityType) &&
+            (identical(other.tenant, tenant) || other.tenant == tenant) &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other.governingOrganization, governingOrganization));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, regRef, facilityType, tenant,
+      status, const DeepCollectionEquality().hash(governingOrganization));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OrganizationCopyWith<_$_Organization> get copyWith =>
+      __$$_OrganizationCopyWithImpl<_$_Organization>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OrganizationToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Organization implements Organization {
+  const factory _Organization(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "regRef") final String? regRef,
+      @JsonKey(name: "facilityType") final String? facilityType,
+      @JsonKey(name: "tenant") final Tenant? tenant,
+      @JsonKey(name: "status") final String? status,
+      @JsonKey(name: "governingOrganization")
+      final dynamic governingOrganization}) = _$_Organization;
+
+  factory _Organization.fromJson(Map<String, dynamic> json) =
+      _$_Organization.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "regRef")
+  String? get regRef;
+  @override
+  @JsonKey(name: "facilityType")
+  String? get facilityType;
+  @override
+  @JsonKey(name: "tenant")
+  Tenant? get tenant;
+  @override
+  @JsonKey(name: "status")
+  String? get status;
+  @override
+  @JsonKey(name: "governingOrganization")
+  dynamic get governingOrganization;
+  @override
+  @JsonKey(ignore: true)
+  _$$_OrganizationCopyWith<_$_Organization> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Tenant _$TenantFromJson(Map<String, dynamic> json) {
+  return _Tenant.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Tenant {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TenantCopyWith<Tenant> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TenantCopyWith<$Res> {
+  factory $TenantCopyWith(Tenant value, $Res Function(Tenant) then) =
+      _$TenantCopyWithImpl<$Res, Tenant>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id, @JsonKey(name: "name") String? name});
+}
+
+/// @nodoc
+class _$TenantCopyWithImpl<$Res, $Val extends Tenant>
+    implements $TenantCopyWith<$Res> {
+  _$TenantCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TenantCopyWith<$Res> implements $TenantCopyWith<$Res> {
+  factory _$$_TenantCopyWith(_$_Tenant value, $Res Function(_$_Tenant) then) =
+      __$$_TenantCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id, @JsonKey(name: "name") String? name});
+}
+
+/// @nodoc
+class __$$_TenantCopyWithImpl<$Res>
+    extends _$TenantCopyWithImpl<$Res, _$_Tenant>
+    implements _$$_TenantCopyWith<$Res> {
+  __$$_TenantCopyWithImpl(_$_Tenant _value, $Res Function(_$_Tenant) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$_Tenant(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Tenant implements _Tenant {
+  const _$_Tenant(
+      {@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name});
+
+  factory _$_Tenant.fromJson(Map<String, dynamic> json) =>
+      _$$_TenantFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "name")
+  final String? name;
+
+  @override
+  String toString() {
+    return 'Tenant(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Tenant &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TenantCopyWith<_$_Tenant> get copyWith =>
+      __$$_TenantCopyWithImpl<_$_Tenant>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TenantToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Tenant implements Tenant {
+  const factory _Tenant(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "name") final String? name}) = _$_Tenant;
+
+  factory _Tenant.fromJson(Map<String, dynamic> json) = _$_Tenant.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TenantCopyWith<_$_Tenant> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

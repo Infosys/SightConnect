@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/consent_model.dart';
-import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -243,7 +241,7 @@ class PatientConsentFormPage extends HookWidget {
                     children: [
                       Consumer(
                         builder: (context, ref, child) {
-                          final model = ref.watch(consentRepositoryProvider);
+                          //  final model = ref.watch(consentRepositoryProvider);
                           return Expanded(
                             child: ElevatedButton(
                               onPressed: selectedValue.value

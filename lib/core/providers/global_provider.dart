@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 var globalProvider = ChangeNotifierProvider((ref) => GlobalProvider());
 

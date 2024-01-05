@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/services/app_logger.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -99,7 +98,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    // check consent again
+    // check consent again for all roles other than patient
     await navigateBasedOnRole(navigator, role);
   }
 

@@ -1,20 +1,15 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -56,15 +51,10 @@ class MyApp extends ConsumerWidget {
             data: mediaQueryData.copyWith(
                 textScaler: TextScaler.linear(
               ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-            )
-
-                //  TextScaler.linear(
-                //   Responsive.isMobile(context) ? 1.0 : 1.3,
-                // ),
-                ),
+            )),
             child: MaterialApp(
               title: AppText.appName,
-              // locale: const Locale('en'),
+
               locale: ref.watch(globalLanguageProvider).currentLocale,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
@@ -73,11 +63,7 @@ class MyApp extends ConsumerWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               navigatorObservers: AppEnv.isProd ? [matomoObserver] : [],
-              // supportedLocales: const [
-              //   Locale('en'),
-              //   Locale('hi'),
-              //   Locale("te")
-              // ],
+
               supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),
@@ -86,7 +72,7 @@ class MyApp extends ConsumerWidget {
                   : AppTheme.getDarkTheme(context),
               routes: AppRouter.routes,
               initialRoute: initialRoute,
-              // home: const PatientDashboardPage(),
+
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
               //   return ref.watch(internetProvider).when(
