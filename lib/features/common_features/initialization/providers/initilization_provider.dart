@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +33,21 @@ class InitializationProvider extends ChangeNotifier {
         if (result.isEmpty) {
           // if result is empty then user is not found
           return false;
-        }
+        } else {
+          bool isRoleAvailable = result.first.practiceGrants!
+              .any((element) => element.grantRole == role.name);
 
-        final profile = result.first;
-        await PersistentAuthStateService.authState.saveUserProfileId(
-          profile.id.toString(),
-        );
-        return true;
+          if (isRoleAvailable) {
+            final profile = result.first;
+            await PersistentAuthStateService.authState.saveUserProfileId(
+              profile.id.toString(),
+            );
+            return true;
+          } else {
+            // if result is empty then user is not found
+            return false;
+          }
+        }
       });
     } else if (role == Role.ROLE_PATIENT) {
       final response = await _ref
@@ -57,6 +66,32 @@ class InitializationProvider extends ChangeNotifier {
           result.profile!.patient!.patientId.toString(),
         );
         return true;
+      });
+    } else if (role == Role.ROLE_VISION_GUARDIAN) {
+      final response = await _ref
+          .read(vtAuthenticationRepositoryProvider)
+          .getVtProfile(phone);
+      return response.fold((failure) {
+        throw failure;
+      }, (result) async {
+        if (result.isEmpty) {
+          // if result is empty then user is not found
+          return false;
+        } else {
+          bool isRoleAvailable = result.first.practiceGrants!
+              .any((element) => element.grantRole == role.name);
+
+          if (isRoleAvailable) {
+            final profile = result.first;
+            await PersistentAuthStateService.authState.saveUserProfileId(
+              profile.id.toString(),
+            );
+            return true;
+          } else {
+            // if result is empty then user is not found
+            return false;
+          }
+        }
       });
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");

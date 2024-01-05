@@ -32,13 +32,15 @@ _$_VtProfileModel _$$_VtProfileModelFromJson(Map<String, dynamic> json) =>
           ? null
           : RegistrationAcademic.fromJson(
               json['registrationAcademic'] as Map<String, dynamic>),
-      specialities: (json['specialities'] as List<dynamic>?)
-          ?.map((e) => Speciality.fromJson(e as Map<String, dynamic>))
-          .toList(),
       currentWorkDetails: json['currentWorkDetails'] == null
           ? null
           : CurrentWorkDetails.fromJson(
               json['currentWorkDetails'] as Map<String, dynamic>),
+      availableForTeleconsultation:
+          json['availableForTeleconsultation'] as bool?,
+      practiceGrants: (json['practiceGrants'] as List<dynamic>?)
+          ?.map((e) => PracticeGrant.fromJson(e as Map<String, dynamic>))
+          .toList(),
       osid: json['osid'] as String?,
     );
 
@@ -56,8 +58,10 @@ Map<String, dynamic> _$$_VtProfileModelToJson(_$_VtProfileModel instance) =>
       'communicationAddress': instance.communicationAddress?.toJson(),
       'contactInformation': instance.contactInformation?.toJson(),
       'registrationAcademic': instance.registrationAcademic?.toJson(),
-      'specialities': instance.specialities?.map((e) => e.toJson()).toList(),
       'currentWorkDetails': instance.currentWorkDetails?.toJson(),
+      'availableForTeleconsultation': instance.availableForTeleconsultation,
+      'practiceGrants':
+          instance.practiceGrants?.map((e) => e.toJson()).toList(),
       'osid': instance.osid,
     };
 
@@ -122,10 +126,6 @@ _$_CurrentWorkDetails _$$_CurrentWorkDetailsFromJson(
       chooseWorkStatus: json['chooseWorkStatus'] as String?,
       reasonForNotWorking: json['reasonForNotWorking'] as String?,
       certificateAttachment: json['certificateAttachment'] as String?,
-      facilityDeclarationData: json['facilityDeclarationData'] == null
-          ? null
-          : Speciality.fromJson(
-              json['facilityDeclarationData'] as Map<String, dynamic>),
       osid: json['osid'] as String?,
     );
 
@@ -137,17 +137,6 @@ Map<String, dynamic> _$$_CurrentWorkDetailsToJson(
       'chooseWorkStatus': instance.chooseWorkStatus,
       'reasonForNotWorking': instance.reasonForNotWorking,
       'certificateAttachment': instance.certificateAttachment,
-      'facilityDeclarationData': instance.facilityDeclarationData?.toJson(),
-      'osid': instance.osid,
-    };
-
-_$_Speciality _$$_SpecialityFromJson(Map<String, dynamic> json) =>
-    _$_Speciality(
-      osid: json['osid'] as String?,
-    );
-
-Map<String, dynamic> _$$_SpecialityToJson(_$_Speciality instance) =>
-    <String, dynamic>{
       'osid': instance.osid,
     };
 
@@ -177,6 +166,62 @@ Map<String, dynamic> _$$_PersonalInformationToJson(
       'city': instance.city,
       'languagesSpoken': instance.languagesSpoken,
       'osid': instance.osid,
+    };
+
+_$_PracticeGrant _$$_PracticeGrantFromJson(Map<String, dynamic> json) =>
+    _$_PracticeGrant(
+      registrationDate: const TimestampConverter()
+          .fromJson(json['registrationDate'] as String?),
+      id: json['id'] as int?,
+      grantType: json['grantType'] as String?,
+      grantRole: json['grantRole'] as String?,
+      department: json['department'] as String?,
+      organization: json['organization'] == null
+          ? null
+          : Organization.fromJson(json['organization'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_PracticeGrantToJson(_$_PracticeGrant instance) =>
+    <String, dynamic>{
+      'registrationDate':
+          const TimestampConverter().toJson(instance.registrationDate),
+      'id': instance.id,
+      'grantType': instance.grantType,
+      'grantRole': instance.grantRole,
+      'department': instance.department,
+      'organization': instance.organization?.toJson(),
+    };
+
+_$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
+    _$_Organization(
+      id: json['id'] as int?,
+      regRef: json['regRef'] as String?,
+      facilityType: json['facilityType'] as String?,
+      tenant: json['tenant'] == null
+          ? null
+          : Tenant.fromJson(json['tenant'] as Map<String, dynamic>),
+      status: json['status'] as String?,
+      governingOrganization: json['governingOrganization'],
+    );
+
+Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'regRef': instance.regRef,
+      'facilityType': instance.facilityType,
+      'tenant': instance.tenant?.toJson(),
+      'status': instance.status,
+      'governingOrganization': instance.governingOrganization,
+    };
+
+_$_Tenant _$$_TenantFromJson(Map<String, dynamic> json) => _$_Tenant(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$$_TenantToJson(_$_Tenant instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
     };
 
 _$_RegistrationAcademic _$$_RegistrationAcademicFromJson(

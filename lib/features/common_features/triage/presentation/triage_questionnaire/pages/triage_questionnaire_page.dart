@@ -295,7 +295,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             model.saveQuestionaireResponse();
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
-                            
                           } else {
                             pageController.animateToPage(
                               index + 1,

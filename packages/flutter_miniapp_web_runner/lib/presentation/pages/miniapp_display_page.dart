@@ -81,124 +81,132 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.miniapp.displayName ?? "Service"),
-        leading: IconButton(
-          onPressed: () {
-            widget.onBack?.call();
-          },
-          icon: const Icon(CupertinoIcons.back),
-        ),
-        actions: [
-          IconButton(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) {
+        if (value) return;
+        Navigator.of(context).pop(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.miniapp.displayName ?? "Service"),
+          leading: IconButton(
             onPressed: () {
-              webViewController?.reload();
+              widget.onBack?.call();
             },
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(CupertinoIcons.back),
           ),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            InAppWebView(
-              key: webViewKey,
-              initialUrlRequest: URLRequest(
-                url: WebUri(widget.miniapp.sourceurl),
-              ),
-              initialSettings: settings,
-              pullToRefreshController: pullToRefreshController,
-              onWebViewCreated: (controller) {
-                webViewController = controller;
-                controller.addJavaScriptHandler(
-                  handlerName: 'getPatientRegisterMiniAppModel',
-                  callback: (args) {
-                    return widget.injectionModel?.toJson();
-                  },
-                );
+          actions: [
+            IconButton(
+              onPressed: () {
+                webViewController?.reload();
               },
-              onLoadStart: (controller, url) {
-                setState(() {
-                  this.url = url.toString();
-                  urlController.text = this.url;
-                });
-              },
-              onPermissionRequest: (controller, request) async {
-                return PermissionResponse(
-                  resources: request.resources,
-                  action: PermissionResponseAction.GRANT,
-                );
-              },
-              onLoadStop: (controller, url) async {
-                pullToRefreshController?.endRefreshing();
-                setState(() {
-                  this.url = url.toString();
-                  urlController.text = this.url;
-                });
-              },
-              onReceivedError: (controller, request, error) {
-                pullToRefreshController?.endRefreshing();
-              },
-              onProgressChanged: (controller, progress) {
-                if (progress == 100) {
-                  pullToRefreshController?.endRefreshing();
-                }
-                setState(() {
-                  this.progress = progress / 100;
-                  urlController.text = url;
-                });
-              },
-              onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                setState(() {
-                  this.url = url.toString();
-                  urlController.text = this.url;
-                });
-              },
-              onConsoleMessage: (controller, consoleMessage) {
-                logger.d("Console: ${consoleMessage.message}");
-              },
-              shouldInterceptRequest: (controller, request) async {
-                logger.d("androidShouldInterceptRequest: ${request.url}");
-                final hash = request.url.fragment.trim();
-                final host = request.url.host.trim();
-
-                if (widget.token.isNotEmpty &&
-                    host == "eyecare4all-dev.infosysapps.com") {
-                  request.headers!["Authorization"] = "Bearer ${widget.token}";
-                }
-                logger.d("hash: $hash");
-                if (hash == "failure") {
-                  // Navigator.of(context).pop(true);
-                  Future.value(WebResourceResponse(data: Uint8List(0)));
-                } else if (hash == "success") {
-                  Navigator.of(context).pop(true);
-                  Future.value(WebResourceResponse(data: Uint8List(0)));
-                }
-
-                return null;
-              },
-              shouldOverrideUrlLoading: (controller, navigationAction) async {
-                final hash = navigationAction.request.url?.fragment.trim();
-                if (hash == "failure" || hash == "success") {
-                  return NavigationActionPolicy.CANCEL;
-                } else {
-                  return NavigationActionPolicy.ALLOW;
-                }
-              },
-              initialUserScripts: UnmodifiableListView<UserScript>(
-                [
-                  UserScript(
-                    source: SuperappUserScript.userScript,
-                    injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
-                  )
-                ],
-              ),
+              icon: const Icon(Icons.refresh),
             ),
-            progress < 1.0
-                ? LinearProgressIndicator(value: progress)
-                : Container(),
           ],
+        ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              InAppWebView(
+                key: webViewKey,
+                initialUrlRequest: URLRequest(
+                  url: WebUri(widget.miniapp.sourceurl),
+                ),
+                initialSettings: settings,
+                pullToRefreshController: pullToRefreshController,
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                  controller.addJavaScriptHandler(
+                    handlerName: 'getPatientRegisterMiniAppModel',
+                    callback: (args) {
+                      return widget.injectionModel?.toJson();
+                    },
+                  );
+                },
+                onLoadStart: (controller, url) {
+                  setState(() {
+                    this.url = url.toString();
+                    urlController.text = this.url;
+                  });
+                },
+                onPermissionRequest: (controller, request) async {
+                  return PermissionResponse(
+                    resources: request.resources,
+                    action: PermissionResponseAction.GRANT,
+                  );
+                },
+                onLoadStop: (controller, url) async {
+                  pullToRefreshController?.endRefreshing();
+                  setState(() {
+                    this.url = url.toString();
+                    urlController.text = this.url;
+                  });
+                },
+                onReceivedError: (controller, request, error) {
+                  pullToRefreshController?.endRefreshing();
+                },
+                onProgressChanged: (controller, progress) {
+                  if (progress == 100) {
+                    pullToRefreshController?.endRefreshing();
+                  }
+                  setState(() {
+                    this.progress = progress / 100;
+                    urlController.text = url;
+                  });
+                },
+                onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                  setState(() {
+                    this.url = url.toString();
+                    urlController.text = this.url;
+                  });
+                },
+                onConsoleMessage: (controller, consoleMessage) {
+                  logger.d("Console: ${consoleMessage.message}");
+                },
+                shouldInterceptRequest: (controller, request) async {
+                  logger.d("androidShouldInterceptRequest: ${request.url}");
+                  final hash = request.url.fragment.trim();
+                  final host = request.url.host.trim();
+
+                  if (widget.token.isNotEmpty &&
+                      host == "eyecare4all-dev.infosysapps.com") {
+                    request.headers!["Authorization"] =
+                        "Bearer ${widget.token}";
+                  }
+                  logger.d("hash: $hash");
+                  if (hash == "failure") {
+                    // Navigator.of(context).pop(true);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
+                  } else if (hash == "success") {
+                    Navigator.of(context).pop(true);
+                    Future.value(WebResourceResponse(data: Uint8List(0)));
+                  }
+
+                  return null;
+                },
+                shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  final hash = navigationAction.request.url?.fragment.trim();
+                  if (hash == "failure" || hash == "success") {
+                    return NavigationActionPolicy.CANCEL;
+                  } else {
+                    return NavigationActionPolicy.ALLOW;
+                  }
+                },
+                initialUserScripts: UnmodifiableListView<UserScript>(
+                  [
+                    UserScript(
+                      source: SuperappUserScript.userScript,
+                      injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+                    )
+                  ],
+                ),
+              ),
+              progress < 1.0
+                  ? LinearProgressIndicator(value: progress)
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );
