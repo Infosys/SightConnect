@@ -170,5 +170,23 @@
     "assessmentReportButton": "চকুৰ মূল্যায়ন প্ৰতিবেদন",
     "notificationsTitle": "জাননীসমূহ",
     "notificationsNotAvailable": "কোনো জাননী নাই",
-    "servicesPatientCare": "ৰোগীৰ যত্ন"
+    "servicesPatientCare": "ৰোগীৰ যত্ন",
+
+    "reportAssessmentId": "মূল্যায়ন আইডি",
+    "reportDateAndTime": "তাৰিখ আৰু সময়",
+    "reportSeverityAbnormal": "অস্বাভাবিক পৰীক্ষা",
+    "reportSeverityHigh": "আগত পৰীক্ষা",
+    "reportSeverityLow": "নিয়মিত পৰীক্ষা",
+    "reportDataUnavailable": "ডাটা প্ৰাপ্তয়োগ্য নহয়",
+    "reportTumblingTitle": "দৃষ্টিশক্তি পৰীক্ষা - টাম্ব্লিং ই",
+    "rightCornea": "সোঁহালি কর্ণ",
+    "leftCornea": "বাওঁহালি কর্ণ",
+    "myProfileGeneralInfo": "সাধাৰণ তথ্য",
+    "myProfileAge": "বয়স",
+    "myProfileAddress": "ঠিকানা",
+    "myProfileLine": "লাইন",
+    "myProfileCity": "নগৰ",
+    "myProfileDistrict": "জিলা",
+    "myProfileState": "ৰাজ্য",
+    "myProfilePinCode": "পিন কোড"
 }

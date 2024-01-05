@@ -170,5 +170,23 @@
     "assessmentReportButton": "डोळा मूल्यमापन अहवाल",
     "notificationsTitle": "सूचना",
     "notificationsNotAvailable": "कोणत्याही सूचना उपलब्ध नाहीत",
-    "servicesPatientCare": "रुग्ण सेवा"
+    "servicesPatientCare": "रुग्ण सेवा",
+
+    "reportAssessmentId": "मूल्यमापन क्रमांक",
+    "reportDateAndTime": "तारीख व वेळ",
+    "reportSeverityAbnormal": "असामान्य तपास",
+    "reportSeverityHigh": "प्राथमिक तपास",
+    "reportSeverityLow": "नियमित तपास",
+    "reportDataUnavailable": "डेटा उपलब्ध नाह",
+    "reportTumblingTitle": "एक्यूट चाचणी - टंबलिंग ई",
+    "rightCornea": "उजवी का",
+    "leftCornea": "डावी का",
+    "myProfileGeneralInfo": "सामान्य माहिती",
+    "myProfileAge": "वय",
+    "myProfileAddress": "पत्ता",
+    "myProfileLine": "लाइन",
+    "myProfileCity": "शहर",
+    "myProfileDistrict": "जिल्हा",
+    "myProfileState": "राज्य",
+    "myProfilePinCode": "पिन कोड"
 }
