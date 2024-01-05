@@ -2,11 +2,11 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
@@ -22,22 +22,24 @@ class PatientAssessmentReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
           children: [
-            const Text("Eye Assessment"),
+            Text(loc.eyeAssessmentTitle),
             const Spacer(),
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.width(context) * 0.01,
               ),
               decoration: BoxDecoration(
-                color: _getRequestSeverityColor(
+                color: getRequestSeverityColor(
                     assessmentDetailsReport.cumulativeSeverity),
               ),
               child: Text(
-                _getSeverityText(assessmentDetailsReport.cumulativeSeverity),
+                getSeverityText(
+                    assessmentDetailsReport.cumulativeSeverity, context.loc!),
                 style: applyRobotoFont(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -81,32 +83,5 @@ class PatientAssessmentReportPage extends ConsumerWidget {
         ),
       ),
     );
-  }
-}
-
-String _getSeverityText(Severity? severity) {
-  switch (severity) {
-    case Severity.ABNORMAL:
-      return "Urgent Consult";
-    case Severity.LOW:
-      return "Routine Checkup";
-    case Severity.HIGH:
-      return "Early Checkup";
-    default:
-      return "";
-  }
-}
-
-Color _getRequestSeverityColor(Severity? severity) {
-  switch (severity) {
-    case Severity.ABNORMAL:
-      return AppColor.red;
-    case Severity.HIGH:
-      return AppColor.orange;
-    case Severity.LOW:
-      return AppColor.green;
-
-    default:
-      return AppColor.grey;
   }
 }
