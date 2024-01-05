@@ -14,17 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final COLORS = [
-  Colors.blue.shade100,
-  Colors.green.shade100,
-  // Colors.yellow.shade100,
-  Colors.pink.shade100,
-  Colors.purple.shade100,
-  Colors.orange.shade100,
-  Colors.cyan.shade100,
-  Colors.deepOrange.shade100,
-];
-
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const PatientHomePageAppBar({super.key});
@@ -120,17 +109,18 @@ class PatientHomePageAppBar extends StatelessWidget
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
                                           color: isActiveLocale
-                                              ? Colors.green
+                                              ? Colors.blue
                                               : Colors.black38.withOpacity(0),
                                           width: isActiveLocale ? 2 : 1,
                                         ),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Colors.black45,
-                                            spreadRadius: 1,
-                                            blurRadius: 2,
-                                          )
-                                        ]),
+                                        // boxShadow: const [
+                                        //   BoxShadow(
+                                        //     color: Colors.black45,
+                                        //     spreadRadius: 1,
+                                        //     blurRadius: 2,
+                                        //   )
+                                        // ]
+                                        ),
                                     child: Stack(
                                       children: [
                                         Column(
@@ -139,35 +129,47 @@ class PatientHomePageAppBar extends StatelessWidget
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              appLocale.localeName,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: applyRobotoFont(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            Text(
-                                              appLocale.locale != "en"
-                                                  ? appLocale.name
-                                                  : "",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: applyRobotoFont(),
-                                            ),
-                                          ],
-                                        ),
-                                        isActiveLocale
-                                            ? const Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: Icon(
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  appLocale.localeSymbol,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: applyRobotoFont(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                                isActiveLocale? const Icon(
                                                   Icons.check_circle,
                                                   color: Colors.green,
                                                   size: 32,
-                                                ))
-                                            : Container()
+                                                ): Container()
+                                              ],
+                                            ),
+                                            // const SizedBox(height: 10),
+                                            Wrap(
+                                              children: [
+                                                Text(
+                                                  appLocale.localeName,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: applyRobotoFont(),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Text(
+                                                  appLocale.locale != "en"
+                                                      ? appLocale.name
+                                                      : "",
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: applyRobotoFont(),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
