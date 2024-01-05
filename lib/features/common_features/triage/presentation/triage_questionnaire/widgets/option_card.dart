@@ -31,10 +31,7 @@ class OptionCard extends StatelessWidget {
         children: [
           Text(
             question?.text ?? '',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
+            style: applyFiraSansFont(fontSize: 22),
           ),
           const SizedBox(height: AppSize.klheight),
           Expanded(
@@ -74,9 +71,12 @@ class OptionCard extends StatelessWidget {
                     top: 10,
                     right: 10,
                     child: Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kmpadding,
+                        vertical: AppSize.kspadding,
+                      ),
                       decoration: BoxDecoration(
-                        color: AppColor.black.withOpacity(0.5),
+                        color: AppColor.white.withOpacity(0.8),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text.rich(
@@ -84,27 +84,15 @@ class OptionCard extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: '$index',
-                              style: const TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: applyRobotoFont(fontSize: 16),
                             ),
-                            const TextSpan(
-                              text: ' / ',
-                              style: TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            TextSpan(
+                              text: '/',
+                              style: applyRobotoFont(fontSize: 16),
                             ),
                             TextSpan(
                               text: '${total - totalGroupQuestion}',
-                              style: const TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: applyRobotoFont(fontSize: 16),
                             )
                           ],
                         ),
@@ -113,6 +101,14 @@ class OptionCard extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+          const SizedBox(height: AppSize.ksheight),
+          Text(
+            "Note: The images shown here are for indication only. They may not appear the same way in real life.",
+            style: applyRobotoFont(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: AppSize.klheight),
@@ -125,7 +121,7 @@ class OptionCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(AppSize.kspadding),
                   decoration: const BoxDecoration(
-                    color: AppColor.red,
+                    color: Color(0xffDD0000),
                     shape: BoxShape.circle,
                     border: Border.fromBorderSide(
                       BorderSide(

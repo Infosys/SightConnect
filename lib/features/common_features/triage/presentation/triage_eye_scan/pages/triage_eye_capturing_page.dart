@@ -159,31 +159,40 @@ class _PatientTriageEyeCapturingPageState
                 ),
               ),
             ),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(width: AppSize.kmwidth),
-                Text(
-                  loc.stepNumber("3", "3"),
-                  style: applyRobotoFont(
-                    color: AppColor.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const SizedBox(width: AppSize.kmwidth),
-                Flexible(
-                  child: Text(
-                    loc.eyeScanTitle,
-                    style: applyRobotoFont(
-                      color: AppColor.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
+            title: Text(
+              loc.eyeScanTitle,
+              style: applyFiraSansFont(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColor.white,
+              ),
             ),
+
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     const SizedBox(width: AppSize.kmwidth),
+            //     Text(
+            //       loc.stepNumber("3", "3"),
+            //       style: applyRobotoFont(
+            //         color: AppColor.white,
+            //         fontSize: 14,
+            //         fontWeight: FontWeight.w400,
+            //       ),
+            //     ),
+            //     const SizedBox(width: AppSize.kmwidth),
+            //     Flexible(
+            //       child: Text(
+            //         loc.eyeScanTitle,
+            //         style: applyRobotoFont(
+            //           color: AppColor.white,
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.w500,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             actions: [
               InkWell(
                 onTap: () async {

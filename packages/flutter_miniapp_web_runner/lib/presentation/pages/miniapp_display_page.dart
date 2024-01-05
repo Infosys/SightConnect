@@ -5,15 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart';
-import 'package:flutter_miniapp_web_runner/presentation/widgets/web_view_app_bar.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:logger/logger.dart';
 import '../../domain/model/miniapp.dart';
 
 import 'dart:async';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class MiniAppDisplayPage extends StatefulWidget {
   const MiniAppDisplayPage({
@@ -83,10 +79,6 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (value) {
-        if (value) return;
-        Navigator.of(context).pop(false);
-      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.miniapp.displayName ?? "Service"),
@@ -168,13 +160,23 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   logger.d("androidShouldInterceptRequest: ${request.url}");
                   final hash = request.url.fragment.trim();
                   final host = request.url.host.trim();
+                  logger.d({
+                    "header": request.headers,
+                    "hash": hash,
+                    "host": host,
+                    "fragment": request.url.fragment,
+                    "path": request.url.path,
+                    "query": request.url.query,
+                    "scheme": request.url.scheme,
+                    "userInfo": request.url.userInfo,
+                  });
 
                   if (widget.token.isNotEmpty &&
                       host == "eyecare4all-dev.infosysapps.com") {
                     request.headers!["Authorization"] =
                         "Bearer ${widget.token}";
                   }
-                  logger.d("hash: $hash");
+
                   if (hash == "failure") {
                     // Navigator.of(context).pop(true);
                     Future.value(WebResourceResponse(data: Uint8List(0)));

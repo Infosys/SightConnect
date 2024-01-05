@@ -5,8 +5,10 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/accessibility_settings.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/swipe_gesture_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -80,13 +82,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 leadingWidth: 60,
                 titleSpacing: 0.0,
                 actions: const [
-                  // IconButton(
-                  //   splashRadius: 20,
-                  //   onPressed: () {
-                  //     showAccessibilitySettings(context, ref);
-                  //   },
-                  //   icon: const Icon(Icons.settings),
-                  // ),
+                  TextScalePopupMenu(),
                 ],
                 centerTitle: false,
                 leadingIcon: InkWell(
@@ -104,25 +100,33 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                title: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(width: AppSize.kmwidth),
-                    Text(
-                      AppLocalizations.of(context)!.stepNumber('2', '3'),
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(width: AppSize.kmwidth),
-                    Flexible(
-                        child: Text(
-                      AppLocalizations.of(context)!.visualAcuityTitle,
-                    )),
-                  ],
+                title: Text(
+                  context.loc!.visualAcuityTitle,
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+
+                // Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     const SizedBox(width: AppSize.kmwidth),
+                //     Text(
+                //       AppLocalizations.of(context)!.stepNumber('2', '3'),
+                //       style: applyRobotoFont(
+                //         color: AppColor.primary,
+                //         fontSize: 14,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     const SizedBox(width: AppSize.kmwidth),
+                //     Flexible(
+                //         child: Text(
+                //       AppLocalizations.of(context)!.visualAcuityTitle,
+                //     )),
+                //   ],
+                // ),
               ),
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
@@ -138,7 +142,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 children: [
                   TopReadingCard(),
                   SizedBox(height: AppSize.klpadding),
-          /*         AcuityDistanceTile(
+                  /*         AcuityDistanceTile(
                     distanceInCms: 40,
                   ), */
                   Expanded(

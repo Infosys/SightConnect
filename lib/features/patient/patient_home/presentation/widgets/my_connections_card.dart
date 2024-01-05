@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class MyConnectionsCard extends HookWidget {
           ),
           const SizedBox(height: AppSize.ksheight),
           Text(
-            name,
+            name.capitalize(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

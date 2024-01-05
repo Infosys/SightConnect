@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -89,29 +90,40 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(width: AppSize.kmwidth),
-                        Text(
-                          loc.stepNumber('2', '3'),
-                          style: applyRobotoFont(
-                            color: AppColor.primary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(width: AppSize.kswidth),
-                        Text(
-                          loc.visualAcuityTitle,
-                          style: applyFiraSansFont(
-                            color: AppColor.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                    title: Text(
+                      loc.visualAcuityTitle,
+                      style: applyFiraSansFont(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
+                    actions: const [
+                      TextScalePopupMenu(),
+                    ],
+
+                    //  Row(
+                    //   mainAxisSize: MainAxisSize.min,
+                    //   children: [
+                    //     const SizedBox(width: AppSize.kmwidth),
+                    //     Text(
+                    //       loc.stepNumber('2', '3'),
+                    //       style: applyRobotoFont(
+                    //         color: AppColor.primary,
+                    //         fontSize: 14,
+                    //         fontWeight: FontWeight.w500,
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: AppSize.kswidth),
+                    //     Text(
+                    //       loc.visualAcuityTitle,
+                    //       style: applyFiraSansFont(
+                    //         color: AppColor.black,
+                    //         fontSize: 16,
+                    //         fontWeight: FontWeight.w500,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
             // bottomNavigationBar: Padding(
             //   padding: EdgeInsets.symmetric(

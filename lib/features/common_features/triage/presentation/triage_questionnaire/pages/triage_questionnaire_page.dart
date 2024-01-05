@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -74,27 +75,37 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 ),
               ),
             ),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(width: AppSize.kmwidth),
-                Text(
-                  context.loc!.stepNumber("1", "3"),
-                  style: applyRobotoFont(
-                    color: AppColor.primary,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(width: AppSize.kswidth),
-                Text(
-                  AppLocalizations.of(context)!.questionnaireTitle,
-                  style: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+            title: Text(
+              context.loc!.questionnaireTitle,
+              style: applyFiraSansFont(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
+            actions: const [
+              TextScalePopupMenu(),
+            ],
+            //  Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     const SizedBox(width: AppSize.kmwidth),
+            //     Text(
+            //       context.loc!.stepNumber("1", "3"),
+            //       style: applyRobotoFont(
+            //         color: AppColor.primary,
+            //         fontSize: 14,
+            //       ),
+            //     ),
+            //     const SizedBox(width: AppSize.kswidth),
+            //     Text(
+            //       AppLocalizations.of(context)!.questionnaireTitle,
+            //       style: applyFiraSansFont(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w500,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
           body: Consumer(
             builder: (context, ref, _) {

@@ -45,7 +45,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const PatientHeader(),
-              const SizedBox(height: AppSize.kmheight),
+              // const SizedBox(height: AppSize.kmheight),
               // PriorityNotificationList(),
               const SizedBox(height: AppSize.kmheight),
               const MyConnectionsList(),
@@ -54,9 +54,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
               const SizedBox(height: AppSize.kmheight),
               const NearbyVisionCentersList(),
               const SizedBox(height: AppSize.kmheight),
-              const HelplineCard(
-                helpLine: AppText.tollFreeNumber,
-              ),
+              const HelplineCard(helpLine: AppText.tollFreeNumber),
               const SizedBox(height: AppSize.kmheight),
               InviteCard(
                 onPressed: () {

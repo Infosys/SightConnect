@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -152,7 +153,7 @@ class _MemberTile extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          name,
+                          name.capitalize(),
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

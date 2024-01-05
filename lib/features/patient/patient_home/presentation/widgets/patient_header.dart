@@ -23,7 +23,7 @@ class PatientHeader extends HookWidget {
     final displayData = getCarouselData(context.loc!);
     return Container(
       margin: EdgeInsets.only(
-        top: AppSize.height(context) * 0.11,
+        top: AppSize.height(context) * 0.13,
         left: AppSize.kmpadding,
         right: AppSize.kmpadding,
       ),

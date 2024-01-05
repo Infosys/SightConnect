@@ -65,38 +65,42 @@ class TopReadingCard extends ConsumerWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "40 cms",
-                    style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.green),
-                  ),
-                  Consumer(
-                    builder: (context, ref, child) {
-                      var model = ref.watch(tumblingTestProvider);
-                      return Text(
-                        model.currentEye == Eye.left
-                            ? context.loc!.leftEyeString
-                            : (model.currentEye == Eye.right
-                                ? context.loc!.rightEyeString
-                                : "Both Eye"),
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    currentLevel.snellerFraction,
-                    style: applyFiraSansFont(
-                      color: AppColor.grey,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      currentLevel.snellerFraction,
+                      style: applyFiraSansFont(
+                        color: AppColor.grey,
+                      ),
                     ),
-                  ),
-                ],
+                    Consumer(
+                      builder: (context, ref, child) {
+                        var model = ref.watch(tumblingTestProvider);
+                        return Text(
+                          model.currentEye == Eye.left
+                              ? context.loc!.leftEyeString
+                              : (model.currentEye == Eye.right
+                                  ? context.loc!.rightEyeString
+                                  : "Both Eye"),
+                          style: applyFiraSansFont(
+                            fontSize: 18,
+                          ),
+                        );
+                      },
+                    ),
+                    Text(
+                      "40 cms",
+                      style: applyFiraSansFont(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.green),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: AppSize.ksheight),

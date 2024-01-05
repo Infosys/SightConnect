@@ -111,6 +111,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         ),
       ),
     );
+    logger.d("Registration Status: $status");
 
     if (status == null || status == false) {
       // api failed or manual back press
