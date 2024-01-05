@@ -9,10 +9,9 @@ class VisionGuardianEmptyResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          
         Center(
           child: Image(
             width: AppSize.width(context) * 0.55,
