@@ -78,90 +78,93 @@ class PatientHomePageAppBar extends StatelessWidget
                               const SizedBox(width: 50),
                             ],
                           ),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            itemCount: appLocales.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.5,
-                            ),
-                            itemBuilder: (context, index) {
-                              final appLocale = appLocales[index];
+                          Expanded(
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: appLocales.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.5,
+                              ),
+                              itemBuilder: (context, index) {
+                                final appLocale = appLocales[index];
 
-                              bool isActiveLocale =
-                                  currentLocaleCode == appLocale.locale;
-                              return InkWell(
-                                onTap: () {
-                                  ref
-                                      .read(globalLanguageProvider)
-                                      .setCurrentLocale(appLocale.locale);
-                                  Navigator.of(context).pop();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.all(10),
-                                  padding: const EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                      color: appLocale.color,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          color: isActiveLocale
-                                              ? Colors.green
-                                              : Colors.black38.withOpacity(0),
-                                          width: isActiveLocale ? 3 : 2),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          spreadRadius: 1,
-                                          blurRadius: 2,
-                                          // offset: Offset(0, 3),
-                                        )
-                                      ]),
-                                  child: Stack(
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            appLocale.localeName,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                                    fontSize: 32,
-                                                    // fontWeight: FontWeight.bold,
-                                                    color: Colors.black
-                                                        .withOpacity(0.8)),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          Text(
-                                            appLocale.locale != "en"
-                                                ? appLocale.name
-                                                : "",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium,
-                                          ),
-                                        ],
-                                      ),
-                                      isActiveLocale
-                                          ? const Positioned(
-                                              bottom: 0,
-                                              right: 0,
-                                              child: Icon(
-                                                Icons.check_circle,
-                                                color: Colors.green,
-                                                size: 32,
-                                              ))
-                                          : Container()
-                                    ],
+                                bool isActiveLocale =
+                                    currentLocaleCode == appLocale.locale;
+                                return InkWell(
+                                  onTap: () {
+                                    ref
+                                        .read(globalLanguageProvider)
+                                        .setCurrentLocale(appLocale.locale);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                        color: appLocale.color,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: isActiveLocale
+                                                ? Colors.green
+                                                : Colors.black38.withOpacity(0),
+                                            width: isActiveLocale ? 3 : 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            spreadRadius: 1,
+                                            blurRadius: 2,
+                                            // offset: Offset(0, 3),
+                                          )
+                                        ]),
+                                    child: Stack(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              appLocale.localeName,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge
+                                                  ?.copyWith(
+                                                      fontSize: 30,
+                                                      // fontWeight: FontWeight.bold,
+                                                      color: Colors.black
+                                                          .withOpacity(0.8)),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                              appLocale.locale != "en"
+                                                  ? appLocale.name
+                                                  : "",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium,
+                                            ),
+                                          ],
+                                        ),
+                                        isActiveLocale
+                                            ? const Positioned(
+                                                bottom: 0,
+                                                right: 0,
+                                                child: Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.green,
+                                                  size: 32,
+                                                ))
+                                            : Container()
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),

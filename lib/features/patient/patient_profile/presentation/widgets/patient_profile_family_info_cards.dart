@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -19,6 +20,7 @@ class PatientFamilyDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return ListTile(
       visualDensity: VisualDensity.compact,
       title: Column(
@@ -28,7 +30,7 @@ class PatientFamilyDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "My Members",
+                loc.myConnectionsTitle,
                 style: applyFiraSansFont(
                     fontSize: 18, fontWeight: FontWeight.w600),
               ),
@@ -44,16 +46,16 @@ class PatientFamilyDetails extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const PatientRegistrationMiniappPage(
+                                PatientRegistrationMiniappPage(
                               actionType: MiniAppActionType.ADD_MEMBER,
-                              displayName: "Add Member",
+                              displayName: loc.myConnectionsAddMember,
                             ),
                           ),
                         );
                       } catch (e) {
                         logger.d({"error": e});
                         Fluttertoast.showToast(
-                          msg: "Service not available",
+                          msg: loc.myConnectionsServiceNotAvailable,
                         );
                       }
                     },
@@ -65,7 +67,7 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                   const SizedBox(width: AppSize.ksheight),
                   Text(
-                    "Add Members",
+                    loc.myConnectionsAddMember,
                     style: applyFiraSansFont(
                       fontWeight: FontWeight.w500,
                       fontSize: 12,
