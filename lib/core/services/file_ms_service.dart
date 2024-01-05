@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 var fileMsServiceProvider =
     Provider((ref) => FileMsService(ref.read(dioProvider)));
@@ -26,7 +25,7 @@ class FileMsService {
     const endpoint =
         "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
-    final fileName = const Uuid().v1();
+    final fileName = file.path.split('/').last;
 
     var data = FormData.fromMap({
       'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
