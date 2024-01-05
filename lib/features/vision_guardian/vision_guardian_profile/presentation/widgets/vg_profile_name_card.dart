@@ -17,7 +17,7 @@ class VgProfileNameCard extends StatelessWidget {
           width: AppSize.width(context) * 0.3,
           height: 120,
           child: Container(
-            padding: EdgeInsets.all(AppSize.kmpadding),
+            padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: BoxDecoration(
               border: Border.all(width: 1, color: AppColor.darkGrey),
               borderRadius: const BorderRadius.all(

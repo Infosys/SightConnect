@@ -1,9 +1,14 @@
+import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_mobile_number.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_features/triage/presentation/pages/triage_page.dart';
@@ -16,7 +21,37 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(getVGProfileProvider, (previous, next) {
+      if (next.hasError) {
+        logger.d("Logged out from VisionGuardianDashboardPage ");
+        ref.read(initializationProvider).logout().then((value) {
+          Fluttertoast.showToast(msg: "You have been logged out");
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
+        });
+      }
+    });
+    return ref.watch(getVGProfileProvider).when(
+          data: (data) {
+            return _content(context, ref);
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          error: (error, stackTrace) {
+            return Scaffold(
+              body: Text("Error $error"),
+            );
+          },
+        );
+  }
 
+  _content(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Stack(
         children: [
