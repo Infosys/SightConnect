@@ -1,12 +1,8 @@
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_event_details_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_cards.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/branding_widget_h.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,7 +15,6 @@ import '../widgets/vg_event_heder_chips.dart';
 class VisionGuardianEventPage extends HookConsumerWidget {
   const VisionGuardianEventPage({super.key});
 
-
   final eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,15 +26,14 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              print("object");
-                 Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianSearchEvent(
                     search: "event",
                   ),
                 ),
-              ); 
+              );
             },
             icon: const Icon(
               Icons.search,
@@ -121,7 +115,9 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               children: [
                 vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
-                const VisionEventListDetails(eventType: 'default',),
+                const VisionEventListDetails(
+                  eventType: 'default',
+                ),
               ],
             ),
           );

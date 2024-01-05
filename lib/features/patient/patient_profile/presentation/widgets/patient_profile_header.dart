@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_images.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({

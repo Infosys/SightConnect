@@ -5,11 +5,11 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
+import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
+import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,7 +46,11 @@ class PatientHomePageAppBar extends StatelessWidget
         children: [
           SvgPicture.asset(AppIcon.logo),
           const SizedBox(width: AppSize.kmwidth),
-          const Text(AppText.appName),
+          const Flexible(
+            child: Text(
+              AppText.appName,
+            ),
+          ),
         ],
       ),
       actions: [
@@ -59,126 +63,8 @@ class PatientHomePageAppBar extends StatelessWidget
                 showBottomSheet(
                   enableDrag: false,
                   context: context,
-                  builder: (context) => BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 10,
-                      sigmaY: 10,
-                    ),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: AppColor.scaffold,
-                      ),
-                      height: AppSize.height(context) * 0.9,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                icon: const Icon(Icons.close),
-                              ),
-                              const Text(
-                                'Select Language',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(width: 50),
-                            ],
-                          ),
-                          Expanded(
-                            child: GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: appLocales.length,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.5,
-                              ),
-                              itemBuilder: (context, index) {
-                                final appLocale = appLocales[index];
-
-                                bool isActiveLocale =
-                                    currentLocaleCode == appLocale.locale;
-                                return InkWell(
-                                  onTap: () {
-                                    ref
-                                        .read(globalLanguageProvider)
-                                        .setCurrentLocale(appLocale.locale);
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.all(10),
-                                    padding: const EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                        color: AppColor.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: isActiveLocale
-                                              ? Colors.green
-                                              : Colors.black38.withOpacity(0),
-                                          width: isActiveLocale ? 2 : 1,
-                                        ),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Colors.black45,
-                                            spreadRadius: 1,
-                                            blurRadius: 2,
-                                          )
-                                        ]),
-                                    child: Stack(
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              appLocale.localeName,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: applyRobotoFont(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            Text(
-                                              appLocale.locale != "en"
-                                                  ? appLocale.name
-                                                  : "",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: applyRobotoFont(),
-                                            ),
-                                          ],
-                                        ),
-                                        isActiveLocale
-                                            ? const Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: Icon(
-                                                  Icons.check_circle,
-                                                  color: Colors.green,
-                                                  size: 32,
-                                                ))
-                                            : Container()
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 100),
-                        ],
-                      ),
-                    ),
+                  builder: (context) => TranslationPopUp(
+                    currentLocaleCode: currentLocaleCode,
                   ),
                 );
               },
@@ -190,39 +76,7 @@ class PatientHomePageAppBar extends StatelessWidget
             );
           },
         ),
-        Consumer(
-          builder: (context, ref, _) {
-            final model = ref.watch(globalTextScaleFactorProvider);
-            return PopupMenuButton<double>(
-              icon: SvgPicture.asset(
-                "assets/icons/accessability.svg",
-                fit: BoxFit.cover,
-                height: 50,
-                width: 55,
-              ),
-              initialValue: model.textScaleFactor,
-              onSelected: (value) async {
-                await model.setTextScaleFactor(value);
-              },
-              itemBuilder: (context) {
-                return [
-                  const PopupMenuItem(
-                    value: 0.8,
-                    child: Text('-A'),
-                  ),
-                  const PopupMenuItem(
-                    value: 1,
-                    child: Text('A'),
-                  ),
-                  const PopupMenuItem(
-                    value: 1.2,
-                    child: Text('+A'),
-                  ),
-                ];
-              },
-            );
-          },
-        ),
+        const TextScalePopupMenu(),
         Consumer(
           builder: (context, ref, child) {
             final patient = ref.watch(getPatientProfileProvider).asData?.value;

@@ -15,13 +15,12 @@ class VisionGuardianEventSearchBar extends ConsumerWidget {
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
-        print(data);
-          ref.read(addEventDetailsProvider).setSearchEventList(data);
+        ref.read(addEventDetailsProvider).setSearchEventList(data);
       },
       onTap: () {
         if (readOnly) {
           //original
-    /*      Navigator.push(
+          /*      Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const VisionGuardianEyeAssessmentSearchPatient(),

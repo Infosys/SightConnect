@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -16,7 +15,7 @@ class EventPatientsTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(getPatientTriageReportsProvider).when(
       data: (triageReportDetails) {
-        if (triageReportDetails.length == 0) {
+        if (triageReportDetails.isEmpty) {
           return const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -26,7 +25,7 @@ class EventPatientsTab extends ConsumerWidget {
             ],
           );
         }
-        print(triageReportDetails);
+
         return ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
@@ -140,12 +139,7 @@ class EventPatientsTab extends ConsumerWidget {
                                 ),
                                 const Spacer(),
                                 Text(
-                                  DateTime.parse(data.encounterStartDate!)
-                                          .difference(DateTime.parse(
-                                              data.encounterStartDate!))
-                                          .inMinutes
-                                          .toString() +
-                                      ' mins',
+                                  '${DateTime.parse(data.encounterStartDate!).difference(DateTime.parse(data.encounterStartDate!)).inMinutes} mins',
                                   style: applyRobotoFont(
                                     fontSize: 12,
                                     color: AppColor.grey,

@@ -60,7 +60,7 @@ class EventDetailsTab extends ConsumerWidget {
                                 width: AppSize.kswidth - 5,
                               ),
                               Text(
-                                "${startDateformattedDate} - ${endDateformattedDate}",
+                                "$startDateformattedDate - $endDateformattedDate",
                                 style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -82,7 +82,7 @@ class EventDetailsTab extends ConsumerWidget {
                                     width: AppSize.kswidth - 5,
                                   ),
                                   Text(
-                                    "${startformattedTime} - ${endTimeformattedTime}",
+                                    "$startformattedTime - $endTimeformattedTime",
                                     style: applyRobotoFont(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
@@ -157,7 +157,6 @@ class EventDetailsTab extends ConsumerWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      print("object");
                       logger.d(eventDetails.id!);
                       ref
                           .read(addEventDetailsProvider)
@@ -165,7 +164,9 @@ class EventDetailsTab extends ConsumerWidget {
                               eventId: eventDetails.id.toString())
                           .then((statusCode) {
                         if (statusCode >= 200 && statusCode < 210) {
-                          ref.read(addEventDetailsProvider).filterListEvents(0, "");
+                          ref
+                              .read(addEventDetailsProvider)
+                              .filterListEvents(0, "");
                           Navigator.pop(context);
                         }
                       });

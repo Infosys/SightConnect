@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/source/vision_technician_home_local_source.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/source/vt_home_remote_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-//vtHomeRemoteSource
 
 var vtHomeRepository = Provider(
   (ref) => VTHomeRepositoryImpl(
@@ -11,15 +10,12 @@ var vtHomeRepository = Provider(
   ),
 );
 
-class VTHomeRepositoryImpl
-    extends VTHomeRepository {
-      
-      VTHomeRemoteSource remoteDataSource;
-      VTHomeRepositoryImpl(this.remoteDataSource);
+class VTHomeRepositoryImpl extends VTHomeRepository {
+  VTHomeRemoteSource remoteDataSource;
+  VTHomeRepositoryImpl(this.remoteDataSource);
 
-      @override
-      Future<List<VTPatientDto>> getListOfPatients() async{
-        return await remoteDataSource.getListOfPatients();
-      }
-
+  @override
+  Future<List<VTPatientDto>> getListOfPatients() async {
+    return await remoteDataSource.getListOfPatients();
+  }
 }

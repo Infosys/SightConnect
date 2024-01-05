@@ -183,7 +183,7 @@ class _UpdateTriageEyeCapturingPageState
 
   Future<void> _takePicture(BuildContext context) async {
     var navigator = Navigator.of(context);
-    BuildContext dialogContext = context;
+
     try {
       final image = await _capturePicture(context);
       if (image == null) {

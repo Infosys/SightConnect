@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
@@ -12,7 +10,6 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_me
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -38,7 +35,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
               const VisionGuardianAddEventCard(),
               const SizedBox(height: AppSize.klheight),
               Container(
-                padding: EdgeInsets.all(AppSize.kmpadding),
+                padding: const EdgeInsets.all(AppSize.kmpadding),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColor.white,

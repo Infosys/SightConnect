@@ -10,63 +10,62 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return  Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Row(
-          children: [
-            SizedBox(width: AppSize.width(context) * 0.05),
-            Expanded(
-              child: TextButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  // backgroundColor: MaterialStateProperty.all(AppColor.primary),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      side: const BorderSide(color: AppColor.primary),
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  "Cancel",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.primary,
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: Row(
+        children: [
+          SizedBox(width: AppSize.width(context) * 0.05),
+          Expanded(
+            child: TextButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(AppColor.primary),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    side: const BorderSide(color: AppColor.primary),
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
                   ),
                 ),
               ),
-            ),
-            SizedBox(width: AppSize.width(context) * 0.05),
-            Expanded(
-              child: TextButton(
-                onPressed: () {
-                  print("object");
-                  ref.read(addEventDetailsProvider).addEventDetails();
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColor.primary),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      side: const BorderSide(color: AppColor.primary),
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  "Save",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.white,
-                  ),
+              child: Text(
+                "Cancel",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.primary,
                 ),
               ),
             ),
-            SizedBox(width: AppSize.width(context) * 0.05),
-          ],
-        ),
-      );
+          ),
+          SizedBox(width: AppSize.width(context) * 0.05),
+          Expanded(
+            child: TextButton(
+              onPressed: () {
+                ref.read(addEventDetailsProvider).addEventDetails();
+                Navigator.pop(context);
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColor.primary),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    side: const BorderSide(color: AppColor.primary),
+                    borderRadius: BorderRadius.circular(AppSize.klradius),
+                  ),
+                ),
+              ),
+              child: Text(
+                "Save",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.white,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: AppSize.width(context) * 0.05),
+        ],
+      ),
+    );
   }
 }

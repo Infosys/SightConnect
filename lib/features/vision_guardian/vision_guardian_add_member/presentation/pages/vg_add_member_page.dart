@@ -32,7 +32,6 @@ class VisionGuardianMemberPage extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              print("object");
               Navigator.push(
                 context,
                 MaterialPageRoute(

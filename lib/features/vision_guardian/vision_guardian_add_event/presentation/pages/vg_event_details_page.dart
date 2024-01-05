@@ -1,21 +1,14 @@
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
-import '../../../../../core/constants/app_icon.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
-import '../../../vision_guardian_add_member/presentation/pages/vg_member_details_form_page.dart';
-import '../../../vision_guardian_home/data/fake_data_source.dart';
 import '../widgets/vg_event_details_tab.dart';
 import '../widgets/vg_event_patients_tab.dart';
 import '../widgets/vg_event_teammates_tab.dart';
@@ -25,7 +18,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
 
   VisionGuardianEventModel eventDetails;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var tabIndex = useState(0);
 
     return Scaffold(
@@ -59,8 +52,8 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
           ],
           leadingIcon: InkWell(
             onTap: () {
-             /*  Navigator.popUntil(context, (route) => route.isFirst); */
-             Navigator.pop(context);
+              /*  Navigator.popUntil(context, (route) => route.isFirst); */
+              Navigator.pop(context);
             },
             child: const Icon(
               Icons.chevron_left,
@@ -70,12 +63,11 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
         ),
         floatingActionButton: tabIndex.value == 0
             ? InkWell(
-                onTap: ()  {
-
+                onTap: () {
                   ref.read(addEventDetailsProvider).addPatientTriage();
-                  showToastMessage("Added Succesfully",context,0);
-                
-                 /*  Navigator.push(
+                  showToastMessage("Added Succesfully", context, 0);
+
+                  /*  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
@@ -136,7 +128,6 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               children: [
                 TabBar(
                   onTap: (value) {
-                    print(value);
                     tabIndex.value = value;
                   },
                   dividerColor: AppColor.black,
@@ -159,7 +150,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   child: TabBarView(
                     viewportFraction: 1,
                     children: [
-                      EventPatientsTab(),
+                      const EventPatientsTab(),
                       EventDetailsTab(eventDetails: eventDetails),
                       const EventTeammatesTab(),
                     ],

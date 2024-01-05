@@ -4,16 +4,13 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
+
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:millimeters/millimeters.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
-import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 
 class TopReadingCard extends ConsumerWidget {

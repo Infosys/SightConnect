@@ -1,29 +1,22 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logger/logger.dart';
 
-var vgAddEventRemoteSource = Provider((ref) => VgAddEventRemoteSourceImpl(
-    ref.read(dioProvider), ref.read(getTriageModelProvider)));
+var vgAddEventRemoteSource = Provider(
+  (ref) => VgAddEventRemoteSourceImpl(
+    ref.read(dioProvider),
+    ref.read(getTriageModelProvider),
+  ),
+);
 
 abstract class VgAddEventRemoteSource {
-  Future<List<VisionGuardianEventModel>> getVGEvents({
-    required String actorIdentifier,
-   required String eventStatusFilter
-  });
+  Future<List<VisionGuardianEventModel>> getVGEvents(
+      {required String actorIdentifier, required String eventStatusFilter});
   Future<dynamic> postVGEvents({
     required VisionGuardianEventModel vgEventModel,
     required Map<String, dynamic> actor,
@@ -62,35 +55,34 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   VgAddEventRemoteSourceImpl(this._dio, this.getTriageModelProvider);
 
   @override
-  Future<List<VisionGuardianEventModel>> getVGEvents({
-    required String actorIdentifier,
-    required String eventStatusFilter
-  }) async {
+  Future<List<VisionGuardianEventModel>> getVGEvents(
+      {required String actorIdentifier,
+      required String eventStatusFilter}) async {
     const endpoint = "/services/triage/api/campaign-events";
-    print(eventStatusFilter);
+    logger.d(eventStatusFilter);
     Map<String, dynamic> queryParameters = {
       "actor-id": actorIdentifier,
-      "filter":eventStatusFilter
+      "filter": eventStatusFilter
     };
-    print("object1");
+    logger.d("object1");
     try {
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
 
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        print(response);
-        print("object");
-        print(response.data);
+        logger.d(response);
+        logger.d("object");
+        logger.d(response.data);
         return (response.data as List)
             .map((e) => VisionGuardianEventModel.fromJson(e))
             .toList();
       } else {
-        print("object error");
+        logger.d("object error");
         throw ServerException();
       }
     } catch (error) {
-      print("object");
-      print(error);
+      logger.d("object");
+      logger.d(error);
       rethrow;
     }
   }
@@ -106,11 +98,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["images"] = [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
-    print(vgeventjson);
+    logger.d(vgeventjson);
     try {
       final response = await _dio.post(endpoint, data: vgeventjson);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        print(response);
+        logger.d(response);
         return response.data;
       } else {
         throw ServerException();
@@ -123,15 +115,16 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future deleteVGEvents({required String eventId}) async {
     final endpoint = "/services/triage/api/campaign-events/$eventId";
-    print(endpoint);
+    logger.d(endpoint);
     Map<String, dynamic> queryParameters = {
       "login-actor-id": "11067400874",
     };
-  
+
     try {
-      final response = await _dio.delete(endpoint,queryParameters: queryParameters);
+      final response =
+          await _dio.delete(endpoint, queryParameters: queryParameters);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        print(response);
+        logger.d(response);
         return response.statusCode;
       } else {
         throw ServerException();
@@ -160,7 +153,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         "isOwner": false
       };
 
-      print(newResponse);
+      logger.d(newResponse);
 
       const endpoint = "/services/triage/api/campaign-events/teammates";
       Map<String, dynamic> queryParameters = {
@@ -173,11 +166,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           .then((value) {
         return value;
       }).catchError((error) {
-        print(error);
+        logger.d(error);
         return error;
       });
     }).catchError((error) {
-      print(error);
+      logger.d(error);
       return error;
     });
   }
@@ -206,8 +199,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
             await _dio.get(endpoint, queryParameters: queryParameters);
         listofTeamMates.add(teammatesDetails.data);
       }
-      print(listofTeamMates[0]);
-      print("sdifjklsdjfl");
+      logger.d(listofTeamMates[0]);
+      logger.d("sdifjklsdjfl");
       return listofTeamMates;
     }).catchError((onError) {
       return onError;
@@ -227,7 +220,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       "login-actor-id": loginActorIdentifier,
       "actor-id": actorIdentifier,
     };
-    print(queryParameters);
+    logger.d(queryParameters);
 
     try {
       final response =
@@ -272,7 +265,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future postTriageReport({required String eventId}) async {
     const endpoint = "/services/triage/api/campaign-events/triage-report";
 
-    print(eventId);
+    logger.d(eventId);
 /*  TriagePostModel triagePostModel = TriagePostModel(
       patientId: 1801,
       serviceType: ServiceType.OPTOMETRY,
@@ -358,7 +351,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       var response = await _dio.post(endpoint,
           data: datatriage, queryParameters: {"event-id": int.parse(eventId)});
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
-        print(response.statusCode);
+        logger.d(response.statusCode);
         return response.statusCode;
       } else {
         throw ServerException();
