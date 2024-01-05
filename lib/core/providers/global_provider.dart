@@ -1,5 +1,7 @@
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 var globalProvider = ChangeNotifierProvider((ref) => GlobalProvider());
 
@@ -19,8 +21,12 @@ class GlobalProvider extends ChangeNotifier {
   bool isUpdateMode() => _vaMode == VisionAcuityMode.UPDATE;
 }
 
-var globalTextScaleFactorProvider =
-    ChangeNotifierProvider((ref) => GlobalTextScaleFactor());
+var globalTextScaleFactorProvider = ChangeNotifierProvider(
+  (ref) {
+    final defaultScaleFactor = SharedPreferenceService.getFontScale;
+    return GlobalTextScaleFactor(defaultScaleFactor);
+  },
+);
 
 class GlobalTextScaleFactor extends ChangeNotifier {
   double _textScaleFactor = 1.0;
@@ -29,21 +35,23 @@ class GlobalTextScaleFactor extends ChangeNotifier {
   double get textScaleFactor => _textScaleFactor;
   String get scaleAlphabet => _scaleAlphabet;
 
-  void setTextScaleFactor(String data) {
+  GlobalTextScaleFactor(this._textScaleFactor);
+
+  Future<void> setTextScaleFactor(double data) async {
     switch (data) {
-      case "A":
+      case 1.0:
         _textScaleFactor = 1.0;
         _scaleAlphabet = "A";
 
         break;
-      case "-A":
-        _textScaleFactor = 0.8;
-        _scaleAlphabet = "-A";
-
-        break;
-      case "+A":
+      case 1.2:
         _textScaleFactor = 1.2;
         _scaleAlphabet = "+A";
+
+        break;
+      case 0.8:
+        _textScaleFactor = 0.8;
+        _scaleAlphabet = "-A";
 
         break;
       default:
@@ -51,6 +59,7 @@ class GlobalTextScaleFactor extends ChangeNotifier {
         _scaleAlphabet = "A";
         break;
     }
+    await SharedPreferenceService.setFontScale(data);
     notifyListeners();
   }
 }

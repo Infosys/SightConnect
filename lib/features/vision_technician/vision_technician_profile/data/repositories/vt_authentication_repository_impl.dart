@@ -1,5 +1,3 @@
-// https://eyecare4all-dev.infosysapps.com/services/orchestration/api/practitioners/filter?officialMobile=8888888741
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -30,7 +28,6 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
         "/services/orchestration/api/practitioners/filter?officialMobile=$mobile";
     try {
       final response = await _dio.get<List>(endpoint);
-
       return Right(
           response.data!.map((e) => VtProfileModel.fromJson(e)).toList());
     } on DioException catch (e) {

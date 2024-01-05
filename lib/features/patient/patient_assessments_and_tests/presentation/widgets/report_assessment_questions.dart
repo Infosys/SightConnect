@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,9 @@ class ReportAssessmentQuestions extends StatelessWidget {
                                     height: 1.5),
                               ),
                               Text(
-                                responseModel.response,
+                                (responseModel.response == "Yes")
+                                    ? context.loc!.yesButton
+                                    : context.loc!.noButton,
                                 style: applyRobotoFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,

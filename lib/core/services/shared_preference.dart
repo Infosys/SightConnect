@@ -16,6 +16,20 @@ class SharedPreferenceService {
     }
   }
 
+  static Future<void> setLanguage(String value) async {
+    await _sharedPreferences.setString("language", value);
+  }
+
+  static String get getLanguage =>
+      _sharedPreferences.getString("language") ?? "en";
+
+  static Future<void> setFontScale(double value) async {
+    await _sharedPreferences.setDouble("fontScale", value);
+  }
+
+  static double get getFontScale =>
+      _sharedPreferences.getDouble("fontScale") ?? 1.0;
+
   static Future<void> setDontShowVisualAcuityStatus(bool value) async {
     await _sharedPreferences.setBool("dontShowVisualAcuityStatus", value);
   }
