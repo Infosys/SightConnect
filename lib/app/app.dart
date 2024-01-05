@@ -71,9 +71,9 @@ class MyApp extends ConsumerWidget {
               theme: ref.watch(themeProvider) == ThemeMode.light
                   ? AppTheme.getLightTheme(context)
                   : AppTheme.getDarkTheme(context),
-              // routes: AppRouter.routes,
-              // initialRoute: initialRoute,
-              home: const VisionGuardianDashboardPage(),
+              routes: AppRouter.routes,
+              initialRoute: initialRoute,
+              // home: const VisionGuardianDashboardPage(),
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
               //   return ref.watch(internetProvider).when(

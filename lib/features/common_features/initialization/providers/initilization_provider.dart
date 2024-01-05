@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/repositories/vg_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,26 @@ class InitializationProvider extends ChangeNotifier {
         );
         return true;
       });
-    } else {
+    }
+    else if(role == Role.ROLE_VISION_GUARDIAN){
+      final response = await _ref
+          .read(vgAuthenticationRepositoryProvider)
+          .getVgProfile(phone);
+      return response.fold((failure) {
+        throw failure;
+      }, (result) async {
+        if (result.isEmpty) {
+          return false;
+        }
+        final profile = result.first;
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          profile.id.toString(),
+        );
+        return true;
+      });
+    }
+    
+     else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
   }
