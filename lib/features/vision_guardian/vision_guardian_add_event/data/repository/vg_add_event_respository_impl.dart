@@ -11,9 +11,14 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
 
   VgAddEventRepositoryImpl(this.remoteDataSource);
   @override
-  Future<List<VisionGuardianEventModel>> getVGEvents(
-      {required String actorIdentifier}) async {
-    return await remoteDataSource.getVGEvents(actorIdentifier: actorIdentifier);
+  Future<List<VisionGuardianEventModel>> getVGEvents({
+    required String actorIdentifier,
+    required String eventStatusFilter,
+  }) async {
+    return await remoteDataSource.getVGEvents(
+      actorIdentifier: actorIdentifier,
+      eventStatusFilter: eventStatusFilter,
+    );
   }
 
   @override
@@ -54,15 +59,15 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
         actorIdentifier: actorIdentifier);
   }
 
-
-
   @override
   Future postTriageReport({required String eventId}) async {
     await remoteDataSource.postTriageReport(eventId: eventId);
   }
-  
+
   @override
-  Future getTriageReport({required int campaignEventId, required List<int> performerId}) {
-    return remoteDataSource.getTriageReport(campaignEventId: campaignEventId, performerId: performerId);
+  Future getTriageReport(
+      {required int campaignEventId, required List<int> performerId}) {
+    return remoteDataSource.getTriageReport(
+        campaignEventId: campaignEventId, performerId: performerId);
   }
 }

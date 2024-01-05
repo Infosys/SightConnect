@@ -21,9 +21,17 @@ var getEventDetailsProvider =
   ref.watch(addEventDetailsProvider).eventStatusFilterValue;
   ref.watch(addEventDetailsProvider).isSelected;
 
-  return await ref
+  var statusfilter = ref.read(addEventDetailsProvider).eventStatusFilterValue;
+
+  List<VisionGuardianEventModel> response = await ref
       .watch(vgAddEventRepository)
-      .getVGEvents(actorIdentifier: actorIdentifierValue);
+      .getVGEvents(
+          actorIdentifier: actorIdentifierValue,
+          eventStatusFilter: statusfilter);
+
+  ref.read(addEventDetailsProvider).setEventDetails(response);
+  ref.read(addEventDetailsProvider).setSearchEventDetails(response);
+  return response;
 });
 
 var getPatientTriageReportsProvider =
@@ -50,12 +58,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   String eventStatusFilter = "";
   String queryData = "";
   var isSelected = -1;
-  var eventStatus = const [
-    'All',
-    'Ongoing',
-    'Upcoming',
-    'Completed',
-  ];
+  var eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   XFile? _image;
   XFile? get image => _image;
   set image(XFile? value) {
@@ -86,6 +89,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   get isSelectedValue => isSelected;
   get eventStatusFilterValue => eventStatusFilter;
   get eventIdValue => eventId;
+  get listOfEventDetailsValue => listOfEventDetails;
 
   void setEventId(String id) {
     eventId = id;
@@ -118,7 +122,6 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
       var endFormat =
           "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
-
 
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,
@@ -163,7 +166,6 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       filterListEvents(-1, "All");
     } catch (e) {
-
       isLoading = false;
 
       notifyListeners();
@@ -204,5 +206,15 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     var response =
         await vgAddEventRepository.postTriageReport(eventId: eventIdValue);
     logger.d(response);
+  }
+
+  void setEventDetails(eventDetails) {
+    listOfEventDetails = eventDetails;
+/*     notifyListeners(); */
+  }
+
+  void setSearchEventDetails(eventDetails) {
+    searchResults = eventDetails;
+/*     notifyListeners(); */
   }
 }

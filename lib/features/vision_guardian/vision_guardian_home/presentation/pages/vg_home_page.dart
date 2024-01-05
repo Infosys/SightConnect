@@ -157,18 +157,17 @@ class VisionGuardianHomePage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () async {
-                          print("object");
+                          /*   print("object");
                           var reports = await ref
                               .read(patientAssessmentAndTestProvider)
                               .getTriageDetailedReport(33200000017);
-                          print(reports);
-                          /*  Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => VisionGuardianReportPage(
-                                  assessmentDetailsReport: reports,
-                                ),
-                              ),
-                            ); */
+                          print(reports); */
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisionGuardianEventPage(),
+                            ),
+                          );
                         },
                       );
                     },
@@ -176,7 +175,9 @@ class VisionGuardianHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const VisionEventListDetails(),
+            const VisionEventListDetails(
+              eventType: "default",
+            ),
             SizedBox(
               height: AppSize.height(context) * 0.2,
             ),

@@ -19,12 +19,8 @@ import '../widgets/vg_event_heder_chips.dart';
 class VisionGuardianEventPage extends HookConsumerWidget {
   const VisionGuardianEventPage({super.key});
 
-  final eventStatus = const [
-    'All',
-    'Ongoing',
-    'Upcoming',
-    'Completed',
-  ];
+
+  final eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(-1);
@@ -36,14 +32,14 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               print("object");
-              /*   Navigator.push(
+                 Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianSearchEvent(
                     search: "event",
                   ),
                 ),
-              ); */
+              ); 
             },
             icon: const Icon(
               Icons.search,
@@ -124,7 +120,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               children: [
                 vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
-                const VisionEventListDetails(),
+                const VisionEventListDetails(eventType: 'default',),
               ],
             ),
           );

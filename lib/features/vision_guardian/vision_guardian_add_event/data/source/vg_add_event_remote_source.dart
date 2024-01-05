@@ -22,6 +22,7 @@ var vgAddEventRemoteSource = Provider((ref) => VgAddEventRemoteSourceImpl(
 abstract class VgAddEventRemoteSource {
   Future<List<VisionGuardianEventModel>> getVGEvents({
     required String actorIdentifier,
+   required String eventStatusFilter
   });
   Future<dynamic> postVGEvents({
     required VisionGuardianEventModel vgEventModel,
@@ -63,10 +64,13 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
     required String actorIdentifier,
+    required String eventStatusFilter
   }) async {
     const endpoint = "/services/triage/api/campaign-events";
+    print(eventStatusFilter);
     Map<String, dynamic> queryParameters = {
       "actor-id": actorIdentifier,
+      "filter":eventStatusFilter
     };
     print("object1");
     try {

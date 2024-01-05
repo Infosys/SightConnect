@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 abstract class VgAddEventRepository {
   Future<List<VisionGuardianEventModel>> getVGEvents({
     required String actorIdentifier,
+    required String eventStatusFilter
   });
   Future postVGEvents({
     required VisionGuardianEventModel vgEventModel,

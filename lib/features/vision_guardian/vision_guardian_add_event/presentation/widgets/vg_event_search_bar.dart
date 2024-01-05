@@ -15,6 +15,7 @@ class VisionGuardianEventSearchBar extends ConsumerWidget {
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
+        print(data);
           ref.read(addEventDetailsProvider).setSearchEventList(data);
       },
       onTap: () {
