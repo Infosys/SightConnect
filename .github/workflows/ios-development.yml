@@ -12,7 +12,7 @@ jobs:
     steps:
 
       - name: checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
         with:
             repository: monirul-islam_infosys/EYE_CARE_FOR_ALL_INFOSYS
             token: ${{ secrets.MYPAT }}
