@@ -61,7 +61,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Android IPA
-        run: flutter build ipa --release --export-method=ad-hoc  --export-options-plist=ios/Runner/ExportOptions.plist --build-number ${{ github.run_number }}
+        run: flutter build ipa --release  --export-options-plist=ios/Runner/ExportOptions.plist --build-number ${{ github.run_number }}
 
       - name: Upload IPA
         uses: actions/upload-artifact@v2
