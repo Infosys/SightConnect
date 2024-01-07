@@ -13,6 +13,9 @@ jobs:
 
       - name: checkout repository
         uses: actions/checkout@v3
+        with:
+            repository: monirul-islam_infosys/EYE_CARE_FOR_ALL_INFOSYS
+            token: ${{ secrets.MYPAT }}
 
       - name: Install the Apple certificate and provisioning profile
         env:
