@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
@@ -99,6 +100,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                               action: 'Click',
                               name: 'Patient services page click',
                             ),
+                            dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
                           );
                           return const PatientServicesPage();
                         },
@@ -114,6 +116,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                                 action: 'Click',
                                 name: 'Triage member selection page click',
                               ),
+                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
                             );
                             return const TriageMemberSelectionPage();
                           },
@@ -131,6 +134,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                                 action: 'Click',
                                 name: 'Patient Notification Page Click',
                               ),
+                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
                             );
                             return const PatientNotificationPage();
                           },
@@ -147,6 +151,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                                 action: 'Click',
                                 name: 'App Drawer Click',
                               ),
+                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
                             );
                             return const AppDrawer();
                           },
@@ -163,6 +168,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                                 action: 'Click',
                                 name: 'App Drawer Click',
                               ),
+                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
                             );
                             return const AppDrawer();
                           },

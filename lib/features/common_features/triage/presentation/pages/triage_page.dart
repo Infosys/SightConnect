@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
@@ -40,8 +41,9 @@ class _TriagePageState extends ConsumerState<TriagePage> {
       eventInfo: EventInfo(
         category: 'Triage',
         action: 'Triage Entered',
-        name: 'Triage Entered',
+        name: 'Triage Entered'
       ),
+        dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
     );
   }
 
@@ -53,6 +55,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         action: 'Triage Exited',
         name: 'Triage Exited',
       ),
+      dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
     );
 
     super.dispose();
