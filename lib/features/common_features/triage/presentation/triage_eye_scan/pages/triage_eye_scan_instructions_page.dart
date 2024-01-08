@@ -62,7 +62,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
               ),
             ),
             actions: const [
-              TextScalePopupMenu(),
+              // TextScalePopupMenu(),
             ],
 
             //  Row(

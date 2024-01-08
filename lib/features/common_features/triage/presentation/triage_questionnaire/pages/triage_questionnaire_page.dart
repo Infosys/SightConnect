@@ -82,7 +82,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               ),
             ),
             actions: const [
-              TextScalePopupMenu(),
+              // TextScalePopupMenu(),
             ],
             //  Row(
             //   mainAxisSize: MainAxisSize.min,

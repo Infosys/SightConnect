@@ -34,7 +34,7 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "In the event of a sudden vision loss, call this emergency helpline  ${context.loc!.tollFreeNumber}",
+                " ${context.loc!.visionLoss} ${context.loc!.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.white,

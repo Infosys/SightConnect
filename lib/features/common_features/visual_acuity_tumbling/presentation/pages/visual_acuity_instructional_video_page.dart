@@ -97,7 +97,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                       ),
                     ),
                     actions: const [
-                      TextScalePopupMenu(),
+                      // TextScalePopupMenu(),
                     ],
 
                     //  Row(

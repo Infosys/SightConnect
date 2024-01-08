@@ -36,7 +36,7 @@ class PatientHomePageAppBar extends StatelessWidget
         children: [
           Image.asset(
             "assets/logo/app_logo.png",
-            width: 120,
+            width: 150,
           ),
         ],
       ),

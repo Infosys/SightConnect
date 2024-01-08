@@ -81,7 +81,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 leadingWidth: 60,
                 titleSpacing: 0.0,
                 actions: const [
-                  TextScalePopupMenu(),
+                  // TextScalePopupMenu(),
                 ],
                 centerTitle: false,
                 leadingIcon: InkWell(

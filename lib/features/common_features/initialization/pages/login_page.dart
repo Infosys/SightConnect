@@ -67,36 +67,9 @@ class LoginPage extends HookConsumerWidget {
         child: AppBar(
           title: Row(
             children: [
-              Container(
-                margin: const EdgeInsets.all(2),
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    AppImages.logo,
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                AppText.appName,
-                style: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+              Image.asset(
+                "assets/logo/app_logo.png",
+                width: 150,
               ),
             ],
           ),

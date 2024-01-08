@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +13,7 @@ class TriageTestCard extends HookConsumerWidget {
   const TriageTestCard({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Container(
       height: AppSize.height(context) * 0.25,
       margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
@@ -39,7 +41,7 @@ class TriageTestCard extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Our eyes are the most valuable assets.",
+                  loc.eyesAreMostValuable,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: applyFiraSansFont(
@@ -49,7 +51,7 @@ class TriageTestCard extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "Get them tested on time to prevent eye problems.",
+                  loc.gotTheEyesTested,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
@@ -100,7 +102,8 @@ class TriageTestCard extends HookConsumerWidget {
                       );
                     },
                     child: Text(
-                      "Start Eye Test",
+                      // "Start Eye Test",
+                      loc.startEyeTestText,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
