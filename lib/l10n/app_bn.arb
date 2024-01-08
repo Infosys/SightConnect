@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ছবি তোলার সময় এক চোখ দিয়ে হাত দিয়ে ঢেকে রাখুন এবং অন্য চোখ দিয়ে সোজা তাকিয়ে থাকুন।",
     "eyeScanInstructionSix": "ছবি তোলার আগে চোখটি প্যানেলের মধ্যে কেন্দ্র করুন।",
     "eyeScanInstructionSeven": "ফ্ল্যাশ বন্ধ হওয়া পর্যন্ত এবং 'বিপ' শব্দ শোনা যাওয়া পর্যন্ত চোখ প্রশস্ত রাখুন।",
+    "eyeAssessmentNote": "নোট: এখানে প্রদর্শিত চিত্রগুলি শুধুমাত্র সূচনা জন্য। প্রাকৃতিতে তাঁদের এমনভাবে দেখা যাবে না।",
     "agreeButton": "আমি রাজি",
     "consentPageCheckbox": "আমি শর্তাবলীতে রাজি আছি",
     "confirmButton": "নিশ্চিত করুন",
@@ -188,5 +189,19 @@
     "myProfileCity": "ଶହର",
     "myProfileDistrict": "ଜିଲ୍ଲା",
     "myProfileState": "ରାଜ୍ୟ",
-    "myProfilePinCode": "ପିନ୍ କୋଡ୍"
+    "myProfilePinCode": "ପିନ୍ କୋଡ୍",
+
+    "submitButton" : "জমা দিন",
+    "swipeGestureError" : "ভুল স্বাইপ! অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "swipeGestureCardText" : "প্রতীকের দিকে স্বাইপ করুন",
+    "assessmentResultCardAssessmentQuestions" : "মূল্যায়ন\nপ্রশ্ন",
+    "assessmentResultCardAcuityTest" : "দৃষ্টি\nপরীক্ষা",
+    "assessmentResultCardEyeScan" : "নেত্র\nস্ক্যান",
+    "viewReportButton" : "রিপোর্ট দেখুন",
+    "updateButton" : "আপডেট করুন",
+    "assessmentCardUrgentConsult": "জরুরি পরামর্শ",
+    "assessmentCardRoutineCheckUp": "নিয়মিত পরিদর্শন",
+    "assessmentCardEarlyCheckUp": "অগ্রিম পরিদর্শন",
+    "testAgainButton" : "আবার পরীক্ষা করুন",
+    "homeButton" : "হোম"
 }

@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ചിത്രം എടുക്കുമ്പോൾ ഒരു കണ്ണ് കൈകൊണ്ട് മൂടുകയും മറ്റേ കണ്ണ് കൊണ്ട് നേരെ മുന്നോട്ട് നോക്കുകയും ചെയ്യുക.",
     "eyeScanInstructionSix": "ചിത്രം ആരംഭിക്കുന്നതിന് മുമ്പ് പാനലിനുള്ളിൽ കണ്ണ് കേന്ദ്രീകരിക്കുക.",
     "eyeScanInstructionSeven": "ഒരു 'ബീപ്പ്' ശബ്ദം ഫോട്ടോയുടെ അവസാനത്തെ സൂചിപ്പിക്കുന്നതുവരെ ഫ്ലാഷ് ഓഫ് ആകുന്നതുവരെ കണ്ണുകൾ തുറന്നിടുക.",
+    "eyeAssessmentNote": "ശ്രദ്ധിക്കുക: ഇവിടെ കാണിച്ചിരിക്കുന്ന ചിത്രങ്ങൾ സൂചനകൾക്ക് മാത്രമുള്ളതാണ്. യഥാർത്ഥ ജീവിതത്തിൽ അവർ ഒരേ രീതിയിൽ പ്രത്യക്ഷപ്പെടണമെന്നില്ല.",
     "agreeButton": "ഞാൻ സമ്മതിക്കുന്നു.",
     "consentPageCheckbox": "നിബന്ധനകളും വ്യവസ്ഥകളും ഞാൻ അംഗീകരിക്കുന്നു.",
     "confirmButton": "സ്ഥിരീകരിക്കുക",
@@ -188,5 +189,19 @@
     "myProfileCity": "നഗരം",
     "myProfileDistrict": "ജില്ല",
     "myProfileState": "സംസ്ഥാനം",
-    "myProfilePinCode": "പിൻ കോഡ്"
+    "myProfilePinCode": "പിൻ കോഡ്",
+
+    "submitButton" : "സമർപ്പിക്കുക",
+    "swipeGestureError" : "തെറ്റായ സ്വൈപ്പ്! ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+    "swipeGestureCardText" : "ചിഹ്നത്തിന്റെ ദിശയിൽ സ്വൈപ്പ് ചെയ്യുക",
+    "assessmentResultCardAssessmentQuestions" : "മൂല്യനിർണ്ണയം\nചോദ്യങ്ങൾ",
+    "assessmentResultCardAcuityTest" : "ദൃഷ്ടി\nപരീക്ഷ",
+    "assessmentResultCardEyeScan" : "കണ്ണ്\nസ്കാൻ",
+    "viewReportButton" : "റിപ്പോർട്ട് കാണുക",
+    "updateButton" : "അപ്ഡേറ്റ് ചെയ്യുക",
+    "assessmentCardUrgentConsult": "തത്പരമായ പരാമർശം",
+    "assessmentCardRoutineCheckUp": "നിയമിത പരിശീലനം",
+    "assessmentCardEarlyCheckUp": "പ്രാഥമിക പരിശീലനം",
+    "testAgainButton" : "വീണ്ടും പരീക്ഷ ചെയ്യുക",
+    "homeButton" : "ഹോം" 
 }

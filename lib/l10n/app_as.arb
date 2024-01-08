@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ছবিখন লোৱাৰ সময়ত এখন চকু আপোনাৰ হাতেৰে ঢাকি ৰাখক আৰু আনটো চকুৰে পোনকৈ সন্মুখলৈ চাওক।",
     "eyeScanInstructionSix": "ছবিখন আৰম্ভ কৰাৰ আগতে পেনেলৰ ভিতৰত চকু কেন্দ্ৰ কৰক।",
     "eyeScanInstructionSeven": "ফ্লেছটো বন্ধ নোহোৱালৈকে চকু মুকলি কৰি ৰাখক, যেতিয়ালৈকে 'বীপ' শব্দই ফটোখনৰ শেষৰ সংকেত নিদিয়ে।",
+    "eyeAssessmentNote": "বি:দ্ৰ: ইয়াত দেখুওৱা ছবিসমূহ কেৱল ইংগিতৰ বাবেহে। বাস্তৱ জীৱনত হয়তো একে ধৰণে দেখা নাযায়।",
     "agreeButton": "মই একমত।",
     "consentPageCheckbox": "মই নিয়ম আৰু চৰ্তসমূহৰ সৈতে সন্মত।",
     "confirmButton": "নিশ্চিত কৰক",
@@ -188,5 +189,19 @@
     "myProfileCity": "নগৰ",
     "myProfileDistrict": "জিলা",
     "myProfileState": "ৰাজ্য",
-    "myProfilePinCode": "পিন কোড"
+    "myProfilePinCode": "পিন কোড",
+
+    "submitButton" : "দাখিল কৰক",
+    "swipeGestureError" : "ভুল চুইপ! অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।",
+    "swipeGestureCardText" : "চিহ্নৰ দিশত চুইপ কৰক",
+    "assessmentResultCardAssessmentQuestions" : "মূল্যায়ন\nপ্ৰশ্ন",
+    "assessmentResultCardAcuityTest" : "তীক্ষ্ণতা\nপৰীক্ষা",
+    "assessmentResultCardEyeScan" : "চকু\nস্কেন কৰক",
+    "viewReportButton" : "প্ৰতিবেদন চাওক",
+    "updateButton" : "নবীকৰণ",
+    "assessmentCardUrgentConsult": "জৰুৰী পৰামৰ্শ",
+    "assessmentCardRoutineCheckUp": "ৰুটিন চেকআপ",
+    "assessmentCardEarlyCheckUp": "আগতীয়াকৈ পৰীক্ষা কৰা",
+    "testAgainButton" : "আবার পরীক্ষা কৰক",
+    "homeButton" : "হোম"
 }

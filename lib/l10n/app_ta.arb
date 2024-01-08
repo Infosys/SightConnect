@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "படம் எடுக்கும் போது ஒரு கண்ணை உங்கள் கையால் மூடி, மற்ற கண்ணால் நேராகப் பாருங்கள்.",
     "eyeScanInstructionSix": "படத்தை தொடங்குவதற்கு முன்பு பலகையின் உள்ளே கண்ணை மையப்படுத்துங்கள்.",
     "eyeScanInstructionSeven": "ஃபிளாஷ் அணைக்கப்படும் வரை கண்களைத் திறந்து வைத்திருங்கள், ஒரு 'பீப்' ஒலி புகைப்படத்தின் முடிவைக் குறிக்கும் வரை.",
+    "eyeAssessmentNote": "குறிப்பு: இங்கே காட்டப்பட்டுள்ள படங்கள் குறிப்பிற்காக மட்டுமே. நிஜ வாழ்க்கையில் அவர்கள் ஒரே மாதிரியாக தோன்றாமல் இருக்கலாம்.",
     "agreeButton": "நான் ஒப்புக் கொள்கிறேன்.",
     "consentPageCheckbox": "விதிமுறைகளையும் நிபந்தனைகளையும் நான் ஏற்றுக்கொள்கிறேன்.",
     "confirmButton": "உறுதிப்படுத்தல்",
@@ -188,5 +189,19 @@
     "myProfileCity": "நகரம்",
     "myProfileDistrict": "மாவட்டம்",
     "myProfileState": "மாநிலம்",
-    "myProfilePinCode": "பின் குறியீடு"
+    "myProfilePinCode": "பின் குறியீடு",
+
+    "submitButton" : "சமர்ப்பிக்கவும்",
+    "swipeGestureError" : "தவறான ஸ்வைப்! மீண்டும் முயற்சிக்கவும்.",
+    "swipeGestureCardText" : "சின்னத்தின் திசையில் ஸ்வைப் செய்யவும்",
+    "assessmentResultCardAssessmentQuestions" : "மதிப்பாய்வு\nகேள்விகள்",
+    "assessmentResultCardAcuityTest" : "கண்\nசரிபார்க்கப்பட்டுள்ளது",
+    "assessmentResultCardEyeScan" : "கண்\nஸ்கேன்",
+    "viewReportButton" : "அறிக்கையைப் பார்க்கவும்",
+    "updateButton" : "புதுப்பிக்கவும்",
+    "assessmentCardUrgentConsult": "தேவையான ஆலோசனை",
+    "assessmentCardRoutineCheckUp": "வழக்கமான சேர்க்கை",
+    "assessmentCardEarlyCheckUp": "முன்னோக்கி சேர்க்கை",
+    "testAgainButton" : "மீண்டும் சோதிக்கவும்",
+    "homeButton" : "முகப்பு"
 }

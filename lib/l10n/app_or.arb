@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ଫଟୋ ଉଠାଇବା ସମଯ଼ରେ ଗୋଟିଏ ଆଖିକୁ ହାତରେ ଢାଙ୍କି ଅନ୍ଯ଼ ଆଖିକୁ ସିଧା ଆଗକୁ ଦେଖନ୍ତୁ।",
     "eyeScanInstructionSix": "ଚିତ୍ର ଆରମ୍ଭ କରିବା ପୂର୍ବରୁ ପ୍ଯ଼ାନେଲ୍ ଭିତରେ ଆଖିକୁ କେନ୍ଦ୍ର କରନ୍ତୁ।",
     "eyeScanInstructionSeven": "ଫ୍ଲାଶ୍ ବନ୍ଦ ହେବା ପର୍ଯ୍ଯ଼ନ୍ତ ଆଖି ଖୋଲା ରଖନ୍ତୁ, ଯେପର୍ଯ୍ଯ଼ନ୍ତ ଏକ 'ବିପ୍' ଶବ୍ଦ ଫଟୋର ଶେଷକୁ ସଙ୍କେତ ଦିଏ |",
+    "eyeAssessmentNote": "ଟିପନ୍ତୁ: ଏଠାରେ ଦେଖାଯାଇଥିବା ପ୍ରତିଛବିଗୁଡ଼ିକ କେବଳ ସୂଚାଇବା ପାଇଁ | ବାସ୍ତବ ଜୀବନରେ ସେଗୁଡ଼ିକ ସମାନ ଭାବରେ ଦେଖାଯାଇନପାରେ |",
     "agreeButton": "ମୁଁ ରାଜି।",
     "consentPageCheckbox": "ମୁଁ ନିଯ଼ମ ଏବଂ ସର୍ତ୍ତାବଳୀ ସହିତ ସହମତ।",
     "confirmButton": "ନିଶ୍ଚିତ କରନ୍ତୁ",
@@ -188,5 +189,19 @@
     "myProfileCity": "ଶହର",
     "myProfileDistrict": "ଜିଲ୍ଲା",
     "myProfileState": "ରାଜ୍ୟ",
-    "myProfilePinCode": "ପିନ୍ କୋଡ୍"
+    "myProfilePinCode": "ପିନ୍ କୋଡ୍",
+
+    "submitButton" : "ଜମା କରନ୍ତୁ",
+    "swipeGestureError" : "ଭୁଲ ସ୍ୱାଇପ୍! ଦୟାକରି ପୁନଃପ୍ରୟାସ କରନ୍ତୁ।",
+    "swipeGestureCardText" : "ସଂକେତର ଦିଗକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ",
+    "assessmentResultCardAssessmentQuestions" : "ମୂଲ୍ୟାଙ୍କନ\nପ୍ରଶ୍ନ",
+    "assessmentResultCardAcuityTest" : "ନେତ୍ରତ୍ଵ\nପରୀକ୍ଷା",
+    "assessmentResultCardEyeScan" : "ଚକ୍ଷୁ\nସ୍କାନ୍",
+    "viewReportButton" : "ରିପୋର୍ଟ ଦେଖନ୍ତୁ",
+    "updateButton" : "ଅପଡେଟ୍ କରନ୍ତୁ",
+    "assessmentCardUrgentConsult": "ତାତ୍କାଲିକ ପରାମର୍ଶ",
+    "assessmentCardRoutineCheckUp": "ନିଯୁକ୍ତିମତ ଚେକ୍ ଆପ",
+    "assessmentCardEarlyCheckUp": "ପୂର୍ବଦର୍ଶନ",
+    "testAgainButton" : "ପୁନଃପରୀକ୍ଷା କରନ୍ତୁ",
+    "homeButton" : "ହୋମ୍"  
 }

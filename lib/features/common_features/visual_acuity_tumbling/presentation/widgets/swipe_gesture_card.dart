@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_toast.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var endPoint = useState<Offset>(const Offset(0, 0));
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
+    final loc = context.loc!;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -77,7 +79,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           //Interactive toast, set [isIgnoring] false.
           AppToast.showToast(
             context,
-            "Incorrect Swipe! Please try again.",
+            loc.swipeGestureError,
           );
           return;
         }
@@ -118,7 +120,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           borderRadius: const BorderRadius.all(Radius.circular(35)),
           child: Center(
             child: Text(
-              "Swipe in the direction of the symbol",
+              loc.swipeGestureCardText,
               style: applyRobotoFont(
                 fontSize: 14,
                 color: AppColor.grey,

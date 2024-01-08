@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "एक डोळा हाताने झाकून दुसर्‍या डोळ्याने थेट पुढे पाहताना छायाचित्र घ्या.",
     "eyeScanInstructionSix": "छायाचित्र सुरू करण्यापूर्वी डोळा पॅनलमध्ये केंद्रित करा.",
     "eyeScanInstructionSeven": "फ्लॅश बंद होईपर्यंत आणि ‘बीप’ आवाज छायाचित्र संपल्याचे संकेत देईपर्यंत डोळे मोठे ठेवा.",
+    "eyeAssessmentNote": "टीप: येथे दर्शविलेल्या प्रतिमा केवळ संकेतासाठी आहेत. वास्तविक जीवनात ते तशाच दिसणार नाहीत.",
     "agreeButton": "मी सहमत आहे",
     "consentPageCheckbox": "मी नियम आणि अटींशी सहमत आहे",
     "confirmButton": "निश्चित करा",
@@ -188,5 +189,19 @@
     "myProfileCity": "शहर",
     "myProfileDistrict": "जिल्हा",
     "myProfileState": "राज्य",
-    "myProfilePinCode": "पिन कोड"
+    "myProfilePinCode": "पिन कोड",
+
+   "submitButton" : "सबमिट करा",
+   "swipeGestureError" : "चुकीची स्वाईप! कृपया पुन्हा प्रयत्न करा.",
+   "swipeGestureCardText" : "प्रतिक्षा दिशेने स्वाईप करा",
+   "assessmentResultCardAssessmentQuestions" : "मूल्यांकन\nप्रश्न",
+   "assessmentResultCardAcuityTest" : "नेत्रीय\nपरीक्षण",
+   "assessmentResultCardEyeScan" : "नखा\nस्कॅन",
+   "viewReportButton" : "अहवाल पहा",
+   "updateButton" : "अद्यतनित करा",
+   "assessmentCardUrgentConsult": "तत्काल परामर्श",
+   "assessmentCardRoutineCheckUp": "नियमित तपासणी",
+   "assessmentCardEarlyCheckUp": "पूर्व तपासणी",
+   "testAgainButton" : "पुन्हा परीक्षा करा",
+   "homeButton" : "होम"
 }

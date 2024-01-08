@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +14,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageQuestionnaireProvider);
+    final loc = context.loc!;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -132,9 +134,9 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                             model.textEditingController.text;
                         Navigator.pop(context);
                       },
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(
+                      child: Text(
+                        loc.submitButton,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),

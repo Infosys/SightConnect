@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_report/presentation/widgets/vision_guardian_report_eye_test_values.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_report/presentation/widgets/vision_guardian_report_questions.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_report/presentation/widgets/vision_guardian_report_recommended_center.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
@@ -18,6 +19,7 @@ class VisionGuardianReportPage extends StatelessWidget {
   final TriageReportDetailedEntity assessmentDetailsReport;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
         leadingIcon: IconButton(
@@ -150,7 +152,7 @@ class VisionGuardianReportPage extends StatelessWidget {
                 trailing: SvgPicture.asset(
                   AppIcon.call,
                 ),
-                title: const Text("Toll Free Number"),
+                title:  Text(loc.tollFreeNumber),
                 subtitle: const Text(
                   "1800 1211 00411",
                   style: TextStyle(

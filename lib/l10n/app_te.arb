@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "చిత్రాన్ని తీసేటప్పుడు ఒక కన్ను మీ చేతితో కప్పుకొని, మరొక కన్ను నేరుగా ముందుకు చూడండి.",
     "eyeScanInstructionSix": "చిత్రాన్ని ప్రారంభించే ముందు ప్యానెల్ లోపల కన్ను కేంద్రీకరించండి.",
     "eyeScanInstructionSeven": "ఫ్లాష్ ఆరిపోయే వరకు కళ్ళు తెరిచి ఉంచండి, 'బీప్' ధ్వని ఫోటో ముగింపును సూచిస్తుంది.",
+    "eyeAssessmentNote": "గమనిక: ఇక్కడ చూపిన చిత్రాలు సూచన కోసం మాత్రమే. వారు నిజ జీవితంలో ఒకే విధంగా కనిపించకపోవచ్చు.",
     "agreeButton": "నేను అంగీకరిస్తున్నాను.",
     "consentPageCheckbox": "నేను నిబంధనలు మరియు షరతులను అంగీకరిస్తున్నాను",
     "confirmButton": "ధృవీకరించండి",
@@ -192,5 +193,19 @@
     "myProfileCity": "నగరం",
     "myProfileDistrict": "జిల్లా",
     "myProfileState": "రాష్ట్రం",
-    "myProfilePinCode": "పిన్ కోడ్"
+    "myProfilePinCode": "పిన్ కోడ్",
+
+    "submitButton" : "సమర్పించు",
+    "swipeGestureError" : "తప్పు స్వైప్! దయచేసి మళ్లీ ప్రయాసం చేయండి.",
+    "swipeGestureCardText" : "సంకేతం దిశగా స్వైప్ చేయండి",
+    "assessmentResultCardAssessmentQuestions" : "అంచనా\nప్రశ్నలు",
+    "assessmentResultCardAcuityTest" : "కన్నుమూసు\nపరీక్ష",
+    "assessmentResultCardEyeScan" : "కన్ను\nస్కాన్",
+    "viewReportButton" : "నివేదికను చూడండి",
+    "updateButton" : "నవీకరించండి",
+    "assessmentCardUrgentConsult": "అత్యవసర సలహా",
+    "assessmentCardRoutineCheckUp": "సాధారణ పరిశీలన",
+    "assessmentCardEarlyCheckUp": "ముందేని పరిశీలన",
+    "testAgainButton" : "మళ్లీ పరీక్షించండి",
+    "homeButton" : "హోమ్"
 }
