@@ -21,6 +21,7 @@ class AssessmentCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (data.isEmpty) {
       return SizedBox(
         height: 200,
@@ -62,7 +63,7 @@ class AssessmentCards extends ConsumerWidget {
                             currentData.overallSeverity),
                       ),
                       child: Text(
-                        getSeverityText(currentData.overallSeverity),
+                        getSeverityText(currentData.overallSeverity, context),
                         style: applyRobotoFont(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -173,7 +174,7 @@ class AssessmentCards extends ConsumerWidget {
                         }
                       },
                       child: Text(
-                        'View Report',
+                        loc.viewReportButton,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -233,7 +234,7 @@ class AssessmentCards extends ConsumerWidget {
                                     }
                                   : null,
                               label: Text(
-                                'Update',
+                                loc.updateButton,
                                 style: applyRobotoFont(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
@@ -281,14 +282,15 @@ class AssessmentCards extends ConsumerWidget {
   }
 }
 
-String getSeverityText(Severity? severity) {
+String getSeverityText(Severity? severity, BuildContext context) {
+  final loc = context.loc!;
   switch (severity) {
     case Severity.ABNORMAL:
-      return "Urgent Consult";
+      return loc.assessmentCardUrgentConsult;
     case Severity.LOW:
-      return "Routine Checkup";
+      return loc.assessmentCardRoutineCheckUp;
     case Severity.HIGH:
-      return "Early Checkup";
+      return loc.assessmentCardEarlyCheckUp;
     default:
       return "";
   }

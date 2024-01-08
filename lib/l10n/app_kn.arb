@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ಒಂದು ಕಣ್ಣನ್ನು ನಿಮ್ಮ ಕೈಯಿಂದ ಮುಚ್ಚಿ ಇನ್ನೊಂದು ಕಣ್ಣಿಗೆ ಹತ್ತಿರದಲ್ಲಿ ನೋಡಿರುವಂತೆ ಚಿತ್ರವನ್ನು ತೆಗೆಯಿರಿ.",
     "eyeScanInstructionSix": "ಚಿತ್ರವನ್ನು ಪ್ಯಾನೆಲ್ ನಲ್ಲಿ ಕಣ್ಣುಗಳನ್ನು ಮಧ್ಯದಲ್ಲಿ ಇಡಿರಿ ಮುಂದುವರೆಯುವ ಮೊದಲು.",
     "eyeScanInstructionSeven": "ಫ್ಲ್ಯಾಶ್ ಆಫ್ ಆಗುವ ಹತ್ತಿರ 'ಬಿಪ್' ಶಬ್ದವು ಚೇತರಿಸುವ ತನಕ ದಯವಿಟ್ಟು ಕಣ್ಣುಗಳನ್ನು ವಿಶಾಲವಾಗಿ ತೆಗೆದುಕೊಂಡಿರಿ, ಚಿತ್ರದ ಅಂತ್ಯವನ್ನು ಸೂಚಿಸುವ ವೇಳೆಗೆ 'ಬಿಪ್' ಶಬ್ದವಾಗುವದು.",
+    "eyeAssessmentNote": "ಗಮನಿಸಿ: ಇಲ್ಲಿ ತೋರಿಸಿರುವ ಚಿತ್ರಗಳು ಕೇವಲ ಸೂಚನೆಗಾಗಿ ಮಾತ್ರ. ನಿಜ ಜೀವನದಲ್ಲಿ ಅವರು ಒಂದೇ ರೀತಿ ಕಾಣಿಸಿಕೊಳ್ಳದಿರಬಹುದು.",
     "agreeButton": "ನಾನು ಒಪ್ಪಿಗೆಯಾಗುತ್ತೇನೆ",
     "consentPageCheckbox": "ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು ನಾನು ಒಪ್ಪುತ್ತೇನೆ",
     "confirmButton": "ದೃಢೀಕರಿಸಿ",
@@ -188,5 +189,20 @@
     "myProfileCity": "ನಗರ",
     "myProfileDistrict": "ಜಿಲ್ಲೆ",
     "myProfileState": "ರಾಜ್ಯ",
-    "myProfilePinCode": "ಪಿನ್ ಕೋಡ್"
+    "myProfilePinCode": "ಪಿನ್ ಕೋಡ್",
+
+    "submitButton" : "ಸಲ್ಲಿಸು",
+    "swipeGestureError" : "ತಪ್ಪಾದ ಸ್ವೈಪ್! ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    "swipeGestureCardText" : "ಪ್ರತೀಕದ ದಿಕ್ಕಿನಲ್ಲಿ ಸ್ವೈಪ್ ಮಾಡಿ",
+    "assessmentResultCardAssessmentQuestions" : "ಮೌಲ್ಯಾಂಕನ\nಪ್ರಶ್ನೆಗಳು",
+    "assessmentResultCardAcuityTest" : "ದೃಷ್ಟಿ\nಪರೀಕ್ಷೆ",
+    "assessmentResultCardEyeScan" : "ಕಣ್ಣಿನ\nಸ್ಕ್ಯಾನ್",
+    "viewReportButton" : "ವರದಿ ವೀಕ್ಷಿಸಿ",
+    "updateButton" : "ನವೀಕರಿಸಿ",
+    "assessmentCardUrgentConsult": "ತಕ್ಷಣ ಸಲಹೆ",
+    "assessmentCardRoutineCheckUp": "ಸರಿಯಾದ ಪರಿಶ್ವೇಕ್ಷಣೆ",
+    "assessmentCardEarlyCheckUp": "ಮುನ್ನಡೆದ ಪರಿಶೀಲನೆ",
+    "testAgainButton" : "ಮತ್ತೆ ಪರೀಕ್ಷೆ ಮಾಡಿ",
+    "homeButton" : "ಹೋಮ್"
+
 }

@@ -85,7 +85,7 @@ class TopReadingCard extends ConsumerWidget {
                               ? context.loc!.leftEyeString
                               : (model.currentEye == Eye.right
                                   ? context.loc!.rightEyeString
-                                  : "Both Eye"),
+                                  : context.loc!.bothEyeString),
                           style: applyFiraSansFont(
                             fontSize: 18,
                           ),

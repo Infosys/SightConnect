@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/partner_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';

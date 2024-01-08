@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class OptionCard extends StatelessWidget {
   final int totalGroupQuestion;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       child: Column(
@@ -105,7 +107,7 @@ class OptionCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.ksheight),
           Text(
-            "Note: The images shown here are for indication only. They may not appear the same way in real life.",
+            loc.eyeAssessmentNote,
             style: applyRobotoFont(
               fontSize: 12,
               fontWeight: FontWeight.w500,

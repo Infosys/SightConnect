@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "एक आंख को अपने हाथ से ढ़क लें और छवि लेते समय दूसरी आंख के साथ सीधे समुद्र की ओर देखें।",
     "eyeScanInstructionSix": "फोटो शुरू करने से पहले पैनल के अंदर आंख को केंद्रित करें।",
     "eyeScanInstructionSeven": "फ्लैश बंद होने तक और 'बीप' ध्वनि से फ़ोटो समाप्त होने तक आंखें विस्तार से खोली रखें।",
+    "eyeAssessmentNote": "ध्यान दें: यहां दिखाए गए चित्र केवल संकेत के लिए हैं। हो सकता है कि वे वास्तविक जीवन में वैसे ही न दिखें।",
     "agreeButton": "मैं सहमत हूँ",
     "consentPageCheckbox": "मैं नियम और शर्तों से सहमत हूँ",
     "confirmButton": "पुष्टि करें",
@@ -193,5 +194,19 @@
     "myProfileCity": "शहर",
     "myProfileDistrict": "जिला",
     "myProfileState": "राज्य",
-    "myProfilePinCode": "पिन कोड"
+    "myProfilePinCode": "पिन कोड",
+
+   "submitButton" : "सबमिट करें",
+   "swipeGestureError" : "गलत स्वाइप! कृपया पुनः प्रयास करें।",
+   "swipeGestureCardText" : "प्रतीक की दिशा में स्वाइप करें",
+   "assessmentResultCardAssessmentQuestions" : "मूल्यांकन\nप्रश्न",
+   "assessmentResultCardAcuityTest" : "दृष्टिपथ\nपरीक्षण",
+   "assessmentResultCardEyeScan" : "नेत्र\nस्कैन",
+   "viewReportButton" : "रिपोर्ट देखें",
+   "updateButton" : "अपडेट करें",
+   "assessmentCardUrgentConsult": "तत्पर परामर्श",
+   "assessmentCardRoutineCheckUp": "नियमित जांच",
+   "assessmentCardEarlyCheckUp": "पहले से जांच",
+   "testAgainButton" : "फिर से परीक्षण करें",
+   "homeButton" : "होम"
 }

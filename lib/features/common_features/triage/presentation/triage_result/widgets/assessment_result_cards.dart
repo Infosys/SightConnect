@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class AssessmentResultCards extends StatelessWidget {
   final List<Map<String, dynamic>> triageResult;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     if (triageResult.isEmpty) {
       return const SizedBox();
     }
@@ -59,10 +61,10 @@ class AssessmentResultCards extends StatelessWidget {
               ),
               Text(
                 index == 0
-                    ? 'Assessment\nQuestions'
+                    ? loc.assessmentResultCardAssessmentQuestions
                     : index == 1
-                        ? 'Acuity\nTest'
-                        : 'Eye\nScan',
+                        ? loc.assessmentResultCardAcuityTest
+                        : loc.assessmentResultCardAcuityTest,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

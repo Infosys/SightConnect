@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +14,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Column(
       children: [
         ListTile(
@@ -24,7 +26,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
           trailing: SvgPicture.asset(
             AppIcon.call,
           ),
-          title: const Text("Toll Free Number"),
+          title: Text(loc.tollFreeNumber),
           subtitle: const Text(
             "1800 1211 00411",
             style: TextStyle(
@@ -47,7 +49,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
                     ref.read(tumblingTestProvider).reset();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
-                  child: const Text("Home"),
+                  child: Text(loc.homeButton),
                 ),
               ),
               const SizedBox(
@@ -65,7 +67,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: const Text("Test Again"),
+                  child: Text(loc.testAgainButton),
                 ),
               ),
             ],

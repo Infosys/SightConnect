@@ -116,4 +116,6 @@ class AppImages {
 
   // vision technician
   static const String searchEmpty = "assets/images/search_empty.png";
+
+  static const String lvpeiLogo= "assets/images/LVPEI_full_logo.svg";
 }

@@ -156,6 +156,7 @@
     "eyeScanInstructionFive": "ચિત્ર લેતી વખતે તમારા હાથથી એક આંખને ઢાંકી દો અને બીજી આંખથી સીધું આગળ જુઓ.",
     "eyeScanInstructionSix": "ચિત્ર શરૂ કરતા પહેલા પેનલની અંદર આંખને કેન્દ્રિત કરો.",
     "eyeScanInstructionSeven": "જ્યાં સુધી 'બીપ' અવાજ ફોટાના અંતનો સંકેત ન આપે ત્યાં સુધી ફ્લેશ બંધ ન થાય ત્યાં સુધી આંખો ખુલ્લી રાખો.",
+    "eyeAssessmentNote": "નોંધ: અહીં બતાવેલ છબીઓ માત્ર સંકેત માટે છે. તેઓ વાસ્તવિક જીવનમાં સમાન રીતે દેખાતા નથી.",
     "agreeButton": "હું સંમત છું.",
     "consentPageCheckbox": "હું નિયમો અને શરતો સાથે સંમત છું",
     "confirmButton": "પુષ્ટિ કરો",
@@ -188,5 +189,19 @@
     "myProfileCity": "શહેર",
     "myProfileDistrict": "જિલ્લો",
     "myProfileState": "રાજ્ય",
-    "myProfilePinCode": "પિન કોડ"
+    "myProfilePinCode": "પિન કોડ",
+
+    "submitButton" : "સબમિટ કરો",
+    "swipeGestureError" : "ખોટો સ્વાઇપ! મહેરબાની કરીને ફરીથી પ્રયતન કરો.",
+    "swipeGestureCardText" : "પ્રતીકની દિશામાં સ્વાઇપ કરો",
+    "assessmentResultCardAssessmentQuestions" : "મૂલ્યાંકન\nપ્રશ્નો",
+    "assessmentResultCardAcuityTest" : "ઉગ્રતા\nપરીક્ષણ",
+    "assessmentResultCardEyeScan" : "આંખ\nસ્કેન",
+    "viewReportButton" : "રિપોર્ટ જુઓ",
+    "updateButton" : "અપડેટ કરો",
+    "assessmentCardUrgentConsult": "અર્જન્ટ કન્સલ્ટ",
+    "assessmentCardRoutineCheckUp": "રૂટિન ચેકઅપ",
+    "assessmentCardEarlyCheckUp": "પ્રારંભિક તપાસ",
+    "testAgainButton" : "ફરીથી ટેસ્ટ કરો",
+    "homeButton" : "હોમ"
 }
