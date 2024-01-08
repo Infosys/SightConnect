@@ -42,71 +42,71 @@ class PatientHomePageAppBar extends StatelessWidget
           ),
         ],
       ),
-      actions: [
-        Consumer(
-          builder: (context, ref, child) {
-            final currentLocaleCode =
-                ref.watch(globalLanguageProvider).currentLocale.toString();
-            return IconButton(
-              onPressed: () {
-                showBottomSheet(
-                  enableDrag: false,
-                  context: context,
-                  builder: (context) => TranslationPopUp(
-                    currentLocaleCode: currentLocaleCode,
-                  ),
-                );
-              },
-              icon: SvgPicture.asset(
-                "assets/icons/translate.svg",
-                height: 30,
-                width: 30,
-              ),
-            );
-          },
-        ),
-        const TextScalePopupMenu(),
-        Consumer(
-          builder: (context, ref, child) {
-            final patient = ref.watch(getPatientProfileProvider).asData?.value;
-            if (patient == null) {
-              return const CircleAvatar(
-                backgroundColor: AppColor.lightGrey,
-              );
-            }
-            final profileUrl = patient.profile?.patient?.profilePhoto;
-            final name = patient.profile?.patient?.name;
+      // actions: [
+      //   Consumer(
+      //     builder: (context, ref, child) {
+      //       final currentLocaleCode =
+      //           ref.watch(globalLanguageProvider).currentLocale.toString();
+      //       return IconButton(
+      //         onPressed: () {
+      //           showBottomSheet(
+      //             enableDrag: false,
+      //             context: context,
+      //             builder: (context) => TranslationPopUp(
+      //               currentLocaleCode: currentLocaleCode,
+      //             ),
+      //           );
+      //         },
+      //         icon: SvgPicture.asset(
+      //           "assets/icons/translate.svg",
+      //           height: 30,
+      //           width: 30,
+      //         ),
+      //       );
+      //     },
+      //   ),
+      //   const TextScalePopupMenu(),
+      //   Consumer(
+      //     builder: (context, ref, child) {
+      //       final patient = ref.watch(getPatientProfileProvider).asData?.value;
+      //       if (patient == null) {
+      //         return const CircleAvatar(
+      //           backgroundColor: AppColor.lightGrey,
+      //         );
+      //       }
+      //       final profileUrl = patient.profile?.patient?.profilePhoto;
+      //       final name = patient.profile?.patient?.name;
 
-            return InkWell(
-              // onTap: () {
-              //   showDialog(
-              //     context: context,
-              //     builder: (ctx) => MemberSelectionPopUp(
-              //       patients: patient,
-              //     ),
-              //     barrierDismissible: false,
-              //     barrierColor: AppColor.blackOpacity,
-              //   );
-              // },
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientProfilePage(),
-                  ),
-                );
-              },
-              child: Container(
-                child: profileUrl != null
-                    ? AppNetworkImage(imageUrl: profileUrl)
-                    : AppNameAvatar(
-                        name: name,
-                      ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(width: AppSize.kmwidth),
-      ],
+      //       return InkWell(
+      //         // onTap: () {
+      //         //   showDialog(
+      //         //     context: context,
+      //         //     builder: (ctx) => MemberSelectionPopUp(
+      //         //       patients: patient,
+      //         //     ),
+      //         //     barrierDismissible: false,
+      //         //     barrierColor: AppColor.blackOpacity,
+      //         //   );
+      //         // },
+      //         onTap: () {
+      //           Navigator.of(context).push(
+      //             MaterialPageRoute(
+      //               builder: (context) => const PatientProfilePage(),
+      //             ),
+      //           );
+      //         },
+      //         child: Container(
+      //           child: profileUrl != null
+      //               ? AppNetworkImage(imageUrl: profileUrl)
+      //               : AppNameAvatar(
+      //                   name: name,
+      //                 ),
+      //         ),
+      //       );
+      //     },
+      //   ),
+      //   const SizedBox(width: AppSize.kmwidth),
+      // ],
     );
   }
 

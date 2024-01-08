@@ -71,111 +71,111 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   }
 
   Widget _buildPage(WidgetRef ref, BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const PatientHomePage(),
-          Visibility(
-            visible: ref.watch(patientDashboardProvider).isVisible,
-            child: Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: AppBottomNavBar(
-                onSelected: (index) {
-                  ref.read(patientDashboardProvider).currentIndex = index;
-                  switch (index) {
-                    case 0:
-                      break;
-                    case 1:
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
+    return const PatientHomePage();
+
+    return Stack(
+      children: [
+        const PatientHomePage(),
+        Visibility(
+          visible: ref.watch(patientDashboardProvider).isVisible,
+          child: Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: AppBottomNavBar(
+              onSelected: (index) {
+                ref.read(patientDashboardProvider).currentIndex = index;
+                switch (index) {
+                  case 0:
+                    break;
+                  case 1:
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        MatomoTracker.instance.trackEvent(
+                          eventInfo: EventInfo(
+                            category: 'Main',
+                            action: 'Click',
+                            name: 'Patient services page click',
+                          ),
+                        );
+                        return const PatientServicesPage();
+                      },
+                    );
+                    break;
+                  case 2:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
                         builder: (context) {
                           MatomoTracker.instance.trackEvent(
                             eventInfo: EventInfo(
                               category: 'Main',
                               action: 'Click',
-                              name: 'Patient services page click',
+                              name: 'Triage member selection page click',
                             ),
                           );
-                          return const PatientServicesPage();
+                          return const TriageMemberSelectionPage();
                         },
-                      );
-                      break;
-                    case 2:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'Triage member selection page click',
-                              ),
-                            );
-                            return const TriageMemberSelectionPage();
-                          },
-                        ),
-                      );
+                      ),
+                    );
 
-                      break;
-                    case 3:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'Patient Notification Page Click',
-                              ),
-                            );
-                            return const PatientNotificationPage();
-                          },
-                        ),
-                      );
-                      break;
-                    case 4:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'App Drawer Click',
-                              ),
-                            );
-                            return const AppDrawer();
-                          },
-                        ),
-                      );
-                      break;
-                    default:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'App Drawer Click',
-                              ),
-                            );
-                            return const AppDrawer();
-                          },
-                        ),
-                      );
-                  }
-                },
-                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
-              ),
+                    break;
+                  case 3:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          MatomoTracker.instance.trackEvent(
+                            eventInfo: EventInfo(
+                              category: 'Main',
+                              action: 'Click',
+                              name: 'Patient Notification Page Click',
+                            ),
+                          );
+                          return const PatientNotificationPage();
+                        },
+                      ),
+                    );
+                    break;
+                  case 4:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          MatomoTracker.instance.trackEvent(
+                            eventInfo: EventInfo(
+                              category: 'Main',
+                              action: 'Click',
+                              name: 'App Drawer Click',
+                            ),
+                          );
+                          return const AppDrawer();
+                        },
+                      ),
+                    );
+                    break;
+                  default:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          MatomoTracker.instance.trackEvent(
+                            eventInfo: EventInfo(
+                              category: 'Main',
+                              action: 'Click',
+                              name: 'App Drawer Click',
+                            ),
+                          );
+                          return const AppDrawer();
+                        },
+                      ),
+                    );
+                }
+              },
+              selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

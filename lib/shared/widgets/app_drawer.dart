@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
@@ -29,27 +31,28 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     var items = DrawerMenuItems.getAll(loc);
-    return Scaffold(
-      backgroundColor: AppColor.primary,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              AppImages.drawerBg,
-              fit: BoxFit.cover,
-            ),
-            Column(
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 70,
+          left: 70,
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+          ),
+          child: Scaffold(
+            backgroundColor: AppColor.white,
+            body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.klheight),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  leading: const Icon(
-                    CupertinoIcons.back,
-                    color: AppColor.white,
+                  trailing: const Icon(
+                    Icons.close,
                   ),
                   title: Text(
                     loc.appDrawerTitle,
@@ -70,7 +73,6 @@ class AppDrawer extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            splashColor: AppColor.blue,
                             onTap: () {
                               switch (item.id) {
                                 case DrawerMenuItemId.home:
@@ -138,7 +140,7 @@ class AppDrawer extends StatelessWidget {
                                     child: SvgPicture.asset(
                                       item.icon,
                                       colorFilter: const ColorFilter.mode(
-                                        AppColor.white,
+                                        AppColor.primary,
                                         BlendMode.srcIn,
                                       ),
                                     ),
@@ -159,10 +161,10 @@ class AppDrawer extends StatelessWidget {
                                   ),
                             title: Text(
                               item.title,
-                              style: applyFiraSansFont(
-                                color: AppColor.white,
+                              style: applyRobotoFont(
                                 fontWeight: FontWeight.normal,
-                                fontSize: 18,
+                                color: AppColor.grey,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -209,7 +211,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

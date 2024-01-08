@@ -9,6 +9,8 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
+import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
@@ -73,6 +75,13 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             ],
           ),
         ),
+      ),
+      endDrawer: const AppDrawer(),
+      bottomNavigationBar: AppBottomNavBar(
+        onSelected: (index) {
+          ref.read(patientDashboardProvider).currentIndex = index;
+        },
+        selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
       ),
     );
   }
