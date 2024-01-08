@@ -24,7 +24,10 @@ class TopReadingCard extends ConsumerWidget {
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
     var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
-    final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
+    // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
+    // TODO: THIS IS FOR TESTING, Need to remove
+    final optoTypeSize = currentLevel!.size * 10  * 160 * 0.03937;
+
 
     return Container(
       decoration: BoxDecoration(
