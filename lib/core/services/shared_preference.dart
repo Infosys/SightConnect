@@ -20,33 +20,26 @@ class SharedPreferenceService {
     await _sharedPreferences.setString("language", value);
   }
 
-  static String get getLanguage =>
-      _sharedPreferences.getString("language") ?? "en";
+  static Future<void> setDontShowVisualAcuityStatus(bool value) async {
+    await _sharedPreferences.setBool("dontShowVisualAcuityStatus", value);
+  }
 
   static Future<void> setFontScale(double value) async {
     await _sharedPreferences.setDouble("fontScale", value);
   }
 
-  static double get getFontScale =>
-      _sharedPreferences.getDouble("fontScale") ?? 1.0;
-
-  static Future<void> setDontShowVisualAcuityStatus(bool value) async {
-    await _sharedPreferences.setBool("dontShowVisualAcuityStatus", value);
-  }
-
-  static bool get getDontShowVisualAcuityStatus =>
-      _sharedPreferences.getBool("dontShowVisualAcuityStatus") ?? false;
-
-  static Future<void> setConsentStatus(bool value) async {
-    await _sharedPreferences.setBool("consentStatus", value);
-  }
-
-  static bool get getConsentStatus =>
-      _sharedPreferences.getBool("consentStatus") ?? false;
-
   static set storeTumblingOverInfo(bool value) {
     _sharedPreferences.setBool("tumblingOverInfo", value);
   }
+
+  static String get getLanguage =>
+      _sharedPreferences.getString("language") ?? "en";
+
+  static double get getFontScale =>
+      _sharedPreferences.getDouble("fontScale") ?? 1.0;
+
+  static bool get getDontShowVisualAcuityStatus =>
+      _sharedPreferences.getBool("dontShowVisualAcuityStatus") ?? false;
 
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
