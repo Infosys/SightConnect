@@ -96,6 +96,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             // const GoodToKnowCardList(),
             // const SizedBox(height: AppSize.kmheight),
             // const CampaginsList(),
+            const PartnerCard(),
             const SizedBox(height: AppSize.klheight * 4),
           ],
         ),
