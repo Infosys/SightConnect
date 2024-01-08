@@ -1,16 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../vision_guardian_add_member/presentation/pages/vg_add_member_page.dart';
 
 class VisionGuardianServicesCard extends ConsumerWidget {
   const VisionGuardianServicesCard({Key? key, required this.data})
@@ -77,7 +74,10 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                           data["icon"],
                           height: AppSize.klpadding,
                           width: AppSize.klpadding,
-                          color: AppColor.black,
+                          colorFilter: const ColorFilter.mode(
+                            AppColor.black,
+                            BlendMode.srcATop,
+                          ),
                         )
                       : Icon(data["icon"]),
                   const SizedBox(

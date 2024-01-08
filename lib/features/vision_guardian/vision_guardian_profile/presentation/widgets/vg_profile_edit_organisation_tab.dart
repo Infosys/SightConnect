@@ -231,7 +231,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: AppSize.kmheight,
         ),
         Row(

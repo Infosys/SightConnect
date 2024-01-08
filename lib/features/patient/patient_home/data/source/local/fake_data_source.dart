@@ -21,25 +21,6 @@ List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       },
     ];
 
-List<Map<String, dynamic>> connectionList = [
-  {
-    'name': 'Raghavi',
-    'image': 'assets/images/connection_dp_one.png',
-  },
-  {
-    'name': 'Chunkey',
-    'image': 'assets/images/connection_dp_two.png',
-  },
-  {
-    'name': 'Mangal',
-    'image': 'assets/images/connections_dp_three.png',
-  },
-  {
-    'name': 'Rati',
-    'image': 'assets/images/profile_image.png',
-  },
-];
-
 List<Map<String, dynamic>> getRecentServices(AppLocalizations loc) => [
       {
         "id": "eye_assessment",
@@ -59,23 +40,6 @@ List<Map<String, dynamic>> getRecentServices(AppLocalizations loc) => [
       //   "color": AppColor.bisque,
       // },
     ];
-
-List<Map<String, dynamic>> nearByVisionCenter = [
-  {
-    "name": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
-    "location": "Near Gudavalli Village, Cherukupalli, Guntur",
-    "phone": "99634 78759",
-    "speciality":
-        "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-  },
-  {
-    "name": "Edward and Soona Brown Eye Centre",
-    "location": "Pindugurala Road, Sattanapalli, Guntur",
-    "phone": "99634 78760",
-    "speciality":
-        "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-  },
-];
 
 var eyeCampList = [
   {

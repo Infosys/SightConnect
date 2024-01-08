@@ -26,7 +26,10 @@ class VgProfileNameCard extends StatelessWidget {
             ),
             child: SvgPicture.asset(
               AppIcon.navProfile,
-              color: AppColor.lightGrey,
+              colorFilter: const ColorFilter.mode(
+                AppColor.lightGrey,
+                BlendMode.srcATop,
+              ),
             ),
           ),
         ),

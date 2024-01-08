@@ -28,15 +28,14 @@ class VisionGuardianEmptyResultCard extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth: AppSize.width(context) * 0.7,
             ),
-            child:
-                Text('There are no ${type}s at present. Tap on "Add  ${type}"',
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: applyRobotoFont(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                    )),
+            child: Text('There are no ${type}s at present. Tap on "Add  $type"',
+                textAlign: TextAlign.center,
+                softWrap: true,
+                style: applyRobotoFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.grey,
+                )),
           ),
         ),
       ],

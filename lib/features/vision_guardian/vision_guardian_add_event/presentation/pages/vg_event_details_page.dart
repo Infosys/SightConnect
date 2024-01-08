@@ -14,9 +14,9 @@ import '../widgets/vg_event_patients_tab.dart';
 import '../widgets/vg_event_teammates_tab.dart';
 
 class VisionGuardianEventDetailsPage extends HookConsumerWidget {
-  VisionGuardianEventDetailsPage({super.key, required this.eventDetails});
+  final VisionGuardianEventModel eventDetails;
 
-  VisionGuardianEventModel eventDetails;
+  const VisionGuardianEventDetailsPage({required this.eventDetails, super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var tabIndex = useState(0);

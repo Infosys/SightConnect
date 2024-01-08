@@ -8,8 +8,10 @@ var getIvrCallHistoryDetailsProvider =
     FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
   final filters =
       ref.watch(ivrCallHistorySearchHelperProvider).getSelectedFilter();
+  //TODO mobile number
+  const mobile = "";
   return await ref.watch(ivrRepository).getIvrCallHistory(
-        mobile: "8985050009",
+        mobile: mobile,
         callStatus: filters,
       );
 });

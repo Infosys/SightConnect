@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

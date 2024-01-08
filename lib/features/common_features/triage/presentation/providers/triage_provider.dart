@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';

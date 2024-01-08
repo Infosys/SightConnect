@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_mobile_number.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';

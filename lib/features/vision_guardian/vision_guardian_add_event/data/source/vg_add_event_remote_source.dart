@@ -137,11 +137,13 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future postAddTeammate(
       {required String eventId, required String actorIdentifier}) async {
+    //TODO: change the mobile number
+    const mobile = "";
     const endpoint =
-        '/services/orchestration/api/practitioners/filter?officialMobile=8888888741';
+        '/services/orchestration/api/practitioners/filter?officialMobile=$mobile';
 
     return await _dio.get(endpoint).then((patientresponse) async {
-      logger.f(patientresponse.data);
+      logger.d(patientresponse.data);
 
       var roleType = patientresponse.data[0]["practitionerType"];
       if (roleType == "PROFESSIONAL") {

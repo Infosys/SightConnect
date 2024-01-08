@@ -252,10 +252,6 @@ class LoginPage extends HookConsumerWidget {
                     AndroidSmsAutofillMethod.smsUserConsentApi,
                 listenForMultipleSmsOnAndroid: true,
                 separatorBuilder: (index) => const SizedBox(width: 8),
-                // onClipboardFound: (value) {
-                //   debugPrint('onClipboardFound: $value');
-                //   pinController.setText(value);
-                // },
                 enabled: true,
                 showCursor: true,
                 defaultPinTheme: defaultPinTheme,

@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_verification_code/flutter_verification_code.dart';
 
 class VgOnboardingMobileNumber extends StatelessWidget {
   const VgOnboardingMobileNumber({super.key});
@@ -107,7 +106,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: AppSize.kmheight,
                 ),
                 Row(

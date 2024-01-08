@@ -22,10 +22,11 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   bool _cataractSurgery = false;
   bool _eyeDrops = false;
   bool _oralMedication = false;
-  TextEditingController _recommendationsController = TextEditingController();
-  TextEditingController _mrCodeController = TextEditingController();
-  List _listOfEyeDrops = [];
-  List _listOfOralMedication = [];
+  final TextEditingController _recommendationsController =
+      TextEditingController();
+  final TextEditingController _mrCodeController = TextEditingController();
+  final List _listOfEyeDrops = [];
+  final List _listOfOralMedication = [];
 
   int get currentStep => _currentStep;
   bool get isImageCaptured => _isImageCaptured;
@@ -104,7 +105,5 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     }
   }
 
-  void submit(VTPatientDto patientDetails) {
-    
-  }
+  void submit(VTPatientDto patientDetails) {}
 }
