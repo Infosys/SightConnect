@@ -16,28 +16,28 @@ class BottomNavItem {
 class BottomNavItems {
   static BottomNavItem home = BottomNavItem(
     name: "Home",
-    svgImage: AppIcon.navHome,
+    svgImage: "assets/icons/drawer_home.svg",
     initialScale: 1,
     isSelected: true,
   );
   static BottomNavItem service = BottomNavItem(
-    name: "Service",
-    svgImage: AppIcon.navService,
+    name: "Appointments",
+    svgImage: "assets/nav_icons/appointments.svg",
     initialScale: 1,
   );
   static BottomNavItem triage = BottomNavItem(
-    name: "Triage",
-    svgImage: AppIcon.navTriage,
+    name: "Eye Test",
+    svgImage: "assets/nav_icons/Assessmentdefault.svg",
     initialScale: 1,
   );
   static BottomNavItem notification = BottomNavItem(
-    name: "Notification",
-    svgImage: AppIcon.navNotification,
+    name: "Profile",
+    svgImage: AppIcon.navProfile,
     initialScale: 1,
   );
   static BottomNavItem drawer = BottomNavItem(
-    name: "Drawer",
-    svgImage: AppIcon.navDrawer,
+    name: "Notifications",
+    svgImage: "assets/nav_icons/notificatoindefault.svg",
     initialScale: 0.8,
   );
   static List<BottomNavItem> all = [

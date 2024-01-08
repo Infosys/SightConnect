@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -35,6 +36,7 @@ class TranslationPopUp extends ConsumerWidget {
               children: [
                 IconButton(
                   onPressed: () {
+                    ref.read(patientDashboardProvider).setVisibility(true);
                     Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.close),
@@ -51,11 +53,11 @@ class TranslationPopUp extends ConsumerWidget {
             ),
             Expanded(
               child: GridView.builder(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(16),
                 itemCount: appLocales.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.5,
+                  childAspectRatio: 1.7,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -77,7 +79,7 @@ class TranslationPopUp extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: isActiveLocale
-                              ? Colors.green
+                              ? AppColor.primary
                               : Colors.black38.withOpacity(0),
                           width: isActiveLocale ? 2 : 1,
                         ),
@@ -95,13 +97,24 @@ class TranslationPopUp extends ConsumerWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: applyRobotoFont(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
+                                  fontSize: 28,
+                                  color: isActiveLocale
+                                      ? AppColor.primary
+                                      : AppColor.black,
+                                ),
                               ),
                               isActiveLocale
-                                  ? const Icon(
-                                      Icons.check_circle,
-                                      color: Colors.green,
-                                      size: 32,
+                                  ? Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColor.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.check,
+                                        color: AppColor.white,
+                                        size: 20,
+                                      ),
                                     )
                                   : Container()
                             ],
@@ -114,7 +127,10 @@ class TranslationPopUp extends ConsumerWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: applyRobotoFont(
-                                  fontSize: 16,
+                                  fontSize: 14,
+                                  color: isActiveLocale
+                                      ? AppColor.primary
+                                      : AppColor.black,
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -125,7 +141,12 @@ class TranslationPopUp extends ConsumerWidget {
                                       : "",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: applyRobotoFont(),
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: isActiveLocale
+                                        ? AppColor.primary
+                                        : AppColor.darkGrey,
+                                  ),
                                 ),
                               ),
                             ],
@@ -137,7 +158,6 @@ class TranslationPopUp extends ConsumerWidget {
                 },
               ),
             ),
-            const SizedBox(height: 100),
           ],
         ),
       ),

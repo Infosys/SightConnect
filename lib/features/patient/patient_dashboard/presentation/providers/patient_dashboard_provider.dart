@@ -29,6 +29,11 @@ class PatientDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setVisibility(bool value) {
+    isVisible = value;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     super.dispose();

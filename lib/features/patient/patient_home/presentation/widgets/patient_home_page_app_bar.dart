@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -33,15 +34,35 @@ class PatientHomePageAppBar extends StatelessWidget
       backgroundColor: Colors.white.withAlpha(350),
       title: Row(
         children: [
-          SvgPicture.asset(AppIcon.logo),
-          const SizedBox(width: AppSize.kmwidth),
-          const Flexible(
-            child: Text(
-              AppText.appName,
-            ),
+          Image.asset(
+            "assets/logo/app_logo.png",
+            width: 120,
           ),
         ],
       ),
+      actions: [
+        Consumer(
+          builder: (context, ref, child) {
+            final model = ref.watch(patientDashboardProvider);
+            return IconButton(
+              onPressed: () {
+                model.setVisibility(false);
+                Scaffold.of(context).openEndDrawer();
+              },
+              icon: SvgPicture.asset(
+                "assets/icons/drawer_menu.svg",
+                height: 40,
+                width: 40,
+                fit: BoxFit.cover,
+                colorFilter: const ColorFilter.mode(
+                  Colors.black,
+                  BlendMode.srcIn,
+                ),
+              ),
+            );
+          },
+        ),
+      ],
       // actions: [
       //   Consumer(
       //     builder: (context, ref, child) {
@@ -111,5 +132,5 @@ class PatientHomePageAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(58);
 }

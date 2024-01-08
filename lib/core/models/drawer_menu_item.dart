@@ -2,14 +2,21 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum DrawerMenuItemId {
-  home,
-  profile,
-  // appointments,
-  prescriptions,
+  // home,
+  // profile,
+  // // appointments,
+  // prescriptions,
+  // scanner,
+  // // accessibilities,
+  // about,
+  // // termOfUse,
+  // privacyPolicy,
+  // help,
+  language,
+  accessibilities,
+  assessments,
   scanner,
-  // accessibilities,
   about,
-  // termOfUse,
   privacyPolicy,
   help,
 }
@@ -27,24 +34,37 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
-    DrawerMenuItem home = DrawerMenuItem(
-      id: DrawerMenuItemId.home,
-      title: loc.appDrawerHome,
-      icon: AppIcon.drawerHome,
+    // DrawerMenuItem home = DrawerMenuItem(
+    //   id: DrawerMenuItemId.home,
+    //   title: loc.appDrawerHome,
+    //   icon: AppIcon.drawerHome,
+    // );
+    // DrawerMenuItem profile = DrawerMenuItem(
+    //   id: DrawerMenuItemId.profile,
+    //   title: loc.appDrawerMyProfile,
+    //   icon: AppIcon.navProfile,
+    // );
+    DrawerMenuItem language = const DrawerMenuItem(
+      id: DrawerMenuItemId.language,
+      // title: loc.appDrawerMyProfile,
+      title: "Language Selection",
+      icon: "assets/drawer_icons/language.svg",
     );
-    DrawerMenuItem profile = DrawerMenuItem(
-      id: DrawerMenuItemId.profile,
-      title: loc.appDrawerMyProfile,
-      icon: AppIcon.navProfile,
+    DrawerMenuItem accessibilities = const DrawerMenuItem(
+      id: DrawerMenuItemId.accessibilities,
+      // title: loc.appDrawerMyProfile,
+      title: "Accessibility Settings",
+      icon: "assets/drawer_icons/accessibility.svg",
     );
-    DrawerMenuItem prescriptions = DrawerMenuItem(
-      id: DrawerMenuItemId.prescriptions,
+    DrawerMenuItem assessments = DrawerMenuItem(
+      id: DrawerMenuItemId.assessments,
       title: loc.appDrawerAssessmentsAndTests,
       icon: AppIcon.drawerAssessmentsAndTest,
     );
-    DrawerMenuItem scanner = DrawerMenuItem(
+    DrawerMenuItem scanner = const DrawerMenuItem(
       id: DrawerMenuItemId.scanner,
-      title: loc.appDrawerScanner,
+      // title: loc.appDrawerScanner,
+      title: "QR Code Scanner",
       icon: AppIcon.scanner,
     );
     DrawerMenuItem about = DrawerMenuItem(
@@ -52,10 +72,11 @@ class DrawerMenuItems {
       title: loc.appDrawerAboutUs,
       icon: AppIcon.drawerAboutUs,
     );
-    DrawerMenuItem privacyPolicy = DrawerMenuItem(
+    DrawerMenuItem privacyPolicy = const DrawerMenuItem(
       id: DrawerMenuItemId.privacyPolicy,
-      title: loc.appDrawerPrivacyPolicy,
-      icon: AppIcon.drawerPrivacyPolicy,
+      // title: loc.appDrawerPrivacyPolicy,
+      title: "Privacy & Data Protection",
+      icon: "assets/drawer_icons/dpo.svg",
     );
     DrawerMenuItem help = DrawerMenuItem(
       id: DrawerMenuItemId.help,
@@ -64,14 +85,22 @@ class DrawerMenuItems {
     );
 
     return [
-      home,
-      profile,
-      // appointments,
-      prescriptions,
+      // // home,
+      // // profile,
+      // // appointments,
+      // language,
+      // prescriptions,
+      // scanner,
+      // // accessibilities,
+      // about,
+      // // termOfUse,
+      // privacyPolicy,
+      // help,
+      language,
+      accessibilities,
+      assessments,
       scanner,
-      // accessibilities,
       about,
-      // termOfUse,
       privacyPolicy,
       help,
     ];

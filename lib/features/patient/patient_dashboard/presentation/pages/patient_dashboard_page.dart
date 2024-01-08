@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/pages/patient_services_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
@@ -71,111 +72,70 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   }
 
   Widget _buildPage(WidgetRef ref, BuildContext context) {
-    return const PatientHomePage();
+    return Scaffold(
+      body: Stack(
+        children: [
+          const PatientHomePage(),
+          Visibility(
+            visible: ref.watch(patientDashboardProvider).isVisible,
+            child: Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: AppBottomNavBar(
+                onSelected: (index) {
+                  ref.read(patientDashboardProvider).currentIndex = index;
+                  switch (index) {
+                    case 0:
+                      break;
+                    case 1:
+                      break;
 
-    return Stack(
-      children: [
-        const PatientHomePage(),
-        Visibility(
-          visible: ref.watch(patientDashboardProvider).isVisible,
-          child: Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: AppBottomNavBar(
-              onSelected: (index) {
-                ref.read(patientDashboardProvider).currentIndex = index;
-                switch (index) {
-                  case 0:
-                    break;
-                  case 1:
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        MatomoTracker.instance.trackEvent(
-                          eventInfo: EventInfo(
-                            category: 'Main',
-                            action: 'Click',
-                            name: 'Patient services page click',
-                          ),
-                        );
-                        return const PatientServicesPage();
-                      },
-                    );
-                    break;
-                  case 2:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                            eventInfo: EventInfo(
-                              category: 'Main',
-                              action: 'Click',
-                              name: 'Triage member selection page click',
-                            ),
-                          );
-                          return const TriageMemberSelectionPage();
-                        },
-                      ),
-                    );
+                    case 2:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            MatomoTracker.instance.trackEvent(
+                              eventInfo: EventInfo(
+                                category: 'Main',
+                                action: 'Click',
+                                name: 'Triage member selection page click',
+                              ),
+                            );
+                            return const TriageMemberSelectionPage();
+                          },
+                        ),
+                      );
 
-                    break;
-                  case 3:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                            eventInfo: EventInfo(
-                              category: 'Main',
-                              action: 'Click',
-                              name: 'Patient Notification Page Click',
-                            ),
-                          );
-                          return const PatientNotificationPage();
-                        },
-                      ),
-                    );
-                    break;
-                  case 4:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                            eventInfo: EventInfo(
-                              category: 'Main',
-                              action: 'Click',
-                              name: 'App Drawer Click',
-                            ),
-                          );
-                          return const AppDrawer();
-                        },
-                      ),
-                    );
-                    break;
-                  default:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                            eventInfo: EventInfo(
-                              category: 'Main',
-                              action: 'Click',
-                              name: 'App Drawer Click',
-                            ),
-                          );
-                          return const AppDrawer();
-                        },
-                      ),
-                    );
-                }
-              },
-              selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
+                      break;
+                    case 3:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const PatientProfilePage();
+                          },
+                        ),
+                      );
+                      break;
+                    case 4:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const PatientNotificationPage();
+                          },
+                        ),
+                      );
+                      break;
+                    default:
+                      break;
+                  }
+                },
+                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

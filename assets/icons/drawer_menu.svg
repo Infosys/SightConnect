@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Burger_Menu" data-name="Burger Menu" transform="translate(-306 -820)">
+    <rect id="Rectangle_6499" data-name="Rectangle 6499" width="40" height="40" rx="20" transform="translate(306 820)" fill="#333" opacity="0"/>
+    <g id="Group_38745" data-name="Group 38745" transform="translate(8 8)">
+      <rect id="Rectangle_6499-2" data-name="Rectangle 6499" width="24" height="24" rx="12" transform="translate(306 820)" fill="#333" opacity="0"/>
+      <path id="Path_38541" data-name="Path 38541" d="M4.751,18h8.5a.75.75,0,0,1,.1,1.493l-.1.007h-8.5a.75.75,0,0,1-.1-1.493l.1-.007h0Zm-2-6.5h8.5a.75.75,0,0,1,.1,1.493l-.1.007h-8.5a.75.75,0,0,1-.1-1.493l.1-.007h0Zm0-6.5h10.5a.75.75,0,0,1,.1,1.493l-.1.007H2.75a.75.75,0,0,1-.1-1.493L2.75,5h0Z" transform="translate(310 819.996)" fill="#242424"/>
+    </g>
+  </g>
+</svg>

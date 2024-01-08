@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="378" height="184" viewBox="0 0 378 184">
+  <defs>
+    <filter id="Rectangle_15126" x="-24" y="-20" width="426" height="232" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-opacity="0.039"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_15126)">
+        <rect id="Rectangle_15126-2" data-name="Rectangle 15126" width="378" height="184" rx="16" fill="#fff"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g id="Our_eyes_are_the_most_valuable_assets." data-name="Our eyes are the most valuable assets." opacity="0.35" clip-path="url(#clip-path)">
+    <path id="Path_39638" data-name="Path 39638" d="M380,30.862C341.073.447,288.212,48.515,193.212,69.444S.331,67.425,0,114.579H380Z" transform="translate(-1 70.954)" fill="#fff"/>
+  </g>
+</svg>

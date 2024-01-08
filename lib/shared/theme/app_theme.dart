@@ -20,10 +20,10 @@ class AppTheme extends StateNotifier<ThemeMode> {
     return ThemeData(
       useMaterial3: false,
       primarySwatch: MaterialColor(
-        const Color(0xff286DF6).value,
+        const Color(0xff296DF6).value,
         const {
-          50: Color(0xff286DF6),
-          100: Color(0xff286DF6),
+          50: Color(0xff296DF6),
+          100: Color(0xff296DF6),
           200: Color(0xff296DF6),
           300: Color(0xff296DF6),
           400: Color(0xff296DF6),
