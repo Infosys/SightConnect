@@ -170,5 +170,28 @@
     "assessmentReportButton": "नेत्र मूल्यांकन रिपोर्ट",
     "notificationsTitle": "सूचनाएँ",
     "notificationsNotAvailable": "कोई सूचनाएँ नहीं",
-    "servicesPatientCare": "रोगी देखभाल"
+    "servicesPatientCare": "रोगी देखभाल",
+
+    
+
+    "reportAssessmentId": "मूल्यांकन पहचान",
+    "reportDateAndTime": "तारीख और समय",
+    "reportSeverityAbnormal": "तत्पर जांच",
+    "reportSeverityHigh": "जल्दी जांच",
+    "reportSeverityLow": "नियमित जांच",
+    "reportDataUnavailable":"डेटा उपलब्ध नहीं है",
+    "reportTumblingTitle":"एक्यूटी टेस्ट - टम्बलिंग ई",
+    "rightCornea":"दाहिनी कॉर्निया",
+    "leftCornea":"बाएं कॉर्निया",
+
+    
+
+    "myProfileGeneralInfo": "सामान्य जानकारी",
+    "myProfileAge": "आयु",
+    "myProfileAddress": "पता",
+    "myProfileLine": "लाइन",
+    "myProfileCity": "शहर",
+    "myProfileDistrict": "जिला",
+    "myProfileState": "राज्य",
+    "myProfilePinCode": "पिन कोड"
 }

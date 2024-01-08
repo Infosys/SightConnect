@@ -21,8 +21,7 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-    final width = AppSize.width(context);
-    final height = AppSize.height(context);
+
     var isMobile = Responsive.isMobile(context);
     var items = VisionGuardianBottomNavItems.all;
 

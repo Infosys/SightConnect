@@ -134,7 +134,10 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
                       const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
                   child: SvgPicture.asset(
                     AppIcon.flash_on,
-                    color: AppColor.white,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.white,
+                      BlendMode.srcATop,
+                    ),
                   ),
                 ),
               ),

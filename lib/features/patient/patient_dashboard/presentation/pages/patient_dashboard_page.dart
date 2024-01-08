@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/pages/patient_services_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
@@ -89,35 +90,22 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                     case 0:
                       break;
                     case 1:
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                            eventInfo: EventInfo(
-                              category: 'Main',
-                              action: 'Click',
-                              name: 'Patient services page click',
-                            ),
-                            dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
-                          );
-                          return const PatientServicesPage();
-                        },
-                      );
                       break;
+
                     case 2:
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
                             MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'Triage member selection page click',
-                              ),
-                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
-                            );
+                                eventInfo: EventInfo(
+                                  category: 'Main',
+                                  action: 'Click',
+                                  name: 'Triage member selection page click',
+                                ),
+                                dimensions: {
+                                  'dimension1':
+                                      '${PersistentAuthStateService.authState.activeRole}'
+                                });
                             return const TriageMemberSelectionPage();
                           },
                         ),
@@ -128,15 +116,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'Patient Notification Page Click',
-                              ),
-                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
-                            );
-                            return const PatientNotificationPage();
+                            return const PatientProfilePage();
                           },
                         ),
                       );
@@ -145,35 +125,13 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'App Drawer Click',
-                              ),
-                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
-                            );
-                            return const AppDrawer();
+                            return const PatientNotificationPage();
                           },
                         ),
                       );
                       break;
                     default:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'App Drawer Click',
-                              ),
-                              dimensions: {'dimension1':'${PersistentAuthStateService.authState.activeRole}'}
-                            );
-                            return const AppDrawer();
-                          },
-                        ),
-                      );
+                      break;
                   }
                 },
                 selectedIndex: ref.watch(patientDashboardProvider).currentIndex,

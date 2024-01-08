@@ -10,22 +10,7 @@ class EyeCentreDetailsCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List nearByVisionCenter = [
-      {
-        "name": "Dr Kommareddy Raja Ram Mohan Rao Eye Centre",
-        "location": "Near Gudavalli Village, Cherukupalli, Guntur",
-        "phone": "99634 78759",
-        "speciality":
-            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-      },
-      {
-        "name": "Edward and Soona Brown Eye Centre",
-        "location": "Pindugurala Road, Sattanapalli, Guntur",
-        "phone": "99634 78760",
-        "speciality":
-            "Emergency | Diagnostics | Rehabilitation | Paediatric Eye Care | Counselling",
-      },
-    ];
+    List nearByVisionCenter = [];
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,

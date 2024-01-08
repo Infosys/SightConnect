@@ -16,72 +16,56 @@ class HelplineCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              boxShadow: applyLightShadow(),
-              color: AppColor.white.withOpacity(0.3),
-            ),
-            child: SizedBox(
-              width: AppSize.width(context) * 0.75,
-              child: ListTile(
-                horizontalTitleGap: 10,
-                contentPadding: EdgeInsets.zero,
-                visualDensity: const VisualDensity(vertical: -3),
-                tileColor: AppColor.white,
-                onTap: () async {},
-                leading: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: CircleAvatar(
-                    backgroundColor: AppColor.blue.withOpacity(0.1),
-                    child: SvgPicture.asset(
-                      AppIcon.tollFree,
-                    ),
-                  ),
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 2, bottom: 4.0),
-                  child: Text(
-                    context.loc!.tollFreeNumber,
-                    style: applyRobotoFont(fontSize: 14),
-                  ),
-                ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: Text(
-                    helpLine,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: AppColor.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSize.kmpadding,
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding,
+          vertical: AppSize.kspadding + 2,
+        ),
+        decoration: const BoxDecoration(
+          color: AppColor.primary,
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.kmradius * 3),
           ),
-          const Spacer(),
-          InkWell(
-            onTap: () async {
-              Uri phoneno = Uri.parse("tel:$helpLine");
-              await launchUrl(phoneno);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: applyLightShadow(),
+        ),
+        child: Row(
+          children: [
+            Flexible(
+              child: Text(
+                "In the event of a sudden vision loss, call this emergency helpline  ${context.loc!.tollFreeNumber}",
+                style: applyRobotoFont(
+                  fontSize: 12,
+                  color: AppColor.white,
+                ),
               ),
-              child: CircleAvatar(
-                backgroundColor: AppColor.white,
+            ),
+            const SizedBox(width: 8),
+            InkWell(
+              onTap: () async {
+                Uri phoneno = Uri.parse("tel:$helpLine");
+                await launchUrl(phoneno);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: AppColor.white,
+                  shape: BoxShape.circle,
+                ),
                 child: SvgPicture.asset(
                   AppIcon.call,
+                  height: 20,
+                  width: 20,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

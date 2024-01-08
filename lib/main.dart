@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'core/services/app_logger.dart';
+import 'core/services/matomo_logger.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
@@ -21,8 +21,8 @@ Future<void> main() async {
 
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
-  IOSDeviceInfoService.init();
-  await AppLogger.init();
+  await IOSDeviceInfoService.init();
+  await MatomoLogger.init();
 
   runApp(
     const ProviderScope(

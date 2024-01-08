@@ -15,7 +15,6 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(),
               Text(
                 "Personal Details",
                 style: applyFiraSansFont(),
@@ -53,7 +52,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 "Undergraduate",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
-              Divider(),
+              const Divider(),
               Text(
                 "Address and Door Number",
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),

@@ -6,7 +6,12 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 class PersistentAuthData {
   final FlutterSecureStorage _storage;
 
-  PersistentAuthData() : _storage = const FlutterSecureStorage();
+  PersistentAuthData()
+      : _storage = const FlutterSecureStorage(
+          aOptions: AndroidOptions(
+            encryptedSharedPreferences: true,
+          ),
+        );
   final String _accessKey = "accessToken";
   final String _refreshKey = "refreshToken";
   final String _rolesKey = "role";

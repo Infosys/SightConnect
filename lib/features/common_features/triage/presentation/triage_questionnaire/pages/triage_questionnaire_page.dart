@@ -18,7 +18,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/option_card.dart';
 
 var questionnaireIndexProvider = StateProvider.autoDispose<int>((ref) => 1);

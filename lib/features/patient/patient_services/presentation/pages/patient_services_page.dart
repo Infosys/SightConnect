@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import "../../domain/enum/mini_app.dart";
 
 class PatientServicesPage extends ConsumerWidget {
   const PatientServicesPage({Key? key}) : super(key: key);
@@ -15,10 +16,12 @@ class PatientServicesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    Map<String, List<String>> services = {
+    Map<String, List<MiniApp>> services = {
       loc.servicesPatientCare: [
-        loc.recentServicesVisualAcuityTest,
-        loc.recentServicesEyeAssessment,
+        // loc.recentServicesVisualAcuityTest,
+        // loc.recentServicesEyeAssessment,
+        MiniApp.VISUAL_ACUITY_TEST,
+        MiniApp.EYE_ASSESSMENT
       ],
     };
 

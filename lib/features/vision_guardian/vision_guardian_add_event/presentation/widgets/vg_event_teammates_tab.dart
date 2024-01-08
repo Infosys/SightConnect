@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -87,7 +86,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                                     ref
                                         .read(visionGuadianAddMemberProvider)
                                         .addMemberData();
-                                   /*  ref
+                                    /*  ref
                                         .read(visionGuadianAddMemberProvider)
                                         .setAdd(); */
                                     addMember.value = false;
@@ -101,11 +100,11 @@ class EventTeammatesTab extends HookConsumerWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                 InkWell(
+                                InkWell(
                                   onTap: () {
-                                  addMember.value = false;
+                                    addMember.value = false;
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.delete,
                                     color: AppColor.red,
                                     size: 30,
@@ -181,8 +180,7 @@ class EventTeammatesTab extends HookConsumerWidget {
       );
     }, error: (error, stack) {
       return const Center(
-        child: VisionGuardianEmptyResultCard(type: "teamMates")
-      );
+          child: VisionGuardianEmptyResultCard(type: "teamMates"));
     });
   }
 }

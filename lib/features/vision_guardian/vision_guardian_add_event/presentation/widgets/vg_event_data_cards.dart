@@ -11,13 +11,14 @@ import '../../../../../shared/theme/text_theme.dart';
 
 Widget vgEventDataCards(BuildContext context, VisionGuardianEventModel data) {
   DateFormat dateFormat = DateFormat("dd MMM");
-   DateFormat dateFormat2 = DateFormat("dd MMM yy");
-String startDateString = dateFormat.format(DateTime.parse(data.startDate!));
-String endDateString = dateFormat2.format(DateTime.parse(data.endDate!));
+  DateFormat dateFormat2 = DateFormat("dd MMM yy");
+  String startDateString = dateFormat.format(DateTime.parse(data.startDate!));
+  String endDateString = dateFormat2.format(DateTime.parse(data.endDate!));
 
-String startTimeString = DateFormat('h a').format(DateTime.parse(data.startTime!));
-String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
-
+  String startTimeString =
+      DateFormat('h a').format(DateTime.parse(data.startTime!));
+  String endTimeString =
+      DateFormat('h a').format(DateTime.parse(data.endTime!));
 
   return Container(
     padding: const EdgeInsets.all(AppSize.kspadding),
@@ -87,7 +88,7 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                             horizontal: AppSize.kspadding, vertical: 2),
                         child: Text(
                           data.eventStatus!,
-                             softWrap: true,
+                          softWrap: true,
                           style: applyRobotoFont(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
@@ -100,7 +101,8 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  data.id.toString(),   softWrap: true,
+                  data.id.toString(),
+                  softWrap: true,
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -125,9 +127,8 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                             width: AppSize.kswidth - 5,
                           ),
                           Text(
-                            
-                            '${startDateString}-${endDateString}',
-                               softWrap: true,
+                            '$startDateString-$endDateString',
+                            softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -148,8 +149,8 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                             width: AppSize.kswidth - 5,
                           ),
                           Text(
-                            '${startTimeString}-${endTimeString}',
-                               softWrap: true,
+                            '$startTimeString-$endTimeString',
+                            softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 12,
                               color: AppColor.grey,
@@ -177,8 +178,7 @@ String endTimeString = DateFormat('h a').format(DateTime.parse(data.endTime!));
                       width: AppSize.width(context) * 0.50,
                       child: Text(
                         "${data.addresses![0].addressLine1!},${data.addresses![0].city!},${data.addresses![0].state!},${data.addresses![0].pinCode!}",
-                           softWrap: true,
-                           
+                        softWrap: true,
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,

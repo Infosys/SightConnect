@@ -170,5 +170,23 @@
     "assessmentReportButton": "கண் மதிப்பீட்டு அறிக்கை",
     "notificationsTitle": "அறிவிப்புகள்",
     "notificationsNotAvailable": "அறிவிப்புகள் இல்லை",
-    "servicesPatientCare": "நோயாளி பராமரிப்பு"
+    "servicesPatientCare": "நோயாளி பராமரிப்பு",
+
+    "reportAssessmentId": "மதிப்பீட்டு மதிப்பீட்டு ஐடி",
+    "reportDateAndTime": "தேதி மற்றும் நேரம்",
+    "reportSeverityAbnormal": "தீவிர ஆய்வு",
+    "reportSeverityHigh": "முதன்முதல் ஆய்வு",
+    "reportSeverityLow": "வழக்கமான ஆய்வு",
+    "reportDataUnavailable": "தரவு கிடைக்கவில்லை",
+    "reportTumblingTitle": "சரிசெய்வல் சோதனை - வலிமையான ஈ",
+    "rightCornea": "வலபுலம்பை",
+    "leftCornea": "இடபுலம்பை",
+    "myProfileGeneralInfo": "பொது தகவல்",
+    "myProfileAge": "வயது",
+    "myProfileAddress": "முகவரி",
+    "myProfileLine": "வரி",
+    "myProfileCity": "நகரம்",
+    "myProfileDistrict": "மாவட்டம்",
+    "myProfileState": "மாநிலம்",
+    "myProfilePinCode": "பின் குறியீடு"
 }

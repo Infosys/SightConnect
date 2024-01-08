@@ -29,7 +29,7 @@ var globalTextScaleFactorProvider = ChangeNotifierProvider(
 
 class GlobalTextScaleFactor extends ChangeNotifier {
   double _textScaleFactor = 1.0;
-  String _scaleAlphabet = "A";
+  final String _scaleAlphabet = "A";
 
   double get textScaleFactor => _textScaleFactor;
   String get scaleAlphabet => _scaleAlphabet;
@@ -37,27 +37,7 @@ class GlobalTextScaleFactor extends ChangeNotifier {
   GlobalTextScaleFactor(this._textScaleFactor);
 
   Future<void> setTextScaleFactor(double data) async {
-    switch (data) {
-      case 1.0:
-        _textScaleFactor = 1.0;
-        _scaleAlphabet = "A";
-
-        break;
-      case 1.2:
-        _textScaleFactor = 1.2;
-        _scaleAlphabet = "+A";
-
-        break;
-      case 0.8:
-        _textScaleFactor = 0.8;
-        _scaleAlphabet = "-A";
-
-        break;
-      default:
-        _textScaleFactor = 1.0;
-        _scaleAlphabet = "A";
-        break;
-    }
+    _textScaleFactor = data;
     await SharedPreferenceService.setFontScale(data);
     notifyListeners();
   }

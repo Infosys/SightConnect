@@ -2,8 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_details.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_personal.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +18,7 @@ class _VgOnboardingOTPState extends State<VgOnboardingOTP> {
   @override
   bool _onEditing = true;
   String? _code;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -142,8 +141,8 @@ class _VgOnboardingOTPState extends State<VgOnboardingOTP> {
   }
 
   List<Step> getSteps() => [
-        Step(title: Text("Personal"), content: Container()),
-        Step(title: Text("Organisation"), content: Container())
+        Step(title: const Text("Personal"), content: Container()),
+        Step(title: const Text("Organisation"), content: Container())
       ];
 }
 

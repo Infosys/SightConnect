@@ -11,9 +11,12 @@ import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 
 class EventDetailsTab extends ConsumerWidget {
-  EventDetailsTab({super.key, required this.eventDetails});
+  const EventDetailsTab({
+    required this.eventDetails,
+    super.key,
+  });
 
-  VisionGuardianEventModel eventDetails;
+  final VisionGuardianEventModel eventDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

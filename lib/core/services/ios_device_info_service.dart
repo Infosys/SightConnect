@@ -52,15 +52,19 @@ class IOSDeviceInfoService {
   };
   IOSDeviceInfoService._();
 
-  static void init() {
+  static Future<void> init() async {
     _deviceInfoPlugin = DeviceInfoPlugin();
-    _getIOSDeviceInfo();
+    await _getIOSDeviceInfo();
   }
 
-  static void _getIOSDeviceInfo() async {
+  static Future<void> _getIOSDeviceInfo() async {
     try {
       IosDeviceInfo iosDeviceInfo = await _deviceInfoPlugin.iosInfo;
       _iosDeviceName = iosDeviceInfo.name;
+      logger.d({
+        "message": "iOS device info",
+        "deviceName": _iosDeviceName,
+      });
     } catch (e) {
       _iosDeviceName = null;
       logger.d({

@@ -34,11 +34,16 @@ class VisionGuardianReportRecommendedCenter extends ConsumerWidget {
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: RecommendationPhoneNumber(
             children: [
-              Text("LVPEI Eye Institute", style: applyFiraSansFont(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),),
-          SizedBox(height: AppSize.ksheight,),
+              Text(
+                "LVPEI Eye Institute",
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: AppSize.ksheight,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -90,7 +95,7 @@ class VisionGuardianReportRecommendedCenter extends ConsumerWidget {
                         ),
                       ),
                       SizedBox(
-                          width: AppSize.width(context) / 1.3,
+                        width: AppSize.width(context) / 1.3,
                         child: Text(
                           "Monday - Friday, 10:00 AM to 5:00 PM" ?? "",
                           // softWrap: true,

@@ -23,12 +23,7 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
 
   VisionGuardianAddMemberProvider(
       this.remoteDataSource, this.addEventDetailsProvider);
-  final _memberData = [
-    {
-      "name": "Ritu Gupta",
-      "mobile": "+91 8876543321",
-    }
-  ];
+  final _memberData = [];
 
   var add = false;
 

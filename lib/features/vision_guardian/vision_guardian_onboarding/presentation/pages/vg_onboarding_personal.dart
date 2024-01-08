@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/pages/vg_onboarding_organisation.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/widgets/vg_onboarding_personal_address_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_onboarding/presentation/widgets/vg_onboarding_personal_name_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

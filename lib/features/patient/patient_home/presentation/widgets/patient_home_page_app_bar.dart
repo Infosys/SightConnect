@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -13,17 +14,6 @@ import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final COLORS = [
-  Colors.blue.shade100,
-  Colors.green.shade100,
-  // Colors.yellow.shade100,
-  Colors.pink.shade100,
-  Colors.purple.shade100,
-  Colors.orange.shade100,
-  Colors.cyan.shade100,
-  Colors.deepOrange.shade100,
-];
 
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -44,83 +34,103 @@ class PatientHomePageAppBar extends StatelessWidget
       backgroundColor: Colors.white.withAlpha(350),
       title: Row(
         children: [
-          SvgPicture.asset(AppIcon.logo),
-          const SizedBox(width: AppSize.kmwidth),
-          const Flexible(
-            child: Text(
-              AppText.appName,
-            ),
+          Image.asset(
+            "assets/logo/app_logo.png",
+            width: 120,
           ),
         ],
       ),
       actions: [
         Consumer(
           builder: (context, ref, child) {
-            final currentLocaleCode =
-                ref.watch(globalLanguageProvider).currentLocale.toString();
+            final model = ref.watch(patientDashboardProvider);
             return IconButton(
               onPressed: () {
-                showBottomSheet(
-                  enableDrag: false,
-                  context: context,
-                  builder: (context) => TranslationPopUp(
-                    currentLocaleCode: currentLocaleCode,
-                  ),
-                );
+                model.setVisibility(false);
+                Scaffold.of(context).openEndDrawer();
               },
               icon: SvgPicture.asset(
-                "assets/icons/translate.svg",
-                height: 30,
-                width: 30,
+                "assets/icons/drawer_menu.svg",
+                height: 40,
+                width: 40,
+                fit: BoxFit.cover,
+                colorFilter: const ColorFilter.mode(
+                  Colors.black,
+                  BlendMode.srcIn,
+                ),
               ),
             );
           },
         ),
-        const TextScalePopupMenu(),
-        Consumer(
-          builder: (context, ref, child) {
-            final patient = ref.watch(getPatientProfileProvider).asData?.value;
-            if (patient == null) {
-              return const CircleAvatar(
-                backgroundColor: AppColor.lightGrey,
-              );
-            }
-            final profileUrl = patient.profile?.patient?.profilePhoto;
-            final name = patient.profile?.patient?.name;
-
-            return InkWell(
-              // onTap: () {
-              //   showDialog(
-              //     context: context,
-              //     builder: (ctx) => MemberSelectionPopUp(
-              //       patients: patient,
-              //     ),
-              //     barrierDismissible: false,
-              //     barrierColor: AppColor.blackOpacity,
-              //   );
-              // },
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PatientProfilePage(),
-                  ),
-                );
-              },
-              child: Container(
-                child: profileUrl != null
-                    ? AppNetworkImage(imageUrl: profileUrl)
-                    : AppNameAvatar(
-                        name: name,
-                      ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(width: AppSize.kmwidth),
       ],
+      // actions: [
+      //   Consumer(
+      //     builder: (context, ref, child) {
+      //       final currentLocaleCode =
+      //           ref.watch(globalLanguageProvider).currentLocale.toString();
+      //       return IconButton(
+      //         onPressed: () {
+      //           showBottomSheet(
+      //             enableDrag: false,
+      //             context: context,
+      //             builder: (context) => TranslationPopUp(
+      //               currentLocaleCode: currentLocaleCode,
+      //             ),
+      //           );
+      //         },
+      //         icon: SvgPicture.asset(
+      //           "assets/icons/translate.svg",
+      //           height: 30,
+      //           width: 30,
+      //         ),
+      //       );
+      //     },
+      //   ),
+      //   const TextScalePopupMenu(),
+      //   Consumer(
+      //     builder: (context, ref, child) {
+      //       final patient = ref.watch(getPatientProfileProvider).asData?.value;
+      //       if (patient == null) {
+      //         return const CircleAvatar(
+      //           backgroundColor: AppColor.lightGrey,
+      //         );
+      //       }
+      //       final profileUrl = patient.profile?.patient?.profilePhoto;
+      //       final name = patient.profile?.patient?.name;
+
+      //       return InkWell(
+      //         // onTap: () {
+      //         //   showDialog(
+      //         //     context: context,
+      //         //     builder: (ctx) => MemberSelectionPopUp(
+      //         //       patients: patient,
+      //         //     ),
+      //         //     barrierDismissible: false,
+      //         //     barrierColor: AppColor.blackOpacity,
+      //         //   );
+      //         // },
+      //         onTap: () {
+      //           Navigator.of(context).push(
+      //             MaterialPageRoute(
+      //               builder: (context) => const PatientProfilePage(),
+      //             ),
+      //           );
+      //         },
+      //         child: Container(
+      //           child: profileUrl != null
+      //               ? AppNetworkImage(imageUrl: profileUrl)
+      //               : AppNameAvatar(
+      //                   name: name,
+      //                 ),
+      //         ),
+      //       );
+      //     },
+      //   ),
+      //   const SizedBox(width: AppSize.kmwidth),
+      // ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(58);
 }

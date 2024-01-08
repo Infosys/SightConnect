@@ -17,7 +17,7 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/domain/model/miniapp_injection_model.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -232,44 +232,13 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       actionName: "InitializationPage",
       path: InitializationPage.routeName,
       child: Scaffold(
-        backgroundColor: AppColor.primary,
+        backgroundColor: const Color(0xFFffdd04),
         body: Pulsar(
-          child: Stack(
-            children: [
-              SvgPicture.asset(
-                AppImages.splashBg,
-                fit: BoxFit.cover,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(AppSize.kmpadding),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.white,
-                      ),
-                      child: SvgPicture.asset(
-                        AppIcon.logo,
-                        height: 80,
-                        width: 80,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.kmheight),
-                    Text(
-                      AppText.appName,
-                      style: applyFiraSansFont(
-                        fontSize: 28,
-                        color: AppColor.white,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.klheight * 10),
-                  ],
-                ),
-              ),
-            ],
+          child: Center(
+            child: Image.asset(
+              "assets/logo/splash.png",
+              width: AppSize.width(context) * 0.5,
+            ),
           ),
         ),
       ),

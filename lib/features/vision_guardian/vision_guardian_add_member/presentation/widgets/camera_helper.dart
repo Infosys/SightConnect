@@ -92,15 +92,15 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
         ),
       );
     } else {
-      return WillPopScope(
-        onWillPop: () async {
-          var result = await showDialog(
+      return PopScope(
+        onPopInvoked: (value) async {
+          if (value) return;
+          showDialog(
             context: context,
             builder: (context) => TriageExitAlertBox(
               content: AppLocalizations.of(context)!.eyeScanExitDialog,
             ),
           );
-          return result ?? false;
         },
         child: Scaffold(
           key: scaffoldKey,
@@ -132,7 +132,10 @@ class _VisionGuardianCameraHelperState extends ConsumerState<CameraHelper>
                       const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
                   child: SvgPicture.asset(
                     AppIcon.flash_on,
-                    color: AppColor.white,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),

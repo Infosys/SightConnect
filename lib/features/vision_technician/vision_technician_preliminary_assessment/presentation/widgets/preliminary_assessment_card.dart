@@ -131,7 +131,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  address ?? "",
+                  address,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,

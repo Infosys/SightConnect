@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AssessmentOverallResultCard extends StatelessWidget {
   const AssessmentOverallResultCard({
@@ -29,12 +30,14 @@ class AssessmentOverallResultCard extends StatelessWidget {
         color: AppColor.scaffold,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: _getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
+          color: getRequestSeverityColor(
+                  triageResultEntities.questionResponseSeverity)
               .withOpacity(0.7),
         ),
         boxShadow: [
           BoxShadow(
-            color: _getRequestSeverityColor(triageResultEntities.questionResponseSeverity)
+            color: getRequestSeverityColor(
+                    triageResultEntities.questionResponseSeverity)
                 .withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 1.5,
@@ -54,12 +57,13 @@ class AssessmentOverallResultCard extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: _getRequestSeverityColor(
+                  color: getRequestSeverityColor(
                       triageResultEntities.questionResponseSeverity),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  _getSeverityText(triageResultEntities.questionResponseSeverity),
+                  getSeverityText(triageResultEntities.questionResponseSeverity,
+                      context.loc!),
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.white,
@@ -88,20 +92,20 @@ class AssessmentOverallResultCard extends StatelessWidget {
   }
 }
 
-String _getSeverityText(Severity? severity) {
+String getSeverityText(Severity? severity, AppLocalizations loc) {
   switch (severity) {
     case Severity.ABNORMAL:
-      return "Urgent Consult";
-    case Severity.LOW:
-      return "Routine Checkup";
+      return loc.reportSeverityAbnormal;
     case Severity.HIGH:
-      return "Early Checkup";
+      return loc.reportSeverityHigh;
+    case Severity.LOW:
+      return loc.reportSeverityLow;
     default:
       return "";
   }
 }
 
-Color _getRequestSeverityColor(Severity? severity) {
+Color getRequestSeverityColor(Severity? severity) {
   switch (severity) {
     case Severity.ABNORMAL:
       return AppColor.red;
@@ -109,7 +113,7 @@ Color _getRequestSeverityColor(Severity? severity) {
       return AppColor.orange;
     case Severity.LOW:
       return AppColor.green;
-   
+
     default:
       return AppColor.grey;
   }

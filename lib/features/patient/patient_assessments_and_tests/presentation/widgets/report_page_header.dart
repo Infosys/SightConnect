@@ -16,6 +16,7 @@ class ReportPageHeader extends StatelessWidget {
   final TriageReportDetailedEntity triageReportAndAssementPage;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -90,7 +91,7 @@ class ReportPageHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Assessment ID',
+                        loc.reportAssessmentId,
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -115,7 +116,7 @@ class ReportPageHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Date & Time',
+                        loc.reportDateAndTime,
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,

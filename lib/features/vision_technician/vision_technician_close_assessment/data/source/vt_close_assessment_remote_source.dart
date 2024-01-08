@@ -29,7 +29,7 @@ class VTCloseAssessmentRemoteSourceImpl
     try {
       var response = await _dio.patch(endPoint, data: patientDetails.toJson());
       logger.d("this is the response ${response.toString()}");
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       logger.d("this is the error ${e.message}");
       if (e.response != null) {
         logger.d("Error response: ${e.response.toString()}");

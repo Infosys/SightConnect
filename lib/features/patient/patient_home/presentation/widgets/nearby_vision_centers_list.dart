@@ -23,9 +23,6 @@ class NearbyVisionCentersList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      decoration: BoxDecoration(
-        boxShadow: applyLightShadow(),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

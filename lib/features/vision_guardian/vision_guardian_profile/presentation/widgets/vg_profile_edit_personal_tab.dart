@@ -40,7 +40,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                     width: AppSize.width(context) * 0.3,
                     height: 120,
                     child: Container(
-                      padding: EdgeInsets.all(AppSize.kmpadding),
+                      padding: const EdgeInsets.all(AppSize.kmpadding),
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: AppColor.darkGrey),
                         borderRadius: const BorderRadius.all(
@@ -49,7 +49,10 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                       child: SvgPicture.asset(
                         AppIcon.navProfile,
-                        color: AppColor.lightGrey,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.lightGrey,
+                          BlendMode.srcATop,
+                        ),
                       ),
                     ),
                   ),
@@ -611,7 +614,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: AppSize.kmheight,
             ),
             Row(

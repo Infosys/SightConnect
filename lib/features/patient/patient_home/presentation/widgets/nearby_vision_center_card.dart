@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NearbyVisionCentersCard extends StatelessWidget {
   const NearbyVisionCentersCard({super.key, required this.data});
@@ -11,6 +15,13 @@ class NearbyVisionCentersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email =
+        data.facilityInformation?.facilityContactInformation?.facilityEmailId ??
+            "";
+
+    final contact = data.facilityInformation?.facilityContactInformation
+            ?.facilityContactNumber ??
+        "";
     String getLocation(FacilityAddressModel address) {
       String location = "";
       if (address.addressLine1 != null) {
@@ -45,14 +56,21 @@ class NearbyVisionCentersCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.7),
+          border: Border.all(
+            color: AppColor.lightGrey,
+            width: 0.5,
+          ),
           borderRadius: BorderRadius.circular(AppSize.ksradius),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               data.facilityInformation?.facilityName ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -64,9 +82,10 @@ class NearbyVisionCentersCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.location_on_outlined,
-                  color: AppColor.primary,
+                SvgPicture.asset(
+                  AppIcon.location,
+                  width: 20,
+                  height: 20,
                 ),
                 const SizedBox(
                   width: 8,
@@ -77,6 +96,8 @@ class NearbyVisionCentersCard extends StatelessWidget {
                       data.facilityInformation?.facilityAddressDetails ??
                           const FacilityAddressModel(),
                     ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: const Color(0xff333333),
@@ -88,24 +109,21 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: AppSize.ksheight,
-            ),
+            const SizedBox(height: AppSize.ksheight),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.call_outlined,
-                  color: AppColor.primary,
+                SvgPicture.asset(
+                  AppIcon.call,
+                  width: 20,
+                  height: 20,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Flexible(
                   child: Text(
-                    data.facilityInformation?.facilityContactInformation
-                            ?.facilityContactNumber ??
-                        "",
+                    "$email, $contact",
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: const Color(0xff333333),
@@ -116,33 +134,6 @@ class NearbyVisionCentersCard extends StatelessWidget {
             ),
             const SizedBox(
               height: AppSize.ksheight,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.email_outlined,
-                  color: AppColor.primary,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Flexible(
-                  child: Text(
-                    data.facilityInformation?.facilityContactInformation
-                            ?.facilityEmailId ??
-                        "",
-                    softWrap: true,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: const Color(0xff333333),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-              ],
             ),
           ],
         ),

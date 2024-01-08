@@ -1,8 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_details_tab.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patients_tab.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_teammates_tab.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/data/fake_data_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_edit_organisation_tab.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_edit_personal_tab.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

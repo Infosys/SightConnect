@@ -13,13 +13,13 @@ class BottomInputTab extends StatefulWidget {
 class BottomInputTabState extends State<BottomInputTab>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
-  int? _index;
+  int index = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: widget.tabs.length, vsync: this);
-    _index = 0;
+    index = 0;
   }
 
   @override
