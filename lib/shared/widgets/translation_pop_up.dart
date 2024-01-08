@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TranslationPopUp extends ConsumerWidget {
-  const TranslationPopUp({required this.currentLocaleCode, super.key});
+  const TranslationPopUp({
+    required this.currentLocaleCode,
+    super.key,
+  });
 
   final String currentLocaleCode;
 
@@ -88,12 +91,11 @@ class TranslationPopUp extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                appLocale.localeName,
+                                appLocale.localeSymbol,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: applyRobotoFont(
-                                  fontSize: 16,
-                                ),
+                                    fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               isActiveLocale
                                   ? const Icon(
@@ -104,12 +106,29 @@ class TranslationPopUp extends ConsumerWidget {
                                   : Container()
                             ],
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            appLocale.locale != "en" ? appLocale.name : "",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyRobotoFont(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                appLocale.localeName,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Flexible(
+                                child: Text(
+                                  appLocale.locale != "en"
+                                      ? appLocale.name
+                                      : "",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
