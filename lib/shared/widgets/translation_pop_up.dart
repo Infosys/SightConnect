@@ -67,8 +67,8 @@ class TranslationPopUp extends ConsumerWidget {
                     onTap: () {
                       ref
                           .read(globalLanguageProvider)
-                          .setCurrentLocale(appLocale.locale);
-                      Navigator.of(context).pop();
+                          .setCurrentLocale(appLocale.locale)
+                          .then((value) => Navigator.of(context).pop());
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),
