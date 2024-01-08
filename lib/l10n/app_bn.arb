@@ -170,5 +170,23 @@
     "assessmentReportButton": "চোখের মূল্যায়ন প্রতিবেদন",
     "notificationsTitle": "বিজ্ঞপ্তি",
     "notificationsNotAvailable": "কোনো বিজ্ঞপ্তি নেই",
-    "servicesPatientCare": "রোগী যত্ন"
+    "servicesPatientCare": "রোগী যত্ন",
+
+    "reportAssessmentId": "ମୂଲ୍ୟାଙ୍କନ ଆଇଡି",
+    "reportDateAndTime": "ତାରିଖ ଓ ସମୟ",
+    "reportSeverityAbnormal": "ଅସାଧାରଣ ପରୀକ୍ଷା",
+    "reportSeverityHigh": "ପ୍ରଥମ ପରୀକ୍ଷା",
+    "reportSeverityLow": "ନିୟମିତ ପରୀକ୍ଷା",
+    "reportDataUnavailable": "ଡାଟା ଅନୁପଲବ୍ଧ",
+    "reportTumblingTitle": "ଏକ୍ୟୁଟ ଟେଷ୍ଟ - ଟମ୍ବଲିଂ ଈ",
+    "rightCornea": "ଡାହାଣ ଚକ୍ଷୁ ବିକଲ୍ପ",
+    "leftCornea": "ବାମ ଚକ୍ଷୁ ବିକଲ୍ପ",
+    "myProfileGeneralInfo": "ସାଧାରଣ ସୂଚନା",
+    "myProfileAge": "ବୟସ",
+    "myProfileAddress": "ଠିକଣା",
+    "myProfileLine": "ଲାଇନ୍",
+    "myProfileCity": "ଶହର",
+    "myProfileDistrict": "ଜିଲ୍ଲା",
+    "myProfileState": "ରାଜ୍ୟ",
+    "myProfilePinCode": "ପିନ୍ କୋଡ୍"
 }

@@ -170,5 +170,23 @@
     "assessmentReportButton": "ಕಣ್ಣು ಮೌಲಿಕ ವರದಿ",
     "notificationsTitle": "ಅಧಿಸೂಚನೆಗಳು",
     "notificationsNotAvailable": "ಯಾವ ಅಧಿಸೂಚನೆಗಳೂ ಇಲ್ಲ",
-    "servicesPatientCare": "ರೋಗಿ ಆರೋಗ್ಯ ಸೇವೆ"
+    "servicesPatientCare": "ರೋಗಿ ಆರೋಗ್ಯ ಸೇವೆ",
+
+    "reportAssessmentId": "ಮೌಲ್ಯಾಂಕನ ಐಡಿ",
+    "reportDateAndTime": "ದಿನಾಂಕ ಮತ್ತು ಸಮಯ",
+    "reportSeverityAbnormal": "ತೀವ್ರ ಪರೀಕ್ಷೆ",
+    "reportSeverityHigh": "ಮೊದಲ ಪರೀಕ್ಷೆ",
+    "reportSeverityLow": "ನಿಯಮಿತ ಪರೀಕ್ಷೆ",
+    "reportDataUnavailable": "ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ",
+    "reportTumblingTitle": "ಏಕ್ಯೂಟಿ ಟೆಸ್ಟ್ - ಟಂಬ್ಲಿಂಗ್ ಈ",
+    "rightCornea": "ಬಲ ಕರ್ಣ",
+    "leftCornea": "ಎಡ ಕರ್ಣ",
+    "myProfileGeneralInfo": "ಸಾಮಾನ್ಯ ಮಾಹಿತಿ",
+    "myProfileAge": "ವಯಸ್ಸು",
+    "myProfileAddress": "ವಿಳಾಸ",
+    "myProfileLine": "ಲೈನ್",
+    "myProfileCity": "ನಗರ",
+    "myProfileDistrict": "ಜಿಲ್ಲೆ",
+    "myProfileState": "ರಾಜ್ಯ",
+    "myProfilePinCode": "ಪಿನ್ ಕೋಡ್"
 }

@@ -12,6 +12,7 @@ class ReportAssessmentQuestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
@@ -21,7 +22,7 @@ class ReportAssessmentQuestions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Assessment Questions",
+            loc.questionnaireTitle,
             style: applyRobotoFont(
               fontSize: 16,
               fontWeight: FontWeight.w800,
@@ -31,12 +32,12 @@ class ReportAssessmentQuestions extends StatelessWidget {
           const SizedBox(height: 10),
           (questionResponseBreifModel == null ||
                   questionResponseBreifModel!.isEmpty)
-              ? const Padding(
-                  padding: EdgeInsets.only(top: 16),
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 16),
                   child: Center(
                     child: Text(
-                      "No Data Available",
-                      style: TextStyle(
+                      loc.reportDataUnavailable,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,

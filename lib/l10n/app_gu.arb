@@ -170,5 +170,23 @@
     "assessmentReportButton": "આંખ મૂલ્યાંકન અહેવાલ",
     "notificationsTitle": "સૂચનાઓ",
     "notificationsNotAvailable": "કોઈ સૂચનાઓ નથી",
-    "servicesPatientCare": "દર્દી સંભાળ"
+    "servicesPatientCare": "દર્દી સંભાળ",
+
+    "reportAssessmentId": "મૂલ્યાંકન આઈડી",
+    "reportDateAndTime": "તારીખ અને સમય",
+    "reportSeverityAbnormal": "અસામાન્ય પરીક્ષણ",
+    "reportSeverityHigh": "પ્રથમ પરીક્ષણ",
+    "reportSeverityLow": "નિયમિત પરીક્ષણ",
+    "reportDataUnavailable": "ડેટા ઉપલબ્ધ નથી",
+    "reportTumblingTitle": "એક્યુટ ટેસ્ટ - ટંબ્લિંગ ઈ",
+    "rightCornea": "જમણી નેત્રનું વિકલ્પ",
+    "leftCornea": "ડાબી નેત્રનું વિકલ્પ",
+    "myProfileGeneralInfo": "સામાન્ય માહિતી",
+    "myProfileAge": "ઉંમર",
+    "myProfileAddress": "સરનામું",
+    "myProfileLine": "લાઇન",
+    "myProfileCity": "શહેર",
+    "myProfileDistrict": "જિલ્લો",
+    "myProfileState": "રાજ્ય",
+    "myProfilePinCode": "પિન કોડ"
 }

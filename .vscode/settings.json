@@ -1,32 +1,31 @@
-// {
-//   "cSpell.words": [
-//     "ABHA",
-//     "Appbar",
-//     "dont",
-//     "eyecare",
-//     "Fira",
-//     "Fluttertoast",
-//     "lavander",
-//     "LVPEI",
-//     "Matomo",
-//     "Odiya",
-//     "Prasad",
-//     "Roboto",
-//     "Sightconnect",
-//     "teleconsultations",
-//     "मराठी",
-//     "हिन्दी",
-//     "অসমীয়",
-//     "ਪੰਜਾਬੀ",
-//     "ગુજરાતી",
-//     "தமிழ்",
-//     "తెలుగు",
-//     "ಕನ್ನಡ",
-//     "മലയാളം"
-//   ]
-// } 
-
-// {
+{
+  "cSpell.words": [
+    "ABHA",
+    "Appbar",
+    "dont",
+    "eyecare",
+    "Fira",
+    "Fluttertoast",
+    "lavander",
+    "LVPEI",
+    "Matomo",
+    "miniapp",
+    "Odiya",
+    "Prasad",
+    "Roboto",
+    "Sightconnect",
+    "teleconsultations",
+    "मराठी",
+    "हिन्दी",
+    "অসমীয়",
+    "ਪੰਜਾਬੀ",
+    "ગુજરાતી",
+    "தமிழ்",
+    "తెలుగు",
+    "ಕನ್ನಡ",
+    "മലയാളം"
+  ]
+} // {
 //        "files.exclude": {
 //         "**/user_details_model.dart": true,
 //             "**/*.freezed.dart": true,

@@ -170,5 +170,27 @@
     "assessmentReportButton": "కంటి అంచనా నివేదిక",
     "notificationsTitle": "నోటిఫికేషన్లు",
     "notificationsNotAvailable": "నోటిఫికేషన్లు లేవు",
-    "servicesPatientCare": "రోగి సంరక్షణ"
+    "servicesPatientCare": "రోగి సంరక్షణ",
+
+
+    "reportAssessmentId": "మూలనివేదిక ఐడి",
+    "reportDateAndTime": "తేదీ మరియు సమయం",
+    "reportSeverityAbnormal": "అతివారంగ పరిశీలన",
+    "reportSeverityHigh": "మొదటి పరిశీలన",
+    "reportSeverityLow": "నియమిత పరిశీలన",
+    "reportDataUnavailable":"డేటా లేదు",
+    "reportTumblingTitle":"ఏకుపు పరీక్ష - టంబ్లింగ్ E",
+    "rightCornea":"కుడి కర్ణం",
+    "leftCornea":"ఎడమ కర్ణం",
+
+    
+
+    "myProfileGeneralInfo": "సాధారణ సమాచారం",
+    "myProfileAge": "వయస్సు",
+    "myProfileAddress": "చిరునామా",
+    "myProfileLine": "లైన్",
+    "myProfileCity": "నగరం",
+    "myProfileDistrict": "జిల్లా",
+    "myProfileState": "రాష్ట్రం",
+    "myProfilePinCode": "పిన్ కోడ్"
 }

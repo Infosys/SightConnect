@@ -170,5 +170,23 @@
     "assessmentReportButton": "കണ്ണ് വിലയിരുത്തൽ റിപ്പോർട്ട്",
     "notificationsTitle": "അറിയിപ്പുകൾ",
     "notificationsNotAvailable": "അറിയിപ്പുകൾ ഇല്ല",
-    "servicesPatientCare": "രോഗിയുടെ പരിചരണം"
+    "servicesPatientCare": "രോഗിയുടെ പരിചരണം",
+
+    "reportAssessmentId": "മൂല്യനിർണ്ണയ ഐഡി",
+    "reportDateAndTime": "തീയതി കാലത്തെ",
+    "reportSeverityAbnormal": "തീവ്രമായ പരിശോധന",
+    "reportSeverityHigh": "ആദ്യത്തെ പരിശോധന",
+    "reportSeverityLow": "നിയമിത പരിശോധന",
+    "reportDataUnavailable": "ഡാറ്റയുണ്ടാക്കാനാവില്ല",
+    "reportTumblingTitle": "അക്യൂട്ടി ടെസ്റ്റ് - ടംബ്ളിംഗ് ഈ",
+    "rightCornea": "വലത്തര വെളിപ്പെടുത്തം",
+    "leftCornea": "ഇടത്തര വെളിപ്പെടുത്തം",
+    "myProfileGeneralInfo": "പൊതുവിവരങ്ങൾ",
+    "myProfileAge": "പ്രായം",
+    "myProfileAddress": "വിലാസം",
+    "myProfileLine": "ലൈൻ",
+    "myProfileCity": "നഗരം",
+    "myProfileDistrict": "ജില്ല",
+    "myProfileState": "സംസ്ഥാനം",
+    "myProfilePinCode": "പിൻ കോഡ്"
 }

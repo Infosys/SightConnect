@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/left_cornea_tab_view.dart';
 import 'package:eye_care_for_all/shared/widgets/right_cornea_tab_view.dart';
@@ -16,6 +17,7 @@ class EyeScanTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return DefaultTabController(
       length: 2,
       child: Padding(
@@ -24,7 +26,7 @@ class EyeScanTabView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Eye Scan",
+              loc.eyeScanTitle,
               style: applyRobotoFont(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
@@ -42,9 +44,9 @@ class EyeScanTabView extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
               labelColor: AppColor.black,
-              tabs: const [
-                Tab(text: "Right Cornea"),
-                Tab(text: "Left Cornea"),
+              tabs: [
+                Tab(text: loc.rightCornea),
+                Tab(text: loc.leftCornea),
               ],
             ),
             const SizedBox(

@@ -14,17 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final COLORS = [
-  Colors.blue.shade100,
-  Colors.green.shade100,
-  // Colors.yellow.shade100,
-  Colors.pink.shade100,
-  Colors.purple.shade100,
-  Colors.orange.shade100,
-  Colors.cyan.shade100,
-  Colors.deepOrange.shade100,
-];
-
 class PatientHomePageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const PatientHomePageAppBar({super.key});
