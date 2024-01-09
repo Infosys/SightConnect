@@ -80,11 +80,13 @@
     "tollFreeNumber": "টোল ফ্ৰী নম্বৰ",
     "appDrawerTitle": "মেনু",
     "appDrawerHome": "ঘৰ।",
+    "appDrawerLanguageSelection": "ভাষা নিৰ্বাচন",
+    "appDrawerAccessibility" : "অভিগম্যতা সংহতিসমূহ",
     "appDrawerMyProfile": "মোৰ প্ৰফাইল",
     "appDrawerAssessmentsAndTests": "মূল্যায়ন আৰু পৰীক্ষা",
-    "appDrawerScanner": "স্কেনাৰ",
+    "appDrawerScanner": "QR ক'ড স্ক্যানাৰ",
     "appDrawerAboutUs": "আমাৰ বিষয়ে",
-    "appDrawerPrivacyPolicy": "গোপনীয়তা নীতি",
+    "appDrawerPrivacyPolicy": "গোপনীয়তা আৰু তথ্য নীতি",
     "appDrawerHelpAndSupport": "সহায় আৰু সমৰ্থন",
     "appDrawerSignOut": "ছাইন আউট কৰক",
     "aboutUsDescription": "Sightconnect হৈছে এক ব্যৱহাৰকাৰী-অনুকূল চকুৰ যত্নৰ এপ যিয়ে কলৰ জৰিয়তে আত্ম-মূল্যায়ন আৰু পৰামৰ্শ প্ৰদান কৰাত সহায় কৰে। \n\nআমাৰ লক্ষ্যৰ কেন্দ্ৰবিন্দু হৈছে চকুৰ যত্ন সকলোৰে বাবে সুলভ কৰাৰ প্ৰতিশ্ৰুতি। এই এপটো জীৱনৰ সকলো ক্ষেত্ৰৰ ব্যৱহাৰকাৰীৰ বাবে অন্তৰ্ভুক্তিমূলক আৰু সুগম হোৱাকৈ ডিজাইন কৰা হৈছে, তেওঁলোকৰ বয়স, কাৰিকৰী পটভূমি, আৰু সামাজিক বা অৰ্থনৈতিক পটভূমি নিৰ্বিশেষে। এপটো আৰু ইয়াৰ সমলবোৰ ইংৰাজী আৰু অন্যান্য স্থানীয় ভাষাত উপলব্ধ কৰা হৈছে। ই ব্যৱহাৰকাৰীসকলক নিজৰ চকুৰ মূল্যায়ন কৰাত আৰু সময়মতে চিকিৎসাৰ পৰামৰ্শ লাভ কৰাত সহায় কৰে। এপটোৱে আমাৰ ব্যৱহাৰকাৰীসকলক ব্যক্তিগত চকুৰ যত্নৰ সমাধান প্ৰদান কৰিবলৈ শেহতীয়া প্ৰযুক্তি আৰু সঁজুলি ব্যৱহাৰ কৰে। তেওঁলোকৰ জীৱনটো সহজ কৰি তুলিবলৈ ইয়াত বিভিন্ন ধৰণৰ বৈশিষ্ট্য আছে।",
@@ -181,7 +183,6 @@
     "myProfileDistrict": "জিলা",
     "myProfileState": "ৰাজ্য",
     "myProfilePinCode": "পিন কোড",
-
     "submitButton" : "দাখিল কৰক",
     "swipeGestureError" : "ভুল চুইপ! অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।",
     "swipeGestureCardText" : "চিহ্নৰ দিশত চুইপ কৰক",
@@ -202,5 +203,12 @@
     "inviteCardTitle" : "অন্যকল কৰক",
     "inviteCardDescription" : "5টা বন্ধু আৰু পৰিবারজনক আমন্ত্ৰণ কৰক যাতে তাঁদেৰ চক্ষু মূল্যায়ন কৰিব পাৰে আৰু ভবিষ্যতত চক্ষু সমস্যা পূৰ্ববর্তী কৰিব পাৰে।",
     "inviteCardInvitation" : "এতিয়াই আমন্ত্ৰণ কৰক",
-    "partnerCardTitle" : "সহযোগীত"
+    "partnerCardTitle" : "সহযোগীত",
+    "languageSelection" : "ভাষা নিৰ্বাচন কৰক",
+    "profileTitle" : "ৰূপৰেখা",
+    "eyeAssessmentEnterLabel" : "ইয়াত প্ৰৱেশ কৰক",
+    "profilePageAddressDetails" : "ঠিকনাৰ বিৱৰণ",
+    "profilePaeCheckReports" : "আপোনাৰ প্ৰতিবেদনসমূহ পৰীক্ষা কৰক",
+    "bottomNavItemEyeTest" : "চকুৰ পৰীক্ষা",
+    "bottomNavItemAppointment" : "নিযুক্তি"
 }

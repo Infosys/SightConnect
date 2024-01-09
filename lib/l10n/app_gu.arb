@@ -80,11 +80,13 @@
     "tollFreeNumber": "ટોલ ફ્રી નંબર",
     "appDrawerTitle": "મેનુ",
     "appDrawerHome": "ઘરગથ્થુ",
+    "appDrawerLanguageSelection": "ભાષા પસંદગી",
+    "appDrawerAccessibility" : "ઍક્સેસિબિલિટી સેટિંગ્સ",
     "appDrawerMyProfile": "મારી પ્રોફાઇલ",
     "appDrawerAssessmentsAndTests": "મૂલ્યાંકન અને પરીક્ષણો",
-    "appDrawerScanner": "સ્કેનર",
+    "appDrawerScanner": "QR કોડ સ્કેનર",
     "appDrawerAboutUs": "અમારા વિશે",
-    "appDrawerPrivacyPolicy": "ગોપનીયતા નીતિ",
+    "appDrawerPrivacyPolicy": "ગોપનીયતા અને ડેટા નીતિ",
     "appDrawerHelpAndSupport": "સહાય અને સમર્થન",
     "appDrawerSignOut": "સાઇન આઉટ કરો",
     "aboutUsDescription": "Sightconnect એક વપરાશકર્તા-મૈત્રીપૂર્ણ આંખની સંભાળ માટેની એપ્લિકેશન છે જે કૉલ પર સ્વ-મૂલ્યાંકન અને પરામર્શમાં મદદ કરે છે. \n\nઅમારા મિશનના કેન્દ્રમાં આંખની સંભાળને બધા માટે સુલભ બનાવવાની પ્રતિબદ્ધતા છે. એપ્લિકેશનને જીવનના તમામ ક્ષેત્રોના વપરાશકર્તાઓ દ્વારા તેમની ઉંમર, તકનીકી પૃષ્ઠભૂમિ અને સામાજિક અથવા આર્થિક પૃષ્ઠભૂમિને ધ્યાનમાં લીધા વિના સર્વસમાવેશક અને સુલભ બનાવવા માટે ડિઝાઇન કરવામાં આવી છે. એપ્લિકેશન અને તેની સામગ્રી અંગ્રેજી અને અન્ય સ્થાનિક ભાષાઓમાં ઉપલબ્ધ કરાવવામાં આવી છે. તે વપરાશકર્તાઓને તેમની આંખોનું સ્વ-મૂલ્યાંકન કરવામાં અને સમયસર સારવારની સલાહ મેળવવામાં મદદ કરે છે. એપ્લિકેશન અમારા વપરાશકર્તાઓને વ્યક્તિગત આંખની સંભાળના ઉકેલો પ્રદાન કરવા માટે નવીનતમ તકનીકો અને સાધનોનો ઉપયોગ કરે છે. તે તેમના જીવનને સરળ બનાવવા માટે વિવિધ સુવિધાઓ સાથે આવે છે.",
@@ -163,7 +165,6 @@
     "notificationsTitle": "સૂચનાઓ",
     "notificationsNotAvailable": "કોઈ સૂચનાઓ નથી",
     "servicesPatientCare": "દર્દી સંભાળ",
-
     "reportAssessmentId": "મૂલ્યાંકન આઈડી",
     "reportDateAndTime": "તારીખ અને સમય",
     "reportSeverityAbnormal": "અસામાન્ય પરીક્ષણ",
@@ -181,7 +182,6 @@
     "myProfileDistrict": "જિલ્લો",
     "myProfileState": "રાજ્ય",
     "myProfilePinCode": "પિન કોડ",
-
     "submitButton" : "સબમિટ કરો",
     "swipeGestureError" : "ખોટો સ્વાઇપ! મહેરબાની કરીને ફરીથી પ્રયતન કરો.",
     "swipeGestureCardText" : "પ્રતીકની દિશામાં સ્વાઇપ કરો",
@@ -202,5 +202,12 @@
     "inviteCardTitle" : "અન્યોને આમંત્રિત કરો",
     "inviteCardDescription" : "5 મિત્રો અને પરિવારના સભ્યોને આમંત્રિત કરો જેથી તેઓ તેમની આંખ મૂલ્યાંકન કરી શકે અને ભવિષ્યમાં આંખની સમસ્યાઓને રોકી શકે.",
     "inviteCardInvitation" : "હવે આમંત્રિત કરો",
-    "partnerCardTitle" : "ભાગીદારી"
+    "partnerCardTitle" : "ભાગીદારી",
+    "languageSelection" : "ભાષા પસંદ કરો",
+    "profileTitle" : "પ્રોફાઇલ",
+    "eyeAssessmentEnterLabel" : "અહીં દાખલ કરો",
+    "profilePageAddressDetails" : "સરનામાંની વિગતો",
+    "profilePaeCheckReports" : "તમારા અહેવાલો તપાસો",
+    "bottomNavItemEyeTest" : "આંખની કસોટી",
+    "bottomNavItemAppointment" : "નિમણૂંકો"
 }

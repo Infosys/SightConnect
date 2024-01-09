@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,10 @@ class AppBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
+    final loc = context.loc!;
 
     var isMobile = Responsive.isMobile(context);
-    var items = BottomNavItems.all;
+    var items = BottomNavItems.all(loc);
     return BottomNavigationBar(
       backgroundColor: AppColor.white,
       currentIndex: selectedIndex,

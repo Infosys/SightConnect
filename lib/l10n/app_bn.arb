@@ -80,11 +80,13 @@
     "tollFreeNumber": "টোল ফ্রি নম্বর",
     "appDrawerTitle": "মেনু",
     "appDrawerHome": "হোম",
+    "appDrawerLanguageSelection": "ভাষা নির্বাচন",
+    "appDrawerAccessibility" : "প্রাপ্তির সেটিংস",
     "appDrawerMyProfile": "আমার প্রোফাইল",
     "appDrawerAssessmentsAndTests": "মূল্যায়ন এবং পরীক্ষাসমূহ",
-    "appDrawerScanner": "স্ক্যানার",
+    "appDrawerScanner": "স্কিউআর কোড স্ক্যানার",
     "appDrawerAboutUs": "আমাদের সম্পর্কে",
-    "appDrawerPrivacyPolicy": "গোপনীয়তা নীতি",
+    "appDrawerPrivacyPolicy": "গোপনীয়তা ও ডেটা নীতি",
     "appDrawerHelpAndSupport": "সাহায্য এবং সমর্থন",
     "appDrawerSignOut": "সাইন আউট",
     "aboutUsDescription": "Sightconnect একটি ব্যবহারকারী-বন্ধুত্বপূর্ণ চোখ যোগ্যতা অ্যাপ্লিকেশন, যা কলে স্ব-মূল্যায়ন এবং পরামর্শে সাহায্য করে।\n\nআমাদের উদ্দেশ্যের মূলধারায় আমরা সমস্তে চোখচ্ছবি সহজবোধ্য করতে প্রতিশ্রুতি দিচ্ছি। এই অ্যাপ্লিকেশনটি প্রাপ্তিপ্রাপ্ত এবং অ্যাক্সেস করতে ব্যবহারকারীদের বিশেষভাবে যোগ্য করা হয়, তাদের বয়স, তথ্যপ্রযুক্তি পেশার প্রতিবেশী এবং সামাজিক বা আর্থিক প্রস্তাবনা সবকিছুর সাথে নির্বিঘ্নভাবে ব্যবহারকারীদের দিকে অভিন্যচ্ছে। এই অ্যাপ্লিকেশনটি ইংরেজি এবং অন্যান্য স্থানীয় ভাষায় উপলব্ধ করা হয়। এটি ব্যবহারকারীদের তাদের চোখ স্ব-মূল্যায়ন করতে সাহায্য করে এবং সময়ের সাথে চিকিত্সা সালাহ প্রাপ্ত করতে সাহায্য করে। এই অ্যাপ্লিকেশনটি আমাদের ব্যবহারকারীদের জন্য ব্যক্তিগত চোখ যোগ্যতা সমাধান সরবরাহ করতে সহায়ক নতুন প্রযুক্তি এবং টুলস ব্যবহার করে। এটি তাদের জীবনকে সহজ করার জন্য বিভিন্ন ফিচারের সাথে আসে।",
@@ -163,7 +165,6 @@
     "notificationsTitle": "বিজ্ঞপ্তি",
     "notificationsNotAvailable": "কোনো বিজ্ঞপ্তি নেই",
     "servicesPatientCare": "রোগী যত্ন",
-
     "reportAssessmentId": "ମୂଲ୍ୟାଙ୍କନ ଆଇଡି",
     "reportDateAndTime": "ତାରିଖ ଓ ସମୟ",
     "reportSeverityAbnormal": "ଅସାଧାରଣ ପରୀକ୍ଷା",
@@ -181,7 +182,6 @@
     "myProfileDistrict": "ଜିଲ୍ଲା",
     "myProfileState": "ରାଜ୍ୟ",
     "myProfilePinCode": "ପିନ୍ କୋଡ୍",
-
     "submitButton" : "জমা দিন",
     "swipeGestureError" : "ভুল স্বাইপ! অনুগ্রহ করে আবার চেষ্টা করুন।",
     "swipeGestureCardText" : "প্রতীকের দিকে স্বাইপ করুন",
@@ -202,5 +202,12 @@
     "inviteCardTitle" : "অন্যদেরকে আমন্ত্রণ জানান",
     "inviteCardDescription" : "5 জন বন্ধু এবং পরিবারের সদস্যদের আমন্ত্রণ জানান যাতে তারা তাদের চোখ মূল্যায়ন করতে পারে এবং ভবিষ্যতে চোখ সমস্যাগুলি প্রতিরোধ করতে পারে।",
     "inviteCardInvitation" : "এখনই আমন্ত্রণ জানান",
-    "partnerCardTitle" : "সহযোগী"
+    "partnerCardTitle" : "সহযোগী",
+    "languageSelection" : "ভাষা নির্বাচন করুন",
+    "profileTitle" : "প্রোফাইল",
+    "eyeAssessmentEnterLabel" : "এখানে লিখুন",
+    "profilePageAddressDetails" : "ঠিকানা বিবরণ",
+    "profilePaeCheckReports" : "আপনার রিপোর্টগুলি পরীক্ষা করুন",
+    "bottomNavItemEyeTest" : "চোখের পরীক্ষা",
+    "bottomNavItemAppointment" : "অ্যাপয়েন্টমেন্ট"
 }

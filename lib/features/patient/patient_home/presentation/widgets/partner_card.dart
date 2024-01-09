@@ -20,7 +20,7 @@ class PartnerCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Partner",
+              loc.partnerCardTitle,
               style: applyFiraSansFont(
                 fontSize: 18,
               ),

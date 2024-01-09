@@ -26,7 +26,7 @@ class PatientProfilePage extends ConsumerWidget {
         iconTheme: const IconThemeData(),
         title: Text(
           // loc.appDrawerMyProfile,
-          "Profile",
+          loc.profileTitle,
           style: applyFiraSansFont(
             fontWeight: FontWeight.w500,
           ),
