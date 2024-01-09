@@ -20,6 +20,7 @@ import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/triage_eye_scan_provider.dart';
@@ -132,6 +133,7 @@ class _PatientTriageEyeCapturingPageState
         },
         child: Scaffold(
           key: scaffoldKey,
+          extendBodyBehindAppBar: true,
           backgroundColor: AppColor.black,
           drawer: const TriageStepsDrawer(),
           appBar: CustomAppbar(
@@ -141,7 +143,7 @@ class _PatientTriageEyeCapturingPageState
             actionsIconTheme: const IconThemeData(
               color: AppColor.white,
             ),
-            backgroundColor: AppColor.black,
+            backgroundColor: Colors.transparent,
             leadingWidth: 60,
             titleSpacing: 0.0,
             centerTitle: false,
@@ -160,39 +162,13 @@ class _PatientTriageEyeCapturingPageState
               ),
             ),
             title: Text(
-              "${loc.eyeScanTitle} - ${model.currentEye == TriageEyeType.RIGHT ? loc.rightEyeString : loc.leftEyeString}",
+              loc.eyeScanTitle,
               style: applyFiraSansFont(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColor.white,
               ),
             ),
-
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     const SizedBox(width: AppSize.kmwidth),
-            //     Text(
-            //       loc.stepNumber("3", "3"),
-            //       style: applyRobotoFont(
-            //         color: AppColor.white,
-            //         fontSize: 14,
-            //         fontWeight: FontWeight.w400,
-            //       ),
-            //     ),
-            //     const SizedBox(width: AppSize.kmwidth),
-            //     Flexible(
-            //       child: Text(
-            //         loc.eyeScanTitle,
-            //         style: applyRobotoFont(
-            //           color: AppColor.white,
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w500,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             actions: [
               InkWell(
                 onTap: () async {
@@ -216,12 +192,26 @@ class _PatientTriageEyeCapturingPageState
             progressMessage: _progressMessage,
             child: Stack(
               children: [
-                CameraPreview(_controller),
+                Positioned.fill(
+                  child: CameraPreview(_controller),
+                ),
+                Positioned(
+                  top: 100,
+                  left: AppSize.width(context) * 0.45,
+                  child: Text(
+                    _eyeLocalization(model.currentEye, context),
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      color: AppColor.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     padding: const EdgeInsets.all(24),
-                    color: Colors.black,
+                    color: Colors.transparent,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -245,8 +235,7 @@ class _PatientTriageEyeCapturingPageState
                             final image = await _takePicture(context);
                             logger.d("Image: $image");
                             if (image == null) {
-                              Fluttertoast.showToast(
-                                  msg: loc.imageCapturedToastMessage);
+                              Fluttertoast.showToast(msg: "Image not captured");
                               return;
                             }
 
@@ -288,20 +277,7 @@ class _PatientTriageEyeCapturingPageState
                               );
                             }
                           },
-                          child: Container(
-                            padding: const EdgeInsets.all(AppSize.kmpadding),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: AppColor.white,
-                                width: 2,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.camera_alt,
-                              color: AppColor.white,
-                            ),
-                          ),
+                          child: SvgPicture.asset("assets/icons/camera.svg"),
                         ),
                         const Spacer(),
                         Tooltip(
@@ -326,6 +302,15 @@ class _PatientTriageEyeCapturingPageState
         ),
       );
     }
+  }
+
+  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
+    return switch (eye) {
+      TriageEyeType.LEFT => context.loc!.leftEyeString,
+      TriageEyeType.RIGHT => context.loc!.rightEyeString,
+      TriageEyeType.BOTH => context.loc!.bothEyeString,
+      _ => "",
+    };
   }
 
   Future<bool> _validateImage(XFile image) async {
@@ -402,52 +387,76 @@ class _PatientTriageEyeCapturingPageState
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
     final loc = context.loc!;
-    showDialog(
+    showModalBottomSheet(
+      isDismissible: false,
       context: context,
-      builder: (context) => BlurDialogBox(
-        title: Text(
-          loc.eyeCaptureCompletionDialogHeading,
-          style: applyRobotoFont(
-            color: AppColor.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
         ),
-        content: Text(
-          loc.eyeCaptureCompletionDialogBody,
-          style: applyRobotoFont(
-            color: AppColor.black,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              if (context.mounted && _controller.value.isInitialized) {
-                _controller.dispose();
-              }
-
-              ref.read(triageStepperProvider).goToNextStep();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => TriageResultPage(
-                    triageResult: result,
-                  ),
-                ),
-              );
-            },
-            child: Text(
-              loc.eyeCaptureCompletionDialogViewResult,
-              style: applyRobotoFont(
-                color: AppColor.black,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ],
       ),
+      builder: (context) {
+        return Container(
+          margin: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                loc.eyeCaptureCompletionDialogHeading,
+                style: applyRobotoFont(
+                  color: AppColor.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                loc.eyeCaptureCompletionDialogBody,
+                style: applyRobotoFont(
+                  color: AppColor.black,
+                  fontSize: 16,
+                ),
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () async {
+                      if (context.mounted && _controller.value.isInitialized) {
+                        _controller.dispose();
+                      }
+
+                      ref.read(triageStepperProvider).goToNextStep();
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => TriageResultPage(
+                            triageResult: result,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      loc.eyeCaptureCompletionDialogViewResult,
+                      style: applyRobotoFont(
+                        color: AppColor.primary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

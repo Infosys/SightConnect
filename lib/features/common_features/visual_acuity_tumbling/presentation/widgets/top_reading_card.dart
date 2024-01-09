@@ -79,9 +79,8 @@ class TopReadingCard extends ConsumerWidget {
                       children: [
                         Text(
                           currentLevel.snellerFraction,
-                          style: applyFiraSansFont(
-                            color: AppColor.grey,
-                          ),
+                          style: applyRobotoFont(
+                              color: AppColor.grey, fontSize: 16),
                         ),
                         Consumer(
                           builder: (context, ref, child) {
@@ -94,7 +93,7 @@ class TopReadingCard extends ConsumerWidget {
                                       : context.loc!.bothEyeString),
                               style: applyFiraSansFont(
                                 fontSize: 18,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w500,
                               ),
                             );
                           },
@@ -114,9 +113,10 @@ class TopReadingCard extends ConsumerWidget {
                             Text(
                               "40 cms",
                               style: applyRobotoFont(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.green),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.green,
+                              ),
                             ),
                           ],
                         ),

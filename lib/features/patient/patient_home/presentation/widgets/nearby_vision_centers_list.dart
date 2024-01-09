@@ -28,13 +28,17 @@ class NearbyVisionCentersList extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
-                child: Text(
-                  loc.nearbyVisionCentersTitle,
-                  style: applyFiraSansFont(
-                    fontSize: 18,
+              Flexible(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+                  child: Text(
+                    loc.nearbyVisionCentersTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),

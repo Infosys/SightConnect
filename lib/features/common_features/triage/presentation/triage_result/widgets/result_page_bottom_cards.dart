@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
@@ -29,7 +30,7 @@ class ResultPageBottomCards extends ConsumerWidget {
           ),
           title: Text(loc.tollFreeNumber),
           subtitle: const Text(
-            "1800 1211 00411",
+            AppText.tollFreeNumber,
             style: TextStyle(
               color: AppColor.black,
               fontWeight: FontWeight.bold,
@@ -44,20 +45,24 @@ class ResultPageBottomCards extends ConsumerWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
+              Flexible(
                 child: ElevatedButton(
                   onPressed: () {
                     ref.read(resetProvider).reset();
                     ref.read(accessibilityProvider).resetBrightness();
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
-                  child:  Text(loc.homeButton),
+                  child: Text(
+                    loc.homeButton,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ),
               const SizedBox(
                 width: AppSize.kmheight,
               ),
-              Expanded(
+              Flexible(
                 child: OutlinedButton(
                   onPressed: () {
                     ref.read(resetProvider).reset();
@@ -69,7 +74,11 @@ class ResultPageBottomCards extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: Text(loc.testAgainButton),
+                  child: Text(
+                    loc.testAgainButton,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ],

@@ -61,86 +61,87 @@ class PatientAssessmentReportPage extends ConsumerWidget {
               ReportPageHeader(
                 triageReportAndAssementPage: assessmentDetailsReport,
               ),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemCount: 3,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: (context, index) {
-                  var data = assessmentDetailsReport;
-                  return Container(
-                    padding: EdgeInsets.only(
-                      left: AppSize.width(context) * 0.03,
-                      top: AppSize.height(context) * 0.01,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: index == 0
-                          ? backColorMapper(data.questionResponseSeverity??Severity.LOW)
-                          : index == 1
-                              ? backColorMapper(data.observationSeverity??Severity.LOW)
-                              : backColorMapper(data.mediaSeverity??Severity.LOW),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: index == 0
-                                ? checkColorMapper(
-                                    data.questionResponseSeverity??Severity.LOW)
-                                : index == 1
-                                    ? checkColorMapper(
-                                        data.observationSeverity??Severity.LOW)
-                                    : checkColorMapper(data.mediaSeverity??Severity.LOW),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          index == 0
-                              ? loc.assessmentResultCardAssessmentQuestions
-                              : index == 1
-                                  ? loc.assessmentResultCardAcuityTest
-                                  : loc.assessmentResultCardEyeScan,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          loc.eyeAssessmentCompleted,
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
+              // GridView.builder(
+              //   shrinkWrap: true,
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   padding: EdgeInsets.zero,
+              //   itemCount: 3,
+              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 3,
+              //     childAspectRatio: 1,
+              //     crossAxisSpacing: 10,
+              //     mainAxisSpacing: 10,
+              //   ),
+              //   itemBuilder: (context, index) {
+              //     var data = assessmentDetailsReport;
+              //     return Container(
+              //       padding: EdgeInsets.only(
+              //         left: AppSize.width(context) * 0.03,
+              //         top: AppSize.height(context) * 0.01,
+              //       ),
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(8),
+              //         color: index == 0
+              //             ? backColorMapper(data.questionResponseSeverity??Severity.LOW)
+              //             : index == 1
+              //                 ? backColorMapper(data.observationSeverity??Severity.LOW)
+              //                 : backColorMapper(data.mediaSeverity??Severity.LOW),
+              //       ),
+              //       child: Column(
+              //         mainAxisSize: MainAxisSize.min,
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Container(
+              //             width: 20,
+              //             height: 20,
+              //             decoration: BoxDecoration(
+              //               shape: BoxShape.circle,
+              //               color: index == 0
+              //                   ? checkColorMapper(
+              //                       data.questionResponseSeverity??Severity.LOW)
+              //                   : index == 1
+              //                       ? checkColorMapper(
+              //                           data.observationSeverity??Severity.LOW)
+              //                       : checkColorMapper(data.mediaSeverity??Severity.LOW),
+              //             ),
+              //             child: const Center(
+              //               child: Icon(
+              //                 Icons.check,
+              //                 color: Colors.white,
+              //                 size: 15,
+              //               ),
+              //             ),
+              //           ),
+              //           const SizedBox(
+              //             height: 8,
+              //           ),
+              //           Text(
+              //             index == 0
+              //                 ? loc.assessmentResultCardAssessmentQuestions
+              //                 : index == 1
+              //                     ? loc.assessmentResultCardAcuityTest
+              //                     : loc.assessmentResultCardEyeScan,
+              //             style: applyRobotoFont(
+              //               fontSize: 14,
+              //               fontWeight: FontWeight.w600,
+              //             ),
+              //           ),
+              //           const SizedBox(
+              //             height: 8,
+              //           ),
+              //           Text(
+              //             loc.eyeAssessmentCompleted,
+              //             style: applyRobotoFont(
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.w400,
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // ),
+
               const SizedBox(
                 height: AppSize.kmheight,
               ),

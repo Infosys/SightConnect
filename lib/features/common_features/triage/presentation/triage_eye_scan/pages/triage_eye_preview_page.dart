@@ -36,22 +36,39 @@ class TriageEyePreviewPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).pop(null);
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppColor.red,
+                  Flexible(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pop(null);
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: AppColor.red,
+                      ),
+                      icon: const Icon(Icons.cancel, size: 22),
+                      label: Flexible(
+                        child: Text(
+                          loc.discardButton,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
-                    icon: const Icon(Icons.cancel, size: 22),
-                    label: Text(loc.discardButton),
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).pop(imageFile);
-                    },
-                    icon: const Icon(Icons.check_circle, size: 22),
-                    label: Text(loc.confirmButton),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pop(imageFile);
+                      },
+                      icon: const Icon(Icons.check_circle, size: 22),
+                      label: Flexible(
+                        child: Text(
+                          loc.confirmButton,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
