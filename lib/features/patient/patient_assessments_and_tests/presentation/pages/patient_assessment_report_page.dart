@@ -82,10 +82,10 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: index == 0
-                          ? backColorMapper(data.questionResponseSeverity!)
+                          ? backColorMapper(data.questionResponseSeverity??Severity.LOW)
                           : index == 1
-                              ? backColorMapper(data.observationSeverity!)
-                              : backColorMapper(data.mediaSeverity!),
+                              ? backColorMapper(data.observationSeverity??Severity.LOW)
+                              : backColorMapper(data.mediaSeverity??Severity.LOW),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -98,11 +98,11 @@ class PatientAssessmentReportPage extends ConsumerWidget {
                             shape: BoxShape.circle,
                             color: index == 0
                                 ? checkColorMapper(
-                                    data.questionResponseSeverity!)
+                                    data.questionResponseSeverity??Severity.LOW)
                                 : index == 1
                                     ? checkColorMapper(
-                                        data.observationSeverity!)
-                                    : checkColorMapper(data.mediaSeverity!),
+                                        data.observationSeverity??Severity.LOW)
+                                    : checkColorMapper(data.mediaSeverity??Severity.LOW),
                           ),
                           child: const Center(
                             child: Icon(
