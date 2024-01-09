@@ -23,6 +23,8 @@ class ProfileHeader extends ConsumerWidget {
       mon: patient.profile?.patient?.monthOfBirth ?? "",
       year: patient.profile?.patient?.yearOfBirth ?? "",
     );
+
+    var uniqueId = _eightDigit(patient.profile?.patient?.patientId);
     return Container(
       decoration: BoxDecoration(
         color: AppColor.white,
@@ -128,8 +130,7 @@ class ProfileHeader extends ConsumerWidget {
                                       const SizedBox(height: 8),
                                       Flexible(
                                         child: Text(
-                                          _eightDigit(patient
-                                              .profile?.patient?.patientId),
+                                          uniqueId,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyRobotoFont(
@@ -142,7 +143,7 @@ class ProfileHeader extends ConsumerWidget {
                                   ),
                                   QrImageView(
                                     padding: EdgeInsets.zero,
-                                    data: '1234567890',
+                                    data: uniqueId,
                                     version: QrVersions.auto,
                                     size: 60.0,
                                   ),
