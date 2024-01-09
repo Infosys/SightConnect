@@ -42,7 +42,14 @@ class PatientFamilyDetails extends StatelessWidget {
                     ),
                   ),
                 ).then(
-                  (value) => ref.invalidate(getPatientProfileProvider),
+                  (value) {
+                    if (value == null || value == false) {
+                      Fluttertoast.showToast(msg: "Family member not added");
+                    } else {
+                      Fluttertoast.showToast(msg: "Family member added");
+                    }
+                    ref.invalidate(getPatientProfileProvider);
+                  },
                 );
               } catch (e) {
                 logger.d({"error": e});

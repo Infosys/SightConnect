@@ -109,9 +109,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
     if (status == null || status == false) {
       // api failed or manual back press
+      Fluttertoast.showToast(msg: "Patient Registration Failed");
       await _showRegistrationDialog(role);
     } else {
       // patient register successfully
+      Fluttertoast.showToast(msg: "Patient Registered Successfully");
       await _profileVerification(role);
     }
   }

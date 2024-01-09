@@ -176,6 +176,7 @@ class LoginPage extends HookConsumerWidget {
                               isLoading.value = false;
                               showOtp.value = true;
                             } catch (e) {
+                              isLoading.value = false;
                               scaffold.showSnackBar(
                                 const SnackBar(
                                   content: Text(

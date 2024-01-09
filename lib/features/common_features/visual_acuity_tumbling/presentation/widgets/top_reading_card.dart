@@ -123,6 +123,13 @@ class TopReadingCard extends ConsumerWidget {
                       ],
                     ),
                     const SizedBox(height: AppSize.kmheight),
+                    Text(
+                      context.loc?.visualAcuityTestDistanceInstruction ?? "",
+                      style: applyRobotoFont(
+                        fontSize: 10,
+                        color: AppColor.grey,
+                      ),
+                    )
                   ],
                 ),
               ),

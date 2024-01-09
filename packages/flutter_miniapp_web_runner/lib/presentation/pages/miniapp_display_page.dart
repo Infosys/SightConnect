@@ -35,11 +35,12 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
 
   InAppWebViewController? webViewController;
   InAppWebViewSettings settings = InAppWebViewSettings(
-      isInspectable: kDebugMode,
-      mediaPlaybackRequiresUserGesture: false,
-      allowsInlineMediaPlayback: true,
-      iframeAllow: "camera; microphone",
-      iframeAllowFullscreen: true);
+    isInspectable: kDebugMode,
+    mediaPlaybackRequiresUserGesture: false,
+    allowsInlineMediaPlayback: true,
+    iframeAllow: "camera; microphone",
+    iframeAllowFullscreen: true,
+  );
 
   PullToRefreshController? pullToRefreshController;
   String url = "";
@@ -154,18 +155,8 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 },
                 shouldInterceptRequest: (controller, request) async {
                   logger.d("androidShouldInterceptRequest: ${request.url}");
-                  final hash = request.url.fragment.trim();
+                  final path = request.url.path.trim();
                   final host = request.url.host.trim();
-                  logger.d({
-                    "header": request.headers,
-                    "hash": hash,
-                    "host": host,
-                    "fragment": request.url.fragment,
-                    "path": request.url.path,
-                    "query": request.url.query,
-                    "scheme": request.url.scheme,
-                    "userInfo": request.url.userInfo,
-                  });
 
                   if (widget.token.isNotEmpty &&
                       host == "eyecare4all-dev.infosysapps.com") {
@@ -173,10 +164,10 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                         "Bearer ${widget.token}";
                   }
 
-                  if (hash == "failure") {
+                  if (path == "/failure") {
                     Navigator.of(context).pop(false);
                     Future.value(WebResourceResponse(data: Uint8List(0)));
-                  } else if (hash == "success") {
+                  } else if (path == "/success") {
                     Navigator.of(context).pop(true);
                     Future.value(WebResourceResponse(data: Uint8List(0)));
                   }
@@ -184,8 +175,10 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   return null;
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
-                  final hash = navigationAction.request.url?.fragment.trim();
-                  if (hash == "failure" || hash == "success") {
+                  final path = navigationAction.request.url?.path.trim();
+                  logger.d("shouldOverrideUrlLoading: $path");
+
+                  if (path == "/failure" || path == "/success") {
                     return NavigationActionPolicy.CANCEL;
                   } else {
                     return NavigationActionPolicy.ALLOW;

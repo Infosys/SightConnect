@@ -36,7 +36,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         name: displayName,
         displayName: displayName,
         sourceurl:
-            "https://eyecare4all-dev.infosysapps.com/patient-registration/",
+            "https://eyecare4all-dev.infosysapps.com/patient-registration-dev/",
       ),
     );
   }
