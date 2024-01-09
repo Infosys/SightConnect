@@ -98,7 +98,7 @@ class SwipeGestureCard extends HookConsumerWidget {
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(35)),
-          color: AppColor.black,
+          color: AppColor.scaffold,
         ),
         // gradient: LinearGradient(
         //   begin: Alignment.topCenter,
