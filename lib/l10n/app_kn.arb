@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "ಹತ್ತಿರದ ದೃಷ್ಟಿ ಕೇಂದ್ರಗಳು",
     "nearbyVisionCentersNotFound": "ದೃಷ್ಟಿ ಕೇಂದ್ರಗಳು ಕಂಡುಬರುವುದಿಲ್ಲ",
     "tollFreeNumber": "ಶುಲ್ಕ ಮುಕ್ತ ಸಂಖ್ಯೆ",
-    "inviteCardTitle": "ಇತರರನ್ನು ಸೇರಿಸಲು ಆಹ್ವಾನಿಸಿ",
-    "inviteCardDescription": "ಆನಂದದ ಬಳಿಕ ಬಳಸುವ ನೀವು ನಿಮ್ಮ ಕುಟುಂಬ ಮತ್ತು ಸ್ನೇಹಿತರನ್ನು ಆಹ್ವಾನಿಸಿ ಮತ್ತು {appName} ಅಪ್ಲಿಕೇಶನ್ ಬಳಸಲು ಹಣೆಕುರಿಯನ್ನು ಅನ್ವಯಿಸಿ.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "ಮೆನು",
     "appDrawerHome": "ಹೋಮ್",
     "appDrawerMyProfile": "ನನ್ನ ಪ್ರೊಫೈಲ್",
@@ -203,6 +194,17 @@
     "assessmentCardRoutineCheckUp": "ಸರಿಯಾದ ಪರಿಶ್ವೇಕ್ಷಣೆ",
     "assessmentCardEarlyCheckUp": "ಮುನ್ನಡೆದ ಪರಿಶೀಲನೆ",
     "testAgainButton" : "ಮತ್ತೆ ಪರೀಕ್ಷೆ ಮಾಡಿ",
-    "homeButton" : "ಹೋಮ್"
+    "homeButton" : "ಹೋಮ್",
+    "homeTriageCardTitle" : "ನಮ್ಮ ಕಣ್ಣುಗಳು ಅತ್ಯಂತ ಮೌಲ್ಯಯುತ ಆಸ್ತಿಗಳು.",
+    "homeTriageCardDescription" : "ಕಣ್ಣು ಸಮಸ್ಯೆಗಳನ್ನು ಹೆಚ್ಚಿನ ತೊಂದರೆಗಳಿಂದ ತಡೆಯಲು ಸಮಯದಲ್ಲಿ ಪರೀಕ್ಷಿಸಿ.",
+    "homeTriageCardTest" : "ಕಣ್ಣು ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ",
+
+    "homeHelplineCardDescrition" : "ಅಚಾನಕ ದೃಷ್ಟಿ ಕೊನೆಗೆಯುವ ಸಂದರ್ಭದಲ್ಲಿ, ಈ ಆಪಾತಕಾಲೀನ ಹೆಲ್ಪ್‌ಲೈನ್ ಗೆ ಕಾಲ್ ಮಾಡಿ",
+
+    "inviteCardTitle" : "ಇತರರನ್ನು ಆಹ್ವಾನಿಸಿ",
+    "inviteCardDescription" : "5 ಜನ ಸ್ನೇಹಿತರನ್ನು ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರನ್ನು ಆಹ್ವಾನಿಸಿ, ಅವರು ತಮ್ಮ ಕಣ್ಣುಗಳನ್ನುಮೂಲೆಕೆಳಗೆ ಟೆಸ್ಟ್ ಮಾಡಿ ಮತ್ತು ಭವಿಷ್ಯದಲ್ಲಿ ಕಣ್ಣು ಸಮಸ್ಯೆಗಳನ್ನು ತಡೆಗಟ್ಟುವಂತೆ ಮಾಡಿಕೊಳ್ಳಿ.",
+    "inviteCardInvitation" : "ಈಗ ಆಹ್ವಾನಿಸಿ",
+
+    "partnerCardTitle" : "ಭಾಗಿತವಾದ"
 
 }

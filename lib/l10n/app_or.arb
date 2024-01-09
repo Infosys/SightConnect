@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "ନିକଟବର୍ତ୍ତୀ ଦୃଷ୍ଟି କେନ୍ଦ୍ରଗୁଡ଼ିକ",
     "nearbyVisionCentersNotFound": "କୌଣସି ଦୃଷ୍ଟି କେନ୍ଦ୍ର ମିଳିନାହିଁ",
     "tollFreeNumber": "ଟୋଲ୍ ଫ୍ରି ନମ୍ବର",
-    "inviteCardTitle": "ଯୋଗଦେବା ପାଇଁ ଅନ୍ଯ଼ମାନଙ୍କୁ ନିମନ୍ତ୍ରଣ କରନ୍ତୁ",
-    "inviteCardDescription": "ଜଣେ ଆନନ୍ଦିତ ବ୍ଯ଼ବହାରକାରୀ ଭାବେ, ଆପଣ ନିଜ ପରିବାର ଏବଂ ବନ୍ଧୁବାନ୍ଧବଙ୍କୁ {appName} ଆପରେ ଯୋଗଦେବା ଏବଂ ଏହାର ଲାଭ ବିଷଯ଼ରେ ଜାଣିବା ପାଇଁ ନିମନ୍ତ୍ରଣ କରିପାରିବେ।",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "ସୂଚୀ",
     "appDrawerHome": "ଘର.",
     "appDrawerMyProfile": "ମୋ ପ୍ରୋଫାଇଲ",
@@ -203,5 +194,16 @@
     "assessmentCardRoutineCheckUp": "ନିଯୁକ୍ତିମତ ଚେକ୍ ଆପ",
     "assessmentCardEarlyCheckUp": "ପୂର୍ବଦର୍ଶନ",
     "testAgainButton" : "ପୁନଃପରୀକ୍ଷା କରନ୍ତୁ",
-    "homeButton" : "ହୋମ୍"  
+    "homeButton" : "ହୋମ୍",
+    "homeTriageCardTitle": "ଆମର ଚକ୍ଷୁ ସବୁଥିବା ମୂଲ୍ୟବାନ ସ୍ୱତ୍ବ ।",
+    "homeTriageCardDescription": "ଚକ୍ଷୁ ପ୍ରସ୍ତୁତ ହେବା ପୂର୍ବରୁ ସମୟରେ ପରୀକ୍ଷା କରନ୍ତୁ ଯାହା ଚକ୍ଷୁ ମୁଖ୍ୟ ବିରୋଧଗ୍ରାସି ରୋକିବା ପାଇଁ ।",
+    "homeTriageCardTest": "ଚକ୍ଷୁ ପରୀକ୍ଷା ଶୁରୁ କରନ୍ତୁ",
+
+    "homeHelplineCardDescrition": "ଅସ୍ପଷ୍ଟ ଦୃଷ୍ଟି ହାନିରେ, ଏହା ଆପତ୍ତି ହେଲାଇନରେ ଏହି ଆପାତକାଲୀରେ କଲ୍ କରନ୍ତୁ",
+
+    "inviteCardTitle": "ଅନ୍ୟାୟିତ କରନ୍ତୁ",
+    "inviteCardDescription": "5 ବନ୍ଧୁ ଏବଂ ପରିବାରର ସଦସ୍ୟଙ୍କୁ ଆମର ଚକ୍ଷୁ ମୂଲ୍ୟାଂକନ ପାଇଁ ଆମନ୍ତ୍ରିତ କରନ୍ତୁ ଏବଂ ଭବିଷ୍ୟତର ଚକ୍ଷୁ ସମସ୍ୟାରୁ ବଚାଇବାରେ ସହାୟ୍ୟ କରନ୍ତୁ ।",
+    "inviteCardInvitation": "ଆମନ୍ତ୍ରଣ କରନ",
+    "partner" : "ସହଭାଗୀ"
+
 }

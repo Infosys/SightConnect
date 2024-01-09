@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "സമീപത്തുള്ള ദർശന കേന്ദ്രങ്ങൾ",
     "nearbyVisionCentersNotFound": "കാഴ്ച കേന്ദ്രങ്ങളൊന്നും കണ്ടെത്തിയില്ല",
     "tollFreeNumber": "ടോൾ ഫ്രീ നമ്പർ",
-    "inviteCardTitle": "മറ്റുള്ളവരെ ചേരാൻ ക്ഷണിക്കുക",
-    "inviteCardDescription": "സന്തോഷവാനായ ഒരു ഉപയോക്താവെന്ന നിലയിൽ, നിങ്ങളുടെ കുടുംബത്തെയും സുഹൃത്തുക്കളെയും {appName} ആപ്ലിക്കേഷനിൽ ചേരാനും അതിന്റെ പ്രയോജനങ്ങൾ പര്യവേക്ഷണം ചെയ്യാനും നിങ്ങൾക്ക് ക്ഷണിക്കാം.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "മെനു",
     "appDrawerHome": "വീട്",
     "appDrawerMyProfile": "എൻ്റെ പ്രൊഫൈൽ",
@@ -203,5 +194,16 @@
     "assessmentCardRoutineCheckUp": "നിയമിത പരിശീലനം",
     "assessmentCardEarlyCheckUp": "പ്രാഥമിക പരിശീലനം",
     "testAgainButton" : "വീണ്ടും പരീക്ഷ ചെയ്യുക",
-    "homeButton" : "ഹോം" 
+    "homeButton" : "ഹോം",
+    "homeTriageCardTitle" : "ഞങ്ങളുടെ കണ്ണുകൾ ഏറ്റവും മൂല്യപ്രാധാന്യമുള്ള ആസ്തികൾ ആണ്.",
+    "homeTriageCardDescription" : "കണ്ണ് പ്രശ്നങ്ങൾ മുമ്പായി സമയത്ത് പരീക്ഷിക്കുകയാണ് നടത്തുന്നത്.",
+    "homeTriageCardTest" : "കണ്ണ് പരീക്ഷ ആരംഭിക്കുക",
+
+    "homeHelplineCardDescrition" : "ഏറ്റവും അപ്രതീക്ഷിത ദൃഷ്ടി ഇഴഞ്ഞ സമയത്ത്, ഈ ആപത്തെത്തുവണമെന്ന് ഈ എയ്ഡ് ഹെൽപ്പ്ലൈൻ അയയ്ക്കുക",
+
+    "inviteCardTitle" : "മറ്റുള്ളവരെ അമന്യമാക്കുക",
+    "inviteCardDescription" : "5 ആപ്രവാസികൾക്കും കുടുംബസദസ്യര്‍ക്കും അമന്യമാക്കുക, അവരുടെ കണ്ണുകളെ മൂല്യാംകനം ചെയ്യുകയും ഭവിഷ്യത്തിൽ കണ്ണ് പ്രശ്നങ്ങൾ പിന്തുടർന്ന് തടയുകയും ചെയ്യുക.",
+    "inviteCardInvitation" : "ഇപ്പോൾ അമന്യമാക്കുക",
+
+    "partnerCardTitle" : "പങ്കിടുത്തിയത്"
 }

@@ -64,7 +64,7 @@ class AssessmentResultCards extends StatelessWidget {
                     ? loc.assessmentResultCardAssessmentQuestions
                     : index == 1
                         ? loc.assessmentResultCardAcuityTest
-                        : loc.assessmentResultCardAcuityTest,
+                        : loc.assessmentResultCardEyeScan,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

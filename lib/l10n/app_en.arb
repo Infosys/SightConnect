@@ -95,16 +95,6 @@
 
     "tollFreeNumber": "Toll Free Number",
 
-    "inviteCardTitle":"Invite Others to Join",
-    "inviteCardDescription": "As a delighted user, you could invite your family and friends to join and explore the benefits of the {appName} app.",
-    "@inviteCardDescription":{
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
-
     "appDrawerTitle": "Menu",
     "appDrawerHome":"Home",
     "appDrawerMyProfile":"My Profile",
@@ -244,7 +234,25 @@
     "assessmentCardRoutineCheckUp": "Routine Checkup",
     "assessmentCardEarlyCheckUp": "Early Checkup",
     "testAgainButton" : "Test Again",
-    "homeButton" : "Home"
+    "homeButton" : "Home",
+
+    "homeTriageCardTitle" : "Our eyes are the most valuable assets.",
+    "homeTriageCardDescription" : "Get them tested on time to prevent eye problems.",
+    "homeTriageCardTest" : "Start Eye Test",
+
+    "homeHelplineCardDescrition" : "In the event of a sudden vision loss, call this emergency helpline",
+
+    "inviteCardTitle" : "Invite Others",
+    "inviteCardDescription" : "Invite 5 friends and family members so that they can get their eyes assessed and prevent eye issues in the future.",
+    "inviteCardInvitation" : "Invite Now",
+
+    "partnerCardTitle" : "Partner"
+
+    
+
+    
+
+
 
   }
 
