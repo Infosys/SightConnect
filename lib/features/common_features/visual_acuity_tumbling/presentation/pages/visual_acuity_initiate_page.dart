@@ -26,7 +26,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
     var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
     return PopScope(
       canPop: false,
-      onPopInvoked: (value) {
+      onPopInvoked: (value) async {
         if (value) {
           return;
         }

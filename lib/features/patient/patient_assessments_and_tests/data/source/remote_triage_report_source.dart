@@ -28,8 +28,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     final endpoint =
         "/services/triage/api/triage/triage-report?patient-id=$patientId";
 
-    try { 
-      
+    try {
       final response = await dio.get(endpoint);
 
       if (response.statusCode! >= 200 && response.statusCode! < 210) {

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
@@ -11,6 +12,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../triage/presentation/providers/triage_stepper_provider.dart';
@@ -83,9 +85,24 @@ class VisualAcuityDialog {
                           );
                         } else {
                           logger.d("Update Mode");
-                          ref
-                              .watch(tumblingTestProvider)
+
+                          final result = await ref
+                              .read(tumblingTestProvider)
                               .updateVisualAcuityTumblingResponse();
+
+                          result.fold(
+                            (failure) {
+                              Fluttertoast.showToast(
+                                  msg:
+                                      "Failed to update observation at this moment");
+                            },
+                            (result) {
+                              Fluttertoast.showToast(
+                                  msg: "Observation Updated");
+                            },
+                          );
+                          ref.invalidate(tumblingTestProvider);
+                          navigator.pop();
                           navigator.pop();
                           navigator.pop();
                           navigator.pop();

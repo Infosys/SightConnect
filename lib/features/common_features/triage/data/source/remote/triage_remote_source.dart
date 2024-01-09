@@ -8,10 +8,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
-
-
-
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriagePostModel> saveTriage({required TriagePostModel triage});
@@ -22,7 +18,7 @@ abstract class TriageRemoteSource {
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
-   GetTriageModelNotifier getTriageModelNotifier;
+  GetTriageModelNotifier getTriageModelNotifier;
   TriageRemoteSourceImpl(this.dio, this.getTriageModelNotifier);
 
   // @override
@@ -116,12 +112,9 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       });
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-
-
           getTriageModelNotifier.triagePostModel =
               TriagePostModel.fromJson(response.data);
 
-              
           return getTriageModelNotifier._triagePostModel;
         } else {
           throw ServerException();
@@ -156,7 +149,6 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          
           return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
@@ -173,20 +165,14 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
 var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
-    ref.watch(dioProvider),
-    ref.watch(getTriageModelProvider)
-  ),
+      ref.watch(dioProvider), ref.watch(getTriageModelProvider)),
 );
-
-
-
 
 var getTriageModelProvider = ChangeNotifierProvider<GetTriageModelNotifier>(
   (ref) => GetTriageModelNotifier(),
 );
 
 class GetTriageModelNotifier extends ChangeNotifier {
-
   TriagePostModel _triagePostModel = const TriagePostModel();
 
   TriagePostModel get triagePostModel => _triagePostModel;
