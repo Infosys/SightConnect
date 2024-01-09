@@ -129,74 +129,72 @@ class ProfileHeader extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(height: AppSize.height(context) * 0.02),
-            Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.kspadding - 2),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.primary.withOpacity(0.2),
-                          ),
-                          child: const Icon(
-                            Icons.call_outlined,
-                            size: 16,
-                            color: AppColor.primary,
-                          ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding - 2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.primary.withOpacity(0.2),
                         ),
-                        const SizedBox(width: AppSize.ksheight),
-                        Text(
-                          patient.profile?.patient?.phoneNumber ?? "",
+                        child: const Icon(
+                          Icons.call_outlined,
+                          size: 16,
+                          color: AppColor.primary,
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.ksheight),
+                      Text(
+                        patient.profile?.patient?.phoneNumber ?? "",
+                        softWrap: true,
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: patient.profile?.patient?.email != null,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.kspadding - 2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.primary.withOpacity(0.2),
+                        ),
+                        child: const Icon(
+                          Icons.email_outlined,
+                          size: 16,
+                          color: AppColor.primary,
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.ksheight),
+                      Flexible(
+                        child: Text(
+                          patient.profile?.patient?.email ?? "",
                           softWrap: true,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Visibility(
-                    visible: patient.profile?.patient?.email != null,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.kspadding - 2),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.primary.withOpacity(0.2),
-                          ),
-                          child: const Icon(
-                            Icons.email_outlined,
-                            size: 16,
-                            color: AppColor.primary,
-                          ),
-                        ),
-                        const SizedBox(width: AppSize.ksheight),
-                        Flexible(
-                          child: Text(
-                            patient.profile?.patient?.email ?? "",
-                            softWrap: true,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             )
           ],
         ),

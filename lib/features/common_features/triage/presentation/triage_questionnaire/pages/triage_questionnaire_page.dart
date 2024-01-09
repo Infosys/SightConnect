@@ -81,8 +81,21 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            actions: const [
-              TextScalePopupMenu(),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const TextScalePopupMenu();
+                    },
+                  );
+                },
+                icon: SvgPicture.asset(
+                  "assets/drawer_icons/accessibility.svg",
+                  height: 22,
+                ),
+              ),
             ],
             //  Row(
             //   mainAxisSize: MainAxisSize.min,

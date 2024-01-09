@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -34,7 +35,7 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "In the event of a sudden vision loss, call this emergency helpline  ${context.loc!.tollFreeNumber}",
+                "In the event of a sudden vision loss, call this emergency helpline  ${AppText.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.white,

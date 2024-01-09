@@ -31,7 +31,7 @@ class InviteCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           SizedBox(
-            height: AppSize.height(context) * 0.18,
+            height: AppSize.height(context) * 0.2,
             child: Stack(
               fit: StackFit.expand,
               children: [

@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
@@ -96,8 +97,21 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    actions: const [
-                      TextScalePopupMenu(),
+                    actions: [
+                      IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const TextScalePopupMenu();
+                            },
+                          );
+                        },
+                        icon: SvgPicture.asset(
+                          "assets/drawer_icons/accessibility.svg",
+                          height: 22,
+                        ),
+                      ),
                     ],
 
                     //  Row(

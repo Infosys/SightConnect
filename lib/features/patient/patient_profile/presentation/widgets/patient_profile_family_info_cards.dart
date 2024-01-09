@@ -84,14 +84,22 @@ class PatientFamilyDetails extends StatelessWidget {
           ),
         ),
         Container(
-          width: 60,
           padding: const EdgeInsets.only(right: AppSize.kmpadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               patient.profile?.patient?.profilePhoto != null
-                  ? AppNetworkImage(
-                      imageUrl: patient.profile!.patient!.profilePhoto!,
+                  ? Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColor.blue,
+                          width: 3,
+                        ),
+                      ),
+                      child: AppNetworkImage(
+                        imageUrl: patient.profile!.patient!.profilePhoto!,
+                      ),
                     )
                   : AppNameAvatar(
                       name: patient.profile!.patient!.name!,
