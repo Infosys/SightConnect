@@ -36,7 +36,8 @@ class TopReadingCard extends ConsumerWidget {
       ),
       child: Container(
         height: 200,
-        padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding, vertical: AppSize.kmpadding),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSize.kspadding, vertical: AppSize.kmpadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -103,9 +104,11 @@ class TopReadingCard extends ConsumerWidget {
                           children: [
                             Transform.translate(
                               offset: const Offset(0, 3),
-                              child: Icon(Icons.camera_alt_outlined,
-                                  size: AppSize.width(context) * 0.06,
-                                  color: AppColor.black.withOpacity(0.8),),
+                              child: Icon(
+                                Icons.camera_alt_outlined,
+                                size: AppSize.width(context) * 0.06,
+                                color: AppColor.black.withOpacity(0.8),
+                              ),
                             ),
                             SizedBox(width: AppSize.width(context) * 0.03),
                             Text(
@@ -122,7 +125,7 @@ class TopReadingCard extends ConsumerWidget {
                     const SizedBox(height: AppSize.kmheight),
                     Center(
                       child: Text(
-                        loc.visualAcuityDistanceInstruction,
+                        "",
                         style: applyFiraSansFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,

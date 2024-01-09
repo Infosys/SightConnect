@@ -10,10 +10,9 @@
                 "type": "String"
             }
         }
-        
     },
-
-
+ 
+ 
     "questionnaireTitle": "Eye Assessment Questions",
     "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
     "visualAcuityTitle" : "Visual Acuity Test",
@@ -60,7 +59,7 @@
     "noButton": "No",
     "exitButton": "Exit",
     "okButton":"Okay",
-
+ 
     "knowMoreButton": "Know More",
     "seeAllButton": "See All",
     "tryAgainButton": "Try Again",
@@ -216,6 +215,5 @@
     "profilePaeCheckReports" : "Check your reports",
     "bottomNavItemEyeTest" : "Eye Test",
     "bottomNavItemAppointment" : "Appointments"
-
+ 
 }
-
