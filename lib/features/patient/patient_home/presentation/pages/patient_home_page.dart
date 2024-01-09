@@ -5,14 +5,11 @@ import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/partner_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_recent_services_card_list.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/triage_test_card.dart';
-import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';

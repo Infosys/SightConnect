@@ -1,7 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -14,15 +11,12 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashbo
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import '../../../../core/constants/app_images.dart';
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {

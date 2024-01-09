@@ -1,16 +1,5 @@
 import 'dart:ui';
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
-import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
-import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
