@@ -20,14 +20,14 @@ class TopReadingCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(tumblingTestProvider);
     var currentLevel = model.level;
+    final loc = context.loc!;
 
     final physicalities = Millimeters.of(context);
     final mm = physicalities.mm;
     var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
     // TODO: THIS IS FOR TESTING, Need to remove
-    final optoTypeSize = currentLevel!.size * 10  * 160 * 0.03937;
-
+    final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;
 
     return Container(
       decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class TopReadingCard extends ConsumerWidget {
       ),
       child: Container(
         height: 200,
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding, vertical: AppSize.kmpadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -68,36 +68,66 @@ class TopReadingCard extends ConsumerWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      currentLevel.snellerFraction,
-                      style: applyFiraSansFont(
-                        color: AppColor.grey,
-                      ),
-                    ),
-                    Consumer(
-                      builder: (context, ref, child) {
-                        var model = ref.watch(tumblingTestProvider);
-                        return Text(
-                          model.currentEye == Eye.left
-                              ? context.loc!.leftEyeString
-                              : (model.currentEye == Eye.right
-                                  ? context.loc!.rightEyeString
-                                  : context.loc!.bothEyeString),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          currentLevel.snellerFraction,
                           style: applyFiraSansFont(
-                            fontSize: 18,
+                            color: AppColor.grey,
                           ),
-                        );
-                      },
+                        ),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            var model = ref.watch(tumblingTestProvider);
+                            return Text(
+                              model.currentEye == Eye.left
+                                  ? context.loc!.leftEyeString
+                                  : (model.currentEye == Eye.right
+                                      ? context.loc!.rightEyeString
+                                      : context.loc!.bothEyeString),
+                              style: applyFiraSansFont(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            );
+                          },
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Transform.translate(
+                              offset: const Offset(0, 3),
+                              child: Icon(Icons.camera_alt_outlined,
+                                  size: AppSize.width(context) * 0.06,
+                                  color: AppColor.black.withOpacity(0.8),),
+                            ),
+                            SizedBox(width: AppSize.width(context) * 0.03),
+                            Text(
+                              "40 cms",
+                              style: applyRobotoFont(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.green),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Text(
-                      "40 cms",
-                      style: applyFiraSansFont(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.green),
+                    const SizedBox(height: AppSize.kmheight),
+                    Center(
+                      child: Text(
+                        loc.visualAcuityDistanceInstruction,
+                        style: applyFiraSansFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                            color: AppColor.grey),
+                      ),
                     ),
                   ],
                 ),

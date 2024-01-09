@@ -152,6 +152,7 @@
     "eyeAssessmentPopUpYesButton": "Yes",
     "eyeAssessmentPopUpNoButton": "No",
 
+    "visualAcuityDistanceInstruction" : "Position the camera 40cm away from the eye.",
     "visualAcuityTestInstructionOne": "Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result",
     "visualAcuityTestInstructionTwo": "Make sure you are holding the device at the eye level. If you wear glasses or contact lenses, keep them on",
     "visualAcuityTestInstructionThree": "Position yourself 40 cm from the screen. Distance will be shown in the test screen.",
@@ -193,6 +194,7 @@
     "eyeCaptureTriageSavedLocally":"Triage Saved Locally",
 
     "visualAcuityTestResults":"Visual Acuity Test Results",
+
 
     "assessmentResultPageMoreDetailsText": "Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.",
     "assessmentReportButton": "Eye Assessment Report",
