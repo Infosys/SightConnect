@@ -32,6 +32,18 @@ jobs:
 
       - name: Build APPBUNDLE
         run: flutter build appbundle --release --build-number ${{ github.run_number }}
+      - name: Build Android APK
+        run: flutter build apk --release --build-number ${{ github.run_number }}
+
+      - name: upload artifact to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: stg-radar-mobility/eyecare4all
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          group: Collaborators
+          file: ./build/app/outputs/flutter-apk/app-release.apk
+          notifyTesters: true
+          debug: false
 
       - name: Upload AAB
         uses: actions/upload-artifact@v2
