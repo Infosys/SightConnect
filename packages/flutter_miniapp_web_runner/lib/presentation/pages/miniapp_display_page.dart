@@ -174,7 +174,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   }
 
                   if (hash == "failure") {
-                    // Navigator.of(context).pop(true);
+                    Navigator.of(context).pop(false);
                     Future.value(WebResourceResponse(data: Uint8List(0)));
                   } else if (hash == "success") {
                     Navigator.of(context).pop(true);

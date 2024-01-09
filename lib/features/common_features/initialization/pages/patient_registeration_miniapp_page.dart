@@ -16,9 +16,12 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if true returned then api call was successful
+    // if false returned then api call was unsuccessful
+    // if null returned then user cancelled the process
     return MiniAppDisplayPage(
       onBack: () {
-        Navigator.of(context).pop(false);
+        Navigator.of(context).pop(null);
       },
       token: PersistentAuthStateService.authState.accessToken ?? "",
       injectionModel: MiniAppInjectionModel(
