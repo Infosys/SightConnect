@@ -8,10 +8,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
-
-
-
 abstract class TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage();
   Future<TriagePostModel> saveTriage({required TriagePostModel triage});
@@ -22,12 +18,12 @@ abstract class TriageRemoteSource {
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
-   GetTriageModelNotifier getTriageModelNotifier;
+  GetTriageModelNotifier getTriageModelNotifier;
   TriageRemoteSourceImpl(this.dio, this.getTriageModelNotifier);
 
   // @override
   // Future<TriageResponseDto> saveTriageVT(TriageResponseModel triage) async {
-  //   const endPoint = "/services/triage/api/triage-report";
+  //   const endPoint = "/services/kms-triage/api/triage-report";
 
   //   try {
   //     var response = await dio.post(endPoint, data: triage.toJson());
@@ -102,7 +98,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<TriagePostModel> saveTriage({
     required TriagePostModel triage,
   }) async {
-    const endpoint = "/services/triage/api/triage-report";
+    const endpoint = "/services/kms-triage/api/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(
@@ -116,12 +112,9 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       });
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-
-
           getTriageModelNotifier.triagePostModel =
               TriagePostModel.fromJson(response.data);
 
-              
           return getTriageModelNotifier._triagePostModel;
         } else {
           throw ServerException();
@@ -149,14 +142,13 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //   throw ServerException();
     // }
     try {
-      var endpoint = "/services/triage/api/triage-report/$id";
+      var endpoint = "/services/kms-triage/api/triage-report/$id";
 
       logger.d({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(endpoint, data: triage.toJson());
 
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          
           return TriagePostModel.fromJson(response.data);
         } else {
           throw ServerException();
@@ -173,20 +165,14 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
 var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
-    ref.watch(dioProvider),
-    ref.watch(getTriageModelProvider)
-  ),
+      ref.watch(dioProvider), ref.watch(getTriageModelProvider)),
 );
-
-
-
 
 var getTriageModelProvider = ChangeNotifierProvider<GetTriageModelNotifier>(
   (ref) => GetTriageModelNotifier(),
 );
 
 class GetTriageModelNotifier extends ChangeNotifier {
-
   TriagePostModel _triagePostModel = const TriagePostModel();
 
   TriagePostModel get triagePostModel => _triagePostModel;
