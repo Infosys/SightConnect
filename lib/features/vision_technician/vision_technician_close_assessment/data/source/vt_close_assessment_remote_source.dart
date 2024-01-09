@@ -21,7 +21,7 @@ class VTCloseAssessmentRemoteSourceImpl
   @override
   void submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) async {
     String endPoint =
-        '/services/kms-triage/api/triage/${patientDetails.encounterId}/close';
+        '/services/triage/api/triage/${patientDetails.encounterId}/close';
 
     logger.d(endPoint);
     logger.d(patientDetails.toJson().toString());

@@ -27,7 +27,7 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
 
     try {
       String endPoint =
-          "/services/kms-triage/api/triage-report/$reportId/care-plan";
+          "/services/triage/api/triage-report/$reportId/care-plan";
       var response = await dio.post(endPoint, data: carePlan.toJson());
 
       logger.d("this is the response ${response.toString()}");
@@ -44,7 +44,7 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
     return const CarePlanModel();
 
     // try {
-    //   String endPoint = "/services/kms-triage/api/triage-report/$reportId/care-plan";
+    //   String endPoint = "/services/triage/api/triage-report/$reportId/care-plan";
 
     //   var response = await dio.post(
     //     endPoint,

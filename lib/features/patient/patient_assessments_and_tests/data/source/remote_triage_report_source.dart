@@ -26,7 +26,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportsByPatientId(
       int patientId) async {
     final endpoint =
-        "/services/kms-triage/api/triage/triage-report?patient-id=$patientId";
+        "/services/triage/api/triage/triage-report?patient-id=$patientId";
 
     try {
       final response = await dio.get(endpoint);
@@ -50,7 +50,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   @override
   Future<TriageDetailedReportModel> getTriageReportByReportId(
       int reportId) async {
-    final endpoint = "/services/kms-triage/api/triage-report/$reportId/details";
+    final endpoint = "/services/triage/api/triage-report/$reportId/details";
 
     final response = await dio.get(endpoint);
 
