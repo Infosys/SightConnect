@@ -462,56 +462,80 @@ class _PatientTriageEyeCapturingPageState
 
   _showServerExceptionDialog(BuildContext context, Failure failure) {
     final loc = context.loc!;
-    showDialog(
-        context: context,
-        builder: (context) {
-          return BlurDialogBox(
-            title: Text(
-              loc.eyeCaptureTriageSavedLocally,
-              style: applyRobotoFont(
-                color: AppColor.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            content: Text(
-              failure.errorMessage,
-              style: applyRobotoFont(
-                color: AppColor.black,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  if (context.mounted && _controller.value.isInitialized) {
-                    _controller.dispose();
-                  }
-
-                  ref.read(resetProvider).reset();
-                  ref.read(accessibilityProvider).resetBrightness();
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  //this will naviagte to local page for future ref
-                  // Navigator.of(context).pushReplacement(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => TriageResultPage(
-                  //       triageResult: failure.data as TriagePostModel,
-                  //     ),
-                  //   ),
-                  // );
-                },
-                child: Text(
-                  loc.okButton,
-                  style: applyRobotoFont(
-                    color: AppColor.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
+    showModalBottomSheet(
+      isDismissible: false,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      builder: (context) {
+        return Container(
+          margin: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                loc.eyeCaptureTriageSavedLocally,
+                style: applyRobotoFont(
+                  color: AppColor.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
+              const SizedBox(height: 16),
+              Text(
+                failure.errorMessage,
+                style: applyRobotoFont(
+                  color: AppColor.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () async {
+                      if (context.mounted && _controller.value.isInitialized) {
+                        _controller.dispose();
+                      }
+
+                      ref.read(resetProvider).reset();
+                      ref.read(accessibilityProvider).resetBrightness();
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      //this will naviagte to local page for future ref
+                      // Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => TriageResultPage(
+                      //       triageResult: failure.data as TriagePostModel,
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: Text(
+                      loc.okButton,
+                      style: applyRobotoFont(
+                        color: AppColor.primary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
