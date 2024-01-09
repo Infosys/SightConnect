@@ -15,125 +15,149 @@ class PatientFamilyDetails extends StatelessWidget {
   const PatientFamilyDetails({
     super.key,
     required this.relations,
+    required this.patient,
   });
   final List<RelatedPartyModel> relations;
+  final PatientResponseModel patient;
 
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return ListTile(
-      visualDensity: VisualDensity.compact,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  loc.myConnectionsTitle,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          customBorder: const CircleBorder(),
+          onTap: () {
+            try {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PatientRegistrationMiniappPage(
+                    actionType: MiniAppActionType.ADD_MEMBER,
+                    displayName: loc.myConnectionsAddMember,
                   ),
                 ),
+              );
+            } catch (e) {
+              logger.d({"error": e});
+              Fluttertoast.showToast(
+                msg: loc.myConnectionsServiceNotAvailable,
+              );
+            }
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColor.blue,
+                    width: 1,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  size: 20,
+                  color: AppColor.blue,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () {
-                      try {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                PatientRegistrationMiniappPage(
-                              actionType: MiniAppActionType.ADD_MEMBER,
-                              displayName: loc.myConnectionsAddMember,
-                            ),
-                          ),
-                        );
-                      } catch (e) {
-                        logger.d({"error": e});
-                        Fluttertoast.showToast(
-                          msg: loc.myConnectionsServiceNotAvailable,
-                        );
-                      }
-                    },
-                    child: const Icon(
-                      Icons.add,
-                      size: 20,
-                      color: AppColor.blue,
-                    ),
-                  ),
-                  const SizedBox(width: AppSize.ksheight),
-                  Text(
-                    loc.myConnectionsAddMember,
-                    style: applyFiraSansFont(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: AppColor.blue,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 4),
+              Text(
+                loc.myConnectionsAddMember,
+                style: applyRobotoFont(
+                  fontSize: 10,
+                  color: AppColor.blue,
+                ),
               ),
             ],
           ),
-          const SizedBox(
-            height: AppSize.ksheight,
+        ),
+        const SizedBox(
+          height: 40,
+          child: VerticalDivider(
+            thickness: 2,
+            width: AppSize.klelevation,
+            color: AppColor.lightGrey,
           ),
-          ...relations
-              .map(
-                (data) => ListTile(
-                  visualDensity: const VisualDensity(),
-                  contentPadding: const EdgeInsets.all(0),
-                  title: Row(
-                    children: [
-                      data.profilePicture != null
-                          ? AppNetworkImage(imageUrl: data.profilePicture!)
-                          : AppNameAvatar(name: data.name!),
-                      const SizedBox(
-                        width: AppSize.ksheight,
-                      ),
-                      Flexible(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              data.name ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              data.parentPatientId != null
-                                  ? data.relation.toString().split(".").last
-                                  : "Self, ${data.age} years",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+        ),
+        Container(
+          width: 60,
+          padding: const EdgeInsets.only(right: AppSize.kmpadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              patient.profile?.patient?.profilePhoto != null
+                  ? AppNetworkImage(
+                      imageUrl: patient.profile!.patient!.profilePhoto!,
+                    )
+                  : AppNameAvatar(
+                      name: patient.profile!.patient!.name!,
+                      radius: 20,
+                    ),
+              const SizedBox(height: 4),
+              Text(
+                _formateFirstName(patient.profile!.patient!.name!),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyRobotoFont(
+                  fontSize: 10,
                 ),
               )
-              .toList(),
-          const SizedBox(height: 10),
-        ],
-      ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ...relations
+                    .map(
+                      (data) => Container(
+                        width: 60,
+                        padding:
+                            const EdgeInsets.only(right: AppSize.kmpadding),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            data.profilePicture != null
+                                ? AppNetworkImage(
+                                    imageUrl: data.profilePicture!,
+                                  )
+                                : AppNameAvatar(
+                                    name: data.name!,
+                                    radius: 20,
+                                  ),
+                            const SizedBox(height: 4),
+                            Text(
+                              _formateFirstName(data.name!),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyRobotoFont(
+                                fontSize: 10,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
+  }
+
+  _formateFirstName(String name) {
+    if (name.isEmpty) {
+      return "";
+    } else {
+      return name.split(" ")[0].capitalize();
+    }
   }
 }

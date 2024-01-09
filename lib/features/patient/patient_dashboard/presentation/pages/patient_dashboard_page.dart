@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/features/patient/patient_services/presentation/
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
+import 'package:eye_care_for_all/shared/widgets/appointment_booking_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -90,6 +91,13 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                     case 0:
                       break;
                     case 1:
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const AppointmentBooking();
+                          },
+                        ),
+                      );
                       break;
 
                     case 2:
