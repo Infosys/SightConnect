@@ -1,0 +1,11 @@
+<svg id="app_bg" data-name="app bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="412" height="892" viewBox="0 0 412 892">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_15117" data-name="Rectangle 15117" width="412" height="892" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="bg" clip-path="url(#clip-path)">
+    <rect id="Rectangle_15116" data-name="Rectangle 15116" width="412" height="892" fill="#efefef"/>
+    <path id="Path_39630" data-name="Path 39630" d="M-30.411-9.866C141.217-10.618,76.834,25.24,187.041,71.851s136.516.929,194.549,100.591v629.68C281.966,792.368,278.867,747.833,177,747.833S38.893,757.4-24.319,698.7C-24.319,510.116-30.411,149.672-30.411-9.866Z" transform="translate(30.411 9.878)" fill="#f5f5f5"/>
+  </g>
+</svg>

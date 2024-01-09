@@ -160,7 +160,7 @@ class _PatientTriageEyeCapturingPageState
               ),
             ),
             title: Text(
-              loc.eyeScanTitle,
+              "${loc.eyeScanTitle} - ${model.currentEye == TriageEyeType.RIGHT ? loc.rightEyeString : loc.leftEyeString}",
               style: applyFiraSansFont(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

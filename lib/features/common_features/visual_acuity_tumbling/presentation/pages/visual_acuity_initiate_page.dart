@@ -154,7 +154,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TopReadingCard(),
-                  SizedBox(height: AppSize.klpadding),
+                  // SizedBox(height: AppSize.kmpadding),
                   /*         AcuityDistanceTile(
                     distanceInCms: 40,
                   ), */

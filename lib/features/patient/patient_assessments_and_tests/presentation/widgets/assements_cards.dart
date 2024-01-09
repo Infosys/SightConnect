@@ -96,7 +96,7 @@ class AssessmentCards extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          currentData.triageResultType ?? "",
+                          loc.eyeAssessmentTitle,
                           style: applyRobotoFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,

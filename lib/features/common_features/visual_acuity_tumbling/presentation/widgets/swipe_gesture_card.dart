@@ -7,7 +7,9 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../../core/constants/app_size.dart';
 import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 import 'dart:math';
@@ -94,38 +96,52 @@ class SwipeGestureCard extends HookConsumerWidget {
         );
       },
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(35)),
-          color: AppColor.scaffold,
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.black.withOpacity(0.1), // Shadow color at the top
-              Colors.white.withOpacity(0.05),
-              Colors.transparent, // Shadow color with less opacity
-              AppColor.scaffold,
-              AppColor.scaffold, // Original color of the container
-            ],
-            stops: const [
-              0.0, // Shadow starts at the top of the container
-              0.1,
-              1, // Less opaque shadow starts at 20% of the container
-              1,
-              0.1, // Original color starts from 10% of the container
-            ],
-          ),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(35)),
+          color: AppColor.black,
         ),
+        // gradient: LinearGradient(
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        //   colors: [
+        //     Colors.black.withOpacity(0.1), // Shadow color at the top
+        //     Colors.white.withOpacity(0.05),
+        //     Colors.transparent, // Shadow color with less opacity
+        //     AppColor.scaffold,
+        //     AppColor.scaffold, // Original color of the container
+        //   ],
+        //   stops: const [
+        //     0.0, // Shadow starts at the top of the container
+        //     0.1,
+        //     1, // Less opaque shadow starts at 20% of the container
+        //     1,
+        //     0.1, // Original color starts from 10% of the container
+        //   ],
+        // ),
+
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(35)),
-          child: Center(
-            child: Text(
-              loc.swipeGestureCardText,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.grey,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+          child: Stack(
+            clipBehavior: Clip.hardEdge,
+            children: [
+              SvgPicture.asset(
+                "assets/images/app_bg.svg",
+                fit: BoxFit.fill,
               ),
-            ),
+              Center(
+                child: Padding(
+                  padding:  EdgeInsets.only(top: AppSize.height(context)*0.3),
+                  child: Text(
+                    loc.swipeGestureCardText,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
