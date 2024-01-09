@@ -154,31 +154,35 @@ class AssessmentCards extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
-                      onPressed: () async {
-                        try {
-                          final navigator = Navigator.of(context);
-                          final reports = await ref
-                              .read(patientAssessmentAndTestProvider)
-                              .getTriageDetailedReport(
-                                  currentData.triageResultID);
-                          navigator.push(
-                            MaterialPageRoute(
-                              builder: (context) => PatientAssessmentReportPage(
-                                assessmentDetailsReport: reports,
+                    Flexible(
+                      child: TextButton(
+                        onPressed: () async {
+                          try {
+                            final navigator = Navigator.of(context);
+                            final reports = await ref
+                                .read(patientAssessmentAndTestProvider)
+                                .getTriageDetailedReport(
+                                    currentData.triageResultID);
+                            navigator.push(
+                              MaterialPageRoute(
+                                builder: (context) => PatientAssessmentReportPage(
+                                  assessmentDetailsReport: reports,
+                                ),
                               ),
-                            ),
-                          );
-                        } catch (e) {
-                          Fluttertoast.showToast(msg: "$e");
-                        }
-                      },
-                      child: Text(
-                        loc.viewReportButton,
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.primary,
+                            );
+                          } catch (e) {
+                            Fluttertoast.showToast(msg: "$e");
+                          }
+                        },
+                        child: Text(
+                          loc.viewReportButton,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.primary,
+                          ),
                         ),
                       ),
                     ),
@@ -200,57 +204,61 @@ class AssessmentCards extends ConsumerWidget {
                                 strokeWidth: 2,
                               ),
                             )
-                          : TextButton.icon(
-                              onPressed: currentData.isUpdateEnabled ?? false
-                                  ? () async {
-                                      ref
-                                              .read(
-                                                  patientAssessmentAndTestProvider)
-                                              .currentTriageReportId =
-                                          currentData.triageResultID;
-                                      final result = await ref
-                                          .read(
-                                              patientAssessmentAndTestProvider)
-                                          .updateTriage(
-                                              currentData.triageResultID);
-                                      logger.d({result});
-                                      if (result.isEmpty) {
-                                        Fluttertoast.showToast(
-                                            msg: "No data found");
-                                        return;
+                          : Flexible(
+                            child: TextButton.icon(
+                                onPressed: currentData.isUpdateEnabled ?? false
+                                    ? () async {
+                                        ref
+                                                .read(
+                                                    patientAssessmentAndTestProvider)
+                                                .currentTriageReportId =
+                                            currentData.triageResultID;
+                                        final result = await ref
+                                            .read(
+                                                patientAssessmentAndTestProvider)
+                                            .updateTriage(
+                                                currentData.triageResultID);
+                                        logger.d({result});
+                                        if (result.isEmpty) {
+                                          Fluttertoast.showToast(
+                                              msg: "No data found");
+                                          return;
+                                        }
+                                        if (context.mounted) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return UpdateTriageAlertBox(
+                                                result: result,
+                                                diagnosticReportID:
+                                                    currentData.triageResultID,
+                                              );
+                                            },
+                                          );
+                                        }
                                       }
-                                      if (context.mounted) {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return UpdateTriageAlertBox(
-                                              result: result,
-                                              diagnosticReportID:
-                                                  currentData.triageResultID,
-                                            );
-                                          },
-                                        );
-                                      }
-                                    }
-                                  : null,
-                              label: Text(
-                                loc.updateButton,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                    : null,
+                                label: Text(
+                                  loc.updateButton,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: currentData.isUpdateEnabled ?? false
+                                        ? AppColor.primary
+                                        : AppColor.grey,
+                                  ),
+                                ),
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 16,
                                   color: currentData.isUpdateEnabled ?? false
                                       ? AppColor.primary
                                       : AppColor.grey,
                                 ),
                               ),
-                              icon: Icon(
-                                Icons.edit,
-                                size: 16,
-                                color: currentData.isUpdateEnabled ?? false
-                                    ? AppColor.primary
-                                    : AppColor.grey,
-                              ),
-                            ),
+                          ),
                     ),
 
                     // InkWell(

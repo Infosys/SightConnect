@@ -80,11 +80,13 @@
     "tollFreeNumber": "ଟୋଲ୍ ଫ୍ରି ନମ୍ବର",
     "appDrawerTitle": "ସୂଚୀ",
     "appDrawerHome": "ଘର.",
+    "appDrawerLanguageSelection": "ଭାଷା ଚୟନ",
+    "appDrawerAccessibility" : "ଅଭିଗମ୍ୟତା ସେଟିଂସମୂହ |",
     "appDrawerMyProfile": "ମୋ ପ୍ରୋଫାଇଲ",
     "appDrawerAssessmentsAndTests": "ମୂଲ୍ଯ଼ାଙ୍କନ ଏବଂ ପରୀକ୍ଷଣ",
-    "appDrawerScanner": "ସ୍କାନର",
+    "appDrawerScanner": "QR କୋଡ୍ ସ୍କାନର୍ |",
     "appDrawerAboutUs": "ଆମ ବିଷଯ଼ରେ",
-    "appDrawerPrivacyPolicy": "ଗୋପନୀଯ଼ତା ନୀତି",
+    "appDrawerPrivacyPolicy": "ଗୋପନୀୟତା ଏବଂ ତଥ୍ୟ ନୀତି |",
     "appDrawerHelpAndSupport": "ସହାଯ଼ତା ଏବଂ ସହାଯ଼ତା",
     "appDrawerSignOut": "ସାଇନ୍ ଆଉଟ୍ କରନ୍ତୁ",
     "aboutUsDescription": "Sightconnect ଏକ ବ୍ୟବହାରକାରୀ ବନ୍ଧୁତାମୂଳକ ନେତ୍ର ଯତ୍ନ ଆପ୍ ଅଟେ, ଯାହା ସ୍ୱ ମୂଲ୍ୟାଙ୍କନ ଏବଂ କଲ୍ ଉପରେ ପରାମର୍ଶ ସହିତ ସହାୟତା କରେ।\n\nଆମର ମିଶନର ହୃଦୟରେ ଏକ ପ୍ରତିବଦ୍ଧତା ଅଛି ସମସ୍ତଙ୍କ ପାଇଁ ନେତ୍ର ଯତ୍ନ ପ୍ରାପ୍ୟ କରିବା। ଏହି ଆପ୍ ସମସ୍ତ ଜୀବନର ପଥର ଉପଭୋଗ୍ତାମାନେ ସମାବେଶୀ ଏବଂ ସହଜସୁଲଭ ଭାବେ ଡିଜାଇନ କରାଯାଇଛି, ଯାହା ସେମାନଙ୍କର ବୟସ, ପ୍ରଯୁକ୍ତିଗତ ପୃଷ୍ଠଭୂମି, ଏବଂ ସାମାଜିକ କିମ୍ବା ଆର୍ଥିକ ପୃଷ୍ଠଭୂମି ନିର୍ବିଶେଷରେ। ଆପ୍ ଏବଂ ତାହାର ସମସ୍ତ ସାମଗ୍ରୀ ଇଂରାଜୀ ଏବଂ ଅନ୍ୟାନ୍ୟ ସ୍ଥାନୀୟ ଭାଷାରେ ଉପଲବ୍ଧ। ଏହା ଉପଭୋଗ୍ତାମାନଙ୍କୁ ସ୍ୱ ନେତ୍ର ମୂଲ୍ୟାଙ୍କନ କରିବାରେ ଏବଂ ସମୟମତେ ଚିକିତ୍ସା ପରାମର୍ଶ ପାଇବାରେ ସହାୟତା କରେ। ଆପ୍ ନବୀନତମ ପ୍ରଯୁକ୍ତି ଓ ଟୁଲସ୍ ବ୍ୟବହାର କରି ଆମର ଉପଭୋଗ୍ତାମାନଙ୍କୁ ବୈଯକ୍ତିକୃତ ନେତ୍ର ଯତ୍ନ ସମାଧାନ ପ୍ରଦାନ କରେ। ଏହା ଉପଭୋଗ୍ତାମାନଙ୍କର ଜୀବନ ସୁଗମ କରିବାପାଇଁ ବିଭିନ୍ନ ଧରଣର ବୈଶିଷ୍ଟ୍ୟ ସହିତ ଆସେ।",
@@ -163,7 +165,6 @@
     "notificationsTitle": "ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ",
     "notificationsNotAvailable": "କୌଣସି ବିଜ୍ଞପ୍ତି ନାହିଁ",
     "servicesPatientCare": "ରୋଗୀ ଯତ୍ନ",
-
     "reportAssessmentId": "ମୂଲ୍ୟାଙ୍କନ ଆଇଡି",
     "reportDateAndTime": "ତାରିଖ ଓ ସମୟ",
     "reportSeverityAbnormal": "ଅସାଧାରଣ ପରୀକ୍ଷା",
@@ -181,7 +182,6 @@
     "myProfileDistrict": "ଜିଲ୍ଲା",
     "myProfileState": "ରାଜ୍ୟ",
     "myProfilePinCode": "ପିନ୍ କୋଡ୍",
-
     "submitButton" : "ଜମା କରନ୍ତୁ",
     "swipeGestureError" : "ଭୁଲ ସ୍ୱାଇପ୍! ଦୟାକରି ପୁନଃପ୍ରୟାସ କରନ୍ତୁ।",
     "swipeGestureCardText" : "ସଂକେତର ଦିଗକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ",
@@ -198,12 +198,17 @@
     "homeTriageCardTitle": "ଆମର ଚକ୍ଷୁ ସବୁଥିବା ମୂଲ୍ୟବାନ ସ୍ୱତ୍ବ ।",
     "homeTriageCardDescription": "ଚକ୍ଷୁ ପ୍ରସ୍ତୁତ ହେବା ପୂର୍ବରୁ ସମୟରେ ପରୀକ୍ଷା କରନ୍ତୁ ଯାହା ଚକ୍ଷୁ ମୁଖ୍ୟ ବିରୋଧଗ୍ରାସି ରୋକିବା ପାଇଁ ।",
     "homeTriageCardTest": "ଚକ୍ଷୁ ପରୀକ୍ଷା ଶୁରୁ କରନ୍ତୁ",
-
     "homeHelplineCardDescrition": "ଅସ୍ପଷ୍ଟ ଦୃଷ୍ଟି ହାନିରେ, ଏହା ଆପତ୍ତି ହେଲାଇନରେ ଏହି ଆପାତକାଲୀରେ କଲ୍ କରନ୍ତୁ",
-
     "inviteCardTitle": "ଅନ୍ୟାୟିତ କରନ୍ତୁ",
     "inviteCardDescription": "5 ବନ୍ଧୁ ଏବଂ ପରିବାରର ସଦସ୍ୟଙ୍କୁ ଆମର ଚକ୍ଷୁ ମୂଲ୍ୟାଂକନ ପାଇଁ ଆମନ୍ତ୍ରିତ କରନ୍ତୁ ଏବଂ ଭବିଷ୍ୟତର ଚକ୍ଷୁ ସମସ୍ୟାରୁ ବଚାଇବାରେ ସହାୟ୍ୟ କରନ୍ତୁ ।",
     "inviteCardInvitation": "ଆମନ୍ତ୍ରଣ କରନ",
-    "partner" : "ସହଭାଗୀ"
+    "partnerCardTitle" : "ସହଭାଗୀ",
+    "languageSelection" : "ଭାଷା ଚୟନ କରନ୍ତୁ |",
+    "profileTitle" : "ପ୍ରୋଫାଇଲ୍",
+    "eyeAssessmentEnterLabel" : "ଏଠାରେ ପ୍ରବେଶ କରନ୍ତୁ |",
+    "profilePageAddressDetails" : "ଠିକଣା ବିବରଣୀ",
+    "profilePaeCheckReports" : "ଆପଣଙ୍କର ରିପୋର୍ଟଗୁଡିକ ଯାଞ୍ଚ କରନ୍ତୁ",
+    "bottomNavItemEyeTest" : "ଚକ୍ଷୁ ପରୀକ୍ଷା",
+    "bottomNavItemAppointment" : "ନିଯୁକ୍ତି"
 
 }

@@ -80,11 +80,13 @@
     "tollFreeNumber": "టోల్ ఫ్రీ నంబర్",
     "appDrawerTitle": "మెనూ",
     "appDrawerHome": "హోమ్",
+    "appDrawerLanguageSelection": "భాష ఎంపిక",
+    "appDrawerAccessibility" : "యాక్సెసిబిలిటీ సెట్టింగ్‌లు",
     "appDrawerMyProfile": "నా ప్రొఫైల్",
     "appDrawerAssessmentsAndTests": "అంచనాలు మరియు పరీక్షలు",
-    "appDrawerScanner": "స్కానర్",
+    "appDrawerScanner": "QR కోడ్ స్కానర్",
     "appDrawerAboutUs": "మా గురించి",
-    "appDrawerPrivacyPolicy": "గోప్యతా విధానం",
+    "appDrawerPrivacyPolicy": "గోప్యత & డేటా విధానం",
     "appDrawerHelpAndSupport": "సహాయం మరియు మద్దతు",
     "appDrawerSignOut": "సైన్ అవుట్ చేయండి",
     "aboutUsDescription": "Sightconnect అనేది వినియోగదారు-స్నేహపూర్వక కంటి సంరక్షణ అనువర్తనం, ఇది కాల్ ద్వారా స్వీయ-అంచనా మరియు సంప్రదింపులకు సహాయపడుతుంది. \n\n మా లక్ష్యం యొక్క గుండెలో కంటి సంరక్షణను అందరికీ అందుబాటులో ఉంచడానికి నిబద్ధత ఉంది. ఈ అనువర్తనం వారి వయస్సు, సాంకేతిక నేపథ్యం మరియు సామాజిక లేదా ఆర్థిక నేపథ్యంతో సంబంధం లేకుండా అన్ని వర్గాల వినియోగదారులను కలుపుకొని, అందుబాటులో ఉండేలా రూపొందించబడింది. అనువర్తనం మరియు దాని కంటెంట్ ఆంగ్లం మరియు ఇతర స్థానిక భాషలలో అందుబాటులో ఉంచబడ్డాయి. ఇది వినియోగదారులకు వారి కళ్ళను స్వీయ-అంచనా వేయడానికి మరియు సకాలంలో చికిత్స సలహాలను పొందడానికి సహాయపడుతుంది. మా వినియోగదారులకు వ్యక్తిగతీకరించిన కంటి సంరక్షణ పరిష్కారాలను అందించడానికి అనువర్తనం సరికొత్త సాంకేతిక పరిజ్ఞానాన్ని మరియు సాధనాలను ఉపయోగిస్తుంది. ఇది వారి జీవితాన్ని సులభతరం చేయడానికి వివిధ రకాల లక్షణాలతో వస్తుంది.",
@@ -163,8 +165,6 @@
     "notificationsTitle": "నోటిఫికేషన్లు",
     "notificationsNotAvailable": "నోటిఫికేషన్లు లేవు",
     "servicesPatientCare": "రోగి సంరక్షణ",
-
-
     "reportAssessmentId": "మూలనివేదిక ఐడి",
     "reportDateAndTime": "తేదీ మరియు సమయం",
     "reportSeverityAbnormal": "అతివారంగ పరిశీలన",
@@ -174,9 +174,6 @@
     "reportTumblingTitle":"ఏకుపు పరీక్ష - టంబ్లింగ్ E",
     "rightCornea":"కుడి కర్ణం",
     "leftCornea":"ఎడమ కర్ణం",
-
-    
-
     "myProfileGeneralInfo": "సాధారణ సమాచారం",
     "myProfileAge": "వయస్సు",
     "myProfileAddress": "చిరునామా",
@@ -185,7 +182,6 @@
     "myProfileDistrict": "జిల్లా",
     "myProfileState": "రాష్ట్రం",
     "myProfilePinCode": "పిన్ కోడ్",
-
     "submitButton" : "సమర్పించు",
     "swipeGestureError" : "తప్పు స్వైప్! దయచేసి మళ్లీ ప్రయాసం చేయండి.",
     "swipeGestureCardText" : "సంకేతం దిశగా స్వైప్ చేయండి",
@@ -202,12 +198,16 @@
     "homeTriageCardTitle" : "మా కళ్ళు అత్యంత అమూల్య సంపదలు.",
     "homeTriageCardDescription" : "కళ్లను సమయంలో పరీక్షించి కళ సమస్యలను తడుముగా తగ్గించేందుకు మీరు పరీక్షించండి.",
     "homeTriageCardTest" : "కళ పరీక్ష ప్రారంభించండి",
-
     "homeHelplineCardDescrition" : "అకస్మాతీకరణ దృష్టి నష్టం కాలమోలకంగా, ఈ అత్యావశ్యక హెల్ప్‌లైన్‌ను కాల్ చేయండి",
-
     "inviteCardTitle" : "ఇతరులను ఆహ్వానించండి",
     "inviteCardDescription" : "5 స్నేహితులను మరియు కుటుంబ సభ్యులను ఆమంత్రించండి, వారు మరియు భవిష్యత్తులో ఉన్న కళ సమస్యలను తడుముగా తగ్గించడానికి అవకాశం కల్పంచండి.",
     "inviteCardInvitation" : "ఇప్పుడు ఆహ్వానించండి",
-
-    "partnerCardTitle" : "భాగస్వామి"
+    "partnerCardTitle" : "భాగస్వామి",
+    "languageSelection" : "భాషను ఎంచుకోండి",
+    "profileTitle" : "Pప్రొఫైల్",
+    "eyeAssessmentEnterLabel" : "ఇక్కడ నమోదు చేయండి",
+    "profilePageAddressDetails" : "చిరునామా వివరాలు",
+    "profilePaeCheckReports" : "మీ నివేదికలను తనిఖీ చేయండి",
+    "bottomNavItemEyeTest" : "కంటి పరీక్ష",
+    "bottomNavItemAppointment" : "నియామకాలు"
 }
