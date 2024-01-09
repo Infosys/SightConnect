@@ -215,6 +215,9 @@
   
   
     "bottomNavItemEyeTest" : "Eye Test",
-    "bottomNavItemAppointment" : "Appointments"
+    "bottomNavItemAppointment" : "Appointments",
  
+    "somethingWentWrong" : "Something went wrong.",
+    "triageUpdatedSuccessfully" : "Triage Updated successfully.",
+    "noPreviewAvailable" : "No Preview Available"
 }

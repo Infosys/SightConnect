@@ -34,7 +34,7 @@ class _UpdateTriageEyeCapturingPageState
   late CameraController _controller;
   ResolutionPreset defaultResolution = ResolutionPreset.max;
   bool isLoading = false;
-
+  
   @override
   void initState() {
     super.initState();
@@ -87,7 +87,7 @@ class _UpdateTriageEyeCapturingPageState
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
-    ref.watch(updateTriageEyeScanProvider);
+   ref.read(updateTriageEyeScanProvider);
 
     if (!_controller.value.isInitialized) {
       return const Scaffold(
@@ -136,6 +136,7 @@ class _UpdateTriageEyeCapturingPageState
                 aspectRatio: 1 / _controller.value.aspectRatio,
                 child: CameraPreview(_controller),
               ),
+              
               Positioned(
                 left: 0,
                 right: 0,
@@ -153,6 +154,15 @@ class _UpdateTriageEyeCapturingPageState
       );
     }
   }
+
+  //  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
+  //   return switch (eye) {
+  //     TriageEyeType.LEFT => context.loc!.leftEyeString,
+  //     TriageEyeType.RIGHT => context.loc!.rightEyeString,
+  //     TriageEyeType.BOTH => context.loc!.bothEyeString,
+  //     _ => "",
+  //   };
+  // }
 
   Future<bool> _validateImage(XFile? image) async {
     XFile? verifiedImage = await Navigator.of(context).push(

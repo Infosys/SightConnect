@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,8 +42,8 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
                 children: [
                   Text(
                     currentEye == TriageEyeType.RIGHT
-                        ? "Capture Right Eye"
-                        : "Capture Left Eye",
+                        ? context.loc!.captureRightEyeString
+                        : context.loc!.captureLeftEyeString,
                     style: const TextStyle(color: AppColor.white),
                     textAlign: TextAlign.center,
                   ),
