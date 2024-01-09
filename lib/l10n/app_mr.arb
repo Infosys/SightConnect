@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "जवळील दृष्टी केंद्रे",
     "nearbyVisionCentersNotFound": "कोणतीही दृष्टी केंद्रे सापडली नाहीत",
     "tollFreeNumber": "टोल फ्री क्रमांक",
-    "inviteCardTitle": "इतरांना सहभागी होण्यासाठी आमंत्रित करा",
-    "inviteCardDescription": "{appName} अ‍ॅपचा उपयोग करत असलेल्या आनंदित वापरकर्त्या म्हणून, आपण आपल्या कुटुंब आणि मित्रांना या अ‍ॅपमध्ये सहभागी होण्यासाठी आमंत्रित करू शकता आणि {appName} अ‍ॅपचे फायदे शोधू शकता.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "मेनू",
     "appDrawerHome": "मुख्यपृष्ठ",
     "appDrawerMyProfile": "माझे प्रोफाइल",
@@ -203,5 +194,16 @@
    "assessmentCardRoutineCheckUp": "नियमित तपासणी",
    "assessmentCardEarlyCheckUp": "पूर्व तपासणी",
    "testAgainButton" : "पुन्हा परीक्षा करा",
-   "homeButton" : "होम"
+   "homeButton" : "होम",
+   "homeTriageCardTitle" : "आपले डोळे सर्वात मूल्यवान संपत्ती आहेत.",
+   "homeTriageCardDescription" : "डोळे समस्या टाळण्यासाठी त्यांची वेळेवर तपासा करा.",
+   "homeTriageCardTest" : "डोळे चाचणी सुरू करा",
+
+   "homeHelplineCardDescrition" : "अचानक दृष्टी हानीच्या प्रकरणात, आपल्याला या आपातकालीन हेल्पलाईनवर कॉल करा",
+
+   "inviteCardTitle" : "इतरांना आमंत्रित करा",
+   "inviteCardDescription" : "5 मित्रांना आणि कुटुंबातील सदस्यांना आमंत्रित करा, त्यांना त्यांची डोळे मूल्यांकन करण्यास सहाय्य करा आणि भविष्यातील डोळ्यांच्या समस्यांना टाळा.",
+   "inviteCardInvitation" : "आत्ताच आमंत्रित करा",
+
+   "partnerCardTitle" : "साथीदार"
 }

@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "ওচৰৰ দৃষ্টি কেন্দ্ৰসমূহ",
     "nearbyVisionCentersNotFound": "কোনো দৃষ্টি কেন্দ্ৰ পোৱা নগ \"ল",
     "tollFreeNumber": "টোল ফ্ৰী নম্বৰ",
-    "inviteCardTitle": "আনকো যোগদান কৰিবলৈ আমন্ত্ৰণ জনোৱা",
-    "inviteCardDescription": "এগৰাকী আনন্দিত ব্যৱহাৰকাৰী হিচাপে, আপুনি আপোনাৰ পৰিয়াল আৰু বন্ধুবৰ্গক যোগদান কৰিবলৈ আৰু {appName} এপৰ সুবিধাসমূহ অন্বেষণ কৰিবলৈ আমন্ত্ৰণ জনাব পাৰে।",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "মেনু",
     "appDrawerHome": "ঘৰ।",
     "appDrawerMyProfile": "মোৰ প্ৰফাইল",
@@ -203,5 +194,13 @@
     "assessmentCardRoutineCheckUp": "ৰুটিন চেকআপ",
     "assessmentCardEarlyCheckUp": "আগতীয়াকৈ পৰীক্ষা কৰা",
     "testAgainButton" : "আবার পরীক্ষা কৰক",
-    "homeButton" : "হোম"
+    "homeButton" : "হোম",
+    "homeTriageCardTitle" : "আমাৰ চক্ষুসমূহ শ্ৰেষ্ঠ সম্পদ।",
+    "homeTriageCardDescription" : "চক্ষু সমস্যা পূৰ্ববর্তী কৰিবলৈ সময়ত তালক পাওক।",
+    "homeTriageCardTest" : "চক্ষু পৰীক্ষা আৰম্ভ কৰক",
+    "homeHelplineCardDescrition" : "অচানক চক্ষু হাৰে যাবলৈ, এই জরুৰী সহায়তা হেলপলাইনটো কল কৰক",
+    "inviteCardTitle" : "অন্যকল কৰক",
+    "inviteCardDescription" : "5টা বন্ধু আৰু পৰিবারজনক আমন্ত্ৰণ কৰক যাতে তাঁদেৰ চক্ষু মূল্যায়ন কৰিব পাৰে আৰু ভবিষ্যতত চক্ষু সমস্যা পূৰ্ববর্তী কৰিব পাৰে।",
+    "inviteCardInvitation" : "এতিয়াই আমন্ত্ৰণ কৰক",
+    "partnerCardTitle" : "সহযোগীত"
 }

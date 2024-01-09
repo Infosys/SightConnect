@@ -23,8 +23,7 @@ class InviteCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Invite Others",
-            // loc.inviteCardTitle,
+            loc.inviteCardTitle,
             style: applyFiraSansFont(
               fontSize: 18,
             ),
@@ -54,7 +53,7 @@ class InviteCard extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          "Invite 5 friends and family members so that they can get their eyes assessed and prevent eye issues in the future.",
+                          loc.inviteCardDescription,
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
@@ -66,9 +65,9 @@ class InviteCard extends StatelessWidget {
                       const SizedBox(height: 8),
                       InkWell(
                         onTap: onPressed,
-                        child: const Row(
+                        child: Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               backgroundColor: AppColor.white,
                               maxRadius: 14,
                               child: Icon(
@@ -77,12 +76,12 @@ class InviteCard extends StatelessWidget {
                                 size: 16,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 4,
                             ),
                             Text(
-                              "Invite Now",
-                              style: TextStyle(
+                              loc.inviteCardInvitation,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.white,

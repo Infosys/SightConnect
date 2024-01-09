@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "નજીકના દ્રષ્ટિ કેન્દ્રો",
     "nearbyVisionCentersNotFound": "કોઈ દ્રષ્ટિ કેન્દ્રો મળ્યાં નથી",
     "tollFreeNumber": "ટોલ ફ્રી નંબર",
-    "inviteCardTitle": "અન્ય લોકોને જોડાવા માટે આમંત્રણ આપો",
-    "inviteCardDescription": "એક ખુશખુશાલ વપરાશકર્તા તરીકે, તમે તમારા પરિવાર અને મિત્રોને જોડાવા અને {appName} એપ્લિકેશનના ફાયદાઓ શોધવા માટે આમંત્રિત કરી શકો છો.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "મેનુ",
     "appDrawerHome": "ઘરગથ્થુ",
     "appDrawerMyProfile": "મારી પ્રોફાઇલ",
@@ -203,5 +194,13 @@
     "assessmentCardRoutineCheckUp": "રૂટિન ચેકઅપ",
     "assessmentCardEarlyCheckUp": "પ્રારંભિક તપાસ",
     "testAgainButton" : "ફરીથી ટેસ્ટ કરો",
-    "homeButton" : "હોમ"
+    "homeButton" : "હોમ",
+    "homeTriageCardTitle" : "આપણા આંખો સૌથી મૂલ્યવાન સંપત્તિ છે.",
+    "homeTriageCardDescription" : "આંખના સમસ્યાઓને રોકવા સમયે તેની ટેસ્ટિંગ કરો.",
+    "homeTriageCardTest" : "આંખ ટેસ્ટ શરૂ કરો",
+    "homeHelplineCardDescrition" : "અચાનક દૃષ્ટિ નુકશાન થતાં, આ આપત્તિ હેલ્પલાઇનને કોલ કરો",
+    "inviteCardTitle" : "અન્યોને આમંત્રિત કરો",
+    "inviteCardDescription" : "5 મિત્રો અને પરિવારના સભ્યોને આમંત્રિત કરો જેથી તેઓ તેમની આંખ મૂલ્યાંકન કરી શકે અને ભવિષ્યમાં આંખની સમસ્યાઓને રોકી શકે.",
+    "inviteCardInvitation" : "હવે આમંત્રિત કરો",
+    "partnerCardTitle" : "ભાગીદારી"
 }

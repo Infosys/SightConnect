@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "அருகிலுள்ள பார்வை மையங்கள்",
     "nearbyVisionCentersNotFound": "பார்வை மையங்கள் கிடைக்கவில்லை",
     "tollFreeNumber": "கட்டணமில்லா எண்",
-    "inviteCardTitle": "மற்றவர்களை சேர்க்க அழைக்கவும்",
-    "inviteCardDescription": "ஒரு மகிழ்ச்சியான பயனராக, நீங்கள் உங்கள் குடும்பத்தினரையும் நண்பர்களையும் {appName} செயலியில் சேர்ந்து பயன்களை ஆராய்ந்து கண்டுகொள்ள அழைக்கலாம்.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "மெனு",
     "appDrawerHome": "முகப்பு",
     "appDrawerMyProfile": "எனது சுயவிவரம்",
@@ -203,5 +194,15 @@
     "assessmentCardRoutineCheckUp": "வழக்கமான சேர்க்கை",
     "assessmentCardEarlyCheckUp": "முன்னோக்கி சேர்க்கை",
     "testAgainButton" : "மீண்டும் சோதிக்கவும்",
-    "homeButton" : "முகப்பு"
+    "homeButton" : "முகப்பு",
+    "homeTriageCardTitle": "எங்கள் கண்கள் மிகவும் மதிப்பிடப்படுகின்றன.",
+    "homeTriageCardDescription": "கண்களை விடுத்துத் தீர்வுகளை முன்னேற்றியும் கைகொள்ளுங்கள்.",
+    "homeTriageCardTest": "கண் சோதனையைத் தொடங்குங்கள்",
+
+    "homeHelplineCardDescrition": "எப்போதும் விழிப்புணர்வு இல்லாத நேரத்தில், இது அவசர ஹெல்ப்லைனை அழைக்கவும்",
+
+    "inviteCardTitle": "மற்றவர்களை அழைக்கவும்",
+    "inviteCardDescription": "5 நண்பர்களையும் குடும்ப உறவினர்களையும் அழைக்கவும், அவர்கள் தங்களது கண்களை மதிப்பிட மற்றும் விடுத்துக் கொள்ள முடியும்.",
+    "inviteCardInvitation": "இப்போது அழைக்கவும்",
+    "partner" : "கூட்டாளி"
 }

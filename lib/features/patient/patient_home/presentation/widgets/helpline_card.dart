@@ -16,6 +16,7 @@ class HelplineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSize.kmpadding,
@@ -35,7 +36,7 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "In the event of a sudden vision loss, call this emergency helpline  ${AppText.tollFreeNumber}",
+                "${loc.homeHelplineCardDescrition} ${AppText.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.white,
