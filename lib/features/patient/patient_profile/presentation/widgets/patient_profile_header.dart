@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -19,9 +20,9 @@ class ProfileHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var dob = _formateAge(
-      day: patient.profile?.patient?.dayOfBirth ?? "",
-      mon: patient.profile?.patient?.monthOfBirth ?? "",
-      year: patient.profile?.patient?.yearOfBirth ?? "",
+      day: patient.profile?.patient?.dayOfBirth,
+      mon: patient.profile?.patient?.monthOfBirth,
+      year: patient.profile?.patient?.yearOfBirth,
     );
 
     var uniqueId = _eightDigit(patient.profile?.patient?.patientId);
@@ -234,14 +235,15 @@ class ProfileHeader extends ConsumerWidget {
   }
 
   String _formateAge({
-    required String day,
-    required String mon,
-    required String year,
+    required String? day,
+    required String? mon,
+    required String? year,
   }) {
     try {
-      var dob = DateTime.parse("$year-$mon-$day");
-      var age = DateTime.now().difference(dob).inDays ~/ 365;
-      return "$age years";
+      if (day == null || mon == null || year == null) {
+        return "-";
+      }
+      return "$day/$mon/$year";
     } catch (e) {
       return "-";
     }

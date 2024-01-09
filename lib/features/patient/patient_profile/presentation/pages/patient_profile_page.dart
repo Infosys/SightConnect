@@ -25,7 +25,6 @@ class PatientProfilePage extends ConsumerWidget {
       appBar: CustomAppbar(
         iconTheme: const IconThemeData(),
         title: Text(
-          // loc.appDrawerMyProfile,
           loc.profileTitle,
           style: applyFiraSansFont(
             fontWeight: FontWeight.w500,
@@ -61,7 +60,10 @@ class PatientProfilePage extends ConsumerWidget {
   }
 
   Widget _content(
-      BuildContext context, PatientResponseModel patient, WidgetRef ref) {
+    BuildContext context,
+    PatientResponseModel patient,
+    WidgetRef ref,
+  ) {
     final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(

@@ -191,19 +191,24 @@ class _PatientTriageEyeCapturingPageState
             isLoading: isLoading,
             progressMessage: _progressMessage,
             child: Stack(
+              alignment: Alignment.center,
               children: [
                 Positioned.fill(
                   child: CameraPreview(_controller),
                 ),
                 Positioned(
                   top: 100,
-                  left: AppSize.width(context) * 0.45,
-                  child: Text(
-                    _eyeLocalization(model.currentEye, context),
-                    style: applyRobotoFont(
-                      fontSize: 16,
-                      color: AppColor.white,
-                      fontWeight: FontWeight.w500,
+                  left: null,
+                  right: null,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      _eyeLocalization(model.currentEye, context),
+                      style: applyRobotoFont(
+                        fontSize: 16,
+                        color: AppColor.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),

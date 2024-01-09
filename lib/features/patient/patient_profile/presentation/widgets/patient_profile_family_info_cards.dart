@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientFamilyDetails extends StatelessWidget {
   const PatientFamilyDetails({
@@ -26,54 +28,58 @@ class PatientFamilyDetails extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          customBorder: const CircleBorder(),
-          onTap: () {
-            try {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PatientRegistrationMiniappPage(
-                    actionType: MiniAppActionType.ADD_MEMBER,
-                    displayName: loc.myConnectionsAddMember,
+        Consumer(
+          builder: (context, ref, child) => InkWell(
+            customBorder: const CircleBorder(),
+            onTap: () {
+              try {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PatientRegistrationMiniappPage(
+                      actionType: MiniAppActionType.ADD_MEMBER,
+                      displayName: loc.myConnectionsAddMember,
+                    ),
                   ),
-                ),
-              );
-            } catch (e) {
-              logger.d({"error": e});
-              Fluttertoast.showToast(
-                msg: loc.myConnectionsServiceNotAvailable,
-              );
-            }
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  border: Border.all(
+                ).then(
+                  (value) => ref.invalidate(getPatientProfileProvider),
+                );
+              } catch (e) {
+                logger.d({"error": e});
+                Fluttertoast.showToast(
+                  msg: loc.myConnectionsServiceNotAvailable,
+                );
+              }
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    border: Border.all(
+                      color: AppColor.blue,
+                      width: 1,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    size: 20,
                     color: AppColor.blue,
-                    width: 1,
                   ),
                 ),
-                child: const Icon(
-                  Icons.add,
-                  size: 20,
-                  color: AppColor.blue,
+                const SizedBox(height: 4),
+                Text(
+                  loc.myConnectionsAddMember,
+                  style: applyRobotoFont(
+                    fontSize: 10,
+                    color: AppColor.blue,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                loc.myConnectionsAddMember,
-                style: applyRobotoFont(
-                  fontSize: 10,
-                  color: AppColor.blue,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         const SizedBox(

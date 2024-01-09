@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../widgets/cataract_eye_scan_carousel.dart';
@@ -90,18 +91,22 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
                   activeIndex.value == 6 ? AppColor.primary : AppColor.white,
             ),
             onPressed: () async {
-              var cameras = await availableCameras();
-              if (cameras.isEmpty) {
-                return;
-              }
-              if (context.mounted) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) =>
-                        TriageEyeCapturingPage(cameras: cameras),
-                  ),
-                );
+              PermissionStatus status = await Permission.camera.status;
+              if (status.isDenied) {
+                await Permission.camera.request();
+              } else if (status.isPermanentlyDenied) {
+                await openAppSettings();
+              } else if (status.isGranted) {
+                var cameras = await availableCameras();
+                if (cameras.isNotEmpty && context.mounted) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) =>
+                          TriageEyeCapturingPage(cameras: cameras),
+                    ),
+                  );
+                }
               }
             },
             child: Text(
