@@ -154,7 +154,7 @@
     "consentPageCheckbox": "ମୁଁ ନିଯ଼ମ ଏବଂ ସର୍ତ୍ତାବଳୀ ସହିତ ସହମତ।",
     "confirmButton": "ନିଶ୍ଚିତ କରନ୍ତୁ",
     "discardButton": "ପରିତ୍ଯ଼ାଗ କରନ୍ତୁ।",
-    "imageCapturedToastMessage": "ଚିତ୍ର ଉତ୍ତୋଳନ କରାଯାଇଛି",
+    "imageNotCapturedToastMessage": "ପ୍ରତିଛବି ଧରାଯାଇ ନାହିଁ ",
     "eyeCaptureCompletionDialogHeading": "ପରୀକ୍ଷା ଶେଷ ହେଲା",
     "eyeCaptureCompletionDialogBody": "ଆପଣ ପରୀକ୍ଷା ସମାପ୍ତ କରିଛନ୍ତି। ଫଳାଫଳ ଦେଖିବା ପାଇଁ ଦଯ଼ାକରି ତଳେ ଥିବା ବଟନ୍ ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।",
     "eyeCaptureCompletionDialogViewResult": "ଫଳାଫଳ ଦେଖନ୍ତୁ",
@@ -209,6 +209,9 @@
     "profilePageAddressDetails" : "ଠିକଣା ବିବରଣୀ",
     "profilePaeCheckReports" : "ଆପଣଙ୍କର ରିପୋର୍ଟଗୁଡିକ ଯାଞ୍ଚ କରନ୍ତୁ",
     "bottomNavItemEyeTest" : "ଚକ୍ଷୁ ପରୀକ୍ଷା",
-    "bottomNavItemAppointment" : "ନିଯୁକ୍ତି"
+    "bottomNavItemAppointment" : "ନିଯୁକ୍ତି",
+    "memberSelection" : "ସଦସ୍ୟ ଚୟନ କରନ୍ତୁ",
+    "triageAlerDialogBoxTitle" : "ପୁନର୍ବାର କରିବାକୁ ପଦକ୍ଷେପଗୁଡିକ ଚୟନ କରନ୍ତୁ",
+    "scannerTitle" : "ସ୍କାନର୍"
 
 }

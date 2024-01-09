@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class SuperAppScannerPage extends StatefulWidget {
   const SuperAppScannerPage({Key? key}) : super(key: key);
 

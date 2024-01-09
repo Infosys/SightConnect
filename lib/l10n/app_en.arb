@@ -157,7 +157,7 @@
     "consentPageCheckbox": "I agree to the terms and conditions",
     "confirmButton": "Confirm",
     "discardButton": "Discard",
-    "imageCapturedToastMessage": "Image Captured",
+    "imageNotCapturedToastMessage": "Image not Captured",
     "eyeCaptureCompletionDialogHeading": "Test Completed",
     "eyeCaptureCompletionDialogBody": "You have completed the test. Please click on the button below to view the result.",
     "eyeCaptureCompletionDialogViewResult": "View Result",
@@ -214,6 +214,11 @@
     "profilePageAddressDetails" : "Address Details",
     "profilePaeCheckReports" : "Check your reports",
     "bottomNavItemEyeTest" : "Eye Test",
-    "bottomNavItemAppointment" : "Appointments"
+    "bottomNavItemAppointment" : "Appointments",
+    "memberSelection" : "Select Member",
+    "triageAlerDialogBoxTitle" : "Select Steps to Redo",
+    "scannerTitle" : "Scanner"
+    
+
  
 }
