@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
@@ -16,7 +15,6 @@ class TriageTestCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      height: AppSize.height(context) * 0.25,
       margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -26,10 +24,11 @@ class TriageTestCard extends HookConsumerWidget {
         color: const Color(0xffE9EEFA),
       ),
       child: Stack(
-        fit: StackFit.expand,
         children: [
-          Align(
-            alignment: Alignment.bottomCenter,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: SvgPicture.asset(
               "assets/images/triage_card_bg.svg",
               width: AppSize.width(context),

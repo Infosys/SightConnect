@@ -165,7 +165,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             pageController.animateToPage(
                                               index + 1,
                                               duration: const Duration(
-                                                  milliseconds: 100),
+                                                  milliseconds: 80),
                                               curve: Curves.easeIn,
                                             );
                                           },
@@ -209,7 +209,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                               pageController.animateToPage(
                                                 index + 1,
                                                 duration: const Duration(
-                                                    milliseconds: 100),
+                                                    milliseconds: 80),
                                                 curve: Curves.easeIn,
                                               );
                                             }

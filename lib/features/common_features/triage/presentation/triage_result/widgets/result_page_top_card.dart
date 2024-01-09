@@ -95,19 +95,21 @@ class ResultPageTopCard extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSize.width(context) * 0.01,
-                          ),
-                          decoration: BoxDecoration(
-                            color: triageResult!['color'],
-                          ),
-                          child: Text(
-                            triageResult!['labelText'] ?? "",
-                            style: applyRobotoFont(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.white),
-                          )),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSize.width(context) * 0.01,
+                        ),
+                        decoration: BoxDecoration(
+                          color: triageResult!['color'],
+                        ),
+                        child: Text(
+                          _urgencyLocalization(
+                              triageResult!['labelText'] ?? "", context),
+                          style: applyRobotoFont(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: AppColor.white),
+                        ),
+                      ),
                       const Spacer(),
                       Text(
                         todayDate.formateDate,
@@ -180,6 +182,19 @@ class ResultPageTopCard extends ConsumerWidget {
     );
   }
 
+  String _urgencyLocalization(String value, BuildContext context) {
+    switch (value) {
+      case "Urgent Consult":
+        return context.loc!.assessmentCardUrgentConsult;
+      case "Routine Consult":
+        return context.loc!.assessmentCardRoutineCheckUp;
+      case "Early Consult":
+        return context.loc!.assessmentCardEarlyCheckUp;
+      default:
+        return "";
+    }
+  }
+
   Widget patientDetailsWidget(String name, String id, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0.0),
@@ -199,6 +214,8 @@ class ResultPageTopCard extends ConsumerWidget {
               width: AppSize.width(context) * 0.29,
               child: Text(
                 name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style:
                     applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w600),
                 softWrap: true,

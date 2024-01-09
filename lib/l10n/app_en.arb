@@ -10,14 +10,11 @@
                 "type": "String"
             }
         }
-        
     },
-
-
+ 
+ 
     "questionnaireTitle": "Eye Assessment Questions",
     "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
-
-
     "visualAcuityTitle" : "Visual Acuity Test",
     "visualAcuityDescription" : "A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!",
     "visualAcuityHowToPerform" : "How to perform the visual acuity test?",
@@ -45,8 +42,6 @@
     "directionRight":"Right",
     "dontShowAgainString":"Don't show again",
     "visualAcuityCarouselTitle": "Steps to perform Visual Acuity Test",
-
-
     "eyeScanTitle":"Eye Scan",
     "eyeScanDescription":"You are close! Just one more test to go. Capture the photos of your eyes next.",
     "eyeScanHowToPerform":"How to scan your eyes?",
@@ -54,8 +49,6 @@
     "eyeScanExitDialog":"Eye Scan helps to understand more about your eye problem. Do you really wish to exit?",
     "captureRightEyeString": "Capture Right Eye",
     "captureLeftEyeString": "Capture Left Eye",
-
-
     "skipButton":"Skip",
     "startTestText":"Start Test",
     "continueButton": "Continue",
@@ -66,53 +59,43 @@
     "noButton": "No",
     "exitButton": "Exit",
     "okButton":"Okay",
-
+ 
     "knowMoreButton": "Know More",
     "seeAllButton": "See All",
     "tryAgainButton": "Try Again",
     "shareNowButton": "Share Now",
     "retryButton": "Retry",
-    
     "homeCarousal1Title": "Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above",
     "homeCarousal1Description": "Schematic presentation of sampling procedure on prevalence of cataract and associated factors",
     "homeCarousal2Title": "7 eye problems not to mfakeiss out!",
     "homeCarousal2Description": "\n7 eye problems to get tested for: \n \n• Redness of eye\n• Watering of eyes\n• White spots on eyes",
     "homeCarousal3Title": "Eye problems. There are many that you can't see",
     "homeCarousal3Description": "But a vision care expert can.\nGet eye problems identified\nand treated in time to avoid\ncomplications later",
-
     "myConnectionsTitle": "My Members",
     "myConnectionsAddMember": "Add Member",
     "myConnectionsServiceNotAvailable": "Service not available",
     "myConnectionsAdd": "Add",
-
-
     "recentServicesTitle": "My Recent Services",
     "recentServicesEyeAssessment": "Eye Assessment",
     "recentServicesVisualAcuityTest": "Visual Acuity Test",
-
     "nearbyVisionCentersTitle": "Nearby Vision Centers",
     "nearbyVisionCentersNotFound": "No Vision Centers Found",
-
     "tollFreeNumber": "Toll Free Number",
-
     "appDrawerTitle": "Menu",
+    "appDrawerLanguageSelection": "Language Selection",
+    "appDrawerAccessibility" : "Accessibility Settings",
     "appDrawerHome":"Home",
     "appDrawerMyProfile":"My Profile",
     "appDrawerAssessmentsAndTests":"Assessments and Tests",
-    "appDrawerScanner":"Scanner",
+    "appDrawerScanner":"QR Code Scanner",
     "appDrawerAboutUs":"About Us",
-    "appDrawerPrivacyPolicy":"Privacy Policy",
+    "appDrawerPrivacyPolicy":"Privacy & Data Policy",
     "appDrawerHelpAndSupport":"Help and Support",
     "appDrawerSignOut": "Sign Out",
-
-    
-    
-    
     "aboutUsDescription": "Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\n\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ",
     "aboutUsFeaturesTitle": "Features",
     "aboutUsFeaturesDescription": "In-app Eye Testing: The app allows its users to self-assess their eyes by answering few questions and getting appropriate recommendations on the next steps and the doctor to be visited. Even friends and family of users can get benefitted too. |Appointment Booking: Users can book online teleconsultations and in-clinic visits with doctors to get their eyes diagnosed. |IVR Call Services: Our IVR call services are available in English and local languages and it caters to users with basic feature phones as well. Users can dial our eye care professionals to seek instant help during an emergency or for any eye related issues. They can also call to book appointments or seek any further clarifications. |Nearby Clinics: Users can locate the eye care clinics near to them. |Prescriptions and Reports: All prescriptions and reports of users can be accessed from one place without much hassle. |Eye Camps: Users can get information about nearby eye camps to get the eyes of their friends and family tested for free. |Reminders and Alerts: Users can receive timely alerts and reminders related to their upcoming appointments, medication, reports etc. |Sharing: Users can share this app and other useful information provided within the app with their friends and family members. ",
     "aboutUsConclusion": "The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!",
-
     "privacyPolicyDescription": "LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.",
     "privacyPolicyPersonalDataTitle": "Personal data elements collected/processed:",
     "privacyPolicyPersonalDataDescription": "You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.",
@@ -132,14 +115,9 @@
     "privacyPolicyRightToWithdrawDescription": "Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to <LVPEI to provide generic mail ID for DSR>.",
     "privacyPolicyAcknowledgement": "By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.",
     "privacyPolicyBottomAppBarLabel": "Privacy Policy Accepted",
-
-
     "helpAndSupportReachTitle" : "Reach out to us",
-
-
     "assessmentAndTestsSubtitle": "Here is a quick view of the assessments done so far.",
     "assessmentAndTestsReportsNotFound": "No Reports Found",
-
     "eyeAssessmentTitle": "Eye Assessment",
     "eyeAssessmentSubtitle": "Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.",
     "eyeAssessmentGetMemberLabel": "Change Member",
@@ -151,25 +129,19 @@
     "eyeAssessmentPopUpBody" : "Are you having any eyesight related problem?",
     "eyeAssessmentPopUpYesButton": "Yes",
     "eyeAssessmentPopUpNoButton": "No",
-
-    "visualAcuityDistanceInstruction" : "Position the camera 40cm away from the eye.",
     "visualAcuityTestInstructionOne": "Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result",
     "visualAcuityTestInstructionTwo": "Make sure you are holding the device at the eye level. If you wear glasses or contact lenses, keep them on",
     "visualAcuityTestInstructionThree": "Position yourself 40 cm from the screen. Distance will be shown in the test screen.",
     "visualAcuityTestInstructionFour": "If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.",
-
     "skipAndProceedButton": "Skip & Proceed to Scan",
     "proceedToScanButton" : "Proceed to Scan",
-
     "eyeAssessmentSteps":"Steps",
     "eyeAssessmentStepOne":"Step 1 - Eye Assessment Questions",
     "eyeAssessmentStepTwo":"Step 2 - Eye Assessment Questions",
     "eyeAssessmentStepThree":"Step 3 - Eye Assessment Questions",
-
     "eyeAssessmentOngoing": "Ongoing",
     "eyeAssessmentCompleted": "Completed",
     "eyeAssessmentPending": "Pending",
-
     "eyeAssessmentResults": "Assessment Results",
     "eyeAssessmentCompleteSteps":"Complete all steps to view results",
     "eyeAssessmentToolTip":"Please make sure that the flash is turned off and the brightness is set to 80%",
@@ -181,10 +153,8 @@
     "eyeScanInstructionSix": "Centre the eye inside the panel before starting the picture.",
     "eyeScanInstructionSeven": "Keep the eyes wide open till the flash goes off, until a ‘beep’ sound signals the end of the Photo.",
     "eyeAssessmentNote": "Note: The images shown here are for indication only. They may not appear the same way in real life.",
-
     "agreeButton" : "I Agree",
     "consentPageCheckbox": "I agree to the terms and conditions",
-
     "confirmButton": "Confirm",
     "discardButton": "Discard",
     "imageCapturedToastMessage": "Image Captured",
@@ -192,19 +162,12 @@
     "eyeCaptureCompletionDialogBody": "You have completed the test. Please click on the button below to view the result.",
     "eyeCaptureCompletionDialogViewResult": "View Result",
     "eyeCaptureTriageSavedLocally":"Triage Saved Locally",
-
     "visualAcuityTestResults":"Visual Acuity Test Results",
-
-
     "assessmentResultPageMoreDetailsText": "Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.",
     "assessmentReportButton": "Eye Assessment Report",
-
     "notificationsTitle": "Notifications",
     "notificationsNotAvailable": "No Notifications",
-
     "servicesPatientCare": "Patient Care",
-
-
     "reportAssessmentId": "Assessment ID",
     "reportDateAndTime": "Date & Time",
     "reportSeverityAbnormal": "Urgent Consult",
@@ -214,7 +177,6 @@
     "reportTumblingTitle":"Acuity Test - Tumbling E",
     "rightCornea":"Right Cornea",
     "leftCornea":"Left Cornea",
-
     "myProfileGeneralInfo": "General Information",
     "myProfileAge": "Age",
     "myProfileAddress": "Address",
@@ -223,7 +185,6 @@
     "myProfileDistrict": "District",
     "myProfileState": "State",
     "myProfilePinCode": "PinCode",
-
     "submitButton" : "Submit",
     "swipeGestureError" : "Incorrect Swipe! Please try again.",
     "swipeGestureCardText" : "Swipe in the direction of the symbol",
@@ -237,24 +198,22 @@
     "assessmentCardEarlyCheckUp": "Early Checkup",
     "testAgainButton" : "Test Again",
     "homeButton" : "Home",
-
     "homeTriageCardTitle" : "Our eyes are the most valuable assets.",
     "homeTriageCardDescription" : "Get them tested on time to prevent eye problems.",
     "homeTriageCardTest" : "Start Eye Test",
-
     "homeHelplineCardDescrition" : "In the event of a sudden vision loss, call this emergency helpline",
-
     "inviteCardTitle" : "Invite Others",
     "inviteCardDescription" : "Invite 5 friends and family members so that they can get their eyes assessed and prevent eye issues in the future.",
     "inviteCardInvitation" : "Invite Now",
-
-    "partnerCardTitle" : "Partner"
-
-    
-
-    
-
-
-
-  }
-
+    "partnerCardTitle" : "Partner",
+    "languageSelection" : "Select Language",
+    "profileTitle" : "Profile",
+    "eyeAssessmentEnterLabel" : "Enter here",
+    "profilePageAddressDetails" : "Address Details",
+    "profilePaeCheckReports" : "Check your reports",
+    "profilePageAddressDetails" : "Address Details",
+    "profilePaeCheckReports" : "Check your reports",
+    "bottomNavItemEyeTest" : "Eye Test",
+    "bottomNavItemAppointment" : "Appointments"
+ 
+}

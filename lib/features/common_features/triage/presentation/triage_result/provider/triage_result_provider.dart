@@ -80,7 +80,9 @@ class TriageResultProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> _setPropertiesByUrgency(
-      double urgency, String? description) {
+    double urgency,
+    String? description,
+  ) {
     if (urgency == 1) {
       return {
         'urgency': TriageUrgency.ROUTINE,
@@ -99,7 +101,7 @@ class TriageResultProvider extends ChangeNotifier {
         'icon': Icons.check,
         'backColor': AppColor.lightOrange.withOpacity(0.4),
         'checkColor': AppColor.orange,
-        "labelText": "Routine Consult",
+        "labelText": "Early Consult",
         "state": "Completed",
         "issueInfo": description ?? "",
       };

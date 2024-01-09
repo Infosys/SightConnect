@@ -80,11 +80,13 @@
     "tollFreeNumber": "ಶುಲ್ಕ ಮುಕ್ತ ಸಂಖ್ಯೆ",
     "appDrawerTitle": "ಮೆನು",
     "appDrawerHome": "ಹೋಮ್",
+    "appDrawerLanguageSelection": "ಭಾಷೆಯ ಆಯ್ಕೆ",
+    "appDrawerAccessibility" : "ಪ್ರವೇಶಿಸುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
     "appDrawerMyProfile": "ನನ್ನ ಪ್ರೊಫೈಲ್",
     "appDrawerAssessmentsAndTests": "ಮೌಲಿಕತಾ ಮತ್ತು ಪರೀಕ್ಷೆಗಳು",
-    "appDrawerScanner": "ಸ್ಕ್ಯಾನರ್",
+    "appDrawerScanner": "QR ಕೋಡ್ ಸ್ಕ್ಯಾನರ್",
     "appDrawerAboutUs": "ನಮ್ಮ ಬಗ್ಗೆ",
-    "appDrawerPrivacyPolicy": "ಗೌಪ್ಯತಾ ನೀತಿ",
+    "appDrawerPrivacyPolicy": "ಗೌಪ್ಯತೆ ಮತ್ತು ಡೇಟಾ ನೀತಿ",
     "appDrawerHelpAndSupport": "ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ",
     "appDrawerSignOut": "ಲಾಗ್ ಔಟ್",
     "aboutUsDescription": "ಸೈಟ್‌ಕನೆಕ್ಟ್ ಸ್ವಯಂ-ಮೌಲಿಕತಾ ಮತ್ತು ಕಾಲದಲ್ಲಿ ಸಲಹೆ ನೀಡುವ ಬೆಳಕು ಸೇವೆಗಳೊಂದಿಗೆ ಸಹಾಯ ಮಾಡುವ ಸುಲಭ ಕಣ್ಣೀರು ಸೇವೆ ಆಗಿದೆ.\n\nನಮ್ಮ ಉದ್ದೇಶದ ಮಧ್ಯೆಯೇ ನಾವು ಎಲ್ಲರಿಗೂ ದೃಷ್ಟಿ ಸಂರಕ್ಷಣೆ ಲಭ್ಯವಿರಬೇಕೆಂಬ ನಿಷ್ಠೆಯಿದೆ. ಈ ಅಪ್ಲಿಕೇಶನ್ ಎಲ್ಲ ಜೀವನದ ನಡುವೆಯೂ ಬಳಸಲು ಡಿಜೈನ್ ಮಾಡಲಾಗಿದೆ, ಯಾವುದೇ ವಯಸ್ಸು, ತಾಂತ್ರಿಕ ಹಿನ್ನೆಲೆ, ಮತ್ತು ಸಾಮಾಜಿಕ ಅಥವಾ ಆರ್ಥಿಕ ಹಿನ್ನೆಲೆಯಿಂದಲೂ ಬಳಸಲು ಯೋಗ್ಯವಾಗಿದೆ. ಈ ಅಪ್ಲಿಕೇಶನ್ ಮತ್ತು ಅದರ ವಿಷಯಸ್ವಲ್ಪವನ್ನು ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಇತರ ಸ್ಥಳೀಯ ಭಾಷೆಗಳಲ್ಲಿ ಲಭ್ಯವಿದೆ. ಇದು ಬಳಸುಗರನ್ನು ತಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಸ್ವಯಂ-ಮೌಲಿಕತಾ ಮಾಡಲು ಮತ್ತು ಕಾಲದಲ್ಲಿ ಚಿಕಿತ್ಸೆ ಸಲಹೆ ಪಡೆಯಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಈ ಅಪ್ಲಿಕೇಶನ್ ನಮ್ಮ ಬಳಕೆದಾರರಿಗೆ ವೈಯಕ್ತಿಕ ಕಣ್ಣೀರು ಸೇವೆಗಳನ್ನು ಒದಗಿಸಲು ಕೊಡುವಂತೆ ಸಮಗೊಳಿಸಲು ಕೊಡುತ್ತದೆ. ಇದು ಅವರ ಜೀವನವನ್ನು ಸುಲಭಗೊಳಿಸಲು ವಿವಿಧ ಅಂಶಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
@@ -163,7 +165,6 @@
     "notificationsTitle": "ಅಧಿಸೂಚನೆಗಳು",
     "notificationsNotAvailable": "ಯಾವ ಅಧಿಸೂಚನೆಗಳೂ ಇಲ್ಲ",
     "servicesPatientCare": "ರೋಗಿ ಆರೋಗ್ಯ ಸೇವೆ",
-
     "reportAssessmentId": "ಮೌಲ್ಯಾಂಕನ ಐಡಿ",
     "reportDateAndTime": "ದಿನಾಂಕ ಮತ್ತು ಸಮಯ",
     "reportSeverityAbnormal": "ತೀವ್ರ ಪರೀಕ್ಷೆ",
@@ -181,7 +182,6 @@
     "myProfileDistrict": "ಜಿಲ್ಲೆ",
     "myProfileState": "ರಾಜ್ಯ",
     "myProfilePinCode": "ಪಿನ್ ಕೋಡ್",
-
     "submitButton" : "ಸಲ್ಲಿಸು",
     "swipeGestureError" : "ತಪ್ಪಾದ ಸ್ವೈಪ್! ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     "swipeGestureCardText" : "ಪ್ರತೀಕದ ದಿಕ್ಕಿನಲ್ಲಿ ಸ್ವೈಪ್ ಮಾಡಿ",
@@ -198,13 +198,17 @@
     "homeTriageCardTitle" : "ನಮ್ಮ ಕಣ್ಣುಗಳು ಅತ್ಯಂತ ಮೌಲ್ಯಯುತ ಆಸ್ತಿಗಳು.",
     "homeTriageCardDescription" : "ಕಣ್ಣು ಸಮಸ್ಯೆಗಳನ್ನು ಹೆಚ್ಚಿನ ತೊಂದರೆಗಳಿಂದ ತಡೆಯಲು ಸಮಯದಲ್ಲಿ ಪರೀಕ್ಷಿಸಿ.",
     "homeTriageCardTest" : "ಕಣ್ಣು ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ",
-
     "homeHelplineCardDescrition" : "ಅಚಾನಕ ದೃಷ್ಟಿ ಕೊನೆಗೆಯುವ ಸಂದರ್ಭದಲ್ಲಿ, ಈ ಆಪಾತಕಾಲೀನ ಹೆಲ್ಪ್‌ಲೈನ್ ಗೆ ಕಾಲ್ ಮಾಡಿ",
-
     "inviteCardTitle" : "ಇತರರನ್ನು ಆಹ್ವಾನಿಸಿ",
     "inviteCardDescription" : "5 ಜನ ಸ್ನೇಹಿತರನ್ನು ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರನ್ನು ಆಹ್ವಾನಿಸಿ, ಅವರು ತಮ್ಮ ಕಣ್ಣುಗಳನ್ನುಮೂಲೆಕೆಳಗೆ ಟೆಸ್ಟ್ ಮಾಡಿ ಮತ್ತು ಭವಿಷ್ಯದಲ್ಲಿ ಕಣ್ಣು ಸಮಸ್ಯೆಗಳನ್ನು ತಡೆಗಟ್ಟುವಂತೆ ಮಾಡಿಕೊಳ್ಳಿ.",
     "inviteCardInvitation" : "ಈಗ ಆಹ್ವಾನಿಸಿ",
-
-    "partnerCardTitle" : "ಭಾಗಿತವಾದ"
+    "partnerCardTitle" : "ಭಾಗಿತವಾದ",
+    "languageSelection" : "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "profileTitle" : "ಪ್ರೊಫೈಲ್",
+    "eyeAssessmentEnterLabel" : "ಇಲ್ಲಿ ನಮೂದಿಸಿ",
+    "profilePageAddressDetails" : "ವಿಳಾಸ ವಿವರಗಳು",
+    "profilePaeCheckReports" : "ನಿಮ್ಮ ವರದಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+    "bottomNavItemEyeTest" : "ಕಣ್ಣಿನ ಪರೀಕ್ಷೆ",
+    "bottomNavItemAppointment" : "ನೇಮಕಾತಿಗಳು"
 
 }

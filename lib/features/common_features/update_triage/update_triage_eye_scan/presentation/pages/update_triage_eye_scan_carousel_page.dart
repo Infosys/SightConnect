@@ -51,20 +51,22 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
-                  child: AnimatedSmoothIndicator(
-                    onDotClicked: (index) {},
-                    activeIndex: activeIndex.value,
-                    count: 7,
-                    effect: const SlideEffect(
-                      activeDotColor: AppColor.primary,
-                      radius: 2,
-                      dotColor: AppColor.lightGrey,
-                      dotHeight: 5,
-                      dotWidth: 20,
-                      spacing: 4,
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.klpadding),
+                    child: AnimatedSmoothIndicator(
+                      onDotClicked: (index) {},
+                      activeIndex: activeIndex.value,
+                      count: 7,
+                      effect: const SlideEffect(
+                        activeDotColor: AppColor.primary,
+                        radius: 2,
+                        dotColor: AppColor.lightGrey,
+                        dotHeight: 5,
+                        dotWidth: 20,
+                        spacing: 4,
+                      ),
                     ),
                   ),
                 ),

@@ -65,6 +65,8 @@ class AssessmentResultCards extends StatelessWidget {
                     : index == 1
                         ? loc.assessmentResultCardAcuityTest
                         : loc.assessmentResultCardEyeScan,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -85,6 +87,5 @@ class AssessmentResultCards extends StatelessWidget {
         );
       },
     );
-  
   }
 }

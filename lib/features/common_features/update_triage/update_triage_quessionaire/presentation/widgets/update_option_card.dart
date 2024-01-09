@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class UpdateOptionCard extends StatelessWidget {
     required this.index,
     required this.total,
     required this.totalGroupQuestion,
-    
   });
   final int index;
   final int total;
@@ -32,10 +32,7 @@ class UpdateOptionCard extends StatelessWidget {
         children: [
           Text(
             question?.text ?? '',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
+            style: applyFiraSansFont(fontSize: 22),
           ),
           const SizedBox(height: AppSize.klheight),
           Expanded(
@@ -77,7 +74,7 @@ class UpdateOptionCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColor.black.withOpacity(0.5),
+                        color: AppColor.white.withOpacity(0.8),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text.rich(
@@ -85,27 +82,15 @@ class UpdateOptionCard extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: '$index',
-                              style: const TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: applyRobotoFont(fontSize: 16),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: ' / ',
-                              style: TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: applyRobotoFont(fontSize: 16),
                             ),
                             TextSpan(
                               text: '${total - totalGroupQuestion}',
-                              style: const TextStyle(
-                                color: AppColor.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: applyRobotoFont(fontSize: 16),
                             )
                           ],
                         ),
@@ -114,6 +99,14 @@ class UpdateOptionCard extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+          const SizedBox(height: AppSize.ksheight),
+          Text(
+            context.loc!.eyeAssessmentNote,
+            style: applyRobotoFont(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: AppSize.klheight),
@@ -126,7 +119,7 @@ class UpdateOptionCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(AppSize.kspadding),
                   decoration: const BoxDecoration(
-                    color: AppColor.red,
+                    color: Color(0xffDD0000),
                     shape: BoxShape.circle,
                     border: Border.fromBorderSide(
                       BorderSide(

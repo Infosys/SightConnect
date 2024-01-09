@@ -59,7 +59,7 @@ class TriageResultPage extends ConsumerWidget {
             padding: const EdgeInsets.all(AppSize.kmpadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ResultPageTopCard(

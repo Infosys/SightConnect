@@ -68,12 +68,12 @@ class PatientServicesPage extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child:
-                                SvgPicture.asset(BottomNavItems.home.svgImage),
+                                SvgPicture.asset(BottomNavItems.home(loc).svgImage),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                              BottomNavItems.service.svgImage,
+                              BottomNavItems.service(loc).svgImage,
                               colorFilter: const ColorFilter.mode(
                                 AppColor.primary,
                                 BlendMode.srcIn,
@@ -87,13 +87,13 @@ class PatientServicesPage extends ConsumerWidget {
                               color: AppColor.primary,
                             ),
                             child: SvgPicture.asset(
-                              BottomNavItems.triage.svgImage,
+                              BottomNavItems.triage(loc).svgImage,
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                                BottomNavItems.notification.svgImage,
+                                BottomNavItems.notification(loc).svgImage,
                                 colorFilter: const ColorFilter.mode(
                                   AppColor.grey,
                                   BlendMode.srcIn,
@@ -102,7 +102,7 @@ class PatientServicesPage extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SvgPicture.asset(
-                              BottomNavItems.drawer.svgImage,
+                              BottomNavItems.drawer(loc).svgImage,
                               colorFilter: const ColorFilter.mode(
                                 AppColor.grey,
                                 BlendMode.srcIn,

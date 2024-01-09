@@ -44,16 +44,16 @@ class DrawerMenuItems {
     //   title: loc.appDrawerMyProfile,
     //   icon: AppIcon.navProfile,
     // );
-    DrawerMenuItem language = const DrawerMenuItem(
+    DrawerMenuItem language =  DrawerMenuItem(
       id: DrawerMenuItemId.language,
       // title: loc.appDrawerMyProfile,
-      title: "Language Selection",
+      title: loc.appDrawerLanguageSelection,
       icon: "assets/drawer_icons/language.svg",
     );
-    DrawerMenuItem accessibilities = const DrawerMenuItem(
+    DrawerMenuItem accessibilities = DrawerMenuItem(
       id: DrawerMenuItemId.accessibilities,
       // title: loc.appDrawerMyProfile,
-      title: "Accessibility Settings",
+      title: loc.appDrawerAccessibility,
       icon: "assets/drawer_icons/accessibility.svg",
     );
     DrawerMenuItem assessments = DrawerMenuItem(
@@ -61,10 +61,9 @@ class DrawerMenuItems {
       title: loc.appDrawerAssessmentsAndTests,
       icon: AppIcon.drawerAssessmentsAndTest,
     );
-    DrawerMenuItem scanner = const DrawerMenuItem(
+    DrawerMenuItem scanner =  DrawerMenuItem(
       id: DrawerMenuItemId.scanner,
-      // title: loc.appDrawerScanner,
-      title: "QR Code Scanner",
+      title: loc.appDrawerScanner,
       icon: AppIcon.scanner,
     );
     DrawerMenuItem about = DrawerMenuItem(
@@ -72,10 +71,9 @@ class DrawerMenuItems {
       title: loc.appDrawerAboutUs,
       icon: AppIcon.drawerAboutUs,
     );
-    DrawerMenuItem privacyPolicy = const DrawerMenuItem(
+    DrawerMenuItem privacyPolicy =  DrawerMenuItem(
       id: DrawerMenuItemId.privacyPolicy,
-      // title: loc.appDrawerPrivacyPolicy,
-      title: "Privacy & Data Protection",
+      title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
     );
     DrawerMenuItem help = DrawerMenuItem(

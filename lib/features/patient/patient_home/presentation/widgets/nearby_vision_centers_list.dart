@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,85 +21,76 @@ class NearbyVisionCentersList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Padding(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
                 child: Text(
                   loc.nearbyVisionCentersTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: applyFiraSansFont(
                     fontSize: 18,
                   ),
                 ),
               ),
-              const Spacer(),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     "See All",
-              //     style: applyRobotoFont(
-              //       fontSize: 14,
-              //       fontWeight: FontWeight.w500,
-              //       color: AppColor.blue,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-          const SizedBox(
-            height: AppSize.kmheight,
-          ),
-          ref.watch(nearByVisionCenterProvider).when(
-                data: (data) {
-                  if (data.isEmpty) {
-                    return Center(
-                      child: Text(
-                        loc.nearbyVisionCentersNotFound,
-                        style: applyFiraSansFont(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    );
-                  }
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        ...data
-                            .map(
-                              (e) => NearbyVisionCentersCard(data: e),
-                            )
-                            .toList()
-                      ],
-                    ),
-                  );
-                },
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (error, stackTrace) {
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: AppSize.kmheight,
+        ),
+        ref.watch(nearByVisionCenterProvider).when(
+              data: (data) {
+                if (data.isEmpty) {
                   return Center(
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextButton.icon(
-                        onPressed: () {
-                          ref.read(patientHomeProvider).init();
-                        },
-                        label: Text(loc.tryAgainButton),
-                        icon: const Icon(Icons.location_on),
+                    child: Text(
+                      loc.nearbyVisionCentersNotFound,
+                      style: applyFiraSansFont(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   );
-                },
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ...data
+                          .map(
+                            (e) => NearbyVisionCentersCard(data: e),
+                          )
+                          .toList()
+                    ],
+                  ),
+                );
+              },
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
               ),
-        ],
-      ),
+              error: (error, stackTrace) {
+                return Center(
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        ref.read(patientHomeProvider).init();
+                      },
+                      label: Text(loc.tryAgainButton),
+                      icon: const Icon(Icons.location_on),
+                    ),
+                  ),
+                );
+              },
+            ),
+      ],
     );
   }
 }
