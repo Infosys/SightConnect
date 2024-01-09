@@ -23,8 +23,10 @@ class AppNetworkImage extends StatelessWidget {
           );
         } else {
           return Container(
+            height: radius,
+            width: radius,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(radius),
+              borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 image: imageProvider,
                 fit: BoxFit.cover,

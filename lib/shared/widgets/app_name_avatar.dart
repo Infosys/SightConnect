@@ -8,8 +8,8 @@ class AppNameAvatar extends StatelessWidget {
     required this.name,
     this.radius = 18,
     this.fontSize = 14,
-    this.color = AppColor.primary,
-    this.fontColor = AppColor.white,
+    this.color = const Color(0xffD4C1FF),
+    this.fontColor = AppColor.black,
   });
   final String? name;
   final double radius;

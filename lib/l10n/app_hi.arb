@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "आस-पास के दृष्टि केंद्र",
     "nearbyVisionCentersNotFound": "कोई दृष्टि केंद्र नहीं मिला",
     "tollFreeNumber": "टोल फ्री नंबर",
-    "inviteCardTitle": "दूसरों को जुड़ने के लिए आमंत्रित करें",
-    "inviteCardDescription": "एक प्रसन्न उपयोगकर्ता के रूप में, आप अपने परिवार और दोस्तों को आमंत्रित कर सकते हैं और {appName} ऐप के लाभों का अन्वेषण करने के लिए।",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "मेनू",
     "appDrawerHome": "होम",
     "appDrawerMyProfile": "मेरी प्रोफ़ाइल",
@@ -208,5 +199,16 @@
    "assessmentCardRoutineCheckUp": "नियमित जांच",
    "assessmentCardEarlyCheckUp": "पहले से जांच",
    "testAgainButton" : "फिर से परीक्षण करें",
-   "homeButton" : "होम"
+   "homeButton" : "होम",
+   "homeTriageCardTitle" : "हमारी आंखें सबसे मूल्यवान संपत्ति हैं।",
+   "homeTriageCardDescription" : "आंखों की समस्याओं को रोकने के लिए समय पर जांच करवाएं।",
+   "homeTriageCardTest" : "आंख परीक्षा शुरू करें",
+
+   "homeHelplineCardDescrition" : "अचानक दृष्टि के हानि के मामले में, इस आपातकालीन हेल्पलाइन पर कॉल करें",
+
+   "inviteCardTitle" : "दूसरों को आमंत्रित करें",
+   "inviteCardDescription" : "5 दोस्तों और परिवार के सदस्यों को आमंत्रित करें ताकि उनकी आंखों की मूल्यांकन किया जा सके और भविष्य में आंख संबंधी समस्याओं को रोक सकें।",
+   "inviteCardInvitation" : "अभी आमंत्रित करें",
+
+   "partnerCardTitle" : "साझेदार"
 }

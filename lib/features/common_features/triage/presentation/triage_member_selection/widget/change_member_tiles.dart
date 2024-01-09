@@ -11,6 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/triage_member_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 class ChangeMemberTiles extends HookConsumerWidget {
   const ChangeMemberTiles({super.key});
@@ -50,138 +51,137 @@ class ChangeMemberTiles extends HookConsumerWidget {
     ValueNotifier<int> selectedValue,
     TriageMemberProvider memberProvider,
   ) {
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: connectionsList.length + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            final person = currentProfile;
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSize.ksheight - 2,
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: connectionsList.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          final person = currentProfile;
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.ksheight - 2,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: applyLightShadow(),
+                color: AppColor.white,
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: applyLightShadow(),
-                  color: AppColor.white,
+              child: RadioListTile<int>(
+                contentPadding: EdgeInsets.zero,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    person.profilePhoto != null
+                        ? AppNetworkImage(
+                            imageUrl: person.profilePhoto!,
+                          )
+                        : AppNameAvatar(
+                            name: person.name,
+                          ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          person.name?.capitalize() ?? "",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Me",
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                child: RadioListTile<int>(
-                  contentPadding: EdgeInsets.zero,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      person.profilePhoto != null
-                          ? AppNetworkImage(
-                              imageUrl: person.profilePhoto!,
-                            )
-                          : AppNameAvatar(
-                              name: person.name,
-                            ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            person.name ?? "",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Me",
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  value: index,
-                  groupValue: selectedValue.value,
-                  onChanged: (value) {
-                    selectedValue.value = value!;
-                    memberProvider.setTestPersonId(person.patientId!);
-                  },
-                ),
+                value: index,
+                groupValue: selectedValue.value,
+                onChanged: (value) {
+                  selectedValue.value = value!;
+                  memberProvider.setTestPersonId(person.patientId!);
+                },
               ),
-            );
-          } else {
-            final person = connectionsList[index - 1];
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSize.ksheight - 2,
+            ),
+          );
+        } else {
+          final person = connectionsList[index - 1];
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.ksheight - 2,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: applyLightShadow(),
+                color: AppColor.white,
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: applyLightShadow(),
-                  color: AppColor.white,
+              child: RadioListTile<int>(
+                contentPadding: EdgeInsets.zero,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    person.profilePicture != null
+                        ? AppNetworkImage(
+                            imageUrl: person.profilePicture!,
+                          )
+                        : AppNameAvatar(
+                            name: person.name,
+                          ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          person.name?.capitalize() ?? "",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          person.relation.toString().split(".").last,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                child: RadioListTile<int>(
-                  contentPadding: EdgeInsets.zero,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      person.profilePicture != null
-                          ? AppNetworkImage(
-                              imageUrl: person.profilePicture!,
-                            )
-                          : AppNameAvatar(
-                              name: person.name,
-                            ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            person.name ?? "",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            person.relation.toString().split(".").last,
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  value: index,
-                  groupValue: selectedValue.value,
-                  onChanged: (value) {
-                    selectedValue.value = value!;
-                    memberProvider.setTestPersonId(person.patientId!);
-                  },
-                ),
+                value: index,
+                groupValue: selectedValue.value,
+                onChanged: (value) {
+                  selectedValue.value = value!;
+                  memberProvider.setTestPersonId(person.patientId!);
+                },
               ),
-            );
-          }
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }

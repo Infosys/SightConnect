@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -80,8 +81,21 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
             : CustomAppbar(
                 leadingWidth: 60,
                 titleSpacing: 0.0,
-                actions: const [
-                  // TextScalePopupMenu(),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const TextScalePopupMenu();
+                        },
+                      );
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/drawer_icons/accessibility.svg",
+                      height: 22,
+                    ),
+                  ),
                 ],
                 centerTitle: false,
                 leadingIcon: InkWell(

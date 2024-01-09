@@ -78,15 +78,6 @@
     "nearbyVisionCentersTitle": "సమీపంలోని దృష్టి కేంద్రాలు",
     "nearbyVisionCentersNotFound": "దృష్టి కేంద్రాలు దొరకలేదు",
     "tollFreeNumber": "టోల్ ఫ్రీ నంబర్",
-    "inviteCardTitle": "చేరడానికి ఇతరులను ఆహ్వానించండి",
-    "inviteCardDescription": "సంతోషకరమైన వినియోగదారుగా, మీరు మీ కుటుంబాన్ని మరియు స్నేహితులను చేరడానికి మరియు {appName} యాప్ యొక్క ప్రయోజనాలను అన్వేషించడానికి ఆహ్వానించవచ్చు.",
-    "@inviteCardDescription": {
-        "placeholders": {
-            "appName": {
-                "type": "String"
-            }
-        }
-    },
     "appDrawerTitle": "మెనూ",
     "appDrawerHome": "హోమ్",
     "appDrawerMyProfile": "నా ప్రొఫైల్",
@@ -207,5 +198,16 @@
     "assessmentCardRoutineCheckUp": "సాధారణ పరిశీలన",
     "assessmentCardEarlyCheckUp": "ముందేని పరిశీలన",
     "testAgainButton" : "మళ్లీ పరీక్షించండి",
-    "homeButton" : "హోమ్"
+    "homeButton" : "హోమ్",
+    "homeTriageCardTitle" : "మా కళ్ళు అత్యంత అమూల్య సంపదలు.",
+    "homeTriageCardDescription" : "కళ్లను సమయంలో పరీక్షించి కళ సమస్యలను తడుముగా తగ్గించేందుకు మీరు పరీక్షించండి.",
+    "homeTriageCardTest" : "కళ పరీక్ష ప్రారంభించండి",
+
+    "homeHelplineCardDescrition" : "అకస్మాతీకరణ దృష్టి నష్టం కాలమోలకంగా, ఈ అత్యావశ్యక హెల్ప్‌లైన్‌ను కాల్ చేయండి",
+
+    "inviteCardTitle" : "ఇతరులను ఆహ్వానించండి",
+    "inviteCardDescription" : "5 స్నేహితులను మరియు కుటుంబ సభ్యులను ఆమంత్రించండి, వారు మరియు భవిష్యత్తులో ఉన్న కళ సమస్యలను తడుముగా తగ్గించడానికి అవకాశం కల్పంచండి.",
+    "inviteCardInvitation" : "ఇప్పుడు ఆహ్వానించండి",
+
+    "partnerCardTitle" : "భాగస్వామి"
 }

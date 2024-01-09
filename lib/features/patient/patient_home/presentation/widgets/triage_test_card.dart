@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -41,7 +42,7 @@ class TriageTestCard extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  loc.eyesAreMostValuable,
+                  loc.homeTriageCardTitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: applyFiraSansFont(
@@ -51,7 +52,7 @@ class TriageTestCard extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  loc.gotTheEyesTested,
+                  loc.homeTriageCardDescription,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
@@ -86,24 +87,36 @@ class TriageTestCard extends HookConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            MatomoTracker.instance.trackEvent(
+                      showModalBottomSheet(
+                        context: context,
+                        isDismissible: false,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        barrierLabel: MaterialLocalizations.of(context)
+                            .modalBarrierDismissLabel,
+                        builder: (context) {
+                          MatomoTracker.instance.trackEvent(
                               eventInfo: EventInfo(
                                 category: 'Main',
                                 action: 'Click',
                                 name: 'Triage member selection page click',
                               ),
-                            );
-                            return const TriageMemberSelectionPage();
-                          },
-                        ),
+                              dimensions: {
+                                'dimension1':
+                                    '${PersistentAuthStateService.authState.activeRole}'
+                              });
+                          return const TriageMemberSelectionPage();
+                        },
                       );
                     },
                     child: Text(
-                      // "Start Eye Test",
-                      loc.startEyeTestText,
+                      loc.homeTriageCardTest,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

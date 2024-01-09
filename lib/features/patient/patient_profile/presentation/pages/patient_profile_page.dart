@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_helper.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -21,48 +22,23 @@ class PatientProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: CustomAppbar(
-          iconTheme: const IconThemeData(
-            color: AppColor.white,
+      appBar: CustomAppbar(
+        iconTheme: const IconThemeData(),
+        title: Text(
+          // loc.appDrawerMyProfile,
+          "Profile",
+          style: applyFiraSansFont(
+            fontWeight: FontWeight.w500,
           ),
-          title: Text(
-            loc.appDrawerMyProfile,
-            style: applyFiraSansFont(
-              fontWeight: FontWeight.w500,
-              color: AppColor.white,
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-              onPressed: () {
-                final navigator = Navigator.of(context);
-                navigator
-                    .push<bool?>(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const PatientRegistrationMiniappPage(
-                          actionType: MiniAppActionType.UPDATE,
-                          displayName: "Update Profile",
-                        ),
-                      ),
-                    )
-                    .then((value) => ref.invalidate(getPatientProfileProvider));
-              },
-              icon: const Icon(
-                Icons.edit_outlined,
-                color: AppColor.white,
-              ),
-            )
-          ],
         ),
       ),
       body: ref.watch(getPatientProfileProvider).when(
         data: (data) {
-          return _content(context, data);
+          return _content(
+            context,
+            data,
+            ref,
+          );
         },
         error: (e, s) {
           return Center(
@@ -84,123 +60,158 @@ class PatientProfilePage extends ConsumerWidget {
     );
   }
 
-  Widget _content(BuildContext context, PatientResponseModel patient) {
-    var dob = _formateAge(
-      day: patient.profile?.patient?.dayOfBirth ?? "",
-      mon: patient.profile?.patient?.monthOfBirth ?? "",
-      year: patient.profile?.patient?.yearOfBirth ?? "",
-    );
+  Widget _content(
+      BuildContext context, PatientResponseModel patient, WidgetRef ref) {
     final loc = context.loc!;
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ProfileHeader(patient: patient),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: AppSize.ksheight),
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      loc.myProfileGeneralInfo,
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            PatientFamilyDetails(
+              relations: patient.profile?.patient?.relatedParty ?? [],
+              patient: patient,
+            ),
+            const SizedBox(height: 4),
+            Divider(
+              thickness: 1,
+              color: AppColor.black.withOpacity(0.2),
+            ),
+            const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Health Card",
+                  style: applyFiraSansFont(fontSize: 18),
+                ),
+                IconButton(
+                  onPressed: () {
+                    final navigator = Navigator.of(context);
+                    navigator
+                        .push<bool?>(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientRegistrationMiniappPage(
+                              actionType: MiniAppActionType.UPDATE,
+                              displayName: "Update Profile",
+                            ),
+                          ),
+                        )
+                        .then(
+                          (value) => ref.invalidate(getPatientProfileProvider),
+                        );
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    size: 16,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 8),
+            ProfileHeader(
+              patient: patient,
+            ),
+            const SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ExpansionTile(
+                title: Text(
+                  "Address Details",
+                  style: applyFiraSansFont(fontSize: 16),
+                ),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
                     ),
-                    const SizedBox(
-                      height: AppSize.ksheight,
+                    child: Divider(
+                      thickness: 1,
+                      color: AppColor.black.withOpacity(0.2),
                     ),
-                    PatientInfoCard(
-                      keyText: loc.myProfileAge,
-                      valueText: dob,
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PatientInfoCard(
+                          keyText: loc.myProfileLine,
+                          valueText: PatientHelper.street(
+                            patient.profile?.patient?.address,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ksheight),
+                        PatientInfoCard(
+                          keyText: loc.myProfileCity,
+                          valueText: PatientHelper.city(
+                            patient.profile?.patient?.address,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ksheight),
+                        PatientInfoCard(
+                          keyText: loc.myProfileDistrict,
+                          valueText: PatientHelper.district(
+                            patient.profile?.patient?.address,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ksheight),
+                        PatientInfoCard(
+                          keyText: loc.myProfileState,
+                          valueText: PatientHelper.state(
+                            patient.profile?.patient?.address,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ksheight),
+                        PatientInfoCard(
+                          keyText: loc.myProfilePinCode,
+                          valueText: PatientHelper.pincode(
+                            patient.profile?.patient?.address,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColor.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AssessmentsAndTestsPage(),
+                    ),
+                  );
+                },
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColor.white,
+                  size: 16,
+                ),
+                title: Text(
+                  "Check your reports",
+                  style: applyFiraSansFont(
+                    fontSize: 14,
+                    color: AppColor.white,
+                  ),
                 ),
               ),
-              const SizedBox(height: AppSize.ksheight),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: Divider(
-                  thickness: 1,
-                  color: AppColor.black.withOpacity(0.2),
-                ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      loc.myProfileAddress,
-                      style: applyFiraSansFont(
-                          fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: AppSize.ksheight),
-                    PatientInfoCard(
-                      keyText: loc.myProfileLine,
-                      valueText: PatientHelper.street(
-                        patient.profile?.patient?.address,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ksheight),
-                    PatientInfoCard(
-                      keyText: loc.myProfileCity,
-                      valueText: PatientHelper.city(
-                        patient.profile?.patient?.address,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ksheight),
-                    PatientInfoCard(
-                      keyText: loc.myProfileDistrict,
-                      valueText: PatientHelper.district(
-                        patient.profile?.patient?.address,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ksheight),
-                    PatientInfoCard(
-                      keyText: loc.myProfileState,
-                      valueText: PatientHelper.state(
-                        patient.profile?.patient?.address,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ksheight),
-                    PatientInfoCard(
-                      keyText: loc.myProfilePinCode,
-                      valueText: PatientHelper.pincode(
-                        patient.profile?.patient?.address,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-              PatientFamilyDetails(
-                relations: patient.profile?.patient?.relatedParty ?? [],
-              ),
-            ],
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
-  }
-
-  String _formateAge({
-    required String day,
-    required String mon,
-    required String year,
-  }) {
-    try {
-      var dob = DateTime.parse("$year-$mon-$day");
-      var age = DateTime.now().difference(dob).inDays ~/ 365;
-      return "$age years";
-    } catch (e) {
-      return "";
-    }
   }
 }

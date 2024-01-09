@@ -51,9 +51,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
         margin: const EdgeInsets.only(
           left: 16,
         ),
-        padding: const EdgeInsets.all(
-          AppSize.kmpadding,
-        ),
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.7),
           border: Border.all(
@@ -76,20 +74,21 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: AppSize.ksheight,
-            ),
+            const SizedBox(height: AppSize.kmheight),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 SvgPicture.asset(
                   AppIcon.location,
-                  width: 20,
-                  height: 20,
+                  width: 18,
+                  height: 18,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.grey,
+                    BlendMode.srcATop,
+                  ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
+                const SizedBox(width: 10),
                 Flexible(
                   child: Text(
                     getLocation(
@@ -104,9 +103,6 @@ class NearbyVisionCentersCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
               ],
             ),
             const SizedBox(height: AppSize.ksheight),
@@ -115,12 +111,14 @@ class NearbyVisionCentersCard extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   AppIcon.call,
-                  width: 20,
-                  height: 20,
+                  width: 18,
+                  height: 18,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.grey,
+                    BlendMode.srcATop,
+                  ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
+                const SizedBox(width: 10),
                 Flexible(
                   child: Text(
                     "$email, $contact",
@@ -131,9 +129,6 @@ class NearbyVisionCentersCard extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: AppSize.ksheight,
             ),
           ],
         ),

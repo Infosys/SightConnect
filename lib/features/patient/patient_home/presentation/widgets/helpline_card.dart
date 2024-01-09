@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,6 +16,7 @@ class HelplineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSize.kmpadding,
@@ -34,7 +36,7 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                " ${context.loc!.visionLoss} ${context.loc!.tollFreeNumber}",
+                "${loc.homeHelplineCardDescrition} ${AppText.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.white,
