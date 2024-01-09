@@ -122,7 +122,7 @@ class PatientProfilePage extends ConsumerWidget {
               ),
               child: ExpansionTile(
                 title: Text(
-                  "Address Details",
+                  context.loc!.profilePageAddressDetails,
                   style: applyFiraSansFont(fontSize: 16),
                 ),
                 children: [
@@ -201,7 +201,7 @@ class PatientProfilePage extends ConsumerWidget {
                   size: 16,
                 ),
                 title: Text(
-                  "Check your reports",
+                  context.loc!.profilePaeCheckReports,
                   style: applyFiraSansFont(
                     fontSize: 14,
                     color: AppColor.white,

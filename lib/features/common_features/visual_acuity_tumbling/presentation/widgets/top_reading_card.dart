@@ -123,15 +123,6 @@ class TopReadingCard extends ConsumerWidget {
                       ],
                     ),
                     const SizedBox(height: AppSize.kmheight),
-                    Center(
-                      child: Text(
-                        "",
-                        style: applyFiraSansFont(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
-                            color: AppColor.grey),
-                      ),
-                    ),
                   ],
                 ),
               ),
