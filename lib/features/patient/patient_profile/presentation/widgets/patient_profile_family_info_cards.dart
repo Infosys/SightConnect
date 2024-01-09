@@ -53,6 +53,7 @@ class PatientFamilyDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+                  color: Colors.white,
                   border: Border.all(
                     color: AppColor.blue,
                     width: 1,

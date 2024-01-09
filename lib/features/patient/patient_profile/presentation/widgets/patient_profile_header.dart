@@ -1,14 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({
@@ -36,170 +35,201 @@ class ProfileHeader extends ConsumerWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: patient.profile?.patient?.profilePhoto != null
-                  ? AppNetworkImage(
-                      radius: 70,
-                      shapeCircle: false,
-                      imageUrl: patient.profile!.patient!.profilePhoto!,
-                    )
-                  : AppNameAvatar(
-                      name: patient.profile?.patient?.name,
-                      color: AppColor.blue,
-                      radius: 30,
-                      fontSize: 20,
-                    ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          patient.profile?.patient?.name ?? "",
-                          maxLines: 1,
-                          style: applyFiraSansFont(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          final navigator = Navigator.of(context);
-                          navigator
-                              .push<bool?>(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const PatientRegistrationMiniappPage(
-                                    actionType: MiniAppActionType.UPDATE,
-                                    displayName: "Update Profile",
-                                  ),
-                                ),
-                              )
-                              .then(
-                                (value) =>
-                                    ref.invalidate(getPatientProfileProvider),
-                              );
-                        },
-                        icon: Container(
-                          padding: const EdgeInsets.all(AppSize.kspadding - 2),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.primary.withOpacity(0.2),
-                          ),
-                          child: const Icon(
-                            Icons.mode_edit,
-                            size: 16,
-                            color: AppColor.primary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Flexible(
-                    child: Text(
-                      "PID : ${patient.profile?.patient?.patientId ?? ""}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "Age : $dob",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(left: 8),
+            decoration: const BoxDecoration(
+              color: Color(0xFFffdd04),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
               ),
             ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Row(
               children: [
-                Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(AppSize.kspadding - 2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primary.withOpacity(0.2),
-                        ),
-                        child: const Icon(
-                          Icons.call_outlined,
-                          size: 16,
-                          color: AppColor.primary,
-                        ),
-                      ),
-                      const SizedBox(width: AppSize.ksheight),
-                      Text(
-                        patient.profile?.patient?.phoneNumber ?? "",
-                        softWrap: true,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: patient.profile?.patient?.email != null,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(AppSize.kspadding - 2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primary.withOpacity(0.2),
-                        ),
-                        child: const Icon(
-                          Icons.email_outlined,
-                          size: 16,
-                          color: AppColor.primary,
-                        ),
-                      ),
-                      const SizedBox(width: AppSize.ksheight),
-                      Flexible(
-                        child: Text(
-                          patient.profile?.patient?.email ?? "",
-                          softWrap: true,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                Image.asset(
+                  "assets/logo/app_logo.png",
+                  height: 40,
+                  width: 120,
                 ),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          Stack(
+            children: [
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: SvgPicture.asset(
+                  "assets/images/triage_card_bg.svg",
+                  width: AppSize.width(context),
+                  height: AppSize.height(context) * 0.23,
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    AppColor.primary.withOpacity(0.1),
+                    BlendMode.srcATop,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(
+                  left: AppSize.kmpadding,
+                  right: AppSize.kmpadding,
+                  top: AppSize.kmpadding,
+                  bottom: AppSize.kspadding,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        patient.profile?.patient?.profilePhoto != null
+                            ? AppNetworkImage(
+                                radius: 80,
+                                shapeCircle: false,
+                                imageUrl:
+                                    patient.profile!.patient!.profilePhoto!,
+                              )
+                            : AppNameAvatar(
+                                name: patient.profile?.patient?.name,
+                                color: AppColor.blue,
+                                radius: 28,
+                                fontSize: 18,
+                              ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        patient.profile?.patient?.name ?? "",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: applyRobotoFont(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Flexible(
+                                        child: Text(
+                                          _eightDigit(patient
+                                              .profile?.patient?.patientId),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: applyRobotoFont(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  QrImageView(
+                                    padding: EdgeInsets.zero,
+                                    data: '1234567890',
+                                    version: QrVersions.auto,
+                                    size: 60.0,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  infoCard("Date of Birth", dob),
+                                  infoCard("Gender",
+                                      patient.profile?.patient?.gender?.name),
+                                  infoCard("Mobile",
+                                      patient.profile?.patient?.phoneNumber),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Powered by",
+                          style: applyRobotoFont(
+                            fontSize: 10,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "Health Connect Tech Stack",
+                          style: applyFiraSansFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+
+  Widget infoCard(String? name, String? value) {
+    return Column(
+      children: [
+        Text(
+          name ?? "",
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
+            fontSize: 10,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          value == null ? "" : value.toLowerCase(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _eightDigit(int? value) {
+    if (value == null) {
+      return "-";
+    }
+
+    final result = value.toString().padLeft(8, "0").splitMapJoin(
+          RegExp(r".{4}"),
+          onMatch: (m) => "${m.group(0)} ",
+        );
+    return "HCSC 0001 $result";
   }
 
   String _formateAge({
@@ -212,7 +242,7 @@ class ProfileHeader extends ConsumerWidget {
       var age = DateTime.now().difference(dob).inDays ~/ 365;
       return "$age years";
     } catch (e) {
-      return "";
+      return "-";
     }
   }
 }

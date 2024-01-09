@@ -34,7 +34,11 @@ class PatientProfilePage extends ConsumerWidget {
       ),
       body: ref.watch(getPatientProfileProvider).when(
         data: (data) {
-          return _content(context, data);
+          return _content(
+            context,
+            data,
+            ref,
+          );
         },
         error: (e, s) {
           return Center(
@@ -56,7 +60,8 @@ class PatientProfilePage extends ConsumerWidget {
     );
   }
 
-  Widget _content(BuildContext context, PatientResponseModel patient) {
+  Widget _content(
+      BuildContext context, PatientResponseModel patient, WidgetRef ref) {
     final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(
@@ -74,6 +79,38 @@ class PatientProfilePage extends ConsumerWidget {
               color: AppColor.black.withOpacity(0.2),
             ),
             const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Health Card",
+                  style: applyFiraSansFont(fontSize: 18),
+                ),
+                IconButton(
+                  onPressed: () {
+                    final navigator = Navigator.of(context);
+                    navigator
+                        .push<bool?>(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientRegistrationMiniappPage(
+                              actionType: MiniAppActionType.UPDATE,
+                              displayName: "Update Profile",
+                            ),
+                          ),
+                        )
+                        .then(
+                          (value) => ref.invalidate(getPatientProfileProvider),
+                        );
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    size: 16,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 8),
             ProfileHeader(
               patient: patient,
             ),

@@ -60,17 +60,44 @@ class TriageMemberSelectionPage extends StatelessWidget {
                 body: SingleChildScrollView(
                   controller: controller,
                   child: Padding(
-                    padding: const EdgeInsets.all(AppSize.kmpadding),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.kmpadding,
+                      vertical: AppSize.kmpadding,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          "Select Member",
-                          style: applyFiraSansFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 4,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Select Member",
+                              style: applyFiraSansFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(Icons.cancel),
+                            )
+                          ],
                         ),
                         const ChangeMemberTiles(),
                       ],

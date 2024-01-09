@@ -97,27 +97,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                 ),
               ),
             ],
-            //  Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     const SizedBox(width: AppSize.kmwidth),
-            //     Text(
-            //       context.loc!.stepNumber("1", "3"),
-            //       style: applyRobotoFont(
-            //         color: AppColor.primary,
-            //         fontSize: 14,
-            //       ),
-            //     ),
-            //     const SizedBox(width: AppSize.kswidth),
-            //     Text(
-            //       AppLocalizations.of(context)!.questionnaireTitle,
-            //       style: applyFiraSansFont(
-            //         fontSize: 16,
-            //         fontWeight: FontWeight.w500,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
           body: Consumer(
             builder: (context, ref, _) {
@@ -186,7 +165,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             pageController.animateToPage(
                                               index + 1,
                                               duration: const Duration(
-                                                  milliseconds: 500),
+                                                  milliseconds: 100),
                                               curve: Curves.easeIn,
                                             );
                                           },
@@ -230,7 +209,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                               pageController.animateToPage(
                                                 index + 1,
                                                 duration: const Duration(
-                                                    milliseconds: 500),
+                                                    milliseconds: 100),
                                                 curve: Curves.easeIn,
                                               );
                                             }
