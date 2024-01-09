@@ -57,7 +57,7 @@ class TranslationPopUp extends ConsumerWidget {
                 itemCount: appLocales.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.7,
+                  childAspectRatio: 1.5,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
