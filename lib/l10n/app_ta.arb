@@ -154,7 +154,7 @@
     "consentPageCheckbox": "விதிமுறைகளையும் நிபந்தனைகளையும் நான் ஏற்றுக்கொள்கிறேன்.",
     "confirmButton": "உறுதிப்படுத்தல்",
     "discardButton": "தூக்கி எறியுங்கள்.",
-    "imageCapturedToastMessage": "படம் பிடிபட்டது",
+    "imageNotCapturedToastMessage": "படம் பிடிக்கப்படவில்லை",
     "eyeCaptureCompletionDialogHeading": "சோதனை முடிந்தது",
     "eyeCaptureCompletionDialogBody": "நீங்கள் சோதனையை முடித்துவிட்டீர்கள். முடிவைக் காண கீழே உள்ள பொத்தானைக் கிளிக் செய்க.",
     "eyeCaptureCompletionDialogViewResult": "முடிவுகளைக் காண்க",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "முகவரி விவரங்கள்",
     "profilePaeCheckReports" : "உங்கள் அறிக்கைகளை சரிபார்க்கவும்",
     "bottomNavItemEyeTest" : "கண் பரிசோதனை",
-    "bottomNavItemAppointment" : "நியமனங்கள்"
+    "bottomNavItemAppointment" : "நியமனங்கள்",
+    "memberSelection" : "உறுப்பினரைத் தேர்ந்தெடுக்கவும்",
+    "triageAlerDialogBoxTitle" : "மீண்டும் செய்ய படிகளைத் தேர்ந்தெடுக்கவும்",
+    "scannerTitle" : "ஸ்கேனர்"
 }

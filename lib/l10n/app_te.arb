@@ -154,7 +154,7 @@
     "consentPageCheckbox": "నేను నిబంధనలు మరియు షరతులను అంగీకరిస్తున్నాను",
     "confirmButton": "ధృవీకరించండి",
     "discardButton": "పారవేయండి.",
-    "imageCapturedToastMessage": "చిత్రం సంగ్రహించబడింది",
+    "imageNotCapturedToastMessage": "చిత్రం సంగ్రహించబడలేదు",
     "eyeCaptureCompletionDialogHeading": "పరీక్ష పూర్తయింది",
     "eyeCaptureCompletionDialogBody": "మీరు పరీక్షను పూర్తి చేసారు. ఫలితాన్ని చూడటానికి దయచేసి దిగువ బటన్పై క్లిక్ చేయండి.",
     "eyeCaptureCompletionDialogViewResult": "ఫలితాన్ని చూడండి",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "చిరునామా వివరాలు",
     "profilePaeCheckReports" : "మీ నివేదికలను తనిఖీ చేయండి",
     "bottomNavItemEyeTest" : "కంటి పరీక్ష",
-    "bottomNavItemAppointment" : "నియామకాలు"
+    "bottomNavItemAppointment" : "నియామకాలు",
+    "memberSelection" : "సభ్యుడిని ఎంచుకోండి",
+    "triageAlerDialogBoxTitle" : "పునరావృతం చేయడానికి దశలను ఎంచుకోండి",
+    "scannerTitle" : "స్కానర్"
 }

@@ -69,14 +69,16 @@ class TranslationPopUp extends ConsumerWidget {
                 ),
                 itemBuilder: (context, index) {
                   final appLocale = appLocales[index];
-
                   bool isActiveLocale = currentLocaleCode == appLocale.locale;
+                  bool isPunjabi = appLocale.locale == "pa";
                   return InkWell(
                     onTap: () {
+                      if (!isPunjabi){
                       ref
                           .read(globalLanguageProvider)
                           .setCurrentLocale(appLocale.locale)
                           .then((value) => Navigator.of(context).pop());
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),
@@ -109,20 +111,27 @@ class TranslationPopUp extends ConsumerWidget {
                                       : AppColor.black,
                                 ),
                               ),
-                              isActiveLocale
-                                  ? Container(
-                                      padding: const EdgeInsets.all(2),
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColor.green,
-                                      ),
-                                      child: const Icon(
-                                        Icons.check,
-                                        color: AppColor.white,
-                                        size: 20,
-                                      ),
-                                    )
-                                  : Container()
+                              if (!isPunjabi && isActiveLocale)
+                                Container(
+                                  padding: const EdgeInsets.all(2),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColor.green,
+                                  ),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: AppColor.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              if (isPunjabi)
+                                Text(
+                                  'Coming Soon',
+                                  style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color:  AppColor.primary,
+                                ),
+                                ),
                             ],
                           ),
                           Row(

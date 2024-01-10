@@ -14,6 +14,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
+
+import '../../../../../../shared/widgets/app_toast.dart';
 
 var updatequestionnaireIndexProvider =
     StateProvider.autoDispose<int>((ref) => 1);
@@ -32,241 +35,258 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
     model.selectedOptions.containsValue(true);
     var pageController = usePageController();
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      key: scaffoldKey.value,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              context.loc!.questionnaireTitle,
-              style: applyFiraSansFont(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+    final loc = context.loc!;
+
+    return TraceableWidget(
+      actionName: 'UpdateTriageQuestionnairePage',
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        key: scaffoldKey.value,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                context.loc!.questionnaireTitle,
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      body: model.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Consumer(
-              builder: (context, ref, _) {
-                return PageView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: pageController,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: model.questionnaireSections.length,
-                    itemBuilder: (context, index) {
-                      var question = model.questionnaireSections[index];
-                      var isLastQuestion =
-                          (model.questionnaireSections.length - 1 == index);
-                      // (double, int) record =
-                      //     _getWeightage(question.answerOption ?? []);
-                      // double weightage = record.$1;
-                      // int answerCode = record.$2;
+        body: model.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer(
+                builder: (context, ref, _) {
+                  return PageView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: pageController,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: model.questionnaireSections.length,
+                      itemBuilder: (context, index) {
+                        var question = model.questionnaireSections[index];
+                        var isLastQuestion =
+                            (model.questionnaireSections.length - 1 == index);
+                        // (double, int) record =
+                        //     _getWeightage(question.answerOption ?? []);
+                        // double weightage = record.$1;
+                        // int answerCode = record.$2;
 
-                      Map<String, Map<String, int>> finalValueMap =
-                          _getWeightageAnswerCode(question.answerOption ?? []);
+                        Map<String, Map<String, int>> finalValueMap =
+                            _getWeightageAnswerCode(
+                                question.answerOption ?? []);
 
-                      if (question.type == QuestionnaireType.Group) {
-                        return Center(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(AppSize.kmradius),
-                            ),
-                            elevation: AppSize.kselevation,
-                            color: Colors.white,
-                            child: SizedBox(
-                              width: AppSize.width(context) * 0.8,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.all(AppSize.kmpadding),
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Assessment",
-                                            style:
-                                                applyFiraSansFont(fontSize: 24),
-                                          ),
-                                          SvgPicture.asset(
-                                            AppIcon.question,
-                                            height: 32,
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: AppSize.ksheight,
-                                      ),
-                                      Text(
-                                        question.text ?? '',
-                                        style: applyRobotoFont(fontSize: 14),
-                                      ),
-                                      const SizedBox(
-                                        height: AppSize.ksheight,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          TextButton(
-                                            onPressed: () {
-                                              pageController.animateToPage(
-                                                index + 1,
-                                                duration: const Duration(
-                                                    milliseconds: 500),
-                                                curve: Curves.easeIn,
-                                              );
-                                            },
-                                            child: Text(
-                                              "Yes",
-                                              style: applyRobotoFont(
-                                                  fontSize: 14,
-                                                  color: AppColor.primary),
+                        if (question.type == QuestionnaireType.Group) {
+                          return Center(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.kmradius),
+                              ),
+                              elevation: AppSize.kselevation,
+                              color: Colors.white,
+                              child: SizedBox(
+                                width: AppSize.width(context) * 0.8,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.all(AppSize.kmpadding),
+                                  child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              loc.eyeAssessmentPopUpHeading,
+                                              style: applyFiraSansFont(
+                                                  fontSize: 24),
                                             ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () async {
-                                              if (index == 0) {
-                                                Navigator.of(context).pop();
-                                              } else {
-                                                int groupSectionCount = 0;
-                                                while (index <
-                                                        model
-                                                            .questionnaireSections
-                                                            .length &&
-                                                    (groupSectionCount == 0 ||
-                                                        model
-                                                                .questionnaireSections[
-                                                                    index]
-                                                                .type !=
-                                                            QuestionnaireType
-                                                                .Group)) {
-                                                  index++;
-                                                  groupSectionCount++;
-                                                }
-                                                if (index ==
-                                                    model.questionnaireSections
-                                                        .length) {
-                                                  model
-                                                      .saveQuestionaireResponse();
-                                                  await updateTriage(
-                                                      context, ref);
-                                                } else {
-                                                  index--;
-                                                  pageController.animateToPage(
-                                                    index + 1,
-                                                    duration: const Duration(
-                                                        milliseconds: 500),
-                                                    curve: Curves.easeIn,
-                                                  );
-                                                }
-                                              }
-                                            },
-                                            child: Text(
-                                              "No",
-                                              style: applyRobotoFont(
-                                                fontSize: 14,
-                                                color: AppColor.primary,
+                                            SvgPicture.asset(
+                                              AppIcon.question,
+                                              height: 32,
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: AppSize.ksheight,
+                                        ),
+                                        Text(
+                                          question.text ?? '',
+                                          style: applyRobotoFont(fontSize: 14),
+                                        ),
+                                        const SizedBox(
+                                          height: AppSize.ksheight,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                pageController.animateToPage(
+                                                  index + 1,
+                                                  duration: const Duration(
+                                                      milliseconds: 80),
+                                                  curve: Curves.easeIn,
+                                                );
+                                              },
+                                              child: Text(
+                                                loc.yesButton,
+                                                style: applyRobotoFont(
+                                                    fontSize: 14,
+                                                    color: AppColor.primary),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ]),
+                                            TextButton(
+                                              onPressed: () async {
+                                                if (index == 0) {
+                                                  Navigator.of(context).pop();
+                                                } else {
+                                                  int groupSectionCount = 0;
+                                                  while (index <
+                                                          model
+                                                              .questionnaireSections
+                                                              .length &&
+                                                      (groupSectionCount == 0 ||
+                                                          model
+                                                                  .questionnaireSections[
+                                                                      index]
+                                                                  .type !=
+                                                              QuestionnaireType
+                                                                  .Group)) {
+                                                    index++;
+                                                    groupSectionCount++;
+                                                  }
+                                                  if (index ==
+                                                      model
+                                                          .questionnaireSections
+                                                          .length) {
+                                                    model
+                                                        .saveQuestionaireResponse();
+                                                    await updateTriage(
+                                                        context, ref);
+                                                  } else {
+                                                    index--;
+                                                    pageController
+                                                        .animateToPage(
+                                                      index + 1,
+                                                      duration: const Duration(
+                                                          milliseconds: 80),
+                                                      curve: Curves.easeIn,
+                                                    );
+                                                  }
+                                                }
+                                              },
+                                              child: Text(
+                                                loc.noButton,
+                                                style: applyRobotoFont(
+                                                  fontSize: 14,
+                                                  color: AppColor.primary,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ]),
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      } else if (question.type == QuestionnaireType.Choice) {
-                        return UpdateOptionCard(
-                           totalGroupQuestion: model.totalGroupQuestion(),
-                           total: model.questionnaireSections.length,
-                           index:  ref
-                            .watch(updatequestionnaireIndexProvider.notifier)
-                            .state,
-                          question: question,
-                          onNoButtonPressed: () {
-                              ref.read(updatequestionnaireIndexProvider.notifier).state++;
+                          );
+                        } else if (question.type == QuestionnaireType.Choice) {
+                          return UpdateOptionCard(
+                            totalGroupQuestion: model.totalGroupQuestion(),
+                            total: model.questionnaireSections.length,
+                            index: ref
+                                .watch(
+                                    updatequestionnaireIndexProvider.notifier)
+                                .state,
+                            question: question,
+                            onNoButtonPressed: () {
+                              ref
+                                  .read(
+                                      updatequestionnaireIndexProvider.notifier)
+                                  .state++;
 
-                            model.addQuestionnaireAnswer(
-                              question.id!,
-                              "No",
-                              _getAnswerWeightage(finalValueMap, "No").toInt(),
-                              _getAnswerCode(finalValueMap, "No"),
-                            );
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                          onYesButtonPressed: () async {
-                             ref.read(updatequestionnaireIndexProvider.notifier).state++;
-
-                            model.addQuestionnaireAnswer(
-                              question.id!,
-                              "Yes",
-                              _getAnswerWeightage(finalValueMap, "Yes").toInt(),
-                              _getAnswerCode(finalValueMap, "Yes"),
-                            );
-
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                              await updateTriage(context, ref);
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                        );
-                      } else if (question.type == QuestionnaireType.String) {
-                        return UpdateTriageTextTypeQuestion(
-                          question: question,
-                          onSubmitted: (String value) async {
-                            if (value.isNotEmpty) {
                               model.addQuestionnaireAnswer(
                                 question.id!,
-                                value,
-                                0,
-                                0,
+                                "No",
+                                _getAnswerWeightage(finalValueMap, "No")
+                                    .toInt(),
+                                _getAnswerCode(finalValueMap, "No"),
                               );
-                            }
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-                              await updateTriage(context, ref);
-                            } else {
-                              pageController.animateToPage(
-                                index + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
+                              if (isLastQuestion) {
+                                model.saveQuestionaireResponse();
+                              } else {
+                                pageController.animateToPage(
+                                  index + 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            },
+                            onYesButtonPressed: () async {
+                              ref
+                                  .read(
+                                      updatequestionnaireIndexProvider.notifier)
+                                  .state++;
+
+                              model.addQuestionnaireAnswer(
+                                question.id!,
+                                "Yes",
+                                _getAnswerWeightage(finalValueMap, "Yes")
+                                    .toInt(),
+                                _getAnswerCode(finalValueMap, "Yes"),
                               );
-                            }
-                          },
-                        );
-                      } else {
-                        return const Text("Question Not Supported Yet");
-                      }
-                    });
-              },
-            ),
+
+                              if (isLastQuestion) {
+                                model.saveQuestionaireResponse();
+                                await updateTriage(context, ref);
+                              } else {
+                                pageController.animateToPage(
+                                  index + 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            },
+                          );
+                        } else if (question.type == QuestionnaireType.String) {
+                          return UpdateTriageTextTypeQuestion(
+                            question: question,
+                            onSubmitted: (String value) async {
+                              if (value.isNotEmpty) {
+                                model.addQuestionnaireAnswer(
+                                  question.id!,
+                                  value,
+                                  0,
+                                  0,
+                                );
+                              }
+                              if (isLastQuestion) {
+                                model.saveQuestionaireResponse();
+                                await updateTriage(context, ref);
+                              } else {
+                                pageController.animateToPage(
+                                  index + 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            },
+                          );
+                        } else {
+                          return Text(loc.eyeAssessmentUnsupportedQuestion);
+                        }
+                      });
+                },
+              ),
+      ),
     );
   }
 
@@ -278,17 +298,21 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
         .updateTriage(reportId);
 
     response.fold((failure) {
-      context.scaffoldMessenger.showSnackBar(
-        const SnackBar(
-          content: Text("Something went wrong"),
-        ),
-      );
+      AppToast.showToast(context, context.loc!.somethingWentWrong,
+          isError: true);
+      // context.scaffoldMessenger.showSnackBar(
+      //   SnackBar(
+      //     content: Text(context.loc!.somethingWentWrong),
+      //   ),
+      // );
     }, (result) {
-      context.scaffoldMessenger.showSnackBar(
-        const SnackBar(
-          content: Text("Triage Updated Successfully"),
-        ),
-      );
+      AppToast.showToast(context, context.loc!.triageUpdatedSuccessfully,
+          isSuccess: true);
+      // context.scaffoldMessenger.showSnackBar(
+      //    SnackBar(
+      //     content: Text(context.loc!.triageUpdatedSuccessfully),
+      //   ),
+      // );
     });
     navigator.pop();
   }

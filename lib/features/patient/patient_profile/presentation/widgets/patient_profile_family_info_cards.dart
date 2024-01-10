@@ -43,6 +43,7 @@ class PatientFamilyDetails extends StatelessWidget {
                   ),
                 ).then(
                   (value) {
+                    logger.d({"Profile Page add Miniapp": value});
                     if (value == null || value == false) {
                       Fluttertoast.showToast(msg: "Family member not added");
                     } else {

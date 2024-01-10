@@ -55,7 +55,7 @@ class UpdateOptionCard extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                ("No Preview Available"),
+                                (context.loc!.noPreviewAvailable),
                                 style: applyRobotoFont(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,

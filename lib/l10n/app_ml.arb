@@ -154,7 +154,7 @@
     "consentPageCheckbox": "നിബന്ധനകളും വ്യവസ്ഥകളും ഞാൻ അംഗീകരിക്കുന്നു.",
     "confirmButton": "സ്ഥിരീകരിക്കുക",
     "discardButton": "ഉപേക്ഷിക്കുക.",
-    "imageCapturedToastMessage": "ചിത്രം പകർത്തി",
+    "imageNotCapturedToastMessage": "ചിത്രം പകർത്തിയിട്ടില്ല",
     "eyeCaptureCompletionDialogHeading": "പരീക്ഷണം പൂർത്തിയായി",
     "eyeCaptureCompletionDialogBody": "നിങ്ങൾ പരീക്ഷ പൂർത്തിയാക്കി. ഫലം കാണാൻ താഴെ കൊടുത്തിരിക്കുന്ന ബട്ടണിൽ ക്ലിക്ക് ചെയ്യുക.",
     "eyeCaptureCompletionDialogViewResult": "ഫലം കാണുക",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "വിലാസത്തിന്റെ വിശദാംശങ്ങൾ",
     "profilePaeCheckReports" : "നിങ്ങളുടെ റിപ്പോർട്ടുകൾ പരിശോധിക്കുക",
     "bottomNavItemEyeTest" : "നേത്ര പരിശോധന",
-    "bottomNavItemAppointment" : "നിയമനങ്ങൾ"
+    "bottomNavItemAppointment" : "നിയമനങ്ങൾ",
+    "memberSelection" : "അംഗം തിരഞ്ഞെടുക്കുക",
+    "triageAlerDialogBoxTitle" : "വീണ്ടും ചെയ്യാനുള്ള ഘട്ടങ്ങൾ തിരഞ്ഞെടുക്കുക",
+    "scannerTitle" : "സ്കാനർ"
 }

@@ -154,7 +154,7 @@
     "consentPageCheckbox": "ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು ನಾನು ಒಪ್ಪುತ್ತೇನೆ",
     "confirmButton": "ದೃಢೀಕರಿಸಿ",
     "discardButton": "ವಿಸರ್ಗಿಸಿ",
-    "imageCapturedToastMessage": "ಚಿತ್ರ ತೆಗೆಯಲಾಗಿದೆ",
+    "imageNotCapturedToastMessage": "ಚಿತ್ರ ಸೆರೆಹಿಡಿಯಲಾಗಿಲ್ಲ",
     "eyeCaptureCompletionDialogHeading": "ಪರೀಕ್ಷೆ ಮುಗಿಯಿತು",
     "eyeCaptureCompletionDialogBody": "ನೀವು ಪರೀಕ್ಷೆಯನ್ನು ಮುಗಿಸಿದ್ದೀರಿ. ಫಲಿತಾಂಶವನ್ನು ನೋಡಲು ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಬಟನ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.",
     "eyeCaptureCompletionDialogViewResult": "ಫಲಿತಾಂಶ ವೀಕ್ಷಿಸಿ",
@@ -209,6 +209,9 @@
     "profilePageAddressDetails" : "ವಿಳಾಸ ವಿವರಗಳು",
     "profilePaeCheckReports" : "ನಿಮ್ಮ ವರದಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
     "bottomNavItemEyeTest" : "ಕಣ್ಣಿನ ಪರೀಕ್ಷೆ",
-    "bottomNavItemAppointment" : "ನೇಮಕಾತಿಗಳು"
+    "bottomNavItemAppointment" : "ನೇಮಕಾತಿಗಳು",
+    "memberSelection" : "ಸದಸ್ಯರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+    "triageAlerDialogBoxTitle" : "ಮತ್ತೆಮಾಡಲು ಹಂತಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "scannerTitle" : "ಸ್ಕ್ಯಾನರ್"
 
 }

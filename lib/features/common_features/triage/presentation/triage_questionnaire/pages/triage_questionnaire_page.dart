@@ -52,7 +52,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
         );
       },
       child: TraceableWidget(
-        actionName: 'TriageQuestionnaire Page',
+        actionName: 'TriageQuestionnairePage',
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           key: scaffoldKey.value,
