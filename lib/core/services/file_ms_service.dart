@@ -29,7 +29,6 @@ class FileMsService {
 
     var data = FormData.fromMap({
       'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
-      'specData': 'abc@gmail.com'
     });
 
     try {
@@ -49,17 +48,4 @@ class FileMsService {
       rethrow;
     }
   }
-
-  // //create a method which will take file as input and the file is below 16mb then return the file else degrade the quality of the image and return the file
-  // Future<File> compressImage(File file) async {
-  //   //check the size of the file
-  //   final size = await file.length();
-  //   if (size <= 16000000) {
-  //     return file;
-  //   } else {
-  //     //degrade the quality of the image
-
-  //     return file;
-  //   }
-  // }
 }

@@ -68,13 +68,13 @@ class VgAddOptoData extends HookWidget {
                       Row(
                         children: [
                           Text(
-                            'OP 4567890',
+                            '-',
                             style: applyRobotoFont(
                                 fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           const Spacer(),
                           Text(
-                            'Test ID:1234567891',
+                            '-',
                             style: applyRobotoFont(
                                 fontSize: 12, fontWeight: FontWeight.w400),
                           ),
@@ -84,7 +84,7 @@ class VgAddOptoData extends HookWidget {
                       Row(
                         children: [
                           Text(
-                            'Raghavi Pandey, Graduate Diploma,Female,22 years',
+                            '-',
                             style: applyRobotoFont(
                                 fontSize: 12, fontWeight: FontWeight.w400),
                           ),

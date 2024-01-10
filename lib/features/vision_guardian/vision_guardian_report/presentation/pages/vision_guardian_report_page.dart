@@ -151,9 +151,9 @@ class VisionGuardianReportPage extends StatelessWidget {
                 trailing: SvgPicture.asset(
                   AppIcon.call,
                 ),
-                title:  Text(loc.tollFreeNumber),
+                title: Text(loc.tollFreeNumber),
                 subtitle: const Text(
-                  "1800 1211 00411",
+                  "-",
                   style: TextStyle(
                     color: AppColor.black,
                     fontWeight: FontWeight.bold,

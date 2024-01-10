@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/services/dio_service.dart';
-import '../../../vision_technician_register_new_patient/data/models/vt_patient_response_model.dart';
 
 var assessmentCardProvider = ChangeNotifierProvider<AssessmentCardProvider>(
     (ref) => AssessmentCardProvider(ref.read(dioProvider)));

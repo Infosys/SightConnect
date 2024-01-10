@@ -1,13 +1,11 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
-
-import '../../../vision_technician_register_new_patient/data/models/vt_eyecare_details_question_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_new_patient/data/models/vt_eyecare_details_question_model.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vt_patient_model.freezed.dart';
 part 'vt_patient_model.g.dart';
-
 
 @freezed
 class VTPatientDto with _$VTPatientDto {
@@ -31,8 +29,6 @@ class VTPatientDto with _$VTPatientDto {
   factory VTPatientDto.fromJson(Map<String, dynamic> json) =>
       _$VTPatientDtoFromJson(json);
 }
-
- 
 
 class VTPatientModel {
   String firstName;

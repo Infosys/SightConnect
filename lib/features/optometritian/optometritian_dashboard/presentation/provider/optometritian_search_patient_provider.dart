@@ -12,7 +12,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   DateTime _selectedToDate = DateTime.now();
   DateTime _selectedFromDate = DateTime.now();
 
-  final List<PatientModel> _patientList = fakePatients;
+  final List<PatientModel> _patientList = [];
   final List<PatientModel> _searchPatientList = [];
   String _query = "";
 

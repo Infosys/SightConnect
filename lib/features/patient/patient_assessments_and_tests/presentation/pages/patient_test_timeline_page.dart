@@ -40,7 +40,7 @@ class PatientTestTimelinePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Assessment ID: AT 010101",
+              "Assessment ID: -",
               style: applyRobotoFont(
                 fontSize: 16,
                 color: AppColor.black,

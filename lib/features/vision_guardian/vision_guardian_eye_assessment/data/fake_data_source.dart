@@ -10,7 +10,7 @@ var eyeAssessmentfilters = [
 
 var casesCritical = [
   VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
+    name: "Raghav Pandey - ",
     age: "28 yrs",
     gender: "Male",
     reportDate: "17 Dec 23",
@@ -24,7 +24,7 @@ var casesCritical = [
     prefix: "PG",
   ),
   VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
+    name: "Raghav Pandey -",
     age: "28 yrs",
     gender: "Male",
     reportDate: "17 Dec 23",

@@ -8,44 +8,43 @@ var visionGuardianMemberDetailsProvider = ChangeNotifierProvider.autoDispose(
     (ref) => VisionGuardianMemberDetailsProvider());
 
 class VisionGuardianMemberDetailsProvider extends ChangeNotifier {
-
   var casesCritical = [
-  VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
-    age: "28 yrs",
-    gender: "Male",
-    reportDate: "17 Dec 23",
-    reportTime: "11:00 AM",
-    assessmentId: "Assessment ID: AT 010111",
-    urgency: "Urgent Consult",
-    profession: "Eye Surgeon",
-    recommendation:
-        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
-    image: AppImages.raghavi,
-    prefix: "PG",
-  ),
-  VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
-    age: "28 yrs",
-    gender: "Male",
-    reportDate: "17 Dec 23",
-    reportTime: "11:00 AM",
-    assessmentId: "Assessment ID: AT 010111",
-    urgency: "Routine Consult",
-    profession: "Eye Surgeon",
-    recommendation:
-        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
-    image: AppImages.raghavi,
-    prefix: "PG",
-  )
-];
+    VisionGuardianEyeAssessmentPatientModel(
+      name: "Raghav Pandey -",
+      age: "28 yrs",
+      gender: "Male",
+      reportDate: "17 Dec 23",
+      reportTime: "11:00 AM",
+      assessmentId: "Assessment ID: AT 010111",
+      urgency: "Urgent Consult",
+      profession: "Eye Surgeon",
+      recommendation:
+          "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+      image: AppImages.raghavi,
+      prefix: "PG",
+    ),
+    VisionGuardianEyeAssessmentPatientModel(
+      name: "Raghav Pandey",
+      age: "28 yrs",
+      gender: "Male",
+      reportDate: "17 Dec 23",
+      reportTime: "11:00 AM",
+      assessmentId: "Assessment ID: AT 010111",
+      urgency: "Routine Consult",
+      profession: "Eye Surgeon",
+      recommendation:
+          "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+      image: AppImages.raghavi,
+      prefix: "PG",
+    )
+  ];
 
-var addMemberFilters = [
-   "All", 
-  "Early Consult",
-   "Urgent Consult",
- "Routine Consult"
-];
+  var addMemberFilters = [
+    "All",
+    "Early Consult",
+    "Urgent Consult",
+    "Routine Consult"
+  ];
   XFile? _imageFile;
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -86,8 +85,6 @@ var addMemberFilters = [
   TextEditingController get city => _cityController;
   TextEditingController get state => _stateController;
   TextEditingController get pincode => _pincodeController;
-
-
 
   // set setName(String value) => _nameController.text = value;
 

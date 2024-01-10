@@ -6,8 +6,8 @@ import '../../../../core/constants/app_icon.dart';
 
 var casesCritical = [
   {
-    "name": "Raghav Pandey - PD 789996",
-    "age": "28 yrs",
+    "name": "Raghav Pandey - ",
+    "age": "-",
     "gender": "Male",
     "reportDate": "17 Dec 23",
     "reportTime": "11:00 AM",
@@ -20,8 +20,8 @@ var casesCritical = [
     "prefix": "PG",
   },
   {
-    "name": "Raghav Pandey - PD 789996",
-    "age": "28 yrs",
+    "name": "Raghav Pandey - ",
+    "age": "-",
     "gender": "Male",
     "reportDate": "17 Dec 23",
     "reportTime": "11:00 AM",
@@ -37,8 +37,8 @@ var casesCritical = [
 
 var casesFollowUp = [
   {
-    "name": "Raghav Pandey - PD 789996",
-    "age": "28 yrs",
+    "name": "Raghav Pandey - ",
+    "age": "-",
     "gender": "Male",
     "reportDate": "17 Dec 23",
     "reportTime": "11:00 AM",
@@ -51,8 +51,8 @@ var casesFollowUp = [
     "prefix": "PG",
   },
   {
-    "name": "Raghav Pandey - PD 789996",
-    "age": "28 yrs",
+    "name": "Raghav Pandey - ",
+    "age": "-",
     "gender": "Male",
     "reportDate": "17 Dec 23",
     "reportTime": "11:00 AM",

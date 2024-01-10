@@ -62,7 +62,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                     children: [
                       const Icon(Icons.phone_outlined, color: AppColor.grey),
                       Text(
-                        "99634 78759",
+                        "- ",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(

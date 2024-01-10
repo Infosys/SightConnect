@@ -27,7 +27,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "1234567890123456",
+                "-",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const SizedBox(
@@ -38,7 +38,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "priyarajarajan_r01@abcde.com",
+                "-",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const SizedBox(
