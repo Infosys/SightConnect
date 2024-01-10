@@ -154,7 +154,7 @@
     "consentPageCheckbox": "মই নিয়ম আৰু চৰ্তসমূহৰ সৈতে সন্মত।",
     "confirmButton": "নিশ্চিত কৰক",
     "discardButton": "বিসৰ্জন কৰক",
-    "imageCapturedToastMessage": "ছবি বন্দী কৰা হৈছে",
+    "imageNotCapturedToastMessage": "ছবি ধৰা পৰা হোৱা নাই",
     "eyeCaptureCompletionDialogHeading": "পৰীক্ষা সম্পূৰ্ণ কৰা হৈছে",
     "eyeCaptureCompletionDialogBody": "আপুনি পৰীক্ষাটো সম্পূৰ্ণ কৰিছে। ফলাফল চাবলৈ অনুগ্ৰহ কৰি তলৰ বুটামটোত ক্লিক কৰক।",
     "eyeCaptureCompletionDialogViewResult": "ফলাফল চাওক",
@@ -210,5 +210,8 @@
     "profilePageAddressDetails" : "ঠিকনাৰ বিৱৰণ",
     "profilePaeCheckReports" : "আপোনাৰ প্ৰতিবেদনসমূহ পৰীক্ষা কৰক",
     "bottomNavItemEyeTest" : "চকুৰ পৰীক্ষা",
-    "bottomNavItemAppointment" : "নিযুক্তি"
+    "bottomNavItemAppointment" : "নিযুক্তি",
+    "memberSelection" : "সদস্য নিৰ্বাচন কৰক",
+    "triageAlerDialogBoxTitle" : "পুনৰায় কৰিবলৈ পদক্ষেপসমূহ নিৰ্ব্বাচন কৰক",
+    "scannerTitle" : "স্ক্যানাৰ"
 }

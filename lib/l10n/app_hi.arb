@@ -154,7 +154,7 @@
     "consentPageCheckbox": "मैं नियम और शर्तों से सहमत हूँ",
     "confirmButton": "पुष्टि करें",
     "discardButton": "छोड़ना",
-    "imageCapturedToastMessage": "छवि कैप्चर की गई",
+    "imageNotCapturedToastMessage": "छवि कैप्चर नहीं की गई",
     "eyeCaptureCompletionDialogHeading": "परीक्षण पूरा हुआ",
     "eyeCaptureCompletionDialogBody": "आपने परीक्षण पूरा किया है। कृपया नीचे दिए गए बटन पर क्लिक करके परिणाम देखने के लिए।",
     "eyeCaptureCompletionDialogViewResult": "परिणाम देखें",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "पते का विवरण",
     "profilePaeCheckReports" : "अपनी रिपोर्ट जांचें",
     "bottomNavItemEyeTest" : "नेत्र परीक्षण",
-    "bottomNavItemAppointment" : "नियुक्ति"
+    "bottomNavItemAppointment" : "नियुक्ति",
+    "memberSelection" : "सदस्य का चयन करें",
+    "triageAlerDialogBoxTitle" : "पुनः करने के चरण चुनें",
+    "scannerTitle" : "चित्रान्वीक्षक"
 }

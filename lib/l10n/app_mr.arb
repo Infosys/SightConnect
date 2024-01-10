@@ -154,7 +154,7 @@
     "consentPageCheckbox": "मी नियम आणि अटींशी सहमत आहे",
     "confirmButton": "निश्चित करा",
     "discardButton": "रद्द करा",
-    "imageCapturedToastMessage": "छायाचित्र कॅप्चर केले",
+    "imageNotCapturedToastMessage": "प्रतिमा कॅप्चर केलेली नाही",
     "eyeCaptureCompletionDialogHeading": "चाचणी पूर्ण",
     "eyeCaptureCompletionDialogBody": "तुम्ही चाचणी पूर्ण केली आहे. कृपया परिणाम पाहण्यासाठी खालील बटणावर क्लिक करा.",
     "eyeCaptureCompletionDialogViewResult": "परिणाम पहा",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "पत्ता तपशील",
     "profilePaeCheckReports" : "तुमचे अहवाल तपासा",
     "bottomNavItemEyeTest" : "डोळा चाचणी",
-    "bottomNavItemAppointment" : "भेटी"
+    "bottomNavItemAppointment" : "भेटी",
+    "memberSelection" : "सदस्य निवडा",
+    "triageAlerDialogBoxTitle" : "पुन्हा करण्यासाठी पायऱ्या निवडा",
+    "scannerTitle" : "स्कॅनर"
 }

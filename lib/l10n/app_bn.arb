@@ -154,7 +154,7 @@
     "consentPageCheckbox": "আমি শর্তাবলীতে রাজি আছি",
     "confirmButton": "নিশ্চিত করুন",
     "discardButton": "বাতিল করুন",
-    "imageCapturedToastMessage": "ছবি ধরা পড়েছে",
+    "imageNotCapturedToastMessage": "ছবি ক্যাপচার করা হয়নি",
     "eyeCaptureCompletionDialogHeading": "পরীক্ষা সম্পূর্ণ",
     "eyeCaptureCompletionDialogBody": "আপনি পরীক্ষা সম্পন্ন করেছেন। ফলাফল দেখার জন্য নিচের বোতামে ক্লিক করুন।",
     "eyeCaptureCompletionDialogViewResult": "ফলাফল দেখুন",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "ঠিকানা বিবরণ",
     "profilePaeCheckReports" : "আপনার রিপোর্টগুলি পরীক্ষা করুন",
     "bottomNavItemEyeTest" : "চোখের পরীক্ষা",
-    "bottomNavItemAppointment" : "অ্যাপয়েন্টমেন্ট"
+    "bottomNavItemAppointment" : "অ্যাপয়েন্টমেন্ট",
+    "memberSelection" : "সদস্য নির্বাচন করুন",
+    "triageAlerDialogBoxTitle" : "পুনরায় করার জন্য ধাপগুলি নির্বাচন করুন",
+    "scannerTitle" : "স্ক্যানার"
 }

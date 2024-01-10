@@ -240,7 +240,7 @@ class _PatientTriageEyeCapturingPageState
                             final image = await _takePicture(context);
                             logger.d("Image: $image");
                             if (image == null) {
-                              Fluttertoast.showToast(msg: "Image not captured");
+                              Fluttertoast.showToast(msg: loc.imageNotCapturedToastMessage);
                               return;
                             }
 

@@ -154,7 +154,7 @@
     "consentPageCheckbox": "હું નિયમો અને શરતો સાથે સંમત છું",
     "confirmButton": "પુષ્ટિ કરો",
     "discardButton": "કાઢી નાંખો",
-    "imageCapturedToastMessage": "છબી લેવામાં આવી",
+    "imageNotCapturedToastMessage": "છબી કેપ્ચર નથી",
     "eyeCaptureCompletionDialogHeading": "પરીક્ષણ પૂર્ણ થયું",
     "eyeCaptureCompletionDialogBody": "તમે પરીક્ષા પૂર્ણ કરી લીધી છે. પરિણામ જોવા માટે મહેરબાની કરીને નીચેના બટન પર ક્લિક કરો.",
     "eyeCaptureCompletionDialogViewResult": "પરિણામ જુઓ",
@@ -209,5 +209,8 @@
     "profilePageAddressDetails" : "સરનામાંની વિગતો",
     "profilePaeCheckReports" : "તમારા અહેવાલો તપાસો",
     "bottomNavItemEyeTest" : "આંખની કસોટી",
-    "bottomNavItemAppointment" : "નિમણૂંકો"
+    "bottomNavItemAppointment" : "નિમણૂંકો",
+    "memberSelection" : "સભ્ય પસંદ કરો",
+    "triageAlerDialogBoxTitle" : "ફરીથી કરવાનાં પગલાં પસંદ કરો",
+    "scannerTitle" : "સ્કેનર"
 }

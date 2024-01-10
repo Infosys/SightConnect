@@ -85,7 +85,7 @@ class TriageMemberSelectionPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Select Member",
+                              loc.memberSelection,
                               style: applyFiraSansFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

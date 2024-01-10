@@ -19,8 +19,8 @@ class HelpAndSupportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Help and Support"),
+      appBar: CustomAppbar(
+        title: Text(loc.appDrawerHelpAndSupport),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
