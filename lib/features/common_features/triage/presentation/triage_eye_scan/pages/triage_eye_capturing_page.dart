@@ -16,7 +16,6 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
@@ -240,7 +239,8 @@ class _PatientTriageEyeCapturingPageState
                             final image = await _takePicture(context);
                             logger.d("Image: $image");
                             if (image == null) {
-                              Fluttertoast.showToast(msg: loc.imageNotCapturedToastMessage);
+                              Fluttertoast.showToast(
+                                  msg: loc.imageNotCapturedToastMessage);
                               return;
                             }
 
