@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 class UpdateTriageEyePreviewPage extends StatelessWidget {
@@ -41,14 +42,14 @@ class UpdateTriageEyePreviewPage extends StatelessWidget {
                       backgroundColor: AppColor.red,
                     ),
                     icon: const Icon(Icons.cancel, size: 22),
-                    label: const Text("Discard"),
+                    label:  Text(context.loc!.discardButton),
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.of(context).pop(imageFile);
                     },
                     icon: const Icon(Icons.check_circle, size: 22),
-                    label: const Text("Confirm"),
+                    label:  Text(context.loc!.confirmButton),
                   ),
                 ],
               ),

@@ -218,8 +218,11 @@
     "bottomNavItemAppointment" : "Appointments",
     "memberSelection" : "Select Member",
     "triageAlerDialogBoxTitle" : "Select Steps to Redo",
-    "scannerTitle" : "Scanner"
+    "scannerTitle" : "Scanner",
     
 
  
+    "somethingWentWrong" : "Something went wrong.",
+    "triageUpdatedSuccessfully" : "Triage Updated successfully.",
+    "noPreviewAvailable" : "No Preview Available"
 }
