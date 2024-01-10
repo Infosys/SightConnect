@@ -43,7 +43,7 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           Flexible(child: Text(loc.triageAlerDialogBoxTitle)),
+          Flexible(child: Text(loc.triageAlerDialogBoxTitle)),
           InkWell(
             onTap: () {
               Navigator.of(context).pop();
