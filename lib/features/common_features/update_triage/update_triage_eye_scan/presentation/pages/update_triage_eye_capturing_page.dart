@@ -34,7 +34,8 @@ class _UpdateTriageEyeCapturingPageState
   late CameraController _controller;
   ResolutionPreset defaultResolution = ResolutionPreset.max;
   bool isLoading = false;
-  
+  String _progressMessage = "Loading...";
+
   @override
   void initState() {
     super.initState();
@@ -84,10 +85,23 @@ class _UpdateTriageEyeCapturingPageState
     super.dispose();
   }
 
+  void setLoading([String message = "Loading..."]) {
+    setState(() {
+      isLoading = true;
+      _progressMessage = message;
+    });
+  }
+
+  void removeLoading() {
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
-   ref.read(updateTriageEyeScanProvider);
+    final model = ref.watch(updateTriageEyeScanProvider);
 
     if (!_controller.value.isInitialized) {
       return const Scaffold(
@@ -98,9 +112,10 @@ class _UpdateTriageEyeCapturingPageState
     } else {
       return Scaffold(
         key: scaffoldKey,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         appBar: AppBar(
-          backgroundColor: AppColor.black,
+          backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
           title: Text(
             context.loc!.eyeScanTitle,
@@ -131,12 +146,27 @@ class _UpdateTriageEyeCapturingPageState
         body: LoadingOverlay(
           isLoading: isLoading,
           child: Stack(
+            alignment: Alignment.center,
             children: [
-              AspectRatio(
-                aspectRatio: 1 / _controller.value.aspectRatio,
+              Positioned.fill(
                 child: CameraPreview(_controller),
               ),
-              
+              Positioned(
+                top: 100,
+                left: null,
+                right: null,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    _eyeLocalization(model.currentEye, context),
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      color: AppColor.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
               Positioned(
                 left: 0,
                 right: 0,
@@ -155,14 +185,14 @@ class _UpdateTriageEyeCapturingPageState
     }
   }
 
-  //  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
-  //   return switch (eye) {
-  //     TriageEyeType.LEFT => context.loc!.leftEyeString,
-  //     TriageEyeType.RIGHT => context.loc!.rightEyeString,
-  //     TriageEyeType.BOTH => context.loc!.bothEyeString,
-  //     _ => "",
-  //   };
-  // }
+  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
+    return switch (eye) {
+      TriageEyeType.LEFT => context.loc!.leftEyeString,
+      TriageEyeType.RIGHT => context.loc!.rightEyeString,
+      TriageEyeType.BOTH => context.loc!.bothEyeString,
+      _ => "",
+    };
+  }
 
   Future<bool> _validateImage(XFile? image) async {
     XFile? verifiedImage = await Navigator.of(context).push(
@@ -181,13 +211,9 @@ class _UpdateTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return null;
     }
-    setState(() {
-      isLoading = true;
-    });
+    setLoading();
     final image = await _controller.takePicture();
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
     return image;
   }
 
@@ -212,8 +238,12 @@ class _UpdateTriageEyeCapturingPageState
       } else if (model.currentEye == TriageEyeType.LEFT) {
         model.setLeftEyeImage(image);
 
+        setLoading("Uploading...");
+
         bool resposne =
             await model.updateEyeScanReport(widget.diagnosticReportId);
+
+        removeLoading();
         if (resposne) {
           navigator.pop();
           navigator.pop();
@@ -226,7 +256,9 @@ class _UpdateTriageEyeCapturingPageState
       }
     } on CameraException {
       Fluttertoast.showToast(msg: "Camera not found");
+      removeLoading();
     } catch (e) {
+      removeLoading();
       Fluttertoast.showToast(msg: "Something went wrong");
     }
   }
@@ -235,35 +267,27 @@ class _UpdateTriageEyeCapturingPageState
     if (!_controller.value.isInitialized) {
       return;
     }
-    setState(() {
-      isLoading = true;
-    });
+    setLoading();
 
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _initializeCamera(CameraLensDirection.back);
     } else {
       _initializeCamera(CameraLensDirection.front);
     }
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
   }
 
   Future<void> _toggleFlash() async {
     if (!_controller.value.isInitialized) {
       return;
     }
-    setState(() {
-      isLoading = true;
-    });
+    setLoading();
 
     if (_controller.value.flashMode == FlashMode.off) {
       await _controller.setFlashMode(FlashMode.torch);
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
-    setState(() {
-      isLoading = false;
-    });
+    removeLoading();
   }
 }
