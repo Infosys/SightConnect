@@ -76,6 +76,12 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
+        widget.onBack?.call();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.miniapp.displayName ?? "Service"),
