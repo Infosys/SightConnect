@@ -161,7 +161,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 },
                 shouldInterceptRequest: (controller, request) async {
                   logger.d("androidShouldInterceptRequest: ${request.url}");
-                  final path = request.url.path.trim();
+                  // final path = request.url.path.trim();
                   final host = request.url.host.trim();
 
                   if (widget.token.isNotEmpty &&
@@ -170,13 +170,13 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                         "Bearer ${widget.token}";
                   }
 
-                  if (path == "/failure") {
-                    Navigator.of(context).pop(false);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
-                  } else if (path == "/success") {
-                    Navigator.of(context).pop(true);
-                    Future.value(WebResourceResponse(data: Uint8List(0)));
-                  }
+                  // if (path == "/failure") {
+                  //   Navigator.of(context).pop(false);
+                  //   Future.value(WebResourceResponse(data: Uint8List(0)));
+                  // } else if (path == "/success") {
+                  //   Navigator.of(context).pop(true);
+                  //   Future.value(WebResourceResponse(data: Uint8List(0)));
+                  // }
 
                   return null;
                 },
@@ -184,7 +184,11 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   final path = navigationAction.request.url?.path.trim();
                   logger.d("shouldOverrideUrlLoading: $path");
 
-                  if (path == "/failure" || path == "/success") {
+                  if (path == "/failure") {
+                    Navigator.of(context).pop(false);
+                    return NavigationActionPolicy.CANCEL;
+                  } else if (path == "/success") {
+                    Navigator.of(context).pop(true);
                     return NavigationActionPolicy.CANCEL;
                   } else {
                     return NavigationActionPolicy.ALLOW;
