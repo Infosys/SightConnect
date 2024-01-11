@@ -13,23 +13,23 @@ class ReportAssessmentQuestions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8,
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            loc.questionnaireTitle,
-            style: applyRobotoFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              color: Colors.black,
-            ),
+      child: ExpansionTile(
+        title: Text(
+          loc.questionnaireTitle,
+          style: applyRobotoFont(
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            color: Colors.black,
           ),
-          const SizedBox(height: 10),
+        ),
+        children: [
           (questionResponseBreifModel == null ||
                   questionResponseBreifModel!.isEmpty)
               ? Padding(
@@ -45,56 +45,54 @@ class ReportAssessmentQuestions extends StatelessWidget {
                     ),
                   ),
                 )
-              : ListView.builder(
+              : ListView.separated(
                   itemCount: questionResponseBreifModel!.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.black12,
+                    );
+                  },
                   itemBuilder: (BuildContext context, int index) {
                     var responseModel = questionResponseBreifModel![index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          responseModel.question,
+
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: Text(
+                          "${index + 1}. ${responseModel.question}",
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: Colors.black.withOpacity(0.8),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                "\u2022  ",
-                                style: applyRobotoFont(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black.withOpacity(0.7),
-                                    height: 1.5),
+                        subtitle: Row(
+                          children: [
+                            Text(
+                              "\u2022  ",
+                              style: applyRobotoFont(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black.withOpacity(0.7),
+                                  height: 1.5),
+                            ),
+                            Text(
+                              (responseModel.response == "Yes")
+                                  ? context.loc!.yesButton
+                                  : context.loc!.noButton,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
                               ),
-                              Text(
-                                (responseModel.response == "Yes")
-                                    ? context.loc!.yesButton
-                                    : context.loc!.noButton,
-                                style: applyRobotoFont(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(
-                            thickness: 1.5,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                      ],
+                      ),
                     );
                   },
                 ),

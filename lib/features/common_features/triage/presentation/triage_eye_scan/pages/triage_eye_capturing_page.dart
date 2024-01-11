@@ -46,6 +46,7 @@ class _PatientTriageEyeCapturingPageState
   @override
   void initState() {
     super.initState();
+    logger.d("INIT STATE");
     WidgetsBinding.instance.addObserver(this);
     _initializeCamera(CameraLensDirection.back);
   }
@@ -71,6 +72,7 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d("didChangeAppLifecycleState");
     final CameraController cameraController = _controller;
     if (!cameraController.value.isInitialized) {
       return;
@@ -80,15 +82,6 @@ class _PatientTriageEyeCapturingPageState
     } else if (state == AppLifecycleState.resumed) {
       _initializeCamera(cameraController.description.lensDirection);
     }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    if (_controller.value.isInitialized) {
-      _controller.dispose();
-    }
-    super.dispose();
   }
 
   void setLoading([String message = "Loading..."]) {
@@ -102,6 +95,12 @@ class _PatientTriageEyeCapturingPageState
     setState(() {
       isLoading = false;
     });
+  }
+
+  @override
+  void dispose() {
+    logger.d("dispose");
+    super.dispose();
   }
 
   @override
@@ -252,7 +251,8 @@ class _PatientTriageEyeCapturingPageState
                             } else if (model.currentEye == TriageEyeType.LEFT) {
                               setLoading("Uploading Image");
                               await model.setLeftEyeImage(image);
-                              removeLoading();
+                              // removeLoading();
+                              setLoading("Validating...");
 
                               await ref
                                   .read(triageEyeScanProvider)
@@ -262,6 +262,7 @@ class _PatientTriageEyeCapturingPageState
 
                               response.fold(
                                 (failure) async {
+                                  removeLoading();
                                   logger.d({
                                     "Failure while saving in local db ":
                                         failure,
@@ -273,6 +274,7 @@ class _PatientTriageEyeCapturingPageState
                                   );
                                 },
                                 (result) async {
+                                  removeLoading();
                                   logger.d({
                                     "saveTriageEyeScanResponseToDB": "Success",
                                   });
@@ -434,11 +436,7 @@ class _PatientTriageEyeCapturingPageState
                   const Spacer(),
                   TextButton(
                     onPressed: () async {
-                      if (context.mounted && _controller.value.isInitialized) {
-                        _controller.dispose();
-                      }
-
-                      ref.read(triageStepperProvider).goToNextStep();
+                      ref.read(triageStepperProvider).reset();
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => TriageResultPage(
@@ -446,6 +444,10 @@ class _PatientTriageEyeCapturingPageState
                           ),
                         ),
                       );
+                      if (context.mounted && _controller.value.isInitialized) {
+                        WidgetsBinding.instance.removeObserver(this);
+                        _controller.dispose();
+                      }
                     },
                     child: Text(
                       loc.eyeCaptureCompletionDialogViewResult,
@@ -510,13 +512,13 @@ class _PatientTriageEyeCapturingPageState
                   const Spacer(),
                   TextButton(
                     onPressed: () async {
-                      if (context.mounted && _controller.value.isInitialized) {
-                        _controller.dispose();
-                      }
-
                       ref.read(resetProvider).reset();
                       ref.read(accessibilityProvider).resetBrightness();
                       Navigator.of(context).popUntil((route) => route.isFirst);
+                      if (context.mounted && _controller.value.isInitialized) {
+                        WidgetsBinding.instance.removeObserver(this);
+                        _controller.dispose();
+                      }
                       //this will naviagte to local page for future ref
                       // Navigator.of(context).pushReplacement(
                       //   MaterialPageRoute(

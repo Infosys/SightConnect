@@ -91,12 +91,16 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
                   activeIndex.value == 6 ? AppColor.primary : AppColor.white,
             ),
             onPressed: () async {
-              PermissionStatus status = await Permission.camera.status;
-              if (status.isDenied) {
+              PermissionStatus cameraStatus = await Permission.camera.status;
+              PermissionStatus audioStatus = await Permission.microphone.status;
+
+              if (cameraStatus.isDenied || audioStatus.isDenied) {
                 await Permission.camera.request();
-              } else if (status.isPermanentlyDenied) {
+                await Permission.microphone.request();
+              } else if (cameraStatus.isPermanentlyDenied ||
+                  audioStatus.isPermanentlyDenied) {
                 await openAppSettings();
-              } else if (status.isGranted) {
+              } else if (cameraStatus.isGranted && audioStatus.isGranted) {
                 var cameras = await availableCameras();
                 if (cameras.isNotEmpty && context.mounted) {
                   Navigator.of(context).push(

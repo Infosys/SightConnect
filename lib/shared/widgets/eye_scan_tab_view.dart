@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
@@ -18,84 +19,114 @@ class EyeScanTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return DefaultTabController(
-      length: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              loc.eyeScanTitle,
-              style: applyRobotoFont(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TabBar(
-              dividerColor: AppColor.black,
-              unselectedLabelColor: AppColor.grey,
-              labelStyle: applyFiraSansFont(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-              labelColor: AppColor.black,
-              tabs: [
-                Tab(text: loc.rightCornea),
-                Tab(text: loc.leftCornea),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        title: Text(
+          loc.eyeScanTitle,
+          style: applyRobotoFont(
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            color: Colors.black,
+          ),
+        ),
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            height: 200,
+            child: Row(
+              children: [
+                Expanded(
+                  child: _EyeScanImage(
+                    image: getRightEyeImageUrl(eyeScanData),
+                    name: "Right Eye",
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _EyeScanImage(
+                    image: getLeftEyeImageUrl(eyeScanData),
+                    name: "Left Eye",
+                  ),
+                ),
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: lerpDouble(
-                  AppSize.height(context), AppSize.width(context), 1.05),
-              child: TabBarView(
-                viewportFraction: 1,
-                children: [
-                  RightCorneaTabView(
-                    rightEyeImage: getRightEyeImageUrl(eyeScanData),
-                  ),
-                  LeftCorneaTabView(
-                    leftEyeImage: getLeftEyeImageUrl(eyeScanData),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
+
+  String? getLeftEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
+    if (imageBriefEntity == null) return null;
+
+    List<String> leftEyeImageUrl = [];
+
+    for (ImageBriefEntity imageBrief in imageBriefEntity) {
+      if (imageBrief.bodySite == "LEFT_EYE") {
+        leftEyeImageUrl.add(imageBrief.imageUrl);
+      }
+    }
+    return leftEyeImageUrl.isEmpty ? null : leftEyeImageUrl.first;
+  }
+
+  String? getRightEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
+    if (imageBriefEntity == null) return null;
+
+    List<String> rightEyeImageUrl = [];
+
+    for (ImageBriefEntity imageBrief in imageBriefEntity) {
+      if (imageBrief.bodySite == "RIGHT_EYE") {
+        rightEyeImageUrl.add(imageBrief.imageUrl);
+      }
+    }
+    return rightEyeImageUrl.isEmpty ? null : rightEyeImageUrl.first;
+  }
 }
 
-List<String> getLeftEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
-  if (imageBriefEntity == null) return [];
+class _EyeScanImage extends StatelessWidget {
+  const _EyeScanImage({
+    required this.image,
+    required this.name,
+    super.key,
+  });
 
-  List<String> leftEyeImageUrl = [];
+  final String? image;
+  final String name;
 
-  for (ImageBriefEntity imageBrief in imageBriefEntity) {
-    if (imageBrief.bodySite == "LEFT_EYE") {
-      leftEyeImageUrl.add(imageBrief.imageUrl);
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          name,
+          style: applyRobotoFont(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        image == null
+            ? const Center(child: Text("No Image"))
+            : Flexible(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  child: CachedNetworkImage(
+                    imageUrl: image!,
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+              ),
+      ],
+    );
   }
-  return leftEyeImageUrl;
-}
-
-List<String> getRightEyeImageUrl(List<ImageBriefEntity>? imageBriefEntity) {
-  if (imageBriefEntity == null) return [];
-
-  List<String> rightEyeImageUrl = [];
-
-  for (ImageBriefEntity imageBrief in imageBriefEntity) {
-    if (imageBrief.bodySite == "RIGHT_EYE") {
-      rightEyeImageUrl.add(imageBrief.imageUrl);
-    }
-  }
-  return rightEyeImageUrl;
 }

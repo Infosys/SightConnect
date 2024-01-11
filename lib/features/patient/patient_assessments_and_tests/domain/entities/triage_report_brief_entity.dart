@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/encounter_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 
@@ -77,15 +79,21 @@ class TriageReportBriefEntity {
   DateTime? triageResultStartDate;
   String? triageResultDescription;
   bool? isUpdateEnabled;
+  int encounterId;
+  EncounterStatus? encounterStatus;
 
   String? questionResultDescription;
   String? observationResultDescription;
   String? mediaResultDescription;
+  PerformerRole? performerRole;
 
   TriageReportBriefEntity({
+    required this.encounterId,
+    this.encounterStatus,
     this.questionResultDescription,
     this.observationResultDescription,
     this.mediaResultDescription,
+    this.performerRole,
     required this.triageResultID,
     this.overallSeverity,
     this.reportTag,
