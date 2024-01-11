@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/source/remote_triage_report_source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -52,6 +53,52 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
       try {
         final remoteResponse =
             await triageReportSource.getTriageReportByReportId(reportId);
+
+        return Right(remoteResponse);
+      } on ServerException catch (e) {
+        return Left(
+          UnknownFailure(
+            errorMessage: e.toString(),
+          ),
+        );
+      }
+    } else {
+      return Left(ServerFailure(errorMessage: 'No internet connectivity'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TriageDetailedReportModel>>>
+      getTriageReportByPatientIdAndStatus(
+    int patientId,
+    DiagnosticReportStatus status,
+  ) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final remoteResponse = await triageReportSource
+            .getTriageReportByPatientIdAndStatus(patientId, status);
+
+        return Right(remoteResponse);
+      } on ServerException catch (e) {
+        return Left(
+          UnknownFailure(
+            errorMessage: e.toString(),
+          ),
+        );
+      }
+    } else {
+      return Left(ServerFailure(errorMessage: 'No internet connectivity'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TriageDetailedReportModel>>>
+      getTriageReportByEncounterId(
+          int encounterId, DiagnosticReportStatus status) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final remoteResponse = await triageReportSource
+            .getTriageReportByEncounterId(encounterId, status);
 
         return Right(remoteResponse);
       } on ServerException catch (e) {

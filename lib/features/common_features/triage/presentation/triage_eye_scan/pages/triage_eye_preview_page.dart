@@ -45,12 +45,10 @@ class TriageEyePreviewPage extends StatelessWidget {
                         backgroundColor: AppColor.red,
                       ),
                       icon: const Icon(Icons.cancel, size: 22),
-                      label: Flexible(
-                        child: Text(
-                          loc.discardButton,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      label: Text(
+                        loc.discardButton,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
@@ -61,12 +59,10 @@ class TriageEyePreviewPage extends StatelessWidget {
                         Navigator.of(context).pop(imageFile);
                       },
                       icon: const Icon(Icons.check_circle, size: 22),
-                      label: Flexible(
-                        child: Text(
-                          loc.confirmButton,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      label: Text(
+                        loc.confirmButton,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),

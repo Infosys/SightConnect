@@ -6,10 +6,12 @@ class LoadingOverlay extends StatelessWidget {
     this.isLoading = false,
     required this.child,
     this.progressMessage = "Loading...",
+    this.overlayColor = Colors.black,
   });
   final bool isLoading;
   final Widget child;
   final String progressMessage;
+  final Color overlayColor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class LoadingOverlay extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Container(
-                color: Colors.black.withOpacity(0.6),
+                color: overlayColor.withOpacity(0.6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

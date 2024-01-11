@@ -1,21 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/assessment_overall_result_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_page_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_scan_tab_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/enum/severity.dart';
 
-class PatientAssessmentReportPage extends ConsumerWidget {
+class PatientAssessmentReportPage extends HookConsumerWidget {
   const PatientAssessmentReportPage({
     required this.assessmentDetailsReport,
     super.key,
@@ -25,166 +27,198 @@ class PatientAssessmentReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    var showReport = useState(false);
+    var scrollController = useScrollController();
     return Scaffold(
       appBar: CustomAppbar(
-        title: Row(
+        title: Text(
+            "PID - ${assessmentDetailsReport.patientId} - ${assessmentDetailsReport.patientName}"),
+      ),
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(loc.eyeAssessmentTitle),
-            const Spacer(),
+            const SizedBox(height: AppSize.kmheight),
             Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSize.width(context) * 0.01,
-              ),
+              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: getRequestSeverityColor(
-                    assessmentDetailsReport.cumulativeSeverity),
+                borderRadius: BorderRadius.circular(8),
+                color: AppColor.primary.withOpacity(0.2),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Report ID: ${assessmentDetailsReport.diagnosticReportId}",
+                  ),
+                  Text(
+                    "${assessmentDetailsReport.reportDate?.formateDate}",
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSize.kmheight),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.white,
+                border: Border.all(
+                  color: _checkColorMapper(
+                    assessmentDetailsReport.cumulativeSeverity,
+                  ),
+                  width: 1,
+                ),
               ),
               child: Text(
-                getSeverityText(
-                    assessmentDetailsReport.cumulativeSeverity, context.loc!),
+                "The assessment indicates that you may have a blocked vision due to Scotoma. You are recommended to visit a Neuro Ophthalmologist for further consultation without delay.",
                 style: applyRobotoFont(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.white,
+                  fontSize: 16,
                 ),
               ),
             ),
+            const SizedBox(height: AppSize.kmheight),
+            const NearbyVisionCentersList(),
+            const SizedBox(height: AppSize.kmheight),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppColor.white,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.call,
+                            color: AppColor.primary,
+                          ),
+                          const SizedBox(width: AppSize.kmpadding),
+                          Flexible(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text("Toll Free number"),
+                                Text(
+                                  AppText.tollFreeNumber,
+                                  style: applyRobotoFont(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: AppSize.kmpadding,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColor.primary.withOpacity(0.5),
+                    ),
+                    child: SvgPicture.asset(
+                      AppIcon.call,
+                      width: 18,
+                      height: 18,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.white,
+                        BlendMode.srcATop,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                showReport.value = !showReport.value;
+                await Future.delayed(const Duration(milliseconds: 300));
+                if (!showReport.value) {
+                  scrollController.animateTo(
+                    scrollController.position.minScrollExtent,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  scrollController.animateTo(
+                    scrollController.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    showReport.value
+                        ? "Hide Detailed Report"
+                        : "Show Detailed Report",
+                    style: applyRobotoFont(
+                      color: AppColor.primary,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(width: AppSize.kmpadding),
+                  Icon(
+                    showReport.value
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    size: 16,
+                  ),
+                ],
+              ),
+            ),
+            AnimatedCrossFade(
+              firstChild: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ReportAssessmentQuestions(
+                    questionResponseBreifModel:
+                        assessmentDetailsReport.questionResponseBriefEntity,
+                  ),
+                  const SizedBox(height: AppSize.kmheight),
+                  TumblingEReportCard(
+                    tumblingEData:
+                        assessmentDetailsReport.visualAcuityBreifEntity,
+                    observationDescription:
+                        assessmentDetailsReport.observationResultDescription,
+                  ),
+                  const SizedBox(height: AppSize.kmheight),
+                  EyeScanTabView(
+                    eyeScanData: assessmentDetailsReport.imageBriefEntity,
+                  ),
+                  const SizedBox(height: AppSize.klheight * 3),
+                ],
+              ),
+              secondChild: const SizedBox(),
+              crossFadeState: showReport.value
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 200),
+            )
           ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ReportPageHeader(
-                triageReportAndAssementPage: assessmentDetailsReport,
-              ),
-              // GridView.builder(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   padding: EdgeInsets.zero,
-              //   itemCount: 3,
-              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 3,
-              //     childAspectRatio: 1,
-              //     crossAxisSpacing: 10,
-              //     mainAxisSpacing: 10,
-              //   ),
-              //   itemBuilder: (context, index) {
-              //     var data = assessmentDetailsReport;
-              //     return Container(
-              //       padding: EdgeInsets.only(
-              //         left: AppSize.width(context) * 0.03,
-              //         top: AppSize.height(context) * 0.01,
-              //       ),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(8),
-              //         color: index == 0
-              //             ? backColorMapper(data.questionResponseSeverity??Severity.LOW)
-              //             : index == 1
-              //                 ? backColorMapper(data.observationSeverity??Severity.LOW)
-              //                 : backColorMapper(data.mediaSeverity??Severity.LOW),
-              //       ),
-              //       child: Column(
-              //         mainAxisSize: MainAxisSize.min,
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Container(
-              //             width: 20,
-              //             height: 20,
-              //             decoration: BoxDecoration(
-              //               shape: BoxShape.circle,
-              //               color: index == 0
-              //                   ? checkColorMapper(
-              //                       data.questionResponseSeverity??Severity.LOW)
-              //                   : index == 1
-              //                       ? checkColorMapper(
-              //                           data.observationSeverity??Severity.LOW)
-              //                       : checkColorMapper(data.mediaSeverity??Severity.LOW),
-              //             ),
-              //             child: const Center(
-              //               child: Icon(
-              //                 Icons.check,
-              //                 color: Colors.white,
-              //                 size: 15,
-              //               ),
-              //             ),
-              //           ),
-              //           const SizedBox(
-              //             height: 8,
-              //           ),
-              //           Text(
-              //             index == 0
-              //                 ? loc.assessmentResultCardAssessmentQuestions
-              //                 : index == 1
-              //                     ? loc.assessmentResultCardAcuityTest
-              //                     : loc.assessmentResultCardEyeScan,
-              //             style: applyRobotoFont(
-              //               fontSize: 14,
-              //               fontWeight: FontWeight.w600,
-              //             ),
-              //           ),
-              //           const SizedBox(
-              //             height: 8,
-              //           ),
-              //           Text(
-              //             loc.eyeAssessmentCompleted,
-              //             style: applyRobotoFont(
-              //               fontSize: 12,
-              //               fontWeight: FontWeight.w400,
-              //             ),
-              //           )
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // ),
-
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
-              AssessmentOverallResultCard(
-                triageResult: const {},
-                name: "name",
-                id: "id",
-                patientImage: AppImages.aboutUs,
-                triageResultEntities: assessmentDetailsReport,
-              ),
-              ReportAssessmentQuestions(
-                questionResponseBreifModel:
-                    assessmentDetailsReport.questionResponseBriefEntity,
-              ),
-              TumblingEReportCard(
-                tumblingEData: assessmentDetailsReport.visualAcuityBreifEntity,
-                observationDescription:
-                    assessmentDetailsReport.observationResultDescription,
-              ),
-              EyeScanTabView(
-                eyeScanData: assessmentDetailsReport.imageBriefEntity,
-              ),
-            ],
-          ),
         ),
       ),
     );
   }
 
-  Color backColorMapper(Severity severity) {
-    switch (severity) {
-      case Severity.ABNORMAL:
-        return AppColor.lightRed.withOpacity(0.4);
-      case Severity.LOW:
-        return AppColor.lightGreen.withOpacity(0.4);
-      case Severity.HIGH:
-        return AppColor.lightOrange.withOpacity(0.4);
-      default:
-        return AppColor.grey.withOpacity(0.4);
-    }
-  }
-
-  Color checkColorMapper(Severity severity) {
+  Color _checkColorMapper(Severity? severity) {
     switch (severity) {
       case Severity.ABNORMAL:
         return AppColor.red;

@@ -21,16 +21,15 @@ class NearbyVisionCentersList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Flexible(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Flexible(
                 child: Text(
                   loc.nearbyVisionCentersTitle,
                   maxLines: 1,
@@ -40,57 +39,57 @@ class NearbyVisionCentersList extends ConsumerWidget {
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: AppSize.kmheight,
-        ),
-        ref.watch(nearByVisionCenterProvider).when(
-              data: (data) {
-                if (data.isEmpty) {
+            ],
+          ),
+          const SizedBox(
+            height: AppSize.kmheight,
+          ),
+          ref.watch(nearByVisionCenterProvider).when(
+                data: (data) {
+                  if (data.isEmpty) {
+                    return Center(
+                      child: Text(
+                        loc.nearbyVisionCentersNotFound,
+                        style: applyFiraSansFont(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    );
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ...data
+                            .map(
+                              (e) => NearbyVisionCentersCard(data: e),
+                            )
+                            .toList()
+                      ],
+                    ),
+                  );
+                },
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                error: (error, stackTrace) {
                   return Center(
-                    child: Text(
-                      loc.nearbyVisionCentersNotFound,
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          ref.read(patientHomeProvider).init();
+                        },
+                        label: Text(loc.tryAgainButton),
+                        icon: const Icon(Icons.location_on),
                       ),
                     ),
                   );
-                }
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ...data
-                          .map(
-                            (e) => NearbyVisionCentersCard(data: e),
-                          )
-                          .toList()
-                    ],
-                  ),
-                );
-              },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
+                },
               ),
-              error: (error, stackTrace) {
-                return Center(
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextButton.icon(
-                      onPressed: () {
-                        ref.read(patientHomeProvider).init();
-                      },
-                      label: Text(loc.tryAgainButton),
-                      icon: const Icon(Icons.location_on),
-                    ),
-                  ),
-                );
-              },
-            ),
-      ],
+        ],
+      ),
     );
   }
 }

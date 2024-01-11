@@ -24,6 +24,7 @@ class AssessmentDetailedReportMapper {
       patientName: profileEntity.name,
       patientImage: profileEntity.image,
       assessmentID: triageDetailedReport.assessmentCode ?? 0,
+      diagnosticReportId: triageDetailedReport.diagnosticReportId ?? 0,
       reportDate: triageDetailedReport.issued ?? DateTime.now(),
       questionResponseBriefEntity:
           AssessmentDetailedReportMapper._getQuestionsBriefEntity(

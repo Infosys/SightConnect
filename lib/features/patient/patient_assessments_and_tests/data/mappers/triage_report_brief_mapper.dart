@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
@@ -5,6 +6,8 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 class AssessmentReportMapper {
   static TriageReportBriefEntity toEntity(TriageDetailedReportModel model) {
     return TriageReportBriefEntity(
+      encounterId: model.encounterId!,
+      encounterStatus: model.encounterStatus,
       questionResultDescription: model.questionResultDescription ?? "",
       observationResultDescription: model.observationResultDescription ?? "",
       mediaResultDescription: model.mediaResultDescription ?? "",
@@ -17,7 +20,8 @@ class AssessmentReportMapper {
       triageResultStartDate: model.userStartDate!,
       triageResultDescription: model.diagnosticReportDescription ?? "",
       isUpdateEnabled: model.updateEndTime!.isAfter(DateTime.now()) &&
-          model.status != DiagnosticReportStatus.CANCELLED,
+          model.status != DiagnosticReportStatus.CANCELLED &&
+          model.performerRole == PerformerRole.PATIENT,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 
@@ -6,6 +7,7 @@ class TriageReportDetailedEntity {
   final String patientName;
   String? patientImage;
   final int assessmentID;
+  final int diagnosticReportId;
   DateTime? reportDate;
   String? triageResultDescription;
   String? questionResultDescription;
@@ -26,6 +28,7 @@ class TriageReportDetailedEntity {
     this.observationSeverity,
     this.mediaSeverity,
     this.questionResponseSeverity,
+    required this.diagnosticReportId,
     this.triageResultDescription,
     this.questionResultDescription,
     this.observationResultDescription,

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -155,22 +156,25 @@ class ResultPageTopCard extends ConsumerWidget {
               ),
               child: Consumer(
                 builder: (context, ref, child) {
-                  PatientResponseModel? patientResponseModel = ref
+                  PatientModel? patient = ref
                       .watch(getPatientProfileByIdProvider(id!))
                       .asData
-                      ?.value;
-                  if (patientResponseModel?.profile?.patient?.profilePhoto ==
-                      null) {
+                      ?.value
+                      .profile
+                      ?.patient;
+                  String? image = patient?.profilePhoto;
+                  String? name = patient?.name;
+
+                  if (image != null && image.isNotEmpty) {
+                    return AppNetworkImage(
+                      imageUrl: image,
+                      radius: 40,
+                    );
+                  } else {
                     return AppNameAvatar(
                       radius: 38,
                       fontSize: 22,
-                      name: patientResponseModel?.profile?.patient?.name,
-                    );
-                  } else {
-                    return AppNetworkImage(
-                      imageUrl:
-                          patientResponseModel!.profile!.patient!.profilePhoto!,
-                      radius: 40,
+                      name: name,
                     );
                   }
                 },
