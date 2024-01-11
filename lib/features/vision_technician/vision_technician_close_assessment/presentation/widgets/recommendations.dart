@@ -23,15 +23,13 @@ class Recommendations extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recommendation(s)",
+            "Note",
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
             ),
           ),
           TextField(
-            controller: ref
-                .watch(vtCloseAssessmentHelperProvider)
-                .recommendationsController,
+            controller: ref.watch(vtCloseAssessmentHelperProvider).recommendationsController,
             decoration: InputDecoration(
               hintText: "Enter Recommendations Here",
               hintStyle: applyRobotoFont(fontSize: 14),

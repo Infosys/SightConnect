@@ -1,17 +1,20 @@
+import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/enums/category_enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../common_features/triage/domain/models/enums/status.dart';
-part 'care_plan_model.freezed.dart';
-part 'care_plan_model.g.dart';
+part 'care_plan_post_model.freezed.dart';
+part 'care_plan_post_model.g.dart';
 
 @freezed
-class CarePlanModel with _$CarePlanModel {
-  const factory CarePlanModel({
+class CarePlanPostModel with _$CarePlanPostModel {
+  const factory CarePlanPostModel({
+    int? id,
     List<ReportModel>? reports,
     int? encounterId,
     int? organizationCode,
@@ -19,12 +22,12 @@ class CarePlanModel with _$CarePlanModel {
     List<ConditionModel>? conditions,
     List<ServiceRequestModel>? serviceRequest,
     String? note,
-    String? startDate,
+    @TimestampConverter() DateTime? startDate,
     List<GoalModel>? goal,
-  }) = _CarePlanModel;
+  }) = _CarePlanPostModel;
 
-  factory CarePlanModel.fromJson(Map<String, dynamic> json) =>
-      _$CarePlanModelFromJson(json);
+  factory CarePlanPostModel.fromJson(Map<String, dynamic> json) =>
+      _$CarePlanPostModelFromJson(json);
 }
 
 @freezed
@@ -51,7 +54,8 @@ class PerformerModel with _$PerformerModel {
 @freezed
 class ConditionModel with _$ConditionModel {
   const factory ConditionModel({
-    String? recordedDate,
+    int? id,
+    @TimestampConverter() DateTime? recordedDate,
     BodySite? bodySite,
     Code? code,
     String? note,
@@ -64,11 +68,12 @@ class ConditionModel with _$ConditionModel {
 @freezed
 class ServiceRequestModel with _$ServiceRequestModel {
   const factory ServiceRequestModel({
+    int? id,
     String? note,
     PatientInstruction? patientInstruction,
     int? identifier,
     BodySite? bodySite,
-    TriageUrgency? priority,
+    TriagePriority? priority,
   }) = _ServiceRequestModel;
 
   factory ServiceRequestModel.fromJson(Map<String, dynamic> json) =>
@@ -78,12 +83,14 @@ class ServiceRequestModel with _$ServiceRequestModel {
 @freezed
 class GoalModel with _$GoalModel {
   const factory GoalModel({
+    int? id,
     String? statusReason,
     Status? achievementStatus,
     List<GoalOutcomeModel>? outcomes,
     String? note,
-    String? startDate,
+    @TimestampConverter() DateTime? startDate,
     List<TargetModel>? target,
+    Category? category,
   }) = _GoalModel;
 
   factory GoalModel.fromJson(Map<String, dynamic> json) =>
@@ -93,6 +100,7 @@ class GoalModel with _$GoalModel {
 @freezed
 class GoalOutcomeModel with _$GoalOutcomeModel {
   const factory GoalOutcomeModel({
+    int? id,
     GoalOutCome? goalOutcome,
   }) = _GoalOutcomeModel;
 
@@ -103,6 +111,7 @@ class GoalOutcomeModel with _$GoalOutcomeModel {
 @freezed
 class TargetModel with _$TargetModel {
   const factory TargetModel({
+    int? id,
     String? detailString,
   }) = _TargetModel;
 

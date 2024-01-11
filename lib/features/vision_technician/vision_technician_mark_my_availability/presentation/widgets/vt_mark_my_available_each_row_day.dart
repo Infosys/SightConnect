@@ -58,9 +58,9 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
               onPressed: daydata.checked == false
                   ? null
                   : () {
-                      ref
-                          .read(markMyAvailabilityHelperProvider.notifier)
-                          .removeDayAvailability(dayAvailabilityindex, index);
+                      // ref
+                      //     .read(markMyAvailabilityHelperProvider.notifier)
+                      //     .removeDayAvailability(dayAvailabilityindex, index);
                     },
             )
           ],

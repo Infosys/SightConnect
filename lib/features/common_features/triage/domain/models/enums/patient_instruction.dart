@@ -1,6 +1,6 @@
-enum PatientInstruction{
+enum PatientInstruction {
   VISIT_PRIMARY_CLINIC,
   VISIT_SECONDARY_CLINIC,
   VISIT_TERTIARY_CLINIC,
-  VISIT_CENTER_OF_EXCELLENCE
+  VISIT_COE
 }

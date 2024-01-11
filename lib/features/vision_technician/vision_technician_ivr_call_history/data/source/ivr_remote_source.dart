@@ -14,7 +14,7 @@ var ivrRemoteSource = Provider(
 
 abstract class IvrRemoteSource {
   Future<List<IvrCallHistoryModel>> getIvrCallHistory({
-    required String mobile,
+    required String? mobile,
     List<String>? callStatus,
   });
   Future makeIvrCall({required String patientMobile});
@@ -27,7 +27,7 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
 
   @override
   Future<List<IvrCallHistoryModel>> getIvrCallHistory({
-    required String mobile,
+    required String? mobile,
     List<String>? callStatus,
   }) async {
     try {

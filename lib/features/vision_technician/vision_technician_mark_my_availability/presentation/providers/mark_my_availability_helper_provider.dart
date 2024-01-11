@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/models/mark_my_availability_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/repositories/availability_repository_impl.dart';
@@ -10,57 +11,64 @@ var markMyAvailabilityHelperProvider =
     ChangeNotifierProvider<MarkMyAvailabilityHelperNotifier>(
   (ref) => MarkMyAvailabilityHelperNotifier(
     availabilityRepository: ref.watch(availabilityRepository),
+    globalVTProvider: ref.watch(globalVTProvider),
+    available: ref.watch(globalVTProvider).user?.availableForTeleconsultation!,
   ),
 );
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
-  MarkMyAvailabilityHelperNotifier({required this.availabilityRepository});
+  MarkMyAvailabilityHelperNotifier(
+      {required this.availabilityRepository,
+      required this.globalVTProvider,
+      required this.available});
 
   AvailabilityRepository availabilityRepository;
+  GlobalVTProvider globalVTProvider;
+  bool? available;
 
   String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
   var markMyAvailabilityList = [
     MarkMyAvailabilityModel(
       day: "Monday",
       time: [
-        ["9:00 AM", "10:00 AM", "1"]
+        ["9:00 AM", "07:00 PM", "1"]
       ],
       checked: true,
     ),
     MarkMyAvailabilityModel(
         day: "Tuesday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
     MarkMyAvailabilityModel(
         day: "Wednesday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
     MarkMyAvailabilityModel(
         day: "Thursday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
     MarkMyAvailabilityModel(
         day: "Friday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
     MarkMyAvailabilityModel(
         day: "Saturday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
     MarkMyAvailabilityModel(
         day: "Sunday",
         time: [
-          ["9:00 AM", "10:00 AM", "1"]
+          ["9:00 AM", "07:00 PM", "1"]
         ],
         checked: true),
   ];
@@ -78,9 +86,17 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      markAvailability = await availabilityRepository.postMarkMyAvailability(
-        available: !markAvailability,
+
+      if (available == null) return;
+
+      available = await availabilityRepository.postMarkMyAvailability(
+        !available!,
+        globalVTProvider.userId,
+        globalVTProvider.user?.officialMobile,
       );
+
+      logger.d("markAvailability response : $markAvailability");
+
       isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -98,7 +114,7 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
 
   void addDayAvailability(int dayAvailabilityindex) {
     (markMyAvailabilityList[dayAvailabilityindex].time)
-        .add(["9:00 AM", "10:00 AM", "1"]);
+        .add(["9:00 AM", "07:00 PM", "1"]);
     notifyListeners();
   }
 

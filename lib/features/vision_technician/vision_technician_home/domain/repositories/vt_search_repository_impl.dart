@@ -21,7 +21,7 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
 
   @override
   Future<List<VTPatientDto>> getPatientProfile(String query) async {
-    if (query.isEmpty) throw "List is empty";
+    if (query.length < 4) throw "List is empty";
 
     var endPoint = '/services/orchestration/api/patients/triage-reports';
 

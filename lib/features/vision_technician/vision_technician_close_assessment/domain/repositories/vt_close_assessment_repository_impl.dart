@@ -13,7 +13,7 @@ class VTCloseAssessmentRepositoryImpl extends VTCloseAssessmentRepository {
   VTCloseAssessmentRepositoryImpl(this.remoteDataSource);
 
   @override
-  void submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) {
-    remoteDataSource.submitCloseAssessmentInfo(patientDetails);
+  Future<String> submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) {
+    return remoteDataSource.submitCloseAssessmentInfo(patientDetails);
   }
 }

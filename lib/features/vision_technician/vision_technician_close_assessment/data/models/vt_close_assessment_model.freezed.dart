@@ -23,7 +23,7 @@ mixin _$CloseAssessmentDto {
   int? get encounterId => throw _privateConstructorUsedError;
   int? get diagnosticReportId => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
-  List<Performer>? get performer => throw _privateConstructorUsedError;
+  List<PerformerDto>? get performer => throw _privateConstructorUsedError;
   int? get carePlanId => throw _privateConstructorUsedError;
   int? get goalId => throw _privateConstructorUsedError;
   GoalAction? get goalAction => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $CloseAssessmentDtoCopyWith<$Res> {
       {int? encounterId,
       int? diagnosticReportId,
       int? organizationCode,
-      List<Performer>? performer,
+      List<PerformerDto>? performer,
       int? carePlanId,
       int? goalId,
       GoalAction? goalAction,
@@ -107,7 +107,7 @@ class _$CloseAssessmentDtoCopyWithImpl<$Res, $Val extends CloseAssessmentDto>
       performer: freezed == performer
           ? _value.performer
           : performer // ignore: cast_nullable_to_non_nullable
-              as List<Performer>?,
+              as List<PerformerDto>?,
       carePlanId: freezed == carePlanId
           ? _value.carePlanId
           : carePlanId // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ abstract class _$$_CloseAssessmentDtoCopyWith<$Res>
       {int? encounterId,
       int? diagnosticReportId,
       int? organizationCode,
-      List<Performer>? performer,
+      List<PerformerDto>? performer,
       int? carePlanId,
       int? goalId,
       GoalAction? goalAction,
@@ -213,7 +213,7 @@ class __$$_CloseAssessmentDtoCopyWithImpl<$Res>
       performer: freezed == performer
           ? _value._performer
           : performer // ignore: cast_nullable_to_non_nullable
-              as List<Performer>?,
+              as List<PerformerDto>?,
       carePlanId: freezed == carePlanId
           ? _value.carePlanId
           : carePlanId // ignore: cast_nullable_to_non_nullable
@@ -261,7 +261,7 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
       {this.encounterId,
       this.diagnosticReportId,
       this.organizationCode,
-      final List<Performer>? performer,
+      final List<PerformerDto>? performer,
       this.carePlanId,
       this.goalId,
       this.goalAction,
@@ -283,9 +283,9 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
   final int? diagnosticReportId;
   @override
   final int? organizationCode;
-  final List<Performer>? _performer;
+  final List<PerformerDto>? _performer;
   @override
-  List<Performer>? get performer {
+  List<PerformerDto>? get performer {
     final value = _performer;
     if (value == null) return null;
     if (_performer is EqualUnmodifiableListView) return _performer;
@@ -393,7 +393,7 @@ abstract class _CloseAssessmentDto implements CloseAssessmentDto {
       {final int? encounterId,
       final int? diagnosticReportId,
       final int? organizationCode,
-      final List<Performer>? performer,
+      final List<PerformerDto>? performer,
       final int? carePlanId,
       final int? goalId,
       final GoalAction? goalAction,
@@ -414,7 +414,7 @@ abstract class _CloseAssessmentDto implements CloseAssessmentDto {
   @override
   int? get organizationCode;
   @override
-  List<Performer>? get performer;
+  List<PerformerDto>? get performer;
   @override
   int? get carePlanId;
   @override
@@ -440,33 +440,34 @@ abstract class _CloseAssessmentDto implements CloseAssessmentDto {
       throw _privateConstructorUsedError;
 }
 
-Performer _$PerformerFromJson(Map<String, dynamic> json) {
-  return _Performer.fromJson(json);
+PerformerDto _$PerformerDtoFromJson(Map<String, dynamic> json) {
+  return _PerformerDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Performer {
+mixin _$PerformerDto {
   Role? get role => throw _privateConstructorUsedError;
   int? get identifier => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PerformerCopyWith<Performer> get copyWith =>
+  $PerformerDtoCopyWith<PerformerDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PerformerCopyWith<$Res> {
-  factory $PerformerCopyWith(Performer value, $Res Function(Performer) then) =
-      _$PerformerCopyWithImpl<$Res, Performer>;
+abstract class $PerformerDtoCopyWith<$Res> {
+  factory $PerformerDtoCopyWith(
+          PerformerDto value, $Res Function(PerformerDto) then) =
+      _$PerformerDtoCopyWithImpl<$Res, PerformerDto>;
   @useResult
   $Res call({Role? role, int? identifier});
 }
 
 /// @nodoc
-class _$PerformerCopyWithImpl<$Res, $Val extends Performer>
-    implements $PerformerCopyWith<$Res> {
-  _$PerformerCopyWithImpl(this._value, this._then);
+class _$PerformerDtoCopyWithImpl<$Res, $Val extends PerformerDto>
+    implements $PerformerDtoCopyWith<$Res> {
+  _$PerformerDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -493,21 +494,22 @@ class _$PerformerCopyWithImpl<$Res, $Val extends Performer>
 }
 
 /// @nodoc
-abstract class _$$_PerformerCopyWith<$Res> implements $PerformerCopyWith<$Res> {
-  factory _$$_PerformerCopyWith(
-          _$_Performer value, $Res Function(_$_Performer) then) =
-      __$$_PerformerCopyWithImpl<$Res>;
+abstract class _$$_PerformerDtoCopyWith<$Res>
+    implements $PerformerDtoCopyWith<$Res> {
+  factory _$$_PerformerDtoCopyWith(
+          _$_PerformerDto value, $Res Function(_$_PerformerDto) then) =
+      __$$_PerformerDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Role? role, int? identifier});
 }
 
 /// @nodoc
-class __$$_PerformerCopyWithImpl<$Res>
-    extends _$PerformerCopyWithImpl<$Res, _$_Performer>
-    implements _$$_PerformerCopyWith<$Res> {
-  __$$_PerformerCopyWithImpl(
-      _$_Performer _value, $Res Function(_$_Performer) _then)
+class __$$_PerformerDtoCopyWithImpl<$Res>
+    extends _$PerformerDtoCopyWithImpl<$Res, _$_PerformerDto>
+    implements _$$_PerformerDtoCopyWith<$Res> {
+  __$$_PerformerDtoCopyWithImpl(
+      _$_PerformerDto _value, $Res Function(_$_PerformerDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -516,7 +518,7 @@ class __$$_PerformerCopyWithImpl<$Res>
     Object? role = freezed,
     Object? identifier = freezed,
   }) {
-    return _then(_$_Performer(
+    return _then(_$_PerformerDto(
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -531,11 +533,11 @@ class __$$_PerformerCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Performer implements _Performer {
-  const _$_Performer({this.role, this.identifier});
+class _$_PerformerDto implements _PerformerDto {
+  const _$_PerformerDto({this.role, this.identifier});
 
-  factory _$_Performer.fromJson(Map<String, dynamic> json) =>
-      _$$_PerformerFromJson(json);
+  factory _$_PerformerDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PerformerDtoFromJson(json);
 
   @override
   final Role? role;
@@ -544,14 +546,14 @@ class _$_Performer implements _Performer {
 
   @override
   String toString() {
-    return 'Performer(role: $role, identifier: $identifier)';
+    return 'PerformerDto(role: $role, identifier: $identifier)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Performer &&
+            other is _$_PerformerDto &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier));
@@ -564,23 +566,23 @@ class _$_Performer implements _Performer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
-      __$$_PerformerCopyWithImpl<_$_Performer>(this, _$identity);
+  _$$_PerformerDtoCopyWith<_$_PerformerDto> get copyWith =>
+      __$$_PerformerDtoCopyWithImpl<_$_PerformerDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PerformerToJson(
+    return _$$_PerformerDtoToJson(
       this,
     );
   }
 }
 
-abstract class _Performer implements Performer {
-  const factory _Performer({final Role? role, final int? identifier}) =
-      _$_Performer;
+abstract class _PerformerDto implements PerformerDto {
+  const factory _PerformerDto({final Role? role, final int? identifier}) =
+      _$_PerformerDto;
 
-  factory _Performer.fromJson(Map<String, dynamic> json) =
-      _$_Performer.fromJson;
+  factory _PerformerDto.fromJson(Map<String, dynamic> json) =
+      _$_PerformerDto.fromJson;
 
   @override
   Role? get role;
@@ -588,7 +590,7 @@ abstract class _Performer implements Performer {
   int? get identifier;
   @override
   @JsonKey(ignore: true)
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
+  _$$_PerformerDtoCopyWith<_$_PerformerDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
@@ -19,6 +20,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var query = useState<String>("");
+
+    var watchRef = ref.watch(visionTechnicianSearchProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -111,7 +114,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Buttons",
+                              "Timeline",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -136,23 +139,22 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           list.length,
                           (index) => DataRow(
                             onSelectChanged: (value) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
+                              watchRef.setPatientDetails(list[index]);
+                              VTPatientDto patientDetails = list[index];
+                              if (context.mounted) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
                                     builder: (context) =>
                                         VisionTechnicianPreliminaryAssessmentPage(
-                                          patientDetails: list[index],
-                                        )
-                                    //     VisionTechnicianAssessmentTimeline(
-                                    //   patientDetails: list[index],
-                                    // ),
+                                      patientDetails: patientDetails,
                                     ),
-                              );
+                                  ),
+                                );
+                              }
                             },
                             cells: generateListTileSearchResults(
-                              list[index],
-                              context,
-                            ),
+                                list[index], context, watchRef),
                           ),
                         ),
                       ),
@@ -175,7 +177,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     );
   }
 
-  List<DataCell> generateListTileSearchResults(VTPatientDto data, context) {
+  List<DataCell> generateListTileSearchResults(VTPatientDto data,
+      BuildContext context, VisionTechnicianSearchProvider watchRef) {
     return [
       DataCell(
         Column(
@@ -241,23 +244,16 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
         ),
       ),
       DataCell(
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // button
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const VisionTechnicianPreliminaryAssessmentPage(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.edit),
-            )
-          ],
+        IconButton(
+          onPressed: () {
+            watchRef.setPatientDetails(data);
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return VisionTechnicianAssessmentTimeline(
+                patientDetails: data,
+              );
+            }));
+          },
+          icon: const Icon(Icons.timeline_outlined),
         ),
       ),
       DataCell(

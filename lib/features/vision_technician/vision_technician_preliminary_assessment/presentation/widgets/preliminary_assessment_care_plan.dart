@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_view_model_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,7 +14,7 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
     final options = [
       "Visit Primary Center",
       "Visit Secondary Center",
-      "Visit tertiaryCenter",
+      "Visit Tertiary Center",
       "Visit Center of Excellence"
     ];
     final selectedOption = useState<String?>('');
@@ -43,9 +43,13 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
                   value: option,
                   groupValue: selectedOption.value,
                   onChanged: (value) {
+                    ref
+                        .read(preliminaryAssessmentHelperProvider)
+                        .setRecommendationSelected();
                     selectedOption.value = value;
                     data.setPatientInstruction(selectedOption.value!);
-                    ref.read(carePlanViewModelProvider).saveCarePlan();
+                    
+                    // ref.read(carePlanViewModelProvider).saveCarePlan();
                   },
                 );
               }).toList(),

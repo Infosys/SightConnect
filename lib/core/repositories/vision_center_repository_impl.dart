@@ -36,4 +36,24 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<OrganizationResponseModel> getVisionCenterById(
+      int? organizationProfileId) async {
+    if (organizationProfileId == null) {
+      throw Exception("OrganizationProfileId cannot be null");
+    }
+    final endpoint =
+        "/services/orchestration/api/organizations?organizationId=$organizationProfileId";
+
+    try {
+      final response = await dio.get<Map<String, dynamic>>(endpoint);
+      return OrganizationResponseModel.fromJson(response.data!);
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

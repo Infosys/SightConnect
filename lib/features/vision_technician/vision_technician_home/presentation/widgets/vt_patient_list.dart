@@ -1,14 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/enums/vision_technician_home_enums.dart';
 
-class VTPatientList extends StatelessWidget {
+class VTPatientList extends ConsumerWidget {
   const VTPatientList({
     required this.listOfAssessments,
     super.key,
@@ -16,10 +18,17 @@ class VTPatientList extends StatelessWidget {
 
   final List<VTPatientDto> listOfAssessments;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    var watchRef = ref.watch(visionTechnicianSearchProvider);
+
     return PaginatedDataTable(
+      showCheckboxColumn: false,
       rowsPerPage: 6,
-      columnSpacing: AppSize.width(context) * 0.09,
+      columnSpacing: AppSize.width(context) * 0.15,
+      horizontalMargin: AppSize.klpadding,
+      dataRowMaxHeight: AppSize.klheight * 3,
+      dataRowMinHeight: AppSize.klheight * 2,
       columns: [
         DataColumn(
           label: Text(
@@ -66,19 +75,39 @@ class VTPatientList extends StatelessWidget {
           ),
         ),
       ],
-      source: _DataSource(list: listOfAssessments),
+      source: _DataSource(
+        list: listOfAssessments,
+        context: context,
+        watchRef: watchRef,
+      ),
     );
   }
 }
 
 class _DataSource extends DataTableSource {
   final List<VTPatientDto> list;
-  _DataSource({required this.list});
+  final BuildContext context;
+  final watchRef;
+  _DataSource({
+    required this.list,
+    required this.context,
+    required this.watchRef
+  });
   @override
   DataRow? getRow(int index) {
     final VTPatientDto data = list[index];
 
     return DataRow(
+      onSelectChanged: (value) {
+        watchRef.setPatientDetails(list[index]);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
+                    patientDetails: data,
+                  )),
+        );
+      },
       cells: [
         DataCell(
           Column(
@@ -162,12 +191,12 @@ class _DataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 
-  String _formatDate(String originalDate) {
-    DateTime date = DateTime.parse(originalDate);
-    DateFormat dateFormat = DateFormat("dd MMM yy");
-    String formattedDate = dateFormat.format(date);
-    return formattedDate.toString();
-  }
+  // String _formatDate(String originalDate) {
+  //   DateTime date = DateTime.parse(originalDate);
+  //   DateFormat dateFormat = DateFormat("dd MMM yy");
+  //   String formattedDate = dateFormat.format(date);
+  //   return formattedDate.toString();
+  // }
 
   String categoryMapper(SeverityCategory? category) {
     if (category == null) return "";

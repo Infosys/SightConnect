@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/data/contracts/ivr_repository.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/repositories/ivr_repository_impl.dart';
@@ -8,10 +9,13 @@ var getIvrCallHistoryDetailsProvider =
     FutureProvider.autoDispose<List<IvrCallHistoryModel>>((ref) async {
   final filters =
       ref.watch(ivrCallHistorySearchHelperProvider).getSelectedFilter();
-  //TODO mobile number
-  const mobile = "";
   return await ref.watch(ivrRepository).getIvrCallHistory(
-        mobile: mobile,
+        mobile: ref
+            .watch(ivrCallHistorySearchHelperProvider)
+            .globalVTProvider
+            .user
+            ?.officialMobile
+            .toString(),
         callStatus: filters,
       );
 });
@@ -20,6 +24,7 @@ final ivrCallHistorySearchHelperProvider =
     ChangeNotifierProvider<IvrCallHistorySearchHelperNotifier>((ref) {
   return IvrCallHistorySearchHelperNotifier(
     ivrRepositoryRef: ref.watch(ivrRepository),
+    globalVTProvider: ref.watch(globalVTProvider),
   );
 });
 
@@ -28,8 +33,11 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
   List<IvrCallHistoryModel> ivrCallHistoryDetails = [];
   bool isLoading = false;
 
-  IvrCallHistorySearchHelperNotifier({required this.ivrRepositoryRef});
-
+  IvrCallHistorySearchHelperNotifier({
+    required this.ivrRepositoryRef,
+    required this.globalVTProvider,
+  });
+  final GlobalVTProvider globalVTProvider;
   var tablefilter = [
     {"type": "All", "checked": false},
     {"type": "Completed", "checked": true},

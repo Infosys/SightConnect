@@ -7,11 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class DashboardFilterCheckBoxes extends StatelessWidget {
   final List<Map<String, Object>> items;
   final String name;
-  const DashboardFilterCheckBoxes({
-    super.key,
-    required this.items,
-    required this.name,
-  });
+  const DashboardFilterCheckBoxes(
+      {super.key, required this.items, required this.name});
 
   @override
   Widget build(BuildContext context) {

@@ -55,4 +55,7 @@ const _$SeverityCategoryEnumMap = {
   SeverityCategory.CRITICAL: 'CRITICAL',
   SeverityCategory.EARLY: 'EARLY',
   SeverityCategory.ROUTINE: 'ROUTINE',
+  SeverityCategory.URGENT: 'URGENT',
+  SeverityCategory.ASAP: 'ASAP',
+  SeverityCategory.STAT: 'STAT',
 };

@@ -1,7 +1,10 @@
 enum SeverityCategory{
   CRITICAL,
   EARLY,
-  ROUTINE
+  ROUTINE,
+  URGENT,
+  ASAP,
+  STAT
 }
 
 enum Gender {

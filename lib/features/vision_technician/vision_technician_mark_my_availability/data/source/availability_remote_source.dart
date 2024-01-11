@@ -24,10 +24,14 @@ class AvailabilityRemoteSourceImpl implements AvailabilityRemoteSource {
   Future<bool> markAvailability({
     required AvailabilityModel availability,
   }) async {
-    String url = "/api/markAvailability";
+    String url = "/services/orchestration/api/markAvailability";
     try {
+      // logger.d("markAvailability response to be saved : $availability");
+
       var response = await _dio.post(url, data: availability.toJson());
-      return AvailabilityModel.fromJson(response.data).available;
+      bool available = AvailabilityModel.fromJson(response.data).available!;
+      // logger.d("markAvailability response : $available");
+      return available;
     } catch (e) {
       logger.d("markAvailability error: $e");
       rethrow;

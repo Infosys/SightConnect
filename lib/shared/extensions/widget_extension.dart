@@ -18,6 +18,8 @@ extension DateExtension on DateTime {
 
   String get formateDateWithTime =>
       DateFormat('dd/MM/yyyy hh:mm a').format(this);
+  String get formatDateTimeMonthNameWithTime =>
+      DateFormat("dd MMM yyyy, hh:mm a").format(this);
 }
 
 extension StringExtension on String {

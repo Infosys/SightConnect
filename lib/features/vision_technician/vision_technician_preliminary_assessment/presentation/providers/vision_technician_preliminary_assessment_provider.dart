@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -13,44 +14,60 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/ivr_caller_details_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_ivr_caller_details_remote_source.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_view_model_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
 
 var vtTriageProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
     return VtTriageProvider(
       ref.watch(saveTriageUseCase),
-      9627849182,
+      ref.watch(getVTProfileProvider).asData?.value,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
       ref.watch(visionTechnicianTriageProvider),
+      ref.watch(carePlanViewModelProvider),
+      ref.watch(preliminaryAssessmentHelperProvider),
+      ref.watch(vtIVRCallerDetailsRemoteSourceProvider),
     );
   },
 );
 
 class VtTriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
-
   final TriageUrgencyRepository _triageUrgencyRepository;
-  final int _patientId;
+  final VtProfileModel? _vtProfile;
   final TriageLocalSource _triageLocalSource;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
+  final CarePlanViewModel _carePlanViewModelProvider;
+  final PreliminaryAssessmentHelperNotifier
+      _preliminaryAssessmentHelperProvider;
+  final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
 
   VtTriageProvider(
     this._saveTriageUseCase,
-    this._patientId,
+    this._vtProfile,
     this._triageUrgencyRepository,
     this._triageLocalSource,
     this._visionTechnicianTriageProvider,
+    this._carePlanViewModelProvider,
+    this._preliminaryAssessmentHelperProvider,
+    this._callerDetailsRemoteSource,
   );
 
-  Future<Either<Failure, TriagePostModel>> saveTriage() async {
+  Future<Either<Failure, TriagePostModel>> saveTriage(
+      VTPatientDto patientDetails) async {
     List<PostTriageImagingSelectionModel> imageSelection =
-        _visionTechnicianTriageProvider.getTriageEyeScanResponse();
+        await _visionTechnicianTriageProvider.getTriageEyeScanResponse();
 
     List<PostTriageObservationsModel> observations =
         _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
@@ -72,77 +89,81 @@ class VtTriageProvider extends ChangeNotifier {
     //inject assesment
     DiagnosticReportTemplateFHIRModel assessment =
         await _triageLocalSource.getAssessment();
+
     TriagePostModel triagePostModel = TriagePostModel(
-      id: 0,
-      patientId: _patientId,
-      encounterId: 0,
+      patientId: patientDetails.id,
       serviceType: ServiceType.OPTOMETRY,
       organizationCode: assessment.organizationCode,
       performer: [
         Performer(
-          id: 0,
           role: PerformerRole.VISION_TECHNICIAN,
-          identifier: _patientId,
+          identifier: _vtProfile?.id,
         )
       ],
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
       score: [
-        {"QUESTIONNAIRE": 0},
-        {"OBSERVATION": 0},
-        {"IMAGE": 0}
+        {"QUESTIONNAIRE": quessionnaireUrgency},
+        {"OBSERVATION": visualAcuityUrgency},
+        {"IMAGE": eyeScanUrgency}
       ],
       userStartDate: DateTime.now(),
       issued: DateTime.now(),
-      subject: 0,
       source: Source.VT_APP,
       sourceVersion: AppText.appVersion,
       incompleteSection: [],
-      imagingSelection: [],
-      observations: [],
-      questionResponse: [],
+      imagingSelection:
+          _preliminaryAssessmentHelperProvider.onIvrCall ? [] : imageSelection,
+      observations:
+          _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
+      questionResponse: questionResponse,
     );
 
-    logger.d({"triage model to be saved": triagePostModel});
+    _preliminaryAssessmentHelperProvider.setLoading(true);
 
     Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
       SaveTriageParam(triagePostModel: triagePostModel),
     );
-    logger.d({"triage model saved": response});
+
+    TriagePostModel? triageResponse = response.fold((error) {
+      // throw error;
+      return;
+    }, (result) {
+      return result;
+    });
+
+    logger.d({"triage response new": triageResponse});
+    _preliminaryAssessmentHelperProvider.setTriageResponse(triageResponse);
+
+    int? reportId = triageResponse?.id;
+    int? encounterId = triageResponse?.encounter?.id;
+    int? organizationCode = assessment.organizationCode;
+    CarePlanPostModel? carePlanResponse;
+
+    if (organizationCode != null && reportId != null && encounterId != null) {
+      carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
+          organizationCode, reportId, encounterId);
+      logger.d("lets see the care plan response $carePlanResponse");
+
+      _preliminaryAssessmentHelperProvider
+          .setCarePlanResponse(carePlanResponse);
+    }
+
+    if (_preliminaryAssessmentHelperProvider.onIvrCall) {
+      final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
+        agentMobile: _vtProfile?.officialMobile,
+        callerId: patientDetails.id.toString(),
+        callerName: patientDetails.name,
+        callerNumber: patientDetails.mobile,
+      );
+      await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
+    }
+
+    _preliminaryAssessmentHelperProvider.setLoading(false);
+
     return response;
   }
-
-//   List<PostIncompleteTestModel> _getInclompleteSection(int currentStep) {
-//     List<PostIncompleteTestModel> incompleteSection = [];
-
-//     if (currentStep == 0) {
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.QUESTIONNAIRE,
-//       ));
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.OBSERVATION,
-//       ));
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.IMAGE,
-//       ));
-//     }
-//     if (currentStep == 1) {
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.OBSERVATION,
-//       ));
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.IMAGE,
-//       ));
-//     }
-//     if (currentStep == 2) {
-//       incompleteSection.add(const PostIncompleteTestModel(
-//         testName: TestType.IMAGE,
-//       ));
-//     }
-
-//     return incompleteSection;
-//   }
 }
 
 var resetProvider = ChangeNotifierProvider.autoDispose(

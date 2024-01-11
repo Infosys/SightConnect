@@ -13,12 +13,13 @@ class AvailabilityRepositoryImpl extends AvailabilityRepository {
   AvailabilityRepositoryImpl(this.availabilityRemoteSource);
 
   @override
-  Future<bool> postMarkMyAvailability({required bool available}) async {
+  Future<bool> postMarkMyAvailability(bool? available, int? userId, String? mobile) async {
+    
     return await availabilityRemoteSource.markAvailability(
       availability: AvailabilityModel(
-        userId: 1001,
+        userId: userId ?? 0,
         userType: "PRACTITIONER",
-        mobile: "8985050009",
+        mobile: mobile,
         available: available,
       ),
     );

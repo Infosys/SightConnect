@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,7 +13,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // VTPatientModel patient =
     //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    var model = ref.watch(globalVTProvider).user;
+    // var model = ref.watch(globalVTProvider).user;
     // var dateYear = DateTime.now().year;
 
     // int giveAge() {
@@ -32,7 +31,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     // );
 
     // String profileImage = model?.patient?.profilePhoto ?? "";
-    String genderString = "MALE";
+    String  genderString = "MALE";
     const address = "";
 
     String profileImage = "";
@@ -112,7 +111,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    genderString ?? "",
+                    genderString ,
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -131,7 +130,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  address,
+                  address ,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -147,11 +146,4 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   }
 }
 
-String _formateAddress({
-  required String line,
-  required String ward,
-  required String district,
-  required String state,
-}) {
-  return "$line, $ward, $district, $state";
-}
+

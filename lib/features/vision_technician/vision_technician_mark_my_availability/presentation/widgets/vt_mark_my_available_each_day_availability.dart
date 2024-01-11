@@ -20,7 +20,6 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
         .markMyAvailabilityList[dayAvailabilityindex];
 
     return Column(
-     
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,14 +27,15 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
             Row(
               children: [
                 Checkbox(
-                    value: dayAvailabilityState.checked,
-                    onChanged: (value) {
-                      ref
-                          .read(markMyAvailabilityHelperProvider)
-                          .toogleDay(dayAvailabilityindex);
-                    }),
+                  value: dayAvailabilityState.checked,
+                  onChanged: (value) {
+                    // ref
+                    //     .read(markMyAvailabilityHelperProvider)
+                    //     .toogleDay(dayAvailabilityindex);
+                  },
+                ),
                 SizedBox(
-                  width: AppSize.klwidth*3,
+                  width: AppSize.klwidth * 3,
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
@@ -55,23 +55,26 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  ListView(shrinkWrap: true, children: [
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return VtMarkMyAvailableEachRow(
-                            dayAvailabilityindex: dayAvailabilityindex,
-                            index: index,
-                            daydata: dayAvailabilityState);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: AppSize.kmheight,
-                        );
-                      },
-                      itemCount: (dayAvailabilityState.time).length,
-                    ),
-                  ]),
+                  ListView(
+                    shrinkWrap: true,
+                    children: [
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return VtMarkMyAvailableEachRow(
+                              dayAvailabilityindex: dayAvailabilityindex,
+                              index: index,
+                              daydata: dayAvailabilityState);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: AppSize.kmheight,
+                          );
+                        },
+                        itemCount: (dayAvailabilityState.time).length,
+                      ),
+                    ],
+                  ),
                   const SizedBox(
                     height: AppSize.ksheight,
                   ),
@@ -84,9 +87,9 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                     onPressed: dayAvailabilityState.checked == false
                         ? null
                         : () {
-                            ref
-                                .read(markMyAvailabilityHelperProvider.notifier)
-                                .addDayAvailability(dayAvailabilityindex);
+                            // ref
+                            //     .read(markMyAvailabilityHelperProvider.notifier)
+                            //     .addDayAvailability(dayAvailabilityindex);
                           },
                   )
                 ],

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,8 @@ class VisionCentersScrollBar extends ConsumerWidget {
                       padding: const EdgeInsets.all(AppSize.kspadding),
                       child: InkWell(
                         onTap: () {
+                          logger.d("selected vision center ${data[index]}");
+
                           ref
                               .read(preliminaryAssessmentHelperProvider)
                               .setSelectedVisionCenter(data[index]);
@@ -90,8 +93,8 @@ class VisionCentersScrollBar extends ConsumerWidget {
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            error: (error, stackTrace) => Center(
-              child: SizedBox(child: Text("Error $error")),
+            error: (error, stackTrace) => const Center(
+              child: SizedBox(child: Text("Some Error Occurred")),
             ),
           ),
     );

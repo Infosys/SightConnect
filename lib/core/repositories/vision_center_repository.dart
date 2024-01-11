@@ -5,4 +5,6 @@ abstract class VisionCenterRepository {
     double? latitude,
     double? longitude,
   });
+  Future<OrganizationResponseModel> getVisionCenterById(
+      int? organizationProfileId);
 }

@@ -1,10 +1,13 @@
+import 'package:collection/collection.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreliminaryAssessmentQuestions extends HookConsumerWidget {
@@ -12,8 +15,16 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var initiated = useState<bool>(false);
+
     return ref.watch(getTriageProvider).when(
       data: (data) {
+        if (!initiated.value) {
+          ref
+              .watch(visionTechnicianTriageProvider)
+              .setData(data , data.questionnaire?.questionnaireItem ?? []);
+          initiated.value = true;
+        }
         return AssessmentQuestionCard(
           questionnaire: data.questionnaire?.questionnaireItem ?? [],
         );
@@ -43,11 +54,9 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
         );
       },
       loading: () {
-        return const Scaffold(
-          body: Center(
+        return const Center(
             child: CircularProgressIndicator(),
-          ),
-        );
+          );
       },
     );
   }
@@ -61,13 +70,6 @@ class AssessmentQuestionCard extends StatelessWidget {
   final List<QuestionnaireItemFHIRModel> questionnaire;
   @override
   Widget build(BuildContext context) {
-    QuestionnaireItemFHIRModel eyeSightProblems = questionnaire[0];
-    QuestionnaireItemFHIRModel eyeRelatedProblems = questionnaire[1];
-    List<AnswerOptionModel>? eyeSightProblemsQuestion =
-        eyeSightProblems.answerOption;
-    List<AnswerOptionModel>? eyeRelatedProblemsQuestion =
-        eyeRelatedProblems.answerOption;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -97,21 +99,30 @@ class AssessmentQuestionCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSize.ksheight),
-              Wrap(
-                runSpacing: AppSize.klheight,
-                children: [
-                  PreliminaryAssessmentFilterCheckBox(
-                    heading: eyeSightProblems.text,
-                    includeInputBox: 1,
-                    questions: eyeSightProblemsQuestion,
-                  ),
-                  PreliminaryAssessmentFilterCheckBox(
-                    heading: eyeRelatedProblems.text,
-                    includeInputBox: 1,
-                    questions: eyeRelatedProblemsQuestion,
-                  ),
-                ],
-              ),
+              ...questionnaire.mapIndexed(
+                (index, element) {
+                  return PreliminaryAssessmentFilterCheckBox(
+                    question: element,
+                    index: index,
+                    questionnaire: questionnaire,
+                  );
+                },
+              ).toList(),
+              // Wrap(
+              //   runSpacing: AppSize.klheight,
+              //   children: [
+              //     PreliminaryAssessmentFilterCheckBox(
+              //       heading: eyeSightProblems.text,
+              //       includeInputBox: 1,
+              //       questions: eyeSightProblemsQuestion,
+              //     ),
+              //     PreliminaryAssessmentFilterCheckBox(
+              //       heading: eyeRelatedProblems.text,
+              //       includeInputBox: 1,
+              //       questions: eyeRelatedProblemsQuestion,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

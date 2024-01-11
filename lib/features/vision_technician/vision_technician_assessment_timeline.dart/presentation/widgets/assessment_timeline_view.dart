@@ -1,6 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
+import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
+
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -24,35 +27,13 @@ class AssessmentTimelineView extends ConsumerWidget {
       itemBuilder: (context, index) {
         return ListTile(
           contentPadding: const EdgeInsets.all(0),
-          // leading: Container(
-          //   padding: const EdgeInsets.all(3),
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.circle,
-          //     border: Border.all(
-          //       color: timeLineList[index].type == "Success"
-          //           ? AppColor.altGreen
-          //           : AppColor.red,
-          //     ),
-          //   ),
-          //   child: timeLineList[index].type == "Success"
-          //       ? const Icon(
-          //           Icons.check,
-          //           color: AppColor.altGreen,
-          //           size: 20,
-          //         )
-          //       : const Icon(
-          //           Icons.close,
-          //           color: AppColor.red,
-          //           size: 20,
-          //         ),
-          // ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: AppSize.width(context) / 5,
                 child: Text(
-                  timeLineList[index].title,
+                  timeLineList[index].title ?? "",
                   style: applyRobotoFont(
                     fontSize: 14,
                     color: AppColor.black,
@@ -60,8 +41,10 @@ class AssessmentTimelineView extends ConsumerWidget {
                 ),
               ),
               Text(
-                DateFormat("dd MMM yyyy, hh:mm a")
-                    .format(timeLineList[index].date),
+                timeLineList[index].date == null
+                    ? ""
+                    : DateFormat("dd MMM yyyy, hh:mm a")
+                        .format(timeLineList[index].date!),
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.grey,
@@ -78,7 +61,7 @@ class AssessmentTimelineView extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          timeLineList[index].subtitle,
+                          timeLineList[index].subtitle ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             color: AppColor.grey,
@@ -93,7 +76,7 @@ class AssessmentTimelineView extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          timeLineList[index].subtitle,
+                          timeLineList[index].subtitle ?? "",
                           style: applyRobotoFont(
                             fontSize: 12,
                             color: AppColor.grey,
@@ -114,7 +97,7 @@ class AssessmentTimelineView extends ConsumerWidget {
           ),
         );
       },
-      itemCount: 4,
+      itemCount: timeLineList.length,
       separatorBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -144,7 +127,7 @@ Widget TimeWidgetRender(BuildContext context,
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
-      if (timeLine.call.isNotEmpty)
+      if (timeLine.call != null)
         Row(
           children: [
             const Icon(
@@ -155,7 +138,7 @@ Widget TimeWidgetRender(BuildContext context,
               width: AppSize.kswidth,
             ),
             Text(
-              timeLine.call,
+              timeLine.call ?? "",
               style: applyRobotoFont(
                 fontSize: 12,
                 color: AppColor.grey,
@@ -163,7 +146,7 @@ Widget TimeWidgetRender(BuildContext context,
             ),
           ],
         ),
-      if (timeLine.assessmentId != "")
+      if (timeLine.assessmentId != null)
         Row(
           children: [
             const Icon(
@@ -179,24 +162,26 @@ Widget TimeWidgetRender(BuildContext context,
             InkWell(
               onTap: () async {
                 try {
-                  final navigator = Navigator.of(context);
-                  final report = await ref
-                      .read(patientAssessmentAndTestProvider)
-                      .getTriageDetailedReport(33200000017);
-
-                  navigator.push(MaterialPageRoute(
-                    builder: (context) {
-                      return VisionTechnicianAssessmentReportPage(
-                        assessmentDetailsReport: report,
-                      );
-                    },
-                  ));
+                  AssessmentAndTriageReportDetailedEntity response = await ref
+                      .watch(vtAssessmentAndTestProvider)
+                      .getTriageDetailedReportByEncounterId(
+                          timeLine.encounterId!, DiagnosticReportStatus.FINAL);
+                  logger.d("report response ${response.toJson()}");
+                  if (context.mounted) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return VisionTechnicianAssessmentReportPage(
+                          assessmentDetailsReport: response,
+                        );
+                      },
+                    ));
+                  }
                 } catch (e) {
-                  logger.d("$e");
+                  logger.d("error $e");
                 }
               },
               child: Text(
-                timeLine.assessmentId,
+                timeLine.assessmentId.toString(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: applyRobotoFont(

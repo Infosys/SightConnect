@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,15 +12,14 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 class SolutionTile extends HookConsumerWidget {
   const SolutionTile({
     super.key,
-    required this.title,
+    required this.goalOutCome,
   });
 
-  final String title;
+  final GoalOutCome goalOutCome;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var switchState = useState<bool>(false);
 
-    var count = useState<int>(1);
     var refRead = ref.read(vtCloseAssessmentHelperProvider);
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -37,13 +38,14 @@ class SolutionTile extends HookConsumerWidget {
                 activeColor: AppColor.primary,
                 onChanged: (bool value) {
                   switchState.value = value;
-                  refRead.setSolution(title.toLowerCase());
+
+                  refRead.setSolution(goalOutCome);
                   // model.addSolutions(title);
                 },
               ),
               const SizedBox(width: AppSize.kswidth),
               Text(
-                title,
+                _enumToString(goalOutCome),
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -52,114 +54,22 @@ class SolutionTile extends HookConsumerWidget {
               ),
             ],
           ),
-          // if (hasDropDown && dropDownState.value)
-          //   Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       for (int i = 0; i < count.value; i++)
-          //         Container(
-          //           margin: const EdgeInsets.only(
-          //             left: AppSize.klwidth * 5,
-          //             right: AppSize.klwidth,
-          //           ),
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Wrap(
-          //                 spacing: AppSize.klwidth * 3,
-          //                 runSpacing: AppSize.kmheight,
-          //                 children: [
-          //                   Row(
-          //                     mainAxisSize: MainAxisSize.min,
-          //                     children: [
-          //                       Text(
-          //                         "$title Name",
-          //                         maxLines: 1,
-          //                         overflow: TextOverflow.ellipsis,
-          //                         style: applyRobotoFont(
-          //                           fontSize: 14,
-          //                           fontWeight: FontWeight.w500,
-          //                           color: AppColor.grey,
-          //                         ),
-          //                       ),
-          //                       const SizedBox(width: AppSize.klwidth),
-          //                       Text(
-          //                         "Soothe XP",
-          //                         maxLines: 1,
-          //                         overflow: TextOverflow.ellipsis,
-          //                         style: applyRobotoFont(
-          //                           fontSize: 14,
-          //                           fontWeight: FontWeight.w500,
-          //                         ),
-          //                       ),
-          //                     ],
-          //                   ),
-
-          //                   Row(
-          //                     mainAxisSize: MainAxisSize.min,
-          //                     children: [
-          //                       Text(
-          //                         "Dosage",
-          //                         maxLines: 1,
-          //                         overflow: TextOverflow.ellipsis,
-          //                         style: applyRobotoFont(
-          //                           fontSize: 14,
-          //                           fontWeight: FontWeight.w500,
-          //                           color: AppColor.grey,
-          //                         ),
-          //                       ),
-          //                       const SizedBox(width: AppSize.klwidth),
-          //                       Text(
-          //                         "3 Times a Day",
-          //                         maxLines: 1,
-          //                         overflow: TextOverflow.ellipsis,
-          //                         style: applyRobotoFont(
-          //                           fontSize: 14,
-          //                           fontWeight: FontWeight.w500,
-          //                         ),
-          //                       ),
-          //                     ],
-          //                   ),
-          //                 ],
-          //               ),
-          //               const SizedBox(height: AppSize.klheight),
-          //               const Divider(color: AppColor.grey),
-          //             ],
-          //           ),
-          //         ),
-          //       Container(
-          //         margin: const EdgeInsets.only(
-          //           left: AppSize.klwidth * 5,
-          //         ),
-          //         child: TextButton(
-          //           onPressed: () {
-          //             count.value++;
-          //           },
-          //           child: Row(
-          //             mainAxisSize: MainAxisSize.min,
-          //             children: [
-          //               const Icon(
-          //                 Icons.add_circle_outline,
-          //                 color: AppColor.primary,
-          //                 size: AppSize.klheight,
-          //               ),
-          //               const SizedBox(width: AppSize.kswidth),
-          //               Text(
-          //                 "Add",
-          //                 style: applyRobotoFont(
-          //                   fontSize: 13,
-          //                   fontWeight: FontWeight.w500,
-          //                   color: AppColor.primary,
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
         ],
       ),
     );
+  }
+
+  String _enumToString(GoalOutCome goalOutCome) {
+    List<String> words = goalOutCome.toString().split('.').last.split('_');
+    String title = "";
+
+    for (int i = 0; i < words.length; i++) {
+      title += words[i].sentenceCase();
+      if (i != words.length - 1) {
+        title += " ";
+      }
+    }
+
+    return title;
   }
 }
