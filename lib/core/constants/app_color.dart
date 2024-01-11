@@ -30,6 +30,7 @@ class AppColor {
   static const Color blackOpacity = Colors.black38;
   static const Color paleYellow = Color(0xFFF3FFC1);
   static const Color lavanderBlue = Color(0xFFD4C1FF);
+  static const Color lightLavanderBlue = Color(0xFFE9EEFA);
   static const Color teaGreen = Color(0xFFCFFFC1);
   static const Color bisque = Color(0xFFFEEAC1);
   static const Color lightOrange = Color(0xFFFECB92);

@@ -37,7 +37,7 @@ class TopReadingCard extends ConsumerWidget {
       child: Container(
         height: 200,
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kspadding, vertical: AppSize.kmpadding),
+            horizontal: AppSize.kmpadding - 3, vertical: AppSize.kmpadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -72,13 +72,13 @@ class TopReadingCard extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentLevel.snellerFraction,
+                          "${currentLevel.snellerFraction}  ",
                           style: applyRobotoFont(
                               color: AppColor.grey, fontSize: 16),
                         ),
@@ -99,17 +99,14 @@ class TopReadingCard extends ConsumerWidget {
                           },
                         ),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Transform.translate(
-                              offset: const Offset(0, 3),
-                              child: Icon(
-                                Icons.camera_alt_outlined,
-                                size: AppSize.width(context) * 0.06,
-                                color: AppColor.black.withOpacity(0.8),
-                              ),
+                            Icon(
+                              Icons.camera_alt_outlined,
+                              size: AppSize.width(context) * 0.057,
+                              color: AppColor.black.withOpacity(0.8),
                             ),
-                            SizedBox(width: AppSize.width(context) * 0.03),
+                            SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
                               "40 cms",
                               style: applyRobotoFont(
