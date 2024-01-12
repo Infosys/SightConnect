@@ -46,7 +46,6 @@ abstract class VgAddEventRemoteSource {
     required List<int> performerId,
   });
 
-
   Future getEventPatientList({
     required String patientQueryData,
   });
@@ -140,6 +139,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         '/services/orchestration/api/practitioners/filter?officialMobile=$officialMobile}';
 
     return await _dio.get(endpoint).then((patientresponse) async {
+      if (patientresponse.data == null || patientresponse.data.length > 0) {
+        throw ServerException();
+      }
       var roleType = patientresponse.data[0]["practitionerType"];
       if (roleType == "PROFESSIONAL") {
         roleType = "MEDICAL_PRACTITIONER";
