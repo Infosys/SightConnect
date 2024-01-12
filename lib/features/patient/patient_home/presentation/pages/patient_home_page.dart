@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
@@ -37,6 +38,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
         onAccessibilityChange: () {
           TextScalePopupMenu.show(context, ref);
@@ -54,43 +56,54 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
         },
       ),
       appBar: const PatientHomePageAppBar(),
-      body: SingleChildScrollView(
-        controller: ref.read(patientDashboardProvider).scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const PatientHeader(),
-            // const SizedBox(height: AppSize.kmheight),
-            // PriorityNotificationList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const MyConnectionsList(),
-            const SizedBox(height: AppSize.ksheight),
-            const TriageTestCard(),
-            const SizedBox(height: AppSize.kmheight),
-            const HelplineCard(helpLine: AppText.tollFreeNumber),
-            const SizedBox(height: AppSize.kmheight),
-
-            // const RecentServicesCardList(),
-
-            const NearbyVisionCentersList(),
-            const SizedBox(height: AppSize.kmheight),
-
-            InviteCard(
-              onPressed: () {
-                Share.share(
-                  'check out my website https://example.com',
-                  subject: 'Look what I made!',
-                );
-              },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              AppImages.scaffoldBg,
             ),
-            // const EyeCampsCardList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const GoodToKnowCardList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const CampaginsList(),
-            const PartnerCard(),
-            const SizedBox(height: AppSize.klheight * 4),
-          ],
+            alignment: Alignment.topRight,
+          ),
+        ),
+        child: SingleChildScrollView(
+          controller: ref.read(patientDashboardProvider).scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: AppSize.klheight * 3),
+              const PatientHeader(),
+              // const SizedBox(height: AppSize.kmheight),
+              // PriorityNotificationList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const MyConnectionsList(),
+              const SizedBox(height: AppSize.ksheight),
+              const TriageTestCard(),
+              const SizedBox(height: AppSize.kmheight),
+              const HelplineCard(helpLine: AppText.tollFreeNumber),
+              const SizedBox(height: AppSize.kmheight),
+
+              // const RecentServicesCardList(),
+
+              const NearbyVisionCentersList(),
+              const SizedBox(height: AppSize.kmheight),
+
+              InviteCard(
+                onPressed: () {
+                  Share.share(
+                    'check out my website https://example.com',
+                    subject: 'Look what I made!',
+                  );
+                },
+              ),
+              // const EyeCampsCardList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const GoodToKnowCardList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const CampaginsList(),
+              const PartnerCard(),
+              const SizedBox(height: AppSize.klheight * 4),
+            ],
+          ),
         ),
       ),
     );
