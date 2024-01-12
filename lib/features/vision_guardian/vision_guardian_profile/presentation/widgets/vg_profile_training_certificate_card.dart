@@ -1,14 +1,26 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class VgProfileTrainingCertificateCard extends StatelessWidget {
-  const VgProfileTrainingCertificateCard({super.key});
-
+  const VgProfileTrainingCertificateCard(
+      {super.key, required this.profileData});
+  final VgProfileModel profileData;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
+    return Container(
+      padding: const EdgeInsets.all(AppSize.kspadding),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        boxShadow: applyLightShadow(),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppSize.kmradius - 5),
+        ),
+      ),
       child: Container(
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: Column(

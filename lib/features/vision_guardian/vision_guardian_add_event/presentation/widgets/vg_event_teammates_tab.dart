@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
+
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,10 +16,8 @@ class EventTeammatesTab extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var addNewTeammate = useState<bool>(false);
     var addMember = useState<bool>(false);
 
-    // var isEdit1 = useState<bool>(true);
     var nameController1 = useTextEditingController();
     var mobileController1 = useTextEditingController();
     return ref.watch(teamListProvider).when(data: (data) {
@@ -39,13 +39,14 @@ class EventTeammatesTab extends HookConsumerWidget {
               height: AppSize.klheight,
             ),
             Flexible(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return TeammatesDataCards(index: index, data: data);
-                },
-              ),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                ...data.map((e) {
+                  return TeammatesDataCards(
+                    data: e,
+                    type: "default",
+                  );
+                })
+              ]),
             ),
             const SizedBox(
               height: AppSize.kmheight,
@@ -83,12 +84,19 @@ class EventTeammatesTab extends HookConsumerWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
+                                    if (mobileController1.text.isEmpty) {
+                                      return;
+                                    }
                                     ref
                                         .read(visionGuadianAddMemberProvider)
-                                        .addMemberData();
-                                    /*  ref
-                                        .read(visionGuadianAddMemberProvider)
-                                        .setAdd(); */
+                                        .addMemberData(
+                                            int.parse(mobileController1.text));
+                                    showToastMessage(
+                                        "TeamMate Added Succesfully",
+                                        context,
+                                        0);
+                       
+
                                     addMember.value = false;
                                   },
                                   child: const Icon(
@@ -102,6 +110,9 @@ class EventTeammatesTab extends HookConsumerWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
+                                    nameController1.text = "";
+
+                                    mobileController1.text = "";
                                     addMember.value = false;
                                   },
                                   child: const Icon(
@@ -147,6 +158,7 @@ class EventTeammatesTab extends HookConsumerWidget {
             InkWell(
               onTap: () {
                 addMember.value = !addMember.value;
+                mobileController1.text = "";
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

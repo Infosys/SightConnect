@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
+/* import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      
       children: [
         Text(
           name,
@@ -25,6 +26,7 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
         Consumer(
           builder: (context, ref, child) {
             return Wrap(
+       
               children: [
                 for (int index = 0; index < items.length; index++) ...[
                   CheckboxListTile(
@@ -39,7 +41,8 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
                     value: items[index]["checked"] as bool,
                     onChanged: (bool? value) {
                       ref
-                          .read(visionGuardianEyeAssessmentProvider.notifier)
+                          .read(
+                              visionGuardianEyeAssessmentProvider.notifier)
                           .toggleFilterBoxes(name, index);
                     },
                   )
@@ -52,3 +55,4 @@ class VisionGuardianEyeAssessmentFilterCheckBoxes extends StatelessWidget {
     );
   }
 }
+ */

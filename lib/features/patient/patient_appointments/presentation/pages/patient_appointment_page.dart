@@ -1,11 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../core/models/patient_response_model.dart';
 import '../../../../../core/providers/global_patient_provider.dart';
@@ -22,9 +21,8 @@ class PatientAppointmentPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
-      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: CustomAppbar(
         title: Text(loc.appointmentTitle),
         centerTitle: false,
@@ -118,51 +116,54 @@ Widget _content(
   WidgetRef ref,
 ) {
   final loc = context.loc!;
-  return Stack(
-    children: [
-      SvgPicture.asset(
-        "assets/images/app_bg.svg",
-        fit: BoxFit.contain,
+
+  return Container(
+    padding: const EdgeInsets.all(AppSize.kmpadding),
+    decoration: const BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(AppImages.scaffoldBg),
+        alignment: Alignment.topRight,
       ),
-      Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(height: AppSize.klelevation * 3),
+        AppointmentPatientSelector(
+          patient: patient,
+          relations:
+              patient.profile?.patient?.relatedParty?.reversed.toList() ?? [],
+        ),
+        const SizedBox(height: AppSize.ksheight),
+        Divider(
+          color: AppColor.grey.withOpacity(0.4),
+          thickness: 1,
+          height: 2,
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        Text(
+          loc.appointmentSubtitle,
+          style: applyFiraSansFont(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+          ),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        Expanded(
+            child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            SizedBox(
-              height: AppSize.height(context) * 0.12,
-            ),
-            AppointmentPatientSelector(
-              patient: patient,
-              relations:
-                  patient.profile?.patient?.relatedParty?.reversed.toList() ??
-                      [],
-            ),
-            const SizedBox(height: AppSize.ksheight),
-            Divider(
-              color: AppColor.grey.withOpacity(0.4),
-              thickness: 1,
-              height: 2,
-            ),
-            const SizedBox(height: AppSize.kmheight),
-            Text(
-              loc.appointmentSubtitle,
-              style: applyFiraSansFont(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: AppSize.kmheight),
             ...patient.profile!.patient!.relatedParty!.asMap().entries.map((e) {
-              final index = e.key;
+              // final index = e.key;
               final patient = e.value;
               return Card(
                 elevation: 1,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
@@ -183,10 +184,12 @@ Widget _content(
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Flexible(
+                          Expanded(
                             child: ListTile(
                               visualDensity: const VisualDensity(
-                                  horizontal: 0, vertical: 0),
+                                horizontal: 0,
+                                vertical: 0,
+                              ),
                               contentPadding: EdgeInsets.zero,
                               leading: patient.profilePicture != null
                                   ? Container(
@@ -213,7 +216,7 @@ Widget _content(
                                     color: AppColor.black.withOpacity(0.8)),
                               ),
                               subtitle: Text(
-                                patient.parentPatientId.toString() ?? "",
+                                "${patient.parentPatientId ?? ""}",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
@@ -222,13 +225,16 @@ Widget _content(
                               ),
                             ),
                           ),
-                          Flexible(
+                          Expanded(
                             child: Container(
                               decoration: BoxDecoration(
                                 color: AppColor.lightLavanderBlue,
                                 borderRadius: BorderRadius.circular(30),
                               ),
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               child: Center(
                                 child: Text(
                                   "Telephone Consultation",
@@ -245,7 +251,7 @@ Widget _content(
                         ],
                       ),
                       Text(
-                        patient.patientId.toString() ?? "",
+                        "Date -",
                         style: applyRobotoFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -255,7 +261,7 @@ Widget _content(
                         height: AppSize.ksheight,
                       ),
                       Text(
-                        "14, Nagar Khana Hanuman Temple Road, Gowsala Nagar, Hyderabad, Telangana 500012",
+                        "Address -",
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -323,8 +329,8 @@ Widget _content(
               );
             })
           ],
-        ),
-      ),
-    ],
+        )),
+      ],
+    ),
   );
 }

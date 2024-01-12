@@ -6,14 +6,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class VGSlide2 extends StatelessWidget {
-  const VGSlide2({super.key});
-  static Map<String, int> dataMapAge = {
-    "< 10 Yrs": 0,
-    "10 - 29 Yrs": 0,
-    "30 - 39 Yrs": 0,
-    "40 - 59 Yrs": 0,
-    "60+ Yrs": 0,
-  };
+   const VGSlide2({super.key, required this.dataMapAge});
+  final Map<String, dynamic> dataMapAge ;
 
   static List<Color> colorList = [
     AppColor.lavanderBlue,
@@ -52,27 +46,27 @@ class VGSlide2 extends StatelessWidget {
                   children: [
                     VGAgeChip(
                       value: dataMapAge.values.elementAt(0).toString(),
-                      years: dataMapAge.keys.elementAt(0),
+                      years: "< 10 Yrs",
                       color: colorList[0],
                     ),
                     VGAgeChip(
                       value: dataMapAge.values.elementAt(1).toString(),
-                      years: dataMapAge.keys.elementAt(1),
+                      years: "10 - 29 Yrs",
                       color: colorList[1],
                     ),
                     VGAgeChip(
                       value: dataMapAge.values.elementAt(2).toString(),
-                      years: dataMapAge.keys.elementAt(2),
+                      years: "30 - 39 Yrs",
                       color: colorList[2],
                     ),
                     VGAgeChip(
                       value: dataMapAge.values.elementAt(3).toString(),
-                      years: dataMapAge.keys.elementAt(3),
+                      years: "40 - 59 Yrs",
                       color: colorList[3],
                     ),
                     VGAgeChip(
                       value: dataMapAge.values.elementAt(4).toString(),
-                      years: dataMapAge.keys.elementAt(4),
+                      years: "60+ Yrs",
                       color: colorList[4],
                     ),
                   ],

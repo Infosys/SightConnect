@@ -1,105 +1,116 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class VgProfileNameCard extends StatelessWidget {
-  const VgProfileNameCard({super.key});
+  const VgProfileNameCard({super.key, required this.profileData});
+  final VgProfileModel profileData;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      child: Row(children: [
-        SizedBox(
-          width: AppSize.width(context) * 0.3,
-          height: 120,
-          child: Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
-            decoration: BoxDecoration(
-              border: Border.all(width: 1, color: AppColor.darkGrey),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
-            child: SvgPicture.asset(
-              AppIcon.navProfile,
-              colorFilter: const ColorFilter.mode(
-                AppColor.lightGrey,
-                BlendMode.srcATop,
-              ),
-            ),
-          ),
+    return Container(
+      padding: const EdgeInsets.all(AppSize.kmpadding),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        boxShadow: applyLightShadow(),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppSize.kmradius - 5),
         ),
-        Container(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Radhavi Pandey",
-                style:
-                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
-              Text(
-                "ABCD 1234 1234 1234",
-                style:
-                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(
-                height: AppSize.kmheight,
-              ),
-              Row(
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: AppSize.kmpadding),
+        child: Row(
+          children: [
+            SizedBox(
+              child: (profileData.profilePhoto != null &&
+                      profileData.profilePhoto!.isNotEmpty &&
+                      profileData.profilePhoto != "string")
+                  ? AppNetworkImage(
+                      radius: 30,
+                      imageUrl: profileData.profilePhoto!,
+                    )
+                  : AppNameAvatar(
+                      name: profileData.personalInformation?.firstName ?? "",
+                      color: AppColor.blue,
+                      radius: 45,
+                      fontSize: 30,
+                    ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Text(
+                    "${profileData.personalInformation?.firstName ?? ""} ${profileData.personalInformation?.lastName ?? ""}",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.kmheight),
+                  Text(
+                    "${profileData.id ?? ""}",
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.kmheight),
+                  Row(
                     children: [
-                      Text(
-                        "Gender",
-                        style: applyRobotoFont(
-                            fontSize: 10, color: AppColor.darkGrey),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Gender",
+                            style: applyRobotoFont(
+                                fontSize: 10, color: AppColor.darkGrey),
+                          ),
+                          const SizedBox(
+                            height: AppSize.ksheight / 2,
+                          ),
+                          Text(
+                            "-",
+                            style: applyRobotoFont(fontSize: 14),
+                          )
+                        ],
                       ),
                       const SizedBox(
-                        height: AppSize.ksheight / 2,
+                        width: AppSize.kmwidth,
                       ),
-                      Text(
-                        "Female",
-                        style: applyRobotoFont(fontSize: 14),
-                      )
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Mobile",
+                            style: applyRobotoFont(
+                                fontSize: 10, color: AppColor.darkGrey),
+                          ),
+                          const SizedBox(
+                            height: AppSize.ksheight / 2,
+                          ),
+                          Text(
+                            profileData.officialMobile ?? "",
+                            style: applyRobotoFont(fontSize: 14),
+                          )
+                        ],
+                      ),
                     ],
-                  ),
-                  const SizedBox(
-                    width: AppSize.kmwidth,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Mobile",
-                        style: applyRobotoFont(
-                            fontSize: 10, color: AppColor.darkGrey),
-                      ),
-                      const SizedBox(
-                        height: AppSize.ksheight / 2,
-                      ),
-                      Text(
-                        "8719782828",
-                        style: applyRobotoFont(fontSize: 14),
-                      )
-                    ],
-                  ),
+                  )
                 ],
-              )
-            ],
-          ),
-        )
-      ]),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

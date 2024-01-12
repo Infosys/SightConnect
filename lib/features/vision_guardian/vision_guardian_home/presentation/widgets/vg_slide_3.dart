@@ -7,17 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class VGSlide3 extends StatelessWidget {
-  const VGSlide3({super.key});
-  static Map<String, double> data = {
-    "Refractive": 0,
-    "Cataract": 0,
-    "Glaucoma": 0,
-    "Keratitis": 0,
-    "Blepharitis": 0,
-    "Conjunctivitis": 0,
-  };
+  const VGSlide3({super.key, required this.values});
 
-  static int total = 0;
+ final Map<String, dynamic> values;
 
   static List<Color> colorList = [
     AppColor.darkBlue,
@@ -30,6 +22,21 @@ class VGSlide3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int total = values["refractive"] +
+        values["cataract"] +
+        values["glaucoma"] +
+        values["keratitis"] +
+        values["blepharitis"] +
+        values["conjunctivitis"];
+
+    Map<String, double> data = {
+      "Refractive": double.parse(values["refractive"].toString()),
+      "Cataract": double.parse(values["cataract"].toString()),
+      "Glaucoma": double.parse(values["glaucoma"].toString()),
+      "Keratitis": double.parse(values["keratitis"].toString()),
+      "Blepharitis": double.parse(values["blepharitis"].toString()),
+      "Conjunctivitis": double.parse(values["conjunctivitis"].toString()),
+    };
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: AppSize.kspadding,

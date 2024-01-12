@@ -1,22 +1,26 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_member/presentation/pages/vg_member_details_form_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionGuardianFloatingAddPatientAction extends StatelessWidget {
+class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
   const VisionGuardianFloatingAddPatientAction({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-              Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionGuardianMemberDetailsPage(),
-            ),
-          ); 
+        ref.read(addPatientEventProvider).setPatientSearchQuery("");
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const VisionGuardianAddPatient(),
+          ),
+        );
       },
       child: Container(
         width: AppSize.width(context) * 0.35,

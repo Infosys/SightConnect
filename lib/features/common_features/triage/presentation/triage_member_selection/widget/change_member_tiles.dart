@@ -19,13 +19,18 @@ class ChangeMemberTiles extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(globalPatientProvider).activeUser;
+
     final List<RelatedPartyModel> connectionsList =
         model?.profile?.patient?.relatedParty ?? [];
     final currentProfile = model?.profile?.patient;
     var memberProvider = ref.watch(triageMemberProvider);
-    final selectedValue = useState<int>(-1);
+    final selectedValue = useState<int>(0);
 
-    if (model == null) {
+    if (currentProfile?.patientId != null) {
+      memberProvider.setTestPersonId(currentProfile!.patientId!);
+    }
+
+    if (model == null || currentProfile == null || connectionsList.isEmpty) {
       return const Center(
           child: Text(
         "No Member Found",
@@ -39,7 +44,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
     return _content(
       connectionsList,
-      currentProfile!,
+      currentProfile,
       selectedValue,
       memberProvider,
     );

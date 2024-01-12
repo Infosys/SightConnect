@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../data/models/vg_bottom_nav_items.dart';
+import '../../../vision_guardian_home/data/models/vg_bottom_nav_items.dart';
 
 class VisionGuardianBottomNavBar extends StatelessWidget {
   const VisionGuardianBottomNavBar({
@@ -21,7 +21,6 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-
     var isMobile = Responsive.isMobile(context);
     var items = VisionGuardianBottomNavItems.all;
 

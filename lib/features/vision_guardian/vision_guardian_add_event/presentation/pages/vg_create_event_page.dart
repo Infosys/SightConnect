@@ -40,10 +40,6 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               color: AppColor.grey,
             ),
           ),
-/*           IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(AppIcon.filterIcon),
-          ), */
         ],
         leadingIcon: InkWell(
           onTap: () {
@@ -86,11 +82,12 @@ class VisionGuardianEventPage extends HookConsumerWidget {
               text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                      text: '+ ',
-                      style: applyRobotoFont(
-                          fontSize: 21,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w300)),
+                    text: '+ ',
+                    style: applyRobotoFont(
+                        fontSize: 21,
+                        color: AppColor.black,
+                        fontWeight: FontWeight.w300),
+                  ),
                   TextSpan(
                     text: 'Add Event',
                     style: applyRobotoFont(

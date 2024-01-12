@@ -32,6 +32,7 @@ mixin _$VisionGuardianPatientResponseModel {
   String? get townName => throw _privateConstructorUsedError;
   String? get pincode => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
+  int? get diagnosticReportId => throw _privateConstructorUsedError;
   String? get encounterStartDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
@@ -63,6 +64,7 @@ abstract class $VisionGuardianPatientResponseModelCopyWith<$Res> {
       String? townName,
       String? pincode,
       int? encounterId,
+      int? diagnosticReportId,
       String? encounterStartDate,
       String? status,
       String? category});
@@ -93,6 +95,7 @@ class _$VisionGuardianPatientResponseModelCopyWithImpl<$Res,
     Object? townName = freezed,
     Object? pincode = freezed,
     Object? encounterId = freezed,
+    Object? diagnosticReportId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
     Object? category = freezed,
@@ -142,6 +145,10 @@ class _$VisionGuardianPatientResponseModelCopyWithImpl<$Res,
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      diagnosticReportId: freezed == diagnosticReportId
+          ? _value.diagnosticReportId
+          : diagnosticReportId // ignore: cast_nullable_to_non_nullable
+              as int?,
       encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
@@ -179,6 +186,7 @@ abstract class _$$_VisionGuardianPatientResponseModelCopyWith<$Res>
       String? townName,
       String? pincode,
       int? encounterId,
+      int? diagnosticReportId,
       String? encounterStartDate,
       String? status,
       String? category});
@@ -208,6 +216,7 @@ class __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>
     Object? townName = freezed,
     Object? pincode = freezed,
     Object? encounterId = freezed,
+    Object? diagnosticReportId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
     Object? category = freezed,
@@ -257,6 +266,10 @@ class __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      diagnosticReportId: freezed == diagnosticReportId
+          ? _value.diagnosticReportId
+          : diagnosticReportId // ignore: cast_nullable_to_non_nullable
+              as int?,
       encounterStartDate: freezed == encounterStartDate
           ? _value.encounterStartDate
           : encounterStartDate // ignore: cast_nullable_to_non_nullable
@@ -289,6 +302,7 @@ class _$_VisionGuardianPatientResponseModel
       this.townName,
       this.pincode,
       this.encounterId,
+      this.diagnosticReportId,
       this.encounterStartDate,
       this.status,
       this.category});
@@ -320,6 +334,8 @@ class _$_VisionGuardianPatientResponseModel
   @override
   final int? encounterId;
   @override
+  final int? diagnosticReportId;
+  @override
   final String? encounterStartDate;
   @override
   final String? status;
@@ -328,7 +344,7 @@ class _$_VisionGuardianPatientResponseModel
 
   @override
   String toString() {
-    return 'VisionGuardianPatientResponseModel(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, encounterStartDate: $encounterStartDate, status: $status, category: $category)';
+    return 'VisionGuardianPatientResponseModel(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, diagnosticReportId: $diagnosticReportId, encounterStartDate: $encounterStartDate, status: $status, category: $category)';
   }
 
   @override
@@ -353,6 +369,8 @@ class _$_VisionGuardianPatientResponseModel
             (identical(other.pincode, pincode) || other.pincode == pincode) &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
+            (identical(other.diagnosticReportId, diagnosticReportId) ||
+                other.diagnosticReportId == diagnosticReportId) &&
             (identical(other.encounterStartDate, encounterStartDate) ||
                 other.encounterStartDate == encounterStartDate) &&
             (identical(other.status, status) || other.status == status) &&
@@ -375,6 +393,7 @@ class _$_VisionGuardianPatientResponseModel
       townName,
       pincode,
       encounterId,
+      diagnosticReportId,
       encounterStartDate,
       status,
       category);
@@ -409,6 +428,7 @@ abstract class _VisionGuardianPatientResponseModel
       final String? townName,
       final String? pincode,
       final int? encounterId,
+      final int? diagnosticReportId,
       final String? encounterStartDate,
       final String? status,
       final String? category}) = _$_VisionGuardianPatientResponseModel;
@@ -439,6 +459,8 @@ abstract class _VisionGuardianPatientResponseModel
   String? get pincode;
   @override
   int? get encounterId;
+  @override
+  int? get diagnosticReportId;
   @override
   String? get encounterStartDate;
   @override

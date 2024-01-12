@@ -12,7 +12,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   DateTime _selectedToDate = DateTime.now();
   DateTime _selectedFromDate = DateTime.now();
 
-  final List<PatientModel> _patientList = fakePatients;
+  final List<PatientModel> _patientList = [];
   final List<PatientModel> _searchPatientList = [];
   String _query = "";
 
@@ -20,6 +20,10 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   List<PatientModel> get searchPatientList => _searchPatientList;
   List<TimeFrame> get timeFrameList => TimeFrame.values;
   String get query => _query;
+  TimeFrame get selectedTimeFrame => _selectedTimeFrame;
+  DateTime get selectedToDate => _selectedToDate;
+  DateTime get selectedFromDate => _selectedFromDate;
+  List<PatientModel> get patientList => _patientList;
 
   set setTimeFrame(TimeFrame timeFrame) {
     _selectedTimeFrame = timeFrame;
@@ -51,10 +55,10 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   }
 
   void searchByTimeFrame() {
-    var time = calculateDateFromTimeFrame(_selectedTimeFrame);
+    // var time = calculateDateFromTimeFrame(_selectedTimeFrame);
     // _searchPatientList =
     //     _patientList.where((element) => element.date!.isAfter(time)).toList();
-    notifyListeners();
+    // notifyListeners();
   }
 
   void searchByQuery() {
@@ -74,7 +78,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
     //   }
     //   return false;
     // }).toList();
-    notifyListeners();
+    // notifyListeners();
   }
 
   DateTime calculateDateFromTimeFrame(TimeFrame timeFrame) {

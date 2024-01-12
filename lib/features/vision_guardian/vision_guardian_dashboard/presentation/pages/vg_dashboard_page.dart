@@ -3,14 +3,13 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../common_features/triage/presentation/pages/triage_page.dart';
 import '../../../vision_guardian_home/presentation/pages/vg_home_page.dart';
 import '../providers/vg_dashboard_provider.dart';
 import '../widgets/vg_bottom_nav_bar.dart';
@@ -22,7 +21,6 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(getVGProfileProvider, (previous, next) {
       if (next.hasError) {
-        logger.d("Logged out from VisionGuardianDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
           Fluttertoast.showToast(msg: "You have been logged out");
           Navigator.pushNamedAndRemoveUntil(
@@ -62,16 +60,19 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
               left: 0,
               right: 0,
               child: VisionGuardianBottomNavBar(
-                onSelected: (index) {
+                onSelected: (index) async {
                   ref.read(visionGuardianDashboardProvider).currentIndex =
                       index;
                   switch (index) {
                     case 0:
                       break;
                     case 1:
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TriagePage(),
-                      ));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const VisionGuardianEyeAssessmentPage(),
+                        ),
+                      );
                       break;
                     case 2:
                       Navigator.of(context).push(

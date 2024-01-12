@@ -1,14 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_search_patient.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionGuardianEyeAssessmentSearchBar extends ConsumerWidget {
-  const VisionGuardianEyeAssessmentSearchBar({super.key, required this.readOnly});
+class VisionGuardianPatientSearchBar extends ConsumerWidget {
+  const VisionGuardianPatientSearchBar({super.key, required this.readOnly});
   final bool readOnly;
 
   @override
@@ -16,20 +15,12 @@ class VisionGuardianEyeAssessmentSearchBar extends ConsumerWidget {
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
-         ref
-            .read(visionGuardianEyeAssessmentProvider.notifier)
-            .setSearchPatientList(data); 
+        ref
+            .read(visionGuardianEyeAssessmentProvider)
+            .setSearchPatientList(data);
       },
       onTap: () {
-        if (readOnly) {
-          //original
-         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionGuardianEyeAssessmentSearchPatient(),
-            ),
-          ); 
-        }
+        if (readOnly) {}
       },
       decoration: InputDecoration(
         prefixIcon: const Icon(
@@ -50,17 +41,12 @@ class VisionGuardianEyeAssessmentSearchBar extends ConsumerWidget {
             const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
         filled: true,
         fillColor: AppColor.white,
-        hintText: 'Search by Patient ID, Name',
+        hintText: 'Search by patient ID, Name',
         hintStyle: applyRobotoFont(
           color: AppColor.grey,
           fontSize: 14,
         ),
-        // border: OutlineInputBorder(
-        //   borderSide: BorderSide.none,
-        //   borderRadius: BorderRadius.circular(AppSize.klradius * 3),
-        // ),
         border: OutlineInputBorder(
-          // borderSide: BorderSide.none,
           borderSide: const BorderSide(color: AppColor.primary),
           borderRadius: BorderRadius.circular(AppSize.klradius * 3),
         ),

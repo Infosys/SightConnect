@@ -23,20 +23,12 @@ class VisionGuardianServicesCard extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             if (data["text"] == "Event") {
-              // ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianEventPage(),
                 ),
               );
             } else if (data["text"] == "New Patient") {
-              // ref.read(globalProvider).setHideTumblingElement = false;
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => const VisionGuardianMemberPage(),
-              //   ),
-              // );
-
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const PatientRegistrationMiniappPage(
@@ -46,7 +38,6 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                 ),
               );
             } else if (data["text"] == "Assessment") {
-              // ref.read(globalProvider).setHideTumblingElement = true;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const VisionGuardianEyeAssessmentPage(),
@@ -76,13 +67,11 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                           width: AppSize.klpadding,
                           colorFilter: const ColorFilter.mode(
                             AppColor.black,
-                            BlendMode.srcATop,
+                            BlendMode.srcIn,
                           ),
                         )
                       : Icon(data["icon"]),
-                  const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
+                  const SizedBox(height: AppSize.ksheight),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: Text(

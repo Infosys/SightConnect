@@ -3,14 +3,12 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/source/local/fake_data_source.dart';
-
 class CampaginsList extends StatelessWidget {
   const CampaginsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var data = campagins;
+    var data = [];
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

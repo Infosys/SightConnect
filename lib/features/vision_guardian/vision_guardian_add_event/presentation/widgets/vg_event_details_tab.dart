@@ -1,20 +1,17 @@
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
+import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 
 class EventDetailsTab extends ConsumerWidget {
-  const EventDetailsTab({
-    required this.eventDetails,
-    super.key,
-  });
+  const EventDetailsTab({super.key, required this.eventDetails});
 
   final VisionGuardianEventModel eventDetails;
 
@@ -31,18 +28,33 @@ class EventDetailsTab extends ConsumerWidget {
     DateTime endTime = DateTime.parse(eventDetails.endTime!);
     String endTimeformattedTime = DateFormat('h a').format(endTime);
 
+    logger.d(eventDetails.images);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
             Stack(
               children: [
-                Image.asset(
-                  AppImages.aboutUs,
-                ),
+                (eventDetails.images != null)
+                    ? SizedBox(
+                        height: AppSize.height(context) / 3,
+                        child: AppNetworkImage(
+                          shapeCircle: false,
+                          radius: AppSize.ksradius,
+                          imageUrl: _getImageUrl(eventDetails.images![0]),
+                        ),
+                      )
+                    : const SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Text(
+                            "No Image",
+                          ),
+                        ),
+                      ),
                 Positioned(
                     left: 0,
                     right: 0,
@@ -103,7 +115,7 @@ class EventDetailsTab extends ConsumerWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: AppSize.kmpadding, vertical: 3),
                                 child: Text(
-                                  eventDetails.eventStatus!,
+                                  eventDetails.eventStatus ?? "",
                                   style: applyRobotoFont(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -121,7 +133,7 @@ class EventDetailsTab extends ConsumerWidget {
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            aboutDetails(eventDetails.description!),
+            aboutDetails(eventDetails.description ?? ""),
             const SizedBox(
               height: AppSize.kmheight,
             ),
@@ -133,7 +145,7 @@ class EventDetailsTab extends ConsumerWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: null,
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
                         color: AppColor.primary,
@@ -160,13 +172,14 @@ class EventDetailsTab extends ConsumerWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      logger.d(eventDetails.id!);
                       ref
                           .read(addEventDetailsProvider)
                           .deleteEventDetails(
                               eventId: eventDetails.id.toString())
                           .then((statusCode) {
                         if (statusCode >= 200 && statusCode < 210) {
+                          showToastMessage(
+                              "Event Deleted Succesfully", context, 0);
                           ref
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
@@ -240,7 +253,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
             height: AppSize.ksheight - 5,
           ),
           Text(
-            addressDetails.addressLine1!,
+            addressDetails.addressLine1 ?? "",
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.black,
@@ -266,7 +279,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      addressDetails.pinCode!,
+                      addressDetails.pinCode ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -286,7 +299,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      addressDetails.subDistrict!,
+                      addressDetails.subDistrict ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -310,7 +323,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      addressDetails.city!,
+                      addressDetails.city ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -330,7 +343,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight - 5,
                     ),
                     Text(
-                      addressDetails.district!,
+                      addressDetails.district ?? "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -392,4 +405,9 @@ Widget aboutDetails(String description) {
       ),
     ),
   );
+}
+
+String _getImageUrl(VisionGuardianEventImage image) {
+  String imageUrl = "${image.baseUrl}${image.endpoint}";
+  return imageUrl;
 }

@@ -18,12 +18,12 @@ class TriageStepsDrawer extends ConsumerWidget {
     return Drawer(
       width: AppSize.width(context),
       child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/drawer_background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage("assets/images/drawer_background.png"),
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

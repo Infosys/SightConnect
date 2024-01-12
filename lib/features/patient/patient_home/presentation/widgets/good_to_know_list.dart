@@ -5,14 +5,12 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/source/local/fake_data_source.dart';
-
 class GoodToKnowCardList extends StatelessWidget {
   const GoodToKnowCardList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var data = goodToKnow;
+    var data = [];
     return Container(
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),

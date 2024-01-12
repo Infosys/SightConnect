@@ -49,22 +49,6 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                     ),
                   ],
                 ),
-                // const SizedBox(height: AppSize.klheight * 1.5),
-                // Text(
-                //   "Welcome",
-                //   style: applyFiraSansFont(
-                //     color: AppColor.scaffold,
-                //     fontSize: 24,
-                //   ),
-                // ),
-                // const SizedBox(height: AppSize.ksheight - 5),
-                // Text(
-                //   "Anupama Bansal",
-                //   style: applyFiraSansFont(
-                //     fontSize: 24,
-                //     color: AppColor.white,
-                //   ),
-                // ),
                 const SizedBox(height: AppSize.klheight * 1.2),
                 Text(
                   'Verify Phone Number',
@@ -95,7 +79,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const VgOnboardingOTP(),
+                          builder: (context) => const VGOnboardingOtp(),
                         ),
                       );
                     },

@@ -5,7 +5,9 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
+
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -117,60 +119,84 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     ],
                   ),
                   Positioned(
-                    bottom: -80,
+                    bottom: -1 * (AppSize.height(context) / 7.5),
+                    left: (AppSize.kswidth * 2) * -1,
                     child: SizedBox(
                       width: AppSize.width(context),
-                      child: const VGCarousel(),
+                      child: ref.watch(getAnalyticsProvider).when(
+                        data: (data) {
+                          return VGCarousel(data: data);
+                        },
+                        error: (error, stackTrace) {
+                          return Container();
+                        },
+                        loading: () {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 80),
-            Column(
-              children: [
-                const VisionGuardianServicesCardList(),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Events',
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        color: AppColor.black,
-                        fontWeight: FontWeight.w400,
+            const SizedBox(height: AppSize.klheight * 3),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: AppSize.kmpadding,
+                right: AppSize.kmpadding,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Services",
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                    ),
+                  ),
+                  const VisionGuardianServicesCardList(),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Events',
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                          color: AppColor.black,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Consumer(
-                      builder: (context, ref, child) {
-                        return TextButton(
-                          child: Text(
-                            'View All',
-                            style: applyFiraSansFont(
-                              fontSize: 14,
-                              color: AppColor.primary,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          onPressed: () async {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const VisionGuardianEventPage(),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          return TextButton(
+                            child: Text(
+                              'View All',
+                              style: applyFiraSansFont(
+                                fontSize: 14,
+                                color: AppColor.primary,
+                                fontWeight: FontWeight.w400,
                               ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                const VisionEventListDetails(
-                  eventType: "default",
-                ),
-                const SizedBox(height: 16),
-              ],
+                            ),
+                            onPressed: () async {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const VisionGuardianEventPage(),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const VisionEventListDetails(
+                    eventType: "default",
+                  ),
+                  const SizedBox(height: AppSize.klheight * 4)
+                ],
+              ),
             ),
           ],
         ),
