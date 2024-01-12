@@ -10,30 +10,7 @@ class AssessmentRecommendation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> data = [
-      {
-        "name": "Dr. Praveen (ID 394956)",
-        "date": "16 Sep 2023, 12:20 PM",
-        "recommendation":
-            "Surgery completed. Post operative care and follow-ups recommended."
-      },
-      {
-        "name": "Ram C (VT 314200)",
-        "date": "30 Aug 2023, 11:20 AM",
-        "recommendation":
-            "Cataract Identified in Left Eye with further test. Patient is recommended to visit Doctor for treatment."
-      },
-      {
-        "name": "Ajai C (VG 314200)",
-        "date": "29 Aug 2023, 11:20 AM",
-        "recommendation":
-            "Patient sees coloured halos around lights. Patient consistently identifies the orientation of few “E” letters but struggles with a most. Recommended Urgent Visit to Vision Center"
-      },
-      {
-        "name": "IVR",
-        "date": "10 Aug 2023, 11:20 AM",
-        "recommendation":
-            "Patient sees colored halos around lights. This could mean that patient is developing a serious eye disorder such as cataracts or glaucoma."
-      },
+      {"name": "-", "date": "-", "recommendation": "-"},
     ];
 
     return Padding(

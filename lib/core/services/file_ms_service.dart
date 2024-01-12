@@ -29,7 +29,6 @@ class FileMsService {
 
     var data = FormData.fromMap({
       'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
-      'specData': 'abc@gmail.com'
     });
 
     try {
