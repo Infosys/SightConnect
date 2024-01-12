@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
@@ -17,25 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class PatientHomePage extends ConsumerStatefulWidget {
+class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
-  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
-}
-
-class _PatientHomePageState extends ConsumerState<PatientHomePage> {
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(Duration.zero, () {
-      ref.read(patientHomeProvider).init();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       endDrawer: AppDrawer(
         onAccessibilityChange: () {
