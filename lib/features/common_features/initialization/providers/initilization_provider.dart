@@ -24,75 +24,11 @@ class InitializationProvider extends ChangeNotifier {
     }
 
     if (role == Role.ROLE_VISION_TECHNICIAN) {
-      final response = await _ref
-          .read(vtAuthenticationRepositoryProvider)
-          .getVtProfile(phone);
-      return response.fold((failure) {
-        throw failure;
-      }, (result) async {
-        if (result.isEmpty) {
-          // if result is empty then user is not found
-          return false;
-        } else {
-          bool isRoleAvailable = result.first.practiceGrants!
-              .any((element) => element.grantRole == role.name);
-
-          if (isRoleAvailable) {
-            final profile = result.first;
-            await PersistentAuthStateService.authState.saveUserProfileId(
-              profile.id.toString(),
-            );
-            return true;
-          } else {
-            // if result is empty then user is not found
-            return false;
-          }
-        }
-      });
+      return await _checkVisionTechnicianExist(phone, role);
     } else if (role == Role.ROLE_PATIENT) {
-      final response = await _ref
-          .read(patientAuthenticationRepositoryProvider)
-          .getPatientProfileByPhone(phone);
-
-      return response.fold((failure) {
-        logger.e("Patient Profile Not Found: $failure");
-        if (failure is NotFoundFailure) {
-          return false;
-        }
-
-        throw failure;
-      }, (result) async {
-        await PersistentAuthStateService.authState.saveUserProfileId(
-          result.profile!.patient!.patientId.toString(),
-        );
-        return true;
-      });
+      return await _checkPatientExist(phone, role);
     } else if (role == Role.ROLE_VISION_GUARDIAN) {
-      final response = await _ref
-          .read(vgAuthenticationRepositoryProvider)
-          .getVgProfile(phone);
-      return response.fold((failure) {
-        throw failure;
-      }, (result) async {
-        if (result.isEmpty) {
-          // if result is empty then user is not found
-          return false;
-        } else {
-          bool isRoleAvailable = result.first.practiceGrants!
-              .any((element) => element.grantRole == role.name);
-
-          if (isRoleAvailable) {
-            final profile = result.first;
-            await PersistentAuthStateService.authState.saveUserProfileId(
-              profile.id.toString(),
-            );
-            return true;
-          } else {
-            // if result is empty then user is not found
-            return false;
-          }
-        }
-      });
+      return await _checkVisionGuardianExist(phone, role);
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
@@ -138,5 +74,85 @@ class InitializationProvider extends ChangeNotifier {
     } catch (e) {
       return Future.error(e);
     }
+  }
+
+  Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {
+    final response =
+        await _ref.read(vtAuthenticationRepositoryProvider).getVtProfile(phone);
+    return response.fold((failure) {
+      throw failure;
+    }, (result) async {
+      if (result.isEmpty) {
+        return false;
+      } else {
+        if (result.first.practiceGrants == null) {
+          return false;
+        }
+
+        bool isRoleAvailable = result.first.practiceGrants!
+            .any((element) => element.grantRole == role.name);
+
+        if (isRoleAvailable) {
+          final profile = result.first;
+          await PersistentAuthStateService.authState.saveUserProfileId(
+            profile.id.toString(),
+          );
+          return true;
+        } else {
+          // if result is empty then user is not found
+          return false;
+        }
+      }
+    });
+  }
+
+  Future<bool> _checkPatientExist(String phone, Role role) async {
+    final response = await _ref
+        .read(patientAuthenticationRepositoryProvider)
+        .getPatientProfileByPhone(phone);
+
+    return response.fold((failure) {
+      logger.e("Patient Profile Not Found: $failure");
+      if (failure is NotFoundFailure) {
+        return false;
+      }
+
+      throw failure;
+    }, (result) async {
+      await PersistentAuthStateService.authState.saveUserProfileId(
+        result.profile!.patient!.patientId.toString(),
+      );
+      return true;
+    });
+  }
+
+  Future<bool> _checkVisionGuardianExist(String phone, Role role) async {
+    final response =
+        await _ref.read(vgAuthenticationRepositoryProvider).getVgProfile(phone);
+    return response.fold((failure) {
+      throw failure;
+    }, (result) async {
+      if (result.isEmpty) {
+        // if result is empty then user is not found
+        return false;
+      } else {
+        if (result.first.practiceGrants == null) {
+          return false;
+        }
+        bool isRoleAvailable = result.first.practiceGrants!
+            .any((element) => element.grantRole == role.name);
+
+        if (isRoleAvailable) {
+          final profile = result.first;
+          await PersistentAuthStateService.authState.saveUserProfileId(
+            profile.id.toString(),
+          );
+          return true;
+        } else {
+          // if result is empty then user is not found
+          return false;
+        }
+      }
+    });
   }
 }

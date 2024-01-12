@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/contracts/assessment_timeline_repository.dart';
@@ -19,4 +20,16 @@ class AssessmentTimelineRepositoryImpl extends AssessmentTimelineRepository {
       int encounterId) async {
     return await assessmentTimeLineSource.getAssessmentTimeLine(encounterId);
   }
+
+  @override
+  Future<List<Encounter>> getEncounters(int patientId) async {
+    return await assessmentTimeLineSource.getEncounters(patientId);
+  }
+
+  // @override
+  // Future<TriageReportDetailedEntity> getTriageDetailedReport(
+  //     int reportId) async {
+  //   return await assessmentTimeLineSource.getTriageDetailedReport(reportId);
+  // }
+  
 }

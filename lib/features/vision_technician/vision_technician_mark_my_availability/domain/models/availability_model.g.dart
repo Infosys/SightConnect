@@ -9,9 +9,9 @@ part of 'availability_model.dart';
 _$_AvailabilityModel _$$_AvailabilityModelFromJson(Map<String, dynamic> json) =>
     _$_AvailabilityModel(
       userId: json['userId'] as int,
-      userType: json['userType'] as String,
-      mobile: json['mobile'] as String,
-      available: json['available'] as bool,
+      userType: json['userType'] as String?,
+      mobile: json['mobile'] as String?,
+      available: json['available'] as bool?,
     );
 
 Map<String, dynamic> _$$_AvailabilityModelToJson(

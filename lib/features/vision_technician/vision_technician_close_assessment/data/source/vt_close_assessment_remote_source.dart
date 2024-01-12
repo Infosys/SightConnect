@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class VTCloseAssessmentRemoteSource {
-  void submitCloseAssessmentInfo(CloseAssessmentDto patientDetails);
+  Future<String> submitCloseAssessmentInfo(CloseAssessmentDto patientDetails);
 }
 
 var vtCloseAssessmentRemoteSource =
@@ -19,31 +19,36 @@ class VTCloseAssessmentRemoteSourceImpl
   VTCloseAssessmentRemoteSourceImpl(this._dio);
 
   @override
-  void submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) async {
+  Future<String> submitCloseAssessmentInfo(
+      CloseAssessmentDto closeAssessmentDto) async {
     String endPoint =
-        '/services/triage/api/triage/${patientDetails.encounterId}/close';
+        '/services/triage/api/triage/${closeAssessmentDto.encounterId}/close';
 
-    logger.d(endPoint);
-    logger.d(patientDetails.toJson().toString());
+    logger.d(
+        "close assessment response to be saved ${closeAssessmentDto.toJson()}");
 
     try {
-      var response = await _dio.patch(endPoint, data: patientDetails.toJson());
-      logger.d("this is the response ${response.toString()}");
+      var response =
+          await _dio.patch(endPoint, data: closeAssessmentDto.toJson());
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 210) {
+        logger.d("response from close assessment ${response.toString()}");
+        return "success";
+      }else{
+        return "failure";
+      }
+
     } on DioException catch (e) {
       logger.d("this is the error ${e.message}");
       if (e.response != null) {
         logger.d("Error response: ${e.response.toString()}");
       }
+      return "failure";
     } catch (e) {
       logger.d("Unknown error: ${e.toString()}");
+      return "failure";
     }
 
-    // _dio.patch(endPoint, data: patientDetails.toJson()).then((value) {
-    //   if (value.statusCode! < 500) {
-    //     logger.d("from if $value");
-    //   }
-
-    //   logger.d(value.statusMessage);
-    // });
   }
 }

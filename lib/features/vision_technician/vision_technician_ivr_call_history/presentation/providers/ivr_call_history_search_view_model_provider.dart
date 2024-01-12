@@ -1,14 +1,14 @@
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+// import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
+// import 'package:flutter/material.dart';
+// import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var ivrCallHistorySearchViewModelProvider =
-    ChangeNotifierProvider<IVRCallHistorySearchViewModel>((ref) =>
-        IVRCallHistorySearchViewModel(
-            ref.read(ivrCallHistorySearchHelperProvider)));
+// var ivrCallHistorySearchViewModelProvider =
+//     ChangeNotifierProvider<IVRCallHistorySearchViewModel>((ref) =>
+//         IVRCallHistorySearchViewModel(
+//             ref.read(ivrCallHistorySearchHelperProvider)));
 
-class IVRCallHistorySearchViewModel extends ChangeNotifier {
-  final IvrCallHistorySearchHelperNotifier _ivrCallHistorySearchHelperNotifier;
+// class IVRCallHistorySearchViewModel extends ChangeNotifier {
+//   final IvrCallHistorySearchHelperNotifier _ivrCallHistorySearchHelperNotifier;
 
-  IVRCallHistorySearchViewModel(this._ivrCallHistorySearchHelperNotifier);
-}
+//   IVRCallHistorySearchViewModel(this._ivrCallHistorySearchHelperNotifier);
+// }

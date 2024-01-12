@@ -34,7 +34,6 @@ class AssessmentReportDetails extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.ksheight),
-
           (questionResponseBreifModel == null ||
                   questionResponseBreifModel!.isEmpty)
               ? const Padding(
@@ -101,78 +100,6 @@ class AssessmentReportDetails extends StatelessWidget {
                     );
                   },
                 ),
-
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       "1. Patient has the following eyesight related problems:",
-          //       style: applyRobotoFont(fontWeight: FontWeight.w400),
-          //     ),
-          //     const SizedBox(height: AppSize.ksheight),
-          //     ListView.builder(
-          //       itemCount: 1,
-          //       shrinkWrap: true,
-          //       itemBuilder: (context, index) {
-          //         return Text(
-          //           "(None)",
-          //           style: applyRobotoFont(
-          //             fontWeight: FontWeight.w500,
-          //             fontSize: 14,
-          //           ),
-          //         );
-          //       },
-          //     )
-          //   ],
-          // ),
-          // const Divider(
-          //   thickness: 1,
-          // ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       "2. Patient has the following eye related problems:",
-          //       style: applyRobotoFont(fontWeight: FontWeight.w400),
-          //     ),
-          //     const SizedBox(height: AppSize.ksheight),
-          //     ListView.builder(
-          //       itemCount: 1,
-          //       shrinkWrap: true,
-          //       itemBuilder: (context, index) {
-          //         return Text(
-          //           "Sticky discharges in eyes",
-          //           style: applyRobotoFont(
-          //             fontWeight: FontWeight.w500,
-          //             fontSize: 14,
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //     const Divider(
-          //       thickness: 1,
-          //     ),
-          //   ],
-          // ),
-          // Consumer(
-          //   builder: (context, ref, child) {
-          //     var eyeSightProblems =
-          //         ref.watch(preliminaryAssessmentHelperProvider).eyeSightProblem;
-
-          //     var eyeRelatedProblems =
-          //         ref.watch(preliminaryAssessmentHelperProvider).eyeRelatedProblem;
-
-          //     var eyeRelatedProblemsFilter = eyeRelatedProblems
-          //         .where((e) => e.checked == true)
-          //         .toList();
-          //     var eyeSightProblemsFilter =
-          //         eyeSightProblems.where((e) => e.checked == true).toList();
-
-          //     return Wrap(spacing: AppSize.kmwidth * 5, children: [
-
-          //     ],);
-          //   },
-          // )
         ],
       ),
     );

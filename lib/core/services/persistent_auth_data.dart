@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -131,6 +132,8 @@ class PersistentAuthData {
     await _storage.delete(key: _usernameKey);
     await _storage.delete(key: _userIdKey);
     await _storage.delete(key: _id_token);
+    // clear shared preference
+    SharedPreferenceService.clear();
 
     accessToken = null;
     refreshToken = null;

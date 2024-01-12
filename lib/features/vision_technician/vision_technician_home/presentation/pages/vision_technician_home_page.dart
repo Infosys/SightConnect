@@ -3,14 +3,12 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
-import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -18,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
@@ -34,21 +31,25 @@ class VisionTechnicianHomePage extends ConsumerWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () async {
-            final navigator = Navigator.of(context);
-            try {
-              final response = await ref
-                  .read(patientAssessmentAndTestProvider)
-                  .getTriageDetailedReport(33200000017);
-              navigator.push(MaterialPageRoute(
-                builder: (context) {
-                  return VisionTechnicianAssessmentReportPage(
-                    assessmentDetailsReport: response,
-                  );
-                },
-              ));
-            } catch (e) {
-              logger.d("$e");
-            }
+            // final navigator = ;
+
+            // try {
+            //   var response = await ref
+            //     .watch(patientAssessmentAndTestProvider)
+            //     .getTriageDetailedReport(33200000023);
+            //     logger.d("response $response");
+            //     if(context.mounted){
+            //    Navigator.of(context).push(MaterialPageRoute(
+            //     builder: (context) {
+            //       return VisionTechnicianAssessmentReportPage(
+            //         assessmentDetailsReport: response,
+            //       );
+            //     },
+
+            //   ));}
+            // } catch (e) {
+            //   logger.d("error $e");
+            // }
           },
           child: Container(
             margin: const EdgeInsets.only(

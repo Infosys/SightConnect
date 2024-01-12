@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/services/file_ms_service.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -8,27 +13,46 @@ import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 
 var visionTechnicianTriageProvider =
-    ChangeNotifierProvider((ref) => VisionTechnicianTriageProvider());
+    ChangeNotifierProvider((ref) => VisionTechnicianTriageProvider(
+          fileMsService: ref.watch(fileMsServiceProvider),
+          vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
+        ));
 
 class VisionTechnicianTriageProvider extends ChangeNotifier {
-  VisionTechnicianTriageProvider() {
-    _selectedOptions = {};
+  FileMsService fileMsService;
+  VisionTechnicianSearchProvider vtSearchProvider;
+  VisionTechnicianTriageProvider(
+      {required this.fileMsService, required this.vtSearchProvider}) {
+    // _selectedOptions = {};
   }
   //patient id is static data right now
-  String _patientID = "100101";
-  late final Map<int, int> _selectedOptions;
-  Map<int, int> get selectedOptions => _selectedOptions;
+  String _patientID = "";
+  Map<int, String> _selectedOptions = {};
+  Map<int, String> get selectedOptions => _selectedOptions;
+  final Map<int, QuestionnaireItemFHIRModel> _idToQuestions = {};
   final List<PostTriageQuestionModel> _questionResponseList = [];
   XFile? _leftEyeImage;
   XFile? _rightEyeImage;
   double? _leftEyeSight;
   double? _rightEyeSight;
   double? _bothEyeSight;
-
+  DiagnosticReportTemplateFHIRModel _assessment =
+      const DiagnosticReportTemplateFHIRModel();
+  DiagnosticReportTemplateFHIRModel get assessment => _assessment;
   void setPatientID(String patientID) {
     _patientID = patientID;
     logger.d("Patient ID: $_patientID");
     notifyListeners();
+  }
+
+  void setData(DiagnosticReportTemplateFHIRModel assessment,
+      List<QuestionnaireItemFHIRModel> questions) {
+    _assessment = assessment;
+    _selectedOptions = {};
+    for (int i = 0; i < questions.length; i++) {
+      _selectedOptions[questions[i].id!] = "No";
+      _idToQuestions[questions[i].id!] = questions[i];
+    }
   }
 
   void setLeftEyeSight(double leftEye) {
@@ -55,22 +79,19 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addQuestionnaireAnswer(int questionCode, bool answer, int score) {
-    _selectedOptions[questionCode] = score;
+  void addQuestionnaireAnswer(int? questionCode, String? response) {
+    if (questionCode == null) return;
+    if (response == null) return;
+
+    _selectedOptions[questionCode] = response;
+
     notifyListeners();
-    logger.d({
-      "Added Options: $_selectedOptions",
-      "Answer: $answer",
-      "Score: $score",
-    });
   }
 
-  void removeQuestionnaireAnswer(int questionCode) {
-    _selectedOptions.remove(questionCode);
+  void removeQuestionnaireAnswer(int? questionCode) {
+    if (questionCode == null) return;
+    _selectedOptions[questionCode] = "No";
     notifyListeners();
-    logger.d({
-      "Removed Options: $_selectedOptions",
-    });
   }
 
   List<PostTriageQuestionModel> getQuestionaireResponse() {
@@ -78,29 +99,45 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
   }
 
   void saveQuestionaireResponse() {
-    Map<int, bool> selectedOptionsList = {};
-    _selectedOptions.forEach((key, value) {
-      selectedOptionsList[key] = true;
-    });
-    // _questionnaireResponse.add(selectedOptionsList);
+    // Map<int, bool> selectedOptionsList = {};
+    // _selectedOptions.forEach((key, value) {
+    //   selectedOptionsList[key] = true;
+    // });
     addtoFinalResponse(_selectedOptions);
     logger.d("Questionnaire Response: $_selectedOptions");
     _selectedOptions.clear();
     notifyListeners();
   }
 
-  void addtoFinalResponse(selectedOptions) {
+  void addtoFinalResponse(Map<int, String> selectedOptions) {
+    if (selectedOptions.isEmpty) return;
+
     selectedOptions.forEach(
-      (key, score) {
+      (questionId, response) {
+        List<AnswerOptionModel> answerOptions =
+            _idToQuestions[questionId]?.answerOption ?? [];
+
+        double score = 0;
+        int answerCode = 0;
+        for (int i = 0; i < answerOptions.length; i++) {
+          if (answerOptions[i].answer?.answerString?.toLowerCase() ==
+              response.toLowerCase()) {
+            score =
+                answerOptions[i].answer?.answerItemWeight?.value?.toDouble() ??
+                    0;
+            answerCode = answerOptions[i].answer?.id ?? 0;
+          }
+        }
+
         _questionResponseList.add(
           PostTriageQuestionModel(
-            id: 0,
-            linkId: key,
-            score: 1,
+            linkId: questionId, //question id
+            score: score, //answerwt.value
             answers: [
               PostTriageAnswerModel(
-                value: "YES",
-                score: double.parse(score.toString()),
+                answerCode: answerCode,
+                value: response,
+                score: score, //answerwt.value
               )
             ],
           ),
@@ -111,28 +148,53 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
   //////////////////////////////////////////////////////////////////
 
-  List<PostTriageImagingSelectionModel> getTriageEyeScanResponse() {
-    XFile XleftEyeImage = XFile(AppImages.cataractEyecare); // _leftEyeImage!;
-    XFile XrightEyeImage = XFile(AppImages.cataractEyecare); // _rightEyeImage!;
+  Future<List<PostTriageImagingSelectionModel>>
+      getTriageEyeScanResponse() async {
+    if (_leftEyeImage == null) {
+      return [];
+    }
+
+    if (_rightEyeImage == null) {
+      return [];
+    }
+
+    XFile XleftEyeImage = _leftEyeImage!; // XFile(AppImages.aboutUs);
+    XFile XrightEyeImage = _rightEyeImage!; //XFile(AppImages.aboutUs);
+
+    String leftEyeImage =
+        await fileMsService.uploadImage(File(XleftEyeImage.path));
+
+    String? rightEyeImage =
+        await fileMsService.uploadImage(File(XrightEyeImage.path));
+
+    Map<String, String> leftEyeData = parseUrl(leftEyeImage);
+    Map<String, String> rightEyeData = parseUrl(rightEyeImage);
+    int? leftEyeIdentifier;
+    int? rightEyeIdentifier;
+
+    Map<String, int> identifierMap = {};
+    _assessment.study?.imagingSelectionTemplate?.forEach((element) {
+      identifierMap[element.name!] = element.id!;
+    });
+    leftEyeIdentifier = identifierMap["LEFT_EYE"];
+    rightEyeIdentifier = identifierMap["RIGHT_EYE"];
 
     List<PostTriageImagingSelectionModel> mediaCaptureList = [];
     mediaCaptureList.add(PostTriageImagingSelectionModel(
-      id: 0,
-      identifier: 70000001,
-      endpoint: getUniqueFileName(XleftEyeImage.name),
-      baseUrl: XleftEyeImage.mimeType,
-      score: 1,
+      identifier: leftEyeIdentifier,
+      endpoint: leftEyeData["endPoint"]!,
+      baseUrl: leftEyeData["baseUrl"]!,
+      score: 0,
+      fileId: leftEyeData["fileId"]!,
     ));
     mediaCaptureList.add(PostTriageImagingSelectionModel(
-      id: 0,
-      identifier: 70000002,
-      endpoint: getUniqueFileName(XrightEyeImage.name),
-      baseUrl: XrightEyeImage.mimeType,
-      score: 1,
+      identifier: rightEyeIdentifier,
+      endpoint: rightEyeData["endPoint"]!,
+      baseUrl: rightEyeData["baseUrl"]!,
+      score: 0,
+      fileId: rightEyeData["fileId"]!,
     ));
-    logger.d({
-      "getTriageEyeScanResponse": mediaCaptureList,
-    });
+
     return mediaCaptureList;
   }
 
@@ -144,7 +206,53 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
   String getUniqueFileName(String fileName) {
     String uniqueKey = generateUniqueKey();
-    return "${_patientID}_$fileName-$uniqueKey";
+
+    if (vtSearchProvider.patientDetails == null) {
+      logger.d("Patient Details is null");
+    }
+
+    return "${vtSearchProvider.patientDetails!.id.toString()}_$fileName-$uniqueKey";
+  }
+
+  Map<String, String> parseUrl(String url) {
+    Map<String, String> mp = {};
+    String baseUrl = "";
+    String endpoint = "";
+    String fileId = "";
+    int slashcount = 0;
+    for (int i = 0; i < url.length; i++) {
+      if (url[i] == '/') {
+        slashcount++;
+      }
+      if (slashcount < 3) {
+        baseUrl += url[i];
+      } else {
+        endpoint += url[i];
+      }
+    }
+
+    for (int i = endpoint.length - 1; i >= 0; i--) {
+      if (endpoint[i] == '/') {
+        break;
+      }
+
+      fileId += endpoint[i];
+    }
+    fileId = reverseFileId(fileId);
+
+    mp["baseUrl"] = baseUrl;
+    mp["endPoint"] = endpoint;
+    mp["fileId"] = fileId;
+
+    return mp;
+  }
+
+  String reverseFileId(String input) {
+    String reversed = '';
+    for (int i = input.length - 1; i >= 0; i--) {
+      reversed += input[i];
+    }
+    return reversed;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,34 +269,51 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
   }
 
   List<PostTriageObservationsModel> getVisionAcuityTumblingResponse() {
+    if (_leftEyeImage == null ||
+        _rightEyeImage == null ||
+        _bothEyeSight == null) {
+      return [];
+    }
+
     double leftEyeUrgency = _calculateScore(_leftEyeSight!);
     double rightEyeUrgency = _calculateScore(_rightEyeSight!);
     double bothEyeUrgency = _calculateScore(_bothEyeSight!);
 
+    int? leftIdentifier;
+    int? rightIdentifier;
+
+    // logger.d("assessment from observations functions $assessment");
+
+    Map<BodySite, int> identifierMap = {};
+    _assessment.observations?.observationDefinition?.forEach((element) {
+      identifierMap[element.bodySite!] = element.id!;
+    });
+    leftIdentifier = identifierMap[BodySite.LEFT_EYE];
+    rightIdentifier = identifierMap[BodySite.RIGHT_EYE];
+
+    int bothEyeIdentifier = _assessment.observations?.id ?? 0;
+
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(
-        id: 0,
-        identifier: 50000001,
+        identifier: leftIdentifier,
         value: _leftEyeSight.toString(),
         score: leftEyeUrgency,
       ),
       PostTriageObservationsModel(
-        id: 0,
-        identifier: 50000002,
+        identifier: rightIdentifier,
         value: _rightEyeSight.toString(),
         score: rightEyeUrgency,
       ),
       PostTriageObservationsModel(
-        id: 0,
-        identifier: 50000003,
+        identifier: bothEyeIdentifier,
         value: _bothEyeSight.toString(),
         score: bothEyeUrgency,
       ),
     ];
 
-    logger.d({
-      "getVisionAcuityTumblingResponse": observationList,
-    });
+    // logger.d({
+    //   "getVisionAcuityTumblingResponse": observationList,
+    // });
     return observationList;
   }
 }

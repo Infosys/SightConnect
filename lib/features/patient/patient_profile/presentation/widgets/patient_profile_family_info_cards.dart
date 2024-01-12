@@ -132,6 +132,7 @@ class PatientFamilyDetails extends StatelessWidget {
             ],
           ),
         ),
+       
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

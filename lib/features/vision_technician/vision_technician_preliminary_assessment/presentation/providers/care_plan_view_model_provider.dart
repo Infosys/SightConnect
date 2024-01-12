@@ -1,123 +1,88 @@
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/status.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_care_plan_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../data/model/care_plan_model.dart';
+
+import '../../data/model/care_plan_post_model.dart';
 
 var carePlanViewModelProvider =
     ChangeNotifierProvider((ref) => CarePlanViewModel(
           ref.read(carePlanProvider),
-          ref,
+          ref.watch(preliminaryAssessmentHelperProvider),
+          ref.watch(globalVTProvider).userId,
+          ref.watch(vtCarePlanRemoteSourceProvider),
         ));
 
 class CarePlanViewModel extends ChangeNotifier {
+  final VTCarePlanRemoteSource _vtCarePlanRemoteSource;
   final CarePlanProvider _carePlanProvider;
-  Ref ref;
+
+  final PreliminaryAssessmentHelperNotifier
+      _preliminaryAssessmentHelperProvider;
+  final int? _vtId;
 
   CarePlanViewModel(
     this._carePlanProvider,
-    this.ref,
+    this._preliminaryAssessmentHelperProvider,
+    this._vtId,
+    this._vtCarePlanRemoteSource,
   );
 
-  Future<CarePlanModel> saveCarePlan() async {
-    final String patientInstruction = _carePlanProvider.patientInstruction;
+  Future<CarePlanPostModel> saveCarePlan(
+      int organizationCode, int reportId, int encounterId) async {
+    final PatientInstruction patientInstruction =
+        _carePlanProvider.patientInstruction;
 
-    const response = CarePlanModel(
-      //take data from json like id = 33200000002
+    int? visionCenterId =
+        _preliminaryAssessmentHelperProvider.selectedVisionCenter?.id;
+    logger.d("visionCenterId from careplan : $visionCenterId");
+
+    final CarePlanPostModel carePlan = CarePlanPostModel(
       reports: [
-        ReportModel(id: 33200000071),
+        ReportModel(id: reportId),
       ],
-      encounterId: 33300000033,
-      organizationCode: 1001,
+      encounterId: encounterId,
+      organizationCode: organizationCode,
+      note: _preliminaryAssessmentHelperProvider.remarksController.text,
       performer: [
-        PerformerModel(role: Role.VISION_TECHNICIAN, identifier: 1601),
-      ],
-      conditions: [
-        ConditionModel(
-          recordedDate: "2023-10-12T14:11:33.000Z",
-          bodySite: BodySite.LEFT_EYE,
-          code: Code.EYE_TRIAGE,
-          note: "",
+        PerformerModel(
+          role: Role.VISION_TECHNICIAN,
+          identifier: _vtId,
         ),
       ],
       serviceRequest: [
         ServiceRequestModel(
-          note: "",
-          patientInstruction: PatientInstruction.VISIT_PRIMARY_CLINIC,
-          identifier: 1234,
-          bodySite: BodySite.LEFT_EYE,
-          priority: TriageUrgency.ROUTINE,
+          patientInstruction: patientInstruction,
+          bodySite: BodySite.BOTH_EYES,
+          identifier: visionCenterId, //vision center id
+          priority: _preliminaryAssessmentHelperProvider.selectedSeverity,
         ),
       ],
-      note: "abc",
-      startDate: "2023-10-12T14:11:33.000Z",
+      startDate: DateTime.now(),
       goal: [
         GoalModel(
-          statusReason: "null",
+          statusReason: "Create by VT",
           achievementStatus: Status.IN_PROGRESS,
-          outcomes: [
-            GoalOutcomeModel(goalOutcome: GoalOutCome.GLASSES_PRESCRIBED),
-          ],
-          note: "abc",
-          startDate: "2023-10-12T14:11:33.000Z",
+          startDate: DateTime.now(),
           target: [
-            TargetModel(detailString: "TREATMENT_TO_BE_PROVIDED"),
+            const TargetModel(detailString: "TREATMENT_TO_BE_PROVIDED"),
           ],
         ),
       ],
     );
 
-    final vtCarePlanRemoteSource = ref.watch(vtCarePlanRemoteSourceProvider);
-
-    return await vtCarePlanRemoteSource.saveCarePlan(
-      carePlan: response,
+    var response = await _vtCarePlanRemoteSource.saveCarePlan(
+      carePlan: carePlan,
     );
-  }
 
-  // {
-  //   "reports": [{
-  //        "id":33200000002
-  //     }],
-  //   "encounterId": 33300000004,
-  //   "organizationCode": 88000001,
-  //   "performer": [{
-  //      "role":"VISION_TECHNICIAN",
-  //     "identifier":9627849171
-  //   }],
-  //   "conditions": [
-  //     {
-  //       "recordedDate": "2023-10-12T14:11:33.000Z",
-  //       "bodySite": "LEFT_EYE",
-  //       "code": "EYE_TRIAGE",
-  //       "note": ""
-  //     }
-  //   ],
-  //   "serviceRequest":[ {
-  //     "note": "",
-  //     "patientInstruction": "VISIT_PRIMARY_CLINIC",
-  //     "identifier": 1234,
-  //     "bodySite": "LEFT_EYE",
-  //     "priority": "URGENT"
-  //   }],
-  //   "note": "abc",
-  //   "startDate": "2023-10-12T14:11:33.000Z",
-  //   "goal": [{
-  //     "statusReason": "null",
-  //     "achievementStatus": "IN_PROGRESS",
-  //     "outcomes": [
-  //         {
-  //           "goalOutcome": "GLASSES_PRESCRIBED"
-  //         }
-  //       ],
-  //       "note": "abc",
-  //     "startDate": "2023-10-12T14:11:33.000Z",
-  //     "target":[{"detailString":"TREATMENT_TO_BE_PROVIDED"}]
-  //   }]
-  // }
+    return response;
+  }
 }

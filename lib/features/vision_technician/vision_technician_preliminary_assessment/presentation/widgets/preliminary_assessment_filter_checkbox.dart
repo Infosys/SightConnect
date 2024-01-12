@@ -7,15 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../common_features/triage/domain/models/enums/questionnaire_type.dart';
+
 class PreliminaryAssessmentFilterCheckBox extends ConsumerStatefulWidget {
-  final String? heading;
-  final int includeInputBox;
-  final List<AnswerOptionModel>? questions;
+  final QuestionnaireItemFHIRModel question;
+  final int index;
+  final List<QuestionnaireItemFHIRModel> questionnaire;
   const PreliminaryAssessmentFilterCheckBox({
     super.key,
-    this.heading,
-    required this.includeInputBox,
-    required this.questions,
+    required this.question,
+    required this.index,
+    required this.questionnaire,
   });
 
   @override
@@ -33,76 +35,92 @@ class _PreliminaryAssessmentFilterCheckBoxState
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.heading!,
-          style: applyFiraSansFont(
-            fontSize: 18,
-            color: AppColor.black,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Wrap(
-          children: [
-            for (int index = 0; index < widget.questions!.length; index++) ...[
-              QuestionTile(
-                text: widget.questions![index].answer!.answerString!,
-                questions: widget.questions![index],
-              ),
-            ],
-            if (widget.includeInputBox == 1)
-              Padding(
-                padding: const EdgeInsets.only(left: AppSize.klpadding),
-                child: SizedBox(
-                  width: AppSize.width(context) * 0.2,
-                  child: const TextField(
-                    decoration: InputDecoration(labelText: "Others"),
+        widget.questionnaire[widget.index].type == QuestionnaireType.Group
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.question.text!.toString(),
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ),
-          ],
-        ),
+                  const SizedBox(height: AppSize.ksheight),
+                ],
+              )
+            : widget.questionnaire[widget.index].type ==
+                    QuestionnaireType.String
+                ? Padding(
+                    padding: const EdgeInsets.only(left: AppSize.klpadding),
+                    child: SizedBox(
+                      width: AppSize.width(context) * 0.2,
+                      child: TextField(
+                        onChanged: (value) {
+                          ref
+                              .read(visionTechnicianTriageProvider)
+                              .addQuestionnaireAnswer(
+                                  widget.question.id, value);
+                          
+                        },
+                        decoration: const InputDecoration(labelText: "Others"),
+                      ),
+                    ),
+                  )
+                : Row(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      QuestionTile(question: widget.question),
+                      Text(
+                        widget.question.text!.toString(),
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                          color: AppColor.black,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
       ],
     );
   }
 }
 
 class QuestionTile extends HookConsumerWidget {
-  const QuestionTile({super.key, required this.text, required this.questions});
-  final text;
-  final AnswerOptionModel? questions;
+  const QuestionTile({super.key, required this.question});
+
+  final QuestionnaireItemFHIRModel? question;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var checkBoxState = useState(false);
-    int questionCode = questions?.id ?? 0;
-    bool answer = checkBoxState.value;
-    int score = questions?.answer?.answerItemWeight?.value?.toInt() ?? 0;
-    return SizedBox(
-      width: AppSize.width(context) * 0.4,
-      child: CheckboxListTile(
-        controlAffinity: ListTileControlAffinity.leading,
-        title: Text(
-          text,
-          style: applyRobotoFont(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: AppColor.grey,
-          ),
-        ),
-        value: checkBoxState.value,
-        onChanged: (bool? value) {
-          checkBoxState.value = value!;
-          if (checkBoxState.value == true) {
-            answer = checkBoxState.value;
-            ref
-                .read(visionTechnicianTriageProvider)
-                .addQuestionnaireAnswer(questionCode, answer, score);
-          } else {
-            ref
-                .read(visionTechnicianTriageProvider)
-                .removeQuestionnaireAnswer(questionCode);
-          }
-        },
-      ),
+    // int questionCode = questions?.id ?? 0;
+    // bool answer = checkBoxState.value;
+    // int score = questions?.answer?.answerItemWeight?.value?.toInt() ?? 0;
+    return Checkbox(
+      // controlAffinity: ListTileControlAffinity.leading,
+
+      // title: Text(
+      //   text,
+      //   style: applyRobotoFont(
+      //     fontSize: 15,
+      //     fontWeight: FontWeight.w500,
+      //     color: AppColor.grey,
+      //   ),
+      // ),
+      value: checkBoxState.value,
+      onChanged: (bool? value) {
+        checkBoxState.value = value!;
+
+        if (checkBoxState.value == true) {
+          ref
+              .read(visionTechnicianTriageProvider)
+              .addQuestionnaireAnswer(question?.id, "Yes");
+        } else {
+          ref
+              .read(visionTechnicianTriageProvider)
+              .removeQuestionnaireAnswer(question?.id);
+        }
+      },
     );
   }
 }

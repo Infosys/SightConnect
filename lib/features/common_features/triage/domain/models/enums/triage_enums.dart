@@ -15,3 +15,5 @@ enum TriageEyeType { LEFT, RIGHT, BOTH, UNKNOWN }
 enum QuestionnaireUrgency { EMERGENCY, PRIORITY, ROUTINE }
 
 enum VisualAcuityUrgency { EMERGENCY, PRIORITY, ROUTINE }
+
+enum TriagePriority { ROUTINE, URGENT, ASAP, STAT }

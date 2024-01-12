@@ -21,9 +21,9 @@ AvailabilityModel _$AvailabilityModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AvailabilityModel {
   int get userId => throw _privateConstructorUsedError;
-  String get userType => throw _privateConstructorUsedError;
-  String get mobile => throw _privateConstructorUsedError;
-  bool get available => throw _privateConstructorUsedError;
+  String? get userType => throw _privateConstructorUsedError;
+  String? get mobile => throw _privateConstructorUsedError;
+  bool? get available => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $AvailabilityModelCopyWith<$Res> {
           AvailabilityModel value, $Res Function(AvailabilityModel) then) =
       _$AvailabilityModelCopyWithImpl<$Res, AvailabilityModel>;
   @useResult
-  $Res call({int userId, String userType, String mobile, bool available});
+  $Res call({int userId, String? userType, String? mobile, bool? available});
 }
 
 /// @nodoc
@@ -54,27 +54,27 @@ class _$AvailabilityModelCopyWithImpl<$Res, $Val extends AvailabilityModel>
   @override
   $Res call({
     Object? userId = null,
-    Object? userType = null,
-    Object? mobile = null,
-    Object? available = null,
+    Object? userType = freezed,
+    Object? mobile = freezed,
+    Object? available = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
-      userType: null == userType
+      userType: freezed == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
-              as String,
-      mobile: null == mobile
+              as String?,
+      mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as String,
-      available: null == available
+              as String?,
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$_AvailabilityModelCopyWith<$Res>
       __$$_AvailabilityModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int userId, String userType, String mobile, bool available});
+  $Res call({int userId, String? userType, String? mobile, bool? available});
 }
 
 /// @nodoc
@@ -102,27 +102,27 @@ class __$$_AvailabilityModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? userType = null,
-    Object? mobile = null,
-    Object? available = null,
+    Object? userType = freezed,
+    Object? mobile = freezed,
+    Object? available = freezed,
   }) {
     return _then(_$_AvailabilityModel(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
-      userType: null == userType
+      userType: freezed == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
-              as String,
-      mobile: null == mobile
+              as String?,
+      mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as String,
-      available: null == available
+              as String?,
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -131,10 +131,7 @@ class __$$_AvailabilityModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AvailabilityModel implements _AvailabilityModel {
   const _$_AvailabilityModel(
-      {required this.userId,
-      required this.userType,
-      required this.mobile,
-      required this.available});
+      {required this.userId, this.userType, this.mobile, this.available});
 
   factory _$_AvailabilityModel.fromJson(Map<String, dynamic> json) =>
       _$$_AvailabilityModelFromJson(json);
@@ -142,11 +139,11 @@ class _$_AvailabilityModel implements _AvailabilityModel {
   @override
   final int userId;
   @override
-  final String userType;
+  final String? userType;
   @override
-  final String mobile;
+  final String? mobile;
   @override
-  final bool available;
+  final bool? available;
 
   @override
   String toString() {
@@ -189,9 +186,9 @@ class _$_AvailabilityModel implements _AvailabilityModel {
 abstract class _AvailabilityModel implements AvailabilityModel {
   const factory _AvailabilityModel(
       {required final int userId,
-      required final String userType,
-      required final String mobile,
-      required final bool available}) = _$_AvailabilityModel;
+      final String? userType,
+      final String? mobile,
+      final bool? available}) = _$_AvailabilityModel;
 
   factory _AvailabilityModel.fromJson(Map<String, dynamic> json) =
       _$_AvailabilityModel.fromJson;
@@ -199,11 +196,11 @@ abstract class _AvailabilityModel implements AvailabilityModel {
   @override
   int get userId;
   @override
-  String get userType;
+  String? get userType;
   @override
-  String get mobile;
+  String? get mobile;
   @override
-  bool get available;
+  bool? get available;
   @override
   @JsonKey(ignore: true)
   _$$_AvailabilityModelCopyWith<_$_AvailabilityModel> get copyWith =>

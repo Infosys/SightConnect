@@ -26,8 +26,7 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
 
     TextEditingController controller =
         TextEditingController(text: dropdownvalue);
-    var hour = (dropdownvalue.split(':')[0]);
-    var minute = (dropdownvalue.split(':')[1]).split(' ')[0];
+
     return Flexible(
       child: TextFormField(
         enabled: disable ? true : false,
@@ -39,42 +38,43 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
           return null;
         },
         controller: controller,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           suffixIcon: IconButton(
-            onPressed: () {
-              showTimePicker(
-                context: context,
-                initialTime:
-                    TimeOfDay(hour: int.parse(hour), minute: int.parse(minute)),
-              ).then((selectedDate) {
-                if (selectedDate != null) {
-                  var startingValue = dropdownlist.time[index][0];
+            onPressed: null,
+            // () {
+            //   showTimePicker(
+            //     context: context,
+            //     initialTime:
+            //         TimeOfDay(hour: int.parse(hour), minute: int.parse(minute)),
+            //   ).then((selectedDate) {
+            //     if (selectedDate != null) {
+            //       // var startingValue = dropdownlist.time[index][0];
 
-                  var time1 = dropdownlist.time[index][0];
-                  var time2 = selectedDate;
+            //       var time1 = dropdownlist.time[index][0];
+            //       // var time2 = selectedDate;
 
-                  var format = DateFormat('h:mm a');
-                  var startTimeDropDown = format.parse(time1);
-                  var endTimeDropDown =
-                      format.parse((selectedDate.format(context)));
-                  var difference =
-                      endTimeDropDown.difference(startTimeDropDown);
-                  var differenceInHours = difference.inHours;
-                  var differenceMinutes = difference.inMinutes;
+            //       var format = DateFormat('h:mm a');
+            //       var startTimeDropDown = format.parse(time1);
+            //       var endTimeDropDown =
+            //           format.parse((selectedDate.format(context)));
+            //       var difference =
+            //           endTimeDropDown.difference(startTimeDropDown);
+            //       var differenceInHours = difference.inHours;
+            //       // var differenceMinutes = difference.inMinutes;
 
-                  if (differenceInHours <= 0) {
-                    return null;
-                  }
+            //       if (differenceInHours <= 0) {
+            //         return null;
+            //       }
 
-                  controller.text = selectedDate.format(context);
-                  ref
-                      .read(markMyAvailabilityHelperProvider.notifier)
-                      .updatedropdown(dayAvailabilityindex, index,
-                          controller.text, dropDownNo);
-                }
-              });
-            },
-            icon: const Icon(Icons.expand_more),
+            //       controller.text = selectedDate.format(context);
+            //       ref
+            //           .read(markMyAvailabilityHelperProvider.notifier)
+            //           .updatedropdown(dayAvailabilityindex, index,
+            //               controller.text, dropDownNo);
+            //     }
+            //   });
+            // },
+            icon: Icon(Icons.expand_more),
           ),
         ),
       ),

@@ -1,10 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline_view.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import '../../domain/repositories/assessment_timeline_repository_impl.dart';
 
 var vtAssessmentTimelineProvider =
@@ -15,34 +18,35 @@ var vtAssessmentTimelineProvider =
 });
 
 class AssessmentTimeline extends ConsumerWidget {
-  final int? encounterId;
-  final String? enconterDate;
-
   const AssessmentTimeline({
     super.key,
-    this.encounterId,
-    this.enconterDate,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (encounterId != null) {
-      return const Center(
-        child: Text("Timeline is not available for this patient"),
+    
+
+    Encounter? encounter =
+        ref.watch(assessmentTimelineProvider).currentEncounter;
+    int? encounterId = encounter?.id;
+    String? encounterDate =
+        encounter?.period!.start!.formatDateTimeMonthName.toString();
+    if (encounterId == null) {
+      return Center(
+        child: Text(
+          "Please select an encounter",
+          style: applyRobotoFont(fontSize: 18),
+        ),
       );
     }
-    return ref.watch(vtAssessmentTimelineProvider(encounterId!)).when(
+
+    return ref.watch(vtAssessmentTimelineProvider(encounterId)).when(
           data: (data) {
+            logger.d("timeline data $data");
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Assessment Timeline",
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
                 const SizedBox(height: AppSize.kmheight),
                 Container(
                   padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -61,7 +65,7 @@ class AssessmentTimeline extends ConsumerWidget {
                           SizedBox(
                             width: AppSize.width(context) / 5,
                             child: Text(
-                              "Timeline: EA ${encounterId ?? ""}",
+                              "Timeline: EA $encounterId",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: applyFiraSansFont(
@@ -83,7 +87,7 @@ class AssessmentTimeline extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
-                              data[-1].title ?? "",
+                              data.first.title ?? "",
                               style: applyRobotoFont(
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400,
@@ -96,7 +100,7 @@ class AssessmentTimeline extends ConsumerWidget {
                       SizedBox(
                         width: AppSize.width(context) / 5,
                         child: Text(
-                          "Start Date: ${enconterDate ?? ""}",
+                          "Start Date: ${encounterDate ?? ""}",
                           style: applyRobotoFont(
                             color: AppColor.grey,
                             fontSize: 16,
@@ -119,9 +123,15 @@ class AssessmentTimeline extends ConsumerWidget {
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
-          error: (error, stack) => const Center(
-            child: Text("Error"),
-          ),
+          error: (error, stack) {
+            logger.d("timeline error $error");
+            return Center(
+              child: Text(
+                "Error",
+                style: applyRobotoFont(),
+              ),
+            );
+          },
         );
   }
 }

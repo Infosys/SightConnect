@@ -21,7 +21,7 @@ OrganizationResponseModel _$OrganizationResponseModelFromJson(
 
 /// @nodoc
 mixin _$OrganizationResponseModel {
-  int? get organizationProfileId => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get trackingId => throw _privateConstructorUsedError;
   String? get facilityid => throw _privateConstructorUsedError;
   FacilityType? get facilityType => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $OrganizationResponseModelCopyWith<$Res> {
       _$OrganizationResponseModelCopyWithImpl<$Res, OrganizationResponseModel>;
   @useResult
   $Res call(
-      {int? organizationProfileId,
+      {int? id,
       String? trackingId,
       String? facilityid,
       FacilityType? facilityType,
@@ -74,7 +74,7 @@ class _$OrganizationResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? organizationProfileId = freezed,
+    Object? id = freezed,
     Object? trackingId = freezed,
     Object? facilityid = freezed,
     Object? facilityType = freezed,
@@ -84,9 +84,9 @@ class _$OrganizationResponseModelCopyWithImpl<$Res,
     Object? osid = freezed,
   }) {
     return _then(_value.copyWith(
-      organizationProfileId: freezed == organizationProfileId
-          ? _value.organizationProfileId
-          : organizationProfileId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       trackingId: freezed == trackingId
           ? _value.trackingId
@@ -170,7 +170,7 @@ abstract class _$$_OrganizationResponseModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? organizationProfileId,
+      {int? id,
       String? trackingId,
       String? facilityid,
       FacilityType? facilityType,
@@ -201,7 +201,7 @@ class __$$_OrganizationResponseModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? organizationProfileId = freezed,
+    Object? id = freezed,
     Object? trackingId = freezed,
     Object? facilityid = freezed,
     Object? facilityType = freezed,
@@ -211,9 +211,9 @@ class __$$_OrganizationResponseModelCopyWithImpl<$Res>
     Object? osid = freezed,
   }) {
     return _then(_$_OrganizationResponseModel(
-      organizationProfileId: freezed == organizationProfileId
-          ? _value.organizationProfileId
-          : organizationProfileId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int?,
       trackingId: freezed == trackingId
           ? _value.trackingId
@@ -251,7 +251,7 @@ class __$$_OrganizationResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrganizationResponseModel implements _OrganizationResponseModel {
   const _$_OrganizationResponseModel(
-      {this.organizationProfileId,
+      {this.id,
       this.trackingId,
       this.facilityid,
       this.facilityType,
@@ -264,7 +264,7 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
       _$$_OrganizationResponseModelFromJson(json);
 
   @override
-  final int? organizationProfileId;
+  final int? id;
   @override
   final String? trackingId;
   @override
@@ -283,7 +283,7 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
 
   @override
   String toString() {
-    return 'OrganizationResponseModel(organizationProfileId: $organizationProfileId, trackingId: $trackingId, facilityid: $facilityid, facilityType: $facilityType, tenant: $tenant, facilityInformation: $facilityInformation, facilityAdditionalInformation: $facilityAdditionalInformation, osid: $osid)';
+    return 'OrganizationResponseModel(id: $id, trackingId: $trackingId, facilityid: $facilityid, facilityType: $facilityType, tenant: $tenant, facilityInformation: $facilityInformation, facilityAdditionalInformation: $facilityAdditionalInformation, osid: $osid)';
   }
 
   @override
@@ -291,8 +291,7 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrganizationResponseModel &&
-            (identical(other.organizationProfileId, organizationProfileId) ||
-                other.organizationProfileId == organizationProfileId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.trackingId, trackingId) ||
                 other.trackingId == trackingId) &&
             (identical(other.facilityid, facilityid) ||
@@ -313,7 +312,7 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      organizationProfileId,
+      id,
       trackingId,
       facilityid,
       facilityType,
@@ -339,7 +338,7 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
 
 abstract class _OrganizationResponseModel implements OrganizationResponseModel {
   const factory _OrganizationResponseModel(
-      {final int? organizationProfileId,
+      {final int? id,
       final String? trackingId,
       final String? facilityid,
       final FacilityType? facilityType,
@@ -352,7 +351,7 @@ abstract class _OrganizationResponseModel implements OrganizationResponseModel {
       _$_OrganizationResponseModel.fromJson;
 
   @override
-  int? get organizationProfileId;
+  int? get id;
   @override
   String? get trackingId;
   @override
@@ -552,7 +551,7 @@ mixin _$FacilityInformationModel {
       throw _privateConstructorUsedError;
   List<FacilityAddressProofModel>? get facilityAddressProof =>
       throw _privateConstructorUsedError;
-  List<FacilityTimingModel>? get facilityTimings =>
+  List<FacilityTimingModel>? get timingsOfFacility =>
       throw _privateConstructorUsedError;
   List<AbdmCompliantSoftwareModel>? get abdmCompliantSoftware =>
       throw _privateConstructorUsedError;
@@ -584,7 +583,7 @@ abstract class $FacilityInformationModelCopyWith<$Res> {
       String? facilityOperationalStatus,
       FacilityUploadModel? facilityUploads,
       List<FacilityAddressProofModel>? facilityAddressProof,
-      List<FacilityTimingModel>? facilityTimings,
+      List<FacilityTimingModel>? timingsOfFacility,
       List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware});
 
   $FacilityAddressModelCopyWith<$Res>? get facilityAddressDetails;
@@ -621,7 +620,7 @@ class _$FacilityInformationModelCopyWithImpl<$Res,
     Object? facilityOperationalStatus = freezed,
     Object? facilityUploads = freezed,
     Object? facilityAddressProof = freezed,
-    Object? facilityTimings = freezed,
+    Object? timingsOfFacility = freezed,
     Object? abdmCompliantSoftware = freezed,
   }) {
     return _then(_value.copyWith(
@@ -681,9 +680,9 @@ class _$FacilityInformationModelCopyWithImpl<$Res,
           ? _value.facilityAddressProof
           : facilityAddressProof // ignore: cast_nullable_to_non_nullable
               as List<FacilityAddressProofModel>?,
-      facilityTimings: freezed == facilityTimings
-          ? _value.facilityTimings
-          : facilityTimings // ignore: cast_nullable_to_non_nullable
+      timingsOfFacility: freezed == timingsOfFacility
+          ? _value.timingsOfFacility
+          : timingsOfFacility // ignore: cast_nullable_to_non_nullable
               as List<FacilityTimingModel>?,
       abdmCompliantSoftware: freezed == abdmCompliantSoftware
           ? _value.abdmCompliantSoftware
@@ -756,7 +755,7 @@ abstract class _$$_FacilityInformationModelCopyWith<$Res>
       String? facilityOperationalStatus,
       FacilityUploadModel? facilityUploads,
       List<FacilityAddressProofModel>? facilityAddressProof,
-      List<FacilityTimingModel>? facilityTimings,
+      List<FacilityTimingModel>? timingsOfFacility,
       List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware});
 
   @override
@@ -794,7 +793,7 @@ class __$$_FacilityInformationModelCopyWithImpl<$Res>
     Object? facilityOperationalStatus = freezed,
     Object? facilityUploads = freezed,
     Object? facilityAddressProof = freezed,
-    Object? facilityTimings = freezed,
+    Object? timingsOfFacility = freezed,
     Object? abdmCompliantSoftware = freezed,
   }) {
     return _then(_$_FacilityInformationModel(
@@ -854,9 +853,9 @@ class __$$_FacilityInformationModelCopyWithImpl<$Res>
           ? _value._facilityAddressProof
           : facilityAddressProof // ignore: cast_nullable_to_non_nullable
               as List<FacilityAddressProofModel>?,
-      facilityTimings: freezed == facilityTimings
-          ? _value._facilityTimings
-          : facilityTimings // ignore: cast_nullable_to_non_nullable
+      timingsOfFacility: freezed == timingsOfFacility
+          ? _value._timingsOfFacility
+          : timingsOfFacility // ignore: cast_nullable_to_non_nullable
               as List<FacilityTimingModel>?,
       abdmCompliantSoftware: freezed == abdmCompliantSoftware
           ? _value._abdmCompliantSoftware
@@ -884,10 +883,10 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
       this.facilityOperationalStatus,
       this.facilityUploads,
       final List<FacilityAddressProofModel>? facilityAddressProof,
-      final List<FacilityTimingModel>? facilityTimings,
+      final List<FacilityTimingModel>? timingsOfFacility,
       final List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware})
       : _facilityAddressProof = facilityAddressProof,
-        _facilityTimings = facilityTimings,
+        _timingsOfFacility = timingsOfFacility,
         _abdmCompliantSoftware = abdmCompliantSoftware;
 
   factory _$_FacilityInformationModel.fromJson(Map<String, dynamic> json) =>
@@ -930,12 +929,13 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<FacilityTimingModel>? _facilityTimings;
+  final List<FacilityTimingModel>? _timingsOfFacility;
   @override
-  List<FacilityTimingModel>? get facilityTimings {
-    final value = _facilityTimings;
+  List<FacilityTimingModel>? get timingsOfFacility {
+    final value = _timingsOfFacility;
     if (value == null) return null;
-    if (_facilityTimings is EqualUnmodifiableListView) return _facilityTimings;
+    if (_timingsOfFacility is EqualUnmodifiableListView)
+      return _timingsOfFacility;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -953,7 +953,7 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
 
   @override
   String toString() {
-    return 'FacilityInformationModel(facilityName: $facilityName, ownershipCode: $ownershipCode, ownershipSubTypeCode: $ownershipSubTypeCode, ownershipSubTypeCode2: $ownershipSubTypeCode2, facilityAddressDetails: $facilityAddressDetails, facilityContactInformation: $facilityContactInformation, systemOfMedicineCode: $systemOfMedicineCode, facilityTypeCode: $facilityTypeCode, facilitySubType: $facilitySubType, specialityTypeCode: $specialityTypeCode, typeOfServiceCode: $typeOfServiceCode, facilityOperationalStatus: $facilityOperationalStatus, facilityUploads: $facilityUploads, facilityAddressProof: $facilityAddressProof, facilityTimings: $facilityTimings, abdmCompliantSoftware: $abdmCompliantSoftware)';
+    return 'FacilityInformationModel(facilityName: $facilityName, ownershipCode: $ownershipCode, ownershipSubTypeCode: $ownershipSubTypeCode, ownershipSubTypeCode2: $ownershipSubTypeCode2, facilityAddressDetails: $facilityAddressDetails, facilityContactInformation: $facilityContactInformation, systemOfMedicineCode: $systemOfMedicineCode, facilityTypeCode: $facilityTypeCode, facilitySubType: $facilitySubType, specialityTypeCode: $specialityTypeCode, typeOfServiceCode: $typeOfServiceCode, facilityOperationalStatus: $facilityOperationalStatus, facilityUploads: $facilityUploads, facilityAddressProof: $facilityAddressProof, timingsOfFacility: $timingsOfFacility, abdmCompliantSoftware: $abdmCompliantSoftware)';
   }
 
   @override
@@ -993,7 +993,7 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
             const DeepCollectionEquality()
                 .equals(other._facilityAddressProof, _facilityAddressProof) &&
             const DeepCollectionEquality()
-                .equals(other._facilityTimings, _facilityTimings) &&
+                .equals(other._timingsOfFacility, _timingsOfFacility) &&
             const DeepCollectionEquality()
                 .equals(other._abdmCompliantSoftware, _abdmCompliantSoftware));
   }
@@ -1016,7 +1016,7 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
       facilityOperationalStatus,
       facilityUploads,
       const DeepCollectionEquality().hash(_facilityAddressProof),
-      const DeepCollectionEquality().hash(_facilityTimings),
+      const DeepCollectionEquality().hash(_timingsOfFacility),
       const DeepCollectionEquality().hash(_abdmCompliantSoftware));
 
   @JsonKey(ignore: true)
@@ -1050,7 +1050,7 @@ abstract class _FacilityInformationModel implements FacilityInformationModel {
           final String? facilityOperationalStatus,
           final FacilityUploadModel? facilityUploads,
           final List<FacilityAddressProofModel>? facilityAddressProof,
-          final List<FacilityTimingModel>? facilityTimings,
+          final List<FacilityTimingModel>? timingsOfFacility,
           final List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware}) =
       _$_FacilityInformationModel;
 
@@ -1086,7 +1086,7 @@ abstract class _FacilityInformationModel implements FacilityInformationModel {
   @override
   List<FacilityAddressProofModel>? get facilityAddressProof;
   @override
-  List<FacilityTimingModel>? get facilityTimings;
+  List<FacilityTimingModel>? get timingsOfFacility;
   @override
   List<AbdmCompliantSoftwareModel>? get abdmCompliantSoftware;
   @override

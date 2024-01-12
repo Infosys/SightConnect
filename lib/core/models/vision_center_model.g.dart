@@ -9,7 +9,7 @@ part of 'vision_center_model.dart';
 _$_OrganizationResponseModel _$$_OrganizationResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_OrganizationResponseModel(
-      organizationProfileId: json['organizationProfileId'] as int?,
+      id: json['id'] as int?,
       trackingId: json['trackingId'] as String?,
       facilityid: json['facilityid'] as String?,
       facilityType:
@@ -32,7 +32,7 @@ _$_OrganizationResponseModel _$$_OrganizationResponseModelFromJson(
 Map<String, dynamic> _$$_OrganizationResponseModelToJson(
         _$_OrganizationResponseModel instance) =>
     <String, dynamic>{
-      'organizationProfileId': instance.organizationProfileId,
+      'id': instance.id,
       'trackingId': instance.trackingId,
       'facilityid': instance.facilityid,
       'facilityType': _$FacilityTypeEnumMap[instance.facilityType],
@@ -89,7 +89,7 @@ _$_FacilityInformationModel _$$_FacilityInformationModelFromJson(
           ?.map((e) =>
               FacilityAddressProofModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      facilityTimings: (json['facilityTimings'] as List<dynamic>?)
+      timingsOfFacility: (json['timingsOfFacility'] as List<dynamic>?)
           ?.map((e) => FacilityTimingModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       abdmCompliantSoftware: (json['abdmCompliantSoftware'] as List<dynamic>?)
@@ -117,8 +117,8 @@ Map<String, dynamic> _$$_FacilityInformationModelToJson(
       'facilityUploads': instance.facilityUploads?.toJson(),
       'facilityAddressProof':
           instance.facilityAddressProof?.map((e) => e.toJson()).toList(),
-      'facilityTimings':
-          instance.facilityTimings?.map((e) => e.toJson()).toList(),
+      'timingsOfFacility':
+          instance.timingsOfFacility?.map((e) => e.toJson()).toList(),
       'abdmCompliantSoftware':
           instance.abdmCompliantSoftware?.map((e) => e.toJson()).toList(),
     };

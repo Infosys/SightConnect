@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/domain/model/ivr_call_history_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/widgets/ivr_call_history_search_bar_chips.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -27,7 +28,9 @@ class IvrCallHistoryTableView extends ConsumerWidget {
         const SizedBox(height: AppSize.klheight),
         ref.watch(getIvrCallHistoryDetailsProvider).when(
               data: (data) {
-                if (data.isEmpty) {
+                List<IvrCallHistoryModel> reversedData = data.reversed.toList();
+
+                if (reversedData.isEmpty) {
                   return const Center(
                     child: Text("Call Log is Empty.. No Calls made yet!!"),
                   );
@@ -69,10 +72,10 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                         },
                       ),
                       rows: List<DataRow>.generate(
-                        data.length,
+                        reversedData.length,
                         (index) => DataRow(
                           cells: generateIvrCallHistoryListTile(
-                            data[index],
+                            reversedData[index],
                             ref,
                           ),
                         ),
@@ -82,6 +85,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                 );
               },
               error: (e, s) {
+                logger.d("error :$e");
                 return const Center(
                   child: Text("No Data available"),
                 );
@@ -118,7 +122,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
             fontSize: 14,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),
@@ -151,7 +155,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
       ),
       DataCell(
         Text(
-          data.logDate.formateTime,
+          data.logDate.toLocal().formateTime,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
@@ -218,9 +222,11 @@ class IvrCallHistoryTableView extends ConsumerWidget {
   }
 
   _formateDateToDay(DateTime date) {
-    if (date == DateTime.now()) {
+    var currentTime = DateTime.now();
+    var diff = currentTime.difference(date).inDays;
+    if (diff < 1) {
       return "TODAY";
-    } else if (date == DateTime.now().subtract(const Duration(days: 1))) {
+    } else if (diff < 2) {
       return "YESTERDAY";
     } else {
       return date.formateDate;

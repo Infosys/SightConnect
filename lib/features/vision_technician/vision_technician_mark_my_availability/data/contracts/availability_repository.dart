@@ -1,3 +1,3 @@
 abstract class AvailabilityRepository {
-  Future<bool> postMarkMyAvailability({required bool available});
+  Future<bool> postMarkMyAvailability(bool? available, int? userId, String? mobile);
 }

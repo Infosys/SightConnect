@@ -224,5 +224,8 @@
  
     "somethingWentWrong" : "Something went wrong.",
     "triageUpdatedSuccessfully" : "Triage Updated successfully.",
-    "noPreviewAvailable" : "No Preview Available"
+    "noPreviewAvailable" : "No Preview Available",
+
+    "appointmentTitle" : "Appointments",
+    "appointmentSubtitle" : "All Appointments"
 }

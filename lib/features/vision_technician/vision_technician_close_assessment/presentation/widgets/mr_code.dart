@@ -29,11 +29,26 @@ class MRCode extends ConsumerWidget {
             ),
           ),
           TextField(
-            controller:
-                ref.watch(vtCloseAssessmentHelperProvider).mrCodeController,
+            onChanged: (value) {
+              ref.read(vtCloseAssessmentHelperProvider).setMrCode(value);
+            },
             decoration: InputDecoration(
               hintText: "Enter MR Code Here",
               hintStyle: applyRobotoFont(fontSize: 14),
+              error: ref
+                          .watch(vtCloseAssessmentHelperProvider)
+                          .mrCodeController
+                          .text
+                          .length <
+                      4
+                  ? Text(
+                      "Please enter MR Code",
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.red,
+                      ),
+                    )
+                  : null,
             ),
           )
         ],

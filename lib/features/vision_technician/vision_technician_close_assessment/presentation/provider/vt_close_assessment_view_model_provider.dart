@@ -1,9 +1,14 @@
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/contracts/vt_close_assessment_reposirtory.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/models/vt_close_assessment_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/domain/repositories/vt_close_assessment_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,61 +17,59 @@ var vtCloseAssessmentViewModelProvider =
   (ref) => VTCloseAssessmentViewModel(
     vtCloseAssessmentHelperNotifier: ref.read(vtCloseAssessmentHelperProvider),
     vtCloseAssessmentRepository: ref.read(vtCloseAssessmentRepository),
+    preliminaryAssessmentHelperProvider:
+        ref.watch(preliminaryAssessmentHelperProvider),
+    globalVTProvider: ref.watch(globalVTProvider),
   ),
 );
 
 class VTCloseAssessmentViewModel extends ChangeNotifier {
   final VTCloseAssessmentHelperNotifier vtCloseAssessmentHelperNotifier;
   final VTCloseAssessmentRepository vtCloseAssessmentRepository;
+  final PreliminaryAssessmentHelperNotifier preliminaryAssessmentHelperProvider;
+  final GlobalVTProvider globalVTProvider;
   VTCloseAssessmentViewModel({
     required this.vtCloseAssessmentHelperNotifier,
     required this.vtCloseAssessmentRepository,
+    required this.preliminaryAssessmentHelperProvider,
+    required this.globalVTProvider,
   });
 
-  void submitCloseAssessmentInfo(VTPatientDto patientDetails) {
+  Future<String> submitCloseAssessmentInfo(VTPatientDto patientDetails) async {
     List<Outcome> listOfOutcomes = [];
 
-    // if (vtCloseAssessmentHelperNotifier.spectacles) {
-    //   listOfOutcomes.add(const Outcome(
-    //     action: ActionOutcome.ADD,
-    //     goalOutcome: GoalOutCome.GLASSES_PRESCRIBED,
-    //   ));
-    // }
+    Set<GoalOutCome> selectedGoalOutComeList =
+        vtCloseAssessmentHelperNotifier.selectedGoalOutComeList;
 
-    // if (vtCloseAssessmentHelperNotifier.cataractSurgery) {
-    //   listOfOutcomes.add(const Outcome(
-    //     action: ActionOutcome.ADD,
-    //     goalOutcome: GoalOutCome.CATARACT_SURGERY_PRESCRIBED,
-    //   ));
-    // }
+    for (var element in selectedGoalOutComeList) {
+      listOfOutcomes.add(Outcome(
+        action: ActionOutcome.ADD,
+        goalOutcome: element,
+      ));
+    }
 
-    // if (vtCloseAssessmentHelperNotifier.eyeDrops) {
-    //   listOfOutcomes.add(const Outcome(
-    //     action: ActionOutcome.ADD,
-    //     goalOutcome: GoalOutCome.EYE_DROPS_PRESCRIBED,
-    //   ));
-    // }
+    logger.d("List of Outcomes: $listOfOutcomes");
 
-    // if (vtCloseAssessmentHelperNotifier.oralMedication) {
-    //   listOfOutcomes.add(const Outcome(
-    //     action: ActionOutcome.ADD,
-    //     goalOutcome: GoalOutCome.ORAL_MEDICATION_PRESCRIBED,
-    //   ));
-    // }
+    TriagePostModel? triageResponse =
+        preliminaryAssessmentHelperProvider.triageResponse;
 
-    // String dateTime = DateTime().
+    CarePlanPostModel? carePlanResponse =
+        preliminaryAssessmentHelperProvider.carePlanResponse;
 
-    CloseAssessmentDto patientDetails0 = CloseAssessmentDto(
-      encounterId: 33300000023, //from care plan response,
-      diagnosticReportId: 33200000051, //from care plan response
-      organizationCode: 1001, //from care plan response
+    CloseAssessmentDto patientDetails = CloseAssessmentDto(
+      encounterId: triageResponse?.encounter?.id,
+      diagnosticReportId: triageResponse?.id, //from care plan response
+      organizationCode:
+          carePlanResponse?.organizationCode, //from care plan response
       performer: [
-        const Performer(role: Role.VISION_TECHNICIAN, identifier: 1601)
+        PerformerDto(
+          role: Role.VISION_TECHNICIAN,
+          identifier: globalVTProvider.userId,
+        ),
       ],
-      carePlanId: 13513, //from care plan response
-      goalId: 13613, //from care plan
+      carePlanId: carePlanResponse?.id, //from care plan response
+      goalId: carePlanResponse?.goal?[0].id, //from care plan
       goalAction: GoalAction.UPDATE,
-      statusReason: "don't know",
       achievementStatus: AchievementStatus.ACHIEVED,
       statusDate: DateTime.now(),
       outcomes: listOfOutcomes,
@@ -74,13 +77,10 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
       mrn: vtCloseAssessmentHelperNotifier.mrCodeController.text,
     );
 
-    vtCloseAssessmentRepository.submitCloseAssessmentInfo(patientDetails0);
-    // _vtCloseAssessmentHelperNotifier.oralMedication;
-  }
+    logger.d("Close Assessment Dto: ${patientDetails.toJson()}");
 
-  DateTime covertDateTimeToDateTimeZone(DateTime date) {
-    String dateStr = "${date.toString()}Z";
-
-    return DateTime.parse(dateStr);
+    String response = await vtCloseAssessmentRepository
+        .submitCloseAssessmentInfo(patientDetails);
+    return response;
   }
 }

@@ -13,6 +13,10 @@ class CameraPreviewCard extends ConsumerWidget {
   final CameraController controller;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+
+    var refRead = ref.read(vtCloseAssessmentHelperProvider);
+
     return Container(
       decoration: BoxDecoration(
         color: AppColor.black.withOpacity(0.5),
@@ -70,12 +74,12 @@ class CameraPreviewCard extends ConsumerWidget {
                   InkWell(
                     onTap: () async {
                       try {
+                        refRead
+                            .setLoading(true);
                         final XFile image = await controller.takePicture();
-                        // setState(() {
-                        //   imagePath = image.path;
-                        // });
-                        ref
-                            .read(vtCloseAssessmentHelperProvider)
+                        refRead
+                            .setLoading(false);
+                        refRead
                             .saveImage(image);
                       } catch (e) {
                         logger.d(e);

@@ -90,16 +90,6 @@ class TimelineProfile extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: AppSize.klwidth * 3),
-                      // ElevatedButton(
-                      //   onPressed: () {},
-                      //   child: Text(
-                      //     "View Family",
-                      //     style: applyRobotoFont(
-                      //         fontSize: 14,
-                      //         fontWeight: FontWeight.w500,
-                      //         color: AppColor.white),
-                      //   ),
-                      // )
                     ],
                   ),
                   Row(
@@ -120,7 +110,7 @@ class TimelineProfile extends ConsumerWidget {
                         width: AppSize.kswidth,
                       ),
                       Text(
-                        "-",
+                        "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(

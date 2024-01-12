@@ -118,6 +118,7 @@ const _$SourceEnumMap = {
 const _$StatusEnumMap = {
   Status.REGISTERED: 'REGISTERED',
   Status.IN_PROGRESS: 'IN_PROGRESS',
+  Status.COMPLETED: 'COMPLETED',
 };
 
 const _$SeverityEnumMap = {

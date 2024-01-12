@@ -128,22 +128,6 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             TextButton(
-                                              onPressed: () {
-                                                pageController.animateToPage(
-                                                  index + 1,
-                                                  duration: const Duration(
-                                                      milliseconds: 80),
-                                                  curve: Curves.easeIn,
-                                                );
-                                              },
-                                              child: Text(
-                                                loc.yesButton,
-                                                style: applyRobotoFont(
-                                                    fontSize: 14,
-                                                    color: AppColor.primary),
-                                              ),
-                                            ),
-                                            TextButton(
                                               onPressed: () async {
                                                 if (index == 0) {
                                                   Navigator.of(context).pop();
@@ -189,6 +173,22 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                                   fontSize: 14,
                                                   color: AppColor.primary,
                                                 ),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                pageController.animateToPage(
+                                                  index + 1,
+                                                  duration: const Duration(
+                                                      milliseconds: 80),
+                                                  curve: Curves.easeIn,
+                                                );
+                                              },
+                                              child: Text(
+                                                loc.yesButton,
+                                                style: applyRobotoFont(
+                                                    fontSize: 14,
+                                                    color: AppColor.primary),
                                               ),
                                             ),
                                           ],

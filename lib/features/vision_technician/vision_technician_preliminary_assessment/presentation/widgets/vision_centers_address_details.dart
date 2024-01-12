@@ -19,7 +19,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "LVPEI Eye Institute",
+          visionCenter.facilityInformation?.facilityName ?? "",
           style: applyFiraSansFont(
             fontSize: 14,
             fontWeight: FontWeight.w400,

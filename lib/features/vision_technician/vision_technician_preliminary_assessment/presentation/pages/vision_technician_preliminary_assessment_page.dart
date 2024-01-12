@@ -1,26 +1,22 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
-import '../../../vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
-import '../providers/vision_technician_preliminary_assessment_provider.dart';
+import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
@@ -67,98 +63,117 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
       );
     }
 
+    var refWatch = ref.watch(preliminaryAssessmentHelperProvider);
+    var refRead = ref.read(preliminaryAssessmentHelperProvider);
+    var canSubmit = refWatch.recommendationSelected &&
+        refWatch.visionCenterSelected &&
+        (refWatch.onIvrCall ||
+            (refWatch.visualAcuityRightEyeValueEntered &&
+                refWatch.visualAcuityLeftEyeValueEntered &&
+                refWatch.visualAcuityBothEyeValueEntered &&
+                refWatch.imagesSubmitted));
+    var isLoading = refWatch.isLoading;
+
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: ElevatedButton(
-          onPressed: () async {
-            ref.read(visionTechnicianTriageProvider).saveQuestionaireResponse();
-            var response = await ref.read(vtTriageProvider).saveTriage();
-            response.fold(
-              (failure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(failure.errorMessage),
+        child: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ElevatedButton(
+                onPressed: canSubmit
+                    ? () async {
+                        ref
+                            .read(visionTechnicianTriageProvider)
+                            .saveQuestionaireResponse();
+                        var response = await ref
+                            .read(vtTriageProvider)
+                            .saveTriage(patientDetails!);
+
+                        response.fold(
+                          (failure) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(failure.errorMessage),
+                              ),
+                            );
+                          },
+                          (triageResponseModel) {
+                            // logger.d(triageResponseModel.toJson());
+                            // navigate to close assessment
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    VisionTechnicianCloseAssessmentPage(
+                                  patientDetails: patientDetails,
+                                ),
+                              ),
+                            );
+
+                            ref
+                                .read(visionTechnicianResultProvider)
+                                .setTriageResponseModel(triageResponseModel);
+                          },
+                        );
+                      }
+                    : null,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                    canSubmit ? AppColor.primary : AppColor.lightGrey,
                   ),
-                );
-              },
-              (triageResponseModel) {
-                ref
-                    .read(visionTechnicianResultProvider)
-                    .setTriageResponseModel(triageResponseModel);
-              },
-            );
-          },
-          child: Text(
-            "Submit",
-            style: applyRobotoFont(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: AppColor.white,
-            ),
-          ),
-        ),
+                ),
+                child: Text(
+                  "Submit",
+                  style: applyRobotoFont(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: canSubmit ? AppColor.white : AppColor.grey,
+                  ),
+                ),
+              ),
       ),
-      appBar: CustomAppbar(
+      appBar: const CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
-        title: InkWell(
-          onTap: () async {
-            final navigator = Navigator.of(context);
-            try {
-              final response = await ref
-                  .read(patientAssessmentAndTestProvider)
-                  .getTriageDetailedReport(33200000017);
-              navigator.push(MaterialPageRoute(
-                builder: (context) {
-                  return VisionTechnicianAssessmentReportPage(
-                    assessmentDetailsReport: response,
-                  );
-                },
-              ));
-            } catch (e) {
-              logger.d("$e");
-            }
-          },
-          child: const Text('Preliminary Assessment'),
-        ),
+        title: Text('Preliminary Assessment'),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             children: [
-              const PreliminaryAssessmentCard(
-                patient: null,
+              PreliminaryAssessmentCard(
+                patient: patientDetails,
               ),
-
-              // const PreliminaryAssessmentIvrCard(),
               const SizedBox(height: AppSize.klheight),
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
+                  if (value == "Yes") {
+                    refRead.toggleIvrCall(true);
+                  } else {
+                    refRead.toggleIvrCall(false);
+                  }
                   selectedOption.value = value;
                 },
                 intialValue: selectedOption.value,
               ),
+              const SizedBox(height: AppSize.klheight),
+              const PreliminaryAssessmentQuestions(),
               if (selectedOption.value == "No")
                 const Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: AppSize.klheight),
-                    PreliminaryAssessmentQuestions(),
                     SizedBox(height: AppSize.klheight),
                     EyeScanCard(),
                     SizedBox(height: AppSize.klheight),
                     PreliminaryAssessmentVisualAcuity(),
                   ],
                 ),
-              // const PreliminaryAssessmentRecommendation(),
               const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentCarePlan(),
               const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentVisionCenter(),
-
               const SizedBox(height: AppSize.klheight * 3),
             ],
           ),
@@ -173,7 +188,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     required this.patient,
     super.key,
   });
-  final PatientResponseModel? patient;
+  final VTPatientDto? patient;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (patient == null) {
@@ -183,36 +198,45 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       width: double.infinity,
       decoration: const BoxDecoration(
         color: AppColor.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.lightGrey,
+            blurRadius: AppSize.ksradius / 2,
+            spreadRadius: AppSize.ksradius / 8,
+          )
+        ],
         borderRadius: BorderRadius.all(
           Radius.circular(AppSize.kmradius - 5),
         ),
       ),
       padding: const EdgeInsets.all(AppSize.klpadding),
-      child: Wrap(
-        runSpacing: AppSize.ksheight,
-        direction: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Wrap(
-            direction: Axis.horizontal,
+          Row(
             children: [
-              patient?.profile?.patient?.profilePhoto != null
-                  ? AppNetworkImage(
-                      imageUrl: patient!.profile!.patient!.profilePhoto!)
-                  : const CircleAvatar(),
+              // patient?.profile?.patient?.profilePhoto != null
+              //     ? AppNetworkImage(
+              //         imageUrl: patient!.profile!.patient!.profilePhoto!)
+              //     :
+              const CircleAvatar(),
               const SizedBox(width: AppSize.kswidth),
-              Wrap(
-                direction: Axis.vertical,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    patient?.profile?.patient?.name ?? "",
+                    patient?.name ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    patient?.profile?.patient?.abhaNumber ?? "",
+                    patient == null ? "" : "OP ${patient?.id.toString()}",
                     style: applyRobotoFont(
+                      decoration: TextDecoration.underline,
                       fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
+                      color: AppColor.primary,
                       fontSize: 14,
                     ),
                   ),
@@ -220,56 +244,60 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(width: AppSize.kswidth * 3),
-          Wrap(direction: Axis.vertical, spacing: AppSize.ksheight, children: [
-            Wrap(spacing: AppSize.kmwidth * 5, children: [
-              Wrap(
-                direction: Axis.vertical,
-                children: [
-                  Text(
-                    "Age",
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    " ${patient?.profile?.patient?.age ?? ""}",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Age",
+                style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
-              Wrap(
-                direction: Axis.vertical,
-                children: [
-                  Text(
-                    "Gender",
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    "${patient?.profile?.patient?.gender ?? ""}",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: AppSize.ksheight),
+              Text(
+                calculateAge(patient?.yearOfBirth),
+                style: applyRobotoFont(
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.grey,
+                  fontSize: 14,
+                ),
               ),
-            ]),
-            Wrap(
-              direction: Axis.vertical,
+            ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Gender",
+                style: applyFiraSansFont(fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: AppSize.ksheight),
+              Text(
+                patient?.gender.toString().split('.').last ?? "",
+                style: applyRobotoFont(
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.grey,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Address",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  formatAddress(),
+                  formatAddress(patient),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -278,17 +306,44 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 ),
               ],
             ),
-          ]),
+          ),
+          const SizedBox(),
         ],
       ),
     );
   }
 
-  String formatAddress() {
-    return "";
+  String formatAddress(VTPatientDto? patient) {
+    String address = "";
+
+    if (patient == null) return "";
+
+    if (patient.townName != null) {
+      address += patient.townName!;
+    }
+
+    if (address.isNotEmpty) {
+      address += ", ";
+    }
+
+    if (patient.districtName != null) {
+      address += patient.districtName!;
+    }
+
+    if (address.isNotEmpty) {
+      address += ", ";
+    }
+
+    if (patient.pincode != null) {
+      address += patient.pincode!;
+    }
+
+    return address;
   }
 
-  String formatAge() {
-    return "";
+  String calculateAge(String? yearOfBirth) {
+    if (yearOfBirth == null || yearOfBirth.isEmpty) return "";
+
+    return (DateTime.now().year - int.parse(yearOfBirth)).toString();
   }
 }

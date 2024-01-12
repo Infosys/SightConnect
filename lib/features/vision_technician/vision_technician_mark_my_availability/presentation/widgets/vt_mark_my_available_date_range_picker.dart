@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,9 +13,16 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController controller = TextEditingController(
-        text:
-            ref.watch(markMyAvailabilityHelperProvider).markMyAvailabilityDataRange);
-    return  TextField(
+        text: ref
+            .watch(markMyAvailabilityHelperProvider)
+            .markMyAvailabilityDataRange);
+    return Container(
+      width: AppSize.klwidth * 10,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSize.kspadding,
+      ),
+      child: TextField(
         readOnly: true,
         controller: controller,
         decoration: InputDecoration(
@@ -26,17 +34,17 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
           ),
           suffixIcon: IconButton(
             onPressed: () async {
-              var pickedDateRange = await _showDateRangePicker(context);
-    
-              var result =
-                  "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
-              controller.text = result;
+              // var pickedDateRange = await _showDateRangePicker(context);
+
+              // var result =
+              //     "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
+              // controller.text = result;
             },
             icon: const Icon(CupertinoIcons.calendar),
           ),
         ),
-      );
-    
+      ),
+    );
   }
 
   Future<DateTimeRange?> _showDateRangePicker(BuildContext context) async {

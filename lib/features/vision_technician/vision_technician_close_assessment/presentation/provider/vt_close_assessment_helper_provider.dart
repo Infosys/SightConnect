@@ -1,11 +1,12 @@
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 
-var vtCloseAssessmentHelperProvider = ChangeNotifierProvider(
+var vtCloseAssessmentHelperProvider = ChangeNotifierProvider.autoDispose(
   (ref) => VTCloseAssessmentHelperNotifier(),
 );
 
@@ -18,15 +19,11 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   XFile _leftEyeImage = XFile("");
   XFile _rightEyeImage = XFile("");
   XFile _bothEyeImage = XFile("");
-  bool _spectacles = false;
-  bool _cataractSurgery = false;
-  bool _eyeDrops = false;
-  bool _oralMedication = false;
-  final TextEditingController _recommendationsController =
-      TextEditingController();
+  bool _loading = false;
+  final TextEditingController _recommendationsController = TextEditingController();
   final TextEditingController _mrCodeController = TextEditingController();
-  final List _listOfEyeDrops = [];
-  final List _listOfOralMedication = [];
+  final List<GoalOutCome> _goalOutComeList = GoalOutCome.values;
+  Set<GoalOutCome> _selectedGoalOutComeList = {};
 
   int get currentStep => _currentStep;
   bool get isImageCaptured => _isImageCaptured;
@@ -36,13 +33,20 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   XFile get leftEyeImage => _leftEyeImage;
   XFile get rightEyeImage => _rightEyeImage;
   XFile get bothEyeImage => _bothEyeImage;
-  bool get spectacles => _spectacles;
-  bool get cataractSurgery => _cataractSurgery;
-  bool get eyeDrops => _eyeDrops;
-  bool get oralMedication => _oralMedication;
+  bool get loading => _loading;
   TextEditingController get recommendationsController =>
       _recommendationsController;
   TextEditingController get mrCodeController => _mrCodeController;
+  List<GoalOutCome> get goalOutComeList => _goalOutComeList;
+  Set<GoalOutCome> get selectedGoalOutComeList => _selectedGoalOutComeList;
+  VTCloseAssessmentHelperNotifier() {
+    _selectedGoalOutComeList = {};
+  }
+
+  void setMrCode(String value){
+    _mrCodeController.text = value;
+    notifyListeners();
+  }
 
   void goToNextStep() {
     _currentStep = _currentStep + 1;
@@ -93,17 +97,20 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSolution(String solution) {
-    if (solution.contains('spectacles')) {
-      _spectacles = !_spectacles;
-    } else if (solution.contains("cataract")) {
-      _cataractSurgery = !_cataractSurgery;
-    } else if (solution.contains("eye")) {
-      _eyeDrops = !_eyeDrops;
+  void setSolution(GoalOutCome solution) {
+    if (_selectedGoalOutComeList.contains(solution)) {
+      _selectedGoalOutComeList.remove(solution);
     } else {
-      _oralMedication = !_oralMedication;
+      _selectedGoalOutComeList.add(solution);
     }
+
+    logger.d(_selectedGoalOutComeList);
   }
 
-  void submit(VTPatientDto patientDetails) {}
+
+
+  void setLoading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
 }

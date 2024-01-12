@@ -11,7 +11,7 @@ class CloseAssessmentDto with _$CloseAssessmentDto {
     int? encounterId,
     int? diagnosticReportId,
     int? organizationCode,
-    List<Performer>? performer,
+    List<PerformerDto>? performer,
     int? carePlanId,
     int? goalId,
     GoalAction? goalAction,
@@ -28,14 +28,14 @@ class CloseAssessmentDto with _$CloseAssessmentDto {
 }
 
 @freezed
-class Performer with _$Performer {
-  const factory Performer({
+class PerformerDto with _$PerformerDto {
+  const factory PerformerDto({
     Role? role,
     int? identifier,
-  }) = _Performer;
+  }) = _PerformerDto;
 
-  factory Performer.fromJson(Map<String, dynamic> json) =>
-      _$PerformerFromJson(json);
+  factory PerformerDto.fromJson(Map<String, dynamic> json) =>
+      _$PerformerDtoFromJson(json);
 }
 
 @freezed

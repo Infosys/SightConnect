@@ -12,21 +12,6 @@ class TumblingResultPageTopCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var resultData = ref.watch(resultStateProvider);
-    // resultData.setTopColors();
-    // String issueInfo = resultData.highestPriority == 'Major'
-    //     ? 'You have some eye conditions that needs urgent treatment.visit the nearest vision center within 48 hours for more details.'
-    //     : resultData.highestPriority == 'Minor'
-    //         ? 'Looks like you are in the early stages of developing eye problems. Consult an eye specialist within 7 days to get your eye problems corrected on time.'
-    //         : 'The initial assessment shows no major issues. However, as a precaution, you need to consult an eye specialist for a complete evaluation.';
-
-    // String issueLabelText = resultData.highestPriority == 'Major'
-    //     ? 'Urgent Consult'
-    //     : resultData.highestPriority == 'Minor'
-    //         ? 'Early Consult'
-    //         : 'Routine Consult';
-    // logger.d(
-    //     '${resultData.highestPriority} wqeqlmdaldsmlasdlsadlsakdlsa\n${resultData.topCardColor}');
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 16,

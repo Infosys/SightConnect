@@ -126,7 +126,7 @@ class LoginPage extends HookConsumerWidget {
                       mobileController.text = value!;
                     },
                     validator: (value) {
-                      const pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                      const pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
                       final regExp = RegExp(pattern);
                       if (value!.isEmpty) {
                         return 'Please enter mobile number';

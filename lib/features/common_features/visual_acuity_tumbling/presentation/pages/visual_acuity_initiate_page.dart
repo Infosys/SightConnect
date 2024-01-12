@@ -65,15 +65,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                   icon: const Icon(CupertinoIcons.back),
                 ),
                 titleSpacing: 0,
-                actions: const [
-                  // IconButton(
-                  //   splashRadius: 20,
-                  //   onPressed: () {
-                  //     showAccessibilitySettings(context, ref);
-                  //   },
-                  //   icon: const Icon(Icons.settings),
-                  // ),
-                ],
+                actions: const [],
                 centerTitle: false,
                 title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
               )
@@ -83,12 +75,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const TextScalePopupMenu();
-                        },
-                      );
+                      TextScalePopupMenu.show(context, ref);
                     },
                     icon: SvgPicture.asset(
                       "assets/drawer_icons/accessibility.svg",
@@ -119,26 +106,6 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
-                // Row(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: [
-                //     const SizedBox(width: AppSize.kmwidth),
-                //     Text(
-                //       AppLocalizations.of(context)!.stepNumber('2', '3'),
-                //       style: applyRobotoFont(
-                //         color: AppColor.primary,
-                //         fontSize: 14,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     ),
-                //     const SizedBox(width: AppSize.kmwidth),
-                //     Flexible(
-                //         child: Text(
-                //       AppLocalizations.of(context)!.visualAcuityTitle,
-                //     )),
-                //   ],
-                // ),
               ),
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(

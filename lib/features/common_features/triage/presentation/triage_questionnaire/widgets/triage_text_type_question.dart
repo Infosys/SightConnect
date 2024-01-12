@@ -20,23 +20,6 @@ class TriageTextTypeQuestion extends ConsumerWidget {
     final model = ref.watch(updateTriageQuestionnaireProvider);
     final loc = context.loc!;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text(
-      //     "Assessment",
-      //     style: TextStyle(
-      //       fontSize: 16,
-      //       fontWeight: FontWeight.w500,
-      //     ),
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {},
-      //       icon: const Icon(
-      //         Icons.search,
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(
           AppSize.klpadding,
@@ -95,32 +78,6 @@ class TriageTextTypeQuestion extends ConsumerWidget {
                     ),
                   ),
                   const Spacer(),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: AppSize.kspadding,
-                  //     horizontal: AppSize.kspadding,
-                  //   ),
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(
-                  //       AppSize.klradius * 10,
-                  //     ),
-                  //     border: Border.all(
-                  //       color: AppColor.grey.withOpacity(
-                  //         0.2,
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //       children: [
-                  //         SvgPicture.asset(
-                  //           AppImages.mic,
-                  //         ),
-                  //         SvgPicture.asset(
-                  //           AppImages.speaker,
-                  //         )
-                  //       ]),
-                  // )
                 ],
               ),
             ),

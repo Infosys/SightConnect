@@ -13,7 +13,7 @@ _$_CloseAssessmentDto _$$_CloseAssessmentDtoFromJson(
       diagnosticReportId: json['diagnosticReportId'] as int?,
       organizationCode: json['organizationCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
-          ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => PerformerDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       carePlanId: json['carePlanId'] as int?,
       goalId: json['goalId'] as int?,
@@ -57,12 +57,13 @@ const _$AchievementStatusEnumMap = {
   AchievementStatus.ACHIEVED: 'ACHIEVED',
 };
 
-_$_Performer _$$_PerformerFromJson(Map<String, dynamic> json) => _$_Performer(
+_$_PerformerDto _$$_PerformerDtoFromJson(Map<String, dynamic> json) =>
+    _$_PerformerDto(
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
       identifier: json['identifier'] as int?,
     );
 
-Map<String, dynamic> _$$_PerformerToJson(_$_Performer instance) =>
+Map<String, dynamic> _$$_PerformerDtoToJson(_$_PerformerDto instance) =>
     <String, dynamic>{
       'role': _$RoleEnumMap[instance.role],
       'identifier': instance.identifier,

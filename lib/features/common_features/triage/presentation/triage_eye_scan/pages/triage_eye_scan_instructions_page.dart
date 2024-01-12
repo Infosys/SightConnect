@@ -65,12 +65,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const TextScalePopupMenu();
-                    },
-                  );
+                  TextScalePopupMenu.show(context, ref);
                 },
                 icon: SvgPicture.asset(
                   "assets/drawer_icons/accessibility.svg",
@@ -78,28 +73,6 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                 ),
               ),
             ],
-
-            //  Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     const SizedBox(width: AppSize.kmwidth),
-            //     Text(
-            //       loc.stepNumber('3', '3'),
-            //       style: applyRobotoFont(
-            //         color: AppColor.primary,
-            //         fontSize: 14,
-            //       ),
-            //     ),
-            //     const SizedBox(width: AppSize.kswidth),
-            //     Text(
-            //       loc.eyeScanTitle,
-            //       style: applyFiraSansFont(
-            //         fontSize: 16,
-            //         fontWeight: FontWeight.w500,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
           body: Padding(
             padding: const EdgeInsets.all(AppSize.kspadding),
