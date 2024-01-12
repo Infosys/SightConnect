@@ -1,4 +1,5 @@
 enum Status{
   REGISTERED,
-  IN_PROGRESS
+  IN_PROGRESS,
+  COMPLETED
 }
