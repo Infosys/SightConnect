@@ -6,10 +6,10 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+
 import '../../triage_member_selection/widget/triage_steps_drawer.dart';
 import '../widgets/option_card.dart';
 
@@ -27,7 +28,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     required this.questionnaireSections,
     super.key,
   });
+
   final List<QuestionnaireItemFHIRModel> questionnaireSections;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scaffoldKey = useState(GlobalKey<ScaffoldState>());
@@ -84,12 +87,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const TextScalePopupMenu();
-                    },
-                  );
+                  TextScalePopupMenu.show(context, ref);
                 },
                 icon: SvgPicture.asset(
                   "assets/drawer_icons/accessibility.svg",

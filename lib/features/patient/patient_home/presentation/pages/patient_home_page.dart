@@ -39,12 +39,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
     return Scaffold(
       endDrawer: AppDrawer(
         onAccessibilityChange: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return const TextScalePopupMenu();
-            },
-          );
+          TextScalePopupMenu.show(context, ref);
         },
         onLanguageChange: () {
           final currentLocaleCode =

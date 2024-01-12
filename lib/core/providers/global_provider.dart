@@ -16,7 +16,9 @@ class GlobalProvider extends ChangeNotifier {
   }
 
   bool isTriageMode() => _vaMode == VisionAcuityMode.TRIAGE;
+
   bool isStandaloneMode() => _vaMode == VisionAcuityMode.STANDALONE;
+
   bool isUpdateMode() => _vaMode == VisionAcuityMode.UPDATE;
 }
 
@@ -31,14 +33,31 @@ class GlobalTextScaleFactor extends ChangeNotifier {
   double _textScaleFactor = 1.0;
   final String _scaleAlphabet = "A";
 
+  late double _textScaleFactorMemo;
+
   double get textScaleFactor => _textScaleFactor;
+
   String get scaleAlphabet => _scaleAlphabet;
 
-  GlobalTextScaleFactor(this._textScaleFactor);
+  GlobalTextScaleFactor(this._textScaleFactor) {
+    _textScaleFactorMemo = _textScaleFactor;
+  }
 
-  Future<void> setTextScaleFactor(double data) async {
+  Future<void> setTextScaleFactor(double data,
+      {bool shouldUpdateMemo = false}) async {
     _textScaleFactor = data;
     await SharedPreferenceService.setFontScale(data);
+    if (shouldUpdateMemo) {
+      _textScaleFactorMemo = data;
+    }
     notifyListeners();
+  }
+
+  Future<void> rollback() async {
+    setTextScaleFactor(_textScaleFactorMemo, shouldUpdateMemo: true);
+  }
+
+  Future<void> persistChanges() async {
+    setTextScaleFactor(_textScaleFactor, shouldUpdateMemo: true);
   }
 }

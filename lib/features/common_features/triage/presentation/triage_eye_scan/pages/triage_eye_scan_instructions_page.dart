@@ -65,12 +65,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const TextScalePopupMenu();
-                    },
-                  );
+                  TextScalePopupMenu.show(context, ref);
                 },
                 icon: SvgPicture.asset(
                   "assets/drawer_icons/accessibility.svg",
