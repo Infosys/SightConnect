@@ -29,7 +29,7 @@ class VisionCentersScrollBar extends ConsumerWidget {
         border: Border.all(color: AppColor.lightGrey),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
-      child: ref.watch(nearByVisionCenterProvider).when(
+      child: ref.watch(simpleNearByVisionCenterProvider).when(
             data: (data) {
               return Scrollbar(
                 thumbVisibility: true,
