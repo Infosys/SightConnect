@@ -405,6 +405,7 @@ class _VisualAcuityFaceDistancePageViewState
     _canProcess = false;
     _meshDetector.close();
     _stopLiveFeed();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -444,11 +445,16 @@ class _VisualAcuityFaceDistancePageViewState
           child: Align(
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const VisualAcuityInitiatePage(),
-                ),
-              ),
+              onPressed: () {
+                
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const VisualAcuityInitiatePage(),
+                  ),
+                );
+                _stopLiveFeed();
+               
+              },
               child: const Text('Next'),
             ),
           ),

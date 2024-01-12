@@ -36,6 +36,7 @@ class VisualAcuityDemoPage extends HookWidget {
     };
     var tumblingAngle = useState<double>(4.71);
     var countValue = useState<int>(0);
+    var sliderValue = useState<double>(0.0);
 
     return Scaffold(
       appBar: const CustomAppbar(
@@ -96,6 +97,8 @@ class VisualAcuityDemoPage extends HookWidget {
                       currentDemoImage.value = demoData[QuestionDirection.down];
                       swipeText.value = "Swipe Down";
                       tumblingAngle.value = 7.85;
+                      //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
+                      sliderValue.value = 180.0;
                       countValue.value++;
                     }
                   } else if (countValue.value == 1) {
@@ -103,6 +106,7 @@ class VisualAcuityDemoPage extends HookWidget {
                       currentDemoImage.value = demoData[QuestionDirection.left];
                       swipeText.value = "Swipe Left";
                       tumblingAngle.value = 3.14;
+                      sliderValue.value = 270.0;
                       countValue.value++;
                     }
                   } else if (countValue.value == 2) {
@@ -111,6 +115,7 @@ class VisualAcuityDemoPage extends HookWidget {
                           demoData[QuestionDirection.right];
                       swipeText.value = "Swipe Right";
                       tumblingAngle.value = 0.0;
+                      sliderValue.value = 90.0;
                       countValue.value++;
                     }
                   } else if (countValue.value == 3) {
@@ -180,16 +185,13 @@ class VisualAcuityDemoPage extends HookWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              SizedBox(
-                                height: AppSize.height(context) * 0.1,
+                              Transform.rotate(
+                                angle: (pi/180)*sliderValue.value,
+                                child: Image.asset(
+                                  "assets/images/animation_up.gif",
+                                  height: AppSize.height(context) * 0.4,
+                                ),
                               ),
-                              Pulsar(
-                                  animationCurve: Curves.easeInOutSine,
-                                  lowOpacity: 0.5,
-                                  highOpacity: 1,
-                                  pulsePeriod:
-                                      const Duration(milliseconds: 900),
-                                  child: currentDemoImage.value),
                             ],
                           ),
                         ),
