@@ -19,7 +19,6 @@ class VTPatientList extends ConsumerWidget {
   final List<VTPatientDto> listOfAssessments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     var watchRef = ref.watch(visionTechnicianSearchProvider);
 
     return PaginatedDataTable(
@@ -87,12 +86,9 @@ class VTPatientList extends ConsumerWidget {
 class _DataSource extends DataTableSource {
   final List<VTPatientDto> list;
   final BuildContext context;
-  final watchRef;
-  _DataSource({
-    required this.list,
-    required this.context,
-    required this.watchRef
-  });
+  final VisionTechnicianSearchProvider watchRef;
+  _DataSource(
+      {required this.list, required this.context, required this.watchRef});
   @override
   DataRow? getRow(int index) {
     final VTPatientDto data = list[index];

@@ -81,6 +81,7 @@ dependencies:
   superapp_scanner:
     path: packages/superapp_scanner/
   pinput: ^3.0.1
+  image_picker: ^1.0.7
 
 
 

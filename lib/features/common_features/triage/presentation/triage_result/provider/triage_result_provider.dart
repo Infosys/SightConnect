@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -9,8 +9,6 @@ import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart'
 
 import 'package:logger/logger.dart';
 
-import 'dart:async';
-
 class MiniAppDisplayPage extends StatefulWidget {
   const MiniAppDisplayPage({
     required this.miniapp,

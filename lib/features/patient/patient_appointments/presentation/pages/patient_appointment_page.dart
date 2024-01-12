@@ -157,7 +157,7 @@ Widget _content(
             ),
             const SizedBox(height: AppSize.kmheight),
             ...patient.profile!.patient!.relatedParty!.asMap().entries.map((e) {
-              final index = e.key;
+              // final index = e.key;
               final patient = e.value;
               return Card(
                 elevation: 1,
@@ -213,7 +213,7 @@ Widget _content(
                                     color: AppColor.black.withOpacity(0.8)),
                               ),
                               subtitle: Text(
-                                patient.parentPatientId.toString() ?? "",
+                                "${patient.parentPatientId ?? ""}",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
@@ -245,7 +245,7 @@ Widget _content(
                         ],
                       ),
                       Text(
-                        patient.patientId.toString() ?? "",
+                        "${patient.patientId ?? ""}",
                         style: applyRobotoFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

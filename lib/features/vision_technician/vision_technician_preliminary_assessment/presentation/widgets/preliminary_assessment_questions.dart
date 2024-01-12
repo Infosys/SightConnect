@@ -22,7 +22,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
         if (!initiated.value) {
           ref
               .watch(visionTechnicianTriageProvider)
-              .setData(data , data.questionnaire?.questionnaireItem ?? []);
+              .setData(data, data.questionnaire?.questionnaireItem ?? []);
           initiated.value = true;
         }
         return AssessmentQuestionCard(
@@ -55,8 +55,8 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
       },
       loading: () {
         return const Center(
-            child: CircularProgressIndicator(),
-          );
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

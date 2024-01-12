@@ -26,7 +26,7 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     var showReport = useState(false);
     var scrollController = useScrollController();
     return Scaffold(
