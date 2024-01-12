@@ -74,7 +74,7 @@ dependencies:
   flutter_verification_code: ^1.1.7
   another_stepper: ^1.2.2
   qr_flutter: ^4.1.0
- 
+  google_mlkit_face_mesh_detection: ^0.0.2 
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
