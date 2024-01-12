@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:eye_care_for_all/core/services/sqflite_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -33,7 +34,7 @@ class TriageDBHelper {
   Future<Database> _initDatabase() async {
     return openDatabase(
       join(await getDatabasesPath(), _databaseName),
-      password: "sql_is_okay",
+      password: SqfLiteService.password,
       onCreate: (db, _) {
         /// table for GET triage json
         db.execute('''

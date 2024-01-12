@@ -12,18 +12,19 @@ class SqfLiteService {
   static const _storage = FlutterSecureStorage();
   static const String _passwordkey = 'sq_pass';
   static String? _password;
+  static String? get password => _password;
   SqfLiteService._();
 
   static Future<void> init() async {
     final isPasswordAvailable = await SqfLiteService._isPasswordAvailable();
     if (!isPasswordAvailable) {
-      await _generateSecurePassowrd();
+      await _generateSecurePassword();
     } else {
       _password = await _storage.read(key: _passwordkey);
     }
   }
 
-  static Future<void> _generateSecurePassowrd() async {
+  static Future<void> _generateSecurePassword() async {
     _password = _passwordGenerator.generatePassword();
     await _storage.write(key: _passwordkey, value: _password);
   }
