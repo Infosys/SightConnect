@@ -684,22 +684,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
-  google_mlkit_commons:
-    dependency: transitive
-    description:
-      name: google_mlkit_commons
-      sha256: "046586b381cdd139f7f6a05ad6998f7e339d061bd70158249907358394b5f496"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.1"
-  google_mlkit_face_mesh_detection:
-    dependency: "direct main"
-    description:
-      name: google_mlkit_face_mesh_detection
-      sha256: b2406d8eca7e842d82b43dc020e55aef75cf073aeb9272d49fc0158fd5d705c7
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   graphs:
     dependency: transitive
     description:
