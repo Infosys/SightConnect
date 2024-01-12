@@ -74,7 +74,7 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                 ),
               ),
               child: Text(
-                "The assessment indicates that you may have a blocked vision due to Scotoma. You are recommended to visit a Neuro Ophthalmologist for further consultation without delay.",
+                assessmentDetailsReport.triageResultDescription ?? "",
                 style: applyRobotoFont(
                   fontSize: 16,
                 ),
