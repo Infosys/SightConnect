@@ -8,44 +8,43 @@ var visionGuardianMemberDetailsProvider = ChangeNotifierProvider.autoDispose(
     (ref) => VisionGuardianMemberDetailsProvider());
 
 class VisionGuardianMemberDetailsProvider extends ChangeNotifier {
-
   var casesCritical = [
-  VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
-    age: "28 yrs",
-    gender: "Male",
-    reportDate: "17 Dec 23",
-    reportTime: "11:00 AM",
-    assessmentId: "Assessment ID: AT 010111",
-    urgency: "Urgent Consult",
-    profession: "Eye Surgeon",
-    recommendation:
-        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
-    image: AppImages.raghavi,
-    prefix: "PG",
-  ),
-  VisionGuardianEyeAssessmentPatientModel(
-    name: "Raghav Pandey - PD 789996",
-    age: "28 yrs",
-    gender: "Male",
-    reportDate: "17 Dec 23",
-    reportTime: "11:00 AM",
-    assessmentId: "Assessment ID: AT 010111",
-    urgency: "Routine Consult",
-    profession: "Eye Surgeon",
-    recommendation:
-        "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
-    image: AppImages.raghavi,
-    prefix: "PG",
-  )
-];
+    VisionGuardianEyeAssessmentPatientModel(
+      name: "Raghav Pandey - PD 789996",
+      age: "28 yrs",
+      gender: "Male",
+      reportDate: "17 Dec 23",
+      reportTime: "11:00 AM",
+      assessmentId: "Assessment ID: AT 010111",
+      urgency: "Urgent Consult",
+      profession: "Eye Surgeon",
+      recommendation:
+          "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+      image: AppImages.raghavi,
+      prefix: "PG",
+    ),
+    VisionGuardianEyeAssessmentPatientModel(
+      name: "Raghav Pandey - PD 789996",
+      age: "28 yrs",
+      gender: "Male",
+      reportDate: "17 Dec 23",
+      reportTime: "11:00 AM",
+      assessmentId: "Assessment ID: AT 010111",
+      urgency: "Routine Consult",
+      profession: "Eye Surgeon",
+      recommendation:
+          "Hey Raghavan, you have an upcoming appointment for your eye checkup on Sep 23rd at 2.00 PM.",
+      image: AppImages.raghavi,
+      prefix: "PG",
+    )
+  ];
 
-var addMemberFilters = [
-   "All", 
-  "Early Consult",
-   "Urgent Consult",
- "Routine Consult"
-];
+  var addMemberFilters = [
+    "All",
+    "Early Consult",
+    "Urgent Consult",
+    "Routine Consult"
+  ];
   XFile? _imageFile;
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -86,47 +85,4 @@ var addMemberFilters = [
   TextEditingController get city => _cityController;
   TextEditingController get state => _stateController;
   TextEditingController get pincode => _pincodeController;
-
-
-
-  // set setName(String value) => _nameController.text = value;
-
-  // String get lastName => _lastNameController.text;
-  // set setLastName(String value) => _lastNameController.text = value;
-
-  // String get age => _ageController.text;
-  // set setAge(String value) => _ageController.text = value;
-
-  // String get dob => _dobController.text;
-  // set setDob(String value) => _dobController.text = value;
-
-  // String get abhaid => _abhaidController.text;
-  // set setAbhaid(String value) => _abhaidController.text = value;
-
-  // String get mobileNumber => _mobileNumberController.text;
-  // set setMobileNumber(String value) => _mobileNumberController.text = value;
-
-  // String get email => _emailController.text;
-  // set setEmail(String value) => _emailController.text = value;
-
-  // String get doorNo => _doorNoController.text;
-  // set setDoorNo(String value) => _doorNoController.text = value;
-
-  // String get street => _streetController.text;
-  // set setStreet(String value) => _streetController.text = value;
-
-  // String get subDistrict => _subDistrictController.text;
-  // set setSubDistrict(String value) => _subDistrictController.text = value;
-
-  // String get district => _districtController.text;
-  // set setDistrict(String value) => _districtController.text = value;
-
-  // String get city => _cityController.text;
-  // set setCity(String value) => _cityController.text = value;
-
-  // String get state => _stateController.text;
-  // set setState(String value) => _stateController.text = value;
-
-  // String get pincode => _pincodeController.text;
-  // set setPincode(String value) => _pincodeController.text = value;
 }

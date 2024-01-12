@@ -143,15 +143,6 @@ class TopReadingCard extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: AppSize.ksheight),
-            // Flexible(
-            //   child: LinearPercentIndicator(
-            //     padding: const EdgeInsets.all(2),
-            //     lineHeight: Responsive.isMobile(context) ? 8 : 14,
-            //     percent: (model.currentLevel! / model.maxLevel!).clamp(0, 1),
-            //     barRadius: const Radius.circular(AppSize.klradius),
-            //     progressColor: AppColor.green,
-            //   ),
-            // ),
           ],
         ),
       ),

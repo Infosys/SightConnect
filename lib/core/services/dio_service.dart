@@ -13,7 +13,9 @@ var keycloakDioProvider = Provider(
       ),
     );
     dio.interceptors.addAll(
-      [DioCertificateInterceptor(dio)],
+      [
+        DioCertificateInterceptor(dio),
+      ],
     );
     return dio;
   },
@@ -29,14 +31,14 @@ var dioProvider = Provider(
         headers: {
           "X-Accept-Language": lang,
         },
-        // queryParameters: {
-        //   "lang-id": lang,
-        // },
       ),
     );
 
     dio.interceptors.addAll(
-      [DioTokenInterceptor(ref, dio), DioCertificateInterceptor(dio)],
+      [
+        DioTokenInterceptor(ref, dio),
+        DioCertificateInterceptor(dio),
+      ],
     );
     return dio;
   },

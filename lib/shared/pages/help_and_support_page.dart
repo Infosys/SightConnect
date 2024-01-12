@@ -35,25 +35,6 @@ class HelpAndSupportPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
-            // Text(
-            //   'Dummy text of the printing lorem',
-            //   softWrap: true,
-            //   textAlign: TextAlign.left,
-            //   style: applyRobotoFont(
-            //     fontWeight: FontWeight.w600,
-            //     fontSize: 18,
-            //   ),
-            // ),
-            // const SizedBox(height: 20),
-            // Text(
-            //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived remaining.',
-            //   softWrap: true,
-            //   style: applyRobotoFont(
-            //     fontWeight: FontWeight.w400,
-            //     fontSize: 14,
-            //   ),
-            // ),
-            // const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),

@@ -2,16 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum DrawerMenuItemId {
-  // home,
-  // profile,
-  // // appointments,
-  // prescriptions,
-  // scanner,
-  // // accessibilities,
-  // about,
-  // // termOfUse,
-  // privacyPolicy,
-  // help,
   language,
   accessibilities,
   assessments,
@@ -34,25 +24,13 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
-    // DrawerMenuItem home = DrawerMenuItem(
-    //   id: DrawerMenuItemId.home,
-    //   title: loc.appDrawerHome,
-    //   icon: AppIcon.drawerHome,
-    // );
-    // DrawerMenuItem profile = DrawerMenuItem(
-    //   id: DrawerMenuItemId.profile,
-    //   title: loc.appDrawerMyProfile,
-    //   icon: AppIcon.navProfile,
-    // );
-    DrawerMenuItem language =  DrawerMenuItem(
+    DrawerMenuItem language = DrawerMenuItem(
       id: DrawerMenuItemId.language,
-      // title: loc.appDrawerMyProfile,
       title: loc.appDrawerLanguageSelection,
       icon: "assets/drawer_icons/language.svg",
     );
     DrawerMenuItem accessibilities = DrawerMenuItem(
       id: DrawerMenuItemId.accessibilities,
-      // title: loc.appDrawerMyProfile,
       title: loc.appDrawerAccessibility,
       icon: "assets/drawer_icons/accessibility.svg",
     );
@@ -61,7 +39,7 @@ class DrawerMenuItems {
       title: loc.appDrawerAssessmentsAndTests,
       icon: AppIcon.drawerAssessmentsAndTest,
     );
-    DrawerMenuItem scanner =  DrawerMenuItem(
+    DrawerMenuItem scanner = DrawerMenuItem(
       id: DrawerMenuItemId.scanner,
       title: loc.appDrawerScanner,
       icon: AppIcon.scanner,
@@ -71,7 +49,7 @@ class DrawerMenuItems {
       title: loc.appDrawerAboutUs,
       icon: AppIcon.drawerAboutUs,
     );
-    DrawerMenuItem privacyPolicy =  DrawerMenuItem(
+    DrawerMenuItem privacyPolicy = DrawerMenuItem(
       id: DrawerMenuItemId.privacyPolicy,
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
@@ -83,17 +61,6 @@ class DrawerMenuItems {
     );
 
     return [
-      // // home,
-      // // profile,
-      // // appointments,
-      // language,
-      // prescriptions,
-      // scanner,
-      // // accessibilities,
-      // about,
-      // // termOfUse,
-      // privacyPolicy,
-      // help,
       language,
       accessibilities,
       assessments,
