@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:password_generator/password_generator.dart';
 
 class PersistentAuthData {
   final FlutterSecureStorage _storage;
@@ -19,6 +20,7 @@ class PersistentAuthData {
   final String _usernameKey = "username";
   final String _userIdKey = "userId";
   final String _id_token = "id_token";
+  final String _sqfliteKey = 'sqflite_pass';
 
   String? accessToken;
   String? refreshToken;
@@ -122,6 +124,23 @@ class PersistentAuthData {
     await _storage.write(key: _refreshKey, value: refreshToken);
   }
 
+  Future<String> getSQFlitePassword() async {
+    final password = await _storage.read(key: _sqfliteKey);
+    if (password == null) {
+      final securePassword = PasswordGenerator(
+        length: 21,
+        hasCapitalLetters: true,
+        hasNumbers: true,
+        hasSmallLetters: true,
+        hasSymbols: true,
+      ).generatePassword();
+      await _storage.write(key: _sqfliteKey, value: securePassword);
+      return securePassword;
+    } else {
+      return password;
+    }
+  }
+
   Future<void> logout() async {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
@@ -131,6 +150,8 @@ class PersistentAuthData {
     await _storage.delete(key: _usernameKey);
     await _storage.delete(key: _userIdKey);
     await _storage.delete(key: _id_token);
+    //SQFLite
+    await _storage.delete(key: _sqfliteKey);
 
     accessToken = null;
     refreshToken = null;
@@ -139,7 +160,7 @@ class PersistentAuthData {
     userId = null;
     idToken = null;
     activeRole = null;
-    logger.d("Logged out");
+    logger.d("Logged out successfully");
     logger.d({
       'accessTokenData': accessToken,
       'refreshTokenData': refreshToken,
@@ -148,6 +169,7 @@ class PersistentAuthData {
       'userId': userId,
       'idToken': idToken,
       'activeRole': activeRole,
+      'sqflite-pass': 'deleted',
     });
   }
 

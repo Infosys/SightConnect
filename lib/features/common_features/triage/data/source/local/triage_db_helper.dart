@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/sqflite_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
@@ -27,17 +28,21 @@ class TriageDBHelper {
   static const _databaseVersion = 1;
 
   Future<Database> get database async {
-    _database ??= await _initDatabase();
+    final pass =
+        await PersistentAuthStateService.authState.getSQFlitePassword();
+
+    _database ??= await _initDatabase(pass);
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
-    return openDatabase(
-      join(await getDatabasesPath(), _databaseName),
-      password: SqfLiteService.password,
-      onCreate: (db, _) {
-        /// table for GET triage json
-        db.execute('''
+  Future<Database> _initDatabase(String pass) async {
+    try {
+      return openDatabase(
+        join(await getDatabasesPath(), _databaseName),
+        password: pass,
+        onCreate: (db, _) {
+          /// table for GET triage json
+          db.execute('''
           CREATE TABLE $_triageAssessmentTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
@@ -45,8 +50,8 @@ class TriageDBHelper {
           );
         ''');
 
-        /// table to save triarge response
-        db.execute('''
+          /// table to save triarge response
+          db.execute('''
           CREATE TABLE $_triageResponseTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
@@ -55,8 +60,8 @@ class TriageDBHelper {
 
         ''');
 
-        /// table to save triarge questionnaire
-        db.execute('''
+          /// table to save triarge questionnaire
+          db.execute('''
           CREATE TABLE $_triageQuestionnaireTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
            $_timeStampColumnName INT NOT NULL,
@@ -65,8 +70,8 @@ class TriageDBHelper {
 
         ''');
 
-        /// table to save triarge visual acuity
-        db.execute('''
+          /// table to save triarge visual acuity
+          db.execute('''
           CREATE TABLE $_triageVisualAcuityTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
@@ -75,8 +80,8 @@ class TriageDBHelper {
 
         ''');
 
-        /// table to save triarge eye scan
-        db.execute('''
+          /// table to save triarge eye scan
+          db.execute('''
           CREATE TABLE $_triageEyeScanTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
@@ -84,9 +89,13 @@ class TriageDBHelper {
           );
 
         ''');
-      },
-      version: _databaseVersion,
-    );
+        },
+        version: _databaseVersion,
+      );
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
   }
 
   Future<dynamic> getTriageAssessment() async {

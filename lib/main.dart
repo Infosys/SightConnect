@@ -24,7 +24,6 @@ Future<void> main() async {
   await SharedPreferenceService.init();
   await IOSDeviceInfoService.init();
   await MatomoLogger.init();
-  await SqfLiteService.init();
 
   runApp(
     const ProviderScope(
