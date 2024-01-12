@@ -4,7 +4,8 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+// import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_sqlcipher/sqflite.dart';
 
 var triageDBHelperProvider = Provider((ref) => TriageDBHelper());
 
@@ -32,6 +33,7 @@ class TriageDBHelper {
   Future<Database> _initDatabase() async {
     return openDatabase(
       join(await getDatabasesPath(), _databaseName),
+      password: "sql_is_okay",
       onCreate: (db, _) {
         /// table for GET triage json
         db.execute('''

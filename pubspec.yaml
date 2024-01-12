@@ -96,6 +96,7 @@ dependencies:
   another_stepper: ^1.2.2
   qr_flutter: ^4.1.0
   password_generator: ^1.0.0
+  sqflite_sqlcipher: ^2.2.1
 
 flutter_launcher_icons:
   android: "launcher_icon"
