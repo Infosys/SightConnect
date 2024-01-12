@@ -31,9 +31,14 @@ class InitializationProvider extends ChangeNotifier {
         throw failure;
       }, (result) async {
         if (result.isEmpty) {
-          // if result is empty then user is not found
+         
           return false;
         } else {
+          
+          if(result.first.practiceGrants==null){
+            return false;
+          }
+
           bool isRoleAvailable = result.first.practiceGrants!
               .any((element) => element.grantRole == role.name);
 

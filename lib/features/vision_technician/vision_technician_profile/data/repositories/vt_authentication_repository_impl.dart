@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vtAuthenticationRepositoryProvider =
@@ -32,6 +33,7 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
       return Right(
           response.data!.map((e) => VtProfileModel.fromJson(e)).toList());
     } on DioException catch (e) {
+      logger.e("Error in getVtProfile: ${e.response!.data["message"]}");
       return Left(
         ServerFailure(errorMessage: "${e.response!.data["message"]}"),
       );

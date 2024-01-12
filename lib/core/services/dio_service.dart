@@ -29,9 +29,9 @@ var dioProvider = Provider(
         headers: {
           "X-Accept-Language": lang,
         },
-        queryParameters: {
-          "lang-id": lang,
-        },
+        // queryParameters: {
+        //   "lang-id": lang,
+        // },
       ),
     );
 
