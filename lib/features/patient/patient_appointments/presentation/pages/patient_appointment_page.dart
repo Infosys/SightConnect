@@ -13,6 +13,7 @@ import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_name_avatar.dart';
 import '../../../../../shared/widgets/app_network_image.dart';
 import '../widgets/appointment_patient_selector.dart';
+import 'patient_book_appointment_page.dart';
 
 class PatientAppointmentPage extends ConsumerWidget {
   const PatientAppointmentPage({super.key});
@@ -28,6 +29,59 @@ class PatientAppointmentPage extends ConsumerWidget {
         title: Text(loc.appointmentTitle),
         centerTitle: false,
         backgroundColor: Colors.transparent,
+      ),
+      floatingActionButton: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PatientBookAppointmentPage(),
+            ),
+          );
+        },
+        child: Container(
+          width: AppSize.width(context) * 0.43,
+          height: AppSize.height(context) * 0.06,
+          padding: const EdgeInsets.only(bottom: AppSize.ksheight - 1),
+          margin: const EdgeInsets.only(bottom: AppSize.klheight),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColor.yellow,
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: AppColor.black,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '+ ',
+                  style: applyRobotoFont(
+                      fontSize: 28,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w300),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Text(
+                    'Book Appointment',
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: ref.watch(getPatientProfileProvider).when(
         data: (data) {
