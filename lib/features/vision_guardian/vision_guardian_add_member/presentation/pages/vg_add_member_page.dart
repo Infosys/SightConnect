@@ -108,6 +108,7 @@ class VisionGuardianMemberPage extends HookConsumerWidget {
           ),
         ),
       ),
+     
       body: (event.isEmpty)
           ? const VisionGuardianAddMemberResultCard()
           : Padding(

@@ -47,6 +47,13 @@ class TriageExitAlertBox extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    logger.d({"currentStep": model.currentStep});
+                  },
+                  child: Text(loc.noButton),
+                ),
+                TextButton(
                   onPressed: () async {
                     var naviagtor = Navigator.of(context);
                     if (model.currentStep > 0) {
@@ -57,13 +64,6 @@ class TriageExitAlertBox extends ConsumerWidget {
                     onYesPressed?.call();
                   },
                   child: Text(loc.yesButton),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    logger.d({"currentStep": model.currentStep});
-                  },
-                  child: Text(loc.noButton),
                 ),
               ],
             ),
