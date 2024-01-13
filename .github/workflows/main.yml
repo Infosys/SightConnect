@@ -36,7 +36,7 @@ jobs:
       - name: Build APPBUNDLE
         run: flutter build appbundle --release --build-number ${{ github.run_number }}
       - name: Build Android APK
-        run: flutter build apk --obfuscate --split-debug-info=/temp/sightconnect --release --build-number ${{ github.run_number }}
+        run: flutter build apk --obfuscate --split-debug-info=./temp/sightconnect --release --build-number ${{ github.run_number }}
       
       - name: Copy the file
         run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-${{ github.run_number }}.apk
