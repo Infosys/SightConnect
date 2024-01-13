@@ -7,6 +7,8 @@
 -keep class io.flutter.plugins.**  { *; }
 -keep class io.flutter.embedding.**  { *; }
 -dontwarn io.flutter.embedding.**
+-keep class net.sqlcipher.** { *; }
+-keep class net.sqlcipher.database.** { *; }
 
 ## Dart
 -keep class **.Dart { *; }
