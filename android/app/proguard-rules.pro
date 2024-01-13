@@ -10,5 +10,7 @@
 -keep class net.sqlcipher.** { *; }
 -keep class net.sqlcipher.database.** { *; }
 
+-dontwarn net.sqlcipher.**
+
 ## Dart
 -keep class **.Dart { *; }
