@@ -18,19 +18,12 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(globalPatientProvider).activeUser;
+    final memberProvider = ref.watch(triageMemberProvider);
+    final connectionsList = memberProvider.connectionsList;
+    final currentProfile = memberProvider.currentProfile;
+    final selectedValue = memberProvider.currentIndex;
 
-    final List<RelatedPartyModel> connectionsList =
-        model?.profile?.patient?.relatedParty ?? [];
-    final currentProfile = model?.profile?.patient;
-    var memberProvider = ref.watch(triageMemberProvider);
-    final selectedValue = useState<int>(0);
-
-    if (currentProfile?.patientId != null) {
-      memberProvider.setTestPersonId(currentProfile!.patientId!);
-    }
-
-    if (model == null || currentProfile == null || connectionsList.isEmpty) {
+    if (currentProfile == null) {
       return const Center(
           child: Text(
         "No Member Found",
@@ -53,7 +46,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
   Widget _content(
     List<RelatedPartyModel> connectionsList,
     PatientModel currentProfile,
-    ValueNotifier<int> selectedValue,
+    int selectedValue,
     TriageMemberProvider memberProvider,
   ) {
     return ListView.builder(
@@ -70,8 +63,14 @@ class ChangeMemberTiles extends HookConsumerWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: applyLightShadow(),
-                color: AppColor.white,
+                // boxShadow: applyLightShadow(),
+                // color: AppColor.white,
+                border: selectedValue == index
+                    ? Border.all(
+                        color: AppColor.primary,
+                        width: 1,
+                      )
+                    : null,
               ),
               child: RadioListTile<int>(
                 contentPadding: EdgeInsets.zero,
@@ -115,9 +114,9 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   ],
                 ),
                 value: index,
-                groupValue: selectedValue.value,
+                groupValue: selectedValue,
                 onChanged: (value) {
-                  selectedValue.value = value!;
+                  memberProvider.setCurrentIndex(value!);
                   memberProvider.setTestPersonId(person.patientId!);
                 },
               ),
@@ -132,8 +131,14 @@ class ChangeMemberTiles extends HookConsumerWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: applyLightShadow(),
-                color: AppColor.white,
+                // boxShadow: applyLightShadow(),
+                // color: AppColor.white,
+                border: selectedValue == index
+                    ? Border.all(
+                        color: AppColor.primary,
+                        width: 2,
+                      )
+                    : null,
               ),
               child: RadioListTile<int>(
                 contentPadding: EdgeInsets.zero,
@@ -165,7 +170,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           height: 5,
                         ),
                         Text(
-                          person.relation.toString().split(".").last,
+                          "${person.relation.toString().split(".").last.toLowerCase().capitalize()}, ${person.age} years",
                           style: applyRobotoFont(
                             fontSize: 12,
                             color: AppColor.grey,
@@ -177,9 +182,9 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   ],
                 ),
                 value: index,
-                groupValue: selectedValue.value,
+                groupValue: selectedValue,
                 onChanged: (value) {
-                  selectedValue.value = value!;
+                  memberProvider.setCurrentIndex(value!);
                   memberProvider.setTestPersonId(person.patientId!);
                 },
               ),

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/enum/severity.dart';
 
@@ -124,19 +125,25 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                   const SizedBox(
                     width: AppSize.kmpadding,
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.primary.withOpacity(0.5),
-                    ),
-                    child: SvgPicture.asset(
-                      AppIcon.call,
-                      width: 18,
-                      height: 18,
-                      colorFilter: const ColorFilter.mode(
-                        AppColor.white,
-                        BlendMode.srcATop,
+                  InkWell(
+                    onTap: () async {
+                      Uri phoneno = Uri.parse("tel:${AppText.tollFreeNumber}");
+                      await launchUrl(phoneno);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColor.primary.withOpacity(0.5),
+                      ),
+                      child: SvgPicture.asset(
+                        AppIcon.call,
+                        width: 18,
+                        height: 18,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.white,
+                          BlendMode.srcATop,
+                        ),
                       ),
                     ),
                   ),

@@ -1,18 +1,45 @@
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageMemberProvider = ChangeNotifierProvider<TriageMemberProvider>((ref) {
-  return TriageMemberProvider();
+  return TriageMemberProvider(ref);
 });
 
 class TriageMemberProvider extends ChangeNotifier {
   int? testPatientId;
-  TriageMemberProvider();
+  int currentIndex = 0;
+  Ref ref;
+  final List<RelatedPartyModel> connectionsList = [];
+  PatientModel? currentProfile;
+
+  TriageMemberProvider(this.ref) {
+    _initilizeMembers();
+  }
 
   void setTestPersonId(int patientId) {
     testPatientId = patientId;
     notifyListeners();
     logger.i('TriageMemberProvider: setTestPersonId: $testPatientId');
+  }
+
+  void setCurrentIndex(int index) {
+    currentIndex = index;
+    notifyListeners();
+    logger.i('TriageMemberProvider: setCurrentIndex: $currentIndex');
+  }
+
+  void _initilizeMembers() {
+    final model = ref.watch(globalPatientProvider).activeUser;
+    currentProfile = model?.profile?.patient;
+    connectionsList.addAll(model?.profile?.patient?.relatedParty ?? []);
+    notifyListeners();
+    logger.i('TriageMemberProvider: initilizeMembers: $connectionsList');
+
+    if (currentProfile != null) {
+      setTestPersonId(currentProfile!.patientId!);
+    }
   }
 }

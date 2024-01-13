@@ -127,9 +127,11 @@ class AppointmentPatientSelector extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Container(
                   height: AppSize.height(context) * 0.06,
+                  margin: const EdgeInsets.only(right: AppSize.kspadding),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.kspadding,
-                      vertical: AppSize.kspadding - 2),
+                    horizontal: AppSize.kspadding,
+                    vertical: AppSize.kspadding - 2,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColor.white,
                     borderRadius: BorderRadius.circular(8),

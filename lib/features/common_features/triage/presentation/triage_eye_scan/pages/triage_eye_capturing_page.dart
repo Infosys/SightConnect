@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../provider/triage_eye_scan_provider.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
@@ -68,6 +69,22 @@ class _PatientTriageEyeCapturingPageState
       logger.d(e);
       Fluttertoast.showToast(msg: e);
     });
+  }
+
+  Future<bool> _cameraPermisson() async {
+    final status = await Permission.camera.status;
+    if (status.isGranted) {
+      return true;
+    } else if (status.isDenied) {
+      final result = await Permission.camera.request();
+      if (result.isGranted) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   @override

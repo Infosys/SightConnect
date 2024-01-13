@@ -29,19 +29,27 @@ class TriageDBHelper {
   Future<Database> get database async {
     final pass =
         await PersistentAuthStateService.authState.getSQFlitePassword();
+    logger.d('SQLITE PASS: $pass');
 
-    _database ??= await _initDatabase(pass);
+    if (_database == null) {
+      try {
+        _database = await _initDatabase(pass);
+      } catch (e, stackTrace) {
+        logger.d('Error initializing database: $e\n$stackTrace');
+
+        throw StateError('Failed to initialize database');
+      }
+    }
     return _database!;
   }
 
   Future<Database> _initDatabase(String pass) async {
-    try {
-      return openDatabase(
-        join(await getDatabasesPath(), _databaseName),
-        password: pass,
-        onCreate: (db, _) {
-          /// table for GET triage json
-          db.execute('''
+    return openDatabase(
+      join(await getDatabasesPath(), _databaseName),
+      password: pass,
+      onCreate: (db, _) {
+        /// table for GET triage json
+        db.execute('''
           CREATE TABLE $_triageAssessmentTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
@@ -49,8 +57,8 @@ class TriageDBHelper {
           );
         ''');
 
-          /// table to save triarge response
-          db.execute('''
+        /// table to save triarge response
+        db.execute('''
           CREATE TABLE $_triageResponseTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
@@ -59,8 +67,8 @@ class TriageDBHelper {
 
         ''');
 
-          /// table to save triarge questionnaire
-          db.execute('''
+        /// table to save triarge questionnaire
+        db.execute('''
           CREATE TABLE $_triageQuestionnaireTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
            $_timeStampColumnName INT NOT NULL,
@@ -69,8 +77,8 @@ class TriageDBHelper {
 
         ''');
 
-          /// table to save triarge visual acuity
-          db.execute('''
+        /// table to save triarge visual acuity
+        db.execute('''
           CREATE TABLE $_triageVisualAcuityTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
@@ -79,8 +87,8 @@ class TriageDBHelper {
 
         ''');
 
-          /// table to save triarge eye scan
-          db.execute('''
+        /// table to save triarge eye scan
+        db.execute('''
           CREATE TABLE $_triageEyeScanTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
@@ -88,127 +96,168 @@ class TriageDBHelper {
           );
 
         ''');
-        },
-        version: _databaseVersion,
-      );
-    } catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+      },
+      version: _databaseVersion,
+    );
   }
 
   Future<dynamic> getTriageAssessment() async {
-    var dbClient = await database;
-    var response = await dbClient.query(_triageAssessmentTableName,
-        orderBy: "id DESC", limit: 1);
-    if (response.isNotEmpty) {
-      return json.decode(response.first[_responseColumnName].toString());
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageAssessmentTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return json.decode(response.first[_responseColumnName].toString());
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage assessment: $e');
+      return [];
     }
-    return [];
   }
 
   Future<dynamic> getTriageAssessmentResponse() async {
-    var dbClient = await database;
-    var response = await dbClient.query(_triageResponseTableName,
-        orderBy: "id DESC", limit: 1);
-    if (response.isNotEmpty) {
-      return json.decode(response.first[_responseColumnName].toString());
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageResponseTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return json.decode(response.first[_responseColumnName].toString());
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage assessment response: $e');
+      return [];
     }
-    return [];
   }
 
   Future<void> insertTriageAssessment(
       {required DiagnosticReportTemplateFHIRModel triageAssessment}) async {
-    var dbClient = await database;
-    await dbClient.insert(_triageAssessmentTableName, {
-      _responseColumnName: json.encode(
-        triageAssessment.toJson(),
-      ),
-      _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-    });
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageAssessmentTableName, {
+        _responseColumnName: json.encode(
+          triageAssessment.toJson(),
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage assessment: $e');
+    }
   }
 
   Future<void> insertTriageResponse(
       {required TriagePostModel triageResponse}) async {
-    var dbClient = await database;
-    await dbClient.insert(_triageResponseTableName, {
-      _responseColumnName: json.encode(
-        triageResponse.toJson(),
-      ),
-      _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-    });
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageResponseTableName, {
+        _responseColumnName: json.encode(
+          triageResponse.toJson(),
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage response: $e');
+    }
   }
 
   Future<void> insertTriageQuestionnaire(
       {required List<PostTriageQuestionModel> triageQuestionnaire}) async {
-    var dbClient = await database;
-    await dbClient.insert(_triageQuestionnaireTableName, {
-      _responseColumnName: json.encode(
-        triageQuestionnaire,
-      ),
-      _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-    });
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageQuestionnaireTableName, {
+        _responseColumnName: json.encode(
+          triageQuestionnaire,
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage questionnaire: $e');
+    }
   }
 
   Future<void> insertTriageVisualAcuity(
       {required List<PostTriageObservationsModel> triageVisualAcuity}) async {
-    var dbClient = await database;
-    await dbClient.insert(_triageVisualAcuityTableName, {
-      _responseColumnName: json.encode(
-        triageVisualAcuity,
-      ),
-      _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-    });
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageVisualAcuityTableName, {
+        _responseColumnName: json.encode(
+          triageVisualAcuity,
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage visual acuity: $e');
+    }
   }
 
   Future<void> insertTriageEyeScan(
       {required List<PostTriageImagingSelectionModel> triageEyeScan}) async {
-    var dbClient = await database;
-    await dbClient.insert(_triageEyeScanTableName, {
-      _responseColumnName: json.encode(
-        triageEyeScan,
-      ),
-      _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-    });
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageEyeScanTableName, {
+        _responseColumnName: json.encode(
+          triageEyeScan,
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage eye scan: $e');
+    }
   }
 
   Future<List<PostTriageQuestionModel>> getTriageQuestionnaire() async {
-    var dbClient = await database;
-    var response = await dbClient.query(_triageQuestionnaireTableName,
-        orderBy: "id DESC", limit: 1);
-    if (response.isNotEmpty) {
-      return (json.decode(response.first[_responseColumnName].toString())
-              as List)
-          .map((e) => PostTriageQuestionModel.fromJson(e))
-          .toList();
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageQuestionnaireTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return (json.decode(response.first[_responseColumnName].toString())
+                as List)
+            .map((e) => PostTriageQuestionModel.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage questionnaire: $e');
+      return [];
     }
-    return [];
   }
 
   Future<List<PostTriageObservationsModel>> getTriageVisualAcuity() async {
-    var dbClient = await database;
-    var response = await dbClient.query(_triageVisualAcuityTableName,
-        orderBy: "id DESC", limit: 1);
-    if (response.isNotEmpty) {
-      return (json.decode(response.first[_responseColumnName].toString())
-              as List)
-          .map((e) => PostTriageObservationsModel.fromJson(e))
-          .toList();
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageVisualAcuityTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return (json.decode(response.first[_responseColumnName].toString())
+                as List)
+            .map((e) => PostTriageObservationsModel.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage visual acuity: $e');
+      return [];
     }
-    return [];
   }
 
   Future<List<PostTriageImagingSelectionModel>> getTriageEyeScan() async {
-    var dbClient = await database;
-    var response = await dbClient.query(_triageEyeScanTableName,
-        orderBy: "id DESC", limit: 1);
-    if (response.isNotEmpty) {
-      return (json.decode(response.first[_responseColumnName].toString())
-              as List)
-          .map((e) => PostTriageImagingSelectionModel.fromJson(e))
-          .toList();
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageEyeScanTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return (json.decode(response.first[_responseColumnName].toString())
+                as List)
+            .map((e) => PostTriageImagingSelectionModel.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage eye scan: $e');
+      return [];
     }
-    return [];
   }
 
   Future<void> deleteTriageAssessment() async {
