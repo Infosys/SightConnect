@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 
 class SuperAppScannerPage extends StatefulWidget {
   const SuperAppScannerPage({Key? key}) : super(key: key);
@@ -12,10 +14,12 @@ class SuperAppScannerPage extends StatefulWidget {
   State<SuperAppScannerPage> createState() => _SuperAppScannerPageState();
 }
 
-class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
+class _SuperAppScannerPageState extends State<SuperAppScannerPage>
+    with WidgetsBindingObserver {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
+  PermissionStatus? _permissionStatus;
 
   String scanResult = "-1";
   bool isText = false;
@@ -23,10 +27,99 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
   bool isMiniApp = false;
   bool isUPI = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestCameraPermissions();
+    });
+  }
+
+  Future<void> _requestCameraPermissions() async {
+    await _getCameraPermission().then((permissionStatus) {
+      setState(() {
+        _permissionStatus = permissionStatus;
+      });
+
+      if (permissionStatus.isGranted) {
+        _onCameraPermissionGranted();
+      } else if (permissionStatus.isDenied) {
+        _onCameraPermissionDenied();
+      } else if (permissionStatus.isPermanentlyDenied) {
+        _onCameraPermissionPermanentlyDenied();
+      }
+    });
+  }
+
+  void _onCameraPermissionGranted() {
+    controller?.resumeCamera();
+  }
+
+  void _onCameraPermissionDenied() {
+    controller?.pauseCamera();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return _PermissionRequestAlertDialog(
+          title: "Camera Permission",
+          description: "Please allow camera permission to scan QR Code",
+          positiveButtonLabel: "Allow",
+          onPositiveButtonClick: () async {
+            Navigator.of(context).pop();
+            await Permission.camera.request();
+          },
+          negativeButtonLabel: "Deny",
+          onNegativeButtonClick: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
+  }
+
+  void _onCameraPermissionPermanentlyDenied() {
+    controller?.pauseCamera();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return _PermissionRequestAlertDialog(
+          title: "Camera Permission",
+          description: "Please allow camera permission to scan QR Code",
+          positiveButtonLabel: "App Settings",
+          onPositiveButtonClick: () async {
+            Navigator.of(context).pop();
+            await openAppSettings();
+          },
+          negativeButtonLabel: "Deny",
+          onNegativeButtonClick: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      _requestCameraPermissions();
+    }
+  }
+
   void _onQRViewCreated(QRViewController controller, BuildContext context) {
     setState(() {
       this.controller = controller;
-      controller.resumeCamera();
+      if (_permissionStatus?.isGranted == true) {
+        controller.resumeCamera();
+      }
     });
 
     controller.scannedDataStream.listen((scanData) {
@@ -59,43 +152,8 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
     }
   }
 
-  void _onPermissionSet(
-    BuildContext context,
-    QRViewController ctrl,
-    bool p,
-  ) async {
-    var scaffold = ScaffoldMessenger.of(context);
-    var navigator = Navigator.of(context);
-    PermissionStatus status = await _getCameraPermission();
-    if (status.isDenied) {
-      await Permission.camera.request();
-    }
-    if (status.isPermanentlyDenied) {
-      scaffold.showSnackBar(
-        const SnackBar(
-          content: Text("Please Provide camera access through Settings"),
-        ),
-      );
-      navigator.pop();
-    }
-    if (status.isDenied) {
-      scaffold.showSnackBar(
-        const SnackBar(
-          content: Text("Camera access is denied"),
-        ),
-      );
-      navigator.pop();
-    }
-  }
-
   Future<PermissionStatus> _getCameraPermission() async {
-    var status = await Permission.camera.status;
-    if (!status.isGranted) {
-      final result = await Permission.camera.request();
-      return result;
-    } else {
-      return status;
-    }
+    return await Permission.camera.status;
   }
 
   @override
@@ -113,85 +171,108 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
         ),
         title: const Text("Scanner"),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        alignment: Alignment.center,
-        children: [
-          QRView(
-            formatsAllowed: const [],
-            key: _qrKey,
-            onQRViewCreated: (controller) {
-              _onQRViewCreated(controller, context);
-            },
-            overlay: QrScannerOverlayShape(
-              borderColor: Theme.of(context).primaryColor,
-              borderRadius: 10,
-              borderLength: 30,
-              borderWidth: 10,
-              cutOutSize: scanArea,
-            ),
-            onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
-          ),
-          Positioned(
-            top: 80,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Theme.of(context).primaryColor.withOpacity(0.3),
-              ),
-              padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () async {
-                      await controller?.toggleFlash();
-                      setState(() {});
-                    },
-                    icon: FutureBuilder<bool?>(
-                      future: controller?.getFlashStatus(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          return Icon(
-                            snapshot.data! ? Icons.flash_on : Icons.flash_off,
-                            color: Colors.white,
-                          );
-                        } else {
-                          return const SizedBox.shrink();
-                        }
+      body: Container(
+        color: _permissionStatus?.isGranted == true ? null : Colors.black,
+        child: Stack(
+          fit: StackFit.expand,
+          alignment: Alignment.center,
+          children: [
+            Builder(builder: (context) {
+              if (_permissionStatus?.isGranted == true) {
+                return QRView(
+                  formatsAllowed: const [],
+                  key: _qrKey,
+                  onQRViewCreated: (controller) {
+                    _onQRViewCreated(controller, context);
+                  },
+                  overlay: QrScannerOverlayShape(
+                    borderColor: Theme.of(context).primaryColor,
+                    borderRadius: 10,
+                    borderLength: 30,
+                    borderWidth: 10,
+                    cutOutSize: scanArea,
+                  )
+                );
+              }
+              return const SizedBox.shrink();
+            }),
+            Positioned(
+              top: 80,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).primaryColor.withOpacity(0.3),
+                ),
+                padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        await controller?.toggleFlash();
+                        setState(() {});
                       },
+                      icon: FutureBuilder<bool?>(
+                        future: controller?.getFlashStatus(),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return Icon(
+                              snapshot.data! ? Icons.flash_on : Icons.flash_off,
+                              color: Colors.white,
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      await controller?.flipCamera();
-                      setState(() {});
-                    },
-                    icon: FutureBuilder(
-                      future: controller?.getCameraInfo(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          return const Icon(
-                            Icons.switch_camera,
-                            color: Colors.white,
-                          );
-                        } else {
-                          return const SizedBox.shrink();
-                        }
+                    IconButton(
+                      onPressed: () async {
+                        await controller?.flipCamera();
+                        setState(() {});
                       },
+                      icon: FutureBuilder(
+                        future: controller?.getCameraInfo(),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return const Icon(
+                              Icons.switch_camera,
+                              color: Colors.white,
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          )
-        ],
+            Builder(builder: (context) {
+              if (_permissionStatus?.isGranted == true) return const SizedBox.shrink();
+
+              return Container(
+                decoration: ShapeDecoration(
+                  shape: QrScannerOverlayShape(
+                    borderColor: Theme.of(context).primaryColor,
+                    borderRadius: 10,
+                    borderLength: 30,
+                    borderWidth: 10,
+                    cutOutSize: scanArea,
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
 
   @override
   void dispose() {
-    controller!.dispose();
+    controller?.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -209,5 +290,71 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage> {
     if (!await launchUrl(uri)) {
       throw Exception('Could not launch $uri');
     }
+  }
+}
+
+class _PermissionRequestAlertDialog extends StatelessWidget {
+  final String _title;
+  final String _description;
+  final String _positiveButtonLabel;
+  final String _negativeButtonLabel;
+  final VoidCallback _onPositiveButtonClick;
+  final VoidCallback _onNegativeButtonClick;
+
+  const _PermissionRequestAlertDialog({
+    required String title,
+    required String description,
+    required String positiveButtonLabel,
+    required String negativeButtonLabel,
+    required VoidCallback onPositiveButtonClick,
+    required VoidCallback onNegativeButtonClick,
+  })  : _title = title,
+        _description = description,
+        _positiveButtonLabel = positiveButtonLabel,
+        _negativeButtonLabel = negativeButtonLabel,
+        _onPositiveButtonClick = onPositiveButtonClick,
+        _onNegativeButtonClick = onNegativeButtonClick;
+
+  @override
+  Widget build(BuildContext context) {
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+      child: AlertDialog(
+        title: Text(
+          _title,
+          style: applyFiraSansFont(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(_description,
+                  style: applyFiraSansFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  )),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextButton(
+                    onPressed: _onPositiveButtonClick,
+                    child: Text(_positiveButtonLabel),
+                  ),
+                  TextButton(
+                    onPressed: _onNegativeButtonClick,
+                    child: Text(_negativeButtonLabel),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
