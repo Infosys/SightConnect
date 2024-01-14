@@ -1,11 +1,12 @@
 import 'dart:ui';
 
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 
 class SuperAppScannerPage extends StatefulWidget {
   const SuperAppScannerPage({Key? key}) : super(key: key);
@@ -104,7 +105,6 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
     );
   }
 
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
@@ -180,19 +180,18 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
             Builder(builder: (context) {
               if (_permissionStatus?.isGranted == true) {
                 return QRView(
-                  formatsAllowed: const [],
-                  key: _qrKey,
-                  onQRViewCreated: (controller) {
-                    _onQRViewCreated(controller, context);
-                  },
-                  overlay: QrScannerOverlayShape(
-                    borderColor: Theme.of(context).primaryColor,
-                    borderRadius: 10,
-                    borderLength: 30,
-                    borderWidth: 10,
-                    cutOutSize: scanArea,
-                  )
-                );
+                    formatsAllowed: const [],
+                    key: _qrKey,
+                    onQRViewCreated: (controller) {
+                      _onQRViewCreated(controller, context);
+                    },
+                    overlay: QrScannerOverlayShape(
+                      borderColor: Theme.of(context).primaryColor,
+                      borderRadius: 10,
+                      borderLength: 30,
+                      borderWidth: 10,
+                      cutOutSize: scanArea,
+                    ));
               }
               return const SizedBox.shrink();
             }),
@@ -249,7 +248,9 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
               ),
             ),
             Builder(builder: (context) {
-              if (_permissionStatus?.isGranted == true) return const SizedBox.shrink();
+              if (_permissionStatus?.isGranted == true) {
+                return const SizedBox.shrink();
+              }
 
               return Container(
                 decoration: ShapeDecoration(
@@ -320,39 +321,39 @@ class _PermissionRequestAlertDialog extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: AlertDialog(
-        title: Text(
-          _title,
-          style: applyFiraSansFont(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_description,
-                  style: applyFiraSansFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  )),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextButton(
-                    onPressed: _onPositiveButtonClick,
-                    child: Text(_positiveButtonLabel),
-                  ),
-                  TextButton(
-                    onPressed: _onNegativeButtonClick,
-                    child: Text(_negativeButtonLabel),
-                  ),
-                ],
-              )
-            ],
-          ),
+        elevation: AppSize.kselevation,
+        backgroundColor: Colors.white,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _title,
+              style: applyFiraSansFont(fontSize: 24),
+            ),
+            const SizedBox(height: AppSize.ksheight),
+            Text(
+              _description,
+              style: applyRobotoFont(fontSize: 14),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: _onNegativeButtonClick,
+                  child: Text(_negativeButtonLabel),
+                ),
+                TextButton(
+                  onPressed: _onPositiveButtonClick,
+                  child: Text(_positiveButtonLabel),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
