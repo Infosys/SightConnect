@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -84,72 +85,11 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
             const SizedBox(height: AppSize.kmheight),
             const NearbyVisionCentersList(),
             const SizedBox(height: AppSize.kmheight),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColor.white,
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.call,
-                            color: AppColor.primary,
-                          ),
-                          const SizedBox(width: AppSize.kmpadding),
-                          Flexible(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text("Toll Free number"),
-                                Text(
-                                  AppText.tollFreeNumber,
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: AppSize.kmpadding,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      Uri phoneno = Uri.parse("tel:${AppText.tollFreeNumber}");
-                      await launchUrl(phoneno);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.primary.withOpacity(0.5),
-                      ),
-                      child: SvgPicture.asset(
-                        AppIcon.call,
-                        width: 18,
-                        height: 18,
-                        colorFilter: const ColorFilter.mode(
-                          AppColor.white,
-                          BlendMode.srcATop,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const HelplineCard(helpLine: AppText.tollFreeNumber),
+            const SizedBox(height: AppSize.kmheight),
+            EyeScanTabView(
+                eyeScanData: assessmentDetailsReport.imageBriefEntity),
+            const SizedBox(height: AppSize.kmheight),
             TextButton(
               onPressed: () async {
                 showReport.value = !showReport.value;
@@ -205,10 +145,6 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                         assessmentDetailsReport.visualAcuityBreifEntity,
                     observationDescription:
                         assessmentDetailsReport.observationResultDescription,
-                  ),
-                  const SizedBox(height: AppSize.kmheight),
-                  EyeScanTabView(
-                    eyeScanData: assessmentDetailsReport.imageBriefEntity,
                   ),
                   const SizedBox(height: AppSize.klheight * 3),
                 ],

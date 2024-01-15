@@ -1,21 +1,20 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_image_card.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
-
-import '../widgets/result_page_bottom_cards.dart';
 
 class TriageResultPage extends ConsumerWidget {
   const TriageResultPage({
@@ -39,6 +38,7 @@ class TriageResultPage extends ConsumerWidget {
         Navigator.of(context).popUntil((route) => route.isFirst);
       },
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: CustomAppbar(
           leadingIcon: InkWell(
             onTap: () {
@@ -53,94 +53,77 @@ class TriageResultPage extends ConsumerWidget {
           title: Text(loc.eyeAssessmentResults),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(AppImages.scaffoldBg),
+                alignment: Alignment.topCenter,
+              ),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
+                SizedBox(height: AppSize.height(context) * 0.14),
                 ResultPageTopCard(
                   triageResult: model.getOverallTriageResult(),
                   id: triageResult.subject,
+                  testDate: triageResult.userStartDate?.formateDate,
+                  testId: "Test ID: ${triageResult.id}",
                 ),
                 const SizedBox(height: AppSize.kmheight),
-                AssessmentResultCards(
-                  triageResult: model.getCompleteTriageResultList(),
-                ),
-                const SizedBox(height: AppSize.kmheight),
-                InkWell(
-                  onTap: () {
-                    ref.read(accessibilityProvider).resetBrightness();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AssessmentsAndTestsPage(),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColor.white,
+                    border: Border.all(
+                      color: _checkColorMapper(
+                        triageResult.cumulativeSeverity,
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(
-                            2,
-                            10,
-                          ),
-                          color: AppColor.primary.withOpacity(0.1),
-                          blurRadius: 20,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(AppSize.ksradius),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: AppColor.primary.withOpacity(0.1),
-                          child: SvgPicture.asset(
-                            AppIcon.report,
-                            height: 16,
-                          ),
-                        ),
-                        SizedBox(
-                          width: AppSize.width(context) * 0.05,
-                        ),
-                        Text(
-                          loc.assessmentReportButton,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.chevron_right_sharp),
-                      ],
+                      width: 1,
                     ),
                   ),
-                ),
-                const SizedBox(height: AppSize.klheight),
-                Text(
-                  loc.assessmentResultPageMoreDetailsText,
-                  textAlign: TextAlign.left,
-                  softWrap: true,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                  child: Text(
+                    triageResult.diagnosticReportDescription ?? "",
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 const NearbyVisionCentersList(),
                 const SizedBox(height: AppSize.kmheight),
-                const ResultPageBottomCards(),
+                const HelplineCard(helpLine: AppText.tollFreeNumber),
+                const SizedBox(height: AppSize.kmheight),
+                ResultImageCard(
+                  reportId: triageResult.id,
+                ),
+                const SizedBox(height: AppSize.klheight * 3),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Color _checkColorMapper(Severity? severity) {
+    switch (severity) {
+      case Severity.ABNORMAL:
+        return AppColor.red;
+      case Severity.LOW:
+        return AppColor.green;
+      case Severity.HIGH:
+        return AppColor.orange;
+      default:
+        return AppColor.grey;
+    }
   }
 }
