@@ -41,10 +41,15 @@ class EventDetailsTab extends ConsumerWidget {
                 (eventDetails.images != null)
                     ? SizedBox(
                         height: AppSize.height(context) / 3,
-                        child: AppNetworkImage(
-                          shapeCircle: false,
-                          radius: AppSize.ksradius,
-                          imageUrl: _getImageUrl(eventDetails.images![0]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppNetworkImage(
+                              shapeCircle: false,
+                              radius: 100,
+                              imageUrl: _getImageUrl(eventDetails.images![0]),
+                            ),
+                          ],
                         ),
                       )
                     : const SizedBox(
@@ -68,7 +73,6 @@ class EventDetailsTab extends ConsumerWidget {
                             children: [
                               const Icon(
                                 Icons.calendar_month_outlined,
-                                color: AppColor.white,
                                 size: 15,
                               ),
                               const SizedBox(
@@ -77,9 +81,9 @@ class EventDetailsTab extends ConsumerWidget {
                               Text(
                                 "$startDateformattedDate - $endDateformattedDate",
                                 style: applyRobotoFont(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ],
                           ),
@@ -90,7 +94,6 @@ class EventDetailsTab extends ConsumerWidget {
                                 children: [
                                   const Icon(
                                     Icons.schedule_outlined,
-                                    color: AppColor.white,
                                     size: 15,
                                   ),
                                   const SizedBox(
@@ -99,9 +102,9 @@ class EventDetailsTab extends ConsumerWidget {
                                   Text(
                                     "$startformattedTime - $endTimeformattedTime",
                                     style: applyRobotoFont(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ],
                               ),

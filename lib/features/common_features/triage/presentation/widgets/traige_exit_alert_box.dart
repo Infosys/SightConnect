@@ -1,7 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -75,10 +79,23 @@ class TriageExitAlertBox extends ConsumerWidget {
   }
 
   Future<bool> _saveTriageModel(WidgetRef ref) async {
-    var res = await ref
-        .watch(triageProvider)
-        .saveTriage(ref.read(triageStepperProvider).currentStep);
-    logger.d({"triagesave": res});
+    var model = ref.watch(triageProvider);
+    Either<Failure, TriagePostModel> res;
+
+    logger.d({
+      "triagesave": model.triageMode,
+    });
+
+    if (model.triageMode == TriageMode.EVENT) {
+      res = await model.saveTriageForEvent(
+        ref.read(triageStepperProvider).currentStep,
+        ref.read(addEventDetailsProvider).eventId,
+      );
+    } else {
+      res = await model.saveTriage(
+        ref.read(triageStepperProvider).currentStep,
+      );
+    }
 
     res.fold((l) {
       logger.d({"triagesave": l});

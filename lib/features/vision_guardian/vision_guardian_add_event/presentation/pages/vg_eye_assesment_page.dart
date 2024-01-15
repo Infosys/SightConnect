@@ -34,10 +34,11 @@ class VisionGuardianEyeAssessment extends ConsumerWidget {
                       .setTestPersonId(int.parse(patientId));
                   ref.read(triageProvider).setTriageMode(TriageMode.EVENT);
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TriagePage(),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TriagePage(),
+                    ),
+                  );
                 },
                 child: Text(
                   "Start",

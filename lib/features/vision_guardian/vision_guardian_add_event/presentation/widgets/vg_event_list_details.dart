@@ -157,22 +157,23 @@ class VisionEventListDetails extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.2
-                        : AppSize.width(context) * 0.1,
-                  ),
-                  child: data.images == null
-                      ? AppNameAvatar(
-                          name: data.title,
-                          radius: 0,
-                          fontSize: 18,
-                        )
-                      : AppNetworkImage(
-                          shapeCircle: false,
-                          radius: 0,
-                          imageUrl: _getImageUrl(data.images!.first),
-                        )),
+                constraints: BoxConstraints(
+                  maxWidth: Responsive.isMobile(context)
+                      ? AppSize.width(context) * 0.2
+                      : AppSize.width(context) * 0.1,
+                ),
+                child: data.images == null
+                    ? AppNameAvatar(
+                        name: data.title,
+                        radius: 40,
+                        fontSize: 18,
+                      )
+                    : AppNetworkImage(
+                        shapeCircle: false,
+                        radius: 40,
+                        imageUrl: _getImageUrl(data.images!.first),
+                      ),
+              ),
               const SizedBox(width: AppSize.kswidth),
               Padding(
                 padding: const EdgeInsets.all(AppSize.kspadding),
