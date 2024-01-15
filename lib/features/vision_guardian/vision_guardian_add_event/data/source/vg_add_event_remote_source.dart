@@ -139,7 +139,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         '/services/orchestration/api/practitioners/filter?officialMobile=$officialMobile}';
 
     return await _dio.get(endpoint).then((patientresponse) async {
-      if (patientresponse.data == null || patientresponse.data.length > 0) {
+      if (patientresponse.data == null || patientresponse.data.length == 0) {
         throw ServerException();
       }
       var roleType = patientresponse.data[0]["practitionerType"];

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 
@@ -66,7 +67,9 @@ class TeammatesDataCards extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: AppSize.width(context) * 0.7,
+                        width: Responsive.isMobile(context)
+                            ? AppSize.width(context) * 0.74
+                            : AppSize.width(context) * 0.85,
                         child: Row(
                           children: [
                             Expanded(
@@ -82,9 +85,6 @@ class TeammatesDataCards extends HookConsumerWidget {
                                   color: AppColor.black,
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 10,
                             ),
                             Transform.translate(
                               offset: const Offset(0, 10),

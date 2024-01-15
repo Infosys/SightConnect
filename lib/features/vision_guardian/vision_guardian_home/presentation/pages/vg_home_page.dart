@@ -51,29 +51,6 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 fontSize: 16,
               ),
             ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {
-                final navigator = Navigator.of(context);
-                ref.read(initializationProvider).logout().then(
-                  (value) async {
-                    navigator.pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (route) => false,
-                    );
-                    ref.invalidate(initializationProvider);
-                  },
-                ).catchError((e) {
-                  Fluttertoast.showToast(
-                    msg: e.toString(),
-                  );
-                });
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: AppColor.white,
-              ),
-            )
           ],
         ),
       ),
