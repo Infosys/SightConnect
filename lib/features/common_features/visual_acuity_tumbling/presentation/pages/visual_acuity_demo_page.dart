@@ -178,27 +178,70 @@ class VisualAcuityDemoPage extends HookWidget {
                         left: 0,
                         right: 0,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Instructions",
+                            Center(
+                              child: Text(
+                                "Instructions",
                                 style: applyRobotoFont(
                                   fontSize: 14,
                                   color: AppColor.grey,
-                                )),
+                                ),
+                              ),
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
-                            Text(
-                              swipeText.value,
-                              style: applyFiraSansFont(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
+                            Center(
+                              child: Text(
+                                swipeText.value,
+                                style: applyFiraSansFont(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                            Transform.rotate(
-                              angle: (pi / 180) * sliderValue.value,
-                              child: Image.asset(
-                                "assets/images/animation_up.gif",
-                                height: AppSize.height(context) * 0.4,
+                            Center(
+                              child: Transform.rotate(
+                                angle: (pi / 180) * sliderValue.value,
+                                child: Image.asset(
+                                  "assets/images/animation_up.gif",
+                                  height: AppSize.height(context) * 0.4,
+                                ),
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: const Offset(20, -40),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VisualAcuityInitiatePage(),
+                                    ),
+                                  );
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  side: const BorderSide(
+                                    color: AppColor.grey,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.0),
+                                  child: Text(
+                                    "Skip",
+                                    style: applyRobotoFont(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColor.grey,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],

@@ -1,5 +1,7 @@
 {
   "as": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -9,6 +11,8 @@
   ],
 
   "bn": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -18,6 +22,8 @@
   ],
 
   "gu": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -27,6 +33,8 @@
   ],
 
   "hi": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -36,6 +44,8 @@
   ],
 
   "kn": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -45,6 +55,8 @@
   ],
 
   "ml": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -54,6 +66,8 @@
   ],
 
   "mr": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -63,6 +77,8 @@
   ],
 
   "or": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -72,6 +88,8 @@
   ],
 
   "ta": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
@@ -81,6 +99,8 @@
   ],
 
   "te": [
+    "privacyPolicyTitle",
+    "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",

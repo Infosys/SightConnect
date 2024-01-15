@@ -33,14 +33,7 @@ class VTConsentFormPage extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 20),
-                Center(
-                  child: SvgPicture.asset(
-                    AppImages.privacyPolicy,
-                    height: AppSize.height(context) * 0.25,
-                    width: AppSize.width(context),
-                  ),
-                ),
+               
                 const SizedBox(height: 20),
                 Text(
                   'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data-',
