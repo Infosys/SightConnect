@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:superapp_scanner/constants/app_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SuperAppScannerPage extends StatefulWidget {
@@ -333,12 +332,12 @@ class _PermissionRequestAlertDialog extends StatelessWidget {
           children: [
             Text(
               _title,
-              style: applyFiraSansFont(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: AppSize.ksheight),
             Text(
               _description,
-              style: applyRobotoFont(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -104,9 +104,6 @@ class _NearbyVisionCentersListState
                 );
               } else if (viewState.errorMessage != null) {
                 return Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
-                  ),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -141,7 +138,7 @@ class _NearbyVisionCentersListState
                                   .read(nearByVisionCenterProvider.notifier)
                                   .init();
                             },
-                            child: Text("Request Location Permission"),
+                            child: const Text("Request Location Permission"),
                           );
                         } else if (viewState.permissionStatus ==
                             location.PermissionStatus.deniedForever) {
@@ -149,7 +146,7 @@ class _NearbyVisionCentersListState
                             onPressed: () {
                               openAppSettings();
                             },
-                            child: Text("App Settings"),
+                            child: const Text("App Settings"),
                           );
                         }
 

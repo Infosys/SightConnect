@@ -60,5 +60,5 @@ class PatientHomePageAppBar extends ConsumerWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(58);
+  Size get preferredSize => const Size.fromHeight(40);
 }

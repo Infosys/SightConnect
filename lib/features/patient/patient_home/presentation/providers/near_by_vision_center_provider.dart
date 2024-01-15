@@ -34,7 +34,8 @@ class NearByVisionCenterProvider
       );
       location = Location();
       final permissionStatus = await location.requestPermission();
-      print("nearByVisionCenterProvider, permissionStatus: $permissionStatus");
+      logger
+          .d("nearByVisionCenterProvider, permissionStatus: $permissionStatus");
 
       switch (permissionStatus) {
         case PermissionStatus.granted:
@@ -62,9 +63,7 @@ class NearByVisionCenterProvider
   }
 
   void onPermissionGranted(PermissionStatus permissionStatus) async {
-    state = state.copyWith(
-      permissionStatus: permissionStatus
-    );
+    state = state.copyWith(permissionStatus: permissionStatus);
 
     data = await location.getLocation();
     if (data == null) {
@@ -96,6 +95,7 @@ class NearByVisionCenterProvider
   void enableForceReload() {
     state = state.copyWith(shouldForceReload: true);
   }
+
   void disableForceReload() {
     state = state.copyWith(shouldForceReload: false);
   }
