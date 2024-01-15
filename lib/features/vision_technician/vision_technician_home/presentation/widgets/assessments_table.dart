@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_patient_list.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,17 +24,16 @@ class AssessmentTable extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSize.klheight),
-          // const Row(
-          //   children: [
-          //     CustomChip(title: "All"),
-          //     CustomChip(title: "Critical"),
-          //     CustomChip(title: "IVR Assessments"),
-          //   ],
-          // ),
           const SizedBox(height: AppSize.kmheight),
-
           ref.watch(getAssessmentTableProvider).when(
                 data: (data) {
+                  logger.d("table $data");
+                  if (data.isEmpty) {
+                    return const Center(
+                      child: Text("No data available"),
+                    );
+                  }
+
                   return VTPatientList(
                     listOfAssessments: data,
                   );
@@ -42,7 +42,7 @@ class AssessmentTable extends ConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 error: (error, stackTrace) {
-                  // logger.d("This is the error $error");
+                  logger.d("This is the error $error");
                   return const Center(
                     child: Text("No data available"),
                   );

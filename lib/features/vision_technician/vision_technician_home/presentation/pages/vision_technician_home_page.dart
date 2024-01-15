@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
@@ -29,43 +30,20 @@ class VisionTechnicianHomePage extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () async {
-            // final navigator = ;
-
-            // try {
-            //   var response = await ref
-            //     .watch(patientAssessmentAndTestProvider)
-            //     .getTriageDetailedReport(33200000023);
-            //     logger.d("response $response");
-            //     if(context.mounted){
-            //    Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) {
-            //       return VisionTechnicianAssessmentReportPage(
-            //         assessmentDetailsReport: response,
-            //       );
-            //     },
-
-            //   ));}
-            // } catch (e) {
-            //   logger.d("error $e");
-            // }
-          },
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: AppSize.kspadding,
-              left: AppSize.kmpadding,
-            ),
-            padding: const EdgeInsets.all(5),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColor.white,
-            ),
-            child: SvgPicture.asset(
-              AppIcon.logo,
-              height: 10,
-              width: 10,
-            ),
+        leading: Container(
+          margin: const EdgeInsets.only(
+            top: AppSize.kspadding,
+            left: AppSize.kmpadding,
+          ),
+          padding: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColor.white,
+          ),
+          child: SvgPicture.asset(
+            AppIcon.logo,
+            height: 10,
+            width: 10,
           ),
         ),
         backgroundColor: AppColor.primary,

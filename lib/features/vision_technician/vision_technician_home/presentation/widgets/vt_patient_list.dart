@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -19,7 +20,6 @@ class VTPatientList extends ConsumerWidget {
   final List<VTPatientDto> listOfAssessments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     var watchRef = ref.watch(visionTechnicianSearchProvider);
 
     return PaginatedDataTable(
@@ -79,6 +79,7 @@ class VTPatientList extends ConsumerWidget {
         list: listOfAssessments,
         context: context,
         watchRef: watchRef,
+        ref: ref,
       ),
     );
   }
@@ -88,11 +89,9 @@ class _DataSource extends DataTableSource {
   final List<VTPatientDto> list;
   final BuildContext context;
   final watchRef;
-  _DataSource({
-    required this.list,
-    required this.context,
-    required this.watchRef
-  });
+  final ref;
+  _DataSource(
+      {required this.list, required this.context, required this.watchRef, required this.ref});
   @override
   DataRow? getRow(int index) {
     final VTPatientDto data = list[index];
@@ -107,6 +106,7 @@ class _DataSource extends DataTableSource {
                     patientDetails: data,
                   )),
         );
+
       },
       cells: [
         DataCell(
@@ -115,7 +115,7 @@ class _DataSource extends DataTableSource {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "${data.name?.sentenceCase()}",
+                "${data.name?.capitalizeFirstOfEach()}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(fontSize: 14),
@@ -190,13 +190,6 @@ class _DataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
-
-  // String _formatDate(String originalDate) {
-  //   DateTime date = DateTime.parse(originalDate);
-  //   DateFormat dateFormat = DateFormat("dd MMM yy");
-  //   String formattedDate = dateFormat.format(date);
-  //   return formattedDate.toString();
-  // }
 
   String categoryMapper(SeverityCategory? category) {
     if (category == null) return "";

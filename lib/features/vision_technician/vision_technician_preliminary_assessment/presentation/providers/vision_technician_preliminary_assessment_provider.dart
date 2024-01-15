@@ -127,7 +127,6 @@ class VtTriageProvider extends ChangeNotifier {
     );
 
     TriagePostModel? triageResponse = response.fold((error) {
-      // throw error;
       return;
     }, (result) {
       return result;

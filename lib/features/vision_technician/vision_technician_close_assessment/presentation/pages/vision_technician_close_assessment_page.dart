@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -39,6 +40,10 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
             onTap: () {
               ref.invalidate(vtCloseAssessmentHelperProvider);
               Navigator.popUntil(context, (route) => route.isFirst);
+              Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (builder) {
+              return const VisionTechnicianHomePage();
+            }));
             },
             child: const Icon(Icons.chevron_left)),
         title: Text(

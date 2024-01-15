@@ -24,7 +24,7 @@ class VTPatientSearchRepositoryImpl implements VTPatientSearchRepository {
     if (query.length < 4) throw "List is empty";
 
     var endPoint = '/services/orchestration/api/patients/triage-reports';
-
+    
     if (isNumeric(query)) {
       endPoint += "?mobile=$query";
     } else {

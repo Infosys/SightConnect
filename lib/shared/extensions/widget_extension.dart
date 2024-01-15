@@ -30,4 +30,8 @@ extension StringExtension on String {
   String sentenceCase() {
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
+  
+  String capitalizeFirstOfEach(){
+    return this.split(" ").map((str) => str.sentenceCase()).join(" ");
+  }
 }

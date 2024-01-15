@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
@@ -26,6 +27,15 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.black,
+          ),
+        ),
         title: VTSearchBar(
           readOnly: false,
           onSearched: (value) {
@@ -186,7 +196,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${data.name?.sentenceCase()}",
+              "${data.name?.capitalizeFirstOfEach()}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(fontSize: 14),
