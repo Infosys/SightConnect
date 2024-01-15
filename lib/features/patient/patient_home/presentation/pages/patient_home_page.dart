@@ -55,7 +55,7 @@ class PatientHomePage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: AppSize.klheight * 3),
+              const SizedBox(height: AppSize.klheight * 4),
               const PatientHeader(),
               // const SizedBox(height: AppSize.kmheight),
               // PriorityNotificationList(),
@@ -86,7 +86,7 @@ class PatientHomePage extends ConsumerWidget {
               // const SizedBox(height: AppSize.kmheight),
               // const CampaginsList(),
               const PartnerCard(),
-              const SizedBox(height: AppSize.klheight * 4),
+              const SizedBox(height: AppSize.klheight * 3.2),
             ],
           ),
         ),
