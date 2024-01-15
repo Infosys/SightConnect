@@ -28,7 +28,7 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>your usage description here</string>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This we want to use to give information about the nearest vision care centers</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>your usage description here</string>
