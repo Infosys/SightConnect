@@ -132,7 +132,7 @@ class TriageProvider extends ChangeNotifier {
       questionResponse: questionResponse,
     );
 
-    logger.d({"triage model to be saved": triagePostModel});
+    logger.d({"triage model to be saved": triagePostModel.toJson()});
 
     try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(

@@ -279,7 +279,6 @@ class _PatientTriageEyeCapturingPageState
                               Either<Failure, TriagePostModel> response;
                               var tiageModel = ref.read(triageProvider);
 
-                              await ref.read(triageProvider).saveTriage(3);
                               if (tiageModel.triageMode == TriageMode.EVENT) {
                                 response = await tiageModel.saveTriageForEvent(
                                   3,
@@ -473,10 +472,6 @@ class _PatientTriageEyeCapturingPageState
                           ),
                         ),
                       );
-                      if (context.mounted && _controller.value.isInitialized) {
-                        WidgetsBinding.instance.removeObserver(this);
-                        _controller.dispose();
-                      }
                     },
                     child: Text(
                       loc.eyeCaptureCompletionDialogViewResult,
@@ -544,10 +539,7 @@ class _PatientTriageEyeCapturingPageState
                       ref.read(resetProvider).reset();
                       ref.read(accessibilityProvider).resetBrightness();
                       Navigator.of(context).popUntil((route) => route.isFirst);
-                      if (context.mounted && _controller.value.isInitialized) {
-                        WidgetsBinding.instance.removeObserver(this);
-                        _controller.dispose();
-                      }
+
                       //this will naviagte to local page for future ref
                       // Navigator.of(context).pushReplacement(
                       //   MaterialPageRoute(
