@@ -352,25 +352,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     );
   }
 
-  // (double, int) _getWeightage(List<AnswerOptionModel> answerOption) {
-  //   double weightage = 0.0;
-  //   int answerCode = 0;
-  //   for (var answer in answerOption) {
-  //     var answerString = answer.answer?.answerString?.toLowerCase() ?? "";
-  //     if (answerString == "yes") {
-  //       weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
-  //       answerCode = answer.answer?.id ?? 0;
-  //     } else if (answerString == "no") {
-  //       weightage = answer.answer?.answerItemWeight?.value ?? 0.0;
-  //       answerCode = answer.answer?.id ?? 0;
-  //     } else {
-  //       weightage = 0;
-  //       answerCode = 0;
-  //     }
-  //   }
-  //   return (weightage, answerCode);
-  // }
-
   Map<String, Map<String, int>> _getWeightageAnswerCode(
       List<AnswerOptionModel> answerOption) {
     Map<String, Map<String, int>> finalValueMap = {};
@@ -402,27 +383,4 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     String answerString = answer.toLowerCase();
     return finalValueMap[answerString]?["answerCode"] ?? 0;
   }
-
-  //   Future<void> saveTriage(BuildContext context, WidgetRef ref) async {
-  //   final navigator = Navigator.of(context);
-
-  //   var response = await ref
-  //       .read(updateTriageQuestionnaireProvider)
-  //       .updateTriage(reportId);
-
-  //   response.fold((failure) {
-  //     context.scaffoldMessenger.showSnackBar(
-  //       const SnackBar(
-  //         content: Text("Something went wrong"),
-  //       ),
-  //     );
-  //   }, (result) {
-  //     context.scaffoldMessenger.showSnackBar(
-  //       const SnackBar(
-  //         content: Text("Triage Updated Successfully"),
-  //       ),
-  //     );
-  //   });
-  //   navigator.pop();
-  // }
 }

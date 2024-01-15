@@ -55,19 +55,6 @@ class PatientNotificationCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.kmheight),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-          //     TextButton(
-          //       onPressed: () {},
-          //       child: const Text("Book Appointment"),
-          //     ),
-          //     TextButton(
-          //       onPressed: () {},
-          //       child: const Text("Remind Me Later"),
-          //     ),
-          //   ],
-          // )
         ],
       ),
     );

@@ -111,37 +111,6 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     }
   }
 
-  // void saveQuestionaireResponse() {
-  //   Map<int, bool> selectedOptionsList = {};
-  //   _selectedOptions.forEach((key, value) {
-  //     selectedOptionsList[key] = true;
-  //   });
-  //   _questionnaireResponse.add(selectedOptionsList);
-  //   addtoFinalResponse(_selectedOptions);
-  //   logger.d("Questionnaire Response: $_selectedOptions");
-  //   _selectedOptions.clear();
-  //   notifyListeners();
-  // }
-
-  // void addtoFinalResponse(selectedOptions) {
-  //   selectedOptions.forEach(
-  //     (key, score) {
-  //       _questionResponseList.add(
-  //         PostTriageQuestionModel(
-  //           linkId: key,
-  //           score: 1,
-  //           answer: [
-  //             PostAnswerModel(
-  //               value: "Yes",
-  //               score: double.parse(score.toString()),
-  //             )
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   List<PostTriageQuestionModel> getQuestionaireResponse() {
     return _questionResponseList;
   }

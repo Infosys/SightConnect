@@ -43,4 +43,8 @@ class SharedPreferenceService {
 
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
+
+  static void clear() async {
+    await _sharedPreferences.clear();
+  }
 }

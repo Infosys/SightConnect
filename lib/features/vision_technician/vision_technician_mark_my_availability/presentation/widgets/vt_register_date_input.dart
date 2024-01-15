@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class VTRegisterDateInput extends StatelessWidget {
-  const VTRegisterDateInput({super.key, required this.title, required this.controller});
+  const VTRegisterDateInput(
+      {super.key, required this.title, required this.controller});
   final TextEditingController controller;
   final String title;
   @override

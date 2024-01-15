@@ -113,62 +113,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                         ),
                       ),
                     ],
-
-                    //  Row(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   children: [
-                    //     const SizedBox(width: AppSize.kmwidth),
-                    //     Text(
-                    //       loc.stepNumber('2', '3'),
-                    //       style: applyRobotoFont(
-                    //         color: AppColor.primary,
-                    //         fontSize: 14,
-                    //         fontWeight: FontWeight.w500,
-                    //       ),
-                    //     ),
-                    //     const SizedBox(width: AppSize.kswidth),
-                    //     Text(
-                    //       loc.visualAcuityTitle,
-                    //       style: applyFiraSansFont(
-                    //         color: AppColor.black,
-                    //         fontSize: 16,
-                    //         fontWeight: FontWeight.w500,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
-            // bottomNavigationBar: Padding(
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: AppSize.width(context) * 0.1,
-            //     vertical: AppSize.height(context) * 0.02,
-            //   ),
-            //   child: ElevatedButton(
-            //     onPressed: () async {
-            //       final status = await showDialog(
-            //         barrierDismissible: false,
-            //         context: context,
-            //         builder: (context) {
-            //           return VisualAcuityDialog.showEyeInstructionDialog(
-            //               context, Eye.right);
-            //         },
-            //       );
-            //       if (status == true) {
-            //         return;
-            //       }
-            //       if (context.mounted) {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (context) => VisualAcuityInitiatePage(),
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Text(
-            //       loc.startButton,
-            //     ),
-            //   ),
-            // ),
             body: Padding(
               padding: Responsive.isMobile(context)
                   ? const EdgeInsets.all(AppSize.kmpadding)
@@ -185,76 +130,6 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSize.kmheight),
                   const Expanded(child: VisualAcuityInstructionPage())
-                  // Text(
-                  //   loc.visualAcuityHowToPerform,
-                  //   style: applyRobotoFont(
-                  //       fontSize: 18, fontWeight: FontWeight.w600),
-                  // ),
-                  // const SizedBox(height: AppSize.kmheight),
-                  // Container(
-                  //   height: 200,
-                  //   width: AppSize.width(context) * 0.9,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(AppSize.klradius),
-                  //     boxShadow: applyLightShadow(),
-                  //     color: AppColor.black,
-                  //   ),
-                  //   child: Center(
-                  //     child: SvgPicture.asset(
-                  //       AppImages.tumblingTestPlay,
-                  //       height: 40,
-                  //       width: 40,
-                  //     ),
-                  //   ),
-                  // ),
-                  // const SizedBox(height: AppSize.kmheight),
-                  // const Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  //   child: Divider(),
-                  // ),
-                  // const SizedBox(height: AppSize.kmheight),
-                  // InkWell(
-                  //   onTap: () {
-                  //     Navigator.of(context).push(
-                  //       MaterialPageRoute(
-                  //         builder: (context) =>
-                  //             const VisualAcuityInstructionPage(),
-                  //         fullscreenDialog: true,
-                  //       ),
-                  //     );
-                  //   },
-                  //   child: Container(
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 14,
-                  //       vertical: 8,
-                  //     ),
-                  //     decoration: BoxDecoration(
-                  //       color: AppColor.white,
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: AppColor.primary.withOpacity(0.1),
-                  //           blurRadius: 10,
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: [
-                  //         const Icon(Icons.vibration, color: AppColor.blue),
-                  //         const SizedBox(width: AppSize.kswidth),
-                  //         Text(
-                  //           loc
-                  //               .visualAcuityViewStepsToPerform,
-                  //           style: applyRobotoFont(
-                  //             fontSize: 14,
-                  //             color: AppColor.blue,
-                  //             fontWeight: FontWeight.w500,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
