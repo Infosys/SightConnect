@@ -100,7 +100,7 @@ Widget vgPatientDataCards(BuildContext context,
   DateTime dateTime = DateTime.parse(dateTimeString);
 
   String formattedDate = DateFormat("dd MMM yy").format(dateTime);
-  String formattedTime = DateFormat("hh:mm a").format(dateTime);
+  String formattedTime = DateFormat("hh:mm a").format(dateTime.toLocal());
 
   return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),

@@ -170,7 +170,7 @@ class VisionEventListDetails extends ConsumerWidget {
                         )
                       : AppNetworkImage(
                           shapeCircle: false,
-                          radius: 0,
+                          radius: Size.infinite.height,
                           imageUrl: _getImageUrl(data.images!.first),
                         )),
               const SizedBox(width: AppSize.kswidth),

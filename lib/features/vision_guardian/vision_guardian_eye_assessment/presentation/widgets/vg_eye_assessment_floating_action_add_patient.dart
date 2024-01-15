@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -18,7 +19,9 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const VisionGuardianAddPatient(),
+            builder: (context) => const VisionGuardianAddPatient(
+              triageMode: TriageMode.STANDALONE,
+            ),
           ),
         );
       },

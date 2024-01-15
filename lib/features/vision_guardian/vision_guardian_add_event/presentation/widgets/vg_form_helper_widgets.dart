@@ -1,22 +1,21 @@
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget customTextField(
-  TextEditingController controller,
-  String label,
-) {
+Widget customTextField(TextEditingController controller, String label,
+    {String? Function(String?)? validationFunction}) {
   return TextFormField(
     controller: controller,
     onChanged: (value) {
       controller.text = value;
     },
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Please enter $label";
-      }
-      return null;
-    },
+    onEditingComplete: () {},
+    validator: validationFunction ??
+        (value) {
+          if (value == null || value.isEmpty) {
+            return "Please enter $label";
+          }
+          return null;
+        },
     decoration: InputDecoration(
       label: Padding(
         padding: const EdgeInsets.only(left: 8.0),

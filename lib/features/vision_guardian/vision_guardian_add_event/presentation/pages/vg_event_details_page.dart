@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
@@ -42,11 +43,12 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                               search: "search",
                             )),
                   );
-                }else{
+                } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const VisionGuardianSearchTeammate(
+                        builder: (context) =>
+                            const VisionGuardianSearchTeammate(
                               search: "search",
                             )),
                   );
@@ -78,7 +80,9 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   context,
                   MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (context) => const VisionGuardianAddPatient(),
+                    builder: (context) => const VisionGuardianAddPatient(
+                      triageMode: TriageMode.EVENT,
+                    ),
                   ),
                 );
               },

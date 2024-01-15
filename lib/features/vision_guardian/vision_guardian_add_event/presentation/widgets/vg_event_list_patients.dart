@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_eye_assesment_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patient_search.dart';
@@ -14,7 +15,11 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianPatientList extends ConsumerWidget {
-  const VisionGuardianPatientList({super.key});
+  final TriageMode triageMode;
+  const VisionGuardianPatientList({
+    super.key,
+    required this.triageMode,
+  });
 
   int calculateAge(DateTime dateOfBirth) {
     final now = DateTime.now();
@@ -193,6 +198,8 @@ class VisionGuardianPatientList extends ConsumerWidget {
                                                                       index]
                                                                   .patientId
                                                                   .toString(),
+                                                              triageMode:
+                                                                  triageMode,
                                                             ),
                                                           ),
                                                         );
