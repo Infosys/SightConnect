@@ -3,13 +3,15 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class AppNetworkImage extends StatelessWidget {
-  const AppNetworkImage(
-      {super.key,
-      required this.imageUrl,
-      this.radius = 20,
-      this.shapeCircle = true});
+  const AppNetworkImage({
+    super.key,
+    required this.imageUrl,
+    this.radius = 20,
+    this.shapeCircle = true,
+  });
   final String imageUrl;
   final double radius;
+
   final bool shapeCircle;
   @override
   Widget build(BuildContext context) {

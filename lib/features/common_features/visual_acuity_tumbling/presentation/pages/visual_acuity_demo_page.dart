@@ -55,18 +55,15 @@ class VisualAcuityDemoPage extends HookWidget {
                 angle: tumblingAngle.value,
                 child: SvgPicture.asset(
                   AppImages.tumblingE,
-                  height: AppSize.height(context) * 0.2,
+                  height: AppSize.height(context) * 0.14,
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.kmheight,
-          ),
           Center(
             child: Container(
               height: 4,
-              width: AppSize.width(context) * 0.35,
+              width: AppSize.width(context) * 0.25,
               decoration: BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.circular(4),
@@ -133,10 +130,11 @@ class VisualAcuityDemoPage extends HookWidget {
                 } else if (countValue.value == 3) {
                   if (dragDirection.value == QuestionDirection.right) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const VisualAcuityInitiatePage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const VisualAcuityInitiatePage(),
+                      ),
+                    );
                   }
                 }
               },
@@ -165,8 +163,9 @@ class VisualAcuityDemoPage extends HookWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(35)),
+                    topLeft: Radius.circular(35),
+                    topRight: Radius.circular(35),
+                  ),
                   child: Stack(
                     fit: StackFit.expand,
                     clipBehavior: Clip.none,
