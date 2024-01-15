@@ -20,7 +20,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../app_environment.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
-  return await FlutterJailbreakDetection.jailbroken;
+  return false;
+  // return await FlutterJailbreakDetection.jailbroken;
 });
 
 class MyApp extends ConsumerWidget {

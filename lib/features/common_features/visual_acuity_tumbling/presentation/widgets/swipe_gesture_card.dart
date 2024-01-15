@@ -25,16 +25,6 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
-    var isDemo = useState<bool>(true);
-    var swipeText = useState<String>("Swipe Up");
-    var currentDemoImage = useState<SvgPicture>(
-        SvgPicture.asset("assets/images/swipe_gesture_up.svg"));
-    Map<QuestionDirection, dynamic> demoData = {
-      QuestionDirection.down: SvgPicture.asset("assets/images/swipe_down.svg"),
-      QuestionDirection.left: SvgPicture.asset("assets/images/swipe_left.svg"),
-      QuestionDirection.right:
-          SvgPicture.asset("assets/images/swipe_right.svg"),
-    };
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -96,30 +86,16 @@ class SwipeGestureCard extends HookConsumerWidget {
           );
           return;
         }
-        if (isDemo.value == false) {
-          model.handUserResponse(
-            UserResponse(
-              levelNumber: model.currentLevel!,
-              swipeDirection: dragDirection.value,
-              mode: model.gameMode!,
-              questionIndex: model.currentIndex!,
-              isUserResponseCorrect: false,
-            ),
-          );
-        } else {
-          if (dragDirection.value == QuestionDirection.up) {
-            currentDemoImage.value = demoData[QuestionDirection.down];
-            swipeText.value = "Swipe Down";
-          } else if (dragDirection.value == QuestionDirection.down) {
-            currentDemoImage.value = demoData[QuestionDirection.left];
-            swipeText.value = "Swipe Left";
-          } else if (dragDirection.value == QuestionDirection.left) {
-            currentDemoImage.value = demoData[QuestionDirection.right];
-            swipeText.value = "Swipe Right";
-          } else if (dragDirection.value == QuestionDirection.right) {
-            isDemo.value = false;
-          }
-        }
+
+        model.handUserResponse(
+          UserResponse(
+            levelNumber: model.currentLevel!,
+            swipeDirection: dragDirection.value,
+            mode: model.gameMode!,
+            questionIndex: model.currentIndex!,
+            isUserResponseCorrect: false,
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -155,53 +131,18 @@ class SwipeGestureCard extends HookConsumerWidget {
                 "assets/images/app_bg.svg",
                 fit: BoxFit.fill,
               ),
-              isDemo.value == true
-                  ? Positioned(
-                      top: 60,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        children: [
-                          Text("Instructions",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.grey,
-                              )),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            swipeText.value,
-                            style: applyFiraSansFont(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          SizedBox(
-                            height: AppSize.height(context) * 0.1,
-                          ),
-                          Pulsar(
-                              animationCurve: Curves.easeInOutSine,
-                              lowOpacity: 0.5,
-                              highOpacity: 1,
-                              pulsePeriod: const Duration(milliseconds: 900),
-                              child: currentDemoImage.value),
-                        ],
-                      ),
-                    )
-                  : Center(
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(top: AppSize.height(context) * 0.3),
-                        child: Text(
-                          loc.swipeGestureCardText,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                      ),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: AppSize.height(context) * 0.3),
+                  child: Text(
+                    loc.swipeGestureCardText,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.grey,
                     ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
