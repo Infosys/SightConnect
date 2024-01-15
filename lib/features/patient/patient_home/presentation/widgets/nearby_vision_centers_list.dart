@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var nearByVisionCenterProvider = FutureProvider(
+var simpleNearByVisionCenterProvider = FutureProvider(
   (ref) {
     final location = ref.watch(patientHomeProvider).data;
     return ref.watch(visionCenterRepositoryProvider).getVisionCenters(
