@@ -18,9 +18,9 @@ class TextScalePopupMenu extends HookConsumerWidget {
       },
     ).then((value) async {
       if (value == null) {
-        ref.watch(globalTextScaleFactorProvider).rollback();
+        ref.read(globalTextScaleFactorProvider).rollback();
       } else {
-        ref.watch(globalTextScaleFactorProvider).persistChanges();
+        ref.read(globalTextScaleFactorProvider).persistChanges();
       }
     });
   }
