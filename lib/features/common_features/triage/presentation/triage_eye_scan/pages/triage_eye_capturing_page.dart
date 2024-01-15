@@ -515,7 +515,7 @@ class _PatientTriageEyeCapturingPageState
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                loc.eyeCaptureTriageSavedLocally,
+                "Server Error",
                 style: applyRobotoFont(
                   color: AppColor.black,
                   fontSize: 16,
@@ -524,7 +524,7 @@ class _PatientTriageEyeCapturingPageState
               ),
               const SizedBox(height: 16),
               Text(
-                failure.errorMessage,
+                "Your result has been saved locally. Please try again later.",
                 style: applyRobotoFont(
                   color: AppColor.black,
                   fontSize: 14,
