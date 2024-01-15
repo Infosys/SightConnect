@@ -1,6 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/assessment_result_cards.dart';
@@ -69,60 +72,71 @@ class TriageResultPage extends ConsumerWidget {
                   triageResult: model.getCompleteTriageResultList(),
                 ),
                 const SizedBox(height: AppSize.kmheight),
-                InkWell(
-                  onTap: () {
-                    ref.read(accessibilityProvider).resetBrightness();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AssessmentsAndTestsPage(),
+                PersistentAuthStateService.authState.activeRole ==
+                        "ROLE_VISION_GUARDIAN"
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              ref.read(accessibilityProvider).resetBrightness();
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AssessmentsAndTestsPage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(AppSize.kspadding),
+                              decoration: BoxDecoration(
+                                color: AppColor.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: const Offset(
+                                      2,
+                                      10,
+                                    ),
+                                    color: AppColor.primary.withOpacity(0.1),
+                                    blurRadius: 20,
+                                    spreadRadius: 5,
+                                  ),
+                                ],
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.ksradius),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor:
+                                        AppColor.primary.withOpacity(0.1),
+                                    child: SvgPicture.asset(
+                                      AppIcon.report,
+                                      height: 16,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: AppSize.width(context) * 0.05,
+                                  ),
+                                  Text(
+                                    loc.assessmentReportButton,
+                                    style: applyRobotoFont(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  const Icon(Icons.chevron_right_sharp),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.klheight),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(
-                            2,
-                            10,
-                          ),
-                          color: AppColor.primary.withOpacity(0.1),
-                          blurRadius: 20,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(AppSize.ksradius),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: AppColor.primary.withOpacity(0.1),
-                          child: SvgPicture.asset(
-                            AppIcon.report,
-                            height: 16,
-                          ),
-                        ),
-                        SizedBox(
-                          width: AppSize.width(context) * 0.05,
-                        ),
-                        Text(
-                          loc.assessmentReportButton,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.chevron_right_sharp),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: AppSize.klheight),
                 Text(
                   loc.assessmentResultPageMoreDetailsText,
                   textAlign: TextAlign.left,
