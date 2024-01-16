@@ -27,7 +27,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         title: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(AppSize.kspadding / 2),
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColor.white,
@@ -63,8 +63,8 @@ class VisionGuardianHomePage extends ConsumerWidget {
               decoration: const BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(AppSize.kmradius),
+                  bottomRight: Radius.circular(AppSize.kmradius),
                 ),
               ),
               child: Stack(
@@ -128,7 +128,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     ),
                   ),
                   const VisionGuardianServicesCardList(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSize.kmheight),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

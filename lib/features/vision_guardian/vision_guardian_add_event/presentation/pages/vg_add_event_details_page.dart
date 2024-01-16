@@ -22,8 +22,14 @@ class VGAddEventDetailsPage extends ConsumerWidget {
     var formKey = data.formKey;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: const CustomAppbar(
-        title: Text("Add Event"),
+      appBar: CustomAppbar(
+        leadingIcon: IconButton(
+            onPressed: () {
+              ref.watch(addEventDetailsProvider).resetFields();
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
+        title: const Text("Add Event"),
         centerTitle: false,
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),

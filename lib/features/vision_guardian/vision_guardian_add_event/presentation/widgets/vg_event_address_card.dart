@@ -40,13 +40,6 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           customTextFieldIcon(
             data.venueName,
             "Venue Name",
-            validationFunction: (value) {
-              if (!RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                  .hasMatch(value!)) {
-                return "Please add a valid Venue Name";
-              }
-              return null;
-            },
             const Icon(CupertinoIcons.search),
           ),
           const SizedBox(height: AppSize.kmheight),
@@ -65,13 +58,6 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           customTextFieldIcon(
             data.city,
             "City/Town/Village",
-            validationFunction: (value) {
-              if (!RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                  .hasMatch(value!)) {
-                return "Please add valid City/Town/Village name";
-              }
-              return null;
-            },
             const Icon(CupertinoIcons.search),
           ),
           const SizedBox(height: AppSize.kmheight),
