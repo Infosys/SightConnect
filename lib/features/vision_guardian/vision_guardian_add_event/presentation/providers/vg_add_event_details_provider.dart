@@ -120,6 +120,16 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setStartDate(String date) {
+    _startDate.text = date;
+    notifyListeners();
+  }
+
+  void setEndDate(String date) {
+    _endDate.text = date;
+    notifyListeners();
+  }
+
   Future<int> deleteEventDetails({required String eventId}) async {
     isLoading = true;
     notifyListeners();

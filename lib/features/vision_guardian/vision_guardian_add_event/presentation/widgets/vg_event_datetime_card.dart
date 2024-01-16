@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class VisionGuardianEventDateTimeCard extends ConsumerWidget {
   const VisionGuardianEventDateTimeCard({super.key});
@@ -39,15 +40,20 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
           Row(
             children: [
               customTextFieldDatePicker(
-                data.startDate,
-                "Start Date",
-                context,
+                context: context,
+                dateController: data.startDate,
+                label: "Start Date",
+                startDate: DateTime.now(),
+                onDateChanged: (value) {
+                  data.setStartDate(value);
+                },
               ),
               const SizedBox(width: AppSize.kswidth),
               customTextFieldTimePicker(
                 data.startTime,
                 "Start Time",
                 context,
+                null,
               ),
             ],
           ),
@@ -55,16 +61,33 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
           Row(
             children: [
               customTextFieldDatePicker(
-                data.endDate,
-                "End Date",
-                context,
+                context: context,
+                dateController: data.endDate,
+                label: "Start Date",
+                startDate: data.startDate.text.isEmpty
+                    ? DateTime.now()
+                    : DateFormat('d MMM yyyy').parse(data.startDate.text),
+                onDateChanged: (value) {
+                  data.setEndDate(value);
+                },
               ),
               const SizedBox(width: AppSize.kswidth),
-              customTextFieldTimePicker(
-                data.endTime,
-                "End Time",
-                context,
-              ),
+              customTextFieldTimePicker(data.endTime, "End Time", context,
+                  (value) {
+                if (data.startDate.text.isNotEmpty &&
+                    data.startTime.text.isNotEmpty) {
+                  if (data.startDate.text == data.endDate.text) {
+                    if (DateFormat('hh:mm a')
+                        .parse(data.startTime.text)
+                        .isAfter(
+                            DateFormat('hh:mm a').parse(data.endTime.text))) {
+                      return "End time should be greater than start time";
+                    }
+                  }
+                }
+
+                return null;
+              }),
             ],
           ),
         ],

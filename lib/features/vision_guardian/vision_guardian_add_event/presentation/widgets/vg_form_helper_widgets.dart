@@ -8,7 +8,6 @@ Widget customTextField(TextEditingController controller, String label,
     onChanged: (value) {
       controller.text = value;
     },
-    onEditingComplete: () {},
     validator: validationFunction ??
         (value) {
           if (value == null || value.isEmpty) {
@@ -123,14 +122,17 @@ Widget customTextFieldRows(
   );
 }
 
-Widget customTextFieldDatePicker(
-    TextEditingController dateController, String label, BuildContext context) {
+Widget customTextFieldDatePicker({
+  required TextEditingController dateController,
+  required BuildContext context,
+  required String label,
+  required DateTime startDate,
+  required Null Function(dynamic value) onDateChanged,
+}) {
   return Expanded(
     child: TextFormField(
       controller: dateController,
-      onChanged: (value) {
-        dateController.text = value;
-      },
+      readOnly: true,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Please enter $label";
@@ -142,8 +144,11 @@ Widget customTextFieldDatePicker(
           padding: const EdgeInsets.only(left: 12.0),
           child: InkWell(
             onTap: () async {
-              var dateTime = await selectDate(context);
-              dateController.text = dateTime.toString();
+              var dateTime = await selectDate(
+                context,
+                startDate,
+              );
+              onDateChanged(dateTime);
             },
             child: const Icon(
               Icons.calendar_month_outlined,
@@ -167,19 +172,25 @@ Widget customTextFieldDatePicker(
 }
 
 Widget customTextFieldTimePicker(
-    TextEditingController timeController, String label, BuildContext context) {
+  TextEditingController timeController,
+  String label,
+  BuildContext context,
+  String? Function(String?)? customValidation,
+) {
   return Expanded(
     child: TextFormField(
+      readOnly: true,
       controller: timeController,
       onChanged: (value) {
         timeController.text = value;
       },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Please enter $label";
-        }
-        return null;
-      },
+      validator: customValidation ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter $label";
+            }
+            return null;
+          },
       decoration: InputDecoration(
         suffixIcon: Padding(
           padding: const EdgeInsets.only(left: 12.0),
@@ -251,7 +262,7 @@ Widget customTextFieldRowsAgeDob(
               padding: const EdgeInsets.only(left: 12.0),
               child: InkWell(
                 onTap: () async {
-                  var dateTime = await selectDate(context);
+                  var dateTime = await selectDate(context, DateTime(1900));
                   secondController.text = dateTime.toString();
                 },
                 child: const Icon(
@@ -278,11 +289,11 @@ Widget customTextFieldRowsAgeDob(
 }
 
 //date picker method that return date like 12 Nov 2021
-Future<String?> selectDate(BuildContext context) async {
+Future<String?> selectDate(BuildContext context, DateTime startDate) async {
   final DateTime? picked = await showDatePicker(
     context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(1900),
+    initialDate: startDate,
+    firstDate: startDate,
     lastDate: DateTime(2100),
   );
   if (picked != null) {
