@@ -266,7 +266,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {"name": patientQueryData},
+        queryParameters: {"queryText": patientQueryData},
       );
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
