@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import '../providers/machine_learning_camera_service.dart';
+import '../widgets/visual_acuity_face_distance_painter.dart';
 import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
@@ -23,7 +24,8 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
 class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  final bool enablePainterView = false;
+  CustomPaint? _customPaint;
+  final bool _enablePainterView = false;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
@@ -185,6 +187,23 @@ class _VisualAcuityFaceDistancePageViewState
       resetValues();
     }
 
+    // Calling the Distance Calculator Painter
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final painter = VisualAcuityFaceDistancePainter(
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _translatedEyeLandmarks,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
     if (mounted) {
       setState(() {});
     }
@@ -215,18 +234,18 @@ class _VisualAcuityFaceDistancePageViewState
         backgroundColor: AppColor.black,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
-
+            // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
             return Stack(
               children: [
                 Center(
-                  child: CameraPreview(_controller),
-                ),
-                Visibility(
-                  visible: enablePainterView,
-                  child: CustomPaint(
-                    painter: EyeBoxPainter(_translatedEyeLandmarks),
-                  ),
+                  child: _enablePainterView
+                      ? CameraPreview(
+                          _controller,
+                          child: _customPaint,
+                        )
+                      : CameraPreview(
+                          _controller,
+                        ),
                 ),
                 Positioned(
                   top: 140,
@@ -298,30 +317,4 @@ class _VisualAcuityFaceDistancePageViewState
     await _controller.stopImageStream();
     await _controller.dispose();
   }
-}
-
-class EyeBoxPainter extends CustomPainter {
-  final List<Point<double>> eyeLandmarks;
-
-  EyeBoxPainter(this.eyeLandmarks);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColor.primary
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
-
-    for (final landmark in eyeLandmarks) {
-      final rect = Rect.fromCenter(
-        center: Offset(landmark.x, landmark.y),
-        width: 50.0,
-        height: 30.0,
-      );
-      canvas.drawOval(rect, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

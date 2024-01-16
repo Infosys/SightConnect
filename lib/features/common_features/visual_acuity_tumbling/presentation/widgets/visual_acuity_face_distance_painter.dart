@@ -1,66 +1,58 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/app_color.dart';
+
 class VisualAcuityFaceDistancePainter extends CustomPainter {
   VisualAcuityFaceDistancePainter(
-    this.imageSize,
     this.boxCenter,
-    this.distanceToFace,
+    this.boxWidth,
+    this.boxHeight,
     this.eyeLandmarkPoints,
     this.getCanvasSize,
   );
 
-  final Size imageSize;
   final Point<double> boxCenter;
-  final int? distanceToFace;
+  final double boxWidth;
+  final double boxHeight;
   final List<Point<double>> eyeLandmarkPoints;
   final Function(Size)? getCanvasSize;
 
   @override
   void paint(Canvas canvas, Size size) {
     getCanvasSize?.call(size);
-    // Distance Painter
-    const textStyle = TextStyle(
-      color: Colors.black,
-      backgroundColor: Colors.white,
-      fontSize: 20,
+    final Paint boxPainter = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0
+      ..color = Colors.green;
+
+    final center = Offset(boxCenter.x, boxCenter.y);
+
+    canvas.drawRect(
+      Rect.fromCenter(
+        center: center,
+        width: boxWidth,
+        height: boxHeight,
+      ),
+      boxPainter,
     );
 
-    String text = "";
-    if (distanceToFace == null) {
-      text = 'Face not Found!';
-    } else if (distanceToFace != null) {
-      text = 'Distance: $distanceToFace cm';
+    //Eye Painter
+    final paint = Paint()
+      ..color = AppColor.primary
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    for (final landmark in eyeLandmarkPoints) {
+      final rect = Rect.fromCenter(
+        center: Offset(landmark.x, landmark.y),
+        width: 50.0,
+        height: 30.0,
+      );
+      canvas.drawOval(rect, paint);
     }
-
-    final textSpan = TextSpan(
-      text: text,
-      style: textStyle,
-    );
-
-    final distancePainter = TextPainter(
-      text: textSpan,
-      textDirection: TextDirection.ltr,
-    );
-
-    distancePainter.layout(
-      minWidth: 0,
-      maxWidth: size.width,
-    );
-
-    final xCenter = boxCenter.x;
-    const yCenter = 100.0;
-
-    final offset = Offset(xCenter, yCenter) -
-        Offset(distancePainter.width / 2, distancePainter.height / 2);
-
-    distancePainter.paint(canvas, offset);
   }
 
   @override
-  bool shouldRepaint(VisualAcuityFaceDistancePainter oldDelegate) {
-    return oldDelegate.imageSize != imageSize ||
-        oldDelegate.eyeLandmarkPoints != eyeLandmarkPoints ||
-        oldDelegate.distanceToFace != distanceToFace;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
