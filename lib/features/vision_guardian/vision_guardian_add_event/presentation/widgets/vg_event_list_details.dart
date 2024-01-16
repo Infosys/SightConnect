@@ -150,7 +150,9 @@ class VisionEventListDetails extends ConsumerWidget {
           width: Responsive.isMobile(context)
               ? AppSize.width(context) * 0.9
               : AppSize.width(context) * 0.5,
-          height: AppSize.height(context) / 7,
+          height: Responsive.isMobile(context)
+              ? AppSize.height(context) / 5.5
+              : AppSize.height(context) * 0.1,
           color: AppColor.white,
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -158,10 +160,10 @@ class VisionEventListDetails extends ConsumerWidget {
             children: [
               ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxWidth: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.2
-                        : AppSize.width(context) * 0.1,
-                  ),
+                      maxWidth: Responsive.isMobile(context)
+                          ? AppSize.width(context) * 0.2
+                          : AppSize.width(context) * 0.1,
+                      maxHeight: AppSize.klheight * 4.6),
                   child: data.images == null
                       ? AppNameAvatar(
                           name: data.title,
@@ -197,6 +199,8 @@ class VisionEventListDetails extends ConsumerWidget {
                             data.title!.capitalize() ?? "",
                             maxLines: 1,
                             softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                        
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -218,6 +222,8 @@ class VisionEventListDetails extends ConsumerWidget {
                             child: Text(
                               data.eventStatus ?? "",
                               softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: applyRobotoFont(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500,
@@ -232,6 +238,8 @@ class VisionEventListDetails extends ConsumerWidget {
                     Text(
                       data.id.toString(),
                       softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -258,6 +266,8 @@ class VisionEventListDetails extends ConsumerWidget {
                               Text(
                                 '$startDateString-$endDateString',
                                 softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -280,6 +290,8 @@ class VisionEventListDetails extends ConsumerWidget {
                               Text(
                                 '$startTimeString-$endTimeString',
                                 softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.grey,
@@ -308,7 +320,6 @@ class VisionEventListDetails extends ConsumerWidget {
                           child: Text(
                             "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",
                             softWrap: true,
-                            overflow: TextOverflow.ellipsis,
                             style: applyRobotoFont(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
