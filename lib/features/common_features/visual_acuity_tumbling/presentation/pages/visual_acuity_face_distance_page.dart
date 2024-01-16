@@ -23,56 +23,39 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
 
 class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
+  List<CameraDescription> _cameras = [];
+  late CameraController _controller;
+  final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
-  double _focalLength = 0.00001;
-  double _sensorY = 0.00001;
-  double _sensorX = 0.00001;
-  bool _canProcess = true;
+  bool _canProcess = false;
   bool _isBusy = false;
-  CustomPaint? _customPaint;
-
+  double _focalLength = 0.001;
+  double _sensorX = 0.001;
+  double _sensorY = 0.001;
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
-  Size _canvasSize = const Size(0, 0);
-  static List<CameraDescription> _cameras = [];
-  late CameraController _controller;
-  final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  Size _canvasSize = Size.zero;
+  CustomPaint? _customPaint = const CustomPaint();
 
-//This method is called once when the State object is created. It initializes the camera and fetches the camera info.
   @override
   void initState() {
     super.initState();
-    _initialize();
-    MachineLearningCameraService.getCameraInfo().then(
-      (cameraInfo) {
-        _focalLength = cameraInfo?['focalLength'] ?? 0.001;
-        _sensorX = cameraInfo?['sensorX'] ?? 0.001;
-        _sensorY = cameraInfo?['sensorY'] ?? 0.001;
-      },
-    ).catchError(
-      (error) {
-        logger.e('Error getting camera info: $error');
-      },
-    );
+    _initializeCamera();
   }
 
-//This method initializes the camera by getting the available cameras and starting the live feed.
-  Future<void> _initialize() async {
-    if (_cameras.isEmpty) {
-      _cameras = await availableCameras();
-    }
+  Future<void> _initializeCamera() async {
+    _cameras = await availableCameras();
     _canProcess = true;
-    _startLiveFeed();
+    await _startLiveFeed();
+    await _getCameraInfo();
   }
 
-  //This method starts the live feed from the camera. It initializes the CameraController and starts the image stream.
-  Future _startLiveFeed() async {
+  Future<void> _startLiveFeed() async {
     _controller = CameraController(
       _cameras.firstWhere(
-        (element) => element.lensDirection == _cameraLensDirection,
-      ),
+          (element) => element.lensDirection == _cameraLensDirection),
       // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
       ResolutionPreset.high,
       enableAudio: false,
@@ -80,28 +63,28 @@ class _VisualAcuityFaceDistancePageViewState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-    await _controller.initialize().then(
-      (value) {
-        if (!mounted) {
-          return;
-        }
-        _controller.startImageStream(_processCameraImage).then(
-          (value) {
-            if (widget.onCameraFeedReady != null) {
-              widget.onCameraFeedReady!();
-            }
-          },
-        );
-        setState(() {});
-      },
-    );
+    await _controller.initialize();
+    if (!mounted) return;
+    _controller
+        .startImageStream(_processCameraImage)
+        .then((value) => widget.onCameraFeedReady?.call());
+    setState(() {});
   }
 
-//This method processes each frame from the camera feed. It converts the CameraImage to an InputImage and then processes the InputImage.
+  Future<void> _getCameraInfo() async {
+    try {
+      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
+      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
+      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
+      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
+    } catch (error) {
+      logger.e('Error getting camera info: $error');
+    }
+  }
+
   void _processCameraImage(CameraImage image) {
-    final camera = _cameras.firstWhere(
-      (element) => element.lensDirection == _cameraLensDirection,
-    );
+    final camera = _cameras
+        .firstWhere((element) => element.lensDirection == _cameraLensDirection);
     final orientation = _controller.value.deviceOrientation;
     final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
         image, camera, orientation);
@@ -110,72 +93,72 @@ class _VisualAcuityFaceDistancePageViewState
     _processImage(inputImage, screenSize);
   }
 
-  //This method processes the InputImage. It detects faces in the image, translates the eye landmarks, checks if the eyes are inside the box, and calculates the distance to the face.
   Future<void> _processImage(InputImage inputImage, Size screenSize) async {
-    if (!_canProcess) return;
-    if (_isBusy) return;
+    if (!_canProcess || _isBusy) return;
     _isBusy = true;
-    setState(() {});
-    final meshes = await _meshDetector.processImage(inputImage);
 
-    final boxWidth = _canvasSize.width * (7 / 10);
-    final boxHeight = screenSize.height * (7 / 10);
+    final meshes = await _meshDetector.processImage(inputImage);
+    if (meshes.isEmpty) {
+      _isBusy = false;
+      _translatedEyeLandmarks = [];
+      _distanceToFace = null;
+      return;
+    }
+
+    const boxSizeRatio = 0.7;
+    final boxWidth = _canvasSize.width * boxSizeRatio;
+    final boxHeight = screenSize.height * boxSizeRatio;
     final boxCenter = Point(
-      _canvasSize.width * (1 / 2),
-      _canvasSize.height * (1 / 2),
+      _canvasSize.width * 0.5,
+      _canvasSize.height * 0.5,
     );
 
-    if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+    final mesh = meshes[0];
+    final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+    final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final leftEyeLandmark =
-            MachineLearningCameraService.getEyeLandmark(leftEyeContour);
-        final rightEyeLandmark =
-            MachineLearningCameraService.getEyeLandmark(rightEyeContour);
-        List<Point<double>> eyeLandmarks = [];
-        eyeLandmarks.add(leftEyeLandmark);
-        eyeLandmarks.add(rightEyeLandmark);
-        // Translate Eye Points
-        // List<Point<double>> translatedEyeLandmarks = [];
-        _translatedEyeLandmarks = [];
-        for (final landmark in eyeLandmarks) {
-          _translatedEyeLandmarks.add(
-            MachineLearningCameraService.translator(
-              landmark,
-              inputImage,
-              _canvasSize,
-              _cameraLensDirection,
-            ),
-          );
-        }
-        debugPrint("Translated Eye Landmarks: $_translatedEyeLandmarks");
-        // Check if Eyes are inside the box
-        final eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
+    if (leftEyeContour != null && rightEyeContour != null) {
+      final leftEyeLandmark =
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour);
+      final rightEyeLandmark =
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour);
+      List<Point<double>> eyeLandmarks = [];
+      eyeLandmarks.add(leftEyeLandmark);
+      eyeLandmarks.add(rightEyeLandmark);
+      // Translate Eye Points
+      // List<Point<double>> translatedEyeLandmarks = [];
+      _translatedEyeLandmarks = [];
+      for (final landmark in eyeLandmarks) {
+        _translatedEyeLandmarks.add(
+          MachineLearningCameraService.translator(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
+          ),
         );
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark,
-            rightEyeLandmark,
-            _focalLength,
-            _sensorX,
-            _sensorY,
-            inputImage.metadata!.size.width.toInt(),
-            inputImage.metadata!.size.height.toInt(),
-          );
-        } else {
-          _distanceToFace = null;
-        }
+      }
+      debugPrint("Translated Eye Landmarks: $_translatedEyeLandmarks");
+      // Check if Eyes are inside the box
+      final eyeLandmarksInsideTheBox =
+          MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+        _translatedEyeLandmarks,
+        boxCenter,
+        boxWidth,
+        boxHeight,
+      );
+      if (eyeLandmarksInsideTheBox) {
+        _distanceToFace =
+            MachineLearningCameraService.calculateDistanceToScreen(
+          leftEyeLandmark,
+          rightEyeLandmark,
+          _focalLength,
+          _sensorX,
+          _sensorY,
+          inputImage.metadata!.size.width.toInt(),
+          inputImage.metadata!.size.height.toInt(),
+        );
       } else {
-        _translatedEyeLandmarks = [];
         _distanceToFace = null;
       }
     } else {
@@ -206,36 +189,27 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-//This method is called when the app lifecycle state changes. It stops the live feed and closes the face mesh detector when the app is inactive, and reinitializes the camera when the app is resumed.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController cameraController = _controller;
-    if (!cameraController.value.isInitialized) {
-      return;
-    }
+    if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
-      debugPrint("AppLifecycleState.inactive Called");
-      cameraController.dispose();
-      cameraController.stopImageStream();
-      _canProcess = false;
+      _stopLiveFeed();
       _meshDetector.close();
+      _canProcess = false;
     } else if (state == AppLifecycleState.resumed) {
-      debugPrint("AppLifecycleState.resumed Called");
-      _initialize();
+      _initializeCamera();
     }
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
     _canProcess = false;
     _meshDetector.close();
     _stopLiveFeed();
-    _controller.dispose();
     super.dispose();
   }
 
-  Future _stopLiveFeed() async {
+  Future<void> _stopLiveFeed() async {
     await _controller.stopImageStream();
     await _controller.dispose();
   }
@@ -244,47 +218,34 @@ class _VisualAcuityFaceDistancePageViewState
   Widget build(BuildContext context) {
     return Scaffold(
       body: _liveFeedBody(),
+      floatingActionButton: _nextButton(),
     );
   }
 
-//This method builds the body of the page. It returns a Container containing the camera preview and the next button.
   Widget _liveFeedBody() {
-    if (_cameras.isEmpty) return Container();
-    if (_controller.value.isInitialized == false) return Container();
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Center(
-            child: CameraPreview(
-              _controller,
-              child: _customPaint,
-            ),
-          ),
-          _nextButton(),
-        ],
-      ),
+    if (!_controller.value.isInitialized) {
+      return Container();
+    }
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        CameraPreview(_controller),
+        // Your existing widgets for displaying the face mesh and other UI elements go here
+      ],
     );
   }
 
-  Widget _nextButton() => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const VisualAcuityInitiatePage(),
-                  ),
-                );
-                _stopLiveFeed();
-              },
-              child: const Text('Next'),
-            ),
-          ),
-        ),
-      );
+  Widget _nextButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const VisualAcuityInitiatePage()),
+        );
+        _stopLiveFeed();
+      },
+      child: const Icon(Icons.navigate_next),
+    );
+  }
 }
