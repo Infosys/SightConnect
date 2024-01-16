@@ -12,7 +12,7 @@ import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_toast.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
-import 'visual_acuity_face_distance_page.dart';
+import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityDemoPage extends HookWidget {
   const VisualAcuityDemoPage({super.key});
