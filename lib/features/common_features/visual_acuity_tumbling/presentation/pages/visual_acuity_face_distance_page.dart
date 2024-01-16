@@ -98,12 +98,6 @@ class _VisualAcuityFaceDistancePageViewState
     _isBusy = true;
 
     final meshes = await _meshDetector.processImage(inputImage);
-    if (meshes.isEmpty) {
-      _isBusy = false;
-      _translatedEyeLandmarks = [];
-      _distanceToFace = null;
-      return;
-    }
 
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -113,52 +107,56 @@ class _VisualAcuityFaceDistancePageViewState
       _canvasSize.height * 0.5,
     );
 
-    final mesh = meshes[0];
-    final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-    final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+    if (meshes.isNotEmpty) {
+      final mesh = meshes[0];
+      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
-    if (leftEyeContour != null && rightEyeContour != null) {
-      final leftEyeLandmark =
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour);
-      final rightEyeLandmark =
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour);
-      List<Point<double>> eyeLandmarks = [];
-      eyeLandmarks.add(leftEyeLandmark);
-      eyeLandmarks.add(rightEyeLandmark);
-      // Translate Eye Points
-      // List<Point<double>> translatedEyeLandmarks = [];
-      _translatedEyeLandmarks = [];
-      for (final landmark in eyeLandmarks) {
-        _translatedEyeLandmarks.add(
-          MachineLearningCameraService.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
-          ),
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final leftEyeLandmark =
+            MachineLearningCameraService.getEyeLandmark(leftEyeContour);
+        final rightEyeLandmark =
+            MachineLearningCameraService.getEyeLandmark(rightEyeContour);
+        List<Point<double>> eyeLandmarks = [];
+        eyeLandmarks.add(leftEyeLandmark);
+        eyeLandmarks.add(rightEyeLandmark);
+        // Translate Eye Points
+        _translatedEyeLandmarks = [];
+        for (final landmark in eyeLandmarks) {
+          _translatedEyeLandmarks.add(
+            MachineLearningCameraService.translator(
+              landmark,
+              inputImage,
+              _canvasSize,
+              _cameraLensDirection,
+            ),
+          );
+        }
+        debugPrint("Translated Eye Landmarks: $_translatedEyeLandmarks");
+        // Check if Eyes are inside the box
+        final eyeLandmarksInsideTheBox =
+            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+          _translatedEyeLandmarks,
+          boxCenter,
+          boxWidth,
+          boxHeight,
         );
-      }
-      debugPrint("Translated Eye Landmarks: $_translatedEyeLandmarks");
-      // Check if Eyes are inside the box
-      final eyeLandmarksInsideTheBox =
-          MachineLearningCameraService.areEyeLandmarksInsideTheBox(
-        _translatedEyeLandmarks,
-        boxCenter,
-        boxWidth,
-        boxHeight,
-      );
-      if (eyeLandmarksInsideTheBox) {
-        _distanceToFace =
-            MachineLearningCameraService.calculateDistanceToScreen(
-          leftEyeLandmark,
-          rightEyeLandmark,
-          _focalLength,
-          _sensorX,
-          _sensorY,
-          inputImage.metadata!.size.width.toInt(),
-          inputImage.metadata!.size.height.toInt(),
-        );
+        if (eyeLandmarksInsideTheBox) {
+          _distanceToFace =
+              MachineLearningCameraService.calculateDistanceToScreen(
+            leftEyeLandmark,
+            rightEyeLandmark,
+            _focalLength,
+            _sensorX,
+            _sensorY,
+            inputImage.metadata!.size.width.toInt(),
+            inputImage.metadata!.size.height.toInt(),
+          );
+        } else {
+          _distanceToFace = null;
+        }
       } else {
+        _translatedEyeLandmarks = [];
         _distanceToFace = null;
       }
     } else {
@@ -226,12 +224,20 @@ class _VisualAcuityFaceDistancePageViewState
     if (!_controller.value.isInitialized) {
       return Container();
     }
-    return Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        CameraPreview(_controller),
-        // Your existing widgets for displaying the face mesh and other UI elements go here
-      ],
+    return Container(
+      color: Colors.black,
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Center(
+            child: CameraPreview(
+              _controller,
+              child: _customPaint,
+            ),
+          ),
+          // Your existing widgets for displaying the face mesh and other UI elements go here
+        ],
+      ),
     );
   }
 
