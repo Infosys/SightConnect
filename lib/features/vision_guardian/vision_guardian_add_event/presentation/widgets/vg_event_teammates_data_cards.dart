@@ -89,32 +89,37 @@ class TeammatesDataCards extends HookConsumerWidget {
                             Transform.translate(
                               offset: const Offset(0, 10),
                               child: InkWell(
-                                onTap: () {
-                                  ref
+                                onTap: () async {
+                                  await ref
                                       .read(visionGuadianAddMemberProvider)
-                                      .deleteMember(data["id"].toString());
-
-                                  if (data["id"] ==
-                                      ref.read(globalVGProvider).userId) {
-                                    ref
-                                        .read(addEventDetailsProvider)
-                                        .filterListEvents(-1, "ALL");
-                                    if (type == "Search") {
-                                      Navigator.pop(context);
-                                    }
-                                    Navigator.pop(context);
-                                  } else {
-                                    if (type == "Search") {
+                                      .deleteMember(data["id"].toString())
+                                      .then((value) {
+                                    if (data["id"] ==
+                                        ref.read(globalVGProvider).userId) {
                                       ref
-                                          .read(visionGuadianAddMemberProvider)
-                                          .setAdd();
+                                          .read(addEventDetailsProvider)
+                                          .filterListEvents(-1, "ALL");
+                                      if (type == "Search") {
+                                        Navigator.pop(context);
+                                      }
                                       Navigator.pop(context);
+                                    } else {
+                                      if (type == "Search") {
+                                        ref
+                                            .read(
+                                                visionGuadianAddMemberProvider)
+                                            .setAdd();
+                                        Navigator.pop(context);
+                                      }
                                     }
-                                  }
-                                  showToastMessage(
-                                      "TeamMate Deleted Succesfully",
-                                      context,
-                                      0);
+                                    showToastMessage(
+                                        "TeamMate Deleted Succesfully",
+                                        context,
+                                        0);
+                                  }).catchError((error) {
+                                    showToastMessage(
+                                        "Something went wrong", context, 0);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.delete_outline,
