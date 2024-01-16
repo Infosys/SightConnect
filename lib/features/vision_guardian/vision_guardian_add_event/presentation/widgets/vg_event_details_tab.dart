@@ -186,7 +186,11 @@ class EventDetailsTab extends ConsumerWidget {
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
                           Navigator.pop(context);
+                        } else {
+                          showToastMessage("Event Deletion Failed", context, 0);
                         }
+                      }).catchError((error) {
+                        showToastMessage("Event Deletion Failed", context, 0);
                       });
                     },
                     style: ElevatedButton.styleFrom(
