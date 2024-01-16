@@ -48,6 +48,24 @@ class _VisualAcuityFaceDistancePageViewState
   };
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController cameraController = _controller;
+    if (!cameraController.value.isInitialized) {
+      return;
+    }
+    if (state == AppLifecycleState.inactive) {
+      debugPrint("AppLifecycleState.inactive Called");
+      cameraController.dispose();
+      cameraController.stopImageStream();
+      _canProcess = false;
+    _meshDetector.close();
+    } else if (state == AppLifecycleState.resumed) {
+      debugPrint("AppLifecycleState.resumed Called");
+      _initialize();
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _initialize();
