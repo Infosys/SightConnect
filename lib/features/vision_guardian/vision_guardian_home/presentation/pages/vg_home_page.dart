@@ -55,7 +55,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: AppSize.height(context) / 4,
+              height: AppSize.klheight * 7.5,
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSize.kmpadding,
                 vertical: AppSize.kmpadding,
