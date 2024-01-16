@@ -28,11 +28,11 @@ class MachineLearningCameraService {
     }
   }
 
-  static InputImage? inputImageFromCameraImage(
-    CameraImage image,
-    CameraDescription camera,
-    DeviceOrientation deviceOrientation,
-  ) {
+  static InputImage? inputImageFromCameraImage({
+    required CameraImage image,
+    required CameraDescription camera,
+    required DeviceOrientation deviceOrientation,
+  }) {
     // get image rotation
     // it is used in android to convert the InputImage from Dart to Java: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/android/src/main/java/com/google_mlkit_commons/InputImageConverter.java
     // `rotation` is not used in iOS to convert the InputImage from Dart to Obj-C: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/ios/Classes/MLKVisionImage%2BFlutterPlugin.m
@@ -114,15 +114,16 @@ class MachineLearningCameraService {
     return eyeLandmark;
   }
 
-  static int calculateDistanceToScreen(
-      Point<double> leftEyeLandmark,
-      Point<double> rightEyeLandmark,
-      double focalLength,
-      double sensorX,
-      double sensorY,
-      int imageWidth,
-      int imageHeight,
-      {double averageEyeDistance = 63.0}) {
+  static int calculateDistanceToScreen({
+    required Point<double> leftEyeLandmark,
+    required Point<double> rightEyeLandmark,
+    required double focalLength,
+    required double sensorX,
+    required double sensorY,
+    required int imageWidth,
+    required int imageHeight,
+    double averageEyeDistance = 63.0,
+  }) {
     double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
     double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
     double distance;

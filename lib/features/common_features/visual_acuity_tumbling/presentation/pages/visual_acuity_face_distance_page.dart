@@ -100,9 +100,9 @@ class _VisualAcuityFaceDistancePageViewState
     );
     final orientation = _controller.value.deviceOrientation;
     final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
-      image,
-      camera,
-      orientation,
+      image: image,
+      camera: camera,
+      deviceOrientation: orientation,
     );
     if (inputImage == null) return;
     final screenSize = MediaQuery.of(context).size;
@@ -156,13 +156,13 @@ class _VisualAcuityFaceDistancePageViewState
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
               MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark,
-            rightEyeLandmark,
-            _focalLength,
-            _sensorX,
-            _sensorY,
-            inputImage.metadata!.size.width.toInt(),
-            inputImage.metadata!.size.height.toInt(),
+            leftEyeLandmark: leftEyeLandmark,
+            rightEyeLandmark: rightEyeLandmark,
+            focalLength: _focalLength,
+            sensorX: _sensorX,
+            sensorY: _sensorY,
+            imageWidth: inputImage.metadata!.size.width.toInt(),
+            imageHeight: inputImage.metadata!.size.height.toInt(),
           );
         } else {
           _distanceToFace = null;
