@@ -18,6 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
@@ -227,7 +228,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    patient?.name ?? "",
+                    patient?.name?.capitalizeFirstOfEach() ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),

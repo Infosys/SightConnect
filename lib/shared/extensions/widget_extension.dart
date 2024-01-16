@@ -40,4 +40,8 @@ extension StringExtension on String? {
       return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
     }
   }
+  
+  String capitalizeFirstOfEach(){
+    return this.split(" ").map((str) => str.sentenceCase()).join(" ");
+  }
 }
