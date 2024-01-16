@@ -182,48 +182,41 @@ class VisionGuardianPatientList extends ConsumerWidget {
                                           padding: const EdgeInsets.only(
                                               left: AppSize.klpadding * 3),
                                           child: RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                                text: "Select",
-                                                recognizer:
-                                                    TapGestureRecognizer()
-                                                      ..onTap = () {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                VisionGuardianEyeAssessment(
-                                                              patientName: data[
-                                                                          index]
-                                                                      .name ??
-                                                                  "",
-                                                              patientId: data[
-                                                                      index]
-                                                                  .patientId
-                                                                  .toString(),
-                                                              triageMode:
-                                                                  triageMode,
+                                            text: TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: "Start Assessment",
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  VisionGuardianEyeAssessment(
+                                                                patientName:
+                                                                    data[index]
+                                                                            .name ??
+                                                                        "",
+                                                                patientId: data[
+                                                                        index]
+                                                                    .patientId
+                                                                    .toString(),
+                                                                triageMode:
+                                                                    triageMode,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        );
-                                                      },
-                                                style: applyRobotoFont(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColor.blue,
-                                                )),
-                                            const WidgetSpan(
-                                              child: SizedBox(
-                                                  width: AppSize.klwidth),
+                                                          );
+                                                        },
+                                                  style: applyRobotoFont(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColor.blue,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            TextSpan(
-                                                text: "View Profile",
-                                                style: applyRobotoFont(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColor.blue,
-                                                )),
-                                          ])),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(

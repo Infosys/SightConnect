@@ -150,9 +150,6 @@ class VisionEventListDetails extends ConsumerWidget {
           width: Responsive.isMobile(context)
               ? AppSize.width(context) * 0.9
               : AppSize.width(context) * 0.5,
-          height: Responsive.isMobile(context)
-              ? AppSize.height(context) / 5.5
-              : AppSize.height(context) * 0.1,
           color: AppColor.white,
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -200,7 +197,6 @@ class VisionEventListDetails extends ConsumerWidget {
                             maxLines: 1,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                        
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -320,6 +316,7 @@ class VisionEventListDetails extends ConsumerWidget {
                           child: Text(
                             "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",
                             softWrap: true,
+                            overflow: TextOverflow.ellipsis,
                             style: applyRobotoFont(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

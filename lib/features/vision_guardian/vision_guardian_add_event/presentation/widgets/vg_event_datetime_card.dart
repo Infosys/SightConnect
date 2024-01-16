@@ -63,7 +63,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
               customTextFieldDatePicker(
                 context: context,
                 dateController: data.endDate,
-                label: "Start Date",
+                label: "End Date",
                 startDate: data.startDate.text.isEmpty
                     ? DateTime.now()
                     : DateFormat('d MMM yyyy').parse(data.startDate.text),
