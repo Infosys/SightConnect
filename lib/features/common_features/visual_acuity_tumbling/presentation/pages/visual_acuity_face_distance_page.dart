@@ -2,20 +2,18 @@ import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import '../providers/machine_learning_camera_service.dart';
-// import '../widgets/visual_acuity_face_distance_painter.dart';
 import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
   const VisualAcuityFaceDistancePage({
     Key? key,
-    this.onCameraFeedReady,
   }) : super(key: key);
-
-  final VoidCallback? onCameraFeedReady;
 
   @override
   State<VisualAcuityFaceDistancePage> createState() =>
@@ -30,15 +28,15 @@ class _VisualAcuityFaceDistancePageViewState
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
+  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
+  final ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
-  bool _isBusy = false;
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  // CustomPaint? _customPaint = const CustomPaint();
 
   @override
   void initState() {
@@ -48,10 +46,18 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _initializeCamera() async {
-    _cameras = await availableCameras();
-    _canProcess = true;
-    await _startLiveFeed();
-    await _getCameraInfo();
+    final navigator = Navigator.of(context);
+    try {
+      if (_cameras.isEmpty) {
+        _cameras = await availableCameras();
+      }
+      _canProcess = true;
+      await _startLiveFeed();
+      await _getCameraInfo();
+    } catch (e) {
+      navigator.pop();
+      Fluttertoast.showToast(msg: "Service not available");
+    }
   }
 
   Future<void> _startLiveFeed() async {
@@ -59,8 +65,7 @@ class _VisualAcuityFaceDistancePageViewState
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-      ResolutionPreset.high,
+      defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
@@ -71,16 +76,10 @@ class _VisualAcuityFaceDistancePageViewState
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage).then(
-          (value) {
-            if (widget.onCameraFeedReady != null) {
-              widget.onCameraFeedReady!();
-            }
-          },
-        );
-        setState(() {});
+        _controller.startImageStream(_processCameraImage);
       },
     );
+    setState(() {});
   }
 
   Future<void> _getCameraInfo() async {
@@ -91,6 +90,7 @@ class _VisualAcuityFaceDistancePageViewState
       _sensorY = cameraInfo?['sensorY'] ?? 0.001;
     } catch (error) {
       logger.e('Error getting camera info: $error');
+      rethrow;
     }
   }
 
@@ -110,12 +110,8 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _processImage(InputImage inputImage, Size screenSize) async {
-    if (!_canProcess || _isBusy) return;
-    _isBusy = true;
-    // logger.f("Inside Process Image Function");
-
+    if (!_canProcess) return;
     final meshes = await _meshDetector.processImage(inputImage);
-
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
     final boxHeight = screenSize.height * boxSizeRatio;
@@ -179,64 +175,20 @@ class _VisualAcuityFaceDistancePageViewState
       _translatedEyeLandmarks = [];
       _distanceToFace = null;
     }
-
-    // // Calling the Distance Calculator Painter
-    // if (inputImage.metadata?.size != null &&
-    //     inputImage.metadata?.rotation != null) {
-    //   final painter = VisualAcuityFaceDistancePainter(
-    //     inputImage.metadata!.size,
-    //     boxCenter,
-    //     _distanceToFace,
-    //     _translatedEyeLandmarks,
-    //     (size) {
-    //       _canvasSize = size;
-    //       // logger.f("Canvas Size: $_canvasSize");
-    //     },
-    //   );
-    //   _customPaint = CustomPaint(painter: painter);
-    // } else {
-    //   _customPaint = null;
-    // }
-
-    _isBusy = false;
     if (mounted) {
       setState(() {});
     }
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    // logger.f("State of the AppLifecycle: $state");
-    if (!(_controller.value.isInitialized)) return;
-    if (state == AppLifecycleState.inactive) {
-      // logger.f("AppLifecycleState.inactive");
-      _stopLiveFeed();
-      _meshDetector.close();
-      _canProcess = false;
-    } else if (state == AppLifecycleState.resumed) {
-      // logger.f("AppLifecycleState.resumed");
-      _initializeCamera();
-    }
-  }
-
-  @override
-  void dispose() {
-    // logger.f("Dispose Called");
-    _stopLiveFeed();
-    super.dispose();
-  }
-
-  Future<void> _stopLiveFeed() async {
-    // logger.f("Stop Live Feed Called");
-    _canProcess = false;
-    _meshDetector.close();
-    await _controller.stopImageStream();
-    await _controller.dispose();
-    // WidgetsBinding.instance.removeObserver(this);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (_cameras.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
@@ -246,79 +198,84 @@ class _VisualAcuityFaceDistancePageViewState
     } else {
       return Scaffold(
         backgroundColor: AppColor.black,
-        body: _liveFeedBody(),
-        floatingActionButton: _nextButton(),
+        body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
+
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                Center(
+                  child: CameraPreview(_controller),
+                ),
+                Positioned(
+                  top: 140,
+                  left: AppSize.width(context) * 0.2,
+                  right: AppSize.width(context) * 0.2,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColor.primary.withOpacity(0.6),
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                    child: Text(
+                      'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const VisualAcuityInitiatePage(),
+              ),
+            );
+          },
+          child: const Icon(Icons.navigate_next),
+        ),
       );
     }
   }
 
-  Widget _liveFeedBody() {
-    if (!_controller.value.isInitialized) {
-      return Container();
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!(_controller.value.isInitialized)) return;
+    if (state == AppLifecycleState.inactive) {
+      logger.d("AppLifecycleState.inactive");
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.resumed) {
+      logger.d("AppLifecycleState.resumed");
+      _initializeCamera();
     }
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
-        logger.f("Canvas Size: $_canvasSize");
-        return Stack(
-          children: [
-            Positioned.fill(
-              child: CameraPreview(_controller),
-            ),
-            Positioned(
-              top: 80,
-              right: 20,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColor.primary.withOpacity(0.6),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                ),
-                child: Text(
-                  'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 
-  // Widget _liveFeedBody() {
-  //   // if (_controller.value.isInitialized == false) return Container();
-  //   return Stack(
-  //     fit: StackFit.expand,
-  //     children: <Widget>[
-  //       Center(
-  //         child: CameraPreview(
-  //           _controller,
-  //           child: _customPaint,
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+  @override
+  void dispose() {
+    logger.d("Dispose Called");
+    _stopLiveFeed();
+    super.dispose();
+  }
 
-  Widget _nextButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const VisualAcuityInitiatePage()),
-        );
-        _stopLiveFeed();
-      },
-      child: const Icon(Icons.navigate_next),
-    );
+  Future<void> _stopLiveFeed() async {
+    logger.d("Stop Live Feed Called");
+    _canProcess = false;
+    _meshDetector.close();
+    await _controller.stopImageStream();
+    await _controller.dispose();
   }
 }

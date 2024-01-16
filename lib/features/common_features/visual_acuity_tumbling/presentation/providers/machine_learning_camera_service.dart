@@ -23,7 +23,7 @@ class MachineLearningCameraService {
           await platform.invokeMapMethod<String, double>('getCameraInfo');
       return cameraInfo;
     } catch (e) {
-      logger.d('Error getting camera info: $e');
+      logger.e('Error getting camera info: $e');
       return {};
     }
   }
