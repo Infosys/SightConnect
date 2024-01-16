@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -148,9 +150,7 @@ class VisionEventListDetails extends ConsumerWidget {
           width: Responsive.isMobile(context)
               ? AppSize.width(context) * 0.9
               : AppSize.width(context) * 0.5,
-          height: Responsive.isMobile(context)
-              ? AppSize.height(context) / 5.5
-              : AppSize.height(context) * 0.1,
+          height: AppSize.height(context) / 7,
           color: AppColor.white,
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -168,10 +168,16 @@ class VisionEventListDetails extends ConsumerWidget {
                           radius: 0,
                           fontSize: 18,
                         )
-                      : AppNetworkImage(
-                          shapeCircle: false,
-                          radius: Size.infinite.height,
+                      :
+                      // : AppNetworkImage(
+                      //     shapeCircle: false,
+                      //     radius: Size.infinite.height,
+                      //     imageUrl: _getImageUrl(data.images!.first),
+                      //   ),
+                      CachedNetworkImage(
                           imageUrl: _getImageUrl(data.images!.first),
+                          fit: BoxFit.fill,
+                          height: Size.infinite.height,
                         )),
               const SizedBox(width: AppSize.kswidth),
               Padding(
@@ -188,7 +194,8 @@ class VisionEventListDetails extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            data.title ?? "",
+                            data.title!.capitalize() ?? "",
+                            maxLines: 1,
                             softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 14,
@@ -301,6 +308,7 @@ class VisionEventListDetails extends ConsumerWidget {
                           child: Text(
                             "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",
                             softWrap: true,
+                            overflow: TextOverflow.ellipsis,
                             style: applyRobotoFont(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

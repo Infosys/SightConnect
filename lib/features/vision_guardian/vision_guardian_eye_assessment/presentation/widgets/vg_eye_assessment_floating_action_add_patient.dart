@@ -35,8 +35,8 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
           color: AppColor.yellow,
           boxShadow: const <BoxShadow>[
             BoxShadow(
-              color: AppColor.black,
-              blurRadius: 10,
+              color: AppColor.grey,
+              blurRadius: 8,
               offset: Offset(0, 4),
             ),
           ],
@@ -48,9 +48,9 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
                 TextSpan(
                     text: '+ ',
                     style: applyRobotoFont(
-                        fontSize: 21,
+                        fontSize: 24,
                         color: AppColor.black,
-                        fontWeight: FontWeight.w300)),
+                        fontWeight: FontWeight.w400)),
                 TextSpan(
                   text: 'Add Patient',
                   style: applyRobotoFont(
