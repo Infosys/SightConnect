@@ -523,7 +523,7 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
   }
 
   QuestionDirection randomQuestionDirection(Question question) {
-    var random = Random();
+    var random = Random.secure();
     var randomNumber = random.nextInt(4);
     return QuestionDirection.values[randomNumber];
   }

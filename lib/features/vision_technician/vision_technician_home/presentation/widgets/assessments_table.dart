@@ -23,7 +23,6 @@ class AssessmentTable extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
           const SizedBox(height: AppSize.kmheight),
           ref.watch(getAssessmentTableProvider).when(
                 data: (data) {

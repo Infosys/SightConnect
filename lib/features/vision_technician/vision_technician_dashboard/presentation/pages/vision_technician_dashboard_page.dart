@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -9,6 +10,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
@@ -52,6 +55,14 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
     return Scaffold(
       body: const VisionTechnicianHomePage(),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColor.white,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: AppColor.primary,
+        unselectedItemColor: AppColor.grey,
+        unselectedLabelStyle: applyRobotoFont(fontSize: 10),
+        selectedLabelStyle:
+            applyRobotoFont(fontSize: 10, fontWeight: FontWeight.w600),
         onTap: (index) {
           switch (index) {
             case 0:
@@ -95,39 +106,49 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           }
         },
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
-              size: AppSize.kmheight * 2,
+              size: Responsive.isMobile(context)
+                  ? AppSize.kmheight * 1.8
+                  : AppSize.kmheight * 2.5,
             ),
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.person_add,
-              size: AppSize.kmheight * 2,
+              size: Responsive.isMobile(context)
+                  ? AppSize.kmheight * 1.8
+                  : AppSize.kmheight * 2.5,
             ),
             label: 'Register Patient',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.perspective,
-              size: AppSize.kmheight * 2,
+              size: Responsive.isMobile(context)
+                  ? AppSize.kmheight * 1.8
+                  : AppSize.kmheight * 2.5,
             ),
             label: 'Triage',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.person_add,
-              size: AppSize.kmheight * 2,
+              size: Responsive.isMobile(context)
+                  ? AppSize.kmheight * 1.8
+                  : AppSize.kmheight * 2.5,
             ),
             label: 'Mark My Availability',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.phone,
-              size: AppSize.kmheight * 2,
+              size: Responsive.isMobile(context)
+                  ? AppSize.kmheight * 1.8
+                  : AppSize.kmheight * 2.5,
             ),
             label: 'IVR Call History',
           ),

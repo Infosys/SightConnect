@@ -179,6 +179,13 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   return null;
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  var uri = navigationAction.request.url!;
+                  if (![
+                    "https",
+                  ].contains(uri.scheme)) {
+                    return NavigationActionPolicy.CANCEL;
+                  }
+
                   final path = navigationAction.request.url?.path.trim();
                   logger.d("shouldOverrideUrlLoading: $path");
 
