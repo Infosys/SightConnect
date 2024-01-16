@@ -56,15 +56,15 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               top: AppSize.kspadding,
               left: AppSize.kmpadding,
             ),
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: AppColor.white,
             ),
-            child: SvgPicture.asset(
+            child: Image.asset(
               AppIcon.logo,
-              height: 10,
-              width: 10,
+              height: 30,
+              width: 30,
             ),
           ),
         ),
