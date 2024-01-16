@@ -33,9 +33,9 @@ class VGAddEventDetailsPage extends ConsumerWidget {
         centerTitle: false,
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),
-      body: SingleChildScrollView(
-        child: LoadingOverlay(
-          isLoading: ref.watch(addEventDetailsProvider).isLoading,
+      body: LoadingOverlay(
+        isLoading: ref.watch(addEventDetailsProvider).isLoading,
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
@@ -63,8 +63,11 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                           data.eventTitle,
                           "Event Title",
                           validationFunction: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter End time";
+                            }
                             if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                                .hasMatch(value!)) {
+                                .hasMatch(value)) {
                               return "Should not contain any special character";
                             }
                             return null;

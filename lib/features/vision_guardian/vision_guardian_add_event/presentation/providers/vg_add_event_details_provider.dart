@@ -120,6 +120,10 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setIsLoading() {
+    isLoading = false;
+  }
+
   void setStartDate(String date) {
     _startDate.text = date;
     notifyListeners();
@@ -294,6 +298,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     _venueName.clear();
     _pincode.clear();
     _city.clear();
+    _image = null;
     notifyListeners();
   }
 

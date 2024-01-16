@@ -74,6 +74,9 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
               const SizedBox(width: AppSize.kswidth),
               customTextFieldTimePicker(data.endTime, "End Time", context,
                   (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please Enter End time";
+                }
                 if (data.startDate.text.isNotEmpty &&
                     data.startTime.text.isNotEmpty) {
                   if (data.startDate.text == data.endDate.text) {

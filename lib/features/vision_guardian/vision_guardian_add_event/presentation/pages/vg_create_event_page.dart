@@ -54,6 +54,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
       ),
       floatingActionButton: InkWell(
         onTap: () {
+          ref.read(addEventDetailsProvider).setIsLoading();
           Navigator.push(
             context,
             MaterialPageRoute(
