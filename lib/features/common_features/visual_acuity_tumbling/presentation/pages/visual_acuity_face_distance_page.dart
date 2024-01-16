@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import '../providers/machine_learning_camera_service.dart';
-import '../widgets/visual_acuity_face_distance_painter.dart';
+// import '../widgets/visual_acuity_face_distance_painter.dart';
 import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
@@ -38,11 +38,12 @@ class _VisualAcuityFaceDistancePageViewState
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  CustomPaint? _customPaint = const CustomPaint();
+  // CustomPaint? _customPaint = const CustomPaint();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initializeCamera();
   }
 
@@ -56,7 +57,8 @@ class _VisualAcuityFaceDistancePageViewState
   Future<void> _startLiveFeed() async {
     _controller = CameraController(
       _cameras.firstWhere(
-          (element) => element.lensDirection == _cameraLensDirection),
+        (element) => element.lensDirection == _cameraLensDirection,
+      ),
       // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
       ResolutionPreset.high,
       enableAudio: false,
@@ -64,12 +66,21 @@ class _VisualAcuityFaceDistancePageViewState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-    await _controller.initialize();
-    if (!mounted) return;
-    _controller
-        .startImageStream(_processCameraImage)
-        .then((value) => widget.onCameraFeedReady?.call());
-    setState(() {});
+    await _controller.initialize().then(
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        _controller.startImageStream(_processCameraImage).then(
+          (value) {
+            if (widget.onCameraFeedReady != null) {
+              widget.onCameraFeedReady!();
+            }
+          },
+        );
+        setState(() {});
+      },
+    );
   }
 
   Future<void> _getCameraInfo() async {
@@ -84,11 +95,15 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   void _processCameraImage(CameraImage image) {
-    final camera = _cameras
-        .firstWhere((element) => element.lensDirection == _cameraLensDirection);
+    final camera = _cameras.firstWhere(
+      (element) => element.lensDirection == _cameraLensDirection,
+    );
     final orientation = _controller.value.deviceOrientation;
     final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
-        image, camera, orientation);
+      image,
+      camera,
+      orientation,
+    );
     if (inputImage == null) return;
     final screenSize = MediaQuery.of(context).size;
     _processImage(inputImage, screenSize);
@@ -97,6 +112,7 @@ class _VisualAcuityFaceDistancePageViewState
   Future<void> _processImage(InputImage inputImage, Size screenSize) async {
     if (!_canProcess || _isBusy) return;
     _isBusy = true;
+    // logger.f("Inside Process Image Function");
 
     final meshes = await _meshDetector.processImage(inputImage);
 
@@ -133,7 +149,6 @@ class _VisualAcuityFaceDistancePageViewState
             ),
           );
         }
-        debugPrint("Translated Eye Landmarks: $_translatedEyeLandmarks");
         // Check if Eyes are inside the box
         final eyeLandmarksInsideTheBox =
             MachineLearningCameraService.areEyeLandmarksInsideTheBox(
@@ -165,22 +180,23 @@ class _VisualAcuityFaceDistancePageViewState
       _distanceToFace = null;
     }
 
-    // Calling the Distance Calculator Painter
-    if (inputImage.metadata?.size != null &&
-        inputImage.metadata?.rotation != null) {
-      final painter = VisualAcuityFaceDistancePainter(
-        inputImage.metadata!.size,
-        boxCenter,
-        _distanceToFace,
-        _translatedEyeLandmarks,
-        (size) {
-          _canvasSize = size;
-        },
-      );
-      _customPaint = CustomPaint(painter: painter);
-    } else {
-      _customPaint = null;
-    }
+    // // Calling the Distance Calculator Painter
+    // if (inputImage.metadata?.size != null &&
+    //     inputImage.metadata?.rotation != null) {
+    //   final painter = VisualAcuityFaceDistancePainter(
+    //     inputImage.metadata!.size,
+    //     boxCenter,
+    //     _distanceToFace,
+    //     _translatedEyeLandmarks,
+    //     (size) {
+    //       _canvasSize = size;
+    //       // logger.f("Canvas Size: $_canvasSize");
+    //     },
+    //   );
+    //   _customPaint = CustomPaint(painter: painter);
+    // } else {
+    //   _customPaint = null;
+    // }
 
     _isBusy = false;
     if (mounted) {
@@ -190,76 +206,107 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    // logger.f("State of the AppLifecycle: $state");
     if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
+      // logger.f("AppLifecycleState.inactive");
       _stopLiveFeed();
       _meshDetector.close();
       _canProcess = false;
     } else if (state == AppLifecycleState.resumed) {
+      // logger.f("AppLifecycleState.resumed");
       _initializeCamera();
     }
   }
 
   @override
   void dispose() {
-    _canProcess = false;
-    _meshDetector.close();
+    // logger.f("Dispose Called");
     _stopLiveFeed();
     super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
+    // logger.f("Stop Live Feed Called");
+    _canProcess = false;
+    _meshDetector.close();
     await _controller.stopImageStream();
     await _controller.dispose();
+    // WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.black,
-      body: _liveFeedBody(),
-      floatingActionButton: _nextButton(),
-    );
+    if (!_controller.value.isInitialized) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: AppColor.black,
+        body: _liveFeedBody(),
+        floatingActionButton: _nextButton(),
+      );
+    }
   }
 
   Widget _liveFeedBody() {
     if (!_controller.value.isInitialized) {
       return Container();
     }
-    return AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: Stack(
-        children: <Widget>[
-          CameraPreview(
-            _controller,
-            child: _customPaint,
-          ),
-          Positioned(
-            top: 80,
-            right: 20,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: AppColor.primary.withOpacity(0.6),
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
+        logger.f("Canvas Size: $_canvasSize");
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: CameraPreview(_controller),
+            ),
+            Positioned(
+              top: 80,
+              right: 20,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: AppColor.primary.withOpacity(0.6),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
                 ),
-              ),
-              child: Text(
-                'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+                child: Text(
+                  'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
+
+  // Widget _liveFeedBody() {
+  //   // if (_controller.value.isInitialized == false) return Container();
+  //   return Stack(
+  //     fit: StackFit.expand,
+  //     children: <Widget>[
+  //       Center(
+  //         child: CameraPreview(
+  //           _controller,
+  //           child: _customPaint,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _nextButton() {
     return FloatingActionButton(
