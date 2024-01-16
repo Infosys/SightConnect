@@ -40,9 +40,9 @@ class ProfileHeader extends ConsumerWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4,),
             decoration: const BoxDecoration(
-              color: Color(0xFFffdd04),
+              color: Color(0xFFC9DAFD),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -52,7 +52,7 @@ class ProfileHeader extends ConsumerWidget {
               children: [
                 Image.asset(
                   "assets/logo/app_logo.png",
-                  height: 40,
+                  height: 30,
                   width: 120,
                 ),
               ],
@@ -179,7 +179,7 @@ class ProfileHeader extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "Health Connect Tech Stack",
+                          "Digital Public Health Stack",
                           style: applyFiraSansFont(
                             fontSize: 14,
                           ),

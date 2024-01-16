@@ -1,0 +1,8 @@
+<svg id="splash_screen_bg" data-name="splash screen bg" xmlns="http://www.w3.org/2000/svg" width="412" height="892" viewBox="0 0 412 892">
+  <rect id="Rectangle_18716" data-name="Rectangle 18716" width="412" height="892" fill="#f5f5f5"/>
+  <g id="Group_40221" data-name="Group 40221" transform="translate(0 500.9)">
+    <path id="Path_40061" data-name="Path 40061" d="M412,0V385.3C293.92,361.2,177.09,320.36,96.75,256.86,254.54,243.86,387.51,172.04,412,0" fill="#94b6fa" fill-rule="evenodd"/>
+    <path id="Path_40062" data-name="Path 40062" d="M412,385.3v5.8H0V257.95a714.1,714.1,0,0,0,96.75-1.09C177.09,320.36,293.92,361.2,412,385.3" fill="#296df6" fill-rule="evenodd"/>
+    <path id="Path_40063" data-name="Path 40063" d="M96.75,256.86A714.1,714.1,0,0,1,0,257.95V120.05c14.83,54.25,49.47,99.46,96.75,136.81" fill="#5f92f9" fill-rule="evenodd"/>
+  </g>
+</svg>
