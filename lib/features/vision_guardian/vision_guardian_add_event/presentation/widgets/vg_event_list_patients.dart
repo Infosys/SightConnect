@@ -57,7 +57,10 @@ class VisionGuardianPatientList extends ConsumerWidget {
                     ],
                   )
                 : ref.watch(getEventPatientListProvider).when(
-                    data: (data) {
+                    data: (response) {
+                      final data = response
+                          .where((element) => element.patientId != null)
+                          .toList();
                       return data.isEmpty
                           ? SingleChildScrollView(
                               child: SizedBox(
