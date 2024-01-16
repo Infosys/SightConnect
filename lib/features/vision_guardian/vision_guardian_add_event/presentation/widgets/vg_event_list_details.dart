@@ -158,7 +158,7 @@ class VisionEventListDetails extends ConsumerWidget {
                       maxWidth: Responsive.isMobile(context)
                           ? AppSize.width(context) * 0.2
                           : AppSize.width(context) * 0.1,
-                      maxHeight: AppSize.height(context) / 6),
+                      maxHeight: AppSize.klheight * 4.6),
                   child: data.images == null
                       ? AppNameAvatar(
                           name: data.title,
