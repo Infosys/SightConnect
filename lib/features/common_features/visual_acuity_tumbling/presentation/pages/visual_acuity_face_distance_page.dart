@@ -40,6 +40,7 @@ class _VisualAcuityFaceDistancePageViewState
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
 
+//This method is called once when the State object is created. It initializes the camera and fetches the camera info.
   @override
   void initState() {
     super.initState();
@@ -57,6 +58,7 @@ class _VisualAcuityFaceDistancePageViewState
     );
   }
 
+//This method initializes the camera by getting the available cameras and starting the live feed.
   Future<void> _initialize() async {
     if (_cameras.isEmpty) {
       _cameras = await availableCameras();
@@ -65,6 +67,7 @@ class _VisualAcuityFaceDistancePageViewState
     _startLiveFeed();
   }
 
+  //This method starts the live feed from the camera. It initializes the CameraController and starts the image stream.
   Future _startLiveFeed() async {
     _controller = CameraController(
       _cameras.firstWhere(
@@ -94,6 +97,7 @@ class _VisualAcuityFaceDistancePageViewState
     );
   }
 
+//This method processes each frame from the camera feed. It converts the CameraImage to an InputImage and then processes the InputImage.
   void _processCameraImage(CameraImage image) {
     final camera = _cameras.firstWhere(
       (element) => element.lensDirection == _cameraLensDirection,
@@ -106,7 +110,7 @@ class _VisualAcuityFaceDistancePageViewState
     _processImage(inputImage, screenSize);
   }
 
-  // Function to process the frames as per our requirements
+  //This method processes the InputImage. It detects faces in the image, translates the eye landmarks, checks if the eyes are inside the box, and calculates the distance to the face.
   Future<void> _processImage(InputImage inputImage, Size screenSize) async {
     if (!_canProcess) return;
     if (_isBusy) return;
@@ -202,6 +206,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
+//This method is called when the app lifecycle state changes. It stops the live feed and closes the face mesh detector when the app is inactive, and reinitializes the camera when the app is resumed.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final CameraController cameraController = _controller;
@@ -242,6 +247,7 @@ class _VisualAcuityFaceDistancePageViewState
     );
   }
 
+//This method builds the body of the page. It returns a Container containing the camera preview and the next button.
   Widget _liveFeedBody() {
     if (_cameras.isEmpty) return Container();
     if (_controller.value.isInitialized == false) return Container();
