@@ -23,7 +23,7 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
 class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  final bool _enablePainterView = false;
+  final bool enablePainterView = false;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
@@ -38,6 +38,8 @@ class _VisualAcuityFaceDistancePageViewState
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
+  final List<int> _distanceBuffer = [];
+  final int bufferSize = 10;
 
   @override
   void initState() {
@@ -83,6 +85,17 @@ class _VisualAcuityFaceDistancePageViewState
     setState(() {});
   }
 
+//The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
+  void updateDistance(int newDistance) {
+    _distanceBuffer.add(newDistance);
+    if (_distanceBuffer.length > bufferSize) {
+      _distanceBuffer.removeAt(0);
+    }
+    _distanceToFace =
+        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+    setState(() {});
+  }
+
   Future<void> _getCameraInfo() async {
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
@@ -112,6 +125,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
+
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -127,26 +141,20 @@ class _VisualAcuityFaceDistancePageViewState
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
-        final leftEyeLandmark =
-            MachineLearningCameraService.getEyeLandmark(leftEyeContour);
-        final rightEyeLandmark =
-            MachineLearningCameraService.getEyeLandmark(rightEyeContour);
-        List<Point<double>> eyeLandmarks = [];
-        eyeLandmarks.add(leftEyeLandmark);
-        eyeLandmarks.add(rightEyeLandmark);
-        // Translate Eye Points
-        _translatedEyeLandmarks = [];
-        for (final landmark in eyeLandmarks) {
-          _translatedEyeLandmarks.add(
-            MachineLearningCameraService.translator(
-              landmark,
-              inputImage,
-              _canvasSize,
-              _cameraLensDirection,
-            ),
+        final eyeLandmarks = [
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        ];
+
+        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+          return MachineLearningCameraService.translator(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
           );
-        }
-        // Check if Eyes are inside the box
+        }).toList();
+
         final eyeLandmarksInsideTheBox =
             MachineLearningCameraService.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
@@ -154,31 +162,37 @@ class _VisualAcuityFaceDistancePageViewState
           boxWidth,
           boxHeight,
         );
+
         if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
+          int newDistance =
               MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: leftEyeLandmark,
-            rightEyeLandmark: rightEyeLandmark,
+            leftEyeLandmark: eyeLandmarks[0],
+            rightEyeLandmark: eyeLandmarks[1],
             focalLength: _focalLength,
             sensorX: _sensorX,
             sensorY: _sensorY,
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
+          updateDistance(newDistance);
         } else {
-          _distanceToFace = null;
+          resetValues();
         }
       } else {
-        _translatedEyeLandmarks = [];
-        _distanceToFace = null;
+        resetValues();
       }
     } else {
-      _translatedEyeLandmarks = [];
-      _distanceToFace = null;
+      resetValues();
     }
+
     if (mounted) {
       setState(() {});
     }
+  }
+
+  void resetValues() {
+    _translatedEyeLandmarks = [];
+    _distanceToFace = null;
   }
 
   @override
@@ -204,10 +218,15 @@ class _VisualAcuityFaceDistancePageViewState
             _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
 
             return Stack(
-              fit: StackFit.expand,
               children: [
                 Center(
                   child: CameraPreview(_controller),
+                ),
+                Visibility(
+                  visible: enablePainterView,
+                  child: CustomPaint(
+                    painter: EyeBoxPainter(_translatedEyeLandmarks),
+                  ),
                 ),
                 Positioned(
                   top: 140,
@@ -279,4 +298,30 @@ class _VisualAcuityFaceDistancePageViewState
     await _controller.stopImageStream();
     await _controller.dispose();
   }
+}
+
+class EyeBoxPainter extends CustomPainter {
+  final List<Point<double>> eyeLandmarks;
+
+  EyeBoxPainter(this.eyeLandmarks);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColor.primary
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    for (final landmark in eyeLandmarks) {
+      final rect = Rect.fromCenter(
+        center: Offset(landmark.x, landmark.y),
+        width: 50.0,
+        height: 30.0,
+      );
+      canvas.drawOval(rect, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
