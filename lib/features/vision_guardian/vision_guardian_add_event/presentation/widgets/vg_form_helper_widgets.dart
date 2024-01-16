@@ -32,18 +32,20 @@ Widget customTextField(TextEditingController controller, String label,
 }
 
 Widget customTextFieldIcon(
-    TextEditingController controller, String label, Widget icon) {
+    TextEditingController controller, String label, Widget icon,
+    {String? Function(String?)? validationFunction}) {
   return TextFormField(
     controller: controller,
     onChanged: (value) {
       controller.text = value;
     },
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Please enter $label";
-      }
-      return null;
-    },
+    validator: validationFunction ??
+        (value) {
+          if (value == null || value.isEmpty) {
+            return "Please enter $label";
+          }
+          return null;
+        },
     decoration: InputDecoration(
       label: Padding(
         padding: const EdgeInsets.only(left: 8.0),
