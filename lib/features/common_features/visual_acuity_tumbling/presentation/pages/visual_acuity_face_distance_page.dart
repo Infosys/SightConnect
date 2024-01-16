@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 
 import '../widgets/coordinates_translator.dart';
+import '../widgets/get_eye_landmark.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
 import 'visual_acuity_initiate_page.dart';
 
@@ -216,8 +217,8 @@ class _VisualAcuityFaceDistancePageViewState
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
-        final leftEyeLandmark = _getEyeLandmark(leftEyeContour);
-        final rightEyeLandmark = _getEyeLandmark(rightEyeContour);
+        final leftEyeLandmark = GetEyeLandmark.getEyeLandmark(leftEyeContour);
+        final rightEyeLandmark = GetEyeLandmark.getEyeLandmark(rightEyeContour);
         List<Point<double>> eyeLandmarks = [];
         eyeLandmarks.add(leftEyeLandmark);
         eyeLandmarks.add(rightEyeLandmark);
@@ -285,36 +286,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  Point<double> _getEyeLandmark(List<FaceMeshPoint> eyeContours) {
-    double leastX = 999999999;
-    double leastY = 999999999;
-    double highestX = 0;
-    double highestY = 0;
-
-    for (final point in eyeContours) {
-      final x = point.x;
-      final y = point.y;
-      if (x < leastX) {
-        leastX = x;
-      }
-      if (x > highestX) {
-        highestX = x;
-      }
-      if (y < leastY) {
-        leastY = y;
-      }
-      if (y > highestY) {
-        highestY = y;
-      }
-    }
-
-    double eyeLandmarkX = (highestX + leastX) / 2;
-    double eyeLandmarkY = (highestY + leastY) / 2;
-
-    Point<double> eyeLandmark = Point<double>(eyeLandmarkX, eyeLandmarkY);
-
-    return eyeLandmark;
-  }
+  
 
   Point<double> _translator(
     Point<double> point,
