@@ -23,6 +23,7 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
 class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
+  final bool _enablePainterView = false;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
@@ -105,16 +106,16 @@ class _VisualAcuityFaceDistancePageViewState
       deviceOrientation: orientation,
     );
     if (inputImage == null) return;
-    final screenSize = MediaQuery.of(context).size;
-    _processImage(inputImage, screenSize);
+
+    _processImage(inputImage);
   }
 
-  Future<void> _processImage(InputImage inputImage, Size screenSize) async {
+  Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
-    final boxHeight = screenSize.height * boxSizeRatio;
+    final boxHeight = _canvasSize.height * boxSizeRatio;
     final boxCenter = Point(
       _canvasSize.width * 0.5,
       _canvasSize.height * 0.5,
