@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
@@ -215,6 +216,7 @@ class _VisualAcuityFaceDistancePageViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.black,
       body: _liveFeedBody(),
       floatingActionButton: _nextButton(),
     );
@@ -224,18 +226,36 @@ class _VisualAcuityFaceDistancePageViewState
     if (!_controller.value.isInitialized) {
       return Container();
     }
-    return Container(
-      color: Colors.black,
+    return AspectRatio(
+      aspectRatio: _controller.value.aspectRatio,
       child: Stack(
-        fit: StackFit.expand,
         children: <Widget>[
-          Center(
-            child: CameraPreview(
-              _controller,
-              child: _customPaint,
+          CameraPreview(
+            _controller,
+            child: _customPaint,
+          ),
+          Positioned(
+            top: 80,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.primary.withOpacity(0.6),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                ),
+              ),
+              child: Text(
+                'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ),
-          // Your existing widgets for displaying the face mesh and other UI elements go here
         ],
       ),
     );
