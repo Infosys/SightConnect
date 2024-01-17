@@ -61,12 +61,14 @@ class _VisualAcuityInitiatePageViewState
 
   @override
   void initState() {
+    logger.d("InitState Called");
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _initializeCamera();
   }
 
   Future<void> _initializeCamera() async {
+    logger.d("InitializeCamera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -82,6 +84,7 @@ class _VisualAcuityInitiatePageViewState
   }
 
   Future<void> _startLiveFeed() async {
+    logger.d("StartLiveFeed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -116,6 +119,7 @@ class _VisualAcuityInitiatePageViewState
   }
 
   Future<void> _getCameraInfo() async {
+    logger.d("GetCameraInfo Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -128,6 +132,7 @@ class _VisualAcuityInitiatePageViewState
   }
 
   void _processCameraImage(CameraImage image) {
+    logger.d("ProcessCameraImage Called");
     final camera = _cameras.firstWhere(
       (element) => element.lensDirection == _cameraLensDirection,
     );
@@ -143,6 +148,7 @@ class _VisualAcuityInitiatePageViewState
   }
 
   Future<void> _processImage(InputImage inputImage) async {
+    logger.d("ProcessImage Called");
     if (!_canProcess) return;
 
     final meshes = await _meshDetector.processImage(inputImage);
