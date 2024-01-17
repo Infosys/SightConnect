@@ -18,7 +18,7 @@ class OptionCard extends StatelessWidget {
   });
   final QuestionnaireItemFHIRModel? question;
   final VoidCallback onYesButtonPressed;
-  final VoidCallback onNoButtonPressed;
+  final Future Function(bool isNav, bool isForward) onNoButtonPressed;
   final int index;
   final int total;
   final int totalGroupQuestion;
@@ -99,28 +99,76 @@ class OptionCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  bottom: 10,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColor.black.withOpacity(0.5),
+                top: 200,
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        onNoButtonPressed(true, false);
+                      },
+                      child: Container(
+                          margin: const EdgeInsets.only(left: 20),
+                          decoration: BoxDecoration(
+                            color: AppColor.white.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.chevron_left_outlined,
+                              size: 50,
+                            ),
+                          )),
                     ),
-                    child: Center(
-                      child: Text(
-                        question?.relatedImage?.first.imageTitle ?? '',
-                        style: applyRobotoFont(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.white,
+                    InkWell(
+                      onTap: () {
+                        onNoButtonPressed(true, true);
+                      },
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 20),
+                          decoration: BoxDecoration(
+                            color: AppColor.white.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.chevron_right_outlined,
+                              size: 50,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+              question?.relatedImage?.first.imageTitle == null ||
+                      question?.relatedImage?.first.imageTitle == '0'
+                  ? const SizedBox()
+                  : Positioned(
+                      bottom: 10,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColor.black.withOpacity(0.5),
                         ),
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  )),
+                        child: Center(
+                          child: Text(
+                            question?.relatedImage?.first.imageTitle ?? '',
+                            style: applyRobotoFont(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.white,
+                            ),
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )),
             ],
           ),
         ),
@@ -133,7 +181,9 @@ class OptionCard extends StatelessWidget {
               Flexible(
                 child: InkWell(
                   splashColor: AppColor.white,
-                  onTap: onNoButtonPressed,
+                  onTap: () {
+                    onNoButtonPressed(false, true);
+                  },
                   child: Container(
                     height: AppSize.height(context) * 0.13,
                     padding: const EdgeInsets.symmetric(
@@ -169,7 +219,9 @@ class OptionCard extends StatelessWidget {
               const SizedBox(width: 10),
               Flexible(
                 child: InkWell(
-                  onTap: onYesButtonPressed,
+                  onTap: () {
+                    onYesButtonPressed();
+                  },
                   child: Container(
                     height: AppSize.height(context) * 0.13,
                     padding: const EdgeInsets.symmetric(
