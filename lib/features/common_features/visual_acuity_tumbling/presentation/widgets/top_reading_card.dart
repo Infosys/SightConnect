@@ -14,7 +14,12 @@ import '../../domain/models/enums/tumbling_enums.dart';
 import '../providers/visual_acuity_test_provider.dart';
 
 class TopReadingCard extends ConsumerWidget {
-  const TopReadingCard({super.key});
+  const TopReadingCard({
+    this.distanceToFace,
+    super.key,
+  });
+
+  final int? distanceToFace;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

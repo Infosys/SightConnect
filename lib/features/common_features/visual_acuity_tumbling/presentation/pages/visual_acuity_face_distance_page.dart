@@ -95,6 +95,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
     _distanceToFace =
         _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+    logger.d("Distance to face: $_distanceToFace");
     setState(() {});
   }
 
