@@ -354,8 +354,8 @@ class _VisualAcuityInitiatePageViewState
         body: VisualAcuityTumblingOverlay(
           child: IgnorePointer(
             ignoring: !pointerState,
-            child: const Padding(
-              padding: EdgeInsets.only(
+            child: Padding(
+              padding: const EdgeInsets.only(
                   // left: AppSize.klpadding,
                   // right: AppSize.klpadding,
 
@@ -364,13 +364,13 @@ class _VisualAcuityInitiatePageViewState
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TopReadingCard(
-                    distanceToFace: 30,
+                    distanceToFace: _distanceToFace,
                   ),
                   // SizedBox(height: AppSize.kmpadding),
                   /*         AcuityDistanceTile(
                     distanceInCms: 40,
                   ), */
-                  Expanded(
+                  const Expanded(
                     child: SwipeGestureCard(),
                   ),
                   // Expanded(
