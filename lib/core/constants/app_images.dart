@@ -1,7 +1,9 @@
 class AppImages {
   AppImages._();
 
-  static const String logo = 'assets/logo/logo.png';
+  static const String logo = 'assets/logo/app_logo.png';
+  static const String logoSvg = 'assets/logo/app_logo.svg';
+
   static const String drawerBg = "assets/images/drawer_bg.svg";
   static const String splashBg = "assets/images/splash_bg.svg";
 
@@ -117,5 +119,5 @@ class AppImages {
   // vision technician
   static const String searchEmpty = "assets/images/search_empty.png";
 
-  static const String lvpeiLogo= "assets/images/LVPEI_full_logo.svg";
+  static const String lvpeiLogo = "assets/images/LVPEI_full_logo.svg";
 }

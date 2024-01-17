@@ -231,11 +231,19 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       path: InitializationPage.routeName,
       child: Scaffold(
         backgroundColor: const Color(0xFFffdd04),
-        body: Pulsar(
-          child: Center(
-            child: Image.asset(
-              "assets/logo/splash.png",
-              width: AppSize.width(context) * 0.5,
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/logo/splash_bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Pulsar(
+            child: Center(
+              child: Image.asset(
+                "assets/logo/splash.png",
+                width: AppSize.width(context) * 0.4,
+              ),
             ),
           ),
         ),
