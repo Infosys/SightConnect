@@ -8,9 +8,11 @@ class AppNetworkImage extends StatelessWidget {
     required this.imageUrl,
     this.radius = 20,
     this.shapeCircle = true,
+    this.borderRadius = 8,
   });
   final String imageUrl;
   final double radius;
+  final double borderRadius;
 
   final bool shapeCircle;
   @override
@@ -28,7 +30,7 @@ class AppNetworkImage extends StatelessWidget {
             height: radius,
             width: radius,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(borderRadius),
               image: DecorationImage(
                 image: imageProvider,
                 fit: BoxFit.cover,

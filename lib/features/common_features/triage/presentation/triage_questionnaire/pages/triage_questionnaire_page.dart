@@ -33,6 +33,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final scaffoldKey = useState(GlobalKey<ScaffoldState>());
     var model = ref.watch(triageQuestionnaireProvider);
     model.selectedOptions.containsValue(true);

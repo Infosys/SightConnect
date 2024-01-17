@@ -694,6 +694,7 @@ _$_AnswerModel _$$_AnswerModelFromJson(Map<String, dynamic> json) =>
       answerTime:
           const TimestampConverter().fromJson(json['answerTime'] as String?),
       answerString: json['answerString'] as String?,
+      answerDisplayString: json['answerDisplayString'] as String?,
       answerItemWeight: json['answerItemWeight'] == null
           ? null
           : AnswerItemWeightModel.fromJson(
@@ -710,6 +711,7 @@ Map<String, dynamic> _$$_AnswerModelToJson(_$_AnswerModel instance) =>
           const TimestampConverter().toJson(instance.answerDateTime),
       'answerTime': const TimestampConverter().toJson(instance.answerTime),
       'answerString': instance.answerString,
+      'answerDisplayString': instance.answerDisplayString,
       'answerItemWeight': instance.answerItemWeight?.toJson(),
     };
 

@@ -5099,6 +5099,7 @@ mixin _$AnswerModel {
   @TimestampConverter()
   DateTime? get answerTime => throw _privateConstructorUsedError;
   String? get answerString => throw _privateConstructorUsedError;
+  String? get answerDisplayString => throw _privateConstructorUsedError;
   AnswerItemWeightModel? get answerItemWeight =>
       throw _privateConstructorUsedError;
 
@@ -5122,6 +5123,7 @@ abstract class $AnswerModelCopyWith<$Res> {
       @TimestampConverter() DateTime? answerDateTime,
       @TimestampConverter() DateTime? answerTime,
       String? answerString,
+      String? answerDisplayString,
       AnswerItemWeightModel? answerItemWeight});
 
   $AnswerItemWeightModelCopyWith<$Res>? get answerItemWeight;
@@ -5147,6 +5149,7 @@ class _$AnswerModelCopyWithImpl<$Res, $Val extends AnswerModel>
     Object? answerDateTime = freezed,
     Object? answerTime = freezed,
     Object? answerString = freezed,
+    Object? answerDisplayString = freezed,
     Object? answerItemWeight = freezed,
   }) {
     return _then(_value.copyWith(
@@ -5177,6 +5180,10 @@ class _$AnswerModelCopyWithImpl<$Res, $Val extends AnswerModel>
       answerString: freezed == answerString
           ? _value.answerString
           : answerString // ignore: cast_nullable_to_non_nullable
+              as String?,
+      answerDisplayString: freezed == answerDisplayString
+          ? _value.answerDisplayString
+          : answerDisplayString // ignore: cast_nullable_to_non_nullable
               as String?,
       answerItemWeight: freezed == answerItemWeight
           ? _value.answerItemWeight
@@ -5215,6 +5222,7 @@ abstract class _$$_AnswerModelCopyWith<$Res>
       @TimestampConverter() DateTime? answerDateTime,
       @TimestampConverter() DateTime? answerTime,
       String? answerString,
+      String? answerDisplayString,
       AnswerItemWeightModel? answerItemWeight});
 
   @override
@@ -5239,6 +5247,7 @@ class __$$_AnswerModelCopyWithImpl<$Res>
     Object? answerDateTime = freezed,
     Object? answerTime = freezed,
     Object? answerString = freezed,
+    Object? answerDisplayString = freezed,
     Object? answerItemWeight = freezed,
   }) {
     return _then(_$_AnswerModel(
@@ -5270,6 +5279,10 @@ class __$$_AnswerModelCopyWithImpl<$Res>
           ? _value.answerString
           : answerString // ignore: cast_nullable_to_non_nullable
               as String?,
+      answerDisplayString: freezed == answerDisplayString
+          ? _value.answerDisplayString
+          : answerDisplayString // ignore: cast_nullable_to_non_nullable
+              as String?,
       answerItemWeight: freezed == answerItemWeight
           ? _value.answerItemWeight
           : answerItemWeight // ignore: cast_nullable_to_non_nullable
@@ -5289,6 +5302,7 @@ class _$_AnswerModel implements _AnswerModel {
       @TimestampConverter() this.answerDateTime,
       @TimestampConverter() this.answerTime,
       this.answerString,
+      this.answerDisplayString,
       this.answerItemWeight});
 
   factory _$_AnswerModel.fromJson(Map<String, dynamic> json) =>
@@ -5311,11 +5325,13 @@ class _$_AnswerModel implements _AnswerModel {
   @override
   final String? answerString;
   @override
+  final String? answerDisplayString;
+  @override
   final AnswerItemWeightModel? answerItemWeight;
 
   @override
   String toString() {
-    return 'AnswerModel(id: $id, answerBoolean: $answerBoolean, answerDecimal: $answerDecimal, answerInteger: $answerInteger, answerDateTime: $answerDateTime, answerTime: $answerTime, answerString: $answerString, answerItemWeight: $answerItemWeight)';
+    return 'AnswerModel(id: $id, answerBoolean: $answerBoolean, answerDecimal: $answerDecimal, answerInteger: $answerInteger, answerDateTime: $answerDateTime, answerTime: $answerTime, answerString: $answerString, answerDisplayString: $answerDisplayString, answerItemWeight: $answerItemWeight)';
   }
 
   @override
@@ -5336,6 +5352,8 @@ class _$_AnswerModel implements _AnswerModel {
                 other.answerTime == answerTime) &&
             (identical(other.answerString, answerString) ||
                 other.answerString == answerString) &&
+            (identical(other.answerDisplayString, answerDisplayString) ||
+                other.answerDisplayString == answerDisplayString) &&
             (identical(other.answerItemWeight, answerItemWeight) ||
                 other.answerItemWeight == answerItemWeight));
   }
@@ -5351,6 +5369,7 @@ class _$_AnswerModel implements _AnswerModel {
       answerDateTime,
       answerTime,
       answerString,
+      answerDisplayString,
       answerItemWeight);
 
   @JsonKey(ignore: true)
@@ -5376,6 +5395,7 @@ abstract class _AnswerModel implements AnswerModel {
       @TimestampConverter() final DateTime? answerDateTime,
       @TimestampConverter() final DateTime? answerTime,
       final String? answerString,
+      final String? answerDisplayString,
       final AnswerItemWeightModel? answerItemWeight}) = _$_AnswerModel;
 
   factory _AnswerModel.fromJson(Map<String, dynamic> json) =
@@ -5397,6 +5417,8 @@ abstract class _AnswerModel implements AnswerModel {
   DateTime? get answerTime;
   @override
   String? get answerString;
+  @override
+  String? get answerDisplayString;
   @override
   AnswerItemWeightModel? get answerItemWeight;
   @override
