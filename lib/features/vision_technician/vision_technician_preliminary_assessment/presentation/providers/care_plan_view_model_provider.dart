@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/status.dart';
@@ -36,7 +38,7 @@ class CarePlanViewModel extends ChangeNotifier {
     this._vtCarePlanRemoteSource,
   );
 
-  Future<CarePlanPostModel> saveCarePlan(
+  Future<Either<Failure, CarePlanPostModel>> saveCarePlan(
       int organizationCode, int reportId, int encounterId) async {
     final PatientInstruction patientInstruction =
         _carePlanProvider.patientInstruction;
@@ -66,18 +68,20 @@ class CarePlanViewModel extends ChangeNotifier {
           priority: _preliminaryAssessmentHelperProvider.selectedSeverity,
         ),
       ],
-      startDate: DateTime.now(),
+      startDate: DateTime.now().subtract(const Duration(minutes: 1)),
       goal: [
         GoalModel(
           statusReason: "Create by VT",
           achievementStatus: Status.IN_PROGRESS,
-          startDate: DateTime.now(),
+          startDate: DateTime.now().subtract(const Duration(minutes: 1)),
           target: [
             const TargetModel(detailString: "TREATMENT_TO_BE_PROVIDED"),
           ],
         ),
       ],
     );
+
+    logger.d({"care plan to be saved":carePlan.toJson()});
 
     var response = await _vtCarePlanRemoteSource.saveCarePlan(
       carePlan: carePlan,

@@ -41,6 +41,8 @@ class _PreliminaryAssessmentFilterCheckBoxState
                 children: [
                   Text(
                     widget.question.text!.toString(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -61,26 +63,12 @@ class _PreliminaryAssessmentFilterCheckBoxState
                               .read(visionTechnicianTriageProvider)
                               .addQuestionnaireAnswer(
                                   widget.question.id, value);
-                          
                         },
                         decoration: const InputDecoration(labelText: "Others"),
                       ),
                     ),
                   )
-                : Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      QuestionTile(question: widget.question),
-                      Text(
-                        widget.question.text!.toString(),
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
+                : QuestionTile(question: widget.question),
       ],
     );
   }
@@ -93,23 +81,9 @@ class QuestionTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var checkBoxState = useState(false);
-    // int questionCode = questions?.id ?? 0;
-    // bool answer = checkBoxState.value;
-    // int score = questions?.answer?.answerItemWeight?.value?.toInt() ?? 0;
-    return Checkbox(
-      // controlAffinity: ListTileControlAffinity.leading,
-
-      // title: Text(
-      //   text,
-      //   style: applyRobotoFont(
-      //     fontSize: 15,
-      //     fontWeight: FontWeight.w500,
-      //     color: AppColor.grey,
-      //   ),
-      // ),
-      value: checkBoxState.value,
-      onChanged: (bool? value) {
-        checkBoxState.value = value!;
+    return InkWell(
+      onTap: () {
+        checkBoxState.value = !checkBoxState.value;
 
         if (checkBoxState.value == true) {
           ref
@@ -121,6 +95,26 @@ class QuestionTile extends HookConsumerWidget {
               .removeQuestionnaireAnswer(question?.id);
         }
       },
+      child: Row(
+        children: [
+          Checkbox(
+            value: checkBoxState.value,
+            onChanged: (bool? value) {},
+          ),
+          Flexible(
+            child: Text(
+              question?.text?.toString() ?? "",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: applyFiraSansFont(
+                fontSize: 18,
+                color: AppColor.black,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

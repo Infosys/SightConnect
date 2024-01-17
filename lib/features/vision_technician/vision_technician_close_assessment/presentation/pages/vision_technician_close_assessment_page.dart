@@ -41,9 +41,9 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
               ref.invalidate(vtCloseAssessmentHelperProvider);
               Navigator.popUntil(context, (route) => route.isFirst);
               Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (builder) {
-              return const VisionTechnicianHomePage();
-            }));
+                  MaterialPageRoute(builder: (builder) {
+                return const VisionTechnicianHomePage();
+              }));
             },
             child: const Icon(Icons.chevron_left)),
         title: Text(
