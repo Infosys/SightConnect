@@ -17,7 +17,6 @@ class VisionGuardianServicesCardList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-     
           const SizedBox(height: AppSize.kmheight),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

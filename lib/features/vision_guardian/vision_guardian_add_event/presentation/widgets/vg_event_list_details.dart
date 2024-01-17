@@ -188,7 +188,7 @@ class VisionEventListDetails extends ConsumerWidget {
                     SizedBox(
                       width: Responsive.isMobile(context)
                           ? AppSize.width(context) * 0.60
-                          : AppSize.width(context) * 0.50,
+                          : AppSize.width(context) * 0.8,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -246,7 +246,7 @@ class VisionEventListDetails extends ConsumerWidget {
                     SizedBox(
                       width: Responsive.isMobile(context)
                           ? AppSize.width(context) * 0.60
-                          : AppSize.width(context) * 0.50,
+                          : AppSize.width(context) * 0.8,
                       child: Row(
                         children: [
                           Row(

@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,7 +57,9 @@ class VisionGuardianHomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: AppSize.klheight * 7.5,
+              height: Responsive.isMobile(context)
+                  ? AppSize.klheight * 7.5
+                  : AppSize.height(context) / 7.5,
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSize.kmpadding,
                 vertical: AppSize.kmpadding,
@@ -92,7 +96,9 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     ],
                   ),
                   Positioned(
-                    bottom: -1 * (AppSize.height(context) / 7.5),
+                    bottom: Responsive.isMobile(context)
+                        ? -1 * (AppSize.height(context) / 7.5)
+                        : -1 * (AppSize.height(context) / 9.5),
                     left: (AppSize.kswidth * 2) * -1,
                     child: SizedBox(
                       width: AppSize.width(context),
@@ -112,7 +118,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.klheight * 3),
+            SizedBox(height: AppSize.height(context) / 10),
             Padding(
               padding: const EdgeInsets.only(
                 left: AppSize.kmpadding,
