@@ -54,11 +54,11 @@ class DrawerMenuItems {
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
     );
-    DrawerMenuItem help = DrawerMenuItem(
-      id: DrawerMenuItemId.help,
-      title: loc.appDrawerHelpAndSupport,
-      icon: AppIcon.drawerHelpAndSupport,
-    );
+    // DrawerMenuItem help = DrawerMenuItem(
+    //   id: DrawerMenuItemId.help,
+    //   title: loc.appDrawerHelpAndSupport,
+    //   icon: AppIcon.drawerHelpAndSupport,
+    // );
 
     return [
       language,
@@ -67,7 +67,7 @@ class DrawerMenuItems {
       scanner,
       about,
       privacyPolicy,
-      help,
+      // help,
     ];
   }
 }
