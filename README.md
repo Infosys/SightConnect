@@ -12,5 +12,3 @@ flutter run -d chrome --web-browser-flag "--disable-web-security"
 flutter gen-l10n
 
 
-/// SWIP GESTURE CARD UPDATED 
-/// FILE MS URL UPDATES 

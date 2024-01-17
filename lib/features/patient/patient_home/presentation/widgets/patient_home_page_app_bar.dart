@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,8 +29,9 @@ class PatientHomePageAppBar extends ConsumerWidget
       title: Row(
         children: [
           Image.asset(
-            "assets/logo/app_logo.png",
-            width: 150,
+            AppImages.logo,
+            height: 40,
+            width: 120,
           ),
         ],
       ),

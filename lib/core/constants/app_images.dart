@@ -1,7 +1,9 @@
 class AppImages {
   AppImages._();
 
-  static const String logo = 'assets/logo/logo.png';
+  static const String logo = 'assets/logo/app_logo.png';
+  static const String logoSvg = 'assets/logo/app_logo.svg';
+
   static const String drawerBg = "assets/images/drawer_bg.svg";
   static const String splashBg = "assets/images/splash_bg.svg";
   static const String scaffoldBg = "assets/images/scaffold_bg.png";

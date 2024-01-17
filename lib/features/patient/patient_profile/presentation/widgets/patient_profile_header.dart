@@ -40,7 +40,11 @@ class ProfileHeader extends ConsumerWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4,),
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 4,
+              bottom: 4,
+            ),
             decoration: const BoxDecoration(
               color: Color(0xFFC9DAFD),
               borderRadius: BorderRadius.only(
@@ -52,8 +56,8 @@ class ProfileHeader extends ConsumerWidget {
               children: [
                 Image.asset(
                   "assets/logo/app_logo.png",
-                  height: 30,
-                  width: 120,
+                  height: 40,
+                  width: 100,
                 ),
               ],
             ),
@@ -96,6 +100,7 @@ class ProfileHeader extends ConsumerWidget {
                                     patient.profile!.patient!.profilePhoto!,
                               )
                             : AppNameAvatar(
+                                isShapeCircular: false,
                                 name: patient.profile?.patient?.name,
                                 color: AppColor.blue,
                                 radius: 28,
