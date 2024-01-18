@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -12,16 +13,18 @@ import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_toast.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
+import '../widgets/visual_acuity_tumbling_overlay.dart';
 import 'visual_acuity_initiate_page.dart';
 
-class VisualAcuityDemoPage extends HookWidget {
+class VisualAcuityDemoPage extends HookConsumerWidget {
   const VisualAcuityDemoPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var startPoint = useState<Offset>(const Offset(0, 0));
     var endPoint = useState<Offset>(const Offset(0, 0));
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
+    var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
     final loc = context.loc!;
     var swipeText = useState<String>("Swipe Up");
     var currentDemoImage = useState<SvgPicture>(
@@ -41,219 +44,224 @@ class VisualAcuityDemoPage extends HookWidget {
         title: Text("Eye Test"),
         centerTitle: false,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: AppSize.kmheight,
-          ),
-          SizedBox(
-            height: AppSize.height(context) * 0.2,
-            child: Center(
-              child: Transform.rotate(
-                angle: tumblingAngle.value,
-                child: SvgPicture.asset(
-                  AppImages.tumblingE,
-                  height: AppSize.height(context) * 0.14,
-                ),
+      body: VisualAcuityTumblingOverlay(
+        child: IgnorePointer(
+          ignoring: !pointerState,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: AppSize.kmheight,
               ),
-            ),
-          ),
-          Center(
-            child: Container(
-              height: 4,
-              width: AppSize.width(context) * 0.25,
-              decoration: BoxDecoration(
-                color: AppColor.primary,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: GestureDetector(
-              onPanStart: (details) {
-                startPoint.value = details.localPosition;
-              },
-              onPanUpdate: (details) {
-                endPoint.value = details.localPosition;
-              },
-              onPanEnd: (details) {
-                double angleDegrees =
-                    _getAngleOfSwipe(startPoint.value, endPoint.value);
-
-                if (angleDegrees >= 60 && angleDegrees <= 120) {
-                  dragDirection.value = QuestionDirection.down;
-                } else if (angleDegrees >= 150 && angleDegrees <= 210) {
-                  dragDirection.value = QuestionDirection.left;
-                } else if (angleDegrees >= 240 && angleDegrees <= 300) {
-                  dragDirection.value = QuestionDirection.up;
-                } else if (angleDegrees >= 330 || angleDegrees <= 30) {
-                  dragDirection.value = QuestionDirection.right;
-                } else {
-                  //Interactive toast, set [isIgnoring] false.
-                  AppToast.showToast(
-                    context,
-                    loc.swipeGestureError,
-                  );
-                  return;
-                }
-
-                if (countValue.value == 0) {
-                  if (dragDirection.value == QuestionDirection.up) {
-                    currentDemoImage.value = demoData[QuestionDirection.down];
-                    swipeText.value = "Swipe Down";
-                    tumblingAngle.value = 7.85;
-                    //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
-                    sliderValue.value = 180.0;
-                    countValue.value++;
-                  }
-                } else if (countValue.value == 1) {
-                  if (dragDirection.value == QuestionDirection.down) {
-                    currentDemoImage.value = demoData[QuestionDirection.left];
-                    swipeText.value = "Swipe Left";
-                    tumblingAngle.value = 3.14;
-                    sliderValue.value = 270.0;
-                    countValue.value++;
-                  }
-                } else if (countValue.value == 2) {
-                  if (dragDirection.value == QuestionDirection.left) {
-                    currentDemoImage.value = demoData[QuestionDirection.right];
-                    swipeText.value = "Swipe Right";
-                    tumblingAngle.value = 0.0;
-                    sliderValue.value = 90.0;
-                    countValue.value++;
-                  }
-                } else if (countValue.value == 3) {
-                  if (dragDirection.value == QuestionDirection.right) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const VisualAcuityInitiatePage(),
-                      ),
-                    );
-                  }
-                }
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(35)),
-                  color: AppColor.scaffold,
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.black.withOpacity(0.1), // Shadow color at the top
-                      Colors.white.withOpacity(0.05),
-                      Colors.transparent, // Shadow color with less opacity
-                      AppColor.scaffold,
-                      AppColor.scaffold, // Original color of the container
-                    ],
-                    stops: const [
-                      0.0, // Shadow starts at the top of the container
-                      0.1,
-                      1, // Less opaque shadow starts at 20% of the container
-                      1,
-                      0.1, // Original color starts from 10% of the container
-                    ],
+              SizedBox(
+                height: AppSize.height(context) * 0.2,
+                child: Center(
+                  child: Transform.rotate(
+                    angle: tumblingAngle.value,
+                    child: SvgPicture.asset(
+                      AppImages.tumblingE,
+                      height: AppSize.height(context) * 0.14,
+                    ),
                   ),
                 ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(35),
-                    topRight: Radius.circular(35),
+              ),
+              Center(
+                child: Container(
+                  height: 4,
+                  width: AppSize.width(context) * 0.25,
+                  decoration: BoxDecoration(
+                    color: AppColor.primary,
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    clipBehavior: Clip.none,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/images/app_bg.svg",
-                        fit: BoxFit.fill,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onPanStart: (details) {
+                    startPoint.value = details.localPosition;
+                  },
+                  onPanUpdate: (details) {
+                    endPoint.value = details.localPosition;
+                  },
+                  onPanEnd: (details) {
+                    double angleDegrees =
+                        _getAngleOfSwipe(startPoint.value, endPoint.value);
+          
+                    if (angleDegrees >= 60 && angleDegrees <= 120) {
+                      dragDirection.value = QuestionDirection.down;
+                    } else if (angleDegrees >= 150 && angleDegrees <= 210) {
+                      dragDirection.value = QuestionDirection.left;
+                    } else if (angleDegrees >= 240 && angleDegrees <= 300) {
+                      dragDirection.value = QuestionDirection.up;
+                    } else if (angleDegrees >= 330 || angleDegrees <= 30) {
+                      dragDirection.value = QuestionDirection.right;
+                    } else {
+                      //Interactive toast, set [isIgnoring] false.
+                      AppToast.showToast(
+                        context,
+                        loc.swipeGestureError,
+                      );
+                      return;
+                    }
+          
+                    if (countValue.value == 0) {
+                      if (dragDirection.value == QuestionDirection.up) {
+                        currentDemoImage.value = demoData[QuestionDirection.down];
+                        swipeText.value = "Swipe Down";
+                        tumblingAngle.value = 7.85;
+                        //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
+                        sliderValue.value = 180.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 1) {
+                      if (dragDirection.value == QuestionDirection.down) {
+                        currentDemoImage.value = demoData[QuestionDirection.left];
+                        swipeText.value = "Swipe Left";
+                        tumblingAngle.value = 3.14;
+                        sliderValue.value = 270.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 2) {
+                      if (dragDirection.value == QuestionDirection.left) {
+                        currentDemoImage.value = demoData[QuestionDirection.right];
+                        swipeText.value = "Swipe Right";
+                        tumblingAngle.value = 0.0;
+                        sliderValue.value = 90.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 3) {
+                      if (dragDirection.value == QuestionDirection.right) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const VisualAcuityInitiatePage(),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(35)),
+                      color: AppColor.scaffold,
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.1), // Shadow color at the top
+                          Colors.white.withOpacity(0.05),
+                          Colors.transparent, // Shadow color with less opacity
+                          AppColor.scaffold,
+                          AppColor.scaffold, // Original color of the container
+                        ],
+                        stops: const [
+                          0.0, // Shadow starts at the top of the container
+                          0.1,
+                          1, // Less opaque shadow starts at 20% of the container
+                          1,
+                          0.1, // Original color starts from 10% of the container
+                        ],
                       ),
-                      Positioned(
-                        top: 60,
-                        left: 0,
-                        right: 0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                "Instructions",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Center(
-                              child: Text(
-                                swipeText.value,
-                                style: applyFiraSansFont(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Transform.rotate(
-                                angle: (pi / 180) * sliderValue.value,
-                                child: Image.asset(
-                                  "assets/images/animation_up.gif",
-                                  height: AppSize.height(context) * 0.4,
-                                ),
-                              ),
-                            ),
-                            Transform.translate(
-                              offset: const Offset(20, -40),
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VisualAcuityInitiatePage(),
-                                    ),
-                                  );
-                                },
-                                style: OutlinedButton.styleFrom(
-                                  side: const BorderSide(
-                                    color: AppColor.grey,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
+                      ),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        clipBehavior: Clip.none,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/images/app_bg.svg",
+                            fit: BoxFit.fill,
+                          ),
+                          Positioned(
+                            top: 60,
+                            left: 0,
+                            right: 0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
                                   child: Text(
-                                    "Skip",
+                                    "Instructions",
                                     style: applyRobotoFont(
                                       fontSize: 14,
-                                      fontWeight: FontWeight.w500,
                                       color: AppColor.grey,
                                     ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Center(
+                                  child: Text(
+                                    swipeText.value,
+                                    style: applyFiraSansFont(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Transform.rotate(
+                                    angle: (pi / 180) * sliderValue.value,
+                                    child: Image.asset(
+                                      "assets/images/animation_up.gif",
+                                      height: AppSize.height(context) * 0.4,
+                                    ),
+                                  ),
+                                ),
+                                Transform.translate(
+                                  offset: const Offset(20, -40),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisualAcuityInitiatePage(),
+                                        ),
+                                      );
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      side: const BorderSide(
+                                        color: AppColor.grey,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12.0),
+                                      child: Text(
+                                        "Skip",
+                                        style: applyRobotoFont(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColor.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
