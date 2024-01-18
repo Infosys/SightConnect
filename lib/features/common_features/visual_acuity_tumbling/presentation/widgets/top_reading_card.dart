@@ -171,7 +171,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         );
 
         if (eyeLandmarksInsideTheBox) {
-          int newDistance =
+          _distanceToFace =
               MachineLearningCameraService.calculateDistanceToScreen(
             leftEyeLandmark: eyeLandmarks[0],
             rightEyeLandmark: eyeLandmarks[1],
@@ -181,7 +181,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
-          _updateDistance(newDistance);
+          // _updateDistance(newDistance);
         } else {
           _resetValues();
         }
