@@ -3,13 +3,13 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/pages/patient_appointment_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/appointment_booking_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -92,7 +92,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return const PatientAppointmentPage();
+                            return const AppointmentBooking();
                           },
                         ),
                       );

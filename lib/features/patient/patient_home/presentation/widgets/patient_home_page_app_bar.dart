@@ -31,7 +31,7 @@ class PatientHomePageAppBar extends ConsumerWidget
           Image.asset(
             AppImages.logo,
             height: 40,
-            width: 120,
+            width: 140,
           ),
         ],
       ),

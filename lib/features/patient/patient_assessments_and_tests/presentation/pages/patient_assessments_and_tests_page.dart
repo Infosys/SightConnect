@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
@@ -131,101 +132,117 @@ class AssessmentsAndTestsPage extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           final currentData = data[index];
-          return Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Column(
+          return Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
+                          AutoSizeText(
+                            'EID: ${currentData.encounterId}',
+                            minFontSize: 12,
+                            maxLines: 1,
+                            style: applyFiraSansFont(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                             ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: _checkColorMapper(
-                                currentData.encounterStatus,
-                              ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            currentData.triageResultStartDate
+                                    ?.formatDateTimeMonthName ??
+                                "",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
                             ),
-                            child: Text(
-                              currentData.encounterStatus?.name ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 10,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          )
+                          ),
                         ],
                       ),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'EID: ${currentData.encounterId}',
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.grey,
-                              ),
+                    ),
+                    const Spacer(),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: _checkColorMapper(
+                              currentData.encounterStatus,
                             ),
-                            const SizedBox(height: 2),
-                            Text(
-                              currentData.triageResultStartDate?.formateDate ??
-                                  "",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.grey,
-                              ),
+                          ),
+                          child: Text(
+                            _formatStatus(currentData.encounterStatus?.name),
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              color: AppColor.white,
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    currentData.triageResultDescription ?? "",
-                    softWrap: true,
-                    style: applyRobotoFont(fontSize: 14),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () => onViewHistory(currentData),
-                        child: const Text("View History"),
-                      ),
-                      (isLoading &&
-                              currentReportId == currentData.triageResultID)
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(),
-                            )
-                          : TextButton(
-                              onPressed: () => onViewReport(currentData),
-                              child: Text(context.loc!.viewReportButton),
-                            )
-                    ],
-                  )
-                ],
-              ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  currentData.triageResultDescription ?? "",
+                  softWrap: true,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(fontSize: 14),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () => onViewHistory(currentData),
+                      child: const Text("View History"),
+                    ),
+                    (isLoading && currentReportId == currentData.triageResultID)
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(),
+                          )
+                        : TextButton(
+                            onPressed: () => onViewReport(currentData),
+                            child: Text(context.loc!.viewReportButton),
+                          )
+                  ],
+                )
+              ],
             ),
           );
         },
         itemCount: data.length,
       ),
     );
+  }
+
+  _formatStatus(String? status) {
+    // check for null and check if underscore present then take first else retura
+    if (status == null) {
+      return "";
+    }
+    if (status.contains("_")) {
+      return ('${status.split("_")[0]} ${status.split("_")[1]}')
+          .toLowerCase()
+          .capitalize();
+    }
+    return status.toLowerCase().capitalize();
   }
 }

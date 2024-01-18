@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -31,10 +32,10 @@ class OptionCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
+          child: AutoSizeText(
             question?.text ?? '',
-            maxLines: 3,
             style: applyFiraSansFont(fontSize: 22),
+            maxLines: 3,
           ),
         ),
         const SizedBox(height: AppSize.klheight),
@@ -42,30 +43,28 @@ class OptionCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              ClipRRect(
-                child: (question?.relatedImage == null ||
-                        question?.relatedImage?.isEmpty == true ||
-                        question?.relatedImage?.first.url == null)
-                    ? Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            ("No Preview Available"),
-                            style: applyRobotoFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.white),
-                          ),
-                        ),
-                      )
-                    : AppNetworkImage(
-                        shapeCircle: false,
-                        imageUrl: question!.relatedImage!.first.url!,
-                        borderRadius: 0.0,
+              (question?.relatedImage == null ||
+                      question?.relatedImage?.isEmpty == true ||
+                      question?.relatedImage?.first.url == null)
+                  ? Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.black.withOpacity(0.5),
                       ),
-              ),
+                      child: Center(
+                        child: Text(
+                          ("No Preview Available"),
+                          style: applyRobotoFont(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.white),
+                        ),
+                      ),
+                    )
+                  : AppNetworkImage(
+                      shapeCircle: false,
+                      imageUrl: question!.relatedImage!.first.url!,
+                      borderRadius: 0.0,
+                    ),
               Positioned(
                 top: 10,
                 right: 10,
@@ -75,7 +74,7 @@ class OptionCard extends StatelessWidget {
                     vertical: AppSize.kspadding,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColor.white.withOpacity(0.7),
+                    color: AppColor.white.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text.rich(
@@ -118,7 +117,7 @@ class OptionCard extends StatelessWidget {
                         ),
                         child: const Center(
                           child: Icon(
-                            Icons.chevron_left_outlined,
+                            Icons.chevron_left_sharp,
                             size: 40,
                           ),
                         ),
@@ -159,7 +158,7 @@ class OptionCard extends StatelessWidget {
                           color: AppColor.black.withOpacity(0.5),
                         ),
                         child: Center(
-                          child: Text(
+                          child: AutoSizeText(
                             question?.relatedImage?.first.imageTitle ?? '',
                             style: applyRobotoFont(
                               fontSize: 14,
@@ -200,7 +199,7 @@ class OptionCard extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Text(
+                      child: AutoSizeText(
                         isNoFirst
                             ? question?.answerOption?.first.answer
                                     ?.answerDisplayString ??
@@ -240,7 +239,7 @@ class OptionCard extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Text(
+                      child: AutoSizeText(
                         isNoFirst
                             ? question?.answerOption?.last.answer
                                     ?.answerDisplayString ??

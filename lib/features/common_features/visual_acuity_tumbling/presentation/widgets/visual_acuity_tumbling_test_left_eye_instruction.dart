@@ -8,8 +8,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../pages/visual_acuity_demo_page.dart';
-
 class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
   const VisualAcuityTumblingLeftEyeInstruction({super.key});
 

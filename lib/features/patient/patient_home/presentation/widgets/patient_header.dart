@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -19,22 +20,18 @@ class PatientHeader extends HookWidget {
     var initialPage = useState<int>(0);
     final displayData = getCarouselData(context.loc!);
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppSize.kmpadding,
-        vertical: AppSize.kmpadding,
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CarouselSlider.builder(
+          SizedBox(
+            child: CarouselSlider.builder(
               carouselController: carouselController.value,
               itemCount: 3,
               options: CarouselOptions(
-                aspectRatio: 1.5,
-                viewportFraction: 1,
                 initialPage: 0,
-                enlargeCenterPage: false,
-                enlargeFactor: 0,
+                aspectRatio: 1.4,
+                viewportFraction: 1,
                 enableInfiniteScroll: false,
                 onPageChanged: (index, _) {
                   activeIndex.value = index;
@@ -44,74 +41,79 @@ class PatientHeader extends HookWidget {
               itemBuilder: (context, index, _) {
                 var data = displayData[index];
 
-                return Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(AppSize.kmradius),
-                      child: Image.asset(
-                        "assets/images/banner_one.png",
-                        fit: BoxFit.cover,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppSize.kmradius),
+                        child: Image.asset(
+                          "assets/images/banner_one.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: AppSize.kmpadding,
-                        top: AppSize.kmpadding,
-                        right: AppSize.width(context) * 0.3,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            data["title"],
-                            softWrap: true,
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.white,
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: AppSize.kmpadding,
+                          top: AppSize.kmpadding,
+                          right: AppSize.width(context) * 0.3,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AutoSizeText(
+                              data["title"],
+                              minFontSize: 14,
+                              maxLines: 2,
+                              style: applyFiraSansFont(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.white,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: AppSize.ksheight),
-                          Text(
-                            data["description"],
-                            softWrap: true,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.white,
-                              height: 1.4,
+                            const SizedBox(height: AppSize.ksheight),
+                            AutoSizeText(
+                              data["description"],
+                              maxLines: 3,
+                              minFontSize: 12,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: AppSize.ksheight),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 0.0),
-                              child: OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  visualDensity:
-                                      const VisualDensity(vertical: -1),
-                                  side: const BorderSide(
-                                    color: AppColor.white,
-                                  ),
+                            const SizedBox(height: AppSize.ksheight),
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                visualDensity:
+                                    const VisualDensity(vertical: -1),
+                                side: const BorderSide(
+                                  color: AppColor.white,
                                 ),
-                                onPressed: () {},
-                                child: Text(
-                                  context.loc!.knowMoreButton,
-                                  style: applyRobotoFont(
-                                    color: AppColor.white,
-                                  ),
+                              ),
+                              onPressed: () {},
+                              child: AutoSizeText(
+                                context.loc!.knowMoreButton,
+                                minFontSize: 10,
+                                maxLines: 1,
+                                style: applyRobotoFont(
+                                  color: AppColor.white,
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 );
-              }),
-          const SizedBox(height: 10),
+              },
+            ),
+          ),
+          const SizedBox(height: 8),
           AnimatedSmoothIndicator(
             onDotClicked: (index) {},
             activeIndex: activeIndex.value,

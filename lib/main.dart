@@ -16,7 +16,6 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
@@ -25,8 +24,8 @@ Future<void> main() async {
   await SharedPreferenceService.init();
   await IOSDeviceInfoService.init();
   await MatomoLogger.init();
-  await Future.delayed(const Duration(milliseconds: 10));
   FlutterNativeSplash.remove();
+
   runApp(
     const ProviderScope(
       child: MyApp(),

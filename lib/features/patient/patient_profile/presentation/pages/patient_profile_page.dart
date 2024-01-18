@@ -134,61 +134,69 @@ class PatientProfilePage extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: ExpansionTile(
+                childrenPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
                 title: Text(
-                  context.loc!.profilePageAddressDetails,
+                  // context.loc!.profilePageAddressDetails,
+                  "Personal Details",
                   style: applyFiraSansFont(fontSize: 16),
                 ),
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Divider(
-                      thickness: 1,
-                      color: AppColor.black.withOpacity(0.2),
-                    ),
+                  PatientInfoCard(
+                    keyText: "ABHA ID",
+                    valueText: patient.profile?.patient?.abhaAddress ?? "-",
                   ),
                   const SizedBox(height: AppSize.ksheight),
-                  ListTile(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        PatientInfoCard(
-                          keyText: loc.myProfileLine,
-                          valueText: PatientHelper.street(
-                            patient.profile?.patient?.address,
-                          ),
+                  const SizedBox(height: AppSize.ksheight),
+                  PatientInfoCard(
+                    keyText: "Email",
+                    valueText: patient.profile?.patient?.email ?? "",
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Divider(
+                    thickness: 1,
+                    color: AppColor.black.withOpacity(0.2),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PatientInfoCard(
+                        keyText: loc.myProfileLine,
+                        valueText: PatientHelper.street(
+                          patient.profile?.patient?.address,
                         ),
-                        const SizedBox(height: AppSize.ksheight),
-                        PatientInfoCard(
-                          keyText: loc.myProfileCity,
-                          valueText: PatientHelper.city(
-                            patient.profile?.patient?.address,
-                          ),
+                      ),
+                      const SizedBox(height: AppSize.ksheight),
+                      PatientInfoCard(
+                        keyText: loc.myProfileCity,
+                        valueText: PatientHelper.city(
+                          patient.profile?.patient?.address,
                         ),
-                        const SizedBox(height: AppSize.ksheight),
-                        PatientInfoCard(
-                          keyText: loc.myProfileDistrict,
-                          valueText: PatientHelper.district(
-                            patient.profile?.patient?.address,
-                          ),
+                      ),
+                      const SizedBox(height: AppSize.ksheight),
+                      PatientInfoCard(
+                        keyText: loc.myProfileDistrict,
+                        valueText: PatientHelper.district(
+                          patient.profile?.patient?.address,
                         ),
-                        const SizedBox(height: AppSize.ksheight),
-                        PatientInfoCard(
-                          keyText: loc.myProfileState,
-                          valueText: PatientHelper.state(
-                            patient.profile?.patient?.address,
-                          ),
+                      ),
+                      const SizedBox(height: AppSize.ksheight),
+                      PatientInfoCard(
+                        keyText: loc.myProfileState,
+                        valueText: PatientHelper.state(
+                          patient.profile?.patient?.address,
                         ),
-                        const SizedBox(height: AppSize.ksheight),
-                        PatientInfoCard(
-                          keyText: loc.myProfilePinCode,
-                          valueText: PatientHelper.pincode(
-                            patient.profile?.patient?.address,
-                          ),
+                      ),
+                      const SizedBox(height: AppSize.ksheight),
+                      PatientInfoCard(
+                        keyText: loc.myProfilePinCode,
+                        valueText: PatientHelper.pincode(
+                          patient.profile?.patient?.address,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppSize.ksheight),
                 ],

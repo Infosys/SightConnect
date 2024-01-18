@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/top_reading_card.dart';
@@ -40,98 +41,101 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
           Navigator.of(context).pop();
         }
       },
-      child: Scaffold(
-        backgroundColor: AppColor.white,
-        key: scaffoldKey,
-        drawer: const TriageStepsDrawer(),
-        appBar: !isTriageMode
-            ? CustomAppbar(
-                leadingIcon: IconButton(
-                  splashRadius: 20,
-                  onPressed: () {
-                    if (isTriageMode) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => TriageExitAlertBox(
-                          content: AppLocalizations.of(context)!
-                              .visualAcuityExitDialog,
-                        ),
-                      );
-                    } else {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  icon: const Icon(CupertinoIcons.back),
-                ),
-                titleSpacing: 0,
-                actions: const [],
-                centerTitle: false,
-                title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
-              )
-            : CustomAppbar(
-                leadingWidth: 60,
-                titleSpacing: 0.0,
-                actions: [
-                  IconButton(
+      child: TraceableWidget(
+        actionName: 'VisualAcuity Test',
+        child: Scaffold(
+          backgroundColor: AppColor.white,
+          key: scaffoldKey,
+          drawer: const TriageStepsDrawer(),
+          appBar: !isTriageMode
+              ? CustomAppbar(
+                  leadingIcon: IconButton(
+                    splashRadius: 20,
                     onPressed: () {
-                      TextScalePopupMenu.show(context, ref);
+                      if (isTriageMode) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => TriageExitAlertBox(
+                            content: AppLocalizations.of(context)!
+                                .visualAcuityExitDialog,
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).pop();
+                      }
                     },
-                    icon: SvgPicture.asset(
-                      "assets/drawer_icons/accessibility.svg",
-                      height: 22,
+                    icon: const Icon(CupertinoIcons.back),
+                  ),
+                  titleSpacing: 0,
+                  actions: const [],
+                  centerTitle: false,
+                  title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
+                )
+              : CustomAppbar(
+                  leadingWidth: 60,
+                  titleSpacing: 0.0,
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        TextScalePopupMenu.show(context, ref);
+                      },
+                      icon: SvgPicture.asset(
+                        "assets/drawer_icons/accessibility.svg",
+                        height: 22,
+                      ),
+                    ),
+                  ],
+                  centerTitle: false,
+                  leadingIcon: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: Image.asset(
+                        AppIcon.hamburgerIcon,
+                      ),
                     ),
                   ),
-                ],
-                centerTitle: false,
-                leadingIcon: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () {
-                    scaffoldKey.currentState!.openDrawer();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    child: Image.asset(
-                      AppIcon.hamburgerIcon,
+                  title: Text(
+                    context.loc!.visualAcuityTitle,
+                    style: applyFiraSansFont(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                title: Text(
-                  context.loc!.visualAcuityTitle,
-                  style: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-        body: const Padding(
-          padding: EdgeInsets.only(
-              // left: AppSize.klpadding,
-              // right: AppSize.klpadding,
+          body: const Padding(
+            padding: EdgeInsets.only(
+                // left: AppSize.klpadding,
+                // right: AppSize.klpadding,
 
-              ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TopReadingCard(),
-              // SizedBox(height: AppSize.kmpadding),
-              /*         AcuityDistanceTile(
-                distanceInCms: 40,
-              ), */
-              Expanded(
-                child: SwipeGestureCard(),
-              ),
-              // Expanded(
-              //   child: BottomInputTab(
-              //     tabs: [
-              //       SwipeGestureCard(),
-              //       VoiceAssistCard(),
-              //     ],
-              //   ),
-              // ),
-            ],
+                ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TopReadingCard(),
+                // SizedBox(height: AppSize.kmpadding),
+                /*         AcuityDistanceTile(
+                  distanceInCms: 40,
+                ), */
+                Expanded(
+                  child: SwipeGestureCard(),
+                ),
+                // Expanded(
+                //   child: BottomInputTab(
+                //     tabs: [
+                //       SwipeGestureCard(),
+                //       VoiceAssistCard(),
+                //     ],
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),

@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 import '../provider/triage_eye_scan_provider.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
@@ -134,203 +135,209 @@ class _PatientTriageEyeCapturingPageState
         ),
       );
     } else {
-      return PopScope(
-        canPop: false,
-        onPopInvoked: (value) {
-          if (value) {
-            return;
-          }
-          showDialog(
-            context: context,
-            builder: (context) => TriageExitAlertBox(
-              content: loc.eyeScanExitDialog,
-            ),
-          );
-        },
-        child: Scaffold(
-          key: scaffoldKey,
-          extendBodyBehindAppBar: true,
-          backgroundColor: AppColor.black,
-          drawer: const TriageStepsDrawer(),
-          appBar: CustomAppbar(
-            iconTheme: const IconThemeData(
-              color: AppColor.white,
-            ),
-            actionsIconTheme: const IconThemeData(
-              color: AppColor.white,
-            ),
-            backgroundColor: Colors.transparent,
-            leadingWidth: 60,
-            titleSpacing: 0.0,
-            centerTitle: false,
-            leadingIcon: InkWell(
-              customBorder: const CircleBorder(),
-              onTap: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Image.asset(
-                  AppIcon.hamburgerIcon,
-                  color: AppColor.white,
-                ),
+      return TraceableWidget(
+        actionName: 'Triage Eye Scan',
+        child: PopScope(
+          canPop: false,
+          onPopInvoked: (value) {
+            if (value) {
+              return;
+            }
+            showDialog(
+              context: context,
+              builder: (context) => TriageExitAlertBox(
+                content: loc.eyeScanExitDialog,
               ),
-            ),
-            title: Text(
-              loc.eyeScanTitle,
-              style: applyFiraSansFont(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            );
+          },
+          child: Scaffold(
+            key: scaffoldKey,
+            extendBodyBehindAppBar: true,
+            backgroundColor: AppColor.black,
+            drawer: const TriageStepsDrawer(),
+            appBar: CustomAppbar(
+              iconTheme: const IconThemeData(
                 color: AppColor.white,
               ),
-            ),
-            actions: [
-              InkWell(
-                onTap: () async {
-                  await _toggleFlash();
+              actionsIconTheme: const IconThemeData(
+                color: AppColor.white,
+              ),
+              backgroundColor: Colors.transparent,
+              leadingWidth: 60,
+              titleSpacing: 0.0,
+              centerTitle: false,
+              leadingIcon: InkWell(
+                customBorder: const CircleBorder(),
+                onTap: () {
+                  scaffoldKey.currentState!.openDrawer();
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-                  child: Icon(
-                    _controller.value.flashMode == FlashMode.off
-                        ? Icons.flash_off
-                        : Icons.flash_on,
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Image.asset(
+                    AppIcon.hamburgerIcon,
                     color: AppColor.white,
                   ),
                 ),
               ),
-            ],
-          ),
-          body: LoadingOverlay(
-            isLoading: isLoading,
-            progressMessage: _progressMessage,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned.fill(
-                  child: CameraPreview(_controller),
+              title: Text(
+                loc.eyeScanTitle,
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.white,
                 ),
-                Positioned(
-                  top: 100,
-                  left: null,
-                  right: null,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      _eyeLocalization(model.currentEye, context),
-                      style: applyRobotoFont(
-                        fontSize: 16,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: const EdgeInsets.all(24),
-                    color: Colors.transparent,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            await _toggleCamera();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppSize.kmpadding,
-                            ),
-                            child: Icon(
-                              Icons.flip_camera_ios,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        InkWell(
-                          onTap: () async {
-                            final image = await _takePicture(context);
-                            logger.d("Image: $image");
-                            if (image == null) {
-                              Fluttertoast.showToast(
-                                  msg: loc.imageNotCapturedToastMessage);
-                              return;
-                            }
-
-                            if (model.currentEye == TriageEyeType.RIGHT) {
-                              setLoading("Uploading Image");
-                              await model.setRightEyeImage(image);
-                              removeLoading();
-                              model.setCurrentEye(TriageEyeType.LEFT);
-                            } else if (model.currentEye == TriageEyeType.LEFT) {
-                              setLoading("Uploading Image");
-                              await model.setLeftEyeImage(image);
-                              // removeLoading();
-                              setLoading("Validating...");
-
-                              await ref
-                                  .read(triageEyeScanProvider)
-                                  .saveTriageEyeScanResponseToDB();
-                              Either<Failure, TriagePostModel> response;
-                              var tiageModel = ref.read(triageProvider);
-
-                              if (tiageModel.triageMode == TriageMode.EVENT) {
-                                response = await tiageModel.saveTriageForEvent(
-                                  3,
-                                  ref.read(addEventDetailsProvider).eventId,
-                                );
-                              } else {
-                                response = await tiageModel.saveTriage(3);
-                              }
-
-                              response.fold(
-                                (failure) async {
-                                  removeLoading();
-                                  logger.d({
-                                    "Failure while saving in local db ":
-                                        failure,
-                                  });
-
-                                  _showServerExceptionDialog(
-                                    context,
-                                    failure,
-                                  );
-                                },
-                                (result) async {
-                                  removeLoading();
-                                  logger.d({
-                                    "saveTriageEyeScanResponseToDB": "Success",
-                                  });
-
-                                  _showTestCompletionDialog(context, result);
-                                },
-                              );
-                            }
-                          },
-                          child: SvgPicture.asset("assets/icons/camera.svg"),
-                        ),
-                        const Spacer(),
-                        Tooltip(
-                          message: loc.eyeAssessmentToolTip,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppSize.kmpadding,
-                            ),
-                            child: Icon(
-                              Icons.info_outline,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        ),
-                      ],
+              ),
+              actions: [
+                InkWell(
+                  onTap: () async {
+                    await _toggleFlash();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kmpadding),
+                    child: Icon(
+                      _controller.value.flashMode == FlashMode.off
+                          ? Icons.flash_off
+                          : Icons.flash_on,
+                      color: AppColor.white,
                     ),
                   ),
                 ),
               ],
+            ),
+            body: LoadingOverlay(
+              isLoading: isLoading,
+              progressMessage: _progressMessage,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned.fill(
+                    child: CameraPreview(_controller),
+                  ),
+                  Positioned(
+                    top: 100,
+                    left: null,
+                    right: null,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        _eyeLocalization(model.currentEye, context),
+                        style: applyRobotoFont(
+                          fontSize: 16,
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: const EdgeInsets.all(24),
+                      color: Colors.transparent,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              await _toggleCamera();
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppSize.kmpadding,
+                              ),
+                              child: Icon(
+                                Icons.flip_camera_ios,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          InkWell(
+                            onTap: () async {
+                              final image = await _takePicture(context);
+                              logger.d("Image: $image");
+                              if (image == null) {
+                                Fluttertoast.showToast(
+                                    msg: loc.imageNotCapturedToastMessage);
+                                return;
+                              }
+
+                              if (model.currentEye == TriageEyeType.RIGHT) {
+                                setLoading("Uploading Image");
+                                await model.setRightEyeImage(image);
+                                removeLoading();
+                                model.setCurrentEye(TriageEyeType.LEFT);
+                              } else if (model.currentEye ==
+                                  TriageEyeType.LEFT) {
+                                setLoading("Uploading Image");
+                                await model.setLeftEyeImage(image);
+                                // removeLoading();
+                                setLoading("Validating...");
+
+                                await ref
+                                    .read(triageEyeScanProvider)
+                                    .saveTriageEyeScanResponseToDB();
+                                Either<Failure, TriagePostModel> response;
+                                var tiageModel = ref.read(triageProvider);
+
+                                if (tiageModel.triageMode == TriageMode.EVENT) {
+                                  response =
+                                      await tiageModel.saveTriageForEvent(
+                                    3,
+                                    ref.read(addEventDetailsProvider).eventId,
+                                  );
+                                } else {
+                                  response = await tiageModel.saveTriage(3);
+                                }
+
+                                response.fold(
+                                  (failure) async {
+                                    removeLoading();
+                                    logger.d({
+                                      "Failure while saving in local db ":
+                                          failure,
+                                    });
+
+                                    _showServerExceptionDialog(
+                                      context,
+                                      failure,
+                                    );
+                                  },
+                                  (result) async {
+                                    removeLoading();
+                                    logger.d({
+                                      "saveTriageEyeScanResponseToDB":
+                                          "Success",
+                                    });
+
+                                    _showTestCompletionDialog(context, result);
+                                  },
+                                );
+                              }
+                            },
+                            child: SvgPicture.asset("assets/icons/camera.svg"),
+                          ),
+                          const Spacer(),
+                          Tooltip(
+                            message: loc.eyeAssessmentToolTip,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppSize.kmpadding,
+                              ),
+                              child: Icon(
+                                Icons.info_outline,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

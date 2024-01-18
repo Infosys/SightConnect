@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -55,9 +57,9 @@ class ProfileHeader extends ConsumerWidget {
             child: Row(
               children: [
                 Image.asset(
-                  "assets/logo/app_logo.png",
+                  AppImages.logo,
                   height: 40,
-                  width: 100,
+                  width: 120,
                 ),
               ],
             ),
@@ -117,40 +119,45 @@ class ProfileHeader extends ConsumerWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        patient.profile?.patient?.name ?? "",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: applyRobotoFont(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Flexible(
-                                        child: Text(
-                                          uniqueId,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          patient.profile?.patient?.name ?? "",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyRobotoFont(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        const SizedBox(height: 8),
+                                        Flexible(
+                                          child: AutoSizeText(
+                                            uniqueId,
+                                            maxLines: 1,
+                                            minFontSize: 14,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                  const SizedBox(width: 10),
                                   QrImageView(
                                     padding: EdgeInsets.zero,
                                     data: uniqueId,
                                     version: QrVersions.auto,
-                                    size: 60.0,
+                                    size: 50.0,
                                   ),
                                 ],
                               ),
@@ -204,22 +211,18 @@ class ProfileHeader extends ConsumerWidget {
   Widget infoCard(String? name, String? value) {
     return Column(
       children: [
-        Text(
+        AutoSizeText(
           name ?? "",
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
             fontSize: 10,
+            color: AppColor.darkGrey,
           ),
         ),
         const SizedBox(height: 2),
-        Text(
+        AutoSizeText(
           value == null ? "" : value.toLowerCase(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 14,
           ),
         ),
       ],

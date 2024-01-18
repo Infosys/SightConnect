@@ -2,10 +2,12 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NearbyVisionCentersCard extends StatelessWidget {
   const NearbyVisionCentersCard({super.key, required this.data});
@@ -40,6 +42,13 @@ class NearbyVisionCentersCard extends StatelessWidget {
       return location;
     }
 
+    (String, String) getCoordinates(FacilityAddressModel address) {
+      if (address.latitude != null) {
+        return (address.latitude!, address.longitude!);
+      }
+      return ("", "");
+    }
+
     return InkWell(
       onTap: () {},
       child: Container(
@@ -60,16 +69,68 @@ class NearbyVisionCentersCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              data.facilityInformation?.facilityName ?? "",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    data.facilityInformation?.facilityName ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    final coordinates = getCoordinates(
+                        data.facilityInformation?.facilityAddressDetails ??
+                            const FacilityAddressModel());
+
+                    logger.d({
+                      "latitude": coordinates.$1,
+                      "longitude": coordinates.$2,
+                    });
+
+                    if (coordinates.$1.isNotEmpty &&
+                        coordinates.$2.isNotEmpty) {
+                      try {
+                        final url =
+                            "https://www.google.com/maps/search/?api=1&query=${coordinates.$1},${coordinates.$2}";
+                        await _launchUrl(url);
+                      } catch (e) {
+                        logger.e(e);
+                      }
+                    }
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        AppIcon.location,
+                        width: 13,
+                        height: 13,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.primary,
+                          BlendMode.srcATop,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Show on Map",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.ksheight),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -125,10 +186,17 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: AppSize.ksheight),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   String getLocation(FacilityAddressModel address) {

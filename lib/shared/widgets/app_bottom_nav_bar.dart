@@ -24,6 +24,7 @@ class AppBottomNavBar extends StatelessWidget {
     var isMobile = Responsive.isMobile(context);
     var items = BottomNavItems.all(loc);
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       backgroundColor: AppColor.white,
       currentIndex: selectedIndex,
       onTap: onSelected,

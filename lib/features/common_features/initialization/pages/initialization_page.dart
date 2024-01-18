@@ -231,10 +231,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       actionName: "InitializationPage",
       path: InitializationPage.routeName,
       child: Scaffold(
-        backgroundColor: const Color(0xFFffdd04),
         body: Stack(
           children: <Widget>[
-            // Positioned.fill ensures the SVG background fills the whole stack
             Positioned.fill(
               child: SvgPicture.asset(
                 'assets/logo/splash_screen_bg.svg',
@@ -245,7 +243,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
               child: Center(
                 child: Image.asset(
                   "assets/logo/splash.png",
-                  width: AppSize.width(context) * 0.5,
+                  width: AppSize.width(context) * 0.4,
                 ),
               ),
             ),

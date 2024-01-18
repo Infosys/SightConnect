@@ -110,7 +110,9 @@ class _VisualAcuityFaceDistancePageViewState
         _controller.startImageStream(_processCameraImage);
       },
     );
-    setState(() {});
+    if (context.mounted) {
+      setState(() {});
+    }
   }
 
 //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
@@ -121,7 +123,9 @@ class _VisualAcuityFaceDistancePageViewState
     }
     _distanceToFace =
         _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    setState(() {});
+    if (context.mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> _getCameraInfo() async {

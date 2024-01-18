@@ -55,13 +55,13 @@ class PatientHomePage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: AppSize.klheight * 4),
+              const SizedBox(height: AppSize.klheight * 4.5),
               const PatientHeader(),
               // const SizedBox(height: AppSize.kmheight),
               // PriorityNotificationList(),
               // const SizedBox(height: AppSize.kmheight),
               // const MyConnectionsList(),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.kmheight),
               const TriageTestCard(),
               const SizedBox(height: AppSize.kmheight),
               const HelplineCard(helpLine: AppText.tollFreeNumber),

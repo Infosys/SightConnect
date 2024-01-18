@@ -34,12 +34,12 @@ class PatientPrivacyPolicyPage extends HookWidget {
         child: Container(
           margin: const EdgeInsets.only(top: 100),
           padding: const EdgeInsets.only(left: 10.0, right: 10),
-           decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("assets/images/base_bg.png"),
-            fit: BoxFit.fill,
-            alignment: Alignment.topCenter),
-      ),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/base_bg.png"),
+                fit: BoxFit.fill,
+                alignment: Alignment.topCenter),
+          ),
           child: Container(
             decoration: BoxDecoration(
               color: AppColor.white,

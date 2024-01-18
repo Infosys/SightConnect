@@ -44,99 +44,96 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
           Navigator.of(context).pop();
         }
       },
-      child: TraceableWidget(
-        actionName: 'VisualAcuity Test Video Instructions Page',
-        child: Scaffold(
-          key: scaffoldKey,
-          drawer: const TriageStepsDrawer(),
-          appBar: !ref.watch(globalProvider).isTriageMode()
-              ? CustomAppbar(
-                  leadingIcon: IconButton(
-                    splashRadius: 20,
-                    onPressed: () {
-                      if (ref.read(globalProvider).isTriageMode()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => TriageExitAlertBox(
-                            content: loc.visualAcuityExitDialog,
-                          ),
-                        );
-                      } else {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    icon: const Icon(CupertinoIcons.back),
-                  ),
-                  titleSpacing: 0,
-                  centerTitle: false,
-                  title: Text(
-                    loc.visualAcuityTitle,
-                  ),
-                )
-              : CustomAppbar(
-                  leadingWidth: 60,
-                  titleSpacing: 0.0,
-                  centerTitle: false,
-                  leadingIcon: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                      child: Image.asset(
-                        AppIcon.hamburgerIcon,
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    loc.visualAcuityTitle,
-                    style: applyFiraSansFont(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        TextScalePopupMenu.show(context, ref);
-                      },
-                      icon: SvgPicture.asset(
-                        "assets/drawer_icons/accessibility.svg",
-                        height: 22,
-                      ),
-                    ),
-                  ],
-                ),
-          body: Padding(
-            padding: Responsive.isMobile(context)
-                ? const EdgeInsets.all(AppSize.kmpadding)
-                : const EdgeInsets.all(AppSize.kmpadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  loc.visualAcuityDescription,
-                  softWrap: true,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: AppSize.kmheight),
-                Expanded(child: VisualAcuityInstructionPage(
+      child: Scaffold(
+        key: scaffoldKey,
+        drawer: const TriageStepsDrawer(),
+        appBar: !ref.watch(globalProvider).isTriageMode()
+            ? CustomAppbar(
+                leadingIcon: IconButton(
+                  splashRadius: 20,
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const VisualAcuityDemoPage(),
-                      ),
-                    );
+                    if (ref.read(globalProvider).isTriageMode()) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => TriageExitAlertBox(
+                          content: loc.visualAcuityExitDialog,
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                    }
                   },
-                ))
-              ],
-            ),
+                  icon: const Icon(CupertinoIcons.back),
+                ),
+                titleSpacing: 0,
+                centerTitle: false,
+                title: Text(
+                  loc.visualAcuityTitle,
+                ),
+              )
+            : CustomAppbar(
+                leadingWidth: 60,
+                titleSpacing: 0.0,
+                centerTitle: false,
+                leadingIcon: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () {
+                    scaffoldKey.currentState!.openDrawer();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    child: Image.asset(
+                      AppIcon.hamburgerIcon,
+                    ),
+                  ),
+                ),
+                title: Text(
+                  loc.visualAcuityTitle,
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      TextScalePopupMenu.show(context, ref);
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/drawer_icons/accessibility.svg",
+                      height: 22,
+                    ),
+                  ),
+                ],
+              ),
+        body: Padding(
+          padding: Responsive.isMobile(context)
+              ? const EdgeInsets.all(AppSize.kmpadding)
+              : const EdgeInsets.all(AppSize.kmpadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                loc.visualAcuityDescription,
+                softWrap: true,
+                style: applyRobotoFont(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: AppSize.kmheight),
+              Expanded(child: VisualAcuityInstructionPage(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const VisualAcuityDemoPage(),
+                    ),
+                  );
+                },
+              ))
+            ],
           ),
         ),
       ),
