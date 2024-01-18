@@ -6,15 +6,11 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
-import 'package:logger/logger.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
-import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
   const VisualAcuityFaceDistancePage({

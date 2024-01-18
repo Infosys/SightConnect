@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_face_distance_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -14,7 +15,6 @@ import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_toast.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
 import '../widgets/visual_acuity_tumbling_overlay.dart';
-import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityDemoPage extends HookConsumerWidget {
   const VisualAcuityDemoPage({super.key});

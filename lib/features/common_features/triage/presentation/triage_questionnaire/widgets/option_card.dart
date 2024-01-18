@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class OptionCard extends StatelessWidget {
   final int totalGroupQuestion;
   @override
   Widget build(BuildContext context) {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     bool isNoFirst = question?.answerOption?.first.answer?.answerString == "No";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -227,7 +227,7 @@ class TriageProvider extends ChangeNotifier {
   TriageMode get triageMode => _triageMode;
 
   setTriageMode(TriageMode triageMode) {
-    logger.f({
+    logger.d({
       "triageMode": triageMode,
     });
     _triageMode = triageMode;

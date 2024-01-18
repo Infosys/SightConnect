@@ -25,7 +25,8 @@ Future<void> main() async {
   await SharedPreferenceService.init();
   await IOSDeviceInfoService.init();
   await MatomoLogger.init();
-
+  await Future.delayed(const Duration(milliseconds: 10));
+  FlutterNativeSplash.remove();
   runApp(
     const ProviderScope(
       child: MyApp(),
