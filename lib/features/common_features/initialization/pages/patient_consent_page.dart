@@ -1,12 +1,8 @@
-import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientConsentFormPage extends HookWidget {
@@ -45,7 +41,6 @@ class PatientConsentFormPage extends HookWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-               
                 Text(
                   'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data-',
                   softWrap: true,
