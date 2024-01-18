@@ -48,7 +48,7 @@ abstract class VgAddEventRemoteSource {
   });
 
   Future getEventPatientList({
-    required String patientQueryData,
+    required Map<String, dynamic> patientQueryData,
   });
   Future getSearchEvent({
     required eventId,
@@ -261,13 +261,19 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   }
 
   @override
-  Future getEventPatientList({required String patientQueryData}) async {
+  Future getEventPatientList(
+      {required Map<String, dynamic> patientQueryData}) async {
     const endpoint = "/services/orchestration/api/patients/filter";
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {"queryText": patientQueryData},
+        queryParameters: {
+          "offset": patientQueryData["offset"],
+          "limit": patientQueryData["limit"],
+          "queryText": patientQueryData["searchParams"],
+        },
       );
+      logger.f(patientQueryData);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
             (response.data as List)
@@ -279,6 +285,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         throw ServerException();
       }
     } catch (error) {
+      logger.d(error);
       rethrow;
     }
   }

@@ -36,4 +36,8 @@ abstract class VgAddEventRepository {
   Future getSearchEvent({
     required eventId,
   });
+
+  Future getEventPatientList({
+    required Map<String, dynamic> patientQueryData,
+  });
 }

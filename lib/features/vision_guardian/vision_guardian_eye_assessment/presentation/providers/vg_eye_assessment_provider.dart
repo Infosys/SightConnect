@@ -42,6 +42,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
 
   TextEditingController searchController = TextEditingController();
 
+
   RangeValues currentRangeValues = const RangeValues(40, 80);
   var gender = [
     {"type": "Male", "checked": true},

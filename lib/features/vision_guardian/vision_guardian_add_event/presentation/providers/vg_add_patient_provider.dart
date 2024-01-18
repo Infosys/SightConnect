@@ -8,9 +8,16 @@ var getEventPatientListProvider =
     FutureProvider.autoDispose<List<VisionGuardianEventPatientResponseModel>>(
         (ref) async {
   ref.watch(addPatientEventProvider).patientQueryDataValue;
-  return await ref.watch(vgAddEventRepository).getEventPatientList(
-      patientQueryData:
-          ref.read(addPatientEventProvider).patientQueryDataValue);
+
+  var response = await ref
+      .watch(vgAddEventRepository)
+      .getEventPatientList(patientQueryData: {
+    "searchParams": ref.read(addPatientEventProvider).patientQueryDataValue,
+    "offset": ref.read(addPatientEventProvider).offsetValue,
+    "limit": ref.read(addPatientEventProvider).getLimit
+  });
+  ref.read(addPatientEventProvider).setPatientList(response);
+  return ref.read(addPatientEventProvider).getPatientListValue;
 });
 
 final addPatientEventProvider =
@@ -25,14 +32,51 @@ class AddPatientEventNotifier extends ChangeNotifier {
 
   String patientQueryData = "";
 
+  int limit = 5;
+  int offset = 0;
+
+  int get getLimit => limit;
+  int get offsetValue => offset;
+
   String get patientQueryDataValue => patientQueryData;
 
-  AddPatientEventNotifier({required this.vgAddEventRepository});
+  ScrollController patientListScrollController = ScrollController();
+
+  List<VisionGuardianEventPatientResponseModel> patientList = [];
+
+  List<VisionGuardianEventPatientResponseModel> get getPatientListValue =>
+      patientList;
+
+  AddPatientEventNotifier({required this.vgAddEventRepository}) {
+    patientListScrollController.addListener(scrollBarListener);
+  }
+
+  void setPatientList(List<VisionGuardianEventPatientResponseModel> list) {
+    patientList = patientList + list;
+  }
 
   void setPatientSearchQuery(queryData) {
+    resetFields();
     patientQueryData = queryData;
-    if (patientQueryData.length >= 4) {
+/*     if (patientQueryData.length >= 4) {
+      
+    } */
+    notifyListeners();
+  }
+
+  void scrollBarListener() {
+    if (patientListScrollController.position.pixels ==
+        patientListScrollController.position.maxScrollExtent) {
+      print("scrollBarListener");
+      offset = offset + 1;
+      print(offset);
+      print(limit);
       notifyListeners();
     }
+  }
+
+  void resetFields() {
+    patientList = [];
+    offset = 0;
   }
 }
