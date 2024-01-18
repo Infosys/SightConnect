@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,107 +20,6 @@ import 'visual_acuity_tumbling_overlay.dart';
 
 class VisualAcuityDialog {
   VisualAcuityDialog._();
-
-  static BlurDialogBox showSuccessTemp(BuildContext context) {
-    return BlurDialogBox(
-      insetPadding: EdgeInsets.zero,
-      actionsPadding: EdgeInsets.zero,
-      content: SizedBox(
-        width: AppSize.width(context) * 0.8,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              AppImages.checkMark,
-              height: 40,
-              width: 40,
-              color: AppColor.green,
-            ),
-            const SizedBox(
-              height: AppSize.kmheight,
-            ),
-            Text(
-              AppLocalizations.of(context)!.visualAcuityCompletionDialog,
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Consumer(
-                  builder:
-                      (BuildContext context, WidgetRef ref, Widget? child) {
-                    return TextButton(
-                      onPressed: () async {
-                        var navigator = Navigator.of(context);
-                        ref
-                            .read(
-                                visualAcuityTumblingTestDialogProvider.notifier)
-                            .state = true;
-                        ref.read(triageStepperProvider).goToNextStep();
-                        if (ref.read(globalProvider).isTriageMode()) {
-                          logger.d("Triage Mode");
-                          await ref
-                              .read(tumblingTestProvider)
-                              .saveVisionAcuityResponseToDB();
-                          navigator.pop();
-                          navigator.push(
-                            MaterialPageRoute(
-                              builder: (context) => const TriageEyeScanPage(),
-                              fullscreenDialog: true,
-                            ),
-                          );
-                        } else if (ref
-                            .read(globalProvider)
-                            .isStandaloneMode()) {
-                          logger.d("Standalone Mode");
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const TumblingResultReportPage(),
-                            ),
-                          );
-                        } else {
-                          logger.d("Update Mode");
-
-                          final result = await ref
-                              .read(tumblingTestProvider)
-                              .updateVisualAcuityTumblingResponse();
-
-                          result.fold(
-                            (failure) {
-                              Fluttertoast.showToast(
-                                  msg:
-                                      "Failed to update observation at this moment");
-                            },
-                            (result) {
-                              Fluttertoast.showToast(
-                                  msg: "Observation Updated");
-                            },
-                          );
-                          ref.invalidate(tumblingTestProvider);
-                          navigator.pop();
-                          navigator.pop();
-                          navigator.pop();
-                          navigator.pop();
-                          navigator.pop();
-                        }
-                      },
-                      child: Text(AppLocalizations.of(context)!.proceedButton),
-                    );
-                  },
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-      actions: const [],
-    );
-  }
 
   static SizedBox showEyeInstructionDialog(BuildContext context, Eye eye) {
     return SizedBox(
@@ -254,5 +154,149 @@ class VisualAcuityDialog {
       default:
         return "";
     }
+  }
+}
+
+class VisualAcuitySuccessDialog extends HookConsumerWidget {
+  const VisualAcuitySuccessDialog({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var isLoading = useState<bool>(false);
+    return BlurDialogBox(
+      insetPadding: EdgeInsets.zero,
+      actionsPadding: EdgeInsets.zero,
+      content: isLoading.value
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Loading...",
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const SizedBox(
+                  height: 45,
+                  width: 45,
+                  child: CircularProgressIndicator(),
+                ),
+              ],
+            )
+          : SizedBox(
+              width: AppSize.width(context) * 0.8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    AppImages.checkMark,
+                    height: 40,
+                    width: 40,
+                    color: AppColor.green,
+                  ),
+                  const SizedBox(
+                    height: AppSize.kmheight,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.visualAcuityCompletionDialog,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Consumer(
+                        builder: (
+                          BuildContext context,
+                          WidgetRef ref,
+                          Widget? child,
+                        ) {
+                          final isAcuityDialog = ref.read(
+                              visualAcuityTumblingTestDialogProvider.notifier);
+                          final stepper = ref.read(triageStepperProvider);
+                          final global = ref.read(globalProvider);
+                          return TextButton(
+                            onPressed: () async {
+                              var navigator = Navigator.of(context);
+                              try {
+                                isLoading.value = true;
+                                isAcuityDialog.state = true;
+                                stepper.goToNextStep();
+
+                                if (global.isTriageMode()) {
+                                  logger.d("Triage Mode");
+                                  await _saveTriageMode(ref, navigator);
+                                } else if (global.isStandaloneMode()) {
+                                  logger.d("Standalone Mode");
+                                  _saveStandAloneMode(navigator);
+                                } else {
+                                  logger.d("Update Mode");
+                                  await _saveUpdateMode(ref, navigator);
+                                }
+                                isLoading.value = false;
+                              } catch (e) {
+                                logger.d({"VisualAcuitySuccessDialog": e});
+                                isLoading.value = false;
+                              }
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.proceedButton,
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+      actions: const [],
+    );
+  }
+
+  Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
+    await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
+    navigator.pop();
+    navigator.pop();
+    navigator.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const TriageEyeScanPage(),
+        fullscreenDialog: true,
+      ),
+    );
+  }
+
+  void _saveStandAloneMode(NavigatorState navigator) {
+    navigator.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const TumblingResultReportPage(),
+      ),
+    );
+  }
+
+  Future<void> _saveUpdateMode(WidgetRef ref, NavigatorState navigator) async {
+    final result = await ref
+        .read(tumblingTestProvider)
+        .updateVisualAcuityTumblingResponse();
+
+    result.fold(
+      (failure) {
+        Fluttertoast.showToast(
+            msg: "Failed to update observation at this moment");
+      },
+      (result) {
+        Fluttertoast.showToast(msg: "Observation Updated");
+      },
+    );
+    ref.invalidate(tumblingTestProvider);
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
   }
 }

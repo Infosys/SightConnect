@@ -1,19 +1,16 @@
 import 'dart:math';
-
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_face_distance_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_toast.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
-import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityDemoPage extends HookWidget {
   const VisualAcuityDemoPage({super.key});
@@ -132,7 +129,8 @@ class VisualAcuityDemoPage extends HookWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const VisualAcuityInitiatePage(),
+                        builder: (context) =>
+                            const VisualAcuityFaceDistancePage(),
                       ),
                     );
                   }

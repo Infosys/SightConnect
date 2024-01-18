@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
@@ -8,14 +7,13 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 // import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
-
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:millimeters/millimeters.dart';
+// import 'package:millimeters/millimeters.dart';
 import '../../../../../main.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
 import '../providers/machine_learning_camera_service.dart';
@@ -77,159 +75,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  Future<void> _startLiveFeed() async {
-    logger.f("StartLiveFeed Called");
-    _controller = CameraController(
-      _cameras.firstWhere(
-        (element) => element.lensDirection == _cameraLensDirection,
-      ),
-      defaultResolution,
-      enableAudio: false,
-      imageFormatGroup: Platform.isAndroid
-          ? ImageFormatGroup.nv21
-          : ImageFormatGroup.bgra8888,
-    );
-    await _controller.initialize().then(
-      (value) {
-        if (!mounted) {
-          return;
-        }
-        _controller.startImageStream(_processCameraImage);
-      },
-    );
-    setState(() {});
-  }
-
-  Future<void> _getCameraInfo() async {
-    logger.f("GetCameraInfo Called");
-    try {
-      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
-      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
-      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
-      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
-    } catch (error) {
-      logger.e('Error getting camera info: $error');
-      rethrow;
-    }
-  }
-
-  void _processCameraImage(CameraImage image) {
-    logger.f("ProcessCameraImage Called");
-    final camera = _cameras.firstWhere(
-      (element) => element.lensDirection == _cameraLensDirection,
-    );
-    final orientation = _controller.value.deviceOrientation;
-    final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
-      image: image,
-      camera: camera,
-      deviceOrientation: orientation,
-    );
-    if (inputImage == null) return;
-
-    _processImage(inputImage);
-  }
-
-  Future<void> _processImage(InputImage inputImage) async {
-    logger.f("ProcessImage Called");
-    if (!_canProcess) return;
-
-    final meshes = await _meshDetector.processImage(inputImage);
-    const boxSizeRatio = 0.7;
-    final boxWidth = _canvasSize.width * boxSizeRatio;
-    final boxHeight = _canvasSize.height * boxSizeRatio;
-    final boxCenter = Point(
-      _canvasSize.width * 0.5,
-      _canvasSize.height * 0.5,
-    );
-
-    if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
-
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
-        ];
-
-        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraService.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
-          );
-        }).toList();
-
-        final eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
-        );
-
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
-          // _updateDistance(newDistance);
-        } else {
-          _resetValues();
-        }
-      } else {
-        _resetValues();
-      }
-    } else {
-      _resetValues();
-    }
-
-    // Calling the Distance Calculator Painter
-    if (inputImage.metadata?.size != null &&
-        inputImage.metadata?.rotation != null) {
-      final painter = VisualAcuityFaceDistancePainter(
-        boxCenter,
-        boxWidth,
-        boxHeight,
-        _translatedEyeLandmarks,
-        (size) {
-          _canvasSize = size;
-        },
-      );
-      _customPaint = CustomPaint(painter: painter);
-    } else {
-      _customPaint = null;
-    }
-
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  void _updateDistance(int newDistance) {
-    _distanceBuffer.add(newDistance);
-    if (_distanceBuffer.length > bufferSize) {
-      _distanceBuffer.removeAt(0);
-    }
-    _distanceToFace =
-        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    setState(() {});
-  }
-
-  void _resetValues() {
-    _translatedEyeLandmarks = [];
-    _distanceToFace = null;
-  }
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
@@ -247,14 +92,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     logger.f("Dispose Called");
     _stopLiveFeed();
     super.dispose();
-  }
-
-  Future<void> _stopLiveFeed() async {
-    logger.f("Stop Live Feed Called");
-    _canProcess = false;
-    _meshDetector.close();
-    await _controller.stopImageStream();
-    await _controller.dispose();
   }
 
   @override
@@ -278,7 +115,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       child: Container(
         height: 200,
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kmpadding - 3, vertical: AppSize.kmpadding),
+          horizontal: AppSize.kmpadding - 3,
+          vertical: AppSize.kmpadding,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -385,6 +224,169 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         ),
       ),
     );
+  }
+
+  Future<void> _startLiveFeed() async {
+    logger.f("StartLiveFeed Called");
+    _controller = CameraController(
+      _cameras.firstWhere(
+        (element) => element.lensDirection == _cameraLensDirection,
+      ),
+      defaultResolution,
+      enableAudio: false,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : ImageFormatGroup.bgra8888,
+    );
+    await _controller.initialize().then(
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        _controller.startImageStream(_processCameraImage);
+      },
+    );
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _getCameraInfo() async {
+    logger.f("GetCameraInfo Called");
+    try {
+      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
+      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
+      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
+      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
+    } catch (error) {
+      logger.e('Error getting camera info: $error');
+      rethrow;
+    }
+  }
+
+  void _processCameraImage(CameraImage image) {
+    final camera = _cameras.firstWhere(
+      (element) => element.lensDirection == _cameraLensDirection,
+    );
+    final orientation = _controller.value.deviceOrientation;
+    final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
+      image: image,
+      camera: camera,
+      deviceOrientation: orientation,
+    );
+    if (inputImage == null) return;
+
+    _processImage(inputImage);
+  }
+
+  Future<void> _processImage(InputImage inputImage) async {
+    if (!_canProcess) return;
+
+    final meshes = await _meshDetector.processImage(inputImage);
+    const boxSizeRatio = 0.7;
+    final boxWidth = _canvasSize.width * boxSizeRatio;
+    final boxHeight = _canvasSize.height * boxSizeRatio;
+    final boxCenter = Point(
+      _canvasSize.width * 0.5,
+      _canvasSize.height * 0.5,
+    );
+
+    if (meshes.isNotEmpty) {
+      final mesh = meshes[0];
+      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final eyeLandmarks = [
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        ];
+
+        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+          return MachineLearningCameraService.translator(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
+          );
+        }).toList();
+
+        final eyeLandmarksInsideTheBox =
+            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+          _translatedEyeLandmarks,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+
+        if (eyeLandmarksInsideTheBox) {
+          _distanceToFace =
+              MachineLearningCameraService.calculateDistanceToScreen(
+            leftEyeLandmark: eyeLandmarks[0],
+            rightEyeLandmark: eyeLandmarks[1],
+            focalLength: _focalLength,
+            sensorX: _sensorX,
+            sensorY: _sensorY,
+            imageWidth: inputImage.metadata!.size.width.toInt(),
+            imageHeight: inputImage.metadata!.size.height.toInt(),
+          );
+          // _updateDistance(newDistance);
+        } else {
+          _resetValues();
+        }
+      } else {
+        _resetValues();
+      }
+    } else {
+      _resetValues();
+    }
+
+    // Calling the Distance Calculator Painter
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final painter = VisualAcuityFaceDistancePainter(
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _translatedEyeLandmarks,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
+  void _updateDistance(int newDistance) {
+    _distanceBuffer.add(newDistance);
+    if (_distanceBuffer.length > bufferSize) {
+      _distanceBuffer.removeAt(0);
+    }
+    _distanceToFace =
+        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _resetValues() {
+    _translatedEyeLandmarks = [];
+    _distanceToFace = null;
+  }
+
+  Future<void> _stopLiveFeed() async {
+    logger.f("Stop Live Feed Called");
+    _canProcess = false;
+    _meshDetector.close();
+    await _controller.stopImageStream();
+    await _controller.dispose();
   }
 }
 

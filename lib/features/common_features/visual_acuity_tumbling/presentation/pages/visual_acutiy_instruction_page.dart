@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../widgets/visual_acuity_tumling_instruction_carousel.dart';
 
 class VisualAcuityInstructionPage extends HookConsumerWidget {
-  const VisualAcuityInstructionPage({Key? key}) : super(key: key);
-
+  const VisualAcuityInstructionPage({required this.onPressed, Key? key})
+      : super(key: key);
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
@@ -51,7 +51,8 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.klpadding),
+                      horizontal: AppSize.klpadding,
+                    ),
                     child: AnimatedSmoothIndicator(
                       onDotClicked: (index) {},
                       activeIndex: activeIndex.value,
@@ -103,12 +104,7 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
                       activeIndex.value == 4 ? AppColor.primary : null,
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const VisualAcuityTumblingLeftEyeInstruction(),
-                    ),
-                  );
+                  onPressed();
                 },
                 child: Text(
                   activeIndex.value == 3

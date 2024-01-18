@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
@@ -42,6 +43,7 @@ class _VisualAcuityFaceDistancePageViewState
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
   final int bufferSize = 10;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -230,56 +232,74 @@ class _VisualAcuityFaceDistancePageViewState
         ),
       );
     } else {
+      if (isLoading) {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+
       return Scaffold(
         backgroundColor: AppColor.black,
-        body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
-            return Stack(
-              children: [
-                Center(
-                  child: _enablePainterView
-                      ? CameraPreview(
-                          _controller,
-                          child: _customPaint,
-                        )
-                      : CameraPreview(
-                          _controller,
+        body: LoadingOverlay(
+          isLoading: isLoading,
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
+              return Stack(
+                children: [
+                  Center(
+                    child: _enablePainterView
+                        ? CameraPreview(
+                            _controller,
+                            child: _customPaint,
+                          )
+                        : CameraPreview(
+                            _controller,
+                          ),
+                  ),
+                  Positioned(
+                    top: 140,
+                    left: AppSize.width(context) * 0.2,
+                    right: AppSize.width(context) * 0.2,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppColor.primary.withOpacity(0.6),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2,
                         ),
-                ),
-                Positioned(
-                  top: 140,
-                  left: AppSize.width(context) * 0.2,
-                  right: AppSize.width(context) * 0.2,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: AppColor.primary.withOpacity(0.6),
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2,
                       ),
-                    ),
-                    child: Text(
-                      'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      child: Text(
+                        'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
+          onPressed: () async {
+            final navigator = Navigator.of(context);
+            setState(() {
+              isLoading = true;
+            });
+            await _stopLiveFeed();
+            setState(() {
+              isLoading = false;
+            });
+            navigator.pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const VisualAcuityInitiatePage(),
               ),
@@ -301,13 +321,6 @@ class _VisualAcuityFaceDistancePageViewState
       logger.d("AppLifecycleState.resumed");
       _initializeCamera();
     }
-  }
-
-  @override
-  void dispose() {
-    logger.d("Dispose Called");
-    _stopLiveFeed();
-    super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {

@@ -40,22 +40,28 @@ class TriageTestCard extends HookConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  loc.homeTriageCardTitle,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      loc.homeTriageCardTitle,
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  loc.homeTriageCardDescription,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
-                    fontSize: 14,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      loc.homeTriageCardDescription,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),

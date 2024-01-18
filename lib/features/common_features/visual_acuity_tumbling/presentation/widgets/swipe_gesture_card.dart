@@ -44,7 +44,9 @@ class SwipeGestureCard extends HookConsumerWidget {
             context: context,
             builder: (context) {
               return VisualAcuityDialog.showEyeInstructionDialog(
-                  context, next.currentEye!);
+                context,
+                next.currentEye!,
+              );
             });
         next.startGame(Eye.both);
       } else if (next.currentEye == Eye.both && next.isGameOver!) {
@@ -53,7 +55,7 @@ class SwipeGestureCard extends HookConsumerWidget {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return VisualAcuityDialog.showSuccessTemp(context);
+              return const VisualAcuitySuccessDialog();
             });
       }
     });

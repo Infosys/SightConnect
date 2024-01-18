@@ -1,28 +1,25 @@
-import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../widgets/cataract_eye_scan_carousel.dart';
-import '../../widgets/simple_alert_dialog.dart';
 
 class TriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";
 
   const TriageEyeScanCarouselPage({
+    required this.onPressed,
     Key? key,
   }) : super(key: key);
 
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
@@ -92,8 +89,8 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               backgroundColor:
                   activeIndex.value == 6 ? AppColor.primary : AppColor.white,
             ),
-            onPressed: () async {
-              await onPressed(context);
+            onPressed: () {
+              onPressed();
             },
             child: Text(
               activeIndex.value == 6
@@ -109,76 +106,6 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
           const SizedBox(height: AppSize.klheight),
         ],
       ),
-    );
-  }
-
-  Future<void> onPressed(BuildContext context) async {
-    PermissionStatus cameraStatus = await Permission.camera.status;
-    PermissionStatus audioStatus = await Permission.microphone.status;
-
-    if (cameraStatus.isDenied || audioStatus.isDenied) {
-      if (context.mounted) _onPermissionDenied(context);
-    } else if (cameraStatus.isPermanentlyDenied ||
-        audioStatus.isPermanentlyDenied) {
-      if (context.mounted) _onPermissionPermanentlyDenied(context);
-    } else if (cameraStatus.isGranted && audioStatus.isGranted) {
-      var cameras = await availableCameras();
-      if (cameras.isNotEmpty && context.mounted) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            fullscreenDialog: true,
-            builder: (context) => TriageEyeCapturingPage(cameras: cameras),
-          ),
-        );
-      } else {
-        Fluttertoast.showToast(msg: "No camera available");
-      }
-    }
-  }
-
-  void _onPermissionDenied(BuildContext context) async {
-    showMissingPermissionDialog(
-      context: context,
-      onPositiveButtonClick: () async {
-        await Permission.camera.request();
-        await Permission.microphone.request();
-      },
-    );
-  }
-
-  void _onPermissionPermanentlyDenied(BuildContext context) {
-    showMissingPermissionDialog(
-      context: context,
-      positiveButtonLabel: "App Settings",
-      onPositiveButtonClick: () async {
-        await openAppSettings();
-      },
-    );
-  }
-
-  void showMissingPermissionDialog({
-    required BuildContext context,
-    required VoidCallback onPositiveButtonClick,
-    String positiveButtonLabel = "Allow",
-  }) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleAlertDialog(
-          title: "Missing Permissions",
-          description:
-              "Please allow camera and microphone permissions for Eye Scan.",
-          negativeButtonLabel: "Deny",
-          positiveButtonLabel: positiveButtonLabel,
-          onPositiveButtonClick: () {
-            Navigator.of(context).pop();
-            onPositiveButtonClick();
-          },
-          onNegativeButtonClick: () {
-            Navigator.of(context).pop();
-          },
-        );
-      },
     );
   }
 }
