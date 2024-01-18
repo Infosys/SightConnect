@@ -85,13 +85,6 @@ dependencies:
   pinput: ^3.0.1
   image_picker: ^1.0.7
 
-
-
-
-
-
-
-
   password_generator: ^1.0.0
   sqflite_sqlcipher: ^2.2.1
 
@@ -99,7 +92,9 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
 
-  image_path: assets/logo/app_icon.png
+  image_path: 'assets/logo/app_icon.png'
+  adaptive_icon_background: "0xFFFFFFFF"
+
 
 dev_dependencies:
   flutter_test:

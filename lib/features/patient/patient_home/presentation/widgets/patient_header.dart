@@ -54,11 +54,11 @@ class PatientHeader extends HookWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
+                    Container(
+                      padding: EdgeInsets.only(
                         left: AppSize.kmpadding,
                         top: AppSize.kmpadding,
-                        right: AppSize.kmpadding * 5,
+                        right: AppSize.width(context) * 0.3,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,8 +66,7 @@ class PatientHeader extends HookWidget {
                         children: [
                           Text(
                             data["title"],
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
                             style: applyFiraSansFont(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -77,8 +76,7 @@ class PatientHeader extends HookWidget {
                           const SizedBox(height: AppSize.ksheight),
                           Text(
                             data["description"],
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            softWrap: true,
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.white,

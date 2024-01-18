@@ -15,7 +15,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/top_reading_card.dart';
-import '../widgets/visual_acuity_tumbling_overlay.dart';
 
 class VisualAcuityInitiatePage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-initiate";
@@ -24,10 +23,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
-    logger.f("Building VisualAcuityInitiatePage");
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
-
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {
@@ -111,37 +107,32 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                   ),
                 ),
               ),
-        body: VisualAcuityTumblingOverlay(
-          child: IgnorePointer(
-            ignoring: !pointerState,
-            child: const Padding(
-              padding: EdgeInsets.only(
-                  // left: AppSize.klpadding,
-                  // right: AppSize.klpadding,
+        body: const Padding(
+          padding: EdgeInsets.only(
+              // left: AppSize.klpadding,
+              // right: AppSize.klpadding,
 
-                  ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TopReadingCard(),
-                  // SizedBox(height: AppSize.kmpadding),
-                  /*         AcuityDistanceTile(
-                    distanceInCms: 40,
-                  ), */
-                  Expanded(
-                    child: SwipeGestureCard(),
-                  ),
-                  // Expanded(
-                  //   child: BottomInputTab(
-                  //     tabs: [
-                  //       SwipeGestureCard(),
-                  //       VoiceAssistCard(),
-                  //     ],
-                  //   ),
-                  // ),
-                ],
               ),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TopReadingCard(),
+              // SizedBox(height: AppSize.kmpadding),
+              /*         AcuityDistanceTile(
+                distanceInCms: 40,
+              ), */
+              Expanded(
+                child: SwipeGestureCard(),
+              ),
+              // Expanded(
+              //   child: BottomInputTab(
+              //     tabs: [
+              //       SwipeGestureCard(),
+              //       VoiceAssistCard(),
+              //     ],
+              //   ),
+              // ),
+            ],
           ),
         ),
       ),

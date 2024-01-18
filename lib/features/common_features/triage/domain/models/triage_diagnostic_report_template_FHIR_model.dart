@@ -337,6 +337,7 @@ class AnswerModel with _$AnswerModel {
     @TimestampConverter() DateTime? answerDateTime,
     @TimestampConverter() DateTime? answerTime,
     String? answerString,
+    String? answerDisplayString,
     AnswerItemWeightModel? answerItemWeight,
   }) = _AnswerModel;
 

@@ -235,26 +235,67 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             .watch(questionnaireIndexProvider.notifier)
                             .state,
                         total: model.questionnaireSections.length,
-                        onNoButtonPressed: () async {
-                          ref.read(questionnaireIndexProvider.notifier).state++;
-                          model.addQuestionnaireAnswer(
-                            question.id!,
-                            "No",
-                            _getAnswerWeightage(finalValueMap, "No").toInt(),
-                            _getAnswerCode(finalValueMap, "No"),
-                          );
-
-                          if (isLastQuestion) {
-                            model.saveQuestionaireResponse();
-
-                            await model.saveQuestionaireResponseToDB();
-                            ref.read(triageStepperProvider).goToNextStep();
-                          } else {
-                            pageController.animateToPage(
-                              index + 1,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeIn,
+                        onNoButtonPressed: (bool isNav, bool isForward) async {
+                          if (isNav == false) {
+                            ref
+                                .read(questionnaireIndexProvider.notifier)
+                                .state++;
+                            model.addQuestionnaireAnswer(
+                              question.id!,
+                              "No",
+                              _getAnswerWeightage(finalValueMap, "No").toInt(),
+                              _getAnswerCode(finalValueMap, "No"),
                             );
+
+                            if (isLastQuestion) {
+                              model.saveQuestionaireResponse();
+
+                              await model.saveQuestionaireResponseToDB();
+                              ref.read(triageStepperProvider).goToNextStep();
+                            } else {
+                              pageController.animateToPage(
+                                index + 1,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeIn,
+                              );
+                            }
+                          } else {
+                            if (isForward == true) {
+                              ref
+                                  .read(questionnaireIndexProvider.notifier)
+                                  .state++;
+                            } else {
+                              ref
+                                  .read(questionnaireIndexProvider.notifier)
+                                  .state--;
+                            }
+                            model.addQuestionnaireAnswer(
+                              question.id!,
+                              "No",
+                              _getAnswerWeightage(finalValueMap, "No").toInt(),
+                              _getAnswerCode(finalValueMap, "No"),
+                            );
+
+                            if (isLastQuestion) {
+                              model.saveQuestionaireResponse();
+
+                              await model.saveQuestionaireResponseToDB();
+                              ref.read(triageStepperProvider).goToNextStep();
+                            } else {
+                              if (isForward == true) {
+                                pageController.animateToPage(
+                                  index + 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              } else {
+                                pageController.animateToPage(
+                                  index - 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            }
                           }
                         },
                         onYesButtonPressed: () async {
