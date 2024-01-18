@@ -53,14 +53,14 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   @override
   void initState() {
-    logger.f("InitState Called");
+    logger.d("InitState Called");
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _initializeCamera();
   }
 
   Future<void> _initializeCamera() async {
-    logger.f("InitializeCamera Called");
+    logger.d("InitializeCamera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -79,7 +79,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
-      logger.f("AppLifecycleState.inactive");
+      logger.d("AppLifecycleState.inactive");
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("AppLifecycleState.resumed");
@@ -89,7 +89,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   @override
   void dispose() {
-    logger.f("Dispose Called");
+    logger.d("Dispose Called");
     _stopLiveFeed();
     super.dispose();
   }
@@ -227,7 +227,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _startLiveFeed() async {
-    logger.f("StartLiveFeed Called");
+    logger.d("StartLiveFeed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -252,7 +252,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _getCameraInfo() async {
-    logger.f("GetCameraInfo Called");
+    logger.d("GetCameraInfo Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -382,7 +382,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.f("Stop Live Feed Called");
+    logger.d("Stop Live Feed Called");
     _canProcess = false;
     _meshDetector.close();
     await _controller.stopImageStream();
