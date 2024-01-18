@@ -13,6 +13,7 @@ class SimpleAlertDialog extends StatelessWidget {
   final VoidCallback _onNegativeButtonClick;
 
   const SimpleAlertDialog({
+    super.key,
     required String title,
     required String description,
     required String positiveButtonLabel,

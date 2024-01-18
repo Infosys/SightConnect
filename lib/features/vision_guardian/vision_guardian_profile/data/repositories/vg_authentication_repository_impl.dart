@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -28,7 +26,6 @@ class VgAutheticationRepositoryImpl implements VgAuthenticationRepository {
         "/services/orchestration/api/practitioners/filter?officialMobile=$mobile";
     try {
       final response = await _dio.get<List>(endpoint);
-      log(response.data.toString());
 
       return Right(
           response.data!.map((e) => VgProfileModel.fromJson(e)).toList());
