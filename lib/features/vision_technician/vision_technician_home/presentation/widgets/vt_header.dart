@@ -40,39 +40,40 @@ class VTHeader extends HookWidget {
                   color: AppColor.white,
                 ),
               ),
-              TextButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.only(
-                      left: AppSize.kmpadding,
-                      right: AppSize.kspadding,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSize.klradius),
-                      side: const BorderSide(color: AppColor.white),
-                    ),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      "Overall",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.white,
-                      ),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: AppColor.white,
-                    ),
-                  ],
-                ),
-              ),
+              // TextButton(
+              //   onPressed: () {},
+              //   style: ButtonStyle(
+              //     padding: MaterialStateProperty.all(
+              //       const EdgeInsets.only(
+              //         left: AppSize.kmpadding,
+              //         right: AppSize.kspadding,
+              //       ),
+              //     ),
+              //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //       RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(AppSize.klradius),
+              //         side: const BorderSide(color: AppColor.white),
+              //       ),
+              //     ),
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       Text(
+              //         "Overall",
+              //         style: applyRobotoFont(
+              //           fontSize: 12,
+              //           fontWeight: FontWeight.w400,
+              //           color: AppColor.white,
+              //         ),
+              //       ),
+              //       const Icon(
+              //         Icons.keyboard_arrow_down_outlined,
+              //         color: AppColor.white,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+
             ],
           ),
         ),
