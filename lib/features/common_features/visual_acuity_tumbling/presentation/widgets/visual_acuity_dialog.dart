@@ -168,7 +168,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       content: isLoading.value
           ? Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Loading...",
@@ -176,7 +176,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 const SizedBox(
                   height: 45,
                   width: 45,

@@ -3,11 +3,15 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/permission_service.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
 import 'visual_acuity_initiate_page.dart';
@@ -42,14 +46,38 @@ class _VisualAcuityFaceDistancePageViewState
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
-  final int bufferSize = 10;
+  int bufferSize = 10;
   bool isLoading = false;
+  bool isPermissionGranted = false;
 
   @override
   void initState() {
     super.initState();
+    isPermissionGranted = false;
+    isLoading = false;
     WidgetsBinding.instance.addObserver(this);
-    _initializeCamera();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _checkPermissions(context));
+  }
+
+  Future<void> _checkPermissions(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    setState(() {
+      isPermissionGranted = false;
+    });
+
+    final isGranted = await CameraPermissionService.checkPermissions(context);
+
+    if (isGranted) {
+      setState(() {
+        isPermissionGranted = true;
+      });
+
+      _initializeCamera();
+    } else {
+      navigator.pop();
+      Fluttertoast.showToast(msg: "Permission not granted");
+    }
   }
 
   Future<void> _initializeCamera() async {
@@ -218,7 +246,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   Widget build(BuildContext context) {
-    if (_cameras.isEmpty) {
+    if (!isPermissionGranted || isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -232,19 +260,15 @@ class _VisualAcuityFaceDistancePageViewState
         ),
       );
     } else {
-      if (isLoading) {
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      }
-
-      return Scaffold(
-        backgroundColor: AppColor.black,
-        body: LoadingOverlay(
-          isLoading: isLoading,
-          child: LayoutBuilder(
+      return PopScope(
+        canPop: false,
+        onPopInvoked: (value) {
+          if (value) return;
+          _stopLiveFeed();
+        },
+        child: Scaffold(
+          backgroundColor: AppColor.black,
+          body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
               return Stack(
@@ -288,24 +312,21 @@ class _VisualAcuityFaceDistancePageViewState
               );
             },
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final navigator = Navigator.of(context);
-            setState(() {
-              isLoading = true;
-            });
-            await _stopLiveFeed();
-            setState(() {
-              isLoading = false;
-            });
-            navigator.pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const VisualAcuityInitiatePage(),
-              ),
-            );
-          },
-          child: const Icon(Icons.navigate_next),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              final navigator = Navigator.of(context);
+
+              await _stopLiveFeed();
+
+              navigator.pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const VisualAcuityTumblingLeftEyeInstruction(),
+                ),
+              );
+            },
+            child: const Icon(Icons.navigate_next),
+          ),
         ),
       );
     }
@@ -313,19 +334,25 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!isPermissionGranted) return;
     if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
       logger.d("AppLifecycleState.inactive");
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("AppLifecycleState.resumed");
-      _initializeCamera();
+      _checkPermissions(context);
     }
   }
 
   Future<void> _stopLiveFeed() async {
     logger.d("Stop Live Feed Called");
+    setState(() {
+      isLoading = true;
+    });
+
     _canProcess = false;
+
     _meshDetector.close();
     await _controller.stopImageStream();
     await _controller.dispose();

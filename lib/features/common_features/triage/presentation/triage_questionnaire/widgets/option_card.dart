@@ -34,6 +34,7 @@ class OptionCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             question?.text ?? '',
+            maxLines: 3,
             style: applyFiraSansFont(fontSize: 22),
           ),
         ),
@@ -75,7 +76,7 @@ class OptionCard extends StatelessWidget {
                     vertical: AppSize.kspadding,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColor.white.withOpacity(0.8),
+                    color: AppColor.white.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text.rich(
@@ -111,34 +112,36 @@ class OptionCard extends StatelessWidget {
                         onNoButtonPressed(true, false);
                       },
                       child: Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          decoration: BoxDecoration(
-                            color: AppColor.white.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10),
+                        margin: const EdgeInsets.only(left: 20),
+                        decoration: BoxDecoration(
+                          color: AppColor.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.chevron_left_outlined,
+                            size: 40,
                           ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.chevron_left_outlined,
-                              size: 50,
-                            ),
-                          )),
+                        ),
+                      ),
                     ),
                     InkWell(
                       onTap: () {
                         onNoButtonPressed(true, true);
                       },
                       child: Container(
-                          margin: const EdgeInsets.only(right: 20),
-                          decoration: BoxDecoration(
-                            color: AppColor.white.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10),
+                        margin: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          color: AppColor.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.chevron_right_sharp,
+                            size: 40,
                           ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.chevron_right_outlined,
-                              size: 50,
-                            ),
-                          )),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -160,21 +163,21 @@ class OptionCard extends StatelessWidget {
                           child: Text(
                             question?.relatedImage?.first.imageTitle ?? '',
                             style: applyRobotoFont(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
                               color: AppColor.white,
                             ),
                             softWrap: true,
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      )),
+                      ),
+                    ),
             ],
           ),
         ),
         const SizedBox(height: AppSize.klheight),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -209,7 +212,7 @@ class OptionCard extends StatelessWidget {
                         style: applyRobotoFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.blue,
+                          color: AppColor.primary,
                         ),
                       ),
                     ),
@@ -225,7 +228,9 @@ class OptionCard extends StatelessWidget {
                   child: Container(
                     height: AppSize.height(context) * 0.13,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.klpadding - 5, vertical: 0),
+                      horizontal: AppSize.klpadding - 5,
+                      vertical: 0,
+                    ),
                     decoration: const BoxDecoration(
                       color: AppColor.white,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -247,7 +252,7 @@ class OptionCard extends StatelessWidget {
                         style: applyRobotoFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.blue,
+                          color: AppColor.primary,
                         ),
                         softWrap: true,
                       ),

@@ -141,7 +141,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const VisualAcuityInitiatePage(),
+                                const VisualAcuityFaceDistancePage(),
                           ),
                         );
                       }
@@ -229,7 +229,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const VisualAcuityInitiatePage(),
+                                              const VisualAcuityFaceDistancePage(),
                                         ),
                                       );
                                     },

@@ -31,7 +31,12 @@ class TriageExitAlertBox extends HookConsumerWidget {
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
       title: isLoading.value
-          ? const Text("Loading..")
+          ? Text(
+              "Loading..",
+              style: applyRobotoFont(
+                fontSize: 14,
+              ),
+            )
           : const Icon(
               Icons.warning_amber_outlined,
               color: AppColor.orange,

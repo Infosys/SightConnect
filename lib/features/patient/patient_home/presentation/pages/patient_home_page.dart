@@ -16,6 +16,7 @@ import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
@@ -74,14 +75,9 @@ class PatientHomePage extends ConsumerWidget {
 
               InviteCard(
                 onPressed: () {
-                  // Share.share(
-                  //   'check out my website https://example.com',
-                  //   subject: 'Look what I made!',
-                  // );
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const VisualAcuityTumblingPage(),
-                    ),
+                  Share.share(
+                    'check out my website https://example.com',
+                    subject: 'Look what I made!',
                   );
                 },
               ),
