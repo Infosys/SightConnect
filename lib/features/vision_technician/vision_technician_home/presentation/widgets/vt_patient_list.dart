@@ -88,8 +88,10 @@ class VTPatientList extends ConsumerWidget {
                         ),
                       ),
                     ],
-                    rows: List<DataRow>.generate(listOfAssessments.length, (index) {
-                      return getRow(listOfAssessments[index], context, watchRef, ref);
+                    rows: List<DataRow>.generate(listOfAssessments.length,
+                        (index) {
+                      return getRow(
+                          listOfAssessments[index], context, watchRef, ref);
                     }),
                   ),
                 )
@@ -248,6 +250,8 @@ class VTPatientList extends ConsumerWidget {
 
   String categoryMapper(SeverityCategory? category) {
     if (category == null) return "";
-    return category.toString().split('.').last;
+    String newCategory =
+        "${category.toString().split('.').last.sentenceCase()} Consultation";
+    return newCategory;
   }
 }
