@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_eye_assesment_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patient_search.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -34,7 +35,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ScrollController scrollController =
-        ref.read(addPatientEventProvider).patientListScrollController;
+        ref.watch(addPatientEventProvider).patientListScrollController;
     return Padding(
       padding: const EdgeInsets.all(AppSize.kspadding + 2),
       child: Column(
@@ -235,6 +236,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                           );
                   },
                   error: (error, stackTrace) {
+                    logger.f(error.toString());
                     return const Center(child: Text("Error"));
                   },
                   loading: () {

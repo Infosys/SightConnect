@@ -16,6 +16,11 @@ var getEventPatientListProvider =
     "offset": ref.read(addPatientEventProvider).offsetValue,
     "limit": ref.read(addPatientEventProvider).getLimit
   });
+  var controller =
+      ref.watch(addPatientEventProvider).patientListScrollController;
+
+  controller.jumpTo(controller.position.maxScrollExtent);
+
   ref.read(addPatientEventProvider).setPatientList(response);
   return ref.read(addPatientEventProvider).getPatientListValue;
 });
