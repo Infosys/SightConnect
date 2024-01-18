@@ -30,7 +30,6 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'phone_number': '+91$mobile',
           'code': otp,
           'client_id': Env.clientId,
-          'client_secret': Env.clientSecret,
           'scope': Env.scope,
         },
       );
