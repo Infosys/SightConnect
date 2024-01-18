@@ -1,0 +1,91 @@
+{
+  "as": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "bn": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "gu": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "hi": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "kn": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "ml": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "mr": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "or": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "ta": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ],
+
+  "te": [
+    "visualAcuityTestDistanceInstruction",
+    "somethingWentWrong",
+    "triageUpdatedSuccessfully",
+    "noPreviewAvailable",
+    "appointmentTitle",
+    "appointmentSubtitle"
+  ]
+}

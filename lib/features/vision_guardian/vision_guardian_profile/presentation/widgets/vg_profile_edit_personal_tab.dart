@@ -50,9 +50,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       child: SvgPicture.asset(
                         AppIcon.navProfile,
                         colorFilter: const ColorFilter.mode(
-                          AppColor.lightGrey,
-                          BlendMode.srcATop,
-                        ),
+                            AppColor.lightGrey, BlendMode.color),
                       ),
                     ),
                   ),

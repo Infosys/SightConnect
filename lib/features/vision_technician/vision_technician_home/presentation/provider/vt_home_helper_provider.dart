@@ -10,7 +10,7 @@ final vtHomeHelperProvider =
   );
 });
 
-var getAssessmentTableProvider = FutureProvider((ref) async {
+var getAssessmentTableProvider = FutureProvider.autoDispose((ref) async {
   return await ref.watch(vtHomeRepository).getListOfPatients();
 });
 

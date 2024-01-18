@@ -1,20 +1,31 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class VgProfilePersonalDetailsCard extends StatelessWidget {
-  const VgProfilePersonalDetailsCard({super.key});
-
+  const VgProfilePersonalDetailsCard({super.key, required this.profileData});
+  final VgProfileModel profileData;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
+    return Container(
+      padding: const EdgeInsets.all(AppSize.kspadding),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        boxShadow: applyLightShadow(),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppSize.kmradius - 5),
+        ),
+      ),
       child: Container(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Row(),
               Text(
                 "Personal Details",
                 style: applyFiraSansFont(),
@@ -27,7 +38,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "1234567890123456",
+                "-",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const SizedBox(
@@ -38,7 +49,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "priyarajarajan_r01@abcde.com",
+                profileData.officialEmail ?? "-",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const SizedBox(
@@ -49,7 +60,9 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "Undergraduate",
+                profileData.registrationAcademic?.registrationData?[0]
+                        .qualifications?[0].nameOfDegreeOrDiplomaObtained ??
+                    "",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const Divider(),
@@ -58,7 +71,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
-                "12-2, Birla Mandir Road, Adarsh Nagar",
+                profileData.communicationAddress?.address ?? "",
                 style: applyRobotoFont(fontSize: 14, color: AppColor.darkGrey),
               ),
               const SizedBox(
@@ -73,40 +86,12 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Subdistrict",
-                          style: applyRobotoFont(
-                              fontSize: 12, color: AppColor.grey),
-                        ),
-                        Text(
-                          "Sector 51  ",
-                          style: applyRobotoFont(
-                              fontSize: 14, color: AppColor.darkGrey),
-                        ),
-                      ]),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "District",
-                          style: applyRobotoFont(
-                              fontSize: 12, color: AppColor.grey),
-                        ),
-                        Text(
-                          "Guntur",
-                          style: applyRobotoFont(
-                              fontSize: 14, color: AppColor.darkGrey),
-                        ),
-                      ]),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
                           "City",
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Hyderabad",
+                          profileData.communicationAddress?.city ?? "",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -120,7 +105,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "Telangana",
+                          profileData.communicationAddress?.state ?? "",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),
@@ -134,7 +119,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                               fontSize: 12, color: AppColor.grey),
                         ),
                         Text(
-                          "500004",
+                          profileData.communicationAddress?.postalCode ?? "",
                           style: applyRobotoFont(
                               fontSize: 14, color: AppColor.darkGrey),
                         ),

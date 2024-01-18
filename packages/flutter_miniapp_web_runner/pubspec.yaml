@@ -14,14 +14,12 @@ dependencies:
   flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.3.8
   flutter_inappwebview: ^6.0.0
-  dartz: ^0.10.1
+  
   dio: ^5.4.0
   freezed_annotation: ^2.4.1
-  shelf_static: ^1.1.2
   logger: ^2.0.2+1
-  path_provider: ^2.1.1
-  permission_handler: ^11.1.0
-  flutter_archive: ^5.0.0
+ 
+ 
 
 dev_dependencies:
   flutter_test:

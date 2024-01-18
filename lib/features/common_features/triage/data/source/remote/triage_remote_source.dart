@@ -14,6 +14,10 @@ abstract class TriageRemoteSource {
   Future<TriagePostModel> updateTriage({
     required TriageUpdateModel triage,
   });
+  Future<TriagePostModel> saveTriageForEvent({
+    required TriagePostModel triage,
+    required String eventId,
+  });
 }
 
 class TriageRemoteSourceImpl implements TriageRemoteSource {
@@ -123,6 +127,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         throw ServerException();
       }
     } catch (e) {
+      logger.d("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }
@@ -150,6 +155,44 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       if (response.statusCode != null) {
         if (response.statusCode! >= 200 && response.statusCode! < 210) {
           return TriagePostModel.fromJson(response.data);
+        } else {
+          throw ServerException();
+        }
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      logger.d("this is the error ${e.toString()}");
+      throw UnknownException();
+    }
+  }
+
+  @override
+  Future<TriagePostModel> saveTriageForEvent({
+    required TriagePostModel triage,
+    required String eventId,
+  }) async {
+    const endpoint = "/services/triage/api/campaign-events/triage-report";
+    try {
+      logger.d({"triage model to be saved in remote source": triage.toJson()});
+      var response = await dio.post(
+        endpoint,
+        data: triage.toJson(),
+        queryParameters: {
+          "event-id": int.parse(eventId),
+        },
+      );
+
+      logger.d({
+        "API saveTriage": endpoint,
+        "response": response.data,
+      });
+      if (response.statusCode != null) {
+        if (response.statusCode! >= 200 && response.statusCode! < 210) {
+          getTriageModelNotifier.triagePostModel =
+              TriagePostModel.fromJson(response.data);
+
+          return getTriageModelNotifier._triagePostModel;
         } else {
           throw ServerException();
         }

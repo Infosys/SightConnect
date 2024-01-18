@@ -264,4 +264,25 @@ class TriageRepositoryImpl implements TriageRepository {
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, TriagePostModel>> saveTriageResponseForEvent(
+      {required TriagePostModel triageResponse,
+      required String eventId}) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final remoteResponse = await remoteDataSource.saveTriageForEvent(
+            triage: triageResponse, eventId: eventId);
+
+        return Right(remoteResponse);
+      } on ServerException {
+        return Left(ServerFailure(errorMessage: 'This is a server exception'));
+      } on UnknownException {
+        return Left(
+            UnknownFailure(errorMessage: 'This is a unknown exception'));
+      }
+    } else {
+      throw ServerFailure(errorMessage: 'No internet connection');
+    }
+  }
 }

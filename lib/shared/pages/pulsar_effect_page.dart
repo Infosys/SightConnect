@@ -22,10 +22,10 @@ class Pulsar extends StatefulWidget {
   final Curve animationCurve;
 
   @override
-  _PulsarState createState() => _PulsarState();
+  PulsarState createState() => PulsarState();
 }
 
-class _PulsarState extends State<Pulsar> with SingleTickerProviderStateMixin {
+class PulsarState extends State<Pulsar> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
 

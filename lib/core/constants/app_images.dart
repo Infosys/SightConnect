@@ -1,9 +1,12 @@
 class AppImages {
   AppImages._();
 
-  static const String logo = 'assets/logo/logo.png';
+  static const String logo = 'assets/logo/app_logo.png';
+  static const String logoSvg = 'assets/logo/app_logo.svg';
+
   static const String drawerBg = "assets/images/drawer_bg.svg";
   static const String splashBg = "assets/images/splash_bg.svg";
+  static const String scaffoldBg = "assets/images/scaffold_bg.png";
 
   //Patient Appointment Booking
   static const String profileBg = 'assets/images/profile_bg.png';
@@ -37,23 +40,6 @@ class AppImages {
   static const String calendarCheck = 'assets/services/calendar_check.svg';
   static const String doctorNearBy = 'assets/services/doctors_nearby.svg';
   static const String hospitalNearBy = 'assets/services/hospitals_nearby.svg';
-
-  //family
-  static const String familyPerson1 = 'assets/images/family_person_1.png';
-  static const String familyPerson2 = 'assets/images/family_person_2.png';
-
-//discover
-
-  static const String discover = 'assets/images/discover_1.png';
-  static const String discover2 = 'assets/images/discover_2.png';
-
-  //campaings
-  static const String campaign = 'assets/images/campaign_1.png';
-  static const String campaign2 = 'assets/images/campaign_2.png';
-  static const String doctor_2 = 'assets/images/doctor_2.png';
-
-  static const String campaignBgOne = 'assets/images/campaign_bg_one.png';
-  static const String campaignBgTwo = 'assets/images/campaign_bg_two.png';
 
   //tumbling test
 
@@ -99,23 +85,8 @@ class AppImages {
   static const String speaker = "assets/icons/speaker.svg";
   static const String mic = "assets/icons/mic.svg";
 
-  static const String q1 = "assets/images/q1.png";
-  static const String q2 = "assets/images/q2.png";
-  static const String q3 = "assets/images/q3.png";
-  static const String q4 = "assets/images/q4.png";
-  static const String q5 = "assets/images/q5.png";
-  static const String q6 = "assets/images/q6.png";
-  static const String q7 = "assets/images/q7.png";
-  static const String q8 = "assets/images/q8.png";
-  static const String q9 = "assets/images/q9.png";
-  static const String q10 = "assets/images/q10.png";
-  static const String q11 = "assets/images/q11.png";
-  static const String q12 = "assets/images/q12.png";
-  static const String q13 = "assets/images/q13.png";
-  static const String q14 = "assets/images/q14.png";
-
   // vision technician
   static const String searchEmpty = "assets/images/search_empty.png";
 
-  static const String lvpeiLogo= "assets/images/LVPEI_full_logo.svg";
+  static const String lvpeiLogo = "assets/images/LVPEI_full_logo.svg";
 }

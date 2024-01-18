@@ -23,7 +23,6 @@ abstract class TriageLocalSource {
 
   Future<void> deleteTriageResponse();
 
-
   Future<void> saveTriageQuestionnaireLocally({
     required List<PostTriageQuestionModel> triageQuestionnaireResponse,
   });
@@ -176,7 +175,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   Future<int> getTriageCurrentStep() async {
     return await triageDBHelper.getTriageCurrentStep();
   }
-  
+
   @override
   Future<void> deleteTriageResponse() {
     return triageDBHelper.deleteTriageResponse();

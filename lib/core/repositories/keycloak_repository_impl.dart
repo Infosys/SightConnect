@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,12 +26,11 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
         url,
         options: Options(contentType: "application/x-www-form-urlencoded"),
         data: {
-          'grant_type': 'password',
+          'grant_type': Env.grantType,
           'phone_number': '+91$mobile',
           'code': otp,
-          'client_id': "microservices",
-          'client_secret': "microservices",
-          'scope': 'openid profile email',
+          'client_id': Env.clientId,
+          'scope': Env.scope,
         },
       );
 
@@ -64,8 +64,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           contentType: "application/x-www-form-urlencoded",
         ),
         data: {
-          'client_id': "microservices",
-          'grant_type': 'refresh_token',
+          'client_id': Env.clientId,
+          'grant_type': Env.grantTypeRefresh,
           'refresh_token': refreshToken,
         },
       );
@@ -105,7 +105,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       await _dio.get(
         "/auth/realms/care/protocol/openid-connect/logout",
         queryParameters: {
-          'client_id': "microservices",
+          'client_id': Env.clientId,
           'post_redirect_url': "https://test.com",
           'id_token_hint': PersistentAuthStateService.authState.idToken,
         },

@@ -1,7 +1,7 @@
 class AppIcon {
   AppIcon._();
 
-  static const String logo = 'assets/logo/logo.svg';
+  static const String logo = 'assets/logo/app_icon_2.png';
 
   static const String navHome = 'assets/icons/home.svg';
   static const String navService = 'assets/icons/service.svg';

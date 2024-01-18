@@ -7,20 +7,24 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/p
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VGCarousel extends HookWidget {
-  const VGCarousel({super.key});
-
+class VGCarousel extends HookConsumerWidget {
+  const VGCarousel({super.key, required this.data});
+  final Map<String, dynamic> data;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final CarouselController controller = CarouselController();
 
     var current = useState<int>(0);
 
     final List<Widget> slides = [
-      const VGSlide1(),
-      const VGSlide2(),
-      const VGSlide3(),
+      VGSlide1(
+        eyeAssessment: data["eyeAssessment"],
+        byGender: data["byGender"],
+      ),
+       VGSlide2(dataMapAge: data["byAge"]),
+       VGSlide3(values: data["symptoms"],),
     ];
 
     return Column(

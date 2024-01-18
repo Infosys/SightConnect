@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -12,6 +13,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase_for_event.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
@@ -45,12 +47,14 @@ var triageProvider = ChangeNotifierProvider(
       ref.watch(triageMemberProvider).testPatientId!,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
+      ref.watch(saveTriageUseCaseForEvent),
     );
   },
 );
 
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
+  final SaveTriageUseCaseForEvent _saveTriageUseCaseForEvent;
 
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
@@ -61,16 +65,17 @@ class TriageProvider extends ChangeNotifier {
   final TriageUrgencyRepository _triageUrgencyRepository;
   final int _patientId;
   final TriageLocalSource _triageLocalSource;
+  TriageMode _triageMode = TriageMode.STANDALONE;
 
   TriageProvider(
-    this._saveTriageUseCase,
-    this._getTriageEyeScanResponseLocallyUseCase,
-    this._getQuestionnaireResponseLocallyUseCase,
-    this._getVisionAcuityTumblingResponseLocallyUseCase,
-    this._patientId,
-    this._triageUrgencyRepository,
-    this._triageLocalSource,
-  );
+      this._saveTriageUseCase,
+      this._getTriageEyeScanResponseLocallyUseCase,
+      this._getQuestionnaireResponseLocallyUseCase,
+      this._getVisionAcuityTumblingResponseLocallyUseCase,
+      this._patientId,
+      this._triageUrgencyRepository,
+      this._triageLocalSource,
+      this._saveTriageUseCaseForEvent);
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -106,12 +111,7 @@ class TriageProvider extends ChangeNotifier {
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       organizationCode: assessment.organizationCode,
-      performer: [
-        Performer(
-          role: PerformerRole.PATIENT,
-          identifier: _patientId,
-        )
-      ],
+      performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
@@ -124,7 +124,7 @@ class TriageProvider extends ChangeNotifier {
       userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
       issued: DateTime.now().subtract(const Duration(seconds: 2)),
 
-      source: Source.PATIENT_APP,
+      source: getSource(),
       sourceVersion: AppText.appVersion,
       incompleteSection: _getInclompleteSection(currentStep),
       imagingSelection: imageSelection,
@@ -132,7 +132,7 @@ class TriageProvider extends ChangeNotifier {
       questionResponse: questionResponse,
     );
 
-    logger.d({"triage model to be saved": triagePostModel});
+    logger.d({"triage model to be saved": triagePostModel.toJson()});
 
     try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
@@ -145,6 +145,93 @@ class TriageProvider extends ChangeNotifier {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<Either<Failure, TriagePostModel>> saveTriageForEvent(
+    int currentStep,
+    String eventId,
+  ) async {
+    List<PostTriageImagingSelectionModel> imageSelection =
+        await _getTriageEyeScanResponseLocallyUseCase
+            .call(GetTriageEyeScanResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageObservationsModel> observations =
+        await _getVisionAcuityTumblingResponseLocallyUseCase
+            .call(GetVisionAcuityTumblingResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageQuestionModel> questionResponse =
+        await _getQuestionnaireResponseLocallyUseCase
+            .call(GetQuestionnaireResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
+    final quessionnaireUrgency =
+        _triageUrgencyRepository.questionnaireUrgency(questionResponse);
+    final visualAcuityUrgency =
+        _triageUrgencyRepository.visualAcuityUrgency(observations);
+    final eyeScanUrgency =
+        _triageUrgencyRepository.eyeScanUrgency(imageSelection);
+    final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
+      quessionnaireUrgency,
+      visualAcuityUrgency,
+      eyeScanUrgency,
+    );
+    //inject assesment
+    DiagnosticReportTemplateFHIRModel assessment =
+        await _triageLocalSource.getAssessment();
+    TriagePostModel triagePostModel = TriagePostModel(
+      patientId: _patientId,
+      serviceType: ServiceType.OPTOMETRY,
+      organizationCode: assessment.organizationCode,
+      performer: getPerformer(),
+      assessmentCode: assessment.id, //from questionnaire MS
+      assessmentVersion: assessment.version, //questionnaire MS
+      cummulativeScore: triageUrgency.toInt(),
+      score: [
+        //from questionnaire MS
+        {"QUESTIONNAIRE": quessionnaireUrgency},
+        {"OBSERVATION": visualAcuityUrgency},
+        {"IMAGE": eyeScanUrgency}
+      ],
+      userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)),
+
+      source: getSource(),
+      sourceVersion: AppText.appVersion,
+      incompleteSection: _getInclompleteSection(currentStep),
+      imagingSelection: imageSelection,
+      observations: observations,
+      questionResponse: questionResponse,
+    );
+
+    logger.d({"triage model for event to be saved": triagePostModel});
+
+    try {
+      Either<Failure, TriagePostModel> response =
+          await _saveTriageUseCaseForEvent.call(
+        SaveTriageParamForEvent(
+          triagePostModel: triagePostModel,
+          eventId: eventId,
+        ),
+      );
+      logger.d({"triage model for event saved": response});
+      _triageLocalSource.resetTriage();
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  TriageMode get triageMode => _triageMode;
+
+  setTriageMode(TriageMode triageMode) {
+    logger.f({
+      "triageMode": triageMode,
+    });
+    _triageMode = triageMode;
+    notifyListeners();
   }
 
   List<PostIncompleteTestModel> _getInclompleteSection(int currentStep) {
@@ -177,6 +264,39 @@ class TriageProvider extends ChangeNotifier {
 
     return incompleteSection;
   }
+
+  List<Performer> getPerformer() {
+    logger.d({
+      "PersistentAuthStateService.authState.roles":
+          PersistentAuthStateService.authState.activeRole
+    });
+    if (PersistentAuthStateService.authState.activeRole!
+        .contains("VISION_GUARDIAN")) {
+      return [
+        Performer(
+          role: PerformerRole.VISION_GUARDIAN,
+          identifier:
+              int.tryParse(PersistentAuthStateService.authState.userId!),
+        ),
+      ];
+    } else {
+      return [
+        Performer(
+          role: PerformerRole.PATIENT,
+          identifier: _patientId,
+        ),
+      ];
+    }
+  }
+
+  Source getSource() {
+    if (PersistentAuthStateService.authState.activeRole!
+        .contains("VISION_GUARDIAN")) {
+      return Source.VG_APP;
+    } else {
+      return Source.PATIENT_APP;
+    }
+  }
 }
 
 var resetProvider = ChangeNotifierProvider.autoDispose(
@@ -194,4 +314,9 @@ class TriageReset extends ChangeNotifier {
     ref.read(triageStepperProvider).reset();
     notifyListeners();
   }
+}
+
+enum TriageMode {
+  STANDALONE,
+  EVENT,
 }

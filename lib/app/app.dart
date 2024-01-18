@@ -17,11 +17,8 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../app_environment.dart';
-
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
-  return false;
-  // return await FlutterJailbreakDetection.jailbroken;
+  return await FlutterJailbreakDetection.jailbroken;
 });
 
 class MyApp extends ConsumerWidget {
@@ -61,7 +58,7 @@ class MyApp extends ConsumerWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              navigatorObservers: AppEnv.isProd ? [matomoObserver] : [],
+              navigatorObservers: [matomoObserver],
 
               supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,

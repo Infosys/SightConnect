@@ -26,6 +26,15 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.black,
+          ),
+        ),
         title: VTSearchBar(
           readOnly: false,
           onSearched: (value) {
@@ -186,7 +195,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${data.name?.sentenceCase()}",
+              "${data.name?.capitalizeFirstOfEach()}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(fontSize: 14),

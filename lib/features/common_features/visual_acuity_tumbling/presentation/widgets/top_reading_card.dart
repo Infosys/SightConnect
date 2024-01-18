@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
+// import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
 
@@ -261,11 +261,11 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   Widget build(BuildContext context) {
     var model = ref.watch(tumblingTestProvider);
     var currentLevel = model.level;
-    final loc = context.loc!;
+    // final loc = context.loc!;
 
-    final physicalities = Millimeters.of(context);
-    final mm = physicalities.mm;
-    var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
+    // final physicalities = Millimeters.of(context);
+    // final mm = physicalities.mm;
+    // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
     // TODO: THIS IS FOR TESTING, Need to remove
     final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;

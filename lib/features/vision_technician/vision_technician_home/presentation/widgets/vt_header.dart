@@ -32,31 +32,12 @@ class VTHeader extends HookWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () async {
-                  // try {
-                  //   // Replace '1600 Amphitheatre Parkway, Mountain View' with your actual address
-                  //   List<Location> locations = await locationFromAddress(
-                  //       '1600 Amphitheatre Parkway, Mountain View');
-
-                  //   if (locations.isNotEmpty) {
-                  //     Location location = locations.first;
-                  //     logger.d(
-                  //         'Latitude: ${location.latitude}, Longitude: ${location.longitude}');
-                  //   } else {
-                  //     logger.d('No location found for the provided address.');
-                  //   }
-                  // } catch (e) {
-
-                  // }
-                },
-                child: Text(
-                  'Analytics',
-                  style: applyFiraSansFont(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: AppColor.white,
-                  ),
+              Text(
+                'Analytics',
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.white,
                 ),
               ),
               TextButton(
@@ -114,15 +95,15 @@ class VTHeader extends HookWidget {
             return GestureDetector(
               onTap: () {},
               child: Container(
-                width: AppSize.kmradius,
-                height: AppSize.kmradius,
+                width: AppSize.kmradius - 2,
+                height: AppSize.kmradius - 2,
                 margin:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                    const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: AppColor.white,
-                    width: 1.5,
+                    width: 1.8,
                   ),
                   boxShadow:
                       current.value == entry.key ? applyMediumShadow() : [],

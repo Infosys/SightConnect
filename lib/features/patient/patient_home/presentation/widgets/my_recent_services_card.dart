@@ -56,7 +56,10 @@ class RecentServicesCard extends ConsumerWidget {
                     data["icon"],
                     height: AppSize.klpadding,
                     width: AppSize.klpadding,
-                    color: AppColor.black,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.black,
+                      BlendMode.srcATop,
+                    ),
                   ),
                   const SizedBox(
                     height: AppSize.ksheight,

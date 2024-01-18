@@ -1,6 +1,6 @@
 import 'dart:math';
 
- import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_toast.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
-import 'visual_acuity_face_distance_page.dart';
+import 'visual_acuity_initiate_page.dart';
 
 class VisualAcuityDemoPage extends HookWidget {
   const VisualAcuityDemoPage({super.key});
@@ -55,18 +55,15 @@ class VisualAcuityDemoPage extends HookWidget {
                 angle: tumblingAngle.value,
                 child: SvgPicture.asset(
                   AppImages.tumblingE,
-                  height: AppSize.height(context) * 0.2,
+                  height: AppSize.height(context) * 0.14,
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: AppSize.kmheight,
-          ),
           Center(
             child: Container(
               height: 4,
-              width: AppSize.width(context) * 0.35,
+              width: AppSize.width(context) * 0.25,
               decoration: BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.circular(4),
@@ -133,10 +130,11 @@ class VisualAcuityDemoPage extends HookWidget {
                 } else if (countValue.value == 3) {
                   if (dragDirection.value == QuestionDirection.right) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const VisualAcuityInitiatePage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const VisualAcuityInitiatePage(),
+                      ),
+                    );
                   }
                 }
               },
@@ -165,8 +163,9 @@ class VisualAcuityDemoPage extends HookWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(35)),
+                    topLeft: Radius.circular(35),
+                    topRight: Radius.circular(35),
+                  ),
                   child: Stack(
                     fit: StackFit.expand,
                     clipBehavior: Clip.none,

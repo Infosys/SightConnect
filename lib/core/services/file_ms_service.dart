@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/app_environment.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -15,7 +15,7 @@ class FileMsService {
   FileMsService(this._dio);
   Future<String> _getImage(String fileId) async {
     try {
-      return "${AppEnv.baseUrl}/services/filems/api/file/download/$fileId";
+      return "${ApiConstant.baseUrl}/services/filems/api/file/download/$fileId";
     } catch (e) {
       throw ServerFailure(errorMessage: "GetImage: $e");
     }
@@ -29,7 +29,6 @@ class FileMsService {
 
     var data = FormData.fromMap({
       'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
-      'specData': 'abc@gmail.com'
     });
 
     try {
@@ -48,5 +47,46 @@ class FileMsService {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Map<String, String> parseUrl(String url) {
+    Map<String, String> mp = {};
+    String baseUrl = "";
+    String endpoint = "";
+    String fileId = "";
+    int slashcount = 0;
+    for (int i = 0; i < url.length; i++) {
+      if (url[i] == '/') {
+        slashcount++;
+      }
+      if (slashcount < 3) {
+        baseUrl += url[i];
+      } else {
+        endpoint += url[i];
+      }
+    }
+
+    for (int i = endpoint.length - 1; i >= 0; i--) {
+      if (endpoint[i] == '/') {
+        break;
+      }
+
+      fileId += endpoint[i];
+    }
+    fileId = _reverseFileId(fileId);
+
+    mp["baseUrl"] = baseUrl;
+    mp["endPoint"] = endpoint;
+    mp["fileId"] = fileId;
+
+    return mp;
+  }
+
+  String _reverseFileId(String input) {
+    String reversed = '';
+    for (int i = input.length - 1; i >= 0; i--) {
+      reversed += input[i];
+    }
+    return reversed;
   }
 }

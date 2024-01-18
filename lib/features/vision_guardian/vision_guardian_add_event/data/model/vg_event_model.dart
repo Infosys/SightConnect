@@ -7,7 +7,7 @@ part 'vg_event_model.g.dart';
 @freezed
 class VisionGuardianEventModel with _$VisionGuardianEventModel {
   factory VisionGuardianEventModel({
-  int? id,
+    int? id,
     String? title,
     String? description,
     int? serviceProvider,
@@ -24,14 +24,12 @@ class VisionGuardianEventModel with _$VisionGuardianEventModel {
 
   factory VisionGuardianEventModel.fromJson(Map<String, dynamic> json) =>
       _$VisionGuardianEventModelFromJson(json);
-
-
 }
 
 @freezed
 class VisionGuardianEventImage with _$VisionGuardianEventImage {
   factory VisionGuardianEventImage({
-  int? id,
+    int? id,
     String? baseUrl,
     String? endpoint,
     String? fileId,
@@ -47,7 +45,6 @@ class VisionGuardianEventImage with _$VisionGuardianEventImage {
 @freezed
 class VisionGuardianEventAddress with _$VisionGuardianEventAddress {
   factory VisionGuardianEventAddress({
-
     int? id,
     String? venueName,
     String? addressLine1,
@@ -70,3 +67,4 @@ class VisionGuardianEventAddress with _$VisionGuardianEventAddress {
   factory VisionGuardianEventAddress.fromJson(Map<String, dynamic> json) =>
       _$VisionGuardianEventAddressFromJson(json);
 }
+ 

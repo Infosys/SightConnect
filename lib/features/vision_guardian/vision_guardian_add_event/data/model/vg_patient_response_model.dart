@@ -4,7 +4,8 @@ part 'vg_patient_response_model.freezed.dart';
 part 'vg_patient_response_model.g.dart';
 
 @freezed
-class VisionGuardianPatientResponseModel with _$VisionGuardianPatientResponseModel {
+class VisionGuardianPatientResponseModel
+    with _$VisionGuardianPatientResponseModel {
   factory VisionGuardianPatientResponseModel({
     int? id,
     String? name,
@@ -17,13 +18,13 @@ class VisionGuardianPatientResponseModel with _$VisionGuardianPatientResponseMod
     String? townName,
     String? pincode,
     int? encounterId,
+    int? diagnosticReportId,
     String? encounterStartDate,
     String? status,
     String? category,
   }) = _VisionGuardianPatientResponseModel;
 
-  factory VisionGuardianPatientResponseModel.fromJson(Map<String, dynamic> json) =>
+  factory VisionGuardianPatientResponseModel.fromJson(
+          Map<String, dynamic> json) =>
       _$VisionGuardianPatientResponseModelFromJson(json);
-       
 }
-

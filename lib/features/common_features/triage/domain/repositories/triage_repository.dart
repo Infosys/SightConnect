@@ -42,4 +42,8 @@ abstract class TriageRepository {
   Future<Either<Failure, List<PostTriageImagingSelectionModel>>>
       getTriageEyeScanResponseLocally();
   Future<Either<Failure, void>> resetTriage();
+  Future<Either<Failure, TriagePostModel>> saveTriageResponseForEvent({
+    required TriagePostModel triageResponse,
+    required String eventId,
+  });
 }

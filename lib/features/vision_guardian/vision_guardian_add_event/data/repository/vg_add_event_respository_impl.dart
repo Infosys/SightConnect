@@ -36,9 +36,13 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
 
   @override
   Future postAddTeammate(
-      {required String eventId, required String actorIdentifier}) async {
+      {required String eventId,
+      required String actorIdentifier,
+      required int officialMobile}) async {
     return await remoteDataSource.postAddTeammate(
-        eventId: eventId, actorIdentifier: actorIdentifier);
+        eventId: eventId,
+        actorIdentifier: actorIdentifier,
+        officialMobile: officialMobile);
   }
 
   @override
@@ -60,14 +64,19 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
   }
 
   @override
-  Future postTriageReport({required String eventId}) async {
-    await remoteDataSource.postTriageReport(eventId: eventId);
-  }
-
-  @override
   Future getTriageReport(
       {required int campaignEventId, required List<int> performerId}) {
     return remoteDataSource.getTriageReport(
         campaignEventId: campaignEventId, performerId: performerId);
+  }
+
+  Future getEventPatientList({required String patientQueryData}) async {
+    return await remoteDataSource.getEventPatientList(
+        patientQueryData: patientQueryData);
+  }
+
+  @override
+  Future getSearchEvent({required eventId}) {
+    return remoteDataSource.getSearchEvent(eventId: eventId);
   }
 }

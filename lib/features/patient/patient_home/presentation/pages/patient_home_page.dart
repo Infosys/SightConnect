@@ -1,10 +1,10 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_face_distance_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/invite_others_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
@@ -19,26 +19,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class PatientHomePage extends ConsumerStatefulWidget {
+class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
-  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
-}
-
-class _PatientHomePageState extends ConsumerState<PatientHomePage> {
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(Duration.zero, () {
-      ref.read(patientHomeProvider).init();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
         onAccessibilityChange: () {
           TextScalePopupMenu.show(context, ref);
@@ -56,52 +43,59 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
         },
       ),
       appBar: const PatientHomePageAppBar(),
-      body: SingleChildScrollView(
-        controller: ref.read(patientDashboardProvider).scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const PatientHeader(),
-            // const SizedBox(height: AppSize.kmheight),
-            // PriorityNotificationList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const MyConnectionsList(),
-            const SizedBox(height: AppSize.ksheight),
-            const TriageTestCard(),
-            const SizedBox(height: AppSize.kmheight),
-            const HelplineCard(helpLine: AppText.tollFreeNumber),
-            const SizedBox(height: AppSize.kmheight),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              AppImages.scaffoldBg,
+            ),
+            alignment: Alignment.topRight,
+          ),
+        ),
+        child: SingleChildScrollView(
+          controller: ref.read(patientDashboardProvider).scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: AppSize.klheight * 4),
+              const PatientHeader(),
+              // const SizedBox(height: AppSize.kmheight),
+              // PriorityNotificationList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const MyConnectionsList(),
+              const SizedBox(height: AppSize.ksheight),
+              const TriageTestCard(),
+              const SizedBox(height: AppSize.kmheight),
+              const HelplineCard(helpLine: AppText.tollFreeNumber),
+              const SizedBox(height: AppSize.kmheight),
 
-            // const RecentServicesCardList(),
+              // const RecentServicesCardList(),
 
-            const NearbyVisionCentersList(),
-            const SizedBox(height: AppSize.kmheight),
+              const NearbyVisionCentersList(),
+              const SizedBox(height: AppSize.kmheight),
 
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const VisualAcuityInitiatePage(),
-                  ),
-                );
-              },
-              child: InviteCard(
+              InviteCard(
                 onPressed: () {
-                  Share.share(
-                    'check out my website https://example.com',
-                    subject: 'Look what I made!',
+                  // Share.share(
+                  //   'check out my website https://example.com',
+                  //   subject: 'Look what I made!',
+                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const VisualAcuityInitiatePage(),
+                    ),
                   );
                 },
               ),
-            ),
-            // const EyeCampsCardList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const GoodToKnowCardList(),
-            // const SizedBox(height: AppSize.kmheight),
-            // const CampaginsList(),
-            const PartnerCard(),
-            const SizedBox(height: AppSize.klheight * 4),
-          ],
+              // const EyeCampsCardList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const GoodToKnowCardList(),
+              // const SizedBox(height: AppSize.kmheight),
+              // const CampaginsList(),
+              const PartnerCard(),
+              const SizedBox(height: AppSize.klheight * 3.2),
+            ],
+          ),
         ),
       ),
     );

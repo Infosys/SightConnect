@@ -41,9 +41,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                visionCenter.facilityInformation?.facilityAddressDetails
-                        ?.addressLine1 ??
-                    "",
+                "${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -66,8 +64,8 @@ class VisionCenterAddressDetails extends ConsumerWidget {
               width: AppSize.kswidth,
             ),
             Text(
-              visionCenter
-                      .facilityInformation?.facilityAddressDetails?.pincode ??
+              visionCenter.facilityInformation?.facilityContactInformation
+                      ?.facilityContactNumber ??
                   "",
               style: applyRobotoFont(
                 fontSize: 14,
@@ -92,9 +90,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             SizedBox(
               width: AppSize.klwidth * 10,
               child: Text(
-                visionCenter.facilityInformation?.facilityAddressDetails
-                        ?.addressLine1 ??
-                    "",
+                "${visionCenter.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${visionCenter.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${visionCenter.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

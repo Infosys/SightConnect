@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -231,13 +232,24 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       path: InitializationPage.routeName,
       child: Scaffold(
         backgroundColor: const Color(0xFFffdd04),
-        body: Pulsar(
-          child: Center(
-            child: Image.asset(
-              "assets/logo/splash.png",
-              width: AppSize.width(context) * 0.5,
+        body: Stack(
+          children: <Widget>[
+            // Positioned.fill ensures the SVG background fills the whole stack
+            Positioned.fill(
+              child: SvgPicture.asset(
+                'assets/logo/splash_screen_bg.svg',
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
+            Pulsar(
+              child: Center(
+                child: Image.asset(
+                  "assets/logo/splash.png",
+                  width: AppSize.width(context) * 0.5,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -4,14 +4,13 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/p
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VGSlide1 extends StatelessWidget {
-  const VGSlide1({super.key});
+class VGSlide1 extends ConsumerWidget {
+  const VGSlide1({super.key, required this.eyeAssessment, required this.byGender});
+ final Map<String, dynamic> eyeAssessment;
+ final Map<String, dynamic> byGender;
 
-  static Map<String, double> dataMale = {"Male": 0};
-  static Map<String, double> dataFemale = {"Female": 0};
-  static Map<String, double> dataOthers = {"Others": 0};
-  static List<double> totalValues = [0, 0, 0];
   static List<List<Color>> genderColor = [
     [AppColor.primary],
     [AppColor.darkPink],
@@ -19,7 +18,15 @@ class VGSlide1 extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    Map<String, double> dataMale = {"Male": double.parse(byGender["male"].toString())};
+    Map<String, double> dataFemale = {
+      "Female": double.parse(byGender["female"].toString())
+    };
+    Map<String, double> dataOthers = {
+      "Others": double.parse(byGender["others"].toString())
+    };
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: AppSize.kspadding,
@@ -49,7 +56,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "-",
+                          eyeAssessment["total"].toString(),
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -69,7 +76,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "-",
+                          eyeAssessment["camps"].toString(),
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -89,7 +96,7 @@ class VGSlide1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "-",
+                          eyeAssessment["doorToDoor"].toString(),
                           style: applyFiraSansFont(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -132,17 +139,17 @@ class VGSlide1 extends StatelessWidget {
                     VGGenderPieChart(
                       data: dataMale,
                       color: genderColor[0],
-                      total: totalValues[0],
+                      total: double.parse(byGender["male"].toString()),
                     ),
                     VGGenderPieChart(
                       data: dataFemale,
                       color: genderColor[1],
-                      total: totalValues[1],
+                      total: double.parse(byGender["female"].toString()),
                     ),
                     VGGenderPieChart(
                       data: dataOthers,
                       color: genderColor[2],
-                      total: totalValues[2],
+                      total: double.parse(byGender["others"].toString()),
                     ),
                   ],
                 ),

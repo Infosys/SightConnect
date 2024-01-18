@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/main.dart';
 
 class AssessmentDetailedReportMapper {
   static TriageReportDetailedEntity toEntity(
-    TriageReportUserEntity profileEntity,
+    TriageReportUserEntity? profileEntity,
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
@@ -20,9 +20,9 @@ class AssessmentDetailedReportMapper {
           triageDetailedReport.observationResultDescription ?? "NA",
       mediaResultDescription:
           triageDetailedReport.mediaResultDescription ?? "NA",
-      patientId: "${profileEntity.id}",
-      patientName: profileEntity.name,
-      patientImage: profileEntity.image,
+      patientId: "${profileEntity?.id ?? ""}",
+      patientName: profileEntity?.name ?? "",
+      patientImage: profileEntity?.image,
       assessmentID: triageDetailedReport.assessmentCode ?? 0,
       diagnosticReportId: triageDetailedReport.diagnosticReportId ?? 0,
       reportDate: triageDetailedReport.issued ?? DateTime.now(),

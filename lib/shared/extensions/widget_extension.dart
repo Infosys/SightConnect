@@ -22,12 +22,31 @@ extension DateExtension on DateTime {
       DateFormat("dd MMM yyyy, hh:mm a").format(this);
 }
 
-extension StringExtension on String {
+extension StringExtension on String? {
   String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1)}";
+    if (this == null) {
+      return "";
+    } else {
+      final String str = this!;
+      return "${str[0].toUpperCase()}${str.substring(1)}";
+    }
   }
 
   String sentenceCase() {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+    if (this == null) {
+      return "";
+    } else {
+      final String str = this!;
+      return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
+    }
+  }
+
+  String capitalizeFirstOfEach() {
+    if (this == null) {
+      return "";
+    } else {
+      final String str = this!;
+      return str.split(" ").map((str) => str.capitalize()).join(" ");
+    }
   }
 }

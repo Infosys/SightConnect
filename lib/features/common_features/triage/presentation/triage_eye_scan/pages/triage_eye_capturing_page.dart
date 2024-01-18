@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -13,6 +14,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -69,6 +71,22 @@ class _PatientTriageEyeCapturingPageState
       Fluttertoast.showToast(msg: e);
     });
   }
+
+  // Future<bool> _cameraPermisson() async {
+  //   final status = await Permission.camera.status;
+  //   if (status.isGranted) {
+  //     return true;
+  //   } else if (status.isDenied) {
+  //     final result = await Permission.camera.request();
+  //     if (result.isGranted) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -257,8 +275,17 @@ class _PatientTriageEyeCapturingPageState
                               await ref
                                   .read(triageEyeScanProvider)
                                   .saveTriageEyeScanResponseToDB();
-                              final response =
-                                  await ref.read(triageProvider).saveTriage(3);
+                              Either<Failure, TriagePostModel> response;
+                              var tiageModel = ref.read(triageProvider);
+
+                              if (tiageModel.triageMode == TriageMode.EVENT) {
+                                response = await tiageModel.saveTriageForEvent(
+                                  3,
+                                  ref.read(addEventDetailsProvider).eventId,
+                                );
+                              } else {
+                                response = await tiageModel.saveTriage(3);
+                              }
 
                               response.fold(
                                 (failure) async {
@@ -444,10 +471,6 @@ class _PatientTriageEyeCapturingPageState
                           ),
                         ),
                       );
-                      if (context.mounted && _controller.value.isInitialized) {
-                        WidgetsBinding.instance.removeObserver(this);
-                        _controller.dispose();
-                      }
                     },
                     child: Text(
                       loc.eyeCaptureCompletionDialogViewResult,
@@ -491,7 +514,7 @@ class _PatientTriageEyeCapturingPageState
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                loc.eyeCaptureTriageSavedLocally,
+                "Server Error",
                 style: applyRobotoFont(
                   color: AppColor.black,
                   fontSize: 16,
@@ -500,7 +523,7 @@ class _PatientTriageEyeCapturingPageState
               ),
               const SizedBox(height: 16),
               Text(
-                failure.errorMessage,
+                "Your result has been saved locally. Please try again later.",
                 style: applyRobotoFont(
                   color: AppColor.black,
                   fontSize: 14,
@@ -515,10 +538,7 @@ class _PatientTriageEyeCapturingPageState
                       ref.read(resetProvider).reset();
                       ref.read(accessibilityProvider).resetBrightness();
                       Navigator.of(context).popUntil((route) => route.isFirst);
-                      if (context.mounted && _controller.value.isInitialized) {
-                        WidgetsBinding.instance.removeObserver(this);
-                        _controller.dispose();
-                      }
+
                       //this will naviagte to local page for future ref
                       // Navigator.of(context).pushReplacement(
                       //   MaterialPageRoute(

@@ -9,8 +9,6 @@ import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart'
 
 import 'package:logger/logger.dart';
 
-import 'dart:async';
-
 class MiniAppDisplayPage extends StatefulWidget {
   const MiniAppDisplayPage({
     required this.miniapp,
@@ -181,6 +179,13 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   return null;
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  var uri = navigationAction.request.url!;
+                  if (![
+                    "https",
+                  ].contains(uri.scheme)) {
+                    return NavigationActionPolicy.CANCEL;
+                  }
+
                   final path = navigationAction.request.url?.path.trim();
                   logger.d("shouldOverrideUrlLoading: $path");
 

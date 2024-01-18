@@ -17,6 +17,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     var rightEyeController = useTextEditingController();
     var leftEyeController = useTextEditingController();
     var bothEyeController = useTextEditingController();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -52,6 +53,11 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   controller: rightEyeController,
                   onChanged: (value) {
+                    bool isNumeric =
+                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+
+                    if (!isNumeric) return;
+
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setVisualAcuityRightEyeValueEntered(value.isNotEmpty);
@@ -78,6 +84,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   controller: leftEyeController,
                   onChanged: (value) {
+                    bool isNumeric =
+                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+
+                    if (!isNumeric) return;
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setVisualAcuityLeftEyeValueEntered(value.isNotEmpty);
@@ -104,6 +114,11 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   controller: bothEyeController,
                   onChanged: (value) {
+                    bool isNumeric =
+                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+
+                    if (!isNumeric) return;
+
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setVisualAcuityBothEyeValueEntered(value.isNotEmpty);

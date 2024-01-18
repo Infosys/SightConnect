@@ -1,5 +1,4 @@
-class VisionGuardianEyeAssessmentPatientModel
-{
+class VisionGuardianEyeAssessmentPatientModel {
   String? name;
   String? age;
   String? gender;
@@ -12,7 +11,7 @@ class VisionGuardianEyeAssessmentPatientModel
   String? image;
   String? prefix;
 
-    VisionGuardianEyeAssessmentPatientModel({
+  VisionGuardianEyeAssessmentPatientModel({
     required this.name,
     required this.age,
     required this.gender,
@@ -26,4 +25,3 @@ class VisionGuardianEyeAssessmentPatientModel
     required this.prefix,
   });
 }
-

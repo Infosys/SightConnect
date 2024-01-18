@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
@@ -19,7 +20,6 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
             child: TextButton(
               onPressed: () {},
               style: ButtonStyle(
-                // backgroundColor: MaterialStateProperty.all(AppColor.primary),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     side: const BorderSide(color: AppColor.primary),
@@ -40,9 +40,19 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
             child: TextButton(
-              onPressed: () {
-                ref.read(addEventDetailsProvider).addEventDetails();
-                Navigator.pop(context);
+              onPressed: () async {
+                final navigator = Navigator.of(context);
+                if ((ref.read(addEventDetailsProvider).formKey)
+                    .currentState!
+                    .validate()) {
+                  try {
+                    await ref.read(addEventDetailsProvider).addEventDetails();
+                    navigator.pop();
+                    Fluttertoast.showToast(msg: "Event added");
+                  } catch (e) {
+                    Fluttertoast.showToast(msg: "Event not added");
+                  }
+                }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(AppColor.primary),

@@ -13,7 +13,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,43 +28,20 @@ class VisionTechnicianHomePage extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () async {
-            // final navigator = ;
-
-            // try {
-            //   var response = await ref
-            //     .watch(patientAssessmentAndTestProvider)
-            //     .getTriageDetailedReport(33200000023);
-            //     logger.d("response $response");
-            //     if(context.mounted){
-            //    Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) {
-            //       return VisionTechnicianAssessmentReportPage(
-            //         assessmentDetailsReport: response,
-            //       );
-            //     },
-
-            //   ));}
-            // } catch (e) {
-            //   logger.d("error $e");
-            // }
-          },
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: AppSize.kspadding,
-              left: AppSize.kmpadding,
-            ),
-            padding: const EdgeInsets.all(5),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColor.white,
-            ),
-            child: SvgPicture.asset(
-              AppIcon.logo,
-              height: 10,
-              width: 10,
-            ),
+        leading: Container(
+          margin: const EdgeInsets.only(
+            top: AppSize.kspadding,
+            left: AppSize.kmpadding,
+          ),
+          padding: const EdgeInsets.all(2),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColor.white,
+          ),
+          child: Image.asset(
+            AppIcon.logo,
+            height: 30,
+            width: 30,
           ),
         ),
         backgroundColor: AppColor.primary,

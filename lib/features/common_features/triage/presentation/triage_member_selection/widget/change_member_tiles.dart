@@ -1,13 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/triage_member_provider.dart';
@@ -18,14 +15,12 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(globalPatientProvider).activeUser;
-    final List<RelatedPartyModel> connectionsList =
-        model?.profile?.patient?.relatedParty ?? [];
-    final currentProfile = model?.profile?.patient;
-    var memberProvider = ref.watch(triageMemberProvider);
-    final selectedValue = useState<int>(-1);
+    final memberProvider = ref.watch(triageMemberProvider);
+    final connectionsList = memberProvider.connectionsList;
+    final currentProfile = memberProvider.currentProfile;
+    final selectedValue = memberProvider.currentIndex;
 
-    if (model == null) {
+    if (currentProfile == null) {
       return const Center(
           child: Text(
         "No Member Found",
@@ -39,7 +34,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
 
     return _content(
       connectionsList,
-      currentProfile!,
+      currentProfile,
       selectedValue,
       memberProvider,
     );
@@ -48,7 +43,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
   Widget _content(
     List<RelatedPartyModel> connectionsList,
     PatientModel currentProfile,
-    ValueNotifier<int> selectedValue,
+    int selectedValue,
     TriageMemberProvider memberProvider,
   ) {
     return ListView.builder(
@@ -65,8 +60,14 @@ class ChangeMemberTiles extends HookConsumerWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: applyLightShadow(),
-                color: AppColor.white,
+                // boxShadow: applyLightShadow(),
+                // color: AppColor.white,
+                border: selectedValue == index
+                    ? Border.all(
+                        color: AppColor.primary,
+                        width: 1,
+                      )
+                    : null,
               ),
               child: RadioListTile<int>(
                 contentPadding: EdgeInsets.zero,
@@ -110,9 +111,9 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   ],
                 ),
                 value: index,
-                groupValue: selectedValue.value,
+                groupValue: selectedValue,
                 onChanged: (value) {
-                  selectedValue.value = value!;
+                  memberProvider.setCurrentIndex(value!);
                   memberProvider.setTestPersonId(person.patientId!);
                 },
               ),
@@ -127,8 +128,14 @@ class ChangeMemberTiles extends HookConsumerWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: applyLightShadow(),
-                color: AppColor.white,
+                // boxShadow: applyLightShadow(),
+                // color: AppColor.white,
+                border: selectedValue == index
+                    ? Border.all(
+                        color: AppColor.primary,
+                        width: 2,
+                      )
+                    : null,
               ),
               child: RadioListTile<int>(
                 contentPadding: EdgeInsets.zero,
@@ -160,7 +167,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                           height: 5,
                         ),
                         Text(
-                          person.relation.toString().split(".").last,
+                          "${person.relation.toString().split(".").last.toLowerCase().capitalize()}, ${person.age} years",
                           style: applyRobotoFont(
                             fontSize: 12,
                             color: AppColor.grey,
@@ -172,9 +179,9 @@ class ChangeMemberTiles extends HookConsumerWidget {
                   ],
                 ),
                 value: index,
-                groupValue: selectedValue.value,
+                groupValue: selectedValue,
                 onChanged: (value) {
-                  selectedValue.value = value!;
+                  memberProvider.setCurrentIndex(value!);
                   memberProvider.setTestPersonId(person.patientId!);
                 },
               ),

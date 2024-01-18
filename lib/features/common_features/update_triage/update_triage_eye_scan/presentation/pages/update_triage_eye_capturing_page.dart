@@ -34,7 +34,7 @@ class _UpdateTriageEyeCapturingPageState
   late CameraController _controller;
   ResolutionPreset defaultResolution = ResolutionPreset.max;
   bool isLoading = false;
-  String _progressMessage = "Loading...";
+  String progressMessage = "Loading...";
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _UpdateTriageEyeCapturingPageState
   void setLoading([String message = "Loading..."]) {
     setState(() {
       isLoading = true;
-      _progressMessage = message;
+      progressMessage = message;
     });
   }
 
