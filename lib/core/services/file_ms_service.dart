@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/app_environment.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -15,7 +15,7 @@ class FileMsService {
   FileMsService(this._dio);
   Future<String> _getImage(String fileId) async {
     try {
-      return "${AppEnv.baseUrl}/services/filems/api/file/download/$fileId";
+      return "${ApiConstant.baseUrl}/services/filems/api/file/download/$fileId";
     } catch (e) {
       throw ServerFailure(errorMessage: "GetImage: $e");
     }

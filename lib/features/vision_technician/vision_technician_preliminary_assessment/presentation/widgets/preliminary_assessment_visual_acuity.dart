@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     var rightEyeController = useTextEditingController();
     var leftEyeController = useTextEditingController();
     var bothEyeController = useTextEditingController();
-    var error = useState<bool>(false);
 
     return Container(
       width: double.infinity,
@@ -55,10 +53,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   controller: rightEyeController,
                   onChanged: (value) {
-                    
                     bool isNumeric =
                         RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
-                    
+
                     if (!isNumeric) return;
 
                     ref
@@ -89,7 +86,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   onChanged: (value) {
                     bool isNumeric =
                         RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
-                    
+
                     if (!isNumeric) return;
                     ref
                         .read(preliminaryAssessmentHelperProvider)
@@ -119,9 +116,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   onChanged: (value) {
                     bool isNumeric =
                         RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
-                    
+
                     if (!isNumeric) return;
-                    
+
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setVisualAcuityBothEyeValueEntered(value.isNotEmpty);

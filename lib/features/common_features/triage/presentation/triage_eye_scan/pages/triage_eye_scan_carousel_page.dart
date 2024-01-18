@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/simple_alert_dialog.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../widgets/cataract_eye_scan_carousel.dart';
+import '../../widgets/simple_alert_dialog.dart';
 
 class TriageEyeScanCarouselPage extends HookConsumerWidget {
   static const String routeName = "/patientEyeScanInstructionsPage";

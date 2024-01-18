@@ -18,42 +18,43 @@ class TriageStepsIntroPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return WillPopScope(
-      onWillPop: () async {
-        var status = await showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
-                ),
-                title: const Text('Are you sure?'),
-                content: const Text('Do you want to exit the Test?'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(false);
-                    },
-                    child: const Text('No'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    child: const Text('Yes'),
-                  ),
-                ],
-              );
-            });
-        if (status) {
-          ref.invalidate(triageQuestionnaireProvider);
-          ref.invalidate(triageEyeScanProvider);
-          ref.invalidate(tumblingTestProvider);
-          ref.invalidate(triageProvider);
-
-          ref.read(patientDashboardProvider).changeIndex(0);
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
         }
-        return false;
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.klradius),
+              ),
+              title: const Text('Are you sure?'),
+              content: const Text('Do you want to exit the Test?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    ref.invalidate(triageQuestionnaireProvider);
+                    ref.invalidate(triageEyeScanProvider);
+                    ref.invalidate(tumblingTestProvider);
+                    ref.invalidate(triageProvider);
+                    ref.read(patientDashboardProvider).changeIndex(0);
+                  },
+                  child: const Text('Yes'),
+                ),
+              ],
+            );
+          },
+        );
       },
       child: Scaffold(
         backgroundColor: AppColor.scaffold,
