@@ -35,14 +35,13 @@ class _VisualAcuityFaceDistancePageViewState
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
+  bool _isBusy = false;
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  final List<int> _distanceBuffer = [];
-  int bufferSize = 10;
   bool isLoading = false;
   bool isPermissionGranted = false;
 
@@ -140,9 +139,12 @@ class _VisualAcuityFaceDistancePageViewState
     _processImage(inputImage);
   }
 
+  // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
-
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -223,17 +225,6 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  // void _updateDistance(int newDistance) {
-  //   _distanceBuffer.add(newDistance);
-  //   if (_distanceBuffer.length > bufferSize) {
-  //     _distanceBuffer.removeAt(0);
-  //   }
-  //   _distanceToFace =
-  //       _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-  //   setState(() {});
-  // }
-
   void _resetValues() {
     _translatedEyeLandmarks = [];
     _distanceToFace = null;
@@ -263,49 +254,45 @@ class _VisualAcuityFaceDistancePageViewState
         },
         child: Scaffold(
           backgroundColor: AppColor.black,
-          body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
-              return Stack(
-                children: [
-                  Center(
-                    child: _enablePainterView
-                        ? CameraPreview(
-                            _controller,
-                            child: _customPaint,
-                          )
-                        : CameraPreview(
-                            _controller,
-                          ),
-                  ),
-                  Positioned(
-                    top: 140,
-                    left: AppSize.width(context) * 0.2,
-                    right: AppSize.width(context) * 0.2,
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColor.primary.withOpacity(0.6),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2,
-                        ),
+          body: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Center(
+                child: _enablePainterView
+                    ? CameraPreview(
+                        _controller,
+                        child: _customPaint,
+                      )
+                    : CameraPreview(
+                        _controller,
                       ),
-                      child: Text(
-                        'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
+              ),
+              Positioned(
+                top: 140,
+                left: AppSize.width(context) * 0.2,
+                right: AppSize.width(context) * 0.2,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColor.primary.withOpacity(0.6),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
                     ),
                   ),
-                ],
-              );
-            },
+                  child: Text(
+                    'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
