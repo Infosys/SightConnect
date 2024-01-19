@@ -220,6 +220,7 @@ class _VisualAcuityFaceDistancePageViewState
       _customPaint = null;
     }
 
+    _isBusy = false;
     if (mounted) {
       setState(() {});
     }
