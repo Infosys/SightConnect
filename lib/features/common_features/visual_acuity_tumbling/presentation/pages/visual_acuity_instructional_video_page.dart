@@ -14,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
 
 class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
   static const String routeName = "/tumbling-test-instructional-video";
