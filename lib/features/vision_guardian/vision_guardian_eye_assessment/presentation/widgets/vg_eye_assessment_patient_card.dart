@@ -17,6 +17,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   final String type;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /* var offsetvalue = ref.watch(visionGuardianEyeAssessmentProvider).getOffset; */
     if (type == "default") {
       return ref.watch(vgEyeAssessmentHelperProvider).when(
           data: (patientDetails) {
@@ -34,14 +35,29 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
             ),
           );
         }
-        return Column(children: [
+        return ListView.builder(
+          itemCount: patientDetails.length,
+          shrinkWrap: true,
+          controller: ref
+              .watch(visionGuardianEyeAssessmentProvider)
+              .eyeAssessmentController,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {},
+              child: vgPatientDataCards(context, patientDetails[index]),
+            );
+          },
+        );
+
+        /*  Column(children: [
           ...patientDetails.map((event) {
             return InkWell(
               onTap: () {},
               child: vgPatientDataCards(context, event),
             );
           }),
-        ]);
+          const CircularProgressIndicator()
+        ]); */
       }, loading: () {
         return const Center(
           child: CircularProgressIndicator(),

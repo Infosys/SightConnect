@@ -43,8 +43,7 @@ abstract class VgAddEventRemoteSource {
   });
 
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   });
 
   Future getEventPatientList({
@@ -98,7 +97,6 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["images"] = [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
-    logger.f(vgeventjson);
     try {
       final response = await _dio.post(endpoint, data: vgeventjson);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
@@ -237,17 +235,18 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
   @override
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   }) async {
     try {
       const endpoint =
           "/services/orchestration/api/patients/triage-reports/campaign-events";
       Map<String, dynamic> queryParameters = {
-        "campaignEventId": campaignEventId,
-        "performer-id": performerId,
+        "campaignEventId": queryData["campaignEventId"],
+        "performer-id": queryData["performerId"],
+        "page": queryData["pageable"]["page"],
+        "size": queryData["pageable"]["size"]
       };
-
+      logger.d(queryParameters);
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
       List<VisionGuardianPatientResponseModel> data = (response.data as List)
@@ -273,7 +272,6 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           "queryText": patientQueryData["searchParams"],
         },
       );
-      logger.f(patientQueryData);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
             (response.data as List)

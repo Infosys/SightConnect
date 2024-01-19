@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
@@ -193,7 +192,7 @@ class VisionEventListDetails extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            data.title!.capitalize() ?? "",
+                            data.title!.capitalize(),
                             maxLines: 1,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,

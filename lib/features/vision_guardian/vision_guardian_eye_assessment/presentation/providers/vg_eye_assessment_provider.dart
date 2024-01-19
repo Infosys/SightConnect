@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/data/repository/vg_eye_assessment_respository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,7 +17,11 @@ var vgEyeAssessmentHelperProvider =
       .watch(vgEyeAssessmentRepository)
       .getVgEyeAssessmentReports(
           practitionerId: ref.read(globalVGProvider).userId,
-          category: statusfilter == "ALL" ? "" : statusfilter);
+          queryparams: {
+        "page": ref.watch(visionGuardianEyeAssessmentProvider).offset,
+        "size": 7,
+        "category": statusfilter == "ALL" ? "" : statusfilter
+      });
 
   ref.read(visionGuardianEyeAssessmentProvider).setPatientDetails(response);
   ref
@@ -26,8 +31,10 @@ var vgEyeAssessmentHelperProvider =
   return response;
 });
 
-var visionGuardianEyeAssessmentProvider = ChangeNotifierProvider.autoDispose(
-    (ref) => VisionGuardianEyeAssessmentNotifier());
+final visionGuardianEyeAssessmentProvider =
+    ChangeNotifierProvider<VisionGuardianEyeAssessmentNotifier>((ref) {
+  return VisionGuardianEyeAssessmentNotifier();
+});
 
 class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   var checkedFilter = "";
@@ -36,12 +43,22 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   String patientStatusFiltervalue = "";
   var isSelected = -1;
 
+  ScrollController eyeAssessmentController = ScrollController();
+
+  VisionGuardianEyeAssessmentNotifier() {
+    eyeAssessmentController.addListener(() {
+      logger.d("page");
+    });
+  }
+
   get listOfPatientDetailsValue => listOfPatientDetails;
   get getisSelected => isSelected;
   get getpatientStatusFiltervalue => patientStatusFiltervalue;
 
-  TextEditingController searchController = TextEditingController();
+  int offset = 0;
+  get getOffset => offset;
 
+  TextEditingController searchController = TextEditingController();
 
   RangeValues currentRangeValues = const RangeValues(40, 80);
   var gender = [
@@ -94,4 +111,18 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   void setSearchPatientDetails(patientDetails) {
     searchResults = patientDetails;
   }
+
+  void setOffset(pageNo) {
+    offset = pageNo;
+    notifyListeners();
+  }
+
+/*   void scrollListener() {
+    logger.d("page");
+    if (eyeAssessmentController.position.pixels ==
+        eyeAssessmentController.position.maxScrollExtent) {
+      offset = offset + 1;
+      notifyListeners();
+    }
+  } */
 }

@@ -42,22 +42,6 @@ var getEventDetailsProvider =
   return response.reversed.toList();
 });
 
-var getPatientTriageReportsProvider =
-    FutureProvider.autoDispose<List<VisionGuardianPatientResponseModel>>(
-        (ref) async {
-  var eventId = int.parse(ref.read(addEventDetailsProvider).eventIdValue);
-  List<VisionGuardianPatientResponseModel> response = await ref
-      .watch(vgAddEventRepository)
-      .getTriageReport(
-          campaignEventId: eventId,
-          performerId: [ref.read(globalVGProvider).userId]);
-
-  ref.read(addEventDetailsProvider).setEventPatients(response);
-  ref.read(addEventDetailsProvider).setSearchEventPatients(response);
-
-  return response;
-});
-
 class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
   final GlobalVGProvider globalVGProvider;
@@ -66,20 +50,26 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     required this.vgAddEventRepository,
     required this.globalVGProvider,
     required this.fileMsProvider,
-  });
+  }) {
+    eventPatientController.addListener(scrollListener);
+  }
 
   String eventId = "";
   var formKey = GlobalKey<FormState>();
 
   var isLoading = false;
+
+  var getisLoading = false;
   List<VisionGuardianEventModel> listOfEventDetails = [];
   List<VisionGuardianEventModel> searchResults = [];
   List<VisionGuardianPatientResponseModel> listOfEventPatients = [];
   List<VisionGuardianPatientResponseModel> listOfSearchEventPatients = [];
+  List<VisionGuardianPatientResponseModel> newEventPatientList = [];
 
   String eventStatusFilter = "";
   String queryData = "";
   TextEditingController searchController = TextEditingController();
+  ScrollController eventPatientController = ScrollController();
   var isSelected = -1;
   var eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   XFile? _image;
@@ -114,10 +104,38 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   get eventIdValue => eventId;
   get listOfEventDetailsValue => listOfEventDetails;
 
+  var offset = 0;
+  get getOffset => offset;
+
+  void getEventPatientTriageReport(previousList) async {
+    try {
+      logger.d("getPatientTriageReport");
+      getisLoading = true;
+      var eventId = int.parse(eventIdValue);
+
+      List<VisionGuardianPatientResponseModel> response =
+          await vgAddEventRepository.getTriageReport(queryData: {
+        "campaignEventId": eventId,
+        "performerId": [globalVGProvider.userId],
+        "pageable": {"page": offset, "size": 5}
+      });
+
+      setEventPatients(previousList + response);
+      setSearchEventPatients(previousList + response);
+      newEventPatientList = response;
+      getisLoading = false;
+    } catch (error) {
+      getisLoading = false;
+    }
+    notifyListeners();
+  }
+
   void setEventId(String id) {
     eventId = id;
     searchController.text = "";
-    notifyListeners();
+    offset = 0;
+    List<VisionGuardianPatientResponseModel> previousList = [];
+    getEventPatientTriageReport(previousList);
   }
 
   void setIsLoading() {
@@ -247,6 +265,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void setSearchPatientList(String query) async {
+    logger.d(listOfSearchEventPatients);
     List<VisionGuardianPatientResponseModel> resultList = [];
 
     for (int i = 0; i < listOfSearchEventPatients.length; i++) {
@@ -313,5 +332,15 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   void resetSearchFeild() {
     searchController.text = "";
+  }
+
+  void scrollListener() {
+    logger.d("page");
+    if (eventPatientController.position.pixels ==
+            eventPatientController.position.maxScrollExtent &&
+        (newEventPatientList.length == 5 || newEventPatientList.isEmpty)) {
+      offset = offset + 1;
+      getEventPatientTriageReport(listOfEventPatients);
+    }
   }
 }

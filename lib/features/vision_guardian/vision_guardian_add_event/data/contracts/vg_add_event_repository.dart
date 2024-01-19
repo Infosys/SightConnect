@@ -28,8 +28,7 @@ abstract class VgAddEventRepository {
   });
 
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   });
 
 

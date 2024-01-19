@@ -1,29 +1,9 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/contracts/vg_add_event_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-var getEventPatientListProvider =
-    FutureProvider.autoDispose<List<VisionGuardianEventPatientResponseModel>>(
-        (ref) async {
-  ref.watch(addPatientEventProvider).patientQueryDataValue;
-
-  var response = await ref
-      .watch(vgAddEventRepository)
-      .getEventPatientList(patientQueryData: {
-    "searchParams": ref.read(addPatientEventProvider).patientQueryDataValue,
-    "offset": ref.read(addPatientEventProvider).offsetValue,
-    "limit": ref.read(addPatientEventProvider).getLimit
-  });
-  var controller =
-      ref.watch(addPatientEventProvider).patientListScrollController;
-
-  controller.jumpTo(controller.position.maxScrollExtent);
-
-  ref.read(addPatientEventProvider).setPatientList(response);
-  return ref.read(addPatientEventProvider).getPatientListValue;
-});
 
 final addPatientEventProvider =
     ChangeNotifierProvider<AddPatientEventNotifier>((ref) {
@@ -39,6 +19,7 @@ class AddPatientEventNotifier extends ChangeNotifier {
 
   int limit = 5;
   int offset = 0;
+  bool isLoading = false;
 
   int get getLimit => limit;
   int get offsetValue => offset;
@@ -48,6 +29,7 @@ class AddPatientEventNotifier extends ChangeNotifier {
   ScrollController patientListScrollController = ScrollController();
 
   List<VisionGuardianEventPatientResponseModel> patientList = [];
+  List<VisionGuardianEventPatientResponseModel> newpatientList = [];
 
   List<VisionGuardianEventPatientResponseModel> get getPatientListValue =>
       patientList;
@@ -56,32 +38,52 @@ class AddPatientEventNotifier extends ChangeNotifier {
     patientListScrollController.addListener(scrollBarListener);
   }
 
-  void setPatientList(List<VisionGuardianEventPatientResponseModel> list) {
-    patientList = patientList + list;
-  }
-
   void setPatientSearchQuery(queryData) {
-    resetFields();
+    offset = 0;
+    isLoading = false;
     patientQueryData = queryData;
-/*     if (patientQueryData.length >= 4) {
-      
-    } */
+    List<VisionGuardianEventPatientResponseModel> previousList = [];
+    getPatientList(previousList);
+    if (patientListScrollController.hasClients) {
+      patientListScrollController.jumpTo(0);
+    }
+
     notifyListeners();
   }
 
   void scrollBarListener() {
+    logger.d("message");
     if (patientListScrollController.position.pixels ==
-        patientListScrollController.position.maxScrollExtent) {
-      print("scrollBarListener");
+            patientListScrollController.position.maxScrollExtent &&
+        (newpatientList.length == 5 || newpatientList.isEmpty)) {
       offset = offset + 1;
-      print(offset);
-      print(limit);
-      notifyListeners();
+      getPatientList(patientList);
     }
   }
 
   void resetFields() {
+    patientQueryData = "";
     patientList = [];
     offset = 0;
+    isLoading = false;
+  }
+
+  Future<void> getPatientList(previousList) async {
+    try {
+      isLoading = true;
+      var response = await vgAddEventRepository.getEventPatientList(
+          patientQueryData: {
+            "searchParams": patientQueryDataValue,
+            "offset": offsetValue,
+            "limit": getLimit
+          });
+      newpatientList = response;
+      patientList = previousList + response;
+      isLoading = false;
+      notifyListeners();
+    } catch (error) {
+      patientList = [];
+      isLoading = false;
+    }
   }
 }

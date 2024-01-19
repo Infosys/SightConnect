@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patient_search_filter.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_teammate_search.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -75,8 +74,6 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
       floatingActionButton: tabIndex.value == 0
           ? InkWell(
               onTap: () {
-                ref.read(addPatientEventProvider).setPatientSearchQuery("");
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(

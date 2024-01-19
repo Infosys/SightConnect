@@ -14,8 +14,7 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        ref.read(addPatientEventProvider).setPatientSearchQuery("");
-
+        ref.read(addPatientEventProvider).resetFields();
         Navigator.push(
           context,
           MaterialPageRoute(

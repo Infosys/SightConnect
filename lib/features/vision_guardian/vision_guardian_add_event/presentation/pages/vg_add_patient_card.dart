@@ -20,7 +20,7 @@ class VisionGuardianAddPatient extends HookConsumerWidget {
       appBar: CustomAppbar(
         leadingIcon: IconButton(
           onPressed: () {
-            ref.read(addPatientEventProvider).setPatientSearchQuery("");
+            ref.read(addPatientEventProvider).resetFields();
             Navigator.pop(context);
           },
           icon: const Icon(Icons.close),
