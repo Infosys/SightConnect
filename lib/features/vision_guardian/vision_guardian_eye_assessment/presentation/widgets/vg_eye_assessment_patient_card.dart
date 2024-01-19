@@ -2,8 +2,11 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_empty_result_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -17,95 +20,58 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   final String type;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /* var offsetvalue = ref.watch(visionGuardianEyeAssessmentProvider).getOffset; */
-    if (type == "default") {
-      return ref.watch(vgEyeAssessmentHelperProvider).when(
-          data: (patientDetails) {
-        if (patientDetails.isEmpty) {
-          return SizedBox(
-            width: Responsive.isMobile(context)
-                ? AppSize.width(context) * 0.9
-                : AppSize.width(context) * 0.95,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                VisionGuardianEyeAssessmentResultCard(),
-              ],
-            ),
-          );
-        }
-        return ListView.builder(
-          itemCount: patientDetails.length,
-          shrinkWrap: true,
-          controller: ref
-              .watch(visionGuardianEyeAssessmentProvider)
-              .eyeAssessmentController,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {},
-              child: vgPatientDataCards(context, patientDetails[index]),
-            );
-          },
-        );
+    var loading = ref.watch(visionGuardianEyeAssessmentProvider).getisLoading;
+    var response =
+        ref.watch(visionGuardianEyeAssessmentProvider).listOfPatientDetails;
+    var error = ref.watch(visionGuardianEyeAssessmentProvider).error;
 
-        /*  Column(children: [
-          ...patientDetails.map((event) {
-            return InkWell(
-              onTap: () {},
-              child: vgPatientDataCards(context, event),
-            );
-          }),
-          const CircularProgressIndicator()
-        ]); */
-      }, loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }, error: (error, stackTrace) {
-        return const Column(
-          mainAxisSize: MainAxisSize.min,
+    if (loading == false && error) {
+      String em = ref.watch(visionGuardianEyeAssessmentProvider).errorMessage;
+      return Text(em);
+    }
+    if (loading == false && response.isEmpty) {
+      return SizedBox(
+        width: Responsive.isMobile(context)
+            ? AppSize.width(context) * 0.9
+            : AppSize.width(context) * 0.95,
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             VisionGuardianEyeAssessmentResultCard(),
           ],
-        );
-      });
-    } else {
-      var response =
-          ref.watch(visionGuardianEyeAssessmentProvider).listOfPatientDetails;
-      if (response.isEmpty) {
-        return SizedBox(
-          width: Responsive.isMobile(context)
-              ? AppSize.width(context) * 0.9
-              : AppSize.width(context) * 0.95,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              VisionGuardianEyeAssessmentResultCard(),
-            ],
-          ),
-        );
-      }
-      return Column(
-        children: [
-          for (int index = 0; index < response.length; index++) ...[
-            InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: AppSize.kspadding, right: AppSize.kspadding),
-                child: vgPatientDataCards(
-                  context,
-                  response[index],
-                ),
-              ),
-            ),
-          ]
-        ],
+        ),
       );
     }
+    return LoadingOverlay(
+      isLoading: loading,
+      child: ListView.builder(
+        controller: ref
+            .watch(visionGuardianEyeAssessmentProvider)
+            .eyeAssessmentController,
+        itemCount: (ref
+                        .watch(visionGuardianEyeAssessmentProvider)
+                        .newEyeAssessmentPatientList
+                        .length ==
+                    7 &&
+                type != "search")
+            ? response.length + 1
+            : response.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          if (index == response.length) {
+            return const Padding(
+              padding: EdgeInsets.all(AppSize.klpadding),
+              child: CupertinoActivityIndicator(),
+            );
+          }
+          return InkWell(
+            onTap: () {},
+            child: vgPatientDataCards(context, response[index]),
+          );
+        },
+      ),
+    );
   }
 }
 

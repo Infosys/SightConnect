@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_floating_action_add_patient.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_search_bar_chips.dart';
@@ -50,20 +51,20 @@ class VisionGuardianEyeAssessmentPage extends HookConsumerWidget {
         ),
       ),
       floatingActionButton: const VisionGuardianFloatingAddPatientAction(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              vgEyeAssessmentHeaderChips(isSelected, context, eventStatus),
-              const SizedBox(height: AppSize.kmheight),
-              const VisionGuardianEyeAssessmentPatientsCard(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            vgEyeAssessmentHeaderChips(isSelected, context, eventStatus),
+            const SizedBox(height: AppSize.kmheight),
+            const Expanded(
+              child: VisionGuardianEyeAssessmentPatientsCard(
                 type: "default",
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
