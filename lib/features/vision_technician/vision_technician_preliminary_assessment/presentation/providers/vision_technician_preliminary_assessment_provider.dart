@@ -147,11 +147,9 @@ class VtTriageProvider extends ChangeNotifier {
 
       carePlanResponse.fold((error) {
         return;
-      }, (result){
-      _preliminaryAssessmentHelperProvider
-          .setCarePlanResponse(result);
+      }, (result) {
+        _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
       });
-
     }
 
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
