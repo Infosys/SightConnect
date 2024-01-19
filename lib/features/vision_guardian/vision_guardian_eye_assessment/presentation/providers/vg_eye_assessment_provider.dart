@@ -1,41 +1,15 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/contracts/vg_add_event_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/data/contracts/vg_eye_assessment_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/data/repository/vg_eye_assessment_respository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// var vgEyeAssessmentHelperProvider =
-//     FutureProvider.autoDispose<List<VisionGuardianPatientResponseModel>>(
-//         (ref) async {
-//   ref.watch(visionGuardianEyeAssessmentProvider).getpatientStatusFiltervalue;
-//   ref.watch(visionGuardianEyeAssessmentProvider).isSelected;
-//   var statusfilter =
-//       ref.read(visionGuardianEyeAssessmentProvider).getpatientStatusFiltervalue;
-
-//   List<VisionGuardianPatientResponseModel> response = await ref
-//       .watch(vgEyeAssessmentRepository)
-//       .getVgEyeAssessmentReports(
-//           practitionerId: ref.read(globalVGProvider).userId,
-//           queryparams: {
-//         "page": ref.watch(visionGuardianEyeAssessmentProvider).offset,
-//         "size": 7,
-//         "category": statusfilter == "ALL" ? "" : statusfilter
-//       });
-
-//   ref.read(visionGuardianEyeAssessmentProvider).setPatientDetails(response);
-//   ref
-//       .read(visionGuardianEyeAssessmentProvider)
-//       .setSearchPatientDetails(response);
-
-//   return response;
-// });
 
 final visionGuardianEyeAssessmentProvider =
-    ChangeNotifierProvider<VisionGuardianEyeAssessmentNotifier>((ref) {
+    ChangeNotifierProvider.autoDispose<VisionGuardianEyeAssessmentNotifier>(
+        (ref) {
   return VisionGuardianEyeAssessmentNotifier(
     vgEyeAssessmentRepository: ref.watch(vgEyeAssessmentRepository),
     globalVGProvider: ref.read(globalVGProvider),
@@ -88,10 +62,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     {"type": "Karimnagar", "checked": true},
   ];
 
-/*   void updateList() {
-    listOfEyeAssessmentPatientDetails = searchResultsPatientDetails;
-/*     notifyListeners(); */
-  } */
+
 
   void filterPatientList(selectedIndex, selectedValue) {
     isSelected = selectedIndex;
@@ -127,6 +98,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
       getisLoading = false;
       error = false;
     } catch (e) {
+      
       error = true;
       errorMessage = e.toString();
       getisLoading = false;

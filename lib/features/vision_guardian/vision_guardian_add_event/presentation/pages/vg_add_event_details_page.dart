@@ -34,6 +34,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),
       body: LoadingOverlay(
+        overlayColor: null,
         isLoading: ref.watch(addEventDetailsProvider).isLoading,
         child: SingleChildScrollView(
           child: Padding(

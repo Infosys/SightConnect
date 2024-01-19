@@ -2,12 +2,12 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_empty_result_card.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -26,8 +26,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
     var error = ref.watch(visionGuardianEyeAssessmentProvider).error;
 
     if (loading == false && error) {
-      String em = ref.watch(visionGuardianEyeAssessmentProvider).errorMessage;
-      return Text(em);
+      Fluttertoast.showToast(msg: "Server Error");
     }
     if (loading == false && response.isEmpty) {
       return SizedBox(
@@ -45,6 +44,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
     }
     return LoadingOverlay(
       isLoading: loading,
+      overlayColor: null,
       child: ListView.builder(
         controller: ref
             .watch(visionGuardianEyeAssessmentProvider)

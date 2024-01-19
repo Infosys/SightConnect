@@ -56,7 +56,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   String eventId = "";
   var formKey = GlobalKey<FormState>();
-
+  var error = false;
   var isLoading = false;
 
   var getisLoading = false;
@@ -124,7 +124,9 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       setSearchEventPatients(previousList + response);
       newEventPatientList = response;
       getisLoading = false;
-    } catch (error) {
+      error = false;
+    } catch (e) {
+      error = true;
       getisLoading = false;
     }
     notifyListeners();

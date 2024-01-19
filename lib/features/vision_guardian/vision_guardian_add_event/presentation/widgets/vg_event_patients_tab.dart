@@ -28,6 +28,11 @@ class EventPatientsTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var response = ref.watch(addEventDetailsProvider).listOfEventPatients;
     var loading = ref.watch(addEventDetailsProvider).getisLoading;
+    var error = ref.watch(addEventDetailsProvider).error;
+
+   if (loading == false && error) {
+      Fluttertoast.showToast(msg: "Server Error");
+    }
 
     if (loading == false && response.isEmpty) {
       return SizedBox(
@@ -45,6 +50,7 @@ class EventPatientsTab extends ConsumerWidget {
     }
 
     return LoadingOverlay(
+       overlayColor: null,
       isLoading: loading,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
