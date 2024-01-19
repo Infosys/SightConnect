@@ -113,17 +113,6 @@ class _VisualAcuityFaceDistancePageViewState
     setState(() {});
   }
 
-//The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  void updateDistance(int newDistance) {
-    _distanceBuffer.add(newDistance);
-    if (_distanceBuffer.length > bufferSize) {
-      _distanceBuffer.removeAt(0);
-    }
-    _distanceToFace =
-        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    setState(() {});
-  }
-
   Future<void> _getCameraInfo() async {
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
@@ -192,7 +181,7 @@ class _VisualAcuityFaceDistancePageViewState
         );
 
         if (eyeLandmarksInsideTheBox) {
-          int newDistance =
+          _distanceToFace =
               MachineLearningCameraService.calculateDistanceToScreen(
             leftEyeLandmark: eyeLandmarks[0],
             rightEyeLandmark: eyeLandmarks[1],
@@ -202,15 +191,14 @@ class _VisualAcuityFaceDistancePageViewState
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
-          updateDistance(newDistance);
         } else {
-          resetValues();
+          _resetValues();
         }
       } else {
-        resetValues();
+        _resetValues();
       }
     } else {
-      resetValues();
+      _resetValues();
     }
 
     // Calling the Distance Calculator Painter
@@ -235,7 +223,18 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  void resetValues() {
+  //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
+  // void _updateDistance(int newDistance) {
+  //   _distanceBuffer.add(newDistance);
+  //   if (_distanceBuffer.length > bufferSize) {
+  //     _distanceBuffer.removeAt(0);
+  //   }
+  //   _distanceToFace =
+  //       _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+  //   setState(() {});
+  // }
+
+  void _resetValues() {
     _translatedEyeLandmarks = [];
     _distanceToFace = null;
   }
@@ -346,9 +345,7 @@ class _VisualAcuityFaceDistancePageViewState
     setState(() {
       isLoading = true;
     });
-
     _canProcess = false;
-
     _meshDetector.close();
     await _controller.stopImageStream();
     await _controller.dispose();
