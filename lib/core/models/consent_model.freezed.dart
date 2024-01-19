@@ -20,10 +20,10 @@ ConsentModel _$ConsentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ConsentModel {
-  int get templateId => throw _privateConstructorUsedError;
-  String get consentVersion => throw _privateConstructorUsedError;
-  String get consentStatus => throw _privateConstructorUsedError;
-  String get acknowledgeDate => throw _privateConstructorUsedError;
+  int? get templateId => throw _privateConstructorUsedError;
+  String? get consentVersion => throw _privateConstructorUsedError;
+  ConsentStatus get consentStatus => throw _privateConstructorUsedError;
+  String? get acknowledgeDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,10 +38,10 @@ abstract class $ConsentModelCopyWith<$Res> {
       _$ConsentModelCopyWithImpl<$Res, ConsentModel>;
   @useResult
   $Res call(
-      {int templateId,
-      String consentVersion,
-      String consentStatus,
-      String acknowledgeDate});
+      {int? templateId,
+      String? consentVersion,
+      ConsentStatus consentStatus,
+      String? acknowledgeDate});
 }
 
 /// @nodoc
@@ -57,28 +57,28 @@ class _$ConsentModelCopyWithImpl<$Res, $Val extends ConsentModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? templateId = null,
-    Object? consentVersion = null,
+    Object? templateId = freezed,
+    Object? consentVersion = freezed,
     Object? consentStatus = null,
-    Object? acknowledgeDate = null,
+    Object? acknowledgeDate = freezed,
   }) {
     return _then(_value.copyWith(
-      templateId: null == templateId
+      templateId: freezed == templateId
           ? _value.templateId
           : templateId // ignore: cast_nullable_to_non_nullable
-              as int,
-      consentVersion: null == consentVersion
+              as int?,
+      consentVersion: freezed == consentVersion
           ? _value.consentVersion
           : consentVersion // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       consentStatus: null == consentStatus
           ? _value.consentStatus
           : consentStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      acknowledgeDate: null == acknowledgeDate
+              as ConsentStatus,
+      acknowledgeDate: freezed == acknowledgeDate
           ? _value.acknowledgeDate
           : acknowledgeDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -92,10 +92,10 @@ abstract class _$$_ConsentModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int templateId,
-      String consentVersion,
-      String consentStatus,
-      String acknowledgeDate});
+      {int? templateId,
+      String? consentVersion,
+      ConsentStatus consentStatus,
+      String? acknowledgeDate});
 }
 
 /// @nodoc
@@ -109,28 +109,28 @@ class __$$_ConsentModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? templateId = null,
-    Object? consentVersion = null,
+    Object? templateId = freezed,
+    Object? consentVersion = freezed,
     Object? consentStatus = null,
-    Object? acknowledgeDate = null,
+    Object? acknowledgeDate = freezed,
   }) {
     return _then(_$_ConsentModel(
-      templateId: null == templateId
+      templateId: freezed == templateId
           ? _value.templateId
           : templateId // ignore: cast_nullable_to_non_nullable
-              as int,
-      consentVersion: null == consentVersion
+              as int?,
+      consentVersion: freezed == consentVersion
           ? _value.consentVersion
           : consentVersion // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       consentStatus: null == consentStatus
           ? _value.consentStatus
           : consentStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      acknowledgeDate: null == acknowledgeDate
+              as ConsentStatus,
+      acknowledgeDate: freezed == acknowledgeDate
           ? _value.acknowledgeDate
           : acknowledgeDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -139,22 +139,23 @@ class __$$_ConsentModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ConsentModel implements _ConsentModel {
   const _$_ConsentModel(
-      {required this.templateId,
-      required this.consentVersion,
-      required this.consentStatus,
-      required this.acknowledgeDate});
+      {this.templateId,
+      this.consentVersion,
+      this.consentStatus = ConsentStatus.PENDING,
+      this.acknowledgeDate});
 
   factory _$_ConsentModel.fromJson(Map<String, dynamic> json) =>
       _$$_ConsentModelFromJson(json);
 
   @override
-  final int templateId;
+  final int? templateId;
   @override
-  final String consentVersion;
+  final String? consentVersion;
   @override
-  final String consentStatus;
+  @JsonKey()
+  final ConsentStatus consentStatus;
   @override
-  final String acknowledgeDate;
+  final String? acknowledgeDate;
 
   @override
   String toString() {
@@ -197,22 +198,22 @@ class _$_ConsentModel implements _ConsentModel {
 
 abstract class _ConsentModel implements ConsentModel {
   const factory _ConsentModel(
-      {required final int templateId,
-      required final String consentVersion,
-      required final String consentStatus,
-      required final String acknowledgeDate}) = _$_ConsentModel;
+      {final int? templateId,
+      final String? consentVersion,
+      final ConsentStatus consentStatus,
+      final String? acknowledgeDate}) = _$_ConsentModel;
 
   factory _ConsentModel.fromJson(Map<String, dynamic> json) =
       _$_ConsentModel.fromJson;
 
   @override
-  int get templateId;
+  int? get templateId;
   @override
-  String get consentVersion;
+  String? get consentVersion;
   @override
-  String get consentStatus;
+  ConsentStatus get consentStatus;
   @override
-  String get acknowledgeDate;
+  String? get acknowledgeDate;
   @override
   @JsonKey(ignore: true)
   _$$_ConsentModelCopyWith<_$_ConsentModel> get copyWith =>

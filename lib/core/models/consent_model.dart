@@ -6,11 +6,13 @@ part 'consent_model.g.dart';
 @freezed
 class ConsentModel with _$ConsentModel {
   const factory ConsentModel({
-    required int templateId,
-    required String consentVersion,
-    required String consentStatus,
-    required String acknowledgeDate,
+    int? templateId,
+    String? consentVersion,
+    @Default(ConsentStatus.PENDING) ConsentStatus consentStatus,
+    String? acknowledgeDate,
   }) = _ConsentModel;
   factory ConsentModel.fromJson(Map<String, dynamic> json) =>
       _$ConsentModelFromJson(json);
 }
+
+enum ConsentStatus { ACKNOWLEDGED, WITHDRAWN, PENDING }

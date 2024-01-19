@@ -8,16 +8,24 @@ part of 'consent_model.dart';
 
 _$_ConsentModel _$$_ConsentModelFromJson(Map<String, dynamic> json) =>
     _$_ConsentModel(
-      templateId: json['templateId'] as int,
-      consentVersion: json['consentVersion'] as String,
-      consentStatus: json['consentStatus'] as String,
-      acknowledgeDate: json['acknowledgeDate'] as String,
+      templateId: json['templateId'] as int?,
+      consentVersion: json['consentVersion'] as String?,
+      consentStatus:
+          $enumDecodeNullable(_$ConsentStatusEnumMap, json['consentStatus']) ??
+              ConsentStatus.PENDING,
+      acknowledgeDate: json['acknowledgeDate'] as String?,
     );
 
 Map<String, dynamic> _$$_ConsentModelToJson(_$_ConsentModel instance) =>
     <String, dynamic>{
       'templateId': instance.templateId,
       'consentVersion': instance.consentVersion,
-      'consentStatus': instance.consentStatus,
+      'consentStatus': _$ConsentStatusEnumMap[instance.consentStatus]!,
       'acknowledgeDate': instance.acknowledgeDate,
     };
+
+const _$ConsentStatusEnumMap = {
+  ConsentStatus.ACKNOWLEDGED: 'ACKNOWLEDGED',
+  ConsentStatus.WITHDRAWN: 'WITHDRAWN',
+  ConsentStatus.PENDING: 'PENDING',
+};

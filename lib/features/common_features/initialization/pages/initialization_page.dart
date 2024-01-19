@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/consent_model.dart';
+import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -14,7 +16,6 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -94,7 +95,23 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
     // check consent again for all roles other than patient
-    await navigateBasedOnRole(navigator, role);
+    try {
+      final model = ref.watch(consentRepositoryProvider);
+      final consent = await model.getConsent();
+      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+        await navigateBasedOnRole(navigator, role);
+      } else {
+        final isAccepted = await _showConsentForm(navigator, role);
+        if (isAccepted != null && isAccepted) {
+          await navigateBasedOnRole(navigator, role);
+        } else {
+          // it will never come here
+          await _invalidateAndLogout("Consent not given. Please login again.");
+        }
+      }
+    } catch (e) {
+      await _invalidateAndLogout("Server Error. Please login again.");
+    }
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
@@ -234,15 +251,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         body: Stack(
           children: <Widget>[
             Positioned.fill(
-              child: SvgPicture.asset(
-                'assets/logo/splash_screen_bg.svg',
+              child: Image.asset(
+                'assets/logo/splash_bg.png',
                 fit: BoxFit.fill,
               ),
             ),
             Pulsar(
               child: Center(
                 child: Image.asset(
-                  "assets/logo/splash.png",
+                  "assets/logo/splash_icon_transparant.png",
                   width: AppSize.width(context) * 0.4,
                 ),
               ),

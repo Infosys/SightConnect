@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
@@ -12,6 +13,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,33 +30,16 @@ class VisionTechnicianHomePage extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: Container(
-          margin: const EdgeInsets.only(
-            top: AppSize.kspadding,
-            left: AppSize.kmpadding,
-          ),
-          padding: const EdgeInsets.all(2),
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColor.white,
-          ),
-          child: Image.asset(
-            AppIcon.logo,
-            height: 30,
-            width: 30,
-          ),
-        ),
         backgroundColor: AppColor.primary,
         title: Row(
           children: [
-            Text(
-              AppText.appName,
-              style: applyFiraSansFont(
-                color: AppColor.white,
-                fontWeight: FontWeight.w500,
-              ),
+            Image.asset(
+              AppImages.logo,
+              height: 80,
+              width: 120,
+              colorBlendMode: BlendMode.srcIn,
+              color: AppColor.white,
             ),
-            const SizedBox(width: AppSize.klwidth),
             isMobile ? const Spacer() : const SizedBox(),
             isMobile
                 ? IconButton(

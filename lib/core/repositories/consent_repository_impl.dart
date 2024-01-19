@@ -32,6 +32,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
   Future<void> setConsent(ConsentModel consent) async {
     const endPoint = "/services/orchestration/api/consent";
     try {
+      logger.d(consent.toJson());
       final response = await _dio.post(endPoint, data: consent.toJson());
       if (response.statusCode == 200) {
         return;
