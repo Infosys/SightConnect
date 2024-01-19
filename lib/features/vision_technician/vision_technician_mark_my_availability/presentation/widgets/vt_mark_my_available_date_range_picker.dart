@@ -10,10 +10,8 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController controller = TextEditingController(
-        text: ref
-            .watch(markMyAvailabilityHelperProvider)
-            .markMyAvailabilityDataRange);
+    TextEditingController controller =
+        TextEditingController(text: DateTime.now().toString().substring(0, 10));
     return Container(
       width: AppSize.klwidth * 10,
       alignment: Alignment.center,
@@ -22,6 +20,7 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
       ),
       child: TextField(
         readOnly: true,
+        enabled: false,
         controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
