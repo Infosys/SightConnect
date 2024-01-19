@@ -117,7 +117,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           await vgAddEventRepository.getTriageReport(queryData: {
         "campaignEventId": eventId,
         "performerId": [globalVGProvider.userId],
-        "pageable": {"page": offset, "size": 7}
+        "pageable": {"page": offset, "size": 10}
       });
 
       setEventPatients(previousList + response);
@@ -340,7 +340,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     logger.d("page");
     if (eventPatientController.position.pixels ==
             eventPatientController.position.maxScrollExtent &&
-        (newEventPatientList.length == 7 || newEventPatientList.isEmpty)) {
+        (newEventPatientList.length == 10 || newEventPatientList.isEmpty)) {
       offset = offset + 1;
       getEventPatientTriageReport(listOfEventPatients);
     }

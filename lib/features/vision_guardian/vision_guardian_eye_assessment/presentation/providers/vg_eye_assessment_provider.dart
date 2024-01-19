@@ -87,7 +87,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
               practitionerId: globalVGProvider.userId,
               queryparams: {
             "page": offset,
-            "size": 7,
+            "size": 10,
             "category": statusfilter == "ALL" ? "" : statusfilter
           });
 
@@ -141,7 +141,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     logger.d("page");
     if (eyeAssessmentController.position.pixels ==
             eyeAssessmentController.position.maxScrollExtent &&
-        (newEyeAssessmentPatientList.length == 7 ||
+        (newEyeAssessmentPatientList.length == 10 ||
             newEyeAssessmentPatientList.isEmpty)) {
       offset = offset + 1;
       getEyeAssessmentPatientsReport(listOfPatientDetails);

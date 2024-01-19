@@ -17,7 +17,7 @@ class AddPatientEventNotifier extends ChangeNotifier {
 
   String patientQueryData = "";
 
-  int limit = 5;
+  int limit = 10;
   int offset = 0;
   bool isLoading = false;
 
@@ -55,7 +55,7 @@ class AddPatientEventNotifier extends ChangeNotifier {
     logger.d("message");
     if (patientListScrollController.position.pixels ==
             patientListScrollController.position.maxScrollExtent &&
-        (newpatientList.length == 5 || newpatientList.isEmpty)) {
+        (newpatientList.length == 10 || newpatientList.isEmpty)) {
       offset = offset + 1;
       getPatientList(patientList);
     }

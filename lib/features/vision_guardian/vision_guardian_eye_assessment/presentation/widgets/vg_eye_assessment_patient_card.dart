@@ -53,7 +53,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
                         .watch(visionGuardianEyeAssessmentProvider)
                         .newEyeAssessmentPatientList
                         .length ==
-                    7 &&
+                    10 &&
                 type != "search")
             ? response.length + 1
             : response.length,

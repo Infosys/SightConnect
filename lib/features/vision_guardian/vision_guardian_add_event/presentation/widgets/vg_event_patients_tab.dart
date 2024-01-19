@@ -81,7 +81,7 @@ Widget vgPatientTabs(
     shrinkWrap: true,
     scrollDirection: Axis.vertical,
     itemCount:
-        (ref.watch(addEventDetailsProvider).newEventPatientList.length == 7 &&
+        (ref.watch(addEventDetailsProvider).newEventPatientList.length == 10 &&
                 patientsType != "search")
             ? response.length + 1
             : response.length,

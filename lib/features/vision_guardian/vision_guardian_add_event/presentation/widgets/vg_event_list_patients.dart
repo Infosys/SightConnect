@@ -234,7 +234,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
             return const SizedBox(height: AppSize.kmheight);
           },
           itemCount:
-              ref.watch(addPatientEventProvider).newpatientList.length == 5
+              ref.watch(addPatientEventProvider).newpatientList.length == 10
                   ? data.length + 1
                   : data.length),
     );
