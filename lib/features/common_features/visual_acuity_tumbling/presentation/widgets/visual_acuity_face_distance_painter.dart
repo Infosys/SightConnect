@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -37,8 +38,25 @@ class VisualAcuityFaceDistancePainter extends CustomPainter {
       boxPainter,
     );
 
+    // Eye Landmark Painters
+    final Paint eyeLandmarkPainter = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 5.0
+      ..color = AppColor.green;
+
+    List<Offset> eyeLandmarks = [];
+    for (final point in eyeLandmarkPoints) {
+      eyeLandmarks.add(Offset(point.x, point.y));
+    }
+
+    canvas.drawPoints(
+      PointMode.points,
+      eyeLandmarks,
+      eyeLandmarkPainter,
+    );
+
     //Eye Painter
-    final paint = Paint()
+    final eyePainter = Paint()
       ..color = AppColor.primary
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
@@ -49,7 +67,7 @@ class VisualAcuityFaceDistancePainter extends CustomPainter {
         width: 50.0,
         height: 30.0,
       );
-      canvas.drawOval(rect, paint);
+      canvas.drawOval(rect, eyePainter);
     }
   }
 
