@@ -26,7 +26,6 @@ class VTHeader extends HookWidget {
 
     return Column(
       children: [
-        const SizedBox(height: 16),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
           child: Row(
@@ -73,7 +72,6 @@ class VTHeader extends HookWidget {
               //     ],
               //   ),
               // ),
-
             ],
           ),
         ),

@@ -22,13 +22,13 @@ class TriageMemberProvider extends ChangeNotifier {
   void setTestPersonId(int patientId) {
     testPatientId = patientId;
     notifyListeners();
-    logger.i('TriageMemberProvider: setTestPersonId: $testPatientId');
+    logger.d('TriageMemberProvider: setTestPersonId: $testPatientId');
   }
 
   void setCurrentIndex(int index) {
     currentIndex = index;
     notifyListeners();
-    logger.i('TriageMemberProvider: setCurrentIndex: $currentIndex');
+    logger.d('TriageMemberProvider: setCurrentIndex: $currentIndex');
   }
 
   void _initilizeMembers() {
@@ -36,7 +36,7 @@ class TriageMemberProvider extends ChangeNotifier {
     currentProfile = model?.profile?.patient;
     connectionsList.addAll(model?.profile?.patient?.relatedParty ?? []);
     notifyListeners();
-    logger.i('TriageMemberProvider: initilizeMembers: $connectionsList');
+    logger.d('TriageMemberProvider: initilizeMembers: $connectionsList');
 
     if (currentProfile != null) {
       setTestPersonId(currentProfile!.patientId!);

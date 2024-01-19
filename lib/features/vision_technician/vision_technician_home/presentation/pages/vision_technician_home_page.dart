@@ -124,7 +124,10 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const VTHeader()
+                  Transform.translate(
+                    offset: const Offset(0, AppSize.klheight * 1.5),
+                    child: const VTHeader(),
+                  )
                 ],
               ),
             ),

@@ -7,13 +7,17 @@ class ListOfFilterChips extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        CustomChip(title: "ALL"),
-        CustomChip(title: "URGENT"),
-        CustomChip(title: "EARLY"),
-        CustomChip(title: "ROUTINE"),
-      ],
+    return SizedBox(
+      height: 45,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: const [
+          CustomChip(title: "ALL"),
+          CustomChip(title: "URGENT"),
+          CustomChip(title: "EARLY"),
+          CustomChip(title: "ROUTINE"),
+        ],
+      ),
     );
   }
 }

@@ -10,38 +10,33 @@ class CustomChip extends ConsumerWidget {
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     var watchRef = ref.watch(vtHomeHelperProvider);
 
-    return Flexible(
-      child: InkWell(
-        onTap: () {
-          watchRef.updateCategory(title);
-        },
-        child: Container(
-          margin: const EdgeInsets.symmetric(
-              horizontal: AppSize.kspadding / 2,
-              vertical: AppSize.kspadding / 2),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kmpadding,
-            vertical: AppSize.kspadding,
+    return InkWell(
+      onTap: () {
+        watchRef.updateCategory(title);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: AppSize.kspadding / 2,
+          vertical: AppSize.kspadding / 2,
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding,
+          vertical: AppSize.kspadding,
+        ),
+        decoration: BoxDecoration(
+          color:
+              title == watchRef.category ? AppColor.lightBlue : AppColor.white,
+          border: Border.all(
+            color:
+                title == watchRef.category ? AppColor.primary : AppColor.grey,
           ),
-          decoration: BoxDecoration(
-            color: title == watchRef.category
-                ? AppColor.lightBlue
-                : AppColor.white,
-            border: Border.all(
-              color:
-                  title == watchRef.category ? AppColor.primary : AppColor.grey,
-            ),
-            borderRadius: BorderRadius.circular(AppSize.klradius / 2),
-          ),
-          child: Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
+          borderRadius: BorderRadius.circular(AppSize.klradius / 2),
+        ),
+        child: Text(
+          title,
+          style: applyRobotoFont(fontSize: 14),
         ),
       ),
     );

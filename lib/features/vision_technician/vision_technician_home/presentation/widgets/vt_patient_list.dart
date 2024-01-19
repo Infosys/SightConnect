@@ -29,70 +29,71 @@ class VTPatientList extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyLightShadow(),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           listOfAssessments.isNotEmpty
               ? SizedBox(
-                  width: double.infinity,
-                  child: DataTable(
-                    showCheckboxColumn: false,
-                    horizontalMargin: AppSize.klpadding,
-                    dataRowMaxHeight: AppSize.klheight * 3,
-                    dataRowMinHeight: AppSize.klheight * 2,
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          "Patient",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      showCheckboxColumn: false,
+                      horizontalMargin: AppSize.klpadding,
+                      dataRowMaxHeight: AppSize.klheight * 3,
+                      dataRowMinHeight: AppSize.klheight * 2,
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            "Patient",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          "Assessment ID",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        DataColumn(
+                          label: Text(
+                            "Assessment ID",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          "Status",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        DataColumn(
+                          label: Text(
+                            "Status",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          "Category",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyFiraSansFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
+                        DataColumn(
+                          label: Text(
+                            "Category",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(listOfAssessments.length,
-                        (index) {
-                      return getRow(
-                          listOfAssessments[index], context, watchRef, ref);
-                    }),
+                      ],
+                      rows: List<DataRow>.generate(listOfAssessments.length,
+                          (index) {
+                        return getRow(
+                            listOfAssessments[index], context, watchRef, ref);
+                      }),
+                    ),
                   ),
                 )
               : Center(
@@ -107,55 +108,42 @@ class VTPatientList extends ConsumerWidget {
           Row(
             children: [
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.kmpadding,
-                  right: AppSize.kmpadding,
-                  bottom: AppSize.kmpadding,
-                ),
-                child: InkWell(
-                  onTap: () {
-                    if (currentPage == 0) return;
-                    ref
-                        .read(vtHomeHelperProvider.notifier)
-                        .updatePageNumber(currentPage - 1);
-                    logger.d("go to previous page");
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color:
-                        currentPage == 0 ? AppColor.lightGrey : AppColor.grey,
-                    size: AppSize.klheight,
-                  ),
+              InkWell(
+                onTap: () {
+                  if (currentPage == 0) return;
+                  ref
+                      .read(vtHomeHelperProvider.notifier)
+                      .updatePageNumber(currentPage - 1);
+                  logger.d("go to previous page");
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color:
+                      currentPage == 0 ? AppColor.lightGrey : AppColor.primary,
+                  size: 20,
                 ),
               ),
               const SizedBox(width: AppSize.klwidth),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSize.kmpadding,
-                  right: AppSize.kmpadding,
-                  bottom: AppSize.kmpadding,
-                ),
-                child: InkWell(
-                  onTap: () {
-                    if (listOfAssessments.length < pageSize) return;
-                    ref
-                        .read(vtHomeHelperProvider.notifier)
-                        .updatePageNumber(currentPage + 1);
-                    logger.d("go to next page");
-                  },
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: listOfAssessments.length < pageSize
-                        ? AppColor.lightGrey
-                        : AppColor.grey,
-                    size: AppSize.klheight,
-                  ),
+              InkWell(
+                onTap: () {
+                  if (listOfAssessments.length < pageSize) return;
+                  ref
+                      .read(vtHomeHelperProvider.notifier)
+                      .updatePageNumber(currentPage + 1);
+                  logger.d("go to next page");
+                },
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: listOfAssessments.length < pageSize
+                      ? AppColor.lightGrey
+                      : AppColor.primary,
+                  size: 20,
                 ),
               ),
               const SizedBox(width: AppSize.kmwidth),
             ],
           ),
+          const SizedBox(height: AppSize.klheight)
         ],
       ),
     );
