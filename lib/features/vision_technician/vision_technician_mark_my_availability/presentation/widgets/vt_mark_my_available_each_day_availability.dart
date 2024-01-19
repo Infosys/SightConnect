@@ -27,6 +27,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
             Row(
               children: [
                 Checkbox(
+                  fillColor: MaterialStateProperty.all(AppColor.grey),
                   value: dayAvailabilityState.checked,
                   onChanged: (value) {
                     // ref
@@ -39,17 +40,15 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
-                        color: dayAvailabilityState.checked == true
-                            ? AppColor.black
-                            : AppColor.grey,
+                        // color: dayAvailabilityState.checked == true
+                        //     ? AppColor.black
+                        //     : AppColor.grey,
+                        color: AppColor.grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),
                 )
               ],
-            ),
-            const SizedBox(
-              width: AppSize.klwidth,
             ),
             Expanded(
               child: Column(
@@ -62,9 +61,10 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return VtMarkMyAvailableEachRow(
-                              dayAvailabilityindex: dayAvailabilityindex,
-                              index: index,
-                              daydata: dayAvailabilityState);
+                            dayAvailabilityindex: dayAvailabilityindex,
+                            index: index,
+                            daydata: dayAvailabilityState,
+                          );
                         },
                         separatorBuilder: (context, index) {
                           return const SizedBox(

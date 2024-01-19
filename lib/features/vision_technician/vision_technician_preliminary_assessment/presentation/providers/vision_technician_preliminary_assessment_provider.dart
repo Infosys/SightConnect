@@ -138,15 +138,18 @@ class VtTriageProvider extends ChangeNotifier {
     int? reportId = triageResponse?.id;
     int? encounterId = triageResponse?.encounter?.id;
     int? organizationCode = assessment.organizationCode;
-    CarePlanPostModel? carePlanResponse;
+    Either<Failure, CarePlanPostModel>? carePlanResponse;
 
     if (organizationCode != null && reportId != null && encounterId != null) {
       carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
           organizationCode, reportId, encounterId);
       logger.d("lets see the care plan response $carePlanResponse");
 
-      _preliminaryAssessmentHelperProvider
-          .setCarePlanResponse(carePlanResponse);
+      carePlanResponse.fold((error) {
+        return;
+      }, (result) {
+        _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
+      });
     }
 
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {

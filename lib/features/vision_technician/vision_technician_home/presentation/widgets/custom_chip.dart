@@ -1,47 +1,42 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CustomChip extends HookWidget {
+class CustomChip extends ConsumerWidget {
   const CustomChip({super.key, required this.title});
   final String title;
   @override
-  Widget build(BuildContext context) {
-    var backgroundColor = useState(AppColor.white);
-    var borderColor = useState(AppColor.grey);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var watchRef = ref.watch(vtHomeHelperProvider);
 
-    return Flexible(
-      child: InkWell(
-        onTap: () {
-          backgroundColor.value = backgroundColor.value == AppColor.white
-              ? AppColor.primary.withOpacity(0.2)
-              : AppColor.white;
-
-          borderColor.value = borderColor.value == AppColor.grey
-              ? AppColor.primary
-              : AppColor.grey;
-        },
-        child: Container(
-          margin: const EdgeInsets.symmetric(
-              horizontal: AppSize.kspadding / 2,
-              vertical: AppSize.kspadding / 2),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kmpadding,
-            vertical: AppSize.kspadding,
+    return InkWell(
+      onTap: () {
+        watchRef.updateCategory(title);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: AppSize.kspadding / 2,
+          vertical: AppSize.kspadding / 2,
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding,
+          vertical: AppSize.kspadding,
+        ),
+        decoration: BoxDecoration(
+          color:
+              title == watchRef.category ? AppColor.lightBlue : AppColor.white,
+          border: Border.all(
+            color:
+                title == watchRef.category ? AppColor.primary : AppColor.grey,
           ),
-          decoration: BoxDecoration(
-            color: backgroundColor.value,
-            border: Border.all(color: borderColor.value),
-            borderRadius: BorderRadius.circular(AppSize.klradius / 2),
-          ),
-          child: Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(fontSize: 14),
-          ),
+          borderRadius: BorderRadius.circular(AppSize.klradius / 2),
+        ),
+        child: Text(
+          title,
+          style: applyRobotoFont(fontSize: 14),
         ),
       ),
     );

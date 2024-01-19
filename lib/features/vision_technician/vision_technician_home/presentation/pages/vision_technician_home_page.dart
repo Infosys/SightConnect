@@ -63,8 +63,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         actions: [
           AppNameAvatar(
             name: ref.watch(globalVTProvider).name,
-            color: AppColor.white,
-            fontColor: AppColor.primary,
           ),
           isMobile
               ? const SizedBox(width: AppSize.kswidth)
@@ -109,7 +107,10 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const VTHeader()
+                  Transform.translate(
+                    offset: const Offset(0, AppSize.klheight * 1.5),
+                    child: const VTHeader(),
+                  )
                 ],
               ),
             ),

@@ -71,7 +71,7 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
       goalId: carePlanResponse?.goal?[0].id, //from care plan
       goalAction: GoalAction.UPDATE,
       achievementStatus: AchievementStatus.ACHIEVED,
-      statusDate: DateTime.now(),
+      statusDate: DateTime.now().subtract(Duration(minutes: 1)),
       outcomes: listOfOutcomes,
       note: vtCloseAssessmentHelperNotifier.recommendationsController.text,
       mrn: vtCloseAssessmentHelperNotifier.mrCodeController.text,

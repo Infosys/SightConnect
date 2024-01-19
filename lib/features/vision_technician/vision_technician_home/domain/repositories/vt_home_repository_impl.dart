@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/contracts/vt_home_repository.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/table_params.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/source/vt_home_remote_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,8 +17,8 @@ class VTHomeRepositoryImpl
       VTHomeRepositoryImpl(this.remoteDataSource);
 
       @override
-      Future<List<VTPatientDto>> getListOfPatients() async{
-        return await remoteDataSource.getListOfPatients();
+      Future<List<VTPatientDto>> getListOfPatients(TableParams tableParams) async{
+        return await remoteDataSource.getListOfPatients(tableParams);
       }
 
 }
