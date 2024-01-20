@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_header.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/triage_test_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
@@ -75,8 +77,8 @@ class PatientHomePage extends ConsumerWidget {
               InviteCard(
                 onPressed: () {
                   Share.share(
-                    'check out my website https://example.com',
-                    subject: 'Look what I made!',
+                    context.loc?.inviteCardDescription ?? "",
+                    subject: ApiConstant.playStoreUrl,
                   );
                 },
               ),

@@ -45,13 +45,13 @@ class TextScalePopupMenu extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onTap: () async {
-                  defaultScale.value -= 0.1;
                   if (defaultScale.value < 0.5) {
                     Fluttertoast.showToast(
                       msg: "Minimum text size reached",
                       backgroundColor: AppColor.red,
                     );
                   } else {
+                    defaultScale.value -= 0.1;
                     model.setTextScaleFactor(defaultScale.value);
                   }
                 },
@@ -130,13 +130,13 @@ class TextScalePopupMenu extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onTap: () async {
-                  defaultScale.value += 0.1;
                   if (defaultScale.value > 1.3) {
                     Fluttertoast.showToast(
                       msg: "Maximum text size reached",
                       backgroundColor: AppColor.red,
                     );
                   } else {
+                    defaultScale.value += 0.1;
                     model.setTextScaleFactor(defaultScale.value);
                   }
                 },
