@@ -20,6 +20,19 @@ import '../providers/machine_learning_camera_service.dart';
 import '../providers/visual_acuity_test_provider.dart';
 import 'visual_acuity_face_distance_painter.dart';
 
+var faceDistanceProvider = ChangeNotifierProvider<FaceDistance>((ref) {
+  return FaceDistance();
+});
+
+class FaceDistance extends ChangeNotifier {
+  int? _distance;
+  int? get distance => _distance;
+  void setDistance(int? distance) {
+    _distance = distance;
+    notifyListeners();
+  }
+}
+
 class TopReadingCard extends ConsumerStatefulWidget {
   const TopReadingCard({
     Key? key,
@@ -45,7 +58,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
-  int? _distanceToFace;
+
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
@@ -98,6 +111,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   Widget build(BuildContext context) {
     var model = ref.watch(tumblingTestProvider);
     var currentLevel = model.level;
+    var distanceToFace = ref.watch(faceDistanceProvider).distance;
     // final loc = context.loc!;
 
     // final physicalities = Millimeters.of(context);
@@ -188,7 +202,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             ),
                             SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              "${_distanceToFace ?? 0} cm",
+                              "${distanceToFace ?? 0} cm",
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -205,8 +219,21 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                       children: [
                         Flexible(
                           child: Text(
-                            context.loc?.visualAcuityTestDistanceInstruction ??
-                                "",
+                            distanceToFace == null
+                                ? context.loc
+                                        ?.visualAcuityTestDistanceInstruction ??
+                                    ""
+                                : distanceToFace <= 45 && distanceToFace >= 35
+                                    ? context.loc
+                                            ?.visualAcuityTestDistanceInstruction ??
+                                        ""
+                                    : distanceToFace < 35
+                                        ? context.loc
+                                                ?.visualAcuityTestDistanceInstructionTooClose ??
+                                            ""
+                                        : context.loc
+                                                ?.visualAcuityTestDistanceInstructionTooFar ??
+                                            "",
                             style: applyRobotoFont(
                               fontSize: 10,
                               color: AppColor.grey,
@@ -276,10 +303,14 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     );
     if (inputImage == null) return;
 
-    _processImage(inputImage);
+    _processImage(
+      inputImage,
+    );
   }
 
-  Future<void> _processImage(InputImage inputImage) async {
+  Future<void> _processImage(
+    InputImage inputImage,
+  ) async {
     if (!_canProcess) return;
 
     final meshes = await _meshDetector.processImage(inputImage);
@@ -320,16 +351,16 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         );
 
         if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
+          ref.read(faceDistanceProvider).setDistance(
+                  MachineLearningCameraService.calculateDistanceToScreen(
+                leftEyeLandmark: eyeLandmarks[0],
+                rightEyeLandmark: eyeLandmarks[1],
+                focalLength: _focalLength,
+                sensorX: _sensorX,
+                sensorY: _sensorY,
+                imageWidth: inputImage.metadata!.size.width.toInt(),
+                imageHeight: inputImage.metadata!.size.height.toInt(),
+              ));
           // _updateDistance(newDistance);
         } else {
           _resetValues();
@@ -369,8 +400,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (_distanceBuffer.length > bufferSize) {
       _distanceBuffer.removeAt(0);
     }
-    _distanceToFace =
-        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+    ref.read(faceDistanceProvider).setDistance(
+        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length);
     if (mounted) {
       setState(() {});
     }
@@ -378,7 +409,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   void _resetValues() {
     _translatedEyeLandmarks = [];
-    _distanceToFace = null;
+    ref.read(faceDistanceProvider).setDistance(null);
   }
 
   Future<void> _stopLiveFeed() async {

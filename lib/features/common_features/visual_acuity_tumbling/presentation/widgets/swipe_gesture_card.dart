@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -24,6 +25,10 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
+    var faceDistance = ref.watch(faceDistanceProvider);
+    bool isDistanceNull = faceDistance.distance == null;
+    bool isDistanceValid = !isDistanceNull && faceDistance.distance! >= 35 &&
+        faceDistance.distance! <= 45 ;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -88,15 +93,21 @@ class SwipeGestureCard extends HookConsumerWidget {
           return;
         }
 
-        model.handUserResponse(
-          UserResponse(
-            levelNumber: model.currentLevel!,
-            swipeDirection: dragDirection.value,
-            mode: model.gameMode!,
-            questionIndex: model.currentIndex!,
-            isUserResponseCorrect: false,
-          ),
-        );
+        if (isDistanceValid) {
+          model.handUserResponse(
+            UserResponse(
+              levelNumber: model.currentLevel!,
+              swipeDirection: dragDirection.value,
+              mode: model.gameMode!,
+              questionIndex: model.currentIndex!,
+              isUserResponseCorrect: false,
+            ),
+          );
+        }else{
+          AppToast.showToast(
+            context,
+            loc.visualAcuityTestDistanceInstruction,
+          );}
       },
       child: Container(
         decoration: BoxDecoration(
@@ -136,7 +147,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                 child: Padding(
                   padding: EdgeInsets.only(top: AppSize.height(context) * 0.3),
                   child: Text(
-                    loc.swipeGestureCardText,
+                  isDistanceValid? loc.swipeGestureCardText : loc.visualAcuityTestDistanceInstruction,
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.grey,
