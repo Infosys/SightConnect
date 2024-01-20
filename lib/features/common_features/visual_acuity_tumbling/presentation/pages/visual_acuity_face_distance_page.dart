@@ -23,7 +23,7 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
       _VisualAcuityFaceDistancePageViewState();
 }
 
-class _VisualAcuityFaceDistancePageViewState
+class _VisualAcuityFaceDistancePageViewState 
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;

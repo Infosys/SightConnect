@@ -136,6 +136,8 @@
     "visualAcuityTestInstructionThree": "Position yourself 40 cm from the screen. Distance will be shown in the test screen.",
     "visualAcuityTestInstructionFour": "If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.",
     "visualAcuityTestDistanceInstruction":"Position the camera 40cm away from the eye.",
+    "visualAcuityTestDistanceInstructionTooClose":"You are too close to the Camera, Position the camera 40cm away from the eye.",
+    "visualAcuityTestDistanceInstructionTooFar":"You are too far from the Camera, Position the camera 40cm away from the eye.",
     "skipAndProceedButton": "Skip & Proceed to Scan",
     "proceedToScanButton" : "Proceed to Scan",
     "eyeAssessmentSteps":"Steps",
