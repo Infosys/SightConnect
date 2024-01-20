@@ -83,15 +83,15 @@ class ResultImageCard extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: _EyeScanImage(
-                          image: getRightEyeImageUrl(data.imageBriefEntity),
-                          name: "Right Eye",
+                          image: getLeftEyeImageUrl(data.imageBriefEntity),
+                          name: "Left Eye",
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _EyeScanImage(
-                          image: getLeftEyeImageUrl(data.imageBriefEntity),
-                          name: "Left Eye",
+                          image: getRightEyeImageUrl(data.imageBriefEntity),
+                          name: "Right Eye",
                         ),
                       ),
                     ],

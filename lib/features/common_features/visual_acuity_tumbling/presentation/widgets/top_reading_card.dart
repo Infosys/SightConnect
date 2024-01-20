@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 // import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
@@ -117,6 +118,10 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         padding: const EdgeInsets.symmetric(
           horizontal: AppSize.kmpadding - 3,
           vertical: AppSize.kmpadding,
+        ),
+        // add innershadow
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -330,7 +335,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
-          // _updateDistance(newDistance);
+
+          _updateDistance(_distanceToFace);
         } else {
           _resetValues();
         }
@@ -363,17 +369,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  void _updateDistance(int newDistance) {
-    _distanceBuffer.add(newDistance);
-    if (_distanceBuffer.length > bufferSize) {
-      _distanceBuffer.removeAt(0);
-    }
-    _distanceToFace =
-        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    if (mounted) {
-      setState(() {});
-    }
+  void _updateDistance(int? distance) {
+    ref.read(distanceNotifierProvider).distance = distance ?? 0;
   }
 
   void _resetValues() {

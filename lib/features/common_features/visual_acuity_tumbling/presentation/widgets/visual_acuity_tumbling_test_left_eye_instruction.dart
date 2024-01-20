@@ -17,6 +17,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
       actionName: 'VisualAcuity Tumbling LeftEye Instruction Page',
       child: Scaffold(
         appBar: CustomAppbar(
+          centerTitle: true,
           title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
         ),
         body: Padding(

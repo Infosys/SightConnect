@@ -51,8 +51,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             splashRadius: 20,
             onPressed: () {
-              Navigator.of(context).pop();
               onBackPress?.call();
+              Navigator.of(context).pop();
             },
             icon: const Icon(CupertinoIcons.back),
           ),

@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
@@ -59,9 +60,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
         showUnselectedLabels: true,
         selectedItemColor: AppColor.primary,
         unselectedItemColor: AppColor.grey,
-        unselectedLabelStyle: applyRobotoFont(fontSize: 10),
-        selectedLabelStyle:
-            applyRobotoFont(fontSize: 10, fontWeight: FontWeight.w600),
+        unselectedLabelStyle: Responsive.isMobile(context)
+            ? applyRobotoFont(fontSize: 10)
+            : applyRobotoFont(fontSize: 16),
+        selectedLabelStyle: Responsive.isMobile(context)
+            ? applyRobotoFont(fontSize: 10, fontWeight: FontWeight.w600)
+            : applyRobotoFont(fontSize: 16, fontWeight: FontWeight.w600),
         onTap: (index) {
           switch (index) {
             case 0:
@@ -108,9 +112,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 "assets/icons/drawer_home.svg",
+                height: Responsive.isMobile(context) ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.primary,
                   BlendMode.srcIn,
@@ -121,9 +128,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.navProfile,
+                height: Responsive.isMobile(context) ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -134,9 +144,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 "assets/nav_icons/Assessmentdefault.svg",
+                height: Responsive.isMobile(context) ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -147,9 +160,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.drawerAppoinments,
+                height: Responsive.isMobile(context) ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -160,9 +176,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: Responsive.isMobile(context)
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.call,
+                height: Responsive.isMobile(context) ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,

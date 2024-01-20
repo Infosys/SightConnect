@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,62 +37,65 @@ class VTPatientList extends ConsumerWidget {
               ? SizedBox(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      showCheckboxColumn: false,
-                      horizontalMargin: AppSize.klpadding,
-                      dataRowMaxHeight: AppSize.klheight * 3,
-                      dataRowMinHeight: AppSize.klheight * 2,
-                      columns: [
-                        DataColumn(
-                          label: Text(
-                            "Patient",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                    child: FittedBox(
+                      child: DataTable(
+                        showCheckboxColumn: false,
+                        showBottomBorder: true,
+                        horizontalMargin: 0,
+                        dataRowMaxHeight: AppSize.klheight * 3,
+                        dataRowMinHeight: AppSize.klheight * 2,
+                        columns: [
+                          DataColumn(
+                            label: Text(
+                              "Patient",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyFiraSansFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            "Assessment ID",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                          DataColumn(
+                            label: Text(
+                              "Assessment ID",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyFiraSansFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            "Status",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                          DataColumn(
+                            label: Text(
+                              "Status",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyFiraSansFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            "Category",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyFiraSansFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                          DataColumn(
+                            label: Text(
+                              "Category",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyFiraSansFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                      rows: List<DataRow>.generate(listOfAssessments.length,
-                          (index) {
-                        return getRow(
-                            listOfAssessments[index], context, watchRef, ref);
-                      }),
+                        ],
+                        rows: List<DataRow>.generate(listOfAssessments.length,
+                            (index) {
+                          return getRow(
+                              listOfAssessments[index], context, watchRef, ref);
+                        }),
+                      ),
                     ),
                   ),
                 )
@@ -104,6 +108,10 @@ class VTPatientList extends ConsumerWidget {
                     ),
                   ),
                 ),
+          const Responsive(
+            mobileBody: SizedBox(height: AppSize.kswidth),
+            tabletBody: SizedBox(height: AppSize.kmwidth),
+          ),
           Row(
             children: [
               const Spacer(),
@@ -117,12 +125,25 @@ class VTPatientList extends ConsumerWidget {
                 },
                 child: Icon(
                   Icons.arrow_back_ios_new,
-                  color:
-                      currentPage == 0 ? AppColor.lightGrey : AppColor.primary,
+                  color: currentPage == 0 ? AppColor.grey : AppColor.primary,
                   size: 20,
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const Responsive(
+                mobileBody: SizedBox(width: AppSize.kswidth),
+                tabletBody: SizedBox(width: AppSize.kmwidth),
+              ),
+              Text(
+                "Page ${currentPage + 1}",
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: listOfAssessments.length == pageSize
+                      ? AppColor.lightGrey
+                      : AppColor.primary,
+                ),
+              ),
+              const SizedBox(width: AppSize.kswidth),
               InkWell(
                 onTap: () {
                   if (listOfAssessments.length < pageSize) return;
@@ -133,7 +154,7 @@ class VTPatientList extends ConsumerWidget {
                 },
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  color: listOfAssessments.length < pageSize
+                  color: listOfAssessments.length == pageSize
                       ? AppColor.lightGrey
                       : AppColor.primary,
                   size: 20,

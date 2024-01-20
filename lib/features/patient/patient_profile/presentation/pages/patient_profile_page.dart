@@ -69,7 +69,7 @@ class PatientProfilePage extends ConsumerWidget {
     final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

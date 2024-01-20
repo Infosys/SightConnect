@@ -1,4 +1,5 @@
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 class InternetLostPage extends StatelessWidget {
@@ -7,7 +8,6 @@ class InternetLostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +24,11 @@ class InternetLostPage extends StatelessWidget {
               height: 20,
             ),
             FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    InitializationPage.routeName,
+                    (Route<dynamic> route) => false);
+              },
               child: const Text("Retry"),
             ),
           ],

@@ -191,7 +191,7 @@ class ProfileHeader extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "Digital Public Health Stack",
+                          "Health Connect Tech Stack",
                           style: applyFiraSansFont(
                             fontSize: 14,
                           ),

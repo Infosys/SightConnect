@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var connectivityProvider =
     Provider<NetworkInfo>((ref) => NetworkInfoImpl(Connectivity()));
+var internetProvider =
+    FutureProvider((ref) => ref.watch(connectivityProvider).isConnected());
 
 abstract class NetworkInfo {
   Future<bool> isConnected();

@@ -39,6 +39,7 @@ class VisualAcuityDialog {
                 },
                 icon: const Icon(Icons.arrow_back_ios),
               ),
+              centerTitle: true,
               title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
             ),
             body: SizedBox(
@@ -132,12 +133,11 @@ class VisualAcuityDialog {
   static String _mapEyeTitle(BuildContext context, Eye currentEye) {
     switch (currentEye) {
       case Eye.left:
-        return context.loc!.leftEyeString;
+        return context.loc!.visualAcuityLeftEyeHeader;
       case Eye.right:
-        return context.loc!.rightEyeString;
+        return context.loc!.visualAcuityRightEyeHeader;
       case Eye.both:
-        // return context.loc!.bothEyeString;
-        return "Both Eyes";
+        return context.loc!.visualAcuityBothEyeHeader;
       default:
         return "";
     }

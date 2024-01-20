@@ -39,15 +39,15 @@ class EyeScanTabView extends StatelessWidget {
               children: [
                 Expanded(
                   child: _EyeScanImage(
-                    image: getRightEyeImageUrl(eyeScanData),
-                    name: "Right Eye",
+                    image: getLeftEyeImageUrl(eyeScanData),
+                    name: "Left Eye",
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: _EyeScanImage(
-                    image: getLeftEyeImageUrl(eyeScanData),
-                    name: "Left Eye",
+                    image: getRightEyeImageUrl(eyeScanData),
+                    name: "Right Eye",
                   ),
                 ),
               ],

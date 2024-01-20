@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/custom_chip.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -8,7 +9,7 @@ class ListOfFilterChips extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: Responsive.isMobile(context) ? 45 : 50,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: const [

@@ -37,7 +37,11 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               colorBlendMode: BlendMode.srcIn,
               color: AppColor.white,
             ),
-            isMobile ? const Spacer() : const SizedBox(),
+            isMobile
+                ? const Spacer()
+                : const SizedBox(
+                    width: AppSize.klwidth,
+                  ),
             isMobile
                 ? IconButton(
                     onPressed: () {

@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
@@ -262,40 +263,70 @@ class _VisualAcuityFaceDistancePageViewState
     } else {
       return PopScope(
         canPop: false,
-        onPopInvoked: (value) {
+        onPopInvoked: (value) async {
+          final navigator = Navigator.of(context);
           if (value) return;
-          _stopLiveFeed();
+          await _stopLiveFeed();
+          navigator.pop();
         },
         child: Scaffold(
-          backgroundColor: AppColor.black,
+          appBar: CustomAppbar(
+            leadingIcon: IconButton(
+              onPressed: () async {
+                final navigator = Navigator.of(context);
+                await _stopLiveFeed();
+                navigator.pop();
+              },
+              icon: const Icon(Icons.close),
+            ),
+            title: const Text(
+              'Distance to Face',
+            ),
+          ),
           body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
               return Stack(
+                fit: StackFit.expand,
+                alignment: Alignment.topCenter,
                 children: [
-                  Center(
-                    child: _enablePainterView
-                        ? CameraPreview(
-                            _controller,
-                            child: _customPaint,
-                          )
-                        : CameraPreview(
-                            _controller,
+                  _enablePainterView
+                      ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: CameraPreview(
+                                _controller,
+                                child: _customPaint,
+                              ),
+                            ),
                           ),
-                  ),
+                        )
+                      : Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: CameraPreview(
+                                _controller,
+                              ),
+                            ),
+                          ),
+                        ),
                   Positioned(
-                    top: 140,
+                    top: AppSize.height(context) * 0.1,
                     left: AppSize.width(context) * 0.2,
                     right: AppSize.width(context) * 0.2,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColor.primary.withOpacity(0.6),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2,
-                        ),
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.black.withOpacity(0.8),
                       ),
                       child: Text(
                         'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
@@ -303,7 +334,7 @@ class _VisualAcuityFaceDistancePageViewState
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Color(0xff22BF85),
                         ),
                       ),
                     ),

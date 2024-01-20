@@ -55,7 +55,7 @@ class PatientHomePage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: AppSize.klheight * 4.5),
+              const SizedBox(height: AppSize.klheight * 4),
               const PatientHeader(),
               // const SizedBox(height: AppSize.kmheight),
               // PriorityNotificationList(),

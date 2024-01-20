@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -24,6 +25,9 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
+
+    final distance = ref.watch(distanceNotifierProvider).distance;
+    final isValid = distance >= 35 && distance <= 45;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -88,15 +92,17 @@ class SwipeGestureCard extends HookConsumerWidget {
           return;
         }
 
-        model.handUserResponse(
-          UserResponse(
-            levelNumber: model.currentLevel!,
-            swipeDirection: dragDirection.value,
-            mode: model.gameMode!,
-            questionIndex: model.currentIndex!,
-            isUserResponseCorrect: false,
-          ),
-        );
+        if (isValid) {
+          model.handUserResponse(
+            UserResponse(
+              levelNumber: model.currentLevel!,
+              swipeDirection: dragDirection.value,
+              mode: model.gameMode!,
+              questionIndex: model.currentIndex!,
+              isUserResponseCorrect: false,
+            ),
+          );
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -132,17 +138,39 @@ class SwipeGestureCard extends HookConsumerWidget {
                 "assets/images/app_bg.svg",
                 fit: BoxFit.fill,
               ),
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: AppSize.height(context) * 0.3),
-                  child: Text(
-                    loc.swipeGestureCardText,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
+              AnimatedCrossFade(
+                crossFadeState: isValid
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
+                firstChild: Center(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(top: AppSize.height(context) * 0.3),
+                    child: Text(
+                      loc.swipeGestureCardText,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.grey,
+                      ),
                     ),
                   ),
                 ),
+                secondChild: Center(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(top: AppSize.height(context) * 0.3),
+                    child: Text(
+                      "You are not in the range",
+                      textAlign: TextAlign.center,
+                      style: applyRobotoFont(
+                        fontSize: 18,
+                        color: AppColor.red,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                duration: const Duration(milliseconds: 100),
               ),
             ],
           ),

@@ -1,11 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -45,12 +49,14 @@ class MyApp extends ConsumerWidget {
         return Millimeters.fromView(
           child: MediaQuery(
             data: mediaQueryData.copyWith(
-                textScaler: TextScaler.linear(
-              ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-            )),
+              textScaler: Responsive.isMobile(context)
+                  ? TextScaler.linear(
+                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
+                    )
+                  : const TextScaler.linear(1.2),
+            ),
             child: MaterialApp(
               title: AppText.appName,
-
               locale: ref.watch(globalLanguageProvider).currentLocale,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
@@ -59,7 +65,6 @@ class MyApp extends ConsumerWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               navigatorObservers: [matomoObserver],
-
               supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),
@@ -71,18 +76,15 @@ class MyApp extends ConsumerWidget {
 
               navigatorKey: AppRouter.navigatorKey,
               // builder: (context, child) {
-              //   return ref.watch(internetProvider).when(
+              //   return ref.watch(internetProvider).maybeWhen(
               //         data: (value) {
-              //           if (value == ConnectivityResult.none) {
+              //           if (!value) {
               //             return const InternetLostPage();
               //           } else {
               //             return child!;
               //           }
               //         },
-              //         loading: () => const InternetLostPage(),
-              //         error: (error, stackTrace) {
-              //           return const InternetLostPage();
-              //         },
+              //         orElse: () => const InternetLostPage(),
               //       );
               // },
             ),

@@ -15,9 +15,8 @@ var getAssessmentTableProvider = FutureProvider.autoDispose((ref) async {
   String category = ref.watch(vtHomeHelperProvider).category;
   int pageNumber = ref.watch(vtHomeHelperProvider).pageNumber;
   int pageSize = ref.read(vtHomeHelperProvider).pageSize;
-  return await ref
-      .watch(vtHomeRepository)
-      .getListOfPatients(TableParams(category: category, page: pageNumber, size: pageSize));
+  return await ref.watch(vtHomeRepository).getListOfPatients(
+      TableParams(category: category, page: pageNumber, size: pageSize));
 });
 
 class VTHomeHelperNotifier extends ChangeNotifier {
@@ -26,7 +25,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
   final bool _isLoading = false;
   String _category = "ALL";
-  int pageSize = 6;
+  int pageSize = 15;
   int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;

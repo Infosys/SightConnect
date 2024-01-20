@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -28,11 +29,30 @@ class PartnerCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           FractionallySizedBox(
-            widthFactor: 0.9,
-            child: Card(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SvgPicture.asset(AppImages.lvpeiLogo),
+            widthFactor: 1,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Image.asset("assets/images/partner_bg.png"),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: SvgPicture.asset(AppImages.lvpeiLogo),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -48,7 +68,7 @@ class PartnerCard extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                "Digital Public Health Stack",
+                "Health Connect Tech Stack",
                 style: applyFiraSansFont(
                   fontSize: 16,
                 ),

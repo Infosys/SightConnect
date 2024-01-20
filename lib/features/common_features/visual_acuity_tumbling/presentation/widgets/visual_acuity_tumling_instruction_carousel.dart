@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -83,11 +84,9 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
                     color: Colors.black54,
                   ),
                   padding: const EdgeInsets.all(AppSize.kspadding),
-                  child: Text(
+                  child: AutoSizeText(
                     slideShowData[index]["text"]!,
                     textAlign: TextAlign.center,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
                     style: applyFiraSansFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
