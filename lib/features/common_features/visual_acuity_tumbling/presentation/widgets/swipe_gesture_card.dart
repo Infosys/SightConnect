@@ -25,14 +25,8 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
-    var faceDistance = ref.watch(faceDistanceProvider);
-    bool isDistanceNull = faceDistance.distance == null;
-    bool isDistanceValid = !isDistanceNull &&
-        faceDistance.distance! >= 35 &&
-        faceDistance.distance! <= 45;
 
-    final distance = ref.watch(distanceNotifierProvider).distance;
-    final isValid = distance >= 35 && distance <= 45;
+    final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {

@@ -59,10 +59,11 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
+  int? _distanceToFace;
 
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  final List<int> _distanceBuffer = [];
+  // final List<int> _distanceBuffer = [];
   final int bufferSize = 10;
 
   @override
@@ -112,9 +113,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   Widget build(BuildContext context) {
     var model = ref.watch(tumblingTestProvider);
     var currentLevel = model.level;
-    var distanceToFace = ref.watch(faceDistanceProvider).distance;
     // final loc = context.loc!;
-
     // final physicalities = Millimeters.of(context);
     // final mm = physicalities.mm;
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
@@ -207,7 +206,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             ),
                             SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              "${distanceToFace ?? 0} cm",
+                              "${_distanceToFace ?? 0} cm",
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -224,21 +223,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                       children: [
                         Flexible(
                           child: Text(
-                            distanceToFace == null
-                                ? context.loc
-                                        ?.visualAcuityTestDistanceInstruction ??
-                                    ""
-                                : distanceToFace <= 45 && distanceToFace >= 35
-                                    ? context.loc
-                                            ?.visualAcuityTestDistanceInstruction ??
-                                        ""
-                                    : distanceToFace < 35
-                                        ? context.loc
-                                                ?.visualAcuityTestDistanceInstructionTooClose ??
-                                            ""
-                                        : context.loc
-                                                ?.visualAcuityTestDistanceInstructionTooFar ??
-                                            "",
+                            ref
+                                .watch(distanceNotifierProvider)
+                                .getDistanceText(context),
                             style: applyRobotoFont(
                               fontSize: 10,
                               color: AppColor.grey,
@@ -308,12 +295,10 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     );
     if (inputImage == null) return;
 
-    _processImage(
-      inputImage,
-    );
+    processImage(inputImage);
   }
 
-  Future<void> _processImage(
+  Future<void> processImage(
     InputImage inputImage,
   ) async {
     if (!_canProcess) return;
@@ -367,15 +352,15 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
 
-          _updateDistance(_distanceToFace);
+          updateDistance(_distanceToFace);
         } else {
-          _resetValues();
+          resetValues();
         }
       } else {
-        _resetValues();
+        resetValues();
       }
     } else {
-      _resetValues();
+      resetValues();
     }
 
     // Calling the Distance Calculator Painter
@@ -400,16 +385,17 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void _updateDistance(int? distance) {
+  void updateDistance(int? distance) {
     ref.read(distanceNotifierProvider).distance = distance ?? 0;
   }
 
   void resetValues() {
     _translatedEyeLandmarks = [];
+    _distanceToFace = null;
     ref.read(faceDistanceProvider).setDistance(null);
   }
 
-  Future<void> stopLiveFeed() async {
+  Future<void> _stopLiveFeed() async {
     logger.d("Stop Live Feed Called");
     _canProcess = false;
     _meshDetector.close();
