@@ -31,8 +31,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         injectionModel: MiniAppInjectionModel(
           action: actionType,
           mobileNumber: validateMobile(),
-          parentPatientId: PersistentAuthStateService.authState.userId,
-          role: MiniAppInjectionModelRole.PATIENT,
+          parentPatientId: _getPateintId(),
+          role: _getCurrentActiveRole(),
         ),
         miniapp: MiniApp(
           id: "1",
@@ -44,7 +44,14 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       ),
     );
   }
-
+ MiniAppInjectionModelRole _getCurrentActiveRole(){
+    final role = PersistentAuthStateService.authState.activeRole;
+    if(role == null) return MiniAppInjectionModelRole.PATIENT;
+    if(role == "ROLE_PATIENT") return MiniAppInjectionModelRole.PATIENT;
+    if(role == "ROLE_VISION_TECHNICIAN") return MiniAppInjectionModelRole.VISION_TECHNICIAN;
+    if(role == "ROLE_VISION_GUARDIAN") return MiniAppInjectionModelRole.VISION_GUARDIAN;
+    return MiniAppInjectionModelRole.PATIENT;
+  }
   String validateMobile() {
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";
@@ -52,4 +59,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
 
     return mobileNumber;
   }
+}
+
+_getPateintId() {
+     final role = PersistentAuthStateService.authState.activeRole;
+  return role=="ROLE_PATIENT"?PersistentAuthStateService.authState.userId:null;
 }

@@ -2,7 +2,9 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,91 +18,141 @@ class VTPatientList extends ConsumerWidget {
   });
 
   final List<VTPatientDto> listOfAssessments;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var watchRef = ref.watch(visionTechnicianSearchProvider);
+    int currentPage = ref.watch(vtHomeHelperProvider).pageNumber;
+    int pageSize = ref.watch(vtHomeHelperProvider).pageSize;
 
-    return PaginatedDataTable(
-      showCheckboxColumn: false,
-      rowsPerPage: 6,
-      columnSpacing: AppSize.width(context) * 0.15,
-      horizontalMargin: AppSize.klpadding,
-      dataRowMaxHeight: AppSize.klheight * 3,
-      dataRowMinHeight: AppSize.klheight * 2,
-      columns: [
-        DataColumn(
-          label: Text(
-            "Patient",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          listOfAssessments.isNotEmpty
+              ? SizedBox(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      showCheckboxColumn: false,
+                      horizontalMargin: AppSize.klpadding,
+                      dataRowMaxHeight: AppSize.klheight * 3,
+                      dataRowMinHeight: AppSize.klheight * 2,
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            "Patient",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Assessment ID",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Status",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Category",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: List<DataRow>.generate(listOfAssessments.length,
+                          (index) {
+                        return getRow(
+                            listOfAssessments[index], context, watchRef, ref);
+                      }),
+                    ),
+                  ),
+                )
+              : Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: AppSize.klheight),
+                    child: Text(
+                      "No data available",
+                      style: applyRobotoFont(),
+                    ),
+                  ),
+                ),
+          Row(
+            children: [
+              const Spacer(),
+              InkWell(
+                onTap: () {
+                  if (currentPage == 0) return;
+                  ref
+                      .read(vtHomeHelperProvider.notifier)
+                      .updatePageNumber(currentPage - 1);
+                  logger.d("go to previous page");
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color:
+                      currentPage == 0 ? AppColor.lightGrey : AppColor.primary,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: AppSize.klwidth),
+              InkWell(
+                onTap: () {
+                  if (listOfAssessments.length < pageSize) return;
+                  ref
+                      .read(vtHomeHelperProvider.notifier)
+                      .updatePageNumber(currentPage + 1);
+                  logger.d("go to next page");
+                },
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: listOfAssessments.length < pageSize
+                      ? AppColor.lightGrey
+                      : AppColor.primary,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: AppSize.kmwidth),
+            ],
           ),
-        ),
-        DataColumn(
-          label: Text(
-            "Assessment ID",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            "Status",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            "Category",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-      ],
-      source: _DataSource(
-        list: listOfAssessments,
-        context: context,
-        watchRef: watchRef,
-        ref: ref,
+          const SizedBox(height: AppSize.klheight)
+        ],
       ),
     );
   }
-}
 
-class _DataSource extends DataTableSource {
-  final List<VTPatientDto> list;
-  final BuildContext context;
-  final VisionTechnicianSearchProvider watchRef;
-  final WidgetRef ref;
-  _DataSource({
-    required this.list,
-    required this.context,
-    required this.watchRef,
-    required this.ref,
-  });
-  @override
-  DataRow? getRow(int index) {
-    final VTPatientDto data = list[index];
-
+  DataRow getRow(VTPatientDto data, BuildContext context,
+      VisionTechnicianSearchProvider watchRef, WidgetRef ref) {
     return DataRow(
       onSelectChanged: (value) {
-        watchRef.setPatientDetails(list[index]);
+        watchRef.setPatientDetails(data);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -183,17 +235,10 @@ class _DataSource extends DataTableSource {
     );
   }
 
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  get rowCount => list.length;
-
-  @override
-  int get selectedRowCount => 0;
-
   String categoryMapper(SeverityCategory? category) {
     if (category == null) return "";
-    return category.toString().split('.').last;
+    String newCategory =
+        "${category.toString().split('.').last.sentenceCase()} Consultation";
+    return newCategory;
   }
 }

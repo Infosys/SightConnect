@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,15 +36,14 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSize.klheight * 3,
-        // backgroundColor: AppColor.primary,
         leading: InkWell(
             onTap: () {
               ref.invalidate(vtCloseAssessmentHelperProvider);
               Navigator.popUntil(context, (route) => route.isFirst);
               Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (builder) {
-              return const VisionTechnicianHomePage();
-            }));
+                  MaterialPageRoute(builder: (builder) {
+                return const VisionTechnicianHomePage();
+              }));
             },
             child: const Icon(Icons.chevron_left)),
         title: Text(
@@ -90,14 +90,17 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           .read(vtCloseAssessmentViewModelProvider)
                           .submitCloseAssessmentInfo(patientDetails!);
                       ref.invalidate(vtTriageProvider);
+                      ref.invalidate(vtCloseAssessmentHelperProvider);
 
                       if (context.mounted) {
                         if (response == "success") {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Assessment Closed Successfully"),
-                            ),
-                          );
+                          await successDialogue(
+                              context, "Assessment Closed Successfully");
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Text("Assessment Closed Successfully"),
+                          //   ),
+                          // );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -106,7 +109,9 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           );
                         }
 
-                        Navigator.popUntil(context, (route) => route.isFirst);
+                        if (context.mounted) {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                        }
                       }
                     }
                   : null,

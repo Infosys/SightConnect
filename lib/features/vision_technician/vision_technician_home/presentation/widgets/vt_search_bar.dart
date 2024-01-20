@@ -35,20 +35,8 @@ class VTSearchBar extends ConsumerWidget {
         }
       },
       decoration: InputDecoration(
-        prefixIcon: const Icon(
-          CupertinoIcons.search,
-          color: AppColor.primary,
-        ),
-        suffixIcon: Container(
-          decoration: BoxDecoration(
-            color: AppColor.primary.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(AppSize.klradius),
-          ),
-          child: const Icon(
-            CupertinoIcons.mic,
-            color: AppColor.grey,
-          ),
-        ),
+        isDense: true,
+        prefixIcon: const Icon(CupertinoIcons.search, color: AppColor.primary),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
         filled: true,

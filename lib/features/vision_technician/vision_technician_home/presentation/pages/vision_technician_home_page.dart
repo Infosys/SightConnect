@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
@@ -10,10 +8,9 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -61,34 +58,20 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         ),
         centerTitle: false,
         actions: [
-          AppNameAvatar(
-            name: ref.watch(globalVTProvider).name,
-            color: AppColor.white,
-            fontColor: AppColor.primary,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const VTProfilePage()),
+              );
+            },
+            child: AppNameAvatar(
+              name: ref.watch(globalVTProvider).name,
+            ),
           ),
           isMobile
               ? const SizedBox(width: AppSize.kswidth)
               : const SizedBox(width: AppSize.klwidth),
-          IconButton(
-            onPressed: () {
-              final navigator = Navigator.of(context);
-              ref.read(initializationProvider).logout().then((value) async {
-                navigator.pushNamedAndRemoveUntil(
-                  LoginPage.routeName,
-                  (route) => false,
-                );
-                ref.invalidate(initializationProvider);
-              }).catchError((e) {
-                Fluttertoast.showToast(
-                  msg: e.toString(),
-                );
-              });
-            },
-            icon: const Icon(
-              Icons.logout_rounded,
-              color: AppColor.white,
-            ),
-          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -109,7 +92,10 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const VTHeader()
+                  Transform.translate(
+                    offset: const Offset(0, AppSize.klheight * 1.5),
+                    child: const VTHeader(),
+                  )
                 ],
               ),
             ),

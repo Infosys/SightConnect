@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
           ),
           title: Text(loc.tollFreeNumber),
           subtitle: const Text(
-            "1800 1211 00411",
+            AppText.tollFreeNumber,
             style: TextStyle(
               color: AppColor.black,
               fontWeight: FontWeight.bold,

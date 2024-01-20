@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -93,14 +95,12 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         response.fold(
                           (failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(failure.errorMessage),
+                              const SnackBar(
+                                content: Text("Some Error Occurred"),
                               ),
                             );
                           },
                           (triageResponseModel) {
-                            // logger.d(triageResponseModel.toJson());
-                            // navigate to close assessment
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -132,10 +132,21 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                 ),
               ),
       ),
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         leadingWidth: 70,
+        onBackPress: () {
+          ref.invalidate(vtTriageProvider);
+          ref.invalidate(preliminaryAssessmentHelperProvider);
+          Navigator.popUntil(context, (route) => route.isFirst);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const VisionTechnicianHomePage(),
+            ),
+          );
+        },
         centerTitle: false,
-        title: Text('Preliminary Assessment'),
+        title: const Text('Preliminary Assessment'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -217,11 +228,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
         children: [
           Row(
             children: [
-              // patient?.profile?.patient?.profilePhoto != null
-              //     ? AppNetworkImage(
-              //         imageUrl: patient!.profile!.patient!.profilePhoto!)
-              //     :
-              const CircleAvatar(),
+              AppNameAvatar(name: patient?.name),
               const SizedBox(width: AppSize.kswidth),
               Column(
                 mainAxisSize: MainAxisSize.min,

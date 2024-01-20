@@ -158,14 +158,23 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
       return [];
     }
 
-    XFile XleftEyeImage = _leftEyeImage!; // XFile(AppImages.aboutUs);
-    XFile XrightEyeImage = _rightEyeImage!; //XFile(AppImages.aboutUs);
+    XFile XleftEyeImage = _leftEyeImage!;
+    XFile XrightEyeImage = _rightEyeImage!;
 
-    String leftEyeImage =
-        await fileMsService.uploadImage(File(XleftEyeImage.path));
+    String? leftEyeImage;
+    String? rightEyeImage;
 
-    String? rightEyeImage =
-        await fileMsService.uploadImage(File(XrightEyeImage.path));
+    try {
+      leftEyeImage = await fileMsService.uploadImage(File(XleftEyeImage.path));
+      rightEyeImage =
+          await fileMsService.uploadImage(File(XrightEyeImage.path));
+    } catch (e) {
+      logger.d("Error in uploading image: $e");
+    }
+
+    if (leftEyeImage == null || rightEyeImage == null) {
+      return [];
+    }
 
     Map<String, String> leftEyeData = parseUrl(leftEyeImage);
     Map<String, String> rightEyeData = parseUrl(rightEyeImage);
