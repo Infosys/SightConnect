@@ -188,7 +188,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         (failure) {
           _isReportLoading = false;
           notifyListeners();
-          logger.d({"getEyeTriageDetailedReport ": failure});
+          logger.d({"_getTriageUseCase ": failure});
           throw failure;
         },
         (triageAssessment) {
@@ -201,7 +201,8 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         (failure) {
           _isReportLoading = false;
           notifyListeners();
-          logger.d({"getEyeTriageDetailedReport ": failure});
+          logger.d(
+              {" _triageReportRepository.getTriageReportByReportId ": failure});
           throw failure;
         },
         (triageAssessment) {

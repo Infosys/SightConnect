@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:eye_care_for_all/app/app.dart';
-import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/shared/pages/shared_error_app_page.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,21 +17,22 @@ Logger logger = Logger();
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await propertiesInitialization();
+  FlutterNativeSplash.remove();
+  runApp(
+    const ProviderScope(child: MyApp()),
+  );
+}
+
+Future<void> propertiesInitialization() async {
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
 
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
-  await IOSDeviceInfoService.init();
+  // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
-  FlutterNativeSplash.remove();
-
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
 }
 
 class MyHttpOverrides extends HttpOverrides {

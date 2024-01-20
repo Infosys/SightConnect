@@ -1,13 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';

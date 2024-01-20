@@ -89,7 +89,7 @@ class PatientProfilePage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Health Card",
+                  context.loc!.profilePageHealthCardTitle,
                   style: applyFiraSansFont(fontSize: 18),
                 ),
                 IconButton(
@@ -138,19 +138,18 @@ class PatientProfilePage extends ConsumerWidget {
                   horizontal: 16,
                 ),
                 title: Text(
-                  // context.loc!.profilePageAddressDetails,
-                  "Personal Details",
+                  context.loc!.profilePagePersonalDetails,
                   style: applyFiraSansFont(fontSize: 16),
                 ),
                 children: [
                   PatientInfoCard(
-                    keyText: "ABHA ID",
+                    keyText: loc.myProfileABHAID,
                     valueText: patient.profile?.patient?.abhaAddress ?? "-",
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   const SizedBox(height: AppSize.ksheight),
                   PatientInfoCard(
-                    keyText: "Email",
+                    keyText: loc.myProfileEmail,
                     valueText: patient.profile?.patient?.email ?? "",
                   ),
                   const SizedBox(height: AppSize.ksheight),

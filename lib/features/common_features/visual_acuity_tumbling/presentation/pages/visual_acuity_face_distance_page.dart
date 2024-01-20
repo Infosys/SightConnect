@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
@@ -23,7 +22,7 @@ class VisualAcuityFaceDistancePage extends StatefulWidget {
       _VisualAcuityFaceDistancePageViewState();
 }
 
-class _VisualAcuityFaceDistancePageViewState 
+class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
@@ -378,6 +377,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   Future<void> _stopLiveFeed() async {
     logger.d("Stop Live Feed Called");
+    if (mounted) {}
     setState(() {
       isLoading = true;
     });

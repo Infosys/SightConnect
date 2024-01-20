@@ -62,7 +62,7 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   fluttertoast: ^8.2.2
-  device_info_plus: ^9.1.0
+  # device_info_plus: ^9.1.0
   flutter_jailbreak_detection: ^1.10.0
   file_picker: ^5.5.0
   easy_stepper: ^0.8.3

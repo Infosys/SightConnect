@@ -37,8 +37,8 @@ class TriageRepositoryImpl implements TriageRepository {
       try {
         logger.d("Internet is connected Getting triage from remote");
         final remoteResponse = await remoteDataSource.getTriage();
-        localDataSource.deleteAssessment();
-        localDataSource.saveAssessment(triage: remoteResponse);
+        await localDataSource.deleteAssessment();
+        await localDataSource.saveAssessment(triage: remoteResponse);
         return Right(remoteResponse);
       } on ServerException {
         return Left(ServerFailure(errorMessage: 'This is a server exception'));

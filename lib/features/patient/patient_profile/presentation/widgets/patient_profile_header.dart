@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -166,10 +167,11 @@ class ProfileHeader extends ConsumerWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  infoCard("Date of Birth", dob),
-                                  infoCard("Gender",
+                                  infoCard(
+                                      context.loc!.profilePageDateOfBirth, dob),
+                                  infoCard(context.loc!.profilePageGender,
                                       patient.profile?.patient?.gender?.name),
-                                  infoCard("Mobile",
+                                  infoCard(context.loc!.profilePageMobile,
                                       patient.profile?.patient?.phoneNumber),
                                 ],
                               )

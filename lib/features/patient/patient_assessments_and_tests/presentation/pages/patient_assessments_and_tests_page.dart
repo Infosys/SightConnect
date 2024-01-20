@@ -210,7 +210,7 @@ class AssessmentsAndTestsPage extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () => onViewHistory(currentData),
-                      child: const Text("View History"),
+                      child: Text(context.loc!.viewHistoryButton),
                     ),
                     (isLoading && currentReportId == currentData.triageResultID)
                         ? const SizedBox(

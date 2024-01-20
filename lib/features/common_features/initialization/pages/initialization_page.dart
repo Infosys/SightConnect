@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_da
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -181,32 +182,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     if (roles.length == 1) {
       return Future.value(roles.first);
     }
-    return showDialog(
+    return showDialog<Role>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return BlurDialogBox(
-          actions: const [],
-          title: const Text('Select a profile'),
-          content: SizedBox(
-            child: SingleChildScrollView(
-              child: ListBody(
-                children: roles
-                    .map(
-                      (role) => RadioListTile(
-                        title: Text(role.toString().split('_').last),
-                        value: role,
-                        groupValue: null,
-                        onChanged: (value) async {
-                          navigator.pop(value);
-                        },
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-          ),
-        );
+        return ChooseRoleDialog(roles: roles);
       },
     );
   }
