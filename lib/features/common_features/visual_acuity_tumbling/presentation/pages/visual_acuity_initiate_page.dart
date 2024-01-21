@@ -30,6 +30,7 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
         if (value) {
           return;
         }
+
         if (isTriageMode) {
           showDialog(
             context: context,

@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,7 +27,7 @@ class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-  final bool _enablePainterView = false;
+
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
@@ -58,18 +59,18 @@ class _VisualAcuityFaceDistancePageViewState
 
   Future<void> _checkPermissions(BuildContext context) async {
     final navigator = Navigator.of(context);
-    setState(() {
-      isPermissionGranted = false;
-    });
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = false;
+        isLoading = false;
+      });
+    }
 
     final isGranted = await CameraPermissionService.checkPermissions(context);
 
     if (isGranted) {
-      setState(() {
-        isPermissionGranted = true;
-      });
-
-      _initializeCamera();
+      addPermissionLoading();
+      await _initializeCamera();
     } else {
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
@@ -102,6 +103,7 @@ class _VisualAcuityFaceDistancePageViewState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
+
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -110,7 +112,7 @@ class _VisualAcuityFaceDistancePageViewState
         _controller.startImageStream(_processCameraImage);
       },
     );
-    if (context.mounted) {
+    if (mounted) {
       setState(() {});
     }
   }
@@ -123,7 +125,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
     _distanceToFace =
         _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    if (context.mounted) {
+    if (mounted) {
       setState(() {});
     }
   }
@@ -265,7 +267,10 @@ class _VisualAcuityFaceDistancePageViewState
         onPopInvoked: (value) async {
           final navigator = Navigator.of(context);
           if (value) return;
+
+          addLoading();
           await _stopLiveFeed();
+
           navigator.pop();
         },
         child: Scaffold(
@@ -273,6 +278,7 @@ class _VisualAcuityFaceDistancePageViewState
             leadingIcon: IconButton(
               onPressed: () async {
                 final navigator = Navigator.of(context);
+                addLoading();
                 await _stopLiveFeed();
                 navigator.pop();
               },
@@ -282,72 +288,66 @@ class _VisualAcuityFaceDistancePageViewState
               'Distance to Face',
             ),
           ),
-          body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              // _canvasSize = Size(constraints.maxWidth, constraints.maxHeight);
-              return Stack(
-                fit: StackFit.expand,
-                alignment: Alignment.topCenter,
-                children: [
-                  _enablePainterView
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: CameraPreview(
-                                _controller,
-                                child: _customPaint,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: CameraPreview(
-                                _controller,
-                              ),
-                            ),
-                          ),
-                        ),
-                  Positioned(
-                    top: AppSize.height(context) * 0.1,
-                    left: AppSize.width(context) * 0.2,
-                    right: AppSize.width(context) * 0.2,
-                    child: Container(
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.black.withOpacity(0.8),
-                      ),
-                      child: Text(
-                        'Distance to Face: ${_distanceToFace ?? 'Not Found'}',
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Color(0xff22BF85),
-                        ),
-                      ),
-                    ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Text(
+                  "Please keep your face at 40 cm from the screen",
+                  textAlign: TextAlign.center,
+                  style: applyRobotoFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
-                ],
-              );
-            },
+                ),
+                Expanded(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: _controller.value.isInitialized
+                              ? CameraPreview(
+                                  _controller,
+                                  child: _customPaint,
+                                )
+                              : Container(),
+                        ),
+                      ),
+                      Positioned(
+                        top: AppSize.height(context) * 0.06,
+                        left: AppSize.width(context) * 0.2,
+                        right: AppSize.width(context) * 0.2,
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          child: Text(
+                            'Distance to Face: ${_distanceToFace ?? '0'}',
+                            maxLines: 1,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Color(0xff22BF85),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               final navigator = Navigator.of(context);
-
+              addLoading();
               await _stopLiveFeed();
-
               navigator.pushReplacement(
                 MaterialPageRoute(
                   builder: (context) =>
@@ -364,28 +364,81 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!isPermissionGranted) return;
-    if (!(_controller.value.isInitialized)) return;
+    logger.d({
+      "AppLifecycleState": "$state",
+      "isPermissionGranted": "$isPermissionGranted",
+      "isLoading": "$isLoading",
+    });
+    if (!isPermissionGranted) {
+      return;
+    }
+
     if (state == AppLifecycleState.inactive) {
       logger.d("AppLifecycleState.inactive");
+      addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("AppLifecycleState.resumed");
-      _checkPermissions(context);
+
+      if (mounted) {
+        _checkPermissions(context);
+      }
+    } else if (state == AppLifecycleState.paused) {
+      logger.d("AppLifecycleState.paused");
+      addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.detached) {
+      logger.d("AppLifecycleState.detached");
+
+      addLoading();
+      _stopLiveFeed();
     }
   }
 
   Future<void> _stopLiveFeed() async {
     logger.d("Stop Live Feed Called");
-    if (mounted) {}
-    setState(() {
-      isLoading = true;
-    });
+    try {
+      _canProcess = false;
+      _meshDetector.close();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
+    } catch (e) {
+      logger.e('Error stopping live feed: $e');
+    }
+  }
 
-    _canProcess = false;
+  void addLoading() {
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
+  }
 
-    _meshDetector.close();
-    await _controller.stopImageStream();
-    await _controller.dispose();
+  void removeLoading() {
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  void addPermissionLoading() {
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = true;
+      });
+    }
+  }
+
+  void removePermissionLoading() {
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = false;
+      });
+    }
   }
 }

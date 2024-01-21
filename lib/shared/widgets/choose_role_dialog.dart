@@ -68,7 +68,7 @@ class ChooseRoleDialog extends HookWidget {
                         ),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
-                          vertical: 8,
+                          vertical: 10,
                         ),
                         duration: const Duration(milliseconds: 300),
                         decoration: BoxDecoration(
@@ -82,16 +82,32 @@ class ChooseRoleDialog extends HookWidget {
                           onTap: () {
                             selectedRole.value = role;
                           },
-                          child: Text(
-                            _formateRoleName(role!),
-                            textAlign: TextAlign.center,
-                            style: applyRobotoFont(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: selectedRole.value == role
-                                  ? AppColor.white
-                                  : AppColor.black,
-                            ),
+                          child: Row(
+                            children: [
+                              Visibility(
+                                visible: selectedRole.value == role,
+                                child: const Icon(
+                                  Icons.check,
+                                  color: AppColor.white,
+                                  size: 20,
+                                ),
+                              ),
+                              Visibility(
+                                visible: selectedRole.value == role,
+                                child: const SizedBox(width: 10),
+                              ),
+                              Text(
+                                _formateRoleName(role!),
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: selectedRole.value == role
+                                      ? AppColor.white
+                                      : AppColor.black,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -121,10 +137,10 @@ class ChooseRoleDialog extends HookWidget {
 
   _formateRoleName(Role role) {
     return switch (role) {
-      Role.ROLE_OPTOMETRIST => 'Optometrist',
-      Role.ROLE_VISION_TECHNICIAN => 'Vision Technician',
-      Role.ROLE_PATIENT => 'Patient',
-      Role.ROLE_VISION_GUARDIAN => 'Vision Guardian',
+      Role.ROLE_OPTOMETRIST => "OPTOMETRIST",
+      Role.ROLE_VISION_TECHNICIAN => "VISION TECHNICIAN",
+      Role.ROLE_PATIENT => "PATIENT",
+      Role.ROLE_VISION_GUARDIAN => "VISION GUARDIAN",
     };
   }
 }

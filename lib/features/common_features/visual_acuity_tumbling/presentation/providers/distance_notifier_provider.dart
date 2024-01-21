@@ -6,25 +6,26 @@ var distanceNotifierProvider =
     ChangeNotifierProvider((ref) => DistanceNotifier());
 
 class DistanceNotifier extends ChangeNotifier {
-  int _distance = 0;
+  int _currentDistance = 0;
   final int _maxDistance = 45;
   final int _minDistance = 35;
+  final int _doctorRecommendedDistance = 40;
 
-  int get distance => _distance;
+  int get doctorRecommendedDistance => _doctorRecommendedDistance;
 
   set distance(int value) {
-    _distance = value;
+    _currentDistance = value;
     notifyListeners();
   }
 
   bool isDistanceValid() {
-    return _distance <= _maxDistance && _distance >= _minDistance;
+    return _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
   }
 
   String getDistanceText(BuildContext context) {
-    if (_distance <= 45 && _distance >= 35) {
+    if (_currentDistance <= 45 && _currentDistance >= 35) {
       return context.loc?.visualAcuityTestDistanceInstruction ?? "";
-    } else if (_distance < 35) {
+    } else if (_currentDistance < 35) {
       return context.loc?.visualAcuityTestDistanceInstructionTooClose ?? "";
     } else {
       return context.loc?.visualAcuityTestDistanceInstructionTooFar ?? "";

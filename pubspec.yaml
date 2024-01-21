@@ -47,7 +47,7 @@ dependencies:
   connectivity_plus: ^4.0.2
   dotted_border: ^2.0.0+3
   carousel_slider: ^4.2.1
-  camera: any
+  camera: ^0.10.5+9
   syncfusion_flutter_gauges: ^22.2.10
   url_launcher: ^6.1.12
   jwt_decoder: ^2.0.1
@@ -88,12 +88,18 @@ dependencies:
   password_generator: ^1.0.0
   sqflite_sqlcipher: ^2.2.1
 
+dependency_overrides:
+  camera:
+    git:
+      url: https://github.com/bottlepay/plugins.git
+      path: packages/camera/camera
+      ref: e1a4dba770da9bc3cf9f858bac6837083f8b9059
+ 
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: 'assets/logo/app_icon.png'
-
-
 
 dev_dependencies:
   flutter_test:

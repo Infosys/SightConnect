@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 // import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -21,19 +22,6 @@ import '../providers/machine_learning_camera_service.dart';
 import '../providers/visual_acuity_test_provider.dart';
 import 'visual_acuity_face_distance_painter.dart';
 
-var faceDistanceProvider = ChangeNotifierProvider<FaceDistance>((ref) {
-  return FaceDistance();
-});
-
-class FaceDistance extends ChangeNotifier {
-  int? _distance;
-  int? get distance => _distance;
-  void setDistance(int? distance) {
-    _distance = distance;
-    notifyListeners();
-  }
-}
-
 class TopReadingCard extends ConsumerStatefulWidget {
   const TopReadingCard({
     Key? key,
@@ -47,7 +35,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-  // final bool _enablePainterView = false;
+
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
@@ -60,22 +48,44 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   double _sensorX = 0.001;
   double _sensorY = 0.001;
   int? _distanceToFace;
-
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  // final List<int> _distanceBuffer = [];
-  final int bufferSize = 10;
+  final List<int> _distanceBuffer = [];
+  int bufferSize = 10;
+  bool isLoading = false;
+  bool isPermissionGranted = false;
 
   @override
   void initState() {
-    logger.d("InitState Called");
     super.initState();
+    isPermissionGranted = false;
+    isLoading = false;
     WidgetsBinding.instance.addObserver(this);
-    _initializeCamera();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _checkPermissions(context));
+  }
+
+  Future<void> _checkPermissions(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = false;
+        isLoading = false;
+      });
+    }
+
+    final isGranted = await CameraPermissionService.checkPermissions(context);
+
+    if (isGranted) {
+      addPermissionLoading();
+      await _initializeCamera();
+    } else {
+      navigator.pop();
+      Fluttertoast.showToast(msg: "Permission not granted");
+    }
   }
 
   Future<void> _initializeCamera() async {
-    logger.d("InitializeCamera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -90,23 +100,160 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!(_controller.value.isInitialized)) return;
-    if (state == AppLifecycleState.inactive) {
-      logger.d("AppLifecycleState.inactive");
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppLifecycleState.resumed");
-      _initializeCamera();
+  Future<void> _startLiveFeed() async {
+    _controller = CameraController(
+      _cameras.firstWhere(
+        (element) => element.lensDirection == _cameraLensDirection,
+      ),
+      defaultResolution,
+      enableAudio: false,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : ImageFormatGroup.bgra8888,
+    );
+
+    await _controller.initialize().then(
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        _controller.startImageStream(_processCameraImage);
+      },
+    );
+    if (mounted) {
+      setState(() {});
     }
   }
 
-  @override
-  void dispose() {
-    logger.d("Dispose Called");
-    _stopLiveFeed();
-    super.dispose();
+//The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
+  void updateDistance(int newDistance) {
+    _distanceBuffer.add(newDistance);
+    if (_distanceBuffer.length > bufferSize) {
+      _distanceBuffer.removeAt(0);
+    }
+    _distanceToFace =
+        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+    ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _getCameraInfo() async {
+    try {
+      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
+      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
+      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
+      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
+    } catch (error) {
+      logger.e('Error getting camera info: $error');
+      rethrow;
+    }
+  }
+
+  void _processCameraImage(CameraImage image) {
+    final camera = _cameras.firstWhere(
+      (element) => element.lensDirection == _cameraLensDirection,
+    );
+    final orientation = _controller.value.deviceOrientation;
+    final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
+      image: image,
+      camera: camera,
+      deviceOrientation: orientation,
+    );
+    if (inputImage == null) return;
+
+    _processImage(inputImage);
+  }
+
+  Future<void> _processImage(InputImage inputImage) async {
+    if (!_canProcess) return;
+
+    final meshes = await _meshDetector.processImage(inputImage);
+    const boxSizeRatio = 0.7;
+    final boxWidth = _canvasSize.width * boxSizeRatio;
+    final boxHeight = _canvasSize.height * boxSizeRatio;
+    final boxCenter = Point(
+      _canvasSize.width * 0.5,
+      _canvasSize.height * 0.5,
+    );
+
+    if (meshes.isNotEmpty) {
+      final mesh = meshes[0];
+      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final eyeLandmarks = [
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        ];
+
+        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+          return MachineLearningCameraService.translator(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
+          );
+        }).toList();
+
+        final eyeLandmarksInsideTheBox =
+            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+          _translatedEyeLandmarks,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+
+        if (eyeLandmarksInsideTheBox) {
+          int newDistance =
+              MachineLearningCameraService.calculateDistanceToScreen(
+            leftEyeLandmark: eyeLandmarks[0],
+            rightEyeLandmark: eyeLandmarks[1],
+            focalLength: _focalLength,
+            sensorX: _sensorX,
+            sensorY: _sensorY,
+            imageWidth: inputImage.metadata!.size.width.toInt(),
+            imageHeight: inputImage.metadata!.size.height.toInt(),
+          );
+          updateDistance(newDistance);
+        } else {
+          resetValues();
+        }
+      } else {
+        resetValues();
+      }
+    } else {
+      resetValues();
+    }
+
+    // Calling the Distance Calculator Painter
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final painter = VisualAcuityFaceDistancePainter(
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _translatedEyeLandmarks,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void resetValues() {
+    _translatedEyeLandmarks = [];
+    _distanceToFace = null;
   }
 
   @override
@@ -245,162 +392,84 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     );
   }
 
-  Future<void> _startLiveFeed() async {
-    logger.d("StartLiveFeed Called");
-    _controller = CameraController(
-      _cameras.firstWhere(
-        (element) => element.lensDirection == _cameraLensDirection,
-      ),
-      defaultResolution,
-      enableAudio: false,
-      imageFormatGroup: Platform.isAndroid
-          ? ImageFormatGroup.nv21
-          : ImageFormatGroup.bgra8888,
-    );
-    await _controller.initialize().then(
-      (value) {
-        if (!mounted) {
-          return;
-        }
-        _controller.startImageStream(_processCameraImage);
-      },
-    );
-    if (mounted) {
-      setState(() {});
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d({
+      "AppLifecycleState": "$state",
+      "isPermissionGranted": "$isPermissionGranted",
+      "isLoading": "$isLoading",
+    });
+    if (!isPermissionGranted) {
+      return;
     }
-  }
 
-  Future<void> _getCameraInfo() async {
-    logger.d("GetCameraInfo Called");
-    try {
-      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
-      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
-      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
-      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
-    } catch (error) {
-      logger.e('Error getting camera info: $error');
-      rethrow;
-    }
-  }
+    if (state == AppLifecycleState.inactive) {
+      logger.d("AppLifecycleState.inactive");
+      addLoading();
+      stopLiveFeed();
+    } else if (state == AppLifecycleState.resumed) {
+      logger.d("AppLifecycleState.resumed");
 
-  void _processCameraImage(CameraImage image) {
-    final camera = _cameras.firstWhere(
-      (element) => element.lensDirection == _cameraLensDirection,
-    );
-    final orientation = _controller.value.deviceOrientation;
-    final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
-      image: image,
-      camera: camera,
-      deviceOrientation: orientation,
-    );
-    if (inputImage == null) return;
-
-    processImage(inputImage);
-  }
-
-  Future<void> processImage(
-    InputImage inputImage,
-  ) async {
-    if (!_canProcess) return;
-
-    final meshes = await _meshDetector.processImage(inputImage);
-    const boxSizeRatio = 0.7;
-    final boxWidth = _canvasSize.width * boxSizeRatio;
-    final boxHeight = _canvasSize.height * boxSizeRatio;
-    final boxCenter = Point(
-      _canvasSize.width * 0.5,
-      _canvasSize.height * 0.5,
-    );
-
-    if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
-
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
-        ];
-
-        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraService.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
-          );
-        }).toList();
-
-        final eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
-        );
-
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
-
-          updateDistance(_distanceToFace);
-        } else {
-          resetValues();
-        }
-      } else {
-        resetValues();
+      if (mounted) {
+        _checkPermissions(context);
       }
-    } else {
-      resetValues();
-    }
+    } else if (state == AppLifecycleState.paused) {
+      logger.d("AppLifecycleState.paused");
+      addLoading();
+      stopLiveFeed();
+    } else if (state == AppLifecycleState.detached) {
+      logger.d("AppLifecycleState.detached");
 
-    // Calling the Distance Calculator Painter
-    if (inputImage.metadata?.size != null &&
-        inputImage.metadata?.rotation != null) {
-      final painter = VisualAcuityFaceDistancePainter(
-        boxCenter,
-        boxWidth,
-        boxHeight,
-        _translatedEyeLandmarks,
-        (size) {
-          _canvasSize = size;
-        },
-      );
-      _customPaint = CustomPaint(painter: painter);
-    } else {
-      _customPaint = null;
-    }
-
-    if (mounted) {
-      setState(() {});
+      addLoading();
+      stopLiveFeed();
     }
   }
 
-  void updateDistance(int? distance) {
-    ref.read(distanceNotifierProvider).distance = distance ?? 0;
-  }
-
-  void resetValues() {
-    _translatedEyeLandmarks = [];
-    _distanceToFace = null;
-    ref.read(faceDistanceProvider).setDistance(null);
-  }
-
-  Future<void> _stopLiveFeed() async {
+  Future<void> stopLiveFeed() async {
     logger.d("Stop Live Feed Called");
-    _canProcess = false;
-    _meshDetector.close();
-    await _controller.stopImageStream();
-    await _controller.dispose();
+    try {
+      _canProcess = false;
+      _meshDetector.close();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
+    } catch (e) {
+      logger.e('Error stopping live feed: $e');
+    }
+  }
+
+  void addLoading() {
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
+  }
+
+  void removeLoading() {
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  void addPermissionLoading() {
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = true;
+      });
+    }
+  }
+
+  void removePermissionLoading() {
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = false;
+      });
+    }
   }
 }
 
