@@ -19,8 +19,8 @@ class ChooseRoleDialog extends HookWidget {
 
     return BackdropFilter(
       filter: ImageFilter.blur(
-        sigmaX: 20,
-        sigmaY: 10,
+        sigmaX: 5,
+        sigmaY: 5,
       ),
       child: AlertDialog(
         backgroundColor: AppColor.white,
@@ -75,7 +75,7 @@ class ChooseRoleDialog extends HookWidget {
                           borderRadius: BorderRadius.circular(5),
                           color: selectedRole.value == role
                               ? AppColor.primary.withOpacity(0.8)
-                              : Colors.transparent,
+                              : null,
                         ),
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         child: InkWell(
@@ -83,19 +83,8 @@ class ChooseRoleDialog extends HookWidget {
                             selectedRole.value = role;
                           },
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Visibility(
-                                visible: selectedRole.value == role,
-                                child: const Icon(
-                                  Icons.check,
-                                  color: AppColor.white,
-                                  size: 20,
-                                ),
-                              ),
-                              Visibility(
-                                visible: selectedRole.value == role,
-                                child: const SizedBox(width: 10),
-                              ),
                               Text(
                                 _formateRoleName(role!),
                                 textAlign: TextAlign.center,
@@ -105,6 +94,21 @@ class ChooseRoleDialog extends HookWidget {
                                   color: selectedRole.value == role
                                       ? AppColor.white
                                       : AppColor.black,
+                                ),
+                              ),
+                              Visibility(
+                                visible: selectedRole.value == role,
+                                child: Container(
+                                  padding: const EdgeInsets.all(2),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColor.green,
+                                  ),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: AppColor.white,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
                             ],

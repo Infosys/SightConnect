@@ -133,10 +133,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
     _distanceToFace =
         _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
 
     if (mounted) {
-      setState(() {});
+      ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
     }
   }
 
@@ -254,6 +253,16 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   void resetValues() {
     _translatedEyeLandmarks = [];
     _distanceToFace = null;
+  }
+
+  @override
+  void dispose() {
+    logger.d("Top Reading Card Disposed");
+    if (mounted) {
+      stopLiveFeed();
+    }
+
+    super.dispose();
   }
 
   @override
