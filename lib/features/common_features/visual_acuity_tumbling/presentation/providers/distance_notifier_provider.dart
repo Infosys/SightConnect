@@ -6,7 +6,7 @@ var distanceNotifierProvider =
     ChangeNotifierProvider((ref) => DistanceNotifier());
 
 class DistanceNotifier extends ChangeNotifier {
-  int _currentDistance = 0;
+  int _currentDistance = 40;
   final int _maxDistance = 45;
   final int _minDistance = 35;
   final int _doctorRecommendedDistance = 40;

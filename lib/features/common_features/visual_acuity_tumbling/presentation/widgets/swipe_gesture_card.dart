@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io' show Platform;
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
@@ -28,6 +28,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
+    bool isIOS = Platform.isIOS;
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
@@ -153,28 +154,31 @@ class SwipeGestureCard extends HookConsumerWidget {
                           ),
                         ),
                       )
-                    : Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            width: AppSize.width(context) * 0.8,
-                            decoration: BoxDecoration(
-                              color: AppColor.black.withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              distance.getDistanceText(context),
-                              textAlign: TextAlign.center,
-                              style: applyRobotoFont(
-                                fontSize: 16,
-                                color: AppColor.white,
-                                fontWeight: FontWeight.w500,
+                    : isIOS == false && distance.isDistanceValid() == false
+                        ? Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Container(
+                                width: AppSize.width(context) * 0.8,
+                                decoration: BoxDecoration(
+                                  color: AppColor.black.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                child: Text(
+                                  distance.getDistanceText(context),
+                                  textAlign: TextAlign.center,
+                                  style: applyRobotoFont(
+                                    fontSize: 16,
+                                    color: AppColor.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
+                          )
+                        : Container(),
               ),
             ],
           ),
