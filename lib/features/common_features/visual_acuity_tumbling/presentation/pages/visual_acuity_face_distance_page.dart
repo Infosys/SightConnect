@@ -50,6 +50,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void initState() {
+    logger.d("Init State Called");
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -59,6 +60,7 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("Check Permission Called");
     final navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -73,6 +75,8 @@ class _VisualAcuityFaceDistancePageViewState
       addPermissionLoading();
       await _initializeCamera();
     } else {
+      logger.d("Permission not granted");
+      WidgetsBinding.instance.removeObserver(this);
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
@@ -88,6 +92,8 @@ class _VisualAcuityFaceDistancePageViewState
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
+      logger.e('Error initializing camera: $e');
+      WidgetsBinding.instance.removeObserver(this);
       navigator.pop();
       Fluttertoast.showToast(msg: "Service not available");
     }
@@ -271,7 +277,8 @@ class _VisualAcuityFaceDistancePageViewState
         onPopInvoked: (value) async {
           final navigator = Navigator.of(context);
           if (value) return;
-
+          logger.d("Pop Invoked");
+          WidgetsBinding.instance.removeObserver(this);
           addLoading();
           await _stopLiveFeed();
 
@@ -282,6 +289,8 @@ class _VisualAcuityFaceDistancePageViewState
             leadingIcon: IconButton(
               onPressed: () async {
                 final navigator = Navigator.of(context);
+                logger.d("Back Button Pressed");
+                WidgetsBinding.instance.removeObserver(this);
                 addLoading();
                 await _stopLiveFeed();
                 navigator.pop();
@@ -350,6 +359,8 @@ class _VisualAcuityFaceDistancePageViewState
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               final navigator = Navigator.of(context);
+              logger.d("Next Button Pressed");
+              WidgetsBinding.instance.removeObserver(this);
               addLoading();
               await _stopLiveFeed();
               navigator.pushReplacement(
