@@ -44,6 +44,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
+  bool _isBusy = false;
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
@@ -111,7 +112,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -166,9 +166,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     _processImage(inputImage);
   }
 
+  // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
-
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -245,6 +248,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       _customPaint = null;
     }
 
+    _isBusy = false;
     if (mounted) {
       setState(() {});
     }
