@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -21,11 +23,15 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import '../provider/eye_detector_service.dart';
 import '../provider/triage_eye_scan_provider.dart';
+import '../widgets/eye_detector_painter.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({
@@ -42,35 +48,183 @@ class TriageEyeCapturingPage extends ConsumerStatefulWidget {
 class _PatientTriageEyeCapturingPageState
     extends ConsumerState<TriageEyeCapturingPage> with WidgetsBindingObserver {
   late CameraController _controller;
-  ResolutionPreset defaultResolution = ResolutionPreset.max;
+  ResolutionPreset defaultResolution = ResolutionPreset.high;
+  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   bool isLoading = false;
   String _progressMessage = "Loading...";
 
+  List<CameraDescription> _cameras = [];
+  CustomPaint? _customPaint;
+
+  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  final FaceMeshDetector _meshDetector = FaceMeshDetector(
+    option: FaceMeshDetectorOptions.faceMesh,
+  );
+
+  bool _canProcess = false;
+  bool _isBusy = false;
+  Size _canvasSize = Size.zero;
+  bool _isEyeValid = false;
+  bool _eyesInsideTheBox = false;
+  double _eyeWidthRatio = 0.0;
+  List<Point<double>> _translatedEyeContours = [];
+  Map<String, double> _eyeCorners = {};
+  TriageEyeType _currentEye = TriageEyeType.RIGHT;
+  bool _changingCameraLens = false;
+
   @override
   void initState() {
+    debugPrint('EyeDetectorView initState');
     super.initState();
-    logger.d("INIT STATE");
     WidgetsBinding.instance.addObserver(this);
-    _initializeCamera(CameraLensDirection.back);
+    _initializeCamera();
   }
 
-  _initializeCamera(CameraLensDirection lensDirection) async {
+  void _initializeCamera() async {
+    debugPrint('EyeDetectorView _initializeCamera');
+
+    final NavigatorState navigator = Navigator.of(context);
+    try {
+      if (_cameras.isEmpty) {
+        _cameras = await availableCameras();
+      }
+      _canProcess = true;
+      await _startLiveFeed();
+    } catch (e) {
+      debugPrint('Error initializing camera: $e');
+      navigator.pop();
+    }
+  }
+
+  Future<void> _startLiveFeed() async {
+    debugPrint('EyeDetectorView _startLiveFeed');
     _controller = CameraController(
-      widget.cameras.firstWhere(
-        (element) => element.lensDirection == lensDirection,
+      _cameras.firstWhere(
+        (element) => element.lensDirection == _cameraLensDirection,
       ),
       defaultResolution,
+      enableAudio: false,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : ImageFormatGroup.bgra8888,
     );
 
-    await _controller.initialize().then((value) {
-      if (!mounted) {
-        return;
-      }
+    await _controller.initialize().then(
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        _controller.startImageStream(_processCameraImage);
+      },
+    );
+    if (mounted) {
       setState(() {});
-    }).catchError((e) {
-      logger.d(e);
-      Fluttertoast.showToast(msg: e);
-    });
+    }
+  }
+
+  void _processCameraImage(CameraImage image) {
+    final CameraDescription camera = _cameras.firstWhere(
+      (element) => element.lensDirection == _cameraLensDirection,
+    );
+    final DeviceOrientation orientation = _controller.value.deviceOrientation;
+    final InputImage? inputImage = EyeDetectorService.inputImageFromCameraImage(
+      image: image,
+      camera: camera,
+      deviceOrientation: orientation,
+    );
+    if (inputImage == null) return;
+
+    _processImage(inputImage);
+  }
+
+  // Function to process the frames as per our requirements
+  Future<void> _processImage(InputImage inputImage) async {
+    if (!_canProcess) return;
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
+    final meshes = await _meshDetector.processImage(inputImage);
+
+    // Measurement of the Fixed Center Eye Scanner Box
+    final boxWidth = _canvasSize.width * (3 / 5);
+    final boxHeight = _canvasSize.height * (1 / 5);
+    final boxCenter = Point(
+      _canvasSize.width * (1 / 2),
+      _canvasSize.height * (3 / 10),
+    );
+
+    if (meshes.isNotEmpty) {
+      final mesh = meshes[0];
+      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final List<FaceMeshPoint> eyePoints =
+            EyeDetectorService.isLeftEye(_currentEye)
+                ? leftEyeContour
+                : rightEyeContour;
+
+        // Translate Eye Points
+        _translatedEyeContours = eyePoints.map(
+          (contour) {
+            return EyeDetectorService.translator(
+              contour,
+              inputImage,
+              _canvasSize,
+              _cameraLensDirection,
+            );
+          },
+        ).toList();
+
+        // Check if Eyes are inside the box
+        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+          _translatedEyeContours,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+
+        // Get the corner point of the eyes which is needed to calculate eye width
+        _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
+
+        // Calculate the eyeWidth ratio to the boxWidth
+        _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
+          _eyeCorners,
+          boxWidth,
+          boxHeight,
+        );
+
+        // Validity of the eye
+        _isEyeValid = _eyesInsideTheBox &&
+            EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
+      } else {
+        _translatedEyeContours = [];
+      }
+    } else {
+      _translatedEyeContours = [];
+    }
+
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final painter = EyeDetectorPainter(
+        _translatedEyeContours,
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _isEyeValid,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    _isBusy = false;
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   // Future<bool> _cameraPermisson() async {
@@ -91,15 +245,45 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    logger.d("didChangeAppLifecycleState");
-    final CameraController cameraController = _controller;
-    if (!cameraController.value.isInitialized) {
-      return;
-    }
+    if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
+      debugPrint('EyeDetectorView AppLifecycleState.inactive');
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      _initializeCamera(cameraController.description.lensDirection);
+      debugPrint('EyeDetectorView AppLifecycleState.resumed');
+      _initializeCamera();
+    } else if (state == AppLifecycleState.paused) {
+      debugPrint('EyeDetectorView AppLifecycleState.paused');
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.detached) {
+      debugPrint('EyeDetectorView AppLifecycleState.detached');
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.hidden) {
+      debugPrint('EyeDetectorView AppLifecycleState.hidden');
+      _stopLiveFeed();
+    }
+  }
+
+  @override
+  void dispose() {
+    debugPrint('EyeDetectorView dispose');
+    WidgetsBinding.instance.removeObserver(this);
+    _stopLiveFeed();
+    super.dispose();
+  }
+
+  Future<void> _stopLiveFeed() async {
+    debugPrint('EyeDetectorView _stopLiveFeed');
+    try {
+      _canProcess = false;
+      _meshDetector.close();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
+    } catch (e) {
+      debugPrint('Error stopping live feed: $e');
     }
   }
 
@@ -114,12 +298,6 @@ class _PatientTriageEyeCapturingPageState
     setState(() {
       isLoading = false;
     });
-  }
-
-  @override
-  void dispose() {
-    logger.d("dispose");
-    super.dispose();
   }
 
   @override
@@ -212,8 +390,21 @@ class _PatientTriageEyeCapturingPageState
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Positioned.fill(
-                    child: CameraPreview(_controller),
+                            // child: _changingCameraLens
+            //     ? const Center(
+            //         child: Text('Changing camera lens'),
+            //       )
+            //     : CameraPreview(
+            //         _controller,
+            //         child: _customPaint,
+            //       ),
+
+                  _changingCameraLens
+                ? const Center(
+                    child: Text('Changing camera lens'),
+                  )
+                : Positioned.fill(
+                    child: CameraPreview(_controller, child: _customPaint),
                   ),
                   Positioned(
                     top: 100,
@@ -269,8 +460,10 @@ class _PatientTriageEyeCapturingPageState
                                 await model.setRightEyeImage(image);
                                 removeLoading();
                                 model.setCurrentEye(TriageEyeType.LEFT);
+                                _currentEye = TriageEyeType.LEFT;
                               } else if (model.currentEye ==
                                   TriageEyeType.LEFT) {
+                              
                                 setLoading("Uploading Image");
                                 await model.setLeftEyeImage(image);
                                 // removeLoading();
@@ -405,11 +598,26 @@ class _PatientTriageEyeCapturingPageState
     }
     setLoading();
 
+    setState(() {
+      _changingCameraLens = true;
+    });
+
     if (_controller.description.lensDirection == CameraLensDirection.front) {
-      _initializeCamera(CameraLensDirection.back);
+      _cameraLensDirection = CameraLensDirection.back;
     } else {
-      _initializeCamera(CameraLensDirection.front);
+      _cameraLensDirection = CameraLensDirection.front;
     }
+    await _stopLiveFeed();
+    _initializeCamera();
+     setState(() {
+      _changingCameraLens = false;
+    });
+
+    // if (_controller.description.lensDirection == CameraLensDirection.front) {
+    //   _initializeCamera(CameraLensDirection.back);
+    // } else {
+    //   _initializeCamera(CameraLensDirection.front);
+    // }
     removeLoading();
   }
 
