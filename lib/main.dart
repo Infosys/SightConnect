@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:eye_care_for_all/app/app.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/pages/shared_error_app_page.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

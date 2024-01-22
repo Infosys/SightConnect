@@ -34,7 +34,7 @@ class TopReadingCard extends ConsumerStatefulWidget {
 class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  CustomPaint? _customPaint;
+  CustomPaint? customPaint;
 
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
@@ -243,9 +243,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           _canvasSize = size;
         },
       );
-      _customPaint = CustomPaint(painter: painter);
+      customPaint = CustomPaint(painter: painter);
     } else {
-      _customPaint = null;
+      customPaint = null;
     }
 
     _isBusy = false;
