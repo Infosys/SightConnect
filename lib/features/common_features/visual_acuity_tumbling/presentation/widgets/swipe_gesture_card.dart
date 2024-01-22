@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
@@ -9,8 +12,8 @@ import 'package:eye_care_for_all/shared/widgets/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../core/constants/app_size.dart';
 import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
 import 'dart:math';
@@ -25,8 +28,57 @@ class SwipeGestureCard extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
+    final distance = ref.watch(distanceNotifierProvider);
+    // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
+    // final distanceText =
+    //     ref.watch(distanceNotifierProvider).getDistanceText(context);
 
-    final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
+    if (distance.isDistanceValid()==false) {     
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          AppToast.showToast(
+            context,
+            distance.getDistanceText(context),
+          );
+        });
+         Future.delayed(const Duration(seconds: 3), () {});
+    }
+    
+    //   showDialog(
+    //     barrierDismissible: false,
+    //     context: context,
+    //     builder: (context) {
+    //       return Transform.translate(
+    //         offset: Offset(0, AppSize.height(context) * 0.16),
+    //         child: Dialog(
+    //           insetPadding: EdgeInsets.zero,
+    //           backgroundColor: Colors.transparent,
+    //           child: Center(
+    //             child: Container(
+    //               padding: const EdgeInsets.all(10),
+    //               width: AppSize.width(context) * 0.9,
+    //               height: AppSize.height(context) * 0.1,
+    //               color: Colors.black.withOpacity(0.5),
+    //               child: Center(
+    //                 child: Text(
+    //                   distanceText,
+    //                   style: const TextStyle(
+    //                     color: Colors.white,
+    //                     fontSize: 16,
+    //                     fontWeight: FontWeight.bold,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         ),
+    //       );
+    //     },
+    //   );
+    // });
+    // Future.delayed(const Duration(seconds: 3), () {
+    //   if (Navigator.canPop(context)) {
+    //     Navigator.of(context).pop();
+    //   }
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -91,7 +143,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           return;
         }
 
-        if (isValid) {
+        if (distance.isDistanceValid()==true) {
           model.handUserResponse(
             UserResponse(
               levelNumber: model.currentLevel!,
@@ -132,45 +184,56 @@ class SwipeGestureCard extends HookConsumerWidget {
           child: Stack(
             fit: StackFit.expand,
             clipBehavior: Clip.none,
+            alignment: Alignment.center,
             children: [
               SvgPicture.asset(
                 "assets/images/app_bg.svg",
                 fit: BoxFit.fill,
               ),
-              AnimatedCrossFade(
-                crossFadeState: isValid
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-                firstChild: Center(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(top: AppSize.height(context) * 0.3),
-                    child: Text(
-                      loc.swipeGestureCardText,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.grey,
-                      ),
-                    ),
+              Center(
+                child: Text(
+                  loc.swipeGestureCardText,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.grey,
                   ),
                 ),
-                secondChild: Center(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(top: AppSize.height(context) * 0.3),
-                    child: Text(
-                      "You are not in the range",
-                      textAlign: TextAlign.center,
-                      style: applyRobotoFont(
-                        fontSize: 18,
-                        color: AppColor.red,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                duration: const Duration(milliseconds: 100),
               ),
+
+              // AnimatedCrossFade(
+              //   crossFadeState: isValid
+              //       ? CrossFadeState.showFirst
+              //       : CrossFadeState.showSecond,
+              //   firstChild: Center(
+              //     child: Padding(
+              //       padding:
+              //           EdgeInsets.only(top: AppSize.height(context) * 0.3),
+              //       child: Text(
+              //         loc.swipeGestureCardText,
+              //         style: applyRobotoFont(
+              //           fontSize: 14,
+              //           color: AppColor.grey,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   secondChild: Center(
+              //     child: Padding(
+              //       padding:
+              //           EdgeInsets.only(top: AppSize.height(context) * 0.3),
+              //       child: Text(
+              //         "You are not in the range",
+              //         textAlign: TextAlign.center,
+              //         style: applyRobotoFont(
+              //           fontSize: 18,
+              //           color: AppColor.red,
+              //           fontWeight: FontWeight.w500,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   duration: const Duration(milliseconds: 100),
+              // ),
             ],
           ),
         ),
