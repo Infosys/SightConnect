@@ -3,7 +3,7 @@
 <plist version="1.0">
 	<dict>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
-		<true/>
+		<true />
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
@@ -25,21 +25,24 @@
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
-		<true/>
+		<true />
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>App needs access to photo lib for profile images</string>
+
 		<key>NSCameraUsageDescription</key>
-		<string>your usage description here</string>
+		<string>To capture profile photo please grant camera access</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>This we want to use to give information about the nearest vision care centers</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>your usage description here</string>
+		<string>Microphone is needed</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
-		<true/>
+		<true />
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<false />
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
@@ -54,6 +57,6 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false/>
+		<false />
 	</dict>
 </plist>
