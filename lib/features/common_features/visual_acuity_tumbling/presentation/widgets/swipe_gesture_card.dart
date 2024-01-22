@@ -12,7 +12,6 @@ import 'package:eye_care_for_all/shared/widgets/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/tumbling_models.dart';
 import '../providers/visual_acuity_test_provider.dart';
@@ -32,53 +31,6 @@ class SwipeGestureCard extends HookConsumerWidget {
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
-
-    if (distance.isDistanceValid()==false) {     
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          AppToast.showToast(
-            context,
-            distance.getDistanceText(context),
-          );
-        });
-         Future.delayed(const Duration(seconds: 3), () {});
-    }
-    
-    //   showDialog(
-    //     barrierDismissible: false,
-    //     context: context,
-    //     builder: (context) {
-    //       return Transform.translate(
-    //         offset: Offset(0, AppSize.height(context) * 0.16),
-    //         child: Dialog(
-    //           insetPadding: EdgeInsets.zero,
-    //           backgroundColor: Colors.transparent,
-    //           child: Center(
-    //             child: Container(
-    //               padding: const EdgeInsets.all(10),
-    //               width: AppSize.width(context) * 0.9,
-    //               height: AppSize.height(context) * 0.1,
-    //               color: Colors.black.withOpacity(0.5),
-    //               child: Center(
-    //                 child: Text(
-    //                   distanceText,
-    //                   style: const TextStyle(
-    //                     color: Colors.white,
-    //                     fontSize: 16,
-    //                     fontWeight: FontWeight.bold,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   );
-    // });
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   if (Navigator.canPop(context)) {
-    //     Navigator.of(context).pop();
-    //   }
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -143,7 +95,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           return;
         }
 
-        if (distance.isDistanceValid()==true) {
+        if (distance.isDistanceValid() == true) {
           model.handUserResponse(
             UserResponse(
               levelNumber: model.currentLevel!,
@@ -190,50 +142,40 @@ class SwipeGestureCard extends HookConsumerWidget {
                 "assets/images/app_bg.svg",
                 fit: BoxFit.fill,
               ),
-              Center(
-                child: Text(
-                  loc.swipeGestureCardText,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.grey,
-                  ),
-                ),
+              Positioned(
+                child: distance.isDistanceValid() == true
+                    ? Center(
+                        child: Text(
+                          loc.swipeGestureCardText,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: AppSize.width(context) * 0.8,
+                            decoration: BoxDecoration(
+                              color: AppColor.black.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              distance.getDistanceText(context),
+                              textAlign: TextAlign.center,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                color: AppColor.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
               ),
-
-              // AnimatedCrossFade(
-              //   crossFadeState: isValid
-              //       ? CrossFadeState.showFirst
-              //       : CrossFadeState.showSecond,
-              //   firstChild: Center(
-              //     child: Padding(
-              //       padding:
-              //           EdgeInsets.only(top: AppSize.height(context) * 0.3),
-              //       child: Text(
-              //         loc.swipeGestureCardText,
-              //         style: applyRobotoFont(
-              //           fontSize: 14,
-              //           color: AppColor.grey,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              //   secondChild: Center(
-              //     child: Padding(
-              //       padding:
-              //           EdgeInsets.only(top: AppSize.height(context) * 0.3),
-              //       child: Text(
-              //         "You are not in the range",
-              //         textAlign: TextAlign.center,
-              //         style: applyRobotoFont(
-              //           fontSize: 18,
-              //           color: AppColor.red,
-              //           fontWeight: FontWeight.w500,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              //   duration: const Duration(milliseconds: 100),
-              // ),
             ],
           ),
         ),
