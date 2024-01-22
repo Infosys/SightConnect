@@ -52,15 +52,12 @@ class _PatientTriageEyeCapturingPageState
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   bool isLoading = false;
   String _progressMessage = "Loading...";
-
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-
   CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
-
   bool _canProcess = false;
   bool _isBusy = false;
   Size _canvasSize = Size.zero;
@@ -70,19 +67,17 @@ class _PatientTriageEyeCapturingPageState
   List<Point<double>> _translatedEyeContours = [];
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
-  bool _changingCameraLens = false;
 
   @override
   void initState() {
-    debugPrint('EyeDetectorView initState');
+    logger.d('EyeDetectorView initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _initializeCamera();
   }
 
   void _initializeCamera() async {
-    debugPrint('EyeDetectorView _initializeCamera');
-
+    logger.d('EyeDetectorView _initializeCamera');
     final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -91,13 +86,13 @@ class _PatientTriageEyeCapturingPageState
       _canProcess = true;
       await _startLiveFeed();
     } catch (e) {
-      debugPrint('Error initializing camera: $e');
+      logger.d('Error initializing camera: $e');
       navigator.pop();
     }
   }
 
   Future<void> _startLiveFeed() async {
-    debugPrint('EyeDetectorView _startLiveFeed');
+    logger.d('EyeDetectorView _startLiveFeed');
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -139,6 +134,7 @@ class _PatientTriageEyeCapturingPageState
 
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
+    logger.d('EyeDetectorView _processImage');
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -247,33 +243,33 @@ class _PatientTriageEyeCapturingPageState
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
     if (state == AppLifecycleState.inactive) {
-      debugPrint('EyeDetectorView AppLifecycleState.inactive');
+      logger.d('EyeDetectorView AppLifecycleState.inactive');
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      debugPrint('EyeDetectorView AppLifecycleState.resumed');
+      logger.d('EyeDetectorView AppLifecycleState.resumed');
       _initializeCamera();
     } else if (state == AppLifecycleState.paused) {
-      debugPrint('EyeDetectorView AppLifecycleState.paused');
+      logger.d('EyeDetectorView AppLifecycleState.paused');
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      debugPrint('EyeDetectorView AppLifecycleState.detached');
+      logger.d('EyeDetectorView AppLifecycleState.detached');
       _stopLiveFeed();
     } else if (state == AppLifecycleState.hidden) {
-      debugPrint('EyeDetectorView AppLifecycleState.hidden');
+      logger.d('EyeDetectorView AppLifecycleState.hidden');
       _stopLiveFeed();
     }
   }
 
   @override
   void dispose() {
-    debugPrint('EyeDetectorView dispose');
+    logger.d('EyeDetectorView dispose');
     WidgetsBinding.instance.removeObserver(this);
     _stopLiveFeed();
     super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
-    debugPrint('EyeDetectorView _stopLiveFeed');
+    logger.d('EyeDetectorView _stopLiveFeed');
     try {
       _canProcess = false;
       _meshDetector.close();
@@ -283,7 +279,7 @@ class _PatientTriageEyeCapturingPageState
         await _controller.dispose();
       }
     } catch (e) {
-      debugPrint('Error stopping live feed: $e');
+      logger.d('Error stopping live feed: $e');
     }
   }
 
@@ -390,21 +386,11 @@ class _PatientTriageEyeCapturingPageState
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                            // child: _changingCameraLens
-            //     ? const Center(
-            //         child: Text('Changing camera lens'),
-            //       )
-            //     : CameraPreview(
-            //         _controller,
-            //         child: _customPaint,
-            //       ),
-
-                  _changingCameraLens
-                ? const Center(
-                    child: Text('Changing camera lens'),
-                  )
-                : Positioned.fill(
-                    child: CameraPreview(_controller, child: _customPaint),
+                  Positioned.fill(
+                    child: CameraPreview(
+                      _controller,
+                      child: _customPaint,
+                    ),
                   ),
                   Positioned(
                     top: 100,
@@ -454,7 +440,6 @@ class _PatientTriageEyeCapturingPageState
                                     msg: loc.imageNotCapturedToastMessage);
                                 return;
                               }
-
                               if (model.currentEye == TriageEyeType.RIGHT) {
                                 setLoading("Uploading Image");
                                 await model.setRightEyeImage(image);
@@ -463,7 +448,6 @@ class _PatientTriageEyeCapturingPageState
                                 _currentEye = TriageEyeType.LEFT;
                               } else if (model.currentEye ==
                                   TriageEyeType.LEFT) {
-                              
                                 setLoading("Uploading Image");
                                 await model.setLeftEyeImage(image);
                                 // removeLoading();
@@ -484,7 +468,6 @@ class _PatientTriageEyeCapturingPageState
                                 } else {
                                   response = await tiageModel.saveTriage(3);
                                 }
-
                                 response.fold(
                                   (failure) async {
                                     removeLoading();
@@ -492,7 +475,6 @@ class _PatientTriageEyeCapturingPageState
                                       "Failure while saving in local db ":
                                           failure,
                                     });
-
                                     _showServerExceptionDialog(
                                       context,
                                       failure,
@@ -597,11 +579,6 @@ class _PatientTriageEyeCapturingPageState
       return;
     }
     setLoading();
-
-    setState(() {
-      _changingCameraLens = true;
-    });
-
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _cameraLensDirection = CameraLensDirection.back;
     } else {
@@ -609,15 +586,6 @@ class _PatientTriageEyeCapturingPageState
     }
     await _stopLiveFeed();
     _initializeCamera();
-     setState(() {
-      _changingCameraLens = false;
-    });
-
-    // if (_controller.description.lensDirection == CameraLensDirection.front) {
-    //   _initializeCamera(CameraLensDirection.back);
-    // } else {
-    //   _initializeCamera(CameraLensDirection.front);
-    // }
     removeLoading();
   }
 
@@ -753,7 +721,6 @@ class _PatientTriageEyeCapturingPageState
                       ref.read(resetProvider).reset();
                       ref.read(accessibilityProvider).resetBrightness();
                       Navigator.of(context).popUntil((route) => route.isFirst);
-
                       //this will naviagte to local page for future ref
                       // Navigator.of(context).pushReplacement(
                       //   MaterialPageRoute(

@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 
-import '../pages/Eye_detector_view_page.dart';
 import '../../../../visual_acuity_tumbling/presentation/widgets/coordinates_translator.dart';
 
 class EyeDetectorService {
