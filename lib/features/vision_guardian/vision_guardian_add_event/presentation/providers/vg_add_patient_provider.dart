@@ -39,6 +39,9 @@ class AddPatientEventNotifier extends ChangeNotifier {
   }
 
   void setPatientSearchQuery(queryData) {
+    if (queryData.length < 4) {
+      return;
+    }
     offset = 0;
     isLoading = false;
     patientQueryData = queryData;

@@ -31,7 +31,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
 
     var data = ref.watch(addPatientEventProvider).patientList;
     return LoadingOverlay(
-       overlayColor: null,
+      overlayColor: null,
       isLoading: ref.watch(addPatientEventProvider).isLoading,
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding + 2),
@@ -78,7 +78,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                     ),
                   )
                 : VisionGuardianPatientListWidget(
-                    data: data,
+                    response: data,
                     scrollController: scrollController,
                     triageMode: triageMode)
           ],
@@ -91,12 +91,12 @@ class VisionGuardianPatientList extends HookConsumerWidget {
 class VisionGuardianPatientListWidget extends ConsumerWidget {
   const VisionGuardianPatientListWidget({
     super.key,
-    required this.data,
+    required this.response,
     required this.scrollController,
     required this.triageMode,
   });
 
-  final List<VisionGuardianEventPatientResponseModel> data;
+  final List<VisionGuardianEventPatientResponseModel> response;
   final ScrollController scrollController;
   final TriageMode triageMode;
 
@@ -112,6 +112,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var data = response.where((element) => element.patientId != null).toList();
     return Expanded(
       child: ListView.separated(
           controller: scrollController,
@@ -123,6 +124,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                 child: CupertinoActivityIndicator(),
               );
             }
+
             return Container(
               decoration: BoxDecoration(
                 color: AppColor.white,
@@ -146,25 +148,26 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                         : AppNetworkImage(
                             imageUrl: data[index].profilePhoto ?? ""),
                     title: RichText(
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          text: data[index].name,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.black,
-                          )),
-                      const WidgetSpan(
-                        child: SizedBox(width: 10),
-                      ),
-                      TextSpan(
-                          text: "PID ${data[index].patientId}",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.grey,
-                          )),
-                    ])),
+                          TextSpan(
+                              text: data[index].name,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.black,
+                              )),
+                          const WidgetSpan(
+                            child: SizedBox(width: 10),
+                          ),
+                          TextSpan(
+                              text: "PID ${data[index].patientId}",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey,
+                              )),
+                        ])),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
