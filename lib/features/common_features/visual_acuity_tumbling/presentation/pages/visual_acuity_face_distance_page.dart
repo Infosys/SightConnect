@@ -36,6 +36,7 @@ class _VisualAcuityFaceDistancePageViewState
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
+  bool _isBusy = false;
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
@@ -43,8 +44,8 @@ class _VisualAcuityFaceDistancePageViewState
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
-  int bufferSize = 10;
   bool isLoading = false;
+  int bufferSize = 10;
   bool isPermissionGranted = false;
 
   @override
@@ -157,9 +158,12 @@ class _VisualAcuityFaceDistancePageViewState
     _processImage(inputImage);
   }
 
+  // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
-
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -198,7 +202,7 @@ class _VisualAcuityFaceDistancePageViewState
         );
 
         if (eyeLandmarksInsideTheBox) {
-          int newDistance =
+          _distanceToFace =
               MachineLearningCameraService.calculateDistanceToScreen(
             leftEyeLandmark: eyeLandmarks[0],
             rightEyeLandmark: eyeLandmarks[1],
@@ -208,15 +212,14 @@ class _VisualAcuityFaceDistancePageViewState
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
-          updateDistance(newDistance);
         } else {
-          resetValues();
+          _resetValues();
         }
       } else {
-        resetValues();
+        _resetValues();
       }
     } else {
-      resetValues();
+      _resetValues();
     }
 
     // Calling the Distance Calculator Painter
@@ -236,12 +239,13 @@ class _VisualAcuityFaceDistancePageViewState
       _customPaint = null;
     }
 
+    _isBusy = false;
     if (mounted) {
       setState(() {});
     }
   }
 
-  void resetValues() {
+  void _resetValues() {
     _translatedEyeLandmarks = [];
     _distanceToFace = null;
   }

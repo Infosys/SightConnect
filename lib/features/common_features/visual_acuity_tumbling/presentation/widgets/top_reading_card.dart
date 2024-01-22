@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -34,7 +34,7 @@ class TopReadingCard extends ConsumerStatefulWidget {
 class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  CustomPaint? _customPaint;
+  CustomPaint? customPaint;
 
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
@@ -44,6 +44,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
+  bool _isBusy = false;
   double _focalLength = 0.001;
   double _sensorX = 0.001;
   double _sensorY = 0.001;
@@ -54,6 +55,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   int bufferSize = 10;
   bool isLoading = false;
   bool isPermissionGranted = false;
+  bool isIOS = Platform.isIOS;
 
   @override
   void initState() {
@@ -111,7 +113,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -166,9 +167,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     _processImage(inputImage);
   }
 
+  // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
-
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
     final meshes = await _meshDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
@@ -240,11 +244,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           _canvasSize = size;
         },
       );
-      _customPaint = CustomPaint(painter: painter);
+      customPaint = CustomPaint(painter: painter);
     } else {
-      _customPaint = null;
+      customPaint = null;
     }
 
+    _isBusy = false;
     if (mounted) {
       setState(() {});
     }
@@ -275,6 +280,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
     // TODO: THIS IS FOR TESTING, Need to remove
+    logger.d("THE DEVICE IS IOS : $isIOS");
     final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;
 
     return Container(
@@ -362,7 +368,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             ),
                             SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              "${_distanceToFace ?? 0} cm",
+                              isIOS ? "40 cm" : "${_distanceToFace ?? 0} cm",
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -374,22 +380,22 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                       ],
                     ),
                     const SizedBox(height: AppSize.kmheight),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            ref
-                                .watch(distanceNotifierProvider)
-                                .getDistanceText(context),
-                            style: applyRobotoFont(
-                              fontSize: 10,
-                              color: AppColor.grey,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Flexible(
+                    //       child: Text(
+                    //         ref
+                    //             .watch(distanceNotifierProvider)
+                    //             .getDistanceText(context),
+                    //         style: applyRobotoFont(
+                    //           fontSize: 10,
+                    //           color: AppColor.grey,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),
