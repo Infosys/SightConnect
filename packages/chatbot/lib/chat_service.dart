@@ -4,16 +4,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:multi_lingual_recognition/constants/url_endpoints.dart';
 import 'package:chatbot/widgets/chat_message_tile.dart';
 
 // final chatService = ChatService();
 
 class ChatService {
   final int CONTEXT_LIMIT;
-  final String baseUrl;
+  final Uri chatResponseUrl;
+  final Uri querySuggestionsUrl;
   ChatService({
-    required this.baseUrl,
+    required this.chatResponseUrl,
+    required this.querySuggestionsUrl,
     this.CONTEXT_LIMIT = 5,
   });
 
@@ -27,7 +28,7 @@ class ChatService {
 
     debugPrint("ChatService: body: $body");
     final response = await http.post(
-      UrlEndPoints.getChatServiceQuerySuggestionsUrl(baseUrl),
+      querySuggestionsUrl,
       headers: headers,
       body: body,
     );
@@ -65,7 +66,7 @@ class ChatService {
 
     debugPrint("ChatService: body: $body");
     final response = await http.post(
-      UrlEndPoints.getChatServiceResponseUrl(baseUrl),
+      chatResponseUrl,
       headers: headers,
       body: body,
     );
