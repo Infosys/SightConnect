@@ -29,6 +29,9 @@ class SwipeGestureCard extends HookConsumerWidget {
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
     bool isIOS = Platform.isIOS;
+    if(isIOS){
+      distance.distance = 40;
+    }
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
