@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chatbot/constants/app_constants.dart';
-import 'package:chatbot/constants/url_endpoints.dart';
-import 'package:chatbot/diagnostic_report_template_FHIR_model.dart';
+import 'package:chatbot/models/diagnostic_report_template_FHIR_model.dart';
 import 'package:chatbot/chat_service.dart';
 import 'package:chatbot/standard_responses.dart';
 import 'package:chatbot/text_to_speech.dart';
@@ -11,23 +9,29 @@ import 'package:chatbot/widgets/chat_message_tile.dart';
 import 'package:chatbot/widgets/chat_query_suggestions.dart';
 import 'package:chatbot/widgets/language_select_dropdown.dart';
 import 'package:chatbot/utils/language_utils.dart';
-import 'package:chatbot/third_party/local_storage.dart';
 import 'package:chatbot/widgets/loading_indicator.dart';
 
 class ChatBotPage extends StatefulWidget {
-  const ChatBotPage({super.key});
+  const ChatBotPage({
+    super.key,
+    required this.chatServiceUrl,
+    required this.chatServiceQuerySuggestionsUrl,
+    required this.triageQuestionnaireUrl,
+    this.defaultQuerySuggestions = const [],
+    this.loadChatHistory,
+    this.saveChatHistory,
+  });
+
+  final Uri chatServiceUrl;
+  final Uri chatServiceQuerySuggestionsUrl;
+  final Uri triageQuestionnaireUrl;
+  final List<String> defaultQuerySuggestions;
+  final Future<List<ChatMessage>> Function()? loadChatHistory;
+  final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
   @override
   State<ChatBotPage> createState() => _ChatBotPageState();
 }
-
-final chatService = ChatService(
-  baseUrl: UrlEndPoints.getChatServiceBaseUrl(
-    AppConstants.chatServiceIP,
-    AppConstants.chatServicePort,
-  ),
-  CONTEXT_LIMIT: 8,
-);
 
 class _ChatBotPageState extends State<ChatBotPage> {
   // State variables
@@ -42,22 +46,44 @@ class _ChatBotPageState extends State<ChatBotPage> {
   int _currentQuestionIndex = -1;
   bool _isAssessmentGoingOn = false;
 
+  late ChatService _chatService;
+  late TriageQuestionnaireService _triageQuestionnaireService;
+  late Future<List<ChatMessage>> Function() _loadChatHistory;
+  late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
+
   // Init methods
   @override
   void initState() {
+    // LocalStorage.init();
+    _chatService = ChatService(
+      chatResponseUrl: widget.chatServiceUrl,
+      querySuggestionsUrl: widget.chatServiceQuerySuggestionsUrl,
+      CONTEXT_LIMIT: 8,
+    );
+
+    _triageQuestionnaireService = TriageQuestionnaireService(
+        triageQuestionsUrl: widget.triageQuestionnaireUrl);
+
+    _loadChatHistory = widget.loadChatHistory != null
+        ? widget.loadChatHistory!
+        : () async => <ChatMessage>[];
+
+    _saveChatHistory =
+        widget.saveChatHistory != null ? widget.saveChatHistory! : (_) async {};
+
     _initChat();
     _initTts();
-    // LocalStorage.init();
 
     super.initState();
   }
 
   Future _initChat() async {
     // Load chat history if any
-    final chatHistory = await LocalStorage.getChatHistory();
+
+    final chatHistory = await _loadChatHistory();
     debugPrint("Chat History: Loaded: $chatHistory");
 
-    List<String> querySuggestions = AppConstants.defaultQuerySuggestions;
+    List<String> querySuggestions = widget.defaultQuerySuggestions;
 
     if (chatHistory.isEmpty) {
       _chatMessage(ChatMessage(
@@ -65,7 +91,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
         isMe: false,
       ));
     } else {
-      chatService.setContext(chatHistory.toList());
+      _chatService.setContext(chatHistory.toList());
 
       if (chatHistory.length > 1) {
         querySuggestions = await _getQuerySuggestions();
@@ -84,7 +110,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
   }
 
   Future _initEyeAssessment() async {
-    final questions = await TriageQuestionnaireService.loadQuestions();
+    final questions = await _triageQuestionnaireService.loadQuestions();
 
     setState(() {
       _isAssessmentGoingOn = true;
@@ -108,9 +134,9 @@ class _ChatBotPageState extends State<ChatBotPage> {
     // List<Map<String, dynamic>> chatHistory =
     //     _chatMessages.reversed.map((e) => e.toJson()).toList();
     // debugPrint("Chat History: ${jsonEncode(chatHistory)}");
-    LocalStorage.setChatHistory(_chatMessages);
+    _saveChatHistory(_chatMessages);
 
-    chatService.clearContext(); // TODO: Make this conditional
+    _chatService.clearContext(); // TODO: Make this conditional
     super.dispose();
   }
 
@@ -123,7 +149,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
       _isAssessmentGoingOn = false;
       _currentQuestionIndex = -1;
       _triageQuestionnaire = [];
-      _querySuggestions = AppConstants.defaultQuerySuggestions;
+      _querySuggestions = widget.defaultQuerySuggestions;
     });
 
     _chatMessage(
@@ -235,9 +261,9 @@ class _ChatBotPageState extends State<ChatBotPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            chatService.clearContext();
+            _chatService.clearContext();
             _chatMessages = [];
-            LocalStorage.setChatHistory([]).then((value) => _initChat());
+            _saveChatHistory([]).then((value) => _initChat());
           });
         },
         child: Container(
@@ -270,7 +296,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
       _chatMessages.add(message);
       _isLoading = false;
       // if (!_isAssessmentGoingOn) {
-      //   _querySuggestions = AppConstants.defaultQuerySuggestions;
+      //   _querySuggestions = widget.defaultQuerySuggestions;
       // }
     });
   }
@@ -308,7 +334,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
   }
 
   Future _askChatBot(String message) async {
-    final response = await chatService.ask(message);
+    final response = await _chatService.ask(message);
 
     if (response != null) {
       _chatMessage(
@@ -327,7 +353,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
     setState(() {
       _isLoadingQuerySuggestions = true;
     });
-    final suggestions = await chatService.getQuerySuggestions();
+    final suggestions = await _chatService.getQuerySuggestions();
     await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;

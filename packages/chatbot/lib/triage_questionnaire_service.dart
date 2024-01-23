@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:chatbot/constants/url_endpoints.dart';
-import 'package:chatbot/diagnostic_report_template_FHIR_model.dart';
+import 'package:chatbot/models/diagnostic_report_template_FHIR_model.dart';
 
 // ignore: constant_identifier_names
 enum TriageOption { YES, NO }
@@ -32,8 +31,11 @@ String resolveTriageOptionText(TriageOption option) {
 }
 
 class TriageQuestionnaireService {
-  static Future<DiagnosticReportTemplateFHIRModel> loadQuestions() async {
-    var endpoint = Uri.parse(UrlEndPoints.triageQuestions);
+  const TriageQuestionnaireService({required this.triageQuestionsUrl});
+  final Uri triageQuestionsUrl;
+
+  Future<DiagnosticReportTemplateFHIRModel> loadQuestions() async {
+    var endpoint = triageQuestionsUrl;
     debugPrint("API getTriageQuestionnaire: $endpoint");
     var response = await http.get(endpoint);
     //var response = await rootBundle.loadString("assets/triage_assessment.json");
