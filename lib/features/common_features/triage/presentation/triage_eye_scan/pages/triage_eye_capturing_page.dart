@@ -52,6 +52,7 @@ class _PatientTriageEyeCapturingPageState
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   bool isLoading = false;
   String _progressMessage = "Loading...";
+  bool isCompleted = false;
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
   CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
@@ -66,14 +67,17 @@ class _PatientTriageEyeCapturingPageState
   double _eyeWidthRatio = 0.0;
   List<Point<double>> _translatedEyeContours = [];
   Map<String, double> _eyeCorners = {};
-  TriageEyeType _currentEye = TriageEyeType.RIGHT;
+  final TriageEyeType _currentEye = TriageEyeType.RIGHT;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     logger.d('EyeDetectorView initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _initializeCamera();
+    if (isCompleted == false) {
+      _initializeCamera();
+    }
   }
 
   void _initializeCamera() async {
@@ -84,6 +88,7 @@ class _PatientTriageEyeCapturingPageState
         _cameras = await availableCameras();
       }
       _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
     } catch (e) {
       logger.d('Error initializing camera: $e');
@@ -273,11 +278,13 @@ class _PatientTriageEyeCapturingPageState
     try {
       _canProcess = false;
       _meshDetector.close();
-      if (_controller.value.isInitialized &&
-          _controller.value.isStreamingImages) {
-        await _controller.stopImageStream();
-        await _controller.dispose();
-      }
+      // if (_controller.value.isInitialized &&
+      //     _controller.value.isStreamingImages) {
+      //   await _controller.stopImageStream();
+      //   await _controller.dispose();
+      // }
+      await _controller.stopImageStream();
+      await _controller.dispose();
     } catch (e) {
       logger.d('Error stopping live feed: $e');
     }
@@ -298,10 +305,8 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldKey = GlobalKey<ScaffoldState>();
     var model = ref.watch(triageEyeScanProvider);
     final loc = context.loc!;
-
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
@@ -320,7 +325,7 @@ class _PatientTriageEyeCapturingPageState
             showDialog(
               context: context,
               builder: (context) => TriageExitAlertBox(
-                content: loc.eyeScanExitDialog,
+                content: context.loc!.eyeScanExitDialog,
               ),
             );
           },
@@ -383,141 +388,172 @@ class _PatientTriageEyeCapturingPageState
             body: LoadingOverlay(
               isLoading: isLoading,
               progressMessage: _progressMessage,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned.fill(
-                    child: CameraPreview(
-                      _controller,
-                      child: _customPaint,
+              child: Container(
+                color: Colors.black,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: CameraPreview(
+                        _controller,
+                        child: _customPaint,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 100,
-                    left: null,
-                    right: null,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        _eyeLocalization(model.currentEye, context),
-                        style: applyRobotoFont(
-                          fontSize: 16,
-                          color: AppColor.white,
-                          fontWeight: FontWeight.w500,
+                    Positioned(
+                      top: 100,
+                      left: null,
+                      right: null,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          _eyeLocalization(model.currentEye, context),
+                          style: applyRobotoFont(
+                            fontSize: 16,
+                            color: AppColor.white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: const EdgeInsets.all(24),
-                      color: Colors.transparent,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              await _toggleCamera();
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppSize.kmpadding,
-                              ),
-                              child: Icon(
-                                Icons.flip_camera_ios,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          InkWell(
-                            onTap: () async {
-                              final image = await _takePicture(context);
-                              logger.d("Image: $image");
-                              if (image == null) {
-                                Fluttertoast.showToast(
-                                    msg: loc.imageNotCapturedToastMessage);
-                                return;
-                              }
-                              if (model.currentEye == TriageEyeType.RIGHT) {
-                                setLoading("Uploading Image");
-                                await model.setRightEyeImage(image);
-                                removeLoading();
-                                model.setCurrentEye(TriageEyeType.LEFT);
-                                _currentEye = TriageEyeType.LEFT;
-                              } else if (model.currentEye ==
-                                  TriageEyeType.LEFT) {
-                                setLoading("Uploading Image");
-                                await model.setLeftEyeImage(image);
-                                // removeLoading();
-                                setLoading("Validating...");
 
-                                await ref
-                                    .read(triageEyeScanProvider)
-                                    .saveTriageEyeScanResponseToDB();
-                                Either<Failure, TriagePostModel> response;
-                                var tiageModel = ref.read(triageProvider);
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(24),
+                        color: Colors.transparent,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  await _toggleCamera();
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppSize.kmpadding,
+                                  ),
+                                  child: Icon(
+                                    Icons.flip_camera_ios,
+                                    color: AppColor.white,
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () async {
+                                  final image = await _takePicture(context);
+                                  logger.d("Image: $image");
+                                  if (image == null) {
+                                    Fluttertoast.showToast(
+                                        msg: loc.imageNotCapturedToastMessage);
+                                    return;
+                                  }
 
-                                if (tiageModel.triageMode == TriageMode.EVENT) {
-                                  response =
-                                      await tiageModel.saveTriageForEvent(
-                                    3,
-                                    ref.read(addEventDetailsProvider).eventId,
-                                  );
-                                } else {
-                                  response = await tiageModel.saveTriage(3);
-                                }
-                                response.fold(
-                                  (failure) async {
+                                  if (model.currentEye == TriageEyeType.RIGHT) {
+                                    setLoading("Uploading Image");
+                                    await model.setRightEyeImage(image);
                                     removeLoading();
-                                    logger.d({
-                                      "Failure while saving in local db ":
+                                    model.setCurrentEye(TriageEyeType.LEFT);
+                                  } else if (model.currentEye ==
+                                      TriageEyeType.LEFT) {
+                                    setLoading("Uploading Image");
+                                    await model.setLeftEyeImage(image);
+                                    removeLoading();
+                                    setLoading("Validating...");
+
+                                    await ref
+                                        .read(triageEyeScanProvider)
+                                        .saveTriageEyeScanResponseToDB();
+                                    Either<Failure, TriagePostModel> response;
+                                    var tiageModel = ref.read(triageProvider);
+
+                                    if (tiageModel.triageMode ==
+                                        TriageMode.EVENT) {
+                                      response =
+                                          await tiageModel.saveTriageForEvent(
+                                        3,
+                                        ref
+                                            .read(addEventDetailsProvider)
+                                            .eventId,
+                                      );
+                                    } else {
+                                      response = await tiageModel.saveTriage(3);
+                                    }
+
+                                    response.fold(
+                                      (failure) async {
+                                        removeLoading();
+                                        logger.d({
+                                          "Failure while saving in local db ":
+                                              failure,
+                                        });
+
+                                        _showServerExceptionDialog(
+                                          context,
                                           failure,
-                                    });
-                                    _showServerExceptionDialog(
-                                      context,
-                                      failure,
-                                    );
-                                  },
-                                  (result) async {
-                                    removeLoading();
-                                    logger.d({
-                                      "saveTriageEyeScanResponseToDB":
-                                          "Success",
-                                    });
+                                        );
+                                      },
+                                      (result) async {
+                                        removeLoading();
+                                        logger.d({
+                                          "saveTriageEyeScanResponseToDB":
+                                              "Success",
+                                        });
+                                        setState(() {
+                                          isCompleted = true;
+                                        });
 
-                                    _showTestCompletionDialog(context, result);
-                                  },
-                                );
-                              }
-                            },
-                            child: SvgPicture.asset("assets/icons/camera.svg"),
-                          ),
-                          const Spacer(),
-                          Tooltip(
-                            message: loc.eyeAssessmentToolTip,
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppSize.kmpadding,
+                                        if (context.mounted) {
+                                          _showTestCompletionDialog(
+                                              context, result);
+                                        }
+                                      },
+                                    );
+                                  }
+                                },
+                                child:
+                                    SvgPicture.asset("assets/icons/camera.svg"),
                               ),
-                              child: Icon(
-                                Icons.info_outline,
-                                color: AppColor.white,
+                              const Spacer(),
+                              Tooltip(
+                                message: context.loc!.eyeAssessmentToolTip,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppSize.kmpadding,
+                                  ),
+                                  child: Icon(
+                                    Icons.info_outline,
+                                    color: AppColor.white,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
+                            ]),
                       ),
                     ),
-                  ),
-                ],
+                    // _flashToggle(),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       );
     }
+  }
+
+  Future<void> _toggleCamera() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    setLoading();
+    if (_controller.description.lensDirection == CameraLensDirection.front) {
+      _cameraLensDirection = CameraLensDirection.back;
+    } else {
+      _cameraLensDirection = CameraLensDirection.front;
+    }
+    await _stopLiveFeed();
+    _initializeCamera();
+    removeLoading();
   }
 
   String _eyeLocalization(TriageEyeType eye, BuildContext context) {
@@ -574,20 +610,19 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  Future<void> _toggleCamera() async {
-    if (!_controller.value.isInitialized) {
-      return;
-    }
-    setLoading();
-    if (_controller.description.lensDirection == CameraLensDirection.front) {
-      _cameraLensDirection = CameraLensDirection.back;
-    } else {
-      _cameraLensDirection = CameraLensDirection.front;
-    }
-    await _stopLiveFeed();
-    _initializeCamera();
-    removeLoading();
-  }
+  // Future<void> _toggleCamera() async {
+  //   if (!_controller.value.isInitialized) {
+  //     return;
+  //   }
+  //   // setLoading();
+
+  //   if (_controller.description.lensDirection == CameraLensDirection.front) {
+  //     _initializeCamera(CameraLensDirection.back);
+  //   } else {
+  //     _initializeCamera(CameraLensDirection.front);
+  //   }
+  //   removeLoading();
+  // }
 
   Future<void> _toggleFlash() async {
     if (!_controller.value.isInitialized) {
@@ -647,13 +682,16 @@ class _PatientTriageEyeCapturingPageState
                   TextButton(
                     onPressed: () async {
                       ref.read(triageStepperProvider).reset();
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => TriageResultPage(
-                            triageResult: result,
+                      if (context.mounted) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => TriageResultPage(
+                              triageResult: result,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
+                      dispose();
                     },
                     child: Text(
                       loc.eyeCaptureCompletionDialogViewResult,
@@ -721,6 +759,7 @@ class _PatientTriageEyeCapturingPageState
                       ref.read(resetProvider).reset();
                       ref.read(accessibilityProvider).resetBrightness();
                       Navigator.of(context).popUntil((route) => route.isFirst);
+
                       //this will naviagte to local page for future ref
                       // Navigator.of(context).pushReplacement(
                       //   MaterialPageRoute(
