@@ -1,8 +1,10 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_name_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_organisation_details_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_personal_details_card.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +18,7 @@ class VTProfilePage extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
+        
         title: const Text(
           "Profile",
           textAlign: TextAlign.left,
@@ -52,19 +55,19 @@ class VTProfilePage extends ConsumerWidget {
                 children: [
                   VTProfileNameCard(
                     profileData: data,
-                  )
-                  // const SizedBox(
-                  //   height: AppSize.kmheight,
-                  // ),
-                  // VgProfilePersonalDetailsCard(profileData: data),
-                  // const SizedBox(
-                  //   height: AppSize.kmheight,
-                  // ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.kmheight,
+                  ),
+                  VTProfilePersonalDetailsCard(profileData: data),
+                  const SizedBox(
+                    height: AppSize.kmheight,
+                  ),
                   // //VgProfileWorkLocationCard(profileData: data),
                   // const SizedBox(
                   //   height: AppSize.kmheight,
                   // ),
-                  // VgProfileOrganisationDetailsCard(profileData: data),
+                  VTProfileOrganisationDetailsCard(profileData: data),
                   // const SizedBox(
                   //   height: AppSize.kmheight,
                   // ),

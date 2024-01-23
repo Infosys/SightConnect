@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,6 +25,7 @@ class VTPatientList extends ConsumerWidget {
     var watchRef = ref.watch(visionTechnicianSearchProvider);
     int currentPage = ref.watch(vtHomeHelperProvider).pageNumber;
     int pageSize = ref.watch(vtHomeHelperProvider).pageSize;
+    bool isMobile = Responsive.isMobile(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -38,6 +40,8 @@ class VTPatientList extends ConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       showCheckboxColumn: false,
+                      columnSpacing:
+                          isMobile ? null : AppSize.width(context) * 0.15,
                       horizontalMargin: AppSize.klpadding,
                       dataRowMaxHeight: AppSize.klheight * 3,
                       dataRowMinHeight: AppSize.klheight * 2,
@@ -87,11 +91,13 @@ class VTPatientList extends ConsumerWidget {
                           ),
                         ),
                       ],
-                      rows: List<DataRow>.generate(listOfAssessments.length,
-                          (index) {
-                        return getRow(
-                            listOfAssessments[index], context, watchRef, ref);
-                      }),
+                      rows: List<DataRow>.generate(
+                        listOfAssessments.length,
+                        (index) {
+                          return getRow(
+                              listOfAssessments[index], context, watchRef, ref);
+                        },
+                      ),
                     ),
                   ),
                 )

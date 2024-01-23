@@ -23,7 +23,7 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
             const SizedBox(
               width: AppSize.klwidth,
             ),
-            const IvrCallHistorySearchBarVT(readOnly: false),
+            // const IvrCallHistorySearchBarVT(readOnly: false),
           ],
         ),
       ),

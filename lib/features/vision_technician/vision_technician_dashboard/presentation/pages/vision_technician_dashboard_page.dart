@@ -110,7 +110,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: Padding(
               padding: const EdgeInsets.all(4.0),
               child: SvgPicture.asset(
-                "assets/icons/drawer_home.svg",
+                AppIcon.vtHomeIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.primary,
                   BlendMode.srcIn,
@@ -123,7 +123,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: Padding(
               padding: const EdgeInsets.all(4.0),
               child: SvgPicture.asset(
-                AppIcon.navProfile,
+                AppIcon.vtRegisterIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -149,7 +149,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: Padding(
               padding: const EdgeInsets.all(4.0),
               child: SvgPicture.asset(
-                AppIcon.drawerAppoinments,
+                AppIcon.vtAvailabilityIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -162,7 +162,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             icon: Padding(
               padding: const EdgeInsets.all(4.0),
               child: SvgPicture.asset(
-                AppIcon.call,
+                AppIcon.vtIVRCallIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,

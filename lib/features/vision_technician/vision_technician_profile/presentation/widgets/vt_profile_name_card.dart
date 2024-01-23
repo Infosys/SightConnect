@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -52,15 +51,13 @@ class VTProfileNameCard extends StatelessWidget {
                   Text(
                     "${profileData.personalInformation?.firstName ?? ""} ${profileData.personalInformation?.lastName ?? ""}",
                     style: applyRobotoFont(
-                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.ksheight),
                   Text(
                     "${profileData.id ?? ""}",
                     style: applyRobotoFont(
-                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -73,7 +70,9 @@ class VTProfileNameCard extends StatelessWidget {
                           Text(
                             "Gender",
                             style: applyRobotoFont(
-                                fontSize: 10, color: AppColor.darkGrey),
+                              fontSize: 14,
+                              color: AppColor.darkGrey,
+                            ),
                           ),
                           const SizedBox(
                             height: AppSize.ksheight / 2,
@@ -85,7 +84,7 @@ class VTProfileNameCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        width: AppSize.kmwidth,
+                        width: AppSize.klwidth,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,14 +92,16 @@ class VTProfileNameCard extends StatelessWidget {
                           Text(
                             "Mobile",
                             style: applyRobotoFont(
-                                fontSize: 10, color: AppColor.darkGrey),
+                              fontSize: 14,
+                              color: AppColor.darkGrey,
+                            ),
                           ),
                           const SizedBox(
                             height: AppSize.ksheight / 2,
                           ),
                           Text(
                             profileData.officialMobile ?? "",
-                            style: applyRobotoFont(fontSize: 14),
+                            style: applyRobotoFont(),
                           )
                         ],
                       ),
