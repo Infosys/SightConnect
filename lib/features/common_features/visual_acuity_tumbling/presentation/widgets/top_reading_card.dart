@@ -62,6 +62,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   @override
   void initState() {
+    logger.d("Top Reading Card: Init State Called");
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -71,6 +72,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("Top Reading Card: Check Permission Called");
     final navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -78,9 +80,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         isLoading = false;
       });
     }
-
     final isGranted = await CameraPermissionService.checkPermissions(context);
-
     if (isGranted) {
       _addPermissionLoading();
       await _initializeCamera();
@@ -91,6 +91,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _initializeCamera() async {
+    logger.d("Top Reading Card: Initialize Camera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -106,6 +107,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _startLiveFeed() async {
+    logger.d("Top Reading Card: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -144,6 +146,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   // }
 
   Future<void> _getCameraInfo() async {
+    logger.d("Top Reading Card: Get Camera Info Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -404,7 +407,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
-      "AppLifecycleState": "$state",
+      "Top Reading Card: AppLifecycleState": "$state",
       "isPermissionGranted": "$isPermissionGranted",
       "isLoading": "$isLoading",
     });
@@ -413,20 +416,20 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d("AppLifecycleState.inactive");
+      logger.d("Top Reading Card: AppLifecycleState.inactive");
       _addLoading();
       stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppLifecycleState.resumed");
+      logger.d("Top Reading Card: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d("AppLifecycleState.paused");
+      logger.d("Top Reading Card: AppLifecycleState.paused");
       _addLoading();
       stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d("AppLifecycleState.detached");
+      logger.d("Top Reading Card: AppLifecycleState.detached");
       _addLoading();
       stopLiveFeed();
     }
@@ -434,7 +437,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   @override
   void dispose() {
-    logger.d('Dispose Called');
+    logger.d('Top Reading Card: Dispose Called');
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
       stopLiveFeed();
@@ -443,7 +446,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> stopLiveFeed() async {
-    logger.d("Stop Live Feed Called");
+    logger.d("Top Reading Card: Stop Live Feed Called");
     try {
       _canProcess = false;
       _faceDetector.close();
