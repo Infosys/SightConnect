@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class VisualAcuityFaceDistancePainter extends CustomPainter {
@@ -33,6 +34,23 @@ class VisualAcuityFaceDistancePainter extends CustomPainter {
         height: boxHeight,
       ),
       boxPainter,
+    );
+
+    // Eye Landmark Painters
+    final Paint eyeLandmarkPainter = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 5.0
+      ..color = Colors.teal;
+
+    List<Offset> eyeLandmarks = [];
+    for (final point in eyeLandmarkPoints) {
+      eyeLandmarks.add(Offset(point.x, point.y));
+    }
+
+    canvas.drawPoints(
+      PointMode.points,
+      eyeLandmarks,
+      eyeLandmarkPainter,
     );
 
     // //Eye Painter
