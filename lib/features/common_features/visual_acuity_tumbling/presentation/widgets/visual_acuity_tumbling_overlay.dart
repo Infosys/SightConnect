@@ -211,22 +211,26 @@ class _TumblingCarousel extends HookConsumerWidget {
                   Checkbox(
                     value: isCheckboxChecked.value,
                     onChanged: (value) async {
-                      isCheckboxChecked.value = value!;
-                      if (value) {
-                        await SharedPreferenceService
-                            .setDontShowVisualAcuityStatus(true);
-                      } else {
-                        await SharedPreferenceService
-                            .setDontShowVisualAcuityStatus(false);
-                      }
+                      await onDontShowAgainCheckChanged(
+                        isCheckboxChecked,
+                        value,
+                      );
                     },
                   ),
-                  Text(
-                    AppLocalizations.of(context)!.dontShowAgainString,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () async {
+                      await onDontShowAgainCheckChanged(
+                        isCheckboxChecked,
+                        !isCheckboxChecked.value,
+                      );
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.dontShowAgainString,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.grey,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -274,6 +278,16 @@ class _TumblingCarousel extends HookConsumerWidget {
       return AppImages.swipeLeft;
     } else if (index == 3) {
       return AppImages.swipeRight;
+    }
+  }
+
+  Future<void> onDontShowAgainCheckChanged(
+      ValueNotifier<bool> isCheckboxChecked, bool? value) async {
+    isCheckboxChecked.value = value!;
+    if (value) {
+      await SharedPreferenceService.setDontShowVisualAcuityStatus(true);
+    } else {
+      await SharedPreferenceService.setDontShowVisualAcuityStatus(false);
     }
   }
 }

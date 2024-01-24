@@ -13,7 +13,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'package:millimeters/millimeters.dart';
 import '../../../../../main.dart';
@@ -38,8 +38,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
-  final FaceMeshDetector _meshDetector = FaceMeshDetector(
-    option: FaceMeshDetectorOptions.faceMesh,
+  final FaceDetector _faceDetector = FaceDetector(
+    options: FaceDetectorOptions(
+      enableContours: true,
+      enableLandmarks: true,
+      enableClassification: true,
+    ),
   );
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
@@ -52,13 +56,14 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
-  int bufferSize = 10;
   bool isLoading = false;
+  final int _bufferSize = 10;
   bool isPermissionGranted = false;
-  bool isIOS = Platform.isIOS;
+ 
 
   @override
   void initState() {
+    logger.d("TopReadingCard: Init State Called");
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -68,6 +73,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("TopReadingCard: Check Permission Called");
     final navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -75,34 +81,37 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         isLoading = false;
       });
     }
-
     final isGranted = await CameraPermissionService.checkPermissions(context);
-
     if (isGranted) {
-      addPermissionLoading();
+      _addPermissionLoading();
       await _initializeCamera();
     } else {
+      logger.d("TopReadingCard: Permission not granted");
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
   }
 
   Future<void> _initializeCamera() async {
+    logger.d("TopReadingCard: Initialize Camera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
       _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
+      logger.e("TopReadingCard: Error Initializing Camera: $e");
       navigator.pop();
       Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
   Future<void> _startLiveFeed() async {
+    logger.d("TopReadingCard: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -127,9 +136,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
 //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  void updateDistance(int newDistance) {
+  void _updateDistance(int newDistance) {
     _distanceBuffer.add(newDistance);
-    if (_distanceBuffer.length > bufferSize) {
+    if (_distanceBuffer.length > _bufferSize) {
       _distanceBuffer.removeAt(0);
     }
     _distanceToFace =
@@ -141,6 +150,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   Future<void> _getCameraInfo() async {
+    logger.d("TopReadingCard: Get Camera Info Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -173,7 +183,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final meshes = await _meshDetector.processImage(inputImage);
+    final faces = await _faceDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
     final boxHeight = _canvasSize.height * boxSizeRatio;
@@ -182,15 +192,17 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       _canvasSize.height * 0.5,
     );
 
-    if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+    if (faces.isNotEmpty) {
+      final face = faces[0];
+      final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
+      final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
+      if (leftEyeLandmark != null && rightEyeLandmark != null) {
+        final leftEyeLandmarkPosition = leftEyeLandmark.position;
+        final rightEyeLandmarkPosition = rightEyeLandmark.position;
 
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        final List<Point<int>> eyeLandmarks = [
+          leftEyeLandmarkPosition,
+          rightEyeLandmarkPosition
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
@@ -213,23 +225,24 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         if (eyeLandmarksInsideTheBox) {
           int newDistance =
               MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
+            leftEyeLandmark: leftEyeLandmarkPosition,
+            rightEyeLandmark: rightEyeLandmarkPosition,
             focalLength: _focalLength,
             sensorX: _sensorX,
             sensorY: _sensorY,
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
-          updateDistance(newDistance);
+          _updateDistance(newDistance);
         } else {
-          resetValues();
+          _distanceToFace = null;
         }
       } else {
-        resetValues();
+        _distanceToFace = null;
       }
     } else {
-      resetValues();
+      _distanceToFace = null;
+      _translatedEyeLandmarks = [];
     }
 
     // Calling the Distance Calculator Painter
@@ -255,19 +268,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void resetValues() {
+  void _resetValues() {
     _translatedEyeLandmarks = [];
     _distanceToFace = null;
-  }
-
-  @override
-  void dispose() {
-    logger.d("Top Reading Card Disposed");
-    if (mounted) {
-      stopLiveFeed();
-    }
-
-    super.dispose();
   }
 
   @override
@@ -280,7 +283,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
     // TODO: THIS IS FOR TESTING, Need to remove
-    logger.d("THE DEVICE IS IOS : $isIOS");
+
     final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;
 
     return Container(
@@ -368,7 +371,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             ),
                             SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              isIOS ? "40 cm" : "${_distanceToFace ?? 0} cm",
+                              "${_distanceToFace ?? 0} cm",
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -410,7 +413,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
-      "AppLifecycleState": "$state",
+      "TopReadingCard: AppLifecycleState": "$state",
       "isPermissionGranted": "$isPermissionGranted",
       "isLoading": "$isLoading",
     });
@@ -419,32 +422,40 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d("AppLifecycleState.inactive");
-      addLoading();
-      stopLiveFeed();
+      logger.d("TopReadingCard: AppLifecycleState.inactive");
+      _addLoading();
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppLifecycleState.resumed");
-
+      logger.d("TopReadingCard: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d("AppLifecycleState.paused");
-      addLoading();
-      stopLiveFeed();
+      logger.d("TopReadingCard: AppLifecycleState.paused");
+      _addLoading();
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d("AppLifecycleState.detached");
-
-      addLoading();
-      stopLiveFeed();
+      logger.d("TopReadingCard: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
     }
   }
 
-  Future<void> stopLiveFeed() async {
-    logger.d("Stop Live Feed Called");
+  @override
+  void dispose() {
+    logger.d('TopReadingCard: Dispose Called');
+    WidgetsBinding.instance.removeObserver(this);
+    if (mounted) {
+      _stopLiveFeed();
+    }
+    super.dispose();
+  }
+
+  Future<void> _stopLiveFeed() async {
+    logger.d("TopReadingCard: Stop Live Feed Called");
     try {
       _canProcess = false;
-      _meshDetector.close();
+      _faceDetector.close();
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
@@ -455,7 +466,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void addLoading() {
+  void _addLoading() {
     if (mounted) {
       setState(() {
         isLoading = true;
@@ -463,7 +474,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void removeLoading() {
+  void _removeLoading() {
     if (mounted) {
       setState(() {
         isLoading = false;
@@ -471,7 +482,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void addPermissionLoading() {
+  void _addPermissionLoading() {
     if (mounted) {
       setState(() {
         isPermissionGranted = true;
@@ -479,7 +490,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     }
   }
 
-  void removePermissionLoading() {
+  void _removePermissionLoading() {
     if (mounted) {
       setState(() {
         isPermissionGranted = false;

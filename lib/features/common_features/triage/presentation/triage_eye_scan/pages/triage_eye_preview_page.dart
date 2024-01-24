@@ -57,6 +57,7 @@ class TriageEyePreviewPage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).pop(imageFile);
+                        
                       },
                       icon: const Icon(Icons.check_circle, size: 22),
                       label: Text(

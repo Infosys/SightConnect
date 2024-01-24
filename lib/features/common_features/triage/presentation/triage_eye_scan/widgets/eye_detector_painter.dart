@@ -2,28 +2,31 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class VisualAcuityFaceDistancePainter extends CustomPainter {
-  VisualAcuityFaceDistancePainter(
+class EyeDetectorPainter extends CustomPainter {
+  EyeDetectorPainter(
+    this.eyeContourPoints,
     this.boxCenter,
     this.boxWidth,
     this.boxHeight,
-    this.eyeLandmarkPoints,
+    this.isEyeValid,
     this.getCanvasSize,
   );
 
+  final List<Point<double>> eyeContourPoints;
   final Point<double> boxCenter;
   final double boxWidth;
   final double boxHeight;
-  final List<Point<double>> eyeLandmarkPoints;
+  final bool isEyeValid;
   final Function(Size)? getCanvasSize;
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Fixed Box Painter
     getCanvasSize?.call(size);
     final Paint boxPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = Colors.green;
+      ..color = isEyeValid ? Colors.green : Colors.red;
 
     final center = Offset(boxCenter.x, boxCenter.y);
 
@@ -37,36 +40,21 @@ class VisualAcuityFaceDistancePainter extends CustomPainter {
     );
 
     // Eye Landmark Painters
-    final Paint eyeLandmarkPainter = Paint()
+    final Paint eyeLandmarkContour = Paint()
       ..style = PaintingStyle.fill
       ..strokeWidth = 5.0
       ..color = Colors.teal;
 
     List<Offset> eyeLandmarks = [];
-    for (final point in eyeLandmarkPoints) {
+    for (final point in eyeContourPoints) {
       eyeLandmarks.add(Offset(point.x, point.y));
     }
 
     canvas.drawPoints(
       PointMode.points,
       eyeLandmarks,
-      eyeLandmarkPainter,
+      eyeLandmarkContour,
     );
-
-    // //Eye Painter
-    // final paint = Paint()
-    //   ..color = AppColor.primary
-    //   ..style = PaintingStyle.stroke
-    //   ..strokeWidth = 2.0;
-
-    // for (final landmark in eyeLandmarkPoints) {
-    //   final rect = Rect.fromCenter(
-    //     center: Offset(landmark.x, landmark.y),
-    //     width: 50.0,
-    //     height: 30.0,
-    //   );
-    //   canvas.drawOval(rect, paint);
-    // }
   }
 
   @override
