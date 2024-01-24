@@ -35,7 +35,7 @@ class AppToast {
           style: applyRobotoFont(fontSize: 16, color: AppColor.white),
         ),
         backgroundColor: AppColor.black,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -52,7 +52,7 @@ class AppToast {
           style: applyRobotoFont(fontSize: 16, color: AppColor.white),
         ),
         backgroundColor: AppColor.red,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -69,7 +69,7 @@ class AppToast {
           style: applyRobotoFont(fontSize: 16, color: AppColor.white),
         ),
         backgroundColor: AppColor.yellow,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -86,7 +86,7 @@ class AppToast {
           style: applyRobotoFont(fontSize: 16, color: AppColor.white),
         ),
         backgroundColor: AppColor.green,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
       ),
     );
   }

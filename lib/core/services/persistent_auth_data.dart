@@ -152,7 +152,7 @@ class PersistentAuthData {
     await _storage.delete(key: _userIdKey);
     await _storage.delete(key: _id_token);
     //SQFLite
-    await _storage.delete(key: _sqfliteKey);
+    // await _storage.delete(key: _sqfliteKey);
 
     SharedPreferenceService.clear();
 

@@ -22,7 +22,7 @@ class CameraPermissionService {
           await _showCameraSettingsDialog(context);
         }
         logger.d('Camera permission not granted.');
-        return await checkPermissions(context);
+        if(context.mounted) return await checkPermissions(context);
       }
     }
     return isGranted;
@@ -34,9 +34,7 @@ class CameraPermissionService {
     return cameraStatus.isGranted && audioStatus.isGranted;
   }
 
-  static _showCameraSettingsDialog(
-    BuildContext context,
-  ) {
+  static _showCameraSettingsDialog(BuildContext context) {
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -52,10 +50,11 @@ class CameraPermissionService {
             child: const Text('OK'),
             onPressed: () async {
               await openAppSettings();
-
-              await Future.delayed(
-                  const Duration(milliseconds: 500), () async {});
-              Navigator.of(context).pop();
+              await Future.delayed(const Duration(seconds: 1));
+              if (context.mounted) {
+                Navigator.of(context).pop();
+                await checkPermissions(context);
+              }
             },
           ),
         ],

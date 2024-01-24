@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -34,7 +34,7 @@ class TopReadingCard extends ConsumerStatefulWidget {
 class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  CustomPaint? _customPaint;
+  CustomPaint? customPaint;
 
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
@@ -55,6 +55,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   int bufferSize = 10;
   bool isLoading = false;
   bool isPermissionGranted = false;
+  bool isIOS = Platform.isIOS;
 
   @override
   void initState() {
@@ -243,9 +244,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           _canvasSize = size;
         },
       );
-      _customPaint = CustomPaint(painter: painter);
+      customPaint = CustomPaint(painter: painter);
     } else {
-      _customPaint = null;
+      customPaint = null;
     }
 
     _isBusy = false;
@@ -279,6 +280,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
     // TODO: THIS IS FOR TESTING, Need to remove
+    logger.d("THE DEVICE IS IOS : $isIOS");
     final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;
 
     return Container(
@@ -366,7 +368,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             ),
                             SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              "${_distanceToFace ?? 0} cm",
+                              isIOS ? "40 cm" : "${_distanceToFace ?? 0} cm",
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -378,22 +380,22 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                       ],
                     ),
                     const SizedBox(height: AppSize.kmheight),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            ref
-                                .watch(distanceNotifierProvider)
-                                .getDistanceText(context),
-                            style: applyRobotoFont(
-                              fontSize: 10,
-                              color: AppColor.grey,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Flexible(
+                    //       child: Text(
+                    //         ref
+                    //             .watch(distanceNotifierProvider)
+                    //             .getDistanceText(context),
+                    //         style: applyRobotoFont(
+                    //           fontSize: 10,
+                    //           color: AppColor.grey,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),
