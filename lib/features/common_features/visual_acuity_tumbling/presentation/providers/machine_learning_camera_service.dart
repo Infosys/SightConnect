@@ -17,7 +17,7 @@ class MachineLearningCameraService {
   Map<DeviceOrientation, int> get orientations => _orientations;
 
   static Future<Map<String, double>?> getCameraInfo() async {
-    const platform = MethodChannel('com.infosys.eyecareforall/camera');
+    const platform = MethodChannel('com.healthconnect.sightconnect/camera');
     try {
       final cameraInfo =
           await platform.invokeMapMethod<String, double>('getCameraInfo');
