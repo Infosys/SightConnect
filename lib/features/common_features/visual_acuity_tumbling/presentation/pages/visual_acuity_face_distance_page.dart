@@ -69,14 +69,12 @@ class _VisualAcuityFaceDistancePageViewState
         isLoading = false;
       });
     }
-
     final isGranted = await CameraPermissionService.checkPermissions(context);
-
     if (isGranted) {
       _addPermissionLoading();
       await _initializeCamera();
     } else {
-      logger.d("Permission not granted");
+      logger.d("VisualAcuityFaceDistancePage: Permission not granted");
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
@@ -94,7 +92,7 @@ class _VisualAcuityFaceDistancePageViewState
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
-      logger.e('Error initializing camera: $e');
+      logger.e("VisualAcuityFaceDistancePage: Error Initializing Camera: $e");
       navigator.pop();
       Fluttertoast.showToast(msg: "Service not available");
     }
@@ -112,7 +110,6 @@ class _VisualAcuityFaceDistancePageViewState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -399,7 +396,9 @@ class _VisualAcuityFaceDistancePageViewState
   void dispose() {
     logger.d('VisualAcuityFaceDistancePage: Dispose Called');
     WidgetsBinding.instance.removeObserver(this);
-    _stopLiveFeed();
+    if (mounted) {
+      _stopLiveFeed();
+    }
     super.dispose();
   }
 
