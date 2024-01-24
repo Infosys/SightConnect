@@ -9,7 +9,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
 
@@ -27,11 +27,14 @@ class _VisualAcuityFaceDistancePageViewState
     extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
-  final FaceMeshDetector _meshDetector = FaceMeshDetector(
-    option: FaceMeshDetectorOptions.faceMesh,
+  final FaceDetector _faceDetector = FaceDetector(
+    options: FaceDetectorOptions(
+      enableContours: true,
+      enableLandmarks: true,
+      enableClassification: true,
+    ),
   );
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
@@ -43,14 +46,12 @@ class _VisualAcuityFaceDistancePageViewState
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  final List<int> _distanceBuffer = [];
   bool isLoading = false;
-  int bufferSize = 10;
   bool isPermissionGranted = false;
 
   @override
   void initState() {
-    logger.d("Init State Called");
+    logger.d("VisualAcuityFaceDistancePage: Init State Called");
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -60,7 +61,7 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("Check Permission Called");
+    logger.d("VisualAcuityFaceDistancePage: Check Permission Called");
     final navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -68,38 +69,37 @@ class _VisualAcuityFaceDistancePageViewState
         isLoading = false;
       });
     }
-
     final isGranted = await CameraPermissionService.checkPermissions(context);
-
     if (isGranted) {
-      addPermissionLoading();
+      _addPermissionLoading();
       await _initializeCamera();
     } else {
-      logger.d("Permission not granted");
-      WidgetsBinding.instance.removeObserver(this);
+      logger.d("VisualAcuityFaceDistancePage: Permission not granted");
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
   }
 
   Future<void> _initializeCamera() async {
+    logger.d("VisualAcuityFaceDistancePage: Initialize Camera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
       _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
-      logger.e('Error initializing camera: $e');
-      WidgetsBinding.instance.removeObserver(this);
+      logger.e("VisualAcuityFaceDistancePage: Error Initializing Camera: $e");
       navigator.pop();
       Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
   Future<void> _startLiveFeed() async {
+    logger.d("VisualAcuityFaceDistancePage: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -110,7 +110,6 @@ class _VisualAcuityFaceDistancePageViewState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
-
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -124,20 +123,9 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-//The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  void updateDistance(int newDistance) {
-    _distanceBuffer.add(newDistance);
-    if (_distanceBuffer.length > bufferSize) {
-      _distanceBuffer.removeAt(0);
-    }
-    _distanceToFace =
-        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
-    if (mounted) {
-      setState(() {});
-    }
-  }
 
   Future<void> _getCameraInfo() async {
+    logger.d("VisualAcuityFaceDistancePage: Get Camera Info Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -170,7 +158,7 @@ class _VisualAcuityFaceDistancePageViewState
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final meshes = await _meshDetector.processImage(inputImage);
+    final faces = await _faceDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
     final boxWidth = _canvasSize.width * boxSizeRatio;
     final boxHeight = _canvasSize.height * boxSizeRatio;
@@ -179,15 +167,17 @@ class _VisualAcuityFaceDistancePageViewState
       _canvasSize.height * 0.5,
     );
 
-    if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+    if (faces.isNotEmpty) {
+      final face = faces[0];
+      final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
+      final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
+      if (leftEyeLandmark != null && rightEyeLandmark != null) {
+        final leftEyeLandmarkPosition = leftEyeLandmark.position;
+        final rightEyeLandmarkPosition = rightEyeLandmark.position;
 
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        final List<Point<int>> eyeLandmarks = [
+          leftEyeLandmarkPosition,
+          rightEyeLandmarkPosition
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
@@ -210,8 +200,8 @@ class _VisualAcuityFaceDistancePageViewState
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
               MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
+            leftEyeLandmark: leftEyeLandmarkPosition,
+            rightEyeLandmark: rightEyeLandmarkPosition,
             focalLength: _focalLength,
             sensorX: _sensorX,
             sensorY: _sensorY,
@@ -219,13 +209,14 @@ class _VisualAcuityFaceDistancePageViewState
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
         } else {
-          _resetValues();
+          _distanceToFace = null;
         }
       } else {
-        _resetValues();
+        _distanceToFace = null;
       }
     } else {
-      _resetValues();
+      _distanceToFace = null;
+      _translatedEyeLandmarks = [];
     }
 
     // Calling the Distance Calculator Painter
@@ -277,11 +268,8 @@ class _VisualAcuityFaceDistancePageViewState
         onPopInvoked: (value) async {
           final navigator = Navigator.of(context);
           if (value) return;
-          logger.d("Pop Invoked");
-          WidgetsBinding.instance.removeObserver(this);
-          addLoading();
-          await _stopLiveFeed();
-
+          logger.d("VisualAcuityFaceDistancePage: Pop Invoked");
+          _addLoading();
           navigator.pop();
         },
         child: Scaffold(
@@ -289,10 +277,8 @@ class _VisualAcuityFaceDistancePageViewState
             leadingIcon: IconButton(
               onPressed: () async {
                 final navigator = Navigator.of(context);
-                logger.d("Back Button Pressed");
-                WidgetsBinding.instance.removeObserver(this);
-                addLoading();
-                await _stopLiveFeed();
+                logger.d("VisualAcuityFaceDistancePage: Back Button Pressed");
+                _addLoading();
                 navigator.pop();
               },
               icon: const Icon(Icons.close),
@@ -360,9 +346,7 @@ class _VisualAcuityFaceDistancePageViewState
             onPressed: () async {
               final navigator = Navigator.of(context);
               logger.d("Next Button Pressed");
-              WidgetsBinding.instance.removeObserver(this);
-              addLoading();
-              await _stopLiveFeed();
+              _addLoading();
               navigator.pushReplacement(
                 MaterialPageRoute(
                   builder: (context) =>
@@ -380,7 +364,7 @@ class _VisualAcuityFaceDistancePageViewState
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
-      "AppLifecycleState": "$state",
+      "VisualAcuityFaceDistancePage: AppLifecycleState": "$state",
       "isPermissionGranted": "$isPermissionGranted",
       "isLoading": "$isLoading",
     });
@@ -389,32 +373,40 @@ class _VisualAcuityFaceDistancePageViewState
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d("AppLifecycleState.inactive");
-      addLoading();
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.inactive");
+      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppLifecycleState.resumed");
-
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d("AppLifecycleState.paused");
-      addLoading();
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.paused");
+      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d("AppLifecycleState.detached");
-
-      addLoading();
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.detached");
+      _addLoading();
       _stopLiveFeed();
     }
   }
 
+  @override
+  void dispose() {
+    logger.d('VisualAcuityFaceDistancePage: Dispose Called');
+    WidgetsBinding.instance.removeObserver(this);
+    if (mounted) {
+      _stopLiveFeed();
+    }
+    super.dispose();
+  }
+
   Future<void> _stopLiveFeed() async {
-    logger.d("Stop Live Feed Called");
+    logger.d("VisualAcuityFaceDistancePage: Stop Live Feed Called");
     try {
       _canProcess = false;
-      _meshDetector.close();
+      _faceDetector.close();
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
@@ -425,7 +417,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  void addLoading() {
+  void _addLoading() {
     if (mounted) {
       setState(() {
         isLoading = true;
@@ -433,7 +425,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  void removeLoading() {
+  void _removeLoading() {
     if (mounted) {
       setState(() {
         isLoading = false;
@@ -441,7 +433,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  void addPermissionLoading() {
+  void _addPermissionLoading() {
     if (mounted) {
       setState(() {
         isPermissionGranted = true;
@@ -449,7 +441,7 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-  void removePermissionLoading() {
+  void _removePermissionLoading() {
     if (mounted) {
       setState(() {
         isPermissionGranted = false;
