@@ -67,7 +67,7 @@ class _PatientTriageEyeCapturingPageState
   double _eyeWidthRatio = 0.0;
   List<Point<double>> _translatedEyeContours = [];
   Map<String, double> _eyeCorners = {};
-  final TriageEyeType _currentEye = TriageEyeType.RIGHT;
+  TriageEyeType _currentEye = TriageEyeType.RIGHT;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -160,6 +160,7 @@ class _PatientTriageEyeCapturingPageState
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
+        logger.d("current eye in detector is : $_currentEye ");
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
@@ -454,6 +455,11 @@ class _PatientTriageEyeCapturingPageState
                                     await model.setRightEyeImage(image);
                                     removeLoading();
                                     model.setCurrentEye(TriageEyeType.LEFT);
+                                    setState(() {
+                                      _currentEye = TriageEyeType.LEFT;
+                                      logger.d(
+                                          " current eye in after set state is : $_currentEye");
+                                    });
                                   } else if (model.currentEye ==
                                       TriageEyeType.LEFT) {
                                     setLoading("Uploading Image");
