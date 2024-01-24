@@ -51,7 +51,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void initState() {
-    logger.d("Init State Called");
+    logger.d("VisualAcuityFaceDistancePage: Init State Called");
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -61,7 +61,7 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("Check Permission Called");
+    logger.d("VisualAcuityFaceDistancePage: Check Permission Called");
     final navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -83,6 +83,7 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _initializeCamera() async {
+    logger.d("VisualAcuityFaceDistancePage: Initialize Camera Called");
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -100,6 +101,7 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   Future<void> _startLiveFeed() async {
+    logger.d("VisualAcuityFaceDistancePage: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -126,6 +128,7 @@ class _VisualAcuityFaceDistancePageViewState
 
 
   Future<void> _getCameraInfo() async {
+    logger.d("VisualAcuityFaceDistancePage: Get Camera Info Called");
     try {
       final cameraInfo = await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
@@ -268,7 +271,7 @@ class _VisualAcuityFaceDistancePageViewState
         onPopInvoked: (value) async {
           final navigator = Navigator.of(context);
           if (value) return;
-          logger.d("Pop Invoked");
+          logger.d("VisualAcuityFaceDistancePage: Pop Invoked");
           _addLoading();
           navigator.pop();
         },
@@ -277,7 +280,7 @@ class _VisualAcuityFaceDistancePageViewState
             leadingIcon: IconButton(
               onPressed: () async {
                 final navigator = Navigator.of(context);
-                logger.d("Back Button Pressed");
+                logger.d("VisualAcuityFaceDistancePage: Back Button Pressed");
                 _addLoading();
                 navigator.pop();
               },
@@ -364,7 +367,7 @@ class _VisualAcuityFaceDistancePageViewState
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
-      "AppLifecycleState": "$state",
+      "VisualAcuityFaceDistancePage: AppLifecycleState": "$state",
       "isPermissionGranted": "$isPermissionGranted",
       "isLoading": "$isLoading",
     });
@@ -373,20 +376,20 @@ class _VisualAcuityFaceDistancePageViewState
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d("AppLifecycleState.inactive");
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.inactive");
       _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppLifecycleState.resumed");
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d("AppLifecycleState.paused");
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.paused");
       _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d("AppLifecycleState.detached");
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.detached");
       _addLoading();
       _stopLiveFeed();
     }
@@ -394,14 +397,14 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   void dispose() {
-    logger.d('Dispose Called');
+    logger.d('VisualAcuityFaceDistancePage: Dispose Called');
     WidgetsBinding.instance.removeObserver(this);
     _stopLiveFeed();
     super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.d("Stop Live Feed Called");
+    logger.d("VisualAcuityFaceDistancePage: Stop Live Feed Called");
     try {
       _canProcess = false;
       _faceDetector.close();
