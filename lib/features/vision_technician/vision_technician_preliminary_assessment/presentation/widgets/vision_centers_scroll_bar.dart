@@ -94,7 +94,7 @@ class VisionCentersScrollBar extends ConsumerWidget {
               child: CircularProgressIndicator(),
             ),
             error: (error, stackTrace) => const Center(
-              child: SizedBox(child: Text("Some Error Occurred")),
+              child: CircularProgressIndicator(),
             ),
           ),
     );
