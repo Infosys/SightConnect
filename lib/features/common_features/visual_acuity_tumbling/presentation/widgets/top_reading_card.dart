@@ -55,9 +55,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
-  // final List<int> _distanceBuffer = [];
+  final List<int> _distanceBuffer = [];
   bool isLoading = false;
-  // int _bufferSize = 10;
+  int _bufferSize = 10;
   bool isPermissionGranted = false;
 
   @override
@@ -132,18 +132,18 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
 //The updateDistance function is helping to smooth out the fluctuations in the _distanceToFace value by implementing a simple moving average.
-  // void _updateDistance(int newDistance) {
-  //   _distanceBuffer.add(newDistance);
-  //   if (_distanceBuffer.length > bufferSize) {
-  //     _distanceBuffer.removeAt(0);
-  //   }
-  //   _distanceToFace =
-  //       _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
+  void _updateDistance(int newDistance) {
+    _distanceBuffer.add(newDistance);
+    if (_distanceBuffer.length > _bufferSize) {
+      _distanceBuffer.removeAt(0);
+    }
+    _distanceToFace =
+        _distanceBuffer.reduce((a, b) => a + b) ~/ _distanceBuffer.length;
 
-  //   if (mounted) {
-  //     ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
-  //   }
-  // }
+    if (mounted) {
+      ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+    }
+  }
 
   Future<void> _getCameraInfo() async {
     logger.d("Top Reading Card: Get Camera Info Called");
@@ -219,7 +219,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         );
 
         if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
+          int newDistance =
               MachineLearningCameraService.calculateDistanceToScreen(
             leftEyeLandmark: leftEyeLandmarkPosition,
             rightEyeLandmark: rightEyeLandmarkPosition,
@@ -229,6 +229,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
+          _updateDistance(newDistance);
         } else {
           _distanceToFace = null;
         }
