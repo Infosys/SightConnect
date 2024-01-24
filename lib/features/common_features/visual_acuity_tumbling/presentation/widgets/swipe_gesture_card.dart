@@ -27,10 +27,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-    bool isIOS = Platform.isIOS;
-    if(isIOS){
-      distance.distance = 40;
-    }
+
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
@@ -156,8 +153,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                           ),
                         ),
                       )
-                    : isIOS == false && distance.isDistanceValid() == false
-                        ? Center(
+                    :  Center(
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
@@ -180,7 +176,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                               ),
                             ),
                           )
-                        : Container(),
+                        
               ),
             ],
           ),
