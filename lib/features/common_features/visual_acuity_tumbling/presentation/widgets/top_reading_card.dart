@@ -57,7 +57,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
   bool isLoading = false;
-  int _bufferSize = 10;
+  final int _bufferSize = 10;
   bool isPermissionGranted = false;
 
   @override
@@ -85,6 +85,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       _addPermissionLoading();
       await _initializeCamera();
     } else {
+      logger.d("Top Reading Card: Permission not granted");
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
@@ -98,9 +99,11 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         _cameras = await availableCameras();
       }
       _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
+      logger.e("Top Reading Card: Error Initializing Camera: $e");
       navigator.pop();
       Fluttertoast.showToast(msg: "Service not available");
     }
@@ -419,7 +422,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (state == AppLifecycleState.inactive) {
       logger.d("Top Reading Card: AppLifecycleState.inactive");
       _addLoading();
-      stopLiveFeed();
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("Top Reading Card: AppLifecycleState.resumed");
       if (mounted) {
@@ -428,11 +431,11 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     } else if (state == AppLifecycleState.paused) {
       logger.d("Top Reading Card: AppLifecycleState.paused");
       _addLoading();
-      stopLiveFeed();
+      _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
       logger.d("Top Reading Card: AppLifecycleState.detached");
       _addLoading();
-      stopLiveFeed();
+      _stopLiveFeed();
     }
   }
 
@@ -441,12 +444,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     logger.d('Top Reading Card: Dispose Called');
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
-      stopLiveFeed();
+      _stopLiveFeed();
     }
     super.dispose();
   }
 
-  Future<void> stopLiveFeed() async {
+  Future<void> _stopLiveFeed() async {
     logger.d("Top Reading Card: Stop Live Feed Called");
     try {
       _canProcess = false;
