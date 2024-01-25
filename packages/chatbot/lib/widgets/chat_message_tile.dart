@@ -73,7 +73,7 @@ class ChatMessageTile extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.play_circle),
             onPressed: () {
-              // flutterTts.speak(message.message);
+              flutterTts.speak(message.message);
             },
             color: Colors.blue,
           )

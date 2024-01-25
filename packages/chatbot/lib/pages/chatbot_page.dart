@@ -165,8 +165,8 @@ class _ChatBotPageState extends State<ChatBotPage> {
   // Utils
   Future _setTtsLang(LanguageOption lang) async {
     // await flutterTts.setLanguage(resolveLocale(_selectedLanguage));
-    // await flutterTts.setLanguage(resolveLocale(LanguageOption
-    //     .en)); // English option is working for every other language as of now.
+    await flutterTts.setLanguage(resolveLocale(LanguageOption
+        .en)); // English option is working for every other language as of now.
   }
 
   @override
