@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class EyeDetectorPainter extends CustomPainter {
@@ -26,7 +27,7 @@ class EyeDetectorPainter extends CustomPainter {
     final Paint boxPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = isEyeValid ? Colors.green : Colors.red;
+      ..color = isEyeValid ? AppColor.green : AppColor.red;
 
     final center = Offset(boxCenter.x, boxCenter.y);
 
@@ -43,7 +44,7 @@ class EyeDetectorPainter extends CustomPainter {
     final Paint eyeLandmarkContour = Paint()
       ..style = PaintingStyle.fill
       ..strokeWidth = 5.0
-      ..color = Colors.teal;
+      ..color = AppColor.white;
 
     List<Offset> eyeLandmarks = [];
     for (final point in eyeContourPoints) {

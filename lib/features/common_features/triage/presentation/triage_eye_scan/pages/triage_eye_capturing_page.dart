@@ -393,7 +393,7 @@ class _PatientTriageEyeCapturingPageState
               isLoading: isLoading,
               progressMessage: _progressMessage,
               child: Container(
-                color: Colors.black,
+                color: AppColor.black,
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
