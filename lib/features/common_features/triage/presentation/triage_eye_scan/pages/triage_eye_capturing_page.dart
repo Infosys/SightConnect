@@ -36,10 +36,8 @@ import '../widgets/eye_detector_painter.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({
-    required this.cameras,
     super.key,
   });
-  final List<CameraDescription> cameras;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>

@@ -1,4 +1,3 @@
-import 'dart:async' show Platform;
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
@@ -22,11 +21,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
   const UpdateTriageEyeCapturingPage({
-    required this.cameras,
     required this.diagnosticReportId,
     super.key,
   });
-  final List<CameraDescription> cameras;
   final int diagnosticReportId;
 
   @override

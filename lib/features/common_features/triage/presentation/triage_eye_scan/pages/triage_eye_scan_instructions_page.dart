@@ -128,7 +128,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (context) => TriageEyeCapturingPage(cameras: cameras),
+            builder: (context) => const TriageEyeCapturingPage(),
           ),
         );
       } else {
