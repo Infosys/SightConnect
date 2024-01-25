@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -69,13 +70,14 @@ class _PatientTriageEyeCapturingPageState
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isIOS = Platform.isIOS;
 
   @override
   void initState() {
     logger.d('EyeDetectorView initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (isCompleted == false) {
+    if (isCompleted == false && !isIOS) {
       _initializeCamera();
     }
   }
@@ -165,7 +167,6 @@ class _PatientTriageEyeCapturingPageState
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
                 : rightEyeContour;
-
         // Translate Eye Points
         _translatedEyeContours = eyePoints.map(
           (contour) {
@@ -185,17 +186,14 @@ class _PatientTriageEyeCapturingPageState
           boxWidth,
           boxHeight,
         );
-
         // Get the corner point of the eyes which is needed to calculate eye width
         _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
-
         // Calculate the eyeWidth ratio to the boxWidth
         _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
           _eyeCorners,
           boxWidth,
           boxHeight,
         );
-
         // Validity of the eye
         _isEyeValid = _eyesInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
@@ -394,12 +392,18 @@ class _PatientTriageEyeCapturingPageState
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-                    Positioned.fill(
-                      child: CameraPreview(
-                        _controller,
-                        child: _customPaint,
-                      ),
-                    ),
+                    !isIOS
+                        ? Positioned.fill(
+                            child: CameraPreview(
+                              _controller,
+                              child: _customPaint,
+                            ),
+                          )
+                        : Positioned.fill(
+                            child: CameraPreview(
+                              _controller,
+                            ),
+                          ),
                     Positioned(
                       top: 100,
                       left: null,
@@ -688,6 +692,7 @@ class _PatientTriageEyeCapturingPageState
                   TextButton(
                     onPressed: () async {
                       ref.read(triageStepperProvider).reset();
+                      dispose();
                       if (context.mounted) {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
@@ -697,7 +702,6 @@ class _PatientTriageEyeCapturingPageState
                           ),
                         );
                       }
-                      dispose();
                     },
                     child: Text(
                       loc.eyeCaptureCompletionDialogViewResult,
