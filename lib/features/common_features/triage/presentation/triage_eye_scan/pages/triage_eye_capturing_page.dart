@@ -141,7 +141,6 @@ class _PatientTriageEyeCapturingPageState
 
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
-    logger.d('EyeDetectorView _processImage');
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -162,7 +161,6 @@ class _PatientTriageEyeCapturingPageState
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
-        logger.d("current eye in detector is : $_currentEye ");
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
@@ -306,6 +304,13 @@ class _PatientTriageEyeCapturingPageState
   Widget build(BuildContext context) {
     var model = ref.watch(triageEyeScanProvider);
     final loc = context.loc!;
+    if (_cameras.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
@@ -446,6 +451,13 @@ class _PatientTriageEyeCapturingPageState
                               const Spacer(),
                               InkWell(
                                 onTap: () async {
+                                  if (_isEyeValid == false) {
+                                    Fluttertoast.showToast(
+                                      msg:
+                                          "Adjust and position until green boxes appear around the eyes.",
+                                    );
+                                    return;
+                                  }
                                   final image = await _takePicture(context);
                                   logger.d("Image: $image");
                                   if (image == null) {
