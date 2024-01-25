@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:chatbot/widgets/chat_message_tile.dart';
+import 'package:chatbot/presentation/widgets/chat_message_tile.dart';
 
 // final chatService = ChatService();
 

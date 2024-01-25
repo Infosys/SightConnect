@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:chatbot/models/diagnostic_report_template_FHIR_model.dart';
-import 'package:chatbot/chat_service.dart';
+import 'package:chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
+import 'package:chatbot/data/source/remote/chat_service.dart';
 import 'package:chatbot/standard_responses.dart';
 import 'package:chatbot/text_to_speech.dart';
-import 'package:chatbot/triage_questionnaire_service.dart';
-import 'package:chatbot/widgets/chat_message_composer.dart';
-import 'package:chatbot/widgets/chat_message_tile.dart';
-import 'package:chatbot/widgets/chat_query_suggestions.dart';
-import 'package:chatbot/widgets/language_select_dropdown.dart';
+import 'package:chatbot/data/source/remote/triage_questionnaire_service.dart';
+import 'package:chatbot/presentation/widgets/chat_message_composer.dart';
+import 'package:chatbot/presentation/widgets/chat_message_tile.dart';
+import 'package:chatbot/presentation/widgets/chat_query_suggestions.dart';
+import 'package:chatbot/presentation/widgets/language_select_dropdown.dart';
 import 'package:chatbot/utils/language_utils.dart';
-import 'package:chatbot/widgets/loading_indicator.dart';
+import 'package:chatbot/presentation/widgets/loading_indicator.dart';
 
 class ChatBotPage extends StatefulWidget {
   const ChatBotPage({

@@ -1,3 +1,3 @@
 library chatbot;
 
-export 'package:chatbot/pages/chatbot_page.dart';
+export 'package:chatbot/presentation/pages/chatbot_page.dart';

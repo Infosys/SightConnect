@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:chatbot/models/diagnostic_report_template_FHIR_model.dart';
+import 'package:chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
 import 'package:chatbot/text_to_speech.dart';
-import 'package:chatbot/triage_questionnaire_service.dart';
-import 'package:chatbot/widgets/triage_question_image.dart';
+import 'package:chatbot/data/source/remote/triage_questionnaire_service.dart';
+import 'package:chatbot/presentation/widgets/triage_question_image.dart';
 
 class ChatMessage {
   final String message;

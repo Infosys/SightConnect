@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chatbot/models/timestamp_converter.dart';
+import 'package:chatbot/data/models/timestamp_converter.dart';
 
 part 'diagnostic_report_template_FHIR_model.freezed.dart';
 part 'diagnostic_report_template_FHIR_model.g.dart';
