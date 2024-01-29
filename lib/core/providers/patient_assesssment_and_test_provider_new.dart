@@ -85,8 +85,18 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     _selectedPatient = patient;
     _isFinalReportLoading=true;
     _finalReportList=[];
+    _page=0;
     notifyListeners();
     getTriageReportByPatientIdAndStatus();
+  }
+  Future<void> refeshReports() async{
+    _isFinalReportLoading=true;
+    _finalReportList=[];
+    _page=0;
+    logger.f("refreshing reports");
+    notifyListeners();
+    await getTriageReportByPatientIdAndStatus();
+    return;
   }
   void setPage(int ? page) {
     _page = page;

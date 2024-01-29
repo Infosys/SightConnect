@@ -61,6 +61,13 @@ class AssessmentsAndTestsPage extends StatelessWidget {
                   data: model.finalReportList,
                   isLoading: model.isReportLoading,
                   hasMore: model.hasMore,
+                  onRefresh:() async{
+                    try {
+                      await model.refeshReports();
+                    } catch (e) {
+                      Fluttertoast.showToast(msg: "Error in fetching report");
+                    }
+                  },
                   onLoadMore: () async {
                     try {
                       await model.incrementPage();
@@ -124,6 +131,7 @@ class AssessmentsAndTestsPage extends StatelessWidget {
     required bool isLoading,
     required int currentReportId,
     required Function onLoadMore,
+     required Function() onRefresh
   }) {
     if (data.isEmpty) {
       return Expanded(
@@ -139,126 +147,132 @@ class AssessmentsAndTestsPage extends StatelessWidget {
       );
     }
     return Expanded(
-      child: ListView.builder(
-        itemCount: data.length+1,
-        
-        itemBuilder: (context, index) {
-       
-          if(index==data.length){
-            if(hasMore){
-              onLoadMore();
-            }
-             return hasMore?   Center(
-               child: Container(
-                margin: const EdgeInsets.only(top: 20),
-                height: 20,
-                width: 20,
-                 child:const CircularProgressIndicator(),
-               ),
-             ): Center(child:  Container(
-               margin:const EdgeInsets.only(top: 20),
-               child: const  Text("No more Reports")
-             ));
-          }
-            final currentData=data[index];
+
+      child: RefreshIndicator(
+         onRefresh: () async{
+          onRefresh();
+      },
+        child: ListView.builder(
+          itemCount: data.length+1,
+          
+          itemBuilder: (context, index) {
          
-          return Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+            if(index==data.length){
+              if(hasMore){
+                onLoadMore();
+              }
+               return hasMore?   Center(
+                 child: Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 20,
+                  width: 20,
+                   child:const CircularProgressIndicator(),
+                 ),
+               ): Center(child:  Container(
+                 margin:const EdgeInsets.only(top: 20),
+                 child: const  Text("No more Reports")
+               ));
+            }
+              final currentData=data[index];
+           
+            return Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              'EID: ${currentData.encounterId}',
+                              minFontSize: 12,
+                              maxLines: 1,
+                              style: applyFiraSansFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              currentData.triageResultStartDate
+                                      ?.formatDateTimeMonthName ??
+                                  "",
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AutoSizeText(
-                            'EID: ${currentData.encounterId}',
-                            minFontSize: 12,
-                            maxLines: 1,
-                            style: applyFiraSansFont(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
                             ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            currentData.triageResultStartDate
-                                    ?.formatDateTimeMonthName ??
-                                "",
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: _checkColorMapper(
+                                currentData.encounterStatus,
+                              ),
                             ),
-                          ),
+                            child: Text(
+                              _formatStatus(currentData.encounterStatus?.name),
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                    const Spacer(),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: _checkColorMapper(
-                              currentData.encounterStatus,
-                            ),
-                          ),
-                          child: Text(
-                            _formatStatus(currentData.encounterStatus?.name),
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  currentData.triageResultDescription ?? "",
-                  softWrap: true,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(fontSize: 14),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () => onViewHistory(currentData),
-                      child: Text(context.loc!.viewHistoryButton),
-                    ),
-                    (isLoading && currentReportId == currentData.triageResultID)
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(),
-                          )
-                        : TextButton(
-                            onPressed: () => onViewReport(currentData),
-                            child: Text(context.loc!.viewReportButton),
-                          )
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-        
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    currentData.triageResultDescription ?? "",
+                    softWrap: true,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyRobotoFont(fontSize: 14),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () => onViewHistory(currentData),
+                        child: Text(context.loc!.viewHistoryButton),
+                      ),
+                      (isLoading && currentReportId == currentData.triageResultID)
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(),
+                            )
+                          : TextButton(
+                              onPressed: () => onViewReport(currentData),
+                              child: Text(context.loc!.viewReportButton),
+                            )
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+          
+        ),
       ),
     );
   }
