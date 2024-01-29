@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -74,6 +76,12 @@ class TriageExitAlertBox extends HookConsumerWidget {
                       ),
                       TextButton(
                         onPressed: () async {
+                          final activeRole = roleMapper(
+                              PersistentAuthStateService.authState.activeRole);
+                          if (activeRole != Role.ROLE_PATIENT) {
+                            // Clearing the triage state
+                            return;
+                          }
                           var naviagtor = Navigator.of(context);
                           try {
                             isLoading.value = true;
