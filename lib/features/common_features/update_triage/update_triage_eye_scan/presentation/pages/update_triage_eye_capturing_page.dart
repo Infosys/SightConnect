@@ -137,7 +137,7 @@ class _UpdateTriageEyeCapturingPageState
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
       _canvasSize.width * (1 / 2),
-      _canvasSize.height * (3 / 10),
+      _canvasSize.height * (2 / 5),
     );
 
     if (meshes.isNotEmpty) {
@@ -364,50 +364,79 @@ class _UpdateTriageEyeCapturingPageState
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: const EdgeInsets.all(24),
-                    color: Colors.transparent,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              await _toggleCamera();
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppSize.kmpadding,
-                              ),
-                              child: Icon(
-                                Icons.flip_camera_ios,
-                                color: AppColor.white,
-                              ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Visibility(
+                      visible: !_isEyeValid,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          width: AppSize.width(context) * 0.8,
+                          decoration: BoxDecoration(
+                            color: AppColor.black.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            "Adjust and position until green boxes appear around the eyes.",
+                            textAlign: TextAlign.center,
+                            style: applyRobotoFont(
+                              fontSize: 16,
+                              color: AppColor.white,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const Spacer(),
-                          InkWell(
-                            onTap: () async {
-                              await _takePicture(context);
-                            },
-                            child: SvgPicture.asset("assets/icons/camera.svg"),
-                          ),
-                          const Spacer(),
-                          Tooltip(
-                            message: loc.eyeAssessmentToolTip,
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppSize.kmpadding,
-                              ),
-                              child: Icon(
-                                Icons.info_outline,
-                                color: AppColor.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      color: Colors.transparent,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await _toggleCamera();
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: AppSize.kmpadding,
+                                ),
+                                child: Icon(
+                                  Icons.flip_camera_ios,
+                                  color: AppColor.white,
+                                ),
                               ),
                             ),
-                          ),
-                        ]),
-                  ),
+                            const Spacer(),
+                            InkWell(
+                              onTap: () async {
+                                if (!_isEyeValid) {
+                                  return;
+                                }
+                                await _takePicture(context);
+                              },
+                              child:
+                                  SvgPicture.asset("assets/icons/camera.svg"),
+                            ),
+                            const Spacer(),
+                            Tooltip(
+                              message: loc.eyeAssessmentToolTip,
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: AppSize.kmpadding,
+                                ),
+                                child: Icon(
+                                  Icons.info_outline,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ],
                 ),
                 // _flas
               ],
