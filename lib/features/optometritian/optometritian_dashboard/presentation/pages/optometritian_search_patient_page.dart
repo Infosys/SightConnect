@@ -12,6 +12,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../optometritian_triage/presentation/pages/optometritian_fetch_report_page.dart';
+
 class OptometritianSearchPatientPage extends HookConsumerWidget {
   const OptometritianSearchPatientPage({super.key});
 
@@ -214,15 +216,15 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                 (entry) {
                                   return InkWell(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         OptometritianFetchReportPage(
-                                      //       report: entry,
-                                      //     ),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              OptometritianFetchReportPage(
+                                            report: entry,
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(

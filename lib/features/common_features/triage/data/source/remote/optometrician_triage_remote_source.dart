@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -5,10 +7,14 @@ import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../domain/models/triage_assessment_model.dart';
+
 abstract class OptometristRemoteSource {
+  Future<TriageAssessment> getTriage();
   Future<Either<Failure, OptometristTriageResponse>> saveTriage({
     required OptometristTriageResponse triage,
   });
@@ -27,6 +33,17 @@ abstract class OptometristRemoteSource {
 class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   Dio dio;
   OptometristRemoteSourceImpl(this.dio);
+
+    @override
+  Future<TriageAssessment> getTriage() async {
+    var response = await rootBundle.loadString("assets/care_assessment.json");
+    if (response.isNotEmpty) {
+      var data = jsonDecode(response);
+      return TriageAssessment.fromJson(data["assessment"]);
+    } else {
+      throw ServerException();
+    }
+  }
 
   @override
   Future<Either<Failure, OptometristTriageResponse>> saveTriage(
