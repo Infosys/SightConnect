@@ -150,7 +150,7 @@ class _PatientTriageEyeCapturingPageState
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
       _canvasSize.width * (1 / 2),
-      _canvasSize.height * (3 / 10),
+      _canvasSize.height * (2 / 5),
     );
 
     if (meshes.isNotEmpty) {
@@ -423,13 +423,36 @@ class _PatientTriageEyeCapturingPageState
                         ),
                       ),
                     ),
-
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        padding: const EdgeInsets.all(24),
-                        color: Colors.transparent,
-                        child: Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Visibility(
+                          visible: !_isEyeValid,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              width: AppSize.width(context) * 0.8,
+                              decoration: BoxDecoration(
+                                color: AppColor.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                "Adjust and position until green boxes appear around the eyes.",
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          color: Colors.transparent,
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
@@ -449,11 +472,7 @@ class _PatientTriageEyeCapturingPageState
                               const Spacer(),
                               InkWell(
                                 onTap: () async {
-                                  if (_isEyeValid == false) {
-                                    Fluttertoast.showToast(
-                                      msg:
-                                          "Adjust and position until green boxes appear around the eyes.",
-                                    );
+                                  if (!_isEyeValid) {
                                     return;
                                   }
                                   final image = await _takePicture(context);
@@ -547,8 +566,10 @@ class _PatientTriageEyeCapturingPageState
                                   ),
                                 ),
                               ),
-                            ]),
-                      ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     // _flashToggle(),
                   ],
