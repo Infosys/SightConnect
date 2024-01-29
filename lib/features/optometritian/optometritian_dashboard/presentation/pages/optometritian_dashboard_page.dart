@@ -2,21 +2,71 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_dashboard_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OptometritianDashboardPage extends ConsumerWidget {
+class OptometritianDashboardPage extends ConsumerStatefulWidget {
   const OptometritianDashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OptometritianDashboardPage> createState() =>
+      _OptometritianDashboardPageState();
+}
+
+class _OptometritianDashboardPageState
+    extends ConsumerState<OptometritianDashboardPage> {
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(getOptometricianProfileProvider, (previous, next) {
+      if (next.hasError) {
+        logger.d("Logged out from OptometritianDashboardPage ");
+        ref.read(initializationProvider).logout().then((value) {
+          Fluttertoast.showToast(msg: "You have been logged out");
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
+        });
+      }
+    });
+
+    return ref.watch(getOptometricianProfileProvider).when(
+          data: (data) {
+            return _buildPage(ref, context);
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          error: (error, stackTrace) {
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  error.toString(),
+                ),
+              ),
+            );
+          },
+        );
+  }
+
+  Widget _buildPage(
+    WidgetRef ref,
+    BuildContext context,
+  ) {
+    final model = ref.watch(optometricianDashboardProvider);
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
@@ -36,25 +86,23 @@ class OptometritianDashboardPage extends ConsumerWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(AppSize.klpadding),
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.klheight * 1.2),
+                SizedBox(height: AppSize.height(context) * 0.06),
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      AppImages.logoSvg,
-                      height: 20,
-                      width: 120,
-                      colorFilter: const ColorFilter.mode(
-                        AppColor.white,
-                        BlendMode.srcIn,
-                      ),
+                    Image.asset(
+                      AppImages.logo,
+                      height: 40,
+                      width: 140,
+                      colorBlendMode: BlendMode.srcIn,
+                      color: AppColor.white,
                     ),
                     const Spacer(),
                     IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         final navigator = Navigator.of(context);
                         ref
                             .read(initializationProvider)
@@ -73,17 +121,32 @@ class OptometritianDashboardPage extends ConsumerWidget {
                       },
                       icon: const Icon(
                         Icons.logout,
-                        color: Colors.white,
+                        color: AppColor.white,
                       ),
                     )
                   ],
                 ),
-                const SizedBox(height: AppSize.klheight * 1.5),
-                Text(
-                  "Welcome",
-                  style: applyFiraSansFont(
-                    color: AppColor.scaffold,
-                    fontSize: 28,
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Hello, ",
+                        style: applyFiraSansFont(
+                          color: AppColor.white,
+                          fontSize: 28,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ref
+                            .watch(globalOptometricianProvider)
+                            .activeUserFullName,
+                        style: applyFiraSansFont(
+                          color: AppColor.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: AppSize.ksheight),
@@ -99,8 +162,9 @@ class OptometritianDashboardPage extends ConsumerWidget {
           ),
           Positioned(
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSize.kmpadding,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -111,13 +175,15 @@ class OptometritianDashboardPage extends ConsumerWidget {
                     ),
                     margin: const EdgeInsets.only(top: 250),
                     width: AppSize.width(context),
-                    child: const InfoCardOptometric(
+                    child: InfoCardOptometric(
                       "Completed tests",
-                      "2,000",
-                      "2,480",
+                      model.optometricianDashboard
+                          .totalAssessmentsThisMonthByOptometrist,
+                      model.optometricianDashboard.totalAssessmentsThisMonth,
                       "This month",
-                      "120",
-                      "148",
+                      model.optometricianDashboard
+                          .totalAssessmentsTodayByOptometrist,
+                      model.optometricianDashboard.totalAssessmentsToday,
                       "Today",
                     ),
                   ),
@@ -141,12 +207,6 @@ class OptometritianDashboardPage extends ConsumerWidget {
                                   const OptometricianAddPatientPage(),
                             ),
                           );
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         const VisualAcuityTumblingPage(),
-                          //   ),
-                          // );
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -205,7 +265,7 @@ class OptometritianDashboardPage extends ConsumerWidget {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                "Past Assessments",
+                                "Assessment History",
                                 softWrap: false,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -221,6 +281,7 @@ class OptometritianDashboardPage extends ConsumerWidget {
                     ],
                   ),
                   const Spacer(),
+                  const SizedBox(height: AppSize.kmheight),
                 ],
               ),
             ),
@@ -232,13 +293,13 @@ class OptometritianDashboardPage extends ConsumerWidget {
 }
 
 class InfoCardOptometric extends StatelessWidget {
-  final String titleLarge;
-  final String firstValue;
-  final String totalFirstValue;
-  final String firstsubTitle;
-  final String secondValue;
-  final String totalSecondValue;
-  final String secondsubTitle;
+  final String? titleLarge;
+  final int? firstValue;
+  final int? totalFirstValue;
+  final String? firstsubTitle;
+  final int? secondValue;
+  final int? totalSecondValue;
+  final String? secondsubTitle;
 
   const InfoCardOptometric(
       this.titleLarge,
@@ -252,52 +313,61 @@ class InfoCardOptometric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
-      decoration: BoxDecoration(
-          color: AppColor.white.withOpacity(0.9),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppSize.kmradius + 2),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            )
-          ]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Eye Assessments",
-            style: applyRobotoFont(fontSize: 12),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: _BuildScore(
-                  firstValue,
-                  totalFirstValue,
-                  firstsubTitle,
-                ),
-              ),
-              Flexible(
-                child: _BuildScore(
-                  secondValue,
-                  totalSecondValue,
-                  secondsubTitle,
-                ),
+    if (firstValue == null ||
+        totalFirstValue == null ||
+        firstsubTitle == null ||
+        secondValue == null ||
+        totalSecondValue == null ||
+        secondsubTitle == null) {
+      return Container();
+    } else {
+      return Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
+        decoration: BoxDecoration(
+            color: AppColor.white.withOpacity(0.9),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppSize.kmradius + 2),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
               )
-            ],
-          ),
-        ],
-      ),
-    );
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Eye Assessments",
+              style: applyRobotoFont(fontSize: 12),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: _BuildScore(
+                    firstValue!.toString(),
+                    totalFirstValue!.toString(),
+                    firstsubTitle!,
+                  ),
+                ),
+                Flexible(
+                  child: _BuildScore(
+                    secondValue!.toString(),
+                    totalSecondValue!.toString(),
+                    secondsubTitle!,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
 
