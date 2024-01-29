@@ -137,7 +137,7 @@ class _UpdateTriageEyeCapturingPageState
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
       _canvasSize.width * (1 / 2),
-      _canvasSize.height * (2 / 5),
+      _canvasSize.height * (1 / 2),
     );
 
     if (meshes.isNotEmpty) {
