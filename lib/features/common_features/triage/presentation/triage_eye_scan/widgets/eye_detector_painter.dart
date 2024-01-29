@@ -22,14 +22,44 @@ class EyeDetectorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Fixed Box Painter
     getCanvasSize?.call(size);
+    final center = Offset(boxCenter.x, boxCenter.y);
+
+    // Overlay Line Painter
+    final Paint overlayLinePainter = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1.5
+      ..color = Colors.white.withOpacity(0.35);
+
+    canvas.drawLine(
+      Offset(0, center.dy - boxHeight / 2),
+      Offset(size.width, center.dy - boxHeight / 2),
+      overlayLinePainter,
+    );
+
+    canvas.drawLine(
+      Offset(0, center.dy + boxHeight / 2),
+      Offset(size.width, center.dy + boxHeight / 2),
+      overlayLinePainter,
+    );
+
+    canvas.drawLine(
+      Offset(center.dx - boxWidth / 2, center.dy - boxHeight / 2 - 52),
+      Offset(center.dx - boxWidth / 2, center.dy + boxHeight / 2 + 52),
+      overlayLinePainter,
+    );
+
+    canvas.drawLine(
+      Offset(center.dx + boxWidth / 2, center.dy - boxHeight / 2 - 52),
+      Offset(center.dx + boxWidth / 2, center.dy + boxHeight / 2 + 52),
+      overlayLinePainter,
+    );
+
+    // Fixed Box Painter
     final Paint boxPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
       ..color = isEyeValid ? AppColor.green : AppColor.red;
-
-    final center = Offset(boxCenter.x, boxCenter.y);
 
     canvas.drawRect(
       Rect.fromCenter(
@@ -70,8 +100,8 @@ class EyeDetectorPainter extends CustomPainter {
         ..addRect(
           Rect.fromCenter(
             center: center,
-            width: boxWidth,
-            height: boxHeight,
+            width: size.width,
+            height: boxHeight + 104,
           ),
         ),
       overlayPainter,
