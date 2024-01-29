@@ -58,18 +58,44 @@ class EyeDetectorPainter extends CustomPainter {
     // Fixed Box Painter
     final Paint boxPainter = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.0
-      ..color = isEyeValid ? AppColor.green : AppColor.red;
+      ..strokeWidth = 4.0
+      ..color = isEyeValid ? AppColor.pureGreen : AppColor.pureRed
+      ..strokeJoin = StrokeJoin.bevel;
 
-    canvas.drawRect(
-      Rect.fromCenter(
-        center: center,
-        width: boxWidth,
-        height: boxHeight,
-      ),
-      boxPainter,
+    // canvas.drawRect(
+    //   Rect.fromCenter(
+    //     center: center,
+    //     width: boxWidth,
+    //     height: boxHeight,
+    //   ),
+    //   boxPainter,
+    // );
+    final cornerLength = 20.0; // Define the length of the corner lines
+
+    final rect = Rect.fromCenter(
+      center: center,
+      width: boxWidth,
+      height: boxHeight,
     );
+    boxPainter.strokeCap = StrokeCap.round; // or StrokeCap.square
 
+    // Top left corner
+    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left + cornerLength, rect.top), boxPainter);
+    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left, rect.top + cornerLength), boxPainter);
+
+    // Top right corner
+    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right - cornerLength, rect.top), boxPainter);
+    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right, rect.top + cornerLength), boxPainter);
+
+    // Bottom left corner
+    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left + cornerLength, rect.bottom), boxPainter);
+    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left, rect.bottom - cornerLength), boxPainter);
+
+    // Bottom right corner
+    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right - cornerLength, rect.bottom), boxPainter);
+    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right, rect.bottom - cornerLength), boxPainter);
+
+    
     // Eye Landmark Painters
     final Paint eyeLandmarkContour = Paint()
       ..style = PaintingStyle.fill

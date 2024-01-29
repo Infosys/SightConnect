@@ -438,7 +438,7 @@ class _PatientTriageEyeCapturingPageState
                               ),
                               padding: const EdgeInsets.all(8),
                               child: Text(
-                                "Adjust and position until green boxes appear around the eyes.",
+                                loc.eyeBoxText,
                                 textAlign: TextAlign.center,
                                 style: applyRobotoFont(
                                   fontSize: 16,

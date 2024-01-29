@@ -59,6 +59,8 @@
     "noButton": "No",
     "exitButton": "Exit",
     "okButton":"Okay",
+
+    "eyeBoxText": "Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.",
  
     "knowMoreButton": "Know More",
     "seeAllButton": "See All",
