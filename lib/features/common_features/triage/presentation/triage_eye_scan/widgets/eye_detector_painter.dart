@@ -56,6 +56,26 @@ class EyeDetectorPainter extends CustomPainter {
       eyeLandmarks,
       eyeLandmarkContour,
     );
+
+    // Overlay Painter
+    final Paint overlayPainter = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1.0
+      ..color = Colors.black45;
+
+    canvas.drawPath(
+      Path()
+        ..addRect(Rect.fromLTRB(0, 0, size.width, size.height))
+        ..fillType = PathFillType.evenOdd
+        ..addRect(
+          Rect.fromCenter(
+            center: center,
+            width: boxWidth,
+            height: boxHeight,
+          ),
+        ),
+      overlayPainter,
+    );
   }
 
   @override
