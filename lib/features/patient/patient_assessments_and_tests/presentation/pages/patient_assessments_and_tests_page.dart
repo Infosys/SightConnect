@@ -60,6 +60,14 @@ class AssessmentsAndTestsPage extends StatelessWidget {
                   currentReportId: model.currentTriageReportId,
                   data: model.finalReportList,
                   isLoading: model.isReportLoading,
+                  hasMore: model.hasMore,
+                  onLoadMore: () async {
+                    try {
+                      await model.incrementPage();
+                    } catch (e) {
+                      Fluttertoast.showToast(msg: "Error in fetching report");
+                    }
+                  },
                   onViewReport: (report) async {
                     final navigator = Navigator.of(context);
                     try {
@@ -110,10 +118,12 @@ class AssessmentsAndTestsPage extends StatelessWidget {
   _content({
     required BuildContext context,
     required List<TriageReportBriefEntity> data,
+    required bool hasMore,
     required Function(TriageReportBriefEntity) onViewReport,
     required Function(TriageReportBriefEntity) onViewHistory,
     required bool isLoading,
     required int currentReportId,
+    required Function onLoadMore,
   }) {
     if (data.isEmpty) {
       return Expanded(
@@ -130,8 +140,28 @@ class AssessmentsAndTestsPage extends StatelessWidget {
     }
     return Expanded(
       child: ListView.builder(
+        itemCount: data.length+1,
+        
         itemBuilder: (context, index) {
-          final currentData = data[index];
+       
+          if(index==data.length){
+            if(hasMore){
+              onLoadMore();
+            }
+             return hasMore?   Center(
+               child: Container(
+                margin: const EdgeInsets.only(top: 20),
+                height: 20,
+                width: 20,
+                 child:const CircularProgressIndicator(),
+               ),
+             ): Center(child:  Container(
+               margin:const EdgeInsets.only(top: 20),
+               child: const  Text("No more Reports")
+             ));
+          }
+            final currentData=data[index];
+         
           return Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -228,7 +258,7 @@ class AssessmentsAndTestsPage extends StatelessWidget {
             ),
           );
         },
-        itemCount: data.length,
+        
       ),
     );
   }

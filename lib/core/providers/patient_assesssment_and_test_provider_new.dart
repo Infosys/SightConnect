@@ -38,6 +38,8 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   final List<TriageReportBriefEntity> _clinicalReportList = [];
   List<TriageReportBriefEntity> _finalReportList = [];
   final List<TriageReportBriefEntity> _selfTestReportList = [];
+  int ? _page;
+  bool _hasMore = true;
 
   bool _isLoading = false;
   bool _isUpdateLoading = false;
@@ -53,6 +55,8 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     this._patientAssessmentUpdateDataProvider,
   ) {
     getPatients();
+    _isFinalReportLoading=true;
+    notifyListeners();
     getTriageReportByPatientIdAndStatus();
   }
 
@@ -63,16 +67,30 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   bool get isFinalReportLoading => _isFinalReportLoading;
   bool get isSelfTestReportLoading => _isSelfTestReportLoading;
   bool get isClinicalReportLoading => _isClinicalReportLoading;
+  int ? get page => _page;
+  bool get hasMore => _hasMore;
+
 
   List<TriageReportBriefEntity> get triageReportList => _triageReportList;
   List<TriageReportBriefEntity> get finalReportList => _finalReportList;
   List<TriageReportBriefEntity> get clinicalReportList => _clinicalReportList;
   List<TriageReportBriefEntity> get selfTestReportList => _selfTestReportList;
 
+  void setHasMore(bool ? hasMore) {
+    _hasMore = hasMore!;
+    notifyListeners();
+  }
+
   void setPatient(TriageReportUserEntity patient) {
     _selectedPatient = patient;
+    _isFinalReportLoading=true;
+    _finalReportList=[];
     notifyListeners();
     getTriageReportByPatientIdAndStatus();
+  }
+  void setPage(int ? page) {
+    _page = page;
+    notifyListeners();
   }
 
   List<TriageReportUserEntity> getPatients() {
@@ -267,15 +285,21 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       },
     );
   }
+  Future<void> incrementPage() async {
+    _page ??= 0;
+    _page = _page! + 1;
 
-  Future<void> getTriageReportByPatientIdAndStatus() async {
-    _isFinalReportLoading = true;
+    await getTriageReportByPatientIdAndStatus();
     notifyListeners();
+  }
+  Future<void> getTriageReportByPatientIdAndStatus() async {
+
     final selectedPatientId = _selectedPatient?.id;
     final response =
         await _triageReportRepository.getTriageReportByPatientIdAndStatus(
       selectedPatientId!,
       DiagnosticReportStatus.FINAL,
+      _page,
     );
 
     response.fold((failure) {
@@ -287,8 +311,12 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         return b.issued!.compareTo(a.issued!);
       });
       _isFinalReportLoading = false;
+      triageAssessment.isEmpty ? setHasMore(false) : setHasMore(true);
+      List<TriageReportBriefEntity> list = _assessmentReportMapper(triageAssessment);
+      _finalReportList.addAll( list);
       notifyListeners();
-      _finalReportList = _assessmentReportMapper(triageAssessment);
+      
+    
     });
   }
 
@@ -303,6 +331,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isClinicalReportLoading = true;
       notifyListeners();
     }
+
     final response = await _triageReportRepository.getTriageReportByEncounterId(
         encounterId, DiagnosticReportStatus.FINAL);
 

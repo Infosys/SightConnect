@@ -20,6 +20,7 @@ abstract class RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
+    int ? page
   );
   Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
@@ -77,9 +78,17 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
+    int ? page
   ) async {
-    final endpoint =
-        "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}";
+    final String endpoint ;
+    int size = 5;
+    if(page == null){
+     endpoint= "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}";
+    }
+    else{
+      endpoint= "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}&page=$page&size=$size";
+    }
+       
 
     final response = await dio.get(endpoint);
 
