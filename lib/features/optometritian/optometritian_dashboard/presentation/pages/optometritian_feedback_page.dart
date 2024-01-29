@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:eye_care_for_all/core/services/network_info.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,9 +8,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
+import '../../../../common_features/triage/domain/models/triage_post_model.dart';
+import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import '../provider/optometrist_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 
-void showFeedback(BuildContext context) {
+
+void showFeedback(BuildContext context, TriagePostModel result) {
   showDialog(
       barrierDismissible: false,
       context: context,
@@ -259,88 +265,71 @@ void showFeedback(BuildContext context) {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  // feedback.isLoading = true;
-                                  // logger.d(
-                                  //     "isLoading changed to : ${feedback.isLoading}");
-                                  // //give 5 seconds of timeout
+                                  feedback.isLoading = true;
+                                  logger.d(
+                                      "isLoading changed to : ${feedback.isLoading}");
+                                  //give 5 seconds of timeout
 
-                                  // feedback.save();
-                                  // ref
-                                  //     .read(triageStepperProvider)
-                                  //     .goToNextStep();
+                                  feedback.save();
+                                  ref
+                                      .read(triageStepperProvider)
+                                      .goToNextStep();
+                                     
+                                  
 
-                                  // if (await ref
-                                  //     .read(connectivityProvider)
-                                  //     .isConnected()) {
-                                  //   ref
-                                  //       .read(triageProvider)
-                                  //       .saveTriage()
-                                  //       .then((value) {
-                                  //     // model.setCurrentEye(TriageEye.RIGHT_EYE);
-                                  //     feedback.isLoading = false;
-                                  //     if (value.patientId != null) {
-                                  //       Navigator.of(context).push(
-                                  //         MaterialPageRoute(
-                                  //           builder: (context) =>
-                                  //               // const TriageResultPage()
-                                  //               OptometritianReportPage(
-                                  //             id: ref
-                                  //                 .read(
-                                  //                     optometritianAddPatientProvider)
-                                  //                 .patientIdController
-                                  //                 .text,
-                                  //             education: ref
-                                  //                 .read(
-                                  //                     optometritianAddPatientProvider)
-                                  //                 .educationalQualificationController
-                                  //                 .text,
-                                  //             employment: ref
-                                  //                 .read(
-                                  //                     optometritianAddPatientProvider)
-                                  //                 .professionController
-                                  //                 .text,
-                                  //           ),
-                                  //         ),
-                                  //       );
-                                  //     } else {
-                                  //       ScaffoldMessenger.of(context)
-                                  //           .showSnackBar(
-                                  //         const SnackBar(
-                                  //           content: Text(
-                                  //               "Triage Not Saved! Bad Connection"),
-                                  //         ),
-                                  //       );
-                                  //     }
-                                  //   });
-                                  // } else {
-                                  //   if (context.mounted) {
-                                  //     showDialog(
-                                  //         context: context,
-                                  //         builder: (BuildContext context) {
-                                  //           return AlertDialog(
-                                  //             title: const Text(
-                                  //                 "No Internet Connection"),
-                                  //             content: const Text(
-                                  //                 "Please check your internet connection and try again"),
-                                  //             actions: [
-                                  //               TextButton(
-                                  //                   onPressed: () {
-                                  //                     //pop until route isfirst
-                                  //                     Navigator.of(context)
-                                  //                         .popUntil((route) =>
-                                  //                             route.isFirst);
-                                  //                     ref.invalidate(
-                                  //                         optometricianDashboardProvider);
-                                  //                     ref
-                                  //                         .read(triageProvider)
-                                  //                         .resetTriage();
-                                  //                   },
-                                  //                   child: const Text("OK"))
-                                  //             ],
-                                  //           );
-                                  //         });
-                                  //   }
-                                  // }
+                                  if (await ref
+                                      .read(connectivityProvider)
+                                      .isConnected()) {
+                                  ref
+                                      .read(optometristProvider)
+                                      .saveTriage()
+                                      .then((value) {
+                                 logger.d("value is : $value");
+                                  feedback.isLoading = false;
+                                  if (value.patientId != null) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            // const TriageResultPage()
+                                           TriageResultPage(triageResult: result),
+                                      ),
+                                    );
+                                  }
+
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  "Triage Not Saved! Bad Connection"),
+                                            ),
+                                          );
+
+                                      });
+                                    } else {
+                                      if (context.mounted) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                    "No Internet Connection"),
+                                                content: const Text(
+                                                    "Please check your internet connection and try again"),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        //pop until route isfirst
+                                                        Navigator.of(context)
+                                                            .popUntil((route) =>
+                                                                route.isFirst);
+                                                      
+                                                      },
+                                                      child: const Text("OK"))
+                                                ],
+                                              );
+                                            });
+                                      }
+                                    }
                                 },
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(
