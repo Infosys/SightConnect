@@ -29,6 +29,9 @@ class InitializationProvider extends ChangeNotifier {
       return await _checkPatientExist(phone, role);
     } else if (role == Role.ROLE_VISION_GUARDIAN) {
       return await _checkVisionGuardianExist(phone, role);
+    } else if (role == Role.ROLE_OPTOMETRIST) {
+      //only for testing
+      return true;
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }

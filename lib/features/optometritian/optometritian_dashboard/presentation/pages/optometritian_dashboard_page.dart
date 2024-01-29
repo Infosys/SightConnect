@@ -1,11 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,57 +43,39 @@ class OptometritianDashboardPage extends ConsumerWidget {
                 const SizedBox(height: AppSize.klheight * 1.2),
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.white,
-                      ),
-                      child: SvgPicture.asset(
-                        AppIcon.logo,
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: AppSize.kmwidth,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const PatientDashboardPage()),
-                            (route) => false);
-                      },
-                      child: Text(
-                        'ClinicalVal',
-                        style: applyFiraSansFont(
-                          color: AppColor.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    SvgPicture.asset(
+                      AppImages.logoSvg,
+                      height: 20,
+                      width: 120,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.white,
+                        BlendMode.srcIn,
                       ),
                     ),
                     const Spacer(),
                     IconButton(
-                        onPressed: () {
-                          final navigator = Navigator.of(context);
-                          ref
-                              .read(initializationProvider)
-                              .logout()
-                              .then((value) async {
-                            navigator.pushNamedAndRemoveUntil(
-                              LoginPage.routeName,
-                              (route) => false,
-                            );
-                            ref.invalidate(initializationProvider);
-                          }).catchError((e) {
-                            Fluttertoast.showToast(
-                              msg: e.toString(),
-                            );
-                          });
-                        },
-                        icon: const Icon(Icons.logout))
+                      onPressed: () {
+                        final navigator = Navigator.of(context);
+                        ref
+                            .read(initializationProvider)
+                            .logout()
+                            .then((value) async {
+                          navigator.pushNamedAndRemoveUntil(
+                            LoginPage.routeName,
+                            (route) => false,
+                          );
+                          ref.invalidate(initializationProvider);
+                        }).catchError((e) {
+                          Fluttertoast.showToast(
+                            msg: e.toString(),
+                          );
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
+                    )
                   ],
                 ),
                 const SizedBox(height: AppSize.klheight * 1.5),
