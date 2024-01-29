@@ -1,335 +1,109 @@
-import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/assessment_type.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/condition.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/organ.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'enums/action_type.dart';
-import 'enums/constraint.dart';
-import 'enums/disabled_display.dart';
-import 'enums/enable_behaviour.dart';
-import 'enums/media_type.dart';
-import 'enums/operator.dart';
-import 'enums/value_type.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'triage_assessment_model.freezed.dart';
 part 'triage_assessment_model.g.dart';
 
 @freezed
-class TriageAssessmentModel with _$TriageAssessmentModel {
-  const factory TriageAssessmentModel({
-    int? id,
+class TriageAssessment with _$TriageAssessment {
+  const factory TriageAssessment({
+    int? code,
     String? name,
     String? organizationCode,
-    Condition? condition,
-    AssessmentType? assessmentType,
-    Organ? organ,
-    List<QuestionnaireSectionsResponseModel>?
-        questionnaireSectionsResponseDTOList,
-    List<MediaListSectionResponseModel>? mediaListSectionResponseDTOList,
-    List<ObservationSetSectionResponseModel>?
-        observationSetSectionResponseDTOList,
-  }) = _TriageAssessmentModel;
+    String? condition,
+    String? organ,
+    List<QuestionnaireSection>? questionnaireSections,
+    List<ObservationsSection>? observationsSections,
+    List<MediaListSection>? mediaListSections,
+  }) = _TriageAssessment;
 
-  factory TriageAssessmentModel.fromJson(Map<String, dynamic> json) =>
-      _$TriageAssessmentModelFromJson(json);
+  factory TriageAssessment.fromJson(Map<String, dynamic> json) =>
+      _$TriageAssessmentFromJson(json);
 }
 
-///////////////////////////////////////////////////////////////////
+@freezed
+class QuestionnaireSection with _$QuestionnaireSection {
+  const factory QuestionnaireSection({
+    List<Questionnaire>? questionnaire,
+  }) = _QuestionnaireSection;
+
+  factory QuestionnaireSection.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireSectionFromJson(json);
+}
 
 @freezed
-class QuestionnaireSectionsResponseModel
-    with _$QuestionnaireSectionsResponseModel {
-  const factory QuestionnaireSectionsResponseModel({
-    int? id,
-    int? index,
+class Questionnaire with _$Questionnaire {
+  const factory Questionnaire({
     String? description,
-    QuestionnaireSectionModel? supersection,
-    List<QuestionnaireResponseModel>? questionnaireResponseDTOList,
-  }) = _QuestionnaireSectionsResponseModel;
+    List<Question>? questions,
+  }) = _Questionnaire;
 
-  factory QuestionnaireSectionsResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$QuestionnaireSectionsResponseModelFromJson(json);
+  factory Questionnaire.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireFromJson(json);
 }
 
 @freezed
-class QuestionnaireSectionModel with _$QuestionnaireSectionModel {
-  const factory QuestionnaireSectionModel({
+class Question with _$Question {
+  const factory Question({
     int? id,
-    int? index,
-    String? description,
-    QuestionnaireModel? questionnaire,
-    AssessmentModel? assessment,
-  }) = _QuestionnaireSectionModel;
-
-  factory QuestionnaireSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionnaireSectionModelFromJson(json);
-}
-
-@freezed
-class AssessmentModel with _$AssessmentModel {
-  const factory AssessmentModel({
-    int? id,
-    String? name,
-    String? organizationCode,
-    Condition? condition,
-    AssessmentType? assessmentType,
-    Organ? organ,
-    String? version,
-  }) = _AssessmentModel;
-
-  factory AssessmentModel.fromJson(Map<String, dynamic> json) =>
-      _$AssessmentModelFromJson(json);
-}
-
-@freezed
-class QuestionnaireModel with _$QuestionnaireModel {
-  const factory QuestionnaireModel({
-    int? id,
-    String? name,
-    String? description,
-    String? version,
-    @TimestampConverter() DateTime? approvalDate,
-    @TimestampConverter() DateTime? lastReviewDate,
-    @TimestampConverter() DateTime? effectiveFrom,
-    @TimestampConverter() DateTime? effectiveTill,
-    @TimestampConverter() DateTime? creationDate,
-    @TimestampConverter() DateTime? lastModifiedDate,
-    int? publisherCode,
-    String? publisherType,
-  }) = _QuestionnaireModel;
-
-  factory QuestionnaireModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionnaireModelFromJson(json);
-}
-
-@freezed
-class QuestionnaireResponseModel with _$QuestionnaireResponseModel {
-  const factory QuestionnaireResponseModel({
-    int? id,
-    String? name,
-    String? description,
-    String? version,
-    @TimestampConverter() DateTime? approvalDate,
-    @TimestampConverter() DateTime? lastReviewDate,
-    @TimestampConverter() DateTime? effectiveFrom,
-    @TimestampConverter() DateTime? effectiveTill,
-    @TimestampConverter() DateTime? creationDate,
-    @TimestampConverter() DateTime? lastModifiedDate,
-    int? publisherCode,
-    String? publisherType,
-    List<QuestionResponseModel>? questionResponseDTO,
-  }) = _QuestionnaireResponseModel;
-
-  factory QuestionnaireResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionnaireResponseModelFromJson(json);
-}
-
-@freezed
-class QuestionResponseModel with _$QuestionResponseModel {
-  const factory QuestionResponseModel({
-    int? id,
-    String? definition,
-    Constraint? constraint,
+    int? code,
+    String? statement,
+    String? constraint,
     String? defaultValue,
-    EnableBehaviour? enableBehaviour,
-    int? maxLength,
-    DisabledDisplay? disabledDisplay,
-    String? prefix,
+    bool? mandatory,
+    List<ActionOn>? actionOn,
     int? weight,
-    String? image,
-    List<ActionOnResponseModel>? actionOnResponseDTO,
-    bool? readOnly,
-    bool? required,
-  }) = _QuestionResponseModel;
+  }) = _Question;
 
-  factory QuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionResponseModelFromJson(json);
+  factory Question.fromJson(Map<String, dynamic> json) =>
+      _$QuestionFromJson(json);
 }
 
 @freezed
-class ActionOnResponseModel with _$ActionOnResponseModel {
-  const factory ActionOnResponseModel({
-    int? id,
-    Operator? operator,
+class ActionOn with _$ActionOn {
+  const factory ActionOn({
+    String? operator,
+    String? actionType,
     String? answer,
-    ActionType? actionType,
-  }) = _ActionOnResponseModel;
+  }) = _ActionOn;
 
-  factory ActionOnResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ActionOnResponseModelFromJson(json);
+  factory ActionOn.fromJson(Map<String, dynamic> json) =>
+      _$ActionOnFromJson(json);
 }
 
 @freezed
-class MediaListSectionResponseModel with _$MediaListSectionResponseModel {
-  const factory MediaListSectionResponseModel({
-    int? id,
-    int? index,
+class ObservationsSection with _$ObservationsSection {
+  const factory ObservationsSection({
     String? description,
-    MediaListSectionModel? supersection,
-    List<MediaListResponseModel>? mediaListResponseDTOList,
-  }) = _MediaListSectionResponseModel;
+    List<IndividualMeasure>? individualMeasure,
+  }) = _ObservationsSection;
 
-  factory MediaListSectionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListSectionResponseModelFromJson(json);
+  factory ObservationsSection.fromJson(Map<String, dynamic> json) =>
+      _$ObservationsSectionFromJson(json);
 }
 
 @freezed
-class MediaListResponseModel with _$MediaListResponseModel {
-  const factory MediaListResponseModel({
-    int? id,
-    String? name,
-    String? version,
+class IndividualMeasure with _$IndividualMeasure {
+  const factory IndividualMeasure({
+    int? observationCode,
+    String? statement,
+    String? valueType,
+  }) = _IndividualMeasure;
+
+  factory IndividualMeasure.fromJson(Map<String, dynamic> json) =>
+      _$IndividualMeasureFromJson(json);
+}
+
+@freezed
+class MediaListSection with _$MediaListSection {
+  const factory MediaListSection({
+    int? mediaCode,
     String? description,
-    @TimestampConverter() DateTime? creationDate,
-    List<MediaResponseModel>? mediaResponseDTOList,
-  }) = _MediaListResponseModel;
+    String? type,
+    String? maxSize,
+    String? fileTpe,
+  }) = _MediaListSection;
 
-  factory MediaListResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListResponseModelFromJson(json);
+  factory MediaListSection.fromJson(Map<String, dynamic> json) =>
+      _$MediaListSectionFromJson(json);
 }
-
-@freezed
-class MediaResponseModel with _$MediaResponseModel {
-  const factory MediaResponseModel({
-    int? id,
-    String? name,
-    String? description,
-    MediaType? type,
-    int? maxSize,
-    String? fileType,
-  }) = _MediaResponseModel;
-
-  factory MediaResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaResponseModelFromJson(json);
-}
-
-@freezed
-class ObservationSetSectionResponseModel
-    with _$ObservationSetSectionResponseModel {
-  const factory ObservationSetSectionResponseModel({
-    int? id,
-    int? index,
-    String? description,
-    List<ObservationSetResponseModel>? observationSetResponseDTOList,
-    ObservationSetSectionModel? supersection,
-  }) = _ObservationSetSectionResponseModel;
-
-  factory ObservationSetSectionResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$ObservationSetSectionResponseModelFromJson(json);
-}
-
-@freezed
-class ObservationSetResponseModel with _$ObservationSetResponseModel {
-  const factory ObservationSetResponseModel({
-    int? id,
-    String? name,
-    String? version,
-    String? description,
-    @TimestampConverter() DateTime? creationDate,
-    ObservationResponseModel? observationResponseDTO,
-    List<ObservationResponseModel>? observationResponseDTOList,
-  }) = _ObservationSetResponseModel;
-
-  factory ObservationSetResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationSetResponseModelFromJson(json);
-}
-
-
-
-
-@freezed
-class ObservationResponseModel with _$ObservationResponseModel {
-  const factory ObservationResponseModel({
-    int? id,
-    String? name,
-    ValueType? valueType,
-    String? hiThreshold,
-    String? loThreshold,
-    @TimestampConverter() DateTime? creationDate,
-    String? configs,
-    double? weightage,
-  }) = _ObservationResponseModel;
-
-  factory ObservationResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationResponseModelFromJson(json);
-}
-
-@freezed
-class ObservationSetSectionModel with _$ObservationSetSectionModel {
-  const factory ObservationSetSectionModel({
-    int? id,
-    int? index,
-    String? description,
-    ObservationSetModel? observationSet,
-    AssessmentModel? assessment,
-  }) = _ObservationSetSectionModel;
-
-  factory ObservationSetSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationSetSectionModelFromJson(json);
-}
-
-@freezed
-class ObservationSetModel with _$ObservationSetModel {
-  const factory ObservationSetModel({
-    int? id,
-    String? name,
-    String? version,
-    String? description,
-    @TimestampConverter() DateTime? creationDate,
-  }) = _ObservationSetModel;
-
-  factory ObservationSetModel.fromJson(Map<String, dynamic> json) =>
-      _$ObservationSetModelFromJson(json);
-}
-
-@freezed
-class MediaListSectionModel with _$MediaListSectionModel {
-  const factory MediaListSectionModel({
-    int? id,
-    int? index,
-    String? description,
-    MediaListModel? mediaList,
-    AssessmentModel? assessment,
-  }) = _MediaListSectionModel;
-
-  factory MediaListSectionModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListSectionModelFromJson(json);
-}
-
-@freezed
-class MediaListModel with _$MediaListModel {
-  const factory MediaListModel({
-    int? id,
-    String? name,
-    String? version,
-    String? description,
-    @TimestampConverter() DateTime? creationDate,
-  }) = _MediaListModel;
-
-  factory MediaListModel.fromJson(Map<String, dynamic> json) =>
-      _$MediaListModelFromJson(json);
-}
-
-
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

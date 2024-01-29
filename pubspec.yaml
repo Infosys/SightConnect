@@ -89,6 +89,7 @@ dependencies:
   password_generator: ^1.0.0
   sqflite_sqlcipher: ^2.2.1
   sqflite: ^2.3.0
+  flutter_rating_bar: ^4.0.1
 
 dependency_overrides:
   camera:
@@ -135,6 +136,7 @@ flutter:
     - assets/nav_icons/
     - assets/server.pem
     - assets/images/animation_up.gif
+
 
    
  
