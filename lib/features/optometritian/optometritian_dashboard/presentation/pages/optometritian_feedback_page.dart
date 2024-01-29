@@ -10,9 +10,8 @@ import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import '../provider/optometrist_provider.dart';
+import '../../../../common_features/triage/presentation/providers/optometrician_triage_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
-
 
 void showFeedback(BuildContext context, TriagePostModel result) {
   showDialog(
@@ -274,62 +273,59 @@ void showFeedback(BuildContext context, TriagePostModel result) {
                                   ref
                                       .read(triageStepperProvider)
                                       .goToNextStep();
-                                     
-                                  
 
                                   if (await ref
                                       .read(connectivityProvider)
                                       .isConnected()) {
-                                  ref
-                                      .read(optometristProvider)
-                                      .saveTriage()
-                                      .then((value) {
-                                 logger.d("value is : $value");
-                                  feedback.isLoading = false;
-                                  if (value.patientId != null) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            // const TriageResultPage()
-                                           TriageResultPage(triageResult: result),
-                                      ),
-                                    );
-                                  }
-
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                  "Triage Not Saved! Bad Connection"),
-                                            ),
-                                          );
-
-                                      });
-                                    } else {
-                                      if (context.mounted) {
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                    "No Internet Connection"),
-                                                content: const Text(
-                                                    "Please check your internet connection and try again"),
-                                                actions: [
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        //pop until route isfirst
-                                                        Navigator.of(context)
-                                                            .popUntil((route) =>
-                                                                route.isFirst);
-                                                      
-                                                      },
-                                                      child: const Text("OK"))
-                                                ],
-                                              );
-                                            });
+                                    ref
+                                        .read(optometricianTriageProvider)
+                                        .saveTriage()
+                                        .then((value) {
+                                      logger.d("value is : $value");
+                                      feedback.isLoading = false;
+                                      if (value.patientId != null) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                // const TriageResultPage()
+                                                TriageResultPage(
+                                                    triageResult: result),
+                                          ),
+                                        );
                                       }
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              "Triage Not Saved! Bad Connection"),
+                                        ),
+                                      );
+                                    });
+                                  } else {
+                                    if (context.mounted) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                  "No Internet Connection"),
+                                              content: const Text(
+                                                  "Please check your internet connection and try again"),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      //pop until route isfirst
+                                                      Navigator.of(context)
+                                                          .popUntil((route) =>
+                                                              route.isFirst);
+                                                    },
+                                                    child: const Text("OK"))
+                                              ],
+                                            );
+                                          });
                                     }
+                                  }
                                 },
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(

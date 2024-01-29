@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_features/triage/data/models/optometrician_triage_response.dart';
-import '../../../../common_features/triage/data/repositories/triage_urgency_impl.dart';
 import '../../../../common_features/triage/domain/models/enums/triage_enums.dart';
 
 var optometritianReportProvider =
@@ -14,11 +13,9 @@ var optometritianReportProvider =
 });
 
 class OptometritianReportProvider extends ChangeNotifier {
-
   final GlobalKey<NavigatorState> _scaffoldKey;
-  OptometritianReportProvider( this._scaffoldKey);
+  OptometritianReportProvider(this._scaffoldKey);
   GlobalKey<NavigatorState> get scaffoldKey => _scaffoldKey;
-
 
   Color getColorOnUrgency(Urgency urgency) {
     return switch (urgency) {

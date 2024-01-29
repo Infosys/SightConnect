@@ -76,13 +76,16 @@ class TriageExitAlertBox extends HookConsumerWidget {
                       ),
                       TextButton(
                         onPressed: () async {
+                          var naviagtor = Navigator.of(context);
                           final activeRole = roleMapper(
                               PersistentAuthStateService.authState.activeRole);
                           if (activeRole != Role.ROLE_PATIENT) {
-                            // Clearing the triage state
+                            // Clear the triage state
+                            ref.read(resetProvider).reset();
+                            naviagtor.popUntil((route) => route.isFirst);
                             return;
                           }
-                          var naviagtor = Navigator.of(context);
+
                           try {
                             isLoading.value = true;
                             if (model.currentStep > 0) {

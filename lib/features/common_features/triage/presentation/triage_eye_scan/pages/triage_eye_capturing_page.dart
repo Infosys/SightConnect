@@ -20,7 +20,6 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -486,8 +485,8 @@ class _PatientTriageEyeCapturingPageState
                                     removeLoading();
                                     setLoading("Validating...");
 
-                                    // Role based triage saving
-                                    await saveTriageRoleBased();
+                                    // Save Triage
+                                    await saveTriage();
                                   }
                                 },
                                 child:
@@ -615,16 +614,22 @@ class _PatientTriageEyeCapturingPageState
       builder: (context) {
         return TestCompletionDialog(
           onDismiss: () async {
-            ref.read(triageStepperProvider).reset();
-            dispose();
-            if (context.mounted) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => TriageResultPage(
-                    triageResult: result,
+            final activeRole = PersistentAuthStateService.authState.activeRole;
+            final role = roleMapper(activeRole);
+            if (role == Role.ROLE_PATIENT) {
+              ref.read(triageStepperProvider).reset();
+              dispose();
+              if (context.mounted) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => TriageResultPage(
+                      triageResult: result,
+                    ),
                   ),
-                ),
-              );
+                );
+              }
+            } else if (role == Role.ROLE_OPTOMETRIST) {
+              showFeedback(context, result);
             }
           },
         );
@@ -648,39 +653,31 @@ class _PatientTriageEyeCapturingPageState
     );
   }
 
-  Future<void> saveTriageRoleBased() async {
-    final activeRole = PersistentAuthStateService.authState.activeRole;
-    final role = roleMapper(activeRole)!;
+  Future<void> saveTriage() async {
     await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
+    Either<Failure, TriagePostModel> response;
+    var tiageModel = ref.read(triageProvider);
 
-    if (role == Role.ROLE_PATIENT || role == Role.ROLE_VISION_GUARDIAN) {
-      // Save triage for patient and vision guardian
-      Either<Failure, TriagePostModel> response;
-      var tiageModel = ref.read(triageProvider);
-
-      if (tiageModel.triageMode == TriageMode.EVENT) {
-        response = await tiageModel.saveTriageForEvent(
-            3, ref.read(addEventDetailsProvider).eventId);
-      } else {
-        response = await tiageModel.saveTriage(3);
-      }
-      response.fold(
-        (failure) async {
-          removeLoading();
-          logger.d({"Failure while saving in local db ": failure});
-          _showServerExceptionDialog(context, failure);
-        },
-        (result) async {
-          removeLoading();
-          logger.d({"saveTriageEyeScanResponseToDB": "Success"});
-          setState(() {
-            isCompleted = true;
-          });
-          _showTestCompletionDialog(context, result);
-        },
-      );
-    } else if (role == Role.ROLE_OPTOMETRIST) {
-      // API call to save triage for optometrist
+    if (tiageModel.triageMode == TriageMode.EVENT) {
+      response = await tiageModel.saveTriageForEvent(
+          3, ref.read(addEventDetailsProvider).eventId);
+    } else {
+      response = await tiageModel.saveTriage(3);
     }
+    response.fold(
+      (failure) async {
+        removeLoading();
+        logger.d({"Failure while saving in local db ": failure});
+        _showServerExceptionDialog(context, failure);
+      },
+      (result) async {
+        removeLoading();
+        logger.d({"saveTriageEyeScanResponseToDB": "Success"});
+        setState(() {
+          isCompleted = true;
+        });
+        _showTestCompletionDialog(context, result);
+      },
+    );
   }
 }
