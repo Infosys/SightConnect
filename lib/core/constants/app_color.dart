@@ -42,6 +42,11 @@ class AppColor {
   static const Color darkPink = Color(0xFFFFA1A1);
   static const Color darkBlue = Color(0xFF072541);
   static const Color purple = Color(0xFF9D44C0);
+
+  static const Color pureGreen = Color(0xFF00FF00);
+  static const Color pureRed = Color(0xFFFF0000);
+
+
   static const Map<int, Color> colorShades = {
     50: Color(0xFFE3F2FD),
     100: Color(0xFFBBDEFB),

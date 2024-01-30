@@ -150,7 +150,7 @@ class _PatientTriageEyeCapturingPageState
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
       _canvasSize.width * (1 / 2),
-      _canvasSize.height * (2 / 5),
+      _canvasSize.height * (1 / 2),
     );
 
     if (meshes.isNotEmpty) {
@@ -438,7 +438,7 @@ class _PatientTriageEyeCapturingPageState
                               ),
                               padding: const EdgeInsets.all(8),
                               child: Text(
-                                "Adjust and position until green boxes appear around the eyes.",
+                                loc.eyeBoxText,
                                 textAlign: TextAlign.center,
                                 style: applyRobotoFont(
                                   fontSize: 16,

@@ -22,24 +22,80 @@ class EyeDetectorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Fixed Box Painter
     getCanvasSize?.call(size);
-    final Paint boxPainter = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.0
-      ..color = isEyeValid ? AppColor.green : AppColor.red;
-
     final center = Offset(boxCenter.x, boxCenter.y);
 
-    canvas.drawRect(
-      Rect.fromCenter(
-        center: center,
-        width: boxWidth,
-        height: boxHeight,
-      ),
-      boxPainter,
+    // Overlay Line Painter
+    final Paint overlayLinePainter = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1.5
+      ..color = Colors.white.withOpacity(0.35);
+
+    canvas.drawLine(
+      Offset(0, center.dy - boxHeight / 2),
+      Offset(size.width, center.dy - boxHeight / 2),
+      overlayLinePainter,
     );
 
+    canvas.drawLine(
+      Offset(0, center.dy + boxHeight / 2),
+      Offset(size.width, center.dy + boxHeight / 2),
+      overlayLinePainter,
+    );
+
+    canvas.drawLine(
+      Offset(center.dx - boxWidth / 2, center.dy - boxHeight / 2 - 52),
+      Offset(center.dx - boxWidth / 2, center.dy + boxHeight / 2 + 52),
+      overlayLinePainter,
+    );
+
+    canvas.drawLine(
+      Offset(center.dx + boxWidth / 2, center.dy - boxHeight / 2 - 52),
+      Offset(center.dx + boxWidth / 2, center.dy + boxHeight / 2 + 52),
+      overlayLinePainter,
+    );
+
+    // Fixed Box Painter
+    final Paint boxPainter = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0
+      ..color = isEyeValid ? AppColor.pureGreen : AppColor.pureRed
+      ..strokeJoin = StrokeJoin.bevel;
+
+    // canvas.drawRect(
+    //   Rect.fromCenter(
+    //     center: center,
+    //     width: boxWidth,
+    //     height: boxHeight,
+    //   ),
+    //   boxPainter,
+    // );
+    final cornerLength = 20.0; // Define the length of the corner lines
+
+    final rect = Rect.fromCenter(
+      center: center,
+      width: boxWidth,
+      height: boxHeight,
+    );
+    boxPainter.strokeCap = StrokeCap.round; // or StrokeCap.square
+
+    // Top left corner
+    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left + cornerLength, rect.top), boxPainter);
+    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left, rect.top + cornerLength), boxPainter);
+
+    // Top right corner
+    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right - cornerLength, rect.top), boxPainter);
+    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right, rect.top + cornerLength), boxPainter);
+
+    // Bottom left corner
+    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left + cornerLength, rect.bottom), boxPainter);
+    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left, rect.bottom - cornerLength), boxPainter);
+
+    // Bottom right corner
+    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right - cornerLength, rect.bottom), boxPainter);
+    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right, rect.bottom - cornerLength), boxPainter);
+
+    
     // Eye Landmark Painters
     final Paint eyeLandmarkContour = Paint()
       ..style = PaintingStyle.fill
@@ -70,8 +126,8 @@ class EyeDetectorPainter extends CustomPainter {
         ..addRect(
           Rect.fromCenter(
             center: center,
-            width: boxWidth,
-            height: boxHeight,
+            width: size.width,
+            height: boxHeight + 104,
           ),
         ),
       overlayPainter,
