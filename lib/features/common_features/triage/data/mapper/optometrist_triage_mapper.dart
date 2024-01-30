@@ -23,7 +23,7 @@ class OptometristTriageMapper {
 
     for (var question in questionnaire) {
       for (var item in questionnaireItem) {
-        logger.f({
+        logger.d({
           "question.questionCode": question.questionCode,
           "item.id": item.id,
         });
@@ -37,7 +37,7 @@ class OptometristTriageMapper {
         }
       }
     }
-    logger.f("output is $output");
+    logger.d("output is $output");
     return output;
   }
 
@@ -55,7 +55,7 @@ class OptometristTriageMapper {
     required DateTime? assessmentStartTime,
     required String questionnaireRemark,
   }) {
-    logger.f(
+    logger.d(
         "imaging selection $imagingSelection \n observations $observations \n questionResponse $questionResponse \n ref $ref \n patientId $patientId \n educationalQualification $educationalQualification \n profession $profession \n totalUrgency $totalUrgency \n questionnaireUrgency $questionnaireUrgency \n observationUrgency $observationUrgency \n assessmentStartTime $assessmentStartTime \n questionnaireRemark $questionnaireRemark");
     return OptometristTriageResponse(
       id: null,

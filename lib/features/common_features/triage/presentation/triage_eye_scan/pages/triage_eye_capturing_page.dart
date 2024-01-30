@@ -37,17 +37,17 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 import '../provider/eye_detector_service.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/eye_detector_painter.dart';
- 
+
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({
     super.key,
   });
- 
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _PatientTriageEyeCapturingPageState();
 }
- 
+
 class _PatientTriageEyeCapturingPageState
     extends ConsumerState<TriageEyeCapturingPage> with WidgetsBindingObserver {
   late CameraController _controller;
@@ -73,7 +73,7 @@ class _PatientTriageEyeCapturingPageState
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool isIOS = Platform.isIOS;
- 
+
   @override
   void initState() {
     logger.d('EyeDetectorView initState');
@@ -83,7 +83,7 @@ class _PatientTriageEyeCapturingPageState
       _initializeCamera();
     }
   }
- 
+
   void _initializeCamera() async {
     logger.d('EyeDetectorView _initializeCamera');
     final NavigatorState navigator = Navigator.of(context);
@@ -99,7 +99,7 @@ class _PatientTriageEyeCapturingPageState
       navigator.pop();
     }
   }
- 
+
   Future<void> _startLiveFeed() async {
     logger.d('EyeDetectorView _startLiveFeed');
     _controller = CameraController(
@@ -112,7 +112,7 @@ class _PatientTriageEyeCapturingPageState
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
- 
+
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -125,7 +125,7 @@ class _PatientTriageEyeCapturingPageState
       setState(() {});
     }
   }
- 
+
   void _processCameraImage(CameraImage image) {
     final CameraDescription camera = _cameras.firstWhere(
       (element) => element.lensDirection == _cameraLensDirection,
@@ -137,10 +137,10 @@ class _PatientTriageEyeCapturingPageState
       deviceOrientation: orientation,
     );
     if (inputImage == null) return;
- 
+
     _processImage(inputImage);
   }
- 
+
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
@@ -148,7 +148,7 @@ class _PatientTriageEyeCapturingPageState
     _isBusy = true;
     setState(() {});
     final meshes = await _meshDetector.processImage(inputImage);
- 
+
     // Measurement of the Fixed Center Eye Scanner Box
     final boxWidth = _canvasSize.width * (3 / 5);
     final boxHeight = _canvasSize.height * (1 / 5);
@@ -156,12 +156,12 @@ class _PatientTriageEyeCapturingPageState
       _canvasSize.width * (1 / 2),
       _canvasSize.height * (3 / 10),
     );
- 
+
     if (meshes.isNotEmpty) {
       final mesh = meshes[0];
       final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
- 
+
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(_currentEye)
@@ -178,7 +178,7 @@ class _PatientTriageEyeCapturingPageState
             );
           },
         ).toList();
- 
+
         // Check if Eyes are inside the box
         _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
           _translatedEyeContours,
@@ -203,7 +203,7 @@ class _PatientTriageEyeCapturingPageState
     } else {
       _translatedEyeContours = [];
     }
- 
+
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
       final painter = EyeDetectorPainter(
@@ -220,13 +220,13 @@ class _PatientTriageEyeCapturingPageState
     } else {
       _customPaint = null;
     }
- 
+
     _isBusy = false;
     if (mounted) {
       setState(() {});
     }
   }
- 
+
   // Future<bool> _cameraPermisson() async {
   //   final status = await Permission.camera.status;
   //   if (status.isGranted) {
@@ -242,7 +242,7 @@ class _PatientTriageEyeCapturingPageState
   //     return false;
   //   }
   // }
- 
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
@@ -263,7 +263,7 @@ class _PatientTriageEyeCapturingPageState
       _stopLiveFeed();
     }
   }
- 
+
   @override
   void dispose() {
     logger.d('EyeDetectorView dispose');
@@ -271,7 +271,7 @@ class _PatientTriageEyeCapturingPageState
     _stopLiveFeed();
     super.dispose();
   }
- 
+
   Future<void> _stopLiveFeed() async {
     logger.d('EyeDetectorView _stopLiveFeed');
     try {
@@ -288,20 +288,20 @@ class _PatientTriageEyeCapturingPageState
       logger.d('Error stopping live feed: $e');
     }
   }
- 
+
   void setLoading([String message = "Loading..."]) {
     setState(() {
       isLoading = true;
       _progressMessage = message;
     });
   }
- 
+
   void removeLoading() {
     setState(() {
       isLoading = false;
     });
   }
- 
+
   @override
   Widget build(BuildContext context) {
     var model = ref.watch(triageEyeScanProvider);
@@ -427,7 +427,7 @@ class _PatientTriageEyeCapturingPageState
                         ),
                       ),
                     ),
- 
+
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
@@ -467,7 +467,7 @@ class _PatientTriageEyeCapturingPageState
                                         msg: loc.imageNotCapturedToastMessage);
                                     return;
                                   }
- 
+
                                   if (model.currentEye == TriageEyeType.RIGHT) {
                                     setLoading("Uploading Image");
                                     await model.setRightEyeImage(image);
@@ -487,16 +487,20 @@ class _PatientTriageEyeCapturingPageState
                                     await ref
                                         .read(triageEyeScanProvider)
                                         .saveTriageEyeScanResponseToDB();
- 
+
                                     final activeRole =
                                         PersistentAuthStateService
                                             .authState.activeRole;
                                     final role = roleMapper(activeRole);
                                     if (role == Role.ROLE_OPTOMETRIST) {
+                                      // ONLY For OPTOMETRIST
+                                      //Validation API Call
                                       if (context.mounted) {
                                         showFeedback(context);
                                       }
                                     } else {
+                                      // For all other roles
+                                      //Triage API Call
                                       await saveTriage();
                                     }
                                   }
@@ -530,7 +534,7 @@ class _PatientTriageEyeCapturingPageState
       );
     }
   }
- 
+
   Future<void> _toggleCamera() async {
     if (!_controller.value.isInitialized) {
       return;
@@ -545,7 +549,7 @@ class _PatientTriageEyeCapturingPageState
     _initializeCamera();
     removeLoading();
   }
- 
+
   String _eyeLocalization(TriageEyeType eye, BuildContext context) {
     return switch (eye) {
       TriageEyeType.LEFT => context.loc!.leftEyeString,
@@ -554,7 +558,7 @@ class _PatientTriageEyeCapturingPageState
       _ => "",
     };
   }
- 
+
   Future<bool> _validateImage(XFile image) async {
     XFile? verifiedImage = await Navigator.of(context).push(
       MaterialPageRoute(
@@ -567,7 +571,7 @@ class _PatientTriageEyeCapturingPageState
       return false;
     }
   }
- 
+
   Future<XFile?> _capturePicture(BuildContext context) async {
     if (!_controller.value.isInitialized) {
       return null;
@@ -577,14 +581,14 @@ class _PatientTriageEyeCapturingPageState
     removeLoading();
     return image;
   }
- 
+
   Future<XFile?> _takePicture(BuildContext context) async {
     try {
       final image = await _capturePicture(context);
       if (image == null) {
         return null;
       }
- 
+
       final isVerfied = await _validateImage(image);
       if (!isVerfied) {
         return null;
@@ -599,7 +603,7 @@ class _PatientTriageEyeCapturingPageState
       return null;
     }
   }
- 
+
   Future<void> _toggleFlash() async {
     if (!_controller.value.isInitialized) {
       return;
@@ -612,7 +616,7 @@ class _PatientTriageEyeCapturingPageState
     }
     removeLoading();
   }
- 
+
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
     showModalBottomSheet(
       isDismissible: false,
@@ -642,7 +646,7 @@ class _PatientTriageEyeCapturingPageState
       },
     );
   }
- 
+
   _showServerExceptionDialog(BuildContext context, Failure failure) {
     showModalBottomSheet(
       isDismissible: false,
@@ -658,12 +662,12 @@ class _PatientTriageEyeCapturingPageState
       },
     );
   }
- 
+
   Future<void> saveTriage() async {
     await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
     Either<Failure, TriagePostModel> response;
     var tiageModel = ref.read(triageProvider);
- 
+
     if (tiageModel.triageMode == TriageMode.EVENT) {
       response = await tiageModel.saveTriageForEvent(
           3, ref.read(addEventDetailsProvider).eventId);
@@ -687,4 +691,3 @@ class _PatientTriageEyeCapturingPageState
     );
   }
 }
- 
