@@ -44,7 +44,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
             children: [
               const Spacer(),
               TextButton(
-                onPressed: () async {
+                onPressed: () {
                   ref.read(resetProvider).reset();
                   ref.read(accessibilityProvider).resetBrightness();
                   Navigator.of(context).popUntil((route) => route.isFirst);

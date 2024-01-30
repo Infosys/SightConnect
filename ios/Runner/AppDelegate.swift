@@ -141,7 +141,6 @@ import AVFoundation
         result["sensorX"] = modelName["width"]
         result["sensorY"] = modelName["height"]
         print(result)
-//       logger.d(result)
         
         return result
     }
