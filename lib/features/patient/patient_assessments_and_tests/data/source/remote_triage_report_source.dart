@@ -81,7 +81,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     int ? page
   ) async {
     final String endpoint ;
-    int size = 5;
+    int size = 20;
     if(page == null){
      endpoint= "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}";
     }
