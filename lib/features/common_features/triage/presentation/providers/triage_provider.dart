@@ -127,10 +127,21 @@ class TriageProvider extends ChangeNotifier {
       source: getSource(),
       sourceVersion: AppText.appVersion,
       incompleteSection: _getInclompleteSection(currentStep),
-      imagingSelection: imageSelection,
+      imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,
       questionResponse: questionResponse,
     );
+
+    // This is for invalid image from file ms
+    if (currentStep > 2 && !_checkIsimagingSelectionValid(imageSelection)) {
+      triagePostModel = triagePostModel.copyWith(
+        incompleteSection: [
+          const PostIncompleteTestModel(
+            testName: TestType.IMAGE,
+          )
+        ],
+      );
+    }
 
     logger.d({"triage model to be saved": triagePostModel.toJson()});
 
@@ -145,6 +156,24 @@ class TriageProvider extends ChangeNotifier {
     } catch (e) {
       rethrow;
     }
+  }
+
+  bool _checkIsimagingSelectionValid(
+    List<PostTriageImagingSelectionModel> imageSelection,
+  ) {
+    for (var element in imageSelection) {
+      if (element.fileId == null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  List<PostTriageImagingSelectionModel> _removeInvalidImagingSelection(
+    List<PostTriageImagingSelectionModel> imageSelection,
+  ) {
+    imageSelection.removeWhere((element) => element.fileId == null);
+    return imageSelection;
   }
 
   Future<Either<Failure, TriagePostModel>> saveTriageForEvent(
@@ -200,10 +229,21 @@ class TriageProvider extends ChangeNotifier {
       source: getSource(),
       sourceVersion: AppText.appVersion,
       incompleteSection: _getInclompleteSection(currentStep),
-      imagingSelection: imageSelection,
+      imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,
       questionResponse: questionResponse,
     );
+
+    // This is for invalid image from file ms
+    if (currentStep > 2 && !_checkIsimagingSelectionValid(imageSelection)) {
+      triagePostModel = triagePostModel.copyWith(
+        incompleteSection: [
+          const PostIncompleteTestModel(
+            testName: TestType.IMAGE,
+          )
+        ],
+      );
+    }
 
     logger.d({"triage model for event to be saved": triagePostModel});
 
