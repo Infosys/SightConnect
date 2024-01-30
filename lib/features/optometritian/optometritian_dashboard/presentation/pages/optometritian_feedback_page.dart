@@ -277,6 +277,7 @@ void showFeedback(
                                   //     .read(triageStepperProvider)
                                   //     .goToNextStep();
                                   ref.read(triageStepperProvider).reset();
+                                 
 
                                   if (await ref
                                       .read(connectivityProvider)
@@ -299,6 +300,7 @@ void showFeedback(
                                       //   );
                                       // }
                                       ref.read(triageStepperProvider).reset();
+                                       ref.read(resetProvider).reset();
                                       
                                       Navigator.popUntil(
                                           context, (route) => route.isFirst);
