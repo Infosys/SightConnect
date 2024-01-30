@@ -8,32 +8,37 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../main.dart';
+
 class OptometristTriageMapper {
   OptometristTriageMapper();
   static List<Map<String, dynamic>> convertTriageQuestionnaire(
     DiagnosticReportTemplateFHIRModel triageResponse,
     List<QuestionResponse> questionnaire,
   ) {
+    logger.d("questionnaire in mapper is : $questionnaire");
     List<QuestionnaireItemFHIRModel> questionnaireItem =
         triageResponse.questionnaire!.questionnaireItem!;
     List<Map<String, dynamic>> output = [];
-    
+
     for (var question in questionnaire) {
-        for (var item in questionnaireItem) {
-          if (question.questionCode == item.id && question.response == true) {
-            output.add({
-              'questionCode': question.questionCode,
-              'response': question.response,
-              // Add other properties from the item or question as needed
-            });
-            break;
-          }
+      for (var item in questionnaireItem) {
+        logger.f({
+          "question.questionCode": question.questionCode,
+          "item.id": item.id,
+        });
+        if ((question.questionCode != null && item.id != null) &&
+            (question.questionCode == item.id && question.response == true)) {
+          output.add({
+            'questionCode': question.questionCode,
+            'response': item.text,
+            // Add other properties from the item or question as needed
+          });
         }
       }
-
-      return output;
-  
-   
+    }
+    logger.f("output is $output");
+    return output;
   }
 
   static OptometristTriageResponse convertToTriage({
@@ -50,6 +55,8 @@ class OptometristTriageMapper {
     required DateTime? assessmentStartTime,
     required String questionnaireRemark,
   }) {
+    logger.f(
+        "imaging selection $imagingSelection \n observations $observations \n questionResponse $questionResponse \n ref $ref \n patientId $patientId \n educationalQualification $educationalQualification \n profession $profession \n totalUrgency $totalUrgency \n questionnaireUrgency $questionnaireUrgency \n observationUrgency $observationUrgency \n assessmentStartTime $assessmentStartTime \n questionnaireRemark $questionnaireRemark");
     return OptometristTriageResponse(
       id: null,
       uuid: _generateUniqueKey(),
@@ -102,7 +109,7 @@ class OptometristTriageMapper {
     for (var question in questionnaireResponse) {
       output.add(
         QuestionResponse(
-          questionCode: question.id,
+          questionCode: question.linkId,
           response: _getAnswer(question.answers),
         ),
       );

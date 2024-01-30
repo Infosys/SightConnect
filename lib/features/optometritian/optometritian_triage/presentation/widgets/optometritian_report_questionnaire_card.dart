@@ -17,7 +17,6 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(optometritianReportProvider);
-
     return Container(
       color: AppColor.white,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -161,7 +160,7 @@ class _QuestionnaireList extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    question[0],
+                    question["response"] ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,

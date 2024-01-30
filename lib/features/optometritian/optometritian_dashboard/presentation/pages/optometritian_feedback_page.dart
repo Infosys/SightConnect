@@ -13,7 +13,9 @@ import '../../../../common_features/triage/presentation/providers/triage_stepper
 import '../../../../common_features/triage/presentation/providers/optometrician_triage_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 
-void showFeedback(BuildContext context, TriagePostModel result) {
+void showFeedback(
+  BuildContext context,
+) {
   showDialog(
       barrierDismissible: false,
       context: context,
@@ -278,31 +280,36 @@ void showFeedback(BuildContext context, TriagePostModel result) {
                                   if (await ref
                                       .read(connectivityProvider)
                                       .isConnected()) {
+                                    logger.d("in connection");
                                     ref
                                         .read(optometricianTriageProvider)
                                         .saveTriage()
                                         .then((value) {
                                       logger.d("value is : $value");
                                       feedback.isLoading = false;
-                                      if (value.patientId != null) {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                // const TriageResultPage()
-                                                TriageResultPage(
-                                                    triageResult: result),
-                                          ),
-                                        );
-                                      }
+                                      // if (value.patientId != null) {
+                                      //   Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           // const TriageResultPage()
+                                      //           TriageResultPage(
+                                      //               triageResult: result),
+                                      //     ),
+                                      //   );
+                                      // }
 
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                              "Triage Not Saved! Bad Connection"),
-                                        ),
-                                      );
+                                      Navigator.popUntil(
+                                          context, (route) => route.isFirst);
+
+                                      // ScaffoldMessenger.of(context)
+                                      //     .showSnackBar(
+                                      //   const SnackBar(
+                                      //     content: Text(
+                                      //         "Triage Not Saved! Bad Connection"),
+                                      //   ),
+                                      // );
                                     }).catchError((e) {
+                                      logger.d("error is : $e");
                                       feedback.isLoading = false;
                                     });
                                   } else {

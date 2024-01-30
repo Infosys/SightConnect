@@ -34,6 +34,7 @@ class OptometristTriageProvider extends ChangeNotifier {
   OptometristTriageProvider(this.ref);
 
   Future<OptometristTriageResponse> saveTriage() async {
+    logger.d("Optometrist saveTriage called");
     List<PostTriageImagingSelectionModel> imageSelection = await ref
         .read(getTriageEyeScanResponseLocallyUseCase)
         .call(GetTriageEyeScanResponseLocallyParam())

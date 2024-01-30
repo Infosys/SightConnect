@@ -484,9 +484,15 @@ class _PatientTriageEyeCapturingPageState
                                     await model.setLeftEyeImage(image);
                                     removeLoading();
                                     setLoading("Validating...");
-
+                                    await ref
+                                        .read(triageEyeScanProvider)
+                                        .saveTriageEyeScanResponseToDB();
                                     // Save Triage
-                                    await saveTriage();
+                                    if (context.mounted) {
+                                      await _showTestCompletionDialog(
+                                        context,
+                                      );
+                                    }
                                   }
                                 },
                                 child:
@@ -601,7 +607,9 @@ class _PatientTriageEyeCapturingPageState
     removeLoading();
   }
 
-  _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
+  _showTestCompletionDialog(
+    BuildContext context,
+  ) {
     showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -617,19 +625,21 @@ class _PatientTriageEyeCapturingPageState
             final activeRole = PersistentAuthStateService.authState.activeRole;
             final role = roleMapper(activeRole);
             if (role == Role.ROLE_OPTOMETRIST) {
-              showFeedback(context, result);
+              showFeedback(
+                context,
+              );
             } else {
               ref.read(triageStepperProvider).reset();
               dispose();
-              if (context.mounted) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => TriageResultPage(
-                      triageResult: result,
-                    ),
-                  ),
-                );
-              }
+              // if (context.mounted) {
+              //   Navigator.of(context).pushReplacement(
+              //     MaterialPageRoute(
+              //       builder: (context) => TriageResultPage(
+              //         triageResult: result,
+              //       ),
+              //     ),
+              //   );
+              // }
             }
           },
         );
@@ -676,7 +686,7 @@ class _PatientTriageEyeCapturingPageState
         setState(() {
           isCompleted = true;
         });
-        _showTestCompletionDialog(context, result);
+        // _showTestCompletionDialog(context, result);
       },
     );
   }
