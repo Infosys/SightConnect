@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 var fileMsServiceProvider =
     Provider((ref) => FileMsService(ref.read(dioProvider)));
@@ -17,8 +15,8 @@ class FileMsService {
   Future<String> _getImage(String fileId) async {
     try {
       final url =
-          "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/$fileId";
-      logger.f(url);
+          "${ApiConstant.baseUrl}/services/filems/api/file/download/$fileId";
+      logger.d(url);
       return url;
     } catch (e) {
       throw ServerFailure(errorMessage: "GetImage: $e");

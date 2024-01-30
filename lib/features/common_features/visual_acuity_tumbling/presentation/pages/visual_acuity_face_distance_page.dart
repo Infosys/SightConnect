@@ -124,7 +124,6 @@ class _VisualAcuityFaceDistancePageViewState
     }
   }
 
-
   Future<void> _getCameraInfo() async {
     logger.d("VisualAcuityFaceDistancePage: Get Camera Info Called");
     try {

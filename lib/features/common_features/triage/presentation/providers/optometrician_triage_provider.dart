@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_questionnaire_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_eye_scan_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_add_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class OptometristTriageProvider extends ChangeNotifier {
   OptometristTriageProvider(this.ref);
 
   Future<OptometristTriageResponse> saveTriage() async {
+    logger.d("Optometrist saveTriage called");
     List<PostTriageImagingSelectionModel> imageSelection = await ref
         .read(getTriageEyeScanResponseLocallyUseCase)
         .call(GetTriageEyeScanResponseLocallyParam())
@@ -79,6 +81,7 @@ class OptometristTriageProvider extends ChangeNotifier {
       totalUrgency: totalUrgency,
       assessmentStartTime:
           ref.read(optometritianAddPatientProvider).assessmentStartTime,
+      questionnaireRemark: ref.read(triageQuestionnaireProvider).questionnaireRemarks,
     );
 
     var response =

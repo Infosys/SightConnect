@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,102 +35,102 @@ class EventDetailsTab extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Stack(
-              children: [
-                (eventDetails.images != null)
-                    ? SizedBox(
-                        height: AppSize.height(context) / 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            Container(
+              height: AppSize.height(context) / 3,
+              decoration: eventDetails.images != null
+                  ? BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            NetworkImage(_getImageUrl(eventDetails.images![0])),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    )
+                  : BoxDecoration(
+                      color: AppColor.grey.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    ),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      color: AppColor.black.withOpacity(0.3),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(AppSize.kmradius),
+                        bottomRight: Radius.circular(AppSize.kmradius),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            AppNetworkImage(
-                              shapeCircle: false,
-                              radius: 100,
-                              imageUrl: _getImageUrl(eventDetails.images![0]),
+                            const Icon(
+                              Icons.calendar_month_outlined,
+                              size: 15,
+                              color: AppColor.white,
+                            ),
+                            const SizedBox(
+                              width: AppSize.kswidth - 5,
+                            ),
+                            Text(
+                              "$startDateformattedDate - $endDateformattedDate",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
                             ),
                           ],
                         ),
-                      )
-                    : const SizedBox(
-                        height: 200,
-                        child: Center(
-                          child: Text(
-                            "No Image",
-                          ),
-                        ),
-                      ),
-                Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.calendar_month_outlined,
-                                size: 15,
-                              ),
-                              const SizedBox(
-                                width: AppSize.kswidth - 5,
-                              ),
-                              Text(
-                                "$startDateformattedDate - $endDateformattedDate",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.schedule_outlined,
+                                  size: 15,
+                                  color: AppColor.white,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.schedule_outlined,
-                                    size: 15,
-                                  ),
-                                  const SizedBox(
-                                    width: AppSize.kswidth - 5,
-                                  ),
-                                  Text(
-                                    "$startformattedTime - $endTimeformattedTime",
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    AppSize.klradius,
-                                  ),
-                                  color: AppColor.orange,
+                                const SizedBox(
+                                  width: AppSize.kswidth - 5,
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSize.kmpadding, vertical: 3),
-                                child: Text(
-                                  eventDetails.eventStatus ?? "",
+                                Text(
+                                  "$startformattedTime - $endTimeformattedTime",
                                   style: applyRobotoFont(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
                                     color: AppColor.white,
                                   ),
                                 ),
+                              ],
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.klradius,
+                                ),
+                                color: AppColor.orange,
                               ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              ],
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.kmpadding, vertical: 3),
+                              child: Text(
+                                eventDetails.eventStatus ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: AppSize.kmheight,
@@ -187,7 +186,11 @@ class EventDetailsTab extends ConsumerWidget {
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
                           Navigator.pop(context);
+                        } else {
+                          showToastMessage("Event Deletion Failed", context, 0);
                         }
+                      }).catchError((error) {
+                        showToastMessage("Event Deletion Failed", context, 0);
                       });
                     },
                     style: ElevatedButton.styleFrom(

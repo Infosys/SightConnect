@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/services/network_info.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,12 +8,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../shared/theme/text_theme.dart';
-import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../common_features/triage/presentation/providers/optometrician_triage_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 
-void showFeedback(BuildContext context, TriagePostModel result) {
+void showFeedback(BuildContext context) {
   showDialog(
       barrierDismissible: false,
       context: context,
@@ -278,31 +277,38 @@ void showFeedback(BuildContext context, TriagePostModel result) {
                                   if (await ref
                                       .read(connectivityProvider)
                                       .isConnected()) {
+                                    logger.d("in connection");
                                     ref
                                         .read(optometricianTriageProvider)
                                         .saveTriage()
                                         .then((value) {
                                       logger.d("value is : $value");
                                       feedback.isLoading = false;
-                                      if (value.patientId != null) {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                // const TriageResultPage()
-                                                TriageResultPage(
-                                                    triageResult: result),
-                                          ),
-                                        );
-                                      }
+                                      // if (value.patientId != null) {
+                                      //   Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           // const TriageResultPage()
+                                      //           TriageResultPage(
+                                      //               triageResult: result),
+                                      //     ),
+                                      //   );
+                                      // }
+                                      ref.read(triageStepperProvider).reset();
+                                      ref.read(resetProvider).reset();
 
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                              "Triage Not Saved! Bad Connection"),
-                                        ),
-                                      );
+                                      Navigator.popUntil(
+                                          context, (route) => route.isFirst);
+
+                                      // ScaffoldMessenger.of(context)
+                                      //     .showSnackBar(
+                                      //   const SnackBar(
+                                      //     content: Text(
+                                      //         "Triage Not Saved! Bad Connection"),
+                                      //   ),
+                                      // );
                                     }).catchError((e) {
+                                      logger.d("error is : $e");
                                       feedback.isLoading = false;
                                     });
                                   } else {

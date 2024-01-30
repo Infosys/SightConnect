@@ -54,6 +54,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
       ),
       floatingActionButton: InkWell(
         onTap: () {
+          ref.read(addEventDetailsProvider).setIsLoading();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -71,8 +72,8 @@ class VisionGuardianEventPage extends HookConsumerWidget {
             color: AppColor.yellow,
             boxShadow: const <BoxShadow>[
               BoxShadow(
-                color: AppColor.black,
-                blurRadius: 10,
+                color: AppColor.grey,
+                blurRadius: 8,
                 offset: Offset(0, 4),
               ),
             ],
@@ -84,9 +85,9 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                   TextSpan(
                     text: '+ ',
                     style: applyRobotoFont(
-                        fontSize: 21,
+                        fontSize: 24,
                         color: AppColor.black,
-                        fontWeight: FontWeight.w300),
+                        fontWeight: FontWeight.w400),
                   ),
                   TextSpan(
                     text: 'Add Event',

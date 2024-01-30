@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vgEyeAssessmentRemoteSource = Provider(
@@ -12,7 +13,7 @@ var vgEyeAssessmentRemoteSource = Provider(
 
 abstract class VgEyeAssessmentRemoteSource {
   Future<List<VisionGuardianPatientResponseModel>> getVgEyeAssessmentReports(
-      {required int practitionerId, required String category});
+      {required int practitionerId, required Map<String, dynamic> queryparams});
 }
 
 class VgEyeAssessmentRemoteSourceImpl implements VgEyeAssessmentRemoteSource {
@@ -22,13 +23,18 @@ class VgEyeAssessmentRemoteSourceImpl implements VgEyeAssessmentRemoteSource {
 
   @override
   Future<List<VisionGuardianPatientResponseModel>> getVgEyeAssessmentReports(
-      {required int practitionerId, required String category}) async {
+      {required int practitionerId,
+      required Map<String, dynamic> queryparams}) async {
     var endpoint =
         "/services/orchestration/api/patients/triage-reports/practitioners/$practitionerId";
 
     try {
-      final response =
-          await _dio.get(endpoint, queryParameters: {"category": category});
+      logger.d(queryparams);
+      final response = await _dio.get(endpoint, queryParameters: {
+        "category": queryparams["category"],
+        "page": queryparams["page"],
+        "size": queryparams["size"]
+      });
 
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         return (response.data as List)
@@ -38,6 +44,7 @@ class VgEyeAssessmentRemoteSourceImpl implements VgEyeAssessmentRemoteSource {
         throw ServerException();
       }
     } catch (error) {
+      logger.d(error);
       rethrow;
     }
   }

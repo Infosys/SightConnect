@@ -503,9 +503,25 @@ class _PatientTriageEyeCapturingPageState
                                     await model.setLeftEyeImage(image);
                                     removeLoading();
                                     setLoading("Validating...");
+                                    await ref
+                                        .read(triageEyeScanProvider)
+                                        .saveTriageEyeScanResponseToDB();
 
-                                    // Save Triage
-                                    await saveTriage();
+                                    final activeRole =
+                                        PersistentAuthStateService
+                                            .authState.activeRole;
+                                    final role = roleMapper(activeRole);
+                                    if (role == Role.ROLE_OPTOMETRIST) {
+                                      // ONLY For OPTOMETRIST
+                                      //Validation API Call
+                                      if (context.mounted) {
+                                        showFeedback(context);
+                                      }
+                                    } else {
+                                      // For all other roles
+                                      //Triage API Call
+                                      await saveTriage();
+                                    }
                                   }
                                 },
                                 child:
@@ -635,22 +651,16 @@ class _PatientTriageEyeCapturingPageState
       builder: (context) {
         return TestCompletionDialog(
           onDismiss: () async {
-            final activeRole = PersistentAuthStateService.authState.activeRole;
-            final role = roleMapper(activeRole);
-            if (role == Role.ROLE_OPTOMETRIST) {
-              showFeedback(context, result);
-            } else {
-              ref.read(triageStepperProvider).reset();
-              dispose();
-              if (context.mounted) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => TriageResultPage(
-                      triageResult: result,
-                    ),
+            ref.read(triageStepperProvider).reset();
+            dispose();
+            if (context.mounted) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TriageResultPage(
+                    triageResult: result,
                   ),
-                );
-              }
+                ),
+              );
             }
           },
         );

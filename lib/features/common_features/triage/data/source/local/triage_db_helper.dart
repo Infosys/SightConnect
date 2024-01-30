@@ -345,4 +345,14 @@ class TriageDBHelper {
       return 0;
     }
   }
+
+  Future<void> discardLocalTriageEntries() async {
+    await Future.wait([
+      deleteTriageAssessment(),
+      deleteTriageResponse(),
+      deleteTriageQuestionnaire(),
+      deleteTriageVisualAcuity(),
+      deleteTriageEyeScan(),
+    ]);
+  }
 }

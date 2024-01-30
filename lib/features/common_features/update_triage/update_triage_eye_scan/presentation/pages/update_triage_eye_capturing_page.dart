@@ -530,7 +530,7 @@ class _UpdateTriageEyeCapturingPageState
   }
 
   Future<void> _toggleCamera() async {
-    logger.f("toggle camera called");
+    logger.d("toggle camera called");
     if (!_controller.value.isInitialized) {
       return;
     }

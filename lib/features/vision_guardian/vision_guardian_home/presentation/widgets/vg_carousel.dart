@@ -23,8 +23,10 @@ class VGCarousel extends HookConsumerWidget {
         eyeAssessment: data["eyeAssessment"],
         byGender: data["byGender"],
       ),
-       VGSlide2(dataMapAge: data["byAge"]),
-       VGSlide3(values: data["symptoms"],),
+      VGSlide2(dataMapAge: data["byAge"]),
+      VGSlide3(
+        values: data["symptoms"],
+      ),
     ];
 
     return Column(
@@ -49,8 +51,9 @@ class VGCarousel extends HookConsumerWidget {
               child: Container(
                 width: AppSize.kmradius,
                 height: AppSize.kmradius,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                margin: const EdgeInsets.symmetric(
+                    vertical: AppSize.kspadding,
+                    horizontal: AppSize.kspadding / 2),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(

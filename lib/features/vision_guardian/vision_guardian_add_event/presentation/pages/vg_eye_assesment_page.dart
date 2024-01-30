@@ -10,10 +10,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianEyeAssessment extends ConsumerWidget {
-  const VisionGuardianEyeAssessment(
-      {super.key, required this.patientName, required this.patientId});
+  const VisionGuardianEyeAssessment({
+    super.key,
+    required this.patientName,
+    required this.patientId,
+    required this.triageMode,
+  });
   final String patientName;
   final String patientId;
+  final TriageMode triageMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +37,7 @@ class VisionGuardianEyeAssessment extends ConsumerWidget {
                   ref
                       .watch(triageMemberProvider)
                       .setTestPersonId(int.parse(patientId));
-                  ref.read(triageProvider).setTriageMode(TriageMode.EVENT);
+                  ref.read(triageProvider).setTriageMode(triageMode);
                   Navigator.push(
                     context,
                     MaterialPageRoute(

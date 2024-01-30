@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var teamListProvider = FutureProvider.autoDispose<dynamic>((ref) async {
-
   ref.watch(visionGuadianAddMemberProvider).add;
   var eventId = ref.read(addEventDetailsProvider).eventId;
 
@@ -38,18 +37,18 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addMemberData(int officialNumber) async {
+  Future<void> addMemberData(int officialNumber) async {
     var eventId = addEventDetailsProvider.eventIdValue;
-    await remoteDataSource
-        .postAddTeammate(
-            eventId: eventId,
-            actorIdentifier: globalVGProvider.user!.id!.toString(),
-            officialMobile: officialNumber)
-        .then((value) {
+
+    try {
+      await remoteDataSource.postAddTeammate(
+          eventId: eventId,
+          actorIdentifier: globalVGProvider.user!.id!.toString(),
+          officialMobile: officialNumber);
       setAdd();
-    }).catchError((error) {
-      return error;
-    });
+    } catch (error) {
+      rethrow;
+    }
     notifyListeners();
   }
 
@@ -76,7 +75,7 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteMember(String actorIdentifier) async {
+  Future<void> deleteMember(String actorIdentifier) async {
     var eventId = addEventDetailsProvider.eventIdValue;
     try {
       await remoteDataSource.deleteTeamMate(

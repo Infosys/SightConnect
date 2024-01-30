@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -77,9 +78,9 @@ class FeedBackNotifier extends ChangeNotifier {
 
   void save() {
     overallReview = _feedBackController.text;
-    print("Questionarie: $_questionarie");
-    print("Observation: $_observation");
-    print("EyeScan: $_eyeScan");
-    print("OverallReview: $_overallReview");
+    logger.d("Questionarie: $_questionarie");
+    logger.d("Observation: $_observation");
+    logger.d("EyeScan: $_eyeScan");
+    logger.d("OverallReview: $_overallReview");
   }
 }
