@@ -7,6 +7,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
+
 class OptometritianReportQuestionnaireCard extends ConsumerWidget {
   const OptometritianReportQuestionnaireCard({required this.report, super.key});
 
@@ -139,6 +141,7 @@ class _QuestionnaireList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(optometristQuestionnaireProvider(questionnaires));
+    logger.d("model data here: ${model.output}");
 
     if (model.isLoading) {
       return const Center(
@@ -158,7 +161,7 @@ class _QuestionnaireList extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "",
+                    question[0],
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,

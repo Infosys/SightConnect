@@ -14,9 +14,26 @@ class OptometristTriageMapper {
     DiagnosticReportTemplateFHIRModel triageResponse,
     List<QuestionResponse> questionnaire,
   ) {
+    List<QuestionnaireItemFHIRModel> questionnaireItem =
+        triageResponse.questionnaire!.questionnaireItem!;
     List<Map<String, dynamic>> output = [];
-    for (var question in questionnaire) {}
-    return output;
+    
+    for (var question in questionnaire) {
+        for (var item in questionnaireItem) {
+          if (question.questionCode == item.id && question.response == true) {
+            output.add({
+              'questionCode': question.questionCode,
+              'response': question.response,
+              // Add other properties from the item or question as needed
+            });
+            break;
+          }
+        }
+      }
+
+      return output;
+  
+   
   }
 
   static OptometristTriageResponse convertToTriage({
