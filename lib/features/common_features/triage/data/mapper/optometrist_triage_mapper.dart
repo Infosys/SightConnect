@@ -8,14 +8,36 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../main.dart';
+
 class OptometristTriageMapper {
   OptometristTriageMapper();
   static List<Map<String, dynamic>> convertTriageQuestionnaire(
     DiagnosticReportTemplateFHIRModel triageResponse,
     List<QuestionResponse> questionnaire,
   ) {
+    logger.d("questionnaire in mapper is : $questionnaire");
+    List<QuestionnaireItemFHIRModel> questionnaireItem =
+        triageResponse.questionnaire!.questionnaireItem!;
     List<Map<String, dynamic>> output = [];
-    for (var question in questionnaire) {}
+
+    for (var question in questionnaire) {
+      for (var item in questionnaireItem) {
+        logger.d({
+          "question.questionCode": question.questionCode,
+          "item.id": item.id,
+        });
+        if ((question.questionCode != null && item.id != null) &&
+            (question.questionCode == item.id && question.response == true)) {
+          output.add({
+            'questionCode': question.questionCode,
+            'response': item.text,
+            // Add other properties from the item or question as needed
+          });
+        }
+      }
+    }
+    logger.d("output is $output");
     return output;
   }
 
@@ -31,7 +53,10 @@ class OptometristTriageMapper {
     required double questionnaireUrgency,
     required double observationUrgency,
     required DateTime? assessmentStartTime,
+    required String questionnaireRemark,
   }) {
+    logger.d(
+        "imaging selection $imagingSelection \n observations $observations \n questionResponse $questionResponse \n ref $ref \n patientId $patientId \n educationalQualification $educationalQualification \n profession $profession \n totalUrgency $totalUrgency \n questionnaireUrgency $questionnaireUrgency \n observationUrgency $observationUrgency \n assessmentStartTime $assessmentStartTime \n questionnaireRemark $questionnaireRemark");
     return OptometristTriageResponse(
       id: null,
       uuid: _generateUniqueKey(),
@@ -50,14 +75,14 @@ class OptometristTriageMapper {
       physicalAssessmentStartTime: assessmentStartTime,
       physicalAssessmentEndTime: DateTime.now(),
       capturedBy: ref.read(globalOptometricianProvider).preferredUsername,
-      overallUrgency: _urgencyMapper(totalUrgency),
-      questionnaireRemarks: null,
+      overallUrgency: _totalurgencyMapper(totalUrgency),
+      questionnaireRemarks: questionnaireRemark,
       questionResponse: getQuestionnaireResponse(questionResponse),
-      questionnaireUrgency: _urgencyMapper(questionnaireUrgency),
+      questionnaireUrgency: _questionnaireurgencyMapper(questionnaireUrgency),
       questionnaireReview: _review("questionnaire", ref),
       observations: getObservations(observations),
       observationsRemarks: null,
-      observationsUrgency: _urgencyMapper(observationUrgency),
+      observationsUrgency: _visualAcuityurgencyMapper(observationUrgency),
       observationReview: _review("observation", ref),
       mediaCapture: getImagingSelection(imagingSelection),
       eyeScanReview: _review("eyeScan", ref),
@@ -84,7 +109,7 @@ class OptometristTriageMapper {
     for (var question in questionnaireResponse) {
       output.add(
         QuestionResponse(
-          questionCode: question.id,
+          questionCode: question.linkId,
           response: _getAnswer(question.answers),
         ),
       );
@@ -169,10 +194,34 @@ class OptometristTriageMapper {
     return key;
   }
 
-  static Urgency _urgencyMapper(double value) {
-    if (value == 1) {
+  static Urgency _questionnaireurgencyMapper(double value) {
+    if (value == 3) {
       return Urgency.RED;
-    } else if (value == 0.5) {
+    } else if (value == 2) {
+      return Urgency.YELLOW;
+    } else if (value == 1) {
+      return Urgency.GREEN;
+    } else {
+      return Urgency.GREEN;
+    }
+  }
+
+  static Urgency _visualAcuityurgencyMapper(double value) {
+    if (value == 3) {
+      return Urgency.RED;
+    } else if (value == 2) {
+      return Urgency.YELLOW;
+    } else if (value == 1) {
+      return Urgency.GREEN;
+    } else {
+      return Urgency.GREEN;
+    }
+  }
+
+  static Urgency _totalurgencyMapper(double value) {
+    if (value >= 5) {
+      return Urgency.RED;
+    } else if (value >= 3) {
       return Urgency.YELLOW;
     } else {
       return Urgency.GREEN;

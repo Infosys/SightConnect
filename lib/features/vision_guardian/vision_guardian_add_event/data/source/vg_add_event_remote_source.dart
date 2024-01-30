@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/data/source/rem
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vgAddEventRemoteSource = Provider(
@@ -42,12 +43,11 @@ abstract class VgAddEventRemoteSource {
   });
 
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   });
 
   Future getEventPatientList({
-    required String patientQueryData,
+    required Map<String, dynamic> patientQueryData,
   });
   Future getSearchEvent({
     required eventId,
@@ -139,7 +139,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         '/services/orchestration/api/practitioners/filter?officialMobile=$officialMobile}';
 
     return await _dio.get(endpoint).then((patientresponse) async {
-      if (patientresponse.data == null || patientresponse.data.length > 0) {
+      if (patientresponse.data == null || patientresponse.data.length == 0) {
         throw ServerException();
       }
       var roleType = patientresponse.data[0]["practitionerType"];
@@ -235,17 +235,18 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
   @override
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   }) async {
     try {
       const endpoint =
           "/services/orchestration/api/patients/triage-reports/campaign-events";
       Map<String, dynamic> queryParameters = {
-        "campaignEventId": campaignEventId,
-        "performer-id": performerId,
+        "campaignEventId": queryData["campaignEventId"],
+        "performer-id": queryData["performerId"],
+        "page": queryData["pageable"]["page"],
+        "size": queryData["pageable"]["size"]
       };
-
+      logger.d(queryParameters);
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
       List<VisionGuardianPatientResponseModel> data = (response.data as List)
@@ -259,12 +260,17 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   }
 
   @override
-  Future getEventPatientList({required String patientQueryData}) async {
+  Future getEventPatientList(
+      {required Map<String, dynamic> patientQueryData}) async {
     const endpoint = "/services/orchestration/api/patients/filter";
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {"name": patientQueryData},
+        queryParameters: {
+          "offset": patientQueryData["offset"],
+          "limit": patientQueryData["limit"],
+          "queryText": patientQueryData["searchParams"],
+        },
       );
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
@@ -277,6 +283,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         throw ServerException();
       }
     } catch (error) {
+      logger.d(error);
       rethrow;
     }
   }

@@ -90,12 +90,16 @@ class EventTeammatesTab extends HookConsumerWidget {
                                     ref
                                         .read(visionGuadianAddMemberProvider)
                                         .addMemberData(
-                                            int.parse(mobileController1.text));
-                                    showToastMessage(
-                                        "TeamMate Added Succesfully",
-                                        context,
-                                        0);
-                       
+                                            int.parse(mobileController1.text))
+                                        .then((value) {
+                                      showToastMessage(
+                                          "TeamMate Added Succesfully",
+                                          context,
+                                          0);
+                                    }).catchError((error) {
+                                      showToastMessage(
+                                          "Something went wrong", context, 0);
+                                    });
 
                                     addMember.value = false;
                                   },

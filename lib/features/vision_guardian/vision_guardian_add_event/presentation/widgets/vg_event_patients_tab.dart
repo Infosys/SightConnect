@@ -11,6 +11,8 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,62 +26,37 @@ class EventPatientsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (patientsType == "default") {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ref.watch(getPatientTriageReportsProvider).when(
-          data: (triageReportDetails) {
-            if (triageReportDetails.isEmpty) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  VisionGuardianEmptyResultCard(
-                    type: "Patient",
-                  ),
-                ],
-              );
-            }
+    var response = ref.watch(addEventDetailsProvider).listOfEventPatients;
+    var loading = ref.watch(addEventDetailsProvider).getisLoading;
+    var error = ref.watch(addEventDetailsProvider).error;
 
-            return vgPatientTabs(context, triageReportDetails, ref);
-          },
-          error: (error, stackTrace) {
-            return const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                VisionGuardianEmptyResultCard(
-                  type: "Patient",
-                ),
-              ],
-            );
-          },
-          loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+    if (loading == false && error) {
+      Fluttertoast.showToast(msg: "Server Error");
+    }
+
+    if (loading == false && response.isEmpty) {
+      return SizedBox(
+        width: Responsive.isMobile(context)
+            ? AppSize.width(context) * 0.9
+            : AppSize.width(context) * 0.95,
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            VisionGuardianEmptyResultCard(type: "Patient"),
+          ],
         ),
       );
-    } else {
-      var response = ref.watch(addEventDetailsProvider).listOfEventPatients;
-      if (response.isEmpty) {
-        return SizedBox(
-          width: Responsive.isMobile(context)
-              ? AppSize.width(context) * 0.9
-              : AppSize.width(context) * 0.95,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              VisionGuardianEmptyResultCard(type: "Event"),
-            ],
-          ),
-        );
-      }
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: vgPatientTabs(context, response, ref),
-      );
     }
+
+    return LoadingOverlay(
+      overlayColor: null,
+      isLoading: loading,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: vgPatientTabs(context, response, ref, patientsType),
+      ),
+    );
   }
 }
 
@@ -93,13 +70,28 @@ int calculateAge(DateTime dateOfBirth) {
   return age;
 }
 
-Widget vgPatientTabs(BuildContext context,
-    List<VisionGuardianPatientResponseModel> response, WidgetRef ref) {
+Widget vgPatientTabs(
+    BuildContext context,
+    List<VisionGuardianPatientResponseModel> response,
+    WidgetRef ref,
+    String patientsType) {
+  logger.f(ref.watch(addEventDetailsProvider).newEventPatientList.length);
   return ListView.separated(
+    controller: ref.watch(addEventDetailsProvider).eventPatientController,
     shrinkWrap: true,
     scrollDirection: Axis.vertical,
-    itemCount: response.length,
+    itemCount:
+        (ref.watch(addEventDetailsProvider).newEventPatientList.length == 10 &&
+                patientsType != "search")
+            ? response.length + 1
+            : response.length,
     itemBuilder: (context, index) {
+      if (index == response.length) {
+        return const Padding(
+          padding: EdgeInsets.all(AppSize.klpadding),
+          child: CupertinoActivityIndicator(),
+        );
+      }
       var data = response[index];
       return GestureDetector(
         onTap: () async {

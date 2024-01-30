@@ -13,8 +13,8 @@ class VgEyeAssessmentRepositoryImpl extends VgEyeAssessmentRepository {
 
   @override
   Future<List<VisionGuardianPatientResponseModel>> getVgEyeAssessmentReports(
-      {required int practitionerId,required String category}) async {
+      {required int practitionerId, required Map<String, dynamic> queryparams}) async {
     return await remoteDataSource.getVgEyeAssessmentReports(
-        practitionerId: practitionerId,category:category);
+        practitionerId: practitionerId,queryparams:queryparams);
   }
 }

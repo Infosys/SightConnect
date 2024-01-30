@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../main.dart';
 import '../providers/optometritian_report_provider.dart';
+import '../widgets/opto_eye_scan_tab_view.dart';
 import '../widgets/optometritian_report_questionnaire_card.dart';
 import '../widgets/optometritian_tumbling_report_card.dart';
 
@@ -175,7 +176,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
             OptometritianTumblingReportCard(
               report: report,
             ),
-            // EyeScanTabView(report: report),
+            OptoEyeScanTabView(report: report),
             const SizedBox(),
           ]),
         )),

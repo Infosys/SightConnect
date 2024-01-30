@@ -144,7 +144,7 @@ class TriageEyeScanProvider with ChangeNotifier {
     if (await _networkInfo.isConnected()) {
       try {
         final response = await _fileMsService.uploadImage(File(image.path));
-        logger.f({"response": response});
+        logger.d({"response": response});
         if (currentEye == TriageEyeType.LEFT) {
           leftImageUrl = response;
           logger.d({"eyeTypeLeft": leftImageUrl});

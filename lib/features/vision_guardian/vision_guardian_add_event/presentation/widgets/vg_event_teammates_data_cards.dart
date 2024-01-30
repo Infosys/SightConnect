@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 
@@ -66,7 +67,9 @@ class TeammatesDataCards extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: AppSize.width(context) * 0.7,
+                        width: Responsive.isMobile(context)
+                            ? AppSize.width(context) * 0.74
+                            : AppSize.width(context) * 0.85,
                         child: Row(
                           children: [
                             Expanded(
@@ -83,38 +86,40 @@ class TeammatesDataCards extends HookConsumerWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
                             Transform.translate(
                               offset: const Offset(0, 10),
                               child: InkWell(
-                                onTap: () {
-                                  ref
+                                onTap: () async {
+                                  await ref
                                       .read(visionGuadianAddMemberProvider)
-                                      .deleteMember(data["id"].toString());
-
-                                  if (data["id"] ==
-                                      ref.read(globalVGProvider).userId) {
-                                    ref
-                                        .read(addEventDetailsProvider)
-                                        .filterListEvents(-1, "ALL");
-                                    if (type == "Search") {
-                                      Navigator.pop(context);
-                                    }
-                                    Navigator.pop(context);
-                                  } else {
-                                    if (type == "Search") {
+                                      .deleteMember(data["id"].toString())
+                                      .then((value) {
+                                    if (data["id"] ==
+                                        ref.read(globalVGProvider).userId) {
                                       ref
-                                          .read(visionGuadianAddMemberProvider)
-                                          .setAdd();
+                                          .read(addEventDetailsProvider)
+                                          .filterListEvents(-1, "ALL");
+                                      if (type == "Search") {
+                                        Navigator.pop(context);
+                                      }
                                       Navigator.pop(context);
+                                    } else {
+                                      if (type == "Search") {
+                                        ref
+                                            .read(
+                                                visionGuadianAddMemberProvider)
+                                            .setAdd();
+                                        Navigator.pop(context);
+                                      }
                                     }
-                                  }
-                                  showToastMessage(
-                                      "TeamMate Deleted Succesfully",
-                                      context,
-                                      0);
+                                    showToastMessage(
+                                        "TeamMate Deleted Succesfully",
+                                        context,
+                                        0);
+                                  }).catchError((error) {
+                                    showToastMessage(
+                                        "Something went wrong", context, 0);
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.delete_outline,

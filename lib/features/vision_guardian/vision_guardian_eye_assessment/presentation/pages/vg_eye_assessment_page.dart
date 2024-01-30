@@ -50,20 +50,20 @@ class VisionGuardianEyeAssessmentPage extends HookConsumerWidget {
         ),
       ),
       floatingActionButton: const VisionGuardianFloatingAddPatientAction(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              vgEyeAssessmentHeaderChips(isSelected, context, eventStatus),
-              const SizedBox(height: AppSize.kmheight),
-              const VisionGuardianEyeAssessmentPatientsCard(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            vgEyeAssessmentHeaderChips(isSelected, context, eventStatus),
+            const SizedBox(height: AppSize.kmheight),
+            const Expanded(
+              child: VisionGuardianEyeAssessmentPatientsCard(
                 type: "default",
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

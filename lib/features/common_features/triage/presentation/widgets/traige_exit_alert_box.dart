@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
@@ -80,24 +81,35 @@ class TriageExitAlertBox extends HookConsumerWidget {
                           final activeRole = roleMapper(
                               PersistentAuthStateService.authState.activeRole);
                           if (activeRole != Role.ROLE_PATIENT) {
-                            // Clear the triage state
+                            // Delete all triage entries
+                            isLoading.value = true;
+                            await TriageDBHelper()
+                                .discardLocalTriageEntries()
+                                .catchError((e) {
+                              isLoading.value = false;
+                              logger.e(
+                                  "Failed to discard local triage entries $e");
+                            });
+                            logger.d(
+                                {"TriageExitAlertBox": "ALL Triage Cleared"});
+                            ref.read(resetProvider).reset();
+                            isLoading.value = false;
+                            naviagtor.popUntil((route) => route.isFirst);
+                          } else {
+                            //For patient, save the triage entries
+                            try {
+                              isLoading.value = true;
+                              if (model.currentStep > 0) {
+                                await _saveTriageModel(ref);
+                              }
+                              isLoading.value = false;
+                            } catch (e) {
+                              isLoading.value = false;
+                              logger.d({"TriageExitAlertBox": e});
+                            }
                             ref.read(resetProvider).reset();
                             naviagtor.popUntil((route) => route.isFirst);
-                            return;
                           }
-
-                          try {
-                            isLoading.value = true;
-                            if (model.currentStep > 0) {
-                              await _saveTriageModel(ref);
-                            }
-                            isLoading.value = false;
-                          } catch (e) {
-                            isLoading.value = false;
-                            logger.d({"TriageExitAlertBox": e});
-                          }
-                          ref.read(resetProvider).reset();
-                          naviagtor.popUntil((route) => route.isFirst);
                         },
                         child: Text(loc.yesButton),
                       ),
@@ -115,7 +127,7 @@ class TriageExitAlertBox extends HookConsumerWidget {
     Either<Failure, TriagePostModel> res;
 
     logger.d({
-      "triagesave": model.triageMode,
+      "saveTriageMode": model.triageMode,
     });
 
     if (model.triageMode == TriageMode.EVENT) {
@@ -130,11 +142,10 @@ class TriageExitAlertBox extends HookConsumerWidget {
     }
 
     res.fold((l) {
-      logger.d({"triagesave": l});
+      logger.d({"saveTriageFailure": l});
       throw l;
     }, (r) {
-      logger.d({"triagesave": r});
-      return true;
+      logger.d({"saveTriageResult": r});
     });
   }
 }

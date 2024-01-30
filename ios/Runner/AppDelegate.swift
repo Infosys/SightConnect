@@ -133,11 +133,11 @@ import AVFoundation
                     return ["width": 1.0, "height": 1.2]
                     #endif
                 }
-                print(identifier)
+               logger.d(identifier)
                 return mapToDevice(identifier: identifier)
             }()
         
-//        print(modelName)
+//       logger.d(modelName)
         result["sensorX"] = modelName["width"]
         result["sensorY"] = modelName["height"]
         print(result)

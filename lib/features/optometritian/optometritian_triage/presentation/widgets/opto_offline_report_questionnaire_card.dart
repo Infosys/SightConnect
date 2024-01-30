@@ -21,7 +21,7 @@
 //     var remarksData =
 //         ref.watch(triageQuestionnaireProvider).questionnaireRemarks;
 
-//     logger.f("data in the house : $data");
+//    logger.d("data in the house : $data");
 
 //     return Container(
 //       color: AppColor.white,

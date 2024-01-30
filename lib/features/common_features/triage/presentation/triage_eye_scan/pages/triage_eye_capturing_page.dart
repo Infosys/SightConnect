@@ -4,9 +4,6 @@ import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -16,24 +13,18 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/camera_server_exception.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/test_completion_dialog.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/triage_eye_camera_display.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
 import '../provider/eye_detector_service.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/eye_detector_painter.dart';
@@ -71,13 +62,15 @@ class _PatientTriageEyeCapturingPageState
   List<Point<double>> _translatedEyeContours = [];
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   bool isIOS = Platform.isIOS;
 
   @override
   void initState() {
     logger.d('EyeDetectorView initState');
     super.initState();
+    scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
     if (isCompleted == false && !isIOS) {
       _initializeCamera();
@@ -246,19 +239,19 @@ class _PatientTriageEyeCapturingPageState
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
-    if (state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.inactive && mounted) {
       logger.d('EyeDetectorView AppLifecycleState.inactive');
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed) {
+    } else if (state == AppLifecycleState.resumed && mounted) {
       logger.d('EyeDetectorView AppLifecycleState.resumed');
       _initializeCamera();
-    } else if (state == AppLifecycleState.paused) {
+    } else if (state == AppLifecycleState.paused && mounted) {
       logger.d('EyeDetectorView AppLifecycleState.paused');
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.detached) {
+    } else if (state == AppLifecycleState.detached && mounted) {
       logger.d('EyeDetectorView AppLifecycleState.detached');
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.hidden) {
+    } else if (state == AppLifecycleState.hidden && mounted) {
       logger.d('EyeDetectorView AppLifecycleState.hidden');
       _stopLiveFeed();
     }
@@ -268,7 +261,9 @@ class _PatientTriageEyeCapturingPageState
   void dispose() {
     logger.d('EyeDetectorView dispose');
     WidgetsBinding.instance.removeObserver(this);
-    _stopLiveFeed();
+    if (mounted) {
+      _stopLiveFeed();
+    }
     super.dispose();
   }
 
@@ -320,223 +315,83 @@ class _PatientTriageEyeCapturingPageState
         ),
       );
     } else {
-      return TraceableWidget(
-        actionName: 'Triage Eye Scan',
-        child: PopScope(
-          canPop: false,
-          onPopInvoked: (value) {
-            if (value) {
-              return;
-            }
-            showDialog(
-              context: context,
-              builder: (context) => TriageExitAlertBox(
-                content: context.loc!.eyeScanExitDialog,
-              ),
-            );
-          },
-          child: Scaffold(
-            key: scaffoldKey,
-            extendBodyBehindAppBar: true,
-            backgroundColor: AppColor.black,
-            drawer: const TriageStepsDrawer(),
-            appBar: CustomAppbar(
-              iconTheme: const IconThemeData(
-                color: AppColor.white,
-              ),
-              actionsIconTheme: const IconThemeData(
-                color: AppColor.white,
-              ),
-              backgroundColor: Colors.transparent,
-              leadingWidth: 60,
-              titleSpacing: 0.0,
-              centerTitle: false,
-              leadingIcon: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: () {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Image.asset(
-                    AppIcon.hamburgerIcon,
-                    color: AppColor.white,
-                  ),
-                ),
-              ),
-              title: Text(
-                loc.eyeScanTitle,
-                style: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.white,
-                ),
-              ),
-              actions: [
-                InkWell(
-                  onTap: () async {
-                    await _toggleFlash();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kmpadding),
-                    child: Icon(
-                      _controller.value.flashMode == FlashMode.off
-                          ? Icons.flash_off
-                          : Icons.flash_on,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            body: LoadingOverlay(
-              isLoading: isLoading,
-              progressMessage: _progressMessage,
-              child: Container(
-                color: AppColor.black,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    !isIOS
-                        ? Positioned.fill(
-                            child: CameraPreview(
-                              _controller,
-                              child: _customPaint,
-                            ),
-                          )
-                        : Positioned.fill(
-                            child: CameraPreview(
-                              _controller,
-                            ),
-                          ),
-                    Positioned(
-                      top: 100,
-                      left: null,
-                      right: null,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          _eyeLocalization(model.currentEye, context),
-                          style: applyRobotoFont(
-                            fontSize: 16,
-                            color: AppColor.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Visibility(
-                          visible: !_isEyeValid,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Container(
-                              width: AppSize.width(context) * 0.8,
-                              decoration: BoxDecoration(
-                                color: AppColor.black.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                loc.eyeBoxText,
-                                textAlign: TextAlign.center,
-                                style: applyRobotoFont(
-                                  fontSize: 16,
-                                  color: AppColor.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(24),
-                          color: Colors.transparent,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  await _toggleCamera();
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppSize.kmpadding,
-                                  ),
-                                  child: Icon(
-                                    Icons.flip_camera_ios,
-                                    color: AppColor.white,
-                                  ),
-                                ),
-                              ),
-                              const Spacer(),
-                              InkWell(
-                                onTap: () async {
-                                  if (!_isEyeValid) {
-                                    return;
-                                  }
-                                  final image = await _takePicture(context);
-                                  logger.d("Image: $image");
-                                  if (image == null) {
-                                    Fluttertoast.showToast(
-                                        msg: loc.imageNotCapturedToastMessage);
-                                    return;
-                                  }
+      return TriageEyeCameraDisplay(
+        scaffoldKey: scaffoldKey,
+        onCameraSwitch: () async {
+          await _toggleCamera();
+        },
+        onFlashToggle: () async {
+          await _toggleFlash();
+        },
+        isLoading: isLoading,
+        progressMessage: _progressMessage,
+        currentEye: model.currentEye,
+        controller: _controller,
+        customPaint: _customPaint,
+        onCapture: () async {
+          if (!_isEyeValid) {
+            Fluttertoast.showToast(
+                msg:
+                    "Adjust and position until green boxes appear around the eyes.");
+            return;
+          }
+          final image = await _takePicture(context);
+          logger.d("_takePicture: $image");
 
-                                  if (model.currentEye == TriageEyeType.RIGHT) {
-                                    setLoading("Uploading Image");
-                                    await model.setRightEyeImage(image);
-                                    removeLoading();
-                                    model.setCurrentEye(TriageEyeType.LEFT);
-                                    setState(() {
-                                      _currentEye = TriageEyeType.LEFT;
-                                      logger.d(
-                                          " current eye in after set state is : $_currentEye");
-                                    });
-                                  } else if (model.currentEye ==
-                                      TriageEyeType.LEFT) {
-                                    setLoading("Uploading Image");
-                                    await model.setLeftEyeImage(image);
-                                    removeLoading();
-                                    setLoading("Validating...");
-
-                                    // Save Triage
-                                    await saveTriage();
-                                  }
-                                },
-                                child:
-                                    SvgPicture.asset("assets/icons/camera.svg"),
-                              ),
-                              const Spacer(),
-                              Tooltip(
-                                message: context.loc!.eyeAssessmentToolTip,
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppSize.kmpadding,
-                                  ),
-                                  child: Icon(
-                                    Icons.info_outline,
-                                    color: AppColor.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    // _flashToggle(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+          if (image == null) {
+            Fluttertoast.showToast(msg: loc.imageNotCapturedToastMessage);
+            return;
+          }
+          switch (model.currentEye) {
+            case TriageEyeType.RIGHT:
+              await _handleRightEyeCapture(model, image);
+              break;
+            case TriageEyeType.LEFT:
+              await _handleLeftEyeCapture(model, image);
+              break;
+            default:
+              break;
+          }
+        },
       );
+    }
+  }
+
+  Future<void> _handleRightEyeCapture(
+    TriageEyeScanProvider model,
+    XFile image,
+  ) async {
+    setLoading("Uploading Image");
+    await model.setRightEyeImage(image);
+    removeLoading();
+    model.setCurrentEye(TriageEyeType.LEFT);
+    setState(() {
+      _currentEye = TriageEyeType.LEFT;
+      logger.d(" current eye in after set state is : $_currentEye");
+    });
+  }
+
+  Future<void> _handleLeftEyeCapture(
+    TriageEyeScanProvider model,
+    XFile image,
+  ) async {
+    setLoading("Uploading Image");
+    await model.setLeftEyeImage(image);
+    removeLoading();
+    setLoading("Validating...");
+    await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
+
+    final activeRole = PersistentAuthStateService.authState.activeRole;
+    final role = roleMapper(activeRole);
+    if (role == Role.ROLE_OPTOMETRIST) {
+      // For Optometrist show feedback form and call validation API
+      removeLoading();
+      if (context.mounted) {
+        showTriageFeedbackForm(context);
+      }
+    } else {
+      // For other roles, call triage API
+      await saveTriage();
     }
   }
 
@@ -553,15 +408,6 @@ class _PatientTriageEyeCapturingPageState
     await _stopLiveFeed();
     _initializeCamera();
     removeLoading();
-  }
-
-  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
-    return switch (eye) {
-      TriageEyeType.LEFT => context.loc!.leftEyeString,
-      TriageEyeType.RIGHT => context.loc!.rightEyeString,
-      TriageEyeType.BOTH => context.loc!.bothEyeString,
-      _ => "",
-    };
   }
 
   Future<bool> _validateImage(XFile image) async {
@@ -615,16 +461,18 @@ class _PatientTriageEyeCapturingPageState
     }
     setLoading();
     if (_controller.value.flashMode == FlashMode.off) {
-      await _controller.setFlashMode(FlashMode.torch);
+      await _controller.setFlashMode(FlashMode.auto);
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
+
     removeLoading();
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
     showModalBottomSheet(
       isDismissible: false,
+      enableDrag: false,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -635,22 +483,16 @@ class _PatientTriageEyeCapturingPageState
       builder: (context) {
         return TestCompletionDialog(
           onDismiss: () async {
-            final activeRole = PersistentAuthStateService.authState.activeRole;
-            final role = roleMapper(activeRole);
-            if (role == Role.ROLE_OPTOMETRIST) {
-              showFeedback(context, result);
-            } else {
-              ref.read(triageStepperProvider).reset();
-              dispose();
-              if (context.mounted) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => TriageResultPage(
-                      triageResult: result,
-                    ),
+            ref.read(triageStepperProvider).reset();
+            dispose();
+            if (context.mounted) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TriageResultPage(
+                    triageResult: result,
                   ),
-                );
-              }
+                ),
+              );
             }
           },
         );
@@ -661,6 +503,7 @@ class _PatientTriageEyeCapturingPageState
   _showServerExceptionDialog(BuildContext context, Failure failure) {
     showModalBottomSheet(
       isDismissible: false,
+      enableDrag: false,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -675,7 +518,6 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future<void> saveTriage() async {
-    await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
     Either<Failure, TriagePostModel> response;
     var tiageModel = ref.read(triageProvider);
 

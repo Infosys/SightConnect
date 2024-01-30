@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
@@ -19,7 +20,8 @@ class VisionGuardianServicesCard extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(right: AppSize.kmheight),
       child: SizedBox(
-        width: 100,
+        width:
+            Responsive.isMobile(context) ? AppSize.width(context) / 3.7 : 100,
         child: InkWell(
           onTap: () {
             if (data["text"] == "Event") {
