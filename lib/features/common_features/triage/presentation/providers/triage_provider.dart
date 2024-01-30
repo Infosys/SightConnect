@@ -133,7 +133,7 @@ class TriageProvider extends ChangeNotifier {
     );
 
     // This is for invalid image from file ms
-    if (currentStep > 2 && _checkIsimagingSelectionValid(imageSelection)) {
+    if (currentStep > 2 && !_checkIsimagingSelectionValid(imageSelection)) {
       triagePostModel = triagePostModel.copyWith(
         incompleteSection: [
           const PostIncompleteTestModel(
@@ -235,7 +235,7 @@ class TriageProvider extends ChangeNotifier {
     );
 
     // This is for invalid image from file ms
-    if (currentStep > 2 && _checkIsimagingSelectionValid(imageSelection)) {
+    if (currentStep > 2 && !_checkIsimagingSelectionValid(imageSelection)) {
       triagePostModel = triagePostModel.copyWith(
         incompleteSection: [
           const PostIncompleteTestModel(
