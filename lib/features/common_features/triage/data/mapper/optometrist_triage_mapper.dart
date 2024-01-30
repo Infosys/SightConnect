@@ -75,14 +75,14 @@ class OptometristTriageMapper {
       physicalAssessmentStartTime: assessmentStartTime,
       physicalAssessmentEndTime: DateTime.now(),
       capturedBy: ref.read(globalOptometricianProvider).preferredUsername,
-      overallUrgency: _urgencyMapper(totalUrgency),
+      overallUrgency: _totalurgencyMapper(totalUrgency),
       questionnaireRemarks: questionnaireRemark,
       questionResponse: getQuestionnaireResponse(questionResponse),
-      questionnaireUrgency: _urgencyMapper(questionnaireUrgency),
+      questionnaireUrgency: _questionnaireurgencyMapper(questionnaireUrgency),
       questionnaireReview: _review("questionnaire", ref),
       observations: getObservations(observations),
       observationsRemarks: null,
-      observationsUrgency: _urgencyMapper(observationUrgency),
+      observationsUrgency: _visualAcuityurgencyMapper(observationUrgency),
       observationReview: _review("observation", ref),
       mediaCapture: getImagingSelection(imagingSelection),
       eyeScanReview: _review("eyeScan", ref),
@@ -194,10 +194,34 @@ class OptometristTriageMapper {
     return key;
   }
 
-  static Urgency _urgencyMapper(double value) {
-    if (value == 1) {
+  static Urgency _questionnaireurgencyMapper(double value) {
+    if (value == 3) {
       return Urgency.RED;
-    } else if (value == 0.5) {
+    } else if (value == 2) {
+      return Urgency.YELLOW;
+    } else if (value == 1) {
+      return Urgency.GREEN;
+    } else {
+      return Urgency.GREEN;
+    }
+  }
+
+  static Urgency _visualAcuityurgencyMapper(double value) {
+    if (value == 3) {
+      return Urgency.RED;
+    } else if (value == 2) {
+      return Urgency.YELLOW;
+    } else if (value == 1) {
+      return Urgency.GREEN;
+    } else {
+      return Urgency.GREEN;
+    }
+  }
+
+  static Urgency _totalurgencyMapper(double value) {
+    if (value >= 5) {
+      return Urgency.RED;
+    } else if (value >= 3) {
       return Urgency.YELLOW;
     } else {
       return Urgency.GREEN;
