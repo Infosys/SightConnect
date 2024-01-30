@@ -637,7 +637,9 @@ class _PatientTriageEyeCapturingPageState
           onDismiss: () async {
             final activeRole = PersistentAuthStateService.authState.activeRole;
             final role = roleMapper(activeRole);
-            if (role == Role.ROLE_PATIENT) {
+            if (role == Role.ROLE_OPTOMETRIST) {
+              showFeedback(context, result);
+            } else {
               ref.read(triageStepperProvider).reset();
               dispose();
               if (context.mounted) {
@@ -649,8 +651,6 @@ class _PatientTriageEyeCapturingPageState
                   ),
                 );
               }
-            } else if (role == Role.ROLE_OPTOMETRIST) {
-              showFeedback(context, result);
             }
           },
         );

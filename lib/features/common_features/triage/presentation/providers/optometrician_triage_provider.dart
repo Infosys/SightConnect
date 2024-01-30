@@ -81,14 +81,12 @@ class OptometristTriageProvider extends ChangeNotifier {
           ref.read(optometritianAddPatientProvider).assessmentStartTime,
     );
 
-    logger.d("OPTOMETRICIAN Triage Response:  ${triage.toJson()}");
-
     var response =
         await ref.read(optometristRemoteSource).saveTriage(triage: triage);
 
     return response.fold(
       (failure) {
-        logger.d("saveTriage $failure");
+        logger.d(" Optometrist saveTriage $failure");
         Fluttertoast.showToast(
           msg: "Unable to save the Triage! Please try again.",
           toastLength: Toast.LENGTH_LONG,
@@ -96,7 +94,7 @@ class OptometristTriageProvider extends ChangeNotifier {
         throw failure;
       },
       (triageResponse) {
-        logger.d("Final Triage Response:  $triageResponse");
+        logger.d("Optometrist Final Triage Response:  $triageResponse");
         return triageResponse;
       },
     );

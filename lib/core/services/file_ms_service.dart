@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 var fileMsServiceProvider =
     Provider((ref) => FileMsService(ref.read(dioProvider)));
@@ -15,7 +16,10 @@ class FileMsService {
   FileMsService(this._dio);
   Future<String> _getImage(String fileId) async {
     try {
-      return "${ApiConstant.baseUrl}/services/filems/api/file/download/$fileId";
+      final url =
+          "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/$fileId";
+      logger.f(url);
+      return url;
     } catch (e) {
       throw ServerFailure(errorMessage: "GetImage: $e");
     }
@@ -25,10 +29,14 @@ class FileMsService {
     const endpoint =
         "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
-    final fileName = file.path.split('/').last;
+    // final fileName = file.path.split('/').last;
 
     var data = FormData.fromMap({
-      'files': [await MultipartFile.fromFile(file.path, filename: fileName)],
+      'files': [
+        await MultipartFile.fromFile(
+          file.path,
+        )
+      ],
     });
 
     try {
