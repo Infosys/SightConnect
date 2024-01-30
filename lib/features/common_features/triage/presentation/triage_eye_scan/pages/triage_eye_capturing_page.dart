@@ -7,16 +7,20 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/camera_server_exception.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/test_completion_dialog.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -500,54 +504,8 @@ class _PatientTriageEyeCapturingPageState
                                     removeLoading();
                                     setLoading("Validating...");
 
-                                    await ref
-                                        .read(triageEyeScanProvider)
-                                        .saveTriageEyeScanResponseToDB();
-                                    Either<Failure, TriagePostModel> response;
-                                    var tiageModel = ref.read(triageProvider);
-
-                                    if (tiageModel.triageMode ==
-                                        TriageMode.EVENT) {
-                                      response =
-                                          await tiageModel.saveTriageForEvent(
-                                        3,
-                                        ref
-                                            .read(addEventDetailsProvider)
-                                            .eventId,
-                                      );
-                                    } else {
-                                      response = await tiageModel.saveTriage(3);
-                                    }
-
-                                    response.fold(
-                                      (failure) async {
-                                        removeLoading();
-                                        logger.d({
-                                          "Failure while saving in local db ":
-                                              failure,
-                                        });
-
-                                        _showServerExceptionDialog(
-                                          context,
-                                          failure,
-                                        );
-                                      },
-                                      (result) async {
-                                        removeLoading();
-                                        logger.d({
-                                          "saveTriageEyeScanResponseToDB":
-                                              "Success",
-                                        });
-                                        setState(() {
-                                          isCompleted = true;
-                                        });
-
-                                        if (context.mounted) {
-                                          _showTestCompletionDialog(
-                                              context, result);
-                                        }
-                                      },
-                                    );
+                                    // Save Triage
+                                    await saveTriage();
                                   }
                                 },
                                 child:
@@ -651,20 +609,6 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  // Future<void> _toggleCamera() async {
-  //   if (!_controller.value.isInitialized) {
-  //     return;
-  //   }
-  //   // setLoading();
-
-  //   if (_controller.description.lensDirection == CameraLensDirection.front) {
-  //     _initializeCamera(CameraLensDirection.back);
-  //   } else {
-  //     _initializeCamera(CameraLensDirection.front);
-  //   }
-  //   removeLoading();
-  // }
-
   Future<void> _toggleFlash() async {
     if (!_controller.value.isInitialized) {
       return;
@@ -679,7 +623,6 @@ class _PatientTriageEyeCapturingPageState
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
-    final loc = context.loc!;
     showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -690,70 +633,32 @@ class _PatientTriageEyeCapturingPageState
         ),
       ),
       builder: (context) {
-        return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                loc.eyeCaptureCompletionDialogHeading,
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                loc.eyeCaptureCompletionDialogBody,
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                ),
-              ),
-              Row(
-                children: [
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () async {
-                      ref.read(triageStepperProvider).reset();
-                      dispose();
-                      if (context.mounted) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => TriageResultPage(
-                              triageResult: result,
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                    child: Text(
-                      loc.eyeCaptureCompletionDialogViewResult,
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+        return TestCompletionDialog(
+          onDismiss: () async {
+            final activeRole = PersistentAuthStateService.authState.activeRole;
+            final role = roleMapper(activeRole);
+            if (role == Role.ROLE_OPTOMETRIST) {
+              showFeedback(context, result);
+            } else {
+              ref.read(triageStepperProvider).reset();
+              dispose();
+              if (context.mounted) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => TriageResultPage(
+                      triageResult: result,
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+                );
+              }
+            }
+          },
         );
       },
     );
   }
 
   _showServerExceptionDialog(BuildContext context, Failure failure) {
-    final loc = context.loc!;
     showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -764,66 +669,35 @@ class _PatientTriageEyeCapturingPageState
         ),
       ),
       builder: (context) {
-        return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Server Error",
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "Your result has been saved locally. Please try again later.",
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Row(
-                children: [
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () async {
-                      ref.read(resetProvider).reset();
-                      ref.read(accessibilityProvider).resetBrightness();
-                      Navigator.of(context).popUntil((route) => route.isFirst);
+        return const CameraServerExceptionDialog();
+      },
+    );
+  }
 
-                      //this will naviagte to local page for future ref
-                      // Navigator.of(context).pushReplacement(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => TriageResultPage(
-                      //       triageResult: failure.data as TriagePostModel,
-                      //     ),
-                      //   ),
-                      // );
-                    },
-                    child: Text(
-                      loc.okButton,
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
+  Future<void> saveTriage() async {
+    await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
+    Either<Failure, TriagePostModel> response;
+    var tiageModel = ref.read(triageProvider);
+
+    if (tiageModel.triageMode == TriageMode.EVENT) {
+      response = await tiageModel.saveTriageForEvent(
+          3, ref.read(addEventDetailsProvider).eventId);
+    } else {
+      response = await tiageModel.saveTriage(3);
+    }
+    response.fold(
+      (failure) async {
+        removeLoading();
+        logger.d({"Failure while saving in local db ": failure});
+        _showServerExceptionDialog(context, failure);
+      },
+      (result) async {
+        removeLoading();
+        logger.d({"saveTriageEyeScanResponseToDB": "Success"});
+        setState(() {
+          isCompleted = true;
+        });
+        _showTestCompletionDialog(context, result);
       },
     );
   }

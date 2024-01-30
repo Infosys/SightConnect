@@ -91,7 +91,9 @@ class TriageEyeScanProvider with ChangeNotifier {
   }
 
   List<PostTriageImagingSelectionModel> getTriageEyeScanResponse(
-      String leftEyeImageUrl, String rightEyeImageUrl) {
+    String leftEyeImageUrl,
+    String rightEyeImageUrl,
+  ) {
     List<PostTriageImagingSelectionModel> mediaCaptureList = [];
 
     DiagnosticReportTemplateFHIRModel? assessment = _assessment;
@@ -102,15 +104,15 @@ class TriageEyeScanProvider with ChangeNotifier {
 
     mediaCaptureList.add(PostTriageImagingSelectionModel(
         identifier: imageIdentifier["LEFT_EYE"],
-        fileId: leftEyeData["fileId"]!,
-        endpoint: leftEyeData["endPoint"]!,
-        baseUrl: leftEyeData["baseUrl"]!,
+        fileId: leftEyeData["fileId"],
+        endpoint: leftEyeData["endPoint"],
+        baseUrl: leftEyeData["baseUrl"],
         score: 0));
     mediaCaptureList.add(PostTriageImagingSelectionModel(
       identifier: imageIdentifier["RIGHT_EYE"],
-      fileId: rightEyeData["fileId"]!,
-      endpoint: rightEyeData["endPoint"]!,
-      baseUrl: rightEyeData["baseUrl"]!,
+      fileId: rightEyeData["fileId"],
+      endpoint: rightEyeData["endPoint"],
+      baseUrl: rightEyeData["baseUrl"],
       score: 0,
     ));
     logger.d({"getTriageEyeScanResponse": mediaCaptureList});
@@ -118,7 +120,8 @@ class TriageEyeScanProvider with ChangeNotifier {
   }
 
   Map<String, int> getTriageImageIdentifier(
-      DiagnosticReportTemplateFHIRModel assessment) {
+    DiagnosticReportTemplateFHIRModel assessment,
+  ) {
     Map<String, int> imageIdentifier = {};
 
     assessment.study?.imagingSelectionTemplate?.forEach((element) {
@@ -141,7 +144,7 @@ class TriageEyeScanProvider with ChangeNotifier {
     if (await _networkInfo.isConnected()) {
       try {
         final response = await _fileMsService.uploadImage(File(image.path));
-        logger.d({"response": response});
+        logger.f({"response": response});
         if (currentEye == TriageEyeType.LEFT) {
           leftImageUrl = response;
           logger.d({"eyeTypeLeft": leftImageUrl});

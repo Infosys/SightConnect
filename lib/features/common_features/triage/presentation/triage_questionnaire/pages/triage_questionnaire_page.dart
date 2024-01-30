@@ -181,6 +181,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                                 model.questionnaireSections
                                                     .length) {
                                               model.saveQuestionaireResponse();
+
                                               await model
                                                   .saveQuestionaireResponseToDB();
                                               ref
@@ -191,7 +192,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                               pageController.animateToPage(
                                                 index + 1,
                                                 duration: const Duration(
-                                                    milliseconds: 80),
+                                                  milliseconds: 80,
+                                                ),
                                                 curve: Curves.easeIn,
                                               );
                                             }
@@ -209,7 +211,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             pageController.animateToPage(
                                               index + 1,
                                               duration: const Duration(
-                                                  milliseconds: 80),
+                                                milliseconds: 80,
+                                              ),
                                               curve: Curves.easeIn,
                                             );
                                           },
@@ -336,6 +339,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           }
                           if (isLastQuestion) {
                             model.saveQuestionaireResponse();
+
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           } else {
@@ -366,6 +370,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             onPressed: () async {
                               if (isLastQuestion) {
                                 model.saveQuestionaireResponse();
+
                                 await model.saveQuestionaireResponseToDB();
                                 ref.read(triageStepperProvider).goToNextStep();
                               } else {

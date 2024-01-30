@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../optometritian_triage/presentation/pages/optometritian_fetch_report_page.dart';
+
 class OptometritianSearchPatientPage extends HookConsumerWidget {
   const OptometritianSearchPatientPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuardianAddPatientProvider);
-    var isSelected = useState<int>(-1);
+    var isSelected = useState<int>(0);
+    var patientIdController = useTextEditingController();
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
@@ -52,26 +56,28 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                         ),
                       ),
                       child: TextField(
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(16),
-                          hintText: "Search Patient ID",
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: AppColor.grey,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColor.primary,
+                          controller: patientIdController,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(16),
+                            hintText: "Search Patient ID",
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: AppColor.grey,
                             ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(AppSize.klradius),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primary,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(AppSize.klradius),
+                              ),
                             ),
                           ),
-                        ),
-                        onChanged: (value) {
-                          model.setQuery = value;
-                        },
-                      ),
+                          onChanged: (value) {
+                            if (value.length > 2) {
+                              model.getSearchResult(value);
+                            }
+                          }),
                     ),
                   ),
                 ],
@@ -178,39 +184,127 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
               const SizedBox(
                 height: AppSize.klheight,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Image(
-                      width: AppSize.width(context) * 0.55,
-                      image: const AssetImage(
-                        "assets/images/search empty.png",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
-                  isSelected.value != -1
-                      ? Text(
-                          "Data not found for this search",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            color: AppColor.grey,
-                          ),
-                        )
-                      : Text(
-                          model.query.isEmpty
-                              ? "This feature will be made available shortly."
-                              : "This Patient ID is not found. Please try searching with a different Patient ID.",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                ],
-              ),
+              model.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(children: [
+                      model.searchPatientList.isEmpty
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Image(
+                                    width: AppSize.width(context) * 0.55,
+                                    image: const AssetImage(
+                                      "assets/images/search empty.png",
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: AppSize.klheight,
+                                ),
+                                Text(
+                                  "Data not found for this search",
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: AppColor.grey,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Column(
+                              children: model.searchPatientList.map(
+                                (entry) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              OptometritianFetchReportPage(
+                                            report: entry,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(
+                                        AppSize.kspadding,
+                                      ),
+                                      margin: const EdgeInsets.only(
+                                        bottom: AppSize.kspadding + 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: BorderRadius.circular(
+                                          AppSize.ksradius,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                entry.patientId ?? "",
+                                                style: applyFiraSansFont(
+                                                    fontSize: 16,
+                                                    color: AppColor.black,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                entry.assessmentEndTime
+                                                    .formateDateWithTime,
+                                                style: applyRobotoFont(
+                                                  fontSize: 10,
+                                                  color: AppColor.black,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  entry.patientEducation ?? "",
+                                                  softWrap: true,
+                                                  style: applyRobotoFont(
+                                                    fontSize: 14,
+                                                    color: AppColor.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: AppSize.kswidth,
+                                              ),
+                                              Flexible(
+                                                child: Text(
+                                                  entry.patientProfession ?? "",
+                                                  softWrap: true,
+                                                  style: applyRobotoFont(
+                                                    fontSize: 14,
+                                                    color: AppColor.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).toList(),
+                            )
+                    ])
             ],
           ),
         ),

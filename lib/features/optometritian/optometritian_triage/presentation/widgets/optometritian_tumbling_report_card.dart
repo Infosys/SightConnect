@@ -1,24 +1,32 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/optometritian_report_provider.dart';
+import '../../../../common_features/triage/data/models/optometrician_triage_response.dart';
 
 class OptometritianTumblingReportCard extends ConsumerWidget {
-  final List<Map<String, dynamic>> data;
-  final TriageUrgency urgency;
-  const OptometritianTumblingReportCard({
-    super.key,
-    required this.data,
-    required this.urgency,
-  });
+  const OptometritianTumblingReportCard({required this.report, super.key});
+
+  final OptometristTriageResponse report;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> eye = ["Left Eye", "Right Eye", "Both Eye"];
+    // var eyeModel = ref.watch(tumblingTestProvider);
+    // var model = ref.watch(optometritianReportProvider);
+    // var urgency = model.visualAcuityUrgency();
+    // var tumblingEData = model.getTumblingEData(
+    //   eyeModel.calculateEyeSight(Eye.left),
+    //   eyeModel.calculateEyeSight(Eye.right),
+    //   eyeModel.calculateEyeSight(Eye.both),
+    // );
+
+    // List<Observation> observations = report.observations!;
+    print("image urgency : ${report.observations}");
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Column(
@@ -48,7 +56,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: data.length,
+              itemCount: report.observations!.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 1.4,
@@ -72,7 +80,11 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          eye[index],
+                          index == 0
+                              ? "Right Eye"
+                              : index == 1
+                                  ? "Left Eye"
+                                  : "Both Eye",
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -80,14 +92,28 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          data[index]["eye"],
+                          index == 0
+                              ? lookUpSnellenTablefromLogMarValue(
+                                  report.observations![1].response!)
+                              : index == 1
+                                  ? lookUpSnellenTablefromLogMarValue(
+                                      report.observations![0].response!)
+                                  : lookUpSnellenTablefromLogMarValue(
+                                      report.observations![2].response!),
                           style: applyRobotoFont(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: data[index]["color"],
+                            color: index == 0
+                                ? getColorOnUrgency(
+                                    report.observations![1].response!)
+                                : index == 1
+                                    ? getColorOnUrgency(
+                                        report.observations![0].response!)
+                                    : getColorOnUrgency(
+                                        report.observations![2].response!),
                           ),
                           textAlign: TextAlign.left,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -113,7 +139,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               Text(
                 "Category",
                 style: applyRobotoFont(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: Colors.black.withOpacity(0.8),
                 ),
@@ -126,27 +152,75 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                 width: AppSize.width(context) * 0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: getColorOnUrgency(urgency),
+                  color: report.observationsUrgency == Urgency.RED
+                      ? AppColor.red
+                      : report.observationsUrgency == Urgency.YELLOW
+                          ? AppColor.orange
+                          : AppColor.green,
                   border: Border.all(
                     width: 1.5,
-                    color: getColorOnUrgency(urgency),
+                    color: report.observationsUrgency == Urgency.RED
+                        ? AppColor.red
+                        : report.observationsUrgency == Urgency.YELLOW
+                            ? AppColor.orange
+                            : AppColor.green,
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    getUrgencyText(urgency),
+                    report.observationsUrgency == Urgency.RED
+                        ? "Urgent Consult"
+                        : report.observationsUrgency == Urgency.YELLOW
+                            ? "Early Consult"
+                            : "Regular Consult",
                     style: applyRobotoFont(
-                      fontSize: 12,
+                      fontSize: 16,
                       color: AppColor.white,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          // const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ksheight),
         ],
       ),
     );
+  }
+
+  Color getColorOnUrgency(double value) {
+    if (value >= 1) {
+      return AppColor.red;
+    } else if (value >= 0.5) {
+      return AppColor.orange;
+    } else {
+      return AppColor.green;
+    }
+  }
+
+  String lookUpSnellenTablefromLogMarValue(double logMar) {
+    switch (logMar) {
+      case 1.0:
+        return "20/200";
+      case 0.6989:
+        return "20/100";
+      case 0.6021:
+        return "20/80";
+      case 0.4947:
+        return "20/62.5";
+      case 0.3979:
+        return "20/50";
+      case 0.3010:
+        return "20/40";
+      case 0.1761:
+        return "20/31.77";
+      case 0.0969:
+        return "20/25";
+      case 0.0:
+        return "20/20";
+      default:
+        return "20/20";
+    }
   }
 }

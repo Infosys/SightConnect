@@ -9,17 +9,20 @@ extension ThemeExtension on BuildContext {
   TargetPlatform get platform => Theme.of(this).platform;
 }
 
-extension DateExtension on DateTime {
-  String get formateDate => DateFormat('dd/MM/yyyy').format(this);
+extension DateExtension on DateTime? {
+  String get formateDate =>
+      this == null ? "" : DateFormat('dd/MM/yyyy').format(this!);
 
-  String get formateTime => DateFormat('hh:mm a').format(this);
+  String get formateTime =>
+      this == null ? "" : DateFormat('hh:mm a').format(this!);
 
-  String get formatDateTimeMonthName => DateFormat("dd MMM yy").format(this);
+  String get formatDateTimeMonthName =>
+      this == null ? "" : DateFormat("dd MMM yy").format(this!);
 
   String get formateDateWithTime =>
-      DateFormat('dd/MM/yyyy hh:mm a').format(this);
+      this == null ? "" : DateFormat('dd/MM/yyyy hh:mm a').format(this!);
   String get formatDateTimeMonthNameWithTime =>
-      DateFormat("dd MMM yyyy, hh:mm a").format(this);
+      this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
 }
 
 extension StringExtension on String? {
