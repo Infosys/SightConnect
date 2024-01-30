@@ -13,6 +13,7 @@ abstract class TriageReportRepository {
       getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
+    int ? page
   );
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getTriageReportByEncounterId(
