@@ -48,6 +48,7 @@ class OptometristTriageMapper {
     required double questionnaireUrgency,
     required double observationUrgency,
     required DateTime? assessmentStartTime,
+    required String questionnaireRemark,
   }) {
     return OptometristTriageResponse(
       id: null,
@@ -68,7 +69,7 @@ class OptometristTriageMapper {
       physicalAssessmentEndTime: DateTime.now(),
       capturedBy: ref.read(globalOptometricianProvider).preferredUsername,
       overallUrgency: _urgencyMapper(totalUrgency),
-      questionnaireRemarks: null,
+      questionnaireRemarks: questionnaireRemark,
       questionResponse: getQuestionnaireResponse(questionResponse),
       questionnaireUrgency: _urgencyMapper(questionnaireUrgency),
       questionnaireReview: _review("questionnaire", ref),
