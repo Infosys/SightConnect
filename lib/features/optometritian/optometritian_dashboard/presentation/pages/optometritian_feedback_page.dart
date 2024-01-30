@@ -270,9 +270,10 @@ void showFeedback(BuildContext context, TriagePostModel result) {
                                   //give 5 seconds of timeout
 
                                   feedback.save();
-                                  ref
-                                      .read(triageStepperProvider)
-                                      .goToNextStep();
+                                  // ref
+                                  //     .read(triageStepperProvider)
+                                  //     .goToNextStep();
+                                  ref.read(triageStepperProvider).reset();
 
                                   if (await ref
                                       .read(connectivityProvider)
@@ -301,6 +302,8 @@ void showFeedback(BuildContext context, TriagePostModel result) {
                                               "Triage Not Saved! Bad Connection"),
                                         ),
                                       );
+                                    }).catchError((e) {
+                                      feedback.isLoading = false;
                                     });
                                   } else {
                                     if (context.mounted) {
