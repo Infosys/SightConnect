@@ -40,9 +40,9 @@ class MyApp extends ConsumerWidget {
     return ref.watch(isJailBrokenProvider).maybeWhen(
       data: (data) {
         logger.d("isJailBrokenProvider: $data");
-        if (data) {
-          return const SecurePage();
-        }
+        // if (data) {
+        //   return const SecurePage();
+        // }
         return Millimeters.fromView(
           child: MediaQuery(
             data: mediaQueryData.copyWith(

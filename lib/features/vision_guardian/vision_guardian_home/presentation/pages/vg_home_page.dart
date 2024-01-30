@@ -1,17 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
-
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
@@ -31,7 +28,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         title: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(AppSize.kspadding / 2),
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColor.white,
@@ -51,29 +48,6 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 fontSize: 16,
               ),
             ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {
-                final navigator = Navigator.of(context);
-                ref.read(initializationProvider).logout().then(
-                  (value) async {
-                    navigator.pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (route) => false,
-                    );
-                    ref.invalidate(initializationProvider);
-                  },
-                ).catchError((e) {
-                  Fluttertoast.showToast(
-                    msg: e.toString(),
-                  );
-                });
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: AppColor.white,
-              ),
-            )
           ],
         ),
       ),
@@ -82,7 +56,9 @@ class VisionGuardianHomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: AppSize.height(context) / 4,
+              height: Responsive.isMobile(context)
+                  ? AppSize.klheight * 7.5
+                  : AppSize.height(context) / 7.5,
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSize.kmpadding,
                 vertical: AppSize.kmpadding,
@@ -90,8 +66,8 @@ class VisionGuardianHomePage extends ConsumerWidget {
               decoration: const BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(AppSize.kmradius),
+                  bottomRight: Radius.circular(AppSize.kmradius),
                 ),
               ),
               child: Stack(
@@ -119,7 +95,9 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     ],
                   ),
                   Positioned(
-                    bottom: -1 * (AppSize.height(context) / 7.5),
+                    bottom: Responsive.isMobile(context)
+                        ? -1 * (AppSize.height(context) / 7.5)
+                        : -1 * (AppSize.height(context) / 9.5),
                     left: (AppSize.kswidth * 2) * -1,
                     child: SizedBox(
                       width: AppSize.width(context),
@@ -139,7 +117,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.klheight * 3),
+            SizedBox(height: AppSize.height(context) / 10),
             Padding(
               padding: const EdgeInsets.only(
                 left: AppSize.kmpadding,
@@ -155,7 +133,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     ),
                   ),
                   const VisionGuardianServicesCardList(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSize.kmheight),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

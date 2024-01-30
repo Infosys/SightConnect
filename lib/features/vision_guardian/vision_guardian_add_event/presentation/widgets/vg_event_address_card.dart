@@ -46,6 +46,12 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           customTextFieldIcon(
             data.pincode,
             "Pincode",
+            validationFunction: (value) {
+              if (!RegExp(r'^[1-9][0-9]{5}$').hasMatch(value!)) {
+                return "Only 6 digit pincode allowed";
+              }
+              return null;
+            },
             const Icon(CupertinoIcons.search),
           ),
           const SizedBox(height: AppSize.kmheight),

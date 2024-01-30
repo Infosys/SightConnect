@@ -6,9 +6,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_datetime_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_bottom_navigation.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_form_helper_widgets.dart';
-
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
-
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
@@ -24,19 +22,26 @@ class VGAddEventDetailsPage extends ConsumerWidget {
     var formKey = data.formKey;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      appBar: const CustomAppbar(
-        title: Text("Add Event"),
+      appBar: CustomAppbar(
+        leadingIcon: IconButton(
+            onPressed: () {
+              ref.watch(addEventDetailsProvider).resetFields();
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
+        title: const Text("Add Event"),
         centerTitle: false,
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),
-      body: SingleChildScrollView(
-        child: LoadingOverlay(
-          isLoading: ref.watch(addEventDetailsProvider).isLoading,
+      body: LoadingOverlay(
+        overlayColor: null,
+        isLoading: ref.watch(addEventDetailsProvider).isLoading,
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
               key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              // autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 children: [
                   const VisionGuardianAddEventCard(),
@@ -58,6 +63,16 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                         customTextField(
                           data.eventTitle,
                           "Event Title",
+                          validationFunction: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter End time";
+                            }
+                            if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
+                                .hasMatch(value)) {
+                              return "Should not contain any special character";
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(height: AppSize.kmheight),
                         customTextField(
