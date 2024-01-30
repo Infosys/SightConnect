@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/repositories/vg_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -29,12 +30,16 @@ class InitializationProvider extends ChangeNotifier {
       return await _checkPatientExist(phone, role);
     } else if (role == Role.ROLE_VISION_GUARDIAN) {
       return await _checkVisionGuardianExist(phone, role);
+    } else if (role == Role.ROLE_OPTOMETRIST) {
+      //only for testing
+      return true;
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
   }
 
   Future<void> logout() async {
+    await TriageDBHelper().discardLocalTriageEntries();
     await _ref.read(keycloakRepositoryProvider).signOut();
   }
 

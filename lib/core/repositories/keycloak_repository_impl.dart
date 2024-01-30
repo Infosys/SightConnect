@@ -102,7 +102,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _dio.get(
+      final response = await _dio.get(
         "/auth/realms/care/protocol/openid-connect/logout",
         queryParameters: {
           'client_id': Env.clientId,
@@ -110,6 +110,9 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'id_token_hint': PersistentAuthStateService.authState.idToken,
         },
       );
+      logger.d({
+        "signOut response": response.data,
+      });
       await PersistentAuthStateService.authState.logout();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);

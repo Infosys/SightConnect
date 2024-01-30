@@ -105,7 +105,7 @@ class ProfileHeader extends ConsumerWidget {
                             : AppNameAvatar(
                                 isShapeCircular: false,
                                 name: patient.profile?.patient?.name,
-                                color: AppColor.blue,
+                                color: const Color(0xffD4C1FF),
                                 radius: 28,
                                 fontSize: 18,
                               ),

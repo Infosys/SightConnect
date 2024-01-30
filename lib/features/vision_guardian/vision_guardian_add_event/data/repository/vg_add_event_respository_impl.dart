@@ -65,12 +65,13 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
 
   @override
   Future getTriageReport(
-      {required int campaignEventId, required List<int> performerId}) {
+      {required Map<String, dynamic> queryData }) {
     return remoteDataSource.getTriageReport(
-        campaignEventId: campaignEventId, performerId: performerId);
+       queryData:queryData);
   }
 
-  Future getEventPatientList({required String patientQueryData}) async {
+  @override
+  Future getEventPatientList({required Map<String,dynamic> patientQueryData}) async {
     return await remoteDataSource.getEventPatientList(
         patientQueryData: patientQueryData);
   }

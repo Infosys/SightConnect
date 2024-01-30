@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -6,16 +7,20 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_preview_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/camera_server_exception.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/test_completion_dialog.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -35,10 +40,8 @@ import '../widgets/eye_detector_painter.dart';
 
 class TriageEyeCapturingPage extends ConsumerStatefulWidget {
   const TriageEyeCapturingPage({
-    required this.cameras,
     super.key,
   });
-  final List<CameraDescription> cameras;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -69,13 +72,14 @@ class _PatientTriageEyeCapturingPageState
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isIOS = Platform.isIOS;
 
   @override
   void initState() {
     logger.d('EyeDetectorView initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (isCompleted == false) {
+    if (isCompleted == false && !isIOS) {
       _initializeCamera();
     }
   }
@@ -139,7 +143,6 @@ class _PatientTriageEyeCapturingPageState
 
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
-    logger.d('EyeDetectorView _processImage');
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -151,7 +154,7 @@ class _PatientTriageEyeCapturingPageState
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
       _canvasSize.width * (1 / 2),
-      _canvasSize.height * (3 / 10),
+      _canvasSize.height * (1 / 2),
     );
 
     if (meshes.isNotEmpty) {
@@ -160,12 +163,10 @@ class _PatientTriageEyeCapturingPageState
       final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
-        logger.d("current eye in detector is : $_currentEye ");
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
                 : rightEyeContour;
-
         // Translate Eye Points
         _translatedEyeContours = eyePoints.map(
           (contour) {
@@ -185,17 +186,14 @@ class _PatientTriageEyeCapturingPageState
           boxWidth,
           boxHeight,
         );
-
         // Get the corner point of the eyes which is needed to calculate eye width
         _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
-
         // Calculate the eyeWidth ratio to the boxWidth
         _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
           _eyeCorners,
           boxWidth,
           boxHeight,
         );
-
         // Validity of the eye
         _isEyeValid = _eyesInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
@@ -308,6 +306,13 @@ class _PatientTriageEyeCapturingPageState
   Widget build(BuildContext context) {
     var model = ref.watch(triageEyeScanProvider);
     final loc = context.loc!;
+    if (_cameras.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
@@ -390,16 +395,22 @@ class _PatientTriageEyeCapturingPageState
               isLoading: isLoading,
               progressMessage: _progressMessage,
               child: Container(
-                color: Colors.black,
+                color: AppColor.black,
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-                    Positioned.fill(
-                      child: CameraPreview(
-                        _controller,
-                        child: _customPaint,
-                      ),
-                    ),
+                    !isIOS
+                        ? Positioned.fill(
+                            child: CameraPreview(
+                              _controller,
+                              child: _customPaint,
+                            ),
+                          )
+                        : Positioned.fill(
+                            child: CameraPreview(
+                              _controller,
+                            ),
+                          ),
                     Positioned(
                       top: 100,
                       left: null,
@@ -416,13 +427,36 @@ class _PatientTriageEyeCapturingPageState
                         ),
                       ),
                     ),
-
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        padding: const EdgeInsets.all(24),
-                        color: Colors.transparent,
-                        child: Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Visibility(
+                          visible: !_isEyeValid,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              width: AppSize.width(context) * 0.8,
+                              decoration: BoxDecoration(
+                                color: AppColor.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                loc.eyeBoxText,
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          color: Colors.transparent,
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
@@ -442,6 +476,9 @@ class _PatientTriageEyeCapturingPageState
                               const Spacer(),
                               InkWell(
                                 onTap: () async {
+                                  if (!_isEyeValid) {
+                                    return;
+                                  }
                                   final image = await _takePicture(context);
                                   logger.d("Image: $image");
                                   if (image == null) {
@@ -466,55 +503,25 @@ class _PatientTriageEyeCapturingPageState
                                     await model.setLeftEyeImage(image);
                                     removeLoading();
                                     setLoading("Validating...");
-
                                     await ref
                                         .read(triageEyeScanProvider)
                                         .saveTriageEyeScanResponseToDB();
-                                    Either<Failure, TriagePostModel> response;
-                                    var tiageModel = ref.read(triageProvider);
 
-                                    if (tiageModel.triageMode ==
-                                        TriageMode.EVENT) {
-                                      response =
-                                          await tiageModel.saveTriageForEvent(
-                                        3,
-                                        ref
-                                            .read(addEventDetailsProvider)
-                                            .eventId,
-                                      );
+                                    final activeRole =
+                                        PersistentAuthStateService
+                                            .authState.activeRole;
+                                    final role = roleMapper(activeRole);
+                                    if (role == Role.ROLE_OPTOMETRIST) {
+                                      // ONLY For OPTOMETRIST
+                                      //Validation API Call
+                                      if (context.mounted) {
+                                        showFeedback(context);
+                                      }
                                     } else {
-                                      response = await tiageModel.saveTriage(3);
+                                      // For all other roles
+                                      //Triage API Call
+                                      await saveTriage();
                                     }
-
-                                    response.fold(
-                                      (failure) async {
-                                        removeLoading();
-                                        logger.d({
-                                          "Failure while saving in local db ":
-                                              failure,
-                                        });
-
-                                        _showServerExceptionDialog(
-                                          context,
-                                          failure,
-                                        );
-                                      },
-                                      (result) async {
-                                        removeLoading();
-                                        logger.d({
-                                          "saveTriageEyeScanResponseToDB":
-                                              "Success",
-                                        });
-                                        setState(() {
-                                          isCompleted = true;
-                                        });
-
-                                        if (context.mounted) {
-                                          _showTestCompletionDialog(
-                                              context, result);
-                                        }
-                                      },
-                                    );
                                   }
                                 },
                                 child:
@@ -533,8 +540,10 @@ class _PatientTriageEyeCapturingPageState
                                   ),
                                 ),
                               ),
-                            ]),
-                      ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     // _flashToggle(),
                   ],
@@ -616,20 +625,6 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  // Future<void> _toggleCamera() async {
-  //   if (!_controller.value.isInitialized) {
-  //     return;
-  //   }
-  //   // setLoading();
-
-  //   if (_controller.description.lensDirection == CameraLensDirection.front) {
-  //     _initializeCamera(CameraLensDirection.back);
-  //   } else {
-  //     _initializeCamera(CameraLensDirection.front);
-  //   }
-  //   removeLoading();
-  // }
-
   Future<void> _toggleFlash() async {
     if (!_controller.value.isInitialized) {
       return;
@@ -644,7 +639,6 @@ class _PatientTriageEyeCapturingPageState
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
-    final loc = context.loc!;
     showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -655,70 +649,26 @@ class _PatientTriageEyeCapturingPageState
         ),
       ),
       builder: (context) {
-        return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                loc.eyeCaptureCompletionDialogHeading,
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                loc.eyeCaptureCompletionDialogBody,
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                ),
-              ),
-              Row(
-                children: [
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () async {
-                      ref.read(triageStepperProvider).reset();
-                      if (context.mounted) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => TriageResultPage(
-                              triageResult: result,
-                            ),
-                          ),
-                        );
-                      }
-                      dispose();
-                    },
-                    child: Text(
-                      loc.eyeCaptureCompletionDialogViewResult,
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+        return TestCompletionDialog(
+          onDismiss: () async {
+            ref.read(triageStepperProvider).reset();
+            dispose();
+            if (context.mounted) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TriageResultPage(
+                    triageResult: result,
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              );
+            }
+          },
         );
       },
     );
   }
 
   _showServerExceptionDialog(BuildContext context, Failure failure) {
-    final loc = context.loc!;
     showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -729,66 +679,35 @@ class _PatientTriageEyeCapturingPageState
         ),
       ),
       builder: (context) {
-        return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Server Error",
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "Your result has been saved locally. Please try again later.",
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Row(
-                children: [
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () async {
-                      ref.read(resetProvider).reset();
-                      ref.read(accessibilityProvider).resetBrightness();
-                      Navigator.of(context).popUntil((route) => route.isFirst);
+        return const CameraServerExceptionDialog();
+      },
+    );
+  }
 
-                      //this will naviagte to local page for future ref
-                      // Navigator.of(context).pushReplacement(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => TriageResultPage(
-                      //       triageResult: failure.data as TriagePostModel,
-                      //     ),
-                      //   ),
-                      // );
-                    },
-                    child: Text(
-                      loc.okButton,
-                      style: applyRobotoFont(
-                        color: AppColor.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
+  Future<void> saveTriage() async {
+    await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
+    Either<Failure, TriagePostModel> response;
+    var tiageModel = ref.read(triageProvider);
+
+    if (tiageModel.triageMode == TriageMode.EVENT) {
+      response = await tiageModel.saveTriageForEvent(
+          3, ref.read(addEventDetailsProvider).eventId);
+    } else {
+      response = await tiageModel.saveTriage(3);
+    }
+    response.fold(
+      (failure) async {
+        removeLoading();
+        logger.d({"Failure while saving in local db ": failure});
+        _showServerExceptionDialog(context, failure);
+      },
+      (result) async {
+        removeLoading();
+        logger.d({"saveTriageEyeScanResponseToDB": "Success"});
+        setState(() {
+          isCompleted = true;
+        });
+        _showTestCompletionDialog(context, result);
       },
     );
   }

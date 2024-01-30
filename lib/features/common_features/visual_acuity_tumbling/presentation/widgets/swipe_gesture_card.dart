@@ -1,4 +1,3 @@
-import 'dart:io' show Platform;
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
@@ -143,41 +142,39 @@ class SwipeGestureCard extends HookConsumerWidget {
                 fit: BoxFit.fill,
               ),
               Positioned(
-                child: distance.isDistanceValid() == true
-                    ? Center(
-                        child: Text(
-                          loc.swipeGestureCardText,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            color: AppColor.grey,
+                  child: distance.isDistanceValid() == true
+                      ? Center(
+                          child: Text(
+                            loc.swipeGestureCardText,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              color: AppColor.grey,
+                            ),
                           ),
-                        ),
-                      )
-                    :  Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Container(
-                                width: AppSize.width(context) * 0.8,
-                                decoration: BoxDecoration(
-                                  color: AppColor.black.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                child: Text(
-                                  distance.getDistanceText(context),
-                                  textAlign: TextAlign.center,
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    color: AppColor.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                        )
+                      : Center(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              width: AppSize.width(context) * 0.8,
+                              decoration: BoxDecoration(
+                                color: AppColor.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                distance.getDistanceText(context),
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
-                          )
-                        
-              ),
+                          ),
+                        )),
             ],
           ),
         ),

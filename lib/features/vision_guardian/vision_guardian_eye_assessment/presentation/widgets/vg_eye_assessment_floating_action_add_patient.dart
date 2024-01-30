@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -13,12 +14,13 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        ref.read(addPatientEventProvider).setPatientSearchQuery("");
-
+        ref.read(addPatientEventProvider).resetFields();
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const VisionGuardianAddPatient(),
+            builder: (context) => const VisionGuardianAddPatient(
+              triageMode: TriageMode.STANDALONE,
+            ),
           ),
         );
       },
@@ -32,8 +34,8 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
           color: AppColor.yellow,
           boxShadow: const <BoxShadow>[
             BoxShadow(
-              color: AppColor.black,
-              blurRadius: 10,
+              color: AppColor.grey,
+              blurRadius: 8,
               offset: Offset(0, 4),
             ),
           ],
@@ -45,9 +47,9 @@ class VisionGuardianFloatingAddPatientAction extends ConsumerWidget {
                 TextSpan(
                     text: '+ ',
                     style: applyRobotoFont(
-                        fontSize: 21,
+                        fontSize: 24,
                         color: AppColor.black,
-                        fontWeight: FontWeight.w300)),
+                        fontWeight: FontWeight.w400)),
                 TextSpan(
                   text: 'Add Patient',
                   style: applyRobotoFont(

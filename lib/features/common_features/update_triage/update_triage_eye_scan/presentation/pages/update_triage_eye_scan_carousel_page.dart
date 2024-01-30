@@ -117,7 +117,6 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                     MaterialPageRoute(
                       fullscreenDialog: true,
                       builder: (context) => UpdateTriageEyeCapturingPage(
-                        cameras: cameras,
                         diagnosticReportId: diagnosticReportId,
                       ),
                     ),

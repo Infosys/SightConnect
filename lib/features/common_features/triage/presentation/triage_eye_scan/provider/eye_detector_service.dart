@@ -208,7 +208,7 @@ class EyeDetectorService {
   }
 
   static bool areEyesCloseEnough(double eyeWidthRatio,
-      {double threshold = 0.5}) {
+      {double threshold = 0.4}) {
     return (eyeWidthRatio > threshold) && (eyeWidthRatio < 1);
   }
 }

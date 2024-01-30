@@ -1,29 +1,47 @@
+import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
+
+import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/optometrician_triage_remote_source.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/fake_data_source.dart';
 
 var visionGuardianAddPatientProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => OptometricianSearchPatientProvider(),
-);
+    (ref) => OptometricianSearchPatientProvider(
+          ref,
+          ref.watch(optometristRemoteSource),
+        ));
 
 class OptometricianSearchPatientProvider extends ChangeNotifier {
   TimeFrame _selectedTimeFrame = TimeFrame.today;
   DateTime _selectedToDate = DateTime.now();
   DateTime _selectedFromDate = DateTime.now();
+  final Ref _ref;
 
-  final List<PatientModel> _patientList = [];
-  final List<PatientModel> _searchPatientList = [];
+  List<OptometristTriageResponse> _searchPatientList = [];
   String _query = "";
+  bool _isLoading = false;
 
-  OptometricianSearchPatientProvider();
-  List<PatientModel> get searchPatientList => _searchPatientList;
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool value) => _isLoading = value;
+
+  final OptometristRemoteSource _triageRepository;
+
+  OptometricianSearchPatientProvider(this._ref, this._triageRepository) {
+    var startDate = calculateDateFromTimeFrame(_selectedTimeFrame);
+    getTriageByFilters(
+      startDate,
+      DateTime.now(),
+      _ref.read(globalOptometricianProvider).preferredUsername,
+    );
+  }
+  List<OptometristTriageResponse> get searchPatientList => _searchPatientList;
   List<TimeFrame> get timeFrameList => TimeFrame.values;
   String get query => _query;
-  TimeFrame get selectedTimeFrame => _selectedTimeFrame;
-  DateTime get selectedToDate => _selectedToDate;
-  DateTime get selectedFromDate => _selectedFromDate;
-  List<PatientModel> get patientList => _patientList;
 
   set setTimeFrame(TimeFrame timeFrame) {
     _selectedTimeFrame = timeFrame;
@@ -55,10 +73,16 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
   }
 
   void searchByTimeFrame() {
-    // var time = calculateDateFromTimeFrame(_selectedTimeFrame);
+    var startDate = calculateDateFromTimeFrame(_selectedTimeFrame);
     // _searchPatientList =
     //     _patientList.where((element) => element.date!.isAfter(time)).toList();
-    // notifyListeners();
+    logger.d(startDate);
+    getTriageByFilters(
+      startDate,
+      DateTime.now(),
+      _ref.read(globalOptometricianProvider).preferredUsername,
+    );
+    notifyListeners();
   }
 
   void searchByQuery() {
@@ -66,6 +90,7 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
     //     .where((element) =>
     //         element.id!.toLowerCase().contains(_query.toLowerCase()))
     //     .toList();
+    getPatientById(int.parse(_query));
     notifyListeners();
   }
 
@@ -78,21 +103,93 @@ class OptometricianSearchPatientProvider extends ChangeNotifier {
     //   }
     //   return false;
     // }).toList();
-    // notifyListeners();
+    getTriageByFilters(
+      _selectedFromDate,
+      _selectedToDate,
+      _ref.read(globalOptometricianProvider).preferredUsername,
+    );
+    notifyListeners();
+  }
+
+  Future<List<OptometristTriageResponse>> getTriageByFilters(
+    startDate,
+    endDate,
+    capturedBy,
+  ) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      final data =
+          await _triageRepository.getOptometristTriageResponseByFilters(
+        startDate,
+        endDate,
+        _ref.read(globalOptometricianProvider).preferredUsername!,
+      );
+
+      _searchPatientList = data;
+      _isLoading = false;
+      notifyListeners();
+
+      return data;
+    } catch (e) {
+      logger.e(e);
+      _isLoading = false;
+      notifyListeners();
+    }
+    throw ServerException();
+  }
+
+  Future<void> getSearchResult(String query) async {
+    _isLoading = true;
+    notifyListeners();
+    var data = await _triageRepository.getTriageBySearch(
+      query,
+      _ref.read(globalOptometricianProvider).preferredUsername!,
+    );
+
+    _searchPatientList = data;
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> getPatientById(int patientId) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      var data = await _triageRepository.getTriageByPatientId(patientId);
+
+      _searchPatientList = data;
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      logger.d(e);
+    }
+    throw ServerException();
   }
 
   DateTime calculateDateFromTimeFrame(TimeFrame timeFrame) {
     switch (timeFrame) {
       case TimeFrame.today:
-        return DateTime.now().subtract(const Duration(days: 1));
+        return DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day);
       case TimeFrame.thisWeek:
-        return DateTime.now().subtract(const Duration(days: 7));
+        {
+          DateTime startOfTime = DateTime.now().subtract(
+              Duration(days: DateTime.now().weekday - DateTime.monday));
+          return DateTime(startOfTime.year, startOfTime.month, startOfTime.day);
+        }
       case TimeFrame.thisMonth:
-        return DateTime.now().subtract(const Duration(days: 30));
+        return DateTime(DateTime.now().year, DateTime.now().month, 1);
       case TimeFrame.thisYear:
-        return DateTime.now().subtract(const Duration(days: 365));
+        return DateTime(DateTime.now().year, 1, 1);
       default:
-        return DateTime.now().subtract(const Duration(days: 1));
+        return DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+        );
     }
   }
 }

@@ -91,10 +91,10 @@ import AVFoundation
                     case "iPhone8,4": return ["width": 2.0, "height": 2.7]
                     case "iPhone12,8": return ["width": 2.0, "height": 2.7]
                     case "iPhone14,6":                  return ["width": 2.0, "height": 2.7]
-                    case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":     return  ["width": 1.0, "height": 1.2]
-                    case "iPad3,1", "iPad3,2", "iPad3,3":                return  ["width": 1.0, "height": 1.2]
-                    case "iPad3,4", "iPad3,5", "iPad3,6":               return   ["width": 1.0, "height": 1.2]
-                    case "iPad6,11", "iPad6,12":                        return   ["width": 1.0, "height": 1.2]
+                    case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":     return  ["width": 2.0, "height": 2.7]
+                    case "iPad3,1", "iPad3,2", "iPad3,3":                return  ["width": 2.0, "height": 1.2]
+                    case "iPad3,4", "iPad3,5", "iPad3,6":               return   ["width": 2.0, "height": 1.2]
+                    case "iPad6,11", "iPad6,12":                        return   ["width": 2.0, "height": 1.2]
                     case "iPad7,5", "iPad7,6":return ["width": 1.0, "height": 1.2]
                     case "iPad7,11", "iPad7,12":return ["width": 1.0, "height": 1.2]
                     case "iPad11,6", "iPad11,7":return ["width": 1.0, "height": 1.2]
@@ -133,14 +133,15 @@ import AVFoundation
                     return ["width": 1.0, "height": 1.2]
                     #endif
                 }
-                print(identifier)
+               logger.d(identifier)
                 return mapToDevice(identifier: identifier)
             }()
         
-//        print(modelName)
+//       logger.d(modelName)
         result["sensorX"] = modelName["width"]
         result["sensorY"] = modelName["height"]
-//        print(result)
+        print(result)
+//       logger.d(result)
         
         return result
     }

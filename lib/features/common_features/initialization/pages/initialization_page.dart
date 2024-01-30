@@ -95,7 +95,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    // check consent again for all roles other than patient
+    if (role == Role.ROLE_OPTOMETRIST) {
+      await navigateBasedOnRole(navigator, role);
+      return;
+    }
+
     try {
       final model = ref.watch(consentRepositoryProvider);
       final consent = await model.getConsent();
