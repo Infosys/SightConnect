@@ -93,7 +93,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     _isFinalReportLoading=true;
     _finalReportList=[];
     _page=0;
-    logger.f("refreshing reports");
     notifyListeners();
     await getTriageReportByPatientIdAndStatus();
     return;
