@@ -294,6 +294,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetListOfEventPatients() {
+    listOfEventPatients = [];
+    notifyListeners();
+  }
+
   void filterListEvents(selectedIndex, selectedValue) {
     isSelected = selectedIndex;
     eventStatusFilter = selectedValue;
