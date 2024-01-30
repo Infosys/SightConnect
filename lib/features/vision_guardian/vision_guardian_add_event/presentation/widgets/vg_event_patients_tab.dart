@@ -30,7 +30,7 @@ class EventPatientsTab extends ConsumerWidget {
     var loading = ref.watch(addEventDetailsProvider).getisLoading;
     var error = ref.watch(addEventDetailsProvider).error;
 
-   if (loading == false && error) {
+    if (loading == false && error) {
       Fluttertoast.showToast(msg: "Server Error");
     }
 
@@ -43,14 +43,14 @@ class EventPatientsTab extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            VisionGuardianEmptyResultCard(type: "Event"),
+            VisionGuardianEmptyResultCard(type: "Patient"),
           ],
         ),
       );
     }
 
     return LoadingOverlay(
-       overlayColor: null,
+      overlayColor: null,
       isLoading: loading,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
