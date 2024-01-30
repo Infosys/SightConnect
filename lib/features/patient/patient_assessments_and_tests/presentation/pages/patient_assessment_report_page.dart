@@ -85,7 +85,8 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
             const HelplineCard(helpLine: AppText.tollFreeNumber),
             const SizedBox(height: AppSize.kmheight),
             EyeScanTabView(
-                eyeScanData: assessmentDetailsReport.imageBriefEntity),
+              eyeScanData: assessmentDetailsReport.imageBriefEntity,
+            ),
             const SizedBox(height: AppSize.kmheight),
             TextButton(
               onPressed: () async {
