@@ -120,7 +120,7 @@ Widget _content(
     decoration: const BoxDecoration(
       image: DecorationImage(
         image: AssetImage(AppImages.scaffoldBg),
-        alignment: Alignment.topRight,
+        fit: BoxFit.cover,
       ),
     ),
     child: Column(

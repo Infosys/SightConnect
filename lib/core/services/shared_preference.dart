@@ -2,8 +2,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceService {
-  SharedPreferenceService._();
-
   static late SharedPreferences _sharedPreferences;
 
   static Future<void> init() async {
@@ -43,7 +41,10 @@ class SharedPreferenceService {
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
-  static void clear() async {
-    await _sharedPreferences.clear();
+  static Future<void> clear() async {
+    await _sharedPreferences.remove("language");
+    await _sharedPreferences.remove("fontScale");
+    await _sharedPreferences.remove("dontShowVisualAcuityStatus");
+    await _sharedPreferences.remove("tumblingOverInfo");
   }
 }

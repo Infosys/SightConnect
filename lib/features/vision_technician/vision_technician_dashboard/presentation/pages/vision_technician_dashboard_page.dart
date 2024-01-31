@@ -33,6 +33,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             LoginPage.routeName,
             (route) => false,
           );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from VisionTechnicianDashboardPage : $e");
+          Fluttertoast.showToast(
+              msg:
+                  "Apologies, we encountered a logout error in the mobile app.");
         });
       }
     });

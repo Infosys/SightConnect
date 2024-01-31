@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -138,6 +139,10 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           await handleButtonPress(context, feedback, ref);
+                          // RESET LANGUAGE PREFRENCE
+                          await ref
+                              .read(globalLanguageProvider)
+                              .setCurrentLocale("en");
                         },
                         child: Text(
                           "Submit",
@@ -165,7 +170,8 @@ class TriageFeedbackDialog extends HookConsumerWidget {
     logger.d("isLoading changed to : ${feedback.isLoading}");
 
     feedback.save();
-    ref.read(triageStepperProvider).reset();
+    // ref.read(triageStepperProvider).reset();
+    ref.read(triageStepperProvider).goToNextStep();
 
     if (await ref.read(connectivityProvider).isConnected() && context.mounted) {
       await handleConnection(ref, feedback, context);

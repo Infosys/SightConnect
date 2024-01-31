@@ -13,7 +13,7 @@
     },
  
  
-    "questionnaireTitle": "Eye Assessment Questions",
+    "questionnaireTitle": "Eye Test",
     "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
     "visualAcuityTitle" : "Visual Acuity Test",
     "visualAcuityDescription" : "A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!",

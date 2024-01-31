@@ -19,36 +19,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class PatientHomePage extends ConsumerStatefulWidget {
+class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
-  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
-}
-
-class _PatientHomePageState extends ConsumerState<PatientHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final currentLocaleCode = ref.read(globalLanguageProvider).currentLocale;
-      if (currentLocaleCode == null) {
-        showBottomSheet(
-          enableDrag: false,
-          context: context,
-          builder: (context) => TranslationPopUp(
-            currentLocaleCode:
-                currentLocaleCode == null ? 'en' : currentLocaleCode.toString(),
-          ),
-        );
-      }
-    });
-  }
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
@@ -57,12 +32,12 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
         },
         onLanguageChange: () {
           final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale.toString();
+              ref.read(globalLanguageProvider).currentLocale;
           showBottomSheet(
             enableDrag: false,
             context: context,
             builder: (context) => TranslationPopUp(
-              currentLocaleCode: currentLocaleCode,
+              locale: currentLocaleCode,
             ),
           );
         },
@@ -74,7 +49,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             image: AssetImage(
               AppImages.scaffoldBg,
             ),
-            alignment: Alignment.topRight,
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(

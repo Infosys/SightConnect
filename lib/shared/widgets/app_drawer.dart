@@ -186,8 +186,8 @@ class AppDrawer extends StatelessWidget {
                         ref.invalidate(initializationProvider);
                       }).catchError((e) {
                         Fluttertoast.showToast(
-                          msg: e.toString(),
-                        );
+                            msg:
+                                "Apologies, we encountered a logout error in the mobile app.");
                       });
                     },
                     leading: Container(

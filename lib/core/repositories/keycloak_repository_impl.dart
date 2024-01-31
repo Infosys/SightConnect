@@ -113,7 +113,6 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       logger.d({
         "signOut response": response.data,
       });
-      await PersistentAuthStateService.authState.logout();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       throw ServerFailure(errorMessage: "Sign out failed");
