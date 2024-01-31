@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'core/services/matomo_logger.dart';
@@ -13,7 +14,8 @@ import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
@@ -23,6 +25,7 @@ Future<void> main() async {
   // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
 
+  FlutterNativeSplash.remove();
   runApp(
     const ProviderScope(child: MyApp()),
   );

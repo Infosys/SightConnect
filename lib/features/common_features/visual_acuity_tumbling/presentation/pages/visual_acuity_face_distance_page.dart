@@ -168,7 +168,16 @@ class _VisualAcuityFaceDistancePageViewState
     );
 
     if (faces.isNotEmpty) {
-      final face = faces[0];
+      var largestFace = faces[0];
+      var largestFaceArea = largestFace.boundingBox.width * largestFace.boundingBox.height;
+      for (final face in faces.skip(1)) {
+        final currentFaceArea = face.boundingBox.width * face.boundingBox.height;
+        if (currentFaceArea > largestFaceArea) {
+          largestFaceArea = currentFaceArea;
+          largestFace = face;
+        }
+      }
+      final face = largestFace;
       final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
       final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
@@ -343,7 +352,7 @@ class _VisualAcuityFaceDistancePageViewState
                         ),
                       ),
                       Positioned(
-                        bottom: AppSize.height(context) * 0.1,
+                        bottom: AppSize.height(context) * 0.04,
                         left: AppSize.width(context) * 0.1,
                         right: AppSize.width(context) * 0.1,
                         child: ElevatedButton(

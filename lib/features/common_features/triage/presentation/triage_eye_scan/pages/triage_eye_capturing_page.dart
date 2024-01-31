@@ -220,22 +220,6 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  // Future<bool> _cameraPermisson() async {
-  //   final status = await Permission.camera.status;
-  //   if (status.isGranted) {
-  //     return true;
-  //   } else if (status.isDenied) {
-  //     final result = await Permission.camera.request();
-  //     if (result.isGranted) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!(_controller.value.isInitialized)) return;
@@ -274,11 +258,6 @@ class _PatientTriageEyeCapturingPageState
     try {
       _canProcess = false;
       _meshDetector.close();
-      // if (_controller.value.isInitialized &&
-      //     _controller.value.isStreamingImages) {
-      //   await _controller.stopImageStream();
-      //   await _controller.dispose();
-      // }
       await _controller.stopImageStream();
       await _controller.dispose();
     } catch (e) {
