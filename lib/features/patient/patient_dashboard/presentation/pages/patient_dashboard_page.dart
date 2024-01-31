@@ -15,6 +15,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
+import '../../../patient_services/presentation/pages/patient_services_page.dart';
+
 class PatientDashboardPage extends ConsumerStatefulWidget {
   static const routeName = '/patient-dashboard';
   const PatientDashboardPage({
@@ -94,14 +96,23 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
                   case 0:
                     break;
                   case 1:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const AppointmentBooking();
-                        },
-                      ),
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return const PatientServicesPage();
+                      },
                     );
                     break;
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return const AppointmentBooking();
+                  //     },
+                  //   ),
+                  // );
+                  // break;
 
                   case 2:
                     showModalBottomSheet(
