@@ -95,11 +95,11 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
   @override
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getTriageReportByEncounterId(
-          int encounterId, DiagnosticReportStatus status) async {
+          int encounterId, DiagnosticReportStatus status,int ? page) async {
     if (await networkInfo.isConnected()) {
       try {
         final remoteResponse = await triageReportSource
-            .getTriageReportByEncounterId(encounterId, status);
+            .getTriageReportByEncounterId(encounterId, status,page);
 
         return Right(remoteResponse);
       } on ServerException catch (e) {

@@ -27,17 +27,16 @@ class PatientSelfTestReports extends ConsumerStatefulWidget {
 
 class _PatientSelfTestReportsState
     extends ConsumerState<PatientSelfTestReports> {
-  final List<TriageReportBriefEntity> reports = [];
+   List<TriageReportBriefEntity> reports = [];
   @override
   void initState() {
     super.initState();
     Future.microtask(() async {
       try {
-        final result = await ref
+         await ref
             .read(patientAssessmentAndTestProvider)
-            .getTriageReportByEncounterId(widget.encounterId, true);
+            .getTriageReportByEncounterId(widget.encounterId, true,true);
 
-        reports.addAll(result);
       } catch (e) {
         Fluttertoast.showToast(msg: "$e");
       }
@@ -48,6 +47,7 @@ class _PatientSelfTestReportsState
   Widget build(BuildContext context) {
     final loc = context.loc!;
     var model = ref.watch(patientAssessmentAndTestProvider);
+    reports=model.selfTestReportList;
 
     if (model.isSelfTestReportLoading) {
       return const Scaffold(
@@ -56,7 +56,7 @@ class _PatientSelfTestReportsState
         ),
       );
     }
-    if (reports.isEmpty) {
+    if (model.hasMoreSelfReport==false &&  reports.isEmpty) {
       return Scaffold(
         body: Center(
           child: Text(
@@ -73,8 +73,17 @@ class _PatientSelfTestReportsState
     return Scaffold(
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: reports.length,
+        itemCount: reports.length+1,
         itemBuilder: (BuildContext context, int index) {
+          if(index==reports.length){
+              if(model.hasMoreSelfReport){
+                model.incrementSelfTestPage( widget.encounterId);
+                return const Center(child: CircularProgressIndicator());
+              }
+              else{
+                  return const Center(child:  Text("No More Reports"));
+              }
+           }
           final currentData = reports[index];
 
           return Container(
