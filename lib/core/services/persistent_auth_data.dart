@@ -77,7 +77,7 @@ class PersistentAuthData {
     await _storage.write(key: _refreshKey, value: refreshToken);
     final decodedToken = JwtDecoder.decode(accessToken);
 
-    await saveUserType(decodedToken['USER_TYPE']);
+    await saveUserType(decodedToken['USER_TYPE']  ?? "PROD");
 
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
@@ -104,6 +104,7 @@ class PersistentAuthData {
   }
 
   Future<void> saveUserType(String userType) async {
+   
     this.userType = userType;
     await _storage.write(key: _userType, value: userType);
   }

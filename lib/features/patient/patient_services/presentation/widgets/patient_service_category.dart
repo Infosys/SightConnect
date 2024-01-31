@@ -15,6 +15,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
+import '../../../../../main.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -29,6 +30,7 @@ class PatientServiceCategory extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+    logger.d("isUserBeta $isUserBeta");
     final loc = context.loc!;
     return Container(
       margin: Responsive.isMobile(context)
