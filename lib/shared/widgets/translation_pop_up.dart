@@ -73,11 +73,11 @@ class TranslationPopUp extends ConsumerWidget {
                   bool isPunjabi = appLocale.locale == "pa";
                   return InkWell(
                     onTap: () {
-                      if (!isPunjabi){
-                      ref
-                          .read(globalLanguageProvider)
-                          .setCurrentLocale(appLocale.locale)
-                          .then((value) => Navigator.of(context).pop());
+                      if (!isPunjabi) {
+                        ref
+                            .read(globalLanguageProvider)
+                            .setCurrentLocale(appLocale.locale)
+                            .then((value) => Navigator.of(context).pop());
                       }
                     },
                     child: Container(
@@ -128,9 +128,9 @@ class TranslationPopUp extends ConsumerWidget {
                                 Text(
                                   'Coming Soon',
                                   style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color:  AppColor.primary,
-                                ),
+                                    fontSize: 14,
+                                    color: AppColor.primary,
+                                  ),
                                 ),
                             ],
                           ),

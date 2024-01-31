@@ -29,16 +29,16 @@ class AppLocale {
 var globalLanguageProvider = ChangeNotifierProvider(
   (ref) {
     final lang = SharedPreferenceService.getLanguage;
-
     return GlobalLanguageProvider(lang);
   },
 );
 
 class GlobalLanguageProvider extends ChangeNotifier {
-  String _currentLocale = "en";
+  String? _currentLocale;
   GlobalLanguageProvider(this._currentLocale);
 
-  Locale get currentLocale => Locale(_currentLocale);
+  Locale? get currentLocale =>
+      _currentLocale == null ? null : Locale(_currentLocale!);
 
   Future<void> setCurrentLocale(String locale) async {
     _currentLocale = locale;

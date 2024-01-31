@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/features/patient/patient_profile/presentation/p
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/appointment_booking_page.dart';
+import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,10 +33,8 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
 
   @override
   void initState() {
-    MatomoTracker.instance.trackContentImpression(
-      content: _content,
-    );
     super.initState();
+    MatomoTracker.instance.trackContentImpression(content: _content);
   }
 
   @override
@@ -54,7 +54,9 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
     });
     return ref.watch(getPatientProfileProvider).when(
           data: (data) {
-            return _buildPage(ref, context);
+            return Scaffold(
+              body: _buildPage(ref, context),
+            );
           },
           loading: () => const Scaffold(
             body: Center(
@@ -72,90 +74,88 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
   }
 
   Widget _buildPage(WidgetRef ref, BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const PatientHomePage(),
-          Visibility(
-            visible: ref.watch(patientDashboardProvider).isVisible,
-            child: Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: AppBottomNavBar(
-                onSelected: (index) {
-                  ref.read(patientDashboardProvider).currentIndex = index;
-                  switch (index) {
-                    case 0:
-                      break;
-                    case 1:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const AppointmentBooking();
-                          },
-                        ),
-                      );
-                      break;
-
-                    case 2:
-                      showModalBottomSheet(
-                        context: context,
-                        isDismissible: false,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                        ),
-                        barrierLabel: MaterialLocalizations.of(context)
-                            .modalBarrierDismissLabel,
+    return Stack(
+      children: [
+        const PatientHomePage(),
+        Visibility(
+          visible: ref.watch(patientDashboardProvider).isVisible,
+          child: Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: AppBottomNavBar(
+              onSelected: (index) {
+                ref.read(patientDashboardProvider).currentIndex = index;
+                switch (index) {
+                  case 0:
+                    break;
+                  case 1:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
                         builder: (context) {
-                          MatomoTracker.instance.trackEvent(
-                              eventInfo: EventInfo(
-                                category: 'Main',
-                                action: 'Click',
-                                name: 'Triage member selection page click',
-                              ),
-                              dimensions: {
-                                'dimension1':
-                                    '${PersistentAuthStateService.authState.activeRole}'
-                              });
-                          return const TriageMemberSelectionPage();
+                          return const AppointmentBooking();
                         },
-                      );
+                      ),
+                    );
+                    break;
 
-                      break;
-                    case 3:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const PatientProfilePage();
-                          },
+                  case 2:
+                    showModalBottomSheet(
+                      context: context,
+                      isDismissible: false,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
-                      );
-                      break;
-                    case 4:
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const PatientNotificationPage();
-                          },
-                        ),
-                      );
-                      break;
-                    default:
-                      break;
-                  }
-                },
-                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
-              ),
+                      ),
+                      barrierLabel: MaterialLocalizations.of(context)
+                          .modalBarrierDismissLabel,
+                      builder: (context) {
+                        MatomoTracker.instance.trackEvent(
+                            eventInfo: EventInfo(
+                              category: 'Main',
+                              action: 'Click',
+                              name: 'Triage member selection page click',
+                            ),
+                            dimensions: {
+                              'dimension1':
+                                  '${PersistentAuthStateService.authState.activeRole}'
+                            });
+                        return const TriageMemberSelectionPage();
+                      },
+                    );
+
+                    break;
+                  case 3:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const PatientProfilePage();
+                        },
+                      ),
+                    );
+                    break;
+                  case 4:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const PatientNotificationPage();
+                        },
+                      ),
+                    );
+                    break;
+                  default:
+                    break;
+                }
+              },
+              selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

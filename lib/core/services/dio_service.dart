@@ -24,7 +24,7 @@ var keycloakDioProvider = Provider(
 
 var dioProvider = Provider(
   (ref) {
-    final lang = ref.watch(globalLanguageProvider).currentLocale.languageCode;
+    final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,

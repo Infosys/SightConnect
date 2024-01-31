@@ -261,14 +261,16 @@ class _PatientTriageEyeCapturingPageState
   void dispose() {
     logger.d('EyeDetectorView dispose');
     WidgetsBinding.instance.removeObserver(this);
-    if (mounted) {
-      _stopLiveFeed();
-    }
-    super.dispose();
+    _stopLiveFeed().then((_) {
+      super.dispose();
+    });
   }
 
   Future<void> _stopLiveFeed() async {
     logger.d('EyeDetectorView _stopLiveFeed');
+    if (!mounted) {
+      return;
+    }
     try {
       _canProcess = false;
       _meshDetector.close();
