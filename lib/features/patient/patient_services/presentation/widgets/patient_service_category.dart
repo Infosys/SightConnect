@@ -14,6 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/services/persistent_auth_service.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -27,6 +28,7 @@ class PatientServiceCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
     final loc = context.loc!;
     return Container(
       margin: Responsive.isMobile(context)
@@ -54,6 +56,8 @@ class PatientServiceCategory extends ConsumerWidget {
             spacing: Responsive.isMobile(context) ? 10 : 20,
             alignment: WrapAlignment.start,
             children: services
+                .where((miniapp) =>
+                    isUserBeta || miniapp != MiniApp.CATARACT_EYE_TEST)
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
@@ -75,7 +79,8 @@ class PatientServiceCategory extends ConsumerWidget {
                                 const TriageMemberSelectionPage(),
                           ),
                         );
-                      } else if (miniapp == MiniApp.CATARACT_EYE_TEST) {
+                      } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
+                          isUserBeta) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const PatientEyeCapturePage(),
@@ -84,7 +89,8 @@ class PatientServiceCategory extends ConsumerWidget {
                       } else if (miniapp == MiniApp.APPOINTMENT) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const PatientAppointmentPage(),
+                            builder: (context) =>
+                                const PatientAppointmentPage(),
                           ),
                         );
                       }

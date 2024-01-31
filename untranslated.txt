@@ -72,27 +72,8 @@
   ],
 
   "hi": [
-    "eyeBoxText",
     "recentServicesCataractEyeTest",
-    "privacyPolicyTitle",
-    "privacyPolicyPurposeOfProcessingSubTitle",
-    "visualAcuityTestDistanceInstruction",
-    "visualAcuityTestDistanceInstructionTooClose",
-    "visualAcuityTestDistanceInstructionTooFar",
-    "myProfileABHAID",
-    "myProfileEmail",
-    "viewHistoryButton",
-    "profilePagePersonalDetails",
-    "profilePageDateOfBirth",
-    "profilePageGender",
-    "profilePageMobile",
-    "profilePageHealthCardTitle",
-    "bottomNavItemServices",
-    "somethingWentWrong",
-    "triageUpdatedSuccessfully",
-    "noPreviewAvailable",
-    "appointmentTitle",
-    "appointmentSubtitle"
+    "bottomNavItemServices"
   ],
 
   "kn": [
@@ -216,26 +197,7 @@
   ],
 
   "te": [
-    "eyeBoxText",
     "recentServicesCataractEyeTest",
-    "privacyPolicyTitle",
-    "privacyPolicyPurposeOfProcessingSubTitle",
-    "visualAcuityTestDistanceInstruction",
-    "visualAcuityTestDistanceInstructionTooClose",
-    "visualAcuityTestDistanceInstructionTooFar",
-    "myProfileABHAID",
-    "myProfileEmail",
-    "viewHistoryButton",
-    "profilePagePersonalDetails",
-    "profilePageDateOfBirth",
-    "profilePageGender",
-    "profilePageMobile",
-    "profilePageHealthCardTitle",
-    "bottomNavItemServices",
-    "somethingWentWrong",
-    "triageUpdatedSuccessfully",
-    "noPreviewAvailable",
-    "appointmentTitle",
-    "appointmentSubtitle"
+    "bottomNavItemServices"
   ]
 }
