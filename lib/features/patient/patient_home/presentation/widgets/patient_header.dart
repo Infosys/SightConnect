@@ -27,7 +27,7 @@ class PatientHeader extends HookWidget {
           SizedBox(
             child: CarouselSlider.builder(
               carouselController: carouselController.value,
-              itemCount: 3,
+              itemCount: 2,
               options: CarouselOptions(
                 initialPage: 0,
                 aspectRatio: 1.4,
