@@ -1,9 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/repositories/vision_center_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/near_by_vision_center_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/patient_home_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -12,14 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart' as location;
 import 'package:permission_handler/permission_handler.dart';
-
-var simpleNearByVisionCenterProvider = FutureProvider(
-  (ref) {
-    final location = ref.watch(patientHomeProvider).data;
-    return ref.watch(visionCenterRepositoryProvider).getVisionCenters(
-        latitude: location?.latitude, longitude: location?.longitude);
-  },
-);
 
 class NearbyVisionCentersList extends ConsumerStatefulWidget {
   const NearbyVisionCentersList({super.key});

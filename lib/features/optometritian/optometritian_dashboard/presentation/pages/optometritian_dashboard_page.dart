@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/core/providers/global_optometrician_provider.da
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
-import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_dashboard_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -38,6 +37,12 @@ class _OptometritianDashboardPageState
             LoginPage.routeName,
             (route) => false,
           );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
+          Fluttertoast.showToast(
+              msg:
+                  "Apologies, we encountered a logout error in the mobile app.");
         });
       }
     });

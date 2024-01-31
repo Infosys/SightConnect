@@ -11,7 +11,7 @@
             }
         }
     },
-    "questionnaireTitle": "కంటి అంచనా ప్రశ్నలు",
+    "questionnaireTitle": "కంటి పరీక్ష",
     "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
     "visualAcuityTitle": "విజువల్ అక్యుటీ టెస్ట్",
     "visualAcuityDescription": "విజువల్ అక్యుటీ టెస్ట్ అనేది ఒక నిర్దిష్ట దూరం నుండి ఒక అక్షరం లేదా చిహ్నం యొక్క వివరాలను మీరు ఎంత బాగా చూస్తున్నారో తనిఖీ చేసే కంటి పరీక్ష. ఈ శీఘ్ర పరీక్షను ఇప్పుడే చేయండి!",
@@ -212,5 +212,24 @@
     "bottomNavItemAppointment" : "నియామకాలు",
     "memberSelection" : "సభ్యుడిని ఎంచుకోండి",
     "triageAlerDialogBoxTitle" : "పునరావృతం చేయడానికి దశలను ఎంచుకోండి",
-    "scannerTitle" : "స్కానర్"
+    "scannerTitle" : "స్కానర్",
+    "eyeBoxText": "కళ్ల చుట్టూ ఆకుపచ్చ పెట్టెలు కనిపించే వరకు చిత్రాన్ని సర్దుబాటు చేయండి మరియు ఉంచండి. కంటిని దగ్గరగా తరలించి, బాక్స్‌లో 40% కంటితో కప్పబడి ఉండేలా చూసుకోండి.",
+    "privacyPolicyTitle": "గోప్యత & డేటా రక్షణ",
+    "privacyPolicyPurposeOfProcessingSubTitle" : "క్రింది ప్రయోజనాల కోసం మీరు అందించిన వ్యక్తిగత డేటాను మేము ప్రాసెస్ చేస్తాము:",
+    "visualAcuityTestDistanceInstruction": "కెమెరాను కంటికి 40cm దూరంలో ఉంచండి.",
+    "visualAcuityTestDistanceInstructionTooClose": "మీరు కెమెరాకు చాలా దగ్గరగా ఉన్నారు, కెమెరాను కంటికి 40cm దూరంలో ఉంచండి.",
+    "visualAcuityTestDistanceInstructionTooFar": "మీరు కెమెరాకు చాలా దూరంగా ఉన్నారు, కెమెరాను కంటికి 40సెం.మీ దూరంలో ఉంచండి.",
+    "myProfileABHAID": "అభా ఐడి",
+    "myProfileEmail": "ఇమెయిల్",
+    "viewHistoryButton" : "చరిత్రను వీక్షించండి",
+    "profilePagePersonalDetails" : "వ్యక్తిగత వివరాలు",
+    "profilePageDateOfBirth" : "పుట్టిన తేదీ",
+    "profilePageGender": "లింగం",
+    "profilePageMobile": "మొబైల్",
+    "profilePageHealthCardTitle": "హెల్త్ కార్డ్",
+    "somethingWentWrong" : "ఎక్కడో తేడ జరిగింది.",
+    "triageUpdatedSuccessfully" : "ట్రయాజ్ విజయవంతంగా నవీకరించబడింది.",
+    "noPreviewAvailable" : "ప్రివ్యూ అందుబాటులో లేదు",
+    "appointmentTitle" : "నియామకాలు",
+    "appointmentSubtitle" : "అన్ని అపాయింట్‌మెంట్‌లు"
 }

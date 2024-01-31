@@ -32,12 +32,12 @@ class PatientHomePage extends ConsumerWidget {
         },
         onLanguageChange: () {
           final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale.toString();
+              ref.read(globalLanguageProvider).currentLocale;
           showBottomSheet(
             enableDrag: false,
             context: context,
             builder: (context) => TranslationPopUp(
-              currentLocaleCode: currentLocaleCode,
+              locale: currentLocaleCode,
             ),
           );
         },
@@ -49,7 +49,7 @@ class PatientHomePage extends ConsumerWidget {
             image: AssetImage(
               AppImages.scaffoldBg,
             ),
-            alignment: Alignment.topRight,
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(

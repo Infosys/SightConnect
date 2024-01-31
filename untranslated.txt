@@ -65,28 +65,6 @@
     "appointmentSubtitle"
   ],
 
-  "hi": [
-    "eyeBoxText",
-    "privacyPolicyTitle",
-    "privacyPolicyPurposeOfProcessingSubTitle",
-    "visualAcuityTestDistanceInstruction",
-    "visualAcuityTestDistanceInstructionTooClose",
-    "visualAcuityTestDistanceInstructionTooFar",
-    "myProfileABHAID",
-    "myProfileEmail",
-    "viewHistoryButton",
-    "profilePagePersonalDetails",
-    "profilePageDateOfBirth",
-    "profilePageGender",
-    "profilePageMobile",
-    "profilePageHealthCardTitle",
-    "somethingWentWrong",
-    "triageUpdatedSuccessfully",
-    "noPreviewAvailable",
-    "appointmentTitle",
-    "appointmentSubtitle"
-  ],
-
   "kn": [
     "eyeBoxText",
     "privacyPolicyTitle",
@@ -176,28 +154,6 @@
   ],
 
   "ta": [
-    "eyeBoxText",
-    "privacyPolicyTitle",
-    "privacyPolicyPurposeOfProcessingSubTitle",
-    "visualAcuityTestDistanceInstruction",
-    "visualAcuityTestDistanceInstructionTooClose",
-    "visualAcuityTestDistanceInstructionTooFar",
-    "myProfileABHAID",
-    "myProfileEmail",
-    "viewHistoryButton",
-    "profilePagePersonalDetails",
-    "profilePageDateOfBirth",
-    "profilePageGender",
-    "profilePageMobile",
-    "profilePageHealthCardTitle",
-    "somethingWentWrong",
-    "triageUpdatedSuccessfully",
-    "noPreviewAvailable",
-    "appointmentTitle",
-    "appointmentSubtitle"
-  ],
-
-  "te": [
     "eyeBoxText",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
