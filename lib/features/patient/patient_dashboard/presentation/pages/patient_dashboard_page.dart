@@ -47,6 +47,12 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
             LoginPage.routeName,
             (route) => false,
           );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from PatientDashboardPage : $e");
+          Fluttertoast.showToast(
+              msg:
+                  "Apologies, we encountered a logout error in the mobile app.");
         });
       }
     });
