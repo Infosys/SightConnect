@@ -364,18 +364,19 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Icon(
-                              Icons.camera_alt_outlined,
-                              size: AppSize.width(context) * 0.057,
-                              color: AppColor.black.withOpacity(0.8),
-                            ),
-                            SizedBox(width: AppSize.width(context) * 0.02),
+                            // Icon(
+                            //   Icons.camera_alt_outlined,
+                            //   size: AppSize.width(context) * 0.057,
+                            //   color: AppColor.black.withOpacity(0.8),
+                            // ),
+                            // SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                              "${_distanceToFace ?? 0} cm",
+                                _distanceToFace != null ? '${_distanceToFace} cm' : 'No Face',
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: AppColor.green,
+                                color: (_distanceToFace != null && (_distanceToFace! >= 35 && _distanceToFace! <= 45)) ? AppColor.green : AppColor.red,
+                                
                               ),
                             ),
                           ],

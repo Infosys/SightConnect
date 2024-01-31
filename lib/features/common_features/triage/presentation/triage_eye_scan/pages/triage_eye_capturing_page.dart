@@ -49,7 +49,7 @@ class _PatientTriageEyeCapturingPageState
   bool isCompleted = false;
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
