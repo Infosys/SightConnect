@@ -32,8 +32,7 @@ class SharedPreferenceService {
     _sharedPreferences.setBool("tumblingOverInfo", value);
   }
 
-  static String get getLanguage =>
-      _sharedPreferences.getString("language") ?? "en";
+  static String? get getLanguage => _sharedPreferences.getString("language");
 
   static double get getFontScale =>
       _sharedPreferences.getDouble("fontScale") ?? 1.0;

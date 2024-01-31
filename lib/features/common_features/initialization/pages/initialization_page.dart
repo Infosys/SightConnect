@@ -96,14 +96,14 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
     if (role == Role.ROLE_OPTOMETRIST) {
+      //Skip consent for optometrist
       await navigateBasedOnRole(navigator, role);
       return;
     }
 
     try {
-      final model = ref.watch(consentRepositoryProvider);
-      final consent = await model.getConsent();
-      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+      if (await _isConsentAlreadyAccepted()) {
+        // consent already accepted
         await navigateBasedOnRole(navigator, role);
       } else {
         final isAccepted = await _showConsentForm(navigator, role);
@@ -117,6 +117,12 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       await _invalidateAndLogout("Server Error. Please login again.");
     }
+  }
+
+  Future<bool> _isConsentAlreadyAccepted() async {
+    final model = ref.watch(consentRepositoryProvider);
+    final consent = await model.getConsent();
+    return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {

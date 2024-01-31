@@ -19,11 +19,35 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class PatientHomePage extends ConsumerWidget {
+class PatientHomePage extends ConsumerStatefulWidget {
   const PatientHomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
+}
+
+class _PatientHomePageState extends ConsumerState<PatientHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final currentLocaleCode = ref.read(globalLanguageProvider).currentLocale;
+      if (currentLocaleCode == null) {
+        showBottomSheet(
+          enableDrag: false,
+          context: context,
+          builder: (context) => TranslationPopUp(
+            locale: currentLocaleCode,
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
@@ -32,12 +56,12 @@ class PatientHomePage extends ConsumerWidget {
         },
         onLanguageChange: () {
           final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale.toString();
+              ref.read(globalLanguageProvider).currentLocale;
           showBottomSheet(
             enableDrag: false,
             context: context,
             builder: (context) => TranslationPopUp(
-              currentLocaleCode: currentLocaleCode,
+              locale: currentLocaleCode,
             ),
           );
         },
@@ -49,7 +73,7 @@ class PatientHomePage extends ConsumerWidget {
             image: AssetImage(
               AppImages.scaffoldBg,
             ),
-            alignment: Alignment.topRight,
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(

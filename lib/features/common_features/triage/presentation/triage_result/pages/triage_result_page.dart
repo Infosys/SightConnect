@@ -57,7 +57,7 @@ class TriageResultPage extends ConsumerWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppImages.scaffoldBg),
-                alignment: Alignment.topCenter,
+                fit: BoxFit.cover,
               ),
             ),
             child: Column(
