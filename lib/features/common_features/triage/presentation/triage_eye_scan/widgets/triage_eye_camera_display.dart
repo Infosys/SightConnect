@@ -165,25 +165,23 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                       children: [
                         Visibility(
                           visible: !isEyeValid,
-                          child: Positioned(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Container(
-                                width: AppSize.width(context) * 0.8,
-                                decoration: BoxDecoration(
-                                  color: AppColor.black.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                child: Text(
-                                  loc.eyeBoxText,
-                                  textAlign: TextAlign.center,
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    color: AppColor.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              width: AppSize.width(context) * 0.8,
+                              decoration: BoxDecoration(
+                                color: AppColor.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                loc.eyeBoxText,
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

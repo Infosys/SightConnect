@@ -343,7 +343,7 @@ class _VisualAcuityFaceDistancePageViewState
                         ),
                       ),
                       Positioned(
-                        bottom: AppSize.height(context) * 0.1,
+                        bottom: AppSize.height(context) * 0.04,
                         left: AppSize.width(context) * 0.1,
                         right: AppSize.width(context) * 0.1,
                         child: ElevatedButton(
