@@ -1,6 +1,7 @@
 {
   "as": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -14,15 +15,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "bn": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -36,15 +41,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "gu": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -58,15 +67,26 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
+  ],
+
+  "hi": [
+    "recentServicesCataractEyeTest",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject"
   ],
 
   "kn": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -80,15 +100,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "ml": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -102,15 +126,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "mr": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -124,15 +152,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "or": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -146,15 +178,19 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "ta": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -168,10 +204,20 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
+  ],
+
+  "te": [
+    "recentServicesCataractEyeTest",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject"
   ]
 }

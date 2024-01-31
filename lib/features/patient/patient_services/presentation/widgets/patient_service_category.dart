@@ -2,6 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/pages/patient_appointment_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -12,6 +14,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/services/persistent_auth_service.dart';
+import '../../../../../main.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -25,6 +29,8 @@ class PatientServiceCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+    logger.d("isUserBeta $isUserBeta");
     final loc = context.loc!;
     return Container(
       margin: Responsive.isMobile(context)
@@ -52,6 +58,8 @@ class PatientServiceCategory extends ConsumerWidget {
             spacing: Responsive.isMobile(context) ? 10 : 20,
             alignment: WrapAlignment.start,
             children: services
+                .where((miniapp) =>
+                    isUserBeta || miniapp != MiniApp.CATARACT_EYE_TEST)
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
@@ -71,6 +79,20 @@ class PatientServiceCategory extends ConsumerWidget {
                           MaterialPageRoute(
                             builder: (context) =>
                                 const TriageMemberSelectionPage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
+                          isUserBeta) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PatientEyeCapturePage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.APPOINTMENT) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientAppointmentPage(),
                           ),
                         );
                       }
@@ -122,6 +144,8 @@ String _getMiniAppText(
 ) =>
     {
       MiniApp.EYE_ASSESSMENT: loc.recentServicesEyeAssessment,
-      MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest
+      MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest,
+      MiniApp.CATARACT_EYE_TEST: loc.recentServicesCataractEyeTest,
+      MiniApp.APPOINTMENT: loc.bottomNavItemAppointment,
     }[miniApp] ??
     "App";

@@ -39,8 +39,8 @@ class VgProfile extends ConsumerWidget {
                   },
                 ).catchError((e) {
                   Fluttertoast.showToast(
-                    msg: e.toString(),
-                  );
+                      msg:
+                          "Apologies, we encountered a logout error in the mobile app.");
                 });
               },
               icon: const Icon(

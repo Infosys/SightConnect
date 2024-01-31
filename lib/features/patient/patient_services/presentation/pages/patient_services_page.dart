@@ -21,7 +21,9 @@ class PatientServicesPage extends ConsumerWidget {
         // loc.recentServicesVisualAcuityTest,
         // loc.recentServicesEyeAssessment,
         MiniApp.VISUAL_ACUITY_TEST,
-        MiniApp.EYE_ASSESSMENT
+        MiniApp.EYE_ASSESSMENT,
+        MiniApp.CATARACT_EYE_TEST,
+        MiniApp.APPOINTMENT,
       ],
     };
 
@@ -67,8 +69,8 @@ class PatientServicesPage extends ConsumerWidget {
                         tabs: [
                           Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child:
-                                SvgPicture.asset(BottomNavItems.home(loc).svgImage),
+                            child: SvgPicture.asset(
+                                BottomNavItems.home(loc).svgImage),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),

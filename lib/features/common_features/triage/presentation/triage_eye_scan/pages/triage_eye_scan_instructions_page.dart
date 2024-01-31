@@ -73,8 +73,8 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                   TextScalePopupMenu.show(context, ref);
                 },
                 icon: SvgPicture.asset(
-                  "assets/drawer_icons/accessibility.svg",
-                  height: 22,
+                  "assets/icons/accessability.svg",
+                  height: 32,
                 ),
               ),
             ],

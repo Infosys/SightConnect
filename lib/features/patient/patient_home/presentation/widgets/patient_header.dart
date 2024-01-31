@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -7,7 +8,10 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:path/path.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../data/source/local/fake_data_source.dart';
 
 class PatientHeader extends HookWidget {
@@ -27,7 +31,7 @@ class PatientHeader extends HookWidget {
           SizedBox(
             child: CarouselSlider.builder(
               carouselController: carouselController.value,
-              itemCount: 3,
+              itemCount: 2,
               options: CarouselOptions(
                 initialPage: 0,
                 aspectRatio: 1.4,
@@ -49,7 +53,7 @@ class PatientHeader extends HookWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.kmradius),
                         child: Image.asset(
-                          "assets/images/banner_one.png",
+                          data["image"],
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -93,16 +97,39 @@ class PatientHeader extends HookWidget {
                                   color: AppColor.white,
                                 ),
                               ),
-                              onPressed: () {},
-                              child: AutoSizeText(
-                                context.loc!.knowMoreButton,
-                                minFontSize: 10,
-                                maxLines: 1,
-                                style: applyRobotoFont(
-                                  color: AppColor.white,
-                                  fontSize: 14,
-                                ),
-                              ),
+                              onPressed: () {
+                                if (index == 0) {
+                                  launchUrl(Uri(
+                                    scheme: "https",
+                                    host: 'www.lvpei.org',
+                                    path: "/services/icare",
+                                  ));;
+                                } else if (index == 1) {
+                                  Share.share(
+                                    context.loc?.smsContent ?? "",
+                                    subject: context.loc?.emailSubject ?? "",
+                                  );
+                                }
+                              },
+                              child: index == 0
+                                  ? AutoSizeText(
+                                      context.loc!.knowMoreButton,
+                                      minFontSize: 10,
+                                      maxLines: 1,
+                                      style: applyRobotoFont(
+                                        color: AppColor.white,
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  : AutoSizeText(
+                                      "Invite Now",
+                                      minFontSize: 10,
+                                      maxLines: 1,
+                                      style: applyRobotoFont(
+                                        color: AppColor.white,
+                                        fontSize: 14,
+                                      ),
+                                    ),
                             ),
                           ],
                         ),
@@ -117,7 +144,7 @@ class PatientHeader extends HookWidget {
           AnimatedSmoothIndicator(
             onDotClicked: (index) {},
             activeIndex: activeIndex.value,
-            count: 3,
+            count: 2,
             effect: WormEffect(
               paintStyle: PaintingStyle.fill,
               activeDotColor: AppColor.primary,
