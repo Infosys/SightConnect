@@ -14,11 +14,6 @@ List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
         "description": loc.homeCarousal2Description,
         "image": AppImages.patientCover2,
       },
-      /*  {
-        "title": loc.homeCarousal3Title,
-        "description": loc.homeCarousal3Description,
-        "image": AppImages.patientCover3,
-      }, */
     ];
 
 List<Map<String, dynamic>> getRecentServices(AppLocalizations loc) => [
