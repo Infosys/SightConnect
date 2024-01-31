@@ -269,10 +269,10 @@ void showFeedback(BuildContext context) {
                                   //give 5 seconds of timeout
 
                                   feedback.save();
-                                  // ref
-                                  //     .read(triageStepperProvider)
-                                  //     .goToNextStep();
-                                  ref.read(triageStepperProvider).reset();
+                                  ref
+                                      .read(triageStepperProvider)
+                                      .goToNextStep();
+                                  // ref.read(triageStepperProvider).reset();
 
                                   if (await ref
                                       .read(connectivityProvider)
