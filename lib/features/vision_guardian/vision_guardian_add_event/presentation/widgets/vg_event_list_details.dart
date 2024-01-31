@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/source/vg_add_event_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
@@ -23,23 +26,12 @@ class VisionEventListDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (eventType == "default") {
-      return ref.watch(getEventDetailsProvider).when(data: (eventDetails) {
-        if (eventDetails.isEmpty) {
-          return SizedBox(
-            width: Responsive.isMobile(context)
-                ? AppSize.width(context) * 0.9
-                : AppSize.width(context) * 0.95,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                VisionGuardianEmptyResultCard(type: "Event"),
-              ],
-            ),
-          );
-        }
-        return Column(children: [
-          ...eventDetails.map((event) {
+      var response = ref.watch(addEventDetailsProvider).listOfEventDetails;
+
+      return LoadingOverlay(
+        isLoading: ref.watch(addEventDetailsProvider).eventLoading,
+        child: Column(children: [
+          ...response.map((event) {
             return InkWell(
               onTap: () {
                 ref
@@ -58,20 +50,8 @@ class VisionEventListDetails extends ConsumerWidget {
               child: vgEventDataCards(context, event, ref),
             );
           }),
-        ]);
-      }, loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }, error: (error, stackTrace) {
-        return const Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            VisionGuardianEmptyResultCard(type: "Event"),
-          ],
-        );
-      });
+        ]),
+      );
     } else {
       var response = ref.watch(addEventDetailsProvider).listOfEventDetails;
       if (response.isEmpty) {

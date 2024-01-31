@@ -21,26 +21,26 @@ final addEventDetailsProvider =
   );
 });
 
-var getEventDetailsProvider =
-    FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
-  ref.watch(addEventDetailsProvider).eventStatusFilterValue;
-  ref.watch(addEventDetailsProvider).isSelected;
+// var getEventDetailsProvider =
+//     FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
+//   ref.watch(addEventDetailsProvider).eventStatusFilterValue;
+//   ref.watch(addEventDetailsProvider).isSelected;
 
-  var statusfilter = ref.read(addEventDetailsProvider).eventStatusFilterValue;
+//   var statusfilter = ref.read(addEventDetailsProvider).eventStatusFilterValue;
 
-  List<VisionGuardianEventModel> response = await ref
-      .watch(vgAddEventRepository)
-      .getVGEvents(
-          actorIdentifier: ref.read(globalVGProvider).userId.toString(),
-          eventStatusFilter: statusfilter);
+//   List<VisionGuardianEventModel> response = await ref
+//       .watch(vgAddEventRepository)
+//       .getVGEvents(
+//           actorIdentifier: ref.read(globalVGProvider).userId.toString(),
+//           eventStatusFilter: statusfilter);
 
-  ref.read(addEventDetailsProvider).setEventDetails(response.reversed.toList());
-  ref
-      .read(addEventDetailsProvider)
-      .setSearchEventDetails(response.reversed.toList());
+//   ref.read(addEventDetailsProvider).setEventDetails(response.reversed.toList());
+//   ref
+//       .read(addEventDetailsProvider)
+//       .setSearchEventDetails(response.reversed.toList());
 
-  return response.reversed.toList();
-});
+//   return response.reversed.toList();
+// });
 
 class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
@@ -51,7 +51,10 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     required this.globalVGProvider,
     required this.fileMsProvider,
   }) {
+    List<VisionGuardianEventModel> previousList = [];
+    getVgEvent(previousList);
     eventPatientController.addListener(scrollListener);
+    eventListController.addListener(scrollListener);
   }
 
   String eventId = "";
@@ -60,6 +63,9 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   var isLoading = false;
 
   var getisLoading = false;
+
+  var eventLoading = false;
+
   List<VisionGuardianEventModel> listOfEventDetails = [];
   List<VisionGuardianEventModel> searchResults = [];
   List<VisionGuardianPatientResponseModel> listOfEventPatients = [];
@@ -70,6 +76,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   String queryData = "";
   TextEditingController searchController = TextEditingController();
   ScrollController eventPatientController = ScrollController();
+  ScrollController eventListController = ScrollController();
+
   var isSelected = -1;
   var eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   XFile? _image;
@@ -107,6 +115,9 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   var offset = 0;
   get getOffset => offset;
 
+  var eventOffset = 0;
+  get getEventOffset => eventOffset;
+
   void getEventPatientTriageReport(previousList) async {
     try {
       logger.d("getPatientTriageReport");
@@ -130,6 +141,43 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       getisLoading = false;
     }
     notifyListeners();
+  }
+
+  void getVgEvent(previousList) async {
+    try {
+      // ref.watch(addEventDetailsProvider).eventStatusFilterValue;
+      // ref.watch(addEventDetailsProvider).isSelected;
+
+      // var statusfilter = addEventDetailsProvider.eventStatusFilterValue;
+      // ref.read(addEventDetailsProvider).eventStatusFilterValue;
+
+      // ref
+      //     .read(addEventDetailsProvider)
+      //     .setEventDetails(response.reversed.toList());
+      // ref
+      //     .read(addEventDetailsProvider)
+      //     .setSearchEventDetails(response.reversed.toList());
+
+      // return response.reversed.toList();
+      eventLoading = true;
+      List<VisionGuardianEventModel> response =
+          await vgAddEventRepository.getVGEvents(
+        queryData: {
+          "actorIdentifier": globalVGProvider.userId.toString(),
+          "eventStatusFilter": eventStatusFilter,
+          "pageable": {"page": eventOffset, "size": 3}
+        },
+      );
+      logger.f(response);
+      setEventList(previousList + response);
+      eventLoading = false;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void setEventList(List<VisionGuardianEventModel> response) {
+    listOfEventDetails = response;
   }
 
   void setEventId(String id) {
@@ -348,6 +396,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
         (newEventPatientList.length == 10 || newEventPatientList.isEmpty)) {
       offset = offset + 1;
       getEventPatientTriageReport(listOfEventPatients);
+    }
+
+    if (eventListController.position.pixels ==
+            eventListController.position.maxScrollExtent &&
+        true) {
+      eventOffset++;
     }
   }
 }
