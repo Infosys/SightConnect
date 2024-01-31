@@ -37,8 +37,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
           enableDrag: false,
           context: context,
           builder: (context) => TranslationPopUp(
-            currentLocaleCode:
-                currentLocaleCode == null ? 'en' : currentLocaleCode.toString(),
+            locale: currentLocaleCode,
           ),
         );
       }
@@ -57,12 +56,12 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
         },
         onLanguageChange: () {
           final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale.toString();
+              ref.read(globalLanguageProvider).currentLocale;
           showBottomSheet(
             enableDrag: false,
             context: context,
             builder: (context) => TranslationPopUp(
-              currentLocaleCode: currentLocaleCode,
+              locale: currentLocaleCode,
             ),
           );
         },
@@ -74,7 +73,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             image: AssetImage(
               AppImages.scaffoldBg,
             ),
-            alignment: Alignment.topRight,
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(

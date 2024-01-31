@@ -326,38 +326,51 @@ class _VisualAcuityFaceDistancePageViewState
                             color: Colors.black.withOpacity(0.8),
                           ),
                           child: Text(
-                              _distanceToFace != null ? 'Distance to Face: $_distanceToFace' : 'Bring your face inside the box',
+                            _distanceToFace != null
+                                ? 'Distance to Face: $_distanceToFace cm'
+                                : 'Bring your face inside the box',
                             maxLines: 1,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style:  TextStyle(
-                              color: (_distanceToFace != null && (_distanceToFace! >= 35 && _distanceToFace! <= 45)) ? Color(0xff22BF85) :  AppColor.red,
+                            style: TextStyle(
+                              color: (_distanceToFace != null &&
+                                      (_distanceToFace! >= 35 &&
+                                          _distanceToFace! <= 45))
+                                  ? const Color(0xff22BF85)
+                                  : AppColor.red,
                             ),
                           ),
                         ),
                       ),
+                      Positioned(
+                        bottom: AppSize.height(context) * 0.1,
+                        left: AppSize.width(context) * 0.1,
+                        right: AppSize.width(context) * 0.1,
+                        child: ElevatedButton(
+                          onPressed: _distanceToFace != null &&
+                                  (_distanceToFace! >= 35 &&
+                                      _distanceToFace! <= 45)
+                              ? () {
+                                  final navigator = Navigator.of(context);
+                                  logger.d("Next Button Pressed");
+                                  _addLoading();
+                                  navigator.pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VisualAcuityTumblingLeftEyeInstruction(),
+                                    ),
+                                  );
+                                }
+                              : null,
+                          child: const Text("Proceed"),
+                        ),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          floatingActionButton: _distanceToFace != null && (_distanceToFace! >= 35 && _distanceToFace! <= 45)
-                ? FloatingActionButton(
-                    onPressed: () async {
-                      final navigator = Navigator.of(context);
-                      logger.d("Next Button Pressed");
-                      _addLoading();
-                      navigator.pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const VisualAcuityTumblingLeftEyeInstruction(),
-                        ),
-                      );
-                    },
-                    child: const Icon(Icons.navigate_next),
-                  )
-                : Container(),
         ),
       );
     }

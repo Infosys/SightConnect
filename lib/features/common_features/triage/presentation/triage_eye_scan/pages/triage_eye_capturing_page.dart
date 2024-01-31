@@ -319,6 +319,7 @@ class _PatientTriageEyeCapturingPageState
     } else {
       return TriageEyeCameraDisplay(
         scaffoldKey: scaffoldKey,
+        isEyeValid: _isEyeValid,
         onCameraSwitch: () async {
           await _toggleCamera();
         },
@@ -332,9 +333,6 @@ class _PatientTriageEyeCapturingPageState
         customPaint: _customPaint,
         onCapture: () async {
           if (!_isEyeValid) {
-            Fluttertoast.showToast(
-                msg:
-                    "Adjust and position until green boxes appear around the eyes.");
             return;
           }
           final image = await _takePicture(context);

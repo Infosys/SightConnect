@@ -199,7 +199,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             }
                                           },
                                           child: Text(
-                                            loc.noButton,
+                                            question.answerOption?.first.answer
+                                                    ?.answerDisplayString ??
+                                                "",
                                             style: applyRobotoFont(
                                               fontSize: 14,
                                               color: AppColor.primary,
@@ -217,7 +219,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             );
                                           },
                                           child: Text(
-                                            loc.yesButton,
+                                            question.answerOption?.last.answer
+                                                    ?.answerDisplayString ??
+                                                "",
                                             style: applyRobotoFont(
                                                 fontSize: 14,
                                                 color: AppColor.primary),
