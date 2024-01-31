@@ -121,15 +121,15 @@ class EyeScanProvider extends ChangeNotifier {
     }
 
     if (_leftEyeStatus == "Normal") {
-      leftEyeScore =  leftEyeNormalValue * 100;
+      leftEyeScore =  double.parse((leftEyeNormalValue * 100).toStringAsFixed(2));
     }else if (_leftEyeStatus == "Catract") {
-      leftEyeScore = leftEyeMatureValue * 100;
+      leftEyeScore = double.parse((leftEyeMatureValue * 100).toStringAsFixed(2));
     }
 
     if (_rightEyeStatus == "Normal") {
-      rightEyeScore =  rightEyeNormalValue * 100;
+      rightEyeScore =  double.parse((rightEyeNormalValue * 100).toStringAsFixed(2));
     }else if (_rightEyeStatus == "Catract") {
-      rightEyeScore =  rightEyeMatureValue * 100;
+      rightEyeScore =  double.parse((rightEyeMatureValue * 100).toStringAsFixed(2));
     }
 
     // _leftEyeDetected = leftEyeProbability != -1;

@@ -77,8 +77,8 @@ class PatientHomePage extends ConsumerWidget {
               InviteCard(
                 onPressed: () {
                   Share.share(
-                    context.loc?.inviteCardDescription ?? "",
-                    subject: ApiConstant.playStoreUrl,
+                    context.loc?.smsContent ?? "",
+                    subject: context.loc?.emailSubject ?? "",
                   );
                 },
               ),
