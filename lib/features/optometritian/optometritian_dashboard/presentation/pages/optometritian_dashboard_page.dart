@@ -37,6 +37,12 @@ class _OptometritianDashboardPageState
             LoginPage.routeName,
             (route) => false,
           );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
+          Fluttertoast.showToast(
+              msg:
+                  "Apologies, we encountered a logout error in the mobile app.");
         });
       }
     });
