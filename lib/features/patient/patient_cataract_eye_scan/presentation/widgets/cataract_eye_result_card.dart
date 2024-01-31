@@ -69,7 +69,7 @@ class EyeResultImageCard extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                "${model.rightEyeScoreValue.toString()}/20",
+                                "${model.rightEyeScoreValue.toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -138,7 +138,7 @@ class EyeResultImageCard extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                "${model.leftEyeScoreValue.toString()}/20",
+                                "${model.leftEyeScoreValue.toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

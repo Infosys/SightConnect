@@ -93,14 +93,53 @@ class EyeScanProvider extends ChangeNotifier {
       _rightEyeStatus = "Normal";
       rightEyeScore = 20;
     }
+
+    double leftEyeMatureValue =
+        leftEyeProbability['results']?[0]['mature'] ?? 0.0;
+    double leftEyeNormalValue =
+        leftEyeProbability['results']?[1]['normal'] ?? 0.0;
+    double leftEyeRednessValue =
+        leftEyeProbability['results']?[2]['redness'] ?? 0.0;
+
+    double rightEyeMatureValue =
+        rightEyeProbability['results']?[0]['mature'] ?? 0.0;
+    double rightEyeNormalValue =
+        rightEyeProbability['results']?[1]['normal'] ?? 0.0;
+    double rightEyeRednessValue =
+        rightEyeProbability['results']?[2]['redness'] ?? 0.0;
+
+    if (leftEyeMatureValue < 0.5 && leftEyeNormalValue > 0.5) {
+      _leftEyeStatus = "Normal";
+    } else if (leftEyeMatureValue > 0.5 && leftEyeNormalValue < 0.5) {
+      _leftEyeStatus = "Catract";
+    }
+
+    if (rightEyeMatureValue < 0.5 && rightEyeNormalValue > 0.5) {
+      _rightEyeStatus = "Normal";
+    } else if (rightEyeMatureValue > 0.5 && rightEyeMatureValue < 0.5) {
+      _rightEyeStatus = "Catract";
+    }
+
+    if (_leftEyeStatus == "Normal") {
+      leftEyeScore =  leftEyeNormalValue * 100;
+    }else if (_leftEyeStatus == "Catract") {
+      leftEyeScore = leftEyeMatureValue * 100;
+    }
+
+    if (_rightEyeStatus == "Normal") {
+      rightEyeScore =  rightEyeNormalValue * 100;
+    }else if (_rightEyeStatus == "Catract") {
+      rightEyeScore =  rightEyeMatureValue * 100;
+    }
+
     // _leftEyeDetected = leftEyeProbability != -1;
     // _rightEyeDetected = rightEyeProbability != -1;
-    if (leftEyeProbability != -1 && rightEyeProbability != -1) {
-      _leftEyeStatus = await getStatus(leftEyeProbability);
-      _rightEyeStatus = await getStatus(rightEyeProbability);
-      leftEyeScore = await getScore(leftEyeProbability);
-      rightEyeScore = await getScore(rightEyeProbability);
-    }
+    // if (leftEyeProbability != -1 && rightEyeProbability != -1) {
+    //   _leftEyeStatus = await getStatus(leftEyeProbability);
+    //   _rightEyeStatus = await getStatus(rightEyeProbability);
+    //   leftEyeScore = await getScore(leftEyeProbability);
+    //   rightEyeScore = await getScore(rightEyeProbability);
+    // }
     _dateTime = DateTime.now();
     _formatedDate = DateFormat('d MMMM, yyyy').format(_dateTime!);
     _formatedTime = DateFormat('h:mm a').format(_dateTime!);
@@ -108,20 +147,18 @@ class EyeScanProvider extends ChangeNotifier {
     setIsLoading();
   }
 
-  Future<num> predictCataract(XFile? eyeImage) async {
+  Future<Map<String, dynamic>> predictCataract(
+      XFile? eyeImage) async {
     var res = await ref
         .read(patientEyeScanRepository)
         .getCataractPrediction(eyeImage: eyeImage);
 
-    if (res == null) {
-      logger.d("Timeout Called$res");
-      return -1;
-    }
+    logger.d("res.runtimeType is ${res.toString()}");
 
-    Map<String, dynamic>.from(res).isEmpty
-        ? logger.d("Error Occured")
-        : res = Map<String, num>.from(res);
-    return res["probability"];
+    // Map<String, List<Map<String, double>>>.from(res).isEmpty
+    //     ? logger.d("Error Occured")
+    //     : res = Map<String, num>.from(res);
+    return res;
   }
 
   processKeratoconus() {

@@ -24,26 +24,35 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
     // });
     // final formData =
     //     FormData.fromMap({'file': MultipartFile.fromBytes(bytes as List<int>)});
-    String fileName = eyeImage!.path.split('/').last;
+
+    logger.d("eye path is ${eyeImage!.path}");
+    String fileName = eyeImage.path.split('/').last;
     FormData formData = FormData.fromMap({
-      "file": MultipartFile.fromBytes(await eyeImage.readAsBytes(),
-          filename: fileName),
+      "file": await MultipartFile.fromFile(eyeImage.path, filename: fileName),
     });
-    String url = "http://4.240.107.201:8000/predict/";
+
+    // var data = FormData.fromMap({
+    //   'file': [
+    //     await MultipartFile.fromFile(
+    //       eyeImage.path,
+    //     )
+    //   ],
+    // });
+
+    String url = "https://eyecare4all-dev.infosysapps.com/services/ai/api/detect/";
 
     logger.d("model post call initiated");
     logger.d(url);
     try {
-      var response = await _dio.post<Map<String, dynamic>>(
+      var response = await _dio.post(
         url,
-        data: formData,
         options: Options(
-            contentType: "multipart/form-data",
-            receiveTimeout: const Duration(seconds: 7),
-            sendTimeout: const Duration(seconds: 5)),
+          contentType: Headers.formUrlEncodedContentType,
+        ),
+        data: formData,
       );
       logger.d("post called ended");
-      logger.d(response.data.toString());
+      logger.d("api res is : ${response.data.toString()}");
       return response.data;
     } on Exception catch (e) {
       if (e == DioExceptionType.sendTimeout ||
@@ -54,6 +63,4 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
       logger.d(e.toString());
     }
   }
-
-
 }

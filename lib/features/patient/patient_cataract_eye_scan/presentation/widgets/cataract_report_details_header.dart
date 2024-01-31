@@ -26,7 +26,7 @@ class PatientDetailHeader extends ConsumerWidget {
         child: Row(
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage(AppImages.accessability),
+              backgroundColor: AppColor.grey,
             ),
             const SizedBox(
               width: AppSize.kspadding,
