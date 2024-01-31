@@ -20,7 +20,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "bn": [
@@ -44,7 +46,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "gu": [
@@ -68,12 +72,16 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "hi": [
     "recentServicesCataractEyeTest",
-    "bottomNavItemServices"
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject"
   ],
 
   "kn": [
@@ -97,7 +105,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "ml": [
@@ -121,7 +131,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "mr": [
@@ -145,7 +157,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "or": [
@@ -169,7 +183,9 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "ta": [
@@ -193,11 +209,15 @@
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
     "appointmentTitle",
-    "appointmentSubtitle"
+    "appointmentSubtitle",
+    "smsContent",
+    "emailSubject"
   ],
 
   "te": [
     "recentServicesCataractEyeTest",
-    "bottomNavItemServices"
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject"
   ]
 }
