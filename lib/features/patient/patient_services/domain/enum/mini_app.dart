@@ -2,4 +2,6 @@ enum MiniApp {
   EYE_ASSESSMENT,
   VISUAL_ACUITY_TEST,
   // Add more
+  CATARACT_EYE_TEST,
+  APPOINTMENT,
 }

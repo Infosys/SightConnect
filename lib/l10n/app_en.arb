@@ -79,6 +79,7 @@
     "myConnectionsAdd": "Add",
     "recentServicesTitle": "My Recent Services",
     "recentServicesEyeAssessment": "Eye Assessment",
+    "recentServicesCataractEyeTest": "Cataract Eye Test",
     "recentServicesVisualAcuityTest": "Visual Acuity Test",
     "nearbyVisionCentersTitle": "Nearby Vision Centers",
     "nearbyVisionCentersNotFound": "No Vision Centers Found",
@@ -229,6 +230,7 @@
   
     "bottomNavItemEyeTest" : "Eye Test",
     "bottomNavItemAppointment" : "Appointments",
+    "bottomNavItemServices" : "Services",
     "memberSelection" : "Select Member",
     "triageAlerDialogBoxTitle" : "Select Steps to Redo",
     "scannerTitle" : "Scanner",

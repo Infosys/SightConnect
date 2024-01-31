@@ -22,8 +22,8 @@ class BottomNavItems {
     isSelected: true,
   );
   static BottomNavItem service(AppLocalizations loc) => BottomNavItem(
-    name: loc.bottomNavItemAppointment,
-    svgImage: "assets/nav_icons/appointments.svg",
+    name: loc.bottomNavItemServices,
+    svgImage: AppIcon.navService,
     initialScale: 1,
   );
   static BottomNavItem triage(AppLocalizations loc) => BottomNavItem(

@@ -1,6 +1,7 @@
 {
   "as": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -14,6 +15,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -23,6 +25,7 @@
 
   "bn": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -36,6 +39,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -45,6 +49,7 @@
 
   "gu": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -58,6 +63,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -67,6 +73,7 @@
 
   "hi": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -80,6 +87,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -89,6 +97,7 @@
 
   "kn": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -102,6 +111,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -111,6 +121,7 @@
 
   "ml": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -124,6 +135,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -133,6 +145,7 @@
 
   "mr": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -146,6 +159,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -155,6 +169,7 @@
 
   "or": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -168,6 +183,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -177,6 +193,7 @@
 
   "ta": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -190,6 +207,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
@@ -199,6 +217,7 @@
 
   "te": [
     "eyeBoxText",
+    "recentServicesCataractEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -212,6 +231,7 @@
     "profilePageGender",
     "profilePageMobile",
     "profilePageHealthCardTitle",
+    "bottomNavItemServices",
     "somethingWentWrong",
     "triageUpdatedSuccessfully",
     "noPreviewAvailable",
