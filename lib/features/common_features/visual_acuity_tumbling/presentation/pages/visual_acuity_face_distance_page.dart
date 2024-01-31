@@ -168,7 +168,16 @@ class _VisualAcuityFaceDistancePageViewState
     );
 
     if (faces.isNotEmpty) {
-      final face = faces[0];
+      var largestFace = faces[0];
+      var largestFaceArea = largestFace.boundingBox.width * largestFace.boundingBox.height;
+      for (final face in faces.skip(1)) {
+        final currentFaceArea = face.boundingBox.width * face.boundingBox.height;
+        if (currentFaceArea > largestFaceArea) {
+          largestFaceArea = currentFaceArea;
+          largestFace = face;
+        }
+      }
+      final face = largestFace;
       final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
       final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
