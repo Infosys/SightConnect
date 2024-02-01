@@ -1,8 +1,6 @@
 import 'package:dio/src/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
-import 'package:eye_care_for_all/features/chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/chatbot/data/source/remote/chat_service.dart';
-import 'package:eye_care_for_all/features/chatbot/data/source/remote/triage_questionnaire_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_composer.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
@@ -11,19 +9,23 @@ import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_i
 import 'package:eye_care_for_all/features/chatbot/standard_responses.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
 import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
+import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({
     super.key,
-    required this.triageQuestionnaireUrl,
     this.defaultQuerySuggestions = const [],
     this.loadChatHistory,
     this.saveChatHistory,
   });
 
-  final Uri triageQuestionnaireUrl;
   final List<String> defaultQuerySuggestions;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
@@ -46,7 +48,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   bool _isAssessmentGoingOn = false;
 
   late Provider<ChatService> _chatService;
-  late TriageQuestionnaireService _triageQuestionnaireService;
   late Future<List<ChatMessage>> Function() _loadChatHistory;
   late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
   Dio dio = Dio();
@@ -62,9 +63,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     _chatService = Provider((ref) {
       return ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
     });
-
-    _triageQuestionnaireService = TriageQuestionnaireService(
-        triageQuestionsUrl: widget.triageQuestionnaireUrl);
 
     _loadChatHistory = widget.loadChatHistory != null
         ? widget.loadChatHistory!
@@ -113,14 +111,23 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _initEyeAssessment() async {
-    final questions = await _triageQuestionnaireService.loadQuestions();
+    // var triage = ref.watch(getTriageProvider).asData?.value;
+    // debugPrint("Triage Provider: $triage");
+    // final questions = triage?.questionnaire?.questionnaireItem ?? [];
+    
+    // var model = ref.watch(triageQuestionnaireProvider);
+    // model.selectedOptions.containsValue(true);
+    // model.getQuestionnaire(questions);
 
     setState(() {
       _isAssessmentGoingOn = true;
       _currentQuestionIndex = 0;
-      _triageQuestionnaire = questions.questionnaire?.questionnaireItem ?? [];
+      // _triageQuestionnaire = questions;
+      // debugPrint("Triage Questions: $_triageQuestionnaire");
 
       final firstQuestion = _triageQuestionnaire[0];
+       debugPrint("First Questions: $firstQuestion");
+
       _chatMessage(
         ChatMessage(
           message: firstQuestion.text!,
@@ -174,6 +181,13 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
   @override
   Widget build(BuildContext context) {
+     var triage = ref.watch(getTriageProvider).asData?.value;
+    debugPrint("Triage Provider: $triage");
+    final questions = triage?.questionnaire?.questionnaireItem ?? [];
+    setState(() {
+      _triageQuestionnaire = questions;
+      debugPrint("Triage Questions: $_triageQuestionnaire");
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -436,3 +450,4 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     }
   }
 }
+

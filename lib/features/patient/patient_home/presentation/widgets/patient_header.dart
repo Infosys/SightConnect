@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
@@ -99,10 +100,8 @@ class PatientHeader extends HookWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChatBotPage(
-                                      triageQuestionnaireUrl: Uri.parse(
-                                          "https://eyecare4all-dev.infosysapps.com/services/assessments/api/diagnostic-report-templates/assessment/1351"),
-                                      defaultQuerySuggestions: const [
+                                    builder: (context) => const ChatBotPage(
+                                      defaultQuerySuggestions: [
                                         "Start Eye Assessment",
                                         "Common eye issues",
                                         "Tips for a better eye sight",
