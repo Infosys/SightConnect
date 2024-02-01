@@ -25,7 +25,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
   final bool _isLoading = false;
   String _category = "ALL";
-  int pageSize = 15;
+  int pageSize = 10;
   int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;

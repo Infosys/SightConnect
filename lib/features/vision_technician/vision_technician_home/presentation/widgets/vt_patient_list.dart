@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -25,6 +25,7 @@ class VTPatientList extends ConsumerWidget {
     var watchRef = ref.watch(visionTechnicianSearchProvider);
     int currentPage = ref.watch(vtHomeHelperProvider).pageNumber;
     int pageSize = ref.watch(vtHomeHelperProvider).pageSize;
+    bool isMobile = Responsive.isMobile(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -37,64 +38,65 @@ class VTPatientList extends ConsumerWidget {
               ? SizedBox(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: FittedBox(
-                      child: DataTable(
-                        showCheckboxColumn: false,
-                        showBottomBorder: true,
-                        horizontalMargin: 0,
-                        dataRowMaxHeight: AppSize.klheight * 3,
-                        dataRowMinHeight: AppSize.klheight * 2,
-                        columns: [
-                          DataColumn(
-                            label: Text(
-                              "Patient",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
+                    child: DataTable(
+                      showCheckboxColumn: false,
+                      columnSpacing:
+                          isMobile ? null : AppSize.width(context) * 0.15,
+                      horizontalMargin: AppSize.klpadding,
+                      dataRowMaxHeight: AppSize.klheight * 3,
+                      dataRowMinHeight: AppSize.klheight * 2,
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            "Patient",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
                             ),
                           ),
-                          DataColumn(
-                            label: Text(
-                              "Assessment ID",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Assessment ID",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
                             ),
                           ),
-                          DataColumn(
-                            label: Text(
-                              "Status",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Status",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
                             ),
                           ),
-                          DataColumn(
-                            label: Text(
-                              "Category",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyFiraSansFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Category",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyFiraSansFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
                             ),
                           ),
-                        ],
-                        rows: List<DataRow>.generate(listOfAssessments.length,
-                            (index) {
+                        ),
+                      ],
+                      rows: List<DataRow>.generate(
+                        listOfAssessments.length,
+                        (index) {
                           return getRow(
                               listOfAssessments[index], context, watchRef, ref);
-                        }),
+                        },
                       ),
                     ),
                   ),
