@@ -2,6 +2,7 @@
   "as": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -26,6 +27,7 @@
   "bn": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -50,6 +52,7 @@
   "gu": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -73,12 +76,14 @@
 
   "hi": [
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "bottomNavItemServices"
   ],
 
   "kn": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -103,6 +108,7 @@
   "ml": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -127,6 +133,7 @@
   "mr": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -151,6 +158,7 @@
   "or": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -175,6 +183,7 @@
   "ta": [
     "eyeBoxText",
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "privacyPolicyTitle",
     "privacyPolicyPurposeOfProcessingSubTitle",
     "visualAcuityTestDistanceInstruction",
@@ -198,6 +207,7 @@
 
   "te": [
     "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest",
     "bottomNavItemServices"
   ]
 }

@@ -59,7 +59,9 @@ class PatientServiceCategory extends ConsumerWidget {
             alignment: WrapAlignment.start,
             children: services
                 .where((miniapp) =>
-                    isUserBeta || miniapp != MiniApp.CATARACT_EYE_TEST)
+                    isUserBeta ||
+                    miniapp != MiniApp.CATARACT_EYE_TEST ||
+                    miniapp != MiniApp.RED_EYE_TEST)
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
@@ -83,6 +85,17 @@ class PatientServiceCategory extends ConsumerWidget {
                         );
                       } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
                           isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.CATARACT;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PatientEyeCapturePage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.RED_EYE_TEST &&
+                          isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.RED_EYE;
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const PatientEyeCapturePage(),
@@ -146,6 +159,7 @@ String _getMiniAppText(
       MiniApp.EYE_ASSESSMENT: loc.recentServicesEyeAssessment,
       MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest,
       MiniApp.CATARACT_EYE_TEST: loc.recentServicesCataractEyeTest,
+      MiniApp.RED_EYE_TEST: loc.recentServicesRedEyeTest,
       MiniApp.APPOINTMENT: loc.bottomNavItemAppointment,
     }[miniApp] ??
     "App";

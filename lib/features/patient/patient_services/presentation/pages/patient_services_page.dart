@@ -23,6 +23,7 @@ class PatientServicesPage extends ConsumerWidget {
         MiniApp.VISUAL_ACUITY_TEST,
         MiniApp.EYE_ASSESSMENT,
         MiniApp.CATARACT_EYE_TEST,
+        MiniApp.RED_EYE_TEST,
         MiniApp.APPOINTMENT,
       ],
     };

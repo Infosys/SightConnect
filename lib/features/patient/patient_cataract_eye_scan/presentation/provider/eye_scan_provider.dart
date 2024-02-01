@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/remote/patient_eye_scan_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import './../../data/local/fake_data_source_cataract.dart';
@@ -28,11 +29,17 @@ class EyeScanProvider extends ChangeNotifier {
 
   num? rightEyeProbability, leftEyeProbability;
   num? rightEyeScore, leftEyeScore;
+  num? _leftRednessScore, _rightRednessScore;
 
   num? get rightEyeProbabilityValue => rightEyeProbability;
   num? get leftEyeProbabilityValue => leftEyeProbability;
   num? get rightEyeScoreValue => rightEyeScore;
   num? get leftEyeScoreValue => leftEyeScore;
+  num? get leftRednessScore => _leftRednessScore;
+  num? get rightRednessScore => _rightRednessScore;
+  String? _leftRednessStatus, _rightRednessStatus;
+  String? get leftRednessStatus => _leftRednessStatus;
+  String? get rightRednessStatus => _rightRednessStatus;
   String? _leftEyeStatus, _rightEyeStatus;
   String? get leftEyeStatus => _leftEyeStatus;
   String? get rightEyeStatus => _rightEyeStatus;
@@ -75,11 +82,18 @@ class EyeScanProvider extends ChangeNotifier {
   String? get formatedDate => _formatedDate;
   String? get formatedTime => _formatedTime;
 
-  processModel() async {
+  processModel(BuildContext context) async {
     setIsLoading();
 
-    final leftEyeProbability = await predictCataract(_leftEyeImage);
-    final rightEyeProbability = await predictCataract(_rightEyeImage);
+    final leftEyeProbability = await predictCataract(_leftEyeImage, context);
+    final rightEyeProbability = await predictCataract(_rightEyeImage, context);
+
+    if (leftEyeProbability.isEmpty || rightEyeProbability.isEmpty) {
+      Fluttertoast.showToast(msg: "Couldn't detect eyes, try again");
+      if (context.mounted) {
+        Navigator.popUntil(context, (route) => route.isFirst);
+      }
+    }
 
     debugPrint("Left Eye Probability: ${leftEyeProbability.toString()}");
     debugPrint("Right Eye Probability: ${rightEyeProbability.toString()}");
@@ -108,6 +122,21 @@ class EyeScanProvider extends ChangeNotifier {
     double rightEyeRednessValue =
         rightEyeProbability['results']?[2]['redness'] ?? 0.0;
 
+    if (leftEyeRednessValue < 0.5) {
+      _leftRednessStatus = "Normal";
+    } else if (leftEyeRednessValue > 0.5) {
+      _leftRednessStatus = "Redness";
+    }
+
+    if (rightEyeRednessValue < 0.5) {
+      _rightRednessStatus = "Normal";
+    } else if (rightEyeRednessValue > 0.5) {
+      _rightRednessStatus = "Redness";
+    }
+
+    _leftRednessScore = leftEyeRednessValue * 100;
+    _rightRednessScore = rightEyeRednessValue * 100;
+
     if (leftEyeMatureValue < 0.5 && leftEyeNormalValue > 0.5) {
       _leftEyeStatus = "Normal";
     } else if (leftEyeMatureValue > 0.5 && leftEyeNormalValue < 0.5) {
@@ -121,15 +150,15 @@ class EyeScanProvider extends ChangeNotifier {
     }
 
     if (_leftEyeStatus == "Normal") {
-      leftEyeScore =  leftEyeNormalValue * 100;
-    }else if (_leftEyeStatus == "Catract") {
+      leftEyeScore = leftEyeNormalValue * 100;
+    } else if (_leftEyeStatus == "Catract") {
       leftEyeScore = leftEyeMatureValue * 100;
     }
 
     if (_rightEyeStatus == "Normal") {
-      rightEyeScore =  rightEyeNormalValue * 100;
-    }else if (_rightEyeStatus == "Catract") {
-      rightEyeScore =  rightEyeMatureValue * 100;
+      rightEyeScore = rightEyeNormalValue * 100;
+    } else if (_rightEyeStatus == "Catract") {
+      rightEyeScore = rightEyeMatureValue * 100;
     }
 
     // _leftEyeDetected = leftEyeProbability != -1;
@@ -147,14 +176,19 @@ class EyeScanProvider extends ChangeNotifier {
     setIsLoading();
   }
 
-  Future<Map<String, dynamic>> predictCataract(
-      XFile? eyeImage) async {
+  Future<Map<String, dynamic>> predictCataract(XFile? eyeImage, context) async {
     var res = await ref
         .read(patientEyeScanRepository)
         .getCataractPrediction(eyeImage: eyeImage);
 
     logger.d("res.runtimeType is ${res.toString()}");
 
+    if (res["results"] == null ||
+        res["results"].isEmpty ||
+        res["message"] == "No eyes detected") {
+      Fluttertoast.showToast(msg: "Error occurred: No eyes detected");
+      Navigator.popUntil(context, (route) => route.isFirst);
+    }
     // Map<String, List<Map<String, double>>>.from(res).isEmpty
     //     ? logger.d("Error Occured")
     //     : res = Map<String, num>.from(res);

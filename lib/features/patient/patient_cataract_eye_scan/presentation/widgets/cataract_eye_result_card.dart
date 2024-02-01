@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class EyeResultImageCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientEyeScanProvider);
+    VisionAcuityMode scanType = ref.watch(globalProvider).vaMode;
+    bool isCataraact = scanType == VisionAcuityMode.CATARACT;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding + 4),
       child: Card(
@@ -59,30 +62,44 @@ class EyeResultImageCard extends ConsumerWidget {
                                   fontSize: 18,
                                 ),
                               ),
+                              /////////////
                               Text(
-                                "${model.rightEyeStatus}",
+                                isCataraact
+                                    ? "${model.rightEyeStatus}"
+                                    : "${model.rightRednessStatus}",
                                 style: applyFiraSansFont(
                                   fontSize: 18,
-                                  color: model.rightEyeStatus == "Normal"
-                                      ? AppColor.green
-                                      : AppColor.red,
+                                  color: isCataraact
+                                      ? model.rightEyeStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red
+                                      : model.rightRednessStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red,
                                 ),
                               ),
+                              /////////////////
                               Text(
-                                "${model.rightEyeScoreValue.toString()}%",
+                                isCataraact
+                                    ? "${model.rightEyeScoreValue.toString()}%"
+                                    : "${model.rightRednessScore.toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: model.rightEyeStatus == "Normal"
-                                      ? AppColor.green
-                                      : AppColor.red,
+                                  color: isCataraact
+                                      ? model.rightEyeStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red
+                                      : model.rightRednessStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red,
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: AppSize.kspadding / 2),
                           Text(
-                            textMapper(model.rightEyeStatus??""),
+                            textMapper(model.rightEyeStatus ?? ""),
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.grey,
@@ -129,29 +146,41 @@ class EyeResultImageCard extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                "${model.leftEyeStatus}",
+                                isCataraact
+                                    ? "${model.leftEyeStatus}"
+                                    : "${model.leftRednessStatus}",
                                 style: applyFiraSansFont(
                                   fontSize: 18,
-                                  color: model.leftEyeStatus == "Normal"
-                                      ? AppColor.green
-                                      : AppColor.red,
+                                  color: isCataraact
+                                      ? model.leftEyeStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red
+                                      : model.leftRednessStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red,
                                 ),
                               ),
                               Text(
-                                "${model.leftEyeScoreValue.toString()}%",
+                                isCataraact
+                                    ? "${model.leftEyeScoreValue.toString()}%"
+                                    : "${model.leftRednessScore.toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: model.leftEyeStatus == "Normal"
-                                      ? AppColor.green
-                                      : AppColor.red,
+                                  color: isCataraact
+                                      ? model.leftEyeStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red
+                                      : model.leftRednessStatus == "Normal"
+                                          ? AppColor.green
+                                          : AppColor.red,
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: AppSize.kspadding / 2),
                           Text(
-                            textMapper(model.leftEyeStatus??""),
+                            textMapper(model.leftEyeStatus ?? ""),
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.grey,
