@@ -66,7 +66,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               Text(
                                 isCataraact
                                     ? "${model.rightEyeStatus}"
-                                    : "${model.rightRednessStatus}",
+                                    : "Red Eye Level",
                                 style: applyFiraSansFont(
                                   fontSize: 18,
                                   color: isCataraact
@@ -148,7 +148,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               Text(
                                 isCataraact
                                     ? "${model.leftEyeStatus}"
-                                    : "${model.leftRednessStatus}",
+                                    : "Red Eye Level",
                                 style: applyFiraSansFont(
                                   fontSize: 18,
                                   color: isCataraact
