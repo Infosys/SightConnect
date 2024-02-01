@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var globalProvider = ChangeNotifierProvider((ref) => GlobalProvider());
 
-enum VisionAcuityMode { STANDALONE, TRIAGE, UPDATE }
+enum VisionAcuityMode { STANDALONE, TRIAGE, UPDATE, CATARACT, RED_EYE}
 
 class GlobalProvider extends ChangeNotifier {
   VisionAcuityMode _vaMode = VisionAcuityMode.STANDALONE;
@@ -14,6 +14,10 @@ class GlobalProvider extends ChangeNotifier {
   set setVAMode(VisionAcuityMode data) {
     _vaMode = data;
   }
+
+  bool isRedEyeMode() => _vaMode == VisionAcuityMode.RED_EYE;
+
+  bool isCatartactMode() => _vaMode == VisionAcuityMode.CATARACT;
 
   bool isTriageMode() => _vaMode == VisionAcuityMode.TRIAGE;
 

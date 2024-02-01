@@ -118,7 +118,9 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
                     ref.read(patientEyeScanProvider).setScanType();
                     ref.read(patientEyeScanProvider).scanType ==
                             ScanType.Cataract
-                        ? await ref.read(patientEyeScanProvider).processModel()
+                        ? await ref
+                            .read(patientEyeScanProvider)
+                            .processModel(context)
                         : await ref
                             .read(patientEyeScanProvider)
                             .processKeratoconus();
