@@ -172,11 +172,10 @@ Widget customTextFieldDatePicker({
 }
 
 Widget customTextFieldTimePicker(
-  TextEditingController timeController,
-  String label,
-  BuildContext context,
-  String? Function(String?)? customValidation,
-) {
+    TextEditingController timeController,
+    String label,
+    BuildContext context,
+    String? Function(String?)? customValidation) {
   return Expanded(
     child: TextFormField(
       readOnly: true,
@@ -196,7 +195,7 @@ Widget customTextFieldTimePicker(
           padding: const EdgeInsets.only(left: 12.0),
           child: InkWell(
             onTap: () async {
-              var dateTime = await selectTime(context);
+              var dateTime = await selectTime(context, timeController.text);
               timeController.text = dateTime.toString();
             },
             child: const Icon(
@@ -304,14 +303,14 @@ Future<String?> selectDate(BuildContext context, DateTime startDate) async {
   }
 }
 
-Future<String?> selectTime(BuildContext context) async {
+Future<String?> selectTime(BuildContext context, previousValue) async {
   final TimeOfDay? picked = await showTimePicker(
     context: context,
     initialTime: TimeOfDay.now(),
   );
   if (picked != null) {
-    return "${picked.hour}:${picked.minute} ${picked.period.name.toUpperCase()}";
+    return "${picked.hour}:${picked.minute < 10 ? '0${picked.minute}' : picked.minute} ${picked.period.name.toUpperCase()}";
   } else {
-    return null;
+    return previousValue;
   }
 }
