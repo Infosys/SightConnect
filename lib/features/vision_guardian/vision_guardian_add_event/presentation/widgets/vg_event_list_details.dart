@@ -17,9 +17,10 @@ class VisionEventListDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var loading = ref.watch(addEventDetailsProvider).eventLoading;
-    var response = ref.watch(addEventDetailsProvider).listOfEventDetails;
-    var error = ref.watch(addEventDetailsProvider).error;
+    final model = ref.watch(addEventDetailsProvider);
+    var loading = model.eventLoading;
+    var response = model.listOfEventDetails;
+    var error = model.error;
 
     if (loading == false && error) {
       Fluttertoast.showToast(msg: "Server Error");
@@ -66,8 +67,7 @@ class VisionEventListDetails extends ConsumerWidget {
                 data: response[index],
               ),
             ),
-          if (ref.watch(addEventDetailsProvider).newEventList.length == 10 &&
-              eventType != "default")
+          if (model.newEventList.length == 10 && eventType != "default")
             const Padding(
               padding: EdgeInsets.all(AppSize.klpadding),
               child: CupertinoActivityIndicator(),
