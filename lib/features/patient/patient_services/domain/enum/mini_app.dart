@@ -3,5 +3,6 @@ enum MiniApp {
   VISUAL_ACUITY_TEST,
   // Add more
   CATARACT_EYE_TEST,
+  RED_EYE_TEST,
   APPOINTMENT,
 }
