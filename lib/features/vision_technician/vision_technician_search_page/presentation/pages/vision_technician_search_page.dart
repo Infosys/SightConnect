@@ -41,14 +41,14 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
             query.value = value;
           },
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showVtSearchFilter(context);
-            },
-            icon: const Icon(Icons.filter_list),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       showVtSearchFilter(context);
+        //     },
+        //     icon: const Icon(Icons.filter_list),
+        //   ),
+        // ],
       ),
       body: ref.watch(vtSearchProvider(query.value)).when(
         data: (list) {

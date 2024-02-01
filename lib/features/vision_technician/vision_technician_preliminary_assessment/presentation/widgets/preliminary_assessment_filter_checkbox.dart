@@ -99,7 +99,9 @@ class QuestionTile extends HookConsumerWidget {
         children: [
           Checkbox(
             value: checkBoxState.value,
-            onChanged: (bool? value) {},
+            onChanged: null,
+            fillColor: MaterialStateProperty.all(
+                checkBoxState.value ? AppColor.primary : AppColor.white),
           ),
           Flexible(
             child: Text(

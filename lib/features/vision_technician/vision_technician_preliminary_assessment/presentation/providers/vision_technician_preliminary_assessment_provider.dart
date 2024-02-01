@@ -66,29 +66,34 @@ class VtTriageProvider extends ChangeNotifier {
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
       VTPatientDto patientDetails) async {
+    logger.d("save triage called");
+
     List<PostTriageImagingSelectionModel> imageSelection =
         await _visionTechnicianTriageProvider.getTriageEyeScanResponse();
-
+logger.d("image selection called $imageSelection");
     List<PostTriageObservationsModel> observations =
         _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
-
+    logger.d("observation called $observations");
     List<PostTriageQuestionModel> questionResponse =
         _visionTechnicianTriageProvider.getQuestionaireResponse();
-
+  logger.d("question response called $questionResponse");
     final quessionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);
+    logger.d("quessionnaireUrgency called $quessionnaireUrgency");
     final visualAcuityUrgency =
         _triageUrgencyRepository.visualAcuityUrgency(observations);
+        logger.d("visualAcuityUrgency called $visualAcuityUrgency");
     final eyeScanUrgency =
         _triageUrgencyRepository.eyeScanUrgency(imageSelection);
+        logger.d("eyeScanUrgency called $eyeScanUrgency");
     final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
       quessionnaireUrgency,
       visualAcuityUrgency,
       eyeScanUrgency,
     );
+    logger.d("triageUrgency called $triageUrgency");
     //inject assesment
-    DiagnosticReportTemplateFHIRModel assessment =
-        await _triageLocalSource.getAssessment();
+    DiagnosticReportTemplateFHIRModel assessment = _visionTechnicianTriageProvider.assessment;
 
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: patientDetails.id,
@@ -120,6 +125,8 @@ class VtTriageProvider extends ChangeNotifier {
       questionResponse: questionResponse,
     );
 
+    logger.d({"triage model to be saved ": triagePostModel.toJson()});
+
     _preliminaryAssessmentHelperProvider.setLoading(true);
 
     Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
@@ -127,6 +134,7 @@ class VtTriageProvider extends ChangeNotifier {
     );
 
     TriagePostModel? triageResponse = response.fold((error) {
+      logger.d({"triage post error": error});
       return;
     }, (result) {
       return result;

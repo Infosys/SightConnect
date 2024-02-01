@@ -165,11 +165,13 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     String? rightEyeImage;
 
     try {
+      logger.d("Uploading Image");
       leftEyeImage = await fileMsService.uploadImage(File(XleftEyeImage.path));
       rightEyeImage =
           await fileMsService.uploadImage(File(XrightEyeImage.path));
     } catch (e) {
       logger.d("Error in uploading image: $e");
+      throw e;
     }
 
     if (leftEyeImage == null || rightEyeImage == null) {
@@ -203,6 +205,8 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
       score: 0,
       fileId: rightEyeData["fileId"]!,
     ));
+
+    logger.d("Triage Eye Scan Response 24 Jan : $mediaCaptureList");
 
     return mediaCaptureList;
   }

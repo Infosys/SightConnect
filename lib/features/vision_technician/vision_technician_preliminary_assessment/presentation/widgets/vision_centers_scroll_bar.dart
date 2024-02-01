@@ -93,9 +93,12 @@ class VisionCentersScrollBar extends ConsumerWidget {
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            error: (error, stackTrace) => const Center(
-              child: CircularProgressIndicator(),
-            ),
+            error: (error, stackTrace) {
+              logger.d("error for vision center $error");
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
     );
   }
