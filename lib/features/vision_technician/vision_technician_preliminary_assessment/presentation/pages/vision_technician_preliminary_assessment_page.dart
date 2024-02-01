@@ -137,13 +137,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         onBackPress: () {
           ref.invalidate(vtTriageProvider);
           ref.invalidate(preliminaryAssessmentHelperProvider);
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionTechnicianHomePage(),
-            ),
-          );
         },
         centerTitle: false,
         title: const Text('Preliminary Assessment'),
