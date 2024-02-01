@@ -38,7 +38,7 @@ class VgProfileNameCard extends StatelessWidget {
                     )
                   : AppNameAvatar(
                       name: profileData.personalInformation?.firstName ?? "",
-                      color: AppColor.blue,
+                      color: const Color(0xffD4C1FF),
                       radius: 45,
                       fontSize: 30,
                     ),

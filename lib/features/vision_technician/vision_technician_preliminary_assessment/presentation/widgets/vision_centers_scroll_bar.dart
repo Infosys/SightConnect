@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
@@ -7,13 +8,60 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:location/location.dart' as location;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class VisionCentersScrollBar extends ConsumerWidget {
+class VisionCentersScrollBar extends ConsumerStatefulWidget {
   const VisionCentersScrollBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VisionCentersScrollBar> createState() =>
+      _VisionCentersScrollBarState();
+}
+
+class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(nearByVisionCenterProvider.notifier).init();
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (ref.read(nearByVisionCenterProvider).shouldForceReload) {
+          ref.read(nearByVisionCenterProvider.notifier).reload();
+          break;
+        }
+      case AppLifecycleState.paused:
+        if (ref.read(nearByVisionCenterProvider).permissionStatus !=
+            location.PermissionStatus.granted) {
+          ref.read(nearByVisionCenterProvider.notifier).enableForceReload();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final firstcontroller = ScrollController();
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
@@ -34,15 +82,51 @@ class VisionCentersScrollBar extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          if (viewState.isLoading) const LinearProgressIndicator(),
+          if (viewState.isLoading)
+            const Center(child: CircularProgressIndicator()),
           if (viewState.errorMessage != null)
-            Text(
-              viewState.errorMessage!,
-              style: applyRobotoFont(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: AppColor.red,
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  "assets/icons/location_empty_state.svg",
+                  height: 32,
+                  width: 32,
+                ),
+                const SizedBox(height: AppSize.ksheight),
+                AutoSizeText(
+                  viewState.errorMessage
+                      .toString()
+                      .replaceAll("Exception: ", ""),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+                Builder(builder: (context) {
+                  if (viewState.permissionStatus ==
+                      location.PermissionStatus.denied) {
+                    return Flexible(
+                      child: TextButton(
+                        onPressed: () {
+                          ref.read(nearByVisionCenterProvider.notifier).init();
+                        },
+                        child: const Text("Request Location Permission"),
+                      ),
+                    );
+                  } else if (viewState.permissionStatus ==
+                      location.PermissionStatus.deniedForever) {
+                    return Flexible(
+                      child: TextButton(
+                        onPressed: () {
+                          openAppSettings();
+                        },
+                        child: const Text("App Settings"),
+                      ),
+                    );
+                  }
+
+                  return const SizedBox();
+                }),
+              ],
             ),
           if (viewState.visionCenters != null)
             Scrollbar(

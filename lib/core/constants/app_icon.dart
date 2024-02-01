@@ -61,4 +61,10 @@ class AppIcon {
   static const String optometritianAddPatient =
       "assets/icons/optometritian_start_assessment.svg";
   static const String question = "assets/images/question.svg";
+
+  //vision technician assets
+  static const vtHomeIcon = "assets/icons/vt_home.svg";
+  static const vtRegisterIcon = "assets/icons/vt_register.svg";
+  static const vtAvailabilityIcon = "assets/icons/vt_availability.svg";
+  static const vtIVRCallIcon = "assets/icons/vt_ivr_call.svg";
 }

@@ -81,8 +81,8 @@ class EyeScanProvider extends ChangeNotifier {
     final leftEyeProbability = await predictCataract(_leftEyeImage);
     final rightEyeProbability = await predictCataract(_rightEyeImage);
 
-    debugPrint("Left Eye Probability: ${leftEyeProbability.toString()}");
-    debugPrint("Right Eye Probability: ${rightEyeProbability.toString()}");
+    logger.d("Left Eye Probability: ${leftEyeProbability.toString()}");
+    logger.d("Right Eye Probability: ${rightEyeProbability.toString()}");
     // _leftEyeDetected = false;
     // _rightEyeDetected = false;
     if (leftEyeProbability == -1) {
@@ -121,15 +121,19 @@ class EyeScanProvider extends ChangeNotifier {
     }
 
     if (_leftEyeStatus == "Normal") {
-      leftEyeScore =  double.parse((leftEyeNormalValue * 100).toStringAsFixed(2));
-    }else if (_leftEyeStatus == "Catract") {
-      leftEyeScore = double.parse((leftEyeMatureValue * 100).toStringAsFixed(2));
+      leftEyeScore =
+          double.parse((leftEyeNormalValue * 100).toStringAsFixed(2));
+    } else if (_leftEyeStatus == "Catract") {
+      leftEyeScore =
+          double.parse((leftEyeMatureValue * 100).toStringAsFixed(2));
     }
 
     if (_rightEyeStatus == "Normal") {
-      rightEyeScore =  double.parse((rightEyeNormalValue * 100).toStringAsFixed(2));
-    }else if (_rightEyeStatus == "Catract") {
-      rightEyeScore =  double.parse((rightEyeMatureValue * 100).toStringAsFixed(2));
+      rightEyeScore =
+          double.parse((rightEyeNormalValue * 100).toStringAsFixed(2));
+    } else if (_rightEyeStatus == "Catract") {
+      rightEyeScore =
+          double.parse((rightEyeMatureValue * 100).toStringAsFixed(2));
     }
 
     // _leftEyeDetected = leftEyeProbability != -1;
@@ -147,8 +151,7 @@ class EyeScanProvider extends ChangeNotifier {
     setIsLoading();
   }
 
-  Future<Map<String, dynamic>> predictCataract(
-      XFile? eyeImage) async {
+  Future<Map<String, dynamic>> predictCataract(XFile? eyeImage) async {
     var res = await ref
         .read(patientEyeScanRepository)
         .getCataractPrediction(eyeImage: eyeImage);

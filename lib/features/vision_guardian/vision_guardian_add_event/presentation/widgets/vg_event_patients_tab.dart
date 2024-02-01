@@ -75,7 +75,6 @@ Widget vgPatientTabs(
     List<VisionGuardianPatientResponseModel> response,
     WidgetRef ref,
     String patientsType) {
-  logger.f(ref.watch(addEventDetailsProvider).newEventPatientList.length);
   return ListView.separated(
     controller: ref.watch(addEventDetailsProvider).eventPatientController,
     shrinkWrap: true,

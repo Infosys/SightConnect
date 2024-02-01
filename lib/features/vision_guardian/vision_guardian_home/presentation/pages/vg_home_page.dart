@@ -1,5 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
@@ -8,7 +7,6 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/p
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
@@ -25,30 +23,12 @@ class VisionGuardianHomePage extends ConsumerWidget {
       extendBody: true,
       appBar: AppBar(
         backgroundColor: AppColor.primary,
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(AppSize.kspadding / 2),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColor.white,
-              ),
-              child: SvgPicture.asset(
-                AppIcon.logo,
-                height: 20,
-                width: 20,
-              ),
-            ),
-            const SizedBox(width: AppSize.kmwidth),
-            Text(
-              AppText.appName,
-              style: applyFiraSansFont(
-                color: AppColor.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-          ],
+        title: Image.asset(
+          AppImages.logo,
+          height: 40,
+          width: 140,
+          colorBlendMode: BlendMode.srcIn,
+          color: AppColor.white,
         ),
       ),
       body: SingleChildScrollView(
