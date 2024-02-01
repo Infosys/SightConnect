@@ -171,11 +171,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
           await fileMsService.uploadImage(File(XrightEyeImage.path));
     } catch (e) {
       logger.d("Error in uploading image: $e");
-      throw e;
-    }
-
-    if (leftEyeImage == null || rightEyeImage == null) {
-      return [];
+      rethrow;
     }
 
     Map<String, String> leftEyeData = parseUrl(leftEyeImage);

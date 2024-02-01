@@ -350,7 +350,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     if (otp.value.isNotEmpty) {
                       try {
                         otpError.value = '';
-                        logger.f("otp value is : ${otp.value}");
+                        logger.d("otp value is : ${otp.value}");
                         await ref.read(initializationProvider).signIn(
                             mobile: mobileController.text, otp: otp.value);
 

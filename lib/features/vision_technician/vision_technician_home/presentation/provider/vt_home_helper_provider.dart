@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/table_params.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
@@ -53,7 +51,6 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   }
 
   Future<void> getAssessmentTable() async {
-    log(isLoading.toString());
     try {
       hasMore = true;
       _isLoading = true;

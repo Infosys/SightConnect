@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
@@ -7,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -188,7 +187,7 @@ class PatientAssessmentDataSource extends DataTableSource {
       ]);
     }
     if (index >= data.length - 1 && !isLoading && model.hasMore) {
-      log("index $index data ${data.length}");
+      logger.d("index $index data ${data.length}");
       WidgetsBinding.instance.addPostFrameCallback((_) {
         model.updatePageNumber();
       });

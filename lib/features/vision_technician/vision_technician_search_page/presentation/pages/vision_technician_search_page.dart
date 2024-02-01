@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
