@@ -110,6 +110,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _initEyeAssessment() async {
+    debugPrint(
+        "Loaded Triage Questionnaire: ${widget.loadedTriageQuestionnaire}");
+
     if (widget.loadedTriageQuestionnaire.isEmpty) {
       debugPrint("No Triage Questionnaire loaded");
       setState(() {

@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 
@@ -34,6 +36,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     var items = DrawerMenuItems.getAll(loc);
+
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Padding(
@@ -78,6 +81,8 @@ class AppDrawer extends StatelessWidget {
                   (item) {
                     return Consumer(
                       builder: (context, ref, child) {
+                        final triage =
+                            ref.watch(getTriageProvider).asData?.value;
                         return ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -133,6 +138,63 @@ class AppDrawer extends StatelessWidget {
                                         const HelpAndSupportPage(
                                       helpLine: AppText.tollFreeNumber,
                                     ),
+                                  ),
+                                );
+                                break;
+                              case DrawerMenuItemId.chatbot:
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return ref.watch(getTriageProvider).when(
+                                          data: (data) {
+                                        return ChatBotPage(
+                                          defaultQuerySuggestions: const [
+                                            "Start Eye Assessment",
+                                            "Common eye issues",
+                                            "Tips for a better eye sight",
+                                          ],
+                                          loadedTriageQuestionnaire: data
+                                                  .questionnaire
+                                                  ?.questionnaireItem ??
+                                              [],
+                                        );
+                                      }, error: (error, stackTrace) {
+                                        return Scaffold(
+                                          body: Center(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                  child: Text(error.toString()),
+                                                ),
+                                                const SizedBox(
+                                                  height: AppSize.klheight,
+                                                ),
+                                                TextButton.icon(
+                                                  onPressed: () {
+                                                    ref.invalidate(
+                                                        getTriageProvider);
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.refresh_outlined),
+                                                  label: Text(loc.retryButton),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }, loading: () {
+                                        return const Scaffold(
+                                          body: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      });
+                                    },
                                   ),
                                 );
                                 break;
