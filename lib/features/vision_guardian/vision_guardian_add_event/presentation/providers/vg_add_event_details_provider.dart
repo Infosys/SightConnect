@@ -140,7 +140,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           await vgAddEventRepository.getVGEvents(
         queryData: {
           "actorIdentifier": globalVGProvider.userId.toString(),
-          "eventStatusFilter": eventStatusFilter,
+          "eventStatusFilter":
+              eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
           "pageable": {
             "page": type == "search" ? searchEventOffset : eventOffset,
             "size": 10,
@@ -148,12 +149,10 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           },
         },
       );
-      logger.f(response);
 
       setEventList(previousList + response, type);
       if (type == "search") {
         newSearchEventList = response;
-        logger.f(newSearchEventList.length);
       } else {
         newEventList = response;
       }
@@ -328,9 +327,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void filterListEvents(selectedIndex, selectedValue) {
+    eventSearchQuery = "";
     eventOffset = 0;
     isSelected = selectedIndex;
     eventStatusFilter = selectedValue;
+
     List<VisionGuardianEventModel> previousList = [];
     eventLoading = true;
     notifyListeners();
