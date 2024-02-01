@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 Widget customTextField(TextEditingController controller, String label,
     {String? Function(String?)? validationFunction}) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;
@@ -34,6 +35,7 @@ Widget customTextFieldIcon(
     TextEditingController controller, String label, Widget icon,
     {String? Function(String?)? validationFunction}) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;

@@ -18,7 +18,10 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                ref.watch(addEventDetailsProvider).resetFields();
+                Navigator.pop(context);
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
