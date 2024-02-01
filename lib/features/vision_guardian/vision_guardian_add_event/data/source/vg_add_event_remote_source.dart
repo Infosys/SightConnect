@@ -73,6 +73,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       "page": queryData["pageable"]["page"],
       "size": queryData["pageable"]["size"]
     };
+    if (queryData["pageable"]["title-like"].length > 0) {
+      queryParameters
+          .addAll({"title-like": queryData["pageable"]["title-like"]});
+    }
     try {
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);

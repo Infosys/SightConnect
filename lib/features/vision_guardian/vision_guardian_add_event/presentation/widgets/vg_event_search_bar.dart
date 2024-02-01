@@ -20,16 +20,19 @@ class VisionGuardianEventSearchBar extends ConsumerWidget {
       readOnly: readOnly,
       controller: ref.read(addEventDetailsProvider).searchController,
       onChanged: (data) {
-        if (searchType == "event") {
-          ref.read(addEventDetailsProvider).setSearchEventList(data);
+        if (searchType != "event") {
+          ref.read(visionGuadianAddMemberProvider).setSearchTeammateList(data);
         } else if (searchType == "patient") {
           ref.read(addEventDetailsProvider).setSearchPatientList(data);
-        } else {
-          ref.read(visionGuadianAddMemberProvider).setSearchTeammateList(data);
         }
       },
       onTap: () {
         if (readOnly) {}
+      },
+      onSubmitted: (value) {
+        if (searchType == "event") {
+          ref.read(addEventDetailsProvider).setSearchEventList(value);
+        }
       },
       decoration: InputDecoration(
         prefixIcon: const Icon(
