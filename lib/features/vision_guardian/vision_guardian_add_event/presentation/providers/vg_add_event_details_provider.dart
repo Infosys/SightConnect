@@ -401,6 +401,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void resetPagination() {
+    listOfEventDetails = [];
     eventOffset = 0;
   }
 
