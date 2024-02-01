@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:password_generator/password_generator.dart';
@@ -77,7 +76,7 @@ class PersistentAuthData {
     await _storage.write(key: _refreshKey, value: refreshToken);
     final decodedToken = JwtDecoder.decode(accessToken);
 
-    await saveUserType(decodedToken['USER_TYPE']  ?? "PROD");
+    await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
 
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
@@ -104,7 +103,6 @@ class PersistentAuthData {
   }
 
   Future<void> saveUserType(String userType) async {
-   
     this.userType = userType;
     await _storage.write(key: _userType, value: userType);
   }
