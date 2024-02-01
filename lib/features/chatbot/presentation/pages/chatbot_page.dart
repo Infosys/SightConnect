@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,13 +20,13 @@ class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({
     super.key,
     this.defaultQuerySuggestions = const [],
-    this.triageQuestionnaire = const [],
+    this.loadedTriageQuestionnaire = const [],
     this.loadChatHistory,
     this.saveChatHistory,
   });
 
   final List<String> defaultQuerySuggestions;
-  final List<QuestionnaireItemFHIRModel> triageQuestionnaire;
+  final List<QuestionnaireItemFHIRModel> loadedTriageQuestionnaire;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
@@ -40,7 +41,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   List<String> _querySuggestions = [];
   bool _isLoading = false;
   bool _isLoadingQuerySuggestions = false;
-  // List<QuestionnaireItemFHIRModel> widget.triageQuestionnaire = [];
+  List<QuestionnaireItemFHIRModel> _triageQuestionnaire = [];
   final Map<QuestionnaireItemFHIRModel, String> _triageResponses = {};
   // List<String> _triageResponses = [];
   int _currentQuestionIndex = -1;
@@ -109,21 +110,28 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _initEyeAssessment() async {
-    // var triage = ref.watch(getTriageProvider).asData?.value;
-    // debugPrint("Triage Provider: $triage");
-    // final questions = triage?.questionnaire?.questionnaireItem ?? [];
-
-    // var model = ref.watch(triageQuestionnaireProvider);
-    // model.selectedOptions.containsValue(true);
-    // model.getQuestionnaire(questions);
+    if (widget.loadedTriageQuestionnaire.isEmpty) {
+      debugPrint("No Triage Questionnaire loaded");
+      setState(() {
+        _querySuggestions = widget.defaultQuerySuggestions;
+        _chatMessage(
+          ChatMessage(
+            message:
+                "Unable to load questions at the moment. Is there anything else I can help you with?",
+            isMe: false,
+          ),
+        );
+      });
+      return;
+    }
 
     setState(() {
       _isAssessmentGoingOn = true;
       _currentQuestionIndex = 0;
-      // widget.triageQuestionnaire = questions;
-      // debugPrint("Triage Questions: $widget.triageQuestionnaire");
+      _triageQuestionnaire = widget.loadedTriageQuestionnaire;
+      debugPrint("Triage Questions: $_triageQuestionnaire");
 
-      final firstQuestion = widget.triageQuestionnaire[0];
+      final firstQuestion = _triageQuestionnaire[0];
       debugPrint("First Questions: $firstQuestion");
 
       _chatMessage(
@@ -151,12 +159,12 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   Future _endEyeAssessment() async {
     // Do something with the stored responses
     debugPrint(
-        "Eye Assessment Result: Last Question: ${_triageResponses[widget.triageQuestionnaire[widget.triageQuestionnaire.length - 1]]}");
+        "Eye Assessment Result: Last Question: ${_triageResponses[_triageQuestionnaire[_triageQuestionnaire.length - 1]]}");
 
     setState(() {
       _isAssessmentGoingOn = false;
       _currentQuestionIndex = -1;
-      // widget.triageQuestionnaire = [];
+      _triageQuestionnaire = [];
       _querySuggestions = widget.defaultQuerySuggestions;
     });
 
@@ -321,7 +329,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
   Future _onChatMessageSubmit(String message) async {
     if (_isAssessmentGoingOn) {
-      final currentQuestion = widget.triageQuestionnaire[_currentQuestionIndex];
+      final currentQuestion = _triageQuestionnaire[_currentQuestionIndex];
       return _onAssessmentResponse(currentQuestion, message);
     }
 
@@ -399,7 +407,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
 // Handle checkpoint question
     bool continueAssessment =
-        _currentQuestionIndex < widget.triageQuestionnaire.length;
+        _currentQuestionIndex < _triageQuestionnaire.length;
 
     if (question.actionOn!.isNotEmpty && option != null) {
       continueAssessment = continueAssessment &&
@@ -410,7 +418,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       return _endEyeAssessment();
     }
 
-    final nextQuestion = widget.triageQuestionnaire[_currentQuestionIndex];
+    final nextQuestion = _triageQuestionnaire[_currentQuestionIndex];
     _chatMessage(
       ChatMessage(
         message: nextQuestion.text!,
