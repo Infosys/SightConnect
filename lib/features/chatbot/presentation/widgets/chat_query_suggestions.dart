@@ -1,6 +1,6 @@
+import 'package:eye_care_for_all/features/chatbot/presentation/widgets/fading_container.dart';
 import 'package:flutter/material.dart';
 
-import 'package:chatbot/presentation/widgets/fading_container.dart';
 
 class ChatQuerySuggestions extends StatelessWidget {
   const ChatQuerySuggestions({

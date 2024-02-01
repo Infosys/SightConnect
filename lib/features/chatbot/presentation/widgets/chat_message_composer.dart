@@ -1,5 +1,5 @@
+import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:chatbot/utils/language_utils.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class ChatMessageComposer extends StatefulWidget {

@@ -2,42 +2,44 @@
 
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:chatbot/presentation/widgets/chat_message_tile.dart';
 
 // final chatService = ChatService();
 
+var chatbotProvider = Provider((ref) {
+  return ChatService(ref.read(chatbotDioProvider));
+});
+
 class ChatService {
+  final Dio dio;
   final int CONTEXT_LIMIT;
-  final Uri chatResponseUrl;
-  final Uri querySuggestionsUrl;
-  ChatService({
-    required this.chatResponseUrl,
-    required this.querySuggestionsUrl,
-    this.CONTEXT_LIMIT = 5,
-  });
+  ChatService(this.dio, {this.CONTEXT_LIMIT = 5});
 
   List<String> _previousConversation = [];
 
   Future<List<String>> getQuerySuggestions() async {
-    final headers = {'Content-Type': 'application/json'};
+    const url = "query-suggestions";
     final body = jsonEncode({
       "conversation": _previousConversation,
     });
 
     debugPrint("ChatService: body: $body");
-    final response = await http.post(
-      querySuggestionsUrl,
-      headers: headers,
-      body: body,
+    final response = await dio.post(
+      url,
+      options: Options(contentType: "application/json" ),
+      data: body,
     );
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
       List<String> suggestions = utf8
           .decode(
-            response.body.runes.toList(),
+            response.data.toList(),
           )
           .split("|");
 
@@ -56,6 +58,7 @@ class ChatService {
   }
 
   Future<String?> ask(String query) async {
+    const chatResponseUrl = "stream";
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
       "message": query,
@@ -65,18 +68,18 @@ class ChatService {
     _addUserMessageToContext(query);
 
     debugPrint("ChatService: body: $body");
-    final response = await http.post(
+    final response = await dio.post(
       chatResponseUrl,
-      headers: headers,
-      body: body,
+      options: Options(contentType: "application/json" ),
+      data: body,
     );
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
       final responseText = utf8.decode(
-        response.body.runes.toList(),
+        response.data.runes.toList(),
       );
-      debugPrint('Response body: ${response.body}');
+      debugPrint('Response body: ${response.data}');
       debugPrint('Response decoded body: $responseText');
       _addChatBotMessageToContext(responseText);
       return responseText;

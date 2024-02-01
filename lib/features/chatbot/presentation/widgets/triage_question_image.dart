@@ -1,5 +1,6 @@
+import 'package:eye_care_for_all/features/chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
 import 'package:flutter/material.dart';
-import 'package:chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
+
 
 class TriageQuestionImage extends StatelessWidget {
   const TriageQuestionImage({super.key, required this.question});

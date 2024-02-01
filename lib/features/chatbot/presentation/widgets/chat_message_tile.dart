@@ -1,8 +1,9 @@
+import 'package:eye_care_for_all/features/chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
+import 'package:eye_care_for_all/features/chatbot/data/source/remote/triage_questionnaire_service.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/widgets/triage_question_image.dart';
+import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
 import 'package:flutter/material.dart';
-import 'package:chatbot/data/models/diagnostic_report_template_FHIR_model.dart';
-import 'package:chatbot/text_to_speech.dart';
-import 'package:chatbot/data/source/remote/triage_questionnaire_service.dart';
-import 'package:chatbot/presentation/widgets/triage_question_image.dart';
+
 
 class ChatMessage {
   final String message;

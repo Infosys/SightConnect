@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import "package:chatbot/chatbot.dart";
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -99,10 +100,6 @@ class PatientHeader extends HookWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ChatBotPage(
-                                      chatServiceUrl: Uri.parse(
-                                          "http://4.240.71.156:8000/api/chat/stream"),
-                                      chatServiceQuerySuggestionsUrl: Uri.parse(
-                                          "http://4.240.71.156:8000/api/chat/query-suggestions"),
                                       triageQuestionnaireUrl: Uri.parse(
                                           "https://eyecare4all-dev.infosysapps.com/services/assessments/api/diagnostic-report-templates/assessment/1351"),
                                       defaultQuerySuggestions: const [
