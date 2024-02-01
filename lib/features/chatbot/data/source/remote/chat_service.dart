@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:http/http.dart' as http;
 
 // final chatService = ChatService();
 
@@ -31,7 +30,7 @@ class ChatService {
     debugPrint("ChatService: body: $body");
     final response = await dio.post(
       url,
-      options: Options(contentType: "application/json" ),
+      options: Options(contentType: "application/json"),
       data: body,
     );
 
@@ -39,7 +38,7 @@ class ChatService {
       // Request successful, handle the response
       List<String> suggestions = utf8
           .decode(
-            response.data.toList(),
+            response.data.runes.toList(),
           )
           .split("|");
 
@@ -59,7 +58,6 @@ class ChatService {
 
   Future<String?> ask(String query) async {
     const chatResponseUrl = "stream";
-    final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
       "message": query,
       "previousConversation": _previousConversation,
@@ -70,7 +68,7 @@ class ChatService {
     debugPrint("ChatService: body: $body");
     final response = await dio.post(
       chatResponseUrl,
-      options: Options(contentType: "application/json" ),
+      options: Options(contentType: "application/json"),
       data: body,
     );
 

@@ -81,8 +81,6 @@ dependencies:
     path: packages/flutter_miniapp_web_runner/
   superapp_scanner:
     path: packages/superapp_scanner/
-  chatbot:
-    path: packages/chatbot/
 
   pinput: ^3.0.1
   image_picker: ^1.0.7

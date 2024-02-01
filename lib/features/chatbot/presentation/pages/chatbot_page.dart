@@ -14,8 +14,7 @@ import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
-class ChatBotPage extends StatefulWidget {
+class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({
     super.key,
     required this.triageQuestionnaireUrl,
@@ -30,10 +29,10 @@ class ChatBotPage extends StatefulWidget {
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
   @override
-  State<ChatBotPage> createState() => _ChatBotPageState();
+  ConsumerState<ChatBotPage> createState() => _ChatBotPageState();
 }
 
-class _ChatBotPageState extends State<ChatBotPage> {
+class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // State variables
   LanguageOption _selectedLanguage = LanguageOption.en;
   List<ChatMessage> _chatMessages = [];
@@ -46,7 +45,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
   int _currentQuestionIndex = -1;
   bool _isAssessmentGoingOn = false;
 
-  late ChatService _chatService;
+  late Provider<ChatService> _chatService;
   late TriageQuestionnaireService _triageQuestionnaireService;
   late Future<List<ChatMessage>> Function() _loadChatHistory;
   late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
@@ -60,10 +59,9 @@ class _ChatBotPageState extends State<ChatBotPage> {
   @override
   void initState() {
     // LocalStorage.init();
-    _chatService = ChatService(
-      dio,
-      CONTEXT_LIMIT: 8,
-    );
+    _chatService = Provider((ref) {
+      return ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
+    });
 
     _triageQuestionnaireService = TriageQuestionnaireService(
         triageQuestionsUrl: widget.triageQuestionnaireUrl);
@@ -95,7 +93,8 @@ class _ChatBotPageState extends State<ChatBotPage> {
         isMe: false,
       ));
     } else {
-      _chatService.setContext(chatHistory.toList());
+      // _chatService.setContext(chatHistory.toList());
+      // _chatService.read(node)
 
       if (chatHistory.length > 1) {
         querySuggestions = await _getQuerySuggestions();
@@ -140,7 +139,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
     // debugPrint("Chat History: ${jsonEncode(chatHistory)}");
     _saveChatHistory(_chatMessages);
 
-    _chatService.clearContext(); // TODO: Make this conditional
+    ref.read(_chatService).clearContext(); // TODO: Make this conditional
     super.dispose();
   }
 
@@ -265,7 +264,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            _chatService.clearContext();
+            ref.read(_chatService).clearContext();
             _chatMessages = [];
             _saveChatHistory([]).then((value) => _initChat());
           });
@@ -338,7 +337,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
   }
 
   Future _askChatBot(String message) async {
-    final response = await _chatService.ask(message);
+    final response = await ref.read(_chatService).ask(message);
 
     if (response != null) {
       _chatMessage(
@@ -357,7 +356,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
     setState(() {
       _isLoadingQuerySuggestions = true;
     });
-    final suggestions = await _chatService.getQuerySuggestions();
+    final suggestions = await ref.read(_chatService).getQuerySuggestions();
     await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;

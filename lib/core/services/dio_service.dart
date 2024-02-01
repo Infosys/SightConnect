@@ -22,7 +22,6 @@ var keycloakDioProvider = Provider(
   },
 );
 
-
 var chatbotDioProvider = Provider(
   (ref) {
     final dio = Dio(
@@ -31,11 +30,11 @@ var chatbotDioProvider = Provider(
         connectTimeout: const Duration(seconds: 30),
       ),
     );
-    dio.interceptors.addAll(
-      [
-        DioCertificateInterceptor(dio),
-      ],
-    );
+    // dio.interceptors.addAll(
+    //   [
+    //     DioCertificateInterceptor(dio),
+    //   ],
+    // );
     return dio;
   },
 );
