@@ -24,10 +24,11 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   final String type;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var loading = ref.watch(visionGuardianEyeAssessmentProvider).getisLoading;
-    var response =
-        ref.watch(visionGuardianEyeAssessmentProvider).listOfPatientDetails;
-    var error = ref.watch(visionGuardianEyeAssessmentProvider).error;
+    final model = ref.watch(visionGuardianEyeAssessmentProvider);
+    final readModel = ref.read(visionGuardianEyeAssessmentProvider);
+    var loading = model.getisLoading;
+    var response = model.listOfPatientDetails;
+    var error = model.error;
 
     if (loading == false && error) {
       Fluttertoast.showToast(msg: "Server Error");
@@ -71,6 +72,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
           }
           return InkWell(
             onTap: () async {
+              readModel.setIsLoading();
               try {
                 var navigator = Navigator.of(context);
                 TriageReportUserEntity profile = TriageReportUserEntity(
@@ -78,11 +80,11 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
                   id: response[index].id!,
                   image: "",
                 );
+
                 final reports = await ref
                     .read(vgReportProvider(profile))
                     .getTriageDetailedReportByReportId(
                         response[index].diagnosticReportId!);
-
                 navigator.push(
                   MaterialPageRoute(
                     builder: (context) => PatientAssessmentReportPage(
@@ -94,6 +96,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
                 logger.e(e);
                 Fluttertoast.showToast(msg: e.toString());
               }
+              readModel.setIsLoading();
             },
             child: vgPatientDataCards(context, response[index]),
           );
