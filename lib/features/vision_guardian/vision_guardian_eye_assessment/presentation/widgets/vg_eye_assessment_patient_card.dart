@@ -1,7 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_report_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_empty_result_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -66,7 +70,31 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
             );
           }
           return InkWell(
-            onTap: () {},
+            onTap: () async {
+              try {
+                var navigator = Navigator.of(context);
+                TriageReportUserEntity profile = TriageReportUserEntity(
+                  name: response[index].name ?? "",
+                  id: response[index].id!,
+                  image: "",
+                );
+                final reports = await ref
+                    .read(vgReportProvider(profile))
+                    .getTriageDetailedReportByReportId(
+                        response[index].diagnosticReportId!);
+
+                navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => PatientAssessmentReportPage(
+                      assessmentDetailsReport: reports,
+                    ),
+                  ),
+                );
+              } catch (e) {
+                logger.e(e);
+                Fluttertoast.showToast(msg: e.toString());
+              }
+            },
             child: vgPatientDataCards(context, response[index]),
           );
         },

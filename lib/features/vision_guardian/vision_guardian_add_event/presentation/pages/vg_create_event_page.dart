@@ -26,6 +26,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
+              ref.read(addEventDetailsProvider).resetSearchEventList();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -43,6 +44,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         ],
         leadingIcon: InkWell(
           onTap: () {
+            ref.read(addEventDetailsProvider).resetPagination();
             ref.read(addEventDetailsProvider).filterListEvents(0, "");
             Navigator.popUntil(context, (route) => route.isFirst);
           },
@@ -104,6 +106,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
+        controller: ref.watch(addEventDetailsProvider).eventListController,
         child: Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
           return Padding(
@@ -114,7 +117,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                 vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
                 const VisionEventListDetails(
-                  eventType: 'default',
+                  eventType: 'viewAll',
                 ),
               ],
             ),

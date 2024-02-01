@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 final visionGuardianEyeAssessmentProvider =
     ChangeNotifierProvider.autoDispose<VisionGuardianEyeAssessmentNotifier>(
         (ref) {
@@ -62,8 +61,6 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     {"type": "Karimnagar", "checked": true},
   ];
 
-
-
   void filterPatientList(selectedIndex, selectedValue) {
     isSelected = selectedIndex;
     patientStatusFiltervalue = selectedValue;
@@ -98,7 +95,6 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
       getisLoading = false;
       error = false;
     } catch (e) {
-      
       error = true;
       errorMessage = e.toString();
       getisLoading = false;
@@ -141,8 +137,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     logger.d("page");
     if (eyeAssessmentController.position.pixels ==
             eyeAssessmentController.position.maxScrollExtent &&
-        (newEyeAssessmentPatientList.length == 10 ||
-            newEyeAssessmentPatientList.isEmpty)) {
+        (newEyeAssessmentPatientList.length == 10)) {
       offset = offset + 1;
       getEyeAssessmentPatientsReport(listOfPatientDetails);
     }
