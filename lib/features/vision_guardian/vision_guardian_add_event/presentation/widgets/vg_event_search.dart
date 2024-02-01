@@ -24,52 +24,55 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
               readOnly: false, searchType: "event"),
           actions: const [],
         ),
-        body: response.isEmpty
-            ? const Center(
-                child: Text("No Event Found"),
-              )
-            : LoadingOverlay(
-                isLoading: loading,
-                overlayColor: null,
-                child: SingleChildScrollView(
+        body: LoadingOverlay(
+          isLoading: loading,
+          overlayColor: null,
+          child: response.isEmpty
+              ? const Center(
+                  child: Text("No Event Found"),
+                )
+              : SingleChildScrollView(
                   controller: ref
                       .watch(addEventDetailsProvider)
                       .searchEventListController,
-                  child: Column(
-                    children: [
-                      for (int index = 0; index < response.length; index++)
-                        InkWell(
-                          onTap: () {
-                            ref
-                                .read(addEventDetailsProvider)
-                                .setEventId(response[index].id.toString());
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return VisionGuardianEventDetailsPage(
-                                    eventDetails: response[index],
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                          child: VgEventDataCards(
-                            data: response[index],
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSize.kspadding),
+                    child: Column(
+                      children: [
+                        for (int index = 0; index < response.length; index++)
+                          InkWell(
+                            onTap: () {
+                              ref
+                                  .read(addEventDetailsProvider)
+                                  .setEventId(response[index].id.toString());
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return VisionGuardianEventDetailsPage(
+                                      eventDetails: response[index],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: VgEventDataCards(
+                              data: response[index],
+                            ),
                           ),
-                        ),
-                      if (ref
-                              .watch(addEventDetailsProvider)
-                              .newSearchEventList
-                              .length ==
-                          10)
-                        const Padding(
-                          padding: EdgeInsets.all(AppSize.klpadding),
-                          child: CupertinoActivityIndicator(),
-                        ),
-                    ],
+                        if (ref
+                                .watch(addEventDetailsProvider)
+                                .newSearchEventList
+                                .length ==
+                            10)
+                          const Padding(
+                            padding: EdgeInsets.all(AppSize.klpadding),
+                            child: CupertinoActivityIndicator(),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ));
+        ));
   }
 }
