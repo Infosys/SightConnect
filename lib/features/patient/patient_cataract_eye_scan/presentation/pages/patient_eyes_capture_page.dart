@@ -38,6 +38,7 @@ class PatientEyeCapturePage extends StatefulHookConsumerWidget {
 class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
   List<CameraDescription> _cameras = [];
   ResolutionPreset defaultResolution = ResolutionPreset.high;
+  bool isFirstEye = false;
   bool isLoading = false;
   bool isProcessing = false;
   bool _canProcess = false;
@@ -98,14 +99,18 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     //   cameraDescription!,
     //   ResolutionPreset.max,
     // );
+    // var isInitialized = ref.watch(patientEyeScanProvider).isInitialized;
+
     await cameraController!.initialize().then(
       (value) {
+        logger.f("Camera Initialized");
         if (!mounted) {
           return;
         }
         cameraController!.startImageStream(_processCameraImage);
       },
     );
+
     setState(() {
       isLoading = false;
     });
@@ -210,11 +215,13 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     }
   }
 
-  @override
-  void dispose() {
-    logger.f("Dispose Called");
-    cameraController!.dispose();
-    super.dispose();
+  void releaseResources() {
+    logger.f("ReleaseResources Called");
+    if (cameraController != null) {
+      cameraController!.stopImageStream();
+      cameraController!.dispose();
+      cameraController = null;
+    }
   }
 
   @override
@@ -223,81 +230,103 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     ref.watch(patientEyeScanProvider).selectedEye == Eye.RIGHT_EYE
         ? _currentEye = TriageEyeType.RIGHT
         : _currentEye = TriageEyeType.LEFT;
-    return Scaffold(
-      appBar: CustomAppbar(
-        title: Text("Eye Scanner - $eye"),
-      ),
-      body: isLoading
-          ? Container(
-              color: AppColor.white,
-              child: const Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
-            )
-          : Consumer(
-              builder: (context, ref, child) => Center(
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    if (ref.watch(patientEyeScanProvider).rightEyeImage ==
-                            null ||
-                        ref.watch(patientEyeScanProvider).leftEyeImage == null)
-                      CameraPreview(
-                        cameraController!,
-                        child: _customPaint ?? Container(),
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.all(AppSize.klpadding),
-                      child: FloatingActionButton(
-                        backgroundColor: AppColor.grey,
-                        onPressed: () {
-                          if (!_isEyeValid) {
-                            return;
-                          }
-                          _takePicture();
-                        },
-                        child: const Icon(Icons.camera),
-                      ),
-                    ),
-                    if (isProcessing)
-                      Positioned.fill(
-                        child: Container(
-                          color: Colors.black.withOpacity(0.5),
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        final navigator = Navigator.of(context);
+        if (didPop) return;
+        setState(() {
+          isLoading = true;
+        });
+        navigator.popUntil((route) => route.isFirst);
+        releaseResources();
+      },
+      child: Scaffold(
+        appBar: CustomAppbar(
+          title: Text("Eye Scanner - $eye"),
+          leadingIcon: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              final navigator = Navigator.of(context);
+              isLoading = true;
+              navigator.popUntil((route) => route.isFirst);
+              releaseResources();
+            },
+          ),
+        ),
+        body: isLoading
+            ? Container(
+                color: AppColor.white,
+                child: const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+              )
+            : Consumer(
+                builder: (context, ref, child) => Center(
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      if (ref.watch(patientEyeScanProvider).rightEyeImage ==
+                              null ||
+                          ref.watch(patientEyeScanProvider).leftEyeImage ==
+                              null)
+                        CameraPreview(
+                          cameraController!,
+                          child: _customPaint ?? Container(),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.all(AppSize.klpadding),
+                        child: FloatingActionButton(
+                          backgroundColor: AppColor.grey,
+                          onPressed: () {
+                            if (!_isEyeValid) {
+                              return;
+                            }
+                            _takePicture();
+                          },
+                          child: const Icon(Icons.camera),
                         ),
                       ),
-                    Visibility(
-                      visible: !_isEyeValid,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 88.0,
-                        ),
-                        child: Container(
-                          width: AppSize.width(context) * 0.8,
-                          decoration: BoxDecoration(
-                            color: AppColor.black.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(10),
+                      if (isProcessing)
+                        Positioned.fill(
+                          child: Container(
+                            color: Colors.black.withOpacity(0.5),
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            context.loc!.eyeBoxText,
-                            textAlign: TextAlign.center,
-                            style: applyRobotoFont(
-                              fontSize: 16,
-                              color: AppColor.white,
-                              fontWeight: FontWeight.w500,
+                        ),
+                      Visibility(
+                        visible: !_isEyeValid,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 88.0,
+                          ),
+                          child: Container(
+                            width: AppSize.width(context) * 0.8,
+                            decoration: BoxDecoration(
+                              color: AppColor.black.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              context.loc!.eyeBoxText,
+                              textAlign: TextAlign.center,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                color: AppColor.white,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 
@@ -323,6 +352,10 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
           ref.read(patientEyeScanProvider).setLeftEyeImage(image);
         }
         cameraCaptureAlert(context, eye);
+        setState(() {
+          isLoading = true;
+        });
+        releaseResources();
       });
     } on CameraException catch (e) {
       if (kDebugMode) {
