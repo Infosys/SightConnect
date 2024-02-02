@@ -43,6 +43,8 @@ class PatientHomePage extends ConsumerWidget {
       ),
       appBar: const PatientHomePageAppBar(),
       body: Container(
+        height: AppSize.height(context),
+        width: AppSize.width(context),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(

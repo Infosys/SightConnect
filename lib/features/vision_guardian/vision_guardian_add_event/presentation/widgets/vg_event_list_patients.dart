@@ -59,19 +59,20 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                               textAlign: TextAlign.center,
                             ),
                             TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PatientRegistrationMiniappPage(
-                                        actionType: MiniAppActionType.REGISTER,
-                                        displayName: 'Register Patient',
-                                      ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PatientRegistrationMiniappPage(
+                                      actionType: MiniAppActionType.REGISTER,
+                                      displayName: 'Register Patient',
                                     ),
-                                  );
-                                },
-                                child: const Text("Register Patient"))
+                                  ),
+                                );
+                              },
+                              child: const Text("Register Patient"),
+                            )
                           ],
                         ),
                       ),

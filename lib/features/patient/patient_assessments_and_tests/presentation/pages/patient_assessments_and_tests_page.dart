@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
@@ -22,90 +23,105 @@ class AssessmentsAndTestsPage extends StatelessWidget {
     final loc = context.loc!;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: CustomAppbar(
         title: Text(loc.appDrawerAssessmentsAndTests),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Row(
-              children: [
-                PatientDropDownWidget(),
-              ],
+      body: Container(
+        height: AppSize.height(context),
+        width: AppSize.width(context),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              AppImages.scaffoldBg,
             ),
-            const SizedBox(height: 16),
-            Consumer(
-              builder: (context, ref, _) {
-                final model = ref.watch(patientAssessmentAndTestProvider);
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: AppSize.klheight * 5),
+              const Row(
+                children: [
+                  PatientDropDownWidget(),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Consumer(
+                builder: (context, ref, _) {
+                  final model = ref.watch(patientAssessmentAndTestProvider);
 
-                if (model.isFinalReportLoading) {
-                  return Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(height: AppSize.height(context) * 0.3),
-                        const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return _content(
-                  context: context,
-                  currentReportId: model.currentTriageReportId,
-                  data: model.finalReportList,
-                  isLoading: model.isReportLoading,
-                  hasMore: model.hasMore,
-                  onRefresh:() async{
-                    try {
-                      await model.refeshReports();
-                    } catch (e) {
-                      Fluttertoast.showToast(msg: "Error in fetching report");
-                    }
-                  },
-                  onLoadMore: () async {
-                    try {
-                      await model.incrementPage();
-                    } catch (e) {
-                      Fluttertoast.showToast(msg: "Error in fetching report");
-                    }
-                  },
-                  onViewReport: (report) async {
-                    final navigator = Navigator.of(context);
-                    try {
-                      model.currentTriageReportId = report.triageResultID;
-                      final detailedReport = await model
-                          .getTriageDetailedReport(report.triageResultID);
-                      navigator.push(
+                  if (model.isFinalReportLoading) {
+                    return Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: AppSize.height(context) * 0.3),
+                          const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return _content(
+                    context: context,
+                    currentReportId: model.currentTriageReportId,
+                    data: model.finalReportList,
+                    isLoading: model.isReportLoading,
+                    hasMore: model.hasMore,
+                    onRefresh: () async {
+                      try {
+                        await model.refeshReports();
+                      } catch (e) {
+                        Fluttertoast.showToast(msg: "Error in fetching report");
+                      }
+                    },
+                    onLoadMore: () async {
+                      try {
+                        await model.incrementPage();
+                      } catch (e) {
+                        Fluttertoast.showToast(msg: "Error in fetching report");
+                      }
+                    },
+                    onViewReport: (report) async {
+                      final navigator = Navigator.of(context);
+                      try {
+                        model.currentTriageReportId = report.triageResultID;
+                        final detailedReport = await model
+                            .getTriageDetailedReport(report.triageResultID);
+                        navigator.push(
+                          MaterialPageRoute(
+                            builder: (context) => PatientAssessmentReportPage(
+                              assessmentDetailsReport: detailedReport,
+                            ),
+                          ),
+                        );
+                      } catch (e) {
+                        Fluttertoast.showToast(msg: "Error in fetching report");
+                      }
+                    },
+                    onViewHistory: (report) {
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
-                          builder: (context) => PatientAssessmentReportPage(
-                            assessmentDetailsReport: detailedReport,
+                          builder: (context) =>
+                              PatientSelfAndClinicalReportPage(
+                            encounterId: report.encounterId,
                           ),
                         ),
                       );
-                    } catch (e) {
-                      Fluttertoast.showToast(msg: "Error in fetching report");
-                    }
-                  },
-                  onViewHistory: (report) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PatientSelfAndClinicalReportPage(
-                          encounterId: report.encounterId,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ],
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -122,17 +138,16 @@ class AssessmentsAndTestsPage extends StatelessWidget {
     }
   }
 
-  _content({
-    required BuildContext context,
-    required List<TriageReportBriefEntity> data,
-    required bool hasMore,
-    required Function(TriageReportBriefEntity) onViewReport,
-    required Function(TriageReportBriefEntity) onViewHistory,
-    required bool isLoading,
-    required int currentReportId,
-    required Function onLoadMore,
-     required Function() onRefresh
-  }) {
+  _content(
+      {required BuildContext context,
+      required List<TriageReportBriefEntity> data,
+      required bool hasMore,
+      required Function(TriageReportBriefEntity) onViewReport,
+      required Function(TriageReportBriefEntity) onViewHistory,
+      required bool isLoading,
+      required int currentReportId,
+      required Function onLoadMore,
+      required Function() onRefresh}) {
     if (data.isEmpty) {
       return Expanded(
         child: Center(
@@ -147,34 +162,34 @@ class AssessmentsAndTestsPage extends StatelessWidget {
       );
     }
     return Expanded(
-
       child: RefreshIndicator(
-         onRefresh: () async{
+        onRefresh: () async {
           onRefresh();
-      },
+        },
         child: ListView.builder(
-          itemCount: data.length+1,
-          
+          padding: const EdgeInsets.all(0),
+          itemCount: data.length + 1,
           itemBuilder: (context, index) {
-         
-            if(index==data.length){
-              if(hasMore){
+            if (index == data.length) {
+              if (hasMore) {
                 onLoadMore();
               }
-               return hasMore?   Center(
-                 child: Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  height: 20,
-                  width: 20,
-                   child:const CircularProgressIndicator(),
-                 ),
-               ): Center(child:  Container(
-                 margin:const EdgeInsets.only(top: 20),
-                 child: const  Text("No more Reports")
-               ));
+              return hasMore
+                  ? Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(),
+                      ),
+                    )
+                  : Center(
+                      child: Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          child: const Text("No more Reports")));
             }
-              final currentData=data[index];
-           
+            final currentData = data[index];
+
             return Container(
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
@@ -255,7 +270,8 @@ class AssessmentsAndTestsPage extends StatelessWidget {
                         onPressed: () => onViewHistory(currentData),
                         child: Text(context.loc!.viewHistoryButton),
                       ),
-                      (isLoading && currentReportId == currentData.triageResultID)
+                      (isLoading &&
+                              currentReportId == currentData.triageResultID)
                           ? const SizedBox(
                               height: 20,
                               width: 20,
@@ -271,7 +287,6 @@ class AssessmentsAndTestsPage extends StatelessWidget {
               ),
             );
           },
-          
         ),
       ),
     );

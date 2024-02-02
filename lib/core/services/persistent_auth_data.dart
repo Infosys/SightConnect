@@ -157,6 +157,10 @@ class PersistentAuthData {
     }
   }
 
+  Future<void> deleteSQFlitePassword() async {
+    await _storage.delete(key: _sqfliteKey);
+  }
+
   Future<void> logout() async {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
