@@ -9,7 +9,6 @@ import 'package:eye_care_for_all/features/patient/patient_notification/presentat
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/appointment_booking_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

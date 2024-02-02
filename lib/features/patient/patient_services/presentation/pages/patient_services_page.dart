@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/patient_service_category.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 
 import 'package:flutter/material.dart';
@@ -23,9 +24,11 @@ class PatientServicesPage extends ConsumerWidget {
         MiniApp.VISUAL_ACUITY_TEST,
         MiniApp.EYE_ASSESSMENT,
         MiniApp.CATARACT_EYE_TEST,
+        MiniApp.RED_EYE_TEST,
         MiniApp.APPOINTMENT,
       ],
     };
+    final isMobile = Responsive.isMobile(context);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppSize.klradius),
@@ -54,10 +57,14 @@ class PatientServicesPage extends ConsumerWidget {
                         margin: const EdgeInsets.only(top: 10, bottom: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.black45,
+                          color: Colors.black45.withOpacity(0.2),
                         ),
                       ),
                       TabBar(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSize.kmpadding,
+                          vertical: AppSize.kmpadding,
+                        ),
                         indicatorSize: TabBarIndicatorSize.label,
                         enableFeedback: true,
                         onTap: (index) {
@@ -67,14 +74,23 @@ class PatientServicesPage extends ConsumerWidget {
                         },
                         isScrollable: false,
                         tabs: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: SvgPicture.asset(
-                                BottomNavItems.home(loc).svgImage),
+                              height: isMobile ? 16 : 20,
+                              width: isMobile ? 16 : 20,
+                              BottomNavItems.home(loc).svgImage,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.grey,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: SvgPicture.asset(
+                              height: isMobile ? 16 : 20,
+                              width: isMobile ? 16 : 20,
                               BottomNavItems.service(loc).svgImage,
                               colorFilter: const ColorFilter.mode(
                                 AppColor.primary,
@@ -83,27 +99,34 @@ class PatientServicesPage extends ConsumerWidget {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColor.primary,
-                            ),
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: SvgPicture.asset(
+                              height: isMobile ? 16 : 20,
+                              width: isMobile ? 16 : 20,
                               BottomNavItems.triage(loc).svgImage,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.grey,
+                                BlendMode.srcIn,
+                              ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: SvgPicture.asset(
-                                BottomNavItems.notification(loc).svgImage,
-                                colorFilter: const ColorFilter.mode(
-                                  AppColor.grey,
-                                  BlendMode.srcIn,
-                                )),
+                              height: isMobile ? 16 : 20,
+                              width: isMobile ? 16 : 20,
+                              BottomNavItems.notification(loc).svgImage,
+                              colorFilter: const ColorFilter.mode(
+                                AppColor.grey,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: SvgPicture.asset(
+                              height: isMobile ? 16 : 20,
+                              width: isMobile ? 16 : 20,
                               BottomNavItems.drawer(loc).svgImage,
                               colorFilter: const ColorFilter.mode(
                                 AppColor.grey,

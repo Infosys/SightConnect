@@ -77,7 +77,7 @@ class PersistentAuthData {
     await _storage.write(key: _refreshKey, value: refreshToken);
     final decodedToken = JwtDecoder.decode(accessToken);
 
-    await saveUserType(decodedToken['USER_TYPE']  ?? "PROD");
+    await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
 
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
@@ -104,7 +104,6 @@ class PersistentAuthData {
   }
 
   Future<void> saveUserType(String userType) async {
-   
     this.userType = userType;
     await _storage.write(key: _userType, value: userType);
   }
@@ -157,6 +156,10 @@ class PersistentAuthData {
     } else {
       return password;
     }
+  }
+
+  Future<void> deleteSQFlitePassword() async {
+    await _storage.delete(key: _sqfliteKey);
   }
 
   Future<void> logout() async {

@@ -106,7 +106,7 @@ class ProfileHeader extends ConsumerWidget {
                                 isShapeCircular: false,
                                 name: patient.profile?.patient?.name,
                                 color: const Color(0xffD4C1FF),
-                                radius: 28,
+                                radius: 38,
                                 fontSize: 18,
                               ),
                         const SizedBox(width: 16),
@@ -167,8 +167,18 @@ class ProfileHeader extends ConsumerWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  infoCard(
-                                      context.loc!.profilePageDateOfBirth, dob),
+                                  patient.profile?.patient?.dobSource ==
+                                          DOBSource.CALCULATED
+                                      ? infoCard(
+                                          "Age",
+                                          patient.profile?.patient?.age != null
+                                              ? '${patient.profile?.patient?.age} Y'
+                                              : '-',
+                                          age: true,
+                                        )
+                                      : infoCard(
+                                          context.loc!.profilePageDateOfBirth,
+                                          dob),
                                   infoCard(context.loc!.profilePageGender,
                                       patient.profile?.patient?.gender?.name),
                                   infoCard(context.loc!.profilePageMobile,
@@ -210,7 +220,11 @@ class ProfileHeader extends ConsumerWidget {
     );
   }
 
-  Widget infoCard(String? name, String? value) {
+  Widget infoCard(
+    String? name,
+    String? value, {
+    bool age = false,
+  }) {
     return Column(
       children: [
         AutoSizeText(
@@ -222,7 +236,11 @@ class ProfileHeader extends ConsumerWidget {
         ),
         const SizedBox(height: 2),
         AutoSizeText(
-          value == null ? "" : value.toLowerCase(),
+          age
+              ? (value == null ? "" : value.capitalize())
+              : value == null
+                  ? ""
+                  : value.toLowerCase().capitalize(),
           style: applyRobotoFont(
             fontSize: 14,
           ),
