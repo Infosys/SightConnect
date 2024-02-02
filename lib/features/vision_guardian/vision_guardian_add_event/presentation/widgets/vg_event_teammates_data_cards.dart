@@ -39,166 +39,170 @@ class TeammatesDataCards extends HookConsumerWidget {
           ),
         ),
         padding: const EdgeInsets.all(AppSize.kspadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  child: data["profilePhoto"] == null ||
-                          data["profilePhoto"] == ""
-                      ? AppNameAvatar(
-                          name: data["personalInformation"]["lastName"] +
-                                  " " +
-                                  data["personalInformation"]["firstName"] ??
-                              "",
-                          color: AppColor.blue,
-                          fontSize: 16,
-                        )
-                      : AppNetworkImage(imageUrl: data["profilePhoto"]),
-                ),
-                const SizedBox(
-                  width: AppSize.kswidth,
-                ),
-                Transform.translate(
-                  offset: const Offset(0, -5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: Responsive.isMobile(context)
-                            ? AppSize.width(context) * 0.74
-                            : AppSize.width(context) * 0.85,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                nameController.value.text == ''
-                                    ? data["personalInformation"]["firstName"] +
-                                        " " +
-                                        data["personalInformation"]["lastName"]
-                                    : nameController.value.text,
-                                style: applyFiraSansFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.black,
-                                ),
-                              ),
-                            ),
-                            Transform.translate(
-                              offset: const Offset(0, 10),
-                              child: InkWell(
-                                onTap: () async {
-                                  await ref
-                                      .read(visionGuadianAddMemberProvider)
-                                      .deleteMember(data["id"].toString())
-                                      .then((value) {
-                                    if (data["id"] ==
-                                        ref.read(globalVGProvider).userId) {
-                                      ref
-                                          .read(addEventDetailsProvider)
-                                          .filterListEvents(-1, "ALL");
-                                      if (type == "Search") {
-                                        Navigator.pop(context);
-                                      }
-                                      Navigator.pop(context);
-                                    } else {
-                                      if (type == "Search") {
-                                        ref
-                                            .read(
-                                                visionGuadianAddMemberProvider)
-                                            .setAdd();
-                                        Navigator.pop(context);
-                                      }
-                                    }
-                                    showToastMessage(
-                                        "TeamMate Deleted Succesfully",
-                                        context,
-                                        0);
-                                  }).catchError((error) {
-                                    showToastMessage(
-                                        "Something went wrong", context, 0);
-                                  });
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline,
-                                  color: AppColor.red,
-                                  size: 30,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: AppSize.ksheight,
-                      ),
-                      Text(
-                        mobileController.value.text == ''
-                            ? data["officialMobile"]
-                            : mobileController.value.text,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Visibility(
-              visible: !isEdit.value,
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: TextField(
-                      controller: nameController,
-                      onChanged: (value) {
-                        nameController.text = value;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Name",
-                        hintStyle: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    child: data["profilePhoto"] == null ||
+                            data["profilePhoto"] == ""
+                        ? AppNameAvatar(
+                            name: data["personalInformation"]["lastName"] +
+                                    " " +
+                                    data["personalInformation"]["firstName"] ??
+                                "",
+                            color: AppColor.blue,
+                            fontSize: 16,
+                          )
+                        : AppNetworkImage(imageUrl: data["profilePhoto"]),
                   ),
                   const SizedBox(
-                    height: AppSize.klheight,
+                    width: AppSize.kswidth,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: TextField(
-                      onChanged: (value) {
-                        mobileController.text = value;
-                      },
-                      controller: mobileController,
-                      decoration: InputDecoration(
-                        hintText: "Phone Number",
-                        hintStyle: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
+                  Transform.translate(
+                    offset: const Offset(0, -5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: Responsive.isMobile(context)
+                              ? AppSize.width(context) * 0.7
+                              : AppSize.width(context) * 0.85,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  nameController.value.text == ''
+                                      ? data["personalInformation"]
+                                              ["firstName"] +
+                                          " " +
+                                          data["personalInformation"]
+                                              ["lastName"]
+                                      : nameController.value.text,
+                                  style: applyFiraSansFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.black,
+                                  ),
+                                ),
+                              ),
+                              Transform.translate(
+                                offset: const Offset(0, 10),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await ref
+                                        .read(visionGuadianAddMemberProvider)
+                                        .deleteMember(data["id"].toString())
+                                        .then((value) {
+                                      if (data["id"] ==
+                                          ref.read(globalVGProvider).userId) {
+                                        ref
+                                            .read(addEventDetailsProvider)
+                                            .filterListEvents(-1, "ALL");
+                                        if (type == "Search") {
+                                          Navigator.pop(context);
+                                        }
+                                        Navigator.pop(context);
+                                      } else {
+                                        if (type == "Search") {
+                                          ref
+                                              .read(
+                                                  visionGuadianAddMemberProvider)
+                                              .setAdd();
+                                          Navigator.pop(context);
+                                        }
+                                      }
+                                      showToastMessage(
+                                          "TeamMate Deleted Succesfully",
+                                          context,
+                                          0);
+                                    }).catchError((error) {
+                                      showToastMessage(
+                                          "Something went wrong", context, 0);
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.delete_outline,
+                                    color: AppColor.red,
+                                    size: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: AppSize.ksheight,
+                        ),
+                        Text(
+                          mobileController.value.text == ''
+                              ? data["officialMobile"]
+                              : mobileController.value.text,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.black,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
+                  )
                 ],
               ),
-            ),
-          ],
+              Visibility(
+                visible: !isEdit.value,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: TextField(
+                        controller: nameController,
+                        onChanged: (value) {
+                          nameController.text = value;
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Name",
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.klheight,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: TextField(
+                        onChanged: (value) {
+                          mobileController.text = value;
+                        },
+                        controller: mobileController,
+                        decoration: InputDecoration(
+                          hintText: "Phone Number",
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.klheight,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

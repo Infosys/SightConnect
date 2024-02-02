@@ -34,7 +34,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
 
     var data = ref.watch(addPatientEventProvider).patientList;
     return LoadingOverlay(
-      overlayColor: null,
+      overlayColor: Colors.black45,
       isLoading: ref.watch(addPatientEventProvider).isLoading,
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding + 2),

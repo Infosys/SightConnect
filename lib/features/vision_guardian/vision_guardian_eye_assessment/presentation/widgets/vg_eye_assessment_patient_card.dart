@@ -50,7 +50,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
     }
     return LoadingOverlay(
       isLoading: loading,
-      overlayColor: null,
+      overlayColor: model.initialValue ? null : Colors.black45,
       child: ListView.builder(
         controller: ref
             .watch(visionGuardianEyeAssessmentProvider)
@@ -164,12 +164,17 @@ Widget vgPatientDataCards(BuildContext context,
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.grey,
+                    SizedBox(
+                      width: AppSize.width(context) * 0.3,
+                      child: Text(
+                        "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.grey,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ),
                   ],
