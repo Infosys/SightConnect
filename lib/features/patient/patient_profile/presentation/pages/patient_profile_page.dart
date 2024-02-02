@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
@@ -25,7 +26,9 @@ class PatientProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: CustomAppbar(
+        backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(),
         title: Text(
           loc.profileTitle,
@@ -34,30 +37,42 @@ class PatientProfilePage extends ConsumerWidget {
           ),
         ),
       ),
-      body: ref.watch(getPatientProfileProvider).when(
-        data: (data) {
-          return _content(
-            context,
-            data,
-            ref,
-          );
-        },
-        error: (e, s) {
-          return Center(
-            child: Text(
-              "Something went wrong",
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+      body: Container(
+        height: AppSize.height(context),
+        width: AppSize.width(context),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              AppImages.scaffoldBg,
             ),
-          );
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ref.watch(getPatientProfileProvider).when(
+          data: (data) {
+            return _content(
+              context,
+              data,
+              ref,
+            );
+          },
+          error: (e, s) {
+            return Center(
+              child: Text(
+                "Something went wrong",
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            );
+          },
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
       ),
     );
   }
@@ -72,30 +87,35 @@ class PatientProfilePage extends ConsumerWidget {
         .watch(patientProfileProvider(patient.profile?.patient?.patientId))
         .selectPatientId;
 
-    logger.d(patient.toJson());
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            PatientFamilyDetails(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSize.klheight * 5),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+            ),
+            child: PatientFamilyDetails(
               relations:
                   patient.profile?.patient?.relatedParty?.reversed.toList() ??
                       [],
               patient: patient,
             ),
-            const SizedBox(height: 4),
-            Divider(
-              thickness: 1,
-              color: AppColor.black.withOpacity(0.2),
-            ),
-            const SizedBox(height: 4),
-            if (selectedPatientId != null)
-              ref.watch(getPatientProfileByIdProvider(selectedPatientId)).when(
-                data: (data) {
-                  final patient = data;
-                  return Column(
+          ),
+          const SizedBox(height: 4),
+          Divider(
+            thickness: 1,
+            color: AppColor.black.withOpacity(0.2),
+          ),
+          const SizedBox(height: 4),
+          if (selectedPatientId != null)
+            ref.watch(getPatientProfileByIdProvider(selectedPatientId)).when(
+              data: (data) {
+                final patient = data;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,6 +239,8 @@ class PatientProfilePage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       Container(
+                        margin: const EdgeInsets.only(
+                            bottom: AppSize.klelevation * 3),
                         decoration: BoxDecoration(
                           color: AppColor.primary,
                           borderRadius: BorderRadius.circular(8),
@@ -246,29 +268,28 @@ class PatientProfilePage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSize.klheight * 3),
                     ],
-                  );
-                },
-                error: (e, s) {
-                  return Center(
-                    child: Text(
-                      "Something went wrong",
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  ),
+                );
+              },
+              error: (e, s) {
+                return Center(
+                  child: Text(
+                    "Something went wrong",
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
-                  );
-                },
-                loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-          ],
-        ),
+                  ),
+                );
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+        ],
       ),
     );
   }

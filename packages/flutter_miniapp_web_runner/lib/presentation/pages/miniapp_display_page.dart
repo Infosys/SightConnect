@@ -190,7 +190,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   logger.d("shouldOverrideUrlLoading: $path");
 
                   if (path == "/failure") {
-                    Navigator.of(context).pop(false);
+                    // Navigator.of(context).pop(false);
                     return NavigationActionPolicy.CANCEL;
                   } else if (path == "/success") {
                     Navigator.of(context).pop(true);

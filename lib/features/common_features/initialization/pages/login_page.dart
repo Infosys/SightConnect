@@ -95,44 +95,48 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     return PopScope(
       canPop: false,
-      child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              AppImages.scaffoldBg,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(60),
-            child: AppBar(
-              title: Row(
-                children: [
-                  Image.asset(
-                    "assets/logo/app_logo.png",
-                    width: 150,
-                  ),
-                ],
-              ),
-              actions: [
-                Visibility(
-                  visible: showOtp.value,
-                  child: IconButton(
-                    onPressed: () {
-                      showOtp.value = false;
-                      mobileController.clear();
-                      pinController.clear();
-                      otp.value = '';
-                    },
-                    icon: const Icon(Icons.close),
-                  ),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            title: Row(
+              children: [
+                Image.asset(
+                  "assets/logo/app_logo.png",
+                  width: 150,
                 ),
               ],
             ),
+            actions: [
+              Visibility(
+                visible: showOtp.value,
+                child: IconButton(
+                  onPressed: () {
+                    showOtp.value = false;
+                    mobileController.clear();
+                    pinController.clear();
+                    otp.value = '';
+                  },
+                  icon: const Icon(Icons.close),
+                ),
+              ),
+            ],
           ),
-          body: Padding(
+        ),
+        body: Container(
+          height: AppSize.height(context),
+          width: AppSize.width(context),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                AppImages.scaffoldBg,
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
             padding: const EdgeInsets.all(24),
             child: AnimatedCrossFade(
               duration: const Duration(milliseconds: 300),
@@ -146,7 +150,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSize.ksheight),
+                    const SizedBox(height: AppSize.klheight * 5),
                     Text(
                       "Verify your mobile number",
                       style: applyFiraSansFont(
@@ -247,7 +251,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.klheight * 5),
                   Text(
                     "Verify your mobile number",
                     style: applyFiraSansFont(
