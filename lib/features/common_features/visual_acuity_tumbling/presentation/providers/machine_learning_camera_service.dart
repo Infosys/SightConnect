@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import '../widgets/coordinates_translator.dart';
@@ -86,6 +86,17 @@ class MachineLearningCameraService {
     );
   }
 
+  static Face getLargestFace(List<Face> faces) {
+    Face largestFace = faces.reduce(
+      (currentFace, nextFace) =>
+          (currentFace.boundingBox.width * currentFace.boundingBox.height) >
+                  (nextFace.boundingBox.width * nextFace.boundingBox.height)
+              ? currentFace
+              : nextFace,
+    );
+    return largestFace;
+  }
+
   static int calculateDistanceToScreen({
     required Point<int> leftEyeLandmark,
     required Point<int> rightEyeLandmark,
@@ -159,7 +170,7 @@ class MachineLearningCameraService {
 
     for (final Point<double> point in landmarkPoints) {
       // Check if the point is inside the box
-      if (!_doesPointLieInsideBox(
+      if (!doesPointLieInsideBox(
         topLeft,
         topRight,
         bottomRight,
@@ -173,7 +184,7 @@ class MachineLearningCameraService {
     return true;
   }
 
-  static bool _doesPointLieInsideBox(
+  static bool doesPointLieInsideBox(
     Point<double> topLeft,
     Point<double> topRight,
     Point<double> bottomRight,

@@ -59,7 +59,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   bool isLoading = false;
   final int _bufferSize = 10;
   bool isPermissionGranted = false;
- 
 
   @override
   void initState() {
@@ -185,15 +184,16 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     setState(() {});
     final faces = await _faceDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
+    const boxCenterRatio = 0.5;
     final boxWidth = _canvasSize.width * boxSizeRatio;
     final boxHeight = _canvasSize.height * boxSizeRatio;
     final boxCenter = Point(
-      _canvasSize.width * 0.5,
-      _canvasSize.height * 0.5,
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
     );
 
     if (faces.isNotEmpty) {
-      final face = faces[0];
+      final face = MachineLearningCameraService.getLargestFace(faces);
       final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
       final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
@@ -266,11 +266,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (mounted) {
       setState(() {});
     }
-  }
-
-  void _resetValues() {
-    _translatedEyeLandmarks = [];
-    _distanceToFace = null;
   }
 
   @override
@@ -371,12 +366,17 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             // ),
                             // SizedBox(width: AppSize.width(context) * 0.02),
                             Text(
-                                _distanceToFace != null ? '${_distanceToFace} cm' : 'No Face',
+                              _distanceToFace != null
+                                  ? '$_distanceToFace cm'
+                                  : 'No Face',
                               style: applyRobotoFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: (_distanceToFace != null && (_distanceToFace! >= 35 && _distanceToFace! <= 45)) ? AppColor.green : AppColor.red,
-                                
+                                color: (_distanceToFace != null &&
+                                        (_distanceToFace! >= 35 &&
+                                            _distanceToFace! <= 45))
+                                    ? AppColor.green
+                                    : AppColor.red,
                               ),
                             ),
                           ],
