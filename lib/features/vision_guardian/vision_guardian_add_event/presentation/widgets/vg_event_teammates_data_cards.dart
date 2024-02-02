@@ -59,7 +59,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                       : AppNetworkImage(imageUrl: data["profilePhoto"]),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: AppSize.kswidth,
                 ),
                 Transform.translate(
                   offset: const Offset(0, -5),

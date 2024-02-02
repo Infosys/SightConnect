@@ -270,15 +270,19 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future getEventPatientList(
       {required Map<String, dynamic> patientQueryData}) async {
     const endpoint = "/services/orchestration/api/patients/filter";
+    var queryParams = {
+      "offset": patientQueryData["offset"],
+      "limit": patientQueryData["limit"],
+      "queryText": patientQueryData["searchParams"],
+    };
+
+    logger.f(queryParams);
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {
-          "offset": patientQueryData["offset"],
-          "limit": patientQueryData["limit"],
-          "queryText": patientQueryData["searchParams"],
-        },
+        queryParameters: queryParams,
       );
+
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
             (response.data as List)

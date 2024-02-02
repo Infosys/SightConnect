@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/providers/vg_eye_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_empty_result_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -24,10 +25,11 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   final String type;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var loading = ref.watch(visionGuardianEyeAssessmentProvider).getisLoading;
-    var response =
-        ref.watch(visionGuardianEyeAssessmentProvider).listOfPatientDetails;
-    var error = ref.watch(visionGuardianEyeAssessmentProvider).error;
+    final model = ref.watch(visionGuardianEyeAssessmentProvider);
+    final readModel = ref.read(visionGuardianEyeAssessmentProvider);
+    var loading = model.getisLoading;
+    var response = model.listOfPatientDetails;
+    var error = model.error;
 
     if (loading == false && error) {
       Fluttertoast.showToast(msg: "Server Error");
@@ -71,6 +73,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
           }
           return InkWell(
             onTap: () async {
+              readModel.setIsLoading();
               try {
                 var navigator = Navigator.of(context);
                 TriageReportUserEntity profile = TriageReportUserEntity(
@@ -78,11 +81,11 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
                   id: response[index].id!,
                   image: "",
                 );
+
                 final reports = await ref
                     .read(vgReportProvider(profile))
                     .getTriageDetailedReportByReportId(
                         response[index].diagnosticReportId!);
-
                 navigator.push(
                   MaterialPageRoute(
                     builder: (context) => PatientAssessmentReportPage(
@@ -94,6 +97,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
                 logger.e(e);
                 Fluttertoast.showToast(msg: e.toString());
               }
+              readModel.setIsLoading();
             },
             child: vgPatientDataCards(context, response[index]),
           );
@@ -143,7 +147,7 @@ Widget vgPatientDataCards(BuildContext context,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${visionGuardianPatientResponseModel.name ?? ""} - PD ${visionGuardianPatientResponseModel.id}",
+                      "${visionGuardianPatientResponseModel.name.capitalize() ?? ""} - PD ${visionGuardianPatientResponseModel.id}",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

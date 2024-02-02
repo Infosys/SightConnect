@@ -157,15 +157,20 @@ class VgEventDataCards extends StatelessWidget {
                               const SizedBox(
                                 width: AppSize.kswidth - 5,
                               ),
-                              Text(
-                                '$startDateString-$endDateString',
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.grey,
+                              SizedBox(
+                                width: Responsive.isMobile(context)
+                                    ? AppSize.width(context) * 0.2
+                                    : AppSize.width(context) * 0.8,
+                                child: Text(
+                                  '$startDateString-$endDateString',
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.grey,
+                                  ),
                                 ),
                               ),
                             ],
@@ -181,15 +186,20 @@ class VgEventDataCards extends StatelessWidget {
                               const SizedBox(
                                 width: AppSize.kswidth - 5,
                               ),
-                              Text(
-                                '$startTimeString-$endTimeString',
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  color: AppColor.grey,
-                                  fontWeight: FontWeight.w500,
+                              SizedBox(
+                                width: Responsive.isMobile(context)
+                                    ? AppSize.width(context) * 0.2
+                                    : AppSize.width(context) * 0.8,
+                                child: Text(
+                                  '$startTimeString-$endTimeString',
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ],
