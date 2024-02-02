@@ -62,15 +62,7 @@ class EyeDetectorPainter extends CustomPainter {
       ..color = isEyeValid ? AppColor.pureGreen : AppColor.pureRed
       ..strokeJoin = StrokeJoin.bevel;
 
-    // canvas.drawRect(
-    //   Rect.fromCenter(
-    //     center: center,
-    //     width: boxWidth,
-    //     height: boxHeight,
-    //   ),
-    //   boxPainter,
-    // );
-    final cornerLength = 20.0; // Define the length of the corner lines
+    const cornerLength = 20.0; // Define the length of the corner lines
 
     final rect = Rect.fromCenter(
       center: center,
@@ -80,22 +72,53 @@ class EyeDetectorPainter extends CustomPainter {
     boxPainter.strokeCap = StrokeCap.round; // or StrokeCap.square
 
     // Top left corner
-    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left + cornerLength, rect.top), boxPainter);
-    canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left, rect.top + cornerLength), boxPainter);
+    canvas.drawLine(
+      Offset(rect.left, rect.top),
+      Offset(rect.left + cornerLength, rect.top),
+      boxPainter,
+    );
+    canvas.drawLine(
+      Offset(rect.left, rect.top),
+      Offset(rect.left, rect.top + cornerLength),
+      boxPainter,
+    );
 
     // Top right corner
-    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right - cornerLength, rect.top), boxPainter);
-    canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.right, rect.top + cornerLength), boxPainter);
+    canvas.drawLine(
+      Offset(rect.right, rect.top),
+      Offset(rect.right - cornerLength, rect.top),
+      boxPainter,
+    );
+    canvas.drawLine(
+      Offset(rect.right, rect.top),
+      Offset(rect.right, rect.top + cornerLength),
+      boxPainter,
+    );
 
     // Bottom left corner
-    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left + cornerLength, rect.bottom), boxPainter);
-    canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left, rect.bottom - cornerLength), boxPainter);
+    canvas.drawLine(
+      Offset(rect.left, rect.bottom),
+      Offset(rect.left + cornerLength, rect.bottom),
+      boxPainter,
+    );
+    canvas.drawLine(
+      Offset(rect.left, rect.bottom),
+      Offset(rect.left, rect.bottom - cornerLength),
+      boxPainter,
+    );
 
     // Bottom right corner
-    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right - cornerLength, rect.bottom), boxPainter);
-    canvas.drawLine(Offset(rect.right, rect.bottom), Offset(rect.right, rect.bottom - cornerLength), boxPainter);
+    canvas.drawLine(
+      Offset(rect.right, rect.bottom),
+      Offset(rect.right - cornerLength, rect.bottom),
+      boxPainter,
+    );
+    canvas.drawLine(
+      Offset(rect.right, rect.bottom),
+      Offset(rect.right, rect.bottom - cornerLength),
+      boxPainter,
+    );
 
-    
     // Eye Landmark Painters
     final Paint eyeLandmarkContour = Paint()
       ..style = PaintingStyle.fill
