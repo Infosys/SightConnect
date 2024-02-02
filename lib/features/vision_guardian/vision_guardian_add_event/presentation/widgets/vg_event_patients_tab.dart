@@ -53,10 +53,7 @@ class EventPatientsTab extends ConsumerWidget {
     return LoadingOverlay(
       overlayColor: null,
       isLoading: loading,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: vgPatientTabs(context, response, ref, patientsType),
-      ),
+      child: vgPatientTabs(context, response, ref, patientsType),
     );
   }
 }
@@ -122,7 +119,7 @@ Widget vgPatientTabs(
           readModel.loadingToggle();
         },
         child: Container(
-          padding: const EdgeInsets.all(AppSize.kspadding),
+          padding: const EdgeInsets.all(AppSize.kmpadding),
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColor.white,
@@ -134,7 +131,7 @@ Widget vgPatientTabs(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(AppSize.ksradius),
             child: Container(
-              padding: const EdgeInsets.all(AppSize.kspadding),
+              // padding: const EdgeInsets.all(AppSize.kspadding),
               width: Responsive.isMobile(context)
                   ? AppSize.width(context) * 0.9
                   : AppSize.width(context) * 0.6,
