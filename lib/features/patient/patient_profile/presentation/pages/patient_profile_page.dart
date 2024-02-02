@@ -143,7 +143,7 @@ class PatientProfilePage extends ConsumerWidget {
                                   if (value == null || value == false) {
                                     Fluttertoast.showToast(
                                         msg: "Profile not updated");
-                                  } else {
+                                  } else if (value) {
                                     Fluttertoast.showToast(
                                         msg: "Profile updated");
                                   }
