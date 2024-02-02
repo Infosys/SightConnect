@@ -128,13 +128,13 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                 alignment: Alignment.center,
                 children: <Widget>[
                   !Platform.isIOS
-                      ? Positioned.fill(
+                      ? Center(
                           child: CameraPreview(
                             controller,
                             child: customPaint,
                           ),
                         )
-                      : Positioned.fill(
+                      : Center(
                           child: CameraPreview(
                             controller,
                           ),
