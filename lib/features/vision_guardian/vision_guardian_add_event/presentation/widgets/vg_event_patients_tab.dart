@@ -246,7 +246,8 @@ Widget vgPatientTabs(
                             Text(
                               data.encounterStartDate != null
                                   ? DateFormat("hh:mm a").format(
-                                      DateTime.parse(data.encounterStartDate!))
+                                      DateTime.parse(data.encounterStartDate!)
+                                          .toLocal())
                                   : "",
                               style: applyRobotoFont(
                                 fontSize: 12,
