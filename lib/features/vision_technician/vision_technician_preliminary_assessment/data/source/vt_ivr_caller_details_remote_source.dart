@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class VTIVRCallerDetailsRemoteSource {
-  Future saveCallerDetails(IVRCallerDetailsModel callerDetails);
+  Future<String> saveCallerDetails(IVRCallerDetailsModel callerDetails);
   // Future<IVRCallerDetailsModel> saveIVRCallerDetails(
   //     {required IVRCallerDetailsModel ivrCallerDetails});
 }
@@ -23,19 +23,21 @@ class VTIVRCallerDetailsRemoteSourceImpl
   VTIVRCallerDetailsRemoteSourceImpl(this.dio);
 
   @override
-  Future saveCallerDetails(IVRCallerDetailsModel callerDetails) async {
+  Future<String> saveCallerDetails(IVRCallerDetailsModel callerDetails) async {
     try {
       String endPoint = "/services/exotel/api/users/ivr/callerDetails";
       var response = await dio.put(endPoint, data: callerDetails.toJson());
       logger.d("Caller details Saved response ${response.data}");
-      return response;
+      return "success";
     } on DioException catch (e) {
       logger.d("this is the error ${e.message}");
       if (e.response != null) {
         logger.d("Error response: ${e.response.toString()}");
       }
+      return "error";
     } catch (e) {
       logger.d("Unknown error: ${e.toString()}");
+      return "error";
     }
   }
 }

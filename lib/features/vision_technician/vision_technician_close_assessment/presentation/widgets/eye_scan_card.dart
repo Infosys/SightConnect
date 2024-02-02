@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_eye_scan_page.dart';
@@ -47,20 +45,15 @@ class EyeScanCard extends ConsumerWidget {
           const SizedBox(height: AppSize.kmheight),
           if (!allImagesCaptured)
             TextButton(
-              onPressed: () async {
-                var cameras = await availableCameras();
-                if (cameras.isEmpty) {
-                  return;
-                }
-                if (context.mounted) {
+              onPressed: ()  {
+                
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      fullscreenDialog: true,
                       builder: (context) =>
-                          VisionTechnicianEyeCapture(cameras: cameras),
+                          const VisionTechnicianEyeCapture(),
                     ),
                   );
-                }
+                
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(

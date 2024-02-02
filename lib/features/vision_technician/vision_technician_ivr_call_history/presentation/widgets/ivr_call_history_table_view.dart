@@ -45,9 +45,9 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                         AppColor.scaffold,
                       ),
                       columnSpacing: AppSize.width(context) / 15,
-                      dataRowMinHeight: 50,
-                      dataRowMaxHeight: 80,
-                      horizontalMargin: 50,
+                      horizontalMargin: AppSize.klpadding,
+                      dataRowMaxHeight: AppSize.klheight * 2.5,
+                      dataRowMinHeight: AppSize.klheight * 2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(AppSize.ksradius),
                         color: AppColor.white,

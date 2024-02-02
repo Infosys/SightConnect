@@ -102,6 +102,11 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setIsLoading() {
+    getisLoading = !getisLoading;
+    notifyListeners();
+  }
+
   void setSearchPatientList(String query) async {
     List<VisionGuardianPatientResponseModel> resultList = [];
 

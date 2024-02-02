@@ -20,10 +20,12 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   XFile _rightEyeImage = XFile("");
   XFile _bothEyeImage = XFile("");
   bool _loading = false;
-  final TextEditingController _recommendationsController = TextEditingController();
+  final TextEditingController _recommendationsController =
+      TextEditingController();
   final TextEditingController _mrCodeController = TextEditingController();
   final List<GoalOutCome> _goalOutComeList = GoalOutCome.values;
   Set<GoalOutCome> _selectedGoalOutComeList = {};
+  List<CameraDescription>? availableCameras;
 
   int get currentStep => _currentStep;
   bool get isImageCaptured => _isImageCaptured;
@@ -43,10 +45,17 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     _selectedGoalOutComeList = {};
   }
 
-  void setMrCode(String value){
+  void setAvailableCameras(List<CameraDescription> cameras) {
+    availableCameras = cameras;
+    notifyListeners();
+  }
+
+  void setMrCode(String value) {
     _mrCodeController.text = value;
     notifyListeners();
   }
+
+
 
   void goToNextStep() {
     _currentStep = _currentStep + 1;
@@ -106,8 +115,6 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
 
     logger.d(_selectedGoalOutComeList);
   }
-
-
 
   void setLoading(bool value) {
     _loading = value;
