@@ -49,9 +49,13 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                     .currentState!
                     .validate()) {
                   try {
-                    await ref.read(addEventDetailsProvider).addEventDetails();
-                    navigator.pop();
-                    Fluttertoast.showToast(msg: "Event added");
+                    if (ref.watch(addEventDetailsProvider).image == null) {
+                      Fluttertoast.showToast(msg: "Add Event Image");
+                    } else {
+                      await ref.read(addEventDetailsProvider).addEventDetails();
+                      navigator.pop();
+                      Fluttertoast.showToast(msg: "Event added");
+                    }
                   } catch (e) {
                     Fluttertoast.showToast(msg: "Event not added");
                   }

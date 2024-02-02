@@ -186,6 +186,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     isLoading = false;
   }
 
+  void loadingToggle() {
+    getisLoading = !getisLoading;
+    notifyListeners();
+  }
+
   void setStartDate(String date) {
     _startDate.text = date;
     notifyListeners();
@@ -362,6 +367,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   void setEventPatients(List<VisionGuardianPatientResponseModel> response) {
     listOfEventPatients = response;
+    logger.f(listOfEventPatients);
   }
 
   void setSearchEventPatients(

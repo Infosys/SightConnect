@@ -26,9 +26,10 @@ class EventPatientsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var response = ref.watch(addEventDetailsProvider).listOfEventPatients;
-    var loading = ref.watch(addEventDetailsProvider).getisLoading;
-    var error = ref.watch(addEventDetailsProvider).error;
+    final model = ref.watch(addEventDetailsProvider);
+    var response = model.listOfEventPatients;
+    var loading = model.getisLoading;
+    var error = model.error;
 
     if (loading == false && error) {
       Fluttertoast.showToast(msg: "Server Error");
@@ -75,6 +76,7 @@ Widget vgPatientTabs(
     List<VisionGuardianPatientResponseModel> response,
     WidgetRef ref,
     String patientsType) {
+  final readModel = ref.read(addEventDetailsProvider);
   return ListView.separated(
     controller: ref.watch(addEventDetailsProvider).eventPatientController,
     shrinkWrap: true,
@@ -94,6 +96,7 @@ Widget vgPatientTabs(
       var data = response[index];
       return GestureDetector(
         onTap: () async {
+          readModel.loadingToggle();
           try {
             var navigator = Navigator.of(context);
             TriageReportUserEntity profile = TriageReportUserEntity(
@@ -116,6 +119,7 @@ Widget vgPatientTabs(
             logger.e(e);
             Fluttertoast.showToast(msg: e.toString());
           }
+          readModel.loadingToggle();
         },
         child: Container(
           padding: const EdgeInsets.all(AppSize.kspadding),
@@ -163,6 +167,8 @@ Widget vgPatientTabs(
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.black,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const Spacer(),
                             Text(
@@ -172,6 +178,8 @@ Widget vgPatientTabs(
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.red,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
@@ -189,6 +197,8 @@ Widget vgPatientTabs(
                                   int.parse(data.monthOfBirth ?? ""),
                                   int.parse(data.dayOfBirth ?? ""),
                                 )) : ""} yrs',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -203,6 +213,8 @@ Widget vgPatientTabs(
                                           data.encounterStartDate!))
                                       .toString()
                                   : "",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 color: AppColor.grey,
@@ -227,6 +239,8 @@ Widget vgPatientTabs(
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.grey,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const Spacer(),
                             Text(
@@ -239,6 +253,8 @@ Widget vgPatientTabs(
                                 color: AppColor.grey,
                                 fontWeight: FontWeight.w500,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: AppSize.ksheight / 3),
                           ],
