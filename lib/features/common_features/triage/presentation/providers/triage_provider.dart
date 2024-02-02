@@ -245,7 +245,7 @@ class TriageProvider extends ChangeNotifier {
       );
     }
 
-    logger.d({"triage model for event to be saved": triagePostModel});
+    logger.d({"triage model for event to be saved": triagePostModel.toJson()});
 
     try {
       Either<Failure, TriagePostModel> response =
