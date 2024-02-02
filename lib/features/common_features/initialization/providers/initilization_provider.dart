@@ -53,6 +53,8 @@ class InitializationProvider extends ChangeNotifier {
     await PersistentAuthStateService.authState.logout();
     // Triage Database logout
     await TriageDBHelper().discardLocalTriageEntries();
+    // SQFlite logout
+    await PersistentAuthStateService.authState.deleteSQFlitePassword();
     // Shared Preference logout
     await SharedPreferenceService.clear();
   }
