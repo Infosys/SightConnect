@@ -121,8 +121,10 @@ class TriageProvider extends ChangeNotifier {
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
       ],
-      userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
-      issued: DateTime.now().subtract(const Duration(seconds: 2)),
+      userStartDate:
+          DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+      /* "${starttime.toIso8601String()}Z" */
 
       source: getSource(),
       sourceVersion: AppText.appVersion,
@@ -223,8 +225,9 @@ class TriageProvider extends ChangeNotifier {
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
       ],
-      userStartDate: DateTime.now().subtract(const Duration(seconds: 2)),
-      issued: DateTime.now().subtract(const Duration(seconds: 2)),
+      userStartDate:
+          DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
 
       source: getSource(),
       sourceVersion: AppText.appVersion,
