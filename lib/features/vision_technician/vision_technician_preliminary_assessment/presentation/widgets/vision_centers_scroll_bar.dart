@@ -81,6 +81,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (viewState.isLoading)
             const Center(child: CircularProgressIndicator()),

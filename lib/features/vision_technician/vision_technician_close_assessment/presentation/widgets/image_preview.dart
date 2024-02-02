@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,13 @@ class ImagePreview extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String imagePath = ref.watch(vtCloseAssessmentHelperProvider).imagePath;
     int currentStep = ref.watch(vtCloseAssessmentHelperProvider).currentStep;
+    String currentEye = ref
+        .watch(vtCloseAssessmentHelperProvider)
+        .currentEye
+        .toString()
+        .split('.')
+        .last
+        .sentenceCase();
     return Container(
       width: 536,
       height: 714,
@@ -32,7 +40,7 @@ class ImagePreview extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "Left Eye",
+                "$currentEye Eye",
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
