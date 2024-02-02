@@ -1,4 +1,3 @@
-import 'dart:io' show Platform;
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -341,6 +340,80 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
+  Future<void> _toggleCamera() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    setLoading();
+    if (_controller.description.lensDirection == CameraLensDirection.front) {
+      _cameraLensDirection = CameraLensDirection.back;
+    } else {
+      _cameraLensDirection = CameraLensDirection.front;
+    }
+    await _stopLiveFeed();
+    _initializeCamera();
+    removeLoading();
+  }
+
+  Future<void> _toggleFlash() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    setLoading();
+    if (_controller.value.flashMode == FlashMode.off) {
+      await _controller.setFlashMode(FlashMode.auto);
+    } else {
+      await _controller.setFlashMode(FlashMode.off);
+    }
+
+    removeLoading();
+  }
+
+  Future<XFile?> _takePicture(BuildContext context) async {
+    try {
+      final image = await _capturePicture(context);
+      if (image == null) {
+        return null;
+      }
+
+      final isVerfied = await _validateImage(image);
+      if (!isVerfied) {
+        return null;
+      }
+      return image;
+    } on CameraException {
+      Fluttertoast.showToast(msg: "Camera not found");
+      return null;
+    } catch (e) {
+      logger.e("Camera exception: $e");
+      Fluttertoast.showToast(msg: "Camera exception");
+      return null;
+    }
+  }
+
+  Future<XFile?> _capturePicture(BuildContext context) async {
+    if (!_controller.value.isInitialized) {
+      return null;
+    }
+    setLoading();
+    final image = await _controller.takePicture();
+    removeLoading();
+    return image;
+  }
+
+  Future<bool> _validateImage(XFile image) async {
+    XFile? verifiedImage = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TriageEyePreviewPage(imageFile: image),
+      ),
+    );
+    if (verifiedImage != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> _handleRightEyeCapture(
     TriageEyeScanProvider model,
     XFile image,
@@ -379,78 +452,31 @@ class _PatientTriageEyeCapturingPageState
     }
   }
 
-  Future<void> _toggleCamera() async {
-    if (!_controller.value.isInitialized) {
-      return;
-    }
-    setLoading();
-    if (_controller.description.lensDirection == CameraLensDirection.front) {
-      _cameraLensDirection = CameraLensDirection.back;
-    } else {
-      _cameraLensDirection = CameraLensDirection.front;
-    }
-    await _stopLiveFeed();
-    _initializeCamera();
-    removeLoading();
-  }
+  Future<void> saveTriage() async {
+    Either<Failure, TriagePostModel> response;
+    var tiageModel = ref.read(triageProvider);
 
-  Future<bool> _validateImage(XFile image) async {
-    XFile? verifiedImage = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => TriageEyePreviewPage(imageFile: image),
-      ),
+    if (tiageModel.triageMode == TriageMode.EVENT) {
+      response = await tiageModel.saveTriageForEvent(
+          3, ref.read(addEventDetailsProvider).eventId);
+    } else {
+      response = await tiageModel.saveTriage(3);
+    }
+    response.fold(
+      (failure) async {
+        removeLoading();
+        logger.d({"Failure while saving in local db ": failure});
+        _showServerExceptionDialog(context, failure);
+      },
+      (result) async {
+        removeLoading();
+        logger.d({"saveTriageEyeScanResponseToDB": "Success"});
+        setState(() {
+          isCompleted = true;
+        });
+        _showTestCompletionDialog(context, result);
+      },
     );
-    if (verifiedImage != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<XFile?> _capturePicture(BuildContext context) async {
-    if (!_controller.value.isInitialized) {
-      return null;
-    }
-    setLoading();
-    final image = await _controller.takePicture();
-    removeLoading();
-    return image;
-  }
-
-  Future<XFile?> _takePicture(BuildContext context) async {
-    try {
-      final image = await _capturePicture(context);
-      if (image == null) {
-        return null;
-      }
-
-      final isVerfied = await _validateImage(image);
-      if (!isVerfied) {
-        return null;
-      }
-      return image;
-    } on CameraException {
-      Fluttertoast.showToast(msg: "Camera not found");
-      return null;
-    } catch (e) {
-      logger.e("Camera exception: $e");
-      Fluttertoast.showToast(msg: "Camera exception");
-      return null;
-    }
-  }
-
-  Future<void> _toggleFlash() async {
-    if (!_controller.value.isInitialized) {
-      return;
-    }
-    setLoading();
-    if (_controller.value.flashMode == FlashMode.off) {
-      await _controller.setFlashMode(FlashMode.auto);
-    } else {
-      await _controller.setFlashMode(FlashMode.off);
-    }
-
-    removeLoading();
   }
 
   _showTestCompletionDialog(BuildContext context, TriagePostModel result) {
@@ -496,33 +522,6 @@ class _PatientTriageEyeCapturingPageState
       ),
       builder: (context) {
         return const CameraServerExceptionDialog();
-      },
-    );
-  }
-
-  Future<void> saveTriage() async {
-    Either<Failure, TriagePostModel> response;
-    var tiageModel = ref.read(triageProvider);
-
-    if (tiageModel.triageMode == TriageMode.EVENT) {
-      response = await tiageModel.saveTriageForEvent(
-          3, ref.read(addEventDetailsProvider).eventId);
-    } else {
-      response = await tiageModel.saveTriage(3);
-    }
-    response.fold(
-      (failure) async {
-        removeLoading();
-        logger.d({"Failure while saving in local db ": failure});
-        _showServerExceptionDialog(context, failure);
-      },
-      (result) async {
-        removeLoading();
-        logger.d({"saveTriageEyeScanResponseToDB": "Success"});
-        setState(() {
-          isCompleted = true;
-        });
-        _showTestCompletionDialog(context, result);
       },
     );
   }
