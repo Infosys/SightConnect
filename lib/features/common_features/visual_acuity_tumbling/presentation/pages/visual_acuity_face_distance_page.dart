@@ -160,24 +160,16 @@ class _VisualAcuityFaceDistancePageViewState
     setState(() {});
     final faces = await _faceDetector.processImage(inputImage);
     const boxSizeRatio = 0.7;
+    const boxCenterRatio = 0.5;
     final boxWidth = _canvasSize.width * boxSizeRatio;
     final boxHeight = _canvasSize.height * boxSizeRatio;
     final boxCenter = Point(
-      _canvasSize.width * 0.5,
-      _canvasSize.height * 0.5,
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
     );
 
     if (faces.isNotEmpty) {
-      var largestFace = faces[0];
-      var largestFaceArea = largestFace.boundingBox.width * largestFace.boundingBox.height;
-      for (final face in faces.skip(1)) {
-        final currentFaceArea = face.boundingBox.width * face.boundingBox.height;
-        if (currentFaceArea > largestFaceArea) {
-          largestFaceArea = currentFaceArea;
-          largestFace = face;
-        }
-      }
-      final face = largestFace;
+      final face = MachineLearningCameraService.getLargestFace(faces);
       final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
       final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
@@ -249,11 +241,6 @@ class _VisualAcuityFaceDistancePageViewState
     if (mounted) {
       setState(() {});
     }
-  }
-
-  void _resetValues() {
-    _translatedEyeLandmarks = [];
-    _distanceToFace = null;
   }
 
   @override

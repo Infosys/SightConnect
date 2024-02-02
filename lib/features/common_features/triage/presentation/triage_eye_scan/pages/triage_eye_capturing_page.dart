@@ -63,7 +63,6 @@ class _PatientTriageEyeCapturingPageState
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   bool isIOS = Platform.isIOS;
 
   @override
@@ -143,11 +142,12 @@ class _PatientTriageEyeCapturingPageState
     final meshes = await _meshDetector.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
+    const boxCenterRatio = 0.5;
     final boxWidth = _canvasSize.width * (3 / 5);
     final boxHeight = _canvasSize.height * (1 / 5);
     final boxCenter = Point(
-      _canvasSize.width * (1 / 2),
-      _canvasSize.height * (1 / 2),
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
     );
 
     if (meshes.isNotEmpty) {
@@ -160,6 +160,7 @@ class _PatientTriageEyeCapturingPageState
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
                 : rightEyeContour;
+
         // Translate Eye Points
         _translatedEyeContours = eyePoints.map(
           (contour) {
