@@ -66,26 +66,43 @@ class VtTriageProvider extends ChangeNotifier {
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
       VTPatientDto patientDetails) async {
+    if (_preliminaryAssessmentHelperProvider.onIvrCall) {
+      logger.d("on ivr called");
+
+      final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
+        agentMobile: _vtProfile?.officialMobile,
+        callerId: patientDetails.id.toString(),
+        callerName: patientDetails.name,
+        callerNumber: patientDetails.mobile,
+      );
+      String ivrResponse =
+          await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
+      logger.d("ivr response $ivrResponse");
+      if (ivrResponse == "error") {
+        return Left(ServerFailure(errorMessage: "Not on IVR Call Please"));
+      }
+    }
+
     logger.d("save triage called");
 
     List<PostTriageImagingSelectionModel> imageSelection =
         await _visionTechnicianTriageProvider.getTriageEyeScanResponse();
-logger.d("image selection called $imageSelection");
+    logger.d("image selection called $imageSelection");
     List<PostTriageObservationsModel> observations =
         _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
     logger.d("observation called $observations");
     List<PostTriageQuestionModel> questionResponse =
         _visionTechnicianTriageProvider.getQuestionaireResponse();
-  logger.d("question response called $questionResponse");
+    logger.d("question response called $questionResponse");
     final quessionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);
     logger.d("quessionnaireUrgency called $quessionnaireUrgency");
     final visualAcuityUrgency =
         _triageUrgencyRepository.visualAcuityUrgency(observations);
-        logger.d("visualAcuityUrgency called $visualAcuityUrgency");
+    logger.d("visualAcuityUrgency called $visualAcuityUrgency");
     final eyeScanUrgency =
         _triageUrgencyRepository.eyeScanUrgency(imageSelection);
-        logger.d("eyeScanUrgency called $eyeScanUrgency");
+    logger.d("eyeScanUrgency called $eyeScanUrgency");
     final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
       quessionnaireUrgency,
       visualAcuityUrgency,
@@ -93,7 +110,8 @@ logger.d("image selection called $imageSelection");
     );
     logger.d("triageUrgency called $triageUrgency");
     //inject assesment
-    DiagnosticReportTemplateFHIRModel assessment = _visionTechnicianTriageProvider.assessment;
+    DiagnosticReportTemplateFHIRModel assessment =
+        _visionTechnicianTriageProvider.assessment;
 
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: patientDetails.id,
@@ -158,16 +176,6 @@ logger.d("image selection called $imageSelection");
       }, (result) {
         _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
       });
-    }
-
-    if (_preliminaryAssessmentHelperProvider.onIvrCall) {
-      final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
-        agentMobile: _vtProfile?.officialMobile,
-        callerId: patientDetails.id.toString(),
-        callerName: patientDetails.name,
-        callerNumber: patientDetails.mobile,
-      );
-      await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
     }
 
     _preliminaryAssessmentHelperProvider.setLoading(false);

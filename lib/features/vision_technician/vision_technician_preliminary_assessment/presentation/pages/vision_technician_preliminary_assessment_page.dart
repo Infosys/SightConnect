@@ -95,8 +95,8 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         response.fold(
                           (failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Some Error Occurred"),
+                              SnackBar(
+                                content: Text(failure.errorMessage),
                               ),
                             );
                           },

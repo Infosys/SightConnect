@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/error_dialogue_box.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
@@ -19,6 +21,9 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
     bool? available = ref.watch(markMyAvailabilityHelperProvider).available;
     bool loading = ref.watch(markMyAvailabilityHelperProvider).isLoading;
 
+    // bool? availableForTeleconsultation =
+    //     ref.watch(globalVTProvider).user?.availableForTeleconsultation;
+
     logger.d("available : $available");
 
     return Scaffold(
@@ -27,8 +32,9 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
               padding: const EdgeInsets.all(AppSize.kmpadding),
               child: ElevatedButton(
                 style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(0),
                   backgroundColor: MaterialStateProperty.all(
-                    available! ? AppColor.white : AppColor.primary,
+                  available! ? AppColor.white : AppColor.primary,
                   ),
                   side: MaterialStateProperty.all(
                     const BorderSide(color: AppColor.primary),
@@ -38,9 +44,9 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                   try {
                     await watchRef.updateAvailability();
                   } catch (e) {
-                    Fluttertoast.showToast(
-                      msg: "Something went wrong.. Try Again!!",
-                    );
+                    if (context.mounted) {
+                      showErrorDialogue(context);
+                    }
                   }
                 },
                 child: Row(
