@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
@@ -56,7 +57,7 @@ class PatientServiceCategory extends ConsumerWidget {
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
-            alignment: WrapAlignment.start,
+            alignment: WrapAlignment.spaceBetween,
             children: services
                 .where((miniapp) =>
                     isUserBeta ||
@@ -111,26 +112,25 @@ class PatientServiceCategory extends ConsumerWidget {
                       }
                     },
                     child: SizedBox(
-                      width: Responsive.isMobile(context) ? 80 : 120,
+                      // color: Colors.pink,
+                      width: Responsive.isMobile(context) ? 60 : 80,
+                      height: Responsive.isMobile(context) ? 80 : 100,
                       child: Column(
                         children: [
                           MINIAPP_LOGO_MAPPER[miniapp] != null
                               ? SvgPicture.asset(
+                                  width: Responsive.isMobile(context) ? 24 : 34,
                                   MINIAPP_LOGO_MAPPER[miniapp]!,
-                                  height:
-                                      Responsive.isMobile(context) ? 24 : 32,
-                                  width: Responsive.isMobile(context) ? 24 : 32,
                                   colorFilter: const ColorFilter.mode(
                                     AppColor.primary,
                                     BlendMode.srcIn,
                                   ),
-                                  fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
-                          Text(
+                          AutoSizeText(
                             _getMiniAppText(miniapp, loc),
                             softWrap: true,
                             textAlign: TextAlign.center,

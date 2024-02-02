@@ -71,6 +71,8 @@ class PatientProfilePage extends ConsumerWidget {
     final selectedPatientId = ref
         .watch(patientProfileProvider(patient.profile?.patient?.patientId))
         .selectPatientId;
+
+    logger.d(patient.toJson());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

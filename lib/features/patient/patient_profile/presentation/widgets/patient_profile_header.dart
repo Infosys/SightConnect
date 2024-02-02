@@ -169,8 +169,13 @@ class ProfileHeader extends ConsumerWidget {
                                 children: [
                                   patient.profile?.patient?.dobSource ==
                                           DOBSource.CALCULATED
-                                      ? infoCard("Age",
-                                          "${patient.profile?.patient?.age ?? "-"}")
+                                      ? infoCard(
+                                          "Age",
+                                          patient.profile?.patient?.age != null
+                                              ? '${patient.profile?.patient?.age} Y'
+                                              : '-',
+                                          age: true,
+                                        )
                                       : infoCard(
                                           context.loc!.profilePageDateOfBirth,
                                           dob),
@@ -215,7 +220,11 @@ class ProfileHeader extends ConsumerWidget {
     );
   }
 
-  Widget infoCard(String? name, String? value) {
+  Widget infoCard(
+    String? name,
+    String? value, {
+    bool age = false,
+  }) {
     return Column(
       children: [
         AutoSizeText(
@@ -227,7 +236,11 @@ class ProfileHeader extends ConsumerWidget {
         ),
         const SizedBox(height: 2),
         AutoSizeText(
-          value == null ? "" : value.toLowerCase().capitalize(),
+          age
+              ? (value == null ? "" : value.capitalize())
+              : value == null
+                  ? ""
+                  : value.toLowerCase().capitalize(),
           style: applyRobotoFont(
             fontSize: 14,
           ),
