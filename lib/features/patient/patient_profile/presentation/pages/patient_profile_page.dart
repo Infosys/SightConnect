@@ -130,7 +130,7 @@ class PatientProfilePage extends ConsumerWidget {
                                   .push<bool?>(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const PatientRegistrationMiniappPage(
+                                      PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.UPDATE,
                                     displayName: "Update Profile",
                                   ),

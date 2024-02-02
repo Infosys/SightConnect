@@ -59,7 +59,7 @@ class AddPatientEventNotifier extends ChangeNotifier {
     if (patientListScrollController.position.pixels ==
             patientListScrollController.position.maxScrollExtent &&
         (newpatientList.length == 10)) {
-      offset = offset + 1;
+      offset = offset + 10;
       getPatientList(patientList);
     }
   }
