@@ -9,6 +9,8 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/foundation.dart';
 
@@ -210,6 +212,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
 
   @override
   void dispose() {
+    logger.f("Dispose Called");
     cameraController!.dispose();
     super.dispose();
   }
@@ -239,13 +242,20 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                     if (ref.watch(patientEyeScanProvider).rightEyeImage ==
                             null ||
                         ref.watch(patientEyeScanProvider).leftEyeImage == null)
-                      CameraPreview(cameraController!,
-                          child: _customPaint ?? Container()),
+                      CameraPreview(
+                        cameraController!,
+                        child: _customPaint ?? Container(),
+                      ),
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(
                         backgroundColor: AppColor.grey,
-                        onPressed: _takePicture,
+                        onPressed: () {
+                          if (!_isEyeValid) {
+                            return;
+                          }
+                          _takePicture();
+                        },
                         child: const Icon(Icons.camera),
                       ),
                     ),
@@ -258,6 +268,29 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                           ),
                         ),
                       ),
+                    Visibility(
+                      visible: !_isEyeValid,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          width: AppSize.width(context) * 0.8,
+                          decoration: BoxDecoration(
+                            color: AppColor.black.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            context.loc!.eyeBoxText,
+                            textAlign: TextAlign.center,
+                            style: applyRobotoFont(
+                              fontSize: 16,
+                              color: AppColor.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
