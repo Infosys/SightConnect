@@ -271,7 +271,10 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                     Visibility(
                       visible: !_isEyeValid,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 88.0,
+                        ),
                         child: Container(
                           width: AppSize.width(context) * 0.8,
                           decoration: BoxDecoration(
