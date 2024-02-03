@@ -87,7 +87,7 @@ class TumblingEReportCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              tumblingEData![index].bodySite!,
+                              tumblingEData![index].bodySite ?? "",
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,

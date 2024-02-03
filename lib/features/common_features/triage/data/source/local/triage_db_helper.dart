@@ -40,6 +40,7 @@ class TriageDBHelper {
         throw StateError('Failed to initialize database');
       }
     }
+
     return _database!;
   }
 
@@ -346,13 +347,17 @@ class TriageDBHelper {
     }
   }
 
+  // Future<void> discardLocalTriageEntries() async {
+  //   await Future.wait([
+  //     deleteTriageAssessment(),
+  //     deleteTriageResponse(),
+  //     deleteTriageQuestionnaire(),
+  //     deleteTriageVisualAcuity(),
+  //     deleteTriageEyeScan(),
+  //   ]);
+  // }
   Future<void> discardLocalTriageEntries() async {
-    await Future.wait([
-      deleteTriageAssessment(),
-      deleteTriageResponse(),
-      deleteTriageQuestionnaire(),
-      deleteTriageVisualAcuity(),
-      deleteTriageEyeScan(),
-    ]);
+    String path = '${await getDatabasesPath()}/triage_db.db';
+    await deleteDatabase(path);
   }
 }

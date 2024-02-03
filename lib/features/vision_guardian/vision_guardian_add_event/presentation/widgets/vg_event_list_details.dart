@@ -45,6 +45,7 @@ class VisionEventListDetails extends ConsumerWidget {
       isLoading: loading,
       overlayColor: null,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           for (int index = 0; index < response.length; index++)
             InkWell(
@@ -70,7 +71,7 @@ class VisionEventListDetails extends ConsumerWidget {
           if (model.newEventList.length == 10 && eventType != "default")
             const Padding(
               padding: EdgeInsets.all(AppSize.klpadding),
-              child: CupertinoActivityIndicator(),
+              child: CircularProgressIndicator(),
             ),
         ],
       ),

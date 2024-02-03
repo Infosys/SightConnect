@@ -87,10 +87,15 @@ Widget vgPatientTabs(
       if (index == response.length) {
         return const Padding(
           padding: EdgeInsets.all(AppSize.klpadding),
-          child: CupertinoActivityIndicator(),
+          child: CircularProgressIndicator(),
         );
       }
       var data = response[index];
+
+      String formattedDate = DateFormat("dd MMM yy")
+          .format(DateTime.parse(data.encounterStartDate!));
+      String formattedTime = DateFormat("hh:mm a")
+          .format(DateTime.parse(data.encounterStartDate!).toLocal());
       return GestureDetector(
         onTap: () async {
           readModel.loadingToggle();
@@ -213,10 +218,7 @@ Widget vgPatientTabs(
                             const Spacer(),
                             Text(
                               data.encounterStartDate != null
-                                  ? DateFormat("dd MMM yy")
-                                      .format(DateTime.parse(
-                                          data.encounterStartDate!))
-                                      .toString()
+                                  ? formattedDate
                                   : "",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -253,9 +255,7 @@ Widget vgPatientTabs(
                             const Spacer(),
                             Text(
                               data.encounterStartDate != null
-                                  ? DateFormat("hh:mm a").format(
-                                      DateTime.parse(data.encounterStartDate!)
-                                          .toLocal())
+                                  ? formattedTime
                                   : "",
                               style: applyRobotoFont(
                                 fontSize: 12,

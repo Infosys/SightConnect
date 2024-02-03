@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
@@ -50,7 +51,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
     }
     return LoadingOverlay(
       isLoading: loading,
-      overlayColor: null,
+      overlayColor: model.initialValue ? null : Colors.black45,
       child: ListView.builder(
         controller: ref
             .watch(visionGuardianEyeAssessmentProvider)
@@ -68,7 +69,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
           if (index == response.length) {
             return const Padding(
               padding: EdgeInsets.all(AppSize.klpadding),
-              child: CupertinoActivityIndicator(),
+              child: CircularProgressIndicator(),
             );
           }
           return InkWell(
@@ -138,8 +139,7 @@ Widget vgPatientDataCards(BuildContext context,
                 SizedBox(
                   child: AppNameAvatar(
                     name: visionGuardianPatientResponseModel.name ?? "",
-                    color: AppColor.blue,
-                    fontSize: 16,
+                    color: const Color(0xffD4C1FF),
                   ),
                 ),
                 const SizedBox(width: AppSize.kswidth),
@@ -147,11 +147,10 @@ Widget vgPatientDataCards(BuildContext context,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${visionGuardianPatientResponseModel.name.capitalize() ?? ""} - PD ${visionGuardianPatientResponseModel.id}",
+                      "${visionGuardianPatientResponseModel.name.capitalize()} - PD ${visionGuardianPatientResponseModel.id}",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.black,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -164,12 +163,14 @@ Widget vgPatientDataCards(BuildContext context,
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.grey,
+                    SizedBox(
+                      child: AutoSizeText(
+                        "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.grey,
+                        ),
                       ),
                     ),
                   ],
