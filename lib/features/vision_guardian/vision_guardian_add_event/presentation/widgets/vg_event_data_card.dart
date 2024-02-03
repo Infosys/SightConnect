@@ -40,7 +40,7 @@ class VgEventDataCards extends StatelessWidget {
           ? AppSize.width(context) * 0.9
           : AppSize.width(context) * 0.9,
       height: Responsive.isMobile(context)
-          ? AppSize.height(context) * 0.18
+          ? AppSize.height(context) * 0.16
           : AppSize.height(context) * 0.24,
       margin: const EdgeInsets.symmetric(vertical: AppSize.ksheight),
       decoration: BoxDecoration(

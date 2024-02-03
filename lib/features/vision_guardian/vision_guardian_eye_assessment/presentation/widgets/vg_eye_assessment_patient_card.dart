@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
@@ -138,8 +139,7 @@ Widget vgPatientDataCards(BuildContext context,
                 SizedBox(
                   child: AppNameAvatar(
                     name: visionGuardianPatientResponseModel.name ?? "",
-                    color: AppColor.blue,
-                    fontSize: 16,
+                    color: const Color(0xffD4C1FF),
                   ),
                 ),
                 const SizedBox(width: AppSize.kswidth),
@@ -151,7 +151,6 @@ Widget vgPatientDataCards(BuildContext context,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.black,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -165,16 +164,13 @@ Widget vgPatientDataCards(BuildContext context,
                     ),
                     const SizedBox(height: 2),
                     SizedBox(
-                      width: AppSize.width(context) * 0.3,
-                      child: Text(
+                      child: AutoSizeText(
                         "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: AppColor.grey,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
                       ),
                     ),
                   ],

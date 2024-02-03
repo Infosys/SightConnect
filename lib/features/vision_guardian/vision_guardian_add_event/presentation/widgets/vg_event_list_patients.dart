@@ -33,61 +33,60 @@ class VisionGuardianPatientList extends HookConsumerWidget {
         ref.watch(addPatientEventProvider).patientListScrollController;
 
     var data = ref.watch(addPatientEventProvider).patientList;
-    return LoadingOverlay(
-      overlayColor: Colors.black45,
-      isLoading: ref.watch(addPatientEventProvider).isLoading,
-      child: Padding(
-        padding: const EdgeInsets.all(AppSize.kspadding + 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const VisionGuardianEventPatientSearch(),
-            const SizedBox(
-              height: AppSize.ksheight,
-            ),
-            data.isEmpty
-                ? SingleChildScrollView(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "No Patient with Name is registered. Click on the  Register Patient.",
-                              style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.grey),
-                              textAlign: TextAlign.center,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PatientRegistrationMiniappPage(
-                                      actionType: MiniAppActionType.REGISTER,
-                                      displayName: 'Register Patient',
-                                    ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSize.kspadding + 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const VisionGuardianEventPatientSearch(),
+          const SizedBox(
+            height: AppSize.ksheight,
+          ),
+          ref.watch(addPatientEventProvider).isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : const SizedBox(),
+          data.isEmpty
+              ? SingleChildScrollView(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "No Patient with Name is registered. Click on the  Register Patient.",
+                            style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PatientRegistrationMiniappPage(
+                                    actionType: MiniAppActionType.REGISTER,
+                                    displayName: 'Register Patient',
                                   ),
-                                );
-                              },
-                              child: const Text("Register Patient"),
-                            )
-                          ],
-                        ),
+                                ),
+                              );
+                            },
+                            child: const Text("Register Patient"),
+                          )
+                        ],
                       ),
                     ),
-                  )
-                : VisionGuardianPatientListWidget(
-                    response: data,
-                    scrollController: scrollController,
-                    triageMode: triageMode,
-                  )
-          ],
-        ),
+                  ),
+                )
+              : VisionGuardianPatientListWidget(
+                  response: data,
+                  scrollController: scrollController,
+                  triageMode: triageMode,
+                )
+        ],
       ),
     );
   }
