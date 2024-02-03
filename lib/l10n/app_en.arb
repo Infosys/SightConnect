@@ -60,7 +60,7 @@
     "exitButton": "Exit",
     "okButton":"Okay",
 
-    "eyeBoxText": "Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.",
+    "eyeBoxText": "Please adjust and position the eye until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.",
  
     "knowMoreButton": "Know More",
     "seeAllButton": "See All",
@@ -116,9 +116,9 @@
     "privacyPolicyDataRetentionTitle": "Data Retention:",
     "privacyPolicyDataRetentionDescription": "Personal Data that is no longer required to be retained as per legal and business requirements will be disposed in a secure manner.",
     "privacyPolicyDataSubjectRightsTitle": "Data subject rights:",
-    "privacyPolicyDataSubjectRightsDescription": "You are entitled at any time to access and rectify your personal information. In case of any requests, issues, concerns or queries you may reach out to LV Prasad Office by sending an email to <LVPEI to provide generic mail ID for DSR>. ",
+    "privacyPolicyDataSubjectRightsDescription": "You are entitled at any time to access and rectify your personal information. In case of any requests, issues, concerns or queries you may reach out to LV Prasad Office by sending an email to communications@lvpei.org. ",
     "privacyPolicyRightToWithdrawTitle": "Right to Withdrawal:",
-    "privacyPolicyRightToWithdrawDescription": "Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to <LVPEI to provide generic mail ID for DSR>.",
+    "privacyPolicyRightToWithdrawDescription": "Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to communications@lvpei.org.",
     "privacyPolicyAcknowledgement": "By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.",
     "privacyPolicyBottomAppBarLabel": "Privacy Policy Accepted",
     "helpAndSupportReachTitle" : "Reach out to us",
