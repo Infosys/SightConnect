@@ -150,7 +150,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSize.klheight * 3),
+                    const SizedBox(height: AppSize.klheight * 3.5),
                     Text(
                       "Verify your mobile number",
                       style: applyFiraSansFont(
@@ -251,7 +251,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: AppSize.klheight * 3),
+                  const SizedBox(height: AppSize.klheight * 3.5),
                   Text(
                     "Verify your mobile number",
                     style: applyFiraSansFont(
@@ -284,6 +284,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                       if (otp.value.isNotEmpty) {
                         try {
+                          isLoading.value = true;
                           otpError.value = '';
                           logger.d("otp value is : ${otp.value}");
                           await ref.read(initializationProvider).signIn(
@@ -306,6 +307,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           Future.delayed(const Duration(seconds: 2), () {
                             otpError.value = "";
                           });
+                        } finally {
+                          isLoading.value = false;
                         }
                       }
                     },
@@ -382,6 +385,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ],
                   ),
                   // const SizedBox(height: AppSize.klheight),
+                  Visibility(
+                    visible: isLoading.value,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
                   // ElevatedButton(
                   //   style: ElevatedButton.styleFrom(
                   //     minimumSize: Size(AppSize.width(context) * 0.9, 40),
