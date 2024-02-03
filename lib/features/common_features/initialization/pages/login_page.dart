@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -7,7 +8,6 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/matomo_logger.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -286,28 +286,28 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         try {
                           isLoading.value = true;
                           otpError.value = '';
-                          logger.d("otp value is : ${otp.value}");
+
                           await ref.read(initializationProvider).signIn(
                               mobile: mobileController.text, otp: otp.value);
 
                           // Set visitor user id for matomo analytics
-                          var uuid = const Uuid();
-                          String userId = uuid.v1();
-                          MatomoLogger.setVisitorUserId(userId);
-                          /////////////////////////////////
+                          _addMatomoAnalytics();
 
                           navigator.pushNamedAndRemoveUntil(
                               InitializationPage.routeName, (route) => false);
+                        } on DioException catch (e) {
+                          otpError.value =
+                              e.response!.data["error_description"] ??
+                                  "Invalid OTP";
+                          Fluttertoast.showToast(msg: otpError.value);
                         } catch (e) {
-                          logger.e(e);
                           Fluttertoast.showToast(msg: "Invalid OTP");
-
                           otpError.value = "Invalid OTP";
-                          pinController.clear();
+                        } finally {
                           Future.delayed(const Duration(seconds: 2), () {
                             otpError.value = "";
                           });
-                        } finally {
+                          pinController.clear();
                           isLoading.value = false;
                         }
                       }
@@ -448,6 +448,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         RegExp(r'(\d{2})(\d{4})(\d{4})'),
         (match) => '${match[1]}******${match[3]}');
     return maskedMobile;
+  }
+
+  _addMatomoAnalytics() {
+    var uuid = const Uuid();
+    String userId = uuid.v1();
+    MatomoLogger.setVisitorUserId(userId);
   }
 }
 

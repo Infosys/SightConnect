@@ -357,7 +357,8 @@ class TriageDBHelper {
   //   ]);
   // }
   Future<void> discardLocalTriageEntries() async {
-    String path = '${await getDatabasesPath()}/triage_db.db';
+    final databasePath = await getDatabasesPath();
+    String path = join(databasePath, _databaseName);
     await deleteDatabase(path);
   }
 }

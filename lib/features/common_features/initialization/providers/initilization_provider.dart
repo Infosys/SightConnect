@@ -76,25 +76,15 @@ class InitializationProvider extends ChangeNotifier {
     required String mobile,
     required String otp,
   }) async {
-    try {
-      await _ref
-          .read(keycloakRepositoryProvider)
-          .signIn(mobile: mobile, otp: otp);
-    } catch (e) {
-      rethrow;
-    }
+    await _ref
+        .read(keycloakRepositoryProvider)
+        .signIn(mobile: mobile, otp: otp);
   }
 
   Future<int> sendOtp({
     required String mobile,
   }) async {
-    try {
-      return await _ref
-          .read(keycloakRepositoryProvider)
-          .sendOtp(mobile: mobile);
-    } catch (e) {
-      return Future.error(e);
-    }
+    return await _ref.read(keycloakRepositoryProvider).sendOtp(mobile: mobile);
   }
 
   Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {

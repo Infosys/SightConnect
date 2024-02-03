@@ -1,33 +1,113 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/features/patient/patient_services/presentation/pages/patient_services_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
+import 'package:matomo_tracker/matomo_tracker.dart';
 
-class AppBottomNavBar extends StatelessWidget {
+class AppBottomNavBar extends HookConsumerWidget {
   const AppBottomNavBar({
-    required this.onSelected,
     Key? key,
-    required this.selectedIndex,
   }) : super(key: key);
 
-  final Function(int) onSelected;
-  final int selectedIndex;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final primaryColor = Theme.of(context).primaryColor;
     final loc = context.loc!;
+    var selectedIndex = useState(0);
 
     var isMobile = Responsive.isMobile(context);
     var items = BottomNavItems.all(loc);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       backgroundColor: AppColor.white,
-      currentIndex: selectedIndex,
-      onTap: onSelected,
+      currentIndex: selectedIndex.value,
+      selectedIconTheme: const IconThemeData(size: 24),
+      onTap: (index) {
+        selectedIndex.value = index;
+        switch (index) {
+          case 0:
+            break;
+          case 1:
+            showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return const PatientServicesPage();
+              },
+            ).then((value) => selectedIndex.value = 0);
+            break;
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) {
+          //       return const AppointmentBooking();
+          //     },
+          //   ),
+          // );
+          // break;
+
+          case 2:
+            showModalBottomSheet(
+              context: context,
+              isDismissible: false,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              barrierLabel:
+                  MaterialLocalizations.of(context).modalBarrierDismissLabel,
+              builder: (context) {
+                MatomoTracker.instance.trackEvent(
+                    eventInfo: EventInfo(
+                      category: 'Main',
+                      action: 'Click',
+                      name: 'Triage member selection page click',
+                    ),
+                    dimensions: {
+                      'dimension1':
+                          '${PersistentAuthStateService.authState.activeRole}'
+                    });
+                return const TriageMemberSelectionPage();
+              },
+            ).then((value) => selectedIndex.value = 0);
+
+            break;
+          case 3:
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const PatientProfilePage();
+                },
+              ),
+            ).then((value) => selectedIndex.value = 0);
+            break;
+          case 4:
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const PatientNotificationPage();
+                },
+              ),
+            ).then((value) => selectedIndex.value = 0);
+            break;
+          default:
+            break;
+        }
+      },
       showSelectedLabels: true,
       showUnselectedLabels: true,
       selectedItemColor: AppColor.primary,
@@ -45,7 +125,7 @@ class AppBottomNavBar extends StatelessWidget {
                 items[index].svgImage,
                 height: isMobile ? 16 : 20,
                 width: isMobile ? 16 : 20,
-                colorFilter: index == selectedIndex
+                colorFilter: index == selectedIndex.value
                     ? ColorFilter.mode(primaryColor, BlendMode.srcIn)
                     : const ColorFilter.mode(AppColor.grey, BlendMode.srcIn),
               ),

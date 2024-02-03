@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
@@ -103,7 +102,8 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                       );
                   }
                 },
-                selectedIndex: ref.watch(patientDashboardProvider).currentIndex,
+                selectedIndex:
+                    ref.watch(visionGuardianDashboardProvider).currentIndex,
               ),
             ),
           ),
