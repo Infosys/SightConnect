@@ -87,7 +87,7 @@ Widget vgPatientTabs(
       if (index == response.length) {
         return const Padding(
           padding: EdgeInsets.all(AppSize.klpadding),
-          child: CupertinoActivityIndicator(),
+          child: CircularProgressIndicator(),
         );
       }
       var data = response[index];

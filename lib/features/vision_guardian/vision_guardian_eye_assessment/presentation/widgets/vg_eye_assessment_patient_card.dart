@@ -68,7 +68,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
           if (index == response.length) {
             return const Padding(
               padding: EdgeInsets.all(AppSize.klpadding),
-              child: CupertinoActivityIndicator(),
+              child: CircularProgressIndicator(),
             );
           }
           return InkWell(
@@ -147,7 +147,7 @@ Widget vgPatientDataCards(BuildContext context,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${visionGuardianPatientResponseModel.name.capitalize() ?? ""} - PD ${visionGuardianPatientResponseModel.id}",
+                      "${visionGuardianPatientResponseModel.name.capitalize()} - PD ${visionGuardianPatientResponseModel.id}",
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

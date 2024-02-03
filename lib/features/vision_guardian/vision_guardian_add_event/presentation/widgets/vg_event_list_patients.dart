@@ -137,7 +137,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
             if (index == data.length) {
               return const Padding(
                 padding: EdgeInsets.all(AppSize.klpadding),
-                child: CupertinoActivityIndicator(),
+                child: CircularProgressIndicator(),
               );
             }
 

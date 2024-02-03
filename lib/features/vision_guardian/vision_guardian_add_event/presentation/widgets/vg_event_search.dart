@@ -67,7 +67,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
                             10)
                           const Padding(
                             padding: EdgeInsets.all(AppSize.klpadding),
-                            child: CupertinoActivityIndicator(),
+                            child: CircularProgressIndicator(),
                           ),
                       ],
                     ),

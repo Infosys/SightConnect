@@ -23,6 +23,7 @@ class VisionGuardianServicesCard extends ConsumerWidget {
         width:
             Responsive.isMobile(context) ? AppSize.width(context) / 3.7 : 100,
         child: InkWell(
+          customBorder: const CircleBorder(),
           onTap: () {
             if (data["text"] == "Event") {
               Navigator.of(context).push(
@@ -47,49 +48,40 @@ class VisionGuardianServicesCard extends ConsumerWidget {
               );
             }
           },
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
-          child: Card(
-            margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
+          child: Container(
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSize.ksradius),
+              color: data["color"],
             ),
-            color: data["color"],
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSize.kmpadding,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  data["textPrefix"] == "Eye"
-                      ? SvgPicture.asset(
-                          data["icon"],
-                          height: AppSize.klpadding,
-                          width: AppSize.klpadding,
-                          colorFilter: const ColorFilter.mode(
-                            AppColor.black,
-                            BlendMode.srcIn,
-                          ),
-                        )
-                      : Icon(data["icon"]),
-                  const SizedBox(height: AppSize.ksheight),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Text(
-                      '${data["textPrefix"]}\n${data["text"]}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: applyFiraSansFont(
-                        fontSize: 10,
-                        color: AppColor.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+            padding: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                data["textPrefix"] == "Eye"
+                    ? SvgPicture.asset(
+                        data["icon"],
+                        height: AppSize.klpadding,
+                        width: AppSize.klpadding,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.black,
+                          BlendMode.srcIn,
+                        ),
+                      )
+                    : Icon(data["icon"]),
+                const SizedBox(height: AppSize.ksheight),
+                Text(
+                  '${data["textPrefix"]}\n${data["text"]}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: applyFiraSansFont(
+                    fontSize: 10,
+                    color: AppColor.black,
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
