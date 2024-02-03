@@ -52,7 +52,7 @@ class InitializationProvider extends ChangeNotifier {
     // Flutter Secure Storage logout
     await PersistentAuthStateService.authState.logout();
     // Triage Database logout
-    await TriageDBHelper().discardLocalTriageEntries();
+    await TriageDBHelper().deleteTriageDatabase();
     // SQFlite logout
     await PersistentAuthStateService.authState.deleteSQFlitePassword();
     // Shared Preference logout

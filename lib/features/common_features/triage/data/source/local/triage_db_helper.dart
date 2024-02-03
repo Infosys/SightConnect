@@ -347,18 +347,20 @@ class TriageDBHelper {
     }
   }
 
-  // Future<void> discardLocalTriageEntries() async {
-  //   await Future.wait([
-  //     deleteTriageAssessment(),
-  //     deleteTriageResponse(),
-  //     deleteTriageQuestionnaire(),
-  //     deleteTriageVisualAcuity(),
-  //     deleteTriageEyeScan(),
-  //   ]);
-  // }
   Future<void> discardLocalTriageEntries() async {
+    await Future.wait([
+      deleteTriageAssessment(),
+      deleteTriageResponse(),
+      deleteTriageQuestionnaire(),
+      deleteTriageVisualAcuity(),
+      deleteTriageEyeScan(),
+    ]);
+  }
+
+  Future<void> deleteTriageDatabase() async {
     final databasePath = await getDatabasesPath();
     String path = join(databasePath, _databaseName);
     await deleteDatabase(path);
+    _database = null;
   }
 }
