@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianEventPatientSearch extends ConsumerWidget {
@@ -13,28 +14,22 @@ class VisionGuardianEventPatientSearch extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return TextField(
       onSubmitted: (value) {
-        ref.read(addPatientEventProvider).setPatientSearchQuery(value);
+        if (RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+          ref.read(addPatientEventProvider).setPatientSearchQuery(value);
+        } else {
+          Fluttertoast.showToast(msg: "Enter Phone Number");
+        }
       },
       decoration: InputDecoration(
         prefixIcon: const Icon(
           CupertinoIcons.search,
           color: AppColor.primary,
         ),
-        suffixIcon: Container(
-          decoration: BoxDecoration(
-            color: AppColor.primary.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(AppSize.klradius),
-          ),
-          child: const Icon(
-            CupertinoIcons.mic,
-            color: AppColor.grey,
-          ),
-        ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
         filled: true,
         fillColor: AppColor.white,
-        hintText: 'Search Patient by Phone no or Patient ID',
+        hintText: 'Search Patient by Phone Number',
         hintStyle: applyRobotoFont(
           color: AppColor.grey,
           fontSize: 14,

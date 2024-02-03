@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -34,9 +36,12 @@ class VisionGuardianServicesCard extends ConsumerWidget {
             } else if (data["text"] == "New Patient") {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const PatientRegistrationMiniappPage(
-                    actionType: MiniAppActionType.REGISTER,
-                    displayName: "Patient Registration",
+                  // builder: (context) => const PatientRegistrationMiniappPage(
+                  //   actionType: MiniAppActionType.REGISTER,
+                  //   displayName: "Patient Registration",
+                  // ),
+                  builder: (context) => const VisionGuardianAddPatient(
+                    triageMode: TriageMode.STANDALONE,
                   ),
                 ),
               );

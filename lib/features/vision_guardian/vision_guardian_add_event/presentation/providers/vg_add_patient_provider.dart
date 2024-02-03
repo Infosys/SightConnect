@@ -35,13 +35,11 @@ class AddPatientEventNotifier extends ChangeNotifier {
       patientList;
 
   AddPatientEventNotifier({required this.vgAddEventRepository}) {
-    patientListScrollController.addListener(scrollBarListener);
+    // patientListScrollController.addListener(scrollBarListener);
   }
 
   void setPatientSearchQuery(queryData) {
-    if (queryData.length < 4) {
-    return;
-    }
+   
     offset = 0;
     isLoading = false;
     patientQueryData = queryData;
@@ -54,15 +52,15 @@ class AddPatientEventNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void scrollBarListener() {
-    logger.d("message");
-    if (patientListScrollController.position.pixels ==
-            patientListScrollController.position.maxScrollExtent &&
-        (newpatientList.length == 10)) {
-      offset = offset + 10;
-      getPatientList(patientList);
-    }
-  }
+  // void scrollBarListener() {
+  //   logger.d("message");
+  //   if (patientListScrollController.position.pixels ==
+  //           patientListScrollController.position.maxScrollExtent &&
+  //       (newpatientList.length == 10)) {
+  //     offset = offset + 10;
+  //     getPatientList(patientList);
+  //   }
+  // }
 
   void resetFields() {
     patientQueryData = "";
@@ -74,12 +72,12 @@ class AddPatientEventNotifier extends ChangeNotifier {
   Future<void> getPatientList(previousList) async {
     try {
       isLoading = true;
-      var response = await vgAddEventRepository.getEventPatientList(
-          patientQueryData: {
-            "searchParams": patientQueryDataValue,
-            "offset": offsetValue,
-            "limit": getLimit
-          });
+      var response =
+          await vgAddEventRepository.getEventPatientList(patientQueryData: {
+        "searchParams": patientQueryDataValue
+        // "offset": offsetValue,
+        // "limit": getLimit
+      });
       newpatientList = response;
       patientList = previousList + response;
       isLoading = false;
