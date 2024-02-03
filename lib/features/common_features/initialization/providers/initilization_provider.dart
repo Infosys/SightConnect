@@ -56,7 +56,7 @@ class InitializationProvider extends ChangeNotifier {
     // SQFlite logout
     await PersistentAuthStateService.authState.deleteSQFlitePassword();
     // Shared Preference logout
-    await SharedPreferenceService.clear();
+    await SharedPreferenceService.clearAll();
   }
 
   Future<KeycloakResponse?> refreshTokens({

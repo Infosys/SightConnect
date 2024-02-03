@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:password_generator/password_generator.dart';
@@ -175,8 +173,6 @@ class PersistentAuthData {
     //SQFLite
     // await _storage.delete(key: _sqfliteKey);
 
-    SharedPreferenceService.clear();
-
     accessToken = null;
     refreshToken = null;
     roles = null;
@@ -194,7 +190,6 @@ class PersistentAuthData {
       'userId': userId,
       'idToken': idToken,
       'activeRole': activeRole,
-      'sqflite-pass': 'deleted',
     });
   }
 

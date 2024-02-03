@@ -91,7 +91,7 @@ class PatientProfilePage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: AppSize.klheight * 5),
+          const SizedBox(height: AppSize.klheight * 4.2),
           Padding(
             padding: const EdgeInsets.only(
               left: 16,
@@ -124,41 +124,58 @@ class PatientProfilePage extends ConsumerWidget {
                             context.loc!.profilePageHealthCardTitle,
                             style: applyFiraSansFont(fontSize: 18),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .push<bool?>(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PatientRegistrationMiniappPage(
-                                    actionType: MiniAppActionType.UPDATE,
-                                    displayName: "Update Profile",
+                          Visibility(
+                            visible:
+                                patient.profile?.patient?.parentPatientId ==
+                                    null,
+                            child: InkWell(
+                              customBorder: const CircleBorder(),
+                              onTap: () {
+                                Navigator.of(context)
+                                    .push<bool?>(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PatientRegistrationMiniappPage(
+                                      actionType: MiniAppActionType.UPDATE,
+                                      displayName: "Update Profile",
+                                    ),
                                   ),
-                                ),
-                              )
-                                  .then(
-                                (value) {
-                                  logger.d(
-                                      {"Profile Page Update Miniapp": value});
-                                  if (value == null || value == false) {
-                                    Fluttertoast.showToast(
-                                        msg: "Profile not updated");
-                                  } else if (value) {
-                                    Fluttertoast.showToast(
-                                        msg: "Profile updated");
-                                  }
-                                  ref.invalidate(getPatientProfileProvider);
-                                },
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 16,
+                                )
+                                    .then(
+                                  (value) {
+                                    logger.d(
+                                        {"Profile Page Update Miniapp": value});
+                                    if (value == null || value == false) {
+                                      Fluttertoast.showToast(
+                                          msg: "Profile not updated");
+                                    } else if (value) {
+                                      Fluttertoast.showToast(
+                                          msg: "Profile updated");
+                                    }
+                                    ref.invalidate(getPatientProfileProvider);
+                                  },
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.edit,
+                                    size: 16,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "edit",
+                                    style: applyFiraSansFont(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 16),
                       ProfileHeader(
                         patient: patient,
                       ),
