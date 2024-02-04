@@ -25,8 +25,8 @@ class PatientSelfTestReports extends ConsumerStatefulWidget {
       _PatientSelfTestReportsState();
 }
 
-class _PatientSelfTestReportsState
-    extends ConsumerState<PatientSelfTestReports> {
+class _PatientSelfTestReportsState extends ConsumerState<PatientSelfTestReports>
+    with AutomaticKeepAliveClientMixin {
   final List<TriageReportBriefEntity> reports = [];
   @override
   void initState() {
@@ -263,6 +263,10 @@ class _PatientSelfTestReportsState
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 String getSeverityText(Severity? severity, BuildContext context) {

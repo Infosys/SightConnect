@@ -141,20 +141,18 @@ class PatientProfilePage extends ConsumerWidget {
                                     ),
                                   ),
                                 )
-                                    .then(
-                                  (value) {
-                                    logger.d(
-                                        {"Profile Page Update Miniapp": value});
-                                    if (value == null || value == false) {
-                                      Fluttertoast.showToast(
-                                          msg: "Profile not updated");
-                                    } else if (value) {
-                                      Fluttertoast.showToast(
-                                          msg: "Profile updated");
-                                    }
+                                    .then((value) {
+                                  logger.d(
+                                      {"Profile Page Update Miniapp": value});
+                                  if (value == null || value == false) {
+                                    Fluttertoast.showToast(
+                                        msg: "Profile not updated");
+                                  } else if (value) {
+                                    Fluttertoast.showToast(
+                                        msg: "Profile updated");
                                     ref.invalidate(getPatientProfileProvider);
-                                  },
-                                );
+                                  }
+                                });
                               },
                               child: Row(
                                 children: [

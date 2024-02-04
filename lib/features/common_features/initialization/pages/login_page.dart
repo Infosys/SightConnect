@@ -30,6 +30,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.invalidate(globalLanguageProvider);
       final currentLocaleCode = ref.read(globalLanguageProvider).currentLocale;
       if (currentLocaleCode == null) {
         showModalBottomSheet(

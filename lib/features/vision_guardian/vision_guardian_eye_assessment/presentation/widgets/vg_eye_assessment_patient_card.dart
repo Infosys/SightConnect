@@ -11,7 +11,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,15 +26,18 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(visionGuardianEyeAssessmentProvider);
-    final readModel = ref.read(visionGuardianEyeAssessmentProvider);
     var loading = model.getisLoading;
     var response = model.listOfPatientDetails;
-    var error = model.error;
 
-    if (loading == false && error) {
-      Fluttertoast.showToast(msg: "Server Error");
-    }
-    if (loading == false && response.isEmpty) {
+    ref.listen(visionGuardianEyeAssessmentProvider, (previous, next) {
+      if (next.error) {
+        Fluttertoast.showToast(
+          msg: "Error fetching patient details",
+        );
+      }
+    });
+
+    if (!loading && response.isEmpty) {
       return SizedBox(
         width: Responsive.isMobile(context)
             ? AppSize.width(context) * 0.9
@@ -49,62 +51,62 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
         ),
       );
     }
-    return LoadingOverlay(
-      isLoading: loading,
-      overlayColor: model.initialValue ? null : Colors.black45,
-      child: ListView.builder(
-        controller: ref
-            .watch(visionGuardianEyeAssessmentProvider)
-            .eyeAssessmentController,
-        itemCount: (ref
-                        .watch(visionGuardianEyeAssessmentProvider)
-                        .newEyeAssessmentPatientList
-                        .length ==
-                    10 &&
-                type != "search")
-            ? response.length + 1
-            : response.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          if (index == response.length) {
-            return const Padding(
-              padding: EdgeInsets.all(AppSize.klpadding),
-              child: CircularProgressIndicator(),
-            );
-          }
-          return InkWell(
-            onTap: () async {
-              readModel.setIsLoading();
-              try {
-                var navigator = Navigator.of(context);
-                TriageReportUserEntity profile = TriageReportUserEntity(
-                  name: response[index].name ?? "",
-                  id: response[index].id!,
-                  image: "",
+    return loading
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : ListView.builder(
+            controller: ref
+                .watch(visionGuardianEyeAssessmentProvider)
+                .eyeAssessmentController,
+            itemCount: (ref
+                            .watch(visionGuardianEyeAssessmentProvider)
+                            .newEyeAssessmentPatientList
+                            .length ==
+                        10 &&
+                    type != "search")
+                ? response.length + 1
+                : response.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              if (index == response.length) {
+                return const Padding(
+                  padding: EdgeInsets.all(AppSize.klpadding),
+                  child: CircularProgressIndicator(),
                 );
-
-                final reports = await ref
-                    .read(vgReportProvider(profile))
-                    .getTriageDetailedReportByReportId(
-                        response[index].diagnosticReportId!);
-                navigator.push(
-                  MaterialPageRoute(
-                    builder: (context) => PatientAssessmentReportPage(
-                      assessmentDetailsReport: reports,
-                    ),
-                  ),
-                );
-              } catch (e) {
-                logger.e(e);
-                Fluttertoast.showToast(msg: e.toString());
               }
-              readModel.setIsLoading();
+              return InkWell(
+                onTap: () async {
+                  model.setIsLoading();
+                  try {
+                    var navigator = Navigator.of(context);
+                    TriageReportUserEntity profile = TriageReportUserEntity(
+                      name: response[index].name ?? "",
+                      id: response[index].id!,
+                      image: "",
+                    );
+
+                    final reports = await ref
+                        .read(vgReportProvider(profile))
+                        .getTriageDetailedReportByReportId(
+                            response[index].diagnosticReportId!);
+                    navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => PatientAssessmentReportPage(
+                          assessmentDetailsReport: reports,
+                        ),
+                      ),
+                    );
+                  } catch (e) {
+                    logger.e(e);
+                    Fluttertoast.showToast(msg: e.toString());
+                  }
+                  model.setIsLoading();
+                },
+                child: vgPatientDataCards(context, response[index]),
+              );
             },
-            child: vgPatientDataCards(context, response[index]),
           );
-        },
-      ),
-    );
   }
 }
 

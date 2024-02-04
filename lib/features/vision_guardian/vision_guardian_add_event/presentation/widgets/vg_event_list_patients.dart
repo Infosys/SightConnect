@@ -241,6 +241,8 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                           } else if (value) {
                                             Fluttertoast.showToast(
                                                 msg: "Dependent added");
+                                            ref.invalidate(
+                                                addPatientEventProvider);
                                           }
                                         },
                                       );
@@ -298,6 +300,9 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                           } else if (value) {
                                             Fluttertoast.showToast(
                                                 msg: "Patient registered");
+
+                                            ref.invalidate(
+                                                addPatientEventProvider);
                                           }
                                         },
                                       );
