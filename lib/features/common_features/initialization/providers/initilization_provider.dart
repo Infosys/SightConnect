@@ -48,15 +48,12 @@ class InitializationProvider extends ChangeNotifier {
           "Apologies, we encountered a logout error in the mobile app. from keycloak: $e");
       rethrow;
     }
-
-    // Flutter Secure Storage logout
-    await PersistentAuthStateService.authState.logout();
     // Triage Database logout
-    await TriageDBHelper().deleteTriageDatabase();
-    // SQFlite logout
-    await PersistentAuthStateService.authState.deleteSQFlitePassword();
+    await TriageDBHelper().deleteFullDatabase();
     // Shared Preference logout
     await SharedPreferenceService.clearAll();
+    // Flutter Secure Storage logout
+    await PersistentAuthStateService.authState.logout();
   }
 
   Future<KeycloakResponse?> refreshTokens({

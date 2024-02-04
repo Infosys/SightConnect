@@ -55,8 +55,8 @@ class PatientFamilyDetails extends HookConsumerWidget {
                       Fluttertoast.showToast(msg: "Family member not added");
                     } else if (value) {
                       Fluttertoast.showToast(msg: "Family member added");
+                      ref.invalidate(getPatientProfileProvider);
                     }
-                    ref.invalidate(getPatientProfileProvider);
                   },
                 );
               } catch (e) {

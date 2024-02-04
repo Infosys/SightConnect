@@ -64,6 +64,16 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (ref.exists(accessibilityProvider)) {
+        await ref.read(accessibilityProvider).resetBrightness();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     var currentStep = ref.watch(triageStepperProvider).currentStep;
     final loc = context.loc!;
