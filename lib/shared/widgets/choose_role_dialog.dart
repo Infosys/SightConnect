@@ -141,7 +141,7 @@ class ChooseRoleDialog extends HookWidget {
 
   _formateRoleName(Role role) {
     return switch (role) {
-      Role.ROLE_OPTOMETRIST => "OPTOMETRIST",
+      Role.ROLE_OPTOMETRIST => "Eye Care Professional",
       Role.ROLE_VISION_TECHNICIAN => "VISION TECHNICIAN",
       Role.ROLE_PATIENT => "PATIENT",
       Role.ROLE_VISION_GUARDIAN => "VISION GUARDIAN",
