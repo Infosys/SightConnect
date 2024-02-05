@@ -17,10 +17,10 @@ class TriageEyePreviewPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned.fill(
+          Center(
             child: Image.file(
               File(imageFile.path),
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           Positioned(
