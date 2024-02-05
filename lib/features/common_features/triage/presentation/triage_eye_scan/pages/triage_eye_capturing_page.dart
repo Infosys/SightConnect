@@ -88,7 +88,8 @@ class _PatientTriageEyeCapturingPageState
         _isLoading = false;
       });
     }
-    final bool isGranted = await CameraPermissionService.checkPermissions(context);
+    final bool isGranted =
+        await CameraPermissionService.checkPermissions(context);
     if (isGranted) {
       if (mounted) {
         setState(() {
@@ -180,8 +181,10 @@ class _PatientTriageEyeCapturingPageState
 
     if (meshes.isNotEmpty) {
       final FaceMesh mesh = meshes[0];
-      final List<FaceMeshPoint>? leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final List<FaceMeshPoint>? rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+      final List<FaceMeshPoint>? leftEyeContour =
+          mesh.contours[FaceMeshContourType.leftEye];
+      final List<FaceMeshPoint>? rightEyeContour =
+          mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
@@ -209,7 +212,8 @@ class _PatientTriageEyeCapturingPageState
           boxHeight,
         );
         // Get the corner point of the eyes which is needed to calculate eye width
-        final Map<String, double> eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
+        final Map<String, double> eyeCorners =
+            EyeDetectorService.getEyeCorners(_translatedEyeContours);
         // Calculate the eyeWidth ratio to the boxWidth
         final double eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
           eyeCorners,

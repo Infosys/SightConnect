@@ -15,22 +15,20 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   double questionnaireUrgency(
       List<PostTriageQuestionModel> questionnaireResponse) {
     double questionnaireUrgency = 1;
-    int totalScore=0;
+    int totalScore = 0;
     for (var questions in questionnaireResponse) {
       for (var answer in questions.answers!) {
         //TODO: logic changeded
-       // questionnaireScore = max(questionnaireScore, answer.score!);
-        totalScore+=answer.score!.toInt();
+        // questionnaireScore = max(questionnaireScore, answer.score!);
+        totalScore += answer.score!.toInt();
       }
     }
-    if(totalScore>=5){
-      questionnaireUrgency=3;
-    }
-    else if(totalScore>=3){
-      questionnaireUrgency=2;
-    }
-    else{
-      questionnaireUrgency=1;
+    if (totalScore >= 5) {
+      questionnaireUrgency = 3;
+    } else if (totalScore >= 3) {
+      questionnaireUrgency = 2;
+    } else {
+      questionnaireUrgency = 1;
     }
     return questionnaireUrgency;
   }
@@ -39,19 +37,17 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   double visualAcuityUrgency(
       List<PostTriageObservationsModel> visionAcuityResponse) {
     double visionAcuityScore = 0;
-    double visualAcuityUrgency=1;
+    double visualAcuityUrgency = 1;
 
     for (var observation in visionAcuityResponse) {
-      visionAcuityScore +=  observation.score!;
+      visionAcuityScore += observation.score!;
     }
-    if(visionAcuityScore>=5){
-      visualAcuityUrgency=3;
-    }
-    else if(visionAcuityScore>=3){
-      visualAcuityUrgency=2;
-    }
-    else{
-      visualAcuityUrgency=1;
+    if (visionAcuityScore >= 5) {
+      visualAcuityUrgency = 3;
+    } else if (visionAcuityScore >= 3) {
+      visualAcuityUrgency = 2;
+    } else {
+      visualAcuityUrgency = 1;
     }
     return visualAcuityUrgency;
   }
@@ -88,5 +84,16 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   double totalTriageUrgency(double quessionnaireUrgency,
       double visualAcuityUrgency, double eyeScanUrgency) {
     return quessionnaireUrgency + visualAcuityUrgency + eyeScanUrgency;
+  }
+
+  @override
+  TriageUrgency maxTotalUrgency(double quessionnaireUrgency,
+      double visualAcuityUrgency, double eyeScanUrgency) {
+    return mapScoreToUrgency(max(
+        max(
+          quessionnaireUrgency,
+          visualAcuityUrgency,
+        ),
+        eyeScanUrgency));
   }
 }

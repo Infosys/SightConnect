@@ -60,7 +60,7 @@ class OptometristTriageProvider extends ChangeNotifier {
         .eyeScanUrgency(imageSelection);
     final totalUrgency = ref
         .read(triageUrgencyRepositoryProvider)
-        .totalTriageUrgency(
+        .maxTotalUrgency(
             eyeScanUrgency, quessionnaireUrgency, visualAcuityUrgency);
 
     final triage = OptometristTriageMapper.convertToTriage(
