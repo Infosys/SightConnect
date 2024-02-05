@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
@@ -16,7 +15,6 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
@@ -139,7 +137,10 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           ref.invalidate(preliminaryAssessmentHelperProvider);
         },
         centerTitle: false,
-        title: const Text('Preliminary Assessment'),
+        title: Text(
+          'Preliminary Assessment',
+          style: applyFiraSansFont(fontWeight: FontWeight.w500),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

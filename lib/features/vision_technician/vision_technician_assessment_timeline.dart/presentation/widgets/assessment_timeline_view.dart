@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
-
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -12,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
+
 
 import '../../domain/models/assessment_timeline_view_model.dart';
 

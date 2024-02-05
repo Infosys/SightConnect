@@ -1,14 +1,12 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../main.dart';
 
 class CameraPreviewCard extends ConsumerStatefulWidget {
@@ -34,7 +32,7 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     _initializeCamera();
   }
 
-  void _initializeCamera() async {
+  Future<void> _initializeCamera() async {
     logger.d('EyeDetectorView _initializeCamera');
     final NavigatorState navigator = Navigator.of(context);
     try {
@@ -46,6 +44,7 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     } catch (e) {
       logger.d('Error initializing camera: $e');
       navigator.pop();
+      Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
@@ -77,21 +76,26 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!(_controller.value.isInitialized)) return;
-    if (state == AppLifecycleState.inactive && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.inactive');
+    logger.d({
+      "TriageEyeCapturingPage: AppLifecycleState": "$state",
+    });
+
+    if (state == AppLifecycleState.inactive) {
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.inactive');
+
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.resumed');
-      _initializeCamera();
-    } else if (state == AppLifecycleState.paused && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.paused');
+    } else if (state == AppLifecycleState.resumed) {
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.resumed');
+      if (mounted) {
+        _initializeCamera();
+      }
+    } else if (state == AppLifecycleState.paused) {
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.paused');
+
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.detached && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.detached');
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.hidden && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.hidden');
+    } else if (state == AppLifecycleState.detached) {
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.detached');
+
       _stopLiveFeed();
     }
   }
@@ -100,15 +104,14 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
   void dispose() {
     logger.d('EyeDetectorView dispose');
     WidgetsBinding.instance.removeObserver(this);
-    _stopLiveFeed();
+    if (mounted) {
+      _stopLiveFeed();
+    }
     super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
     logger.d('EyeDetectorView _stopLiveFeed');
-    if (!mounted) {
-      return;
-    }
     try {
       if (_controller.value.isInitialized) {
         await _controller.dispose();

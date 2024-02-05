@@ -1,38 +1,45 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class VTSearchBar extends ConsumerWidget {
-  const VTSearchBar({
+class RegisterSearchBar extends HookWidget {
+  const RegisterSearchBar({
     super.key,
-    required this.readOnly,
     this.onSearched,
   });
-  final bool readOnly;
   final Function(String)? onSearched;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    var error = useState<bool>(false);
+
     return TextField(
-      readOnly: readOnly,
       onChanged: (data) {
-        onSearched?.call(data);
-      },
-      onTap: () {
-        if (readOnly) {
-          //original
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionTechnicianSearchPage(),
-            ),
-          );
+        final regex =
+            RegExp(r'^\d{10}$'); // Replace with your regular expression
+        bool matches = regex.hasMatch(data);
+
+        if (matches) {
+          onSearched?.call(data);
+        } else {
+          error.value = true;
+          // Handle the case where the data does not match the regular expression
         }
       },
+      // onTap: () {
+
+      //     //original
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => const VisionTechnicianSearchPage(),
+      //       ),
+      //     );
+
+      // },
       decoration: InputDecoration(
         isDense: true,
         prefixIcon: const Icon(CupertinoIcons.search, color: AppColor.primary),
@@ -40,11 +47,17 @@ class VTSearchBar extends ConsumerWidget {
             const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
         filled: true,
         fillColor: AppColor.white,
-        hintText: 'Search by Patient ID, Mobile No., Name',
+        hintText: 'Search by Mobile No.',
         hintStyle: applyRobotoFont(
           color: AppColor.grey,
           fontSize: 14,
         ),
+        error: error.value
+            ? Text(
+                "Invalid Mobile No.",
+                style: applyRobotoFont(color: AppColor.red),
+              )
+            : null,
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.primary),
           borderRadius: BorderRadius.circular(AppSize.klradius * 3),
