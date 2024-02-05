@@ -23,19 +23,19 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
     final loc = context.loc!;
     var slideShowData = [
       {
-        "image": "assets/images/step1.png",
+        "image": "assets/images/tumbling_step_one.png",
         "text": loc.visualAcuityTestInstructionOne
       },
       {
-        "image": "assets/images/step2.png",
+        "image": "assets/images/tumbling_step_two.png",
         "text": loc.visualAcuityTestInstructionTwo
       },
       {
-        "image": "assets/images/step3.png",
+        "image": "assets/images/tumbling_step_three.png",
         "text": loc.visualAcuityTestInstructionThree
       },
       {
-        "image": "assets/images/step4.png",
+        "image": "assets/images/tumbling_step_four.png",
         "text": loc.visualAcuityTestInstructionFour
       },
     ];
