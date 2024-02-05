@@ -16,6 +16,7 @@ final visionGuardianEyeAssessmentProvider =
 });
 
 class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
+  bool initialValue = true;
   var checkedFilter = "";
   final VgEyeAssessmentRepository vgEyeAssessmentRepository;
   final GlobalVGProvider globalVGProvider;
@@ -43,6 +44,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   int offset = 0;
   get getOffset => offset;
   var getisLoading = false;
+  get initialVal => initialValue;
 
   TextEditingController searchController = TextEditingController();
   String errorMessage = "";
@@ -76,6 +78,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   void getEyeAssessmentPatientsReport(previousList) async {
     try {
       getisLoading = true;
+      initialValue = true;
 
       var statusfilter = getpatientStatusFiltervalue;
 
@@ -85,7 +88,8 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
               queryparams: {
             "page": offset,
             "size": 10,
-            "category": statusfilter == "ALL" ? "" : statusfilter
+            "category": statusfilter == "ALL" ? "" : statusfilter,
+            "sort": ["encounterStartDate"]
           });
 
       setPatientDetails(previousList + response);
@@ -99,6 +103,12 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
       errorMessage = e.toString();
       getisLoading = false;
     }
+    notifyListeners();
+  }
+
+  void setIsLoading() {
+    initialValue = false;
+    getisLoading = !getisLoading;
     notifyListeners();
   }
 

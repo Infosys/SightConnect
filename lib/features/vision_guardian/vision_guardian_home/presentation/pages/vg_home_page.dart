@@ -37,12 +37,8 @@ class VisionGuardianHomePage extends ConsumerWidget {
           children: [
             Container(
               height: Responsive.isMobile(context)
-                  ? AppSize.klheight * 7.5
-                  : AppSize.height(context) / 7.5,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kmpadding,
-                vertical: AppSize.kmpadding,
-              ),
+                  ? AppSize.height(context) * 0.25
+                  : AppSize.height(context) * 0.35,
               decoration: const BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.only(
@@ -51,36 +47,36 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 ),
               ),
               child: Stack(
-                clipBehavior: Clip.none,
-                fit: StackFit.expand,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome",
-                        style: applyFiraSansFont(
-                          color: AppColor.scaffold,
-                          fontSize: 24,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: AppSize.kmpadding,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Welcome",
+                          style: applyFiraSansFont(
+                            color: AppColor.scaffold,
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: AppSize.ksheight - 5),
-                      Text(
-                        ref.watch(globalVGProvider).name,
-                        style: applyFiraSansFont(
-                          fontSize: 24,
-                          color: AppColor.white,
-                        ),
-                      )
-                    ],
+                        const SizedBox(height: AppSize.ksheight - 5),
+                        Text(
+                          ref.watch(globalVGProvider).name,
+                          style: applyFiraSansFont(
+                            fontSize: 24,
+                            color: AppColor.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  Positioned(
-                    bottom: Responsive.isMobile(context)
-                        ? -1 * (AppSize.height(context) / 7.5)
-                        : -1 * (AppSize.height(context) / 9.5),
-                    left: (AppSize.kswidth * 2) * -1,
+                  Transform.translate(
+                    offset: Offset(0, AppSize.height(context) * 0.12),
                     child: SizedBox(
-                      width: AppSize.width(context),
                       child: ref.watch(getAnalyticsProvider).when(
                         data: (data) {
                           return VGCarousel(data: data);
@@ -97,12 +93,10 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(height: AppSize.height(context) / 10),
+            SizedBox(height: AppSize.height(context) * 0.06),
             Padding(
-              padding: const EdgeInsets.only(
-                left: AppSize.kmpadding,
-                right: AppSize.kmpadding,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

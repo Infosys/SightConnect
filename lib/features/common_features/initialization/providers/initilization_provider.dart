@@ -48,13 +48,12 @@ class InitializationProvider extends ChangeNotifier {
           "Apologies, we encountered a logout error in the mobile app. from keycloak: $e");
       rethrow;
     }
-
+    // Triage Database logout
+    await TriageDBHelper().deleteFullDatabase();
+    // Shared Preference logout
+    await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout
     await PersistentAuthStateService.authState.logout();
-    // Triage Database logout
-    await TriageDBHelper().discardLocalTriageEntries();
-    // Shared Preference logout
-    await SharedPreferenceService.clear();
   }
 
   Future<KeycloakResponse?> refreshTokens({
@@ -74,25 +73,15 @@ class InitializationProvider extends ChangeNotifier {
     required String mobile,
     required String otp,
   }) async {
-    try {
-      await _ref
-          .read(keycloakRepositoryProvider)
-          .signIn(mobile: mobile, otp: otp);
-    } catch (e) {
-      rethrow;
-    }
+    await _ref
+        .read(keycloakRepositoryProvider)
+        .signIn(mobile: mobile, otp: otp);
   }
 
   Future<int> sendOtp({
     required String mobile,
   }) async {
-    try {
-      return await _ref
-          .read(keycloakRepositoryProvider)
-          .sendOtp(mobile: mobile);
-    } catch (e) {
-      return Future.error(e);
-    }
+    return await _ref.read(keycloakRepositoryProvider).sendOtp(mobile: mobile);
   }
 
   Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {

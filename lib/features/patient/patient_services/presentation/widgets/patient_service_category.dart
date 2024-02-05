@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
@@ -30,8 +31,15 @@ class PatientServiceCategory extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+
     logger.d("isUserBeta $isUserBeta");
     final loc = context.loc!;
+    final displayServices = isUserBeta
+        ? services
+        : services.where((element) {
+            return element != MiniApp.CATARACT_EYE_TEST &&
+                element != MiniApp.RED_EYE_TEST;
+          }).toList();
     return Container(
       margin: Responsive.isMobile(context)
           ? const EdgeInsets.only(bottom: AppSize.klpadding)
@@ -56,10 +64,9 @@ class PatientServiceCategory extends ConsumerWidget {
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
-            alignment: WrapAlignment.start,
-            children: services
-                .where((miniapp) =>
-                    isUserBeta || miniapp != MiniApp.CATARACT_EYE_TEST)
+            alignment:
+                !isUserBeta ? WrapAlignment.start : WrapAlignment.spaceAround,
+            children: displayServices
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
@@ -83,6 +90,17 @@ class PatientServiceCategory extends ConsumerWidget {
                         );
                       } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
                           isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.CATARACT;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PatientEyeCapturePage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.RED_EYE_TEST &&
+                          isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.RED_EYE;
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const PatientEyeCapturePage(),
@@ -98,26 +116,25 @@ class PatientServiceCategory extends ConsumerWidget {
                       }
                     },
                     child: SizedBox(
-                      width: Responsive.isMobile(context) ? 80 : 120,
+                      // color: Colors.pink,
+                      width: Responsive.isMobile(context) ? 60 : 80,
+                      height: Responsive.isMobile(context) ? 80 : 100,
                       child: Column(
                         children: [
                           MINIAPP_LOGO_MAPPER[miniapp] != null
                               ? SvgPicture.asset(
+                                  width: Responsive.isMobile(context) ? 24 : 34,
                                   MINIAPP_LOGO_MAPPER[miniapp]!,
-                                  height:
-                                      Responsive.isMobile(context) ? 24 : 32,
-                                  width: Responsive.isMobile(context) ? 24 : 32,
                                   colorFilter: const ColorFilter.mode(
                                     AppColor.primary,
                                     BlendMode.srcIn,
                                   ),
-                                  fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
-                          Text(
+                          AutoSizeText(
                             _getMiniAppText(miniapp, loc),
                             softWrap: true,
                             textAlign: TextAlign.center,
@@ -146,6 +163,7 @@ String _getMiniAppText(
       MiniApp.EYE_ASSESSMENT: loc.recentServicesEyeAssessment,
       MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest,
       MiniApp.CATARACT_EYE_TEST: loc.recentServicesCataractEyeTest,
+      MiniApp.RED_EYE_TEST: loc.recentServicesRedEyeTest,
       MiniApp.APPOINTMENT: loc.bottomNavItemAppointment,
     }[miniApp] ??
     "App";

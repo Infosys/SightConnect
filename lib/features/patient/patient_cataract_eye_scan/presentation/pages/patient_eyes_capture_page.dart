@@ -1,6 +1,11 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -8,9 +13,12 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../common_features/triage/domain/models/enums/triage_enums.dart';
 import '../../data/local/fake_data_source_cataract.dart';
 import '../../modals/camera_not_found.dart';
 
@@ -26,10 +34,25 @@ class PatientEyeCapturePage extends StatefulHookConsumerWidget {
 }
 
 class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
-  late CameraDescription? cameraDescription;
+  List<CameraDescription> _cameras = [];
+  ResolutionPreset defaultResolution = ResolutionPreset.high;
   bool isLoading = false;
   bool isProcessing = false;
+  bool _canProcess = false;
+  bool _isBusy = false;
+  Size _canvasSize = Size.zero;
+  bool _isEyeValid = false;
+  bool _eyesInsideTheBox = false;
+  CustomPaint? _customPaint;
+  final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  double _eyeWidthRatio = 0.0;
+  List<Point<double>> _translatedEyeContours = [];
+  Map<String, double> _eyeCorners = {};
   late CameraController? cameraController;
+  final FaceMeshDetector _meshDetector = FaceMeshDetector(
+    option: FaceMeshDetectorOptions.faceMesh,
+  );
+  TriageEyeType _currentEye = TriageEyeType.RIGHT;
 
   @override
   void initState() {
@@ -48,18 +71,141 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     setState(() {
       isLoading = true;
     });
-    final cameras = await availableCameras();
-    cameraDescription = cameras.firstWhere(
-        (element) => element.lensDirection == CameraLensDirection.front);
+    if (_cameras.isEmpty) {
+      _cameras = await availableCameras();
+    }
+    _canProcess = true;
+    _isBusy = false;
 
+    logger.d('EyeDetectorView _startLiveFeed');
     cameraController = CameraController(
-      cameraDescription!,
-      ResolutionPreset.max,
+      _cameras.firstWhere(
+        (element) => element.lensDirection == _cameraLensDirection,
+      ),
+      defaultResolution,
+      enableAudio: false,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : ImageFormatGroup.bgra8888,
     );
-    await cameraController!.initialize();
+    // final cameras = await availableCameras();
+    // cameraDescription = cameras.firstWhere(
+    //     (element) => element.lensDirection == CameraLensDirection.back);
+
+    // cameraController = CameraController(
+    //   cameraDescription!,
+    //   ResolutionPreset.max,
+    // );
+    await cameraController!.initialize().then(
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        cameraController!.startImageStream(_processCameraImage);
+      },
+    );
     setState(() {
       isLoading = false;
     });
+  }
+
+  void _processCameraImage(CameraImage image) {
+    final CameraDescription camera = cameraController!.description;
+    final DeviceOrientation orientation =
+        cameraController!.value.deviceOrientation;
+    final InputImage? inputImage = EyeDetectorService.inputImageFromCameraImage(
+      image: image,
+      camera: camera,
+      deviceOrientation: orientation,
+    );
+    if (inputImage == null) return;
+
+    _processImage(inputImage);
+  }
+
+  Future<void> _processImage(InputImage inputImage) async {
+    if (!_canProcess) return;
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
+    final meshes = await _meshDetector.processImage(inputImage);
+
+    // Measurement of the Fixed Center Eye Scanner Box
+    final boxWidth = _canvasSize.width * (3 / 5);
+    final boxHeight = _canvasSize.height * (1 / 5);
+    final boxCenter = Point(
+      _canvasSize.width * (1 / 2),
+      _canvasSize.height * (1 / 2),
+    );
+
+    if (meshes.isNotEmpty) {
+      final mesh = meshes[0];
+      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final List<FaceMeshPoint> eyePoints =
+            EyeDetectorService.isLeftEye(_currentEye)
+                ? leftEyeContour
+                : rightEyeContour;
+        // Translate Eye Points
+        _translatedEyeContours = eyePoints.map(
+          (contour) {
+            return EyeDetectorService.translator(
+              contour,
+              inputImage,
+              _canvasSize,
+              _cameraLensDirection,
+            );
+          },
+        ).toList();
+
+        // Check if Eyes are inside the box
+        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+          _translatedEyeContours,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+        // Get the corner point of the eyes which is needed to calculate eye width
+        _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
+        // Calculate the eyeWidth ratio to the boxWidth
+        _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
+          _eyeCorners,
+          boxWidth,
+          boxHeight,
+        );
+        // Validity of the eye
+        _isEyeValid = _eyesInsideTheBox &&
+            EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
+      } else {
+        _translatedEyeContours = [];
+      }
+    } else {
+      _translatedEyeContours = [];
+    }
+
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final painter = EyeDetectorPainter(
+        _translatedEyeContours,
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _isEyeValid,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    _isBusy = false;
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -71,6 +217,9 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
   @override
   Widget build(BuildContext context) {
     var eye = ref.watch(patientEyeScanProvider).getEyeText();
+    ref.watch(patientEyeScanProvider).selectedEye == Eye.RIGHT_EYE
+        ? _currentEye = TriageEyeType.RIGHT
+        : _currentEye = TriageEyeType.LEFT;
     return Scaffold(
       appBar: CustomAppbar(
         title: Text("Eye Scanner - $eye"),
@@ -90,7 +239,8 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                     if (ref.watch(patientEyeScanProvider).rightEyeImage ==
                             null ||
                         ref.watch(patientEyeScanProvider).leftEyeImage == null)
-                      CameraPreview(cameraController!),
+                      CameraPreview(cameraController!,
+                          child: _customPaint ?? Container()),
                     Padding(
                       padding: const EdgeInsets.all(AppSize.klpadding),
                       child: FloatingActionButton(

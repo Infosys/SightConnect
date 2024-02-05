@@ -40,6 +40,12 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           customTextFieldIcon(
             data.venueName,
             "Venue Name",
+            validationFunction: (value) {
+              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value!)) {
+                return "Should not contain any special character";
+              }
+              return null;
+            },
             const Icon(CupertinoIcons.search),
           ),
           const SizedBox(height: AppSize.kmheight),
@@ -58,6 +64,12 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           customTextFieldIcon(
             data.city,
             "City/Town/Village",
+            validationFunction: (value) {
+              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value!)) {
+                return "Should not contain any special character";
+              }
+              return null;
+            },
             const Icon(CupertinoIcons.search),
           ),
           const SizedBox(height: AppSize.kmheight),

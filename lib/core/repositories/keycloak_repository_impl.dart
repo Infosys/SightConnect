@@ -48,6 +48,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       });
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
       throw ServerFailure(errorMessage: "Error signing in : $e ");
     }
   }
@@ -72,7 +74,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       return KeycloakResponse.fromJson(keycloakResponseMap.data!);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-
+      rethrow;
+    } catch (e) {
       throw ServerFailure(errorMessage: "Refresh token expired : $e");
     }
   }
@@ -94,7 +97,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       return response.data!['expires_in'];
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-
+      rethrow;
+    } catch (e) {
       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
     }
   }
@@ -115,7 +119,9 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       });
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-      throw ServerFailure(errorMessage: "Sign out failed");
+      rethrow;
+    } catch (e) {
+      throw ServerFailure(errorMessage: "Error signing out : $e");
     }
   }
 }

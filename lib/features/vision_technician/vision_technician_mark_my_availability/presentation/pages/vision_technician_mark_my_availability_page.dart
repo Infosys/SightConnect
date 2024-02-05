@@ -32,7 +32,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 style: ButtonStyle(
                   elevation: MaterialStateProperty.all(0),
                   backgroundColor: MaterialStateProperty.all(
-                  available! ? AppColor.white : AppColor.primary,
+                    available! ? AppColor.white : AppColor.primary,
                   ),
                   side: MaterialStateProperty.all(
                     const BorderSide(color: AppColor.primary),
