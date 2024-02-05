@@ -19,6 +19,5 @@ abstract class TriageReportRepository {
       getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
-    int ? page
   );
 }

@@ -31,12 +31,11 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
   Future<List<TriageDetailedReportModel>> _getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
-    int ? page
   ) async {
     _isUpdateLoading = true;
     notifyListeners();
     var response = await _triageReportRepository.getTriageReportByEncounterId(
-        encounterId, status,page);
+        encounterId, status);
 
     return response.fold(
       (failure) {
@@ -140,7 +139,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
           {"getTriageDetailedReportByEncounterId": triageAssessment.toJson()});
 
       final triageReport =
-          await _getTriageReportByEncounterId(encounterId, status,null);
+          await _getTriageReportByEncounterId(encounterId, status);
       if (triageReport.isEmpty) {
         throw Exception("No data found");
       }
