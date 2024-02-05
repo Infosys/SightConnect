@@ -35,7 +35,11 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
     _isUpdateLoading = true;
     notifyListeners();
     var response = await _triageReportRepository.getTriageReportByEncounterId(
-        encounterId, status);
+      encounterId,
+      status,
+      null,
+      null,
+    );
 
     return response.fold(
       (failure) {
