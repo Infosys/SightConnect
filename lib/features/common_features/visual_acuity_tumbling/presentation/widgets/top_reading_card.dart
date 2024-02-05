@@ -1,4 +1,4 @@
-import 'dart:io' show Platform;
+import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -34,8 +35,7 @@ class TopReadingCard extends ConsumerStatefulWidget {
 class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
-  CustomPaint? customPaint;
-
+  CustomPaint? _customPaint;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final FaceDetector _faceDetector = FaceDetector(
@@ -46,7 +46,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     ),
   );
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-  final ResolutionPreset defaultResolution = ResolutionPreset.high;
+  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
   double _focalLength = 0.001;
@@ -56,16 +56,16 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
   final List<int> _distanceBuffer = [];
-  bool isLoading = false;
   final int _bufferSize = 10;
-  bool isPermissionGranted = false;
+  bool _isLoading = false;
+  bool _isPermissionGranted = false;
 
   @override
   void initState() {
     logger.d("TopReadingCard: Init State Called");
     super.initState();
-    isPermissionGranted = false;
-    isLoading = false;
+    _isPermissionGranted = false;
+    _isLoading = false;
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _checkPermissions(context));
@@ -73,16 +73,21 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   Future<void> _checkPermissions(BuildContext context) async {
     logger.d("TopReadingCard: Check Permission Called");
-    final navigator = Navigator.of(context);
+    final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
-        isPermissionGranted = false;
-        isLoading = false;
+        _isPermissionGranted = false;
+        _isLoading = false;
       });
     }
-    final isGranted = await CameraPermissionService.checkPermissions(context);
+    final bool isGranted =
+        await CameraPermissionService.checkPermissions(context);
     if (isGranted) {
-      _addPermissionLoading();
+      if (mounted) {
+        setState(() {
+          _isPermissionGranted = true;
+        });
+      }
       await _initializeCamera();
     } else {
       logger.d("TopReadingCard: Permission not granted");
@@ -93,7 +98,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
 
   Future<void> _initializeCamera() async {
     logger.d("TopReadingCard: Initialize Camera Called");
-    final navigator = Navigator.of(context);
+    final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
@@ -115,12 +120,13 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      defaultResolution,
+      _defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
+
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
@@ -151,7 +157,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   Future<void> _getCameraInfo() async {
     logger.d("TopReadingCard: Get Camera Info Called");
     try {
-      final cameraInfo = await MachineLearningCameraService.getCameraInfo();
+      final Map<String, double>? cameraInfo =
+          await MachineLearningCameraService.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
       _sensorX = cameraInfo?['sensorX'] ?? 0.001;
       _sensorY = cameraInfo?['sensorY'] ?? 0.001;
@@ -162,11 +169,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   }
 
   void _processCameraImage(CameraImage image) {
-    final camera = _cameras.firstWhere(
+    final CameraDescription camera = _cameras.firstWhere(
       (element) => element.lensDirection == _cameraLensDirection,
     );
-    final orientation = _controller.value.deviceOrientation;
-    final inputImage = MachineLearningCameraService.inputImageFromCameraImage(
+    final DeviceOrientation orientation = _controller.value.deviceOrientation;
+    final InputImage? inputImage =
+        MachineLearningCameraService.inputImageFromCameraImage(
       image: image,
       camera: camera,
       deviceOrientation: orientation,
@@ -182,23 +190,27 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final faces = await _faceDetector.processImage(inputImage);
-    const boxSizeRatio = 0.7;
-    const boxCenterRatio = 0.5;
-    final boxWidth = _canvasSize.width * boxSizeRatio;
-    final boxHeight = _canvasSize.height * boxSizeRatio;
-    final boxCenter = Point(
+    final List<Face> faces = await _faceDetector.processImage(inputImage);
+
+    // Measurement of the Fixed Center Eye Scanner Box
+    const double boxSizeRatio = 0.7;
+    const double boxCenterRatio = 0.5;
+    final double boxWidth = _canvasSize.width * boxSizeRatio;
+    final double boxHeight = _canvasSize.height * boxSizeRatio;
+    final Point<double> boxCenter = Point(
       _canvasSize.width * boxCenterRatio,
       _canvasSize.height * boxCenterRatio,
     );
 
     if (faces.isNotEmpty) {
-      final face = MachineLearningCameraService.getLargestFace(faces);
-      final leftEyeLandmark = face.landmarks[FaceLandmarkType.leftEye];
-      final rightEyeLandmark = face.landmarks[FaceLandmarkType.rightEye];
+      final Face face = MachineLearningCameraService.getLargestFace(faces);
+      final FaceLandmark? leftEyeLandmark =
+          face.landmarks[FaceLandmarkType.leftEye];
+      final FaceLandmark? rightEyeLandmark =
+          face.landmarks[FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
-        final leftEyeLandmarkPosition = leftEyeLandmark.position;
-        final rightEyeLandmarkPosition = rightEyeLandmark.position;
+        final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
+        final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
 
         final List<Point<int>> eyeLandmarks = [
           leftEyeLandmarkPosition,
@@ -214,7 +226,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           );
         }).toList();
 
-        final eyeLandmarksInsideTheBox =
+        final bool eyeLandmarksInsideTheBox =
             MachineLearningCameraService.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
           boxCenter,
@@ -248,7 +260,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     // Calling the Distance Calculator Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final painter = VisualAcuityFaceDistancePainter(
+      final VisualAcuityFaceDistancePainter painter =
+          VisualAcuityFaceDistancePainter(
         boxCenter,
         boxWidth,
         boxHeight,
@@ -257,14 +270,78 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           _canvasSize = size;
         },
       );
-      customPaint = CustomPaint(painter: painter);
+      _customPaint = CustomPaint(painter: painter);
     } else {
-      customPaint = null;
+      _customPaint = null;
     }
 
     _isBusy = false;
     if (mounted) {
       setState(() {});
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d({
+      "TopReadingCard: AppLifecycleState": "$state",
+      "isPermissionGranted": "$_isPermissionGranted",
+      "isLoading": "$_isLoading",
+    });
+    if (!_isPermissionGranted) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      logger.d("TopReadingCard: AppLifecycleState.inactive");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.resumed) {
+      logger.d("TopReadingCard: AppLifecycleState.resumed");
+      if (mounted) {
+        _checkPermissions(context);
+      }
+    } else if (state == AppLifecycleState.paused) {
+      logger.d("TopReadingCard: AppLifecycleState.paused");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.detached) {
+      logger.d("TopReadingCard: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
+    }
+  }
+
+  @override
+  void dispose() {
+    logger.d('TopReadingCard: Dispose Called');
+    WidgetsBinding.instance.removeObserver(this);
+    if (mounted) {
+      _stopLiveFeed();
+    }
+    super.dispose();
+  }
+
+  Future<void> _stopLiveFeed() async {
+    logger.d("TopReadingCard: Stop Live Feed Called");
+    try {
+      _canProcess = false;
+      _faceDetector.close();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
+    } catch (e) {
+      logger.e('Error stopping live feed: $e');
+    }
+  }
+
+  void _addLoading() {
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+      });
     }
   }
 
@@ -409,94 +486,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         ),
       ),
     );
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    logger.d({
-      "TopReadingCard: AppLifecycleState": "$state",
-      "isPermissionGranted": "$isPermissionGranted",
-      "isLoading": "$isLoading",
-    });
-    if (!isPermissionGranted) {
-      return;
-    }
-
-    if (state == AppLifecycleState.inactive) {
-      logger.d("TopReadingCard: AppLifecycleState.inactive");
-      _addLoading();
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed) {
-      logger.d("TopReadingCard: AppLifecycleState.resumed");
-      if (mounted) {
-        _checkPermissions(context);
-      }
-    } else if (state == AppLifecycleState.paused) {
-      logger.d("TopReadingCard: AppLifecycleState.paused");
-      _addLoading();
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.detached) {
-      logger.d("TopReadingCard: AppLifecycleState.detached");
-      _addLoading();
-      _stopLiveFeed();
-    }
-  }
-
-  @override
-  void dispose() {
-    logger.d('TopReadingCard: Dispose Called');
-    WidgetsBinding.instance.removeObserver(this);
-    if (mounted) {
-      _stopLiveFeed();
-    }
-    super.dispose();
-  }
-
-  Future<void> _stopLiveFeed() async {
-    logger.d("TopReadingCard: Stop Live Feed Called");
-    try {
-      _canProcess = false;
-      _faceDetector.close();
-      if (_controller.value.isInitialized &&
-          _controller.value.isStreamingImages) {
-        await _controller.stopImageStream();
-        await _controller.dispose();
-      }
-    } catch (e) {
-      logger.e('Error stopping live feed: $e');
-    }
-  }
-
-  void _addLoading() {
-    if (mounted) {
-      setState(() {
-        isLoading = true;
-      });
-    }
-  }
-
-  void _removeLoading() {
-    if (mounted) {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
-
-  void _addPermissionLoading() {
-    if (mounted) {
-      setState(() {
-        isPermissionGranted = true;
-      });
-    }
-  }
-
-  void _removePermissionLoading() {
-    if (mounted) {
-      setState(() {
-        isPermissionGranted = false;
-      });
-    }
   }
 }
 
