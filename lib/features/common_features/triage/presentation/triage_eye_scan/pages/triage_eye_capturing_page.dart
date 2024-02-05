@@ -44,36 +44,32 @@ class TriageEyeCapturingPage extends ConsumerStatefulWidget {
 
 class _PatientTriageEyeCapturingPageState
     extends ConsumerState<TriageEyeCapturingPage> with WidgetsBindingObserver {
-  late CameraController _controller;
-  ResolutionPreset defaultResolution = ResolutionPreset.high;
-  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-  bool isLoading = false;
-  String _progressMessage = "Loading...";
-  bool isCompleted = false;
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
+  late CameraController _controller;
   CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
+  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
+  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
   Size _canvasSize = Size.zero;
+  bool _isLoading = false;
+  String _progressMessage = "Loading...";
+  bool _isPermissionGranted = false;
   bool _isEyeValid = false;
-  bool _eyesInsideTheBox = false;
-  double _eyeWidthRatio = 0.0;
   List<Point<double>> _translatedEyeContours = [];
-  Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isPermissionGranted = false;
 
   @override
   void initState() {
     logger.d('TriageEyeCapturingPage: initState');
     super.initState();
-    isPermissionGranted = false;
-    isLoading = false;
+    _isPermissionGranted = false;
+    _isLoading = false;
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -85,16 +81,20 @@ class _PatientTriageEyeCapturingPageState
 
   Future<void> _checkPermissions(BuildContext context) async {
     logger.d("TriageEyeCapturingPage: Check Permission Called");
-    final navigator = Navigator.of(context);
+    final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
-        isPermissionGranted = false;
-        isLoading = false;
+        _isPermissionGranted = false;
+        _isLoading = false;
       });
     }
-    final isGranted = await CameraPermissionService.checkPermissions(context);
+    final bool isGranted = await CameraPermissionService.checkPermissions(context);
     if (isGranted) {
-      _addPermissionLoading();
+      if (mounted) {
+        setState(() {
+          _isPermissionGranted = true;
+        });
+      }
       await _initializeCamera();
     } else {
       logger.d("TriageEyeCapturingPage: Permission not granted");
@@ -105,7 +105,7 @@ class _PatientTriageEyeCapturingPageState
 
   Future<void> _initializeCamera() async {
     logger.d('TriageEyeCapturingPage: _initializeCamera');
-    final navigator = Navigator.of(context);
+    final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
@@ -126,7 +126,7 @@ class _PatientTriageEyeCapturingPageState
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      defaultResolution,
+      _defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
@@ -167,21 +167,21 @@ class _PatientTriageEyeCapturingPageState
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final meshes = await _meshDetector.processImage(inputImage);
+    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
-    const boxCenterRatio = 0.5;
-    final boxWidth = _canvasSize.width * (3 / 5);
-    final boxHeight = _canvasSize.height * (1 / 5);
-    final boxCenter = Point(
+    const double boxCenterRatio = 0.5;
+    final double boxWidth = _canvasSize.width * (3 / 5);
+    final double boxHeight = _canvasSize.height * (1 / 5);
+    final Point<double> boxCenter = Point(
       _canvasSize.width * boxCenterRatio,
       _canvasSize.height * boxCenterRatio,
     );
 
     if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+      final FaceMesh mesh = meshes[0];
+      final List<FaceMeshPoint>? leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
+      final List<FaceMeshPoint>? rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
@@ -202,23 +202,23 @@ class _PatientTriageEyeCapturingPageState
         ).toList();
 
         // Check if Eyes are inside the box
-        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+        final bool eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
           _translatedEyeContours,
           boxCenter,
           boxWidth,
           boxHeight,
         );
         // Get the corner point of the eyes which is needed to calculate eye width
-        _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
+        final Map<String, double> eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
         // Calculate the eyeWidth ratio to the boxWidth
-        _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
-          _eyeCorners,
+        final double eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
+          eyeCorners,
           boxWidth,
           boxHeight,
         );
         // Validity of the eye
-        _isEyeValid = _eyesInsideTheBox &&
-            EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
+        _isEyeValid = eyesInsideTheBox &&
+            EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
       } else {
         _translatedEyeContours = [];
       }
@@ -228,7 +228,7 @@ class _PatientTriageEyeCapturingPageState
 
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final painter = EyeDetectorPainter(
+      final EyeDetectorPainter painter = EyeDetectorPainter(
         _translatedEyeContours,
         boxCenter,
         boxWidth,
@@ -253,10 +253,10 @@ class _PatientTriageEyeCapturingPageState
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
       "TriageEyeCapturingPage: AppLifecycleState": "$state",
-      "isPermissionGranted": "$isPermissionGranted",
-      "isLoading": "$isLoading",
+      "isPermissionGranted": "$_isPermissionGranted",
+      "isLoading": "$_isLoading",
     });
-    if (!isPermissionGranted) {
+    if (!_isPermissionGranted) {
       return;
     }
 
@@ -308,30 +308,22 @@ class _PatientTriageEyeCapturingPageState
 
   void setLoading([String message = "Loading..."]) {
     setState(() {
-      isLoading = true;
+      _isLoading = true;
       _progressMessage = message;
     });
   }
 
   void removeLoading() {
     setState(() {
-      isLoading = false;
+      _isLoading = false;
     });
-  }
-
-  void _addPermissionLoading() {
-    if (mounted) {
-      setState(() {
-        isPermissionGranted = true;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     var model = ref.watch(triageEyeScanProvider);
     final loc = context.loc!;
-    if (!isPermissionGranted || isLoading || _cameras.isEmpty) {
+    if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -354,7 +346,7 @@ class _PatientTriageEyeCapturingPageState
         onFlashToggle: () async {
           await _toggleFlash();
         },
-        isLoading: isLoading,
+        isLoading: _isLoading,
         progressMessage: _progressMessage,
         currentEye: model.currentEye,
         controller: _controller,
@@ -363,7 +355,7 @@ class _PatientTriageEyeCapturingPageState
           if (!_isEyeValid) {
             return;
           }
-          final image = await _takePicture(context);
+          final XFile? image = await _takePicture(context);
           logger.d("_takePicture: $image");
 
           if (image == null) {
@@ -416,17 +408,17 @@ class _PatientTriageEyeCapturingPageState
 
   Future<XFile?> _takePicture(BuildContext context) async {
     try {
-      final image = await _capturePicture(context);
+      final XFile? image = await _capturePicture(context);
       if (image == null) {
         return null;
       }
 
-      final croppedImage = await _cropImage(image);
+      final XFile? croppedImage = await _cropImage(image);
       if (croppedImage == null) {
         return null;
       }
 
-      final isVerfied = await _validateImage(croppedImage);
+      final bool isVerfied = await _validateImage(croppedImage);
       if (!isVerfied) {
         return null;
       }
@@ -446,12 +438,12 @@ class _PatientTriageEyeCapturingPageState
       return null;
     }
     setLoading();
-    final image = await _controller.takePicture();
+    final XFile image = await _controller.takePicture();
     removeLoading();
     return image;
   }
 
-  Future _cropImage(XFile image) async {
+  Future<XFile?> _cropImage(XFile image) async {
     final img.Image? capturedImage =
         img.decodeImage(File(image.path).readAsBytesSync());
     if (capturedImage == null) {
@@ -528,8 +520,8 @@ class _PatientTriageEyeCapturingPageState
     setLoading("Validating...");
     await ref.read(triageEyeScanProvider).saveTriageEyeScanResponseToDB();
 
-    final activeRole = PersistentAuthStateService.authState.activeRole;
-    final role = roleMapper(activeRole);
+    final String? activeRole = PersistentAuthStateService.authState.activeRole;
+    final Role? role = roleMapper(activeRole);
     if (role == Role.ROLE_OPTOMETRIST) {
       // For Optometrist show feedback form and call validation API
       removeLoading();
@@ -561,9 +553,6 @@ class _PatientTriageEyeCapturingPageState
       (result) async {
         removeLoading();
         logger.d({"saveTriageEyeScanResponseToDB": "Success"});
-        setState(() {
-          isCompleted = true;
-        });
         _showTestCompletionDialog(context, result);
       },
     );
