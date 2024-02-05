@@ -33,11 +33,9 @@ class _PatientClinicalTestReportsState
     super.initState();
     Future.microtask(() async {
       try {
-        final result = await ref
+        await ref
             .read(patientAssessmentAndTestProvider)
-            .getTriageReportByEncounterId(widget.encounterId, false);
-
-        reports.addAll(result);
+            .getTriageReportByEncounterId(widget.encounterId, false, true);
       } catch (e) {
         Fluttertoast.showToast(msg: "Clinical Report not found");
       }
@@ -49,6 +47,7 @@ class _PatientClinicalTestReportsState
     final loc = context.loc!;
 
     var model = ref.watch(patientAssessmentAndTestProvider);
+    reports = model.clinicalReportList;
     if (model.isClinicalReportLoading) {
       return const Scaffold(
         body: Center(
@@ -56,7 +55,7 @@ class _PatientClinicalTestReportsState
         ),
       );
     }
-    if (reports.isEmpty) {
+    if (!model.hasMoreClinicalReport && reports.isEmpty) {
       return Scaffold(
         body: Center(
           child: Text(
@@ -73,8 +72,17 @@ class _PatientClinicalTestReportsState
     return Scaffold(
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: reports.length,
+        itemCount: reports.length + 1,
         itemBuilder: (BuildContext context, int index) {
+          if (index == reports.length) {
+            if (model.hasMoreClinicalReport) {
+              model.incrementClinicalPage(widget.encounterId);
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return const Center(child: Text("No More Reports"));
+            }
+          }
+
           final currentData = reports[index];
 
           return Container(
