@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_feedback_provider.dart';
@@ -49,7 +50,7 @@ class OptometristTriageMapper {
     required String patientId,
     required String educationalQualification,
     required String profession,
-    required double totalUrgency,
+    required TriageUrgency totalUrgency,
     required double questionnaireUrgency,
     required double observationUrgency,
     required DateTime? assessmentStartTime,
@@ -135,7 +136,7 @@ class OptometristTriageMapper {
       output.add(
         Observation(
           observationCode: observation.id,
-          response: observation.score,
+          response: double.parse(observation.value?? "404") ,
         ),
       );
     }
@@ -218,10 +219,10 @@ class OptometristTriageMapper {
     }
   }
 
-  static Urgency _totalurgencyMapper(double value) {
-    if (value >= 5) {
+  static Urgency _totalurgencyMapper(TriageUrgency value) {
+    if (value == TriageUrgency.EMERGENCY) {
       return Urgency.RED;
-    } else if (value >= 3) {
+    } else if (value == TriageUrgency.PRIORITY) {
       return Urgency.YELLOW;
     } else {
       return Urgency.GREEN;

@@ -155,33 +155,31 @@ class _QuestionnaireList extends ConsumerWidget {
       itemBuilder: (BuildContext context, int index) {
         final question = model.output[index];
 
-        return index > 0
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    question["response"] ?? "",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black.withOpacity(0.8),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Divider(
-                      thickness: 1.5,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              )
-            : const SizedBox();
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              question["response"] ?? "",
+              style: applyRobotoFont(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Colors.black.withOpacity(0.8),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1.5,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        );
       },
     );
   }

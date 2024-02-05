@@ -444,9 +444,9 @@ class _PatientTriageEyeCapturingPageState
       return;
     }
     setLoading();
-    if (_controller.value.flashMode == FlashMode.off) {
-      await _controller.setFlashMode(FlashMode.auto);
-    } else {
+    if (_controller.value.flashMode == FlashMode.off || _controller.value.flashMode == FlashMode.auto) {
+      await _controller.setFlashMode(FlashMode.torch);
+    } else if(_controller.value.flashMode == FlashMode.torch || _controller.value.flashMode == FlashMode.auto) {
       await _controller.setFlashMode(FlashMode.off);
     }
 

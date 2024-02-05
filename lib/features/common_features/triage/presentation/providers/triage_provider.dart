@@ -351,6 +351,7 @@ class TriageReset extends ChangeNotifier {
   TriageReset(this.ref);
 
   void reset() {
+    logger.d("TriageReset called");
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
     ref.read(tumblingTestProvider).reset();
