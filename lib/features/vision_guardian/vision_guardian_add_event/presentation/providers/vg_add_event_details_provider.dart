@@ -101,6 +101,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   var offset = 0;
   get getOffset => offset;
+    bool initialValue = true;
+   get initialVal => initialValue;
 
   var eventOffset = 0;
   var searchEventOffset = 0;
@@ -112,6 +114,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     try {
       logger.d("getPatientTriageReport");
       getisLoading = true;
+      initialValue = true;
       var eventId = int.parse(eventIdValue);
 
       List<VisionGuardianPatientResponseModel> response =
@@ -187,6 +190,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void loadingToggle() {
+    initialValue = false;
     getisLoading = !getisLoading;
     notifyListeners();
   }

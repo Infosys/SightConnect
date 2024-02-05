@@ -51,7 +51,7 @@ class EventPatientsTab extends ConsumerWidget {
     }
 
     return LoadingOverlay(
-      overlayColor: null,
+      overlayColor: model.initialValue ? null : Colors.black45,
       isLoading: loading,
       child: vgPatientTabs(context, response, ref, patientsType),
     );
