@@ -51,6 +51,14 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
       ),
       body: ref.watch(vtSearchProvider(query.value)).when(
         data: (list) {
+          if (list.isEmpty) {
+            return Center(
+                child: Text(
+              "No Data Found",
+              style: applyRobotoFont(),
+            ),);
+          }
+
           return Align(
             alignment: Alignment.topCenter,
             child: SingleChildScrollView(

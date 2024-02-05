@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -7,7 +8,6 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/matomo_logger.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.invalidate(globalLanguageProvider);
       final currentLocaleCode = ref.read(globalLanguageProvider).currentLocale;
       if (currentLocaleCode == null) {
         showModalBottomSheet(
@@ -150,7 +151,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSize.klheight * 5),
+                    const SizedBox(height: AppSize.klheight * 3.5),
                     Text(
                       "Verify your mobile number",
                       style: applyFiraSansFont(
@@ -251,7 +252,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: AppSize.klheight * 5),
+                  const SizedBox(height: AppSize.klheight * 3.5),
                   Text(
                     "Verify your mobile number",
                     style: applyFiraSansFont(
@@ -279,8 +280,38 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     defaultPinTheme: defaultPinTheme,
                     keyboardType: const TextInputType.numberWithOptions(),
                     hapticFeedbackType: HapticFeedbackType.lightImpact,
-                    onCompleted: (pin) {
-                      logger.d(pin);
+                    onCompleted: (pin) async {
+                      final navigator = Navigator.of(context);
+
+                      if (otp.value.isNotEmpty) {
+                        try {
+                          isLoading.value = true;
+                          otpError.value = '';
+
+                          await ref.read(initializationProvider).signIn(
+                              mobile: mobileController.text, otp: otp.value);
+
+                          // Set visitor user id for matomo analytics
+                          _addMatomoAnalytics();
+
+                          navigator.pushNamedAndRemoveUntil(
+                              InitializationPage.routeName, (route) => false);
+                        } on DioException catch (e) {
+                          otpError.value =
+                              e.response!.data["error_description"] ??
+                                  "Invalid OTP";
+                          Fluttertoast.showToast(msg: otpError.value);
+                        } catch (e) {
+                          Fluttertoast.showToast(msg: "Invalid OTP");
+                          otpError.value = "Invalid OTP";
+                        } finally {
+                          Future.delayed(const Duration(seconds: 2), () {
+                            otpError.value = "";
+                          });
+                          pinController.clear();
+                          isLoading.value = false;
+                        }
+                      }
                     },
                     onChanged: (value) {
                       otp.value = value;
@@ -354,50 +385,56 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.klheight),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(AppSize.width(context) * 0.9, 40),
-                    ),
-                    onPressed: () async {
-                      final navigator = Navigator.of(context);
-
-                      if (otp.value.isNotEmpty) {
-                        try {
-                          otpError.value = '';
-                          logger.d("otp value is : ${otp.value}");
-                          await ref.read(initializationProvider).signIn(
-                              mobile: mobileController.text, otp: otp.value);
-
-                          // Set visitor user id for matomo analytics
-                          var uuid = const Uuid();
-                          String userId = uuid.v1();
-                          MatomoLogger.setVisitorUserId(userId);
-                          /////////////////////////////////
-
-                          navigator.pushNamedAndRemoveUntil(
-                              InitializationPage.routeName, (route) => false);
-                        } catch (e) {
-                          logger.e(e);
-                          Fluttertoast.showToast(msg: "Invalid OTP");
-
-                          otpError.value = "Invalid OTP";
-                          pinController.clear();
-                          Future.delayed(const Duration(seconds: 2), () {
-                            otpError.value = "";
-                          });
-                        }
-                      }
-                    },
-                    child: Text(
-                      'Verify and Proceed',
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.white,
-                      ),
+                  // const SizedBox(height: AppSize.klheight),
+                  Visibility(
+                    visible: isLoading.value,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
                     ),
                   ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     minimumSize: Size(AppSize.width(context) * 0.9, 40),
+                  //   ),
+                  //   onPressed: () async {
+                  //     final navigator = Navigator.of(context);
+
+                  //     if (otp.value.isNotEmpty) {
+                  //       try {
+                  //         otpError.value = '';
+                  //         logger.d("otp value is : ${otp.value}");
+                  //         await ref.read(initializationProvider).signIn(
+                  //             mobile: mobileController.text, otp: otp.value);
+
+                  //         // Set visitor user id for matomo analytics
+                  //         var uuid = const Uuid();
+                  //         String userId = uuid.v1();
+                  //         MatomoLogger.setVisitorUserId(userId);
+                  //         /////////////////////////////////
+
+                  //         navigator.pushNamedAndRemoveUntil(
+                  //             InitializationPage.routeName, (route) => false);
+                  //       } catch (e) {
+                  //         logger.e(e);
+                  //         Fluttertoast.showToast(msg: "Invalid OTP");
+
+                  //         otpError.value = "Invalid OTP";
+                  //         pinController.clear();
+                  //         Future.delayed(const Duration(seconds: 2), () {
+                  //           otpError.value = "";
+                  //         });
+                  //       }
+                  //     }
+                  //   },
+                  //   child: Text(
+                  //     'Verify and Proceed',
+                  //     style: applyRobotoFont(
+                  //       fontSize: 14,
+                  //       fontWeight: FontWeight.w500,
+                  //       color: AppColor.white,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -412,6 +449,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         RegExp(r'(\d{2})(\d{4})(\d{4})'),
         (match) => '${match[1]}******${match[3]}');
     return maskedMobile;
+  }
+
+  _addMatomoAnalytics() {
+    var uuid = const Uuid();
+    String userId = uuid.v1();
+    MatomoLogger.setVisitorUserId(userId);
   }
 }
 

@@ -42,7 +42,7 @@ class _PreliminaryAssessmentFilterCheckBoxState
                   Text(
                     widget.question.text!.toString(),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 5,
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

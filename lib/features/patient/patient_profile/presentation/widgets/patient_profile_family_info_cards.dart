@@ -10,7 +10,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -56,8 +55,8 @@ class PatientFamilyDetails extends HookConsumerWidget {
                       Fluttertoast.showToast(msg: "Family member not added");
                     } else if (value) {
                       Fluttertoast.showToast(msg: "Family member added");
+                      ref.invalidate(getPatientProfileProvider);
                     }
-                    ref.invalidate(getPatientProfileProvider);
                   },
                 );
               } catch (e) {

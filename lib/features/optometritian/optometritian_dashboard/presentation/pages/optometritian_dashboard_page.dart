@@ -10,12 +10,14 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_dashboard_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OptometritianDashboardPage extends ConsumerStatefulWidget {
+class OptometritianDashboardPage extends StatefulHookConsumerWidget {
   const OptometritianDashboardPage({super.key});
 
   @override
@@ -27,6 +29,7 @@ class _OptometritianDashboardPageState
     extends ConsumerState<OptometritianDashboardPage> {
   @override
   Widget build(BuildContext context) {
+    var isLoading = useState(false);
     ref.listen(getOptometricianProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.d("Logged out from OptometritianDashboardPage ");
@@ -49,7 +52,7 @@ class _OptometritianDashboardPageState
 
     return ref.watch(getOptometricianProfileProvider).when(
           data: (data) {
-            return _buildPage(ref, context);
+            return _buildPage(ref, context, isLoading);
           },
           loading: () => const Scaffold(
             body: Center(
@@ -71,228 +74,239 @@ class _OptometritianDashboardPageState
   Widget _buildPage(
     WidgetRef ref,
     BuildContext context,
+    ValueNotifier<bool> isLoading,
   ) {
     final model = ref.watch(optometricianDashboardProvider);
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      body: Stack(
-        children: [
-          Container(
-            height: 300,
-            width: double.infinity,
-            padding: const EdgeInsets.all(AppSize.kmpadding),
-            decoration: const BoxDecoration(
-              color: AppColor.primary,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(AppSize.klradius),
-                bottomRight: Radius.circular(AppSize.klradius),
+      body: LoadingOverlay(
+        isLoading: isLoading.value,
+        progressMessage: "Logging out...",
+        child: Stack(
+          children: [
+            Container(
+              height: 300,
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSize.kmpadding),
+              decoration: const BoxDecoration(
+                color: AppColor.primary,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(AppSize.klradius),
+                  bottomRight: Radius.circular(AppSize.klradius),
+                ),
               ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: AppSize.height(context) * 0.06),
-                Row(
-                  children: [
-                    Image.asset(
-                      AppImages.logo,
-                      height: 40,
-                      width: 140,
-                      colorBlendMode: BlendMode.srcIn,
-                      color: AppColor.white,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () async {
-                        final navigator = Navigator.of(context);
-                        ref
-                            .read(initializationProvider)
-                            .logout()
-                            .then((value) async {
-                          navigator.pushNamedAndRemoveUntil(
-                            LoginPage.routeName,
-                            (route) => false,
-                          );
-                          ref.invalidate(initializationProvider);
-                        }).catchError((e) {
-                          Fluttertoast.showToast(
-                            msg: e.toString(),
-                          );
-                        });
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                        color: AppColor.white,
-                      ),
-                    )
-                  ],
-                ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Hello, ",
-                        style: applyFiraSansFont(
-                          color: AppColor.white,
-                          fontSize: 28,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ref
-                            .watch(globalOptometricianProvider)
-                            .activeUserFullName,
-                        style: applyFiraSansFont(
-                          color: AppColor.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "Let's get started",
-                  style: applyFiraSansFont(
-                    fontSize: 14,
-                    color: AppColor.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kmpadding,
-              ),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.width(context) * 0.07,
-                    ),
-                    margin: const EdgeInsets.only(top: 250),
-                    width: AppSize.width(context),
-                    child: InfoCardOptometric(
-                      "Completed tests",
-                      model.optometricianDashboard
-                          .totalAssessmentsThisMonthByOptometrist,
-                      model.optometricianDashboard.totalAssessmentsThisMonth,
-                      "This month",
-                      model.optometricianDashboard
-                          .totalAssessmentsTodayByOptometrist,
-                      model.optometricianDashboard.totalAssessmentsToday,
-                      "Today",
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.klheight),
-                  Text(
-                    "Services",
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.klheight),
+                  SizedBox(height: AppSize.height(context) * 0.06),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const OptometricianAddPatientPage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColor.cyanGreen,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: AppSize.width(context) * 0.105,
-                              vertical: 15),
-                          child: Column(
-                            children: [
-                              SvgPicture.asset(
-                                AppIcon.optometritianAddPatient,
-                                height: 28,
-                                width: 23,
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                "Start Assessment",
-                                softWrap: false,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: applyFiraSansFont(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      Image.asset(
+                        AppImages.logo,
+                        height: 40,
+                        width: 140,
+                        colorBlendMode: BlendMode.srcIn,
+                        color: AppColor.white,
                       ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const OptometritianSearchPatientPage(),
-                            ),
-                          );
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () async {
+                          isLoading.value = true;
+                          final navigator = Navigator.of(context);
+                          ref
+                              .read(initializationProvider)
+                              .logout()
+                              .then((value) async {
+                            navigator.pushNamedAndRemoveUntil(
+                              LoginPage.routeName,
+                              (route) => false,
+                            );
+                            ref.invalidate(initializationProvider);
+                            isLoading.value = false;
+                          }).catchError((e) {
+                            isLoading.value = false;
+                            Fluttertoast.showToast(
+                              msg:
+                                  "Apologies, we encountered a logout error in the mobile app.",
+                            );
+                          });
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColor.butterCream,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSize.width(context) * 0.105,
-                            vertical: 15,
-                          ),
-                          child: Column(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/optometritian_search_history.svg",
-                                height: 28,
-                                width: 23,
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                "Assessment History",
-                                softWrap: false,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: applyFiraSansFont(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
+                        icon: const Icon(
+                          Icons.logout,
+                          color: AppColor.white,
                         ),
-                      ),
+                      )
                     ],
                   ),
-                  const Spacer(),
-                  const SizedBox(height: AppSize.kmheight),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Hello, ",
+                          style: applyFiraSansFont(
+                            color: AppColor.white,
+                            fontSize: 28,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ref
+                              .watch(globalOptometricianProvider)
+                              .activeUserFullName,
+                          style: applyFiraSansFont(
+                            color: AppColor.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    "Let's get started",
+                    style: applyFiraSansFont(
+                      fontSize: 14,
+                      color: AppColor.white,
+                    ),
+                  )
                 ],
               ),
             ),
-          )
-        ],
+            Positioned(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSize.width(context) * 0.07,
+                      ),
+                      margin: const EdgeInsets.only(top: 250),
+                      width: AppSize.width(context),
+                      child: InfoCardOptometric(
+                        "Completed tests",
+                        model.optometricianDashboard
+                            .totalAssessmentsThisMonthByOptometrist,
+                        model.optometricianDashboard.totalAssessmentsThisMonth,
+                        "This month",
+                        model.optometricianDashboard
+                            .totalAssessmentsTodayByOptometrist,
+                        model.optometricianDashboard.totalAssessmentsToday,
+                        "Today",
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.klheight),
+                    Text(
+                      "Services",
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.klheight),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const OptometricianAddPatientPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.cyanGreen,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: AppSize.width(context) * 0.105,
+                                vertical: 15),
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  AppIcon.optometritianAddPatient,
+                                  height: 28,
+                                  width: 23,
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Start Assessment",
+                                  softWrap: false,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyFiraSansFont(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const OptometritianSearchPatientPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.butterCream,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppSize.width(context) * 0.105,
+                              vertical: 15,
+                            ),
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/optometritian_search_history.svg",
+                                  height: 28,
+                                  width: 23,
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Assessment History",
+                                  softWrap: false,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyFiraSansFont(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const SizedBox(height: AppSize.kmheight),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

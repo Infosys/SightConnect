@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,6 +20,8 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(vtHomeHelperProvider);
+
+    bool isMobile = Responsive.isMobile(context);
 
     if (model.listOfAssessments.isEmpty && !model.isLoading) {
       return Row(
@@ -51,7 +54,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
     return PaginatedDataTable(
       rowsPerPage: model.pageSize,
       showCheckboxColumn: false,
-      columnSpacing: AppSize.width(context) * 0.15,
+      columnSpacing: isMobile ? 56 : AppSize.width(context) * 0.15,
       headingRowHeight: AppSize.klheight * 2,
       horizontalMargin: AppSize.klpadding,
       dataRowMaxHeight: AppSize.klheight * 2.5,
@@ -130,61 +133,10 @@ class PatientAssessmentDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     if (isLoading) {
-      return DataRow(cells: [
-        DataCell(
-          Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: double.infinity,
-              height: AppSize.klheight * 2,
-              color: Colors.white,
-            ),
-          ),
-          showEditIcon: false,
-          placeholder: false,
-        ),
-        DataCell(
-          Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: double.infinity,
-              height: AppSize.klheight * 2,
-              color: Colors.white,
-            ),
-          ),
-          showEditIcon: false,
-          placeholder: false,
-        ),
-        DataCell(
-          Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: double.infinity,
-              height: AppSize.klheight * 2,
-              color: Colors.white,
-            ),
-          ),
-          showEditIcon: false,
-          placeholder: false,
-        ),
-        DataCell(
-          Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: double.infinity,
-              height: AppSize.klheight * 2,
-              color: Colors.white,
-            ),
-          ),
-          showEditIcon: false,
-          placeholder: false,
-        ),
-        // Add more DataCells if your table has more columns
-      ]);
+      return DataRow(
+        cells: [
+          loadingDataCell(),loadingDataCell(),loadingDataCell(),loadingDataCell()],
+      );
     }
     if (index >= data.length - 1 && !isLoading && model.hasMore) {
       logger.d("index $index data ${data.length}");
@@ -306,8 +258,24 @@ class PatientAssessmentDataSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-
-
+DataCell loadingDataCell() {
+  return DataCell(
+    Shimmer.fromColors(
+      baseColor: AppColor.white,
+      highlightColor: AppColor.lightGrey.withOpacity(0.1),
+      child: Container(
+        width: AppSize.klwidth * 5,
+        height: AppSize.klheight * 1.5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          color: AppColor.white,
+        ),
+      ),
+    ),
+    showEditIcon: false,
+    placeholder: false,
+  );
+}
 
 
 

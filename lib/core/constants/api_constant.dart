@@ -6,7 +6,8 @@ class ApiConstant {
   static String baseUrl = 'https://eyecare4all-dev.infosysapps.com';
   static String patientRegistrationMiniappUrl =
       '$baseUrl/patient-registration-dev/';
-  //  kDebugMode
+
+  // kDebugMode
   //     ? '$baseUrl/patient-registration-dev/'
   //     : '$baseUrl/patient-registration/';
   static String playStoreUrl = 'https://healthconnecttech.org/install';

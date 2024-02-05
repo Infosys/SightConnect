@@ -68,9 +68,9 @@ class TriageRepositoryImpl implements TriageRepository {
 
         final remoteResponse =
             await remoteDataSource.saveTriage(triage: triageResponse);
-        localDataSource.deleteTriageResponse();
-        await localDataSource.resetTriage();
         await localDataSource.deleteTriageResponse();
+        await localDataSource.resetTriage();
+
         return Right(remoteResponse);
       } on ServerException {
         final localResponse = await localDataSource.saveTriageResponse(

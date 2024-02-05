@@ -77,38 +77,26 @@ class TriageExitAlertBox extends HookConsumerWidget {
                       ),
                       TextButton(
                         onPressed: () async {
-                          var naviagtor = Navigator.of(context);
-                          final activeRole = roleMapper(
-                              PersistentAuthStateService.authState.activeRole);
-                          if (activeRole != Role.ROLE_PATIENT) {
-                            // Delete all triage entries
-                            isLoading.value = true;
-                            await TriageDBHelper()
-                                .discardLocalTriageEntries()
-                                .catchError((e) {
-                              isLoading.value = false;
-                              logger.e(
-                                  "Failed to discard local triage entries $e");
-                            });
-                            logger.d(
-                                {"TriageExitAlertBox": "ALL Triage Cleared"});
-                            ref.read(resetProvider).reset();
-                            isLoading.value = false;
-                            naviagtor.popUntil((route) => route.isFirst);
-                          } else {
-                            //For patient, save the triage entries
-                            try {
-                              isLoading.value = true;
-                              if (model.currentStep > 0) {
-                                await _saveTriageModel(ref);
-                              }
-                              isLoading.value = false;
-                            } catch (e) {
-                              isLoading.value = false;
-                              logger.d({"TriageExitAlertBox": e});
+                          var navigator = Navigator.of(context);
+                          final role =
+                              PersistentAuthStateService.authState.activeRole;
+                          final activeRole = roleMapper(role);
+                          isLoading.value = true;
+                          try {
+                            if (activeRole != Role.ROLE_PATIENT) {
+                              await TriageDBHelper().deleteAllTriageSteps();
+                              logger.d("All Triage Cleared");
+                            } else if (model.currentStep > 0) {
+                              // For patient, save the triage entries
+                              await _saveTriageModel(ref);
                             }
+                          } catch (e) {
+                            logger
+                                .e("Failed to discard local triage entries $e");
+                          } finally {
+                            isLoading.value = false;
                             ref.read(resetProvider).reset();
-                            naviagtor.popUntil((route) => route.isFirst);
+                            navigator.popUntil((route) => route.isFirst);
                           }
                         },
                         child: Text(loc.yesButton),

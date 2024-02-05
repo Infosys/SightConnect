@@ -31,8 +31,15 @@ class PatientServiceCategory extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+
     logger.d("isUserBeta $isUserBeta");
     final loc = context.loc!;
+    final displayServices = isUserBeta
+        ? services
+        : services.where((element) {
+            return element != MiniApp.CATARACT_EYE_TEST &&
+                element != MiniApp.RED_EYE_TEST;
+          }).toList();
     return Container(
       margin: Responsive.isMobile(context)
           ? const EdgeInsets.only(bottom: AppSize.klpadding)
@@ -57,12 +64,9 @@ class PatientServiceCategory extends ConsumerWidget {
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
-            alignment: WrapAlignment.spaceBetween,
-            children: services
-                .where((miniapp) =>
-                    isUserBeta ||
-                    miniapp != MiniApp.CATARACT_EYE_TEST ||
-                    miniapp != MiniApp.RED_EYE_TEST)
+            alignment:
+                !isUserBeta ? WrapAlignment.start : WrapAlignment.spaceAround,
+            children: displayServices
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {

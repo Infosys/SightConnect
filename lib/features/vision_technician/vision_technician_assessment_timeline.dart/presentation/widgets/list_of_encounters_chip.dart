@@ -33,6 +33,8 @@ class ListOfEncountersChip extends HookConsumerWidget {
 
     return ref.watch(vtListOfEncountersChipProvider(patientId)).when(
           data: (data) {
+            data = data.reversed.toList();
+
             return SizedBox(
               height: AppSize.klheight * 1.5,
               child: ListView.builder(
