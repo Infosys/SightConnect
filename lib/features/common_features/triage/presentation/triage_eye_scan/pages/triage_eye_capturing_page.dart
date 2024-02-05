@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
@@ -15,6 +16,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/triage_eye_camera_display.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_result_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -64,22 +66,46 @@ class _PatientTriageEyeCapturingPageState
   Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isIOS = Platform.isIOS;
+  bool isPermissionGranted = false;
 
   @override
   void initState() {
-    logger.d('EyeDetectorView initState');
+    logger.d('TriageEyeCapturingPage  initState');
     super.initState();
+    isPermissionGranted = false;
+    isLoading = false;
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
-    if (isCompleted == false && !isIOS) {
-      _initializeCamera();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (Platform.isAndroid) {
+        _checkPermissions(context);
+      }
+    });
+  }
+
+  Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("TriageEyeCapturingPage: Check Permission Called");
+    final navigator = Navigator.of(context);
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = false;
+        isLoading = false;
+      });
+    }
+    final isGranted = await CameraPermissionService.checkPermissions(context);
+    if (isGranted) {
+      _addPermissionLoading();
+      await _initializeCamera();
+    } else {
+      logger.d("TriageEyeCapturingPage: Permission not granted");
+      navigator.pop();
+      Fluttertoast.showToast(msg: "Permission not granted");
     }
   }
 
-  void _initializeCamera() async {
+  Future<void> _initializeCamera() async {
     logger.d('EyeDetectorView _initializeCamera');
-    final NavigatorState navigator = Navigator.of(context);
+    final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
@@ -90,6 +116,7 @@ class _PatientTriageEyeCapturingPageState
     } catch (e) {
       logger.d('Error initializing camera: $e');
       navigator.pop();
+      Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
@@ -224,21 +251,31 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!(_controller.value.isInitialized)) return;
-    if (state == AppLifecycleState.inactive && mounted) {
+    logger.d({
+      "TriageEyeCapturingPage: AppLifecycleState": "$state",
+      "isPermissionGranted": "$isPermissionGranted",
+      "isLoading": "$isLoading",
+    });
+    if (!isPermissionGranted) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
       logger.d('EyeDetectorView AppLifecycleState.inactive');
+      setLoading();
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed && mounted) {
+    } else if (state == AppLifecycleState.resumed) {
       logger.d('EyeDetectorView AppLifecycleState.resumed');
-      _initializeCamera();
-    } else if (state == AppLifecycleState.paused && mounted) {
+      if (mounted) {
+        _checkPermissions(context);
+      }
+    } else if (state == AppLifecycleState.paused) {
       logger.d('EyeDetectorView AppLifecycleState.paused');
+      setLoading();
       _stopLiveFeed();
-    } else if (state == AppLifecycleState.detached && mounted) {
+    } else if (state == AppLifecycleState.detached) {
       logger.d('EyeDetectorView AppLifecycleState.detached');
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.hidden && mounted) {
-      logger.d('EyeDetectorView AppLifecycleState.hidden');
+      setLoading();
       _stopLiveFeed();
     }
   }
@@ -255,9 +292,7 @@ class _PatientTriageEyeCapturingPageState
 
   Future<void> _stopLiveFeed() async {
     logger.d('EyeDetectorView _stopLiveFeed');
-    if (!mounted) {
-      return;
-    }
+
     try {
       _canProcess = false;
       _meshDetector.close();
@@ -284,11 +319,19 @@ class _PatientTriageEyeCapturingPageState
     });
   }
 
+  void _addPermissionLoading() {
+    if (mounted) {
+      setState(() {
+        isPermissionGranted = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var model = ref.watch(triageEyeScanProvider);
     final loc = context.loc!;
-    if (_cameras.isEmpty) {
+    if (!isPermissionGranted || isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -409,7 +452,8 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future _cropImage(XFile image) async {
-    final img.Image? capturedImage = img.decodeImage(File(image.path).readAsBytesSync());
+    final img.Image? capturedImage =
+        img.decodeImage(File(image.path).readAsBytesSync());
     if (capturedImage == null) {
       return null;
     }
@@ -567,7 +611,13 @@ class _PatientTriageEyeCapturingPageState
         ),
       ),
       builder: (context) {
-        return const CameraServerExceptionDialog();
+        return CameraServerExceptionDialog(
+          onRetry: () {
+            ref.read(resetProvider).reset();
+            ref.read(accessibilityProvider).resetBrightness();
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        );
       },
     );
   }

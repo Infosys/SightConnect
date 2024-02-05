@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CameraServerExceptionDialog extends ConsumerWidget {
-  const CameraServerExceptionDialog({super.key});
+  const CameraServerExceptionDialog({
+    required this.onRetry,
+    super.key,
+  });
+
+  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,9 +50,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  ref.read(resetProvider).reset();
-                  ref.read(accessibilityProvider).resetBrightness();
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  onRetry();
                 },
                 child: Text(
                   loc.okButton,
