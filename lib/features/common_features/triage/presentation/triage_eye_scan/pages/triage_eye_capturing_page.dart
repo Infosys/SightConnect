@@ -70,7 +70,7 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void initState() {
-    logger.d('TriageEyeCapturingPage  initState');
+    logger.d('TriageEyeCapturingPage: initState');
     super.initState();
     isPermissionGranted = false;
     isLoading = false;
@@ -104,7 +104,7 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future<void> _initializeCamera() async {
-    logger.d('EyeDetectorView _initializeCamera');
+    logger.d('TriageEyeCapturingPage: _initializeCamera');
     final navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
@@ -121,7 +121,7 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future<void> _startLiveFeed() async {
-    logger.d('EyeDetectorView _startLiveFeed');
+    logger.d('TriageEyeCapturingPage: _startLiveFeed');
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
@@ -261,20 +261,20 @@ class _PatientTriageEyeCapturingPageState
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d('EyeDetectorView AppLifecycleState.inactive');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.inactive');
       setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d('EyeDetectorView AppLifecycleState.resumed');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.resumed');
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d('EyeDetectorView AppLifecycleState.paused');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.paused');
       setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d('EyeDetectorView AppLifecycleState.detached');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.detached');
       setLoading();
       _stopLiveFeed();
     }
@@ -282,7 +282,7 @@ class _PatientTriageEyeCapturingPageState
 
   @override
   void dispose() {
-    logger.d('EyeDetectorView dispose');
+    logger.d('TriageEyeCapturingPage: dispose');
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
       _stopLiveFeed();
@@ -291,7 +291,7 @@ class _PatientTriageEyeCapturingPageState
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.d('EyeDetectorView _stopLiveFeed');
+    logger.d('TriageEyeCapturingPage: _stopLiveFeed');
 
     try {
       _canProcess = false;
@@ -585,6 +585,7 @@ class _PatientTriageEyeCapturingPageState
           onDismiss: () async {
             ref.read(triageStepperProvider).reset();
             if (context.mounted) {
+              Navigator.of(context).pop();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => TriageResultPage(
