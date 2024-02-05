@@ -29,10 +29,11 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kspadding / 2,
-                          vertical: AppSize.kspadding / 2),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppSize.width(context) * 0.01,
+                        horizontal: AppSize.kspadding / 2,
+                        vertical: AppSize.kspadding / 2,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kmpadding,
                         vertical: AppSize.kspadding,
                       ),
                       decoration: BoxDecoration(

@@ -95,8 +95,8 @@ class EyeScanProvider extends ChangeNotifier {
       }
     }
 
-    debugPrint("Left Eye Probability: ${leftEyeProbability.toString()}");
-    debugPrint("Right Eye Probability: ${rightEyeProbability.toString()}");
+    logger.d("Left Eye Probability: ${leftEyeProbability.toString()}");
+    logger.d("Right Eye Probability: ${rightEyeProbability.toString()}");
     // _leftEyeDetected = false;
     // _rightEyeDetected = false;
     if (leftEyeProbability == -1) {

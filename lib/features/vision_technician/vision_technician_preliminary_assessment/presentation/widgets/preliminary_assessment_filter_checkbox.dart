@@ -42,7 +42,7 @@ class _PreliminaryAssessmentFilterCheckBoxState
                   Text(
                     widget.question.text!.toString(),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 5,
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -99,7 +99,9 @@ class QuestionTile extends HookConsumerWidget {
         children: [
           Checkbox(
             value: checkBoxState.value,
-            onChanged: (bool? value) {},
+            onChanged: null,
+            fillColor: MaterialStateProperty.all(
+                checkBoxState.value ? AppColor.primary : AppColor.white),
           ),
           Flexible(
             child: Text(

@@ -104,8 +104,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: model.questionnaireSections.length,
                   itemBuilder: (context, index) {
-                    logger.d(
-                        "${model.questionnaireSections.length}, is the length of the questions");
                     var question = model.questionnaireSections[index];
                     var isLastQuestion =
                         (model.questionnaireSections.length - 1 == index);

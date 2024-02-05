@@ -18,7 +18,10 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                ref.watch(addEventDetailsProvider).resetFields();
+                Navigator.pop(context);
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -46,9 +49,13 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                     .currentState!
                     .validate()) {
                   try {
-                    await ref.read(addEventDetailsProvider).addEventDetails();
-                    navigator.pop();
-                    Fluttertoast.showToast(msg: "Event added");
+                    if (ref.watch(addEventDetailsProvider).image == null) {
+                      Fluttertoast.showToast(msg: "Add Event Image");
+                    } else {
+                      await ref.read(addEventDetailsProvider).addEventDetails();
+                      navigator.pop();
+                      Fluttertoast.showToast(msg: "Event added");
+                    }
                   } catch (e) {
                     Fluttertoast.showToast(msg: "Event not added");
                   }

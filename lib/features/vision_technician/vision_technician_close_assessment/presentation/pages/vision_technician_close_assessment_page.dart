@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -91,6 +92,8 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           .submitCloseAssessmentInfo(patientDetails!);
                       ref.invalidate(vtTriageProvider);
                       ref.invalidate(vtCloseAssessmentHelperProvider);
+                      ref.invalidate(vtTriageProvider);
+                      ref.invalidate(preliminaryAssessmentHelperProvider);
 
                       if (context.mounted) {
                         if (response == "success") {

@@ -60,47 +60,46 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
                       ),
                 Column(
                   children: [
-                    if (data.image == null)
-                      TextButton(
-                        onPressed: () async {
-                          try {
-                            final ImagePicker picker = ImagePicker();
-                            data.image = await picker.pickImage(
-                                source: ImageSource.gallery);
-                          } catch (e) {
-                            Fluttertoast.showToast(msg: e.toString());
-                          }
-                        },
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              side: const BorderSide(color: AppColor.primary),
-                              borderRadius:
-                                  BorderRadius.circular(AppSize.klradius),
-                            ),
+                    TextButton(
+                      onPressed: () async {
+                        try {
+                          final ImagePicker picker = ImagePicker();
+                          data.image = await picker.pickImage(
+                              source: ImageSource.gallery);
+                        } catch (e) {
+                          Fluttertoast.showToast(msg: e.toString());
+                        }
+                      },
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            side: const BorderSide(color: AppColor.primary),
+                            borderRadius:
+                                BorderRadius.circular(AppSize.klradius),
                           ),
                         ),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.file_upload_outlined,
-                              color: AppColor.primary,
-                              size: 20,
-                            ),
-                            const SizedBox(width: AppSize.kswidth),
-                            Text(
-                              "Upload Image",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.primary,
-                              ),
-                            ),
-                            const SizedBox(width: AppSize.kswidth),
-                          ],
-                        ),
                       ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.file_upload_outlined,
+                            color: AppColor.primary,
+                            size: 20,
+                          ),
+                          const SizedBox(width: AppSize.kswidth),
+                          Text(
+                            "Upload Image",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.primary,
+                            ),
+                          ),
+                          const SizedBox(width: AppSize.kswidth),
+                        ],
+                      ),
+                    ),
                     Text(
                       "Add a photo of the Event which\nwill be shown as thumbnail",
                       style: applyRobotoFont(

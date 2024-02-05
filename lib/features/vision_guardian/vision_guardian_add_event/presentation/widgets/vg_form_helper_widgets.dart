@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 Widget customTextField(TextEditingController controller, String label,
     {String? Function(String?)? validationFunction}) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;
@@ -34,6 +35,7 @@ Widget customTextFieldIcon(
     TextEditingController controller, String label, Widget icon,
     {String? Function(String?)? validationFunction}) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;
@@ -172,11 +174,10 @@ Widget customTextFieldDatePicker({
 }
 
 Widget customTextFieldTimePicker(
-  TextEditingController timeController,
-  String label,
-  BuildContext context,
-  String? Function(String?)? customValidation,
-) {
+    TextEditingController timeController,
+    String label,
+    BuildContext context,
+    String? Function(String?)? customValidation) {
   return Expanded(
     child: TextFormField(
       readOnly: true,
@@ -196,7 +197,7 @@ Widget customTextFieldTimePicker(
           padding: const EdgeInsets.only(left: 12.0),
           child: InkWell(
             onTap: () async {
-              var dateTime = await selectTime(context);
+              var dateTime = await selectTime(context, timeController.text);
               timeController.text = dateTime.toString();
             },
             child: const Icon(
@@ -304,14 +305,30 @@ Future<String?> selectDate(BuildContext context, DateTime startDate) async {
   }
 }
 
-Future<String?> selectTime(BuildContext context) async {
+Future<String?> selectTime(BuildContext context, previousValue) async {
+  DateTime currentDateTime = DateTime.now();
+  DateTime dateTime = DateTime.now();
+
+  if (previousValue != "") {
+    var values = previousValue.split(":");
+    dateTime = DateTime(
+      currentDateTime.year, // year
+      currentDateTime.month, // month
+      currentDateTime.day, // day
+      int.parse(values[0]), // hour
+      int.parse(values[1].split(" ")[0]), // minute
+    );
+  }
+
   final TimeOfDay? picked = await showTimePicker(
     context: context,
-    initialTime: TimeOfDay.now(),
+    initialTime: previousValue == ""
+        ? TimeOfDay.now()
+        : TimeOfDay.fromDateTime(dateTime),
   );
   if (picked != null) {
-    return "${picked.hour}:${picked.minute} ${picked.period.name.toUpperCase()}";
+    return "${picked.hour}:${picked.minute < 10 ? '0${picked.minute}' : picked.minute} ${picked.period.name.toUpperCase()}";
   } else {
-    return null;
+    return previousValue;
   }
 }

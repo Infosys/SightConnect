@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
@@ -95,8 +94,8 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         response.fold(
                           (failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Some Error Occurred"),
+                              SnackBar(
+                                content: Text(failure.errorMessage),
                               ),
                             );
                           },
@@ -137,13 +136,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         onBackPress: () {
           ref.invalidate(vtTriageProvider);
           ref.invalidate(preliminaryAssessmentHelperProvider);
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionTechnicianHomePage(),
-            ),
-          );
         },
         centerTitle: false,
         title: const Text('Preliminary Assessment'),

@@ -2,10 +2,9 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/empty_result_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_filter.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +40,25 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
             query.value = value;
           },
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showVtSearchFilter(context);
-            },
-            icon: const Icon(Icons.filter_list),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       showVtSearchFilter(context);
+        //     },
+        //     icon: const Icon(Icons.filter_list),
+        //   ),
+        // ],
       ),
       body: ref.watch(vtSearchProvider(query.value)).when(
         data: (list) {
+          if (list.isEmpty) {
+            return Center(
+                child: Text(
+              "No Data Found",
+              style: applyRobotoFont(),
+            ),);
+          }
+
           return Align(
             alignment: Alignment.topCenter,
             child: SingleChildScrollView(

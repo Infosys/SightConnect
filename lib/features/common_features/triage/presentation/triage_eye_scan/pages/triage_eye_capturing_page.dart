@@ -246,9 +246,10 @@ class _PatientTriageEyeCapturingPageState
   void dispose() {
     logger.d('EyeDetectorView dispose');
     WidgetsBinding.instance.removeObserver(this);
-    _stopLiveFeed().then((_) {
-      super.dispose();
-    });
+    if (mounted) {
+      _stopLiveFeed();
+    }
+    super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
@@ -259,8 +260,11 @@ class _PatientTriageEyeCapturingPageState
     try {
       _canProcess = false;
       _meshDetector.close();
-      await _controller.stopImageStream();
-      await _controller.dispose();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
     } catch (e) {
       logger.d('Error stopping live feed: $e');
     }
@@ -464,7 +468,6 @@ class _PatientTriageEyeCapturingPageState
         return TestCompletionDialog(
           onDismiss: () async {
             ref.read(triageStepperProvider).reset();
-            dispose();
             if (context.mounted) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(

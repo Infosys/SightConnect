@@ -47,6 +47,8 @@ class AppNetworkImage extends StatelessWidget {
           );
         } else {
           return Container(
+            height: radius,
+            width: radius,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               color: AppColor.lightGrey,

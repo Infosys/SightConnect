@@ -12,12 +12,11 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
   VgAddEventRepositoryImpl(this.remoteDataSource);
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
-    required String actorIdentifier,
-    required String eventStatusFilter,
+        required Map<String, dynamic> queryData,
+
   }) async {
     return await remoteDataSource.getVGEvents(
-      actorIdentifier: actorIdentifier,
-      eventStatusFilter: eventStatusFilter,
+      queryData:queryData
     );
   }
 

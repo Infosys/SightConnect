@@ -9,121 +9,145 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../domain/models/assessment_timeline_view_model.dart';
 
-class AssessmentTimelineView extends ConsumerWidget {
+class AssessmentTimelineView extends HookConsumerWidget {
   const AssessmentTimelineView(this.timeLineList, {super.key});
 
   final List<AssessmentTimelineViewModel> timeLineList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView.separated(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        return ListTile(
-          contentPadding: const EdgeInsets.all(0),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: AppSize.width(context) / 5,
-                child: Text(
-                  timeLineList[index].title ?? "",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.black,
-                  ),
-                ),
-              ),
-              Text(
-                timeLineList[index].date == null
-                    ? ""
-                    : DateFormat("dd MMM yyyy, hh:mm a")
-                        .format(timeLineList[index].date!),
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                ),
-              ),
-            ],
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Responsive.isMobile(context)
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          timeLineList[index].subtitle ?? "",
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                        TimeWidgetRender(
-                            context, timeLineList[index], index, ref)
-                      ],
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          timeLineList[index].subtitle ?? "",
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                        TimeWidgetRender(
-                            context, timeLineList[index], index, ref)
-                      ],
+    ValueNotifier<bool> isLoading = useState<bool>(false);
+
+    return Column(
+      children: [
+        if (isLoading.value) const CircularProgressIndicator(),
+        ListView.separated(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: AppSize.width(context) / 5,
+                    child: Text(
+                      timeLineList[index].title ?? "",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
                     ),
-              const SizedBox(
-                height: AppSize.kmheight,
+                  ),
+                  Text(
+                    timeLineList[index].date == null
+                        ? ""
+                        : DateFormat("dd MMM yyyy, hh:mm a")
+                            .format(timeLineList[index].date!),
+                    style: applyRobotoFont(
+                      fontSize: 12,
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ],
               ),
-              const Divider(
-                color: Colors.grey,
-                thickness: 1,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Responsive.isMobile(context)
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              timeLineList[index].subtitle ?? "",
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                            TimeWidgetRender(
+                              context,
+                              timeLineList[index],
+                              index,
+                              ref,
+                              isLoading,
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              timeLineList[index].subtitle ?? "",
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                            TimeWidgetRender(
+                              context,
+                              timeLineList[index],
+                              index,
+                              ref,
+                              isLoading,
+                            ),
+                          ],
+                        ),
+                  const SizedBox(
+                    height: AppSize.kmheight,
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      },
-      itemCount: timeLineList.length,
-      separatorBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kspadding + 2,
-          ),
-          child: Row(
-            children: [
-              Container(
-                height: 50,
-                width: 4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: index.isEven ? AppColor.altGreen : AppColor.lightGrey,
-                ),
+            );
+          },
+          itemCount: timeLineList.length,
+          separatorBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSize.kspadding + 2,
               ),
-              const Spacer(),
-            ],
-          ),
-        );
-      },
+              child: Row(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 4,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color:
+                          index.isEven ? AppColor.altGreen : AppColor.lightGrey,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
 
-Widget TimeWidgetRender(BuildContext context,
-    AssessmentTimelineViewModel timeLine, int index, WidgetRef ref) {
+Widget TimeWidgetRender(
+  BuildContext context,
+  AssessmentTimelineViewModel timeLine,
+  int index,
+  WidgetRef ref,
+  ValueNotifier<bool> isLoading,
+) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
@@ -162,11 +186,13 @@ Widget TimeWidgetRender(BuildContext context,
             InkWell(
               onTap: () async {
                 try {
+                  isLoading.value = true;
                   AssessmentAndTriageReportDetailedEntity response = await ref
                       .watch(vtAssessmentAndTestProvider)
                       .getTriageDetailedReportByEncounterId(
                           timeLine.encounterId!, DiagnosticReportStatus.FINAL);
                   logger.d("report response ${response.toJson()}");
+                  isLoading.value = false;
                   if (context.mounted) {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
@@ -177,6 +203,14 @@ Widget TimeWidgetRender(BuildContext context,
                     ));
                   }
                 } catch (e) {
+                  isLoading.value = false;
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Some Error Occurred"),
+                      ),
+                    );
+                  }
                   logger.d("error $e");
                 }
               },

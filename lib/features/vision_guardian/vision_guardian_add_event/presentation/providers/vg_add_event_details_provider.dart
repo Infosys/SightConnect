@@ -21,27 +21,6 @@ final addEventDetailsProvider =
   );
 });
 
-var getEventDetailsProvider =
-    FutureProvider.autoDispose<List<VisionGuardianEventModel>>((ref) async {
-  ref.watch(addEventDetailsProvider).eventStatusFilterValue;
-  ref.watch(addEventDetailsProvider).isSelected;
-
-  var statusfilter = ref.read(addEventDetailsProvider).eventStatusFilterValue;
-
-  List<VisionGuardianEventModel> response = await ref
-      .watch(vgAddEventRepository)
-      .getVGEvents(
-          actorIdentifier: ref.read(globalVGProvider).userId.toString(),
-          eventStatusFilter: statusfilter);
-
-  ref.read(addEventDetailsProvider).setEventDetails(response.reversed.toList());
-  ref
-      .read(addEventDetailsProvider)
-      .setSearchEventDetails(response.reversed.toList());
-
-  return response.reversed.toList();
-});
-
 class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
   final GlobalVGProvider globalVGProvider;
@@ -51,25 +30,41 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     required this.globalVGProvider,
     required this.fileMsProvider,
   }) {
+    List<VisionGuardianEventModel> previousList = [];
+    getVgEvents(previousList, "default");
     eventPatientController.addListener(scrollListener);
+    eventListController.addListener(defaulteventScrollListener);
+    searchEventListController.addListener(searcheventScrollListener);
   }
 
   String eventId = "";
   var formKey = GlobalKey<FormState>();
   var error = false;
+  var errorMessage = "";
   var isLoading = false;
 
   var getisLoading = false;
+
+  var eventLoading = false;
+
   List<VisionGuardianEventModel> listOfEventDetails = [];
+  List<VisionGuardianEventModel> newEventList = [];
+
+  List<VisionGuardianEventModel> searchEventResults = [];
+  List<VisionGuardianEventModel> newSearchEventList = [];
+
   List<VisionGuardianEventModel> searchResults = [];
   List<VisionGuardianPatientResponseModel> listOfEventPatients = [];
   List<VisionGuardianPatientResponseModel> listOfSearchEventPatients = [];
   List<VisionGuardianPatientResponseModel> newEventPatientList = [];
 
-  String eventStatusFilter = "";
+  String eventStatusFilter = "ALL";
   String queryData = "";
   TextEditingController searchController = TextEditingController();
   ScrollController eventPatientController = ScrollController();
+  ScrollController eventListController = ScrollController();
+  ScrollController searchEventListController = ScrollController();
+
   var isSelected = -1;
   var eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   XFile? _image;
@@ -107,6 +102,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   var offset = 0;
   get getOffset => offset;
 
+  var eventOffset = 0;
+  var searchEventOffset = 0;
+  get getEventOffset => eventOffset;
+
+  var eventSearchQuery = "";
+
   void getEventPatientTriageReport(previousList) async {
     try {
       logger.d("getPatientTriageReport");
@@ -132,6 +133,47 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void getVgEvents(previousList, type) async {
+    try {
+      eventLoading = true;
+      List<VisionGuardianEventModel> response =
+          await vgAddEventRepository.getVGEvents(
+        queryData: {
+          "actorIdentifier": globalVGProvider.userId.toString(),
+          "eventStatusFilter":
+              eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
+          "pageable": {
+            "page": type == "search" ? searchEventOffset : eventOffset,
+            "size": 10,
+            "title-like": eventSearchQuery,
+          },
+        },
+      );
+
+      setEventList(previousList + response, type);
+      if (type == "search") {
+        newSearchEventList = response;
+      } else {
+        newEventList = response;
+      }
+
+      eventLoading = false;
+    } catch (e) {
+      error = true;
+      errorMessage = e.toString();
+      eventLoading = false;
+    }
+    notifyListeners();
+  }
+
+  void setEventList(List<VisionGuardianEventModel> response, String type) {
+    if (type == "search") {
+      searchEventResults = response;
+    } else {
+      listOfEventDetails = response;
+    }
+  }
+
   void setEventId(String id) {
     eventId = id;
     searchController.text = "";
@@ -142,6 +184,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   void setIsLoading() {
     isLoading = false;
+  }
+
+  void loadingToggle() {
+    getisLoading = !getisLoading;
+    notifyListeners();
   }
 
   void setStartDate(String date) {
@@ -244,26 +291,11 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void setSearchEventList(String query) async {
-    List<VisionGuardianEventModel> resultList = [];
-
-    for (int i = 0; i < searchResults.length; i++) {
-      if (searchResults[i].title!.toLowerCase().contains(query.toLowerCase())) {
-        resultList.add(searchResults[i]);
-      } else if (searchResults[i]
-          .id!
-          .toString()
-          .contains(query.toLowerCase())) {
-        resultList.add(searchResults[i]);
-      } else if (searchResults[i]
-          .description!
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
-        resultList.add(searchResults[i]);
-      }
-    }
-    listOfEventDetails = resultList;
-
+    eventSearchQuery = query;
+    List<VisionGuardianEventModel> previousList = [];
+    eventLoading = true;
     notifyListeners();
+    getVgEvents(previousList, "search");
   }
 
   void setSearchPatientList(String query) async {
@@ -300,10 +332,15 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void filterListEvents(selectedIndex, selectedValue) {
+    eventSearchQuery = "";
+    eventOffset = 0;
     isSelected = selectedIndex;
     eventStatusFilter = selectedValue;
 
+    List<VisionGuardianEventModel> previousList = [];
+    eventLoading = true;
     notifyListeners();
+    getVgEvents(previousList, "default");
   }
 
   void setEventDetails(eventDetails) {
@@ -330,6 +367,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   void setEventPatients(List<VisionGuardianPatientResponseModel> response) {
     listOfEventPatients = response;
+    logger.f(listOfEventPatients);
   }
 
   void setSearchEventPatients(
@@ -349,5 +387,39 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       offset = offset + 1;
       getEventPatientTriageReport(listOfEventPatients);
     }
+  }
+
+  void defaulteventScrollListener() {
+    if (eventListController.position.pixels ==
+            eventListController.position.maxScrollExtent &&
+        (newEventList.length == 10)) {
+      eventOffset = eventOffset + 1;
+      getVgEvents(listOfEventDetails, "default");
+    }
+  }
+
+  void searcheventScrollListener() {
+    if (searchEventListController.position.pixels ==
+            searchEventListController.position.maxScrollExtent &&
+        (newSearchEventList.length == 10)) {
+      searchEventOffset = searchEventOffset + 1;
+      getVgEvents(searchEventResults, "search");
+    }
+  }
+
+  void resetPagination() {
+    listOfEventDetails = [];
+    eventOffset = 0;
+  }
+
+  void resetSearchEventList() {
+    searchEventResults = [];
+    newSearchEventList = [];
+    searchEventOffset = 0;
+  }
+
+  void resetListOfEvents() {
+    listOfEventDetails = [];
+    notifyListeners();
   }
 }

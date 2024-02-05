@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 final visionGuardianEyeAssessmentProvider =
     ChangeNotifierProvider.autoDispose<VisionGuardianEyeAssessmentNotifier>(
         (ref) {
@@ -17,6 +16,7 @@ final visionGuardianEyeAssessmentProvider =
 });
 
 class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
+  bool initialValue = true;
   var checkedFilter = "";
   final VgEyeAssessmentRepository vgEyeAssessmentRepository;
   final GlobalVGProvider globalVGProvider;
@@ -44,6 +44,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   int offset = 0;
   get getOffset => offset;
   var getisLoading = false;
+  get initialVal => initialValue;
 
   TextEditingController searchController = TextEditingController();
   String errorMessage = "";
@@ -62,8 +63,6 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     {"type": "Karimnagar", "checked": true},
   ];
 
-
-
   void filterPatientList(selectedIndex, selectedValue) {
     isSelected = selectedIndex;
     patientStatusFiltervalue = selectedValue;
@@ -79,6 +78,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   void getEyeAssessmentPatientsReport(previousList) async {
     try {
       getisLoading = true;
+      initialValue = true;
 
       var statusfilter = getpatientStatusFiltervalue;
 
@@ -88,7 +88,8 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
               queryparams: {
             "page": offset,
             "size": 10,
-            "category": statusfilter == "ALL" ? "" : statusfilter
+            "category": statusfilter == "ALL" ? "" : statusfilter,
+            "sort": ["encounterStartDate"]
           });
 
       setPatientDetails(previousList + response);
@@ -98,11 +99,16 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
       getisLoading = false;
       error = false;
     } catch (e) {
-      
       error = true;
       errorMessage = e.toString();
       getisLoading = false;
     }
+    notifyListeners();
+  }
+
+  void setIsLoading() {
+    initialValue = false;
+    getisLoading = !getisLoading;
     notifyListeners();
   }
 
@@ -141,8 +147,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
     logger.d("page");
     if (eyeAssessmentController.position.pixels ==
             eyeAssessmentController.position.maxScrollExtent &&
-        (newEyeAssessmentPatientList.length == 10 ||
-            newEyeAssessmentPatientList.isEmpty)) {
+        (newEyeAssessmentPatientList.length == 10)) {
       offset = offset + 1;
       getEyeAssessmentPatientsReport(listOfPatientDetails);
     }

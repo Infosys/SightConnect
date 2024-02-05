@@ -34,13 +34,25 @@ class TriageDBHelper {
     if (_database == null) {
       try {
         _database = await _initDatabase(pass);
-      } catch (e, stackTrace) {
-        logger.d('Error initializing database: $e\n$stackTrace');
-
-        throw StateError('Failed to initialize database');
+      } catch (e) {
+        logger.d("Reinitializing database");
+        await _reInitDatabase();
       }
     }
+
     return _database!;
+  }
+
+  _reInitDatabase() async {
+    try {
+      await deleteFullDatabase();
+      final pass =
+          await PersistentAuthStateService.authState.getSQFlitePassword();
+      _database = await _initDatabase(pass);
+    } catch (e, stackTrace) {
+      logger.d('Error reinitializing database: $e\n$stackTrace');
+      throw StateError('Failed to reinitialize database');
+    }
   }
 
   Future<Database> _initDatabase(String pass) async {
@@ -285,12 +297,6 @@ class TriageDBHelper {
     await dbClient.delete(_triageEyeScanTableName);
   }
 
-  Future<void> deleteAllTriageSteps() async {
-    await deleteTriageQuestionnaire();
-    await deleteTriageVisualAcuity();
-    await deleteTriageEyeScan();
-  }
-
   Future<bool> checkIsTriageResponseTwoDaysOld() async {
     var dbClient = await database;
     var response = await dbClient.query(_triageQuestionnaireTableName,
@@ -346,6 +352,16 @@ class TriageDBHelper {
     }
   }
 
+  // Delet all triage steps
+  Future<void> deleteAllTriageSteps() async {
+    await Future.wait([
+      deleteTriageQuestionnaire(),
+      deleteTriageVisualAcuity(),
+      deleteTriageEyeScan(),
+    ]);
+  }
+
+  // Delete all tables
   Future<void> discardLocalTriageEntries() async {
     await Future.wait([
       deleteTriageAssessment(),
@@ -354,5 +370,15 @@ class TriageDBHelper {
       deleteTriageVisualAcuity(),
       deleteTriageEyeScan(),
     ]);
+  }
+
+  // Delete full database
+  Future<void> deleteFullDatabase() async {
+    final databasePath = await getDatabasesPath();
+    String path = join(databasePath, _databaseName);
+    await deleteDatabase(path);
+    // SQFlite Password
+    await PersistentAuthStateService.authState.deleteSQFlitePassword();
+    _database = null;
   }
 }

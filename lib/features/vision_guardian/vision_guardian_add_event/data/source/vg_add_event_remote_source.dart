@@ -18,8 +18,9 @@ var vgAddEventRemoteSource = Provider(
 );
 
 abstract class VgAddEventRemoteSource {
-  Future<List<VisionGuardianEventModel>> getVGEvents(
-      {required String actorIdentifier, required String eventStatusFilter});
+  Future<List<VisionGuardianEventModel>> getVGEvents({
+    required Map<String, dynamic> queryData,
+  });
   Future<dynamic> postVGEvents({
     required VisionGuardianEventModel vgEventModel,
     required Map<String, dynamic> actor,
@@ -62,14 +63,20 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       this._dio, this.getTriageModelProvider, this.globalVGProvider);
 
   @override
-  Future<List<VisionGuardianEventModel>> getVGEvents(
-      {required String actorIdentifier,
-      required String eventStatusFilter}) async {
+  Future<List<VisionGuardianEventModel>> getVGEvents({
+    required Map<String, dynamic> queryData,
+  }) async {
     const endpoint = "/services/triage/api/campaign-events";
     Map<String, dynamic> queryParameters = {
-      "actor-id": actorIdentifier,
-      "filter": eventStatusFilter
+      "actor-id": queryData["actorIdentifier"],
+      "filter": queryData["eventStatusFilter"],
+      "page": queryData["pageable"]["page"],
+      "size": queryData["pageable"]["size"]
     };
+    if (queryData["pageable"]["title-like"].length > 0) {
+      queryParameters
+          .addAll({"title-like": queryData["pageable"]["title-like"]});
+    }
     try {
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
@@ -263,15 +270,19 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future getEventPatientList(
       {required Map<String, dynamic> patientQueryData}) async {
     const endpoint = "/services/orchestration/api/patients/filter";
+    var queryParams = {
+      "offset": patientQueryData["offset"],
+      "limit": patientQueryData["limit"],
+      "queryText": patientQueryData["searchParams"],
+    };
+
+    logger.f(queryParams);
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {
-          "offset": patientQueryData["offset"],
-          "limit": patientQueryData["limit"],
-          "queryText": patientQueryData["searchParams"],
-        },
+        queryParameters: queryParams,
       );
+
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
             (response.data as List)
