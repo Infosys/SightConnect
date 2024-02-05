@@ -93,6 +93,7 @@ dependencies:
   sqflite: ^2.3.0
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
+  workmanager: ^0.5.2
 
 dependency_overrides:
   camera:
