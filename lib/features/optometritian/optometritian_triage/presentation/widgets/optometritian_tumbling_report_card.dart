@@ -202,19 +202,19 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
     switch (logMar) {
       case 1.0:
         return "20/200";
-      case 0.698:
+      case 0.699:
         return "20/100";
       case 0.602:
         return "20/80";
-      case 0.494:
+      case 0.495:
         return "20/62.5";
-      case 0.397:
+      case 0.398:
         return "20/50";
       case 0.301:
         return "20/40";
       case 0.176:
         return "20/31.77";
-      case 0.096:
+      case 0.097:
         return "20/25";
       case 0.0:
         return "20/20";

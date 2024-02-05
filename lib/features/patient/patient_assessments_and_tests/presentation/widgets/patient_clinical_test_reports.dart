@@ -27,7 +27,7 @@ class PatientClinicalTestReports extends ConsumerStatefulWidget {
 class _PatientClinicalTestReportsState
     extends ConsumerState<PatientClinicalTestReports>
     with AutomaticKeepAliveClientMixin {
-  final List<TriageReportBriefEntity> reports = [];
+  List<TriageReportBriefEntity> reports = [];
   @override
   void initState() {
     super.initState();
