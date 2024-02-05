@@ -24,6 +24,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image/image.dart' as img;
+import 'package:path_provider/path_provider.dart';
 import '../provider/eye_detector_service.dart';
 import '../provider/triage_eye_scan_provider.dart';
 import '../widgets/eye_detector_painter.dart';
@@ -376,7 +378,12 @@ class _PatientTriageEyeCapturingPageState
         return null;
       }
 
-      final isVerfied = await _validateImage(image);
+      final croppedImage = await _cropImage(image);
+      if (croppedImage == null) {
+        return null;
+      }
+
+      final isVerfied = await _validateImage(croppedImage);
       if (!isVerfied) {
         return null;
       }
@@ -399,6 +406,45 @@ class _PatientTriageEyeCapturingPageState
     final image = await _controller.takePicture();
     removeLoading();
     return image;
+  }
+
+  Future _cropImage(XFile image) async {
+    final img.Image? capturedImage = img.decodeImage(File(image.path).readAsBytesSync());
+    if (capturedImage == null) {
+      return null;
+    }
+
+    final img.Image mirroredImage = img.flipHorizontal(capturedImage);
+
+    final int croppedImageWidth = mirroredImage.width;
+    final double croppedImageHeight = mirroredImage.height * (1 / 3);
+    final Point<double> mirroredImageCenter = Point(
+      mirroredImage.width / 2,
+      mirroredImage.height / 2,
+    );
+
+    int x = 0;
+    int y = (mirroredImageCenter.y - croppedImageHeight / 2).toInt();
+
+    final img.Image croppedImage = img.copyCrop(
+      mirroredImage,
+      x: x,
+      y: y,
+      width: croppedImageWidth,
+      height: croppedImageHeight.toInt(),
+    );
+
+    Directory tempDir = await getTemporaryDirectory();
+    String cachePath = tempDir.path;
+
+    final String now = DateTime.now().millisecondsSinceEpoch.toString();
+
+    File croppedImageFile = File('$cachePath/cropped_eyes_$now.jpg')
+      ..writeAsBytesSync(img.encodeJpg(croppedImage));
+
+    final XFile croppedXFileImage = XFile(croppedImageFile.path);
+
+    return croppedXFileImage;
   }
 
   Future<bool> _validateImage(XFile image) async {
