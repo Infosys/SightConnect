@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'dart:ui';
+import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/fake_data_source_cataract.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eye_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';

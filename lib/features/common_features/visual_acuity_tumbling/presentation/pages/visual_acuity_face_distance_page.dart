@@ -449,7 +449,4 @@ class _VisualAcuityFaceDistancePageViewState
       );
     }
   }
-
-
-
 }

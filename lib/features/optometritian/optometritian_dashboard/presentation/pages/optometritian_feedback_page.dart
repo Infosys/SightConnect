@@ -8,9 +8,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
+import '../../../../../core/models/keycloak.dart';
+import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../shared/theme/text_theme.dart';
+import '../../../../common_features/triage/data/source/local/triage_db_helper.dart';
 import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../common_features/triage/presentation/providers/optometrician_triage_provider.dart';
+import '../provider/optometritian_add_patient_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 
 void showTriageFeedbackForm(BuildContext context) {
@@ -171,7 +175,6 @@ class TriageFeedbackDialog extends HookConsumerWidget {
 
     feedback.save();
     // ref.read(triageStepperProvider).reset();
-    ref.read(triageStepperProvider).goToNextStep();
 
     if (await ref.read(connectivityProvider).isConnected() && context.mounted) {
       await handleConnection(ref, feedback, context);
@@ -186,17 +189,24 @@ class TriageFeedbackDialog extends HookConsumerWidget {
     BuildContext context,
   ) async {
     logger.d("in connection");
-    ref.read(optometricianTriageProvider).saveTriage().then((value) {
+    ref.read(optometricianTriageProvider).saveTriage().then((value) async {
       logger.d({
-        "Optometritian Triage": value.toJson(),
+        "Optometritian Triage : ${value.toJson()}",
       });
       feedback.isLoading = false;
-
-      ref.read(resetProvider).reset();
+      final role = PersistentAuthStateService.authState.activeRole;
+      final activeRole = roleMapper(role);
+      if (activeRole != Role.ROLE_PATIENT) {
+        await TriageDBHelper().deleteAllTriageSteps();
+        ref.invalidate(optometritianAddPatientProvider);
+        ref.read(resetProvider).reset();
+      }
     }).catchError((e) {
       logger.d("error is : $e");
       feedback.isLoading = false;
     }).whenComplete(() {
+      ref.read(triageStepperProvider).goToNextStep();
+      ref.read(resetProvider).reset();
       Navigator.popUntil(context, (route) => route.isFirst);
     });
   }

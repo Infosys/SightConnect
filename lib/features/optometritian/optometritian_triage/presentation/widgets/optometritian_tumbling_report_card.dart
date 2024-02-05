@@ -189,7 +189,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
   }
 
   Color getColorOnUrgency(double value) {
-    if (value >= 1) {
+    if (value >= 1.0) {
       return AppColor.red;
     } else if (value >= 0.5) {
       return AppColor.orange;
@@ -202,24 +202,24 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
     switch (logMar) {
       case 1.0:
         return "20/200";
-      case 0.6989:
+      case 0.698:
         return "20/100";
-      case 0.6021:
+      case 0.602:
         return "20/80";
-      case 0.4947:
+      case 0.494:
         return "20/62.5";
-      case 0.3979:
+      case 0.397:
         return "20/50";
-      case 0.3010:
+      case 0.301:
         return "20/40";
-      case 0.1761:
+      case 0.176:
         return "20/31.77";
-      case 0.0969:
+      case 0.096:
         return "20/25";
       case 0.0:
         return "20/20";
       default:
-        return "20/20";
+        return "null";
     }
   }
 }
