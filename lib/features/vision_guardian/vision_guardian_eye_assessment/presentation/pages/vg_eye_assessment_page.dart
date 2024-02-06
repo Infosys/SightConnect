@@ -16,7 +16,7 @@ class VisionGuardianEyeAssessmentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var isSelected = useState<int>(-1);
+    var isSelected = useState<int>(0);
     return Scaffold(
       appBar: CustomAppbar(
         title: const Text('Eye Assessment'),

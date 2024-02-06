@@ -16,7 +16,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:intl/intl.dart';
 
 class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
   const VisionGuardianEyeAssessmentPatientsCard({Key? key, required this.type})
@@ -111,12 +110,11 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
 
 Widget vgPatientDataCards(BuildContext context,
     VisionGuardianPatientResponseModel visionGuardianPatientResponseModel) {
-  String dateTimeString =
+/*   String dateTimeString =
       visionGuardianPatientResponseModel.encounterStartDate ?? "";
   DateTime dateTime = DateTime.parse(dateTimeString);
-
   String formattedDate = DateFormat("dd MMM yy").format(dateTime);
-  String formattedTime = DateFormat("hh:mm a").format(dateTime.toLocal());
+  String formattedTime = DateFormat("hh:mm a").format(dateTime.toLocal()); */
 
   return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
@@ -166,7 +164,7 @@ Widget vgPatientDataCards(BuildContext context,
                     const SizedBox(height: 2),
                     SizedBox(
                       child: AutoSizeText(
-                        "Assessment ID: AT ${visionGuardianPatientResponseModel.encounterId.toString()}",
+                        "Report ID: ${visionGuardianPatientResponseModel.diagnosticReportId}",
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -184,29 +182,29 @@ Widget vgPatientDataCards(BuildContext context,
                 Text(
                   visionGuardianPatientResponseModel.category ?? "",
                   style: applyRobotoFont(
-                    fontSize: 11,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: AppColor.red,
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text(
+/*                 Text(
                   formattedDate,
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.grey,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
+                ), */
+                /*   const SizedBox(height: 2), */
+/*                 Text(
                   formattedTime,
                   style: applyRobotoFont(
                     fontSize: 12,
                     color: AppColor.grey,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                ), */
               ],
             )
           ],
