@@ -127,7 +127,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
                 children: <Widget>[
-                  !Platform.isIOS
+                  Platform.isAndroid
                       ? Center(
                           child: CameraPreview(
                             controller,
