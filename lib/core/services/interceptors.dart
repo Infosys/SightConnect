@@ -69,12 +69,16 @@ class DioTokenInterceptor extends Interceptor {
               "newAccessToken": tokens!.accessToken,
               "newRefreshToken": tokens.refreshToken,
             });
-
+            // update the tokens in the persistent storage
+            // and in the auth state
             await PersistentAuthStateService.authState
                 .updateAccessToken(accessToken: tokens.accessToken);
             await PersistentAuthStateService.authState
                 .updateRefreshToken(refreshToken: tokens.refreshToken);
+            err.requestOptions.headers['Authorization'] =
+                'Bearer ${PersistentAuthStateService.authState.accessToken}';
           } catch (e) {
+            // if there is an error while refreshing the tokens
             logger.e("Error while refreshing tokens $e");
             await _ref.read(initializationProvider).logout();
             AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
@@ -82,21 +86,13 @@ class DioTokenInterceptor extends Interceptor {
               (route) => false,
             );
           }
-          logger.d("updated access token and refresh token");
         }
       }
 
       final response = await _dio.fetch(err.requestOptions);
       return handler.resolve(response);
-    } else {
-      // await _ref.read(initializationProvider).logout();
-      // AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-      //   LoginPage.routeName,
-      //   (route) => false,
-      // );
-
-      super.onError(err, handler);
     }
+    return handler.next(err);
   }
 }
 
