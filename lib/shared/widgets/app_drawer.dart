@@ -157,26 +157,17 @@ class AppDrawer extends StatelessWidget {
                                               .watch(getTriageProvider)
                                               .when(
                                             data: (data) {
-                                              WidgetsBinding.instance
-                                                  .addPostFrameCallback((_) {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ChatBotPage(
-                                                      defaultQuerySuggestions: const [
-                                                        "Start Eye Assessment",
-                                                        "Common eye issues",
-                                                        "Tips for a better eye sight",
-                                                      ],
-                                                      loadedTriageQuestionnaire:
-                                                          data.questionnaire
-                                                                  ?.questionnaireItem ??
-                                                              [],
-                                                    ),
-                                                  ),
-                                                );
-                                              });
-                                              return const SizedBox(); // Return an empty SizedBox while waiting for navigation
+                                              return ChatBotPage(
+                                                defaultQuerySuggestions: const [
+                                                  "Start Eye Assessment",
+                                                  "Common eye issues",
+                                                  "Tips for a better eye sight",
+                                                ],
+                                                loadedTriageQuestionnaire: data
+                                                        .questionnaire
+                                                        ?.questionnaireItem ??
+                                                    [],
+                                              );
                                             },
                                             error: (error, stackTrace) {
                                               return Scaffold(
@@ -224,8 +215,6 @@ class AppDrawer extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child:
-                                            const SizedBox(), // Return an empty SizedBox while waiting for data
                                       );
                                     },
                                   ),
