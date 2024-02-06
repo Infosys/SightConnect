@@ -23,10 +23,12 @@ class ChatBotPage extends ConsumerStatefulWidget {
     this.loadedTriageQuestionnaire = const [],
     this.loadChatHistory,
     this.saveChatHistory,
+    // required this.selectedLanguage,
   });
 
   final List<String> defaultQuerySuggestions;
   final List<QuestionnaireItemFHIRModel> loadedTriageQuestionnaire;
+  // final String selectedLanguage;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
@@ -150,13 +152,17 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // Cleanup methods
   @override
   void dispose() {
+    debugPrint("Dispose start");
     // List<Map<String, dynamic>> chatHistory =
     //     _chatMessages.reversed.map((e) => e.toJson()).toList();
     // debugPrint("Chat History: ${jsonEncode(chatHistory)}");
     _saveChatHistory(_chatMessages);
 
     ref.read(_chatService).clearContext(); // TODO: Make this conditional
+    debugPrint("Before super");
     super.dispose();
+    debugPrint("After super");
+    
   }
 
   Future _endEyeAssessment() async {

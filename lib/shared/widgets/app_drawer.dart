@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
@@ -145,55 +146,87 @@ class AppDrawer extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return ref.watch(getTriageProvider).when(
-                                          data: (data) {
-                                        return ChatBotPage(
-                                          defaultQuerySuggestions: const [
-                                            "Start Eye Assessment",
-                                            "Common eye issues",
-                                            "Tips for a better eye sight",
-                                          ],
-                                          loadedTriageQuestionnaire: data
-                                                  .questionnaire
-                                                  ?.questionnaireItem ??
-                                              [],
-                                        );
-                                      }, error: (error, stackTrace) {
-                                        return Scaffold(
-                                          body: Center(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Center(
-                                                  child: Text(error.toString()),
+                                      var language = ref
+                                          .watch(globalLanguageProvider)
+                                          .currentLocale
+                                          .languageCode;
+                                      debugPrint("language: $language");
+                                      return Consumer(
+                                        builder: (context, ref, child) {
+                                          return ref
+                                              .watch(getTriageProvider)
+                                              .when(
+                                            data: (data) {
+                                              WidgetsBinding.instance
+                                                  .addPostFrameCallback((_) {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatBotPage(
+                                                      defaultQuerySuggestions: const [
+                                                        "Start Eye Assessment",
+                                                        "Common eye issues",
+                                                        "Tips for a better eye sight",
+                                                      ],
+                                                      loadedTriageQuestionnaire:
+                                                          data.questionnaire
+                                                                  ?.questionnaireItem ??
+                                                              [],
+                                                    ),
+                                                  ),
+                                                );
+                                              });
+                                              return const SizedBox(); // Return an empty SizedBox while waiting for navigation
+                                            },
+                                            error: (error, stackTrace) {
+                                              return Scaffold(
+                                                body: Center(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Center(
+                                                        child: Text(
+                                                            error.toString()),
+                                                      ),
+                                                      const SizedBox(
+                                                        height:
+                                                            AppSize.klheight,
+                                                      ),
+                                                      TextButton.icon(
+                                                        onPressed: () {
+                                                          ref.invalidate(
+                                                              getTriageProvider);
+                                                        },
+                                                        icon: const Icon(Icons
+                                                            .refresh_outlined),
+                                                        label: Text(
+                                                            loc.retryButton),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                const SizedBox(
-                                                  height: AppSize.klheight,
+                                              );
+                                            },
+                                            loading: () {
+                                              return const Scaffold(
+                                                body: Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
                                                 ),
-                                                TextButton.icon(
-                                                  onPressed: () {
-                                                    ref.invalidate(
-                                                        getTriageProvider);
-                                                  },
-                                                  icon: const Icon(
-                                                      Icons.refresh_outlined),
-                                                  label: Text(loc.retryButton),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }, loading: () {
-                                        return const Scaffold(
-                                          body: Center(
-                                            child: CircularProgressIndicator(),
-                                          ),
-                                        );
-                                      });
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child:
+                                            const SizedBox(), // Return an empty SizedBox while waiting for data
+                                      );
                                     },
                                   ),
                                 );

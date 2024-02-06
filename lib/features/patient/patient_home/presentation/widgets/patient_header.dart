@@ -96,20 +96,7 @@ class PatientHeader extends HookWidget {
                                   color: AppColor.white,
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const ChatBotPage(
-                                      defaultQuerySuggestions: [
-                                        "Start Eye Assessment",
-                                        "Common eye issues",
-                                        "Tips for a better eye sight",
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
+                              onPressed: () {},
                               child: AutoSizeText(
                                 context.loc!.knowMoreButton,
                                 minFontSize: 10,
