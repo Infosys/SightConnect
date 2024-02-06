@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,6 +40,7 @@ class GlobalLanguageProvider extends ChangeNotifier {
   GlobalLanguageProvider(this._currentLocale);
 
   Locale get currentLocale => Locale(_currentLocale);
+  String get currentLanguage => resolveLanguageByLocaleCode(_currentLocale);
 
   Future<void> setCurrentLocale(String locale) async {
     _currentLocale = locale;

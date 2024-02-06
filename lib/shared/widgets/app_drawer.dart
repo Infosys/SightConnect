@@ -146,11 +146,10 @@ class AppDrawer extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      var language = ref
+                                      var currentLanguage = ref
                                           .watch(globalLanguageProvider)
-                                          .currentLocale
-                                          .languageCode;
-                                      debugPrint("language: $language");
+                                          .currentLanguage;
+                                      debugPrint("language: $currentLanguage");
                                       return Consumer(
                                         builder: (context, ref, child) {
                                           return ref
@@ -158,6 +157,7 @@ class AppDrawer extends StatelessWidget {
                                               .when(
                                             data: (data) {
                                               return ChatBotPage(
+                                                selectedLanguage: currentLanguage,
                                                 defaultQuerySuggestions: const [
                                                   "Start Eye Assessment",
                                                   "Common eye issues",
@@ -166,7 +166,7 @@ class AppDrawer extends StatelessWidget {
                                                 loadedTriageQuestionnaire: data
                                                         .questionnaire
                                                         ?.questionnaireItem ??
-                                                    [],
+                                                    [], 
                                               );
                                             },
                                             error: (error, stackTrace) {

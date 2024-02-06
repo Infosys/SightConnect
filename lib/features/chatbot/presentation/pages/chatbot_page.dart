@@ -12,7 +12,6 @@ import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,12 +22,12 @@ class ChatBotPage extends ConsumerStatefulWidget {
     this.loadedTriageQuestionnaire = const [],
     this.loadChatHistory,
     this.saveChatHistory,
-    // required this.selectedLanguage,
+    required this.selectedLanguage,
   });
 
   final List<String> defaultQuerySuggestions;
   final List<QuestionnaireItemFHIRModel> loadedTriageQuestionnaire;
-  // final String selectedLanguage;
+  final String selectedLanguage;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
@@ -49,7 +48,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   int _currentQuestionIndex = -1;
   bool _isAssessmentGoingOn = false;
 
-  late Provider<ChatService> _chatService;
+  late ChatService _chatService;
   late Future<List<ChatMessage>> Function() _loadChatHistory;
   late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
 
@@ -61,9 +60,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   @override
   void initState() {
     // LocalStorage.init();
-    _chatService = Provider((ref) {
-      return ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
-    });
+    _chatService = 
+       ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
+    
 
     _loadChatHistory = widget.loadChatHistory != null
         ? widget.loadChatHistory!
@@ -158,7 +157,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     // debugPrint("Chat History: ${jsonEncode(chatHistory)}");
     _saveChatHistory(_chatMessages);
 
-    ref.read(_chatService).clearContext(); // TODO: Make this conditional
+    _chatService.clearContext(); // TODO: Make this conditional
     debugPrint("Before super");
     super.dispose();
     debugPrint("After super");
@@ -286,7 +285,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            ref.read(_chatService).clearContext();
+            _chatService.clearContext();
             _chatMessages = [];
             _saveChatHistory([]).then((value) => _initChat());
           });
@@ -359,7 +358,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _askChatBot(String message) async {
-    final response = await ref.read(_chatService).ask(message);
+    final response = await _chatService.ask(message);
 
     if (response != null) {
       _chatMessage(
@@ -378,7 +377,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     setState(() {
       _isLoadingQuerySuggestions = true;
     });
-    final suggestions = await ref.read(_chatService).getQuerySuggestions();
+    final suggestions = await _chatService.getQuerySuggestions();
     await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;
